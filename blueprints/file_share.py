@@ -20,7 +20,7 @@ from werkzeug.exceptions import RequestEntityTooLarge
 from werkzeug.utils import secure_filename
 
 from extensions import db
-from models import SharedFile, User
+from models import SharedFile, User, UserSettings
 
 file_share_bp = Blueprint("file_share", __name__)
 
@@ -29,7 +29,7 @@ DEFAULT_EXPIRY_DAYS = 1
 ALLOWED_EXPIRY_OPTIONS = [1, 3, 7, 14, 30]
 SHARE_CODE_LENGTH = 7
 SHARE_CODE_CHARS = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ"
-PUBLIC_SHARE_BASE_URL = "https://emory.apstudy.org/files/share"
+PUBLIC_SHARE_BASE_URL = "https://nest.apstudy.org/files/share"
 
 
 def _utcnow():
@@ -155,6 +155,7 @@ def handle_file_too_large(_error):
 @file_share_bp.route("/files")
 @login_required
 def file_share_page():
+    user_settings = UserSettings.query.filter_by(user_id=current_user.id).first()
     return render_template(
         "file_share.html",
         user={
@@ -165,6 +166,7 @@ def file_share_page():
         max_file_size=MAX_FILE_SIZE,
         allowed_expiry_options=ALLOWED_EXPIRY_OPTIONS,
         default_expiry_days=DEFAULT_EXPIRY_DAYS,
+        theme_preference=user_settings.interface_theme if user_settings else None,
     )
 
 

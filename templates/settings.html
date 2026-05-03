@@ -3,33 +3,36 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@17/dist/iife/sdk.js"></script>
+    <script src="{{ url_for('static', filename='js/appwrite.js') }}"></script>
     <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
-    <title>Settings - Emory University | APStudy</title>
+    <title>Settings - Nest University | APStudy</title>
     <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy Logo">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/themes.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
-    <script src="https://kit.fontawesome.com/a7731f7ef8.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="index.js" defer></script>
+    <script src="{{ url_for('static', filename='js/settings.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/global.js') }}" defer></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <meta name="description" content="Track and plan assignments and class schedules. Built for Emory University by an Emory Student."/>
+    <meta name="description" content="Track and plan assignments and class schedules. Built for Nest University by a Nest Student."/>
     <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://emory.apstudy.org/">
+    <meta property="og:url" content="https://nest.apstudy.org/">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Emory University | APStudy">
-    <meta property="og:description" content="Track and plan assignments and class schedules. Built for Emory University by an Emory Student."/>
+    <meta property="og:title" content="Nest University | APStudy">
+    <meta property="og:description" content="Track and plan assignments and class schedules. Built for Nest University by a Nest Student."/>
     <meta property="og:image" content="https://resources.apstudy.org/images/APResourcesBanner.png">
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta property="twitter:domain" content="emory.apstudy.org">
-    <meta property="twitter:url" content="https://emory.apstudy.org/">
-    <meta name="twitter:title" content="Emory University | APStudy">
-    <meta name="twitter:description" content="Track and plan assignments and class schedules. Built for Emory University by an Emory Student."/>
+    <meta property="twitter:domain" content="nest.apstudy.org">
+    <meta property="twitter:url" content="https://nest.apstudy.org/">
+    <meta name="twitter:title" content="Nest University | APStudy">
+    <meta name="twitter:description" content="Track and plan assignments and class schedules. Built for Nest University by a Nest Student."/>
     <meta name="twitter:image" content="https://resources.apstudy.org/images/APResourcesBanner.png">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0NT330ZX5L"></script>
@@ -39,75 +42,7 @@
         gtag('js', new Date());
         gtag('config', 'G-0NT330ZX5L');
     </script>
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "surface-container":       "var(--color-surface-container)",
-                        "on-tertiary":             "var(--color-on-tertiary)",
-                        "secondary-fixed":         "#d3e4ff",
-                        "on-surface-variant":      "var(--color-on-surface-variant)",
-                        "primary-fixed-dim":       "#a2c9ff",
-                        "tertiary-fixed":          "#ffddaf",
-                        "on-secondary":            "var(--color-on-secondary)",
-                        "on-tertiary-fixed":       "#281800",
-                        "inverse-primary":         "var(--color-inverse-primary)",
-                        "surface-tint":            "var(--color-surface-tint)",
-                        "secondary-container":     "var(--color-secondary-container)",
-                        "outline":                 "var(--color-outline)",
-                        "inverse-on-surface":      "var(--color-inverse-on-surface)",
-                        "surface":                 "var(--color-surface)",
-                        "surface-bright":          "var(--color-surface-bright)",
-                        "surface-container-low":   "var(--color-surface-container-low)",
-                        "on-secondary-container":  "var(--color-on-secondary-container)",
-                        "surface-container-high":  "var(--color-surface-container-high)",
-                        "on-background":           "var(--color-on-background)",
-                        "outline-variant":         "var(--color-outline-variant)",
-                        "on-tertiary-fixed-variant":"#614000",
-                        "on-error":                "var(--color-on-error)",
-                        "secondary-fixed-dim":     "#aec8ef",
-                        "primary-container":       "var(--color-primary-container)",
-                        "surface-variant":         "var(--color-surface-variant)",
-                        "surface-dim":             "var(--color-surface-dim)",
-                        "on-secondary-fixed-variant":"#2e4869",
-                        "tertiary-fixed-dim":      "#ffba42",
-                        "inverse-surface":         "var(--color-inverse-surface)",
-                        "on-primary":              "var(--color-on-primary)",
-                        "on-error-container":      "var(--color-on-error-container)",
-                        "on-tertiary-container":   "var(--color-on-tertiary-container)",
-                        "error":                   "var(--color-error)",
-                        "tertiary":                "var(--color-tertiary)",
-                        "on-surface":              "var(--color-on-surface)",
-                        "surface-container-highest":"var(--color-surface-container-highest)",
-                        "primary":                 "var(--color-primary)",
-                        "background":              "var(--color-background)",
-                        "on-primary-fixed-variant":"#004882",
-                        "on-primary-fixed":        "#001c38",
-                        "primary-fixed":           "#d3e4ff",
-                        "surface-container-lowest": "var(--color-surface-container-lowest)",
-                        "on-primary-container":    "var(--color-on-primary-container)",
-                        "error-container":         "var(--color-error-container)",
-                        "on-secondary-fixed":      "#001c38",
-                        "secondary":               "var(--color-secondary)",
-                        "tertiary-container":      "var(--color-tertiary-container)"
-                    },
-                    borderRadius: {
-                        DEFAULT: "0.25rem",
-                        lg: "0.5rem",
-                        xl: "0.75rem",
-                        full: "9999px"
-                    },
-                    fontFamily: {
-                        headline: ["Inter", "sans-serif"],
-                        body: ["Inter", "sans-serif"],
-                        label: ["Inter", "sans-serif"]
-                    }
-                },
-            },
-        }
-    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
 </head>
 <body class="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased">
     <div id="settings-notifications" class="fixed top-4 left-1/2 -translate-x-1/2 z-[10020] max-w-[92vw] space-y-2 pointer-events-none flex flex-col items-center"></div>
@@ -115,17 +50,17 @@
     <!-- Body Layout -->
     <div class="flex flex-1 overflow-hidden pt-16">
         <!-- Sidebar Navigation -->
-        <aside class="flex-col h-full py-8 gap-2 w-64 hidden md:flex" style="background: var(--color-sidebar-bg); border-right: 1px solid var(--color-sidebar-border);">
+        <aside class="sticky top-16 flex flex-col h-screen max-h-[calc(100vh-4rem)] py-8 gap-2 w-64 hidden md:flex overflow-y-auto" style="background: var(--color-sidebar-bg); border-right: 1px solid var(--color-sidebar-border);">
             <div class="px-6 mb-8">
                 <h2 class="text-lg font-bold text-primary">Settings</h2>
                 <p class="text-xs text-on-surface-variant mt-1">Canvas.APStudy</p>
             </div>
             <nav class="flex flex-col gap-1 w-full">
-                <a id="nav-account" onclick="switchTab('account')" class="nav-link flex items-center gap-3 bg-surface-container text-primary border-l-4 border-primary px-4 py-3 hover:bg-surface-container-high transition-all duration-150 ease-in-out cursor-pointer">
+                <a id="nav-account" onclick="switchTab('account')" class="nav-link flex items-center gap-3 bg-primary/10 text-primary border-l-4 border-primary px-4 py-3 hover:bg-primary/15 transition-all duration-150 ease-in-out cursor-pointer">
                     <span class="material-symbols-outlined" data-icon="manage_accounts">manage_accounts</span>
                     Account & Data
                 </a>
-                <a id="nav-preferences" onclick="switchTab('preferences')" class="nav-link flex items-center gap-3 text-on-surface-variant px-4 py-3 opacity-70 hover:bg-surface-container-high hover:opacity-100 transition-all duration-150 ease-in-out cursor-pointer border-l-4 border-transparent">
+                <a id="nav-preferences" onclick="switchTab('preferences')" class="nav-link flex items-center gap-3 bg-transparent text-on-surface-variant border-l-4 border-transparent px-4 py-3 opacity-70 hover:bg-surface-container-high/50 hover:opacity-100 transition-all duration-150 ease-in-out cursor-pointer">
                     <span class="material-symbols-outlined" data-icon="tune">tune</span>
                     Preferences
                 </a>
@@ -136,8 +71,8 @@
             <div class="max-w-4xl mx-auto">
                 <!-- Mobile Tab Selector -->
                 <div class="flex gap-2 mb-8 md:hidden">
-                    <button onclick="switchTab('account')" class="mobile-tab flex-1 px-4 py-2 rounded-lg bg-surface-container-high text-primary font-medium text-sm" data-tab="account">Account & Data</button>
-                    <button onclick="switchTab('preferences')" class="mobile-tab flex-1 px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant font-medium text-sm" data-tab="preferences">Preferences</button>
+                    <button onclick="switchTab('account')" class="mobile-tab flex-1 px-4 py-2 rounded-lg bg-surface-container-high text-primary font-medium text-sm transition-colors hover:bg-surface-container-high" data-tab="account">Account & Data</button>
+                    <button onclick="switchTab('preferences')" class="mobile-tab flex-1 px-4 py-2 rounded-lg bg-surface-container text-on-surface-variant font-medium text-sm transition-colors hover:bg-surface-container-high hover:text-on-surface" data-tab="preferences">Preferences</button>
                 </div>
                 <!-- ===================== -->
                 <!-- ACCOUNT & DATA VIEW   -->
@@ -191,10 +126,10 @@
                         </h2>
                         <div class="bg-surface-container p-8 rounded-2xl space-y-8 shadow-2xl shadow-black/20">
                             <div>
-                                <label class="block text-[11px] uppercase tracking-[0.05em] text-on-surface-variant mb-2 font-medium">Emory Canvas Calendar</label>
+                                <label class="block text-[11px] uppercase tracking-[0.05em] text-on-surface-variant mb-2 font-medium">Canvas Calendar</label>
                                 <p class="text-sm text-on-surface-variant mb-3">Paste your ICS calendar link here to sync your schedule and assignments:</p>
                                 <div class="relative">
-                                    <input id="canvas-feed-url" class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg pl-10 pr-4 py-3 text-on-surface focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all font-body text-sm" placeholder="https://canvas.emory.edu/feeds/calendars/..." type="text" value="{{ settings.canvas_ical_url if settings and settings.canvas_ical_url else '' }}" />
+                                    <input id="canvas-feed-url" class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg pl-10 pr-4 py-3 text-on-surface focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all font-body text-sm" placeholder="https://canvas.yourschool.edu/feeds/calendar..." type="text" value="{{ settings.canvas_ical_url if settings and settings.canvas_ical_url else '' }}" />
                                     <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="link">link</span>
                                 </div>
                                 <details class="mt-2">
@@ -216,7 +151,7 @@
                             <div>
                                 <div class="flex items-center justify-between gap-3 mb-2">
                                     <label class="block text-[11px] uppercase tracking-[0.05em] text-on-surface-variant font-medium">Other Calendar Link(s) (Optional)</label>
-                                    <button id="add-other-calendar" type="button" class="inline-flex items-center gap-1 rounded-lg border border-outline-variant/30 bg-surface-container-low px-3 py-1.5 text-xs font-medium text-on-surface hover:bg-surface-container-high transition-colors">
+                                    <button id="add-other-calendar" type="button" class="inline-flex items-center gap-1 rounded-lg bg-surface-container px-3 py-1.5 text-xs font-medium text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors">
                                         <span class="material-symbols-outlined text-sm" data-icon="add">add</span>
                                         Add
                                     </button>
@@ -229,7 +164,7 @@
                                             <input data-other-calendar-url class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg pl-10 pr-4 py-2.5 text-on-surface focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all font-body text-sm" placeholder="https://calendar.google.com/..." type="text" value="{{ url }}" />
                                             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="event">event</span>
                                         </div>
-                                        <button type="button" class="remove-other-calendar inline-flex items-center justify-center rounded-lg border border-outline-variant/30 bg-surface-container-low h-10 w-10 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" aria-label="Remove calendar link">
+                                        <button type="button" class="remove-other-calendar inline-flex items-center justify-center rounded-lg bg-surface-container h-10 w-10 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" aria-label="Remove calendar link">
                                             <span class="material-symbols-outlined text-lg" data-icon="close">close</span>
                                         </button>
                                     </div>
@@ -317,26 +252,26 @@
                                 <h3 class="font-headline font-medium text-on-surface mb-1">System Match</h3>
                                 <p class="text-sm text-on-surface-variant">Adapts to device.</p>
                             </div>
-                            <!-- Emory Light -->
-                            <div data-theme-value="emory-light" class="theme-card bg-surface-container-low p-6 rounded-xl border border-outline-variant/15 relative cursor-pointer group transition-all duration-150 hover:bg-surface-container hover:border-outline-variant/30">
+                            <!-- Nest Light -->
+                            <div data-theme-value="nest-light" class="theme-card bg-surface-container-low p-6 rounded-xl border border-outline-variant/15 relative cursor-pointer group transition-all duration-150 hover:bg-surface-container hover:border-outline-variant/30">
                                 <div class="theme-check absolute top-4 right-4 text-primary hidden">
                                     <span class="material-symbols-outlined" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
                                 </div>
                                 <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-4 border border-[#012169]/20">
                                     <span class="material-symbols-outlined text-[#012169]" data-icon="wb_sunny">wb_sunny</span>
                                 </div>
-                                <h3 class="font-headline font-medium text-on-surface mb-1">Emory Light</h3>
+                                <h3 class="font-headline font-medium text-on-surface mb-1">Nest Light</h3>
                                 <p class="text-sm text-on-surface-variant">University classic style.</p>
                             </div>
-                            <!-- Emory Dark -->
-                            <div data-theme-value="emory-dark" class="theme-card bg-surface-container-low p-6 rounded-xl border border-outline-variant/15 relative cursor-pointer group transition-all duration-150 hover:bg-surface-container hover:border-outline-variant/30">
+                            <!-- Nest Dark -->
+                            <div data-theme-value="nest-dark" class="theme-card bg-surface-container-low p-6 rounded-xl border border-outline-variant/15 relative cursor-pointer group transition-all duration-150 hover:bg-surface-container hover:border-outline-variant/30">
                                 <div class="theme-check absolute top-4 right-4 text-primary hidden">
                                     <span class="material-symbols-outlined" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
                                 </div>
                                 <div class="w-12 h-12 rounded-full bg-[#012169] flex items-center justify-center mb-4">
                                     <span class="material-symbols-outlined text-[#D4AF37]" data-icon="brightness_2">brightness_2</span>
                                 </div>
-                                <h3 class="font-headline font-medium text-on-surface mb-1">Emory Dark</h3>
+                                <h3 class="font-headline font-medium text-on-surface mb-1">Nest Dark</h3>
                                 <p class="text-sm text-on-surface-variant">Midnight blue and gold.</p>
                             </div>
                         </div>
@@ -355,9 +290,9 @@
                                         <p class="text-sm text-on-surface-variant mt-1">Dashboard opens in this view by default.</p>
                                     </div>
                                 </div>
-                                <div id="preferred-calendar-view-toggle" data-default-calendar-view="{{ settings.preferred_calendar_view if settings and settings.preferred_calendar_view in ['week', 'month'] else 'week' }}" class="inline-flex items-center rounded-lg border border-outline-variant/20 bg-surface-container-low p-1">
-                                    <button type="button" data-calendar-view-option="week" class="js-calendar-view-option px-3 py-1.5 text-sm rounded-md {{ 'bg-primary text-on-primary font-medium' if not settings or settings.preferred_calendar_view != 'month' else 'text-on-surface-variant hover:text-on-surface' }}">Weekly</button>
-                                    <button type="button" data-calendar-view-option="month" class="js-calendar-view-option px-3 py-1.5 text-sm rounded-md {{ 'bg-primary text-on-primary font-medium' if settings and settings.preferred_calendar_view == 'month' else 'text-on-surface-variant hover:text-on-surface' }}">Monthly</button>
+                                <div id="preferred-calendar-view-toggle" data-default-calendar-view="{{ settings.preferred_calendar_view if settings and settings.preferred_calendar_view in ['week', 'month'] else 'week' }}" class="inline-flex h-10 items-center rounded-lg border border-outline-variant/20 bg-surface-container-low p-1">
+                                    <button type="button" data-calendar-view-option="week" class="js-calendar-view-option inline-flex h-8 min-w-[84px] items-center justify-center rounded-md px-3 text-sm font-medium transition-colors {{ 'bg-primary text-on-primary shadow-sm' if not settings or settings.preferred_calendar_view != 'month' else 'bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface' }}">Weekly</button>
+                                    <button type="button" data-calendar-view-option="month" class="js-calendar-view-option inline-flex h-8 min-w-[84px] items-center justify-center rounded-md px-3 text-sm font-medium transition-colors {{ 'bg-primary text-on-primary shadow-sm' if settings and settings.preferred_calendar_view == 'month' else 'bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface' }}">Monthly</button>
                                 </div>
                             </div>
                             <div class="px-6 pt-5 pb-4">
@@ -370,8 +305,8 @@
                                     <h3 class="font-headline font-medium text-on-surface">Assignment Reminders</h3>
                                     <p class="text-sm text-on-surface-variant mt-1">Alerts for upcoming deadlines (48h prior).</p>
                                 </div>
-                                <button aria-checked="true" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface bg-primary" role="switch" type="button">
-                                    <span aria-hidden="true" class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-on-primary shadow ring-0 transition duration-200 ease-in-out translate-x-5"></span>
+                                <button aria-checked="true" class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent bg-primary p-0 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface" role="switch" type="button">
+                                    <span aria-hidden="true" class="pointer-events-none inline-block h-5 w-5 translate-x-5 transform rounded-full bg-on-primary shadow ring-0 transition duration-200 ease-in-out"></span>
                                 </button>
                             </div>
                             <!-- Grade Updates -->
@@ -380,8 +315,8 @@
                                     <h3 class="font-headline font-medium text-on-surface">Grade Updates</h3>
                                     <p class="text-sm text-on-surface-variant mt-1">Instant notification when a grade is posted.</p>
                                 </div>
-                                <button aria-checked="true" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface bg-primary" role="switch" type="button">
-                                    <span aria-hidden="true" class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-on-primary shadow ring-0 transition duration-200 ease-in-out translate-x-5"></span>
+                                <button aria-checked="true" class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent bg-primary p-0 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface" role="switch" type="button">
+                                    <span aria-hidden="true" class="pointer-events-none inline-block h-5 w-5 translate-x-5 transform rounded-full bg-on-primary shadow ring-0 transition duration-200 ease-in-out"></span>
                                 </button>
                             </div>
                             <!-- Weekly Digest -->
@@ -390,14 +325,14 @@
                                     <h3 class="font-headline font-medium text-on-surface">Weekly Digest</h3>
                                     <p class="text-sm text-on-surface-variant mt-1">Summary of course activity every Sunday.</p>
                                 </div>
-                                <button aria-checked="false" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface bg-surface-container-highest" role="switch" type="button">
-                                    <span aria-hidden="true" class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-on-surface-variant shadow ring-0 transition duration-200 ease-in-out translate-x-0"></span>
+                                <button aria-checked="false" class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent bg-surface-container-highest p-0 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface" role="switch" type="button">
+                                    <span aria-hidden="true" class="pointer-events-none inline-block h-5 w-5 translate-x-0 transform rounded-full bg-on-surface-variant shadow ring-0 transition duration-200 ease-in-out"></span>
                                 </button>
                             </div>
                         </div>
                     </section>
                     <div class="mt-12 flex justify-end">
-                        <button id="save-interface-preferences" class="bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-medium px-6 py-2.5 rounded-lg hover:scale-[1.02] transition-transform duration-150 shadow-lg shadow-primary/20" type="button">
+                        <button id="save-interface-preferences" class="bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-medium px-6 py-2.5 rounded-lg hover:scale-[1.02] transition-transform shadow-lg shadow-primary/20" type="button">
                             Save Interface Preferences
                         </button>
                     </div>
@@ -411,7 +346,6 @@
         function showSettingsBanner(message, type) {
             const host = document.getElementById('settings-notifications');
             if (!host) return;
-
             const palette = type === 'success'
                 ? {
                     bg: 'bg-emerald-600/60',
@@ -425,7 +359,6 @@
                     text: 'text-red-50',
                     button: 'text-red-100 hover:text-white',
                   };
-
             const banner = document.createElement('div');
             banner.className = `relative overflow-hidden pointer-events-auto border ${palette.bg} ${palette.border} ${palette.text} rounded-lg shadow-xl backdrop-blur px-5 py-3 w-fit max-w-[92vw] opacity-0 transition-opacity duration-300`;
             banner.innerHTML = `
@@ -438,31 +371,25 @@
                     <span aria-hidden="true" class="w-6 h-6"></span>
                 </div>
             `;
-
             const dismiss = () => {
                 banner.classList.remove('opacity-100');
                 banner.classList.add('opacity-0');
                 window.setTimeout(() => banner.remove(), 250);
             };
-
             const closeButton = banner.querySelector('button');
             if (closeButton) {
                 closeButton.addEventListener('click', dismiss);
             }
-
             host.prepend(banner);
             while (host.children.length > 5) {
                 host.lastElementChild?.remove();
             }
-
             window.requestAnimationFrame(() => {
                 banner.classList.remove('opacity-0');
                 banner.classList.add('opacity-100');
             });
-
             window.setTimeout(dismiss, 2000);
         }
-
         async function postJson(url, payload) {
             const response = await fetch(url, {
                 method: 'POST',
@@ -475,11 +402,9 @@
             }
             return data;
         }
-
         const MAX_OTHER_CALENDARS = 10;
         const preferredCalendarViewToggle = document.getElementById('preferred-calendar-view-toggle');
         const DEFAULT_CALENDAR_VIEW = preferredCalendarViewToggle?.dataset.defaultCalendarView === 'month' ? 'month' : 'week';
-
         function updateOtherCalendarCount() {
             const count = document.querySelectorAll('input[data-other-calendar-url]').length;
             const counter = document.getElementById('other-calendar-count');
@@ -487,7 +412,6 @@
                 counter.textContent = `${count} / ${MAX_OTHER_CALENDARS} added`;
             }
         }
-
         function createOtherCalendarRow(value = '') {
             const row = document.createElement('div');
             row.className = 'other-calendar-row flex gap-2 items-center';
@@ -496,21 +420,24 @@
                     <input data-other-calendar-url class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg pl-10 pr-4 py-2.5 text-on-surface focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all font-body text-sm" placeholder="https://calendar.google.com/..." type="text" value="${value}" />
                     <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="event">event</span>
                 </div>
-                <button type="button" class="remove-other-calendar inline-flex items-center justify-center rounded-lg border border-outline-variant/30 bg-surface-container-low h-10 w-10 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" aria-label="Remove calendar link">
+                <button type="button" class="remove-other-calendar inline-flex items-center justify-center rounded-lg bg-surface-container h-10 w-10 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" aria-label="Remove calendar link">
                     <span class="material-symbols-outlined text-lg" data-icon="close">close</span>
                 </button>
             `;
             return row;
         }
-
-        function normalizeCalendarUrlForDedup(url) {
+        function normalizeCalendarUrlForDedup(url, options = {}) {
             try {
                 const trimmed = String(url || '').trim();
                 if (!trimmed) {
                     return '';
                 }
-
-                const parsed = new URL(trimmed);
+                const allowMissingScheme = options.allowMissingScheme === true;
+                const hasScheme = /^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(trimmed);
+                const normalizedInput = !hasScheme && allowMissingScheme
+                    ? `https://${trimmed}`
+                    : trimmed;
+                const parsed = new URL(normalizedInput);
                 let scheme = parsed.protocol.replace(':', '').toLowerCase();
                 if (scheme === 'webcal') {
                     scheme = 'https';
@@ -518,7 +445,6 @@
                 if (scheme !== 'http' && scheme !== 'https') {
                     return '';
                 }
-
                 const host = parsed.host.toLowerCase();
                 const path = parsed.pathname.replace(/\/+$/, '');
                 const query = parsed.search || '';
@@ -527,68 +453,56 @@
                 return '';
             }
         }
-
         function collectOtherCalendarUrls() {
             return Array.from(document.querySelectorAll('input[data-other-calendar-url]'))
                 .map(input => input.value.trim())
                 .filter(Boolean);
         }
-
         function updatePreferredCalendarView(view) {
             const normalizedView = view === 'month' ? 'month' : 'week';
             document.querySelectorAll('.js-calendar-view-option').forEach((button) => {
                 const buttonView = button.dataset.calendarViewOption;
                 const selected = buttonView === normalizedView;
                 button.className = selected
-                    ? 'js-calendar-view-option px-3 py-1.5 text-sm rounded-md bg-primary text-on-primary font-medium'
-                    : 'js-calendar-view-option px-3 py-1.5 text-sm rounded-md text-on-surface-variant hover:text-on-surface';
+                    ? 'js-calendar-view-option inline-flex h-8 min-w-[84px] items-center justify-center rounded-md bg-primary px-3 text-sm font-medium text-on-primary shadow-sm transition-colors'
+                    : 'js-calendar-view-option inline-flex h-8 min-w-[84px] items-center justify-center rounded-md px-3 text-sm font-medium text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface';
             });
         }
-
         let selectedCalendarView = DEFAULT_CALENDAR_VIEW;
         updatePreferredCalendarView(selectedCalendarView);
-
         preferredCalendarViewToggle?.addEventListener('click', (event) => {
             const button = event.target.closest('.js-calendar-view-option');
             if (!button) {
                 return;
             }
-
             const nextView = button.dataset.calendarViewOption === 'month' ? 'month' : 'week';
             selectedCalendarView = nextView;
             updatePreferredCalendarView(selectedCalendarView);
         });
-
         document.getElementById('add-other-calendar')?.addEventListener('click', () => {
             const container = document.getElementById('other-calendar-links');
             if (!container) {
                 return;
             }
-
             if (container.querySelectorAll('input[data-other-calendar-url]').length >= MAX_OTHER_CALENDARS) {
                 showSettingsBanner(`You can add up to ${MAX_OTHER_CALENDARS} optional calendar links.`, 'error');
                 return;
             }
-
             container.appendChild(createOtherCalendarRow());
             updateOtherCalendarCount();
         });
-
         document.getElementById('other-calendar-links')?.addEventListener('click', (event) => {
             const button = event.target.closest('.remove-other-calendar');
             if (!button) {
                 return;
             }
-
             const row = button.closest('.other-calendar-row');
             if (row) {
                 row.remove();
                 updateOtherCalendarCount();
             }
         });
-
         updateOtherCalendarCount();
-
         document.getElementById('save-profile')?.addEventListener('click', async () => {
             const nameInput = document.getElementById('profile-name');
             try {
@@ -602,35 +516,32 @@
                 showSettingsBanner(error.message, 'error');
             }
         });
-
         document.getElementById('save-interface-preferences')?.addEventListener('click', async () => {
             try {
+                const activeTheme = document.documentElement.getAttribute('data-theme');
                 await postJson('{{ url_for("settings.update_interface_preferences") }}', {
                     preferred_calendar_view: selectedCalendarView,
+                    interface_theme: activeTheme,
                 });
                 showSettingsBanner('Interface preferences saved.', 'success');
             } catch (error) {
                 showSettingsBanner(error.message, 'error');
             }
         });
-
         document.getElementById('save-data-connection')?.addEventListener('click', async () => {
             const feedUrl = document.getElementById('canvas-feed-url').value;
             const selectedFrequency = document.querySelector('input[name="sync"]:checked');
             const otherCalendarUrls = collectOtherCalendarUrls();
-
             if (!selectedFrequency) {
                 showSettingsBanner('Select a sync frequency.', 'error');
                 return;
             }
-
             if (otherCalendarUrls.length > MAX_OTHER_CALENDARS) {
                 showSettingsBanner(`You can add up to ${MAX_OTHER_CALENDARS} optional calendar links.`, 'error');
                 return;
             }
-
             const normalizedSeen = new Set();
-            const normalizedCanvas = normalizeCalendarUrlForDedup(feedUrl);
+            const normalizedCanvas = normalizeCalendarUrlForDedup(feedUrl, { allowMissingScheme: true });
             for (const url of otherCalendarUrls) {
                 const normalized = normalizeCalendarUrlForDedup(url);
                 if (!normalized) {
@@ -638,7 +549,7 @@
                     return;
                 }
                 if (normalizedCanvas && normalized === normalizedCanvas) {
-                    showSettingsBanner('Optional calendar links cannot duplicate the Emory Canvas calendar.', 'error');
+                    showSettingsBanner('Optional calendar links cannot duplicate the Nest Canvas calendar.', 'error');
                     return;
                 }
                 if (normalizedSeen.has(normalized)) {
@@ -647,7 +558,6 @@
                 }
                 normalizedSeen.add(normalized);
             }
-
             try {
                 await postJson('{{ url_for("settings.update_feed_url") }}', {
                     canvas_ical_url: feedUrl,
@@ -661,7 +571,6 @@
                 showSettingsBanner(error.message, 'error');
             }
         });
-
         function switchTab(tab) {
             const viewAccount = document.getElementById('view-account');
             const viewPreferences = document.getElementById('view-preferences');
@@ -670,13 +579,13 @@
             if (tab === 'account') {
                 viewAccount.classList.remove('hidden');
                 viewPreferences.classList.add('hidden');
-                navAccount.className = 'nav-link flex items-center gap-3 bg-surface-container text-primary border-l-4 border-primary px-4 py-3 hover:bg-surface-container-high transition-all duration-150 ease-in-out cursor-pointer';
-                navPreferences.className = 'nav-link flex items-center gap-3 text-on-surface-variant px-4 py-3 opacity-70 hover:bg-surface-container-high hover:opacity-100 transition-all duration-150 ease-in-out cursor-pointer border-l-4 border-transparent';
+                navAccount.className = 'nav-link flex items-center gap-3 bg-primary/10 text-primary border-l-4 border-primary px-4 py-3 hover:bg-primary/15 transition-all duration-150 ease-in-out cursor-pointer';
+                navPreferences.className = 'nav-link flex items-center gap-3 bg-transparent text-on-surface-variant border-l-4 border-transparent px-4 py-3 opacity-70 hover:bg-surface-container-high/50 hover:opacity-100 transition-all duration-150 ease-in-out cursor-pointer';
             } else {
                 viewAccount.classList.add('hidden');
                 viewPreferences.classList.remove('hidden');
-                navPreferences.className = 'nav-link flex items-center gap-3 bg-surface-container text-primary border-l-4 border-primary px-4 py-3 hover:bg-surface-container-high transition-all duration-150 ease-in-out cursor-pointer';
-                navAccount.className = 'nav-link flex items-center gap-3 text-on-surface-variant px-4 py-3 opacity-70 hover:bg-surface-container-high hover:opacity-100 transition-all duration-150 ease-in-out cursor-pointer border-l-4 border-transparent';
+                navPreferences.className = 'nav-link flex items-center gap-3 bg-primary/10 text-primary border-l-4 border-primary px-4 py-3 hover:bg-primary/15 transition-all duration-150 ease-in-out cursor-pointer';
+                navAccount.className = 'nav-link flex items-center gap-3 bg-transparent text-on-surface-variant border-l-4 border-transparent px-4 py-3 opacity-70 hover:bg-surface-container-high/50 hover:opacity-100 transition-all duration-150 ease-in-out cursor-pointer';
             }
             // Mobile tabs
             document.querySelectorAll('.mobile-tab').forEach(btn => {
@@ -687,13 +596,15 @@
                 }
             });
         }
+        switchTab('account');
     </script>
     <!-- Theme Switching Logic -->
     <script>
         (function() {
-            const DARK_THEMES = ['obsidian-dark', 'emory-dark'];
-            const VALID_THEMES = ['obsidian-dark', 'parchment-light', 'system-match', 'emory-light', 'emory-dark'];
+            const DARK_THEMES = ['obsidian-dark', 'nest-dark'];
+            const VALID_THEMES = ['obsidian-dark', 'parchment-light', 'system-match', 'nest-light', 'nest-dark'];
             const STORAGE_KEY = 'apstudy-theme';
+            const SERVER_THEME = window.APSTUDY_THEME_PREFERENCE || '';
             /**
              * Apply a theme to the document and update card UI.
              * @param {string} theme - one of VALID_THEMES
@@ -714,6 +625,7 @@
                 if (persist) {
                     localStorage.setItem(STORAGE_KEY, theme);
                 }
+                window.APSTUDY_THEME_PREFERENCE = theme;
                 // Update card visual states
                 updateCardStates(theme);
             }
@@ -743,6 +655,7 @@
              */
             function resolveTheme() {
                 var stored = localStorage.getItem(STORAGE_KEY);
+                if (SERVER_THEME && VALID_THEMES.indexOf(SERVER_THEME) !== -1) return SERVER_THEME;
                 if (stored && VALID_THEMES.indexOf(stored) !== -1) return stored;
                 // No stored preference — detect system
                 if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'obsidian-dark';
@@ -758,6 +671,11 @@
                     var newTheme = card.getAttribute('data-theme-value');
                     currentTheme = newTheme;
                     applyTheme(newTheme, true);
+                    postJson('{{ url_for("settings.update_interface_preferences") }}', {
+                        interface_theme: newTheme,
+                    }).catch(function(error) {
+                        showSettingsBanner(error.message, 'error');
+                    });
                 });
             });
             // --- Listen for system preference changes (for "system-match" mode) ---

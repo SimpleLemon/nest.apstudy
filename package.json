@@ -1,0 +1,29 @@
+{
+  "name": "emory.apstudy",
+  "version": "1.0.0",
+  "description": "Startup command: ```if [[ -f /home/container/requirements.txt ]]; then pip install -U --prefix .local -r requirements.txt; fi; SCHEDULER_ENABLED=1 python -m gunicorn -w 1 -b 0.0.0.0:${SERVER_PORT} \"app:create_app()\"```",
+  "main": "atlasMainScraper.js",
+  "scripts": {
+    "build:css": "tailwindcss -c ./tailwind.config.cjs -i ./static/css/tailwind-input.css -o ./static/css/tailwind.css --minify",
+    "watch:css": "tailwindcss -c ./tailwind.config.cjs -i ./static/css/tailwind-input.css -o ./static/css/tailwind.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimpleLemon/emory.apstudy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/SimpleLemon/emory.apstudy/issues"
+  },
+  "homepage": "https://github.com/SimpleLemon/emory.apstudy#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "appwrite": "^25.0.0"
+  }
+}

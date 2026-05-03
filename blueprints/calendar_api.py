@@ -416,7 +416,7 @@ def ics_feed():
             status=200,
             mimetype="text/calendar",
             headers={
-                "Content-Disposition": "attachment; filename=emory_apstudy.ics",
+                "Content-Disposition": "attachment; filename=nest_apstudy.ics",
             },
         )
     except Exception as e:

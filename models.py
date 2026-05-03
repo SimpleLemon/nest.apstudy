@@ -15,9 +15,10 @@ class User(UserMixin, db.Model):
     picture_url = db.Column(db.Text, nullable=True)
     onboarding_complete = db.Column(db.Boolean, default=False, nullable=False)
     onboarding_step = db.Column(db.Integer, default=1, nullable=False)
+    education_level = db.Column(db.String(32), nullable=True)
     class_year = db.Column(db.String(64), nullable=True)
-    school_college = db.Column(db.String(255), nullable=True)
-    majors_json = db.Column(db.Text, nullable=True)
+    emory_student = db.Column(db.Boolean, nullable=True)
+    emory_email = db.Column(db.String(255), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     last_login = db.Column(db.DateTime, nullable=True)
 
@@ -57,6 +58,7 @@ class UserSettings(db.Model):
     ics_secret_token = db.Column(db.String(255), unique=True, nullable=True, index=True)
     feed_refresh_minutes = db.Column(db.Integer, default=15, nullable=False)
     preferred_calendar_view = db.Column(db.String(16), default="week", nullable=False)
+    interface_theme = db.Column(db.String(32), default="system-match", nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=True)
 

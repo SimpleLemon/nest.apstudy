@@ -80,20 +80,26 @@ def _ensure_sqlite_schema(database_uri):
         _ensure_sqlite_column(
             connection,
             "users",
+            "education_level",
+            "education_level VARCHAR(32)",
+        )
+        _ensure_sqlite_column(
+            connection,
+            "users",
             "class_year",
             "class_year VARCHAR(64)",
         )
         _ensure_sqlite_column(
             connection,
             "users",
-            "school_college",
-            "school_college VARCHAR(255)",
+            "emory_student",
+            "emory_student INTEGER",
         )
         _ensure_sqlite_column(
             connection,
             "users",
-            "majors_json",
-            "majors_json TEXT",
+            "emory_email",
+            "emory_email VARCHAR(255)",
         )
         _ensure_sqlite_column(
             connection,
@@ -133,6 +139,12 @@ def _ensure_sqlite_schema(database_uri):
         )
         _ensure_sqlite_column(
             connection,
+            "user_settings",
+            "interface_theme",
+            "interface_theme VARCHAR(32) DEFAULT 'system-match'",
+        )
+        _ensure_sqlite_column(
+            connection,
             "calendar_cache",
             "is_all_day",
             "is_all_day INTEGER NOT NULL DEFAULT 0",
@@ -146,7 +158,7 @@ def create_app():
     database_uri = _resolve_database_uri(
         os.environ.get(
             "DATABASE_URI",
-            f"sqlite:///{os.path.join(BASE_DIR, 'data', 'emory_apstudy.sqlite')}",
+            f"sqlite:///{os.path.join(BASE_DIR, 'data', 'nest_apstudy.sqlite')}",
         )
     )
     _repair_sqlite_database(database_uri)
@@ -159,6 +171,11 @@ def create_app():
     from extensions import db, login_manager
     db.init_app(app)
     login_manager.init_app(app)
+    login_manager.login_view = "auth.login"
+
+    @login_manager.unauthorized_handler
+    def handle_unauthorized():
+        return redirect(url_for("auth.login"))
 
     # Register all blueprints
     from blueprints import register_blueprints

@@ -20,8 +20,9 @@ from services.atlas_client import DEFAULT_TERM
 
 settings_bp = Blueprint("settings", __name__)
 
-CANVAS_CALENDAR_HOST = "canvas.emory.edu"
-CANVAS_CALENDAR_PATH_PREFIX = "/feeds/calendars"
+CANVAS_CALENDAR_HOST_PREFIX = "canvas."
+CANVAS_CALENDAR_HOST_SUFFIX = ".edu"
+CANVAS_CALENDAR_PATH_PREFIXES = ("/feeds/calendar", "/feeds/calendars")
 MAX_OTHER_CALENDAR_URLS = 10
 
 
@@ -57,19 +58,39 @@ def _normalize_calendar_url(url):
     return normalized
 
 
-def _is_valid_canvas_calendar_url(url):
-    """Validate strict Emory Canvas calendar URLs."""
+def _normalize_canvas_calendar_url(url):
+    """Return a normalized Canvas calendar URL, or None if invalid."""
     if not isinstance(url, str):
-        return False
+        return None
 
-    parsed = urlparse(url.strip())
+    raw = url.strip()
+    if not raw:
+        return None
+
+    if "://" not in raw:
+        raw = f"https://{raw}"
+
+    parsed = urlparse(raw)
     if parsed.scheme.lower() != "https":
-        return False
+        return None
 
-    if parsed.netloc.lower() != CANVAS_CALENDAR_HOST:
-        return False
+    host = parsed.netloc.lower()
+    if not (host.startswith(CANVAS_CALENDAR_HOST_PREFIX) and host.endswith(CANVAS_CALENDAR_HOST_SUFFIX)):
+        return None
 
-    return (parsed.path or "").startswith(CANVAS_CALENDAR_PATH_PREFIX)
+    path = parsed.path or ""
+    if not path.startswith(CANVAS_CALENDAR_PATH_PREFIXES):
+        return None
+
+    normalized_path = path.rstrip("/")
+    return urlunparse((
+        "https",
+        host,
+        normalized_path,
+        "",
+        parsed.query,
+        "",
+    ))
 
 
 def _load_other_calendar_urls(settings):
@@ -118,7 +139,7 @@ def _validate_other_calendar_urls(other_urls, canvas_url):
             )
 
         if normalized_canvas and normalized == normalized_canvas:
-            raise ValueError("Optional calendar links cannot duplicate the Emory Canvas calendar.")
+            raise ValueError("Optional calendar links cannot duplicate the Nest Canvas calendar.")
 
         if normalized in seen:
             raise ValueError("Duplicate optional calendar links are not allowed.")
@@ -132,64 +153,46 @@ def _validate_other_calendar_urls(other_urls, canvas_url):
     return cleaned
 
 
-MAJOR_OPTIONS = [
-    "Undecided",
-    "African American Studies",
-    "Anthropology",
-    "Art History",
-    "Biology",
-    "Biochemistry",
-    "Business Administration",
-    "Chemistry",
-    "Chinese",
-    "Classics",
-    "Computer Science",
-    "Creative Writing",
-    "Dance and Movement Studies",
-    "Economics",
-    "English",
-    "Environmental Science",
-    "Ethics",
-    "Film and Media Studies",
-    "French",
-    "German Studies",
-    "History",
-    "Human Health",
-    "International Studies",
-    "Latin American Studies",
-    "Linguistics",
-    "Mathematics",
-    "Music",
-    "Neuroscience and Behavioral Biology",
-    "Philosophy",
-    "Physics",
-    "Political Science",
-    "Psychology",
-    "Religion",
-    "Sociology",
-    "Spanish and Portuguese",
-    "Women, Gender, and Sexuality Studies",
+EDUCATION_LEVELS = {
+    "High School",
+    "Undergraduate",
+    "Graduate",
     "Other",
-]
+}
 
-YEAR_OPTIONS = [
-    "Freshman (Class of 2030)",
-    "Sophomore (Class of 2029)",
-    "Junior (Class of 2028)",
-    "Senior (Class of 2027)",
-    "Graduate Student",
-    "Other",
-]
 
-SCHOOL_OPTIONS = [
-    "Emory College of Arts and Sciences",
-    "Oxford College",
-    "Goizueta Business School",
-    "Nell Hodgson Woodruff School of Nursing",
-    "Rollins School of Public Health",
-    "Laney Graduate School",
-    "Other",
-]
+def _normalize_education_level(value):
+    if not isinstance(value, str):
+        return None
+    normalized = value.strip()
+    return normalized if normalized in EDUCATION_LEVELS else None
+
+
+def _normalize_emory_student(value):
+    if value is None:
+        return None
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return bool(value)
+    if isinstance(value, str):
+        normalized = value.strip().lower()
+        if normalized in {"yes", "true", "1"}:
+            return True
+        if normalized in {"no", "false", "0"}:
+            return False
+    return None
+
+
+def _normalize_emory_email(value):
+    if not isinstance(value, str):
+        return None
+    normalized = value.strip().lower()
+    if not normalized:
+        return None
+    if not normalized.endswith("@emory.edu"):
+        raise ValueError("Please enter a valid @emory.edu email address.")
+    return normalized
 
 
 def _onboarding_courses():
@@ -202,13 +205,6 @@ def _onboarding_courses():
 
 
 def _onboarding_context():
-    majors = []
-    if current_user.majors_json:
-        try:
-            majors = json.loads(current_user.majors_json)
-        except json.JSONDecodeError:
-            majors = []
-
     return {
         "user": {
             "name": current_user.name,
@@ -217,9 +213,10 @@ def _onboarding_context():
         },
         "first_name": (current_user.name or current_user.email or "Student").split()[0],
         "step": current_user.onboarding_step or 1,
+        "education_level": current_user.education_level,
         "class_year": current_user.class_year,
-        "school_college": current_user.school_college,
-        "selected_majors": majors,
+        "emory_student": current_user.emory_student,
+        "emory_email": current_user.emory_email,
         "courses": [
             {
                 "id": course.id,
@@ -231,9 +228,6 @@ def _onboarding_context():
             }
             for course in _onboarding_courses()
         ],
-        "major_options": MAJOR_OPTIONS,
-        "year_options": YEAR_OPTIONS,
-        "school_options": SCHOOL_OPTIONS,
         "default_term": DEFAULT_TERM,
     }
 
@@ -268,22 +262,43 @@ def save_onboarding():
         return jsonify({"status": "ok", "next_step": 2})
 
     if step == 2:
+        education_level = _normalize_education_level(payload.get("education_level"))
+        if not education_level:
+            return jsonify({"error": "Select an education level before continuing."}), 400
+
         class_year = (payload.get("class_year") or "").strip() or None
-        school_college = (payload.get("school_college") or "").strip() or None
-        majors = payload.get("majors") or []
+        emory_student = _normalize_emory_student(payload.get("emory_student"))
+        emory_email = payload.get("emory_email")
 
-        if isinstance(majors, str):
-            majors = [item for item in majors.split("|") if item]
+        if education_level in {"High School", "Undergraduate"}:
+            if not class_year or len(class_year) != 4 or not class_year.isdigit():
+                return jsonify({"error": "Enter a valid 4-digit class year."}), 400
+        else:
+            class_year = None
 
-        if len(majors) > 2:
-            return jsonify({"error": "Select no more than 2 majors."}), 400
+        if education_level == "Undergraduate":
+            if emory_student is None:
+                return jsonify({"error": "Select whether you are an Emory University student."}), 400
+            if emory_student:
+                try:
+                    emory_email = _normalize_emory_email(emory_email)
+                except ValueError as error:
+                    return jsonify({"error": str(error)}), 400
+            else:
+                emory_email = None
+        else:
+            emory_student = None
+            emory_email = None
 
+        next_step = 3 if education_level == "Undergraduate" and emory_student else 4
+
+        current_user.education_level = education_level
         current_user.class_year = class_year
-        current_user.school_college = school_college
-        current_user.majors_json = json.dumps(majors)
-        current_user.onboarding_step = max(current_user.onboarding_step or 2, 3)
+        current_user.emory_student = emory_student
+        current_user.emory_email = emory_email
+        current_user.onboarding_step = next_step
         db.session.commit()
-        return jsonify({"status": "ok", "next_step": 3})
+        return jsonify({"status": "ok", "next_step": next_step})
 
     if step == 3:
         if action == "add_course":
@@ -342,13 +357,6 @@ def save_onboarding():
             }), 201
 
         if action in {"advance", "continue", "review"}:
-            course_count = UserCourse.query.filter_by(
-                user_id=current_user.id,
-                source="onboarding",
-            ).count()
-            if course_count < 1:
-                return jsonify({"error": "Add at least one course before continuing."}), 400
-
             current_user.onboarding_step = 4
             db.session.commit()
             return jsonify({"status": "ok", "next_step": 4})
@@ -359,7 +367,7 @@ def save_onboarding():
             db.session.commit()
             return jsonify({"status": "ok", "redirect_url": url_for("dashboard.dashboard")})
 
-    if step == 4:
+    if step in {4, 5}:
         current_user.onboarding_complete = True
         current_user.onboarding_step = 4
         db.session.commit()
@@ -395,7 +403,7 @@ def settings_page():
         "email": current_user.email,
         "picture": current_user.picture_url,
         "member_since": current_user.created_at.strftime("%b %d, %Y"),
-    }, settings=user_settings, courses=courses, other_calendar_urls=other_calendar_urls)
+    }, settings=user_settings, courses=courses, other_calendar_urls=other_calendar_urls, theme_preference=user_settings.interface_theme if user_settings else None)
 
 
 # ── API routes (called by settings page JavaScript) ──────────────────────────
@@ -427,7 +435,7 @@ def update_feed_url():
     """
     POST /settings/api/feed-url
         Body: {
-            "canvas_ical_url": "https://canvas.emory.edu/feeds/calendars/...",
+            "canvas_ical_url": "https://canvas.nest.edu/feeds/calendars/...",
             "other_ical_urls": ["https://calendar.google.com/...", "webcal://..."]
         }
 
@@ -435,17 +443,17 @@ def update_feed_url():
     Used by both the onboarding page and the settings page.
     """
     data = request.get_json(silent=True) or {}
-    if "canvas_ical_url" not in data:
-        return jsonify({"error": "Missing canvas_ical_url"}), 400
+    if "canvas_ical_url" not in data and "other_ical_urls" not in data:
+        return jsonify({"error": "Missing calendar payload"}), 400
 
-    url = (data.get("canvas_ical_url") or "").strip()
-    if not url:
-        return jsonify({"error": "Missing canvas_ical_url"}), 400
-
-    if not _is_valid_canvas_calendar_url(url):
-        return jsonify({
-            "error": "Emory Canvas calendar must use https://canvas.emory.edu/feeds/calendars..."
-        }), 400
+    raw_url = (data.get("canvas_ical_url") or "").strip()
+    url = None
+    if raw_url:
+        url = _normalize_canvas_calendar_url(raw_url)
+        if not url:
+            return jsonify({
+                "error": "Canvas calendar must use https://canvas.<school>.edu/feeds/calendar..."
+            }), 400
 
     try:
         if "other_ical_urls" in data:
@@ -512,10 +520,14 @@ def update_refresh_interval():
 def update_interface_preferences():
     """Persist interface-level preferences such as the default dashboard calendar view."""
     data = request.get_json(silent=True) or {}
-    preferred_calendar_view = (data.get("preferred_calendar_view") or "").strip().lower()
+    preferred_calendar_view = (data.get("preferred_calendar_view") or "").strip().lower() or None
+    interface_theme = (data.get("interface_theme") or "").strip() or None
 
-    if preferred_calendar_view not in {"week", "month"}:
+    valid_themes = {"obsidian-dark", "parchment-light", "system-match", "nest-light", "nest-dark"}
+    if preferred_calendar_view and preferred_calendar_view not in {"week", "month"}:
         return jsonify({"error": "Preferred calendar view must be weekly or monthly."}), 400
+    if interface_theme and interface_theme not in valid_themes:
+        return jsonify({"error": "Interface theme is not valid."}), 400
 
     settings = UserSettings.query.filter_by(user_id=current_user.id).first()
     if not settings:
@@ -525,13 +537,17 @@ def update_interface_preferences():
         )
         db.session.add(settings)
 
-    settings.preferred_calendar_view = preferred_calendar_view
+    if preferred_calendar_view:
+        settings.preferred_calendar_view = preferred_calendar_view
+    if interface_theme:
+        settings.interface_theme = interface_theme
     settings.updated_at = datetime.utcnow()
     db.session.commit()
 
     return jsonify({
         "status": "ok",
-        "preferred_calendar_view": preferred_calendar_view,
+        "preferred_calendar_view": settings.preferred_calendar_view,
+        "interface_theme": settings.interface_theme,
     })
 
 

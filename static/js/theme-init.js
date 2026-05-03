@@ -3,14 +3,18 @@
  * <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
  */
 (function() {
-    var DARK_THEMES = ['obsidian-dark', 'emory-dark'];
-    var VALID_THEMES = ['obsidian-dark', 'parchment-light', 'system-match', 'emory-light', 'emory-dark'];
+    var DARK_THEMES = ['obsidian-dark', 'nest-dark'];
+    var VALID_THEMES = ['obsidian-dark', 'parchment-light', 'system-match', 'nest-light', 'nest-dark'];
     var STORAGE_KEY = 'apstudy-theme';
 
     var stored = localStorage.getItem(STORAGE_KEY);
+    var overrideTheme = window.APSTUDY_THEME_PREFERENCE;
+    var lockTheme = window.APSTUDY_THEME_LOCKED === true;
     var theme;
 
-    if (stored && VALID_THEMES.indexOf(stored) !== -1) {
+    if (overrideTheme && VALID_THEMES.indexOf(overrideTheme) !== -1) {
+        theme = overrideTheme;
+    } else if (!lockTheme && stored && VALID_THEMES.indexOf(stored) !== -1) {
         theme = stored;
     } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         theme = 'obsidian-dark';

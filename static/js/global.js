@@ -3,6 +3,9 @@ function renderGlobalChrome() {
     if (nav) {
         nav.style.position = "relative";
         nav.style.zIndex = "9999";
+        nav.style.display = "block";
+        nav.style.width = "100%";
+        nav.style.maxWidth = "100%";
 
         const profileImage =
             nav.dataset.profilePicture ||
@@ -73,33 +76,33 @@ function renderGlobalChrome() {
         }
 
         nav.innerHTML = `
-<header class="bg-surface-container/80 backdrop-blur-md top-0 w-full flex justify-between items-center h-16 px-8 shadow-2xl shadow-black/20 border-b border-outline-variant/30" style="position: relative; z-index: 9999;">
-    <div class="flex items-center gap-4">
-        <a href="/dashboard" class="text-xl font-semibold tracking-tighter text-on-surface-variant hover:text-primary transition-colors no-underline">Emory.APStudy.org</a>
+<header class="bg-surface-container/80 backdrop-blur-md top-0 w-full max-w-full flex justify-between items-center h-16 px-4 sm:px-8 shadow-2xl shadow-black/20 border-b border-outline-variant/30 overflow-visible" style="position: relative; z-index: 9999;">
+    <div class="flex min-w-0 items-center gap-4">
+        <a href="/dashboard" class="truncate text-xl font-semibold tracking-tighter text-on-surface-variant hover:text-primary transition-colors no-underline">Nest.APStudy.org</a>
     </div>
-    <div class="flex items-center gap-3">
-        <button aria-disabled="true" type="button" class="text-on-surface-variant/60 p-2 rounded-full cursor-default" title="Reload">
-            <span class="material-symbols-outlined" data-icon="sync">sync</span>
+    <div class="relative z-50 flex shrink-0 items-center justify-end gap-2 sm:gap-3">
+        <button aria-disabled="false" type="button" class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface-container-high/60 p-0 text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-primary disabled:cursor-not-allowed disabled:opacity-50" title="Reload">
+            <span class="material-symbols-outlined text-[20px] leading-none" data-icon="sync">sync</span>
         </button>
-    <div class="relative" style="z-index: 10000;">
-        <button id="profile-menu-trigger" aria-expanded="false" aria-haspopup="true" class="w-9 h-9 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant/30 hover:border-primary transition-colors">
-            <img alt="Profile" class="w-full h-full object-cover" src="${profileImage}"/>
+    <div class="relative shrink-0" style="z-index: 10000;">
+        <button id="profile-menu-trigger" type="button" aria-expanded="false" aria-haspopup="true" class="inline-flex h-10 w-10 aspect-square shrink-0 items-center justify-center overflow-hidden rounded-full bg-surface-container-high p-0 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/40">
+            <img alt="Profile" class="block h-full w-full rounded-full object-cover" src="${profileImage}"/>
         </button>
-        <div id="profile-menu" class="hidden absolute right-0 mt-2 w-44 bg-surface border border-outline-variant/30 rounded-xl shadow-2xl shadow-black/20 overflow-hidden" style="z-index: 10001;">
-            <button id="profile-my-courses" type="button" class="w-full text-left flex items-center gap-2 px-4 py-3 text-sm text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors">
-                <span class="material-symbols-outlined text-[18px]">school</span>
+        <div id="profile-menu" class="hidden absolute right-0 mt-2 w-52 max-w-[calc(100vw-1rem)] rounded-xl border border-outline-variant/30 bg-surface shadow-2xl shadow-black/20 overflow-hidden" style="z-index: 10001;">
+            <button id="profile-my-courses" type="button" class="flex w-full items-center gap-2 px-4 py-3 text-left text-sm text-on-surface-variant bg-surface-container transition-colors hover:bg-surface-container-high hover:text-primary">
+                <span class="material-symbols-outlined shrink-0 text-[18px]">school</span>
                 My Courses
             </button>
-            <a href="/files" class="w-full text-left flex items-center gap-2 px-4 py-3 text-sm text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors no-underline border-t border-outline-variant/30">
-                <span class="material-symbols-outlined text-[18px]">folder_shared</span>
+            <a href="/files" class="flex w-full items-center gap-2 border-t border-outline-variant/30 px-4 py-3 text-left text-sm text-on-surface-variant no-underline bg-surface-container transition-colors hover:bg-surface-container-high hover:text-primary">
+                <span class="material-symbols-outlined shrink-0 text-[18px]">folder_shared</span>
                 My Files
             </a>
-            <button id="profile-settings" type="button" class="w-full text-left flex items-center gap-2 px-4 py-3 text-sm text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors border-t border-outline-variant/30">
-                <span class="material-symbols-outlined text-[18px]">settings</span>
+            <button id="profile-settings" type="button" class="flex w-full items-center gap-2 px-4 py-3 text-left text-sm text-on-surface-variant bg-surface-container transition-colors hover:bg-surface-container-high hover:text-primary">
+                <span class="material-symbols-outlined shrink-0 text-[18px]">settings</span>
                 Settings
             </button>
-            <button id="profile-logout" type="button" class="w-full text-left flex items-center gap-2 px-4 py-3 text-sm text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors border-t border-outline-variant/30">
-                <span class="material-symbols-outlined text-[18px]">logout</span>
+            <button id="profile-logout" type="button" class="flex w-full items-center gap-2 px-4 py-3 text-left text-sm text-on-surface-variant bg-surface-container transition-colors hover:bg-surface-container-high hover:text-primary">
+                <span class="material-symbols-outlined shrink-0 text-[18px]">logout</span>
                 Logout
             </button>
         </div>
@@ -179,7 +182,7 @@ function renderGlobalChrome() {
         footer.innerHTML = `
 <footer class="bg-surface w-full py-12 border-t border-outline-variant/30">
     <div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto">
-        <span class="font-['Inter'] text-[11px] uppercase tracking-[0.05em] font-normal text-on-surface-variant/50">© 2026 Emory.APStudy.org. Built for Emory University by an Emory Student.</span>
+        <span class="font-['Inter'] text-[11px] uppercase tracking-[0.05em] font-normal text-on-surface-variant/50">© 2026 Nest.APStudy.org. Built for Nest University by a Nest Student.</span>
         <div class="flex gap-6 mt-4 md:mt-0">
             <a class="font-['Inter'] text-[11px] uppercase tracking-[0.05em] font-normal text-on-surface-variant/50 hover:text-primary transition-colors" href="mailto:derekchenusa@gmail.com">Support</a>
             <a class="font-['Inter'] text-[11px] uppercase tracking-[0.05em] font-normal text-on-surface-variant/50 hover:text-primary transition-colors" href="#">Archive</a>

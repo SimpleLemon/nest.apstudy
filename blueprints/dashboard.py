@@ -24,6 +24,7 @@ def dashboard():
     preferred_calendar_view = (user_settings.preferred_calendar_view if user_settings and user_settings.preferred_calendar_view else "week")
     if preferred_calendar_view not in {"week", "month"}:
         preferred_calendar_view = "week"
+    interface_theme = user_settings.interface_theme if user_settings else None
 
     return render_template(
         "dashboard.html",
@@ -33,4 +34,5 @@ def dashboard():
             "picture": current_user.picture_url,
         },
         preferred_calendar_view=preferred_calendar_view,
+        theme_preference=interface_theme,
     )

@@ -45,7 +45,7 @@ def _build_event_uid(event_uid, user_id):
     """
     if event_uid:
         return f"u{user_id}-{event_uid}"
-    return f"u{user_id}-generated-{id(event_uid)}@emory.apstudy.org"
+    return f"u{user_id}-generated-{id(event_uid)}@nest.apstudy.org"
 
 
 def build_ics_for_user(user_id):
@@ -62,11 +62,11 @@ def build_ics_for_user(user_id):
     """
     # Create the top-level VCALENDAR container
     cal = icalendar.Calendar()
-    cal.add("prodid", "-//emory.apstudy.org//calendar//EN")
+    cal.add("prodid", "-//nest.apstudy.org//calendar//EN")
     cal.add("version", "2.0")
     cal.add("calscale", "GREGORIAN")
     cal.add("method", "PUBLISH")
-    cal.add("x-wr-calname", "Emory APStudy")
+    cal.add("x-wr-calname", "Nest APStudy")
     cal.add("x-wr-timezone", "America/New_York")
 
     # Fetch all cached events for this user
@@ -218,7 +218,7 @@ def _inject_atlas_schedule(cal, user_id):
             if section_num:
                 summary += f" (Sec {section_num})"
 
-            vevent.add("uid", f"atlas-{uc.term}-{uc.subject}{uc.catalog}-{section.get('crn', 'x')}@emory.apstudy.org")
+            vevent.add("uid", f"atlas-{uc.term}-{uc.subject}{uc.catalog}-{section.get('crn', 'x')}@nest.apstudy.org")
             vevent.add("dtstamp", now)
             vevent.add("summary", summary)
 

@@ -4,6 +4,9 @@
  * CSS custom property definitions for all five APStudy themes.
  * Each [data-theme] selector overrides the variables that Tailwind utilities reference.
  * Include this file on EVERY page via <link>.
+ *
+ * Tailwind config is centralized in tailwind.config.cjs and compiled to static/css/tailwind.css.
+ * Do not duplicate Tailwind config blocks across pages.
  */
 /* ============================
    OBSIDIAN DARK (default dark)
@@ -181,13 +184,13 @@
     }
 }
 /* ============================
-   EMORY LIGHT
-   Drawn from emory.edu brand guidelines:
-   Emory Blue #012169, Emory Gold #F2A900,
-   Emory Light Blue #007DBA, Emory Dark Blue #0C2344.
+    NEST LIGHT
+    Drawn from nest.edu brand guidelines:
+    Nest Blue #012169, Nest Gold #F2A900,
+    Nest Light Blue #007DBA, Nest Dark Blue #0C2344.
    Crisp white base, warm stone-gray containers.
    ============================ */
-[data-theme="emory-light"] {
+[data-theme="nest-light"] {
     --color-surface-container: #EAEAE4;
     --color-surface: #FFFFFF;
     --color-surface-bright: #FFFFFF;
@@ -228,9 +231,9 @@
     --color-calendar-rule: #B8B6AE;
 }
 /* ============================
-   EMORY DARK
+    NEST DARK
    ============================ */
-[data-theme="emory-dark"] {
+[data-theme="nest-dark"] {
     --color-surface-container: #101730;
     --color-surface: #0a0f22;
     --color-surface-bright: #252c48;
