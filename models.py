@@ -4,7 +4,7 @@ from flask_login import UserMixin
 
 from appwrite.exception import AppwriteException
 from appwrite_client import COLLECTIONS
-from appwrite_helpers import get_document_safe, parse_datetime
+from appwrite_helpers import get_row_safe, parse_datetime
 from extensions import login_manager
 
 
@@ -44,10 +44,10 @@ def load_user(user_id):
     if not user_id:
         return None
     try:
-        doc = get_document_safe(COLLECTIONS["users"], user_id)
+        doc = get_row_safe(COLLECTIONS["users"], user_id)
     except AppwriteException as exc:
         if exc.code == 404:
             return None
-        logger.exception("Failed to load user document")
+        logger.exception("Failed to load user row")
         return None
     return User(doc)

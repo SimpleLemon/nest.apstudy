@@ -6,7 +6,7 @@ from appwrite.client import Client
 from appwrite.exception import AppwriteException
 from appwrite.permission import Permission
 from appwrite.role import Role
-from appwrite.services.databases import Databases
+from appwrite.services.tables_db import TablesDB
 from dotenv import load_dotenv
 
 
@@ -39,46 +39,51 @@ def _init_client():
     return client
 
 
-def _wait_for_attribute(databases, database_id, collection_id, key, timeout=30):
+# ---------------------------------------------------------------------------
+# Polling helpers
+# ---------------------------------------------------------------------------
+
+
+def _wait_for_column(tablesdb, database_id, table_id, key, timeout=30):
     deadline = time.time() + timeout
     while time.time() < deadline:
         try:
-            attribute = databases.get_attribute(
+            column = tablesdb.get_column(
                 database_id=database_id,
-                collection_id=collection_id,
+                table_id=table_id,
                 key=key,
             )
         except AppwriteException:
             time.sleep(0.5)
             continue
 
-        if attribute.get("status") == "available":
+        if column.status == "available":
             return
 
         time.sleep(0.5)
 
     logger.warning(
-        "Attribute %s on %s not available after %ss",
+        "Column %s on %s not available after %ss",
         key,
-        collection_id,
+        table_id,
         timeout,
     )
 
 
-def _wait_for_index(databases, database_id, collection_id, key, timeout=30):
+def _wait_for_index(tablesdb, database_id, table_id, key, timeout=30):
     deadline = time.time() + timeout
     while time.time() < deadline:
         try:
-            index = databases.get_index(
+            index = tablesdb.get_index(
                 database_id=database_id,
-                collection_id=collection_id,
+                table_id=table_id,
                 key=key,
             )
         except AppwriteException:
             time.sleep(0.5)
             continue
 
-        if index.get("status") == "available":
+        if index.status == "available":
             return
 
         time.sleep(0.5)
@@ -86,166 +91,179 @@ def _wait_for_index(databases, database_id, collection_id, key, timeout=30):
     logger.warning(
         "Index %s on %s not available after %ss",
         key,
-        collection_id,
+        table_id,
         timeout,
     )
 
 
-def _list_existing(databases, database_id):
+# ---------------------------------------------------------------------------
+# Introspection helpers
+# ---------------------------------------------------------------------------
+
+
+def _list_existing_tables(tablesdb, database_id):
+    """Return a dict of {table_id: table_object} for all tables in the DB."""
     try:
-        response = databases.list_collections(database_id=database_id)
+        response = tablesdb.list_tables(database_id=database_id)
     except AppwriteException:
-        logger.exception("Failed to list collections")
+        logger.exception("Failed to list tables")
         raise
-    return {collection["$id"]: collection for collection in response.get("collections", [])}
+    return {table.id: table for table in response.tables}
 
 
-def _list_attributes(databases, database_id, collection_id):
+def _list_columns(tablesdb, database_id, table_id):
+    """Return a set of column keys that already exist on a table."""
     try:
-        response = databases.list_attributes(
+        response = tablesdb.list_columns(
             database_id=database_id,
-            collection_id=collection_id,
+            table_id=table_id,
         )
     except AppwriteException:
-        logger.exception("Failed to list attributes for %s", collection_id)
+        logger.exception("Failed to list columns for %s", table_id)
         return set()
 
-    return {attribute["key"] for attribute in response.get("attributes", [])}
+    return {column.key for column in response.columns}
 
 
-def _list_indexes(databases, database_id, collection_id):
+def _list_indexes(tablesdb, database_id, table_id):
+    """Return a set of index keys that already exist on a table."""
     try:
-        response = databases.list_indexes(
+        response = tablesdb.list_indexes(
             database_id=database_id,
-            collection_id=collection_id,
+            table_id=table_id,
         )
     except AppwriteException:
-        logger.exception("Failed to list indexes for %s", collection_id)
+        logger.exception("Failed to list indexes for %s", table_id)
         return set()
 
-    return {index["key"] for index in response.get("indexes", [])}
+    return {index.key for index in response.indexes}
 
 
-def _ensure_collection(databases, database_id, collection_id, name, permissions, document_security):
+# ---------------------------------------------------------------------------
+# Ensure helpers
+# ---------------------------------------------------------------------------
+
+
+def _ensure_table(tablesdb, database_id, table_id, name, permissions, row_security):
     try:
-        databases.create_collection(
+        tablesdb.create_table(
             database_id=database_id,
-            collection_id=collection_id,
+            table_id=table_id,
             name=name,
             permissions=permissions,
-            document_security=document_security,
+            row_security=row_security,
             enabled=True,
         )
-        logger.info("Created collection: %s", collection_id)
+        logger.info("Created table: %s", table_id)
     except AppwriteException as exc:
         if exc.code == 409:
-            logger.info("Collection exists: %s", collection_id)
+            logger.info("Table already exists: %s", table_id)
             return
         raise
 
 
-def _ensure_attribute(databases, database_id, collection_id, existing_attrs, spec):
+def _ensure_column(tablesdb, database_id, table_id, existing_columns, spec):
     key = spec["key"]
-    if key in existing_attrs:
+    if key in existing_columns:
         return
 
     attr_type = spec["type"]
-    required = spec.get("required", False)
-    default = spec.get("default")
+    xrequired = spec.get("xrequired", False)
+    xdefault = spec.get("xdefault")
     array = spec.get("array", False)
 
     try:
         if attr_type == "string":
-            databases.create_string_attribute(
+            tablesdb.create_varchar_column(
                 database_id=database_id,
-                collection_id=collection_id,
+                table_id=table_id,
                 key=key,
                 size=spec["size"],
-                required=required,
-                default=default,
+                required=xrequired,
+                default=xdefault,
                 array=array,
             )
         elif attr_type == "integer":
-            databases.create_integer_attribute(
+            tablesdb.create_integer_column(
                 database_id=database_id,
-                collection_id=collection_id,
+                table_id=table_id,
                 key=key,
-                required=required,
+                required=xrequired,
                 min=None,
                 max=None,
-                default=default,
+                default=xdefault,
                 array=array,
             )
         elif attr_type == "float":
-            databases.create_float_attribute(
+            tablesdb.create_float_column(
                 database_id=database_id,
-                collection_id=collection_id,
+                table_id=table_id,
                 key=key,
-                required=required,
+                required=xrequired,
                 min=None,
                 max=None,
-                default=default,
+                default=xdefault,
                 array=array,
             )
         elif attr_type == "boolean":
-            databases.create_boolean_attribute(
+            tablesdb.create_boolean_column(
                 database_id=database_id,
-                collection_id=collection_id,
+                table_id=table_id,
                 key=key,
-                required=required,
-                default=default,
+                required=xrequired,
+                default=xdefault,
                 array=array,
             )
         elif attr_type == "datetime":
-            databases.create_datetime_attribute(
+            tablesdb.create_datetime_column(
                 database_id=database_id,
-                collection_id=collection_id,
+                table_id=table_id,
                 key=key,
-                required=required,
-                default=default,
+                required=xrequired,
+                default=xdefault,
                 array=array,
             )
         elif attr_type == "email":
-            databases.create_email_attribute(
+            tablesdb.create_email_column(
                 database_id=database_id,
-                collection_id=collection_id,
+                table_id=table_id,
                 key=key,
-                required=required,
-                default=default,
+                required=xrequired,
+                default=xdefault,
                 array=array,
             )
         elif attr_type == "url":
-            databases.create_url_attribute(
+            tablesdb.create_url_column(
                 database_id=database_id,
-                collection_id=collection_id,
+                table_id=table_id,
                 key=key,
-                required=required,
-                default=default,
+                required=xrequired,
+                default=xdefault,
                 array=array,
             )
         else:
-            raise ValueError(f"Unknown attribute type: {attr_type}")
+            raise ValueError(f"Unknown column type: {attr_type}")
     except AppwriteException as exc:
         if exc.code == 409:
             return
         raise
 
-    _wait_for_attribute(databases, database_id, collection_id, key)
-    existing_attrs.add(key)
+    _wait_for_column(tablesdb, database_id, table_id, key)
+    existing_columns.add(key)
 
 
-def _ensure_index(databases, database_id, collection_id, existing_indexes, spec):
+def _ensure_index(tablesdb, database_id, table_id, existing_indexes, spec):
     key = spec["key"]
     if key in existing_indexes:
         return
 
     try:
-        databases.create_index(
+        tablesdb.create_index(
             database_id=database_id,
-            collection_id=collection_id,
+            table_id=table_id,
             key=key,
             type=spec["type"],
-            attributes=spec["attributes"],
+            columns=spec["columns"],
             orders=spec.get("orders"),
         )
     except AppwriteException as exc:
@@ -253,223 +271,221 @@ def _ensure_index(databases, database_id, collection_id, existing_indexes, spec)
             return
         raise
 
-    _wait_for_index(databases, database_id, collection_id, key)
+    _wait_for_index(tablesdb, database_id, table_id, key)
     existing_indexes.add(key)
 
 
-def _apply_collection(databases, database_id, spec, create_collection=True):
-    collection_id = spec["id"]
-    if create_collection:
-        _ensure_collection(
-            databases,
+# ---------------------------------------------------------------------------
+# Apply a full table spec
+# ---------------------------------------------------------------------------
+
+
+def _apply_table(tablesdb, database_id, spec, create_table=True):
+    table_id = spec["id"]
+    if create_table:
+        _ensure_table(
+            tablesdb,
             database_id,
-            collection_id=collection_id,
+            table_id=table_id,
             name=spec["name"],
             permissions=spec["permissions"],
-            document_security=spec["document_security"],
+            row_security=spec["row_security"],
         )
 
-    existing_attrs = _list_attributes(databases, database_id, collection_id)
-    for attr_spec in spec["attributes"]:
-        _ensure_attribute(databases, database_id, collection_id, existing_attrs, attr_spec)
+    existing_columns = _list_columns(tablesdb, database_id, table_id)
+    for column_spec in spec["columns"]:
+        _ensure_column(tablesdb, database_id, table_id, existing_columns, column_spec)
 
-    existing_indexes = _list_indexes(databases, database_id, collection_id)
+    existing_indexes = _list_indexes(tablesdb, database_id, table_id)
     for index_spec in spec["indexes"]:
-        _ensure_index(databases, database_id, collection_id, existing_indexes, index_spec)
+        _ensure_index(tablesdb, database_id, table_id, existing_indexes, index_spec)
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
 
 
 def main():
     _require_env()
 
     client = _init_client()
-    databases = Databases(client)
+    tablesdb = TablesDB(client)
     database_id = os.environ["APPWRITE_DATABASE_ID"]
 
-    collection_specs = [
+    table_specs = [
         {
             "id": "users",
             "name": "users",
             "permissions": [],
-            "document_security": True,
-            "attributes": [
-                {"key": "google_id", "type": "string", "size": 255, "required": True},
-                {"key": "email", "type": "email", "required": True},
+            "row_security": True,
+            "columns": [
+                {"key": "google_id", "type": "string", "size": 255, "xrequired": True},
+                {"key": "email", "type": "email", "xrequired": True},
                 {"key": "name", "type": "string", "size": 255},
                 {"key": "picture_url", "type": "url"},
-                {"key": "onboarding_complete", "type": "boolean", "required": True, "default": False},
-                {"key": "onboarding_step", "type": "integer", "required": True, "default": 1},
+                {"key": "onboarding_complete", "type": "boolean", "xdefault": False},
+                {"key": "onboarding_step", "type": "integer", "xdefault": 1},
                 {"key": "education_level", "type": "string", "size": 32},
                 {"key": "class_year", "type": "string", "size": 64},
                 {"key": "emory_student", "type": "boolean"},
                 {"key": "emory_email", "type": "email"},
-                {"key": "created_at", "type": "datetime", "required": True},
+                {"key": "created_at", "type": "datetime", "xrequired": True},
                 {"key": "last_login", "type": "datetime"},
             ],
             "indexes": [
-                {"key": "idx_users_google_id", "type": "unique", "attributes": ["google_id"]},
-                {"key": "idx_users_email", "type": "unique", "attributes": ["email"]},
+                {"key": "idx_users_google_id", "type": "unique", "columns": ["google_id"]},
+                {"key": "idx_users_email", "type": "unique", "columns": ["email"]},
             ],
         },
         {
             "id": "user_settings",
             "name": "user_settings",
             "permissions": [],
-            "document_security": True,
-            "attributes": [
-                {"key": "user_id", "type": "string", "size": 64, "required": True},
+            "row_security": True,
+            "columns": [
+                {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
                 {"key": "canvas_ical_url", "type": "url"},
                 {"key": "other_ical_urls_json", "type": "string", "size": 4096},
                 {"key": "ics_secret_token", "type": "string", "size": 255},
-                {"key": "feed_refresh_minutes", "type": "integer", "required": True, "default": 15},
-                {"key": "preferred_calendar_view", "type": "string", "size": 16, "required": True, "default": "week"},
-                {"key": "interface_theme", "type": "string", "size": 32, "default": "system-match"},
-                {"key": "created_at", "type": "datetime", "required": True},
+                {"key": "feed_refresh_minutes", "type": "integer", "xdefault": 15},
+                {"key": "preferred_calendar_view", "type": "string", "size": 16, "xdefault": "week"},
+                {"key": "interface_theme", "type": "string", "size": 32, "xdefault": "system-match"},
+                {"key": "created_at", "type": "datetime", "xrequired": True},
                 {"key": "updated_at", "type": "datetime"},
             ],
             "indexes": [
-                {"key": "idx_user_settings_user_id", "type": "unique", "attributes": ["user_id"]},
-                {"key": "idx_user_settings_user_id_key", "type": "key", "attributes": ["user_id"]},
-                {"key": "idx_user_settings_token", "type": "unique", "attributes": ["ics_secret_token"]},
+                {"key": "idx_user_settings_user_id", "type": "unique", "columns": ["user_id"]},
+                {"key": "idx_user_settings_user_id_key", "type": "key", "columns": ["user_id"]},
+                {"key": "idx_user_settings_token", "type": "unique", "columns": ["ics_secret_token"]},
             ],
         },
         {
             "id": "user_courses",
             "name": "user_courses",
             "permissions": [],
-            "document_security": True,
-            "attributes": [
-                {"key": "user_id", "type": "string", "size": 64, "required": True},
-                {"key": "term", "type": "string", "size": 64, "required": True},
-                {"key": "subject", "type": "string", "size": 64, "required": True},
-                {"key": "catalog", "type": "string", "size": 64, "required": True},
+            "row_security": True,
+            "columns": [
+                {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
+                {"key": "term", "type": "string", "size": 64, "xrequired": True},
+                {"key": "subject", "type": "string", "size": 64, "xrequired": True},
+                {"key": "catalog", "type": "string", "size": 64, "xrequired": True},
                 {"key": "course_name", "type": "string", "size": 255},
                 {"key": "section_number", "type": "string", "size": 64},
                 {"key": "instructor_name", "type": "string", "size": 255},
-                {"key": "source", "type": "string", "size": 32, "required": True, "default": "settings"},
+                {"key": "source", "type": "string", "size": 32, "xdefault": "settings"},
                 {"key": "crn", "type": "string", "size": 64},
-                {"key": "added_at", "type": "datetime", "required": True},
+                {"key": "added_at", "type": "datetime", "xrequired": True},
             ],
             "indexes": [
-                {"key": "idx_user_courses_user_id", "type": "key", "attributes": ["user_id"]},
-                {"key": "idx_user_courses_term", "type": "key", "attributes": ["term"]},
-                {"key": "idx_user_courses_subject", "type": "key", "attributes": ["subject"]},
-                {"key": "idx_user_courses_catalog", "type": "key", "attributes": ["catalog"]},
-                {"key": "idx_user_courses_crn", "type": "key", "attributes": ["crn"]},
-                {"key": "idx_user_courses_source", "type": "key", "attributes": ["source"]},
-                {
-                    "key": "idx_user_courses_unique",
-                    "type": "unique",
-                    "attributes": ["user_id", "term", "subject", "catalog", "crn"],
-                },
+                {"key": "idx_user_courses_user_id", "type": "key", "columns": ["user_id"]},
+                {"key": "idx_user_courses_term", "type": "key", "columns": ["term"]},
+                {"key": "idx_user_courses_subject", "type": "key", "columns": ["subject"]},
+                {"key": "idx_user_courses_catalog", "type": "key", "columns": ["catalog"]},
+                {"key": "idx_user_courses_crn", "type": "key", "columns": ["crn"]},
+                {"key": "idx_user_courses_source", "type": "key", "columns": ["source"]},
+                {"key": "idx_user_courses_unique", "type": "unique", "columns": ["user_id", "term", "subject", "catalog", "crn"]},
             ],
         },
         {
             "id": "calendar_cache",
             "name": "calendar_cache",
             "permissions": [],
-            "document_security": True,
-            "attributes": [
-                {"key": "user_id", "type": "string", "size": 64, "required": True},
+            "row_security": True,
+            "columns": [
+                {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
                 {"key": "event_uid", "type": "string", "size": 255},
                 {"key": "event_title", "type": "string", "size": 2048},
                 {"key": "event_start", "type": "datetime"},
                 {"key": "event_end", "type": "datetime"},
-                {"key": "is_all_day", "type": "boolean", "required": True, "default": False},
+                {"key": "is_all_day", "type": "boolean", "xdefault": False},
                 {"key": "event_type", "type": "string", "size": 64},
                 {"key": "course_name", "type": "string", "size": 255},
                 {"key": "raw_description", "type": "string", "size": 4096},
                 {"key": "fetched_at", "type": "datetime"},
             ],
             "indexes": [
-                {"key": "idx_calendar_cache_user_id", "type": "key", "attributes": ["user_id"]},
-                {"key": "idx_calendar_cache_event_start", "type": "key", "attributes": ["event_start"]},
-                {"key": "idx_calendar_cache_fetched_at", "type": "key", "attributes": ["fetched_at"]},
-                {
-                    "key": "idx_calendar_cache_unique_uid",
-                    "type": "unique",
-                    "attributes": ["user_id", "event_uid"],
-                },
+                {"key": "idx_calendar_cache_user_id", "type": "key", "columns": ["user_id"]},
+                {"key": "idx_calendar_cache_event_start", "type": "key", "columns": ["event_start"]},
+                {"key": "idx_calendar_cache_fetched_at", "type": "key", "columns": ["fetched_at"]},
+                {"key": "idx_calendar_cache_unique_uid", "type": "unique", "columns": ["user_id", "event_uid"]},
             ],
         },
         {
             "id": "user_calendar_preferences",
             "name": "user_calendar_preferences",
             "permissions": [],
-            "document_security": True,
-            "attributes": [
-                {"key": "user_id", "type": "string", "size": 64, "required": True},
-                {"key": "calendar_name", "type": "string", "size": 255, "required": True},
-                {"key": "color_hex", "type": "string", "size": 7, "required": True, "default": "#6366f1"},
-                {"key": "visible", "type": "boolean", "required": True, "default": True},
-                {"key": "created_at", "type": "datetime", "required": True},
+            "row_security": True,
+            "columns": [
+                {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
+                {"key": "calendar_name", "type": "string", "size": 255, "xrequired": True},
+                {"key": "color_hex", "type": "string", "size": 7, "xdefault": "#6366f1"},
+                {"key": "visible", "type": "boolean", "xdefault": True},
+                {"key": "created_at", "type": "datetime", "xrequired": True},
                 {"key": "updated_at", "type": "datetime"},
             ],
             "indexes": [
-                {"key": "idx_user_calendar_prefs_user_id", "type": "key", "attributes": ["user_id"]},
-                {"key": "idx_user_calendar_prefs_name", "type": "key", "attributes": ["calendar_name"]},
-                {
-                    "key": "idx_user_calendar_prefs_unique",
-                    "type": "unique",
-                    "attributes": ["user_id", "calendar_name"],
-                },
+                {"key": "idx_user_calendar_prefs_user_id", "type": "key", "columns": ["user_id"]},
+                {"key": "idx_user_calendar_prefs_name", "type": "key", "columns": ["calendar_name"]},
+                {"key": "idx_user_calendar_prefs_unique", "type": "unique", "columns": ["user_id", "calendar_name"]},
             ],
         },
         {
             "id": "user_events",
             "name": "user_events",
             "permissions": [],
-            "document_security": True,
-            "attributes": [
-                {"key": "user_id", "type": "string", "size": 64, "required": True},
-                {"key": "title", "type": "string", "size": 255, "required": True},
+            "row_security": True,
+            "columns": [
+                {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
+                {"key": "title", "type": "string", "size": 255, "xrequired": True},
                 {"key": "description", "type": "string", "size": 4096},
-                {"key": "start", "type": "datetime", "required": True},
-                {"key": "end", "type": "datetime", "required": True},
-                {"key": "is_all_day", "type": "boolean", "required": True, "default": False},
+                {"key": "start", "type": "datetime", "xrequired": True},
+                {"key": "end", "type": "datetime", "xrequired": True},
+                {"key": "is_all_day", "type": "boolean", "xdefault": False},
                 {"key": "color", "type": "string", "size": 7},
-                {"key": "created_at", "type": "datetime", "required": True},
+                {"key": "created_at", "type": "datetime", "xrequired": True},
                 {"key": "updated_at", "type": "datetime"},
             ],
             "indexes": [
-                {"key": "idx_user_events_user_id", "type": "key", "attributes": ["user_id"]},
-                {"key": "idx_user_events_start", "type": "key", "attributes": ["start"]},
+                {"key": "idx_user_events_user_id", "type": "key", "columns": ["user_id"]},
+                {"key": "idx_user_events_start", "type": "key", "columns": ["start"]},
             ],
         },
         {
             "id": "shared_files",
             "name": "shared_files",
             "permissions": [],
-            "document_security": True,
-            "attributes": [
-                {"key": "user_id", "type": "string", "size": 64, "required": True},
-                {"key": "original_filename", "type": "string", "size": 255, "required": True},
-                {"key": "stored_path", "type": "string", "size": 512, "required": True},
-                {"key": "file_size_bytes", "type": "integer", "required": True},
+            "row_security": True,
+            "columns": [
+                {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
+                {"key": "original_filename", "type": "string", "size": 255, "xrequired": True},
+                {"key": "stored_path", "type": "string", "size": 512, "xrequired": True},
+                {"key": "file_size_bytes", "type": "integer", "xrequired": True},
                 {"key": "mime_type", "type": "string", "size": 127},
                 {"key": "share_code", "type": "string", "size": 10},
-                {"key": "is_public", "type": "boolean", "required": True, "default": False},
-                {"key": "expires_at", "type": "datetime", "required": True},
-                {"key": "created_at", "type": "datetime", "required": True},
-                {"key": "downloaded_count", "type": "integer", "required": True, "default": 0},
+                {"key": "is_public", "type": "boolean", "xdefault": False},
+                {"key": "expires_at", "type": "datetime", "xrequired": True},
+                {"key": "created_at", "type": "datetime", "xrequired": True},
+                {"key": "downloaded_count", "type": "integer", "xdefault": 0},
             ],
             "indexes": [
-                {"key": "idx_shared_files_user_id", "type": "key", "attributes": ["user_id"]},
-                {"key": "idx_shared_files_expires_at", "type": "key", "attributes": ["expires_at"]},
-                {"key": "idx_shared_files_created_at", "type": "key", "attributes": ["created_at"]},
-                {"key": "idx_shared_files_share_code", "type": "key", "attributes": ["share_code"]},
-                {"key": "idx_shared_files_is_public", "type": "key", "attributes": ["is_public"]},
-                {"key": "idx_shared_files_share_code_unique", "type": "unique", "attributes": ["share_code"]},
+                {"key": "idx_shared_files_user_id", "type": "key", "columns": ["user_id"]},
+                {"key": "idx_shared_files_expires_at", "type": "key", "columns": ["expires_at"]},
+                {"key": "idx_shared_files_created_at", "type": "key", "columns": ["created_at"]},
+                {"key": "idx_shared_files_share_code", "type": "key", "columns": ["share_code"]},
+                {"key": "idx_shared_files_is_public", "type": "key", "columns": ["is_public"]},
+                {"key": "idx_shared_files_share_code_unique", "type": "unique", "columns": ["share_code"]},
             ],
         },
     ]
 
-    existing_collections = _list_existing(databases, database_id)
-    for spec in collection_specs:
-        if spec["id"] in existing_collections:
-            logger.info("Collection already exists: %s", spec["id"])
-            _apply_collection(databases, database_id, spec, create_collection=False)
+    existing_tables = _list_existing_tables(tablesdb, database_id)
+    for spec in table_specs:
+        if spec["id"] in existing_tables:
+            logger.info("Table already exists: %s", spec["id"])
+            _apply_table(tablesdb, database_id, spec, create_table=False)
         else:
-            _apply_collection(databases, database_id, spec, create_collection=True)
+            _apply_table(tablesdb, database_id, spec, create_table=True)
 
     logger.info("Appwrite database setup complete.")
 

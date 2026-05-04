@@ -17,15 +17,15 @@ from appwrite.id import ID
 from appwrite.query import Query
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import (
-    create_document_safe,
-    delete_document_safe,
-    first_document,
+    create_row_safe,
+    delete_row_safe,
+    first_row,
     format_datetime,
-    get_document_safe,
-    list_documents_all,
-    list_documents_safe,
+    get_row_safe,
+    list_rows_all,
+    list_rows_safe,
     parse_datetime,
-    update_document_safe,
+    update_row_safe,
 )
 
 calendar_bp = Blueprint("calendar", __name__)
@@ -85,7 +85,7 @@ def _span_metadata(start_dt, end_dt, is_all_day=False):
 
 
 def _serialize_event(doc):
-    """Serialize a calendar_cache document for API response."""
+    """Serialize a calendar_cache row for API response."""
     is_all_day = bool(doc.get("is_all_day", False))
     event_start = parse_datetime(doc.get("event_start"))
     event_end = parse_datetime(doc.get("event_end"))
@@ -108,7 +108,7 @@ def _serialize_event(doc):
 
 
 def _serialize_user_event(doc):
-    """Serialize a user_events document for API response."""
+    """Serialize a user_events row for API response."""
     start = parse_datetime(doc.get("start"))
     end = parse_datetime(doc.get("end"))
     created_at = parse_datetime(doc.get("created_at"))
@@ -157,18 +157,18 @@ def get_events():
     """
     user_id = str(current_user.id)
     try:
-        cache_events = list_documents_all(
+        cache_events = list_rows_all(
             COLLECTIONS["calendar_cache"],
             [
                 Query.equal("user_id", [user_id]),
-                Query.orderAsc("event_start"),
+                Query.order_asc("event_start"),
             ],
         )
-        created_events = list_documents_all(
+        created_events = list_rows_all(
             COLLECTIONS["user_events"],
             [
                 Query.equal("user_id", [user_id]),
-                Query.orderAsc("start"),
+                Query.order_asc("start"),
             ],
         )
     except AppwriteException:
@@ -239,9 +239,9 @@ def create_event():
         return jsonify({"error": "end_date must be after start_date"}), 400
 
     try:
-        ev = create_document_safe(
+        ev = create_row_safe(
             COLLECTIONS["user_events"],
-            document_id=ID.unique(),
+            row_id=ID.unique(),
             data={
                 "user_id": str(current_user.id),
                 "title": title,
@@ -264,7 +264,7 @@ def create_event():
 @login_required
 def get_single_event(event_id):
     try:
-        ev = get_document_safe(COLLECTIONS["user_events"], event_id)
+        ev = get_row_safe(COLLECTIONS["user_events"], event_id)
     except AppwriteException as exc:
         if exc.code == 404:
             return jsonify({"error": "not found"}), 404
@@ -280,7 +280,7 @@ def get_single_event(event_id):
 @login_required
 def update_event(event_id):
     try:
-        ev = get_document_safe(COLLECTIONS["user_events"], event_id)
+        ev = get_row_safe(COLLECTIONS["user_events"], event_id)
     except AppwriteException as exc:
         if exc.code == 404:
             return jsonify({"error": "not found"}), 404
@@ -317,7 +317,7 @@ def update_event(event_id):
         updates["color"] = color
 
     try:
-        ev = update_document_safe(
+        ev = update_row_safe(
             COLLECTIONS["user_events"],
             event_id,
             updates,
@@ -333,7 +333,7 @@ def update_event(event_id):
 @login_required
 def delete_event(event_id):
     try:
-        ev = get_document_safe(COLLECTIONS["user_events"], event_id)
+        ev = get_row_safe(COLLECTIONS["user_events"], event_id)
     except AppwriteException as exc:
         if exc.code == 404:
             return jsonify({"error": "not found"}), 404
@@ -344,7 +344,7 @@ def delete_event(event_id):
         return jsonify({"error": "not found"}), 404
 
     try:
-        delete_document_safe(COLLECTIONS["user_events"], event_id)
+        delete_row_safe(COLLECTIONS["user_events"], event_id)
     except AppwriteException:
         logger.exception("Failed to delete user event")
         return jsonify({"error": "Unable to delete event."}), 500
@@ -361,7 +361,7 @@ def refresh_feed():
     """
     user_id = str(current_user.id)
     try:
-        settings = first_document(
+        settings = first_row(
             COLLECTIONS["user_settings"],
             [Query.equal("user_id", [user_id])],
         )
@@ -380,7 +380,7 @@ def refresh_feed():
 
     try:
         count = fetch_and_cache_feeds(user_id, feed_urls)
-        update_document_safe(
+        update_row_safe(
             COLLECTIONS["user_settings"],
             settings.get("$id"),
             {"updated_at": format_datetime(datetime.utcnow())},
@@ -405,21 +405,21 @@ def feed_status():
     """
     user_id = str(current_user.id)
     try:
-        settings = first_document(
+        settings = first_row(
             COLLECTIONS["user_settings"],
             [Query.equal("user_id", [user_id])],
         )
         feed_urls = _configured_feed_urls(settings)
 
-        latest_event = first_document(
+        latest_event = first_row(
             COLLECTIONS["calendar_cache"],
             [
                 Query.equal("user_id", [user_id]),
-                Query.orderDesc("fetched_at"),
+                Query.order_desc("fetched_at"),
             ],
         )
 
-        count_response = list_documents_safe(
+        count_response = list_rows_safe(
             COLLECTIONS["calendar_cache"],
             [Query.equal("user_id", [user_id]), Query.limit(1)],
         )
@@ -450,7 +450,7 @@ def get_calendar_preferences():
     """
     user_id = str(current_user.id)
     try:
-        prefs = list_documents_all(
+        prefs = list_rows_all(
             COLLECTIONS["user_calendar_preferences"],
             [Query.equal("user_id", [user_id])],
         )
@@ -486,7 +486,7 @@ def update_calendar_preferences():
 
     user_id = str(current_user.id)
     try:
-        pref = first_document(
+        pref = first_row(
             COLLECTIONS["user_calendar_preferences"],
             [
                 Query.equal("user_id", [user_id]),
@@ -505,9 +505,9 @@ def update_calendar_preferences():
 
     try:
         if not pref:
-            pref = create_document_safe(
+            pref = create_row_safe(
                 COLLECTIONS["user_calendar_preferences"],
-                document_id=ID.unique(),
+                row_id=ID.unique(),
                 data={
                     "user_id": user_id,
                     "calendar_name": calendar_name,
@@ -518,7 +518,7 @@ def update_calendar_preferences():
                 },
             )
         else:
-            pref = update_document_safe(
+            pref = update_row_safe(
                 COLLECTIONS["user_calendar_preferences"],
                 pref.get("$id"),
                 updates,
@@ -545,7 +545,7 @@ def ics_feed():
         return Response("Missing token", status=401, mimetype="text/plain")
 
     try:
-        settings = first_document(
+        settings = first_row(
             COLLECTIONS["user_settings"],
             [Query.equal("ics_secret_token", [token])],
         )

@@ -17,7 +17,7 @@ from datetime import datetime, timedelta, timezone
 from appwrite.exception import AppwriteException
 from appwrite.query import Query
 from appwrite_client import COLLECTIONS
-from appwrite_helpers import list_documents_all, parse_datetime
+from appwrite_helpers import list_rows_all, parse_datetime
 
 
 def _ics_escape(text):
@@ -73,11 +73,11 @@ def build_ics_for_user(user_id):
 
     # Fetch all cached events for this user
     try:
-        events = list_documents_all(
+        events = list_rows_all(
             COLLECTIONS["calendar_cache"],
             [
                 Query.equal("user_id", [str(user_id)]),
-                Query.orderAsc("event_start"),
+                Query.order_asc("event_start"),
             ],
         )
     except AppwriteException:
@@ -144,7 +144,7 @@ def _inject_atlas_schedule(cal, user_id):
     ATLAS_DATA_DIR = os.path.join(_PROJECT_ROOT, "atlas-data")
 
     try:
-        user_courses = list_documents_all(
+        user_courses = list_rows_all(
             COLLECTIONS["user_courses"],
             [Query.equal("user_id", [str(user_id)])],
         )

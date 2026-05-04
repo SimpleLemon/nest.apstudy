@@ -23,7 +23,7 @@ from apscheduler.triggers.interval import IntervalTrigger
 
 from appwrite.exception import AppwriteException
 from appwrite_client import COLLECTIONS
-from appwrite_helpers import list_documents_all, update_document_safe, format_datetime
+from appwrite_helpers import list_rows_all, update_row_safe, format_datetime
 
 logger = logging.getLogger(__name__)
 
@@ -62,7 +62,7 @@ def _refresh_all_feeds(app):
     with app.app_context():
         from services.feed_fetcher import fetch_and_cache_feeds
         try:
-            all_settings = list_documents_all(COLLECTIONS["user_settings"])
+            all_settings = list_rows_all(COLLECTIONS["user_settings"])
         except AppwriteException:
             logger.exception("Failed to list user settings")
             return
@@ -85,7 +85,7 @@ def _refresh_all_feeds(app):
                     settings.get("user_id"),
                     _configured_feed_urls(settings),
                 )
-                update_document_safe(
+                update_row_safe(
                     COLLECTIONS["user_settings"],
                     settings.get("$id"),
                     {"updated_at": format_datetime(datetime.utcnow())},

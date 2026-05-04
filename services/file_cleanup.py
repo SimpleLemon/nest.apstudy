@@ -6,9 +6,9 @@ from appwrite.exception import AppwriteException
 from appwrite.query import Query
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import (
-    delete_document_safe,
+    delete_row_safe,
     format_datetime,
-    list_documents_all,
+    list_rows_all,
 )
 
 logger = logging.getLogger(__name__)
@@ -19,7 +19,7 @@ def cleanup_expired_files():
 
     now = datetime.utcnow()
     try:
-        expired_files = list_documents_all(
+        expired_files = list_rows_all(
             COLLECTIONS["shared_files"],
             [Query.lessThanEqual("expires_at", format_datetime(now))],
         )
@@ -39,10 +39,10 @@ def cleanup_expired_files():
             logger.exception("Failed to delete expired shared file on disk: %s", absolute_path)
 
         try:
-            delete_document_safe(COLLECTIONS["shared_files"], shared_file.get("$id"))
+            delete_row_safe(COLLECTIONS["shared_files"], shared_file.get("$id"))
             deleted_count += 1
         except AppwriteException:
-            logger.exception("Failed to delete expired shared file document.")
+            logger.exception("Failed to delete expired shared file row.")
             raise
 
     logger.info("Deleted %s expired shared file(s).", deleted_count)

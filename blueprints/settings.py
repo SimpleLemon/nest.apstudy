@@ -20,13 +20,13 @@ from appwrite.id import ID
 from appwrite.query import Query
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import (
-    create_document_safe,
-    delete_document_safe,
-    first_document,
+    create_row_safe,
+    delete_row_safe,
+    first_row,
     format_datetime,
-    get_document_safe,
-    list_documents_all,
-    update_document_safe,
+    get_row_safe,
+    list_rows_all,
+    update_row_safe,
 )
 from services.atlas_client import DEFAULT_TERM
 
@@ -210,12 +210,12 @@ def _normalize_emory_email(value):
 
 def _onboarding_courses():
     try:
-        return list_documents_all(
+        return list_rows_all(
             COLLECTIONS["user_courses"],
             [
                 Query.equal("user_id", [str(current_user.id)]),
                 Query.equal("source", ["onboarding"]),
-                Query.orderAsc("added_at"),
+                Query.order_asc("added_at"),
             ],
         )
     except AppwriteException:
@@ -279,7 +279,7 @@ def save_onboarding():
     if step == 1:
         next_step = max(current_user.onboarding_step or 1, 2)
         try:
-            update_document_safe(
+            update_row_safe(
                 COLLECTIONS["users"],
                 user_id,
                 {"onboarding_step": next_step},
@@ -322,7 +322,7 @@ def save_onboarding():
         next_step = 3 if education_level == "Undergraduate" and emory_student else 4
 
         try:
-            update_document_safe(
+            update_row_safe(
                 COLLECTIONS["users"],
                 user_id,
                 {
@@ -364,7 +364,7 @@ def save_onboarding():
                 return jsonify({"error": "Course code is required."}), 400
 
             try:
-                candidates = list_documents_all(
+                candidates = list_rows_all(
                     COLLECTIONS["user_courses"],
                     [
                         Query.equal("user_id", [user_id]),
@@ -386,9 +386,9 @@ def save_onboarding():
                 return jsonify({"error": "Course already added."}), 409
 
             try:
-                course = create_document_safe(
+                course = create_row_safe(
                     COLLECTIONS["user_courses"],
-                    document_id=ID.unique(),
+                    row_id=ID.unique(),
                     data={
                         "user_id": user_id,
                         "term": term,
@@ -419,7 +419,7 @@ def save_onboarding():
 
         if action in {"advance", "continue", "review"}:
             try:
-                update_document_safe(
+                update_row_safe(
                     COLLECTIONS["users"],
                     user_id,
                     {"onboarding_step": 4},
@@ -432,7 +432,7 @@ def save_onboarding():
 
         if action == "complete":
             try:
-                update_document_safe(
+                update_row_safe(
                     COLLECTIONS["users"],
                     user_id,
                     {
@@ -449,7 +449,7 @@ def save_onboarding():
 
     if step in {4, 5}:
         try:
-            update_document_safe(
+            update_row_safe(
                 COLLECTIONS["users"],
                 user_id,
                 {
@@ -476,7 +476,7 @@ def settings_page():
 
     if not current_user.created_at:
         try:
-            update_document_safe(
+            update_row_safe(
                 COLLECTIONS["users"],
                 str(current_user.id),
                 {"created_at": format_datetime(datetime.utcnow())},
@@ -486,7 +486,7 @@ def settings_page():
         current_user.created_at = datetime.utcnow()
 
     try:
-        user_settings = first_document(
+        user_settings = first_row(
             COLLECTIONS["user_settings"],
             [Query.equal("user_id", [str(current_user.id)])],
         )
@@ -496,13 +496,13 @@ def settings_page():
     other_calendar_urls = _load_other_calendar_urls(user_settings)
 
     try:
-        courses = list_documents_all(
+        courses = list_rows_all(
             COLLECTIONS["user_courses"],
             [
                 Query.equal("user_id", [str(current_user.id)]),
-                Query.orderAsc("term"),
-                Query.orderAsc("subject"),
-                Query.orderAsc("catalog"),
+                Query.order_asc("term"),
+                Query.order_asc("subject"),
+                Query.order_asc("catalog"),
             ],
         )
     except AppwriteException:
@@ -534,7 +534,7 @@ def update_profile():
         updates["created_at"] = format_datetime(datetime.utcnow())
 
     try:
-        update_document_safe(
+        update_row_safe(
             COLLECTIONS["users"],
             str(current_user.id),
             updates,
@@ -587,7 +587,7 @@ def update_feed_url():
             )
         else:
             try:
-                existing = first_document(
+                existing = first_row(
                     COLLECTIONS["user_settings"],
                     [Query.equal("user_id", [str(current_user.id)])],
                 )
@@ -600,7 +600,7 @@ def update_feed_url():
 
     user_id = str(current_user.id)
     try:
-        settings = first_document(
+        settings = first_row(
             COLLECTIONS["user_settings"],
             [Query.equal("user_id", [user_id])],
         )
@@ -616,9 +616,9 @@ def update_feed_url():
 
     try:
         if not settings:
-            settings = create_document_safe(
+            settings = create_row_safe(
                 COLLECTIONS["user_settings"],
-                document_id=user_id,
+                row_id=user_id,
                 data={
                     "user_id": user_id,
                     "ics_secret_token": secrets.token_urlsafe(32),
@@ -630,7 +630,7 @@ def update_feed_url():
                 },
             )
         else:
-            settings = update_document_safe(
+            settings = update_row_safe(
                 COLLECTIONS["user_settings"],
                 settings.get("$id"),
                 payload,
@@ -664,7 +664,7 @@ def update_refresh_interval():
         }), 400
 
     try:
-        settings = first_document(
+        settings = first_row(
             COLLECTIONS["user_settings"],
             [Query.equal("user_id", [str(current_user.id)])],
         )
@@ -675,7 +675,7 @@ def update_refresh_interval():
         return jsonify({"error": "No settings found. Complete onboarding first."}), 404
 
     try:
-        update_document_safe(
+        update_row_safe(
             COLLECTIONS["user_settings"],
             settings.get("$id"),
             {
@@ -706,7 +706,7 @@ def update_interface_preferences():
 
     user_id = str(current_user.id)
     try:
-        settings = first_document(
+        settings = first_row(
             COLLECTIONS["user_settings"],
             [Query.equal("user_id", [user_id])],
         )
@@ -722,9 +722,9 @@ def update_interface_preferences():
 
     try:
         if not settings:
-            settings = create_document_safe(
+            settings = create_row_safe(
                 COLLECTIONS["user_settings"],
-                document_id=user_id,
+                row_id=user_id,
                 data={
                     "user_id": user_id,
                     "ics_secret_token": secrets.token_urlsafe(32),
@@ -736,7 +736,7 @@ def update_interface_preferences():
                 },
             )
         else:
-            settings = update_document_safe(
+            settings = update_row_safe(
                 COLLECTIONS["user_settings"],
                 settings.get("$id"),
                 updates,
@@ -762,7 +762,7 @@ def regenerate_ics_token():
     so the user must re-subscribe in Apple Calendar with the new URL.
     """
     try:
-        settings = first_document(
+        settings = first_row(
             COLLECTIONS["user_settings"],
             [Query.equal("user_id", [str(current_user.id)])],
         )
@@ -774,7 +774,7 @@ def regenerate_ics_token():
 
     new_token = secrets.token_urlsafe(32)
     try:
-        settings = update_document_safe(
+        settings = update_row_safe(
             COLLECTIONS["user_settings"],
             settings.get("$id"),
             {
@@ -808,13 +808,13 @@ def list_my_courses():
     Returns the user's saved course selections.
     """
     try:
-        courses = list_documents_all(
+        courses = list_rows_all(
             COLLECTIONS["user_courses"],
             [
                 Query.equal("user_id", [str(current_user.id)]),
-                Query.orderAsc("term"),
-                Query.orderAsc("subject"),
-                Query.orderAsc("catalog"),
+                Query.order_asc("term"),
+                Query.order_asc("subject"),
+                Query.order_asc("catalog"),
             ],
         )
     except AppwriteException:
@@ -861,7 +861,7 @@ def add_course():
     # Check for duplicates
     user_id = str(current_user.id)
     try:
-        candidates = list_documents_all(
+        candidates = list_rows_all(
             COLLECTIONS["user_courses"],
             [
                 Query.equal("user_id", [user_id]),
@@ -882,9 +882,9 @@ def add_course():
         return jsonify({"error": "Course already in your list."}), 409
 
     try:
-        course = create_document_safe(
+        course = create_row_safe(
             COLLECTIONS["user_courses"],
-            document_id=ID.unique(),
+            row_id=ID.unique(),
             data={
                 "user_id": user_id,
                 "term": term,
@@ -921,7 +921,7 @@ def remove_course(course_id):
     Removes a course from the user's "My Courses" list.
     """
     try:
-        course = get_document_safe(COLLECTIONS["user_courses"], course_id)
+        course = get_row_safe(COLLECTIONS["user_courses"], course_id)
     except AppwriteException as exc:
         if exc.code == 404:
             return jsonify({"error": "Course not found."}), 404
@@ -932,7 +932,7 @@ def remove_course(course_id):
         return jsonify({"error": "Course not found."}), 404
 
     try:
-        delete_document_safe(COLLECTIONS["user_courses"], course_id)
+        delete_row_safe(COLLECTIONS["user_courses"], course_id)
     except AppwriteException:
         logger.exception("Failed to delete course")
         return jsonify({"error": "Unable to remove course."}), 500

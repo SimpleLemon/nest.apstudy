@@ -27,10 +27,10 @@ from flask_login import login_user, logout_user, current_user
 from appwrite.exception import AppwriteException
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import (
-    create_document_safe,
+    create_row_safe,
     format_datetime,
-    get_document_safe,
-    update_document_safe,
+    get_row_safe,
+    update_row_safe,
 )
 from models import User, user_from_doc
 
@@ -123,18 +123,18 @@ def oauth2callback():
     user_doc = None
 
     try:
-        user_doc = get_document_safe(COLLECTIONS["users"], google_id)
+        user_doc = get_row_safe(COLLECTIONS["users"], google_id)
     except AppwriteException as exc:
         if exc.code != 404:
-            logger.exception("Failed to fetch user document")
+            logger.exception("Failed to fetch user row")
             return redirect(url_for("auth.login"))
 
     if not user_doc:
         created_at = format_datetime(datetime.utcnow())
         try:
-            user_doc = create_document_safe(
+            user_doc = create_row_safe(
                 COLLECTIONS["users"],
-                document_id=google_id,
+                row_id=google_id,
                 data={
                     "google_id": google_id,
                     "email": email,
@@ -151,9 +151,9 @@ def oauth2callback():
 
         # Create default settings with a unique .ics subscription token
         try:
-            create_document_safe(
+            create_row_safe(
                 COLLECTIONS["user_settings"],
-                document_id=google_id,
+                row_id=google_id,
                 data={
                     "user_id": google_id,
                     "ics_secret_token": secrets.token_urlsafe(32),
@@ -167,7 +167,7 @@ def oauth2callback():
             return redirect(url_for("auth.login"))
     else:
         try:
-            user_doc = update_document_safe(
+            user_doc = update_row_safe(
                 COLLECTIONS["users"],
                 google_id,
                 {

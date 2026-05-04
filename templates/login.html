@@ -46,6 +46,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
     <style>
         body { font-family: 'Inter', sans-serif; }
+        .oauth-button { border: 1px solid transparent; }
+        .oauth-button--github { background: #24292e; color: #ffffff; }
+        .oauth-button--github:hover { background: #1f2428; }
+        .oauth-button--discord { background: #5865F2; color: #ffffff; }
+        .oauth-button--discord:hover { background: #4e5bd6; }
+        .oauth-button--google { background: #ffffff; color: #757575; border-color: #dadce0; }
+        .oauth-button--google:hover { background: #f8f9fa; }
     </style>
 </head>
 <body class="bg-background text-on-surface min-h-screen flex flex-col relative overflow-x-hidden">
@@ -78,6 +85,41 @@
             </div>
             {% endif %}
 
+            <!-- OAuth2 Sign-In Section -->
+            <div class="flex flex-col gap-3">
+                <p class="text-[11px] uppercase tracking-[0.3em] text-on-surface-variant font-semibold">Continue with</p>
+
+                <button id="oauth-github" type="button" class="w-full font-headline font-medium py-3.5 rounded-lg transition-colors duration-150 flex items-center justify-center gap-3 oauth-button oauth-button--github">
+                    <svg width="20" height="20" viewBox="0 0 24 24" class="shrink-0" aria-hidden="true">
+                        <path fill="currentColor" d="M12 0.296c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387 0.6 0.113 0.82-0.258 0.82-0.577 0-0.285-0.01-1.04-0.015-2.04-3.338 0.724-4.042-1.61-4.042-1.61-0.546-1.387-1.333-1.756-1.333-1.756-1.09-0.745 0.082-0.729 0.082-0.729 1.205 0.084 1.84 1.236 1.84 1.236 1.07 1.835 2.809 1.305 3.495 0.998 0.108-0.776 0.418-1.305 0.762-1.605-2.665-0.303-5.466-1.333-5.466-5.931 0-1.31 0.469-2.381 1.235-3.221-0.123-0.303-0.535-1.523 0.117-3.176 0 0 1.008-0.322 3.301 1.23a11.51 11.51 0 0 1 3.003-0.404c1.018 0.005 2.045 0.137 3.003 0.404 2.291-1.552 3.297-1.23 3.297-1.23 0.653 1.653 0.241 2.873 0.118 3.176 0.77 0.84 1.233 1.911 1.233 3.221 0 4.61-2.805 5.625-5.479 5.921 0.43 0.37 0.814 1.096 0.814 2.211 0 1.596-0.014 2.879-0.014 3.27 0 0.322 0.216 0.694 0.825 0.576C20.565 22.092 24 17.592 24 12.296c0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    <span>Continue with GitHub</span>
+                </button>
+
+                <button id="oauth-discord" type="button" class="w-full font-headline font-medium py-3.5 rounded-lg transition-colors duration-150 flex items-center justify-center gap-3 oauth-button oauth-button--discord">
+                    <svg width="20" height="20" viewBox="0 0 245 240" class="shrink-0" aria-hidden="true">
+                        <path fill="currentColor" d="M104.4 104.4c-5.7 0-10.2 5-10.2 11.1 0 6.1 4.6 11.1 10.2 11.1 5.7 0 10.2-5 10.2-11.1 0-6.1-4.5-11.1-10.2-11.1zm36.2 0c-5.7 0-10.2 5-10.2 11.1 0 6.1 4.6 11.1 10.2 11.1 5.7 0 10.2-5 10.2-11.1 0-6.1-4.5-11.1-10.2-11.1z"/>
+                        <path fill="currentColor" d="M189.5 20h-134C24.7 20 10 34.7 10 52.6v134c0 17.9 14.7 32.6 32.5 32.6h113.6l-5.3-18.5 12.8 11.9 12.1 11.3 21.5 19V52.6C197.2 34.7 182.5 20 164.6 20zM163 163s-5.1-6.1-9.3-11.5c18.5-5.2 25.5-16.7 25.5-16.7-5.8 3.8-11.3 6.5-16.3 8.4-7.1 3-13.9 4.9-20.6 6.1-13.7 2.6-26.3 1.9-36.9-0.1-8-1.5-14.9-3.6-20.6-6.1-3.2-1.2-6.7-2.7-10.2-4.6-0.4-0.2-0.8-0.4-1.1-0.6-0.2-0.1-0.3-0.2-0.4-0.2-1.8-1-2.8-1.7-2.8-1.7s6.7 11.3 24.4 16.6c-4.2 5.4-9.4 11.7-9.4 11.7-31.1-1-42.9-21.4-42.9-21.4 0-45.3 20.2-82.1 20.2-82.1 20.2-15.1 39.4-14.7 39.4-14.7l1.4 1.6c-25.3 7.3-36.9 18.2-36.9 18.2s3.1-1.7 8.3-4.1c15.1-6.6 27.1-8.4 32-8.8 0.8-0.1 1.5-0.2 2.3-0.2 8.3-1.1 17.7-1.4 27.8-0.2 13.4 1.5 27.8 5.2 42.3 13.2 0 0-11.1-10.6-35-17.9l2-2.3s19.2-0.4 39.4 14.7c0 0 20.2 36.8 20.2 82.1 0 0-11.8 20.4-42.9 21.4z"/>
+                    </svg>
+                    <span>Continue with Discord</span>
+                </button>
+
+                <button id="oauth-google" type="button" class="w-full font-headline font-medium py-3.5 rounded-lg transition-colors duration-150 flex items-center justify-center gap-3 oauth-button oauth-button--google">
+                    <svg width="20" height="20" viewBox="0 0 48 48" class="shrink-0" aria-hidden="true">
+                        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                        <path fill="#FBBC05" d="M10.53 28.59a14.5 14.5 0 0 1 0-9.18l-7.98-6.19a24.01 24.01 0 0 0 0 21.56l7.98-6.19z"/>
+                        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                    </svg>
+                    <span>Continue with Google</span>
+                </button>
+            </div>
+
+            <div class="relative flex items-center justify-center my-6">
+                <span class="absolute inset-x-0 h-px bg-outline-variant/40"></span>
+                <span class="relative px-3 text-[11px] uppercase tracking-[0.3em] text-on-surface-variant bg-surface-container">or</span>
+            </div>
+
             <!-- Google Sign-In Section -->
             <div class="flex flex-col gap-4">
                      <a href="{{ url_for('auth.authorize') }}"
@@ -108,5 +150,31 @@
     </div>
     </div>
     <global class="thefooter block w-full mt-auto"></global>
+    <script>
+        const successRedirect = `${window.location.origin}/dashboard`;
+        const failureRedirect = `${window.location.origin}/login`;
+
+        account.get()
+            .then(function() {
+                window.location.href = successRedirect;
+            })
+            .catch(function() {
+                // No active session, stay on login page
+            });
+
+        [
+            { id: "oauth-github", provider: "github" },
+            { id: "oauth-discord", provider: "discord" },
+            { id: "oauth-google", provider: "google" }
+        ].forEach(function(entry) {
+            const button = document.getElementById(entry.id);
+            if (!button) {
+                return;
+            }
+            button.addEventListener("click", function() {
+                account.createOAuth2Session(entry.provider, successRedirect, failureRedirect);
+            });
+        });
+    </script>
 </body>
 </html>

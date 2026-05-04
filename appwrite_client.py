@@ -1,8 +1,8 @@
 """
-SQLite schema -> Appwrite collection mapping reference
+Schema -> Appwrite collection mapping reference
 
-Foreign keys are stored as string attributes containing the related
-document's $id value.
+Foreign keys are stored as string attributes containing the related row's
+$id value.
 
 Table: users
 - id INTEGER PRIMARY KEY -> use Appwrite $id (string); no separate attribute
@@ -97,7 +97,7 @@ Table: shared_files
 import os
 
 from appwrite.client import Client
-from appwrite.services.databases import Databases
+from appwrite.services.tables_db import TablesDB
 
 
 client = Client()
@@ -105,7 +105,7 @@ client.set_endpoint(os.environ["APPWRITE_ENDPOINT"])
 client.set_project(os.environ["APPWRITE_PROJECT_ID"])
 client.set_key(os.environ["APPWRITE_API_KEY"])
 
-databases = Databases(client)
+tablesdb = TablesDB(client)
 DATABASE_ID = os.environ["APPWRITE_DATABASE_ID"]
 
 COLLECTIONS = {

@@ -23,14 +23,14 @@ from appwrite.exception import AppwriteException
 from appwrite.query import Query
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import (
-    create_document_safe,
-    delete_document_safe,
-    first_document,
+    create_row_safe,
+    delete_row_safe,
+    first_row,
     format_datetime,
-    get_document_safe,
-    list_documents_all,
+    get_row_safe,
+    list_rows_all,
     parse_datetime,
-    update_document_safe,
+    update_row_safe,
 )
 
 file_share_bp = Blueprint("file_share", __name__)
@@ -116,7 +116,7 @@ def _generate_share_code():
         raw_bytes = secrets.token_bytes(SHARE_CODE_LENGTH)
         code = "".join(SHARE_CODE_CHARS[byte % len(SHARE_CODE_CHARS)] for byte in raw_bytes)
         try:
-            existing = first_document(
+            existing = first_row(
                 COLLECTIONS["shared_files"],
                 [Query.equal("share_code", [code])],
             )
@@ -147,7 +147,7 @@ def _send_shared_file(shared_file):
         raise FileNotFoundError(absolute_path)
 
     try:
-        update_document_safe(
+        update_row_safe(
             COLLECTIONS["shared_files"],
             shared_file.get("$id"),
             {"downloaded_count": int(shared_file.get("downloaded_count") or 0) + 1},
@@ -168,7 +168,7 @@ def _render_public_share_page(shared_file=None, error_message=None):
     if shared_file:
         owner = None
         try:
-            owner = get_document_safe(COLLECTIONS["users"], shared_file.get("user_id"))
+            owner = get_row_safe(COLLECTIONS["users"], shared_file.get("user_id"))
         except AppwriteException as exc:
             if exc.code != 404:
                 logger.exception("Failed to load shared file owner")
@@ -199,7 +199,7 @@ def handle_file_too_large(_error):
 @login_required
 def file_share_page():
     try:
-        user_settings = first_document(
+        user_settings = first_row(
             COLLECTIONS["user_settings"],
             [Query.equal("user_id", [str(current_user.id)])],
         )
@@ -290,9 +290,9 @@ def upload_file():
         expires_at = _utcnow() + timedelta(days=expiry_days)
 
         try:
-            shared_file = create_document_safe(
+            shared_file = create_row_safe(
                 COLLECTIONS["shared_files"],
-                document_id=file_id,
+                row_id=file_id,
                 data={
                     "user_id": str(current_user.id),
                     "original_filename": display_filename,
@@ -307,7 +307,7 @@ def upload_file():
                 },
             )
         except AppwriteException:
-            logger.exception("Failed to save shared file document")
+            logger.exception("Failed to save shared file row")
             if os.path.exists(absolute_path):
                 os.remove(absolute_path)
             errors.append({"index": idx, "error": "Unable to save file."})
@@ -331,7 +331,7 @@ def upload_file():
 @login_required
 def change_visibility(file_id):
     try:
-        shared_file = get_document_safe(COLLECTIONS["shared_files"], file_id)
+        shared_file = get_row_safe(COLLECTIONS["shared_files"], file_id)
     except AppwriteException as exc:
         if exc.code == 404:
             abort(404)
@@ -356,7 +356,7 @@ def change_visibility(file_id):
         updates["share_code"] = None
 
     try:
-        shared_file = update_document_safe(
+        shared_file = update_row_safe(
             COLLECTIONS["shared_files"],
             shared_file.get("$id"),
             updates,
@@ -373,12 +373,12 @@ def change_visibility(file_id):
 def my_files():
     now = _utcnow()
     try:
-        files = list_documents_all(
+        files = list_rows_all(
             COLLECTIONS["shared_files"],
             [
                 Query.equal("user_id", [str(current_user.id)]),
                 Query.greaterThan("expires_at", format_datetime(now)),
-                Query.orderDesc("created_at"),
+                Query.order_desc("created_at"),
             ],
         )
     except AppwriteException:
@@ -391,7 +391,7 @@ def my_files():
 @login_required
 def download_my_file(file_id):
     try:
-        shared_file = get_document_safe(COLLECTIONS["shared_files"], file_id)
+        shared_file = get_row_safe(COLLECTIONS["shared_files"], file_id)
     except AppwriteException as exc:
         if exc.code == 404:
             abort(404)
@@ -411,7 +411,7 @@ def download_my_file(file_id):
 @login_required
 def delete_my_file(file_id):
     try:
-        shared_file = get_document_safe(COLLECTIONS["shared_files"], file_id)
+        shared_file = get_row_safe(COLLECTIONS["shared_files"], file_id)
     except AppwriteException as exc:
         if exc.code == 404:
             abort(404)
@@ -428,9 +428,9 @@ def delete_my_file(file_id):
         pass
 
     try:
-        delete_document_safe(COLLECTIONS["shared_files"], shared_file.get("$id"))
+        delete_row_safe(COLLECTIONS["shared_files"], shared_file.get("$id"))
     except AppwriteException:
-        logger.exception("Failed to delete shared file document")
+        logger.exception("Failed to delete shared file row")
         return jsonify({"error": "Unable to delete file."}), 500
     return jsonify({"message": "File deleted."})
 
@@ -438,7 +438,7 @@ def delete_my_file(file_id):
 @file_share_bp.route("/files/share/<share_code>")
 def public_share(share_code):
     try:
-        shared_file = first_document(
+        shared_file = first_row(
             COLLECTIONS["shared_files"],
             [
                 Query.equal("share_code", [share_code]),

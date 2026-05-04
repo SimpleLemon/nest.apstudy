@@ -13,7 +13,7 @@ from flask_login import login_required, current_user
 from appwrite.exception import AppwriteException
 from appwrite.query import Query
 from appwrite_client import COLLECTIONS
-from appwrite_helpers import first_document
+from appwrite_helpers import first_row
 
 dashboard_bp = Blueprint("dashboard", __name__)
 logger = logging.getLogger(__name__)
@@ -28,7 +28,7 @@ def dashboard():
 
     user_settings = None
     try:
-        user_settings = first_document(
+        user_settings = first_row(
             COLLECTIONS["user_settings"],
             [Query.equal("user_id", [str(current_user.id)])],
         )

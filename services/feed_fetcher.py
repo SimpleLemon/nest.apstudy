@@ -16,8 +16,8 @@ from appwrite.id import ID
 from appwrite.query import Query
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import (
-    create_document_safe,
-    delete_documents_by_query,
+    create_row_safe,
+    delete_rows_by_query,
     format_datetime,
 )
 
@@ -361,7 +361,7 @@ def fetch_and_cache_feeds(user_id, feed_urls):
 
     # Delete all existing cached events for this user
     try:
-        delete_documents_by_query(
+        delete_rows_by_query(
             COLLECTIONS["calendar_cache"],
             [Query.equal("user_id", [str(user_id)])],
         )
@@ -372,9 +372,9 @@ def fetch_and_cache_feeds(user_id, feed_urls):
     # Insert fresh events
     for event in deduped_events:
         try:
-            create_document_safe(
+            create_row_safe(
                 COLLECTIONS["calendar_cache"],
-                document_id=ID.unique(),
+                row_id=ID.unique(),
                 data={
                     "user_id": str(user_id),
                     "event_uid": event["uid"],
