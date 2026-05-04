@@ -11,6 +11,7 @@ Requires: client_secret.json in project root,
 
 import os
 import secrets
+import logging
 from datetime import datetime
 
 # Must be set before OAuth flow objects are created during local HTTP testing.
@@ -23,10 +24,18 @@ from flask import (
 )
 from flask_login import login_user, logout_user, current_user
 
-from extensions import db
-from models import User, UserSettings
+from appwrite.exception import AppwriteException
+from appwrite_client import COLLECTIONS
+from appwrite_helpers import (
+    create_document_safe,
+    format_datetime,
+    get_document_safe,
+    update_document_safe,
+)
+from models import User, user_from_doc
 
 auth_bp = Blueprint("auth", __name__)
+logger = logging.getLogger(__name__)
 
 CLIENT_SECRETS_FILE = "client_secret.json"
 SCOPES = [
@@ -110,36 +119,72 @@ def oauth2callback():
 
     email = user_info.get("email", "")
 
-    # Database lookup-or-create
-    user = User.query.filter_by(google_id=user_info["id"]).first()
+    google_id = str(user_info["id"])
+    user_doc = None
 
-    if not user:
-        user = User(
-            google_id=user_info["id"],
-            email=email,
-            name=user_info.get("name"),
-            picture_url=user_info.get("picture"),
-        )
-        db.session.add(user)
-        db.session.flush()
+    try:
+        user_doc = get_document_safe(COLLECTIONS["users"], google_id)
+    except AppwriteException as exc:
+        if exc.code != 404:
+            logger.exception("Failed to fetch user document")
+            return redirect(url_for("auth.login"))
+
+    if not user_doc:
+        created_at = format_datetime(datetime.utcnow())
+        try:
+            user_doc = create_document_safe(
+                COLLECTIONS["users"],
+                document_id=google_id,
+                data={
+                    "google_id": google_id,
+                    "email": email,
+                    "name": user_info.get("name"),
+                    "picture_url": user_info.get("picture"),
+                    "onboarding_complete": False,
+                    "onboarding_step": 1,
+                    "created_at": created_at,
+                    "last_login": created_at,
+                },
+            )
+        except AppwriteException:
+            return redirect(url_for("auth.login"))
 
         # Create default settings with a unique .ics subscription token
-        user_settings = UserSettings(
-            user_id=user.id,
-            ics_secret_token=secrets.token_urlsafe(32),
-        )
-        db.session.add(user_settings)
+        try:
+            create_document_safe(
+                COLLECTIONS["user_settings"],
+                document_id=google_id,
+                data={
+                    "user_id": google_id,
+                    "ics_secret_token": secrets.token_urlsafe(32),
+                    "feed_refresh_minutes": 15,
+                    "preferred_calendar_view": "week",
+                    "interface_theme": "system-match",
+                    "created_at": created_at,
+                },
+            )
+        except AppwriteException:
+            return redirect(url_for("auth.login"))
+    else:
+        try:
+            user_doc = update_document_safe(
+                COLLECTIONS["users"],
+                google_id,
+                {
+                    "last_login": format_datetime(datetime.utcnow()),
+                    "name": user_info.get("name", user_doc.get("name")),
+                    "picture_url": user_info.get("picture", user_doc.get("picture_url")),
+                    "email": email or user_doc.get("email"),
+                },
+            )
+        except AppwriteException:
+            return redirect(url_for("auth.login"))
 
-    user.last_login = datetime.utcnow()
-    user.name = user_info.get("name", user.name)
-    user.picture_url = user_info.get("picture", user.picture_url)
-    db.session.commit()
-
-    login_user(user)
+    login_user(user_from_doc(user_doc))
     session.pop("oauth_state", None)
 
     # Redirect users who have not completed onboarding yet.
-    if not user.onboarding_complete:
+    if not user_doc.get("onboarding_complete"):
         return redirect(url_for("settings.onboarding"))
 
     return redirect(url_for("dashboard.dashboard"))

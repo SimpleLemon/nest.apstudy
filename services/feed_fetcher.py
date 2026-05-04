@@ -7,11 +7,19 @@ and return standard RFC 5545 iCalendar data.
 Functional now against any valid .ics feed URL.
 """
 import logging
-import requests as http_requests
 from datetime import datetime, date as date_type, timezone
+
 import icalendar
-from extensions import db
-from models import CalendarCache
+import requests as http_requests
+from appwrite.exception import AppwriteException
+from appwrite.id import ID
+from appwrite.query import Query
+from appwrite_client import COLLECTIONS
+from appwrite_helpers import (
+    create_document_safe,
+    delete_documents_by_query,
+    format_datetime,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -352,25 +360,37 @@ def fetch_and_cache_feeds(user_id, feed_urls):
         deduped_events.append(event)
 
     # Delete all existing cached events for this user
-    CalendarCache.query.filter_by(user_id=user_id).delete()
+    try:
+        delete_documents_by_query(
+            COLLECTIONS["calendar_cache"],
+            [Query.equal("user_id", [str(user_id)])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to clear cached events")
+        raise
 
     # Insert fresh events
     for event in deduped_events:
-        cache_entry = CalendarCache(
-            user_id=user_id,
-            event_uid=event["uid"],
-            event_title=event["title"],
-            event_start=event["start"],
-            event_end=event["end"],
-            event_type=event["event_type"],
-            course_name=event["course_name"],
-            raw_description=event["description"],
-            fetched_at=event["fetched_at"],
-            is_all_day=event["is_all_day"],
-        )
-        db.session.add(cache_entry)
-
-    db.session.commit()
+        try:
+            create_document_safe(
+                COLLECTIONS["calendar_cache"],
+                document_id=ID.unique(),
+                data={
+                    "user_id": str(user_id),
+                    "event_uid": event["uid"],
+                    "event_title": event["title"],
+                    "event_start": format_datetime(event["start"]),
+                    "event_end": format_datetime(event["end"]),
+                    "event_type": event["event_type"],
+                    "course_name": event["course_name"],
+                    "raw_description": event["description"],
+                    "fetched_at": format_datetime(event["fetched_at"]),
+                    "is_all_day": event["is_all_day"],
+                },
+            )
+        except AppwriteException:
+            logger.exception("Failed to cache calendar event")
+            raise
     return len(deduped_events)
 
 

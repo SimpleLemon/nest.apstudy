@@ -5,7 +5,7 @@ Background task scheduler using APScheduler.
 Handles periodic Canvas iCal feed refresh for all users.
 
 Must be initialized within a Flask application context because
-the scheduled jobs access the database via Flask-SQLAlchemy.
+the scheduled jobs access the database via Appwrite.
 
 Warning: When running under Gunicorn with multiple workers, each worker
 spawns its own scheduler. Use the SCHEDULER_ENABLED environment variable
@@ -21,6 +21,10 @@ from datetime import datetime
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 
+from appwrite.exception import AppwriteException
+from appwrite_client import COLLECTIONS
+from appwrite_helpers import list_documents_all, update_document_safe, format_datetime
+
 logger = logging.getLogger(__name__)
 
 # Module-level scheduler instance. Initialized once via init_scheduler().
@@ -30,12 +34,14 @@ _scheduler = None
 def _configured_feed_urls(settings):
     """Return all configured calendar URLs from user settings."""
     urls = []
-    if settings.canvas_ical_url:
-        urls.append(settings.canvas_ical_url.strip())
+    canvas_url = settings.get("canvas_ical_url")
+    if canvas_url:
+        urls.append(canvas_url.strip())
 
-    if settings.other_ical_urls_json:
+    other_urls = settings.get("other_ical_urls_json")
+    if other_urls:
         try:
-            extras = json.loads(settings.other_ical_urls_json)
+            extras = json.loads(other_urls)
             if isinstance(extras, list):
                 for item in extras:
                     if isinstance(item, str) and item.strip():
@@ -54,10 +60,13 @@ def _refresh_all_feeds(app):
     Runs inside a Flask application context so that database access works.
     """
     with app.app_context():
-        from models import User, UserSettings
         from services.feed_fetcher import fetch_and_cache_feeds
+        try:
+            all_settings = list_documents_all(COLLECTIONS["user_settings"])
+        except AppwriteException:
+            logger.exception("Failed to list user settings")
+            return
 
-        all_settings = UserSettings.query.all()
         settings_with_feeds = [
             settings for settings in all_settings if _configured_feed_urls(settings)
         ]
@@ -73,21 +82,31 @@ def _refresh_all_feeds(app):
         for settings in settings_with_feeds:
             try:
                 count = fetch_and_cache_feeds(
-                    settings.user_id,
+                    settings.get("user_id"),
                     _configured_feed_urls(settings),
                 )
-                settings.updated_at = datetime.utcnow()
+                update_document_safe(
+                    COLLECTIONS["user_settings"],
+                    settings.get("$id"),
+                    {"updated_at": format_datetime(datetime.utcnow())},
+                )
                 logger.info(
-                    f"  User {settings.user_id}: {count} events cached."
+                    "  User %s: %s events cached.",
+                    settings.get("user_id"),
+                    count,
+                )
+            except AppwriteException as exc:
+                logger.error(
+                    "  User %s: feed refresh failed: %s",
+                    settings.get("user_id"),
+                    exc,
                 )
             except Exception as e:
                 logger.error(
-                    f"  User {settings.user_id}: feed refresh failed: {e}"
+                    "  User %s: feed refresh failed: %s",
+                    settings.get("user_id"),
+                    e,
                 )
-
-        # Commit all updated_at timestamps
-        from extensions import db
-        db.session.commit()
 
 
 def init_scheduler(app):

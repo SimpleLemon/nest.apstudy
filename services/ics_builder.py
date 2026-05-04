@@ -14,8 +14,10 @@ by the calendar_api blueprint.
 import icalendar
 from datetime import datetime, timedelta, timezone
 
-from extensions import db
-from models import CalendarCache, UserCourse
+from appwrite.exception import AppwriteException
+from appwrite.query import Query
+from appwrite_client import COLLECTIONS
+from appwrite_helpers import list_documents_all, parse_datetime
 
 
 def _ics_escape(text):
@@ -70,11 +72,16 @@ def build_ics_for_user(user_id):
     cal.add("x-wr-timezone", "America/New_York")
 
     # Fetch all cached events for this user
-    events = CalendarCache.query.filter_by(
-        user_id=user_id
-    ).order_by(
-        CalendarCache.event_start.asc()
-    ).all()
+    try:
+        events = list_documents_all(
+            COLLECTIONS["calendar_cache"],
+            [
+                Query.equal("user_id", [str(user_id)]),
+                Query.orderAsc("event_start"),
+            ],
+        )
+    except AppwriteException:
+        events = []
 
     now = datetime.now(timezone.utc)
 
@@ -82,33 +89,35 @@ def build_ics_for_user(user_id):
         vevent = icalendar.Event()
 
         # UID is required per RFC 5545 and must be globally unique [7]
-        vevent.add("uid", _build_event_uid(event.event_uid, user_id))
+        vevent.add("uid", _build_event_uid(event.get("event_uid"), user_id))
 
         # DTSTAMP is the timestamp of when this .ics was generated [7]
         vevent.add("dtstamp", now)
 
-        if event.event_title:
-            vevent.add("summary", event.event_title)
+        if event.get("event_title"):
+            vevent.add("summary", event.get("event_title"))
 
-        if event.raw_description:
-            vevent.add("description", event.raw_description)
+        if event.get("raw_description"):
+            vevent.add("description", event.get("raw_description"))
 
-        if event.event_start:
-            vevent.add("dtstart", event.event_start)
+        event_start = parse_datetime(event.get("event_start"))
+        event_end = parse_datetime(event.get("event_end"))
+        if event_start:
+            vevent.add("dtstart", event_start)
 
-        if event.event_end:
-            vevent.add("dtend", event.event_end)
-        elif event.event_start:
+        if event_end:
+            vevent.add("dtend", event_end)
+        elif event_start:
             # If no end time, default to 1 hour after start
-            vevent.add("dtend", event.event_start + timedelta(hours=1))
+            vevent.add("dtend", event_start + timedelta(hours=1))
 
         # Add course name as a category for client-side filtering
-        if event.course_name:
-            vevent.add("categories", [event.course_name])
+        if event.get("course_name"):
+            vevent.add("categories", [event.get("course_name")])
 
         # Add event type as a custom property
-        if event.event_type and event.event_type != "unknown":
-            vevent.add("x-apstudy-type", event.event_type)
+        if event.get("event_type") and event.get("event_type") != "unknown":
+            vevent.add("x-apstudy-type", event.get("event_type"))
 
         cal.add_component(vevent)
 
@@ -134,7 +143,13 @@ def _inject_atlas_schedule(cal, user_id):
     _PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     ATLAS_DATA_DIR = os.path.join(_PROJECT_ROOT, "atlas-data")
 
-    user_courses = UserCourse.query.filter_by(user_id=user_id).all()
+    try:
+        user_courses = list_documents_all(
+            COLLECTIONS["user_courses"],
+            [Query.equal("user_id", [str(user_id)])],
+        )
+    except AppwriteException:
+        user_courses = []
 
     if not user_courses:
         return
@@ -143,7 +158,12 @@ def _inject_atlas_schedule(cal, user_id):
 
     for uc in user_courses:
         # Read the course JSON file
-        filepath = os.path.join(ATLAS_DATA_DIR, uc.term, uc.subject, f"{uc.catalog}.json")
+        filepath = os.path.join(
+            ATLAS_DATA_DIR,
+            uc.get("term"),
+            uc.get("subject"),
+            f"{uc.get('catalog')}.json",
+        )
         if not os.path.isfile(filepath):
             continue
 
@@ -153,7 +173,10 @@ def _inject_atlas_schedule(cal, user_id):
         except (json.JSONDecodeError, IOError):
             continue
 
-        course_code = course_data.get("course_code", f"{uc.subject} {uc.catalog}")
+        course_code = course_data.get(
+            "course_code",
+            f"{uc.get('subject')} {uc.get('catalog')}",
+        )
         course_title = course_data.get("course_title", "")
         date_range = course_data.get("date_range", {})
 
@@ -171,7 +194,7 @@ def _inject_atlas_schedule(cal, user_id):
 
         for section in sections:
             # If user selected a specific CRN, only include that section
-            if uc.crn and section.get("crn") != uc.crn:
+            if uc.get("crn") and section.get("crn") != uc.get("crn"):
                 continue
 
             schedule = section.get("schedule", {})
@@ -218,7 +241,10 @@ def _inject_atlas_schedule(cal, user_id):
             if section_num:
                 summary += f" (Sec {section_num})"
 
-            vevent.add("uid", f"atlas-{uc.term}-{uc.subject}{uc.catalog}-{section.get('crn', 'x')}@nest.apstudy.org")
+            vevent.add(
+                "uid",
+                f"atlas-{uc.get('term')}-{uc.get('subject')}{uc.get('catalog')}-{section.get('crn', 'x')}@nest.apstudy.org",
+            )
             vevent.add("dtstamp", now)
             vevent.add("summary", summary)
 

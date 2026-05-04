@@ -8,17 +8,30 @@ Handles Canvas iCal URL configuration, refresh intervals,
 
 import json
 import secrets
+import logging
 from datetime import datetime
 from urllib.parse import urlparse, urlunparse
 
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 
-from extensions import db
-from models import UserSettings, UserCourse
+from appwrite.exception import AppwriteException
+from appwrite.id import ID
+from appwrite.query import Query
+from appwrite_client import COLLECTIONS
+from appwrite_helpers import (
+    create_document_safe,
+    delete_document_safe,
+    first_document,
+    format_datetime,
+    get_document_safe,
+    list_documents_all,
+    update_document_safe,
+)
 from services.atlas_client import DEFAULT_TERM
 
 settings_bp = Blueprint("settings", __name__)
+logger = logging.getLogger(__name__)
 
 CANVAS_CALENDAR_HOST_PREFIX = "canvas."
 CANVAS_CALENDAR_HOST_SUFFIX = ".edu"
@@ -95,11 +108,11 @@ def _normalize_canvas_calendar_url(url):
 
 def _load_other_calendar_urls(settings):
     """Load and sanitize persisted optional calendar URLs from JSON text."""
-    if not settings or not settings.other_ical_urls_json:
+    if not settings or not settings.get("other_ical_urls_json"):
         return []
 
     try:
-        parsed = json.loads(settings.other_ical_urls_json)
+        parsed = json.loads(settings.get("other_ical_urls_json"))
     except json.JSONDecodeError:
         return []
 
@@ -196,12 +209,18 @@ def _normalize_emory_email(value):
 
 
 def _onboarding_courses():
-    return UserCourse.query.filter_by(
-        user_id=current_user.id,
-        source="onboarding",
-    ).order_by(
-        UserCourse.added_at.asc()
-    ).all()
+    try:
+        return list_documents_all(
+            COLLECTIONS["user_courses"],
+            [
+                Query.equal("user_id", [str(current_user.id)]),
+                Query.equal("source", ["onboarding"]),
+                Query.orderAsc("added_at"),
+            ],
+        )
+    except AppwriteException:
+        logger.exception("Failed to load onboarding courses")
+        return []
 
 
 def _onboarding_context():
@@ -219,12 +238,12 @@ def _onboarding_context():
         "emory_email": current_user.emory_email,
         "courses": [
             {
-                "id": course.id,
-                "course_code": f"{course.subject} {course.catalog}",
-                "course_name": course.course_name,
-                "section_number": course.section_number,
-                "instructor_name": course.instructor_name,
-                "term": course.term,
+                "id": course.get("$id"),
+                "course_code": f"{course.get('subject')} {course.get('catalog')}",
+                "course_name": course.get("course_name"),
+                "section_number": course.get("section_number"),
+                "instructor_name": course.get("instructor_name"),
+                "term": course.get("term"),
             }
             for course in _onboarding_courses()
         ],
@@ -255,10 +274,20 @@ def save_onboarding():
     payload = request.get_json(silent=True) or request.form.to_dict(flat=True)
     step = int(payload.get("step", current_user.onboarding_step or 1))
     action = payload.get("action", "continue")
+    user_id = str(current_user.id)
 
     if step == 1:
-        current_user.onboarding_step = max(current_user.onboarding_step or 1, 2)
-        db.session.commit()
+        next_step = max(current_user.onboarding_step or 1, 2)
+        try:
+            update_document_safe(
+                COLLECTIONS["users"],
+                user_id,
+                {"onboarding_step": next_step},
+            )
+        except AppwriteException:
+            logger.exception("Failed to update onboarding step")
+            return jsonify({"error": "Unable to save onboarding."}), 500
+        current_user.onboarding_step = next_step
         return jsonify({"status": "ok", "next_step": 2})
 
     if step == 2:
@@ -292,12 +321,26 @@ def save_onboarding():
 
         next_step = 3 if education_level == "Undergraduate" and emory_student else 4
 
+        try:
+            update_document_safe(
+                COLLECTIONS["users"],
+                user_id,
+                {
+                    "education_level": education_level,
+                    "class_year": class_year,
+                    "emory_student": emory_student,
+                    "emory_email": emory_email,
+                    "onboarding_step": next_step,
+                },
+            )
+        except AppwriteException:
+            logger.exception("Failed to update onboarding profile")
+            return jsonify({"error": "Unable to save onboarding."}), 500
         current_user.education_level = education_level
         current_user.class_year = class_year
         current_user.emory_student = emory_student
         current_user.emory_email = emory_email
         current_user.onboarding_step = next_step
-        db.session.commit()
         return jsonify({"status": "ok", "next_step": next_step})
 
     if step == 3:
@@ -320,34 +363,52 @@ def save_onboarding():
             if not subject or not catalog:
                 return jsonify({"error": "Course code is required."}), 400
 
-            existing = UserCourse.query.filter_by(
-                user_id=current_user.id,
-                term=term,
-                subject=subject,
-                catalog=catalog,
-                crn=None,
-                source="onboarding",
-            ).first()
+            try:
+                candidates = list_documents_all(
+                    COLLECTIONS["user_courses"],
+                    [
+                        Query.equal("user_id", [user_id]),
+                        Query.equal("term", [term]),
+                        Query.equal("subject", [subject]),
+                        Query.equal("catalog", [catalog]),
+                        Query.equal("source", ["onboarding"]),
+                    ],
+                )
+            except AppwriteException:
+                logger.exception("Failed to check onboarding course")
+                return jsonify({"error": "Unable to save course."}), 500
+
+            existing = next(
+                (doc for doc in candidates if not doc.get("crn")),
+                None,
+            )
             if existing:
                 return jsonify({"error": "Course already added."}), 409
 
-            course = UserCourse(
-                user_id=current_user.id,
-                term=term,
-                subject=subject,
-                catalog=catalog,
-                course_name=course_name,
-                section_number=section_number,
-                instructor_name=instructor_name,
-                source="onboarding",
-            )
-            db.session.add(course)
-            db.session.commit()
+            try:
+                course = create_document_safe(
+                    COLLECTIONS["user_courses"],
+                    document_id=ID.unique(),
+                    data={
+                        "user_id": user_id,
+                        "term": term,
+                        "subject": subject,
+                        "catalog": catalog,
+                        "course_name": course_name,
+                        "section_number": section_number,
+                        "instructor_name": instructor_name,
+                        "source": "onboarding",
+                        "added_at": format_datetime(datetime.utcnow()),
+                    },
+                )
+            except AppwriteException:
+                logger.exception("Failed to add onboarding course")
+                return jsonify({"error": "Unable to save course."}), 500
 
             return jsonify({
                 "status": "ok",
                 "course": {
-                    "id": course.id,
+                    "id": course.get("$id"),
                     "course_code": f"{subject} {catalog}",
                     "course_name": course_name,
                     "section_number": section_number,
@@ -357,20 +418,50 @@ def save_onboarding():
             }), 201
 
         if action in {"advance", "continue", "review"}:
+            try:
+                update_document_safe(
+                    COLLECTIONS["users"],
+                    user_id,
+                    {"onboarding_step": 4},
+                )
+            except AppwriteException:
+                logger.exception("Failed to update onboarding step")
+                return jsonify({"error": "Unable to save onboarding."}), 500
             current_user.onboarding_step = 4
-            db.session.commit()
             return jsonify({"status": "ok", "next_step": 4})
 
         if action == "complete":
+            try:
+                update_document_safe(
+                    COLLECTIONS["users"],
+                    user_id,
+                    {
+                        "onboarding_step": 4,
+                        "onboarding_complete": True,
+                    },
+                )
+            except AppwriteException:
+                logger.exception("Failed to complete onboarding")
+                return jsonify({"error": "Unable to save onboarding."}), 500
             current_user.onboarding_step = 4
             current_user.onboarding_complete = True
-            db.session.commit()
             return jsonify({"status": "ok", "redirect_url": url_for("dashboard.dashboard")})
 
     if step in {4, 5}:
+        try:
+            update_document_safe(
+                COLLECTIONS["users"],
+                user_id,
+                {
+                    "onboarding_complete": True,
+                    "onboarding_step": 4,
+                },
+            )
+        except AppwriteException:
+            logger.exception("Failed to complete onboarding")
+            return jsonify({"error": "Unable to save onboarding."}), 500
         current_user.onboarding_complete = True
         current_user.onboarding_step = 4
-        db.session.commit()
         return jsonify({"status": "ok", "redirect_url": url_for("dashboard.dashboard")})
 
     return jsonify({"error": "Invalid onboarding step."}), 400
@@ -384,26 +475,46 @@ def settings_page():
         return redirect(url_for("settings.onboarding"))
 
     if not current_user.created_at:
+        try:
+            update_document_safe(
+                COLLECTIONS["users"],
+                str(current_user.id),
+                {"created_at": format_datetime(datetime.utcnow())},
+            )
+        except AppwriteException:
+            logger.exception("Failed to set user created_at")
         current_user.created_at = datetime.utcnow()
-        db.session.commit()
 
-    user_settings = UserSettings.query.filter_by(
-        user_id=current_user.id
-    ).first()
+    try:
+        user_settings = first_document(
+            COLLECTIONS["user_settings"],
+            [Query.equal("user_id", [str(current_user.id)])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to load user settings")
+        user_settings = None
     other_calendar_urls = _load_other_calendar_urls(user_settings)
 
-    courses = UserCourse.query.filter_by(
-        user_id=current_user.id
-    ).order_by(
-        UserCourse.term, UserCourse.subject, UserCourse.catalog
-    ).all()
+    try:
+        courses = list_documents_all(
+            COLLECTIONS["user_courses"],
+            [
+                Query.equal("user_id", [str(current_user.id)]),
+                Query.orderAsc("term"),
+                Query.orderAsc("subject"),
+                Query.orderAsc("catalog"),
+            ],
+        )
+    except AppwriteException:
+        logger.exception("Failed to load user courses")
+        courses = []
 
     return render_template("settings.html", user={
         "name": current_user.name or current_user.email,
         "email": current_user.email,
         "picture": current_user.picture_url,
         "member_since": current_user.created_at.strftime("%b %d, %Y"),
-    }, settings=user_settings, courses=courses, other_calendar_urls=other_calendar_urls, theme_preference=user_settings.interface_theme if user_settings else None)
+    }, settings=user_settings, courses=courses, other_calendar_urls=other_calendar_urls, theme_preference=user_settings.get("interface_theme") if user_settings else None)
 
 
 # ── API routes (called by settings page JavaScript) ──────────────────────────
@@ -418,10 +529,23 @@ def update_profile():
     if not name:
         return jsonify({"error": "Name is required."}), 400
 
-    current_user.name = name
+    updates = {"name": name}
     if not current_user.created_at:
+        updates["created_at"] = format_datetime(datetime.utcnow())
+
+    try:
+        update_document_safe(
+            COLLECTIONS["users"],
+            str(current_user.id),
+            updates,
+        )
+    except AppwriteException:
+        logger.exception("Failed to update profile")
+        return jsonify({"error": "Unable to update profile."}), 500
+
+    current_user.name = name
+    if updates.get("created_at"):
         current_user.created_at = datetime.utcnow()
-    db.session.commit()
 
     return jsonify({
         "status": "ok",
@@ -462,23 +586,58 @@ def update_feed_url():
                 url,
             )
         else:
-            existing = UserSettings.query.filter_by(user_id=current_user.id).first()
+            try:
+                existing = first_document(
+                    COLLECTIONS["user_settings"],
+                    [Query.equal("user_id", [str(current_user.id)])],
+                )
+            except AppwriteException:
+                logger.exception("Failed to load settings")
+                return jsonify({"error": "Unable to save feed URL."}), 500
             other_ical_urls = _load_other_calendar_urls(existing)
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
 
-    settings = UserSettings.query.filter_by(user_id=current_user.id).first()
-    if not settings:
-        settings = UserSettings(
-            user_id=current_user.id,
-            ics_secret_token=secrets.token_urlsafe(32),
+    user_id = str(current_user.id)
+    try:
+        settings = first_document(
+            COLLECTIONS["user_settings"],
+            [Query.equal("user_id", [user_id])],
         )
-        db.session.add(settings)
+    except AppwriteException:
+        logger.exception("Failed to load settings")
+        return jsonify({"error": "Unable to save feed URL."}), 500
 
-    settings.canvas_ical_url = url
-    settings.other_ical_urls_json = json.dumps(other_ical_urls)
-    settings.updated_at = datetime.utcnow()
-    db.session.commit()
+    payload = {
+        "canvas_ical_url": url,
+        "other_ical_urls_json": json.dumps(other_ical_urls),
+        "updated_at": format_datetime(datetime.utcnow()),
+    }
+
+    try:
+        if not settings:
+            settings = create_document_safe(
+                COLLECTIONS["user_settings"],
+                document_id=user_id,
+                data={
+                    "user_id": user_id,
+                    "ics_secret_token": secrets.token_urlsafe(32),
+                    "feed_refresh_minutes": 15,
+                    "preferred_calendar_view": "week",
+                    "interface_theme": "system-match",
+                    "created_at": format_datetime(datetime.utcnow()),
+                    **payload,
+                },
+            )
+        else:
+            settings = update_document_safe(
+                COLLECTIONS["user_settings"],
+                settings.get("$id"),
+                payload,
+            )
+    except AppwriteException:
+        logger.exception("Failed to save feed URL")
+        return jsonify({"error": "Unable to save feed URL."}), 500
 
     return jsonify({
         "status": "ok",
@@ -504,13 +663,29 @@ def update_refresh_interval():
             "error": "Refresh interval must be between 5 and 1440 minutes."
         }), 400
 
-    settings = UserSettings.query.filter_by(user_id=current_user.id).first()
+    try:
+        settings = first_document(
+            COLLECTIONS["user_settings"],
+            [Query.equal("user_id", [str(current_user.id)])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to load settings")
+        return jsonify({"error": "Unable to update refresh interval."}), 500
     if not settings:
         return jsonify({"error": "No settings found. Complete onboarding first."}), 404
 
-    settings.feed_refresh_minutes = minutes
-    settings.updated_at = datetime.utcnow()
-    db.session.commit()
+    try:
+        update_document_safe(
+            COLLECTIONS["user_settings"],
+            settings.get("$id"),
+            {
+                "feed_refresh_minutes": minutes,
+                "updated_at": format_datetime(datetime.utcnow()),
+            },
+        )
+    except AppwriteException:
+        logger.exception("Failed to update refresh interval")
+        return jsonify({"error": "Unable to update refresh interval."}), 500
 
     return jsonify({"status": "ok", "refresh_interval_minutes": minutes})
 
@@ -529,25 +704,51 @@ def update_interface_preferences():
     if interface_theme and interface_theme not in valid_themes:
         return jsonify({"error": "Interface theme is not valid."}), 400
 
-    settings = UserSettings.query.filter_by(user_id=current_user.id).first()
-    if not settings:
-        settings = UserSettings(
-            user_id=current_user.id,
-            ics_secret_token=secrets.token_urlsafe(32),
+    user_id = str(current_user.id)
+    try:
+        settings = first_document(
+            COLLECTIONS["user_settings"],
+            [Query.equal("user_id", [user_id])],
         )
-        db.session.add(settings)
+    except AppwriteException:
+        logger.exception("Failed to load settings")
+        return jsonify({"error": "Unable to update preferences."}), 500
 
+    updates = {"updated_at": format_datetime(datetime.utcnow())}
     if preferred_calendar_view:
-        settings.preferred_calendar_view = preferred_calendar_view
+        updates["preferred_calendar_view"] = preferred_calendar_view
     if interface_theme:
-        settings.interface_theme = interface_theme
-    settings.updated_at = datetime.utcnow()
-    db.session.commit()
+        updates["interface_theme"] = interface_theme
+
+    try:
+        if not settings:
+            settings = create_document_safe(
+                COLLECTIONS["user_settings"],
+                document_id=user_id,
+                data={
+                    "user_id": user_id,
+                    "ics_secret_token": secrets.token_urlsafe(32),
+                    "feed_refresh_minutes": 15,
+                    "preferred_calendar_view": "week",
+                    "interface_theme": "system-match",
+                    "created_at": format_datetime(datetime.utcnow()),
+                    **updates,
+                },
+            )
+        else:
+            settings = update_document_safe(
+                COLLECTIONS["user_settings"],
+                settings.get("$id"),
+                updates,
+            )
+    except AppwriteException:
+        logger.exception("Failed to update interface preferences")
+        return jsonify({"error": "Unable to update preferences."}), 500
 
     return jsonify({
         "status": "ok",
-        "preferred_calendar_view": settings.preferred_calendar_view,
-        "interface_theme": settings.interface_theme,
+        "preferred_calendar_view": settings.get("preferred_calendar_view"),
+        "interface_theme": settings.get("interface_theme"),
     })
 
 
@@ -560,20 +761,37 @@ def regenerate_ics_token():
     Generates a new .ics subscription token. Invalidates the old one,
     so the user must re-subscribe in Apple Calendar with the new URL.
     """
-    settings = UserSettings.query.filter_by(user_id=current_user.id).first()
+    try:
+        settings = first_document(
+            COLLECTIONS["user_settings"],
+            [Query.equal("user_id", [str(current_user.id)])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to load settings")
+        return jsonify({"error": "Unable to regenerate token."}), 500
     if not settings:
         return jsonify({"error": "No settings found."}), 404
 
-    settings.ics_secret_token = secrets.token_urlsafe(32)
-    settings.updated_at = datetime.utcnow()
-    db.session.commit()
+    new_token = secrets.token_urlsafe(32)
+    try:
+        settings = update_document_safe(
+            COLLECTIONS["user_settings"],
+            settings.get("$id"),
+            {
+                "ics_secret_token": new_token,
+                "updated_at": format_datetime(datetime.utcnow()),
+            },
+        )
+    except AppwriteException:
+        logger.exception("Failed to regenerate token")
+        return jsonify({"error": "Unable to regenerate token."}), 500
 
     return jsonify({
         "status": "ok",
         "message": "Token regenerated. Update your calendar subscription URL.",
         "new_subscription_url": url_for(
             "calendar.ics_feed",
-            token=settings.ics_secret_token,
+            token=new_token,
             _external=True,
         ),
     })
@@ -589,22 +807,30 @@ def list_my_courses():
 
     Returns the user's saved course selections.
     """
-    courses = UserCourse.query.filter_by(
-        user_id=current_user.id
-    ).order_by(
-        UserCourse.term, UserCourse.subject, UserCourse.catalog
-    ).all()
+    try:
+        courses = list_documents_all(
+            COLLECTIONS["user_courses"],
+            [
+                Query.equal("user_id", [str(current_user.id)]),
+                Query.orderAsc("term"),
+                Query.orderAsc("subject"),
+                Query.orderAsc("catalog"),
+            ],
+        )
+    except AppwriteException:
+        logger.exception("Failed to list courses")
+        return jsonify({"error": "Unable to load courses."}), 500
 
     return jsonify({
         "count": len(courses),
         "courses": [
             {
-                "id": c.id,
-                "term": c.term,
-                "subject": c.subject,
-                "catalog": c.catalog,
-                "crn": c.crn,
-                "course_code": f"{c.subject} {c.catalog}",
+                "id": c.get("$id"),
+                "term": c.get("term"),
+                "subject": c.get("subject"),
+                "catalog": c.get("catalog"),
+                "crn": c.get("crn"),
+                "course_code": f"{c.get('subject')} {c.get('catalog')}",
             }
             for c in courses
         ],
@@ -633,31 +859,50 @@ def add_course():
         return jsonify({"error": "term, subject, and catalog are required."}), 400
 
     # Check for duplicates
-    existing = UserCourse.query.filter_by(
-        user_id=current_user.id,
-        term=term,
-        subject=subject,
-        catalog=catalog,
-        crn=crn,
-    ).first()
+    user_id = str(current_user.id)
+    try:
+        candidates = list_documents_all(
+            COLLECTIONS["user_courses"],
+            [
+                Query.equal("user_id", [user_id]),
+                Query.equal("term", [term]),
+                Query.equal("subject", [subject]),
+                Query.equal("catalog", [catalog]),
+            ],
+        )
+    except AppwriteException:
+        logger.exception("Failed to check existing course")
+        return jsonify({"error": "Unable to add course."}), 500
 
+    existing = next(
+        (doc for doc in candidates if (doc.get("crn") or None) == crn),
+        None,
+    )
     if existing:
         return jsonify({"error": "Course already in your list."}), 409
 
-    course = UserCourse(
-        user_id=current_user.id,
-        term=term,
-        subject=subject,
-        catalog=catalog,
-        crn=crn,
-    )
-    db.session.add(course)
-    db.session.commit()
+    try:
+        course = create_document_safe(
+            COLLECTIONS["user_courses"],
+            document_id=ID.unique(),
+            data={
+                "user_id": user_id,
+                "term": term,
+                "subject": subject,
+                "catalog": catalog,
+                "crn": crn,
+                "source": "settings",
+                "added_at": format_datetime(datetime.utcnow()),
+            },
+        )
+    except AppwriteException:
+        logger.exception("Failed to add course")
+        return jsonify({"error": "Unable to add course."}), 500
 
     return jsonify({
         "status": "ok",
         "course": {
-            "id": course.id,
+            "id": course.get("$id"),
             "term": term,
             "subject": subject,
             "catalog": catalog,
@@ -667,7 +912,7 @@ def add_course():
     }), 201
 
 
-@settings_bp.route("/api/courses/<int:course_id>", methods=["DELETE"])
+@settings_bp.route("/api/courses/<course_id>", methods=["DELETE"])
 @login_required
 def remove_course(course_id):
     """
@@ -675,15 +920,21 @@ def remove_course(course_id):
 
     Removes a course from the user's "My Courses" list.
     """
-    course = UserCourse.query.filter_by(
-        id=course_id,
-        user_id=current_user.id,
-    ).first()
+    try:
+        course = get_document_safe(COLLECTIONS["user_courses"], course_id)
+    except AppwriteException as exc:
+        if exc.code == 404:
+            return jsonify({"error": "Course not found."}), 404
+        logger.exception("Failed to load course")
+        return jsonify({"error": "Unable to remove course."}), 500
 
-    if not course:
+    if course.get("user_id") != str(current_user.id):
         return jsonify({"error": "Course not found."}), 404
 
-    db.session.delete(course)
-    db.session.commit()
+    try:
+        delete_document_safe(COLLECTIONS["user_courses"], course_id)
+    except AppwriteException:
+        logger.exception("Failed to delete course")
+        return jsonify({"error": "Unable to remove course."}), 500
 
     return jsonify({"status": "ok", "message": "Course removed."})

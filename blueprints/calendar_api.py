@@ -8,10 +8,25 @@ Also provides a token-authenticated .ics subscription endpoint.
 import json
 import logging
 from datetime import datetime, timezone
+
 from flask import Blueprint, jsonify, request, Response
 from flask_login import login_required, current_user
-from extensions import db
-from models import User, UserSettings, CalendarCache, UserCalendarPreference, UserEvent
+
+from appwrite.exception import AppwriteException
+from appwrite.id import ID
+from appwrite.query import Query
+from appwrite_client import COLLECTIONS
+from appwrite_helpers import (
+    create_document_safe,
+    delete_document_safe,
+    first_document,
+    format_datetime,
+    get_document_safe,
+    list_documents_all,
+    list_documents_safe,
+    parse_datetime,
+    update_document_safe,
+)
 
 calendar_bp = Blueprint("calendar", __name__)
 logger = logging.getLogger(__name__)
@@ -69,38 +84,46 @@ def _span_metadata(start_dt, end_dt, is_all_day=False):
     return span_days > 1, span_days
 
 
-def _serialize_event(e):
-    """Serialize a CalendarCache row for API response."""
-    is_all_day = bool(getattr(e, "is_all_day", False))
-    is_multi_day, span_days = _span_metadata(e.event_start, e.event_end, is_all_day)
+def _serialize_event(doc):
+    """Serialize a calendar_cache document for API response."""
+    is_all_day = bool(doc.get("is_all_day", False))
+    event_start = parse_datetime(doc.get("event_start"))
+    event_end = parse_datetime(doc.get("event_end"))
+    fetched_at = parse_datetime(doc.get("fetched_at"))
+    is_multi_day, span_days = _span_metadata(event_start, event_end, is_all_day)
 
     return {
-        "uid": e.event_uid,
-        "title": e.event_title,
-        "start": _serialize_datetime(e.event_start, is_all_day),
-        "end": _serialize_datetime(e.event_end, is_all_day),
-        "type": e.event_type,
-        "course": e.course_name,
-        "description": e.raw_description,
-        "fetched_at": e.fetched_at.isoformat() if e.fetched_at else None,
+        "uid": doc.get("event_uid"),
+        "title": doc.get("event_title"),
+        "start": _serialize_datetime(event_start, is_all_day),
+        "end": _serialize_datetime(event_end, is_all_day),
+        "type": doc.get("event_type"),
+        "course": doc.get("course_name"),
+        "description": doc.get("raw_description"),
+        "fetched_at": fetched_at.isoformat() if fetched_at else None,
         "is_multi_day": is_multi_day,
         "span_days": span_days,
         "is_all_day": is_all_day,
     }
 
 
-def _serialize_user_event(ev):
-    """Serialize a UserEvent row for API response."""
+def _serialize_user_event(doc):
+    """Serialize a user_events document for API response."""
+    start = parse_datetime(doc.get("start"))
+    end = parse_datetime(doc.get("end"))
+    created_at = parse_datetime(doc.get("created_at"))
+    updated_at = parse_datetime(doc.get("updated_at"))
+    is_all_day = bool(doc.get("is_all_day", False))
     return {
-        "id": ev.id,
-        "title": ev.title,
-        "description": ev.description,
-        "start": _serialize_datetime(ev.start, ev.is_all_day),
-        "end": _serialize_datetime(ev.end, ev.is_all_day),
-        "is_all_day": bool(ev.is_all_day),
-        "color": ev.color,
-        "created_at": ev.created_at.isoformat() if ev.created_at else None,
-        "updated_at": ev.updated_at.isoformat() if ev.updated_at else None,
+        "id": doc.get("$id"),
+        "title": doc.get("title"),
+        "description": doc.get("description"),
+        "start": _serialize_datetime(start, is_all_day),
+        "end": _serialize_datetime(end, is_all_day),
+        "is_all_day": is_all_day,
+        "color": doc.get("color"),
+        "created_at": created_at.isoformat() if created_at else None,
+        "updated_at": updated_at.isoformat() if updated_at else None,
     }
 
 
@@ -109,11 +132,13 @@ def _configured_feed_urls(settings):
     if not settings:
         return []
     urls = []
-    if settings.canvas_ical_url:
-        urls.append(settings.canvas_ical_url.strip())
-    if settings.other_ical_urls_json:
+    canvas_url = settings.get("canvas_ical_url")
+    if canvas_url:
+        urls.append(canvas_url.strip())
+    other_urls = settings.get("other_ical_urls_json")
+    if other_urls:
         try:
-            extras = json.loads(settings.other_ical_urls_json)
+            extras = json.loads(other_urls)
             if isinstance(extras, list):
                 for item in extras:
                     if isinstance(item, str) and item.strip():
@@ -130,19 +155,29 @@ def get_events():
     GET /api/calendar/events
     Returns cached calendar events for the authenticated user.
     """
-    cache_events = CalendarCache.query.filter_by(
-        user_id=current_user.id
-    ).order_by(
-        CalendarCache.event_start.asc()
-    ).all()
+    user_id = str(current_user.id)
+    try:
+        cache_events = list_documents_all(
+            COLLECTIONS["calendar_cache"],
+            [
+                Query.equal("user_id", [user_id]),
+                Query.orderAsc("event_start"),
+            ],
+        )
+        created_events = list_documents_all(
+            COLLECTIONS["user_events"],
+            [
+                Query.equal("user_id", [user_id]),
+                Query.orderAsc("start"),
+            ],
+        )
+    except AppwriteException:
+        logger.exception("Failed to load calendar events")
+        return jsonify({"error": "Unable to load calendar events."}), 500
 
-    created_events = UserEvent.query.filter_by(
-        user_id=current_user.id
-    ).order_by(
-        UserEvent.start.asc()
-    ).all()
-
-    serialized = [_serialize_event(e) for e in cache_events] + [_serialize_user_event(e) for e in created_events]
+    serialized = [_serialize_event(e) for e in cache_events] + [
+        _serialize_user_event(e) for e in created_events
+    ]
 
     return jsonify({
         "user_id": current_user.id,
@@ -203,35 +238,56 @@ def create_event():
     if end_dt <= start_dt:
         return jsonify({"error": "end_date must be after start_date"}), 400
 
-    ev = UserEvent(
-        user_id=current_user.id,
-        title=title,
-        description=description,
-        start=start_dt,
-        end=end_dt,
-        is_all_day=all_day,
-        color=color,
-    )
-    db.session.add(ev)
-    db.session.commit()
+    try:
+        ev = create_document_safe(
+            COLLECTIONS["user_events"],
+            document_id=ID.unique(),
+            data={
+                "user_id": str(current_user.id),
+                "title": title,
+                "description": description,
+                "start": format_datetime(start_dt),
+                "end": format_datetime(end_dt),
+                "is_all_day": all_day,
+                "color": color,
+                "created_at": format_datetime(datetime.utcnow()),
+            },
+        )
+    except AppwriteException:
+        logger.exception("Failed to create user event")
+        return jsonify({"error": "Unable to create event."}), 500
 
     return jsonify({"success": True, "event": _serialize_user_event(ev)})
 
 
-@calendar_bp.route("/events/<int:event_id>", methods=["GET"])
+@calendar_bp.route("/events/<event_id>", methods=["GET"])
 @login_required
 def get_single_event(event_id):
-    ev = UserEvent.query.filter_by(id=event_id, user_id=current_user.id).first()
-    if not ev:
+    try:
+        ev = get_document_safe(COLLECTIONS["user_events"], event_id)
+    except AppwriteException as exc:
+        if exc.code == 404:
+            return jsonify({"error": "not found"}), 404
+        logger.exception("Failed to load user event")
+        return jsonify({"error": "Unable to load event."}), 500
+
+    if ev.get("user_id") != str(current_user.id):
         return jsonify({"error": "not found"}), 404
     return jsonify({"event": _serialize_user_event(ev)})
 
 
-@calendar_bp.route("/events/<int:event_id>", methods=["PUT"])
+@calendar_bp.route("/events/<event_id>", methods=["PUT"])
 @login_required
 def update_event(event_id):
-    ev = UserEvent.query.filter_by(id=event_id, user_id=current_user.id).first()
-    if not ev:
+    try:
+        ev = get_document_safe(COLLECTIONS["user_events"], event_id)
+    except AppwriteException as exc:
+        if exc.code == 404:
+            return jsonify({"error": "not found"}), 404
+        logger.exception("Failed to load user event")
+        return jsonify({"error": "Unable to load event."}), 500
+
+    if ev.get("user_id") != str(current_user.id):
         return jsonify({"error": "not found"}), 404
 
     data = request.get_json() or {}
@@ -242,37 +298,57 @@ def update_event(event_id):
     all_day = data.get("all_day")
     color = data.get("color")
 
+    updates = {"updated_at": format_datetime(datetime.utcnow())}
     if title is not None:
-        ev.title = title
+        updates["title"] = title
     if description is not None:
-        ev.description = description
+        updates["description"] = description
     if start_raw is not None:
         parsed = _parse_iso_like(start_raw)
         if parsed:
-            ev.start = parsed
+            updates["start"] = format_datetime(parsed)
     if end_raw is not None:
         parsed = _parse_iso_like(end_raw)
         if parsed:
-            ev.end = parsed
+            updates["end"] = format_datetime(parsed)
     if all_day is not None:
-        ev.is_all_day = bool(all_day)
+        updates["is_all_day"] = bool(all_day)
     if color is not None:
-        ev.color = color
+        updates["color"] = color
 
-    ev.updated_at = datetime.utcnow()
-    db.session.commit()
+    try:
+        ev = update_document_safe(
+            COLLECTIONS["user_events"],
+            event_id,
+            updates,
+        )
+    except AppwriteException:
+        logger.exception("Failed to update user event")
+        return jsonify({"error": "Unable to update event."}), 500
 
     return jsonify({"success": True, "event": _serialize_user_event(ev)})
 
 
-@calendar_bp.route("/events/<int:event_id>", methods=["DELETE"])
+@calendar_bp.route("/events/<event_id>", methods=["DELETE"])
 @login_required
 def delete_event(event_id):
-    ev = UserEvent.query.filter_by(id=event_id, user_id=current_user.id).first()
-    if not ev:
+    try:
+        ev = get_document_safe(COLLECTIONS["user_events"], event_id)
+    except AppwriteException as exc:
+        if exc.code == 404:
+            return jsonify({"error": "not found"}), 404
+        logger.exception("Failed to load user event")
+        return jsonify({"error": "Unable to delete event."}), 500
+
+    if ev.get("user_id") != str(current_user.id):
         return jsonify({"error": "not found"}), 404
-    db.session.delete(ev)
-    db.session.commit()
+
+    try:
+        delete_document_safe(COLLECTIONS["user_events"], event_id)
+    except AppwriteException:
+        logger.exception("Failed to delete user event")
+        return jsonify({"error": "Unable to delete event."}), 500
+
     return jsonify({"success": True})
 
 
@@ -283,7 +359,16 @@ def refresh_feed():
     POST /api/calendar/refresh
     Triggers an immediate re-fetch of all configured user calendar feeds.
     """
-    settings = UserSettings.query.filter_by(user_id=current_user.id).first()
+    user_id = str(current_user.id)
+    try:
+        settings = first_document(
+            COLLECTIONS["user_settings"],
+            [Query.equal("user_id", [user_id])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to load user settings")
+        return jsonify({"error": "Unable to refresh calendar feeds."}), 500
+
     feed_urls = _configured_feed_urls(settings)
 
     if not feed_urls:
@@ -294,14 +379,20 @@ def refresh_feed():
     from services.feed_fetcher import fetch_and_cache_feeds
 
     try:
-        count = fetch_and_cache_feeds(current_user.id, feed_urls)
-        settings.updated_at = datetime.utcnow()
-        db.session.commit()
+        count = fetch_and_cache_feeds(user_id, feed_urls)
+        update_document_safe(
+            COLLECTIONS["user_settings"],
+            settings.get("$id"),
+            {"updated_at": format_datetime(datetime.utcnow())},
+        )
         return jsonify({"status": "ok", "events_cached": count})
+    except AppwriteException:
+        logger.exception("Failed to update settings after refresh")
+        return jsonify({"error": "Unable to refresh calendar feeds."}), 500
     except Exception as e:
         logger.exception(
             "Calendar refresh failed",
-            extra={"user_id": current_user.id, "feed_count": len(feed_urls)},
+            extra={"user_id": user_id, "feed_count": len(feed_urls)},
         )
         return jsonify({"error": f"Feed fetch failed: {str(e)}"}), 500
 
@@ -312,23 +403,42 @@ def feed_status():
     """
     GET /api/calendar/status
     """
-    settings = UserSettings.query.filter_by(user_id=current_user.id).first()
-    feed_urls = _configured_feed_urls(settings)
+    user_id = str(current_user.id)
+    try:
+        settings = first_document(
+            COLLECTIONS["user_settings"],
+            [Query.equal("user_id", [user_id])],
+        )
+        feed_urls = _configured_feed_urls(settings)
 
-    latest_event = CalendarCache.query.filter_by(
-        user_id=current_user.id
-    ).order_by(
-        CalendarCache.fetched_at.desc()
-    ).first()
+        latest_event = first_document(
+            COLLECTIONS["calendar_cache"],
+            [
+                Query.equal("user_id", [user_id]),
+                Query.orderDesc("fetched_at"),
+            ],
+        )
+
+        count_response = list_documents_safe(
+            COLLECTIONS["calendar_cache"],
+            [Query.equal("user_id", [user_id]), Query.limit(1)],
+        )
+    except AppwriteException:
+        logger.exception("Failed to load calendar status")
+        return jsonify({"error": "Unable to load calendar status."}), 500
+
+    last_fetched = None
+    if latest_event and latest_event.get("fetched_at"):
+        parsed = parse_datetime(latest_event.get("fetched_at"))
+        if parsed:
+            last_fetched = parsed.isoformat()
 
     return jsonify({
         "feed_configured": bool(feed_urls),
         "configured_feed_count": len(feed_urls),
-        "refresh_interval_minutes": settings.feed_refresh_minutes if settings else None,
-        "last_fetched": latest_event.fetched_at.isoformat() if latest_event else None,
-        "cached_event_count": CalendarCache.query.filter_by(
-            user_id=current_user.id
-        ).count(),
+        "refresh_interval_minutes": settings.get("feed_refresh_minutes") if settings else None,
+        "last_fetched": last_fetched,
+        "cached_event_count": count_response.get("total", 0),
     })
 
 
@@ -338,14 +448,22 @@ def get_calendar_preferences():
     """
     GET /api/calendar/preferences
     """
-    prefs = UserCalendarPreference.query.filter_by(user_id=current_user.id).all()
+    user_id = str(current_user.id)
+    try:
+        prefs = list_documents_all(
+            COLLECTIONS["user_calendar_preferences"],
+            [Query.equal("user_id", [user_id])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to load calendar preferences")
+        return jsonify({"error": "Unable to load calendar preferences."}), 500
 
     return jsonify({
         "preferences": [
             {
-                "calendar_name": p.calendar_name,
-                "color_hex": p.color_hex,
-                "visible": p.visible,
+                "calendar_name": p.get("calendar_name"),
+                "color_hex": p.get("color_hex"),
+                "visible": p.get("visible"),
             }
             for p in prefs
         ]
@@ -366,31 +484,54 @@ def update_calendar_preferences():
     if not calendar_name:
         return jsonify({"error": "calendar_name is required"}), 400
 
-    pref = UserCalendarPreference.query.filter_by(
-        user_id=current_user.id,
-        calendar_name=calendar_name
-    ).first()
-
-    if not pref:
-        pref = UserCalendarPreference(
-            user_id=current_user.id,
-            calendar_name=calendar_name,
+    user_id = str(current_user.id)
+    try:
+        pref = first_document(
+            COLLECTIONS["user_calendar_preferences"],
+            [
+                Query.equal("user_id", [user_id]),
+                Query.equal("calendar_name", [calendar_name]),
+            ],
         )
-        db.session.add(pref)
+    except AppwriteException:
+        logger.exception("Failed to load calendar preference")
+        return jsonify({"error": "Unable to update preferences."}), 500
 
+    updates = {"updated_at": format_datetime(datetime.utcnow())}
     if color_hex:
-        pref.color_hex = color_hex
+        updates["color_hex"] = color_hex
     if visible is not None:
-        pref.visible = visible
+        updates["visible"] = bool(visible)
 
-    pref.updated_at = datetime.utcnow()
-    db.session.commit()
+    try:
+        if not pref:
+            pref = create_document_safe(
+                COLLECTIONS["user_calendar_preferences"],
+                document_id=ID.unique(),
+                data={
+                    "user_id": user_id,
+                    "calendar_name": calendar_name,
+                    "color_hex": color_hex or "#6366f1",
+                    "visible": bool(True if visible is None else visible),
+                    "created_at": format_datetime(datetime.utcnow()),
+                    **updates,
+                },
+            )
+        else:
+            pref = update_document_safe(
+                COLLECTIONS["user_calendar_preferences"],
+                pref.get("$id"),
+                updates,
+            )
+    except AppwriteException:
+        logger.exception("Failed to update calendar preference")
+        return jsonify({"error": "Unable to update preferences."}), 500
 
     return jsonify({
         "status": "ok",
         "calendar_name": calendar_name,
-        "color_hex": pref.color_hex,
-        "visible": pref.visible,
+        "color_hex": pref.get("color_hex"),
+        "visible": pref.get("visible"),
     })
 
 
@@ -403,14 +544,21 @@ def ics_feed():
     if not token:
         return Response("Missing token", status=401, mimetype="text/plain")
 
-    settings = UserSettings.query.filter_by(ics_secret_token=token).first()
+    try:
+        settings = first_document(
+            COLLECTIONS["user_settings"],
+            [Query.equal("ics_secret_token", [token])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to resolve calendar token")
+        return Response("Feed lookup failed", status=500, mimetype="text/plain")
     if not settings:
         return Response("Invalid token", status=403, mimetype="text/plain")
 
     from services.ics_builder import build_ics_for_user
 
     try:
-        ics_content = build_ics_for_user(settings.user_id)
+        ics_content = build_ics_for_user(settings.get("user_id"))
         return Response(
             ics_content,
             status=200,

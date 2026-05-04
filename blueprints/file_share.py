@@ -2,7 +2,8 @@ import io
 import os
 import secrets
 import uuid
-from datetime import datetime, timedelta
+import logging
+from datetime import datetime, timedelta, timezone
 
 from flask import (
     Blueprint,
@@ -15,14 +16,25 @@ from flask import (
     url_for,
 )
 from flask_login import current_user, login_required
-from sqlalchemy.exc import SQLAlchemyError
 from werkzeug.exceptions import RequestEntityTooLarge
 from werkzeug.utils import secure_filename
 
-from extensions import db
-from models import SharedFile, User, UserSettings
+from appwrite.exception import AppwriteException
+from appwrite.query import Query
+from appwrite_client import COLLECTIONS
+from appwrite_helpers import (
+    create_document_safe,
+    delete_document_safe,
+    first_document,
+    format_datetime,
+    get_document_safe,
+    list_documents_all,
+    parse_datetime,
+    update_document_safe,
+)
 
 file_share_bp = Blueprint("file_share", __name__)
+logger = logging.getLogger(__name__)
 
 MAX_FILE_SIZE = 50 * 1024 * 1024
 DEFAULT_EXPIRY_DAYS = 1
@@ -33,16 +45,23 @@ PUBLIC_SHARE_BASE_URL = "https://nest.apstudy.org/files/share"
 
 
 def _utcnow():
-    return datetime.utcnow()
+    return datetime.now(timezone.utc)
 
 
 def _isoformat(value):
     if not value:
         return None
-    return value.replace(microsecond=0).isoformat() + "Z"
+    parsed = parse_datetime(value)
+    if parsed is None:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed.replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def _format_expiry_display(value):
+    if not value:
+        return ""
     return value.strftime("%B %d, %Y at %I:%M %p UTC").replace(" 0", " ")
 
 
@@ -84,55 +103,79 @@ def _absolute_storage_path(relative_path):
 
 
 def _is_expired(shared_file):
-    return shared_file.expires_at <= _utcnow()
+    expires_at = parse_datetime(shared_file.get("expires_at"))
+    if not expires_at:
+        return True
+    if expires_at.tzinfo is None:
+        expires_at = expires_at.replace(tzinfo=timezone.utc)
+    return expires_at <= _utcnow()
 
 
 def _generate_share_code():
     while True:
         raw_bytes = secrets.token_bytes(SHARE_CODE_LENGTH)
         code = "".join(SHARE_CODE_CHARS[byte % len(SHARE_CODE_CHARS)] for byte in raw_bytes)
-        if not SharedFile.query.filter_by(share_code=code).first():
+        try:
+            existing = first_document(
+                COLLECTIONS["shared_files"],
+                [Query.equal("share_code", [code])],
+            )
+        except AppwriteException:
+            logger.exception("Failed to check share code")
+            raise
+        if not existing:
             return code
 
 
 def _shared_file_payload(shared_file):
     return {
-        "id": shared_file.id,
-        "filename": shared_file.original_filename,
-        "fileSizeBytes": shared_file.file_size_bytes,
-        "mimeType": shared_file.mime_type,
-        "isPublic": shared_file.is_public,
-        "shareUrl": _share_url(shared_file.share_code) if shared_file.is_public and shared_file.share_code else None,
-        "expiresAt": _isoformat(shared_file.expires_at),
-        "createdAt": _isoformat(shared_file.created_at),
-        "downloads": shared_file.downloaded_count,
+        "id": shared_file.get("$id"),
+        "filename": shared_file.get("original_filename"),
+        "fileSizeBytes": shared_file.get("file_size_bytes"),
+        "mimeType": shared_file.get("mime_type"),
+        "isPublic": shared_file.get("is_public"),
+        "shareUrl": _share_url(shared_file.get("share_code")) if shared_file.get("is_public") and shared_file.get("share_code") else None,
+        "expiresAt": _isoformat(shared_file.get("expires_at")),
+        "createdAt": _isoformat(shared_file.get("created_at")),
+        "downloads": shared_file.get("downloaded_count"),
     }
 
 
 def _send_shared_file(shared_file):
-    absolute_path = _absolute_storage_path(shared_file.stored_path)
+    absolute_path = _absolute_storage_path(shared_file.get("stored_path"))
     if not os.path.exists(absolute_path):
         raise FileNotFoundError(absolute_path)
 
-    shared_file.downloaded_count += 1
-    db.session.commit()
+    try:
+        update_document_safe(
+            COLLECTIONS["shared_files"],
+            shared_file.get("$id"),
+            {"downloaded_count": int(shared_file.get("downloaded_count") or 0) + 1},
+        )
+    except AppwriteException:
+        logger.exception("Failed to update download count")
 
     return send_file(
         absolute_path,
         as_attachment=True,
-        download_name=shared_file.original_filename,
-        mimetype=shared_file.mime_type or None,
+        download_name=shared_file.get("original_filename"),
+        mimetype=shared_file.get("mime_type") or None,
     )
 
 
 def _render_public_share_page(shared_file=None, error_message=None):
     shared_by_name = None
     if shared_file:
-        owner = User.query.get(shared_file.user_id)
-        if owner and owner.name:
-            shared_by_name = _possessive(owner.name)
-        elif owner and owner.email:
-            shared_by_name = _possessive(owner.email.split("@")[0])
+        owner = None
+        try:
+            owner = get_document_safe(COLLECTIONS["users"], shared_file.get("user_id"))
+        except AppwriteException as exc:
+            if exc.code != 404:
+                logger.exception("Failed to load shared file owner")
+        if owner and owner.get("name"):
+            shared_by_name = _possessive(owner.get("name"))
+        elif owner and owner.get("email"):
+            shared_by_name = _possessive(owner.get("email").split("@")[0])
         else:
             shared_by_name = _possessive("Someone")
 
@@ -140,9 +183,9 @@ def _render_public_share_page(shared_file=None, error_message=None):
         "file_share_download.html",
         shared_file=shared_file,
         shared_by_name=shared_by_name,
-        file_size_display=_human_readable_size(shared_file.file_size_bytes) if shared_file else None,
-        expires_at_display=_format_expiry_display(shared_file.expires_at) if shared_file else None,
-        download_url=url_for("file_share.public_share", share_code=shared_file.share_code, download=1) if shared_file else None,
+        file_size_display=_human_readable_size(shared_file.get("file_size_bytes")) if shared_file else None,
+        expires_at_display=_format_expiry_display(parse_datetime(shared_file.get("expires_at"))) if shared_file else None,
+        download_url=url_for("file_share.public_share", share_code=shared_file.get("share_code"), download=1) if shared_file else None,
         error_message=error_message or "File not found or expired.",
     )
 
@@ -155,7 +198,14 @@ def handle_file_too_large(_error):
 @file_share_bp.route("/files")
 @login_required
 def file_share_page():
-    user_settings = UserSettings.query.filter_by(user_id=current_user.id).first()
+    try:
+        user_settings = first_document(
+            COLLECTIONS["user_settings"],
+            [Query.equal("user_id", [str(current_user.id)])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to load file share settings")
+        user_settings = None
     return render_template(
         "file_share.html",
         user={
@@ -166,7 +216,7 @@ def file_share_page():
         max_file_size=MAX_FILE_SIZE,
         allowed_expiry_options=ALLOWED_EXPIRY_OPTIONS,
         default_expiry_days=DEFAULT_EXPIRY_DAYS,
-        theme_preference=user_settings.interface_theme if user_settings else None,
+        theme_preference=user_settings.get("interface_theme") if user_settings else None,
     )
 
 
@@ -239,23 +289,25 @@ def upload_file():
         share_code = _generate_share_code() if is_public else None
         expires_at = _utcnow() + timedelta(days=expiry_days)
 
-        shared_file = SharedFile(
-            id=file_id,
-            user_id=current_user.id,
-            original_filename=display_filename,
-            stored_path=relative_path,
-            file_size_bytes=file_size_bytes,
-            mime_type=uploaded_file.mimetype,
-            share_code=share_code,
-            is_public=is_public,
-            expires_at=expires_at,
-        )
-
-        db.session.add(shared_file)
         try:
-            db.session.commit()
-        except SQLAlchemyError:
-            db.session.rollback()
+            shared_file = create_document_safe(
+                COLLECTIONS["shared_files"],
+                document_id=file_id,
+                data={
+                    "user_id": str(current_user.id),
+                    "original_filename": display_filename,
+                    "stored_path": relative_path,
+                    "file_size_bytes": file_size_bytes,
+                    "mime_type": uploaded_file.mimetype,
+                    "share_code": share_code,
+                    "is_public": is_public,
+                    "expires_at": format_datetime(expires_at),
+                    "created_at": format_datetime(_utcnow()),
+                    "downloaded_count": 0,
+                },
+            )
+        except AppwriteException:
+            logger.exception("Failed to save shared file document")
             if os.path.exists(absolute_path):
                 os.remove(absolute_path)
             errors.append({"index": idx, "error": "Unable to save file."})
@@ -278,8 +330,15 @@ def upload_file():
 @file_share_bp.route("/api/files/my/<file_id>/visibility", methods=["POST"])
 @login_required
 def change_visibility(file_id):
-    shared_file = SharedFile.query.filter_by(id=file_id, user_id=current_user.id).first()
-    if not shared_file:
+    try:
+        shared_file = get_document_safe(COLLECTIONS["shared_files"], file_id)
+    except AppwriteException as exc:
+        if exc.code == 404:
+            abort(404)
+        logger.exception("Failed to load shared file")
+        return jsonify({"error": "Unable to update visibility."}), 500
+
+    if shared_file.get("user_id") != str(current_user.id):
         abort(404)
 
     data = request.get_json() or request.form
@@ -287,18 +346,23 @@ def change_visibility(file_id):
     if visibility not in {"public", "private"}:
         return jsonify({"error": "Invalid visibility option."}), 400
 
+    updates = {}
     if visibility == "public":
-        if not shared_file.is_public:
-            shared_file.is_public = True
-            shared_file.share_code = _generate_share_code()
+        if not shared_file.get("is_public"):
+            updates["is_public"] = True
+            updates["share_code"] = _generate_share_code()
     else:
-        shared_file.is_public = False
-        shared_file.share_code = None
+        updates["is_public"] = False
+        updates["share_code"] = None
 
     try:
-        db.session.commit()
-    except SQLAlchemyError:
-        db.session.rollback()
+        shared_file = update_document_safe(
+            COLLECTIONS["shared_files"],
+            shared_file.get("$id"),
+            updates,
+        )
+    except AppwriteException:
+        logger.exception("Failed to update file visibility")
         return jsonify({"error": "Unable to update visibility."}), 500
 
     return jsonify(_shared_file_payload(shared_file)), 200
@@ -308,22 +372,33 @@ def change_visibility(file_id):
 @login_required
 def my_files():
     now = _utcnow()
-    files = (
-        SharedFile.query.filter(
-            SharedFile.user_id == current_user.id,
-            SharedFile.expires_at > now,
+    try:
+        files = list_documents_all(
+            COLLECTIONS["shared_files"],
+            [
+                Query.equal("user_id", [str(current_user.id)]),
+                Query.greaterThan("expires_at", format_datetime(now)),
+                Query.orderDesc("created_at"),
+            ],
         )
-        .order_by(SharedFile.created_at.desc())
-        .all()
-    )
+    except AppwriteException:
+        logger.exception("Failed to load shared files")
+        return jsonify({"error": "Unable to load files."}), 500
     return jsonify({"files": [_shared_file_payload(shared_file) for shared_file in files]})
 
 
 @file_share_bp.route("/api/files/my/<file_id>/download")
 @login_required
 def download_my_file(file_id):
-    shared_file = SharedFile.query.filter_by(id=file_id, user_id=current_user.id).first()
-    if not shared_file or _is_expired(shared_file):
+    try:
+        shared_file = get_document_safe(COLLECTIONS["shared_files"], file_id)
+    except AppwriteException as exc:
+        if exc.code == 404:
+            abort(404)
+        logger.exception("Failed to load shared file")
+        abort(500)
+
+    if shared_file.get("user_id") != str(current_user.id) or _is_expired(shared_file):
         abort(404)
 
     try:
@@ -335,24 +410,45 @@ def download_my_file(file_id):
 @file_share_bp.route("/api/files/my/<file_id>", methods=["DELETE"])
 @login_required
 def delete_my_file(file_id):
-    shared_file = SharedFile.query.filter_by(id=file_id, user_id=current_user.id).first()
-    if not shared_file:
+    try:
+        shared_file = get_document_safe(COLLECTIONS["shared_files"], file_id)
+    except AppwriteException as exc:
+        if exc.code == 404:
+            abort(404)
+        logger.exception("Failed to load shared file")
+        abort(500)
+
+    if shared_file.get("user_id") != str(current_user.id):
         abort(404)
 
-    absolute_path = _absolute_storage_path(shared_file.stored_path)
+    absolute_path = _absolute_storage_path(shared_file.get("stored_path"))
     try:
         os.remove(absolute_path)
     except FileNotFoundError:
         pass
 
-    db.session.delete(shared_file)
-    db.session.commit()
+    try:
+        delete_document_safe(COLLECTIONS["shared_files"], shared_file.get("$id"))
+    except AppwriteException:
+        logger.exception("Failed to delete shared file document")
+        return jsonify({"error": "Unable to delete file."}), 500
     return jsonify({"message": "File deleted."})
 
 
 @file_share_bp.route("/files/share/<share_code>")
 def public_share(share_code):
-    shared_file = SharedFile.query.filter_by(share_code=share_code, is_public=True).first()
+    try:
+        shared_file = first_document(
+            COLLECTIONS["shared_files"],
+            [
+                Query.equal("share_code", [share_code]),
+                Query.equal("is_public", [True]),
+            ],
+        )
+    except AppwriteException:
+        logger.exception("Failed to resolve public share")
+        return _render_public_share_page(error_message="File not found or expired.")
+
     if not shared_file or _is_expired(shared_file):
         return _render_public_share_page(error_message="File not found or expired.")
 
