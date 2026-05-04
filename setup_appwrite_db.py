@@ -92,7 +92,11 @@ def _wait_for_index(databases, database_id, collection_id, key, timeout=30):
 
 
 def _list_existing(databases, database_id):
-    response = databases.list_collections(database_id=database_id)
+    try:
+        response = databases.list_collections(database_id=database_id)
+    except AppwriteException:
+        logger.exception("Failed to list collections")
+        raise
     return {collection["$id"]: collection for collection in response.get("collections", [])}
 
 
@@ -103,6 +107,7 @@ def _list_attributes(databases, database_id, collection_id):
             collection_id=collection_id,
         )
     except AppwriteException:
+        logger.exception("Failed to list attributes for %s", collection_id)
         return set()
 
     return {attribute["key"] for attribute in response.get("attributes", [])}
@@ -115,6 +120,7 @@ def _list_indexes(databases, database_id, collection_id):
             collection_id=collection_id,
         )
     except AppwriteException:
+        logger.exception("Failed to list indexes for %s", collection_id)
         return set()
 
     return {index["key"] for index in response.get("indexes", [])}
