@@ -1,7 +1,7 @@
 """
 blueprints/auth.py
 
-Google OAuth 2.0 authentication flow.
+OAuth 2.0 authentication flow.
 Handles login, callback, session creation, and logout.
 
 Migrated from the monolithic app.py implementation [2].
@@ -20,16 +20,19 @@ os.environ.setdefault("OAUTHLIB_INSECURE_TRANSPORT", "1")
 import requests as http_requests
 import google_auth_oauthlib.flow
 from flask import (
-    Blueprint, redirect, url_for, session, render_template, request, current_app
+    Blueprint, redirect, url_for, session, render_template, request, jsonify
 )
 from flask_login import login_user, logout_user, current_user
 
+from appwrite.client import Client
 from appwrite.exception import AppwriteException
-from appwrite_client import COLLECTIONS
+from appwrite.query import Query
+from appwrite.services.users import Users
 from appwrite_helpers import (
     create_row_safe,
     format_datetime,
     get_row_safe,
+    list_rows_safe,
     update_row_safe,
 )
 from models import User, user_from_doc
@@ -45,6 +48,40 @@ SCOPES = [
 ]
 
 
+def _set_oauth_session(provider, user_id, email, name=None, picture_url=None):
+    session["oauth_provider"] = provider
+    session["oauth_user_id"] = user_id
+    session["oauth_email"] = email
+    if name:
+        session["oauth_name"] = name
+    if picture_url:
+        session["oauth_picture_url"] = picture_url
+
+
+def _account_to_dict(value):
+    if isinstance(value, dict):
+        return value
+
+    if hasattr(value, "to_dict"):
+        return value.to_dict()
+    if hasattr(value, "model_dump"):
+        return value.model_dump(by_alias=True, mode="json")
+    return {}
+
+
+
+def _find_user_by_email(email):
+    if not email:
+        return None
+    from appwrite_client import COLLECTIONS
+    response = list_rows_safe(
+        COLLECTIONS["users"],
+        [Query.equal("email", [email]), Query.limit(1)],
+    )
+    rows = response.get("rows", [])
+    return rows[0] if rows else None
+
+
 @auth_bp.route("/")
 def index():
     """Root redirect: dashboard if authenticated, login if not."""
@@ -55,10 +92,126 @@ def index():
 
 @auth_bp.route("/login")
 def login():
-    """Render the Google-only sign-in page."""
+    """Render the sign-in page."""
     if current_user.is_authenticated:
         return redirect(url_for("dashboard.dashboard"))
     return render_template("login.html")
+
+
+@auth_bp.route("/auth/session", methods=["POST"])
+def appwrite_session():
+    payload = request.get_json(silent=True) or {}
+    user_id = payload.get("user_id")
+    email = payload.get("email")
+    provider = payload.get("provider") or "appwrite"
+
+    if not user_id:
+        return jsonify({"error": "Missing user_id."}), 400
+
+    # Verify user exists in Appwrite via server-side Users service using API key
+    try:
+        from appwrite_client import client as appwrite_client, COLLECTIONS
+        users_service = Users(appwrite_client)
+        remote_user = users_service.get(user_id)
+    except Exception:
+        logger.exception("Failed to verify Appwrite user via server SDK")
+        return jsonify({"error": "Invalid Appwrite user."}), 401
+
+    remote_user = _account_to_dict(remote_user)
+    session["email"] = email
+    remote_email = remote_user.get("email") or ""
+    if email and remote_email and email.lower() != remote_email.lower():
+        # Email mismatch -- fail the exchange
+        logger.warning("Email mismatch during Appwrite session exchange: %s vs %s", email, remote_email)
+        return jsonify({"error": "Email mismatch."}), 401
+
+    appwrite_user_id = user_id
+    user_doc = None
+    try:
+        user_doc = get_row_safe(COLLECTIONS["users"], appwrite_user_id)
+    except AppwriteException as exc:
+        if exc.code != 404:
+            logger.exception("Failed to fetch user row")
+            return jsonify({"error": "User lookup failed."}), 500
+
+    if not user_doc and email:
+        user_doc = _find_user_by_email(email)
+
+    # Normalize profile fields from Appwrite's user object
+    name = remote_user.get("name") or remote_user.get("displayName")
+    picture_url = (
+        remote_user.get("photoUrl")
+        or remote_user.get("avatar")
+        or remote_user.get("picture_url")
+    )
+
+    if not user_doc:
+        created_at = format_datetime(datetime.utcnow())
+        try:
+            user_doc = create_row_safe(
+                COLLECTIONS["users"],
+                row_id=appwrite_user_id,
+                data={
+                    "google_id": appwrite_user_id,
+                    "email": email,
+                    "name": remote_user.get("name"),
+                    "picture_url": remote_user.get("photoUrl") or remote_user.get("avatar") or remote_user.get("picture_url"),
+                    "onboarding_complete": False,
+                    "onboarding_step": 1,
+                    "created_at": created_at,
+                    "last_login": created_at,
+                },
+            )
+        except AppwriteException:
+            logger.exception("Failed to create user row from Appwrite auth")
+            return jsonify({"error": "Unable to create user."}), 500
+
+        try:
+            create_row_safe(
+                COLLECTIONS["user_settings"],
+                row_id=appwrite_user_id,
+                data={
+                    "user_id": appwrite_user_id,
+                    "ics_secret_token": secrets.token_urlsafe(32),
+                    "feed_refresh_minutes": 15,
+                    "preferred_calendar_view": "week",
+                    "interface_theme": "system-match",
+                    "created_at": created_at,
+                },
+            )
+        except AppwriteException:
+            logger.exception("Failed to create user settings from Appwrite auth")
+            return jsonify({"error": "Unable to create user settings."}), 500
+    else:
+        updates = {"last_login": format_datetime(datetime.utcnow())}
+        if name:
+            updates["name"] = name
+        if picture_url:
+            updates["picture_url"] = picture_url
+        if email:
+            updates["email"] = email
+
+        row_id = user_doc.get("$id") or user_doc.get("id")
+        if not row_id:
+            return jsonify({"error": "User lookup failed."}), 500
+        try:
+            user_doc = update_row_safe(
+                COLLECTIONS["users"],
+                row_id,
+                updates,
+            )
+        except AppwriteException:
+            logger.exception("Failed to update user row from Appwrite auth")
+            return jsonify({"error": "Unable to update user."}), 500
+
+    login_user(user_from_doc(user_doc))
+    session["user_id"] = user_doc.get("$id") or user_doc.get("id")
+    _set_oauth_session(provider, appwrite_user_id, email, name=name, picture_url=picture_url)
+    redirect_to = url_for("settings.onboarding")
+    if user_doc.get("onboarding_complete"):
+        redirect_to = url_for("dashboard.dashboard")
+
+    return jsonify({"status": "ok", "user_id": session["user_id"], "redirect": redirect_to})
 
 
 @auth_bp.route("/authorize")
@@ -120,6 +273,13 @@ def oauth2callback():
     email = user_info.get("email", "")
 
     google_id = str(user_info["id"])
+    _set_oauth_session(
+        "google",
+        google_id,
+        email,
+        name=user_info.get("name"),
+        picture_url=user_info.get("picture"),
+    )
     user_doc = None
 
     try:
@@ -181,6 +341,7 @@ def oauth2callback():
             return redirect(url_for("auth.login"))
 
     login_user(user_from_doc(user_doc))
+    session["user_id"] = user_doc.get("$id") or user_doc.get("id")
     session.pop("oauth_state", None)
 
     # Redirect users who have not completed onboarding yet.
@@ -192,8 +353,10 @@ def oauth2callback():
 
 @auth_bp.route("/logout")
 def logout():
-    """Revoke Google token if possible, then clear session."""
+    """Clear session and revoke Google token if possible."""
     credentials_data = session.get("credentials")
+    logout_user()
+    session.clear()
 
     if credentials_data and credentials_data.get("token"):
         http_requests.post(
@@ -201,7 +364,4 @@ def logout():
             params={"token": credentials_data["token"]},
             headers={"content-type": "application/x-www-form-urlencoded"},
         )
-
-    logout_user()
-    session.clear()
     return redirect(url_for("auth.login"))

@@ -153,10 +153,44 @@
     <script>
         const successRedirect = `${window.location.origin}/dashboard`;
         const failureRedirect = `${window.location.origin}/login`;
+        const providerStorageKey = "apstudy-oauth-provider";
+
+        function exchangeAppwriteSession(provider) {
+            if (!account || typeof account.get !== "function") {
+                return Promise.reject(new Error("Appwrite SDK not available"));
+            }
+            return account.get()
+                .then(function(acc) {
+                    const userId = acc.$id || acc.id;
+                    const email = acc.email;
+                    if (!userId) {
+                        throw new Error("Missing Appwrite user id");
+                    }
+                    const body = { user_id: userId, email: email };
+                    if (provider) body.provider = provider;
+                    return fetch("/auth/session", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(body),
+                    });
+                })
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error("Failed to exchange session");
+                    }
+                    return response.json();
+                });
+        }
 
         account.get()
             .then(function() {
-                window.location.href = successRedirect;
+                const provider = sessionStorage.getItem(providerStorageKey) || "appwrite";
+                return exchangeAppwriteSession(provider)
+                    .then(function(data) {
+                        sessionStorage.removeItem(providerStorageKey);
+                        const redirectTo = (data && data.redirect) ? data.redirect : successRedirect;
+                        window.location.href = redirectTo;
+                    });
             })
             .catch(function() {
                 // No active session, stay on login page
@@ -172,6 +206,7 @@
                 return;
             }
             button.addEventListener("click", function() {
+                sessionStorage.setItem(providerStorageKey, entry.provider);
                 account.createOAuth2Session(entry.provider, successRedirect, failureRedirect);
             });
         });

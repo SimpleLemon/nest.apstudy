@@ -101,12 +101,21 @@ from appwrite.services.tables_db import TablesDB
 
 
 client = Client()
-client.set_endpoint(os.environ["APPWRITE_ENDPOINT"])
-client.set_project(os.environ["APPWRITE_PROJECT_ID"])
-client.set_key(os.environ["APPWRITE_API_KEY"])
+_endpoint = os.environ.get("APPWRITE_ENDPOINT")
+_project = os.environ.get("APPWRITE_PROJECT_ID")
+_api_key = os.environ.get("APPWRITE_API_KEY")
+_database_id = os.environ.get("APPWRITE_DATABASE_ID")
 
-tablesdb = TablesDB(client)
-DATABASE_ID = os.environ["APPWRITE_DATABASE_ID"]
+if _endpoint:
+	client.set_endpoint(_endpoint)
+if _project:
+	client.set_project(_project)
+if _api_key:
+	client.set_key(_api_key)
+
+# tablesdb may be None if Appwrite env vars are not configured (e.g., during static imports)
+tablesdb = TablesDB(client) if _endpoint and _project else None
+DATABASE_ID = _database_id
 
 COLLECTIONS = {
 	"users": "users",
