@@ -487,6 +487,43 @@ def main():
                 {"key": "idx_shared_files_share_code_unique", "type": "unique", "columns": ["share_code"]},
             ],
         },
+        {
+            "id": "note_folders",
+            "name": "note_folders",
+            "permissions": [],
+            "row_security": True,
+            "columns": [
+                {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
+                {"key": "name", "type": "string", "size": 255, "xrequired": True},
+                {"key": "parent_folder_id", "type": "string", "size": 64},
+                {"key": "created_at", "type": "datetime", "xrequired": True},
+                {"key": "updated_at", "type": "datetime"},
+            ],
+            "indexes": [
+                {"key": "idx_note_folders_user_id", "type": "key", "columns": ["user_id"]},
+                {"key": "idx_note_folders_parent", "type": "key", "columns": ["parent_folder_id"]},
+                {"key": "idx_note_folders_unique_user_name", "type": "unique", "columns": ["user_id", "name"]},
+            ],
+        },
+        {
+            "id": "notes",
+            "name": "notes",
+            "permissions": [],
+            "row_security": True,
+            "columns": [
+                {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
+                {"key": "folder_id", "type": "string", "size": 64},
+                {"key": "title", "type": "string", "size": 255},
+                {"key": "content", "type": "string", "size": 65535},
+                {"key": "created_at", "type": "datetime", "xrequired": True},
+                {"key": "updated_at", "type": "datetime"},
+            ],
+            "indexes": [
+                {"key": "idx_notes_user_id", "type": "key", "columns": ["user_id"]},
+                {"key": "idx_notes_folder_id", "type": "key", "columns": ["folder_id"]},
+                {"key": "idx_notes_created_at", "type": "key", "columns": ["created_at"]},
+            ],
+        },
     ]
 
     existing_tables = _list_existing_tables(tablesdb, database_id)
