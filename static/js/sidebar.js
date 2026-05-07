@@ -1,8 +1,8 @@
 /**
  * sidebar.js
  * Renders collapsible sidebar with Appwrite Console pattern
- * - Collapse button at bottom with text "Collapse" when expanded
- * - Right-chevron icon when collapsed
+ * - Edge-aligned collapse handle on the sidebar border
+ * - Left-chevron icon when expanded, right-chevron icon when collapsed
  * - Tooltips on icon hover (collapsed state only)
  */
 
@@ -25,7 +25,7 @@ function renderSidebar() {
   if (!sidebarPlaceholder) return;
 
   const userDataEl = document.querySelector('[data-user-emory-student]');
-  const isEmoryStudent = userDataEl?.dataset?.userEmorystudent === 'true' || userDataEl?.dataset?.userEmorystudent === 'True';
+  const isEmoryStudent = userDataEl?.dataset?.userEmoryStudent === 'true' || userDataEl?.dataset?.userEmoryStudent === 'True';
   const currentPath = window.location.pathname;
 
   const isActive = (routePath) => {
@@ -35,68 +35,69 @@ function renderSidebar() {
 
   const sidebarHTML = `
 <div class="sidebar-container" id="sidebar-root">
-  <div class="sidebar-content">
-    <!-- Dashboard Section -->
-    <div class="sidebar-section">
-      <button class="sidebar-item ${isActive('/dashboard') ? 'active' : ''}" data-route="/dashboard" aria-label="Dashboard">
-        <span class="sidebar-item-icon">${SIDEBAR_ICONS.layoutDashboard}</span>
-        <span class="sidebar-item-label">Dashboard</span>
-      </button>
+  <div class="sidebar-scroll">
+    <div class="sidebar-content">
+      <!-- Dashboard Section -->
+      <div class="sidebar-section">
+        <button class="sidebar-item ${isActive('/dashboard') ? 'active' : ''}" data-route="/dashboard" aria-label="Dashboard">
+          <span class="sidebar-item-icon">${SIDEBAR_ICONS.layoutDashboard}</span>
+          <span class="sidebar-item-label">Dashboard</span>
+        </button>
+      </div>
+
+      <!-- My Nest Section -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">My Nest</div>
+        
+        <button class="sidebar-item ${isActive('/calendar') ? 'active' : ''}" data-route="/calendar" aria-label="Calendar">
+          <span class="sidebar-item-icon">${SIDEBAR_ICONS.calendarDays}</span>
+          <span class="sidebar-item-label">Calendar</span>
+        </button>
+
+        ${isEmoryStudent ? `
+        <button class="sidebar-item" data-route="/dashboard" data-courses="true" aria-label="Courses">
+          <span class="sidebar-item-icon">${SIDEBAR_ICONS.graduationCap}</span>
+          <span class="sidebar-item-label">Courses</span>
+        </button>` : ''}
+
+        <button class="sidebar-item ${isActive('/files') ? 'active' : ''}" data-route="/files" aria-label="Files">
+          <span class="sidebar-item-icon">${SIDEBAR_ICONS.folderOpen}</span>
+          <span class="sidebar-item-label">Files</span>
+        </button>
+
+        <button class="sidebar-item ${isActive('/notes') ? 'active' : ''}" data-route="/notes" aria-label="Notes">
+          <span class="sidebar-item-icon">${SIDEBAR_ICONS.notebookPen}</span>
+          <span class="sidebar-item-label">Notes</span>
+        </button>
+      </div>
+
+      <!-- Other Section -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Other</div>
+        <button class="sidebar-item ${isActive('/chat') ? 'active' : ''}" data-route="/chat" aria-label="Chat">
+          <span class="sidebar-item-icon">${SIDEBAR_ICONS.messageSquare}</span>
+          <span class="sidebar-item-label">Chat</span>
+        </button>
+      </div>
+
+      <!-- Spacer -->
+      <div class="sidebar-spacer"></div>
     </div>
 
-    <!-- My Nest Section -->
-    <div class="sidebar-section">
-      <div class="sidebar-section-label">My Nest</div>
-      
-      <button class="sidebar-item ${isActive('/calendar') ? 'active' : ''}" data-route="/calendar" aria-label="Calendar">
-        <span class="sidebar-item-icon">${SIDEBAR_ICONS.calendarDays}</span>
-        <span class="sidebar-item-label">Calendar</span>
-      </button>
-      
-      <button class="sidebar-item ${!isEmoryStudent ? 'hidden' : ''} ${isActive('/courses') ? 'active' : ''}" data-route="/dashboard" data-courses="true" aria-label="Courses">
-        <span class="sidebar-item-icon">${SIDEBAR_ICONS.graduationCap}</span>
-        <span class="sidebar-item-label">Courses</span>
-      </button>
-
-      <button class="sidebar-item ${isActive('/files') ? 'active' : ''}" data-route="/files" aria-label="Files">
-        <span class="sidebar-item-icon">${SIDEBAR_ICONS.folderOpen}</span>
-        <span class="sidebar-item-label">Files</span>
-      </button>
-
-      <button class="sidebar-item ${isActive('/notes') ? 'active' : ''}" data-route="/notes" aria-label="Notes">
-        <span class="sidebar-item-icon">${SIDEBAR_ICONS.notebookPen}</span>
-        <span class="sidebar-item-label">Notes</span>
-      </button>
-    </div>
-
-    <!-- Other Section -->
-    <div class="sidebar-section">
-      <div class="sidebar-section-label">Other</div>
-      <button class="sidebar-item ${isActive('/chat') ? 'active' : ''}" data-route="/chat" aria-label="Chat">
-        <span class="sidebar-item-icon">${SIDEBAR_ICONS.messageSquare}</span>
-        <span class="sidebar-item-label">Chat</span>
-      </button>
-    </div>
-
-    <!-- Spacer -->
-    <div class="sidebar-spacer"></div>
-
-    <!-- Collapse Button (Appwrite style) -->
-    <div class="sidebar-section">
-      <button class="sidebar-collapse" id="sidebar-collapse-btn" aria-label="Toggle sidebar">
-        <span class="sidebar-item-icon">${SIDEBAR_ICONS.chevronsLeft}</span>
-        <span class="sidebar-collapse-label">Collapse</span>
+    <!-- Settings (pinned to bottom) -->
+    <div class="sidebar-settings">
+      <button class="sidebar-item ${isActive('/settings') ? 'active' : ''}" data-route="/settings" aria-label="Settings">
+        <span class="sidebar-item-icon">${SIDEBAR_ICONS.settings}</span>
+        <span class="sidebar-item-label">Settings</span>
       </button>
     </div>
   </div>
 
-  <!-- Settings (pinned to bottom) -->
-  <div class="sidebar-settings">
-    <button class="sidebar-item ${isActive('/settings') ? 'active' : ''}" data-route="/settings" aria-label="Settings">
-      <span class="sidebar-item-icon">${SIDEBAR_ICONS.settings}</span>
-      <span class="sidebar-item-label">Settings</span>
-    </button>
-  </div>
+  <button class="sidebar-toggle-handle" id="sidebar-toggle-handle" type="button" aria-label="Toggle sidebar" aria-expanded="true">
+    <span class="sidebar-toggle-line" aria-hidden="true"></span>
+    <span class="sidebar-toggle-icon" aria-hidden="true"></span>
+    <span class="sidebar-toggle-tooltip">Collapse</span>
+  </button>
 </div>
 
 <!-- Tooltip for collapsed state -->
@@ -124,37 +125,77 @@ function setupSidebarInteractions() {
   const sidebar = document.querySelector('.sidebar-container');
   if (!sidebar) return;
 
-  const collapseBtn = document.getElementById('sidebar-collapse-btn');
+  const toggleHandle = document.getElementById('sidebar-toggle-handle');
   const tooltip = document.getElementById('sidebar-tooltip');
+  const toggleTooltip = toggleHandle?.querySelector('.sidebar-toggle-tooltip');
   const items = document.querySelectorAll('.sidebar-item');
+  let collapseAnimationPending = false;
+
+  function updateToggleHandleState() {
+    if (!toggleHandle) return;
+    const isCollapsed = sidebar.classList.contains('collapsed');
+    const toggleIcon = toggleHandle.querySelector('.sidebar-toggle-icon');
+    if (toggleIcon) {
+      toggleIcon.innerHTML = isCollapsed ? SIDEBAR_ICONS.chevronsRight : SIDEBAR_ICONS.chevronsLeft;
+    }
+    toggleHandle.setAttribute('aria-expanded', String(!isCollapsed));
+    toggleHandle.setAttribute('aria-label', isCollapsed ? 'Expand sidebar' : 'Collapse sidebar');
+    if (toggleTooltip) {
+      toggleTooltip.textContent = isCollapsed ? 'Expand' : 'Collapse';
+    }
+  }
+
+  function setCenteredCollapsedItems(shouldCenter) {
+    sidebar.classList.toggle('collapsed-aligned', shouldCenter);
+  }
+
+  sidebar.addEventListener('transitionend', (event) => {
+    if (event.propertyName !== 'width') return;
+    if (!sidebar.classList.contains('collapsed')) {
+      setCenteredCollapsedItems(false);
+      collapseAnimationPending = false;
+      return;
+    }
+
+    if (collapseAnimationPending) {
+      setCenteredCollapsedItems(true);
+      collapseAnimationPending = false;
+    }
+  });
+
+  function applySidebarCollapsedState(shouldCollapse) {
+    if (shouldCollapse) {
+      sidebar.classList.add('collapsed');
+      setCenteredCollapsedItems(false);
+      collapseAnimationPending = true;
+    } else {
+      sidebar.classList.remove('collapsed');
+      setCenteredCollapsedItems(false);
+      collapseAnimationPending = false;
+    }
+
+    document.body.classList.toggle('sidebar-collapsed', shouldCollapse);
+    localStorage.setItem('sidebar-collapsed', String(shouldCollapse));
+    updateToggleHandleState();
+  }
 
   // Load collapsed state from localStorage
   const isCollapsed = localStorage.getItem('sidebar-collapsed') === 'true';
+  document.body.classList.toggle('sidebar-collapsed', isCollapsed);
   if (isCollapsed) {
     sidebar.classList.add('collapsed');
-    document.body.classList.add('sidebar-collapsed');
-    updateCollapseBtnIcon();
+    setCenteredCollapsedItems(true);
   }
+  updateToggleHandleState();
 
   // Collapse button click
-  if (collapseBtn) {
-    collapseBtn.addEventListener('click', (e) => {
+  if (toggleHandle) {
+    toggleHandle.addEventListener('click', (e) => {
       e.preventDefault();
-      const nowCollapsed = sidebar.classList.toggle('collapsed');
-      document.body.classList.toggle('sidebar-collapsed');
-      localStorage.setItem('sidebar-collapsed', nowCollapsed);
-      updateCollapseBtnIcon();
+      const shouldCollapse = !sidebar.classList.contains('collapsed');
+      applySidebarCollapsedState(shouldCollapse);
       if (tooltip) tooltip.classList.remove('visible');
     });
-  }
-
-  function updateCollapseBtnIcon() {
-    if (!collapseBtn) return;
-    const isCollapsed = sidebar.classList.contains('collapsed');
-    const iconSpan = collapseBtn.querySelector('.sidebar-item-icon');
-    if (iconSpan) {
-      iconSpan.innerHTML = isCollapsed ? SIDEBAR_ICONS.chevronsRight : SIDEBAR_ICONS.chevronsLeft;
-    }
   }
 
   // Navigation items
@@ -162,6 +203,20 @@ function setupSidebarInteractions() {
     item.addEventListener('click', (e) => {
       e.preventDefault();
       const route = item.dataset.route;
+      const isCoursesButton = item.dataset.courses === 'true';
+      const isDashboardRoute = window.location.pathname === '/dashboard' || window.location.pathname === '/';
+
+      if (isCoursesButton && isDashboardRoute) {
+        document.dispatchEvent(new Event('profile-my-courses-click'));
+        return;
+      }
+
+      if (isCoursesButton && !isDashboardRoute) {
+        sessionStorage.setItem('openCoursesPanelOnLoad', 'true');
+        window.location.href = '/dashboard';
+        return;
+      }
+
       if (route) {
         window.location.href = route;
       }

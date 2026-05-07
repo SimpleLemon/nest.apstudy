@@ -8,6 +8,27 @@
  * Tailwind config is centralized in tailwind.config.cjs and compiled to static/css/tailwind.css.
  * Do not duplicate Tailwind config blocks across pages.
  */
+:root {
+    --color-shell-bg: var(--color-surface-container-low);
+    --color-shell-border: var(--color-outline-variant);
+    --color-shell-text-primary: var(--color-on-surface);
+    --color-shell-text-secondary: var(--color-on-surface-variant);
+    --color-shell-text-muted: color-mix(in srgb, var(--color-on-surface-variant) 72%, var(--color-surface) 28%);
+    --color-shell-accent: var(--color-primary);
+    --color-shell-hover-bg: color-mix(in srgb, var(--color-primary) 14%, transparent);
+    --color-shell-active-bg: color-mix(in srgb, var(--color-primary) 18%, transparent);
+    --color-shell-toggle-line-bg: color-mix(in srgb, var(--color-on-surface-variant) 35%, var(--color-surface-container-low) 65%);
+    --color-shell-toggle-icon-bg: var(--color-surface-container-high);
+    --color-shell-toggle-icon-hover-bg: color-mix(in srgb, var(--color-surface-container-high) 76%, var(--color-primary) 24%);
+    --color-shell-tooltip-bg: var(--color-surface-container-high);
+    --color-shell-dropdown-hover-bg: color-mix(in srgb, var(--color-on-surface) 6%, transparent);
+    --color-shell-danger-hover-bg: color-mix(in srgb, var(--color-error) 12%, transparent);
+    --color-shell-danger-hover-text: var(--color-error);
+    --color-shell-shadow: rgba(0, 0, 0, 0.35);
+    --color-shell-dropdown-border: var(--color-outline-variant);
+    --color-sidebar-bg: var(--color-shell-bg);
+    --color-sidebar-border: var(--color-shell-border);
+}
 /* ============================
    OBSIDIAN DARK (default dark)
    ============================ */

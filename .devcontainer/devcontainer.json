@@ -1,5 +1,12 @@
 {
-    "postCreateCommand": "pip install --user -r requirements.txt",
-    "postAttachCommand": "python -m flask --app app:create_app run --host 0.0.0.0 --port 8000",
-    "forwardPorts": [8000]
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "runArgs": ["--device=/dev/net/tun"],
+  "features": {
+    "ghcr.io/tailscale/codespace/tailscale": {
+      "version": "latest"
+    }
+  },
+  "postCreateCommand": "pip install --user -r requirements.txt",
+  "postAttachCommand": "python -m flask --app app:create_app run --host 0.0.0.0 --port 8000",
+  "forwardPorts": [8000]
 }

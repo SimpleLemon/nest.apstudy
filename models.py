@@ -25,6 +25,9 @@ class User(UserMixin):
         self.onboarding_step = data.get("onboarding_step") or 1
         self.education_level = data.get("education_level")
         self.class_year = data.get("class_year")
+        self.school = data.get("school")
+        self.major = data.get("major")
+        self.graduation_year = data.get("graduation_year")
         self.emory_student = data.get("emory_student")
         self.emory_email = data.get("emory_email")
         self.created_at = parse_datetime(data.get("created_at"))

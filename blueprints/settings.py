@@ -7,8 +7,10 @@ Handles Canvas iCal URL configuration, refresh intervals,
 """
 
 import json
+import os
 import secrets
 import logging
+import shutil
 from datetime import datetime
 from urllib.parse import urlparse, urlunparse
 
@@ -18,6 +20,8 @@ from flask_login import login_required, current_user
 from appwrite.exception import AppwriteException
 from appwrite.id import ID
 from appwrite.query import Query
+from appwrite.services.users import Users
+from appwrite_client import client as appwrite_client
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import (
     create_row_safe,
@@ -37,6 +41,226 @@ CANVAS_CALENDAR_HOST_PREFIX = "canvas."
 CANVAS_CALENDAR_HOST_SUFFIX = ".edu"
 CANVAS_CALENDAR_PATH_PREFIXES = ("/feeds/calendar", "/feeds/calendars")
 MAX_OTHER_CALENDAR_URLS = 10
+
+THEME_TO_INTERFACE_THEME = {
+    "dark": "obsidian-dark",
+    "light": "parchment-light",
+    "system": "system-match",
+}
+INTERFACE_THEME_TO_THEME = {
+    "obsidian-dark": "dark",
+    "nest-dark": "dark",
+    "parchment-light": "light",
+    "nest-light": "light",
+    "system-match": "system",
+}
+
+
+def _normalize_theme_value(value):
+    if not isinstance(value, str):
+        return None
+    normalized = value.strip().lower()
+    return normalized if normalized in THEME_TO_INTERFACE_THEME else None
+
+
+def _interface_theme_from_value(value):
+    if not isinstance(value, str):
+        return THEME_TO_INTERFACE_THEME["dark"]
+    normalized = value.strip().lower()
+    if normalized in THEME_TO_INTERFACE_THEME:
+        return THEME_TO_INTERFACE_THEME[normalized]
+    return normalized if normalized in INTERFACE_THEME_TO_THEME else THEME_TO_INTERFACE_THEME["dark"]
+
+
+def _theme_from_interface_theme(value):
+    if not isinstance(value, str):
+        return "dark"
+    normalized = value.strip().lower()
+    return INTERFACE_THEME_TO_THEME.get(normalized, "dark")
+
+
+def _normalize_sidebar_default(value):
+    if not isinstance(value, str):
+        return None
+    normalized = value.strip().lower()
+    if normalized in {"expanded", "collapsed"}:
+        return normalized
+    return None
+
+
+def _normalize_timezone(value):
+    if not isinstance(value, str):
+        return ""
+    return value.strip()
+
+
+def _normalize_bool(value, default=False):
+    if value is None:
+        return default
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return bool(value)
+    if isinstance(value, str):
+        normalized = value.strip().lower()
+        if normalized in {"true", "1", "yes", "on"}:
+            return True
+        if normalized in {"false", "0", "no", "off"}:
+            return False
+    return default
+
+
+def _profile_doc_payload():
+    return {
+        "id": str(current_user.id),
+        "name": current_user.name,
+        "email": current_user.email,
+        "picture_url": current_user.picture_url,
+        "school": current_user.school,
+        "major": current_user.major,
+        "graduation_year": current_user.graduation_year,
+        "education_level": current_user.education_level,
+        "class_year": current_user.class_year,
+        "created_at": format_datetime(current_user.created_at),
+    }
+
+
+def _settings_defaults(user_id):
+    return {
+        "user_id": user_id,
+        "ics_secret_token": secrets.token_urlsafe(32),
+        "feed_refresh_minutes": 15,
+        "preferred_calendar_view": "week",
+        "interface_theme": "obsidian-dark",
+        "theme": "dark",
+        "sidebar_default": "expanded",
+        "email_notifications": True,
+        "product_updates": True,
+        "language": "en",
+        "timezone": "",
+        "created_at": format_datetime(datetime.utcnow()),
+    }
+
+
+def _settings_payload(settings):
+    if not settings:
+        return {
+            "theme": "dark",
+            "sidebar_default": "expanded",
+            "email_notifications": True,
+            "product_updates": True,
+            "language": "en",
+            "timezone": "",
+            "interface_theme": "obsidian-dark",
+            "preferred_calendar_view": "week",
+            "feed_refresh_minutes": 15,
+        }
+    return {
+        "theme": _theme_from_interface_theme(settings.get("interface_theme") or settings.get("theme")),
+        "sidebar_default": (settings.get("sidebar_default") or "expanded").strip().lower(),
+        "email_notifications": bool(settings.get("email_notifications", True)),
+        "product_updates": bool(settings.get("product_updates", True)),
+        "language": settings.get("language") or "en",
+        "timezone": settings.get("timezone") or "",
+        "interface_theme": settings.get("interface_theme") or _interface_theme_from_value(settings.get("theme") or "dark"),
+        "preferred_calendar_view": settings.get("preferred_calendar_view") or "week",
+        "feed_refresh_minutes": settings.get("feed_refresh_minutes") or 15,
+    }
+
+
+def _load_user_settings(user_id):
+    try:
+        settings = first_row(
+            COLLECTIONS["user_settings"],
+            [Query.equal("user_id", [user_id])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to load user settings")
+        return None
+    return settings
+
+
+def _load_user_courses(user_id):
+    try:
+        return list_rows_all(
+            COLLECTIONS["user_courses"],
+            [
+                Query.equal("user_id", [user_id]),
+                Query.order_asc("term"),
+                Query.order_asc("subject"),
+                Query.order_asc("catalog"),
+            ],
+        )
+    except AppwriteException:
+        logger.exception("Failed to load user courses")
+        return []
+
+
+def _storage_usage_bytes(user_id):
+    try:
+        files = list_rows_all(
+            COLLECTIONS["shared_files"],
+            [Query.equal("user_id", [user_id])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to calculate storage usage")
+        return 0
+
+    total = 0
+    for file_row in files:
+        try:
+            total += int(file_row.get("file_size_bytes") or 0)
+        except (TypeError, ValueError):
+            continue
+    return total
+
+
+def _delete_user_artifacts(user_id):
+    rows_to_delete = [
+        COLLECTIONS["user_settings"],
+        COLLECTIONS["user_courses"],
+        COLLECTIONS["calendar_cache"],
+        COLLECTIONS["user_calendar_preferences"],
+        COLLECTIONS["user_events"],
+        COLLECTIONS["shared_files"],
+    ]
+
+    for table_id in rows_to_delete:
+        try:
+            rows = list_rows_all(
+                table_id,
+                [Query.equal("user_id", [user_id])],
+            )
+        except AppwriteException:
+            logger.exception("Failed to list rows for deletion: %s", table_id)
+            continue
+
+        for row in rows:
+            row_id = row.get("$id") or row.get("id")
+            if not row_id:
+                continue
+            try:
+                delete_row_safe(table_id, row_id)
+            except AppwriteException:
+                logger.exception("Failed to delete %s row %s", table_id, row_id)
+
+            if table_id == COLLECTIONS["shared_files"]:
+                stored_path = row.get("stored_path")
+                if not stored_path:
+                    continue
+                absolute_path = os.path.abspath(os.path.join("uploads", "file_share", stored_path))
+                try:
+                    if os.path.exists(absolute_path):
+                        os.remove(absolute_path)
+                except OSError:
+                    logger.exception("Failed to remove stored file %s", absolute_path)
+
+    user_upload_root = os.path.abspath(os.path.join("uploads", "file_share", user_id))
+    if os.path.isdir(user_upload_root):
+        try:
+            shutil.rmtree(user_upload_root)
+        except OSError:
+            logger.exception("Failed to remove upload directory %s", user_upload_root)
 
 
 def _normalize_calendar_url(url):
@@ -485,37 +709,35 @@ def settings_page():
             logger.exception("Failed to set user created_at")
         current_user.created_at = datetime.utcnow()
 
-    try:
-        user_settings = first_row(
-            COLLECTIONS["user_settings"],
-            [Query.equal("user_id", [str(current_user.id)])],
-        )
-    except AppwriteException:
-        logger.exception("Failed to load user settings")
-        user_settings = None
-    other_calendar_urls = _load_other_calendar_urls(user_settings)
-
-    try:
-        courses = list_rows_all(
-            COLLECTIONS["user_courses"],
-            [
-                Query.equal("user_id", [str(current_user.id)]),
-                Query.order_asc("term"),
-                Query.order_asc("subject"),
-                Query.order_asc("catalog"),
-            ],
-        )
-    except AppwriteException:
-        logger.exception("Failed to load user courses")
-        courses = []
+    user_settings = _load_user_settings(str(current_user.id))
 
     return render_template("settings.html", user={
         "name": current_user.name or current_user.email,
         "email": current_user.email,
         "picture": current_user.picture_url,
         "emory_student": current_user.emory_student,
+        "school": current_user.school,
+        "major": current_user.major,
+        "graduation_year": current_user.graduation_year,
         "member_since": current_user.created_at.strftime("%b %d, %Y"),
-    }, settings=user_settings, courses=courses, other_calendar_urls=other_calendar_urls, theme_preference=user_settings.get("interface_theme") if user_settings else None)
+    }, settings=user_settings, theme_preference=(user_settings.get("interface_theme") if user_settings and user_settings.get("interface_theme") else "obsidian-dark"))
+
+
+@settings_bp.route("/api/bootstrap", methods=["GET"])
+@login_required
+def bootstrap_settings():
+    user_id = str(current_user.id)
+    user_settings = _load_user_settings(user_id)
+    user_settings_payload = _settings_payload(user_settings)
+    return jsonify({
+        "profile": _profile_doc_payload(),
+        "settings": user_settings_payload,
+        "user_settings_doc": user_settings,
+        "storage_usage_bytes": _storage_usage_bytes(user_id),
+        "connected_services": [],
+        "other_calendar_urls": _load_other_calendar_urls(user_settings),
+        "member_since": current_user.created_at.strftime("%b %d, %Y") if current_user.created_at else None,
+    })
 
 
 # ── API routes (called by settings page JavaScript) ──────────────────────────
@@ -526,11 +748,24 @@ def update_profile():
     """Update editable profile fields for the authenticated user."""
     data = request.get_json(silent=True) or {}
     name = (data.get("name") or "").strip()
+    picture_url = (data.get("picture_url") or "").strip() or None
+    school = (data.get("school") or "").strip() or None
+    major = (data.get("major") or "").strip() or None
+    graduation_year = (data.get("graduation_year") or "").strip() or None
 
     if not name:
         return jsonify({"error": "Name is required."}), 400
 
-    updates = {"name": name}
+    if graduation_year and (len(graduation_year) != 4 or not graduation_year.isdigit()):
+        return jsonify({"error": "Graduation year must be a 4-digit year."}), 400
+
+    updates = {
+        "name": name,
+        "picture_url": picture_url,
+        "school": school,
+        "major": major,
+        "graduation_year": graduation_year,
+    }
     if not current_user.created_at:
         updates["created_at"] = format_datetime(datetime.utcnow())
 
@@ -545,12 +780,20 @@ def update_profile():
         return jsonify({"error": "Unable to update profile."}), 500
 
     current_user.name = name
+    current_user.picture_url = picture_url
+    current_user.school = school
+    current_user.major = major
+    current_user.graduation_year = graduation_year
     if updates.get("created_at"):
         current_user.created_at = datetime.utcnow()
 
     return jsonify({
         "status": "ok",
         "name": current_user.name,
+        "picture_url": current_user.picture_url,
+        "school": current_user.school,
+        "major": current_user.major,
+        "graduation_year": current_user.graduation_year,
         "member_since": current_user.created_at.strftime("%b %d, %Y"),
     })
 
@@ -617,19 +860,7 @@ def update_feed_url():
 
     try:
         if not settings:
-            settings = create_row_safe(
-                COLLECTIONS["user_settings"],
-                row_id=user_id,
-                data={
-                    "user_id": user_id,
-                    "ics_secret_token": secrets.token_urlsafe(32),
-                    "feed_refresh_minutes": 15,
-                    "preferred_calendar_view": "week",
-                    "interface_theme": "system-match",
-                    "created_at": format_datetime(datetime.utcnow()),
-                    **payload,
-                },
-            )
+            settings = create_row_safe(COLLECTIONS["user_settings"], row_id=user_id, data={**_settings_defaults(user_id), **payload})
         else:
             settings = update_row_safe(
                 COLLECTIONS["user_settings"],
@@ -697,20 +928,29 @@ def update_interface_preferences():
     """Persist interface-level preferences such as the default dashboard calendar view."""
     data = request.get_json(silent=True) or {}
     preferred_calendar_view = (data.get("preferred_calendar_view") or "").strip().lower() or None
+    theme = _normalize_theme_value(data.get("theme"))
     interface_theme = (data.get("interface_theme") or "").strip() or None
+    sidebar_default = _normalize_sidebar_default(data.get("sidebar_default"))
+    language = (data.get("language") or "").strip() or None
+    timezone = _normalize_timezone(data.get("timezone")) if "timezone" in data else None
+    email_notifications = _normalize_bool(data.get("email_notifications"), True) if "email_notifications" in data else None
+    product_updates = _normalize_bool(data.get("product_updates"), True) if "product_updates" in data else None
 
-    valid_themes = {"obsidian-dark", "parchment-light", "system-match", "nest-light", "nest-dark"}
+    valid_interface_themes = {"obsidian-dark", "parchment-light", "system-match", "nest-light", "nest-dark"}
     if preferred_calendar_view and preferred_calendar_view not in {"week", "month"}:
         return jsonify({"error": "Preferred calendar view must be weekly or monthly."}), 400
-    if interface_theme and interface_theme not in valid_themes:
+    if interface_theme and interface_theme not in valid_interface_themes:
         return jsonify({"error": "Interface theme is not valid."}), 400
+    if theme is None and interface_theme:
+        theme = _theme_from_interface_theme(interface_theme)
+    if theme is None:
+        theme = None
+    if timezone is not None and len(timezone) > 64:
+        return jsonify({"error": "Timezone is too long."}), 400
 
     user_id = str(current_user.id)
     try:
-        settings = first_row(
-            COLLECTIONS["user_settings"],
-            [Query.equal("user_id", [user_id])],
-        )
+        settings = _load_user_settings(user_id)
     except AppwriteException:
         logger.exception("Failed to load settings")
         return jsonify({"error": "Unable to update preferences."}), 500
@@ -718,24 +958,26 @@ def update_interface_preferences():
     updates = {"updated_at": format_datetime(datetime.utcnow())}
     if preferred_calendar_view:
         updates["preferred_calendar_view"] = preferred_calendar_view
-    if interface_theme:
+    if theme is not None:
+        updates["theme"] = theme
+        updates["interface_theme"] = _interface_theme_from_value(theme)
+    elif interface_theme:
         updates["interface_theme"] = interface_theme
+        updates["theme"] = _theme_from_interface_theme(interface_theme)
+    if sidebar_default:
+        updates["sidebar_default"] = sidebar_default
+    if email_notifications is not None:
+        updates["email_notifications"] = email_notifications
+    if product_updates is not None:
+        updates["product_updates"] = product_updates
+    if language:
+        updates["language"] = language
+    if timezone is not None:
+        updates["timezone"] = timezone
 
     try:
         if not settings:
-            settings = create_row_safe(
-                COLLECTIONS["user_settings"],
-                row_id=user_id,
-                data={
-                    "user_id": user_id,
-                    "ics_secret_token": secrets.token_urlsafe(32),
-                    "feed_refresh_minutes": 15,
-                    "preferred_calendar_view": "week",
-                    "interface_theme": "system-match",
-                    "created_at": format_datetime(datetime.utcnow()),
-                    **updates,
-                },
-            )
+            settings = create_row_safe(COLLECTIONS["user_settings"], row_id=user_id, data={**_settings_defaults(user_id), **updates})
         else:
             settings = update_row_safe(
                 COLLECTIONS["user_settings"],
@@ -750,7 +992,45 @@ def update_interface_preferences():
         "status": "ok",
         "preferred_calendar_view": settings.get("preferred_calendar_view"),
         "interface_theme": settings.get("interface_theme"),
+        "theme": settings.get("theme") or _theme_from_interface_theme(settings.get("interface_theme")),
+        "sidebar_default": settings.get("sidebar_default") or "expanded",
+        "email_notifications": settings.get("email_notifications", True),
+        "product_updates": settings.get("product_updates", True),
+        "language": settings.get("language") or "en",
+        "timezone": settings.get("timezone") or "",
     })
+
+
+@settings_bp.route("/api/export", methods=["GET"])
+@login_required
+def export_user_data():
+    user_id = str(current_user.id)
+    user_settings = _load_user_settings(user_id)
+    export_payload = {
+        "exported_at": format_datetime(datetime.utcnow()),
+        "profile": _profile_doc_payload(),
+        "settings": _settings_payload(user_settings),
+        "courses": _load_user_courses(user_id),
+        "other_calendar_urls": _load_other_calendar_urls(user_settings),
+        "storage_usage_bytes": _storage_usage_bytes(user_id),
+    }
+    return jsonify(export_payload)
+
+
+@settings_bp.route("/api/account/delete", methods=["POST"])
+@login_required
+def delete_account():
+    user_id = str(current_user.id)
+    users_service = Users(appwrite_client)
+
+    try:
+        users_service.delete(user_id)
+    except Exception:
+        logger.exception("Failed to delete Appwrite auth account")
+        return jsonify({"error": "Unable to delete account."}), 500
+
+    _delete_user_artifacts(user_id)
+    return jsonify({"status": "ok"})
 
 
 @settings_bp.route("/api/regenerate-token", methods=["POST"])

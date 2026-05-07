@@ -207,7 +207,7 @@ def file_share_page():
         logger.exception("Failed to load file share settings")
         user_settings = None
     return render_template(
-        "file_share.html",
+        "files.html",
         user={
             "name": current_user.name,
             "email": current_user.email,
