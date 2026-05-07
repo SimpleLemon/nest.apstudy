@@ -49,7 +49,62 @@ def dashboard():
             "name": current_user.name,
             "email": current_user.email,
             "picture": current_user.picture_url,
+            "emory_student": current_user.emory_student,
         },
         preferred_calendar_view=preferred_calendar_view,
         theme_preference=interface_theme,
+    )
+
+
+@dashboard_bp.route("/calendar")
+@login_required
+def calendar():
+    """Render the calendar view page."""
+    if not current_user.onboarding_complete:
+        return redirect(url_for("settings.onboarding"))
+    
+    return render_template(
+        "calendar.html",
+        user={
+            "name": current_user.name,
+            "email": current_user.email,
+            "picture": current_user.picture_url,
+            "emory_student": current_user.emory_student,
+        },
+    )
+
+
+@dashboard_bp.route("/notes")
+@login_required
+def notes():
+    """Render the notes page."""
+    if not current_user.onboarding_complete:
+        return redirect(url_for("settings.onboarding"))
+    
+    return render_template(
+        "notes.html",
+        user={
+            "name": current_user.name,
+            "email": current_user.email,
+            "picture": current_user.picture_url,
+            "emory_student": current_user.emory_student,
+        },
+    )
+
+
+@dashboard_bp.route("/chat")
+@login_required
+def chat():
+    """Render the chat page."""
+    if not current_user.onboarding_complete:
+        return redirect(url_for("settings.onboarding"))
+    
+    return render_template(
+        "chat.html",
+        user={
+            "name": current_user.name,
+            "email": current_user.email,
+            "picture": current_user.picture_url,
+            "emory_student": current_user.emory_student,
+        },
     )

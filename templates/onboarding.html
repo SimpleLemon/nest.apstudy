@@ -55,7 +55,7 @@
                                             <p class="text-[clamp(0.7rem,0.9vw,0.9rem)] font-medium leading-tight break-all">{{ user.email }}</p>
                                         </div>
                                     </div>
-                                    <a href="{{ url_for('auth.logout') }}" class="ml-4 flex items-center justify-center rounded-xl bg-surface-container px-4 py-2 text-sm font-medium text-on-surface-variant hover:text-error hover:bg-error-container/10 transition-colors">
+                                    <a href="{{ url_for('auth.logout') }}" data-logout class="ml-4 flex items-center justify-center rounded-xl bg-surface-container px-4 py-2 text-sm font-medium text-on-surface-variant hover:text-error hover:bg-error-container/10 transition-colors">
                                         Wrong account? Sign out
                                     </a>
                                 </div>

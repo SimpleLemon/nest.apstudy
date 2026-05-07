@@ -17,6 +17,7 @@ class User(UserMixin):
         self._data = data
         self.id = data.get("$id") or data.get("id")
         self.google_id = data.get("google_id")
+        self.provider = data.get("provider")
         self.email = data.get("email")
         self.name = data.get("name")
         self.picture_url = data.get("picture_url")
@@ -44,10 +45,8 @@ def load_user(user_id):
     if not user_id:
         return None
     try:
-        doc = get_row_safe(COLLECTIONS["users"], user_id)
+        doc = get_row_safe(COLLECTIONS["users"], user_id, allow_missing=True)
     except AppwriteException as exc:
-        if exc.code == 404:
-            return None
         logger.exception("Failed to load user row")
         return None
     return User(doc)

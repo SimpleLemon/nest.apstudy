@@ -212,6 +212,7 @@ def file_share_page():
             "name": current_user.name,
             "email": current_user.email,
             "picture": current_user.picture_url,
+            "emory_student": current_user.emory_student,
         },
         max_file_size=MAX_FILE_SIZE,
         allowed_expiry_options=ALLOWED_EXPIRY_OPTIONS,

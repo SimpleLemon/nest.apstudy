@@ -69,6 +69,59 @@ def _account_to_dict(value):
     return {}
 
 
+def _discord_avatar_url(profile):
+    user_id = profile.get("id")
+    avatar_hash = profile.get("avatar")
+    if not user_id or not avatar_hash:
+        return None
+    extension = "gif" if avatar_hash.startswith("a_") else "png"
+    return f"https://cdn.discordapp.com/avatars/{user_id}/{avatar_hash}.{extension}?size=256"
+
+
+def _fetch_provider_profile(provider, access_token):
+    if not provider or not access_token:
+        return {}
+
+    provider_key = provider.lower()
+    try:
+        if provider_key == "github":
+            response = http_requests.get(
+                "https://api.github.com/user",
+                headers={
+                    "Authorization": f"Bearer {access_token}",
+                    "Accept": "application/vnd.github+json",
+                },
+                timeout=8,
+            )
+            if response.status_code == 200:
+                data = response.json()
+                return {
+                    "name": data.get("name") or data.get("login"),
+                    "avatar_url": data.get("avatar_url"),
+                }
+            logger.warning("GitHub profile fetch failed: %s", response.status_code)
+            return {}
+
+        if provider_key == "discord":
+            response = http_requests.get(
+                "https://discord.com/api/users/@me",
+                headers={"Authorization": f"Bearer {access_token}"},
+                timeout=8,
+            )
+            if response.status_code == 200:
+                data = response.json()
+                return {
+                    "name": data.get("global_name") or data.get("username"),
+                    "avatar_url": _discord_avatar_url(data),
+                }
+            logger.warning("Discord profile fetch failed: %s", response.status_code)
+            return {}
+    except Exception:
+        logger.exception("Failed to fetch provider profile: %s", provider)
+
+    return {}
+
+
 
 def _find_user_by_email(email):
     if not email:
@@ -104,6 +157,7 @@ def appwrite_session():
     user_id = payload.get("user_id")
     email = payload.get("email")
     provider = payload.get("provider") or "appwrite"
+    provider_access_token = payload.get("provider_access_token") or payload.get("providerAccessToken")
 
     if not user_id:
         return jsonify({"error": "Missing user_id."}), 400
@@ -118,49 +172,52 @@ def appwrite_session():
         return jsonify({"error": "Invalid Appwrite user."}), 401
 
     remote_user = _account_to_dict(remote_user)
-    session["email"] = email
     remote_email = remote_user.get("email") or ""
     if email and remote_email and email.lower() != remote_email.lower():
         # Email mismatch -- fail the exchange
         logger.warning("Email mismatch during Appwrite session exchange: %s vs %s", email, remote_email)
         return jsonify({"error": "Email mismatch."}), 401
 
-    appwrite_user_id = user_id
-    user_doc = None
-    try:
-        user_doc = get_row_safe(COLLECTIONS["users"], appwrite_user_id)
-    except AppwriteException as exc:
-        if exc.code != 404:
-            logger.exception("Failed to fetch user row")
-            return jsonify({"error": "User lookup failed."}), 500
+    if not email:
+        email = remote_email
 
+    appwrite_user_id = user_id
+    user_doc = get_row_safe(COLLECTIONS["users"], appwrite_user_id, allow_missing=True)
     if not user_doc and email:
         user_doc = _find_user_by_email(email)
 
     # Normalize profile fields from Appwrite's user object
-    name = remote_user.get("name") or remote_user.get("displayName")
+    provider_profile = _fetch_provider_profile(provider, provider_access_token)
+    provider_name = provider_profile.get("name")
+    provider_avatar_url = provider_profile.get("avatar_url")
+
+    name = provider_name or remote_user.get("name") or remote_user.get("displayName")
     picture_url = (
-        remote_user.get("photoUrl")
+        provider_avatar_url
+        or remote_user.get("photoUrl")
         or remote_user.get("avatar")
         or remote_user.get("picture_url")
     )
 
     if not user_doc:
         created_at = format_datetime(datetime.utcnow())
+        row_data = {
+            "google_id": appwrite_user_id,
+            "email": email,
+            "name": name or remote_user.get("name"),
+            "picture_url": picture_url,
+            "onboarding_complete": False,
+            "onboarding_step": 1,
+            "created_at": created_at,
+            "last_login": created_at,
+        }
+        if provider and provider != "appwrite":
+            row_data["provider"] = provider
         try:
             user_doc = create_row_safe(
                 COLLECTIONS["users"],
                 row_id=appwrite_user_id,
-                data={
-                    "google_id": appwrite_user_id,
-                    "email": email,
-                    "name": remote_user.get("name"),
-                    "picture_url": remote_user.get("photoUrl") or remote_user.get("avatar") or remote_user.get("picture_url"),
-                    "onboarding_complete": False,
-                    "onboarding_step": 1,
-                    "created_at": created_at,
-                    "last_login": created_at,
-                },
+                data=row_data,
             )
         except AppwriteException:
             logger.exception("Failed to create user row from Appwrite auth")
@@ -190,6 +247,8 @@ def appwrite_session():
             updates["picture_url"] = picture_url
         if email:
             updates["email"] = email
+        if provider and provider != "appwrite":
+            updates["provider"] = provider
 
         row_id = user_doc.get("$id") or user_doc.get("id")
         if not row_id:
@@ -206,6 +265,7 @@ def appwrite_session():
 
     login_user(user_from_doc(user_doc))
     session["user_id"] = user_doc.get("$id") or user_doc.get("id")
+    session["email"] = email or remote_email
     _set_oauth_session(provider, appwrite_user_id, email, name=name, picture_url=picture_url)
     redirect_to = url_for("settings.onboarding")
     if user_doc.get("onboarding_complete"):
@@ -355,6 +415,14 @@ def oauth2callback():
 def logout():
     """Clear session and revoke Google token if possible."""
     credentials_data = session.get("credentials")
+    user_id = session.get("oauth_user_id") or session.get("user_id")
+    if user_id:
+        try:
+            from appwrite_client import client as appwrite_client
+            users_service = Users(appwrite_client)
+            users_service.delete_sessions(str(user_id))
+        except Exception:
+            logger.exception("Failed to revoke Appwrite sessions for user")
     logout_user()
     session.clear()
 

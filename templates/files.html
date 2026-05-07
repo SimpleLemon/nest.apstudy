@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <script>
+        window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@17/dist/iife/sdk.js"></script>
+    <script src="{{ url_for('static', filename='js/appwrite.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/themes.css') }}">
+    <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy Logo">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/layout.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+    <title>Files - Nest University | APStudy</title>
+    <script src="{{ url_for('static', filename='js/global.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/navbar.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/sidebar.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/files.js') }}" defer></script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<global class="thenav" data-profile-picture="{{ user.picture }}" data-user-email="{{ user.email }}"></global>
+<global class="thesidebar" data-user-emory-student="{{ user.emory_student }}"></global>
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-primary/30 selection:text-primary-fixed">
+    <main class="flex-1 w-full max-w-[1600px] mx-auto px-6 md:px-8 pt-6 pb-10 flex flex-col gap-12 relative z-10">
+        <!-- Header -->
+        <section class="flex flex-col gap-4 w-full animate-fade-in-up">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+                <div>
+                    <h1 class="text-3xl font-headline font-semibold text-on-surface tracking-tight mb-1">Files</h1>
+                    <p class="text-on-surface-variant text-sm flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">folder_open</span>
+                        <span>Upload, view, and organize your course files</span>
+                    </p>
+                </div>
+                <button id="upload-files-btn" type="button" class="inline-flex items-center gap-2 rounded-lg bg-primary text-on-primary px-5 py-2.5 text-sm font-medium hover:scale-[1.02] transition-transform shadow-lg shadow-primary/20">
+                    <span class="material-symbols-outlined text-[20px]">upload_file</span>
+                    Upload Files
+                </button>
+            </div>
+        </section>
+
+        <!-- Upload Progress / Drop Zone -->
+        <section id="upload-zone" class="hidden w-full animate-fade-in-up">
+            <div class="bg-surface-container-low border-2 border-dashed border-outline-variant/30 rounded-2xl p-12 text-center hover:border-primary/40 transition-colors">
+                <span class="material-symbols-outlined text-[48px] text-on-surface-variant mb-4">cloud_upload</span>
+                <h3 class="text-lg font-headline font-medium text-on-surface mb-2">Drop files here or click to browse</h3>
+                <p class="text-sm text-on-surface-variant mb-4">Supports PDF, DOC, DOCX, PPT, PPTX, XLS, XLSX, JPG, PNG, MP4 (max 50MB per file)</p>
+                <input id="file-input" type="file" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.jpg,.jpeg,.png,.mp4" class="hidden" />
+                <button id="browse-files-btn" type="button" class="inline-flex items-center gap-2 rounded-lg bg-surface-container-high text-on-surface px-4 py-2 text-sm font-medium hover:bg-surface-container transition-colors">
+                    Browse Files
+                </button>
+            </div>
+            <div id="upload-progress" class="mt-4 space-y-2 hidden">
+                <!-- Upload items will be added here dynamically -->
+            </div>
+        </section>
+
+        <!-- Files List -->
+        <section class="flex flex-col gap-4 w-full animate-fade-in-up" style="animation-delay: 100ms;">
+            <div class="flex items-center justify-between">
+                <h2 class="text-xl font-headline font-semibold text-on-surface tracking-tight flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">drive_file_move</span>
+                    Your Files
+                </h2>
+                <div class="flex items-center gap-2">
+                    <input id="files-search" type="text" placeholder="Search files..." class="bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-sm text-on-surface focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all w-48" />
+                </div>
+            </div>
+
+            <!-- File Grid -->
+            <div id="files-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <!-- Loading State -->
+                <div class="col-span-full flex flex-col items-center justify-center py-20">
+                    <span class="material-symbols-outlined text-[48px] text-on-surface-variant mb-4 animate-spin">progress_activity</span>
+                    <p class="text-on-surface-variant text-sm">Loading your files...</p>
+                </div>
+            </div>
+
+            <!-- Empty State (hidden by default) -->
+            <div id="files-empty" class="hidden flex flex-col items-center justify-center py-20">
+                <span class="material-symbols-outlined text-[64px] text-on-surface-variant mb-4">folder_off</span>
+                <h3 class="text-lg font-headline font-medium text-on-surface mb-2">No files yet</h3>
+                <p class="text-sm text-on-surface-variant mb-6 text-center max-w-sm">Upload your first file to get started. You can organize your files by course later.</p>
+                <button id="empty-upload-btn" type="button" class="inline-flex items-center gap-2 rounded-lg bg-primary text-on-primary px-5 py-2.5 text-sm font-medium hover:scale-[1.02] transition-transform shadow-lg shadow-primary/20">
+                    <span class="material-symbols-outlined text-[20px]">upload_file</span>
+                    Upload Files
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- File Preview Modal -->
+    <div id="file-preview-modal" class="fixed inset-0 z-[9999] hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="file-preview-backdrop"></div>
+        <div class="absolute inset-4 md:inset-8 bg-surface-container rounded-2xl border border-outline-variant/20 flex flex-col overflow-hidden shadow-2xl">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/20">
+                <div class="flex items-center gap-3">
+                    <span id="preview-file-icon" class="material-symbols-outlined text-primary text-[28px]">insert_drive_file</span>
+                    <h3 id="preview-file-name" class="text-lg font-headline font-medium text-on-surface truncate max-w-md">Filename.pdf</h3>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="preview-download-btn" type="button" class="inline-flex items-center gap-1.5 rounded-lg bg-surface-container-high text-on-surface px-3 py-2 text-sm font-medium hover:bg-surface-container transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">download</span>
+                        Download
+                    </button>
+                    <button id="preview-close-btn" type="button" class="inline-flex items-center justify-center rounded-lg bg-surface-container-high text-on-surface-variant hover:bg-surface-container transition-colors w-9 h-9">
+                        <span class="material-symbols-outlined text-[20px]">close</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Modal Body -->
+            <div id="preview-content" class="flex-1 overflow-auto p-6">
+                <!-- Preview content goes here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-confirm-modal" class="fixed inset-0 z-[9999] hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="delete-backdrop"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-surface-container rounded-2xl border border-outline-variant/20 p-8 max-w-sm w-full mx-4 shadow-2xl">
+            <div class="text-center">
+                <span class="material-symbols-outlined text-[48px] text-red-400 mb-4">delete_forever</span>
+                <h3 class="text-lg font-headline font-medium text-on-surface mb-2">Delete File?</h3>
+                <p id="delete-file-name" class="text-sm text-on-surface-variant mb-6">This action cannot be undone.</p>
+                <div class="flex gap-3 justify-center">
+                    <button id="delete-cancel-btn" type="button" class="px-5 py-2.5 rounded-lg bg-surface-container-high text-on-surface text-sm font-medium hover:bg-surface-container transition-colors">
+                        Cancel
+                    </button>
+                    <button id="delete-confirm-btn" type="button" class="px-5 py-2.5 rounded-lg bg-red-500 text-white text-sm font-medium hover:bg-red-600 transition-colors">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <global class="thefooter"></global>
+</body>
+</html>

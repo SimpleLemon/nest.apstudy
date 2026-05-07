@@ -513,6 +513,7 @@ def settings_page():
         "name": current_user.name or current_user.email,
         "email": current_user.email,
         "picture": current_user.picture_url,
+        "emory_student": current_user.emory_student,
         "member_since": current_user.created_at.strftime("%b %d, %Y"),
     }, settings=user_settings, courses=courses, other_calendar_urls=other_calendar_urls, theme_preference=user_settings.get("interface_theme") if user_settings else None)
 

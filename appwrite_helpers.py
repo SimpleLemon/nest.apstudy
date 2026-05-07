@@ -109,7 +109,7 @@ def list_rows_all(table_id, queries=None, limit=DEFAULT_LIMIT):
     return rows
 
 
-def get_row_safe(table_id, row_id):
+def get_row_safe(table_id, row_id, *, allow_missing=False):
     try:
         return _row_to_dict(
             tablesdb.get_row(
@@ -119,6 +119,11 @@ def get_row_safe(table_id, row_id):
             )
         )
     except AppwriteException as exc:
+        status_code = getattr(exc, "code", None)
+        if status_code is None:
+            status_code = getattr(exc, "response_code", None)
+        if allow_missing and int(status_code or 0) == 404:
+            return None
         logger.exception("Appwrite get_row failed: %s", table_id)
         raise
 

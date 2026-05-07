@@ -332,6 +332,7 @@ def main():
                 {"key": "emory_email", "type": "email"},
                 {"key": "created_at", "type": "datetime", "xrequired": True},
                 {"key": "last_login", "type": "datetime"},
+                {"key": "provider", "type": "string", "size": 32},
             ],
             "indexes": [
                 {"key": "idx_users_google_id", "type": "unique", "columns": ["google_id"]},
