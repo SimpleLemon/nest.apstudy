@@ -125,4 +125,6 @@ COLLECTIONS = {
 	"user_calendar_preferences": "user_calendar_preferences",
 	"user_events": "user_events",
 	"shared_files": "shared_files",
+	"note_folders": "note_folders",
+	"notes": "notes",
 }

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Editor</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body class="bg-surface-container text-on-surface">
+    <div class="max-w-3xl mx-auto p-6">
+        <input type="text" id="note-title" class="w-full text-4xl font-bold border-none outline-none bg-transparent p-2 mb-4 text-on-surface placeholder:text-on-surface-variant" placeholder="Untitled Note" autocomplete="off">
+        <div id="note-content" contenteditable="true" class="w-full min-h-[60vh] outline-none text-lg leading-relaxed text-on-surface-variant"></div>
+    </div>
+    <script src="/static/js/appwrite-init.js"></script>
+    <script src="/static/js/notes-editor.js"></script>
+</body>
+</html>

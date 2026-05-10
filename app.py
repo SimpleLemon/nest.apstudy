@@ -15,6 +15,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 def create_app():
     app = Flask(__name__)
     app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-fallback-key")
+    app.config["APPWRITE_DATABASE_ID"] = os.environ.get("APPWRITE_DATABASE_ID", "")
     app.config["MAX_CONTENT_LENGTH"] = 50 * 1024 * 1024
     app.config["FILE_SHARE_UPLOAD_DIR"] = os.path.join(app.root_path, "uploads", "file_share")
     os.makedirs(app.config["FILE_SHARE_UPLOAD_DIR"], exist_ok=True)

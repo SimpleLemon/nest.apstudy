@@ -92,6 +92,26 @@ def notes():
     )
 
 
+@dashboard_bp.route("/notes/editor", defaults={"note_id": None})
+@dashboard_bp.route("/notes/editor/<note_id>")
+@login_required
+def notes_editor(note_id):
+    """Render the note editor page."""
+    if not current_user.onboarding_complete:
+        return redirect(url_for("settings.onboarding"))
+
+    return render_template(
+        "notes_editor.html",
+        user={
+            "name": current_user.name,
+            "email": current_user.email,
+            "picture": current_user.picture_url,
+            "emory_student": current_user.emory_student,
+        },
+        note_id=note_id,
+    )
+
+
 @dashboard_bp.route("/chat")
 @login_required
 def chat():

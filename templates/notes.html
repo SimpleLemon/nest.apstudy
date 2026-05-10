@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <script>
-        window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";
-    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";</script>
     <script src="https://cdn.jsdelivr.net/npm/appwrite@17/dist/iife/sdk.js"></script>
     <script src="{{ url_for('static', filename='js/appwrite.js') }}"></script>
     <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/themes.css') }}">
-    <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy Logo">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/layout.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
@@ -19,34 +16,58 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}">
     <title>Notes - Nest University | APStudy</title>
+
     <script src="{{ url_for('static', filename='js/global.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/navbar.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/sidebar.js') }}" defer></script>
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script src="{{ url_for('static', filename='js/notes-export.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/notes-list.js') }}" defer></script>
+    <style>.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}</style>
 </head>
 <global class="thenav" data-profile-picture="{{ user.picture }}" data-user-email="{{ user.email }}"></global>
 <global class="thesidebar" data-user-emory-student="{{ user.emory_student }}"></global>
 <body class="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-primary/30 selection:text-primary-fixed">
     <main class="flex-1 w-full max-w-[1600px] mx-auto px-6 md:px-8 pt-6 pb-10 flex flex-col gap-12 relative z-10">
-        <section class="flex flex-col gap-4 w-full animate-fade-in-up">
-            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+        <div class="notes-page">
+            <div class="notes-page-header">
                 <div>
-                    <h1 class="text-3xl font-headline font-semibold text-on-surface tracking-tight mb-1">Notes</h1>
-                    <p class="text-on-surface-variant text-sm flex items-center gap-2">
-                        <span class="material-symbols-outlined text-[18px]">sticky_note_2</span>
-                        <span>Take and organize your notes</span>
-                    </p>
+                    <h1 class="notes-page-title">Notes</h1>
+                    <p class="notes-page-subtitle">Take and organize your notes</p>
+                </div>
+                <div class="notes-page-actions">
+                    <button id="btn-new-folder" class="btn-secondary cursor-pointer">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" fill="currentColor"/></svg>
+                        New Folder
+                    </button>
+                    <button id="btn-new-note" class="btn-primary cursor-pointer">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        New Note
+                    </button>
                 </div>
             </div>
-            <div class="bg-surface-container/95 border border-outline-variant/20 rounded-2xl p-8 text-center">
-                <p class="text-on-surface-variant">Notes feature coming soon...</p>
-            </div>
-        </section>
+
+            <section id="folders-section" class="notes-section">
+                <h2 class="notes-section-header">FOLDERS</h2>
+                <div id="folders-grid" class="folders-grid"></div>
+            </section>
+
+            <section id="notes-section" class="notes-section">
+                <h2 class="notes-section-header">NOTES</h2>
+                <div id="notes-grid" class="notes-grid"></div>
+                <div id="notes-empty-state" class="empty-state" style="display:none;">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <rect x="8" y="6" width="32" height="36" rx="4" stroke="#94a3b8" stroke-width="2"/>
+                        <line x1="14" y1="16" x2="34" y2="16" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="14" y1="22" x2="28" y2="22" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <p class="empty-state-text">No notes yet</p>
+                    <p class="empty-state-subtext">Click "New Note" to get started</p>
+                </div>
+            </section>
+        </div>
     </main>
     <global class="thefooter"></global>
 </body>
