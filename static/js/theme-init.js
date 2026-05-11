@@ -7,14 +7,79 @@
     var VALID_THEMES = ['obsidian-dark', 'parchment-light', 'system-match', 'nest-light', 'nest-dark'];
     var STORAGE_KEY = 'apstudy-theme';
 
-    var stored = localStorage.getItem(STORAGE_KEY);
-    var overrideTheme = window.APSTUDY_THEME_PREFERENCE;
-    var lockTheme = window.APSTUDY_THEME_LOCKED === true;
+    var root = document.documentElement;
+    var stored = normalizeThemePreference(getStoredTheme());
+    var overrideTheme = normalizeThemePreference(window.APSTUDY_THEME_PREFERENCE || root.dataset.apstudyThemePreference);
+    var lockTheme = window.APSTUDY_THEME_LOCKED === true || root.dataset.apstudyThemeLocked === 'true';
     var theme;
 
-    if (overrideTheme && VALID_THEMES.indexOf(overrideTheme) !== -1) {
+    function getStoredTheme() {
+        try {
+            return localStorage.getItem(STORAGE_KEY);
+        } catch (error) {
+            return '';
+        }
+    }
+
+    function normalizeThemePreference(value) {
+        var normalized = String(value || '').trim().toLowerCase();
+
+        if (normalized === 'dark') {
+            return 'obsidian-dark';
+        }
+        if (normalized === 'light') {
+            return 'parchment-light';
+        }
+        if (normalized === 'auto' || normalized === 'system') {
+            return 'system-match';
+        }
+        if (VALID_THEMES.indexOf(normalized) !== -1) {
+            return normalized;
+        }
+        return '';
+    }
+
+    function isDarkTheme(themeValue) {
+        if (themeValue === 'system-match') {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+        return DARK_THEMES.indexOf(themeValue) !== -1;
+    }
+
+    function applyThemePreference(nextTheme, options) {
+        var normalizedTheme = normalizeThemePreference(nextTheme);
+        var applyOptions = options || {};
+
+        if (!normalizedTheme) {
+            normalizedTheme = 'obsidian-dark';
+        }
+
+        window.APSTUDY_THEME_PREFERENCE = normalizedTheme;
+        root.setAttribute('data-theme', normalizedTheme);
+        root.classList.toggle('dark', isDarkTheme(normalizedTheme));
+
+        if (applyOptions.persist !== false) {
+            try {
+                localStorage.setItem(STORAGE_KEY, normalizedTheme);
+            } catch (error) {
+                // Ignore storage failures so theme switching still works visually.
+            }
+        }
+
+        if (!applyOptions.silent) {
+            document.dispatchEvent(new CustomEvent('apstudy-theme-change', {
+                detail: { theme: normalizedTheme },
+            }));
+        }
+
+        return normalizedTheme;
+    }
+
+    window.APSTUDY_SET_THEME_PREFERENCE = applyThemePreference;
+
+    if (overrideTheme) {
         theme = overrideTheme;
-    } else if (!lockTheme && stored && VALID_THEMES.indexOf(stored) !== -1) {
+    } else if (!lockTheme && stored) {
         theme = stored;
     } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         theme = 'obsidian-dark';
@@ -24,13 +89,5 @@
         theme = 'obsidian-dark';
     }
 
-    document.documentElement.setAttribute('data-theme', theme);
-
-    var isDark;
-    if (theme === 'system-match') {
-        isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    } else {
-        isDark = DARK_THEMES.indexOf(theme) !== -1;
-    }
-    document.documentElement.classList.toggle('dark', isDark);
+    applyThemePreference(theme, { persist: false, silent: true });
 })();

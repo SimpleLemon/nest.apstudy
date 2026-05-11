@@ -15,9 +15,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
 </head>
-<body class="bg-surface text-on-surface font-body min-h-screen">
-    <global class="thenav hidden" data-profile-picture="{{ user.picture }}"></global>
-    <main class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pb-16">
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col">
+    <global class="thenav hidden" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}"></global>
+    <main class="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 pb-16">
         <div class="max-w-4xl mx-auto w-full">
             <section class="bg-surface-container/95 border border-outline-variant/20 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
                 <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,color-mix(in_srgb,var(--color-primary)_14%,transparent),transparent_32%),radial-gradient(circle_at_bottom_left,color-mix(in_srgb,var(--color-tertiary)_8%,transparent),transparent_28%)] pointer-events-none"></div>

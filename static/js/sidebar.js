@@ -26,6 +26,7 @@ function renderSidebar() {
 
   const userDataEl = document.querySelector('[data-user-emory-student]');
   const isEmoryStudent = userDataEl?.dataset?.userEmoryStudent === 'true' || userDataEl?.dataset?.userEmoryStudent === 'True';
+  const sidebarDefault = normalizeSidebarDefault(sidebarPlaceholder?.dataset?.sidebarDefault);
   const currentPath = window.location.pathname;
 
   const isActive = (routePath) => {
@@ -118,10 +119,14 @@ function renderSidebar() {
     document.body.appendChild(tooltip);
   }
 
-  setupSidebarInteractions();
+  setupSidebarInteractions(sidebarDefault);
 }
 
-function setupSidebarInteractions() {
+function normalizeSidebarDefault(value) {
+  return String(value || '').trim().toLowerCase() === 'collapsed' ? 'collapsed' : 'expanded';
+}
+
+function setupSidebarInteractions(sidebarDefault = 'expanded') {
   const sidebar = document.querySelector('.sidebar-container');
   if (!sidebar) return;
 
@@ -179,14 +184,24 @@ function setupSidebarInteractions() {
     updateToggleHandleState();
   }
 
-  // Load collapsed state from localStorage
-  const isCollapsed = localStorage.getItem('sidebar-collapsed') === 'true';
+  // Load per-session state first. On a fresh login, localStorage is cleared,
+  // so the server-rendered Appwrite preference becomes the default.
+  const storedCollapsed = localStorage.getItem('sidebar-collapsed');
+  const isCollapsed = storedCollapsed === null
+    ? normalizeSidebarDefault(sidebarDefault) === 'collapsed'
+    : storedCollapsed === 'true';
   document.body.classList.toggle('sidebar-collapsed', isCollapsed);
   if (isCollapsed) {
     sidebar.classList.add('collapsed');
     setCenteredCollapsedItems(true);
   }
+  localStorage.setItem('sidebar-collapsed', String(isCollapsed));
   updateToggleHandleState();
+
+  window.APSTUDY_SET_SIDEBAR_COLLAPSED = applySidebarCollapsedState;
+  document.addEventListener('apstudy-sidebar-default-change', (event) => {
+    applySidebarCollapsedState(event.detail?.collapsed === true);
+  });
 
   // Collapse button click
   if (toggleHandle) {

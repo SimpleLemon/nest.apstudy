@@ -17,10 +17,14 @@ class User(UserMixin):
         self._data = data
         self.id = data.get("$id") or data.get("id")
         self.google_id = data.get("google_id")
+        self.public_user_id = data.get("public_user_id")
         self.provider = data.get("provider")
         self.email = data.get("email")
         self.name = data.get("name")
         self.picture_url = data.get("picture_url")
+        self.banner_color = data.get("banner_color") or "#fecae1"
+        self.avatar_file_id = data.get("avatar_file_id")
+        self.avatar_source = data.get("avatar_source")
         self.onboarding_complete = bool(data.get("onboarding_complete", False))
         self.onboarding_step = data.get("onboarding_step") or 1
         self.education_level = data.get("education_level")

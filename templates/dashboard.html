@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Track and plan assignments and class schedules. Built for Nest University by a Nest Student." />
-    <title>Dashboard - Nest University | APStudy</title>
+    <title>Dashboard - APStudy Nest</title>
     <script>
         window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";
     </script>
@@ -24,13 +24,13 @@
     <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png">
     <meta property="og:url" content="https://nest.apstudy.org/">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Nest University | APStudy">
+    <meta property="og:title" content="APStudy Nest">
     <meta property="og:description" content="Track and plan assignments and class schedules. Built for Nest University by a Nest Student." />
     <meta property="og:image" content="https://resources.apstudy.org/images/APResourcesBanner.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="nest.apstudy.org">
     <meta property="twitter:url" content="https://nest.apstudy.org/">
-    <meta name="twitter:title" content="Nest University | APStudy">
+    <meta name="twitter:title" content="APStudy Nest">
     <meta name="twitter:description" content="Track and plan assignments and class schedules. Built for Nest University by a Nest Student." />
     <meta name="twitter:image" content="https://resources.apstudy.org/images/APResourcesBanner.png">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0NT330ZX5L"></script>
@@ -52,8 +52,8 @@
         }
     </style>
 </head>
-<global class="thenav" data-profile-picture="{{ user.picture }}" data-user-email="{{ user.email }}"></global>
-<global class="thesidebar" data-user-emory-student="{{ user.emory_student }}"></global>
+<global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
+<global class="thesidebar" data-user-emory-student="{{ user.emory_student }}" data-sidebar-default="{{ sidebar_default|default('expanded') }}"></global>
 <body class="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-primary/30 selection:text-primary-fixed">
 <!-- Main Content Canvas -->
 <main class="flex-1 w-full px-6 md:px-8 pt-6 pb-10 flex flex-col gap-12 relative z-10">

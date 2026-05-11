@@ -1,0 +1,31 @@
+.calendar-today-marker {
+    color: #ef4444;
+    flex: 0 0 auto;
+    font-weight: 700;
+}
+
+.calendar-today-marker-month {
+    border: 1px solid #ef4444;
+    border-radius: 9999px;
+    height: 1.75rem !important;
+    width: 1.75rem !important;
+}
+
+.calendar-today-marker-week {
+    display: inline-grid;
+    place-items: center;
+    position: relative;
+}
+
+.calendar-today-marker-week::before {
+    border: 1px solid #ef4444;
+    border-radius: 9999px;
+    content: "";
+    height: 3.25rem;
+    left: 50%;
+    pointer-events: none;
+    position: absolute;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    width: 3.25rem;
+}

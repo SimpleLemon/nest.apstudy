@@ -1,214 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-apstudy-theme-preference="system-match" data-apstudy-theme-locked="true">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <script>
-        window.APSTUDY_THEME_PREFERENCE = "system-match";
-        window.APSTUDY_THEME_LOCKED = true;
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/appwrite@17/dist/iife/sdk.js"></script>
     <script src="{{ url_for('static', filename='js/appwrite.js') }}"></script>
     <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/themes.css') }}">
-    <title>Login - Nest University | APStudy</title>
+    <title>Login - APStudy Nest</title>
     <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy Logo">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
     <script src="{{ url_for('static', filename='js/global.js') }}" defer></script>
-    <script src="https://kit.fontawesome.com/a7731f7ef8.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="description" content="Track and plan assignments and class schedules. Built for Nest University by a Nest Student."/>
     <meta property="og:url" content="https://nest.apstudy.org/">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Nest University | APStudy">
+    <meta property="og:title" content="APStudy Nest">
     <meta property="og:description" content="Track and plan assignments and class schedules. Built for Nest University by a Nest Student."/>
     <meta property="og:image" content="https://resources.apstudy.org/images/APResourcesBanner.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="nest.apstudy.org">
     <meta property="twitter:url" content="https://nest.apstudy.org/">
-    <meta name="twitter:title" content="Nest University | APStudy">
+    <meta name="twitter:title" content="APStudy Nest">
     <meta name="twitter:description" content="Track and plan assignments and class schedules. Built for Nest University by a Nest Student."/>
     <meta name="twitter:image" content="https://resources.apstudy.org/images/APResourcesBanner.png">
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0NT330ZX5L"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-0NT330ZX5L');
-    </script>
-
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
-    <style>
-        html,
-        body {
-            background: #0d1117;
-            color: #c9d1d9;
-            font-family: 'Inter', sans-serif;
-        }
-
-        body.login-page {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .login-shell {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .login-content {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 24px 16px 48px;
-        }
-
-        .login-card {
-            width: 100%;
-            max-width: 380px;
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            padding: 32px 24px;
-            box-shadow: 0 0 0 1px rgba(48, 54, 61, 0.35), 0 16px 32px rgba(1, 4, 9, 0.3);
-        }
-
-        @media (min-width: 640px) {
-            .login-card {
-                padding: 40px 32px;
-            }
-        }
-
-        .login-brand {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
-        .login-logo {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: #21262d;
-            border: 1px solid #30363d;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #58a6ff;
-        }
-
-        .login-title {
-            font-size: 20px;
-            font-weight: 600;
-            letter-spacing: 0.2px;
-            color: #f0f6fc;
-        }
-
-        .login-error {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 16px;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid #f85149;
-            background: #2d1a1f;
-            color: #f85149;
-            font-size: 12px;
-        }
-
-        .oauth-button {
-            border: 1px solid #30363d;
-            background: #21262d;
-            color: #c9d1d9;
-            font-weight: 600;
-            transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease;
-        }
-
-        .oauth-button:hover {
-            background: #30363d;
-            border-color: #8b949e;
-            transform: translateY(-1px);
-        }
-
-        .oauth-button:active {
-            transform: translateY(0);
-        }
-
-        .oauth-button--github,
-        .oauth-button--discord,
-        .oauth-button--google {
-            background: #21262d;
-            color: #c9d1d9;
-            border-color: #30363d;
-        }
-
-        .oauth-icon--discord { transform: translateX(1px); }
-
-        .login-footer footer {
-            background: transparent;
-            border-top: 1px solid #30363d;
-            color: #8b949e;
-            padding: 20px 16px;
-        }
-
-        .login-footer footer > div {
-            padding: 0;
-        }
-
-        .login-footer footer span,
-        .login-footer footer a {
-            color: #8b949e;
-        }
-
-        .login-footer footer a:hover {
-            color: #58a6ff;
-        }
-
-        .login-footer footer div > div {
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px 18px;
-        }
-
-        @media (max-width: 640px) {
-            .login-footer footer div {
-                text-align: center;
-            }
-
-            .login-footer footer div > div {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-            }
-
-            .login-footer footer a {
-                padding: 6px 12px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <script src="{{ url_for('static', filename='js/login.js') }}" defer></script>
 </head>
 <body class="login-page">
     <div class="login-shell">
-        <div class="login-content">
-            <main class="login-card">
+        <main class="login-content">
+            <section class="login-card" aria-labelledby="login-title">
                 <!-- Branding Header -->
                 <div class="login-brand">
                     <div class="login-logo">
-                        <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                        <span class="material-symbols-outlined login-logo-icon">auto_awesome</span>
                     </div>
-                    <h1 class="login-title">Sign in to Nest</h1>
+                    <h1 id="login-title" class="login-title">Sign in to Nest</h1>
                 </div>
 
             <!-- Error Message (shown via Jinja if present) -->
@@ -251,112 +83,9 @@
                     Did something go wrong? <a class="text-primary hover:underline underline-offset-2" href="mailto:derek.chen@emory.edu">Contact IT</a>
                 </p>
             </div>
-            </main>
-        </div>
+            </section>
+        </main>
         <global class="thefooter login-footer"></global>
     </div>
-    <script>
-        const successRedirect = `${window.location.origin}/dashboard`;
-        const failureRedirect = `${window.location.origin}/login`;
-        const providerStorageKey = "apstudy-oauth-provider";
-
-        function exchangeAppwriteSession(provider, accountData, providerAccessToken) {
-            if (!accountData) {
-                return Promise.reject(new Error("Missing Appwrite account data"));
-            }
-            const userId = accountData.$id || accountData.id;
-            const email = accountData.email;
-            if (!userId) {
-                return Promise.reject(new Error("Missing Appwrite user id"));
-            }
-            const body = { user_id: userId, email: email };
-            if (provider) body.provider = provider;
-            if (providerAccessToken) body.provider_access_token = providerAccessToken;
-            return fetch("/auth/session", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body),
-            }).then(function(response) {
-                if (!response.ok) {
-                    throw new Error("Failed to exchange session");
-                }
-                return response.json();
-            });
-        }
-
-        function getCurrentSessionDetails() {
-            if (!account || typeof account.getSession !== "function") {
-                return Promise.resolve({});
-            }
-            return account.getSession("current")
-                .then(function(sessionData) {
-                    return {
-                        provider: sessionData && sessionData.provider,
-                        providerAccessToken: sessionData && sessionData.providerAccessToken,
-                    };
-                })
-                .catch(function() {
-                    return {};
-                });
-        }
-
-        function shouldSkipAutoLogin() {
-            const params = new URLSearchParams(window.location.search);
-            if (params.get("logged_out") === "1") {
-                return true;
-            }
-            try {
-                return sessionStorage.getItem("apstudy-logged-out") === "true";
-            } catch (error) {
-                return false;
-            }
-        }
-
-        if (account && typeof account.get === "function" && !shouldSkipAutoLogin()) {
-            account.get()
-                .then(function(acc) {
-                    return getCurrentSessionDetails().then(function(sessionDetails) {
-                        const provider = sessionStorage.getItem(providerStorageKey)
-                            || sessionDetails.provider
-                            || "appwrite";
-                        return exchangeAppwriteSession(
-                            provider,
-                            acc,
-                            sessionDetails.providerAccessToken
-                        ).then(function(data) {
-                            sessionStorage.removeItem(providerStorageKey);
-                            const redirectTo = (data && data.redirect) ? data.redirect : successRedirect;
-                            window.location.href = redirectTo;
-                        });
-                    });
-                })
-                .catch(function() {
-                    // No active session, stay on login page
-                });
-        }
-
-        if (shouldSkipAutoLogin()) {
-            try {
-                sessionStorage.removeItem("apstudy-logged-out");
-            } catch (error) {
-                // Ignore storage errors
-            }
-        }
-
-        [
-            { id: "oauth-github", provider: "github" },
-            { id: "oauth-discord", provider: "discord" },
-            { id: "oauth-google", provider: "google" }
-        ].forEach(function(entry) {
-            const button = document.getElementById(entry.id);
-            if (!button) {
-                return;
-            }
-            button.addEventListener("click", function() {
-                sessionStorage.setItem(providerStorageKey, entry.provider);
-                account.createOAuth2Session(entry.provider, successRedirect, failureRedirect);
-            });
-        });
-    </script>
 </body>
 </html>

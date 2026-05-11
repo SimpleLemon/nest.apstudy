@@ -1423,11 +1423,11 @@ function buildMonthViewHtml() {
         const inMonth = day >= monthStart && day <= monthEnd;
         const dayEvents = getEventsForDay(day);
         const isCurrentDay = isToday(day);
-        const todayRingClass = isCurrentDay ? "border-2 border-red-500 rounded-full" : "";
+        const todayMarkerClass = isCurrentDay ? "calendar-today-marker calendar-today-marker-month" : "";
         const todayTextClass = isCurrentDay ? "text-red-500 font-bold" : "text-on-surface-variant";
         cells.push(`
             <div data-date="${day.getFullYear()}-${String(day.getMonth() + 1).padStart(2, "0")}-${String(day.getDate()).padStart(2, "0")}" class="rounded-lg border ${inMonth ? "border-outline-variant/10 bg-surface-container" : "border-outline-variant/5 bg-surface-container/40 opacity-70"} p-2.5 min-h-[98px] flex flex-col gap-1.5">
-                <div class="inline-flex h-7 w-7 items-center justify-center text-xs font-semibold ${todayTextClass} ${todayRingClass}">
+                <div class="inline-flex h-7 w-7 items-center justify-center text-xs font-semibold ${todayTextClass} ${todayMarkerClass}">
                     ${day.getDate()}
                 </div>
                 <div class="space-y-1">
@@ -1466,14 +1466,14 @@ function buildWeekViewHtml() {
     const dayHeaders = days.map((day, i) => {
         const dateLabel = `${day.getMonth() + 1}/${day.getDate()}`;
         const isCurrentDay = isToday(day);
-        const todayRingClass = isCurrentDay ? "border-2 border-red-500 rounded-full" : "";
+        const todayMarkerClass = isCurrentDay ? "calendar-today-marker calendar-today-marker-week" : "";
         const dayNameClass = isCurrentDay ? "text-red-500" : "text-on-surface-variant";
         const dateNumClass = isCurrentDay ? "text-red-500 font-bold" : "text-on-surface";
         return `
             <div class="px-3 py-3 text-center border-r border-calendar-rule last:border-r-0 flex items-center justify-center">
-                <div class="inline-flex flex-col items-center justify-center gap-0.5">
+                <div class="inline-flex flex-col items-center justify-center gap-0.5 ${todayMarkerClass}">
                     <div class="text-[11px] uppercase tracking-[0.05em] font-semibold ${dayNameClass}">${WEEKDAYS[i]}</div>
-                    <div class="inline-flex h-7 w-7 items-center justify-center text-sm font-semibold ${dateNumClass} ${todayRingClass}">
+                    <div class="inline-flex h-7 w-7 items-center justify-center text-sm font-semibold ${dateNumClass}">
                         ${dateLabel}
                     </div>
                 </div>

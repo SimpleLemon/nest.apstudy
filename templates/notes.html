@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}">
-    <title>Notes - Nest University | APStudy</title>
+    <title>Notes - APStudy Nest</title>
 
     <script src="{{ url_for('static', filename='js/global.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/navbar.js') }}" defer></script>
@@ -27,8 +27,8 @@
     <script src="{{ url_for('static', filename='js/notes-list.js') }}" defer></script>
     <style>.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}</style>
 </head>
-<global class="thenav" data-profile-picture="{{ user.picture }}" data-user-email="{{ user.email }}"></global>
-<global class="thesidebar" data-user-emory-student="{{ user.emory_student }}"></global>
+<global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
+<global class="thesidebar" data-user-emory-student="{{ user.emory_student }}" data-sidebar-default="{{ sidebar_default|default('expanded') }}"></global>
 <body class="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-primary/30 selection:text-primary-fixed">
     <main class="flex-1 w-full max-w-[1600px] mx-auto px-6 md:px-8 pt-6 pb-10 flex flex-col gap-12 relative z-10">
         <div class="notes-page">

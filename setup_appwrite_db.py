@@ -6,6 +6,7 @@ from appwrite.exception import AppwriteException
 from appwrite.permission import Permission
 from appwrite.role import Role
 from appwrite.services.tables_db import TablesDB
+from appwrite.services.storage import Storage
 from dotenv import load_dotenv
 
 logging.basicConfig(level=logging.INFO)
@@ -18,6 +19,9 @@ REQUIRED_ENV_VARS = [
     "APPWRITE_DATABASE_ID",
 ]
 MAX_APPWRITE_VARCHAR_SIZE = 16381
+PROFILE_AVATAR_BUCKET_ID = "profile_avatars"
+PROFILE_AVATAR_MAX_FILE_SIZE = 10 * 1024 * 1024
+PROFILE_AVATAR_EXTENSIONS = ["jpg", "jpeg", "png", "gif", "webp"]
 
 def _require_env():
     missing = [key for key in REQUIRED_ENV_VARS if not os.environ.get(key)]
@@ -302,6 +306,39 @@ def _ensure_index(tablesdb, database_id, table_id, existing_indexes, spec):
     _wait_for_index(tablesdb, database_id, table_id, key)
     existing_indexes.add(key)
 
+def _list_existing_buckets(storage):
+    try:
+        response = storage.list_buckets()
+    except AppwriteException:
+        logger.exception("Failed to list storage buckets")
+        return set()
+    return {bucket.id for bucket in response.buckets}
+
+def _ensure_profile_avatar_bucket(storage):
+    existing_buckets = _list_existing_buckets(storage)
+    if PROFILE_AVATAR_BUCKET_ID in existing_buckets:
+        logger.info("Storage bucket already exists: %s", PROFILE_AVATAR_BUCKET_ID)
+        return
+
+    try:
+        storage.create_bucket(
+            bucket_id=PROFILE_AVATAR_BUCKET_ID,
+            name="Profile Avatars",
+            permissions=[Permission.read(Role.any())],
+            file_security=True,
+            enabled=True,
+            maximum_file_size=PROFILE_AVATAR_MAX_FILE_SIZE,
+            allowed_file_extensions=PROFILE_AVATAR_EXTENSIONS,
+            encryption=True,
+            antivirus=True,
+        )
+        logger.info("Created storage bucket: %s", PROFILE_AVATAR_BUCKET_ID)
+    except AppwriteException as exc:
+        if exc.code == 409:
+            logger.info("Storage bucket already exists: %s", PROFILE_AVATAR_BUCKET_ID)
+            return
+        raise
+
 # ---------------------------------------------------------------------------
 # Apply a full table spec
 # ---------------------------------------------------------------------------
@@ -336,12 +373,16 @@ TABLE_SPECS = [
         "row_security": True,
         "columns": [
             {"key": "google_id", "type": "string", "size": 255, "xrequired": True},
+            {"key": "public_user_id", "type": "string", "size": 10},
             {"key": "email", "type": "email", "xrequired": True},
             {"key": "name", "type": "string", "size": 255},
             {"key": "picture_url", "type": "url"},
             {"key": "school", "type": "string", "size": 255},
             {"key": "major", "type": "string", "size": 255},
             {"key": "graduation_year", "type": "string", "size": 16},
+            {"key": "banner_color", "type": "string", "size": 7, "xdefault": "#fecae1"},
+            {"key": "avatar_file_id", "type": "string", "size": 64},
+            {"key": "avatar_source", "type": "string", "size": 16},
             {"key": "onboarding_complete", "type": "boolean", "xdefault": False},
             {"key": "onboarding_step", "type": "integer", "xdefault": 1},
             {"key": "education_level", "type": "string", "size": 32},
@@ -355,6 +396,7 @@ TABLE_SPECS = [
         "indexes": [
             {"key": "idx_users_google_id", "type": "unique", "columns": ["google_id"]},
             {"key": "idx_users_email", "type": "unique", "columns": ["email"]},
+            {"key": "idx_users_public_user_id", "type": "key", "columns": ["public_user_id"]},
         ],
     },
     {
@@ -558,6 +600,7 @@ def main():
     _require_env()
     client = _init_client()
     tablesdb = TablesDB(client)
+    storage = Storage(client)
     database_id = os.environ["APPWRITE_DATABASE_ID"]
 
     existing_tables = _list_existing_tables(tablesdb, database_id)
@@ -567,6 +610,7 @@ def main():
             _apply_table(tablesdb, database_id, spec, create_table=False)
         else:
             _apply_table(tablesdb, database_id, spec, create_table=True)
+    _ensure_profile_avatar_bucket(storage)
     logger.info("Appwrite database setup complete.")
 
 if __name__ == "__main__":

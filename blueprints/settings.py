@@ -8,6 +8,7 @@ Handles Canvas iCal URL configuration, refresh intervals,
 
 import json
 import os
+import re
 import secrets
 import logging
 import shutil
@@ -19,10 +20,14 @@ from flask_login import login_required, current_user
 
 from appwrite.exception import AppwriteException
 from appwrite.id import ID
+from appwrite.input_file import InputFile
+from appwrite.permission import Permission
 from appwrite.query import Query
+from appwrite.role import Role
+from appwrite.services.storage import Storage
 from appwrite.services.users import Users
 from appwrite_client import client as appwrite_client
-from appwrite_client import COLLECTIONS
+from appwrite_client import COLLECTIONS, ENDPOINT, PROFILE_AVATAR_BUCKET_ID, PROJECT_ID
 from appwrite_helpers import (
     create_row_safe,
     delete_row_safe,
@@ -41,6 +46,10 @@ CANVAS_CALENDAR_HOST_PREFIX = "canvas."
 CANVAS_CALENDAR_HOST_SUFFIX = ".edu"
 CANVAS_CALENDAR_PATH_PREFIXES = ("/feeds/calendar", "/feeds/calendars")
 MAX_OTHER_CALENDAR_URLS = 10
+DEFAULT_BANNER_COLOR = "#fecae1"
+MAX_AVATAR_BYTES = 10 * 1024 * 1024
+ALLOWED_AVATAR_MIME_TYPES = {"image/jpeg", "image/png", "image/gif", "image/webp"}
+ALLOWED_AVATAR_EXTENSIONS = {"jpg", "jpeg", "png", "gif", "webp"}
 
 THEME_TO_INTERFACE_THEME = {
     "dark": "obsidian-dark",
@@ -54,6 +63,57 @@ INTERFACE_THEME_TO_THEME = {
     "nest-light": "light",
     "system-match": "system",
 }
+
+
+def _format_member_since(value):
+    if not value:
+        return None
+    if isinstance(value, datetime):
+        return value.strftime("%b %d, %Y")
+    parsed = value
+    if isinstance(value, str) and value.endswith("Z"):
+        parsed = value[:-1] + "+00:00"
+    try:
+        return datetime.fromisoformat(parsed).strftime("%b %d, %Y")
+    except (TypeError, ValueError):
+        return str(value)
+
+
+def _normalize_banner_color(value):
+    if not isinstance(value, str):
+        return DEFAULT_BANNER_COLOR
+    normalized = value.strip()
+    if not normalized.startswith("#"):
+        normalized = f"#{normalized}"
+    if re.fullmatch(r"#[0-9a-fA-F]{6}", normalized):
+        return normalized.lower()
+    return DEFAULT_BANNER_COLOR
+
+
+def _normalize_avatar_source(value, picture_url=None):
+    if not isinstance(value, str):
+        return "url" if picture_url else None
+    normalized = value.strip().lower()
+    if normalized in {"url", "upload", "provider"}:
+        return normalized
+    return "url" if picture_url else None
+
+
+def _avatar_view_url(file_id):
+    endpoint = (ENDPOINT or os.environ.get("APPWRITE_ENDPOINT") or "").rstrip("/")
+    project_id = PROJECT_ID or os.environ.get("APPWRITE_PROJECT_ID") or ""
+    if not endpoint or not project_id or not file_id:
+        return None
+    return f"{endpoint}/storage/buckets/{PROFILE_AVATAR_BUCKET_ID}/files/{file_id}/view?project={project_id}"
+
+
+def _delete_avatar_file(file_id):
+    if not file_id:
+        return
+    try:
+        Storage(appwrite_client).delete_file(PROFILE_AVATAR_BUCKET_ID, file_id)
+    except AppwriteException:
+        logger.exception("Failed to delete old avatar file")
 
 
 def _normalize_theme_value(value):
@@ -113,15 +173,20 @@ def _normalize_bool(value, default=False):
 def _profile_doc_payload():
     return {
         "id": str(current_user.id),
+        "public_user_id": current_user.public_user_id,
         "name": current_user.name,
         "email": current_user.email,
         "picture_url": current_user.picture_url,
+        "banner_color": _normalize_banner_color(current_user.banner_color),
+        "avatar_file_id": current_user.avatar_file_id,
+        "avatar_source": current_user.avatar_source,
         "school": current_user.school,
         "major": current_user.major,
         "graduation_year": current_user.graduation_year,
         "education_level": current_user.education_level,
         "class_year": current_user.class_year,
         "created_at": format_datetime(current_user.created_at),
+        "member_since": _format_member_since(current_user.created_at),
     }
 
 
@@ -154,6 +219,8 @@ def _settings_payload(settings):
             "interface_theme": "obsidian-dark",
             "preferred_calendar_view": "week",
             "feed_refresh_minutes": 15,
+            "canvas_ical_url": "",
+            "other_calendar_urls": [],
         }
     return {
         "theme": _theme_from_interface_theme(settings.get("interface_theme") or settings.get("theme")),
@@ -165,6 +232,8 @@ def _settings_payload(settings):
         "interface_theme": settings.get("interface_theme") or _interface_theme_from_value(settings.get("theme") or "dark"),
         "preferred_calendar_view": settings.get("preferred_calendar_view") or "week",
         "feed_refresh_minutes": settings.get("feed_refresh_minutes") or 15,
+        "canvas_ical_url": settings.get("canvas_ical_url") or "",
+        "other_calendar_urls": _load_other_calendar_urls(settings),
     }
 
 
@@ -197,6 +266,10 @@ def _load_user_courses(user_id):
 
 
 def _storage_usage_bytes(user_id):
+    return _storage_summary(user_id).get("storage_usage_bytes", 0)
+
+
+def _storage_summary(user_id):
     try:
         files = list_rows_all(
             COLLECTIONS["shared_files"],
@@ -204,7 +277,16 @@ def _storage_usage_bytes(user_id):
         )
     except AppwriteException:
         logger.exception("Failed to calculate storage usage")
-        return 0
+        files = []
+
+    try:
+        notes = list_rows_all(
+            COLLECTIONS["notes"],
+            [Query.equal("user_id", [user_id])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to count user notes")
+        notes = []
 
     total = 0
     for file_row in files:
@@ -212,7 +294,11 @@ def _storage_usage_bytes(user_id):
             total += int(file_row.get("file_size_bytes") or 0)
         except (TypeError, ValueError):
             continue
-    return total
+    return {
+        "storage_usage_bytes": total,
+        "files_count": len(files),
+        "notes_count": len(notes),
+    }
 
 
 def _delete_user_artifacts(user_id):
@@ -715,11 +801,15 @@ def settings_page():
         "name": current_user.name or current_user.email,
         "email": current_user.email,
         "picture": current_user.picture_url,
+        "banner_color": _normalize_banner_color(current_user.banner_color),
+        "avatar_source": current_user.avatar_source,
         "emory_student": current_user.emory_student,
         "school": current_user.school,
         "major": current_user.major,
         "graduation_year": current_user.graduation_year,
-        "member_since": current_user.created_at.strftime("%b %d, %Y"),
+        "education_level": current_user.education_level,
+        "class_year": current_user.class_year,
+        "member_since": _format_member_since(current_user.created_at),
     }, settings=user_settings, theme_preference=(user_settings.get("interface_theme") if user_settings and user_settings.get("interface_theme") else "obsidian-dark"))
 
 
@@ -729,14 +819,17 @@ def bootstrap_settings():
     user_id = str(current_user.id)
     user_settings = _load_user_settings(user_id)
     user_settings_payload = _settings_payload(user_settings)
+    storage_summary = _storage_summary(user_id)
     return jsonify({
         "profile": _profile_doc_payload(),
         "settings": user_settings_payload,
         "user_settings_doc": user_settings,
-        "storage_usage_bytes": _storage_usage_bytes(user_id),
+        "storage_usage_bytes": storage_summary.get("storage_usage_bytes", 0),
+        "files_count": storage_summary.get("files_count", 0),
+        "notes_count": storage_summary.get("notes_count", 0),
         "connected_services": [],
         "other_calendar_urls": _load_other_calendar_urls(user_settings),
-        "member_since": current_user.created_at.strftime("%b %d, %Y") if current_user.created_at else None,
+        "member_since": _format_member_since(current_user.created_at),
     })
 
 
@@ -749,6 +842,8 @@ def update_profile():
     data = request.get_json(silent=True) or {}
     name = (data.get("name") or "").strip()
     picture_url = (data.get("picture_url") or "").strip() or None
+    avatar_source = _normalize_avatar_source(data.get("avatar_source"), picture_url)
+    banner_color = _normalize_banner_color(data.get("banner_color"))
     school = (data.get("school") or "").strip() or None
     major = (data.get("major") or "").strip() or None
     graduation_year = (data.get("graduation_year") or "").strip() or None
@@ -759,9 +854,20 @@ def update_profile():
     if graduation_year and (len(graduation_year) != 4 or not graduation_year.isdigit()):
         return jsonify({"error": "Graduation year must be a 4-digit year."}), 400
 
+    old_avatar_file_id = current_user.avatar_file_id
+    avatar_file_id = old_avatar_file_id if avatar_source == "upload" else None
+    should_delete_uploaded_avatar = (
+        current_user.avatar_source == "upload"
+        and current_user.avatar_file_id
+        and (avatar_source != "upload" or picture_url != current_user.picture_url)
+    )
+
     updates = {
         "name": name,
         "picture_url": picture_url,
+        "banner_color": banner_color,
+        "avatar_file_id": avatar_file_id,
+        "avatar_source": avatar_source,
         "school": school,
         "major": major,
         "graduation_year": graduation_year,
@@ -781,20 +887,107 @@ def update_profile():
 
     current_user.name = name
     current_user.picture_url = picture_url
+    current_user.banner_color = banner_color
+    current_user.avatar_file_id = avatar_file_id
+    current_user.avatar_source = avatar_source
     current_user.school = school
     current_user.major = major
     current_user.graduation_year = graduation_year
     if updates.get("created_at"):
         current_user.created_at = datetime.utcnow()
+    if should_delete_uploaded_avatar:
+        _delete_avatar_file(old_avatar_file_id)
 
     return jsonify({
         "status": "ok",
         "name": current_user.name,
         "picture_url": current_user.picture_url,
+        "banner_color": current_user.banner_color,
+        "avatar_file_id": current_user.avatar_file_id,
+        "avatar_source": current_user.avatar_source,
         "school": current_user.school,
         "major": current_user.major,
         "graduation_year": current_user.graduation_year,
-        "member_since": current_user.created_at.strftime("%b %d, %Y"),
+        "education_level": current_user.education_level,
+        "class_year": current_user.class_year,
+        "created_at": format_datetime(current_user.created_at),
+        "member_since": _format_member_since(current_user.created_at),
+    })
+
+
+@settings_bp.route("/api/avatar-upload", methods=["POST"])
+@login_required
+def upload_avatar():
+    """Upload and persist a profile avatar in Appwrite Storage."""
+    uploaded_file = request.files.get("avatar")
+    if not uploaded_file or not uploaded_file.filename:
+        return jsonify({"error": "Choose an image to upload."}), 400
+
+    original_filename = uploaded_file.filename
+    extension = original_filename.rsplit(".", 1)[-1].lower() if "." in original_filename else ""
+    if extension not in ALLOWED_AVATAR_EXTENSIONS:
+        return jsonify({"error": "Avatar must be a JPG, PNG, GIF, or WebP image."}), 400
+    if uploaded_file.mimetype not in ALLOWED_AVATAR_MIME_TYPES:
+        return jsonify({"error": "Avatar file type is not supported."}), 400
+
+    file_bytes = uploaded_file.read()
+    if not file_bytes:
+        return jsonify({"error": "Avatar file is empty."}), 400
+    if len(file_bytes) > MAX_AVATAR_BYTES:
+        return jsonify({"error": "Avatar must be 10 MB or smaller."}), 400
+
+    file_id = ID.unique()
+    stored_filename = f"{current_user.id}-{file_id}.{extension}"
+    input_file = InputFile.from_bytes(
+        file_bytes,
+        stored_filename,
+        mime_type=uploaded_file.mimetype,
+    )
+
+    try:
+        Storage(appwrite_client).create_file(
+            PROFILE_AVATAR_BUCKET_ID,
+            file_id,
+            input_file,
+            permissions=[Permission.read(Role.any())],
+        )
+    except AppwriteException:
+        logger.exception("Failed to upload avatar")
+        return jsonify({"error": "Unable to upload avatar."}), 500
+
+    picture_url = _avatar_view_url(file_id)
+    if not picture_url:
+        _delete_avatar_file(file_id)
+        return jsonify({"error": "Avatar storage is not configured."}), 500
+
+    old_file_id = current_user.avatar_file_id if current_user.avatar_source == "upload" else None
+    try:
+        update_row_safe(
+            COLLECTIONS["users"],
+            str(current_user.id),
+            {
+                "picture_url": picture_url,
+                "avatar_file_id": file_id,
+                "avatar_source": "upload",
+            },
+        )
+    except AppwriteException:
+        _delete_avatar_file(file_id)
+        logger.exception("Failed to save avatar metadata")
+        return jsonify({"error": "Unable to save avatar."}), 500
+
+    if old_file_id and old_file_id != file_id:
+        _delete_avatar_file(old_file_id)
+
+    current_user.picture_url = picture_url
+    current_user.avatar_file_id = file_id
+    current_user.avatar_source = "upload"
+
+    return jsonify({
+        "status": "ok",
+        "picture_url": picture_url,
+        "avatar_file_id": file_id,
+        "avatar_source": "upload",
     })
 
 @settings_bp.route("/api/feed-url", methods=["POST"])
@@ -874,6 +1067,7 @@ def update_feed_url():
     return jsonify({
         "status": "ok",
         "message": "Feed URL saved.",
+        "canvas_ical_url": url or "",
         "other_ical_urls": other_ical_urls,
     })
 
@@ -1006,13 +1200,16 @@ def update_interface_preferences():
 def export_user_data():
     user_id = str(current_user.id)
     user_settings = _load_user_settings(user_id)
+    storage_summary = _storage_summary(user_id)
     export_payload = {
         "exported_at": format_datetime(datetime.utcnow()),
         "profile": _profile_doc_payload(),
         "settings": _settings_payload(user_settings),
         "courses": _load_user_courses(user_id),
         "other_calendar_urls": _load_other_calendar_urls(user_settings),
-        "storage_usage_bytes": _storage_usage_bytes(user_id),
+        "storage_usage_bytes": storage_summary.get("storage_usage_bytes", 0),
+        "files_count": storage_summary.get("files_count", 0),
+        "notes_count": storage_summary.get("notes_count", 0),
     }
     return jsonify(export_payload)
 

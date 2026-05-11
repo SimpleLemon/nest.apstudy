@@ -10,6 +10,9 @@ Table: users
 - email VARCHAR(255) UNIQUE NOT NULL -> email attribute: email (unique)
 - name VARCHAR(255) -> string(255) attribute: name
 - picture_url TEXT -> url attribute: picture_url
+- banner_color VARCHAR(7) DEFAULT '#fecae1' -> string(7) attribute: banner_color
+- avatar_file_id VARCHAR(64) -> string(64) attribute: avatar_file_id
+- avatar_source VARCHAR(16) -> string(16) attribute: avatar_source
 - onboarding_complete BOOLEAN NOT NULL DEFAULT 0 -> boolean attribute: onboarding_complete
 - onboarding_step INTEGER NOT NULL DEFAULT 1 -> integer attribute: onboarding_step
 - education_level VARCHAR(32) -> string(32) attribute: education_level
@@ -116,6 +119,9 @@ if _api_key:
 # tablesdb may be None if Appwrite env vars are not configured (e.g., during static imports)
 tablesdb = TablesDB(client) if _endpoint and _project else None
 DATABASE_ID = _database_id
+PROJECT_ID = _project
+ENDPOINT = _endpoint
+PROFILE_AVATAR_BUCKET_ID = os.environ.get("APPWRITE_PROFILE_AVATAR_BUCKET_ID", "profile_avatars")
 
 COLLECTIONS = {
 	"users": "users",

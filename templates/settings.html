@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/appwrite@17/dist/iife/sdk.js"></script>
     <script src="{{ url_for('static', filename='js/appwrite.js') }}"></script>
     <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
-    <title>Settings - Nest University | APStudy</title>
+    <title>Settings - APStudy Nest</title>
     <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy Logo">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/themes.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
@@ -48,12 +48,12 @@
         .settings-theme-choice::after { display: none !important; }
     </style>
 </head>
+<global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
+<global class="thesidebar" data-user-emory-student="{{ user.emory_student }}" data-sidebar-default="{{ sidebar_default|default('expanded') }}"></global>
 <body class="settings-body bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-primary/30 selection:text-primary-fixed">
     <div id="settings-notifications" class="settings-toast-host fixed top-4 left-1/2 -translate-x-1/2 z-[10020] max-w-[92vw] pointer-events-none flex flex-col items-center gap-2"></div>
-    <global class="thenav" data-profile-picture="{{ user.picture }}" data-user-email="{{ user.email }}"></global>
-    <global class="thesidebar" data-user-emory-student="{{ user.emory_student }}"></global>
-    <main class="settings-page-main flex-1 w-full px-4 sm:px-6 md:px-10 lg:px-16 xl:px-0 py-8 md:py-10">
-        <div class="settings-page-shell mx-auto w-full max-w-5xl xl:max-w-6xl">
+    <main class="settings-page-main flex-1 w-full px-4 sm:px-6 md:px-10 lg:px-16 xl:px-0 py-8 md:py-10 flex flex-col">
+        <div class="settings-page-shell mx-auto w-full max-w-5xl xl:max-w-6xl flex flex-col flex-1">
             <header class="settings-hero mb-8 md:mb-10">
                 <h1 class="settings-title">Settings</h1>
             </header>
@@ -64,128 +64,182 @@
             </nav>
             <div class="settings-sections space-y-8 md:space-y-10">
                 <section id="account" class="settings-section scroll-mt-28 md:scroll-mt-32" data-section="account">
-                    <div class="settings-section-head">
-                        <h2>Account</h2>
-                        <p>Update the profile details shown across APStudy.</p>
-                    </div>
-                    <article class="settings-card">
-                        <div class="settings-card-body">
-                            <div class="settings-card-summary">
-                                <h3>Profile</h3>
-                                <p>Manage your personal information, avatar, and email address.</p>
-                            </div>
-                            <div class="settings-card-content">
-                                <div class="settings-avatar-row">
-                                    <div class="settings-avatar-wrap">
-                                        <img id="settings-avatar-preview" class="settings-avatar" src="{{ user.picture or 'https://resources.apstudy.org/images/AP-Resources-Logo.png' }}" alt="Profile preview" />
-                                    </div>
-                                    <div class="settings-avatar-copy">
-                                        <p class="settings-inline-label">Avatar preview</p>
-                                        <p class="settings-help-text">Paste a profile image URL below to change the image used in the navbar.</p>
-                                    </div>
+                    <div class="settings-account-layout">
+                        <article class="settings-card settings-account-details-card">
+                            <div class="settings-card-body">
+                                <div class="settings-card-summary">
+                                    <h3>Account Details</h3>
+                                    <p>Your account identifiers and information.</p>
                                 </div>
-                                <div class="settings-field-grid">
-                                    <label class="settings-field">
-                                        <span class="settings-field-label">Display Name</span>
-                                        <input id="settings-display-name" type="text" autocomplete="name" placeholder="Your name" />
-                                    </label>
-                                    <label class="settings-field">
-                                        <span class="settings-field-label">Avatar URL</span>
-                                        <input id="settings-avatar-url" type="url" autocomplete="url" placeholder="https://example.com/avatar.png" />
-                                    </label>
-                                    <div class="settings-field settings-field-readonly">
-                                        <span class="settings-field-label">Email</span>
-                                        <div class="settings-copy-field">
-                                            <input id="settings-email" type="text" readonly />
-                                            <button type="button" class="settings-copy-button" data-copy-target="settings-email" aria-label="Copy email">
-                                                <span class="material-symbols-outlined">content_copy</span>
-                                            </button>
+                                <div class="settings-card-content">
+                                    <div class="settings-field-grid settings-field-grid-two">
+                                        <div class="settings-field settings-field-readonly">
+                                            <span class="settings-field-label">User ID</span>
+                                            <div class="settings-copy-field">
+                                                <input id="settings-user-id" type="text" readonly />
+                                                <button type="button" class="settings-copy-button" data-copy-target="settings-user-id" aria-label="Copy user ID">
+                                                    <span class="material-symbols-outlined">content_copy</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="settings-field settings-field-readonly">
+                                            <span class="settings-field-label">Account Created</span>
+                                            <input id="settings-account-created-data" type="text" readonly />
+                                        </div>
+                                        <div class="settings-field settings-field-readonly">
+                                            <span class="settings-field-label">Email (Private)</span>
+                                            <div class="settings-copy-field">
+                                                <input id="settings-email" type="text" readonly />
+                                                <button type="button" class="settings-copy-button" data-copy-target="settings-email" aria-label="Copy email">
+                                                    <span class="material-symbols-outlined">content_copy</span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="settings-field settings-field-readonly">
-                                        <span class="settings-field-label">Account Created</span>
-                                        <input id="settings-account-created" type="text" readonly />
+                                </div>
+                            </div>
+                        </article>
+                        <div class="settings-account-main">
+                            <article class="settings-card settings-profile-form-card">
+                                <div class="settings-card-body settings-card-body-single">
+                                    <div class="settings-card-summary">
+                                        <h3>Profile & Academic Details</h3>
+                                        <p>Manage your display details, avatar, banner color, and academic profile.</p>
+                                    </div>
+                                    <div class="settings-card-content">
+                                        <div class="settings-field-grid settings-field-grid-vertical">
+                                            <label class="settings-field">
+                                                <span class="settings-field-label">Display Name</span>
+                                                <input id="settings-display-name" type="text" autocomplete="name" placeholder="Your name" />
+                                            </label>
+                                            <div class="settings-field">
+                                                <span class="settings-field-label">Avatar</span>
+                                                <div class="settings-avatar-upload-control">
+                                                    <button id="settings-avatar-upload-button" type="button" class="settings-button settings-button-secondary">Upload</button>
+                                                    <input id="settings-avatar-upload" class="sr-only" type="file" accept="image/png,image/jpeg,image/gif,image/webp" />
+                                                </div>
+                                                <span class="settings-help-text" id="settings-avatar-upload-status">JPG, PNG, GIF, or WebP. Max 10 MB.</span>
+                                            </div>
+                                            <label class="settings-field">
+                                                <span class="settings-field-label">Banner Color</span>
+                                                <div id="settings-banner-swatch" class="settings-color-tile" style="--settings-banner-tile-color: {{ user.banner_color or '#fecae1' }};">
+                                                    <span class="material-symbols-outlined" aria-hidden="true">edit</span>
+                                                    <input id="settings-banner-color-picker" type="color" value="{{ user.banner_color or '#fecae1' }}" aria-label="Choose banner color" />
+                                                </div>
+                                            </label>
+                                            <label class="settings-field">
+                                                <span class="settings-field-label">School</span>
+                                                <input id="settings-school" type="text" autocomplete="organization" placeholder="Nest University" />
+                                            </label>
+                                            <label class="settings-field">
+                                                <span class="settings-field-label">Graduation Year</span>
+                                                <input id="settings-graduation-year" type="text" inputmode="numeric" maxlength="4" />
+                                            </label>
+                                            <label class="settings-field settings-field-wide">
+                                                <span class="settings-field-label">Major / Intended Major</span>
+                                                <input id="settings-major" type="text" autocomplete="off" placeholder="Computer Science" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="settings-card-footer">
+                                    <button id="settings-save-profile" type="button" class="settings-button settings-button-primary">Update</button>
+                                </div>
+                            </article>
+                        </div>
+                        <aside class="settings-profile-preview-panel" aria-label="Profile Preview">
+                            <div class="settings-profile-preview-head">
+                                <p class="settings-inline-label">Profile</p>
+                                <div class="settings-profile-actions" aria-label="Profile actions">
+                                    <button id="settings-open-profile" type="button" class="settings-icon-button" aria-label="Open profile">
+                                        <span class="material-symbols-outlined" aria-hidden="true">open_in_new</span>
+                                    </button>
+                                    <button id="settings-share-profile" type="button" class="settings-icon-button" aria-label="Copy profile link">
+                                        <span class="material-symbols-outlined" aria-hidden="true">ios_share</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="settings-profile-tile" class="profile-tile" style="--profile-banner-color: {{ user.banner_color or '#fecae1' }};">
+                                <div class="profile-tile-banner" id="settings-preview-banner"></div>
+                                <div class="profile-tile-body">
+                                    <div class="profile-tile-avatar-frame">
+                                        <img id="settings-avatar-preview" class="profile-tile-avatar" src="{{ (user.picture or 'https://resources.apstudy.org/images/AP-Resources-Logo.png')|avatar_url(150) }}" alt="Profile preview" width="150" height="150" decoding="async" />
+                                    </div>
+                                    <div class="profile-tile-heading">
+                                        <h3 id="settings-preview-name">{{ user.name or 'APStudy User' }}</h3>
+                                        <p id="settings-preview-handle">@{{ (user.name or 'apstudy-user')|lower|replace(' ', '-') }}</p>
+                                    </div>
+                                    <div class="profile-tile-details">
+                                        <div id="settings-preview-school-card">
+                                            <span>School</span>
+                                            <strong id="settings-preview-school">{{ user.school or 'Not set' }}</strong>
+                                        </div>
+                                        <div>
+                                            <span>Major</span>
+                                            <strong id="settings-preview-major">{{ user.major or 'Not set' }}</strong>
+                                        </div>
+                                        <div>
+                                            <span>Graduation</span>
+                                            <strong id="settings-preview-graduation">{{ user.graduation_year or user.class_year or 'Not set' }}</strong>
+                                        </div>
+                                        <div>
+                                            <span>Education</span>
+                                            <strong id="settings-preview-education">{{ user.education_level or 'Not set' }}</strong>
+                                        </div>
+                                        <div id="settings-preview-member-card">
+                                            <span>Member Since</span>
+                                            <strong id="settings-preview-created">{{ user.member_since or 'Not set' }}</strong>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="settings-card-footer">
-                            <button id="settings-save-profile" type="button" class="settings-button settings-button-primary">Update</button>
-                        </div>
-                    </article>
-                    <article class="settings-card">
-                        <div class="settings-card-body">
-                            <div class="settings-card-summary">
-                                <h3>Academic Details</h3>
-                                <p>Your school and academic track.</p>
-                            </div>
-                            <div class="settings-card-content">
-                                <div class="settings-field-grid settings-field-grid-three">
-                                    <label class="settings-field">
-                                        <span class="settings-field-label">School</span>
-                                        <input id="settings-school" type="text" autocomplete="organization" placeholder="Nest University" />
-                                    </label>
-                                    <label class="settings-field">
-                                        <span class="settings-field-label">Graduation Year</span>
-                                        <input id="settings-graduation-year" type="text" inputmode="numeric" maxlength="4" placeholder="2028" />
-                                    </label>
-                                    <label class="settings-field">
-                                        <span class="settings-field-label">Major / Intended Major</span>
-                                        <input id="settings-major" type="text" autocomplete="off" placeholder="Computer Science" />
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="settings-card-footer">
-                            <button id="settings-save-academic" type="button" class="settings-button settings-button-primary">Update</button>
-                        </div>
-                    </article>
-                    <article class="settings-card">
-                        <div class="settings-card-body settings-card-body-actions">
-                            <div class="settings-card-summary">
-                                <h3>Account</h3>
-                                <p>Manage your account status and recovery options.</p>
-                            </div>
-                            <div class="settings-card-content settings-action-stack">
-                                <button id="settings-change-password" type="button" class="settings-button settings-button-secondary">Change Password</button>
-                                <button id="settings-delete-account" type="button" class="settings-button settings-button-danger">Delete Account</button>
-                            </div>
-                        </div>
-                    </article>
+                        </aside>
+                    </div>
                 </section>
                 <section id="data" class="settings-section scroll-mt-28 md:scroll-mt-32" data-section="data">
-                    <div class="settings-section-head">
-                        <h2>Data</h2>
-                        <p>Inspect what APStudy stores and export your information when needed.</p>
-                    </div>
                     <article class="settings-card">
                         <div class="settings-card-body">
                             <div class="settings-card-summary">
-                                <h3>Connection Details</h3>
-                                <p>Your account identifiers and created date.</p>
+                                <h3>Calendar Links</h3>
+                                <p>Connect Canvas and external calendars so assignments and events can sync into Nest.</p>
                             </div>
                             <div class="settings-card-content">
-                                <div class="settings-field-grid settings-field-grid-two">
-                                    <div class="settings-field settings-field-readonly">
-                                        <span class="settings-field-label">User ID</span>
-                                        <div class="settings-copy-field">
-                                            <input id="settings-user-id" type="text" readonly />
-                                            <button type="button" class="settings-copy-button" data-copy-target="settings-user-id" aria-label="Copy user ID">
-                                                <span class="material-symbols-outlined">content_copy</span>
-                                            </button>
-                                        </div>
+                                <label class="settings-field">
+                                    <span class="settings-field-label">Emory Canvas Calendar</span>
+                                    <span class="settings-help-text">Paste your Canvas ICS calendar feed URL.</span>
+                                    <span class="settings-icon-input">
+                                        <span class="material-symbols-outlined" aria-hidden="true">link</span>
+                                        <input id="settings-canvas-feed-url" type="url" inputmode="url" autocomplete="off" placeholder="https://canvas.emory.edu/feeds/calendars/..." />
+                                    </span>
+                                </label>
+                                <details class="settings-calendar-guide">
+                                    <summary>How to find your Canvas Calendar URL</summary>
+                                    <div class="settings-calendar-guide-body">
+                                        <p>Open Canvas Calendar, copy the calendar feed URL, then paste it above.</p>
+                                        <img
+                                            src="https://www.coursicle.com/shared/tasks/img/guides/canvas/desktop/gif.gif"
+                                            alt="Animated guide showing where to find the Canvas calendar feed URL"
+                                            loading="lazy"
+                                            decoding="async"
+                                        />
                                     </div>
-                                    <div class="settings-field settings-field-readonly">
-                                        <span class="settings-field-label">Account Created</span>
-                                        <input id="settings-account-created-data" type="text" readonly />
+                                </details>
+                                <div class="settings-calendar-links-head">
+                                    <div>
+                                        <span class="settings-field-label">Other Calendar Links</span>
+                                        <p class="settings-help-text">Add up to 10 Google, iCloud, Outlook, ICS, or webcal sharing links.</p>
                                     </div>
-                                    <div class="settings-stat-card">
-                                        <span class="settings-field-label">Storage Used</span>
-                                        <strong id="settings-storage-used">0 B</strong>
-                                        <p class="settings-help-text">Across shared files and uploads tied to your account.</p>
-                                    </div>
+                                    <button id="settings-add-other-calendar" type="button" class="settings-button settings-button-secondary settings-button-inline">
+                                        <span class="material-symbols-outlined" aria-hidden="true">add</span>
+                                        Add
+                                    </button>
                                 </div>
+                                <div id="settings-other-calendar-links" class="settings-calendar-link-list" aria-label="Other calendar links"></div>
+                                <p id="settings-other-calendar-count" class="settings-calendar-count">0 / 10 added</p>
                             </div>
+                        </div>
+                        <div class="settings-card-footer">
+                            <button id="settings-save-calendar-links" type="button" class="settings-button settings-button-primary">Save</button>
                         </div>
                     </article>
                     <article class="settings-card">
@@ -194,28 +248,29 @@
                                 <h3>Your Data</h3>
                                 <p>Export your profile, settings, and saved records as JSON.</p>
                             </div>
+                            <div class="settings-stat-card">
+                                <span class="settings-field-label">Storage Used</span>
+                                <strong data-storage-used>0 B</strong>
+                                <p class="settings-storage-details" data-storage-details>0 notes, 0 files</p>
+                            </div>
                             <div class="settings-card-content settings-action-stack">
                                 <button id="settings-export-data" type="button" class="settings-button settings-button-secondary">Export Data</button>
                             </div>
                         </div>
                     </article>
                     <article class="settings-card">
-                        <div class="settings-card-body">
+                        <div class="settings-card-body settings-card-body-actions">
                             <div class="settings-card-summary">
-                                <h3>Integrations</h3>
-                                <p>Third-party services connected to your account.</p>
+                                <h3>Danger Zone!</h3>
+                                <p>Manage your account status.</p>
                             </div>
-                            <div class="settings-card-content">
-                                <div id="settings-connected-services" class="settings-empty-state">No connected services.</div>
+                            <div class="settings-card-content settings-action-stack">
+                                <button id="settings-delete-account" type="button" class="settings-button settings-button-danger">Delete Account</button>
                             </div>
                         </div>
                     </article>
                 </section>
                 <section id="preferences" class="settings-section scroll-mt-28 md:scroll-mt-32" data-section="preferences">
-                    <div class="settings-section-head">
-                        <h2>Preferences</h2>
-                        <p>Adjust how APStudy looks, behaves, and communicates with you.</p>
-                    </div>
                     <article class="settings-card">
                         <div class="settings-card-body">
                             <div class="settings-card-summary">
@@ -313,8 +368,8 @@
                     </article>
                 </section>
             </div>
+            <global class="thefooter"></global>
         </div>
     </main>
-    <global class="thefooter"></global>
 </body>
 </html>

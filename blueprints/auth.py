@@ -12,6 +12,7 @@ Requires: client_secret.json in project root,
 import os
 import secrets
 import logging
+import random
 from datetime import datetime
 
 # Must be set before OAuth flow objects are created during local HTTP testing.
@@ -20,7 +21,7 @@ os.environ.setdefault("OAUTHLIB_INSECURE_TRANSPORT", "1")
 import requests as http_requests
 import google_auth_oauthlib.flow
 from flask import (
-    Blueprint, redirect, url_for, session, render_template, request, jsonify
+    Blueprint, Response, abort, redirect, url_for, session, render_template, request, jsonify, make_response
 )
 from flask_login import login_user, logout_user, current_user
 
@@ -39,6 +40,32 @@ from models import User, user_from_doc
 
 auth_bp = Blueprint("auth", __name__)
 logger = logging.getLogger(__name__)
+
+LOGIN_CSP = "; ".join([
+    "default-src 'self'",
+    "base-uri 'self'",
+    "object-src 'none'",
+    "frame-ancestors 'none'",
+    "script-src 'self' https://cdn.jsdelivr.net",
+    "style-src 'self' https://fonts.googleapis.com",
+    "font-src 'self' https://fonts.gstatic.com",
+    "img-src 'self' https://resources.apstudy.org data:",
+    "connect-src 'self' https://nyc.cloud.appwrite.io",
+    "form-action 'self'",
+])
+
+PUBLIC_PROFILE_CSP = "; ".join([
+    "default-src 'self'",
+    "base-uri 'self'",
+    "object-src 'none'",
+    "frame-ancestors 'none'",
+    "script-src 'self' https://cdn.jsdelivr.net",
+    "style-src 'self' https://fonts.googleapis.com",
+    "font-src 'self' https://fonts.gstatic.com",
+    "img-src 'self' https: data:",
+    "connect-src 'self' https://nyc.cloud.appwrite.io",
+    "form-action 'self'",
+])
 
 CLIENT_SECRETS_FILE = "client_secret.json"
 SCOPES = [
@@ -76,6 +103,83 @@ def _discord_avatar_url(profile):
         return None
     extension = "gif" if avatar_hash.startswith("a_") else "png"
     return f"https://cdn.discordapp.com/avatars/{user_id}/{avatar_hash}.{extension}?size=256"
+
+
+def _format_member_since(value):
+    if not value:
+        return None
+    if isinstance(value, datetime):
+        return value.strftime("%b %d, %Y")
+    text = value[:-1] + "+00:00" if isinstance(value, str) and value.endswith("Z") else value
+    try:
+        return datetime.fromisoformat(text).strftime("%b %d, %Y")
+    except (TypeError, ValueError):
+        return str(value)
+
+
+def _normalize_banner_color(value):
+    if not isinstance(value, str):
+        return "#fecae1"
+    normalized = value.strip()
+    if not normalized.startswith("#"):
+        normalized = f"#{normalized}"
+    if len(normalized) == 7:
+        try:
+            int(normalized[1:], 16)
+            return normalized.lower()
+        except ValueError:
+            return "#fecae1"
+    return "#fecae1"
+
+
+def _profile_handle(name, user_id):
+    base = "".join(
+        char.lower() if char.isalnum() else "-"
+        for char in (name or "")
+    ).strip("-")
+    base = "-".join(part for part in base.split("-") if part)
+    return f"@{base or user_id or 'apstudy-user'}"
+
+
+def _is_emory_school(value):
+    normalized = str(value or "").strip().lower()
+    return normalized in {"emory", "emory university"}
+
+
+def _is_early_member(value):
+    if not value:
+        return False
+    parsed = value
+    if isinstance(value, str) and value.endswith("Z"):
+        parsed = value[:-1] + "+00:00"
+    try:
+        created_at = parsed if isinstance(parsed, datetime) else datetime.fromisoformat(parsed)
+    except (TypeError, ValueError):
+        return False
+    if created_at.tzinfo is not None:
+        created_at = created_at.replace(tzinfo=None)
+    return created_at < datetime(2026, 8, 20)
+
+
+def _public_profile_payload(user_doc):
+    user_id = user_doc.get("$id") or user_doc.get("id")
+    name = user_doc.get("name") or "APStudy User"
+    return {
+        "id": user_id,
+        "public_user_id": user_doc.get("public_user_id"),
+        "name": name,
+        "handle": _profile_handle(name, user_id),
+        "picture_url": user_doc.get("picture_url"),
+        "banner_color": _normalize_banner_color(user_doc.get("banner_color")),
+        "school": user_doc.get("school"),
+        "major": user_doc.get("major"),
+        "graduation_year": user_doc.get("graduation_year"),
+        "education_level": user_doc.get("education_level"),
+        "class_year": user_doc.get("class_year"),
+        "member_since": _format_member_since(user_doc.get("created_at")),
+        "is_emory_school": _is_emory_school(user_doc.get("school")),
+        "is_early_member": _is_early_member(user_doc.get("created_at")),
+    }
 
 
 def _fetch_provider_profile(provider, access_token):
@@ -135,6 +239,21 @@ def _find_user_by_email(email):
     return rows[0] if rows else None
 
 
+def _generate_public_user_id(max_attempts=20):
+    from appwrite_client import COLLECTIONS
+
+    for _ in range(max_attempts):
+        # 10-digit numeric, first digit non-zero to preserve fixed width.
+        candidate = f"{random.randint(1000000000, 9999999999)}"
+        response = list_rows_safe(
+            COLLECTIONS["users"],
+            [Query.equal("public_user_id", [candidate]), Query.limit(1)],
+        )
+        if not response.get("rows"):
+            return candidate
+    raise RuntimeError("Unable to allocate unique public user ID")
+
+
 @auth_bp.route("/")
 def index():
     """Root redirect: dashboard if authenticated, login if not."""
@@ -148,7 +267,64 @@ def login():
     """Render the sign-in page."""
     if current_user.is_authenticated:
         return redirect(url_for("dashboard.dashboard"))
-    return render_template("login.html")
+    response = make_response(render_template("login.html"))
+    response.headers["Content-Security-Policy"] = LOGIN_CSP
+    return response
+
+
+@auth_bp.route("/user/<user_id>")
+def public_user_profile(user_id):
+    """Render a public profile card for a user."""
+    from appwrite_client import COLLECTIONS
+
+    try:
+        user_doc = get_row_safe(COLLECTIONS["users"], user_id, allow_missing=True)
+    except AppwriteException:
+        logger.exception("Failed to load public user profile")
+        abort(404)
+    if not user_doc:
+        abort(404)
+
+    viewer = None
+    theme_preference = "system-match"
+    if current_user.is_authenticated:
+        viewer = {
+            "email": current_user.email,
+            "picture": current_user.picture_url,
+        }
+        try:
+            from appwrite_client import COLLECTIONS
+            settings_response = list_rows_safe(
+                COLLECTIONS["user_settings"],
+                [Query.equal("user_id", [str(current_user.id)]), Query.limit(1)],
+            )
+            rows = settings_response.get("rows", [])
+            if rows:
+                theme_preference = rows[0].get("interface_theme") or theme_preference
+        except AppwriteException:
+            logger.exception("Failed to load viewer theme for public profile")
+
+    response = make_response(render_template(
+        "user_profile.html",
+        profile=_public_profile_payload(user_doc),
+        viewer=viewer,
+        theme_preference=theme_preference,
+    ))
+    response.headers["Content-Security-Policy"] = PUBLIC_PROFILE_CSP
+    return response
+
+
+@auth_bp.route("/user/profile-banner/<color>.svg")
+def profile_banner_svg(color):
+    """Serve a CSP-safe solid banner image for public profile cards."""
+    normalized_color = _normalize_banner_color(color)
+    svg = (
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" '
+        'role="img" aria-hidden="true">'
+        f'<rect width="1200" height="360" fill="{normalized_color}"/>'
+        '</svg>'
+    )
+    return Response(svg, mimetype="image/svg+xml")
 
 
 @auth_bp.route("/auth/session", methods=["POST"])
@@ -201,11 +377,19 @@ def appwrite_session():
 
     if not user_doc:
         created_at = format_datetime(datetime.utcnow())
+        try:
+            public_user_id = _generate_public_user_id()
+        except Exception:
+            logger.exception("Failed to generate public user id")
+            return jsonify({"error": "Unable to create user."}), 500
         row_data = {
             "google_id": appwrite_user_id,
+            "public_user_id": public_user_id,
             "email": email,
             "name": name or remote_user.get("name"),
             "picture_url": picture_url,
+            "banner_color": "#fecae1",
+            "avatar_source": "provider" if picture_url else None,
             "school": None,
             "major": None,
             "graduation_year": None,
@@ -252,8 +436,10 @@ def appwrite_session():
         updates = {"last_login": format_datetime(datetime.utcnow())}
         if name:
             updates["name"] = name
-        if picture_url:
+        existing_avatar_source = user_doc.get("avatar_source")
+        if picture_url and (not user_doc.get("picture_url") or existing_avatar_source == "provider"):
             updates["picture_url"] = picture_url
+            updates["avatar_source"] = "provider"
         if email:
             updates["email"] = email
         if provider and provider != "appwrite":
@@ -361,11 +547,17 @@ def oauth2callback():
     if not user_doc:
         created_at = format_datetime(datetime.utcnow())
         try:
+            public_user_id = _generate_public_user_id()
+        except Exception:
+            logger.exception("Failed to generate public user id")
+            return redirect(url_for("auth.login"))
+        try:
             user_doc = create_row_safe(
                 COLLECTIONS["users"],
                 row_id=google_id,
                 data={
                     "google_id": google_id,
+                    "public_user_id": public_user_id,
                     "email": email,
                     "name": user_info.get("name"),
                     "picture_url": user_info.get("picture"),

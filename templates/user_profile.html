@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" data-apstudy-theme-preference="{{ theme_preference or 'system-match' }}">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@17/dist/iife/sdk.js"></script>
+    <script src="{{ url_for('static', filename='js/appwrite.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
+    <title>{{ profile.name }} - APStudy Nest</title>
+    <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy Logo">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/themes.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/settings.css') }}">
+    <script src="{{ url_for('static', filename='js/global.js') }}" defer></script>
+    {% if viewer %}
+    <script src="{{ url_for('static', filename='js/navbar.js') }}" defer></script>
+    {% endif %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user-profile.css') }}">
+</head>
+<body class="user-profile-page">
+    {% if viewer %}
+    <global class="thenav" data-profile-picture="{{ (viewer.picture or '')|avatar_url(32) }}" data-user-email="{{ viewer.email }}"></global>
+    {% endif %}
+    <div class="user-profile-shell">
+        <main class="user-profile-content">
+            <section class="user-profile-card" aria-label="{{ profile.name }} profile">
+                <div class="profile-tile">
+                    <div class="profile-tile-banner">
+                        <img
+                            class="profile-tile-banner-image"
+                            src="{{ url_for('auth.profile_banner_svg', color=(profile.banner_color or '#fecae1')|replace('#', '')) }}"
+                            alt=""
+                            aria-hidden="true"
+                        />
+                    </div>
+                    <div class="profile-tile-body">
+                        <div class="profile-tile-avatar-frame">
+                            <img class="profile-tile-avatar" src="{{ (profile.picture_url or 'https://resources.apstudy.org/images/AP-Resources-Logo.png')|avatar_url(150) }}" alt="{{ profile.name }} avatar" width="150" height="150" decoding="async" />
+                        </div>
+                        <div class="profile-tile-heading">
+                            <h3>{{ profile.name }}</h3>
+                            <p>{{ profile.handle or profile.id }}</p>
+                        </div>
+                        <div class="profile-tile-details">
+                            <div class="{{ 'profile-tile-detail-emory' if profile.is_emory_school else '' }}">
+                                <span>School</span>
+                                <strong>{{ profile.school or 'Not set' }}</strong>
+                            </div>
+                            <div>
+                                <span>Major</span>
+                                <strong>{{ profile.major or 'Not set' }}</strong>
+                            </div>
+                            <div>
+                                <span>Graduation</span>
+                                <strong>{{ profile.graduation_year or profile.class_year or 'Not set' }}</strong>
+                            </div>
+                            <div>
+                                <span>Education</span>
+                                <strong>{{ profile.education_level or 'Not set' }}</strong>
+                            </div>
+                            <div class="{{ 'profile-tile-detail-early-member' if profile.is_early_member else '' }}">
+                                <span>Member Since</span>
+                                <strong>{{ profile.member_since or 'Not set' }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if viewer %}
+                <p class="user-profile-footer">
+                    <a href="{{ url_for('dashboard.dashboard') }}">Back to dashboard</a>
+                </p>
+                {% else %}
+                <p class="user-profile-footer">
+                    <a href="{{ url_for('auth.login') }}">Sign in to Nest</a>
+                </p>
+                {% endif %}
+            </section>
+        </main>
+        <global class="thefooter user-profile-footer-chrome"></global>
+    </div>
+</body>
+</html>

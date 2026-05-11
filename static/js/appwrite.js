@@ -8,3 +8,10 @@ const client = new Appwrite.Client()
 const account = new Appwrite.Account(client);
 const databases = new Appwrite.Databases(client);
 const storage = new Appwrite.Storage(client);
+
+window.APPWRITE_ENDPOINT = APPWRITE_ENDPOINT;
+window.APPWRITE_PROJECT_ID = APPWRITE_PROJECT_ID;
+window.client = client;
+window.account = account;
+window.databases = databases;
+window.storage = storage;

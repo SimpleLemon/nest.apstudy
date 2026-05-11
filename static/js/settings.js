@@ -7,9 +7,15 @@ const SETTINGS_STATE = {
   profile: null,
   settings: null,
   storageUsageBytes: 0,
+  notesCount: 0,
+  filesCount: 0,
   connectedServices: [],
+  otherCalendarUrls: [],
   activeSection: 'account',
   pendingTheme: '',
+  profileBaseline: null,
+  profileDirty: false,
+  profileSaving: false,
 };
 
 const SETTINGS_SECTION_IDS = ['account', 'data', 'preferences'];
@@ -25,10 +31,13 @@ const SETTINGS_INTERFACE_THEME_TO_THEME = {
   'nest-light': 'light',
   'system-match': 'system',
 };
+const SETTINGS_MAX_OTHER_CALENDARS = 10;
 
 const SETTINGS_ENDPOINTS = {
   bootstrap: '/settings/api/bootstrap',
   profile: '/settings/api/profile',
+  avatarUpload: '/settings/api/avatar-upload',
+  feedUrl: '/settings/api/feed-url',
   preferences: '/settings/api/interface-preferences',
   exportData: '/settings/api/export',
   deleteAccount: '/settings/api/account/delete',
@@ -42,8 +51,10 @@ function initializeSettingsPage() {
   bindCopyButtons();
   bindToggleButtons();
   bindActionButtons();
-  bindAvatarPreview();
+  bindProfilePreviewControls();
+  bindCalendarControls();
   bindTimezoneHelper();
+  bindUnsavedChangesWarning();
   elements.themeChoices = Array.from(document.querySelectorAll('.settings-theme-choice'));
   bindThemeChoiceButtons();
   void bootstrapSettingsPage();
@@ -71,7 +82,23 @@ function cacheElements() {
   elements.copyButtons = Array.from(document.querySelectorAll('[data-copy-target]'));
   elements.toggleButtons = Array.from(document.querySelectorAll('[data-toggle-field]'));
   elements.avatarPreview = document.getElementById('settings-avatar-preview');
-  elements.avatarUrl = document.getElementById('settings-avatar-url');
+  elements.profileTile = document.getElementById('settings-profile-tile');
+  elements.previewName = document.getElementById('settings-preview-name');
+  elements.previewHandle = document.getElementById('settings-preview-handle');
+  elements.previewSchool = document.getElementById('settings-preview-school');
+  elements.previewSchoolCard = document.getElementById('settings-preview-school-card');
+  elements.previewMajor = document.getElementById('settings-preview-major');
+  elements.previewGraduation = document.getElementById('settings-preview-graduation');
+  elements.previewEducation = document.getElementById('settings-preview-education');
+  elements.previewCreated = document.getElementById('settings-preview-created');
+  elements.previewMemberCard = document.getElementById('settings-preview-member-card');
+  elements.openProfile = document.getElementById('settings-open-profile');
+  elements.shareProfile = document.getElementById('settings-share-profile');
+  elements.avatarUpload = document.getElementById('settings-avatar-upload');
+  elements.avatarUploadButton = document.getElementById('settings-avatar-upload-button');
+  elements.avatarUploadStatus = document.getElementById('settings-avatar-upload-status');
+  elements.bannerColorPicker = document.getElementById('settings-banner-color-picker');
+  elements.bannerSwatch = document.getElementById('settings-banner-swatch');
   elements.displayName = document.getElementById('settings-display-name');
   elements.email = document.getElementById('settings-email');
   elements.accountCreated = document.getElementById('settings-account-created');
@@ -80,15 +107,20 @@ function cacheElements() {
   elements.school = document.getElementById('settings-school');
   elements.major = document.getElementById('settings-major');
   elements.graduationYear = document.getElementById('settings-graduation-year');
-  elements.storageUsed = document.getElementById('settings-storage-used');
+  elements.storageUsed = Array.from(document.querySelectorAll('[data-storage-used]'));
+  elements.storageDetails = Array.from(document.querySelectorAll('[data-storage-details]'));
   elements.connectedServices = document.getElementById('settings-connected-services');
+  elements.canvasFeedUrl = document.getElementById('settings-canvas-feed-url');
+  elements.otherCalendarLinks = document.getElementById('settings-other-calendar-links');
+  elements.otherCalendarCount = document.getElementById('settings-other-calendar-count');
+  elements.addOtherCalendar = document.getElementById('settings-add-other-calendar');
+  elements.saveCalendarLinks = document.getElementById('settings-save-calendar-links');
   elements.theme = document.getElementById('settings-theme');
   elements.sidebarDefault = document.getElementById('settings-sidebar-default');
   elements.language = document.getElementById('settings-language');
   elements.timezone = document.getElementById('settings-timezone');
   elements.useCurrentTimezone = document.getElementById('settings-use-current-timezone');
   elements.saveProfile = document.getElementById('settings-save-profile');
-  elements.saveAcademic = document.getElementById('settings-save-academic');
   elements.saveAppearance = document.getElementById('settings-save-appearance');
   elements.saveNotifications = document.getElementById('settings-save-notifications');
   elements.saveRegion = document.getElementById('settings-save-region');
@@ -153,18 +185,95 @@ function bindToggleButtons() {
 
 function bindActionButtons() {
   elements.saveProfile?.addEventListener('click', () => void saveProfile());
-  elements.saveAcademic?.addEventListener('click', () => void saveProfile());
   elements.saveAppearance?.addEventListener('click', () => void savePreferences());
   elements.saveNotifications?.addEventListener('click', () => void savePreferences());
   elements.saveRegion?.addEventListener('click', () => void savePreferences());
+  elements.saveCalendarLinks?.addEventListener('click', () => void saveCalendarLinks());
+  elements.openProfile?.addEventListener('click', () => openProfileLink());
+  elements.shareProfile?.addEventListener('click', () => void shareProfileLink());
   elements.changePassword?.addEventListener('click', () => void handlePasswordReset());
   elements.deleteAccount?.addEventListener('click', () => void handleDeleteAccount());
   elements.exportData?.addEventListener('click', () => void handleExportData());
 }
 
-function bindAvatarPreview() {
-  elements.avatarUrl?.addEventListener('input', () => {
-    updateAvatarPreview(elements.avatarUrl.value);
+function bindProfilePreviewControls() {
+  elements.avatarUploadButton?.addEventListener('click', () => {
+    elements.avatarUpload?.click();
+  });
+  elements.avatarUpload?.addEventListener('change', () => {
+    const file = elements.avatarUpload.files && elements.avatarUpload.files[0];
+    if (file) {
+      void uploadAvatar(file);
+    }
+  });
+  elements.displayName?.addEventListener('input', renderProfilePreview);
+  elements.displayName?.addEventListener('input', updateProfileDirtyState);
+  elements.school?.addEventListener('input', renderProfilePreview);
+  elements.school?.addEventListener('input', updateProfileDirtyState);
+  elements.major?.addEventListener('input', renderProfilePreview);
+  elements.major?.addEventListener('input', updateProfileDirtyState);
+  elements.graduationYear?.addEventListener('input', renderProfilePreview);
+  elements.graduationYear?.addEventListener('input', updateProfileDirtyState);
+  elements.bannerColorPicker?.addEventListener('input', () => {
+    const nextColor = normalizeHexColor(elements.bannerColorPicker.value);
+    paintBannerColor(nextColor);
+    updateProfileDirtyState();
+  });
+}
+
+function getProfileUrl() {
+  const profile = SETTINGS_STATE.profile || {};
+  const accountData = SETTINGS_STATE.account || {};
+  const userId = profile.public_user_id
+    || profile.id
+    || elements.userId?.value
+    || accountData.$id
+    || accountData.id
+    || '';
+  if (!userId) {
+    return '';
+  }
+  return `${window.location.origin}/user/${encodeURIComponent(userId)}`;
+}
+
+function openProfileLink() {
+  const profileUrl = getProfileUrl();
+  if (!profileUrl) {
+    showToast('Profile link is unavailable right now.', 'error');
+    return;
+  }
+  window.open(profileUrl, '_blank', 'noopener');
+}
+
+async function shareProfileLink() {
+  const profileUrl = getProfileUrl();
+  if (!profileUrl) {
+    showToast('Profile link is unavailable right now.', 'error');
+    return;
+  }
+  await copyText(profileUrl);
+  showToast('Copied profile link.', 'success');
+}
+
+function bindCalendarControls() {
+  elements.addOtherCalendar?.addEventListener('click', () => {
+    const currentRows = getOtherCalendarInputValues({ includeBlank: true });
+    if (currentRows.length >= SETTINGS_MAX_OTHER_CALENDARS) {
+      showToast(`You can add up to ${SETTINGS_MAX_OTHER_CALENDARS} calendar links.`, 'error');
+      return;
+    }
+    addOtherCalendarRow('');
+    updateOtherCalendarCount();
+  });
+}
+
+function bindUnsavedChangesWarning() {
+  window.addEventListener('beforeunload', (event) => {
+    if (SETTINGS_STATE.profileSaving || !hasUnsavedProfileChanges()) {
+      return;
+    }
+    event.preventDefault();
+    event.returnValue = '';
   });
 }
 
@@ -189,8 +298,13 @@ async function bootstrapSettingsPage() {
     SETTINGS_STATE.profile = bootstrapResponse.profile || null;
     SETTINGS_STATE.settings = bootstrapResponse.settings || null;
     SETTINGS_STATE.storageUsageBytes = Number(bootstrapResponse.storage_usage_bytes || 0);
+    SETTINGS_STATE.notesCount = Number(bootstrapResponse.notes_count || 0);
+    SETTINGS_STATE.filesCount = Number(bootstrapResponse.files_count || 0);
     SETTINGS_STATE.connectedServices = Array.isArray(bootstrapResponse.connected_services)
       ? bootstrapResponse.connected_services
+      : [];
+    SETTINGS_STATE.otherCalendarUrls = Array.isArray(bootstrapResponse.other_calendar_urls)
+      ? bootstrapResponse.other_calendar_urls
       : [];
 
     populateFields();
@@ -224,15 +338,13 @@ function populateFields() {
 
   const displayName = profile.name || accountData.name || '';
   const email = profile.email || accountData.email || '';
-  const accountId = profile.id || accountData.$id || accountData.id || '';
-  const createdAt = profile.created_at || formatDate(accountData.registration || accountData.$createdAt);
+  const accountId = profile.public_user_id || profile.id || accountData.$id || accountData.id || '';
+  const createdAt = profile.member_since || formatDate(profile.created_at || accountData.registration || accountData.$createdAt);
   const avatarUrl = profile.picture_url || accountData.avatar || accountData.picture_url || '';
+  const bannerColor = normalizeHexColor(profile.banner_color || '#fecae1');
 
   if (elements.displayName) {
     elements.displayName.value = displayName;
-  }
-  if (elements.avatarUrl) {
-    elements.avatarUrl.value = avatarUrl;
   }
   if (elements.email) {
     elements.email.value = email;
@@ -253,13 +365,28 @@ function populateFields() {
     elements.major.value = profile.major || '';
   }
   if (elements.graduationYear) {
-    elements.graduationYear.value = profile.graduation_year || '';
+    elements.graduationYear.value = profile.graduation_year || profile.class_year || '';
   }
-  if (elements.storageUsed) {
-    elements.storageUsed.textContent = formatBytes(SETTINGS_STATE.storageUsageBytes);
+  if (elements.bannerColorPicker) {
+    elements.bannerColorPicker.value = bannerColor;
+  }
+  if (elements.storageUsed?.length) {
+    const storageText = formatBytes(SETTINGS_STATE.storageUsageBytes);
+    elements.storageUsed.forEach((node) => {
+      node.textContent = storageText;
+    });
+  }
+  if (elements.storageDetails?.length) {
+    const detailsText = `${formatCount(SETTINGS_STATE.notesCount, 'note')}, ${formatCount(SETTINGS_STATE.filesCount, 'file')}`;
+    elements.storageDetails.forEach((node) => {
+      node.textContent = detailsText;
+    });
   }
 
   updateAvatarPreview(avatarUrl);
+  paintBannerColor(bannerColor);
+  renderProfilePreview();
+  captureProfileBaseline();
 
   if (elements.language) {
     elements.language.value = settings.language || 'en';
@@ -267,6 +394,10 @@ function populateFields() {
   if (elements.timezone) {
     elements.timezone.value = settings.timezone || '';
   }
+  if (elements.canvasFeedUrl) {
+    elements.canvasFeedUrl.value = settings.canvas_ical_url || '';
+  }
+  renderOtherCalendarRows(SETTINGS_STATE.otherCalendarUrls);
 }
 
 function syncThemeControls() {
@@ -321,6 +452,123 @@ function renderConnectedServices() {
   }).join('');
 }
 
+function renderOtherCalendarRows(urls) {
+  if (!elements.otherCalendarLinks) {
+    return;
+  }
+  elements.otherCalendarLinks.innerHTML = '';
+  const safeUrls = Array.isArray(urls) ? urls.slice(0, SETTINGS_MAX_OTHER_CALENDARS) : [];
+  safeUrls.forEach((url) => addOtherCalendarRow(url));
+  updateOtherCalendarCount();
+}
+
+function addOtherCalendarRow(value) {
+  if (!elements.otherCalendarLinks) {
+    return;
+  }
+
+  const row = document.createElement('div');
+  row.className = 'settings-calendar-row';
+  row.innerHTML = `
+    <label class="settings-field settings-calendar-row-field">
+      <span class="sr-only">Other calendar link</span>
+      <span class="settings-icon-input">
+        <span class="material-symbols-outlined" aria-hidden="true">event</span>
+        <input data-other-calendar-url type="url" inputmode="url" autocomplete="off" placeholder="https://calendar.google.com/..." />
+      </span>
+    </label>
+    <button type="button" class="settings-calendar-remove" aria-label="Remove calendar link">
+      <span class="material-symbols-outlined" aria-hidden="true">close</span>
+    </button>
+  `;
+
+  const input = row.querySelector('[data-other-calendar-url]');
+  if (input) {
+    input.value = value || '';
+    input.addEventListener('input', updateOtherCalendarCount);
+  }
+  row.querySelector('.settings-calendar-remove')?.addEventListener('click', () => {
+    row.remove();
+    updateOtherCalendarCount();
+  });
+  elements.otherCalendarLinks.appendChild(row);
+}
+
+function updateOtherCalendarCount() {
+  if (!elements.otherCalendarCount) {
+    return;
+  }
+  const rowCount = getOtherCalendarInputValues({ includeBlank: true }).length;
+  elements.otherCalendarCount.textContent = `${rowCount} / ${SETTINGS_MAX_OTHER_CALENDARS} added`;
+}
+
+function getOtherCalendarInputValues(options = {}) {
+  const includeBlank = Boolean(options.includeBlank);
+  if (!elements.otherCalendarLinks) {
+    return [];
+  }
+  return Array.from(elements.otherCalendarLinks.querySelectorAll('[data-other-calendar-url]'))
+    .map((input) => input.value.trim())
+    .filter((value) => includeBlank || value);
+}
+
+function collectCalendarPayload() {
+  const canvasUrl = elements.canvasFeedUrl?.value.trim() || '';
+  const otherUrls = getOtherCalendarInputValues();
+  if (otherUrls.length > SETTINGS_MAX_OTHER_CALENDARS) {
+    throw new Error(`You can add up to ${SETTINGS_MAX_OTHER_CALENDARS} calendar links.`);
+  }
+
+  const normalizedCanvasUrl = normalizeCalendarLinkForComparison(canvasUrl);
+  const seen = new Set();
+  const cleanedOtherUrls = [];
+
+  otherUrls.forEach((url) => {
+    const normalized = normalizeCalendarLinkForComparison(url);
+    if (!normalized) {
+      throw new Error('Each optional calendar link must be a valid http(s) or webcal URL.');
+    }
+    if (normalizedCanvasUrl && normalized === normalizedCanvasUrl) {
+      throw new Error('Optional calendar links cannot duplicate the Canvas calendar.');
+    }
+    if (seen.has(normalized)) {
+      throw new Error('Duplicate optional calendar links are not allowed.');
+    }
+    seen.add(normalized);
+    cleanedOtherUrls.push(url);
+  });
+
+  return {
+    canvas_ical_url: canvasUrl,
+    other_ical_urls: cleanedOtherUrls,
+  };
+}
+
+function normalizeCalendarLinkForComparison(value) {
+  const raw = String(value || '').trim();
+  if (!raw) {
+    return '';
+  }
+
+  let parsed;
+  try {
+    parsed = new URL(raw);
+  } catch (error) {
+    return '';
+  }
+
+  let protocol = parsed.protocol.toLowerCase();
+  if (protocol === 'webcal:') {
+    protocol = 'https:';
+  }
+  if (protocol !== 'http:' && protocol !== 'https:') {
+    return '';
+  }
+
+  const pathname = parsed.pathname.replace(/\/+$/, '');
+  return `${protocol}//${parsed.hostname.toLowerCase()}${parsed.port ? `:${parsed.port}` : ''}${pathname}${parsed.search}`;
+}
+
 function syncHashOnLoad() {
   const targetId = normalizeSectionId(window.location.hash) || 'account';
   // Activate the section without scrolling. If a hash is present,
@@ -351,15 +599,19 @@ function activateSection(sectionId, options = {}) {
 }
 
 async function saveProfile() {
+  const currentProfile = SETTINGS_STATE.profile || {};
   const payload = {
     name: elements.displayName?.value.trim() || '',
-    picture_url: elements.avatarUrl?.value.trim() || '',
+    picture_url: currentProfile.picture_url || '',
+    avatar_source: currentProfile.avatar_source || (currentProfile.picture_url ? 'provider' : ''),
+    banner_color: normalizeHexColor(elements.bannerColorPicker?.value || currentProfile.banner_color || '#fecae1'),
     school: elements.school?.value.trim() || '',
     major: elements.major?.value.trim() || '',
     graduation_year: elements.graduationYear?.value.trim() || '',
   };
 
   try {
+    SETTINGS_STATE.profileSaving = true;
     const response = await fetchJson(SETTINGS_ENDPOINTS.profile, {
       method: 'POST',
       body: JSON.stringify(payload),
@@ -371,18 +623,106 @@ async function saveProfile() {
     };
     populateFields();
     const navbarAvatar = document.querySelector('#navbar-avatar-btn img');
-    const profilePreview = elements.avatarPreview;
     const nextAvatar = response.picture_url || '';
     const fallbackAvatar = 'https://resources.apstudy.org/images/AP-Resources-Logo.png';
     if (navbarAvatar) {
-      navbarAvatar.src = nextAvatar || fallbackAvatar;
+      navbarAvatar.src = avatarUrlForSize(nextAvatar || fallbackAvatar, 32);
     }
-    if (profilePreview) {
-      profilePreview.src = nextAvatar || fallbackAvatar;
-    }
+    captureProfileBaseline();
     showToast('Profile saved.', 'success');
   } catch (error) {
     showToast(error.message || 'Unable to save profile.', 'error');
+  } finally {
+    SETTINGS_STATE.profileSaving = false;
+  }
+}
+
+async function uploadAvatar(file) {
+  const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+  if (!allowedTypes.includes(file.type)) {
+    showToast('Avatar must be a JPG, PNG, GIF, or WebP image.', 'error');
+    if (elements.avatarUpload) elements.avatarUpload.value = '';
+    return;
+  }
+  if (file.size > 10 * 1024 * 1024) {
+    showToast('Avatar must be 10 MB or smaller.', 'error');
+    if (elements.avatarUpload) elements.avatarUpload.value = '';
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('avatar', file);
+  if (elements.avatarUpload) elements.avatarUpload.disabled = true;
+  if (elements.avatarUploadStatus) elements.avatarUploadStatus.textContent = 'Uploading...';
+
+  try {
+    const response = await fetchFormData(SETTINGS_ENDPOINTS.avatarUpload, formData);
+    SETTINGS_STATE.profile = {
+      ...(SETTINGS_STATE.profile || {}),
+      ...response,
+    };
+    updateAvatarPreview(response.picture_url || '');
+    const navbarAvatar = document.querySelector('#navbar-avatar-btn img');
+    if (navbarAvatar && response.picture_url) {
+      navbarAvatar.src = avatarUrlForSize(response.picture_url, 32);
+    }
+    if (elements.avatarUploadStatus) elements.avatarUploadStatus.textContent = 'Avatar uploaded.';
+    captureProfileBaseline();
+    showToast('Avatar uploaded.', 'success');
+  } catch (error) {
+    if (elements.avatarUploadStatus) elements.avatarUploadStatus.textContent = 'JPG, PNG, GIF, or WebP. Max 10 MB.';
+    showToast(error.message || 'Unable to upload avatar.', 'error');
+  } finally {
+    if (elements.avatarUpload) {
+      elements.avatarUpload.disabled = false;
+      elements.avatarUpload.value = '';
+    }
+  }
+}
+
+async function saveCalendarLinks() {
+  let payload;
+  try {
+    payload = collectCalendarPayload();
+  } catch (error) {
+    showToast(error.message || 'Check your calendar links.', 'error');
+    return;
+  }
+
+  const previousLabel = elements.saveCalendarLinks?.textContent || 'Save';
+  if (elements.saveCalendarLinks) {
+    elements.saveCalendarLinks.disabled = true;
+    elements.saveCalendarLinks.textContent = 'Saving...';
+  }
+
+  try {
+    const response = await fetchJson(SETTINGS_ENDPOINTS.feedUrl, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+
+    const savedCanvasUrl = response.canvas_ical_url ?? payload.canvas_ical_url;
+    const savedOtherUrls = Array.isArray(response.other_ical_urls)
+      ? response.other_ical_urls
+      : payload.other_ical_urls;
+    SETTINGS_STATE.settings = {
+      ...(SETTINGS_STATE.settings || {}),
+      canvas_ical_url: savedCanvasUrl,
+      other_calendar_urls: savedOtherUrls,
+    };
+    SETTINGS_STATE.otherCalendarUrls = savedOtherUrls;
+    if (elements.canvasFeedUrl) {
+      elements.canvasFeedUrl.value = savedCanvasUrl || '';
+    }
+    renderOtherCalendarRows(savedOtherUrls);
+    showToast('Calendar links saved.', 'success');
+  } catch (error) {
+    showToast(error.message || 'Unable to save calendar links.', 'error');
+  } finally {
+    if (elements.saveCalendarLinks) {
+      elements.saveCalendarLinks.disabled = false;
+      elements.saveCalendarLinks.textContent = previousLabel;
+    }
   }
 }
 
@@ -409,6 +749,7 @@ async function savePreferences() {
     syncThemeControls();
     syncToggleControls();
     applyThemePreference(payload.theme);
+    applySidebarDefault(response.sidebar_default || payload.sidebar_default);
     showToast('Preferences saved.', 'success');
   } catch (error) {
     showToast(error.message || 'Unable to save preferences.', 'error');
@@ -463,25 +804,135 @@ async function handleExportData() {
   }
 }
 
-function bindAvatarPreview() {
-  if (!elements.avatarUrl || !elements.avatarPreview) {
-    return;
-  }
-  elements.avatarUrl.addEventListener('input', () => {
-    updateAvatarPreview(elements.avatarUrl.value);
-  });
-}
-
 function updateAvatarPreview(value) {
   if (!elements.avatarPreview) {
     return;
   }
   const fallback = 'https://resources.apstudy.org/images/AP-Resources-Logo.png';
-  elements.avatarPreview.src = value && value.trim() ? value.trim() : fallback;
+  elements.avatarPreview.src = avatarUrlForSize(value && value.trim() ? value.trim() : fallback, 150);
   elements.avatarPreview.onerror = () => {
     elements.avatarPreview.onerror = null;
-    elements.avatarPreview.src = fallback;
+    elements.avatarPreview.src = avatarUrlForSize(fallback, 150);
   };
+  renderProfilePreview();
+}
+
+function avatarUrlForSize(url, size = 32) {
+  const rawUrl = String(url || '').trim();
+  if (!rawUrl) return rawUrl;
+
+  let parsedUrl;
+  try {
+    parsedUrl = new URL(rawUrl, window.location.origin);
+  } catch (error) {
+    return rawUrl;
+  }
+
+  const host = parsedUrl.hostname.toLowerCase();
+  const normalizedSize = Math.max(16, Math.min(Number.parseInt(size, 10) || 32, 512));
+
+  if (host.includes('githubusercontent.com')) {
+    parsedUrl.searchParams.set('s', String(normalizedSize));
+    return parsedUrl.toString();
+  }
+
+  if (host.includes('discordapp.com') || host.includes('discord.com')) {
+    parsedUrl.searchParams.set('size', String(nearestDiscordAvatarSize(normalizedSize)));
+    return parsedUrl.toString();
+  }
+
+  if (host.includes('googleusercontent.com')) {
+    return googleAvatarUrlForSize(rawUrl, normalizedSize);
+  }
+
+  if (host.includes('cloud.appwrite.io') && parsedUrl.pathname.includes('/storage/buckets/')) {
+    parsedUrl.searchParams.set('width', String(normalizedSize));
+    parsedUrl.searchParams.set('height', String(normalizedSize));
+    return parsedUrl.toString();
+  }
+
+  return rawUrl;
+}
+
+function nearestDiscordAvatarSize(size) {
+  return [16, 32, 64, 128, 256, 512]
+    .reduce((closest, candidate) => (
+      Math.abs(candidate - size) < Math.abs(closest - size) ? candidate : closest
+    ), 32);
+}
+
+function googleAvatarUrlForSize(url, size) {
+  const sizedUrl = url.replace(/([=?&]s(?:z)?=?)\d+/, `$1${size}`);
+  if (sizedUrl !== url) return sizedUrl;
+  return `${url}${url.includes('?') ? '&' : '?'}sz=${size}`;
+}
+
+function renderProfilePreview() {
+  const profile = SETTINGS_STATE.profile || {};
+  const accountData = SETTINGS_STATE.account || {};
+  const displayName = elements.displayName?.value.trim() || profile.name || accountData.name || 'APStudy User';
+  const school = elements.school?.value.trim() || profile.school || 'Not set';
+  const major = elements.major?.value.trim() || profile.major || 'Not set';
+  const graduation = elements.graduationYear?.value.trim()
+    || profile.graduation_year
+    || profile.class_year
+    || 'Not set';
+  const education = profile.education_level || 'Not set';
+  const createdAt = elements.accountCreated?.value
+    || profile.member_since
+    || formatDate(profile.created_at || accountData.registration || accountData.$createdAt)
+    || 'Not set';
+
+  if (elements.previewName) elements.previewName.textContent = displayName;
+  if (elements.previewHandle) elements.previewHandle.textContent = profileHandle(displayName, profile.id || accountData.$id || accountData.id);
+  if (elements.previewSchool) elements.previewSchool.textContent = school;
+  if (elements.previewMajor) elements.previewMajor.textContent = major;
+  if (elements.previewGraduation) elements.previewGraduation.textContent = graduation;
+  if (elements.previewEducation) elements.previewEducation.textContent = education;
+  if (elements.previewCreated) elements.previewCreated.textContent = createdAt;
+  elements.previewSchoolCard?.classList.toggle('profile-tile-detail-emory', isEmorySchool(school));
+  elements.previewMemberCard?.classList.toggle(
+    'profile-tile-detail-early-member',
+    isEarlyMember(profile.created_at || accountData.registration || accountData.$createdAt),
+  );
+}
+
+function captureProfileBaseline() {
+  SETTINGS_STATE.profileBaseline = getProfileFormValues();
+  SETTINGS_STATE.profileDirty = false;
+}
+
+function getProfileFormValues() {
+  return {
+    name: elements.displayName?.value.trim() || '',
+    school: elements.school?.value.trim() || '',
+    major: elements.major?.value.trim() || '',
+    graduation_year: elements.graduationYear?.value.trim() || '',
+    banner_color: normalizeHexColor(elements.bannerColorPicker?.value || ''),
+  };
+}
+
+function hasUnsavedProfileChanges() {
+  if (!SETTINGS_STATE.profileBaseline) {
+    return false;
+  }
+  const currentValues = getProfileFormValues();
+  const baseline = SETTINGS_STATE.profileBaseline;
+  return Object.keys(baseline).some((key) => currentValues[key] !== baseline[key]);
+}
+
+function updateProfileDirtyState() {
+  SETTINGS_STATE.profileDirty = hasUnsavedProfileChanges();
+}
+
+function paintBannerColor(value) {
+  const color = normalizeHexColor(value);
+  if (elements.profileTile) {
+    elements.profileTile.style.setProperty('--profile-banner-color', color);
+  }
+  if (elements.bannerSwatch) {
+    elements.bannerSwatch.style.setProperty('--settings-banner-tile-color', color);
+  }
 }
 
 function setToggleState(button, active) {
@@ -529,6 +980,53 @@ function normalizeSidebarDefault(value) {
   return 'expanded';
 }
 
+function applySidebarDefault(value) {
+  const shouldCollapse = normalizeSidebarDefault(value) === 'collapsed';
+  localStorage.setItem('sidebar-collapsed', String(shouldCollapse));
+  if (typeof window.APSTUDY_SET_SIDEBAR_COLLAPSED === 'function') {
+    window.APSTUDY_SET_SIDEBAR_COLLAPSED(shouldCollapse);
+    return;
+  }
+  document.dispatchEvent(new CustomEvent('apstudy-sidebar-default-change', {
+    detail: { collapsed: shouldCollapse },
+  }));
+}
+
+function normalizeHexColor(value) {
+  let normalized = String(value || '').trim();
+  if (!normalized) {
+    return '#fecae1';
+  }
+  if (!normalized.startsWith('#')) {
+    normalized = `#${normalized}`;
+  }
+  return /^#[0-9a-fA-F]{6}$/.test(normalized) ? normalized.toLowerCase() : '#fecae1';
+}
+
+function profileHandle(name, userId) {
+  const slug = String(name || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  return `@${slug || userId || 'apstudy-user'}`;
+}
+
+function isEmorySchool(value) {
+  const normalized = String(value || '').trim().toLowerCase();
+  return normalized === 'emory' || normalized === 'emory university';
+}
+
+function isEarlyMember(value) {
+  if (!value) {
+    return false;
+  }
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return false;
+  }
+  return date.getTime() < Date.UTC(2026, 7, 20);
+}
+
 function normalizeSectionId(hashValue) {
   if (!hashValue) {
     return '';
@@ -560,6 +1058,13 @@ function formatBytes(bytes) {
   return `${value >= 10 || unitIndex === 0 ? value.toFixed(0) : value.toFixed(1)} ${units[unitIndex]}`;
 }
 
+function formatCount(value, singularLabel) {
+  const count = Number(value || 0);
+  const normalizedCount = Number.isFinite(count) && count >= 0 ? Math.floor(count) : 0;
+  const pluralLabel = `${singularLabel}s`;
+  return `${normalizedCount} ${normalizedCount === 1 ? singularLabel : pluralLabel}`;
+}
+
 function formatDate(value) {
   if (!value) {
     return '';
@@ -584,6 +1089,20 @@ async function fetchJson(url, options = {}) {
   const contentType = response.headers.get('content-type') || '';
   const data = contentType.includes('application/json') ? await response.json() : null;
 
+  if (!response.ok) {
+    throw new Error((data && data.error) || 'Request failed.');
+  }
+  return data;
+}
+
+async function fetchFormData(url, formData) {
+  const response = await fetch(url, {
+    method: 'POST',
+    credentials: 'same-origin',
+    body: formData,
+  });
+  const contentType = response.headers.get('content-type') || '';
+  const data = contentType.includes('application/json') ? await response.json() : null;
   if (!response.ok) {
     throw new Error((data && data.error) || 'Request failed.');
   }
