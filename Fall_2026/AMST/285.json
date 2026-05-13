@@ -5,6 +5,12 @@
   "catalog_number": "285",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "None",
+  "course_description": "Seminars arranged around current issues and controversies in American culture. May be repeated as topic changes. .",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "E. Goldstein",
+      "instructors": [
+        {
+          "name": "E. Goldstein",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "J. Prude",
+      "instructors": [
+        {
+          "name": "J. Prude",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "SEM",
       "instructor": "M. Lowery",
+      "instructors": [
+        {
+          "name": "M. Lowery",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -86,7 +113,9 @@
       "crn": "4006",
       "section_number": "4",
       "schedule_type": "SEM",
-      "instructor": "I. Goh",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -111,6 +140,13 @@
       "section_number": "5",
       "schedule_type": "SEM",
       "instructor": "M. Lowery",
+      "instructors": [
+        {
+          "name": "M. Lowery",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -143,9 +179,8 @@
   },
   "instructors_unique": [
     "E. Goldstein",
-    "I. Goh",
     "J. Prude",
     "M. Lowery"
   ],
-  "scraped_at": "2026-04-20T20:50:18.369Z"
+  "scraped_at": "2026-05-13T00:39:29.210Z"
 }

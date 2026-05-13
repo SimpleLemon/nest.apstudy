@@ -1,10 +1,16 @@
 {
   "course_code": "ECON 385",
-  "course_title": "Special Topics in Economics",
+  "course_title": "Special Topics in Economics: Economics of Performing Arts",
   "subject": "ECON",
   "catalog_number": "385",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "None",
+  "course_description": "Selected topics in Economics. May be repeated for credit when topic varies.",
+  "course_notes": "This course requires ECON _OX 100 or ECON 101 or ECON_OX 101 or FIN 201 AND ECON 112 or ECON_OX112 or equivalent transfer credit as a prerequisite.",
+  "requisites": "This course requires ECON _OX 100 or ECON 101 or ECON_OX 101 or FIN 201 AND ECON 112 or ECON_OX112 or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,7 +21,14 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Lanier/Teague",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "Lanier/Teague",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -33,20 +46,52 @@
           }
         ]
       }
+    },
+    {
+      "crn": "5676",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "E. Pesavento",
+      "instructors": [
+        {
+          "name": "E. Pesavento",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      }
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 1,
     "closed": 0,
-    "waitlisted": 0
+    "waitlisted": 1
   },
   "instructors_unique": [
+    "E. Pesavento",
     "Lanier/Teague"
   ],
-  "scraped_at": "2026-04-20T20:50:38.312Z"
+  "scraped_at": "2026-05-13T00:39:59.884Z"
 }

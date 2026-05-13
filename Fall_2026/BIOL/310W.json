@@ -5,6 +5,12 @@
   "catalog_number": "310W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "CW",
+  "course_description": "This course is designed for seniors who are currently conducting laboratory research and will apply for graduate school in STEM. We begin with writing a fellowship application and conclude with oral and visual communication, including giving engaging slide-based talks.",
+  "course_notes": "(BIOL 142 and 142L) or BIOL_OX 142 or equivalent transfer credit as prerequisites.",
+  "requisites": "(BIOL 142 and 142L) or BIOL_OX 142 or equivalent transfer credit as prerequisites.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "L. Rieder",
+      "instructors": [
+        {
+          "name": "L. Rieder",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "L. Rieder"
   ],
-  "scraped_at": "2026-04-20T20:50:26.638Z"
+  "scraped_at": "2026-05-13T00:39:38.939Z"
 }

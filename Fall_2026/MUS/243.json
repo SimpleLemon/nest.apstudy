@@ -5,6 +5,12 @@
   "catalog_number": "243",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HSC",
+  "course_description": "A lecture/laboratory course on how artists accomplish their work in the face of changes in values, government mandates, and the economy. .",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "THEA 243 ARTHIST 243 DANC 243",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "A. Fristoe",
+      "instructors": [
+        {
+          "name": "A. Fristoe",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "A. Fristoe"
   ],
-  "scraped_at": "2026-04-20T20:51:19.604Z"
+  "scraped_at": "2026-05-13T00:41:04.353Z"
 }

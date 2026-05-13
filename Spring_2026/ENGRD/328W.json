@@ -5,6 +5,12 @@
   "catalog_number": "328W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "CWE",
+  "course_description": "Students will learn about media studies and cultural studies frameworks to analyze popular media throughout the century. Students write in class daily, blog to larger audiences weekly, draft and revise multiple multimodal projects, and respond meaningfully to peers' work in structured workshops.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Salter",
+      "instructors": [
+        {
+          "name": "S. Salter",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "S. Dutta",
+      "instructors": [
+        {
+          "name": "S. Dutta",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -73,5 +93,5 @@
     "S. Dutta",
     "S. Salter"
   ],
-  "scraped_at": "2026-04-20T21:51:31.850Z"
+  "scraped_at": "2026-05-13T00:37:02.042Z"
 }

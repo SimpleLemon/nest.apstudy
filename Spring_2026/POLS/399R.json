@@ -5,6 +5,12 @@
   "catalog_number": "399R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "This course offers 3 hours of independent research study credit. Participating students are matched with a member of the Emory faculty (or an advanced graduate student) and conduct independent research under the faculty member's supervision. May be repeated up to a total of 12 credit hours.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "RSC",
       "instructor": "M. Baker",
+      "instructors": [
+        {
+          "name": "M. Baker",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "M. Baker"
   ],
-  "scraped_at": "2026-04-20T20:48:52.598Z"
+  "scraped_at": "2026-05-13T00:38:58.372Z"
 }

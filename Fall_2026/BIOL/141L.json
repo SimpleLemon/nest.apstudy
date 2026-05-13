@@ -5,6 +5,12 @@
   "catalog_number": "141L",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": "SNTL",
+  "course_description": "Introduces students to scientific inquiry in the laboratory. Students design, implement, analyze and present authentic research projects. Along with Biology 141, 142 and 142L, meets the requirement for medical and dental school and the biology major.",
+  "course_notes": "BIOL 141 or BIOL_OX 141 as co-requisite or CHEM 141 or CHEM_OX 141 as prerequisite or equivalent transfer credit as co-requisite or prerequisite.",
+  "requisites": "BIOL 141 or BIOL_OX 141 as co-requisite or CHEM 141 or CHEM_OX 141 as prerequisite or equivalent transfer credit as co-requisite or prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -34,7 +47,14 @@
       "section_number": "2",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
       "schedule": {
@@ -53,6 +73,13 @@
       "section_number": "3",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -72,6 +99,13 @@
       "section_number": "4",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -91,6 +125,13 @@
       "section_number": "5",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -110,6 +151,13 @@
       "section_number": "6",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -129,6 +177,13 @@
       "section_number": "7",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -148,6 +203,13 @@
       "section_number": "8",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -167,6 +229,13 @@
       "section_number": "9",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -186,6 +255,13 @@
       "section_number": "10",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -205,7 +281,14 @@
       "section_number": "11",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
-      "enrollment_status": "Closed",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
       "schedule": {
@@ -224,6 +307,13 @@
       "section_number": "12",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -243,6 +333,13 @@
       "section_number": "13",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -262,6 +359,13 @@
       "section_number": "14",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -281,6 +385,13 @@
       "section_number": "15",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -300,7 +411,14 @@
       "section_number": "16",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
-      "enrollment_status": "Closed",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
       "schedule": {
@@ -319,6 +437,13 @@
       "section_number": "17",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -338,6 +463,13 @@
       "section_number": "18",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -357,6 +489,13 @@
       "section_number": "19",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -376,6 +515,13 @@
       "section_number": "20",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -395,6 +541,13 @@
       "section_number": "21",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -414,6 +567,13 @@
       "section_number": "22",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -433,6 +593,13 @@
       "section_number": "23",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -452,6 +619,13 @@
       "section_number": "24",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -471,6 +645,13 @@
       "section_number": "25",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -490,6 +671,13 @@
       "section_number": "26",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -509,6 +697,13 @@
       "section_number": "27",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -528,6 +723,13 @@
       "section_number": "28",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -547,6 +749,13 @@
       "section_number": "29",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -566,6 +775,13 @@
       "section_number": "30",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -585,7 +801,14 @@
       "section_number": "31",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
-      "enrollment_status": "Closed",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
       "schedule": {
@@ -604,6 +827,13 @@
       "section_number": "32",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -623,6 +853,13 @@
       "section_number": "33",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -642,6 +879,13 @@
       "section_number": "34",
       "schedule_type": "LAB",
       "instructor": "M. Cole",
+      "instructors": [
+        {
+          "name": "M. Cole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -663,12 +907,12 @@
     "labs": 34,
     "discussions": 0,
     "other": 0,
-    "open": 23,
-    "closed": 11,
+    "open": 25,
+    "closed": 9,
     "waitlisted": 0
   },
   "instructors_unique": [
     "M. Cole"
   ],
-  "scraped_at": "2026-04-20T20:50:26.625Z"
+  "scraped_at": "2026-05-13T00:39:38.937Z"
 }

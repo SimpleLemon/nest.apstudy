@@ -5,6 +5,12 @@
   "catalog_number": "190",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "Limited to freshmen. Topic changes to reflect changing interests of faculty and students.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "D. van Schoor",
+      "instructors": [
+        {
+          "name": "D. van Schoor",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -38,19 +51,15 @@
       "crn": "3524",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "E. Varner",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
-        "display": "T 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
+        "display": "Does Not Meet",
+        "meetings": []
       }
     }
   ],
@@ -65,8 +74,7 @@
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. van Schoor",
-    "E. Varner"
+    "D. van Schoor"
   ],
-  "scraped_at": "2026-04-20T21:52:05.927Z"
+  "scraped_at": "2026-05-13T00:39:50.216Z"
 }

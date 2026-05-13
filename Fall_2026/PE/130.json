@@ -5,6 +5,12 @@
   "catalog_number": "130",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "The activity component of this class will combine resistance training (without the use of heavy weight lifting equipment) with aerobic exercise. Students will be exposed to various tools for strength training including stability balls, body bars, and hand weights. Fulfills the PPF requirement.",
+  "course_notes": "Pre-req: Limit PPF",
+  "requisites": "Pre-req: Limit PPF",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "PE",
       "instructor": "E. Noell",
+      "instructors": [
+        {
+          "name": "E. Noell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "E. Noell"
   ],
-  "scraped_at": "2026-04-20T20:51:27.879Z"
+  "scraped_at": "2026-05-13T00:41:55.780Z"
 }

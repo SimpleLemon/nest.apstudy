@@ -5,6 +5,12 @@
   "catalog_number": "497",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1101",
       "schedule_type": "SUP",
       "instructor": "G. Maturana",
+      "instructors": [
+        {
+          "name": "G. Maturana",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "G. Maturana"
   ],
-  "scraped_at": "2026-04-20T20:52:01.041Z"
+  "scraped_at": "2026-05-13T00:40:16.043Z"
 }

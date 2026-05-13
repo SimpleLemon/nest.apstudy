@@ -5,6 +5,12 @@
   "catalog_number": "371",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "2",
+  "requirement_designation": "None",
+  "course_description": "Explores the diverse biomes of the tropics. Focus will be on tropical forests and grasslands, with an emphasis on ecological processes, biodiversity, human impact in the tropics, indigenous peoples, and ethnobotany.",
+  "course_notes": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or (BIOL 142 and BIOL 142L) or BIOL_OX 142 or equivalent transfer credit as prerequisite.",
+  "requisites": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or (BIOL 142 and BIOL 142L) or BIOL_OX 142 or equivalent transfer credit as prerequisite.",
+  "cross_listed": "ENVS 371",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "L. Wilson",
+      "instructors": [
+        {
+          "name": "L. Wilson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "L. Wilson"
   ],
-  "scraped_at": "2026-04-20T20:47:42.869Z"
+  "scraped_at": "2026-05-13T00:36:31.265Z"
 }

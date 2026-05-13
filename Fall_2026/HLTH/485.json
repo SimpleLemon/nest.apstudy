@@ -5,6 +5,12 @@
   "catalog_number": "485",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "None",
+  "course_description": "Seminar or lecture in various topics on human health. May be repeated for credit (up to 9 hours) when topic varies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -14,7 +20,14 @@
       "crn": "2639",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Choudhary/Downes",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -41,7 +54,7 @@
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Choudhary/Downes"
+    "Team"
   ],
-  "scraped_at": "2026-04-20T20:50:56.537Z"
+  "scraped_at": "2026-05-13T00:40:32.148Z"
 }

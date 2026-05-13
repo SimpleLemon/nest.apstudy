@@ -1,6 +1,6 @@
 (function() {
     const successRedirect = `${window.location.origin}/login`;
-    const defaultRedirect = `${window.location.origin}/dashboard`;
+    const defaultRedirect = `${window.location.origin}/calendar`;
     const failureRedirect = `${window.location.origin}/login`;
     const providerStorageKey = "apstudy-oauth-provider";
 

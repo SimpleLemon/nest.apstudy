@@ -5,6 +5,12 @@
   "catalog_number": "305",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HAP",
+  "course_description": "Considers common roots of spirituals, blues, and jazz, and surveys historical, cultural, social, and denominational factors that have shaped our perspective on the spiritual capacity of jazz. Focus is on the sacred works, biographies, and implicit theological positions of specific jazz masters.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "AAS 305 REL 335",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. Andrews",
+      "instructors": [
+        {
+          "name": "D. Andrews",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "D. Andrews"
   ],
-  "scraped_at": "2026-04-20T20:48:35.986Z"
+  "scraped_at": "2026-05-13T00:37:56.871Z"
 }

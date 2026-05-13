@@ -5,6 +5,12 @@
   "catalog_number": "270",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "None",
+  "course_description": "Seminar or lecture series of topics in music. May be repeated for credit when topic varies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Crist",
+      "instructors": [
+        {
+          "name": "S. Crist",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "D. Castro Pantoja",
+      "instructors": [
+        {
+          "name": "D. Castro Pantoja",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "K. Young",
+      "instructors": [
+        {
+          "name": "K. Young",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -98,5 +125,5 @@
     "K. Young",
     "S. Crist"
   ],
-  "scraped_at": "2026-04-20T20:48:35.984Z"
+  "scraped_at": "2026-05-13T00:37:56.869Z"
 }

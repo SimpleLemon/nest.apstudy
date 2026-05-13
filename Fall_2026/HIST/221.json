@@ -5,6 +5,12 @@
   "catalog_number": "221",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "SSE",
+  "course_description": "Traces the gradual incorporation of Africa into an expanding world economy and examines the impact of this incorporation on the development of African societies and modern nation states.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "AFS 221",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "G. Manrique de Lara Ruiz",
+      "instructors": [
+        {
+          "name": "G. Manrique de Lara Ruiz",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "G. Manrique de Lara Ruiz"
   ],
-  "scraped_at": "2026-04-20T20:50:54.863Z"
+  "scraped_at": "2026-05-13T00:40:30.508Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "488RW",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "CW",
+  "course_description": "All history majors except those who complete the Honors Program must take two colloquia (HIST 487, 488 or 489). Each colloquium treats a special theme by reading, discussion, and writing of papers. Enrollment in each is limited to twelve; non-majors are welcome within space limitations.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "M. Montalvo",
+      "instructors": [
+        {
+          "name": "M. Montalvo",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "3",
       "schedule_type": "SEM",
       "instructor": "C. Suddler",
+      "instructors": [
+        {
+          "name": "C. Suddler",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -63,5 +83,5 @@
     "C. Suddler",
     "M. Montalvo"
   ],
-  "scraped_at": "2026-04-20T20:48:11.186Z"
+  "scraped_at": "2026-05-13T00:37:23.033Z"
 }

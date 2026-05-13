@@ -5,6 +5,12 @@
   "catalog_number": "497R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 12",
+  "requirement_designation": "XA",
+  "course_description": "Supervised work on a faculty member's research project, normally for students who have demonstrated superior performance in sociology.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,8 +21,10 @@
       "section_number": "1",
       "schedule_type": "RSC",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "2",
+      "enrollment_count": "3",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -28,8 +36,15 @@
       "section_number": "2",
       "schedule_type": "RSC",
       "instructor": "R. Franzosi",
+      "instructors": [
+        {
+          "name": "R. Franzosi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "2",
+      "enrollment_count": "3",
       "is_cancelled": false,
       "schedule": {
         "display": "W 5:30-6:45p",
@@ -41,20 +56,41 @@
           }
         ]
       }
+    },
+    {
+      "crn": "5725",
+      "section_number": "3",
+      "schedule_type": "RSC",
+      "instructor": "T. Dowd",
+      "instructors": [
+        {
+          "name": "T. Dowd",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 3,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 3,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Franzosi"
+    "R. Franzosi",
+    "T. Dowd"
   ],
-  "scraped_at": "2026-04-20T20:51:47.801Z"
+  "scraped_at": "2026-05-13T00:42:20.182Z"
 }

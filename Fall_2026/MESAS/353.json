@@ -5,6 +5,12 @@
   "catalog_number": "353",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HSC",
+  "course_description": "This course is a systematic and empirical journey through the economic, political and governance landscapes of Europe, Middle East and North Africa through a comparative assessment of the evolution of state institutions and markets.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "AFS 353 ECON 353",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Cherribi",
+      "instructors": [
+        {
+          "name": "S. Cherribi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "S. Cherribi"
   ],
-  "scraped_at": "2026-04-20T21:52:01.045Z"
+  "scraped_at": "2026-05-13T00:40:56.310Z"
 }

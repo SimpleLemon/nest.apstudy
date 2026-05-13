@@ -5,6 +5,12 @@
   "catalog_number": "444W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "CWE",
+  "course_description": "A research and writing, intensive course designed to introduce students to the field of carceral studies. This course focuses on the racial, political, and gendered dimensions of the U.S. carceral state since its founding. We examine how the nation became a world leader in the use of incarceration.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "AAS 444W",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "C. Suddler",
+      "instructors": [
+        {
+          "name": "C. Suddler",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "C. Suddler"
   ],
-  "scraped_at": "2026-04-20T20:50:54.876Z"
+  "scraped_at": "2026-05-13T00:40:30.515Z"
 }

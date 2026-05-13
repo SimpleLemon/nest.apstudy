@@ -5,6 +5,12 @@
   "catalog_number": "101",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "FW",
+  "course_description": "Instruction in rhetorical composition, critical reading, reflection, and writing as recursive process. Across themed sections, students engage with diverse genres. Courses share some common assignments including research writing and final student-curated portfolio with reflection project.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "B. Whelan",
+      "instructors": [
+        {
+          "name": "B. Whelan",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "13",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "E. Agu",
+      "instructors": [
+        {
+          "name": "E. Agu",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "13",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "M. McDaniel",
+      "instructors": [
+        {
+          "name": "M. McDaniel",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "13",
       "is_cancelled": false,
@@ -87,6 +114,8 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "13",
       "is_cancelled": false,
@@ -111,6 +140,13 @@
       "section_number": "5",
       "schedule_type": "LEC",
       "instructor": "M. McDaniel",
+      "instructors": [
+        {
+          "name": "M. McDaniel",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "13",
       "is_cancelled": false,
@@ -135,6 +171,13 @@
       "section_number": "6",
       "schedule_type": "LEC",
       "instructor": "S. Richman",
+      "instructors": [
+        {
+          "name": "S. Richman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "13",
       "is_cancelled": false,
@@ -159,6 +202,13 @@
       "section_number": "7",
       "schedule_type": "LEC",
       "instructor": "M. Suhr-Sytsma",
+      "instructors": [
+        {
+          "name": "M. Suhr-Sytsma",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "13",
       "is_cancelled": false,
@@ -183,6 +233,13 @@
       "section_number": "8",
       "schedule_type": "LEC",
       "instructor": "M. Suhr-Sytsma",
+      "instructors": [
+        {
+          "name": "M. Suhr-Sytsma",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "13",
       "is_cancelled": false,
@@ -207,6 +264,13 @@
       "section_number": "9",
       "schedule_type": "LEC",
       "instructor": "S. Salter",
+      "instructors": [
+        {
+          "name": "S. Salter",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "13",
       "is_cancelled": false,
@@ -231,6 +295,13 @@
       "section_number": "10",
       "schedule_type": "LEC",
       "instructor": "A. Obedkoff",
+      "instructors": [
+        {
+          "name": "A. Obedkoff",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "13",
       "is_cancelled": false,
@@ -255,6 +326,13 @@
       "section_number": "11",
       "schedule_type": "LEC",
       "instructor": "A. Obedkoff",
+      "instructors": [
+        {
+          "name": "A. Obedkoff",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "13",
       "is_cancelled": false,
@@ -279,6 +357,8 @@
       "section_number": "12",
       "schedule_type": "LEC",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "13",
       "is_cancelled": false,
@@ -292,6 +372,8 @@
       "section_number": "13",
       "schedule_type": "LEC",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "13",
       "is_cancelled": false,
@@ -320,5 +402,5 @@
     "S. Richman",
     "S. Salter"
   ],
-  "scraped_at": "2026-04-20T21:52:12.438Z"
+  "scraped_at": "2026-05-13T00:40:09.600Z"
 }

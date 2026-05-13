@@ -5,6 +5,12 @@
   "catalog_number": "202ZL",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": "None",
+  "course_description": "CHEM 202ZL students will use molecular modeling to build 3-D chemical structures. They will then prepare an ester derivative, perform a nucleophilic addition, and stusy elimination reactions. Products of these reactions will be analyzed using a variety of instruments (IR, NMR, HPLC, etc.).",
+  "course_notes": "CHEM 202Z as co-requisite. Students must enroll in CHEM 202Z first.",
+  "requisites": "CHEM 202Z as co-requisite. Students must enroll in CHEM 202Z first.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,8 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -46,5 +54,5 @@
     "waitlisted": 0
   },
   "instructors_unique": [],
-  "scraped_at": "2026-04-20T20:50:30.041Z"
+  "scraped_at": "2026-05-13T00:39:46.994Z"
 }

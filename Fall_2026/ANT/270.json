@@ -5,6 +5,12 @@
   "catalog_number": "270",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "The aim of this course is to show how anthropologists (biological, cultural, and archaeologists) structure their research hypotheses, organize their data, select and run statistics, and describe their written results and discussions.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Saers",
+      "instructors": [
+        {
+          "name": "J. Saers",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "J. Saers"
   ],
-  "scraped_at": "2026-04-20T20:50:20.081Z"
+  "scraped_at": "2026-05-13T00:39:30.848Z"
 }

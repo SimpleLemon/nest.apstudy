@@ -5,6 +5,12 @@
   "catalog_number": "499RW",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 12",
+  "requirement_designation": "XAW",
+  "course_description": "Students design a research project in collaboration with ENVS faculty. Permission required. Intended for students with previous research experience. Fulfills the ENVS Independent Study requirement.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "RSC",
       "instructor": "G. Vazquez Prokopec",
+      "instructors": [
+        {
+          "name": "G. Vazquez Prokopec",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "G. Vazquez Prokopec"
   ],
-  "scraped_at": "2026-04-20T20:50:43.288Z"
+  "scraped_at": "2026-05-13T00:40:11.212Z"
 }

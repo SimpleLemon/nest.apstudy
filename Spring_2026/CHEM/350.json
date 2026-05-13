@@ -5,6 +5,12 @@
   "catalog_number": "350",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "SNT",
+  "course_description": "Intermediate-level course covering structures and reactivity of coordination compounds and solid state inorganic materials. GER Note: Completion of this course and associated lab satisfies the SNTL requirement. Completion of this course and lab only completes half of the SNT requirement.",
+  "course_notes": "(CHEM 203 or CHEM 203Z or CHEM_OX 203) and (CHEM 203L or CHEM 203ZL or CHEM_OX 203L) and (CHEM 205 or CHEM_OX 205) and (CHEM 205L or CHEM_OX 205L) or equivalent transfer credit as prerequisite.",
+  "requisites": "(CHEM 203 or CHEM 203Z or CHEM_OX 203) and (CHEM 203L or CHEM 203ZL or CHEM_OX 203L) and (CHEM 205 or CHEM_OX 205) and (CHEM 205L or CHEM_OX 205L) or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "F. Zhai",
+      "instructors": [
+        {
+          "name": "F. Zhai",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "F. Zhai"
   ],
-  "scraped_at": "2026-04-20T20:47:46.130Z"
+  "scraped_at": "2026-05-13T00:36:39.347Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "297",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "None",
+  "course_description": "May be repeated for credit, total credit not to exceed six hours. Cannot be used to meet course requirements for a Math major or minor. Topics vary by instructor.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,8 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -28,6 +36,13 @@
       "section_number": "2",
       "schedule_type": "SUP",
       "instructor": "N. Gupta",
+      "instructors": [
+        {
+          "name": "N. Gupta",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -50,5 +65,5 @@
   "instructors_unique": [
     "N. Gupta"
   ],
-  "scraped_at": "2026-04-20T20:48:29.464Z"
+  "scraped_at": "2026-05-13T00:37:47.210Z"
 }

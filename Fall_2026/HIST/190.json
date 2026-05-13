@@ -5,6 +5,12 @@
   "catalog_number": "190",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "Introduces first-year students to the discipline of history, particularly historical sources and methods; aims to improve critical reading, analytical, and writing skills in small group discussion.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "M. Armstrong-Partida",
+      "instructors": [
+        {
+          "name": "M. Armstrong-Partida",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "3",
       "schedule_type": "SEM",
       "instructor": "E. Goldstein",
+      "instructors": [
+        {
+          "name": "E. Goldstein",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -58,6 +78,13 @@
       "section_number": "5",
       "schedule_type": "SEM",
       "instructor": "A. Tullos",
+      "instructors": [
+        {
+          "name": "A. Tullos",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -82,6 +109,13 @@
       "section_number": "6",
       "schedule_type": "SEM",
       "instructor": "T. Menashe",
+      "instructors": [
+        {
+          "name": "T. Menashe",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -118,5 +152,5 @@
     "M. Armstrong-Partida",
     "T. Menashe"
   ],
-  "scraped_at": "2026-04-20T20:50:54.863Z"
+  "scraped_at": "2026-05-13T00:40:30.507Z"
 }

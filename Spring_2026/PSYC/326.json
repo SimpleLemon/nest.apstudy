@@ -5,6 +5,12 @@
   "catalog_number": "326",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "This course examines key developmental changes between infancy and adolescence in various social domains, including self understanding, moral, & emotional development. Through lecture, in-class assignments, and lively discussions, we will contemplate how social interactions shape human psychology.",
+  "course_notes": "PSYC 111 or PSYC_OX 111 or equivalent transfer credit as prerequisite.",
+  "requisites": "PSYC 111 or PSYC_OX 111 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Botto",
+      "instructors": [
+        {
+          "name": "S. Botto",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "S. Botto"
   ],
-  "scraped_at": "2026-04-20T20:48:55.895Z"
+  "scraped_at": "2026-05-13T00:39:01.602Z"
 }

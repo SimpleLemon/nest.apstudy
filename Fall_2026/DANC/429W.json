@@ -5,6 +5,12 @@
   "catalog_number": "429W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "CW",
+  "course_description": "This course explores the practical, aesthetic, and current issues of the performing arts as they relate to the development of individual artists and the communities that support their work. Focus areas include arts advocacy, grant writing, and the arts as a reflection of contemporary culture.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "THEA 429W",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "S. Radell",
+      "instructors": [
+        {
+          "name": "S. Radell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "S. Radell"
   ],
-  "scraped_at": "2026-04-20T20:50:36.609Z"
+  "scraped_at": "2026-05-13T00:39:56.667Z"
 }

@@ -5,21 +5,112 @@
   "catalog_number": "102",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "Introduction to select perennial themes in the history of political philosophy.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
   },
   "sections": [
     {
+      "crn": "5707",
+      "section_number": "D1",
+      "schedule_type": "DIS",
+      "instructor": "J. Owen",
+      "instructors": [
+        {
+          "name": "J. Owen",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5708",
+      "section_number": "D2",
+      "schedule_type": "DIS",
+      "instructor": "J. Owen",
+      "instructors": [
+        {
+          "name": "J. Owen",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11-11:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5709",
+      "section_number": "D3",
+      "schedule_type": "DIS",
+      "instructor": "J. Owen",
+      "instructors": [
+        {
+          "name": "J. Owen",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      }
+    },
+    {
       "crn": "2958",
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Owen",
+      "instructors": [
+        {
+          "name": "J. Owen",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "1",
+      "enrollment_count": "4",
       "is_cancelled": false,
       "schedule": {
-        "display": "TTh 4-4:50p; F 10-10:50a; F 11-11:50a; F 1-1:50p",
+        "display": "TTh 4-4:50p",
         "meetings": [
           {
             "day": "Tue",
@@ -30,38 +121,23 @@
             "day": "Thu",
             "start": "1600",
             "end": "1650"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          },
-          {
-            "day": "Fri",
-            "start": "1100",
-            "end": "1150"
-          },
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
           }
         ]
       }
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 4,
     "lectures": 1,
     "labs": 0,
-    "discussions": 0,
+    "discussions": 3,
     "other": 0,
-    "open": 1,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "J. Owen"
   ],
-  "scraped_at": "2026-04-20T20:51:36.141Z"
+  "scraped_at": "2026-05-13T00:42:05.616Z"
 }

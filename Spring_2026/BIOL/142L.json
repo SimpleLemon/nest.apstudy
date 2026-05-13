@@ -5,6 +5,12 @@
   "catalog_number": "142L",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "2",
+  "requirement_designation": "SNTL",
+  "course_description": "Students experience scientific inquiry in the laboratory. Students design, implement, analyze and present authentic research projects.",
+  "course_notes": "BIOL 142 as a corequisite.",
+  "requisites": "BIOL 142 as a corequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "Cole/Schneider",
+      "instructors": [
+        {
+          "name": "Cole/Schneider",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "LAB",
       "instructor": "Cole/Hailstock",
+      "instructors": [
+        {
+          "name": "Cole/Hailstock",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -53,6 +73,13 @@
       "section_number": "3",
       "schedule_type": "LAB",
       "instructor": "Cole/Sanchez",
+      "instructors": [
+        {
+          "name": "Cole/Sanchez",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -72,6 +99,13 @@
       "section_number": "4",
       "schedule_type": "LAB",
       "instructor": "Cole/Gutierrez",
+      "instructors": [
+        {
+          "name": "Cole/Gutierrez",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -91,6 +125,13 @@
       "section_number": "5",
       "schedule_type": "LAB",
       "instructor": "Cole/Wu",
+      "instructors": [
+        {
+          "name": "Cole/Wu",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -110,6 +151,13 @@
       "section_number": "6",
       "schedule_type": "LAB",
       "instructor": "Cole/Zhao",
+      "instructors": [
+        {
+          "name": "Cole/Zhao",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -129,6 +177,13 @@
       "section_number": "7",
       "schedule_type": "LAB",
       "instructor": "Cole/Hailstock",
+      "instructors": [
+        {
+          "name": "Cole/Hailstock",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -148,6 +203,13 @@
       "section_number": "8",
       "schedule_type": "LAB",
       "instructor": "Cole/McKenna III",
+      "instructors": [
+        {
+          "name": "Cole/McKenna III",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -167,6 +229,13 @@
       "section_number": "9",
       "schedule_type": "LAB",
       "instructor": "Cole/Wells",
+      "instructors": [
+        {
+          "name": "Cole/Wells",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -186,6 +255,13 @@
       "section_number": "10",
       "schedule_type": "LAB",
       "instructor": "Cole/Reed",
+      "instructors": [
+        {
+          "name": "Cole/Reed",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -205,6 +281,13 @@
       "section_number": "11",
       "schedule_type": "LAB",
       "instructor": "Cole/Paredes Diaz",
+      "instructors": [
+        {
+          "name": "Cole/Paredes Diaz",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -224,6 +307,13 @@
       "section_number": "12",
       "schedule_type": "LAB",
       "instructor": "Cole/Ciavatta",
+      "instructors": [
+        {
+          "name": "Cole/Ciavatta",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -243,6 +333,13 @@
       "section_number": "13",
       "schedule_type": "LAB",
       "instructor": "Cole/Hamilton",
+      "instructors": [
+        {
+          "name": "Cole/Hamilton",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -262,6 +359,13 @@
       "section_number": "14",
       "schedule_type": "LAB",
       "instructor": "Cole/Fatima",
+      "instructors": [
+        {
+          "name": "Cole/Fatima",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -281,6 +385,13 @@
       "section_number": "15",
       "schedule_type": "LAB",
       "instructor": "Cole/Pyne",
+      "instructors": [
+        {
+          "name": "Cole/Pyne",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -300,6 +411,13 @@
       "section_number": "16",
       "schedule_type": "LAB",
       "instructor": "Cole/Kim",
+      "instructors": [
+        {
+          "name": "Cole/Kim",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -319,6 +437,13 @@
       "section_number": "17",
       "schedule_type": "LAB",
       "instructor": "Cole/Philpot",
+      "instructors": [
+        {
+          "name": "Cole/Philpot",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -338,6 +463,13 @@
       "section_number": "18",
       "schedule_type": "LAB",
       "instructor": "Cole/Merino",
+      "instructors": [
+        {
+          "name": "Cole/Merino",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -357,6 +489,13 @@
       "section_number": "19",
       "schedule_type": "LAB",
       "instructor": "Cole/Kiessling",
+      "instructors": [
+        {
+          "name": "Cole/Kiessling",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -376,6 +515,13 @@
       "section_number": "20",
       "schedule_type": "LAB",
       "instructor": "Cole/Wells",
+      "instructors": [
+        {
+          "name": "Cole/Wells",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -395,6 +541,13 @@
       "section_number": "21",
       "schedule_type": "LAB",
       "instructor": "Cole/Sherman",
+      "instructors": [
+        {
+          "name": "Cole/Sherman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -414,6 +567,13 @@
       "section_number": "22",
       "schedule_type": "LAB",
       "instructor": "Cole/Alam",
+      "instructors": [
+        {
+          "name": "Cole/Alam",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -433,6 +593,13 @@
       "section_number": "23",
       "schedule_type": "LAB",
       "instructor": "Cole/Harper",
+      "instructors": [
+        {
+          "name": "Cole/Harper",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -452,6 +619,13 @@
       "section_number": "24",
       "schedule_type": "LAB",
       "instructor": "Cole/Banks",
+      "instructors": [
+        {
+          "name": "Cole/Banks",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -471,6 +645,13 @@
       "section_number": "25",
       "schedule_type": "LAB",
       "instructor": "Cole/Simpson",
+      "instructors": [
+        {
+          "name": "Cole/Simpson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -490,6 +671,13 @@
       "section_number": "26",
       "schedule_type": "LAB",
       "instructor": "Cole/Kilic",
+      "instructors": [
+        {
+          "name": "Cole/Kilic",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -509,6 +697,13 @@
       "section_number": "27",
       "schedule_type": "LAB",
       "instructor": "Cole/Fontenla-Iglesias",
+      "instructors": [
+        {
+          "name": "Cole/Fontenla-Iglesias",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -528,6 +723,13 @@
       "section_number": "28",
       "schedule_type": "LAB",
       "instructor": "Cole/Schneider",
+      "instructors": [
+        {
+          "name": "Cole/Schneider",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -547,6 +749,13 @@
       "section_number": "29",
       "schedule_type": "LAB",
       "instructor": "Cole/Pelia",
+      "instructors": [
+        {
+          "name": "Cole/Pelia",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -566,6 +775,13 @@
       "section_number": "30",
       "schedule_type": "LAB",
       "instructor": "Cole/Gleason",
+      "instructors": [
+        {
+          "name": "Cole/Gleason",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -585,6 +801,13 @@
       "section_number": "31",
       "schedule_type": "LAB",
       "instructor": "Cole/Simpson",
+      "instructors": [
+        {
+          "name": "Cole/Simpson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "31",
       "is_cancelled": false,
@@ -639,5 +862,5 @@
     "Cole/Wu",
     "Cole/Zhao"
   ],
-  "scraped_at": "2026-04-20T20:47:42.864Z"
+  "scraped_at": "2026-05-13T00:36:31.260Z"
 }

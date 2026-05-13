@@ -5,6 +5,12 @@
   "catalog_number": "500",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "2190",
       "schedule_type": "LEC",
       "instructor": "S. Turner",
+      "instructors": [
+        {
+          "name": "S. Turner",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2690",
       "schedule_type": "LEC",
       "instructor": "S. Turner",
+      "instructors": [
+        {
+          "name": "S. Turner",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -53,6 +73,13 @@
       "section_number": "4401",
       "schedule_type": "LEC",
       "instructor": "J. Andrle",
+      "instructors": [
+        {
+          "name": "J. Andrle",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -76,5 +103,5 @@
     "J. Andrle",
     "S. Turner"
   ],
-  "scraped_at": "2026-04-20T20:49:15.756Z"
+  "scraped_at": "2026-05-13T00:36:37.720Z"
 }

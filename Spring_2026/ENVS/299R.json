@@ -5,6 +5,12 @@
   "catalog_number": "299R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 8",
+  "requirement_designation": "None",
+  "course_description": "Variable credit. Permission of faculty supervisor required prior to enrollment. Designed primarily for sophomores, this course provides ENVS students with foundational skills for research under the supervision of a faculty member. A stepping stone to more advanced research work.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "RSC",
       "instructor": "X. Huang",
+      "instructors": [
+        {
+          "name": "X. Huang",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "RSC",
       "instructor": "J. Ajibade",
+      "instructors": [
+        {
+          "name": "J. Ajibade",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3",
       "schedule_type": "RSC",
       "instructor": "T. Gillespie",
+      "instructors": [
+        {
+          "name": "T. Gillespie",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "4",
       "schedule_type": "RSC",
       "instructor": "E. Saikawa",
+      "instructors": [
+        {
+          "name": "E. Saikawa",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -79,5 +113,5 @@
     "T. Gillespie",
     "X. Huang"
   ],
-  "scraped_at": "2026-04-20T20:47:59.636Z"
+  "scraped_at": "2026-05-13T00:37:03.650Z"
 }

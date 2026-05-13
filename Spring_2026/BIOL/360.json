@@ -5,6 +5,12 @@
   "catalog_number": "360",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "SNT",
+  "course_description": "Includes electrochemical and biophysical mechanisms for neuronal signaling, synaptic transmission, and neural bases of behavior and perception. GER Note: This course and BIOL360L satisfies half of SNTL requirement. This course w/o BIOL360L will award half of SNT only.",
+  "course_notes": "[(BIOL 142 and BIOL 142L) or BIOL_OX 142] and (CHEM 142 or CHEM_OX 142 or CHEM 202 or CHEM_OX 202 or CHEM 202Z) or equivalent transfer credit as prerequisite..",
+  "requisites": "[(BIOL 142 and BIOL 142L) or BIOL_OX 142] and (CHEM 142 or CHEM_OX 142 or CHEM 202 or CHEM_OX 202 or CHEM 202Z) or equivalent transfer credit as prerequisite..",
+  "cross_listed": "NBB 301",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Roeser",
+      "instructors": [
+        {
+          "name": "A. Roeser",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "A. Roeser"
   ],
-  "scraped_at": "2026-04-20T20:47:42.868Z"
+  "scraped_at": "2026-05-13T00:36:31.264Z"
 }

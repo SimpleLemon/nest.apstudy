@@ -5,6 +5,12 @@
   "catalog_number": "500L",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "A. Nizam",
+      "instructors": [
+        {
+          "name": "A. Nizam",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "LAB",
       "instructor": "C. Robichaux",
+      "instructors": [
+        {
+          "name": "C. Robichaux",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -53,6 +73,13 @@
       "section_number": "3",
       "schedule_type": "LAB",
       "instructor": "A. Nizam",
+      "instructors": [
+        {
+          "name": "A. Nizam",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -72,6 +99,8 @@
       "section_number": "4",
       "schedule_type": "LAB",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -91,6 +120,8 @@
       "section_number": "5",
       "schedule_type": "LAB",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -110,6 +141,8 @@
       "section_number": "6",
       "schedule_type": "LAB",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -129,6 +162,8 @@
       "section_number": "7",
       "schedule_type": "LAB",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -148,6 +183,8 @@
       "section_number": "8",
       "schedule_type": "LAB",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -167,6 +204,8 @@
       "section_number": "9",
       "schedule_type": "LAB",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -190,5 +229,5 @@
     "A. Nizam",
     "C. Robichaux"
   ],
-  "scraped_at": "2026-04-20T20:52:10.992Z"
+  "scraped_at": "2026-05-13T00:39:40.552Z"
 }

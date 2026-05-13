@@ -5,6 +5,12 @@
   "catalog_number": "321",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HAP",
+  "course_description": "Nature of law and justice; relation of law to ethics and custom; the limits of law; and problems of coercion and unjust law.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,7 +21,14 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Schwarz/Jauregui Alcala",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "Schwarz/Jauregui Alcala",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -41,12 +54,12 @@
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 0,
     "closed": 0,
-    "waitlisted": 0
+    "waitlisted": 1
   },
   "instructors_unique": [
     "Schwarz/Jauregui Alcala"
   ],
-  "scraped_at": "2026-04-20T20:51:31.143Z"
+  "scraped_at": "2026-05-13T00:42:00.730Z"
 }

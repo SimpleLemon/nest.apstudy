@@ -5,6 +5,12 @@
   "catalog_number": "372",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "2",
+  "requirement_designation": "None",
+  "course_description": "Permission required. This is the field course to accompany the lecture course on tropical ecology. Field trip will take place during the spring recess.",
+  "course_notes": "This course requires ENVS 371 or BIOL 371 as a prerequisite OR permission of instructor.",
+  "requisites": "This course requires ENVS 371 or BIOL 371 as a prerequisite OR permission of instructor.",
+  "cross_listed": "BIOL 372",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "L. Wilson",
+      "instructors": [
+        {
+          "name": "L. Wilson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "L. Wilson"
   ],
-  "scraped_at": "2026-04-20T20:47:59.640Z"
+  "scraped_at": "2026-05-13T00:37:03.653Z"
 }

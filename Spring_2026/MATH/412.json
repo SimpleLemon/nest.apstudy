@@ -5,6 +5,12 @@
   "catalog_number": "412",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "MQR",
+  "course_description": "This course is a continuation of Math 411 which focuses on integration and uniform convergence in n-space. Topics include: Stoke's theorem, Fubini's theorem, Taylor's theorem, the Stone-Weierstrass theorem, and Sard's theorem.",
+  "course_notes": "This course requires MATH 211 AND MATH_OX211 or equivalent transfer credit as a prerequisite.",
+  "requisites": "This course requires MATH 211 AND MATH_OX211 or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Yang",
+      "instructors": [
+        {
+          "name": "S. Yang",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "S. Yang"
   ],
-  "scraped_at": "2026-04-20T20:48:29.468Z"
+  "scraped_at": "2026-05-13T00:37:47.213Z"
 }

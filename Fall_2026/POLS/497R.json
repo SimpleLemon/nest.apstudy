@@ -5,6 +5,12 @@
   "catalog_number": "497R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 12",
+  "requirement_designation": "None",
+  "course_description": "Credit, one to twelve hours. Prerequisite: consent of instructor. Independent reading and research under the direction of a faculty member. May be repeated for credit.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "J. Owen",
+      "instructors": [
+        {
+          "name": "J. Owen",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "J. Owen"
   ],
-  "scraped_at": "2026-04-20T20:51:36.158Z"
+  "scraped_at": "2026-05-13T00:42:05.648Z"
 }

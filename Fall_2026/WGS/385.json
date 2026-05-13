@@ -5,6 +5,12 @@
   "catalog_number": "385",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "HSC",
+  "course_description": "Offerings vary each semester.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "E. Craig",
+      "instructors": [
+        {
+          "name": "E. Craig",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "S. Law",
+      "instructors": [
+        {
+          "name": "S. Law",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -62,8 +82,10 @@
       "crn": "4015",
       "section_number": "3",
       "schedule_type": "SEM",
-      "instructor": "I. Goh",
-      "enrollment_status": "Closed",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -87,6 +109,13 @@
       "section_number": "4",
       "schedule_type": "SEM",
       "instructor": "Y. Er",
+      "instructors": [
+        {
+          "name": "Y. Er",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -113,15 +142,14 @@
     "labs": 0,
     "discussions": 0,
     "other": 4,
-    "open": 3,
-    "closed": 1,
+    "open": 4,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "E. Craig",
-    "I. Goh",
     "S. Law",
     "Y. Er"
   ],
-  "scraped_at": "2026-04-20T20:51:54.465Z"
+  "scraped_at": "2026-05-13T00:42:28.246Z"
 }

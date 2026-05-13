@@ -5,6 +5,12 @@
   "catalog_number": "398R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 12",
+  "requirement_designation": "XA",
+  "course_description": "Reading and research projects decided upon between the student and a member of the faculty, with final approval from the chair. May be repeated for credit.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "W. Melion",
+      "instructors": [
+        {
+          "name": "W. Melion",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "SUP",
       "instructor": "G. Lovisetto",
+      "instructors": [
+        {
+          "name": "G. Lovisetto",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -51,5 +71,5 @@
     "G. Lovisetto",
     "W. Melion"
   ],
-  "scraped_at": "2026-04-20T21:51:17.192Z"
+  "scraped_at": "2026-05-13T00:36:26.435Z"
 }

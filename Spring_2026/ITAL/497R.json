@@ -5,6 +5,12 @@
   "catalog_number": "497R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 16",
+  "requirement_designation": "None",
+  "course_description": "Independent research for students majoring in Italian Studies. Advanced directed studies in Italian literature and culture. Course may be repeated for a different project.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "A. Porcarelli",
+      "instructors": [
+        {
+          "name": "A. Porcarelli",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "A. Porcarelli"
   ],
-  "scraped_at": "2026-04-20T20:48:17.904Z"
+  "scraped_at": "2026-05-13T00:37:35.933Z"
 }

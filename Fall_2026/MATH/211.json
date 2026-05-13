@@ -5,6 +5,12 @@
   "catalog_number": "211",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "QR",
+  "course_description": "Vectors; multivariable functions; partial derivatives; multiple integrals; vector and scalar fields; Green's and Stokes' theorems; divergence theorem.",
+  "course_notes": "MATH 112 or MATH 112Z or MATH_OX 112 or MATH_OX 112Z or equivalent transfer credit as prerequisite.",
+  "requisites": "MATH 112 or MATH 112Z or MATH_OX 112 or MATH_OX 112Z or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "L. Ruthotto",
+      "instructors": [
+        {
+          "name": "L. Ruthotto",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "A. Lyons",
+      "instructors": [
+        {
+          "name": "A. Lyons",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "D. Singh",
+      "instructors": [
+        {
+          "name": "D. Singh",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -87,6 +114,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "D. Singh",
+      "instructors": [
+        {
+          "name": "D. Singh",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -122,5 +156,5 @@
     "D. Singh",
     "L. Ruthotto"
   ],
-  "scraped_at": "2026-04-20T20:51:13.089Z"
+  "scraped_at": "2026-05-13T00:40:54.684Z"
 }

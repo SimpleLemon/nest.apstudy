@@ -5,6 +5,12 @@
   "catalog_number": "471R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "Selected contemporary problems in memory, language, learning, and thinking. May be repeated when the topic changes.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "S. Hamann",
+      "instructors": [
+        {
+          "name": "S. Hamann",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "T. Medina",
+      "instructors": [
+        {
+          "name": "T. Medina",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -53,6 +73,13 @@
       "section_number": "3",
       "schedule_type": "SEM",
       "instructor": "A. Cohen",
+      "instructors": [
+        {
+          "name": "A. Cohen",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -72,6 +99,13 @@
       "section_number": "4",
       "schedule_type": "SEM",
       "instructor": "B. Yamasaki",
+      "instructors": [
+        {
+          "name": "B. Yamasaki",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -103,5 +137,5 @@
     "S. Hamann",
     "T. Medina"
   ],
-  "scraped_at": "2026-04-20T20:48:55.898Z"
+  "scraped_at": "2026-05-13T00:39:01.604Z"
 }

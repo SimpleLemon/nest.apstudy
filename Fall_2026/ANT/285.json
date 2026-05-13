@@ -5,6 +5,12 @@
   "catalog_number": "285",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "None",
+  "course_description": "Seminar or lecture series on topics of anthropological interest at an intermediate level. Maybe repeated for credit when topic varies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,7 +21,14 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "R. Paul",
-      "enrollment_status": "Closed",
+      "instructors": [
+        {
+          "name": "R. Paul",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "M. Pak",
+      "instructors": [
+        {
+          "name": "M. Pak",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "J. Villa-Flores",
+      "instructors": [
+        {
+          "name": "J. Villa-Flores",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -82,6 +109,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "J. Villa-Flores",
+      "instructors": [
+        {
+          "name": "J. Villa-Flores",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -101,6 +135,13 @@
       "section_number": "5",
       "schedule_type": "LEC",
       "instructor": "G. Lovisetto",
+      "instructors": [
+        {
+          "name": "G. Lovisetto",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -127,8 +168,8 @@
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 1,
+    "open": 3,
+    "closed": 0,
     "waitlisted": 2
   },
   "instructors_unique": [
@@ -137,5 +178,5 @@
     "M. Pak",
     "R. Paul"
   ],
-  "scraped_at": "2026-04-20T20:50:20.081Z"
+  "scraped_at": "2026-05-13T00:39:30.848Z"
 }

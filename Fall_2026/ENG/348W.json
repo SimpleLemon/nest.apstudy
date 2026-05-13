@@ -5,6 +5,12 @@
   "catalog_number": "348W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAPW",
+  "course_description": "Selected works from various genres by writers from the 1950s to the present.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "N. Suhr-Sytsma",
+      "instructors": [
+        {
+          "name": "N. Suhr-Sytsma",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "N. Suhr-Sytsma"
   ],
-  "scraped_at": "2026-04-20T20:50:41.621Z"
+  "scraped_at": "2026-05-13T00:40:07.985Z"
 }

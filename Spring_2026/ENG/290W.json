@@ -5,6 +5,12 @@
   "catalog_number": "290W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "HAW",
+  "course_description": "Long historical surveys of national, regional, or ethnic traditions; or of genres or subgenres. Examples: History of African Literature, History of Latinx Literature, History of Science Fiction, History of the Sonnet, History of Southern U.S. Literature, History of Drama.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "G. Ramirez",
+      "instructors": [
+        {
+          "name": "G. Ramirez",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "E. Nordling",
+      "instructors": [
+        {
+          "name": "E. Nordling",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -73,5 +93,5 @@
     "E. Nordling",
     "G. Ramirez"
   ],
-  "scraped_at": "2026-04-20T20:47:57.991Z"
+  "scraped_at": "2026-05-13T00:37:00.408Z"
 }

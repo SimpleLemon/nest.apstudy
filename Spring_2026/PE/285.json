@@ -5,6 +5,12 @@
   "catalog_number": "285",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "Course based on selected topics of interest in fitness and exercise. Activity focus will vary. May be repeated (up to 2 credit hours) for credit when topic varies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "PE",
       "instructor": "Flint/Bedzow",
+      "instructors": [
+        {
+          "name": "Flint/Bedzow",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "Flint/Bedzow"
   ],
-  "scraped_at": "2026-04-20T20:48:44.274Z"
+  "scraped_at": "2026-05-13T00:38:48.682Z"
 }

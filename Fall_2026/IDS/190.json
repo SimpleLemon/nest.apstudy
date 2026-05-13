@@ -5,6 +5,12 @@
   "catalog_number": "190",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "Variable topics using interdisciplinary approaches from the humanities and social sciences. Topics represent current interests of the instructor.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -14,7 +20,14 @@
       "crn": "1505",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "R. Deighton",
+      "instructor": "Deighton/Hoff",
+      "instructors": [
+        {
+          "name": "Deighton/Hoff",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -46,7 +59,7 @@
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Deighton"
+    "Deighton/Hoff"
   ],
-  "scraped_at": "2026-04-20T20:50:58.225Z"
+  "scraped_at": "2026-05-13T00:40:36.983Z"
 }

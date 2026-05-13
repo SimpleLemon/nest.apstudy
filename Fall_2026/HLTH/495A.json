@@ -5,6 +5,12 @@
   "catalog_number": "495A",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3 - 4",
+  "requirement_designation": "XA",
+  "course_description": "This class is a requirement for students invited into the honors program during which they focus on their independent honors' research under the guidance of faculty.",
+  "course_notes": "HLTH 210 and HLTH 230 and HLTH 250 or equivalent transfer credit as a prerequisite. Used for: HLTH 415",
+  "requisites": "HLTH 210 and HLTH 230 and HLTH 250 or equivalent transfer credit as a prerequisite. Used for: HLTH 415",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "RSC",
       "instructor": "R. Hall-Clifford",
+      "instructors": [
+        {
+          "name": "R. Hall-Clifford",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "R. Hall-Clifford"
   ],
-  "scraped_at": "2026-04-20T20:50:56.537Z"
+  "scraped_at": "2026-05-13T00:40:32.148Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "125",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "Play Emory is an opportunity for students to receive credit through a structured yet flexible active lifestyle program. Students receive instruction in the topic and engage in a variety of fitness and health activities. Students have 15 weeks (one semester) to complete 30 hours of physical activity.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "PE",
       "instructor": "E. Noell",
+      "instructors": [
+        {
+          "name": "E. Noell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "PE",
       "instructor": "A. Murphy",
+      "instructors": [
+        {
+          "name": "A. Murphy",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3",
       "schedule_type": "PE",
       "instructor": "A. Murphy",
+      "instructors": [
+        {
+          "name": "A. Murphy",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "4",
       "schedule_type": "PE",
       "instructor": "L. Shepard",
+      "instructors": [
+        {
+          "name": "L. Shepard",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -67,6 +101,13 @@
       "section_number": "5",
       "schedule_type": "PE",
       "instructor": "L. Shepard",
+      "instructors": [
+        {
+          "name": "L. Shepard",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -91,5 +132,5 @@
     "E. Noell",
     "L. Shepard"
   ],
-  "scraped_at": "2026-04-20T20:48:44.263Z"
+  "scraped_at": "2026-05-13T00:38:48.678Z"
 }

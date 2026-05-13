@@ -5,6 +5,12 @@
   "catalog_number": "326",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HAPE",
+  "course_description": "Spiritual transformations involving worship, magic and healing, ritual, and aesthetic performance in Black speech and literature, music, and drama; and spiritual uses of Biblical themes to empower social political movements.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "AAS 326",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. Stewart",
+      "instructors": [
+        {
+          "name": "D. Stewart",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "D. Stewart"
   ],
-  "scraped_at": "2026-04-20T20:51:44.517Z"
+  "scraped_at": "2026-05-13T00:42:13.744Z"
 }

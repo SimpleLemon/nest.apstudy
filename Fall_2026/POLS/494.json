@@ -5,6 +5,12 @@
   "catalog_number": "494",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HSC",
+  "course_description": "Research Seminar on selected topics and problems in political science. Class will fulfill the \"research\" requirement for the political science major. May be repeated for credit when the topic varies.",
+  "course_notes": "POLS 208 or POLS_OX 208 or equivalent transfer credit as prerequisite.",
+  "requisites": "POLS 208 or POLS_OX 208 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "H. Tworzecki",
+      "instructors": [
+        {
+          "name": "H. Tworzecki",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "Sun/Kim",
+      "instructors": [
+        {
+          "name": "Sun/Kim",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -59,34 +79,17 @@
       }
     },
     {
-      "crn": "3035",
-      "section_number": "3",
-      "schedule_type": "SEM",
-      "instructor": "A. Abramowitz",
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
       "crn": "5102",
       "section_number": "4",
       "schedule_type": "SEM",
       "instructor": "M. Rueda",
+      "instructors": [
+        {
+          "name": "M. Rueda",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -103,20 +106,19 @@
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 3,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 2,
+    "other": 3,
+    "open": 1,
     "closed": 1,
     "waitlisted": 1
   },
   "instructors_unique": [
-    "A. Abramowitz",
     "H. Tworzecki",
     "M. Rueda",
     "Sun/Kim"
   ],
-  "scraped_at": "2026-04-20T20:51:36.157Z"
+  "scraped_at": "2026-05-13T00:42:05.646Z"
 }

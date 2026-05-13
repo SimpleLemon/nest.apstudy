@@ -5,6 +5,12 @@
   "catalog_number": "116",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "This course is an introduction to the central questions of biomedical ethics, such as end-of-life issues, abortion, and justice in the distribution of health care.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Iliopoulos",
+      "instructors": [
+        {
+          "name": "A. Iliopoulos",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "A. Iliopoulos"
   ],
-  "scraped_at": "2026-04-20T20:48:47.556Z"
+  "scraped_at": "2026-05-13T00:38:53.511Z"
 }

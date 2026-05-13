@@ -5,6 +5,12 @@
   "catalog_number": "531",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "L1",
       "schedule_type": "LAB",
       "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "L2",
       "schedule_type": "LAB",
       "instructor": "Stein/Pambo",
+      "instructors": [
+        {
+          "name": "Stein/Pambo",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -53,6 +73,13 @@
       "section_number": "L3",
       "schedule_type": "LAB",
       "instructor": "Stein/Khanna",
+      "instructors": [
+        {
+          "name": "Stein/Khanna",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -72,6 +99,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Stein",
+      "instructors": [
+        {
+          "name": "A. Stein",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -103,5 +137,5 @@
     "Stein/Pambo",
     "Team"
   ],
-  "scraped_at": "2026-04-20T20:49:34.021Z"
+  "scraped_at": "2026-05-13T00:37:13.366Z"
 }

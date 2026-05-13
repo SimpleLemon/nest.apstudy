@@ -5,6 +5,12 @@
   "catalog_number": "309",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "The 'science' of gender moves unevenly from the lab to the clinic. This class examines clinician and patient use of masculinity and femininity. Students explore the life-and-death stakes of gender and health across a range of historical periods and geographic settings",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Mulla",
+      "instructors": [
+        {
+          "name": "S. Mulla",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "S. Mulla"
   ],
-  "scraped_at": "2026-04-20T20:49:10.852Z"
+  "scraped_at": "2026-05-13T00:39:20.941Z"
 }

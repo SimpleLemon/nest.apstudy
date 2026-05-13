@@ -5,6 +5,12 @@
   "catalog_number": "333",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "SNT",
+  "course_description": "This course offers a rigorous treatment of the fundamental principles of thermodynamics and kinetics to show how they underlie complex biological processes: protein folding, membrane selfassembly, neuronal function, and enzyme catalysis. Examples are drawn from biomolecular research and medicine.",
+  "course_notes": "(CHEM 204 or CHEM_OX 204) and (CHEM 204L or CHEM_OX 204L) and (CHEM 205 or CHEM_OX 205) and (CHEM 205L or CHEM_OX 205L) or equivalent transfer credit as prerequisite.",
+  "requisites": "(CHEM 204 or CHEM_OX 204) and (CHEM 204L or CHEM_OX 204L) and (CHEM 205 or CHEM_OX 205) and (CHEM 205L or CHEM_OX 205L) or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Kindt",
+      "instructors": [
+        {
+          "name": "J. Kindt",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "J. Kindt"
   ],
-  "scraped_at": "2026-04-20T20:50:30.046Z"
+  "scraped_at": "2026-05-13T00:39:46.997Z"
 }

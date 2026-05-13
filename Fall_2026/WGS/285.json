@@ -5,6 +5,12 @@
   "catalog_number": "285",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "HSC",
+  "course_description": "Offerings vary each semester.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -14,9 +20,11 @@
       "crn": "4007",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "I. Goh",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "2",
+      "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -38,9 +46,16 @@
       "crn": "4526",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "A. Cato",
+      "instructor": "Cato/Holsey",
+      "instructors": [
+        {
+          "name": "Cato/Holsey",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
+      "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -70,8 +85,7 @@
     "waitlisted": 1
   },
   "instructors_unique": [
-    "A. Cato",
-    "I. Goh"
+    "Cato/Holsey"
   ],
-  "scraped_at": "2026-04-20T20:51:54.461Z"
+  "scraped_at": "2026-05-13T00:42:28.245Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "399R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "This course is designed for students who are currently registered with the Office of Disability Services. Options for physical education credit may include: attending physical therapy as prescribed by the student's physician, modified physical activity, attending PPF lectures, and labs and quizzes.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "A. Flint",
+      "instructors": [
+        {
+          "name": "A. Flint",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "A. Flint"
   ],
-  "scraped_at": "2026-04-20T20:48:44.276Z"
+  "scraped_at": "2026-05-13T00:38:48.683Z"
 }

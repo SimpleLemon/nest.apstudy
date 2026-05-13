@@ -5,6 +5,12 @@
   "catalog_number": "203Z",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "NS",
+  "course_description": "CHEM 203Z builds on themes of structure and reactivity established in CHEM 202Z. The course will blend biomolecular, inorganic, and organic elements of reactivity, using molecular orbital theory to predict structure and properties, and introducing modern examples of catalysis and catalytic cycles.",
+  "course_notes": "CHEM 202Z or equivalent transfer credit as prerequisite.",
+  "requisites": "CHEM 202Z or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. Liotta",
+      "instructors": [
+        {
+          "name": "D. Liotta",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "D. Liotta"
   ],
-  "scraped_at": "2026-04-20T20:47:46.127Z"
+  "scraped_at": "2026-05-13T00:36:39.342Z"
 }

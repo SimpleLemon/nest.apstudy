@@ -5,6 +5,12 @@
   "catalog_number": "150",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "NS",
+  "course_description": "This course will build a strong foundation in atomic and molecular structure. It starts with atomic structure and builds to ionic compounds and molecular structure, including stereochemistry and conformation. Students will interpret experimental data to explain structure, properties relationships.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "K. McKnelly",
+      "instructors": [
+        {
+          "name": "K. McKnelly",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "R. Himes",
+      "instructors": [
+        {
+          "name": "R. Himes",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "L. Wang",
+      "instructors": [
+        {
+          "name": "L. Wang",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -87,6 +114,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "T. McGill",
+      "instructors": [
+        {
+          "name": "T. McGill",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -111,6 +145,13 @@
       "section_number": "5",
       "schedule_type": "LEC",
       "instructor": "T. McGill",
+      "instructors": [
+        {
+          "name": "T. McGill",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -135,6 +176,13 @@
       "section_number": "6",
       "schedule_type": "LEC",
       "instructor": "M. Heaven",
+      "instructors": [
+        {
+          "name": "M. Heaven",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -159,6 +207,13 @@
       "section_number": "7",
       "schedule_type": "LEC",
       "instructor": "L. Dou",
+      "instructors": [
+        {
+          "name": "L. Dou",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -197,5 +252,5 @@
     "R. Himes",
     "T. McGill"
   ],
-  "scraped_at": "2026-04-20T20:50:30.038Z"
+  "scraped_at": "2026-05-13T00:39:46.993Z"
 }

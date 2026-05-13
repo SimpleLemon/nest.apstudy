@@ -5,6 +5,12 @@
   "catalog_number": "490W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAPW",
+  "course_description": "The senior seminar serves as the capstone experience for all each class of interdisciplinary undergraduate scholars. Students write and present a portion of their senior project, read contemporary debates about interdisciplinarity, and design a shared unit of interdisciplinary study.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "IDS 491W",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "J. Tulke",
+      "instructors": [
+        {
+          "name": "J. Tulke",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "J. Tulke"
   ],
-  "scraped_at": "2026-04-20T20:50:18.371Z"
+  "scraped_at": "2026-05-13T00:39:29.210Z"
 }

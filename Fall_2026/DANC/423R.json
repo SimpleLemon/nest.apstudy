@@ -5,6 +5,12 @@
   "catalog_number": "423R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": "PE",
+  "course_description": "Designed for advance dance students who can demonstrate a consistent repertoire of technical skill absent of fundamental body issues. Class material challenges the student's technical and performance range and develops a sophisticated understanding of movement concepts.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "K. O'Neal",
+      "instructors": [
+        {
+          "name": "K. O'Neal",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "K. O'Neal"
   ],
-  "scraped_at": "2026-04-20T20:50:36.609Z"
+  "scraped_at": "2026-05-13T00:39:56.667Z"
 }

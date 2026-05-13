@@ -5,6 +5,12 @@
   "catalog_number": "101",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "IC",
+  "course_description": "Fall. Introduction to the fundamental principles of classical Greek. Students will attain as rapidly as possible the ability to read and understand literary works.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. van Schoor",
+      "instructors": [
+        {
+          "name": "D. van Schoor",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -53,5 +66,5 @@
   "instructors_unique": [
     "D. van Schoor"
   ],
-  "scraped_at": "2026-04-20T20:50:49.944Z"
+  "scraped_at": "2026-05-13T00:40:24.091Z"
 }

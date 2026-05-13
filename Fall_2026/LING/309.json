@@ -5,6 +5,12 @@
   "catalog_number": "309",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "SNT",
+  "course_description": "This course examines the relationship between brain mechanisms and language behavior. Topics include aphasia and language disorders, aphasia in the deaf, critical periods in children, and gender differences in brain organization.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "PSYC 309",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "T. Medina",
+      "instructors": [
+        {
+          "name": "T. Medina",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "T. Medina"
   ],
-  "scraped_at": "2026-04-20T20:51:11.450Z"
+  "scraped_at": "2026-05-13T00:40:53.070Z"
 }

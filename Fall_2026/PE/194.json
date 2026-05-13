@@ -5,6 +5,12 @@
   "catalog_number": "194",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "This course is designed to equip the student with both the physical skills and mental strategies necessary to achieve greater flexibility and deeper states of relaxation. Topics include time management, meditation, coping with academic and peer pressure, depression, anger, and phobias, among others.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "PE",
       "instructor": "M. Delcroix",
+      "instructors": [
+        {
+          "name": "M. Delcroix",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "PE",
       "instructor": "S. Lafley",
+      "instructors": [
+        {
+          "name": "S. Lafley",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "PE",
       "instructor": "L. Shepard",
+      "instructors": [
+        {
+          "name": "L. Shepard",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -93,5 +120,5 @@
     "M. Delcroix",
     "S. Lafley"
   ],
-  "scraped_at": "2026-04-20T20:51:27.884Z"
+  "scraped_at": "2026-05-13T00:41:55.782Z"
 }

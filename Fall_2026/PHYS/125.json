@@ -5,6 +5,12 @@
   "catalog_number": "125",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "NS",
+  "course_description": "This course will introduce students to the basic science of climate change, possibly the greatest challenge of our time, and discuss the climate history of the Earth and the role of energy in our modern society and economy. No prerequisites are necessary.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "SUST 125",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Burton",
+      "instructors": [
+        {
+          "name": "J. Burton",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "J. Burton"
   ],
-  "scraped_at": "2026-04-20T20:51:32.834Z"
+  "scraped_at": "2026-05-13T00:42:02.385Z"
 }

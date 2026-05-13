@@ -5,6 +5,12 @@
   "catalog_number": "240",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "Major topics include the biology of animals and plants, physiology, evolution, and ecology.",
+  "course_notes": "This course requires BIOL 141 and BIOL 141L, or BIOL 151or BIOL_OX141 or equivalent transfer credit as a prerequisite.",
+  "requisites": "This course requires BIOL 141 and BIOL 141L, or BIOL 151or BIOL_OX141 or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "K. O'Toole",
+      "instructors": [
+        {
+          "name": "K. O'Toole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "K. O'Toole",
+      "instructors": [
+        {
+          "name": "K. O'Toole",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -72,5 +92,5 @@
   "instructors_unique": [
     "K. O'Toole"
   ],
-  "scraped_at": "2026-04-20T20:50:26.628Z"
+  "scraped_at": "2026-05-13T00:39:38.938Z"
 }

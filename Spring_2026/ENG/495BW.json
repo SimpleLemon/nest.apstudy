@@ -5,6 +5,12 @@
   "catalog_number": "495BW",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 8",
+  "requirement_designation": "CW",
+  "course_description": "Every semester. Credit, variable; may be repeated for a maximum of eight hours of credit. Prerequisite: approval of adviser and the director of undergraduate studies. Open to students writing honors theses.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "E. Rosinberg",
+      "instructors": [
+        {
+          "name": "E. Rosinberg",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "SUP",
       "instructor": "C. Nickerson",
+      "instructors": [
+        {
+          "name": "C. Nickerson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3",
       "schedule_type": "SUP",
       "instructor": "B. Reiss",
+      "instructors": [
+        {
+          "name": "B. Reiss",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -65,5 +92,5 @@
     "C. Nickerson",
     "E. Rosinberg"
   ],
-  "scraped_at": "2026-04-20T20:47:58.002Z"
+  "scraped_at": "2026-05-13T00:37:00.416Z"
 }

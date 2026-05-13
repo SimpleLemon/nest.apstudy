@@ -5,6 +5,12 @@
   "catalog_number": "660",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-15",
     "end": "2026-08-22"
@@ -15,6 +21,13 @@
       "section_number": "2195",
       "schedule_type": "LEC",
       "instructor": "D. Schweidel",
+      "instructors": [
+        {
+          "name": "D. Schweidel",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -49,6 +62,13 @@
       "section_number": "2295",
       "schedule_type": "LEC",
       "instructor": "D. Schweidel",
+      "instructors": [
+        {
+          "name": "D. Schweidel",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -83,6 +103,13 @@
       "section_number": "3295",
       "schedule_type": "LEC",
       "instructor": "D. Schweidel",
+      "instructors": [
+        {
+          "name": "D. Schweidel",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -126,5 +153,5 @@
   "instructors_unique": [
     "D. Schweidel"
   ],
-  "scraped_at": "2026-04-20T20:52:04.410Z"
+  "scraped_at": "2026-05-13T00:40:57.917Z"
 }

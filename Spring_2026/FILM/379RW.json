@@ -5,6 +5,12 @@
   "catalog_number": "379RW",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "HAPW",
+  "course_description": "An advanced writing-intensive course in the construction and formatting of screenplays for upper-level undergraduates, which also broaches various aspects of pre-production planning.",
+  "course_notes": "FILM 378R or ENGCW 378R or FILM 378RW or ENGCW 378RW or FILM_OX 378RW or ENG_OX 378RW or equivalent transfer credit as prerequisite.",
+  "requisites": "FILM 378R or ENGCW 378R or FILM 378RW or ENGCW 378RW or FILM_OX 378RW or ENG_OX 378RW or equivalent transfer credit as prerequisite.",
+  "cross_listed": "ENGCW 379RW",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Conway",
+      "instructors": [
+        {
+          "name": "J. Conway",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "J. Conway"
   ],
-  "scraped_at": "2026-04-20T20:48:01.281Z"
+  "scraped_at": "2026-05-13T00:37:06.888Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "190",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "Variable topics of special interest in the field of Neuroscience and Behavioral Biology. Any of these NBB 190 courses will satisfy the new General Education freshman seminar requirement but will not count as an NBB elective.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "K. Easterling",
+      "instructors": [
+        {
+          "name": "K. Easterling",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "A. Martin",
+      "instructors": [
+        {
+          "name": "A. Martin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -73,5 +93,5 @@
     "A. Martin",
     "K. Easterling"
   ],
-  "scraped_at": "2026-04-20T20:51:21.294Z"
+  "scraped_at": "2026-05-13T00:41:05.974Z"
 }

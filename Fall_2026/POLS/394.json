@@ -1,10 +1,16 @@
 {
   "course_code": "POLS 394",
-  "course_title": "Research Topics in Political Science",
+  "course_title": "Research Topics in Political Science: Digital Media AI Pol Campaign",
   "subject": "POLS",
   "catalog_number": "394",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "Research on selected topics and problems in political science. Class will fulfill the \"research\" requirement for the political science major. May be repeated for credit when the topic varies.",
+  "course_notes": "POLS 208 or POLS_OX 208 or equivalent transfer credit as prerequisite.",
+  "requisites": "POLS 208 or POLS_OX 208 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "H. Semetko",
+      "instructors": [
+        {
+          "name": "H. Semetko",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "H. Semetko"
   ],
-  "scraped_at": "2026-04-20T20:51:36.157Z"
+  "scraped_at": "2026-05-13T00:42:05.639Z"
 }

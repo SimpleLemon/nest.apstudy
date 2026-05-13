@@ -5,6 +5,12 @@
   "catalog_number": "485",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "None",
+  "course_description": "Seminar or lecture in various topics on human health. May be repeated for credit (up to 9 hours) when topic varies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "R. Hall-Clifford",
+      "instructors": [
+        {
+          "name": "R. Hall-Clifford",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -53,6 +73,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "S. Spangler",
+      "instructors": [
+        {
+          "name": "S. Spangler",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -83,5 +110,5 @@
     "S. Spangler",
     "Team"
   ],
-  "scraped_at": "2026-04-20T20:48:12.842Z"
+  "scraped_at": "2026-05-13T00:37:24.654Z"
 }

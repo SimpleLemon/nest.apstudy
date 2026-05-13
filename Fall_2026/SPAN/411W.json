@@ -5,6 +5,12 @@
   "catalog_number": "411W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "CW",
+  "course_description": "This course presents the history and multiple theories of translation, as well as basic methods/techniques and problems of translating between English and Spanish. A portion of class time will be devoted to translation practice and the comparison of multiple translations of a single text.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "LING 411W",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "L. Dillman",
+      "instructors": [
+        {
+          "name": "L. Dillman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "L. Dillman"
   ],
-  "scraped_at": "2026-04-20T20:51:49.441Z"
+  "scraped_at": "2026-05-13T00:42:21.804Z"
 }

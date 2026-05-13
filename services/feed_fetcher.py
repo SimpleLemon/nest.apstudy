@@ -6,7 +6,9 @@ Canvas iCal feeds are unauthenticated (the URL contains an opaque token)
 and return standard RFC 5545 iCalendar data.
 Functional now against any valid .ics feed URL.
 """
+import hashlib
 import logging
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, date as date_type, timezone
 
 import icalendar
@@ -17,9 +19,13 @@ from appwrite.query import Query
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import (
     create_row_safe,
-    delete_rows_by_query,
+    delete_row_safe,
     format_datetime,
+    first_row,
+    list_rows_all,
+    update_row_safe,
 )
+from services.feed_diff import diff_events
 
 logger = logging.getLogger(__name__)
 
@@ -168,7 +174,11 @@ def _normalize_feed_url(feed_url):
     return normalized
 
 
-def fetch_and_parse_ical(feed_url, timeout=20):
+def _feed_url_hash(feed_url):
+    return hashlib.sha256(feed_url.encode("utf-8")).hexdigest()
+
+
+def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
     """
     Fetch an iCal feed from a URL and parse it into a list of event dicts.
 
@@ -177,9 +187,8 @@ def fetch_and_parse_ical(feed_url, timeout=20):
         timeout: HTTP request timeout in seconds.
 
     Returns:
-        List of dicts, each containing:
-            uid, title, start, end, event_type, course_name,
-            description, fetched_at, is_all_day
+        Dict containing:
+            status_code, events, etag, last_modified, feed_url
 
     Raises:
         requests.RequestException on HTTP errors.
@@ -189,9 +198,11 @@ def fetch_and_parse_ical(feed_url, timeout=20):
     if not normalized_url:
         raise ValueError("Feed URL is empty after normalization.")
 
-    headers = {
-        "User-Agent": "APStudy-Calendar-Fetcher/1.0",
-    }
+    headers = {"User-Agent": "APStudy-Calendar-Fetcher/1.0"}
+    if etag:
+        headers["If-None-Match"] = etag
+    if last_modified:
+        headers["If-Modified-Since"] = last_modified
 
     logger.info("Fetching calendar feed: url=%s", normalized_url)
 
@@ -210,6 +221,19 @@ def fetch_and_parse_ical(feed_url, timeout=20):
             exc_info=True,
         )
         raise
+
+    if response.status_code == 304:
+        logger.info(
+            "Calendar feed not modified: url=%s",
+            normalized_url,
+        )
+        return {
+            "status_code": 304,
+            "events": [],
+            "etag": response.headers.get("ETag") or etag,
+            "last_modified": response.headers.get("Last-Modified") or last_modified,
+            "feed_url": normalized_url,
+        }
 
     raw_bytes = response.content
     raw_text = response.text
@@ -298,100 +322,222 @@ def fetch_and_parse_ical(feed_url, timeout=20):
         normalized_url,
         len(events),
     )
-    return events
+    return {
+        "status_code": 200,
+        "events": events,
+        "etag": response.headers.get("ETag"),
+        "last_modified": response.headers.get("Last-Modified"),
+        "feed_url": normalized_url,
+    }
 
 
 # ── Database caching ─────────────────────────────────────────────────────────
+def _load_feed_metadata(user_id):
+    feed_table = COLLECTIONS.get("calendar_feeds")
+    if not feed_table:
+        return {}
+    try:
+        rows = list_rows_all(
+            feed_table,
+            [Query.equal("user_id", [str(user_id)])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to load feed metadata")
+        return {}
+    return {row.get("feed_url_hash"): row for row in rows if row.get("feed_url_hash")}
+
+
+def _upsert_feed_metadata(user_id, feed_url, result, fetched_at):
+    feed_table = COLLECTIONS.get("calendar_feeds")
+    if not feed_table:
+        return
+    feed_hash = _feed_url_hash(feed_url)
+    existing = first_row(
+        feed_table,
+        [
+            Query.equal("user_id", [str(user_id)]),
+            Query.equal("feed_url_hash", [feed_hash]),
+        ],
+    )
+    if not existing:
+        existing = first_row(
+            feed_table,
+            [
+                Query.equal("user_id", [str(user_id)]),
+                Query.equal("feed_url", [feed_url]),
+            ],
+        )
+    etag_value = result.get("etag")
+    last_modified_value = result.get("last_modified")
+    if existing:
+        if etag_value is None:
+            etag_value = existing.get("etag_header")
+        if last_modified_value is None:
+            last_modified_value = existing.get("last_modified_header")
+
+    payload = {
+        "user_id": str(user_id),
+        "feed_url": feed_url,
+        "feed_url_hash": feed_hash,
+        "etag_header": etag_value,
+        "last_modified_header": last_modified_value,
+        "last_fetch_http_code": result.get("status_code"),
+        "last_fetched": format_datetime(fetched_at),
+        "updated_at": format_datetime(fetched_at),
+    }
+    if existing:
+        update_row_safe(feed_table, existing.get("$id"), payload)
+    else:
+        create_row_safe(
+            feed_table,
+            row_id=ID.unique(),
+            data={
+                **payload,
+                "created_at": format_datetime(fetched_at),
+            },
+        )
+
+
+def _apply_feed_diffs(user_id, feed_url, events, fetched_at, existing_rows=None):
+    if existing_rows is None:
+        feed_hash = _feed_url_hash(feed_url)
+        existing_rows = list_rows_all(
+            COLLECTIONS["calendar_cache"],
+            [
+                Query.equal("user_id", [str(user_id)]),
+                Query.equal("feed_url_hash", [feed_hash]),
+            ],
+        )
+
+    # Diffing uses feed_url + event_uid for stable upserts/deletes.
+    diff = diff_events(existing_rows, events, user_id, feed_url, fetched_at)
+
+    for payload in diff.to_create:
+        create_row_safe(
+            COLLECTIONS["calendar_cache"],
+            row_id=ID.unique(),
+            data=payload,
+        )
+
+    for row_id, payload in diff.to_update:
+        if not row_id:
+            continue
+        update_row_safe(
+            COLLECTIONS["calendar_cache"],
+            row_id,
+            payload,
+        )
+
+    for row in diff.to_delete:
+        row_id = row.get("$id") or row.get("id")
+        if row_id:
+            delete_row_safe(COLLECTIONS["calendar_cache"], row_id)
+
+    return len(diff.to_create) + len(diff.to_update)
+
+
 def fetch_and_cache_feeds(user_id, feed_urls):
     """
-    Fetch one or more user calendar iCal feeds, parse them, and replace
-    cached events in the database.
-
-    Uses a delete-then-insert strategy rather than upsert, because
-    Canvas may remove events (e.g., instructor deletes an assignment)
-    and we want the cache to reflect that removal.
-
-    Args:
-        user_id: Integer user ID from the users table.
-        feed_urls: Iterable of calendar feed URLs.
-
-    Returns:
-        Integer count of events cached.
-
-    Raises:
-        requests.RequestException on HTTP errors.
-        ValueError on invalid iCal data.
+    Fetch user calendar feeds and cache events using upsert/diffing.
     """
     if not feed_urls:
         raise ValueError("At least one feed URL is required.")
 
-    aggregated_events = []
+    normalized_urls = []
+    seen = set()
     for feed_url in feed_urls:
-        try:
-            aggregated_events.extend(fetch_and_parse_ical(feed_url))
-        except Exception as exc:
-            normalized_url = _normalize_feed_url(feed_url)
-            logger.error(
-                "Failed to fetch or parse calendar feed: url=%s error=%s",
-                normalized_url,
-                str(exc),
-                exc_info=True,
-            )
-            raise
+        normalized = _normalize_feed_url(feed_url)
+        if not normalized or normalized in seen:
+            continue
+        normalized_urls.append(normalized)
+        seen.add(normalized)
 
-    deduped_events = []
-    seen_uids = set()
-    seen_fallbacks = set()
-    for event in aggregated_events:
-        uid = event.get("uid")
-        if uid:
-            if uid in seen_uids:
-                continue
-            seen_uids.add(uid)
-        else:
-            fallback_key = (
-                event.get("title"),
-                event.get("start"),
-                event.get("end"),
-            )
-            if fallback_key in seen_fallbacks:
-                continue
-            seen_fallbacks.add(fallback_key)
-        deduped_events.append(event)
+    feed_meta = _load_feed_metadata(user_id)
+    results = []
+    errors = []
 
-    # Delete all existing cached events for this user
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        futures = {}
+        for feed_url in normalized_urls:
+            feed_hash = _feed_url_hash(feed_url)
+            meta = feed_meta.get(feed_hash) or {}
+            futures[executor.submit(
+                fetch_and_parse_ical,
+                feed_url,
+                etag=meta.get("etag_header"),
+                last_modified=meta.get("last_modified_header"),
+            )] = feed_url
+        for future in as_completed(futures):
+            try:
+                results.append(future.result())
+            except Exception as exc:
+                normalized_url = futures.get(future)
+                logger.error(
+                    "Failed to fetch or parse calendar feed: url=%s error=%s",
+                    normalized_url,
+                    str(exc),
+                    exc_info=True,
+                )
+                errors.append(exc)
+
+    if errors:
+        raise errors[0]
+
     try:
-        delete_rows_by_query(
+        existing_rows = list_rows_all(
             COLLECTIONS["calendar_cache"],
             [Query.equal("user_id", [str(user_id)])],
         )
     except AppwriteException:
-        logger.exception("Failed to clear cached events")
+        logger.exception("Failed to load cached events")
         raise
 
-    # Insert fresh events
-    for event in deduped_events:
-        try:
-            create_row_safe(
-                COLLECTIONS["calendar_cache"],
-                row_id=ID.unique(),
-                data={
-                    "user_id": str(user_id),
-                    "event_uid": event["uid"],
-                    "event_title": event["title"],
-                    "event_start": format_datetime(event["start"]),
-                    "event_end": format_datetime(event["end"]),
-                    "event_type": event["event_type"],
-                    "course_name": event["course_name"],
-                    "raw_description": event["description"],
-                    "fetched_at": format_datetime(event["fetched_at"]),
-                    "is_all_day": event["is_all_day"],
-                },
-            )
-        except AppwriteException:
-            logger.exception("Failed to cache calendar event")
-            raise
-    return len(deduped_events)
+    rows_to_update = []
+    orphaned_rows = []
+    for row in existing_rows:
+        if not row.get("feed_url"):
+            orphaned_rows.append(row)
+            continue
+        if not row.get("feed_url_hash"):
+            rows_to_update.append(row)
+    if orphaned_rows:
+        # Legacy rows without feed_url cannot be associated to a feed.
+        for row in orphaned_rows:
+            row_id = row.get("$id") or row.get("id")
+            if row_id:
+                delete_row_safe(COLLECTIONS["calendar_cache"], row_id)
+    for row in rows_to_update:
+        row_id = row.get("$id") or row.get("id")
+        if not row_id:
+            continue
+        update_row_safe(
+            COLLECTIONS["calendar_cache"],
+            row_id,
+            {"feed_url_hash": _feed_url_hash(row.get("feed_url"))},
+        )
+    existing_rows = [row for row in existing_rows if row.get("feed_url")]
+
+    existing_by_feed = {}
+    for row in existing_rows:
+        existing_by_feed.setdefault(row.get("feed_url"), []).append(row)
+
+    total_changes = 0
+    fetched_at = datetime.utcnow()
+    for result in results:
+        feed_url = result.get("feed_url")
+        _upsert_feed_metadata(user_id, feed_url, result, fetched_at)
+        if result.get("status_code") == 304:
+            # No changes; skip parsing and cache writes.
+            continue
+        total_changes += _apply_feed_diffs(
+            user_id,
+            feed_url,
+            result.get("events", []),
+            fetched_at,
+            existing_rows=existing_by_feed.get(feed_url, []),
+        )
+
+    return total_changes
 
 
 def fetch_and_cache_feed(user_id, feed_url):

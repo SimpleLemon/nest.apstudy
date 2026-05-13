@@ -5,6 +5,12 @@
   "catalog_number": "310W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "XAW",
+  "course_description": "This course covers the new and growing field of experimental economics. The term experimental economics refers to the use of the laboratory for the purpose of studying specific research questions in economics. Experiments in economics are similar in spirit to those in psychology, physics, chemistry, or biology.",
+  "course_notes": "This course requires ECON _OX 100 or ECON 101 or ECON_OX 101 or FIN 201 AND ECON 112 or ECON_OX112 or equivalent transfer credit as a prerequisite.",
+  "requisites": "This course requires ECON _OX 100 or ECON 101 or ECON_OX 101 or FIN 201 AND ECON 112 or ECON_OX112 or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "K. Lanier",
+      "instructors": [
+        {
+          "name": "K. Lanier",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "K. Lanier"
   ],
-  "scraped_at": "2026-04-20T20:50:38.310Z"
+  "scraped_at": "2026-05-13T00:39:59.883Z"
 }

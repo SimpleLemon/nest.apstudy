@@ -5,6 +5,12 @@
   "catalog_number": "342",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "This course will provide a framework for observing, analyzing, notating, and understanding movement as an expressive, communicative form. Movement literacy skills are demonstrated through the body by building relationships between Body, Space, Shape, and Effort. By utilizing Rudolph Laban's Movement Analysis system (LMA), emphasis is placed on embodying movement intention and discovering context and meaning in stylistic patterns of movement. Required course for dance and movement studies majors.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "L. Teague",
+      "instructors": [
+        {
+          "name": "L. Teague",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "L. Teague"
   ],
-  "scraped_at": "2026-04-20T20:47:52.916Z"
+  "scraped_at": "2026-05-13T00:36:49.024Z"
 }

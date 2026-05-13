@@ -5,6 +5,12 @@
   "catalog_number": "206W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAW",
+  "course_description": "An introduction to the study of narrative, with an emphasis on narrative fiction and the critical vocabulary used to describe it. Readings will vary by semester, and may include examples from other disciplines.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "C. Nickerson",
+      "instructors": [
+        {
+          "name": "C. Nickerson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "C. Nickerson"
   ],
-  "scraped_at": "2026-04-20T20:50:41.615Z"
+  "scraped_at": "2026-05-13T00:40:07.981Z"
 }

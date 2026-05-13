@@ -5,6 +5,12 @@
   "catalog_number": "110",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "SS",
+  "course_description": "Introduction to analytical concepts, nature of the interstate system, the assumptions and ideas of diplomacy, the determinants of foreign policy.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "E. Reinhardt",
+      "instructors": [
+        {
+          "name": "E. Reinhardt",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "E. Reinhardt"
   ],
-  "scraped_at": "2026-04-20T20:48:52.587Z"
+  "scraped_at": "2026-05-13T00:38:58.358Z"
 }

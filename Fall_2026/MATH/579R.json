@@ -5,6 +5,12 @@
   "catalog_number": "579R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "J. Nagy",
+      "instructors": [
+        {
+          "name": "J. Nagy",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,8 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -67,5 +82,5 @@
   "instructors_unique": [
     "J. Nagy"
   ],
-  "scraped_at": "2026-04-20T20:51:13.102Z"
+  "scraped_at": "2026-05-13T00:40:54.693Z"
 }

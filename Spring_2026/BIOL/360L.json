@@ -5,6 +5,12 @@
   "catalog_number": "360L",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "2",
+  "requirement_designation": "SNTL",
+  "course_description": "This course will explore topics in cellular and small network neuroscience by performing virtual electrophysiology experiments on the computer. The content matches the material covered in Biology 360/NBB 301 and will help students understand neurons and neuronal networks in greater depth.",
+  "course_notes": "[(BIOL 142 and BIOl 142L) or BIOL_OX142] and (BIOL 360 or NBB 301) or equivalent transfer credit as a prerequisite.",
+  "requisites": "[(BIOL 142 and BIOl 142L) or BIOL_OX142] and (BIOL 360 or NBB 301) or equivalent transfer credit as a prerequisite.",
+  "cross_listed": "NBB 301L",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "S. Sober",
+      "instructors": [
+        {
+          "name": "S. Sober",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "S. Sober"
   ],
-  "scraped_at": "2026-04-20T20:47:42.868Z"
+  "scraped_at": "2026-05-13T00:36:31.264Z"
 }

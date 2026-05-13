@@ -5,6 +5,12 @@
   "catalog_number": "267W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "HAWE",
+  "course_description": "An exploration and analysis of the struggle for African American equality with an emphasis on the Civil Rights Movement's development, successes, failures and legacy.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "AAS 267W",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Anderson/Archer",
+      "instructors": [
+        {
+          "name": "Anderson/Archer",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "Anderson/Archer"
   ],
-  "scraped_at": "2026-04-20T20:48:11.178Z"
+  "scraped_at": "2026-05-13T00:37:23.024Z"
 }

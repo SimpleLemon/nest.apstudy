@@ -5,6 +5,12 @@
   "catalog_number": "499R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "XA",
+  "course_description": "Students do original research in accordance with ability and background and present their findings in an oral or poster session. May be repeated. Total research credit to be used toward an undergraduate degree not to exceed twelve hours. 3 or more credits can count to BS elective.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "RSC",
       "instructor": "A. Brathwaite",
+      "instructors": [
+        {
+          "name": "A. Brathwaite",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "A. Brathwaite"
   ],
-  "scraped_at": "2026-04-20T20:47:46.133Z"
+  "scraped_at": "2026-05-13T00:36:39.351Z"
 }

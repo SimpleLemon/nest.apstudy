@@ -5,6 +5,12 @@
   "catalog_number": "770R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "3",
       "schedule_type": "SEM",
       "instructor": "D. Maney",
+      "instructors": [
+        {
+          "name": "D. Maney",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "4",
       "schedule_type": "SEM",
       "instructor": "Z. Delawalla",
+      "instructors": [
+        {
+          "name": "Z. Delawalla",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -53,6 +73,13 @@
       "section_number": "5",
       "schedule_type": "SEM",
       "instructor": "H. Trotman",
+      "instructors": [
+        {
+          "name": "H. Trotman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -72,6 +99,13 @@
       "section_number": "6",
       "schedule_type": "SEM",
       "instructor": "H. Rodman",
+      "instructors": [
+        {
+          "name": "H. Rodman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -91,6 +125,13 @@
       "section_number": "7",
       "schedule_type": "SEM",
       "instructor": "M. Treadway",
+      "instructors": [
+        {
+          "name": "M. Treadway",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -117,5 +158,5 @@
     "M. Treadway",
     "Z. Delawalla"
   ],
-  "scraped_at": "2026-04-20T20:48:55.908Z"
+  "scraped_at": "2026-05-13T00:39:01.613Z"
 }

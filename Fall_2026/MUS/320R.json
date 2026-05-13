@@ -5,6 +5,12 @@
   "catalog_number": "320R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": "XA",
+  "course_description": "Music Majors. Prerequisite: permission of instructor. The study of applied music involves the understanding of music literature through performance on a specific instrument. One-hour private instruction weekly. Students are expected to practice a minimum of five hours per week, perform on a student recital and final jury exam, and attend several recitals and performances during the semester. Contact the instructor to arrange an audition. Lesson fees apply; refer to the departmental website (www.music.emory.edu) for current information.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "MUS",
       "instructor": "P. Bhasin",
+      "instructors": [
+        {
+          "name": "P. Bhasin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "MUS",
       "instructor": "P. Bhasin",
+      "instructors": [
+        {
+          "name": "P. Bhasin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3",
       "schedule_type": "MUS",
       "instructor": "G. Motley",
+      "instructors": [
+        {
+          "name": "G. Motley",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "4",
       "schedule_type": "MUS",
       "instructor": "E. Cholakova",
+      "instructors": [
+        {
+          "name": "E. Cholakova",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -67,6 +101,13 @@
       "section_number": "5",
       "schedule_type": "MUS",
       "instructor": "Dinkins-Matthews/Cholakova",
+      "instructors": [
+        {
+          "name": "Dinkins-Matthews/Cholakova",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -80,6 +121,13 @@
       "section_number": "6",
       "schedule_type": "MUS",
       "instructor": "B. Mamola",
+      "instructors": [
+        {
+          "name": "B. Mamola",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -93,6 +141,13 @@
       "section_number": "7",
       "schedule_type": "MUS",
       "instructor": "B. Mamola",
+      "instructors": [
+        {
+          "name": "B. Mamola",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -106,6 +161,13 @@
       "section_number": "8",
       "schedule_type": "MUS",
       "instructor": "E. Cholakova",
+      "instructors": [
+        {
+          "name": "E. Cholakova",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -132,5 +194,5 @@
     "G. Motley",
     "P. Bhasin"
   ],
-  "scraped_at": "2026-04-20T20:51:19.609Z"
+  "scraped_at": "2026-05-13T00:41:04.362Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "202Z",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "NS",
+  "course_description": "CHEM 202Z will provide students with a basic understanding of covalent bonding models, the energetics of reactions, and the kinetics and thermodynamics associated with reactions. The course will emphasize how reactivity is related to molecular structure and how reactivity can be controlled.",
+  "course_notes": "(CHEM 150 and CHEM 150L) or AP score of 4 or higher or IB score of 5 or higher required.",
+  "requisites": "(CHEM 150 and CHEM 150L) or AP score of 4 or higher or IB score of 5 or higher required.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Weinschenk",
+      "instructors": [
+        {
+          "name": "M. Weinschenk",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Weinschenk"
   ],
-  "scraped_at": "2026-04-20T20:50:30.041Z"
+  "scraped_at": "2026-05-13T00:39:46.994Z"
 }

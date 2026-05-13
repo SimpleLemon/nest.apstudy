@@ -5,6 +5,12 @@
   "catalog_number": "352",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "Epigenetics is the study of heritable characteristics not caused by changes in DNA sequence, but rather induced by non-genetic factors that alter gene expression and are dependent on time and location. The course explores epigenetics and its relation to normal development and disease.",
+  "course_notes": "[(BIOL 142 or BIOL_OX 142) and BIOL 264] or equivalent transfer credit as prerequisite.",
+  "requisites": "[(BIOL 142 or BIOL_OX 142) and BIOL 264] or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Eisen",
+      "instructors": [
+        {
+          "name": "A. Eisen",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "A. Eisen"
   ],
-  "scraped_at": "2026-04-20T20:47:42.868Z"
+  "scraped_at": "2026-05-13T00:36:31.264Z"
 }

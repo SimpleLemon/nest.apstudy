@@ -5,6 +5,12 @@
   "catalog_number": "797R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "2",
       "schedule_type": "SUP",
       "instructor": "B. Risk",
+      "instructors": [
+        {
+          "name": "B. Risk",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "3",
       "schedule_type": "SUP",
       "instructor": "B. Risk",
+      "instructors": [
+        {
+          "name": "B. Risk",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "4",
       "schedule_type": "SUP",
       "instructor": "M. Lau",
+      "instructors": [
+        {
+          "name": "M. Lau",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "5",
       "schedule_type": "SUP",
       "instructor": "R. Nabi",
+      "instructors": [
+        {
+          "name": "R. Nabi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -67,6 +101,13 @@
       "section_number": "6",
       "schedule_type": "SUP",
       "instructor": "J. Hanfelt",
+      "instructors": [
+        {
+          "name": "J. Hanfelt",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -80,6 +121,13 @@
       "section_number": "7",
       "schedule_type": "SUP",
       "instructor": "E. Peterson",
+      "instructors": [
+        {
+          "name": "E. Peterson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -93,6 +141,13 @@
       "section_number": "8",
       "schedule_type": "SUP",
       "instructor": "L. Waller",
+      "instructors": [
+        {
+          "name": "L. Waller",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -120,5 +175,5 @@
     "M. Lau",
     "R. Nabi"
   ],
-  "scraped_at": "2026-04-20T20:49:27.428Z"
+  "scraped_at": "2026-05-13T00:36:32.888Z"
 }

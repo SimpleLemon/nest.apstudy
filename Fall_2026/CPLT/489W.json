@@ -5,6 +5,12 @@
   "catalog_number": "489W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 5",
+  "requirement_designation": "HAPW",
+  "course_description": "This course is designed to give advanced students the opportunity to investigate intensively an area of special interest. A reading knowledge of one foreign language is prerequisite. Topics may vary, but the goal of the course remains unchanged: the courses focuses on contemporary literary theory.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Mitchell",
+      "instructors": [
+        {
+          "name": "A. Mitchell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "A. Mitchell"
   ],
-  "scraped_at": "2026-04-20T20:50:33.315Z"
+  "scraped_at": "2026-05-13T00:39:53.440Z"
 }

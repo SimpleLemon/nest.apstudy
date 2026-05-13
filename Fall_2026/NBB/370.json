@@ -5,6 +5,12 @@
   "catalog_number": "370",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "None",
+  "course_description": "Study of variable topics of special interest in neuroscience and behavioral biology. May be repeated for credit when topics vary.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Grizzell",
+      "instructors": [
+        {
+          "name": "J. Grizzell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "A. Devineni",
+      "instructors": [
+        {
+          "name": "A. Devineni",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "H. Rodman",
+      "instructors": [
+        {
+          "name": "H. Rodman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -98,5 +125,5 @@
     "H. Rodman",
     "J. Grizzell"
   ],
-  "scraped_at": "2026-04-20T20:51:21.296Z"
+  "scraped_at": "2026-05-13T00:41:05.977Z"
 }

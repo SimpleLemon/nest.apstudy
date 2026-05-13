@@ -5,6 +5,12 @@
   "catalog_number": "324R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "This course includes further development of skills introduced in Jazz Dance II with greater emphasis on style, performance and technique. More technically challenging movement sequences will be introduced and students will be expected to individualize movement at an advanced level. Course material may include components of Broadway, lyrical, hip hop and other entertainment-based dance forms. May be taken up to three times for credit.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "T. Myers",
+      "instructors": [
+        {
+          "name": "T. Myers",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "T. Myers"
   ],
-  "scraped_at": "2026-04-20T20:50:36.608Z"
+  "scraped_at": "2026-05-13T00:39:56.667Z"
 }

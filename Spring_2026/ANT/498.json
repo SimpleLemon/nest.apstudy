@@ -5,6 +5,12 @@
   "catalog_number": "498",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "This course culminates the minor in Development Studies, with common readings and class meetings and a final presentation of completed projects to the Faculty Capstone Committee. The steering committee will approve service learning opportunities, internships, and research projects.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "P. Little",
+      "instructors": [
+        {
+          "name": "P. Little",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "P. Little"
   ],
-  "scraped_at": "2026-04-20T20:47:36.256Z"
+  "scraped_at": "2026-05-13T00:36:23.182Z"
 }

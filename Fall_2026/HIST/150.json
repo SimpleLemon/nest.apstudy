@@ -5,6 +5,12 @@
   "catalog_number": "150",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "Part of Emory's Voluntary Core Curriculum. Certain great books have been influential across the centuries, and continue to influence the way we think, act, and understand ourselves today. Major themes of the course are the history of religion, politics, economics, biology, and psychology.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "P. Allitt",
+      "instructors": [
+        {
+          "name": "P. Allitt",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "P. Allitt"
   ],
-  "scraped_at": "2026-04-20T20:50:54.862Z"
+  "scraped_at": "2026-05-13T00:40:30.507Z"
 }

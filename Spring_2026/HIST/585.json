@@ -5,6 +5,12 @@
   "catalog_number": "585",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "T. Andrade",
+      "instructors": [
+        {
+          "name": "T. Andrade",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "D. LaChance",
+      "instructors": [
+        {
+          "name": "D. LaChance",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -53,6 +73,13 @@
       "section_number": "3",
       "schedule_type": "SEM",
       "instructor": "G. Pandey",
+      "instructors": [
+        {
+          "name": "G. Pandey",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -72,6 +99,13 @@
       "section_number": "4",
       "schedule_type": "SEM",
       "instructor": "E. Dunbar",
+      "instructors": [
+        {
+          "name": "E. Dunbar",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -91,6 +125,13 @@
       "section_number": "5",
       "schedule_type": "SEM",
       "instructor": "K. Gross",
+      "instructors": [
+        {
+          "name": "K. Gross",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -110,6 +151,13 @@
       "section_number": "6",
       "schedule_type": "SEM",
       "instructor": "M. Chin",
+      "instructors": [
+        {
+          "name": "M. Chin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -129,6 +177,13 @@
       "section_number": "7",
       "schedule_type": "SEM",
       "instructor": "E. Keme",
+      "instructors": [
+        {
+          "name": "E. Keme",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -163,5 +218,5 @@
     "M. Chin",
     "T. Andrade"
   ],
-  "scraped_at": "2026-04-20T20:48:11.188Z"
+  "scraped_at": "2026-05-13T00:37:23.034Z"
 }

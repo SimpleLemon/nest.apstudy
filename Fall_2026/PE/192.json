@@ -5,6 +5,12 @@
   "catalog_number": "192",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "This course introduces the student to the Olympic sport of foil fencing. Beginning level offensive and defensive techniques will be taught as well as the rules of competition. Emphasis will be placed on the proper execution of the basic skills and physical conditioning. \"",
+  "course_notes": "Students completing PE 212 or PE 250 or equivalent cannot enroll for PE 150. For concerns, please contact the Physical Education department.",
+  "requisites": "Students completing PE 212 or PE 250 or equivalent cannot enroll for PE 150. For concerns, please contact the Physical Education department.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "PE",
       "instructor": "T. Lasker",
+      "instructors": [
+        {
+          "name": "T. Lasker",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "T. Lasker"
   ],
-  "scraped_at": "2026-04-20T20:51:27.883Z"
+  "scraped_at": "2026-05-13T00:41:55.782Z"
 }

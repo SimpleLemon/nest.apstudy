@@ -5,6 +5,12 @@
   "catalog_number": "101",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "IC",
+  "course_description": "Introduction to the fundamental principles of classical Latin. Students will attain as rapidly as possible the ability to read and understand literary works.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "E. Master",
+      "instructors": [
+        {
+          "name": "E. Master",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -44,6 +57,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "C. Schroer",
+      "instructors": [
+        {
+          "name": "C. Schroer",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -73,6 +93,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "C. Schroer",
+      "instructors": [
+        {
+          "name": "C. Schroer",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -112,5 +139,5 @@
     "C. Schroer",
     "E. Master"
   ],
-  "scraped_at": "2026-04-20T20:51:09.758Z"
+  "scraped_at": "2026-05-13T00:40:51.460Z"
 }

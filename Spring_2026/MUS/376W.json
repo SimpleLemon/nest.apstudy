@@ -5,6 +5,12 @@
   "catalog_number": "376W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "HPWE",
+  "course_description": "Studies music and dance of Indigenous peoples of the Arctic and how they reflect languages, social structures, philosophies, and the geography and history of each region. Examines changing historical and social dynamics and cultural traditions. Introduces ethnomusicology theory and research methods.",
+  "course_notes": "MUS 200 or ANT 202 or ANT 202W or equivalent transfer credit as prerequisite.",
+  "requisites": "MUS 200 or ANT 202 or ANT 202W or equivalent transfer credit as prerequisite.",
+  "cross_listed": "ANT 376W",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "H. Senungetuk",
+      "instructors": [
+        {
+          "name": "H. Senungetuk",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "H. Senungetuk"
   ],
-  "scraped_at": "2026-04-20T20:48:35.988Z"
+  "scraped_at": "2026-05-13T00:37:56.873Z"
 }

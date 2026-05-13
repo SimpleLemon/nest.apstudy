@@ -5,6 +5,12 @@
   "catalog_number": "121R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "This course is designed for students with no or very minimal experience in ballet technique. Ballet I introduces students to the basic skills and terminology of ballet. The course includes barre exercises with an emphasis on alignment. Center work will include adagio, tendu, basic turns, petite allegro, and grande allegro in simple combinations. The course is designed to develop individual body awareness, strength, flexibility, and an appreciation of the art of ballet. May be taken up to three times for credit. Students are required to take this course at least two times before progressing to the next level and should secure the permission of the instructor before doing so.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Harris/Radell",
+      "instructors": [
+        {
+          "name": "Harris/Radell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "Harris/Radell",
+      "instructors": [
+        {
+          "name": "Harris/Radell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -72,5 +92,5 @@
   "instructors_unique": [
     "Harris/Radell"
   ],
-  "scraped_at": "2026-04-20T20:50:36.598Z"
+  "scraped_at": "2026-05-13T00:39:56.661Z"
 }

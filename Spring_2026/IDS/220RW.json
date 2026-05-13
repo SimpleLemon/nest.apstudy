@@ -5,6 +5,12 @@
   "catalog_number": "220RW",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "CW",
+  "course_description": "On Recent Discoveries by Emory Researchers (ORDER) engages graduate and postdoctoral students to teach their research to undergraduates. Recommended for sophomores; open to others. Refer to Course Atlas for specific topics of a given semester, articulated by the teacher-scholar team.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "Team"
   ],
-  "scraped_at": "2026-04-20T20:48:14.488Z"
+  "scraped_at": "2026-05-13T00:37:29.491Z"
 }

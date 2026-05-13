@@ -5,6 +5,12 @@
   "catalog_number": "340",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1109",
       "schedule_type": "LEC",
       "instructor": "D. Clear",
+      "instructors": [
+        {
+          "name": "D. Clear",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "1124",
       "schedule_type": "LEC",
       "instructor": "D. Nickerson",
+      "instructors": [
+        {
+          "name": "D. Nickerson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -52,6 +72,13 @@
       "section_number": "1125",
       "schedule_type": "LEC",
       "instructor": "D. Nickerson",
+      "instructors": [
+        {
+          "name": "D. Nickerson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -76,6 +103,13 @@
       "section_number": "1126",
       "schedule_type": "LEC",
       "instructor": "D. Nickerson",
+      "instructors": [
+        {
+          "name": "D. Nickerson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -100,6 +134,13 @@
       "section_number": "1127",
       "schedule_type": "LEC",
       "instructor": "J. Xu",
+      "instructors": [
+        {
+          "name": "J. Xu",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -124,6 +165,13 @@
       "section_number": "1128",
       "schedule_type": "LEC",
       "instructor": "J. Xu",
+      "instructors": [
+        {
+          "name": "J. Xu",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -148,6 +196,13 @@
       "section_number": "1424",
       "schedule_type": "LEC",
       "instructor": "D. Nickerson",
+      "instructors": [
+        {
+          "name": "D. Nickerson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -172,6 +227,13 @@
       "section_number": "1425",
       "schedule_type": "LEC",
       "instructor": "D. Nickerson",
+      "instructors": [
+        {
+          "name": "D. Nickerson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -196,6 +258,13 @@
       "section_number": "1426",
       "schedule_type": "LEC",
       "instructor": "D. Nickerson",
+      "instructors": [
+        {
+          "name": "D. Nickerson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -220,6 +289,13 @@
       "section_number": "1427",
       "schedule_type": "LEC",
       "instructor": "J. Xu",
+      "instructors": [
+        {
+          "name": "J. Xu",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -244,6 +320,13 @@
       "section_number": "1428",
       "schedule_type": "LEC",
       "instructor": "J. Xu",
+      "instructors": [
+        {
+          "name": "J. Xu",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -279,5 +362,5 @@
     "D. Nickerson",
     "J. Xu"
   ],
-  "scraped_at": "2026-04-20T20:49:20.813Z"
+  "scraped_at": "2026-05-13T00:37:50.438Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "115",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "Introductory examination of fundamental moral questions, such as the best way of life for a human being, the relationship between happiness and moral excellence, and the nature of ethical reasoning, as treated by major philosophers in the history of philosophy.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Lysaker/Pandita",
+      "instructors": [
+        {
+          "name": "Lysaker/Pandita",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "K. Schoina",
+      "instructors": [
+        {
+          "name": "K. Schoina",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -78,5 +98,5 @@
     "K. Schoina",
     "Lysaker/Pandita"
   ],
-  "scraped_at": "2026-04-20T20:51:31.138Z"
+  "scraped_at": "2026-05-13T00:42:00.729Z"
 }

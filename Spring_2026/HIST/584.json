@@ -5,6 +5,12 @@
   "catalog_number": "584",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "LAB",
       "schedule_type": "LAB",
       "instructor": "L. Nenzi",
+      "instructors": [
+        {
+          "name": "L. Nenzi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "L. Nenzi",
+      "instructors": [
+        {
+          "name": "L. Nenzi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -47,6 +67,13 @@
       "section_number": "2",
       "schedule_type": "LAB",
       "instructor": "C. Sanders",
+      "instructors": [
+        {
+          "name": "C. Sanders",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -60,6 +87,13 @@
       "section_number": "3",
       "schedule_type": "LAB",
       "instructor": "A. Greene",
+      "instructors": [
+        {
+          "name": "A. Greene",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -73,6 +107,13 @@
       "section_number": "4",
       "schedule_type": "LAB",
       "instructor": "C. Suddler",
+      "instructors": [
+        {
+          "name": "C. Suddler",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -86,6 +127,13 @@
       "section_number": "5",
       "schedule_type": "LAB",
       "instructor": "M. Payne",
+      "instructors": [
+        {
+          "name": "M. Payne",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -112,5 +160,5 @@
     "L. Nenzi",
     "M. Payne"
   ],
-  "scraped_at": "2026-04-20T20:48:11.188Z"
+  "scraped_at": "2026-05-13T00:37:23.034Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "100",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "SS",
+  "course_description": "This course introduces students to the academic study of History and the varied approaches historians use to make sense of the past. It explores the ways historians scrutinize evidence, use digital methods, analyze images, conduct oral history and borrow from other disciplines to study the past.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -14,7 +20,14 @@
       "crn": "2517",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "T. Andrade",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -46,7 +59,7 @@
     "waitlisted": 0
   },
   "instructors_unique": [
-    "T. Andrade"
+    "Team"
   ],
-  "scraped_at": "2026-04-20T20:50:54.861Z"
+  "scraped_at": "2026-05-13T00:40:30.506Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "329R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HSC",
+  "course_description": "Topic changes to meet current interest of students and faculty. Course may be repeated for credit as topic varies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "T. Holman",
+      "instructors": [
+        {
+          "name": "T. Holman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "G. Lovisetto",
+      "instructors": [
+        {
+          "name": "G. Lovisetto",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -73,5 +93,5 @@
     "G. Lovisetto",
     "T. Holman"
   ],
-  "scraped_at": "2026-04-20T21:51:25.337Z"
+  "scraped_at": "2026-05-13T00:36:42.572Z"
 }

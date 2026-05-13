@@ -5,6 +5,12 @@
   "catalog_number": "190",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "Introduces first-year students to the discipline of history, particularly historical sources and methods; aims to improve critical reading, analytical, and writing skills in small group discussion.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "J. Miller",
+      "instructors": [
+        {
+          "name": "J. Miller",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "W. Rucker",
+      "instructors": [
+        {
+          "name": "W. Rucker",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -58,6 +78,13 @@
       "section_number": "3",
       "schedule_type": "SEM",
       "instructor": "E. Zehyoue",
+      "instructors": [
+        {
+          "name": "E. Zehyoue",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -82,6 +109,13 @@
       "section_number": "4",
       "schedule_type": "SEM",
       "instructor": "R. Lal",
+      "instructors": [
+        {
+          "name": "R. Lal",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -106,6 +140,13 @@
       "section_number": "5",
       "schedule_type": "SEM",
       "instructor": "R. Margariti",
+      "instructors": [
+        {
+          "name": "R. Margariti",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -130,6 +171,13 @@
       "section_number": "6",
       "schedule_type": "SEM",
       "instructor": "Gagliardi/Suh",
+      "instructors": [
+        {
+          "name": "Gagliardi/Suh",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -163,5 +211,5 @@
     "R. Margariti",
     "W. Rucker"
   ],
-  "scraped_at": "2026-04-20T20:48:11.174Z"
+  "scraped_at": "2026-05-13T00:37:23.022Z"
 }

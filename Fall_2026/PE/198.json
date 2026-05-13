@@ -5,6 +5,12 @@
   "catalog_number": "198",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "Course is open to students with little or no experience as well as to students with experience in training with free weights and/or machines. Free weights, Cybex systems machines and free-standing equipment are used for the development of muscle strength, muscle fitness, and/or muscle endurance.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "PE",
       "instructor": "E. Noell",
+      "instructors": [
+        {
+          "name": "E. Noell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "PE",
       "instructor": "E. Noell",
+      "instructors": [
+        {
+          "name": "E. Noell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -72,5 +92,5 @@
   "instructors_unique": [
     "E. Noell"
   ],
-  "scraped_at": "2026-04-20T20:51:27.885Z"
+  "scraped_at": "2026-05-13T00:41:55.782Z"
 }

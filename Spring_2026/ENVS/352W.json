@@ -5,6 +5,12 @@
   "catalog_number": "352W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "CW",
+  "course_description": "Explores the role of business in \"doing good\" for society, how to develop a vision for sustainability within a company, what it means to work on environmental concerns in a major corporation, and compares the approaches of leading companies. Emphasis on readings, writing assignments and discussion.",
+  "course_notes": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or ENVS 225 or ENVS 227/POLS 227 or ENVS 227W/POLS 227W or equivalent transfer credit as prerequisite.",
+  "requisites": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or ENVS 225 or ENVS 227/POLS 227 or ENVS 227W/POLS 227W or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "B. Jordan",
+      "instructors": [
+        {
+          "name": "B. Jordan",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "B. Jordan"
   ],
-  "scraped_at": "2026-04-20T20:47:59.638Z"
+  "scraped_at": "2026-05-13T00:37:03.651Z"
 }

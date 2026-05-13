@@ -5,6 +5,12 @@
   "catalog_number": "190",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "Every semester. Freshmen only. Through readings on variable topics, frequent writing assignments, and in-class discussions, the seminar emphasizes reasoned discourse and intellectual community. Does not satisfy first-year writing requirement.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "P. Kelleher",
+      "instructors": [
+        {
+          "name": "P. Kelleher",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "M. Wright",
+      "instructors": [
+        {
+          "name": "M. Wright",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "SEM",
       "instructor": "J. Morey",
+      "instructors": [
+        {
+          "name": "J. Morey",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -98,5 +125,5 @@
     "M. Wright",
     "P. Kelleher"
   ],
-  "scraped_at": "2026-04-20T20:50:41.613Z"
+  "scraped_at": "2026-05-13T00:40:07.980Z"
 }

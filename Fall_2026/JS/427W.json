@@ -5,6 +5,12 @@
   "catalog_number": "427W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "CW",
+  "course_description": "Jr/Sr Colloquium. This seminar will explore continuities and innovations between the medieval and modern blood libels, especially how the modern accusation was a product of post-Enlightenment politics, fears, and conventional social knowledge.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "HIST 427W",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "E. Schainker",
+      "instructors": [
+        {
+          "name": "E. Schainker",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "E. Schainker"
   ],
-  "scraped_at": "2026-04-20T20:51:04.794Z"
+  "scraped_at": "2026-05-13T00:40:46.638Z"
 }

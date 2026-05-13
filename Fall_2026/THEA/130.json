@@ -5,6 +5,12 @@
   "catalog_number": "130",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "A theoretical and practical introduction to technical theater.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "LAB",
       "schedule_type": "LAB",
       "instructor": "B. Glenn",
+      "instructors": [
+        {
+          "name": "B. Glenn",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "B. Glenn",
+      "instructors": [
+        {
+          "name": "B. Glenn",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -61,5 +81,5 @@
   "instructors_unique": [
     "B. Glenn"
   ],
-  "scraped_at": "2026-04-20T20:51:51.074Z"
+  "scraped_at": "2026-05-13T00:42:25.021Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "207",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "Epidemiology is the study of disease patterns, and determinants, within a population and the application of this information to mitigate public health problems. Students will learn to apply basic principles of epidemiology and biostatistics to identification and analysis of public health problems.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "K. Wall",
+      "instructors": [
+        {
+          "name": "K. Wall",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "K. Wall"
   ],
-  "scraped_at": "2026-04-20T20:50:56.529Z"
+  "scraped_at": "2026-05-13T00:40:32.137Z"
 }

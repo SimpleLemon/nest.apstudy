@@ -5,6 +5,12 @@
   "catalog_number": "300L",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": "None",
+  "course_description": "This is a project-design based lab course. It will bring together materials from previous lab courses, as well as covering new techniques/methods.",
+  "course_notes": "(CHEM 204L or CHEM_OX 204L) and (CHEM 205L or CHEM_OX 205L) or equivalent transfer credit as prerequisite or co-requisite.",
+  "requisites": "(CHEM 204L or CHEM_OX 204L) and (CHEM 205L or CHEM_OX 205L) or equivalent transfer credit as prerequisite or co-requisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "R. Himes",
+      "instructors": [
+        {
+          "name": "R. Himes",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LAB",
       "instructor": "R. Himes",
+      "instructors": [
+        {
+          "name": "R. Himes",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "LAB",
       "instructor": "R. Himes",
+      "instructors": [
+        {
+          "name": "R. Himes",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -96,5 +123,5 @@
   "instructors_unique": [
     "R. Himes"
   ],
-  "scraped_at": "2026-04-20T20:50:30.046Z"
+  "scraped_at": "2026-05-13T00:39:46.996Z"
 }

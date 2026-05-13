@@ -5,6 +5,12 @@
   "catalog_number": "221",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "QR",
+  "course_description": "Systems of linear equations, matrices, determinants, linear transformations, eigenvalues and eigenvectors, least-squares.",
+  "course_notes": "MATH 111 or MATH_OX 111 or MATH 112 or MATH_OX 112 or MATH 112Z or equivalent transfer credit as prerequisite.",
+  "requisites": "MATH 111 or MATH_OX 111 or MATH 112 or MATH_OX 112 or MATH 112Z or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Shah/Zheng",
+      "instructors": [
+        {
+          "name": "Shah/Zheng",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -44,6 +57,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "Shah/Zheng",
+      "instructors": [
+        {
+          "name": "Shah/Zheng",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -73,6 +93,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "Singh/Miyazaki",
+      "instructors": [
+        {
+          "name": "Singh/Miyazaki",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -102,6 +129,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "Singh/Miyazaki",
+      "instructors": [
+        {
+          "name": "Singh/Miyazaki",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -131,6 +165,13 @@
       "section_number": "5",
       "schedule_type": "LEC",
       "instructor": "Taskovic/Alston",
+      "instructors": [
+        {
+          "name": "Taskovic/Alston",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -160,6 +201,13 @@
       "section_number": "6",
       "schedule_type": "LEC",
       "instructor": "Taskovic/Alston",
+      "instructors": [
+        {
+          "name": "Taskovic/Alston",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -200,5 +248,5 @@
     "Singh/Miyazaki",
     "Taskovic/Alston"
   ],
-  "scraped_at": "2026-04-20T20:48:29.461Z"
+  "scraped_at": "2026-05-13T00:37:47.209Z"
 }

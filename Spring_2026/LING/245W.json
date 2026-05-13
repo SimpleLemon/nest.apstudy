@@ -5,6 +5,12 @@
   "catalog_number": "245W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "HAW",
+  "course_description": "This course is an introduction to the major historical decipherments of ancient writing systems, including Egyptian hieroglyphics, Babylonian cuneiform, Linear B, and Maya hieroglyphs. It includes the examination of scripts that have yet to be deciphered.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "MESAS 245W",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. Stewart",
+      "instructors": [
+        {
+          "name": "D. Stewart",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "D. Stewart"
   ],
-  "scraped_at": "2026-04-20T20:48:27.743Z"
+  "scraped_at": "2026-05-13T00:37:45.581Z"
 }

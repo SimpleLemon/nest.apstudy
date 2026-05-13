@@ -5,6 +5,12 @@
   "catalog_number": "497R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 12",
+  "requirement_designation": "XA",
+  "course_description": "Supervised work on a faculty member's research project, normally for students who have demonstrated superior performance in sociology.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "RSC",
       "instructor": "R. Franzosi",
+      "instructors": [
+        {
+          "name": "R. Franzosi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "RSC",
       "instructor": "K. Brown",
+      "instructors": [
+        {
+          "name": "K. Brown",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3",
       "schedule_type": "RSC",
       "instructor": "R. Hall-Clifford",
+      "instructors": [
+        {
+          "name": "R. Hall-Clifford",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "4",
       "schedule_type": "RSC",
       "instructor": "N. Hoffmann",
+      "instructors": [
+        {
+          "name": "N. Hoffmann",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -67,6 +101,13 @@
       "section_number": "5",
       "schedule_type": "RSC",
       "instructor": "C. Puckett",
+      "instructors": [
+        {
+          "name": "C. Puckett",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -80,6 +121,13 @@
       "section_number": "6",
       "schedule_type": "RSC",
       "instructor": "B. Xu",
+      "instructors": [
+        {
+          "name": "B. Xu",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -93,6 +141,13 @@
       "section_number": "7",
       "schedule_type": "RSC",
       "instructor": "E. Idler",
+      "instructors": [
+        {
+          "name": "E. Idler",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -106,6 +161,13 @@
       "section_number": "8",
       "schedule_type": "RSC",
       "instructor": "A. Sewell",
+      "instructors": [
+        {
+          "name": "A. Sewell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -119,6 +181,13 @@
       "section_number": "9",
       "schedule_type": "RSC",
       "instructor": "J. Mullis",
+      "instructors": [
+        {
+          "name": "J. Mullis",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -149,5 +218,5 @@
     "R. Franzosi",
     "R. Hall-Clifford"
   ],
-  "scraped_at": "2026-04-20T20:49:04.191Z"
+  "scraped_at": "2026-05-13T00:39:12.886Z"
 }

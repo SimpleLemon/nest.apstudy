@@ -5,6 +5,12 @@
   "catalog_number": "247",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "SSE",
+  "course_description": "Relations between and within groups, and conflict and cooperation in light of a number of models of social interaction. Application of principles to racial, religious, and ethnic minorities.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "AAS 247",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,7 +21,14 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Sewell",
-      "enrollment_status": "Closed",
+      "instructors": [
+        {
+          "name": "A. Sewell",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
       "schedule": {
@@ -39,7 +52,14 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "A. Sewell",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "A. Sewell",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
       "schedule": {
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "Easley/Burke",
+      "instructors": [
+        {
+          "name": "Easley/Burke",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -97,5 +124,5 @@
     "A. Sewell",
     "Easley/Burke"
   ],
-  "scraped_at": "2026-04-20T20:51:47.788Z"
+  "scraped_at": "2026-05-13T00:42:20.176Z"
 }

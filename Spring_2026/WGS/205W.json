@@ -5,6 +5,12 @@
   "catalog_number": "205W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "HSCW",
+  "course_description": "This course is an introduction to the interdisciplinary field of sexuality studies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "E. Wilson",
+      "instructors": [
+        {
+          "name": "E. Wilson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "DIS",
       "instructor": "M. Goldman",
+      "instructors": [
+        {
+          "name": "M. Goldman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -53,6 +73,13 @@
       "section_number": "3",
       "schedule_type": "DIS",
       "instructor": "T. Stanford",
+      "instructors": [
+        {
+          "name": "T. Stanford",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -72,6 +99,13 @@
       "section_number": "4",
       "schedule_type": "DIS",
       "instructor": "R. Rodina",
+      "instructors": [
+        {
+          "name": "R. Rodina",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -103,5 +137,5 @@
     "R. Rodina",
     "T. Stanford"
   ],
-  "scraped_at": "2026-04-20T20:49:10.851Z"
+  "scraped_at": "2026-05-13T00:39:20.940Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "220",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "This course traces the development of Western concert dance from 19th century Romantic Ballet to the present. Emphasis will be placed on the development of American modern dance, post modern dance, and current trends and dance artists. This course is required for all dance and movement studies majors and minors. Students wishing to enroll must be a declared dance and movement studies major or minor, or obtain permission of the instructor.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "G. Staib",
+      "instructors": [
+        {
+          "name": "G. Staib",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "G. Staib"
   ],
-  "scraped_at": "2026-04-20T20:47:52.914Z"
+  "scraped_at": "2026-05-13T00:36:49.023Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "546",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "2148",
       "schedule_type": "LEC",
       "instructor": "D. Brames",
+      "instructors": [
+        {
+          "name": "D. Brames",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "3248",
       "schedule_type": "LEC",
       "instructor": "D. Brames",
+      "instructors": [
+        {
+          "name": "D. Brames",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -62,5 +82,5 @@
   "instructors_unique": [
     "D. Brames"
   ],
-  "scraped_at": "2026-04-20T20:52:04.408Z"
+  "scraped_at": "2026-05-13T00:40:57.916Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "201",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "IC",
+  "course_description": "Every semester. Emphasis on oral and written communication skills. Assignments include a thorough review of French grammar, short readings, a French movie, and frequent short compositions. Prerequisites: French 102 or by placement.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "E. Bulakites",
+      "instructors": [
+        {
+          "name": "E. Bulakites",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -44,6 +57,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "C. Tenkorang",
+      "instructors": [
+        {
+          "name": "C. Tenkorang",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -73,6 +93,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "J. Lopez Cochachi",
+      "instructors": [
+        {
+          "name": "J. Lopez Cochachi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -113,5 +140,5 @@
     "E. Bulakites",
     "J. Lopez Cochachi"
   ],
-  "scraped_at": "2026-04-20T20:50:46.593Z"
+  "scraped_at": "2026-05-13T00:40:17.662Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "697",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "2101",
       "schedule_type": "SUP",
       "instructor": "C. Goetz",
+      "instructors": [
+        {
+          "name": "C. Goetz",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2102",
       "schedule_type": "SUP",
       "instructor": "B. Goebel",
+      "instructors": [
+        {
+          "name": "B. Goebel",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "2103",
       "schedule_type": "SUP",
       "instructor": "G. Maturana",
+      "instructors": [
+        {
+          "name": "G. Maturana",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "2104",
       "schedule_type": "SUP",
       "instructor": "R. Cui",
+      "instructors": [
+        {
+          "name": "R. Cui",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -67,6 +101,13 @@
       "section_number": "2105",
       "schedule_type": "SUP",
       "instructor": "B. Goebel",
+      "instructors": [
+        {
+          "name": "B. Goebel",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -80,6 +121,13 @@
       "section_number": "2106",
       "schedule_type": "SUP",
       "instructor": "S. Garate",
+      "instructors": [
+        {
+          "name": "S. Garate",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -93,6 +141,13 @@
       "section_number": "2107",
       "schedule_type": "SUP",
       "instructor": "S. Garate",
+      "instructors": [
+        {
+          "name": "S. Garate",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -106,6 +161,13 @@
       "section_number": "2192",
       "schedule_type": "SUP",
       "instructor": "Rosensweig/Sullivan",
+      "instructors": [
+        {
+          "name": "Rosensweig/Sullivan",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -119,6 +181,13 @@
       "section_number": "2201",
       "schedule_type": "SUP",
       "instructor": "U. Rackliffe",
+      "instructors": [
+        {
+          "name": "U. Rackliffe",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -132,6 +201,13 @@
       "section_number": "2202",
       "schedule_type": "SUP",
       "instructor": "T. Smith",
+      "instructors": [
+        {
+          "name": "T. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -145,6 +221,13 @@
       "section_number": "2203",
       "schedule_type": "SUP",
       "instructor": "T. Smith",
+      "instructors": [
+        {
+          "name": "T. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -158,6 +241,13 @@
       "section_number": "2204",
       "schedule_type": "SUP",
       "instructor": "R. Kazanjian",
+      "instructors": [
+        {
+          "name": "R. Kazanjian",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -171,6 +261,13 @@
       "section_number": "2205",
       "schedule_type": "SUP",
       "instructor": "R. Garg",
+      "instructors": [
+        {
+          "name": "R. Garg",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -184,6 +281,13 @@
       "section_number": "2206",
       "schedule_type": "SUP",
       "instructor": "R. Kazanjian",
+      "instructors": [
+        {
+          "name": "R. Kazanjian",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -197,6 +301,13 @@
       "section_number": "2292",
       "schedule_type": "SUP",
       "instructor": "Rosensweig/Sullivan",
+      "instructors": [
+        {
+          "name": "Rosensweig/Sullivan",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -210,6 +321,13 @@
       "section_number": "3201",
       "schedule_type": "SUP",
       "instructor": "D. Lee",
+      "instructors": [
+        {
+          "name": "D. Lee",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -223,6 +341,13 @@
       "section_number": "3202",
       "schedule_type": "SUP",
       "instructor": "B. Konsynski",
+      "instructors": [
+        {
+          "name": "B. Konsynski",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -236,6 +361,13 @@
       "section_number": "3203",
       "schedule_type": "SUP",
       "instructor": "C. Goetz",
+      "instructors": [
+        {
+          "name": "C. Goetz",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -249,6 +381,13 @@
       "section_number": "3204",
       "schedule_type": "SUP",
       "instructor": "B. Goebel",
+      "instructors": [
+        {
+          "name": "B. Goebel",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -262,6 +401,13 @@
       "section_number": "3205",
       "schedule_type": "SUP",
       "instructor": "R. Berlin",
+      "instructors": [
+        {
+          "name": "R. Berlin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -275,6 +421,13 @@
       "section_number": "3206",
       "schedule_type": "SUP",
       "instructor": "C. Goetz",
+      "instructors": [
+        {
+          "name": "C. Goetz",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -288,6 +441,13 @@
       "section_number": "3207",
       "schedule_type": "SUP",
       "instructor": "R. Berlin",
+      "instructors": [
+        {
+          "name": "R. Berlin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -301,6 +461,13 @@
       "section_number": "3208",
       "schedule_type": "SUP",
       "instructor": "Jap/Brames",
+      "instructors": [
+        {
+          "name": "Jap/Brames",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -314,6 +481,13 @@
       "section_number": "3209",
       "schedule_type": "SUP",
       "instructor": "G. Negro",
+      "instructors": [
+        {
+          "name": "G. Negro",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -327,6 +501,13 @@
       "section_number": "3210",
       "schedule_type": "SUP",
       "instructor": "D. Bowman",
+      "instructors": [
+        {
+          "name": "D. Bowman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -340,8 +521,35 @@
       "section_number": "3211",
       "schedule_type": "SUP",
       "instructor": "S. Garate",
+      "instructors": [
+        {
+          "name": "S. Garate",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6753",
+      "section_number": "4201",
+      "schedule_type": "SUP",
+      "instructor": "T. Smith",
+      "instructors": [
+        {
+          "name": "T. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -350,13 +558,13 @@
     }
   ],
   "section_summary": {
-    "total_sections": 26,
+    "total_sections": 27,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 26,
+    "other": 27,
     "open": 4,
-    "closed": 22,
+    "closed": 23,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -377,5 +585,5 @@
     "T. Smith",
     "U. Rackliffe"
   ],
-  "scraped_at": "2026-04-20T20:49:15.760Z"
+  "scraped_at": "2026-05-13T00:36:37.727Z"
 }

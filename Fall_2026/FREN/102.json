@@ -5,6 +5,12 @@
   "catalog_number": "102",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "IC",
+  "course_description": "This course is open to students who have had some French (FREN 101 or two years in high school). It is designed to help students build proficiency in French reading, writing, speaking and listening in the context of cultural exploration.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "N. Giguere",
+      "instructors": [
+        {
+          "name": "N. Giguere",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -44,6 +57,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "N. Giguere",
+      "instructors": [
+        {
+          "name": "N. Giguere",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -73,7 +93,14 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "B. Ben Asker",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "B. Ben Asker",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
       "schedule": {
@@ -104,13 +131,13 @@
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
-    "closed": 2,
+    "open": 0,
+    "closed": 3,
     "waitlisted": 0
   },
   "instructors_unique": [
     "B. Ben Asker",
     "N. Giguere"
   ],
-  "scraped_at": "2026-04-20T20:50:46.592Z"
+  "scraped_at": "2026-05-13T00:40:17.662Z"
 }

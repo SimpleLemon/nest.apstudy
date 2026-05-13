@@ -5,6 +5,12 @@
   "catalog_number": "498R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 12",
+  "requirement_designation": "None",
+  "course_description": "Credit variable. Psychology majors only, registration by permission of faculty supervisor.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "E. Kim",
+      "instructors": [
+        {
+          "name": "E. Kim",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "SUP",
       "instructor": "D. Maney",
+      "instructors": [
+        {
+          "name": "D. Maney",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -51,5 +71,5 @@
     "D. Maney",
     "E. Kim"
   ],
-  "scraped_at": "2026-04-20T20:51:39.454Z"
+  "scraped_at": "2026-05-13T00:42:08.914Z"
 }

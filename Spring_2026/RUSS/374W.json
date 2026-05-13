@@ -5,6 +5,12 @@
   "catalog_number": "374W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "HAPW",
+  "course_description": "This class examines several paradigms for understanding Shakespeare's formidable influence in Russian culture. The plays in question will be discussed in order to understand which of the themes will have the strongest impact and new life in a Russian culture and which are overlooked and downplayed.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "Team"
   ],
-  "scraped_at": "2026-04-20T20:49:02.551Z"
+  "scraped_at": "2026-05-13T00:39:09.658Z"
 }

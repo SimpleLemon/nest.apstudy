@@ -5,6 +5,12 @@
   "catalog_number": "460W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "CWE",
+  "course_description": "Jr/Sr Colloquium. Using in-depth case studies to guide us, we will unravel puzzles about race, ethnicity, and national identity in Latin America. They revolve around the central question: how have particular configurations of racial and ethnic hierarchy emerged in these countries?",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "HIST 460W",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "T. Rogers",
+      "instructors": [
+        {
+          "name": "T. Rogers",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "T. Rogers"
   ],
-  "scraped_at": "2026-04-20T20:51:08.049Z"
+  "scraped_at": "2026-05-13T00:40:49.860Z"
 }

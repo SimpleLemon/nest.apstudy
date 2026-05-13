@@ -5,6 +5,12 @@
   "catalog_number": "240L",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1",
+  "requirement_designation": "None",
+  "course_description": "This is the laboratory portion of the ENVS 240 Ecosystem Ecology class. Field studies and laboratory exercises will be conducted in various ecosystems around north Georgia.",
+  "course_notes": "ENVS 240 as prerequisite or co-requisite, or equivalent transfer credit.",
+  "requisites": "ENVS 240 as prerequisite or co-requisite, or equivalent transfer credit.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "J. Pynne",
+      "instructors": [
+        {
+          "name": "J. Pynne",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "J. Pynne"
   ],
-  "scraped_at": "2026-04-20T20:47:59.634Z"
+  "scraped_at": "2026-05-13T00:37:03.648Z"
 }

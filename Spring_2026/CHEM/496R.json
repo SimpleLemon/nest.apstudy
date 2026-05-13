@@ -5,6 +5,12 @@
   "catalog_number": "496R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1",
+  "requirement_designation": "XA",
+  "course_description": "This course is open to chemistry majors who are currently engaged in an eligible internship experience or have completed an internship in the previous term. Course activities consist of assignments in which the student reflects on their internship, to maximize the benefits of the experience.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "PRA",
       "instructor": "J. Kindt",
+      "instructors": [
+        {
+          "name": "J. Kindt",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "J. Kindt"
   ],
-  "scraped_at": "2026-04-20T20:47:46.132Z"
+  "scraped_at": "2026-05-13T00:36:39.351Z"
 }

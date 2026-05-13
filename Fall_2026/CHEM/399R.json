@@ -5,6 +5,12 @@
   "catalog_number": "399R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "None",
+  "course_description": "Introduces students to instrumental procedures and empirical techniques used in chemical research. Total credit not to exceed four hours. Cannot be used to meet course requirements for a chemistry major.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "A. Brathwaite",
+      "instructors": [
+        {
+          "name": "A. Brathwaite",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "A. Brathwaite"
   ],
-  "scraped_at": "2026-04-20T20:50:30.048Z"
+  "scraped_at": "2026-05-13T00:39:46.998Z"
 }

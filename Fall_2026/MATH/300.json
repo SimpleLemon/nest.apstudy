@@ -5,6 +5,12 @@
   "catalog_number": "300",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "Mathematical foundations and efficient implementation of popular machine learning models. Topics include: regression and classification techniques, deep learning, model evaluation and practical Implementation.",
+  "course_notes": "(MATH 210 or MATH_OX 210 or MATH 211 or MATH_OX 211) and (MATH 221 or MATH_OX 221) and (CS 170 or CS_OX 170 or MATH 170) or equivalent transfer credit as prerequisites.",
+  "requisites": "(MATH 210 or MATH_OX 210 or MATH 211 or MATH_OX 211) and (MATH 221 or MATH_OX 221) and (CS 170 or CS_OX 170 or MATH 170) or equivalent transfer credit as prerequisites.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Y. Xi",
+      "instructors": [
+        {
+          "name": "Y. Xi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "Y. Xi"
   ],
-  "scraped_at": "2026-04-20T20:51:13.090Z"
+  "scraped_at": "2026-05-13T00:40:54.686Z"
 }

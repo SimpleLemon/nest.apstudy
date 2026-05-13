@@ -5,6 +5,12 @@
   "catalog_number": "378",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HSCE",
+  "course_description": "The course explores human trafficking from the era of the trans- Atlantic slave trade to present-day instances of trafficking in productive and reproductive labor. Through primary and secondary sources, the students learn about the racial and gender ideologies undergirding this phenomenon.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "HIST 378 AFS 378 LACS 378",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Chira",
+      "instructors": [
+        {
+          "name": "A. Chira",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "A. Chira"
   ],
-  "scraped_at": "2026-04-20T20:50:20.083Z"
+  "scraped_at": "2026-05-13T00:39:30.871Z"
 }

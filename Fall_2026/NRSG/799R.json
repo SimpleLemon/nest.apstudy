@@ -5,6 +5,12 @@
   "catalog_number": "799R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,8 +21,15 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "C. Xiao",
+      "instructors": [
+        {
+          "name": "C. Xiao",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "11",
+      "enrollment_count": "12",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -28,8 +41,15 @@
       "section_number": "2",
       "schedule_type": "SUP",
       "instructor": "R. Chandler-Coley",
+      "instructors": [
+        {
+          "name": "R. Chandler-Coley",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "11",
+      "enrollment_count": "12",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -41,8 +61,15 @@
       "section_number": "3",
       "schedule_type": "SUP",
       "instructor": "V. Hertzberg",
+      "instructors": [
+        {
+          "name": "V. Hertzberg",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "11",
+      "enrollment_count": "12",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -54,8 +81,15 @@
       "section_number": "4",
       "schedule_type": "SUP",
       "instructor": "J. Wells",
+      "instructors": [
+        {
+          "name": "J. Wells",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "11",
+      "enrollment_count": "12",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -67,8 +101,15 @@
       "section_number": "5",
       "schedule_type": "SUP",
       "instructor": "L. McCauley",
+      "instructors": [
+        {
+          "name": "L. McCauley",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "11",
+      "enrollment_count": "12",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -80,8 +121,15 @@
       "section_number": "6",
       "schedule_type": "SUP",
       "instructor": "N. Giordano",
+      "instructors": [
+        {
+          "name": "N. Giordano",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "11",
+      "enrollment_count": "12",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -93,8 +141,15 @@
       "section_number": "7",
       "schedule_type": "SUP",
       "instructor": "J. Cimiotti",
+      "instructors": [
+        {
+          "name": "J. Cimiotti",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "11",
+      "enrollment_count": "12",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -106,8 +161,15 @@
       "section_number": "8",
       "schedule_type": "SUP",
       "instructor": "S. Brasher",
+      "instructors": [
+        {
+          "name": "S. Brasher",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "11",
+      "enrollment_count": "12",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -119,8 +181,15 @@
       "section_number": "9",
       "schedule_type": "SUP",
       "instructor": "J. Bai",
+      "instructors": [
+        {
+          "name": "J. Bai",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "11",
+      "enrollment_count": "12",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -132,8 +201,15 @@
       "section_number": "10",
       "schedule_type": "SUP",
       "instructor": "N. Carlson",
+      "instructors": [
+        {
+          "name": "N. Carlson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "11",
+      "enrollment_count": "12",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -145,8 +221,35 @@
       "section_number": "11",
       "schedule_type": "SUP",
       "instructor": "E. Ferranti",
+      "instructors": [
+        {
+          "name": "E. Ferranti",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "11",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5729",
+      "section_number": "12",
+      "schedule_type": "SUP",
+      "instructor": "R. Xiao",
+      "instructors": [
+        {
+          "name": "R. Xiao",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -155,12 +258,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 11,
+    "total_sections": 12,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 11,
-    "open": 11,
+    "other": 12,
+    "open": 12,
     "closed": 0,
     "waitlisted": 0
   },
@@ -174,8 +277,9 @@
     "N. Carlson",
     "N. Giordano",
     "R. Chandler-Coley",
+    "R. Xiao",
     "S. Brasher",
     "V. Hertzberg"
   ],
-  "scraped_at": "2026-04-20T20:52:09.354Z"
+  "scraped_at": "2026-05-13T00:41:09.233Z"
 }

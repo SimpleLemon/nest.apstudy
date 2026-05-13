@@ -5,6 +5,12 @@
   "catalog_number": "495A",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "XA",
+  "course_description": "Enrollment limited to linguistics majors invited to participate in the Linguistics Honors Program.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "Y. Kim",
+      "instructors": [
+        {
+          "name": "Y. Kim",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "Y. Kim"
   ],
-  "scraped_at": "2026-04-20T20:48:27.757Z"
+  "scraped_at": "2026-05-13T00:37:45.587Z"
 }

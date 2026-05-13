@@ -5,6 +5,12 @@
   "catalog_number": "201",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "This course draws on classical, modern, and contemporary texts to introduce skills required for reading comparatively across national traditions and academic disciplines with an emphasis on close reading, critical interpretation, and the multiplicity of linguistic traditions around the world. *Note: This course is non-repeatable.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Ozdemir",
+      "instructors": [
+        {
+          "name": "M. Ozdemir",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -38,7 +51,9 @@
       "crn": "2317",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "I. Goh",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -70,8 +85,7 @@
     "waitlisted": 0
   },
   "instructors_unique": [
-    "I. Goh",
     "M. Ozdemir"
   ],
-  "scraped_at": "2026-04-20T20:50:33.313Z"
+  "scraped_at": "2026-05-13T00:39:53.437Z"
 }

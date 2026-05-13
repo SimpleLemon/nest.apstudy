@@ -5,6 +5,12 @@
   "catalog_number": "101",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "IC",
+  "course_description": "This is the first half of the Elementary Korean language course. It is designed for those who have very limited or no prior knowledge of Korean language. Emphasis is placed on the fundamentals of listening, speaking, reading, and writing.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "E. Jo",
+      "instructors": [
+        {
+          "name": "E. Jo",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -44,6 +57,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "E. Jo",
+      "instructors": [
+        {
+          "name": "E. Jo",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -73,6 +93,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "J. Hong",
+      "instructors": [
+        {
+          "name": "J. Hong",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -102,7 +129,14 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "J. Hong",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "J. Hong",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Closed",
       "enrollment_count": "8",
       "is_cancelled": false,
       "schedule": {
@@ -131,6 +165,13 @@
       "section_number": "5",
       "schedule_type": "LEC",
       "instructor": "B. Choi",
+      "instructors": [
+        {
+          "name": "B. Choi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -155,6 +196,13 @@
       "section_number": "6",
       "schedule_type": "LEC",
       "instructor": "B. Choi",
+      "instructors": [
+        {
+          "name": "B. Choi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -179,6 +227,13 @@
       "section_number": "7",
       "schedule_type": "LEC",
       "instructor": "B. Choi",
+      "instructors": [
+        {
+          "name": "B. Choi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -203,6 +258,13 @@
       "section_number": "8",
       "schedule_type": "LEC",
       "instructor": "B. Choi",
+      "instructors": [
+        {
+          "name": "B. Choi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -229,8 +291,8 @@
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 4,
+    "open": 3,
+    "closed": 5,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -238,5 +300,5 @@
     "E. Jo",
     "J. Hong"
   ],
-  "scraped_at": "2026-04-20T20:51:06.419Z"
+  "scraped_at": "2026-05-13T00:40:48.247Z"
 }

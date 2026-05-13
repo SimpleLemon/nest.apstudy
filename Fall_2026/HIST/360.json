@@ -5,6 +5,12 @@
   "catalog_number": "360",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HSCE",
+  "course_description": "This course examines 500 plus years of Mexican history, from the Aztec Empire to the \"Narco State.\" Major themes include empire; colonialism; neocolonialism; class and ethnic relations; modernization; popular resistance; revolution; national identity; migration; neoliberalism; and drug trafficking.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "LACS 360",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Y. Yannakakis",
+      "instructors": [
+        {
+          "name": "Y. Yannakakis",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "Y. Yannakakis"
   ],
-  "scraped_at": "2026-04-20T20:50:54.869Z"
+  "scraped_at": "2026-05-13T00:40:30.511Z"
 }

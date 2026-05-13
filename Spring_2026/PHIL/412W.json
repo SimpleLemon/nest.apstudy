@@ -5,6 +5,12 @@
   "catalog_number": "412W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "HSCW",
+  "course_description": "This course surveys important perspectives, ideas, and theories in the writings of major American writers. It will focus on pragmatism as developed by such thinkers as Charles Peirce, William James, John Dewey, and George Herbert Mead.",
+  "course_notes": "Two PHIL courses or equivalent transfer credit as prerequisite.",
+  "requisites": "Two PHIL courses or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Iliopoulos",
+      "instructors": [
+        {
+          "name": "A. Iliopoulos",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "A. Iliopoulos"
   ],
-  "scraped_at": "2026-04-20T20:48:47.568Z"
+  "scraped_at": "2026-05-13T00:38:53.517Z"
 }

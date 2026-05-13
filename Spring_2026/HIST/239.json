@@ -5,6 +5,12 @@
   "catalog_number": "239",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HAE",
+  "course_description": "Examines African American history from 1865 to the present. Emphasizes regional, gender, and class distinction within African American communities, and the ways in which industrial transformations shaped African American life, thought, and resistance.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "AAS 239",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "C. Sanders",
+      "instructors": [
+        {
+          "name": "C. Sanders",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "C. Sanders"
   ],
-  "scraped_at": "2026-04-20T20:48:11.177Z"
+  "scraped_at": "2026-05-13T00:37:23.023Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "789",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "E. Davenport",
+      "instructors": [
+        {
+          "name": "E. Davenport",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -30,31 +43,19 @@
       }
     },
     {
-      "crn": "2484",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "E. Goodstein",
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-3:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
       "crn": "2485",
       "section_number": "3",
       "schedule_type": "SEM",
       "instructor": "Klein/Salter",
+      "instructors": [
+        {
+          "name": "Klein/Salter",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "3",
+      "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
         "display": "T 10a-12:45p",
@@ -72,6 +73,13 @@
       "section_number": "4",
       "schedule_type": "SEM",
       "instructor": "G. Bennington",
+      "instructors": [
+        {
+          "name": "G. Bennington",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -91,8 +99,15 @@
       "section_number": "5",
       "schedule_type": "SEM",
       "instructor": "S. Gagliardi",
+      "instructors": [
+        {
+          "name": "S. Gagliardi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "3",
+      "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 10a-12:45p",
@@ -107,21 +122,20 @@
     }
   ],
   "section_summary": {
-    "total_sections": 5,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 5,
-    "open": 5,
+    "other": 4,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "E. Davenport",
-    "E. Goodstein",
     "G. Bennington",
     "Klein/Salter",
     "S. Gagliardi"
   ],
-  "scraped_at": "2026-04-20T20:50:41.629Z"
+  "scraped_at": "2026-05-13T00:40:07.988Z"
 }

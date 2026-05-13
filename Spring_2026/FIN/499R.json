@@ -5,6 +5,12 @@
   "catalog_number": "499R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,8 +21,15 @@
       "section_number": "1101",
       "schedule_type": "LEC",
       "instructor": "C. Robinson",
+      "instructors": [
+        {
+          "name": "C. Robinson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "1",
+      "enrollment_count": "2",
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-5:15p",
@@ -34,6 +47,13 @@
       "section_number": "1102",
       "schedule_type": "LEC",
       "instructor": "S. Ramachandran",
+      "instructors": [
+        {
+          "name": "S. Ramachandran",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -52,21 +72,42 @@
           }
         ]
       }
+    },
+    {
+      "crn": "6749",
+      "section_number": "1109",
+      "schedule_type": "LEC",
+      "instructor": "D. Clear",
+      "instructors": [
+        {
+          "name": "D. Clear",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "C. Robinson",
+    "D. Clear",
     "S. Ramachandran"
   ],
-  "scraped_at": "2026-04-20T20:49:17.432Z"
+  "scraped_at": "2026-05-13T00:37:08.500Z"
 }

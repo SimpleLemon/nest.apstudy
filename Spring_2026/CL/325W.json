@@ -5,6 +5,12 @@
   "catalog_number": "325W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "HSCW",
+  "course_description": "A study of the role of the Greco-Roman legacy during formative decades of the American republic and in shaping civic values in the United States.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "HIST 325W",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "B. Lawatsch-Melton",
+      "instructors": [
+        {
+          "name": "B. Lawatsch-Melton",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "B. Lawatsch-Melton"
   ],
-  "scraped_at": "2026-04-20T21:51:25.336Z"
+  "scraped_at": "2026-05-13T00:36:42.572Z"
 }

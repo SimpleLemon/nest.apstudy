@@ -5,6 +5,12 @@
   "catalog_number": "225",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HSC",
+  "course_description": "Introduces theories of human interaction with the environment. Focus is on holistically examining the factors social science research suggests drives human behavior towards natural resources. Focused on Ostrom's IAD and SES Frameworks.",
+  "course_notes": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or equivalent transfer credit as prerequisite.",
+  "requisites": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Rafi",
+      "instructors": [
+        {
+          "name": "S. Rafi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "S. Rafi"
   ],
-  "scraped_at": "2026-04-20T20:47:59.633Z"
+  "scraped_at": "2026-05-13T00:37:03.648Z"
 }

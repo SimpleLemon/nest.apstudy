@@ -1,0 +1,96 @@
+{
+  "course_code": "HIST 585P",
+  "course_title": "Special Topics In History: 2nd Year Research Paper",
+  "subject": "HIST",
+  "catalog_number": "585P",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "crn": "5813",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "C. Sanders",
+      "instructors": [
+        {
+          "name": "C. Sanders",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5814",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "J. Ward",
+      "instructors": [
+        {
+          "name": "J. Ward",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5815",
+      "section_number": "3",
+      "schedule_type": "SUP",
+      "instructor": "J. Bullock",
+      "instructors": [
+        {
+          "name": "J. Bullock",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 3,
+    "open": 3,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "C. Sanders",
+    "J. Bullock",
+    "J. Ward"
+  ],
+  "scraped_at": "2026-05-13T00:40:30.520Z"
+}

@@ -5,6 +5,12 @@
   "catalog_number": "495BW",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 8",
+  "requirement_designation": "CW",
+  "course_description": "Spring semester component of the research project for students selected by the department for the Honors Program. Includes writing of the Honors thesis, regular meetings between student and faculty adviser, and a public thesis defense.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "K. Ostrom",
+      "instructors": [
+        {
+          "name": "K. Ostrom",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "SUP",
       "instructor": "A. Herrero-Olaizola",
+      "instructors": [
+        {
+          "name": "A. Herrero-Olaizola",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -51,5 +71,5 @@
     "A. Herrero-Olaizola",
     "K. Ostrom"
   ],
-  "scraped_at": "2026-04-20T20:49:05.825Z"
+  "scraped_at": "2026-05-13T00:39:14.504Z"
 }

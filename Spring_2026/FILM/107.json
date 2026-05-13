@@ -5,6 +5,12 @@
   "catalog_number": "107",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "A hands-on introduction to the production of cinematic media. The course focuses on the basic gestures of filmmaking (from writing to filming and editing) in order to develop successful visual storytelling skills. Significant amounts of filming and editing take place outside of class.",
+  "course_notes": "FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
+  "requisites": "FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
+  "cross_listed": "ARTVIS 107",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "T. Ozdemir",
+      "instructors": [
+        {
+          "name": "T. Ozdemir",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "A. Llosa",
+      "instructors": [
+        {
+          "name": "A. Llosa",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -63,5 +83,5 @@
     "A. Llosa",
     "T. Ozdemir"
   ],
-  "scraped_at": "2026-04-20T20:48:01.268Z"
+  "scraped_at": "2026-05-13T00:37:06.883Z"
 }

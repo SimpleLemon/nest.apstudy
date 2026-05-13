@@ -5,6 +5,12 @@
   "catalog_number": "202W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAW",
+  "course_description": "This course introduces students to the way translation between different literatures, literary genres, and new media impacts our comparative reading of texts. *Note: This course is non-repeatable.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Araujo Soares",
+      "instructors": [
+        {
+          "name": "A. Araujo Soares",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "A. Phillips",
+      "instructors": [
+        {
+          "name": "A. Phillips",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "K. Thompson",
+      "instructors": [
+        {
+          "name": "K. Thompson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -87,6 +114,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "S. Di Gironimo",
+      "instructors": [
+        {
+          "name": "S. Di Gironimo",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -123,5 +157,5 @@
     "K. Thompson",
     "S. Di Gironimo"
   ],
-  "scraped_at": "2026-04-20T20:50:33.313Z"
+  "scraped_at": "2026-05-13T00:39:53.438Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "389",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "None",
+  "course_description": "A seminar or lecture series on topics of special sociological concern.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "X. Yang",
+      "instructors": [
+        {
+          "name": "X. Yang",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "N. Hoffmann",
+      "instructors": [
+        {
+          "name": "N. Hoffmann",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "5",
       "schedule_type": "LEC",
       "instructor": "S. Shrivastava",
+      "instructors": [
+        {
+          "name": "S. Shrivastava",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -87,6 +114,13 @@
       "section_number": "6",
       "schedule_type": "LEC",
       "instructor": "C. Strickland",
+      "instructors": [
+        {
+          "name": "C. Strickland",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -111,6 +145,13 @@
       "section_number": "7",
       "schedule_type": "LEC",
       "instructor": "J. Zhang",
+      "instructors": [
+        {
+          "name": "J. Zhang",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -135,6 +176,13 @@
       "section_number": "9",
       "schedule_type": "LEC",
       "instructor": "Hall-Clifford/Wutor",
+      "instructors": [
+        {
+          "name": "Hall-Clifford/Wutor",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -173,5 +221,5 @@
     "S. Shrivastava",
     "X. Yang"
   ],
-  "scraped_at": "2026-04-20T20:49:04.188Z"
+  "scraped_at": "2026-05-13T00:39:12.880Z"
 }

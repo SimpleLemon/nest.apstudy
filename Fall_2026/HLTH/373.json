@@ -5,6 +5,12 @@
   "catalog_number": "373",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": "None",
+  "course_description": "This course employs multiple perspectives, including organizational theory, business, and economics, to examine the structure, financing, and performance of the US health care system and its ability to deliver health. Mental health, long-term care, and public health sectors are explored in depth.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "V. Phillips",
+      "instructors": [
+        {
+          "name": "V. Phillips",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "V. Phillips"
   ],
-  "scraped_at": "2026-04-20T20:50:56.532Z"
+  "scraped_at": "2026-05-13T00:40:32.142Z"
 }

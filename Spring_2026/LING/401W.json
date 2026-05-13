@@ -5,6 +5,12 @@
   "catalog_number": "401W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "HAPW",
+  "course_description": "In this course, students think critically about fundamental questions in linguistics, including: Is language a product of how the mind works or a product of social interaction? What are the sources of linguistic structure? Is language innate in humans? Various perspectives are compared &amp; contrasted.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "S. Tamasi",
+      "instructors": [
+        {
+          "name": "S. Tamasi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "J. Boigues-Lopez",
+      "instructors": [
+        {
+          "name": "J. Boigues-Lopez",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -73,5 +93,5 @@
     "J. Boigues-Lopez",
     "S. Tamasi"
   ],
-  "scraped_at": "2026-04-20T20:48:27.755Z"
+  "scraped_at": "2026-05-13T00:37:45.585Z"
 }

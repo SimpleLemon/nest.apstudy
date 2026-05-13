@@ -5,6 +5,12 @@
   "catalog_number": "229",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "Introduction to Dance is an overview of dance as an expressive art form, a symbolic language, and an integral aspect of world cultures. The course is designed to help students grasp a range of cultural, aesthetic, and bodily worlds from which dance is born. Course work enables students to develop intuitive and verbal skills which allow them to articulate about movement and its meaning. This is supported by direct physical experience in various dance forms, styles, genres, and through exploring the creative process.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,7 +21,14 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "G. Staib",
-      "enrollment_status": "Waitlist",
+      "instructors": [
+        {
+          "name": "G. Staib",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -41,12 +54,12 @@
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 0
   },
   "instructors_unique": [
     "G. Staib"
   ],
-  "scraped_at": "2026-04-20T20:50:36.607Z"
+  "scraped_at": "2026-05-13T00:39:56.665Z"
 }

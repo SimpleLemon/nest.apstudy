@@ -5,6 +5,12 @@
   "catalog_number": "495BW",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 8",
+  "requirement_designation": "CW",
+  "course_description": "Honors research in Greek under the direct supervision of a faculty member. Open by invitation only. One semester of honors research can be used toward the College's Continuing Writing requirement",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "L. Pratt",
+      "instructors": [
+        {
+          "name": "L. Pratt",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "L. Pratt"
   ],
-  "scraped_at": "2026-04-20T20:48:06.246Z"
+  "scraped_at": "2026-05-13T00:37:16.582Z"
 }

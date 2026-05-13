@@ -5,6 +5,12 @@
   "catalog_number": "207",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HA",
+  "course_description": "Hands-on introduction to technical and stylistic foundations of moving image production using a variety of film and video formats and to the economic and professional realities of narrative content creation for film.",
+  "course_notes": "FILM 107 or FILM_OX 107 or equivalent transfer credit as prerequisite.",
+  "requisites": "FILM 107 or FILM_OX 107 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. Rogers",
+      "instructors": [
+        {
+          "name": "D. Rogers",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "D. Rogers"
   ],
-  "scraped_at": "2026-04-20T20:50:44.936Z"
+  "scraped_at": "2026-05-13T00:40:14.425Z"
 }

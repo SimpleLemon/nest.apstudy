@@ -5,6 +5,12 @@
   "catalog_number": "110",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "QR",
+  "course_description": "Study of correct reasoning, including the recognition, analysis, and criticism of arguments; relevant topics include informal fallacies, syllogistic reasoning, and systems of deduction.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,7 +21,14 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Wahman",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "J. Wahman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
       "schedule": {
@@ -44,6 +57,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "J. Wahman",
+      "instructors": [
+        {
+          "name": "J. Wahman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -75,12 +95,12 @@
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
-    "closed": 1,
+    "open": 0,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "J. Wahman"
   ],
-  "scraped_at": "2026-04-20T20:51:31.137Z"
+  "scraped_at": "2026-05-13T00:42:00.728Z"
 }

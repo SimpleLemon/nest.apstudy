@@ -1,10 +1,16 @@
 {
   "course_code": "JPN 285",
-  "course_title": "Special Topics in Japanese",
+  "course_title": "Special Topics in Japanese: Extensive Reading",
   "subject": "JPN",
   "catalog_number": "285",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "None",
+  "course_description": "Study of Japanese language, literature, society, thought, or culture, alone or in conjunction with other literary or cultural trends. Topics to be announced in advance.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Mazzotta",
+      "instructors": [
+        {
+          "name": "M. Mazzotta",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Mazzotta"
   ],
-  "scraped_at": "2026-04-20T21:51:59.406Z"
+  "scraped_at": "2026-05-13T00:40:45.033Z"
 }

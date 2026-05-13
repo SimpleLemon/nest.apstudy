@@ -5,6 +5,12 @@
   "catalog_number": "751R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,8 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -35,5 +43,5 @@
     "waitlisted": 0
   },
   "instructors_unique": [],
-  "scraped_at": "2026-04-20T20:47:58.003Z"
+  "scraped_at": "2026-05-13T00:37:00.418Z"
 }

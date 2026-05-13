@@ -5,6 +5,12 @@
   "catalog_number": "497R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 12",
+  "requirement_designation": "None",
+  "course_description": "Under faculty mentorship, students propose a focused research question and design a reading plan to explore the available evidence in depth through independent study. Students will write a semester paper which describes our current understanding of the topic and critiques the available evidence.",
+  "course_notes": "HLTH 210 or equivalent transfer credit as prerequisite.",
+  "requisites": "HLTH 210 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "IND",
       "instructor": "R. Hall-Clifford",
+      "instructors": [
+        {
+          "name": "R. Hall-Clifford",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "R. Hall-Clifford"
   ],
-  "scraped_at": "2026-04-20T20:50:56.537Z"
+  "scraped_at": "2026-05-13T00:40:32.148Z"
 }

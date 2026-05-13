@@ -5,6 +5,12 @@
   "catalog_number": "443",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HSC",
+  "course_description": "This seminar deals with the sociocultural foundations of music, attending to scholarship on the production, content, and reception of various types of music.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "T. Dowd",
+      "instructors": [
+        {
+          "name": "T. Dowd",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "T. Dowd"
   ],
-  "scraped_at": "2026-04-20T20:49:04.188Z"
+  "scraped_at": "2026-05-13T00:39:12.880Z"
 }

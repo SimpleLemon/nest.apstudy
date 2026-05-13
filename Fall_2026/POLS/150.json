@@ -5,6 +5,12 @@
   "catalog_number": "150",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "SS",
+  "course_description": "Discussion based course on the foundational ideas that underlie American democracy and other major American political debates from the revolutionary era to the present. Readings drawn from classic texts and original documents, speeches and writings of leading American political figures.This course is part of Emory's Voluntary Core Curriculum program.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "E. Gee",
+      "instructors": [
+        {
+          "name": "E. Gee",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "E. Gee"
   ],
-  "scraped_at": "2026-04-20T20:51:36.144Z"
+  "scraped_at": "2026-05-13T00:42:05.624Z"
 }

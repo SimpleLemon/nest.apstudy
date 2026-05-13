@@ -5,6 +5,12 @@
   "catalog_number": "436",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "SNT",
+  "course_description": "This course focuses on computational methods essential for modeling and analyzing complex physical systems. Topics include techniques for solving partial differential equations, Monte Carlo methods, many-body simulations, and AI-based approaches. A strong emphasis will be placed on hands-on work.",
+  "course_notes": "(PHYS 212 or PHYS_OX 212) and (PHYS 220 or PHYS_OX 220) or equivalent transfer credit as prerequisites.",
+  "requisites": "(PHYS 212 or PHYS_OX 212) and (PHYS 220 or PHYS_OX 220) or equivalent transfer credit as prerequisites.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. Sussman",
+      "instructors": [
+        {
+          "name": "D. Sussman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "D. Sussman"
   ],
-  "scraped_at": "2026-04-20T20:51:32.838Z"
+  "scraped_at": "2026-05-13T00:42:02.388Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "231",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "SS",
+  "course_description": "An introduction to international trade, capital flows, and finance. Topics include the impact of public policy decisions concerning protectionism, balance of payments, and foreign exchange markets on economic activities.",
+  "course_notes": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as a prerequisite.",
+  "requisites": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "T. Smith",
+      "instructors": [
+        {
+          "name": "T. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "T. Smith"
   ],
-  "scraped_at": "2026-04-20T20:50:38.309Z"
+  "scraped_at": "2026-05-13T00:39:59.883Z"
 }

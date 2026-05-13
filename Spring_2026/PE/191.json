@@ -5,6 +5,12 @@
   "catalog_number": "191",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "A course for students interested in becoming familiar with the principles of ballroom and social dance, consisting of terminology and technique. This course will concentrate on the following dances: Foxtrot, Waltz, American Tango, East Coast Swing, Rumba, Cha-cha, Salsa and free-style Hip-Hop. b",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "PE",
       "instructor": "P. White",
+      "instructors": [
+        {
+          "name": "P. White",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "P. White"
   ],
-  "scraped_at": "2026-04-20T20:48:44.268Z"
+  "scraped_at": "2026-05-13T00:38:48.680Z"
 }

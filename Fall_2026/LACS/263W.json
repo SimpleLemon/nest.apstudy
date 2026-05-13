@@ -5,6 +5,12 @@
   "catalog_number": "263W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HSWE",
+  "course_description": "\"Plantation America\", stretching from the American South, through the Caribbean to northern Brazil, comprises a geographical area that, as its name suggests, was dominated by the economic system of plantation monoculture. This course will attempt two inter-related tasks: it will firstly survey the unity and variety of the plantation as a form of socio-economic organization; secondly it will explicate the unity and variety of the political and cultural forms that have evolved alongside the plantation. The course will be interdisciplinary in nature, using texts from history, literature and anthropology.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "HIST 263W",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "R. Goddard",
+      "instructors": [
+        {
+          "name": "R. Goddard",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "R. Goddard"
   ],
-  "scraped_at": "2026-04-20T20:51:08.048Z"
+  "scraped_at": "2026-05-13T00:40:49.859Z"
 }

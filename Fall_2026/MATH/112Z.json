@@ -5,6 +5,12 @@
   "catalog_number": "112Z",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "QR",
+  "course_description": "This class is for freshmen who have earned a 4 or 5 on the AP AB exam, or a 5 on the IB HL exam. Topics include: techniques of integration, exponential and logarithm functions, sequences and series, and polar coordinates.",
+  "course_notes": "This class is for freshmen who have earned a 4 or 5 on the AP AB exam, or a 5 on the IB HL exam. Topics include: techniques of integration, exponential and logarithm functions, sequences and series, and polar coordinates.",
+  "requisites": "This class is for freshmen who have earned a 4 or 5 on the AP AB exam, or a 5 on the IB HL exam. Topics include: techniques of integration, exponential and logarithm functions, sequences and series, and polar coordinates.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Taskovic",
+      "instructors": [
+        {
+          "name": "M. Taskovic",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,8 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -72,5 +87,5 @@
   "instructors_unique": [
     "M. Taskovic"
   ],
-  "scraped_at": "2026-04-20T20:51:13.087Z"
+  "scraped_at": "2026-05-13T00:40:54.683Z"
 }

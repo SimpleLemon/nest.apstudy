@@ -5,6 +5,12 @@
   "catalog_number": "270",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "SSE",
+  "course_description": "This course offers a general overview of the history of Jews and Judaism, beginning with the Biblical period and ending with modern times.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "JS 270 MESAS 275",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "C. Perry",
+      "instructors": [
+        {
+          "name": "C. Perry",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "C. Perry"
   ],
-  "scraped_at": "2026-04-20T20:48:11.179Z"
+  "scraped_at": "2026-05-13T00:37:23.025Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "265",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "SS",
+  "course_description": "This course introduces students to the cross-cultural study of gender and sexuality, providing anthropological perspectives on femininity, masculinity, heteronormativity, gender variance, same sex relations, and various theories and methods that are relevant to the study of these phenomena.Students who have taken ANT_OX 265 may not repeat this course for credit.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "WGS 265",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Glass",
+      "instructors": [
+        {
+          "name": "J. Glass",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "J. Glass"
   ],
-  "scraped_at": "2026-04-20T20:50:20.080Z"
+  "scraped_at": "2026-05-13T00:39:30.848Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "301",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "IC",
+  "course_description": "Prerequisites: Arabic 202 or permission of instructor. Fifth in a series of courses that develop reading, speaking, listening, writing, and cultural skills in Arabic. Course includes video materials and stresses communication in formal and spoken Arabic.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "G. Shehata",
+      "instructors": [
+        {
+          "name": "G. Shehata",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "G. Shehata"
   ],
-  "scraped_at": "2026-04-20T20:50:21.712Z"
+  "scraped_at": "2026-05-13T00:39:32.513Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "102",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HAE",
+  "course_description": "This course is a multidisciplinary introduction to South Asia, including an overview of the history and historiography of the region spanning from the Indus Valley Civilization to before the rise of the Mughal Empire in the mid-second millennium C.E.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "HIST 104",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Fredsell",
+      "instructors": [
+        {
+          "name": "A. Fredsell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "A. Fredsell"
   ],
-  "scraped_at": "2026-04-20T21:52:01.040Z"
+  "scraped_at": "2026-05-13T00:40:56.307Z"
 }

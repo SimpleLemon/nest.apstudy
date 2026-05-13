@@ -5,6 +5,12 @@
   "catalog_number": "337",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HSC",
+  "course_description": "This class explores issues such as what makes for a healthy self or person, the role of religious practices and belief in healing, and the relationship of body and mind.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "EAS 337",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "C. Ozawa-de Silva",
+      "instructors": [
+        {
+          "name": "C. Ozawa-de Silva",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "C. Ozawa-de Silva"
   ],
-  "scraped_at": "2026-04-20T20:47:36.247Z"
+  "scraped_at": "2026-05-13T00:36:23.134Z"
 }

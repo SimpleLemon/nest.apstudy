@@ -5,75 +5,31 @@
   "catalog_number": "100",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "HTH",
+  "course_description": "It is increasingly evident that individual involvement in personal health has profound benefits. This course provides students the opportunity to become involved in a personalized approach to health and well-being with strategic approaches for the implementation of a healthy lifestyle.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
   },
   "sections": [
     {
-      "crn": "2689",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "L. Edwards",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 8-8:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "800",
-            "end": "850"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2690",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "L. Edwards",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 8-8:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "800",
-            "end": "850"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2691",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "L. Edwards",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 8-8:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "800",
-            "end": "850"
-          }
-        ]
-      }
-    },
-    {
       "crn": "2693",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "L. Edwards",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 9-9:50a",
@@ -90,9 +46,16 @@
       "crn": "2697",
       "section_number": "5",
       "schedule_type": "LEC",
-      "instructor": "L. Edwards",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 9-9:50a",
@@ -109,9 +72,16 @@
       "crn": "2700",
       "section_number": "6",
       "schedule_type": "LEC",
-      "instructor": "L. Edwards",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 9-9:50a",
@@ -128,9 +98,16 @@
       "crn": "2701",
       "section_number": "7",
       "schedule_type": "LEC",
-      "instructor": "L. Edwards",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 9-9:50a",
@@ -147,9 +124,16 @@
       "crn": "2703",
       "section_number": "8",
       "schedule_type": "LEC",
-      "instructor": "L. Edwards",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 9-9:50a",
@@ -166,85 +150,16 @@
       "crn": "2705",
       "section_number": "9",
       "schedule_type": "LEC",
-      "instructor": "L. Edwards",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 9-9:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2706",
-      "section_number": "10",
-      "schedule_type": "LEC",
-      "instructor": "L. Edwards",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 9-9:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2709",
-      "section_number": "11",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 9-9:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2710",
-      "section_number": "12",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 9-9:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2716",
-      "section_number": "13",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 9-9:50a",
@@ -261,9 +176,16 @@
       "crn": "2718",
       "section_number": "14",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 10-10:50a",
@@ -280,9 +202,16 @@
       "crn": "2721",
       "section_number": "15",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 10-10:50a",
@@ -299,9 +228,16 @@
       "crn": "2722",
       "section_number": "16",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 11:30a-12:20p",
@@ -318,9 +254,16 @@
       "crn": "2724",
       "section_number": "17",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 11:30a-12:20p",
@@ -337,9 +280,16 @@
       "crn": "2726",
       "section_number": "18",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 1-1:50p",
@@ -356,9 +306,16 @@
       "crn": "2727",
       "section_number": "19",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 1-1:50p",
@@ -375,9 +332,16 @@
       "crn": "3215",
       "section_number": "20",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-3:20p",
@@ -394,9 +358,16 @@
       "crn": "2731",
       "section_number": "21",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-3:20p",
@@ -413,47 +384,16 @@
       "crn": "2732",
       "section_number": "22",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-4:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2735",
-      "section_number": "23",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-4:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2737",
-      "section_number": "24",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-4:50p",
@@ -470,9 +410,16 @@
       "crn": "2739",
       "section_number": "25",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-4:50p",
@@ -489,9 +436,16 @@
       "crn": "2741",
       "section_number": "26",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-4:50p",
@@ -508,47 +462,16 @@
       "crn": "2742",
       "section_number": "27",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-4:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2743",
-      "section_number": "28",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-4:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2744",
-      "section_number": "29",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-4:50p",
@@ -565,9 +488,16 @@
       "crn": "2745",
       "section_number": "30",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-4:50p",
@@ -584,9 +514,16 @@
       "crn": "2746",
       "section_number": "31",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-4:50p",
@@ -600,69 +537,19 @@
       }
     },
     {
-      "crn": "2747",
-      "section_number": "32",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 8-8:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "800",
-            "end": "850"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2748",
-      "section_number": "33",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 8-8:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "800",
-            "end": "850"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3216",
-      "section_number": "34",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 8-8:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "800",
-            "end": "850"
-          }
-        ]
-      }
-    },
-    {
       "crn": "2750",
       "section_number": "35",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 9-9:50a",
@@ -679,9 +566,16 @@
       "crn": "2751",
       "section_number": "36",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 9-9:50a",
@@ -698,9 +592,16 @@
       "crn": "2752",
       "section_number": "37",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 9-9:50a",
@@ -717,9 +618,16 @@
       "crn": "2753",
       "section_number": "38",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 9-9:50a",
@@ -736,28 +644,16 @@
       "crn": "2754",
       "section_number": "39",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 9-9:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2756",
-      "section_number": "40",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 9-9:50a",
@@ -774,66 +670,16 @@
       "crn": "2929",
       "section_number": "41",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 9-9:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2930",
-      "section_number": "42",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 9-9:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2932",
-      "section_number": "43",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 9-9:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2933",
-      "section_number": "44",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 9-9:50a",
@@ -850,9 +696,16 @@
       "crn": "2934",
       "section_number": "45",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 10-10:50a",
@@ -869,9 +722,16 @@
       "crn": "2935",
       "section_number": "46",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 10-10:50a",
@@ -888,9 +748,16 @@
       "crn": "2936",
       "section_number": "47",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 11:30a-12:20p",
@@ -907,9 +774,16 @@
       "crn": "2938",
       "section_number": "48",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 11:30a-12:20p",
@@ -926,9 +800,16 @@
       "crn": "2940",
       "section_number": "49",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 1-1:50p",
@@ -945,9 +826,16 @@
       "crn": "3220",
       "section_number": "50",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 1-1:50p",
@@ -964,9 +852,16 @@
       "crn": "2942",
       "section_number": "51",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-3:20p",
@@ -983,9 +878,16 @@
       "crn": "2944",
       "section_number": "52",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-3:20p",
@@ -1002,9 +904,16 @@
       "crn": "2946",
       "section_number": "53",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-4:50p",
@@ -1021,9 +930,16 @@
       "crn": "3221",
       "section_number": "54",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-4:50p",
@@ -1040,9 +956,16 @@
       "crn": "2948",
       "section_number": "55",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-4:50p",
@@ -1059,9 +982,16 @@
       "crn": "3160",
       "section_number": "56",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-4:50p",
@@ -1078,9 +1008,16 @@
       "crn": "3161",
       "section_number": "57",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-4:50p",
@@ -1097,9 +1034,16 @@
       "crn": "3162",
       "section_number": "58",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-4:50p",
@@ -1108,120 +1052,6 @@
             "day": "Tue",
             "start": "1600",
             "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3163",
-      "section_number": "59",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-4:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3164",
-      "section_number": "60",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-4:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3165",
-      "section_number": "61",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-4:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3166",
-      "section_number": "62",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-4:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3167",
-      "section_number": "63",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 8-8:50a",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "800",
-            "end": "850"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3202",
-      "section_number": "64",
-      "schedule_type": "LEC",
-      "instructor": "N. Keyton",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 8-8:50a",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "800",
-            "end": "850"
           }
         ]
       }
@@ -1230,9 +1060,16 @@
       "crn": "3205",
       "section_number": "65",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 9-9:50a",
@@ -1249,9 +1086,16 @@
       "crn": "3206",
       "section_number": "66",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 9-9:50a",
@@ -1268,9 +1112,16 @@
       "crn": "3210",
       "section_number": "67",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 9-9:50a",
@@ -1287,9 +1138,16 @@
       "crn": "3213",
       "section_number": "68",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 9-9:50a",
@@ -1306,9 +1164,16 @@
       "crn": "3219",
       "section_number": "69",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 9-9:50a",
@@ -1325,9 +1190,16 @@
       "crn": "3224",
       "section_number": "70",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 9-9:50a",
@@ -1344,9 +1216,16 @@
       "crn": "3229",
       "section_number": "71",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 10-10:50a",
@@ -1363,9 +1242,16 @@
       "crn": "3232",
       "section_number": "72",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 10-10:50a",
@@ -1382,9 +1268,16 @@
       "crn": "3241",
       "section_number": "73",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 11:30a-12:20p",
@@ -1401,9 +1294,16 @@
       "crn": "3242",
       "section_number": "74",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 11:30a-12:20p",
@@ -1420,9 +1320,16 @@
       "crn": "3243",
       "section_number": "75",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-1:50p",
@@ -1439,9 +1346,16 @@
       "crn": "3244",
       "section_number": "76",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-1:50p",
@@ -1458,9 +1372,16 @@
       "crn": "3245",
       "section_number": "77",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-3:20p",
@@ -1477,9 +1398,16 @@
       "crn": "3246",
       "section_number": "78",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-3:20p",
@@ -1496,9 +1424,16 @@
       "crn": "3247",
       "section_number": "79",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-4:50p",
@@ -1515,9 +1450,16 @@
       "crn": "3248",
       "section_number": "80",
       "schedule_type": "LEC",
-      "instructor": "N. Keyton",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-4:50p",
@@ -1534,9 +1476,16 @@
       "crn": "3249",
       "section_number": "81",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-4:50p",
@@ -1553,9 +1502,16 @@
       "crn": "3250",
       "section_number": "82",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-4:50p",
@@ -1572,9 +1528,16 @@
       "crn": "3251",
       "section_number": "83",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-4:50p",
@@ -1583,101 +1546,6 @@
             "day": "Wed",
             "start": "1600",
             "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3252",
-      "section_number": "84",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 4-4:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3253",
-      "section_number": "85",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 4-4:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3286",
-      "section_number": "86",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 4-4:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3287",
-      "section_number": "87",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 8-8:50a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "800",
-            "end": "850"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3288",
-      "section_number": "88",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 8-8:50a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "800",
-            "end": "850"
           }
         ]
       }
@@ -1686,9 +1554,16 @@
       "crn": "3289",
       "section_number": "89",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9-9:50a",
@@ -1705,9 +1580,16 @@
       "crn": "3290",
       "section_number": "90",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9-9:50a",
@@ -1724,9 +1606,16 @@
       "crn": "3291",
       "section_number": "91",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9-9:50a",
@@ -1743,47 +1632,16 @@
       "crn": "3292",
       "section_number": "92",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 9-9:50a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3293",
-      "section_number": "93",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 9-9:50a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3294",
-      "section_number": "94",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9-9:50a",
@@ -1800,9 +1658,16 @@
       "crn": "3295",
       "section_number": "95",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 10-10:50a",
@@ -1819,9 +1684,16 @@
       "crn": "3296",
       "section_number": "96",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 10-10:50a",
@@ -1838,9 +1710,16 @@
       "crn": "3297",
       "section_number": "97",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 11:30a-12:20p",
@@ -1857,9 +1736,16 @@
       "crn": "3298",
       "section_number": "98",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 11:30a-12:20p",
@@ -1876,9 +1762,16 @@
       "crn": "3299",
       "section_number": "99",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 1-1:50p",
@@ -1895,9 +1788,16 @@
       "crn": "3300",
       "section_number": "100",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 1-1:50p",
@@ -1914,9 +1814,16 @@
       "crn": "3301",
       "section_number": "101",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-3:20p",
@@ -1933,9 +1840,16 @@
       "crn": "3302",
       "section_number": "102",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-3:20p",
@@ -1952,9 +1866,16 @@
       "crn": "3303",
       "section_number": "103",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4-4:50p",
@@ -1971,9 +1892,16 @@
       "crn": "3304",
       "section_number": "104",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4-4:50p",
@@ -1990,9 +1918,16 @@
       "crn": "3305",
       "section_number": "105",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4-4:50p",
@@ -2009,9 +1944,16 @@
       "crn": "3306",
       "section_number": "106",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4-4:50p",
@@ -2028,9 +1970,16 @@
       "crn": "3307",
       "section_number": "107",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4-4:50p",
@@ -2039,158 +1988,6 @@
             "day": "Thu",
             "start": "1600",
             "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3308",
-      "section_number": "108",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 4-4:50p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3309",
-      "section_number": "109",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 4-4:50p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3310",
-      "section_number": "110",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 4-4:50p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3311",
-      "section_number": "111",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 8-8:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "800",
-            "end": "850"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3312",
-      "section_number": "112",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 8-8:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "800",
-            "end": "850"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3313",
-      "section_number": "113",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 9-9:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3314",
-      "section_number": "114",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 9-9:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3315",
-      "section_number": "115",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 9-9:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "900",
-            "end": "950"
           }
         ]
       }
@@ -2199,9 +1996,16 @@
       "crn": "3316",
       "section_number": "116",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "F 9-9:50a",
@@ -2218,9 +2022,16 @@
       "crn": "3317",
       "section_number": "117",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "F 9-9:50a",
@@ -2237,9 +2048,16 @@
       "crn": "3318",
       "section_number": "118",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-10:50a",
@@ -2256,9 +2074,16 @@
       "crn": "3319",
       "section_number": "119",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-10:50a",
@@ -2275,47 +2100,16 @@
       "crn": "3320",
       "section_number": "120",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3321",
-      "section_number": "121",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3322",
-      "section_number": "122",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-10:50a",
@@ -2332,9 +2126,16 @@
       "crn": "3323",
       "section_number": "123",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "F 11-11:50a",
@@ -2351,9 +2152,16 @@
       "crn": "3324",
       "section_number": "124",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "F 11-11:50a",
@@ -2370,47 +2178,16 @@
       "crn": "3325",
       "section_number": "125",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11-11:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1100",
-            "end": "1150"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3326",
-      "section_number": "126",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11-11:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1100",
-            "end": "1150"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3327",
-      "section_number": "127",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "F 11-11:50a",
@@ -2427,9 +2204,16 @@
       "crn": "3328",
       "section_number": "128",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "F 12-12:50p",
@@ -2446,9 +2230,16 @@
       "crn": "3329",
       "section_number": "129",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "F 12-12:50p",
@@ -2465,9 +2256,16 @@
       "crn": "3330",
       "section_number": "130",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "F 12-12:50p",
@@ -2484,9 +2282,16 @@
       "crn": "3331",
       "section_number": "131",
       "schedule_type": "LEC",
-      "instructor": "M. Campbell",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "150",
+      "enrollment_count": "88",
       "is_cancelled": false,
       "schedule": {
         "display": "F 12-12:50p",
@@ -2495,386 +2300,23 @@
             "day": "Fri",
             "start": "1200",
             "end": "1250"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3332",
-      "section_number": "132",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 12-12:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1200",
-            "end": "1250"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3333",
-      "section_number": "133",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 12-12:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1200",
-            "end": "1250"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3334",
-      "section_number": "134",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3335",
-      "section_number": "135",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3336",
-      "section_number": "136",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3337",
-      "section_number": "137",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3338",
-      "section_number": "138",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3339",
-      "section_number": "139",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 2-2:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1400",
-            "end": "1450"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3340",
-      "section_number": "140",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 2-2:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1400",
-            "end": "1450"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3341",
-      "section_number": "141",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 2-2:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1400",
-            "end": "1450"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3342",
-      "section_number": "142",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 2-2:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1400",
-            "end": "1450"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3343",
-      "section_number": "143",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 2-2:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1400",
-            "end": "1450"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3344",
-      "section_number": "144",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 3-3:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1500",
-            "end": "1550"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3345",
-      "section_number": "145",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 3-3:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1500",
-            "end": "1550"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3346",
-      "section_number": "146",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 3-3:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1500",
-            "end": "1550"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3347",
-      "section_number": "147",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 3-3:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1500",
-            "end": "1550"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3348",
-      "section_number": "148",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 3-3:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1500",
-            "end": "1550"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3349",
-      "section_number": "149",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 4-4:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3350",
-      "section_number": "150",
-      "schedule_type": "LEC",
-      "instructor": "M. Campbell",
-      "enrollment_status": "Closed",
-      "enrollment_count": "150",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 4-4:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1600",
-            "end": "1650"
           }
         ]
       }
     }
   ],
   "section_summary": {
-    "total_sections": 150,
-    "lectures": 150,
+    "total_sections": 88,
+    "lectures": 88,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 150,
+    "closed": 88,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Edwards",
-    "M. Campbell",
-    "N. Keyton"
+    "Team"
   ],
-  "scraped_at": "2026-04-20T20:50:56.527Z"
+  "scraped_at": "2026-05-13T00:40:32.136Z"
 }

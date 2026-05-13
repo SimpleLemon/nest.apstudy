@@ -5,6 +5,12 @@
   "catalog_number": "473W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 5",
+  "requirement_designation": "CW",
+  "course_description": "Selected issues in psychopathology theory and research with a writing component.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "Klaiman/Reid",
+      "instructors": [
+        {
+          "name": "Klaiman/Reid",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "Klaiman/Reid"
   ],
-  "scraped_at": "2026-04-20T20:48:55.899Z"
+  "scraped_at": "2026-05-13T00:39:01.604Z"
 }

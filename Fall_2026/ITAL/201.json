@@ -5,6 +5,12 @@
   "catalog_number": "201",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "IC",
+  "course_description": "This course is a continuation of Elementary Italian sequence.This intermediate-level Italian language course provides students with new perspectives on Italian culture while building writing, reading, speaking and listening skills in a cultural context.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "C. Ristaino",
+      "instructors": [
+        {
+          "name": "C. Ristaino",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -43,7 +56,9 @@
       "crn": "1823",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "A. Castaldo",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -80,8 +95,7 @@
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Castaldo",
     "C. Ristaino"
   ],
-  "scraped_at": "2026-04-20T20:51:01.545Z"
+  "scraped_at": "2026-05-13T00:40:43.422Z"
 }

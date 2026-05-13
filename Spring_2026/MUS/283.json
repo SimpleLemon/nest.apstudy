@@ -5,6 +5,12 @@
   "catalog_number": "283",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "Offers a detailed historical examination of Western classical music from 1800 through 1900, emphasizing both repertoire and the cultural practice of music-making.",
+  "course_notes": "MUS 200 or MUS_OX 200 or equivalent transfer credit as prerequisite.",
+  "requisites": "MUS 200 or MUS_OX 200 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "H. Senungetuk",
+      "instructors": [
+        {
+          "name": "H. Senungetuk",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "H. Senungetuk"
   ],
-  "scraped_at": "2026-04-20T20:48:35.985Z"
+  "scraped_at": "2026-05-13T00:37:56.869Z"
 }

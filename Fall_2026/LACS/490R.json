@@ -5,6 +5,12 @@
   "catalog_number": "490R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "Topics vary. Each colloquium treats a different theme in depth, often combining reading and seminar discussion with research and writing. If listed as WR, fulfills the post-freshman writing requirement.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,7 +21,14 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "A. Herrero-Olaizola",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "A. Herrero-Olaizola",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "H. Gold",
+      "instructors": [
+        {
+          "name": "H. Gold",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -63,6 +83,8 @@
       "section_number": "3",
       "schedule_type": "SEM",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -89,13 +111,13 @@
     "labs": 0,
     "discussions": 0,
     "other": 3,
-    "open": 1,
+    "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 3
   },
   "instructors_unique": [
     "A. Herrero-Olaizola",
     "H. Gold"
   ],
-  "scraped_at": "2026-04-20T20:51:08.050Z"
+  "scraped_at": "2026-05-13T00:40:49.860Z"
 }

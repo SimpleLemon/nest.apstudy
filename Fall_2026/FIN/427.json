@@ -5,6 +5,12 @@
   "catalog_number": "427",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1101",
       "schedule_type": "LEC",
       "instructor": "A. Anarkulova",
+      "instructors": [
+        {
+          "name": "A. Anarkulova",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "1102",
       "schedule_type": "LEC",
       "instructor": "A. Anarkulova",
+      "instructors": [
+        {
+          "name": "A. Anarkulova",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -72,5 +92,5 @@
   "instructors_unique": [
     "A. Anarkulova"
   ],
-  "scraped_at": "2026-04-20T20:52:01.035Z"
+  "scraped_at": "2026-05-13T00:40:16.042Z"
 }

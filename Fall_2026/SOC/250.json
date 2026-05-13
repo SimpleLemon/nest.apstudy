@@ -5,6 +5,12 @@
   "catalog_number": "250",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "SS",
+  "course_description": "An introduction to the overall field of global health, its history, methods, and key principles, with case studies illustrating the burden of disease in nations with strikingly different political-economic contexts.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "ANT 205 HLTH 250",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "R. Hall-Clifford",
+      "instructors": [
+        {
+          "name": "R. Hall-Clifford",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "R. Hall-Clifford"
   ],
-  "scraped_at": "2026-04-20T20:51:47.789Z"
+  "scraped_at": "2026-05-13T00:42:20.176Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "102",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "IC",
+  "course_description": "This course focuses on elementary communication skills through a systematic introduction to the basic grammatical patterns and vocabulary of the Italian language. The goal is to widen the fundamental skills of listening comprehension, speaking, reading and writing within a cultural context.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Di Pietro",
+      "instructors": [
+        {
+          "name": "A. Di Pietro",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -44,6 +57,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "A. Di Pietro",
+      "instructors": [
+        {
+          "name": "A. Di Pietro",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -73,6 +93,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "A. Porcarelli",
+      "instructors": [
+        {
+          "name": "A. Porcarelli",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -102,6 +129,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "S. Maranzana",
+      "instructors": [
+        {
+          "name": "S. Maranzana",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -131,6 +165,13 @@
       "section_number": "5",
       "schedule_type": "LEC",
       "instructor": "S. Maranzana",
+      "instructors": [
+        {
+          "name": "S. Maranzana",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -160,6 +201,13 @@
       "section_number": "6",
       "schedule_type": "LEC",
       "instructor": "S. Muratore",
+      "instructors": [
+        {
+          "name": "S. Muratore",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -201,5 +249,5 @@
     "S. Maranzana",
     "S. Muratore"
   ],
-  "scraped_at": "2026-04-20T20:48:17.897Z"
+  "scraped_at": "2026-05-13T00:37:35.930Z"
 }

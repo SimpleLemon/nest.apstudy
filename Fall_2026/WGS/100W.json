@@ -5,6 +5,12 @@
   "catalog_number": "100W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HSCW",
+  "course_description": "This course is an introduction to gender, sex, and power in the contemporary world.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "K. Amin",
+      "instructors": [
+        {
+          "name": "K. Amin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "DIS",
       "instructor": "N. Dams",
+      "instructors": [
+        {
+          "name": "N. Dams",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -53,6 +73,13 @@
       "section_number": "3",
       "schedule_type": "DIS",
       "instructor": "S. Kwon",
+      "instructors": [
+        {
+          "name": "S. Kwon",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -83,5 +110,5 @@
     "N. Dams",
     "S. Kwon"
   ],
-  "scraped_at": "2026-04-20T20:51:54.457Z"
+  "scraped_at": "2026-05-13T00:42:28.244Z"
 }

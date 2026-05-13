@@ -5,6 +5,12 @@
   "catalog_number": "324",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "SNT",
+  "course_description": "Why and how do humans sleep and dream? This is a survey course presenting a biologically informed approach to sleep and dreaming under both typical and pathological conditions. Format will be primarily lecture, but some discussion and active exercises will also be used.",
+  "course_notes": "(PSYC 110 or PSYC_OX 110 or NBB 201 or ANT 200 or NBB_OX 201 or NBB 301 or BIOL 360) and (QTM 100 or QTM_OX 100) or equivalent transfer credit as prerequisite.",
+  "requisites": "(PSYC 110 or PSYC_OX 110 or NBB 201 or ANT 200 or NBB_OX 201 or NBB 301 or BIOL 360) and (QTM 100 or QTM_OX 100) or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "H. Rodman",
+      "instructors": [
+        {
+          "name": "H. Rodman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "H. Rodman"
   ],
-  "scraped_at": "2026-04-20T20:51:39.447Z"
+  "scraped_at": "2026-05-13T00:42:08.900Z"
 }

@@ -1,10 +1,16 @@
 {
   "course_code": "JS 190",
-  "course_title": "Freshman Seminar",
+  "course_title": "Freshman Seminar: Gender on the Margins",
   "subject": "JS",
   "catalog_number": "190",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "Designed to engage first-year students in aspects of inquiry and research into areas of Jewish religion, culture, history, or language. Topics will vary.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "T. Menashe",
+      "instructors": [
+        {
+          "name": "T. Menashe",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "E. Goldstein",
+      "instructors": [
+        {
+          "name": "E. Goldstein",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -68,5 +88,5 @@
     "E. Goldstein",
     "T. Menashe"
   ],
-  "scraped_at": "2026-04-20T20:51:04.785Z"
+  "scraped_at": "2026-05-13T00:40:46.636Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "370",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "2",
+  "requirement_designation": "None",
+  "course_description": "The course covers the US health care system, including the factors responsible for increasing health care spending, the purpose of regulation in the individual insurance market, the role of Medicare and Medicaid, and pros and cons of horizontal and vertical integration among providers and hospitals.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. Howard",
+      "instructors": [
+        {
+          "name": "D. Howard",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "D. Howard"
   ],
-  "scraped_at": "2026-04-20T20:48:12.837Z"
+  "scraped_at": "2026-05-13T00:37:24.652Z"
 }

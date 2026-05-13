@@ -5,6 +5,12 @@
   "catalog_number": "220",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "NS",
+  "course_description": "This course examines the subjective experience and neural substrates of music perception and performance.Each week the class participates in a dialog between musicians and neuroscientists that examines both the experiential and mechanistic approach to music by asking questions such as \"What makes something musical\" and \"how are the complex sounds of music processed by the brain?\". The relationships of music to language, emotion and memory will be examined in detail. Theories of motor learning will be discussed and applied to musical performance. The course explores the development of the musical mind from infancy to adulthood and asks the question, \"How are the brains of composers, conductors, and performers different?\" Evidence of the efficacy of music therapy and the impact of music on mental health are evaluated. Finally, the evolution of musicality in animals and humans explained.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "MUS 220",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Roeser/Wyttenbach",
+      "instructors": [
+        {
+          "name": "Roeser/Wyttenbach",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "Roeser/Wyttenbach"
   ],
-  "scraped_at": "2026-04-20T20:48:37.701Z"
+  "scraped_at": "2026-05-13T00:37:58.482Z"
 }

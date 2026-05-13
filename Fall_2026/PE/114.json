@@ -5,6 +5,12 @@
   "catalog_number": "114",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "Development of specific fitness components utilizing routine participation in jogging and/or running on WPEC indoor and outdoor tracks, local streets and Lullwater Park. Instruction in running biomechanics, pace, and building a progressive program are included. Fulfills the PPF requirement.",
+  "course_notes": "Pre-req: Limit PPF",
+  "requisites": "Pre-req: Limit PPF",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "PE",
       "instructor": "E. Noell",
+      "instructors": [
+        {
+          "name": "E. Noell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -53,5 +66,5 @@
   "instructors_unique": [
     "E. Noell"
   ],
-  "scraped_at": "2026-04-20T20:51:27.877Z"
+  "scraped_at": "2026-05-13T00:41:55.779Z"
 }

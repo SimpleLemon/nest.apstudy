@@ -5,6 +5,12 @@
   "catalog_number": "112",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "SS",
+  "course_description": "Covers current debates on the workings of the aggregate economy, including unemployment, inflation, economic growth, the national debt, financial markets, money and the banking system, and international trade.",
+  "course_notes": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as a prerequisite.",
+  "requisites": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "N. Peat",
+      "instructors": [
+        {
+          "name": "N. Peat",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "M. Ayar",
+      "instructors": [
+        {
+          "name": "M. Ayar",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "A. Scudiero",
+      "instructors": [
+        {
+          "name": "A. Scudiero",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -98,5 +125,5 @@
     "M. Ayar",
     "N. Peat"
   ],
-  "scraped_at": "2026-04-20T20:50:38.300Z"
+  "scraped_at": "2026-05-13T00:39:59.881Z"
 }

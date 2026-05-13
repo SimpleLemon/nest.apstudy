@@ -5,6 +5,12 @@
   "catalog_number": "354",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HSC",
+  "course_description": "The purpose of this course is to provide students with a selected overview of the history, debates, and major topical issues in anthropological studies of culture and economy. It will show how anthropologists study the economic bases of social and cultural life in both agrarian and urban societies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "P. Little",
+      "instructors": [
+        {
+          "name": "P. Little",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "P. Little"
   ],
-  "scraped_at": "2026-04-20T20:50:20.083Z"
+  "scraped_at": "2026-05-13T00:39:30.849Z"
 }

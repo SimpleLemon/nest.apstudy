@@ -5,6 +5,12 @@
   "catalog_number": "200",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "This course is an introduction to the theories, themes and questions in the interdisciplinary field of women's, gender, and sexuality studies. The course is required for all majors and minors.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. devuono-powell",
+      "instructors": [
+        {
+          "name": "S. devuono-powell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "O. Faniyi",
+      "instructors": [
+        {
+          "name": "O. Faniyi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "F. Tariq",
+      "instructors": [
+        {
+          "name": "F. Tariq",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -87,6 +114,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "S. Carson",
+      "instructors": [
+        {
+          "name": "S. Carson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -111,6 +145,13 @@
       "section_number": "5",
       "schedule_type": "LEC",
       "instructor": "G. Mahabeer",
+      "instructors": [
+        {
+          "name": "G. Mahabeer",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -148,5 +189,5 @@
     "S. Carson",
     "S. devuono-powell"
   ],
-  "scraped_at": "2026-04-20T20:49:10.850Z"
+  "scraped_at": "2026-05-13T00:39:20.940Z"
 }

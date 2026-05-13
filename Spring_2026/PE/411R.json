@@ -5,6 +5,12 @@
   "catalog_number": "411R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "Must register by permission only from head coach. Meets the Principles of Physical Fitness (PPF) requirement with exams on curricular content.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "PE",
       "instructor": "C. Hixon",
+      "instructors": [
+        {
+          "name": "C. Hixon",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "C. Hixon"
   ],
-  "scraped_at": "2026-04-20T20:48:44.277Z"
+  "scraped_at": "2026-05-13T00:38:48.687Z"
 }

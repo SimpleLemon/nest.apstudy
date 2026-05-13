@@ -5,6 +5,12 @@
   "catalog_number": "385",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "HSC",
+  "course_description": "Seminar or lecture series of topics of anthropological concern. May be repeated for credit when topic varies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. Nugent",
+      "instructors": [
+        {
+          "name": "D. Nugent",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "J. Saers",
+      "instructors": [
+        {
+          "name": "J. Saers",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -58,6 +78,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "Jones/Buckmaster",
+      "instructors": [
+        {
+          "name": "Jones/Buckmaster",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -82,6 +109,13 @@
       "section_number": "5",
       "schedule_type": "LEC",
       "instructor": "J. Glass",
+      "instructors": [
+        {
+          "name": "J. Glass",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -101,6 +135,13 @@
       "section_number": "6",
       "schedule_type": "LEC",
       "instructor": "B. Holsey",
+      "instructors": [
+        {
+          "name": "B. Holsey",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -125,6 +166,13 @@
       "section_number": "7",
       "schedule_type": "LEC",
       "instructor": "D. Seeman",
+      "instructors": [
+        {
+          "name": "D. Seeman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -144,6 +192,13 @@
       "section_number": "9",
       "schedule_type": "LEC",
       "instructor": "J. Saers",
+      "instructors": [
+        {
+          "name": "J. Saers",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -177,5 +232,5 @@
     "J. Saers",
     "Jones/Buckmaster"
   ],
-  "scraped_at": "2026-04-20T20:47:36.248Z"
+  "scraped_at": "2026-05-13T00:36:23.181Z"
 }

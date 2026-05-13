@@ -5,6 +5,12 @@
   "catalog_number": "150",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "NS",
+  "course_description": "This course will build a strong foundation in atomic and molecular structure. It starts with atomic structure and builds to ionic compounds and molecular structure, including stereochemistry and conformation. Students will interpret experimental data to explain structure, properties relationships.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Kindt",
+      "instructors": [
+        {
+          "name": "J. Kindt",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "J. Kindt"
   ],
-  "scraped_at": "2026-04-20T20:47:46.125Z"
+  "scraped_at": "2026-05-13T00:36:39.339Z"
 }

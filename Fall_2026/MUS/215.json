@@ -5,6 +5,12 @@
   "catalog_number": "215",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "Critical and analytic study of jazz idioms from the turn of the century to the present, including the blues, ragtime, Dixieland, swing, bop, and modern jazz. Emphasis on such figures as Armstrong, Ellington, Parker, Monk, and Coleman.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "AAS 215",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. Andrews",
+      "instructors": [
+        {
+          "name": "D. Andrews",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "D. Andrews"
   ],
-  "scraped_at": "2026-04-20T20:51:19.602Z"
+  "scraped_at": "2026-05-13T00:41:04.346Z"
 }

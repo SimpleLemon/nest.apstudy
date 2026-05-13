@@ -5,6 +5,12 @@
   "catalog_number": "190",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "Small class experience on topics of current psychological interest that fosters a highly interactive and mutually collaborative learning environment involving freshmen and faculty members. Topics include clinical, neuroscience, animal behavior, social, development and cognition.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "S. Hamann",
+      "instructors": [
+        {
+          "name": "S. Hamann",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "3",
       "schedule_type": "SEM",
       "instructor": "A. Kazama",
+      "instructors": [
+        {
+          "name": "A. Kazama",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -68,5 +88,5 @@
     "A. Kazama",
     "S. Hamann"
   ],
-  "scraped_at": "2026-04-20T20:48:55.889Z"
+  "scraped_at": "2026-05-13T00:39:01.599Z"
 }

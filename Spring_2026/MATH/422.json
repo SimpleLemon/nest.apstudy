@@ -5,6 +5,12 @@
   "catalog_number": "422",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "MQR",
+  "course_description": "Ring Theory and Field Theory: polynomial rings, unique factorization, Euclidean domains, splitting fields of polynomials, elements of Galois theory, finite fields.",
+  "course_notes": "This course requires MATH 421or equivalent transfer credit as a prerequisite.",
+  "requisites": "This course requires MATH 421or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "R. Ramadas",
+      "instructors": [
+        {
+          "name": "R. Ramadas",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "R. Ramadas"
   ],
-  "scraped_at": "2026-04-20T20:48:29.468Z"
+  "scraped_at": "2026-05-13T00:37:47.213Z"
 }

@@ -258,7 +258,7 @@ def _generate_public_user_id(max_attempts=20):
 def index():
     """Root redirect: dashboard if authenticated, login if not."""
     if current_user.is_authenticated:
-        return redirect(url_for("dashboard.dashboard"))
+        return redirect(url_for("dashboard.calendar"))
     return redirect(url_for("auth.login"))
 
 
@@ -266,7 +266,7 @@ def index():
 def login():
     """Render the sign-in page."""
     if current_user.is_authenticated:
-        return redirect(url_for("dashboard.dashboard"))
+        return redirect(url_for("dashboard.calendar"))
     response = make_response(render_template("login.html"))
     response.headers["Content-Security-Policy"] = LOGIN_CSP
     return response
@@ -618,7 +618,7 @@ def oauth2callback():
     if not user_doc.get("onboarding_complete"):
         return redirect(url_for("settings.onboarding"))
 
-    return redirect(url_for("dashboard.dashboard"))
+    return redirect(url_for("dashboard.calendar"))
 
 
 @auth_bp.route("/logout")

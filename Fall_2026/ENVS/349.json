@@ -5,6 +5,12 @@
   "catalog_number": "349",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "None",
+  "course_description": "This course will familiarize students with principles of ecological invasions and methods for assessing the spread and impacts of invasive species on a global scale. Students will also become familiar with major sources of exotic species introductions and methods available for prevention and control.",
+  "course_notes": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or (BIOL 142 and BIOL 142L) or BIOL_OX 142 or equivalent transfer credit as prerequisite.",
+  "requisites": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or (BIOL 142 and BIOL 142L) or BIOL_OX 142 or equivalent transfer credit as prerequisite.",
+  "cross_listed": "BIOL 349",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "C. Keogh",
+      "instructors": [
+        {
+          "name": "C. Keogh",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -53,5 +66,5 @@
   "instructors_unique": [
     "C. Keogh"
   ],
-  "scraped_at": "2026-04-20T20:50:43.285Z"
+  "scraped_at": "2026-05-13T00:40:11.209Z"
 }

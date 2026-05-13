@@ -5,6 +5,12 @@
   "catalog_number": "497R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 12",
+  "requirement_designation": "None",
+  "course_description": "Supervised reading in Portuguese.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Lesser",
+      "instructors": [
+        {
+          "name": "J. Lesser",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "J. Lesser",
+      "instructors": [
+        {
+          "name": "J. Lesser",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "A. Teixeira",
+      "instructors": [
+        {
+          "name": "A. Teixeira",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "A. Teixeira",
+      "instructors": [
+        {
+          "name": "A. Teixeira",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -77,5 +111,5 @@
     "A. Teixeira",
     "J. Lesser"
   ],
-  "scraped_at": "2026-04-20T20:48:54.233Z"
+  "scraped_at": "2026-05-13T00:38:59.985Z"
 }

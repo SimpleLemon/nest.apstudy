@@ -5,6 +5,12 @@
   "catalog_number": "351",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1174",
       "schedule_type": "LEC",
       "instructor": "T. Chan",
+      "instructors": [
+        {
+          "name": "T. Chan",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "1175",
       "schedule_type": "LEC",
       "instructor": "T. Chan",
+      "instructors": [
+        {
+          "name": "T. Chan",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "1176",
       "schedule_type": "LEC",
       "instructor": "S. Walton",
+      "instructors": [
+        {
+          "name": "S. Walton",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -87,6 +114,13 @@
       "section_number": "1177",
       "schedule_type": "LEC",
       "instructor": "S. Walton",
+      "instructors": [
+        {
+          "name": "S. Walton",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -111,6 +145,13 @@
       "section_number": "1474",
       "schedule_type": "LEC",
       "instructor": "T. Chan",
+      "instructors": [
+        {
+          "name": "T. Chan",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -135,6 +176,13 @@
       "section_number": "1475",
       "schedule_type": "LEC",
       "instructor": "T. Chan",
+      "instructors": [
+        {
+          "name": "T. Chan",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -159,6 +207,13 @@
       "section_number": "1476",
       "schedule_type": "LEC",
       "instructor": "S. Walton",
+      "instructors": [
+        {
+          "name": "S. Walton",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -183,6 +238,13 @@
       "section_number": "1477",
       "schedule_type": "LEC",
       "instructor": "S. Walton",
+      "instructors": [
+        {
+          "name": "S. Walton",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -217,5 +279,5 @@
     "S. Walton",
     "T. Chan"
   ],
-  "scraped_at": "2026-04-20T20:52:02.721Z"
+  "scraped_at": "2026-05-13T00:40:41.804Z"
 }

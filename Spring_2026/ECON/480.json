@@ -5,6 +5,12 @@
   "catalog_number": "480",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "This course introduces students to the use of advanced computer science techniques for the economic analysis of observational data. It covers multi-processing programming for economic policy simulation, web scraping for sentiment analysis, and network data and social interaction models.",
+  "course_notes": "ECON 320 & CS 334 or equivalent transfer credit as prerequisites.",
+  "requisites": "ECON 320 & CS 334 or equivalent transfer credit as prerequisites.",
+  "cross_listed": "CS 480",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Hoderlein",
+      "instructors": [
+        {
+          "name": "S. Hoderlein",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "S. Hoderlein"
   ],
-  "scraped_at": "2026-04-20T20:47:54.576Z"
+  "scraped_at": "2026-05-13T00:36:52.252Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "190",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "Freshmen only. Variable topics.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "S. L'Hernault",
+      "instructors": [
+        {
+          "name": "S. L'Hernault",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "Y. Bromberg",
+      "instructors": [
+        {
+          "name": "Y. Bromberg",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -73,5 +93,5 @@
     "S. L'Hernault",
     "Y. Bromberg"
   ],
-  "scraped_at": "2026-04-20T20:50:26.626Z"
+  "scraped_at": "2026-05-13T00:39:38.937Z"
 }

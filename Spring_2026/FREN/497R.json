@@ -5,6 +5,12 @@
   "catalog_number": "497R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "XA",
+  "course_description": "Every semester. Credit, two to four hours. For students concentrating in French. Registration for this course is permitted only in the semester in which the student expects to complete requirements.",
+  "course_notes": "FREN 310, FREN 314 and two 300 level FREN courses, or equivalent transfer credit as prerequisite.",
+  "requisites": "FREN 310, FREN 314 and two 300 level FREN courses, or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "RSC",
       "instructor": "C. Nouvet",
+      "instructors": [
+        {
+          "name": "C. Nouvet",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "RSC",
       "instructor": "S. Xavier",
+      "instructors": [
+        {
+          "name": "S. Xavier",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -51,5 +71,5 @@
     "C. Nouvet",
     "S. Xavier"
   ],
-  "scraped_at": "2026-04-20T20:48:02.927Z"
+  "scraped_at": "2026-05-13T00:37:10.123Z"
 }

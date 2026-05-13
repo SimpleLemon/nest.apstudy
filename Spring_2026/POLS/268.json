@@ -5,6 +5,12 @@
   "catalog_number": "268",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HAE",
+  "course_description": "Covers the history of the Israeli-Palestinian conflict from the 1880s to today. It will introduce students to early Zionist debates and the late Ottoman context before discussing the British Mandate period, the State of Israel, and the Palestinian cause on the world stage after the 1967 war.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "JS 268 HIST 268 MESAS 268",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "DeBoard/Schrenzel",
+      "instructors": [
+        {
+          "name": "DeBoard/Schrenzel",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "DeBoard/Schrenzel"
   ],
-  "scraped_at": "2026-04-20T20:48:52.590Z"
+  "scraped_at": "2026-05-13T00:38:58.359Z"
 }

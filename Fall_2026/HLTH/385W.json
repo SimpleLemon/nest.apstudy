@@ -5,6 +5,12 @@
   "catalog_number": "385W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 5",
+  "requirement_designation": "CW",
+  "course_description": "Seminar of lecture series of topics in human health. May be repeated for credit when topic varies. Credit varies from one to five hours.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Freeman",
+      "instructors": [
+        {
+          "name": "A. Freeman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -38,7 +51,9 @@
       "crn": "5125",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "X. Marsilli-Vargas",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -70,8 +85,7 @@
     "waitlisted": 1
   },
   "instructors_unique": [
-    "A. Freeman",
-    "X. Marsilli-Vargas"
+    "A. Freeman"
   ],
-  "scraped_at": "2026-04-20T20:50:56.533Z"
+  "scraped_at": "2026-05-13T00:40:32.145Z"
 }

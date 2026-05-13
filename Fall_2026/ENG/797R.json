@@ -5,6 +5,12 @@
   "catalog_number": "797R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "E. Davenport",
+      "instructors": [
+        {
+          "name": "E. Davenport",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "SUP",
       "instructor": "M. Wright",
+      "instructors": [
+        {
+          "name": "M. Wright",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3",
       "schedule_type": "SUP",
       "instructor": "N. Suhr-Sytsma",
+      "instructors": [
+        {
+          "name": "N. Suhr-Sytsma",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -65,5 +92,5 @@
     "M. Wright",
     "N. Suhr-Sytsma"
   ],
-  "scraped_at": "2026-04-20T20:50:41.631Z"
+  "scraped_at": "2026-05-13T00:40:07.989Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "322",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "SNT",
+  "course_description": "A course that furthers a deeper understanding of organic chemistry, building on the foundational principles from earlier chemistry courses: molecular orbital theory, organic reaction mechanisms, stereochemistry, and the relationship between structure and reactivity.",
+  "course_notes": "(CHEM 204 or CHEM_X 204) and (CHEM 204L or CHEM_OX 204L) or equivalent transfer credit as prerequisite.CHEM 204 & CHEM 204 prereq.",
+  "requisites": "(CHEM 204 or CHEM_X 204) and (CHEM 204L or CHEM_OX 204L) or equivalent transfer credit as prerequisite.CHEM 204 & CHEM 204 prereq.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Weinschenk",
+      "instructors": [
+        {
+          "name": "M. Weinschenk",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Weinschenk"
   ],
-  "scraped_at": "2026-04-20T20:47:46.129Z"
+  "scraped_at": "2026-05-13T00:36:39.345Z"
 }

@@ -1,10 +1,16 @@
 {
   "course_code": "WGS 190",
-  "course_title": "Fresh Sem: Women, Gender, & Sexuality Studies",
+  "course_title": "Fresh Sem: Women, Gender, & Sexuality Studies: Gender, Sex, & Science Fiction",
   "subject": "WGS",
   "catalog_number": "190",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "For first-year students only. Entry level seminar focusing on a specific topic.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,8 +21,15 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "S. Mulla",
+      "instructors": [
+        {
+          "name": "S. Mulla",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "2",
+      "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a",
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "K. Wallace-Sanders",
+      "instructors": [
+        {
+          "name": "K. Wallace-Sanders",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -63,8 +83,15 @@
       "section_number": "3",
       "schedule_type": "SEM",
       "instructor": "T. Menashe",
+      "instructors": [
+        {
+          "name": "T. Menashe",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
-      "enrollment_count": "2",
+      "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -98,5 +125,5 @@
     "S. Mulla",
     "T. Menashe"
   ],
-  "scraped_at": "2026-04-20T20:51:54.458Z"
+  "scraped_at": "2026-05-13T00:42:28.244Z"
 }

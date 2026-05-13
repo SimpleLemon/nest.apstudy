@@ -5,6 +5,12 @@
   "catalog_number": "490R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "Topics vary. Each colloquium treats a different theme in depth, often combining reading and seminar discussion with research and writing. If listed as WR, fulfills the post-freshman writing requirement.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "H. Feldman",
+      "instructors": [
+        {
+          "name": "H. Feldman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "H. Feldman"
   ],
-  "scraped_at": "2026-04-20T20:48:24.429Z"
+  "scraped_at": "2026-05-13T00:37:42.368Z"
 }

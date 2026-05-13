@@ -5,6 +5,12 @@
   "catalog_number": "162",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "The offensive and defensive skills of amateur boxing are taught. Course content includes stances, movement, basic punches, defenses, strategies, and tactics. The course exposes participants to the coping strategies necessary to deal with a physical threat. Moderate fitness is required at minimum.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "PE",
       "instructor": "T. Gordon",
+      "instructors": [
+        {
+          "name": "T. Gordon",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "T. Gordon"
   ],
-  "scraped_at": "2026-04-20T20:48:44.265Z"
+  "scraped_at": "2026-05-13T00:38:48.678Z"
 }

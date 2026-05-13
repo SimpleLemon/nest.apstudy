@@ -5,6 +5,12 @@
   "catalog_number": "203",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "XA",
+  "course_description": "This hands-on design studio introduces basic architectural concepts and techniques through making. Regular design presentations and feedback on drawing and modeling projects will teach students rigorous design methodology and how it leads to meaningful contributions to the built environment.",
+  "course_notes": "ARTHIST 103 and (ARTHIST 104 or ART_OX 104) or equivalent transfer credit as prerequisite.",
+  "requisites": "ARTHIST 103 and (ARTHIST 104 or ART_OX 104) or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "A. Patrao",
+      "instructors": [
+        {
+          "name": "A. Patrao",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "A. Patrao"
   ],
-  "scraped_at": "2026-04-20T21:51:17.188Z"
+  "scraped_at": "2026-05-13T00:36:26.426Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "210",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "QR",
+  "course_description": "This course is a short treatment of MATH 112 and 211 with a lab component. It is not appropriate for students who have taken MATH 211. Topics include: advanced integration, Taylor series; and multivariable differentiation, optimization and integration; and applications to statistics and science.",
+  "course_notes": "MATH 111 or MATH 111L or MATH_OX 111 or equivalent transfer credit as prerequisite.",
+  "requisites": "MATH 111 or MATH 111L or MATH_OX 111 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "C. Drum",
+      "instructors": [
+        {
+          "name": "C. Drum",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "3",
       "schedule_type": "LAB",
       "instructor": "Drum/Longbrake",
+      "instructors": [
+        {
+          "name": "Drum/Longbrake",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -58,6 +78,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "J. Darges",
+      "instructors": [
+        {
+          "name": "J. Darges",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -82,6 +109,13 @@
       "section_number": "5",
       "schedule_type": "LAB",
       "instructor": "Darges/Navarrete",
+      "instructors": [
+        {
+          "name": "Darges/Navarrete",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -101,6 +135,13 @@
       "section_number": "6",
       "schedule_type": "LAB",
       "instructor": "Darges/Navarrete",
+      "instructors": [
+        {
+          "name": "Darges/Navarrete",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -132,5 +173,5 @@
     "Drum/Longbrake",
     "J. Darges"
   ],
-  "scraped_at": "2026-04-20T20:48:29.460Z"
+  "scraped_at": "2026-05-13T00:37:47.208Z"
 }

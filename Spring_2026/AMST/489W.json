@@ -5,6 +5,12 @@
   "catalog_number": "489W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 5",
+  "requirement_designation": "CW",
+  "course_description": "An advanced interdisciplinary treatment of American culture issues, historical events or eras, or literature. The ILA and AMST programs support interdisciplinary inquiry of the Americas across Emory College of Arts and Sciences; this course will be frequently cross-listed with other departments.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "M. Montalvo",
+      "instructors": [
+        {
+          "name": "M. Montalvo",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "M. Montalvo"
   ],
-  "scraped_at": "2026-04-20T20:47:34.613Z"
+  "scraped_at": "2026-05-13T00:36:21.416Z"
 }

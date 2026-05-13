@@ -5,6 +5,12 @@
   "catalog_number": "399RW",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 12",
+  "requirement_designation": "CW",
+  "course_description": "Every semester. Credit variable; may be repeated for a maximum of eight hours of credit. Prerequisite: approval of project by adviser before preregistration. For students wishing to pursue projects of their own design.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "S. Hoque",
+      "instructors": [
+        {
+          "name": "S. Hoque",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "S. Hoque"
   ],
-  "scraped_at": "2026-04-20T20:47:58.002Z"
+  "scraped_at": "2026-05-13T00:37:00.416Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "381W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "CW",
+  "course_description": "Communicating health and science requires learning to identify new developments, conduct interviews, and craft an argument, while translating professional jargon into everyday language. You'll also learn journalism's norms and standards: speed, thoroughness, accuracy, novelty and evidentiary rigor.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. McKenna",
+      "instructors": [
+        {
+          "name": "M. McKenna",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. McKenna"
   ],
-  "scraped_at": "2026-04-20T20:50:56.533Z"
+  "scraped_at": "2026-05-13T00:40:32.143Z"
 }

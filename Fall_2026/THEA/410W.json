@@ -5,6 +5,12 @@
   "catalog_number": "410W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "CW",
+  "course_description": "A seminar, capstone to the theater studies major, covering major critical texts that interrogate the nature of the theatrical event.",
+  "course_notes": "(THEA 130 or THEA_OX 130) and THEA 210W and (THEA 215 or THEA_OX 215) and (THEA 216 or THEA_OX 216) or equivalent transfer credit as prerequisite.",
+  "requisites": "(THEA 130 or THEA_OX 130) and THEA 210W and (THEA 215 or THEA_OX 215) and (THEA 216 or THEA_OX 216) or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "N. Montez",
+      "instructors": [
+        {
+          "name": "N. Montez",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "N. Montez"
   ],
-  "scraped_at": "2026-04-20T20:51:51.086Z"
+  "scraped_at": "2026-05-13T00:42:25.024Z"
 }

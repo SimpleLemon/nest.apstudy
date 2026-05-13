@@ -5,6 +5,12 @@
   "catalog_number": "190",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "Limited to first-year students, the topics vary based on the instructor.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "L. Velloso-Lyons",
+      "instructors": [
+        {
+          "name": "L. Velloso-Lyons",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "3",
       "schedule_type": "SEM",
       "instructor": "A. Chira",
+      "instructors": [
+        {
+          "name": "A. Chira",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "4",
       "schedule_type": "SEM",
       "instructor": "C. Crowley",
+      "instructors": [
+        {
+          "name": "C. Crowley",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -87,6 +114,13 @@
       "section_number": "5",
       "schedule_type": "SEM",
       "instructor": "K. Loudermilk",
+      "instructors": [
+        {
+          "name": "K. Loudermilk",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -111,6 +145,13 @@
       "section_number": "6",
       "schedule_type": "SEM",
       "instructor": "N. Suhr-Sytsma",
+      "instructors": [
+        {
+          "name": "N. Suhr-Sytsma",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -135,6 +176,13 @@
       "section_number": "7",
       "schedule_type": "SEM",
       "instructor": "R. De Luca",
+      "instructors": [
+        {
+          "name": "R. De Luca",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -159,6 +207,13 @@
       "section_number": "8",
       "schedule_type": "SEM",
       "instructor": "B. Ozawa-de Silva",
+      "instructors": [
+        {
+          "name": "B. Ozawa-de Silva",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -198,5 +253,5 @@
     "N. Suhr-Sytsma",
     "R. De Luca"
   ],
-  "scraped_at": "2026-04-20T21:52:09.210Z"
+  "scraped_at": "2026-05-13T00:40:01.509Z"
 }

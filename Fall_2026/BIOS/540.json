@@ -1,0 +1,65 @@
+{
+  "course_code": "BIOS 540",
+  "course_title": "Introduction to Bioinformatics",
+  "subject": "BIOS",
+  "catalog_number": "540",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-10-20"
+  },
+  "sections": [
+    {
+      "crn": "5816",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Z. Qin",
+      "instructors": [
+        {
+          "name": "Z. Qin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "WF 1-2:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1450"
+          },
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1450"
+          }
+        ]
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Z. Qin"
+  ],
+  "scraped_at": "2026-05-13T00:39:40.555Z"
+}

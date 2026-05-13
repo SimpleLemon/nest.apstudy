@@ -5,6 +5,12 @@
   "catalog_number": "799R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "T. Andrade",
+      "instructors": [
+        {
+          "name": "T. Andrade",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "SUP",
       "instructor": "Candido/Crais",
+      "instructors": [
+        {
+          "name": "Candido/Crais",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3",
       "schedule_type": "SUP",
       "instructor": "Candido/Rogers",
+      "instructors": [
+        {
+          "name": "Candido/Rogers",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "4",
       "schedule_type": "SUP",
       "instructor": "Dudziak/Ward",
+      "instructors": [
+        {
+          "name": "Dudziak/Ward",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -67,6 +101,13 @@
       "section_number": "5",
       "schedule_type": "SUP",
       "instructor": "D. LaChance",
+      "instructors": [
+        {
+          "name": "D. LaChance",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -80,6 +121,13 @@
       "section_number": "6",
       "schedule_type": "SUP",
       "instructor": "G. Pandey",
+      "instructors": [
+        {
+          "name": "G. Pandey",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -93,6 +141,13 @@
       "section_number": "7",
       "schedule_type": "SUP",
       "instructor": "T. Rogers",
+      "instructors": [
+        {
+          "name": "T. Rogers",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -106,6 +161,13 @@
       "section_number": "8",
       "schedule_type": "SUP",
       "instructor": "C. Suddler",
+      "instructors": [
+        {
+          "name": "C. Suddler",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -119,6 +181,13 @@
       "section_number": "9",
       "schedule_type": "SUP",
       "instructor": "B. Vick",
+      "instructors": [
+        {
+          "name": "B. Vick",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -132,6 +201,13 @@
       "section_number": "10",
       "schedule_type": "SUP",
       "instructor": "J. Ward",
+      "instructors": [
+        {
+          "name": "J. Ward",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -163,5 +239,5 @@
     "T. Andrade",
     "T. Rogers"
   ],
-  "scraped_at": "2026-04-20T20:50:54.878Z"
+  "scraped_at": "2026-05-13T00:40:30.521Z"
 }

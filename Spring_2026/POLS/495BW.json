@@ -5,6 +5,12 @@
   "catalog_number": "495BW",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 8",
+  "requirement_designation": "CW",
+  "course_description": "Open only to students selected to participate in the department's Honors Program. Basic social science research methods and preparation of an honors thesis on some previously uninvestigated or insufficiently investigated area of political science. This course is required for completion of the Honors Program in political science.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. Davis III",
+      "instructors": [
+        {
+          "name": "D. Davis III",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "D. Davis III"
   ],
-  "scraped_at": "2026-04-20T20:48:52.604Z"
+  "scraped_at": "2026-05-13T00:38:58.377Z"
 }

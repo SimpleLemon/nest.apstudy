@@ -5,6 +5,12 @@
   "catalog_number": "445W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "5",
+  "requirement_designation": "XAW",
+  "course_description": "This course introduces sophisticated laboratory instruments and experimental techniques. Experiments include nuclear magnetic resonance, atomic force microscopy, and quantum entanglement.",
+  "course_notes": "PHYS 253 or PHYS_OX 253 or equivalent transfer credit as prerequisite.",
+  "requisites": "PHYS 253 or PHYS_OX 253 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "J. Brody",
+      "instructors": [
+        {
+          "name": "J. Brody",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "J. Brody"
   ],
-  "scraped_at": "2026-04-20T20:48:49.256Z"
+  "scraped_at": "2026-05-13T00:38:55.135Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "207",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "SS",
+  "course_description": "Introduces students to the growing field of development studies and provides a solid foundation for subsequent course work in the Minor. Key topics include human rights, gender, environment, poverty and inequality, democratic reforms and governance, market reforms, rural development, and conflict.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "P. Little",
+      "instructors": [
+        {
+          "name": "P. Little",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "P. Little"
   ],
-  "scraped_at": "2026-04-20T20:50:20.079Z"
+  "scraped_at": "2026-05-13T00:39:30.847Z"
 }

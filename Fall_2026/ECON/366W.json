@@ -5,6 +5,12 @@
   "catalog_number": "366W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HSCW",
+  "course_description": "This course is designed to provide students the opportunity to explore issues in economic development viewed from the perspective of sub-Saharan Africa from the impact of slavery and colonialism to the modern era of globalization.",
+  "course_notes": "This course requires ECON _OX 100 or ECON 101 or ECON_OX 101 or FIN 201 AND ECON 112 or ECON_OX112 or equivalent transfer credit as a prerequisite.",
+  "requisites": "This course requires ECON _OX 100 or ECON 101 or ECON_OX 101 or FIN 201 AND ECON 112 or ECON_OX112 or equivalent transfer credit as a prerequisite.",
+  "cross_listed": "AFS 366W",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Ayogu",
+      "instructors": [
+        {
+          "name": "M. Ayogu",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Ayogu"
   ],
-  "scraped_at": "2026-04-20T20:50:38.312Z"
+  "scraped_at": "2026-05-13T00:39:59.884Z"
 }

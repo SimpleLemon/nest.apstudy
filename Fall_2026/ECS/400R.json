@@ -5,6 +5,12 @@
   "catalog_number": "400R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": "None",
+  "course_description": "This is a 2-credit course intended for continuing student members of the Emory College Honor Council. Members are required to develop a project related to academic integrity and to help facilitate the general practicum, which covers new research and trends concerning academic dishonesty.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -14,7 +20,14 @@
       "crn": "1802",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "Team",
+      "instructor": "Wilson/Shoemake",
+      "instructors": [
+        {
+          "name": "Wilson/Shoemake",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -41,7 +54,7 @@
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Team"
+    "Wilson/Shoemake"
   ],
-  "scraped_at": "2026-04-20T21:52:09.212Z"
+  "scraped_at": "2026-05-13T00:40:01.510Z"
 }

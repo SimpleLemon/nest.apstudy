@@ -5,6 +5,12 @@
   "catalog_number": "317",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HAP",
+  "course_description": "Reading of Vergil's Aeneid and Dante's Divine Comedy in English translation.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "ITAL 317",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "N. Slater",
+      "instructors": [
+        {
+          "name": "N. Slater",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -53,5 +66,5 @@
   "instructors_unique": [
     "N. Slater"
   ],
-  "scraped_at": "2026-04-20T21:51:25.335Z"
+  "scraped_at": "2026-05-13T00:36:42.572Z"
 }

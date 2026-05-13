@@ -5,6 +5,12 @@
   "catalog_number": "167",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "Yoga exercise and breathing are designed to focus and calm your mind while stretching and strengthening your body. The course progresses until the student learns to design their program to relax, increase energy or cope with stress and illnesses. The instructor adapts exercises to individual needs.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "PE",
       "instructor": "S. Lafley",
+      "instructors": [
+        {
+          "name": "S. Lafley",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "PE",
       "instructor": "R. Young",
+      "instructors": [
+        {
+          "name": "R. Young",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "PE",
       "instructor": "R. Young",
+      "instructors": [
+        {
+          "name": "R. Young",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -87,6 +114,13 @@
       "section_number": "4",
       "schedule_type": "PE",
       "instructor": "R. Young",
+      "instructors": [
+        {
+          "name": "R. Young",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -111,6 +145,13 @@
       "section_number": "5",
       "schedule_type": "PE",
       "instructor": "R. Young",
+      "instructors": [
+        {
+          "name": "R. Young",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -145,5 +186,5 @@
     "R. Young",
     "S. Lafley"
   ],
-  "scraped_at": "2026-04-20T20:51:27.882Z"
+  "scraped_at": "2026-05-13T00:41:55.781Z"
 }

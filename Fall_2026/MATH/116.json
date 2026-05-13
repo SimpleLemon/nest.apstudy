@@ -5,6 +5,12 @@
   "catalog_number": "116",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "QR",
+  "course_description": "Integration, differential equations, multivariable calculus, and discrete probability and statistics, with an emphasis on applications to biology.",
+  "course_notes": "MATH 111 or MATH 111L or equivalent transfer credit as prerequisite.",
+  "requisites": "MATH 111 or MATH 111L or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -14,7 +20,14 @@
       "crn": "2758",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "C. Drum",
+      "instructor": "J. Mayfield",
+      "instructors": [
+        {
+          "name": "J. Mayfield",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -38,7 +51,14 @@
       "crn": "3225",
       "section_number": "2",
       "schedule_type": "LAB",
-      "instructor": "Drum/Bu",
+      "instructor": "Mayfield/Bu",
+      "instructors": [
+        {
+          "name": "Mayfield/Bu",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -57,7 +77,14 @@
       "crn": "3429",
       "section_number": "4",
       "schedule_type": "LAB",
-      "instructor": "Drum/Bu",
+      "instructor": "Mayfield/Bu",
+      "instructors": [
+        {
+          "name": "Mayfield/Bu",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -84,8 +111,8 @@
     "waitlisted": 2
   },
   "instructors_unique": [
-    "C. Drum",
-    "Drum/Bu"
+    "J. Mayfield",
+    "Mayfield/Bu"
   ],
-  "scraped_at": "2026-04-20T20:51:13.087Z"
+  "scraped_at": "2026-05-13T00:40:54.683Z"
 }

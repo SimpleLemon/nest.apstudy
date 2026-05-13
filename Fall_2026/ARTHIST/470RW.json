@@ -1,10 +1,16 @@
 {
   "course_code": "ARTHIST 470RW",
-  "course_title": "Sem:Ancient Mediterr/Anatolian Art",
+  "course_title": "Sem:Ancient Mediterr/Anatolian Art: Seeing Double",
   "subject": "ARTHIST",
   "catalog_number": "470RW",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAPW",
+  "course_description": "Advanced seminar with emphasis on critical texts, methods, and techniques of art historical investigation. For art history majors; open to others with permission from the instructor.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "G. Lovisetto",
+      "instructors": [
+        {
+          "name": "G. Lovisetto",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "G. Lovisetto"
   ],
-  "scraped_at": "2026-04-20T21:51:57.794Z"
+  "scraped_at": "2026-05-13T00:39:34.121Z"
 }

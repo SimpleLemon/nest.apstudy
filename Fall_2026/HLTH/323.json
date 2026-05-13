@@ -5,6 +5,12 @@
   "catalog_number": "323",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "This course addresses how nutrition helps individuals meet exercise goals, promote health, and achieve optimal performance through examination of the physiological roles of nutrients and dietary components, basic principles of exercise science, and conventional and contemporary fueling strategies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. Benardot",
+      "instructors": [
+        {
+          "name": "D. Benardot",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "D. Benardot"
   ],
-  "scraped_at": "2026-04-20T20:50:56.531Z"
+  "scraped_at": "2026-05-13T00:40:32.139Z"
 }

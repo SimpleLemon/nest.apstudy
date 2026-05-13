@@ -5,6 +5,12 @@
   "catalog_number": "475",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "For juniors and seniors interested in a basic understanding of the eye. This course will review principles and state-of-the-art information on ocular anatomy, embryology, biochemistry, physiology, genetics, immunology, microbiology, pharmacology, and pathology.",
+  "course_notes": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
+  "requisites": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Pardue",
+      "instructors": [
+        {
+          "name": "M. Pardue",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Pardue"
   ],
-  "scraped_at": "2026-04-20T20:47:42.872Z"
+  "scraped_at": "2026-05-13T00:36:31.266Z"
 }

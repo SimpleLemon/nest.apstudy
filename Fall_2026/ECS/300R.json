@@ -5,6 +5,12 @@
   "catalog_number": "300R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": "None",
+  "course_description": "This is a 2-credit course intended for new student members of the Emory College Honor Council. It introduces students to academic integrity as a field of research and inquiry, the historical context of college honor systems, and new research and trends concerning academic dishonesty.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -14,8 +20,15 @@
       "crn": "1801",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "Team",
-      "enrollment_status": "Open",
+      "instructor": "Wilson/Shoemake",
+      "instructors": [
+        {
+          "name": "Wilson/Shoemake",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -36,12 +49,12 @@
     "labs": 0,
     "discussions": 0,
     "other": 1,
-    "open": 1,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Team"
+    "Wilson/Shoemake"
   ],
-  "scraped_at": "2026-04-20T21:52:09.212Z"
+  "scraped_at": "2026-05-13T00:40:01.509Z"
 }

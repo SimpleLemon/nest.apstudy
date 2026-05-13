@@ -5,6 +5,12 @@
   "catalog_number": "241",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "None",
+  "course_description": "A study of the factors that cause genetic change and of the evolutionary consequences of such changes. Topics include population genetics, adaptation and natural selection, evolution of genes, proteins and genomes, sexual selection, kin selection, speciation, and diversification of taxa.",
+  "course_notes": "BIOL 142 and BIOL 142L, or BIOL_OX 142 or BIOL_OX 142X, or equivalent transfer credit as prerequisite.",
+  "requisites": "BIOL 142 and BIOL 142L, or BIOL_OX 142 or BIOL_OX 142X, or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "K. Koelle",
+      "instructors": [
+        {
+          "name": "K. Koelle",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "DIS",
       "instructor": "K. Koelle",
+      "instructors": [
+        {
+          "name": "K. Koelle",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -58,6 +78,13 @@
       "section_number": "3",
       "schedule_type": "DIS",
       "instructor": "K. Koelle",
+      "instructors": [
+        {
+          "name": "K. Koelle",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -77,7 +104,14 @@
       "section_number": "4",
       "schedule_type": "DIS",
       "instructor": "K. Koelle",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "K. Koelle",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Waitlist",
       "enrollment_count": "5",
       "is_cancelled": false,
       "schedule": {
@@ -96,6 +130,13 @@
       "section_number": "5",
       "schedule_type": "DIS",
       "instructor": "K. Koelle",
+      "instructors": [
+        {
+          "name": "K. Koelle",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -117,12 +158,12 @@
     "labs": 0,
     "discussions": 4,
     "other": 0,
-    "open": 5,
+    "open": 4,
     "closed": 0,
-    "waitlisted": 0
+    "waitlisted": 1
   },
   "instructors_unique": [
     "K. Koelle"
   ],
-  "scraped_at": "2026-04-20T20:50:26.630Z"
+  "scraped_at": "2026-05-13T00:39:38.938Z"
 }

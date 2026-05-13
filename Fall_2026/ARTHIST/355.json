@@ -5,6 +5,12 @@
   "catalog_number": "355",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HAP",
+  "course_description": "Traditional genres of African art with a focus on masks and figure sculpture in West and Central African city-states and chiefdoms from 1500 to European colonization. May be repeated for credit when topic changes, up to a maximum of twelve hours.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "AAS 355 AFS 355",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "K. Daniels",
+      "instructors": [
+        {
+          "name": "K. Daniels",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "K. Daniels"
   ],
-  "scraped_at": "2026-04-20T21:51:57.792Z"
+  "scraped_at": "2026-05-13T00:39:34.119Z"
 }

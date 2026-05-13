@@ -5,6 +5,12 @@
   "catalog_number": "250",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "XA",
+  "course_description": "This is a dance composition course designed to allow the student to discover new ideas about movement in a nurturing and experimental environment. Students develop and perform solo studies with an emphasis placed on the development of personal movement vocabulary, phrase building, and the exploration of choreographic tools. Discussion, critiquing, and descriptive writing about their choreographic processes will supplement direct physical work. Required course for dance and movement studies majors and minors. Must be a declared dance and movement studies major or minor, or permission of instructor.",
+  "course_notes": "DANCE 150R or PE_OX 151 or equivalent transfer credit as a prerequisite.",
+  "requisites": "DANCE 150R or PE_OX 151 or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "G. Catellier",
+      "instructors": [
+        {
+          "name": "G. Catellier",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "G. Catellier"
   ],
-  "scraped_at": "2026-04-20T20:50:36.608Z"
+  "scraped_at": "2026-05-13T00:39:56.666Z"
 }

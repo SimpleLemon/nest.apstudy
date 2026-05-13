@@ -5,6 +5,12 @@
   "catalog_number": "170",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "HSC",
+  "course_description": "Special topics in Middle Eastern and South Asian Studies, at the 100 level; may be repeated when content varies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. Nagar",
+      "instructors": [
+        {
+          "name": "D. Nagar",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "D. Nagar"
   ],
-  "scraped_at": "2026-04-20T21:52:01.040Z"
+  "scraped_at": "2026-05-13T00:40:56.307Z"
 }

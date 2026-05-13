@@ -5,6 +5,12 @@
   "catalog_number": "331",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1109",
       "schedule_type": "LEC",
       "instructor": "D. Clear",
+      "instructors": [
+        {
+          "name": "D. Clear",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "1133",
       "schedule_type": "LEC",
       "instructor": "J. Kim",
+      "instructors": [
+        {
+          "name": "J. Kim",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -52,6 +72,13 @@
       "section_number": "1134",
       "schedule_type": "LEC",
       "instructor": "J. Kim",
+      "instructors": [
+        {
+          "name": "J. Kim",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -76,6 +103,13 @@
       "section_number": "1135",
       "schedule_type": "LEC",
       "instructor": "L. Thomas",
+      "instructors": [
+        {
+          "name": "L. Thomas",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -100,6 +134,13 @@
       "section_number": "1433",
       "schedule_type": "LEC",
       "instructor": "J. Kim",
+      "instructors": [
+        {
+          "name": "J. Kim",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -124,6 +165,13 @@
       "section_number": "1434",
       "schedule_type": "LEC",
       "instructor": "J. Kim",
+      "instructors": [
+        {
+          "name": "J. Kim",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -148,6 +196,13 @@
       "section_number": "1435",
       "schedule_type": "LEC",
       "instructor": "L. Thomas",
+      "instructors": [
+        {
+          "name": "L. Thomas",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -183,5 +238,5 @@
     "J. Kim",
     "L. Thomas"
   ],
-  "scraped_at": "2026-04-20T20:49:24.075Z"
+  "scraped_at": "2026-05-13T00:38:05.280Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "213",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "This course combines the theoretical and practical elements of cinematography and lighting. Historical and contemporary trends and styles are examined. Video formats, exposure, camera placement,composition, movement and continuity will be covered.",
+  "course_notes": "FILM 107 or ARTVIS 107 or FILM_OX 107 or FILM_OX 107E or equivalent transfer credit as prerequisite.",
+  "requisites": "FILM 107 or ARTVIS 107 or FILM_OX 107 or FILM_OX 107E or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,7 +21,14 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "T. Ozdemir",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "T. Ozdemir",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -36,12 +49,12 @@
     "labs": 0,
     "discussions": 0,
     "other": 1,
-    "open": 1,
+    "open": 0,
     "closed": 0,
-    "waitlisted": 0
+    "waitlisted": 1
   },
   "instructors_unique": [
     "T. Ozdemir"
   ],
-  "scraped_at": "2026-04-20T20:50:44.937Z"
+  "scraped_at": "2026-05-13T00:40:14.426Z"
 }

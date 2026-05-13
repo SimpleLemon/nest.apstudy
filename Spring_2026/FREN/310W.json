@@ -5,6 +5,12 @@
   "catalog_number": "310W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "ICW",
+  "course_description": "Third-year-level course given in French. Intensive study of written French based on syntactic and lexical analysis of a variety of texts. Bi-weekly compositions with extensive revisions and concern for the process of writing in a foreign language.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Ami Ali Barrow/Gardner",
+      "instructors": [
+        {
+          "name": "Ami Ali Barrow/Gardner",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "N. Giguere",
+      "instructors": [
+        {
+          "name": "N. Giguere",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -73,5 +93,5 @@
     "Ami Ali Barrow/Gardner",
     "N. Giguere"
   ],
-  "scraped_at": "2026-04-20T20:48:02.924Z"
+  "scraped_at": "2026-05-13T00:37:10.122Z"
 }

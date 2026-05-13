@@ -5,6 +5,12 @@
   "catalog_number": "402",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "IC",
+  "course_description": "This course helps Korean advanced level learners to improve their proficiency to high-advanced level by introducting the language, history, culture, and society of Korea. Throughout the course, students will be broadly exposed to the diversity of Korean society and culture.",
+  "course_notes": "This course requires KRN 401 or equivalent transfer credit as a prerequisite.",
+  "requisites": "This course requires KRN 401 or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "H. Jin",
+      "instructors": [
+        {
+          "name": "H. Jin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "H. Jin"
   ],
-  "scraped_at": "2026-04-20T20:48:22.793Z"
+  "scraped_at": "2026-05-13T00:37:40.754Z"
 }

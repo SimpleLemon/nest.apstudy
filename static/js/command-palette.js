@@ -7,7 +7,7 @@ const h = React.createElement;
 export const COMMAND_PALETTE_PAGES = [
   {
     name: 'Dashboard',
-    route: '/dashboard',
+    route: '/calendar',
     icon: 'dashboard',
     keywords: ['home', 'overview', 'calendar', 'assignments', 'courses'],
   },
@@ -16,6 +16,12 @@ export const COMMAND_PALETTE_PAGES = [
     route: '/calendar',
     icon: 'calendar',
     keywords: ['schedule', 'events', 'week', 'month', 'classes'],
+  },
+  {
+    name: 'Courses',
+    route: '/courses',
+    icon: 'school',
+    keywords: ['emory', 'classes', 'atlas', 'registration', 'seats'],
   },
   {
     name: 'Notes',
@@ -305,6 +311,12 @@ function renderIcon(name) {
       return h('svg', iconProps,
         h('path', { d: 'M4 20h16V8h-8l-2-4H4z' }),
         h('path', { d: 'M4 8h16' }),
+      );
+    case 'school':
+      return h('svg', iconProps,
+        h('path', { d: 'm3 8 9-4 9 4-9 4-9-4Z' }),
+        h('path', { d: 'M7 10.5v4.2c1.3 1.1 3 1.7 5 1.7s3.7-.6 5-1.7v-4.2' }),
+        h('path', { d: 'M21 8v6' }),
       );
     case 'settings':
       return h('svg', iconProps,

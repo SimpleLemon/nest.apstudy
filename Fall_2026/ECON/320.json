@@ -5,6 +5,12 @@
   "catalog_number": "320",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "MQR",
+  "course_description": "Introduction to construction and testing of econometric models; analysis and critique of general linear regression model; simultaneous equations models; computer program for regression analysis; applications.",
+  "course_notes": "(ECON 101 or ECON_OX 101 or BUS 201) and (ECON 112 or ECON_OX 112) and (ECON 220 or MATH 207 or MATH_OX 207 or MATH 361 or MATH 362) or equivalent transfer credit as a prerequisite.",
+  "requisites": "(ECON 101 or ECON_OX 101 or BUS 201) and (ECON 112 or ECON_OX 112) and (ECON 220 or MATH 207 or MATH_OX 207 or MATH 361 or MATH 362) or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "LAB1",
       "schedule_type": "LAB",
       "instructor": "S. Smyly",
+      "instructors": [
+        {
+          "name": "S. Smyly",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "LAB2",
       "schedule_type": "LAB",
       "instructor": "S. Smyly",
+      "instructors": [
+        {
+          "name": "S. Smyly",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -53,6 +73,13 @@
       "section_number": "LAB3",
       "schedule_type": "LAB",
       "instructor": "J. Cassa",
+      "instructors": [
+        {
+          "name": "J. Cassa",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -72,6 +99,13 @@
       "section_number": "LAB4",
       "schedule_type": "LAB",
       "instructor": "J. Cassa",
+      "instructors": [
+        {
+          "name": "J. Cassa",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -91,6 +125,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "E. Maasoumi",
+      "instructors": [
+        {
+          "name": "E. Maasoumi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -115,6 +156,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "S. O'Connell",
+      "instructors": [
+        {
+          "name": "S. O'Connell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -139,6 +187,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "S. Hoderlein",
+      "instructors": [
+        {
+          "name": "S. Hoderlein",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -163,6 +218,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "P. Lopez de mesa Moyano",
+      "instructors": [
+        {
+          "name": "P. Lopez de mesa Moyano",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -201,5 +263,5 @@
     "S. O'Connell",
     "S. Smyly"
   ],
-  "scraped_at": "2026-04-20T20:50:38.310Z"
+  "scraped_at": "2026-05-13T00:39:59.883Z"
 }

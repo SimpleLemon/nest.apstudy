@@ -5,6 +5,12 @@
   "catalog_number": "190",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "Fulfills the freshman seminar requirement of the General Education Requirements. A variety of courses covering a wide range of topics in music. Refer to the Music Department website for a listing of classes currently offered.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "D. Castro Pantoja",
+      "instructors": [
+        {
+          "name": "D. Castro Pantoja",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "H. Senungetuk",
+      "instructors": [
+        {
+          "name": "H. Senungetuk",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -73,5 +93,5 @@
     "D. Castro Pantoja",
     "H. Senungetuk"
   ],
-  "scraped_at": "2026-04-20T20:48:35.980Z"
+  "scraped_at": "2026-05-13T00:37:56.866Z"
 }

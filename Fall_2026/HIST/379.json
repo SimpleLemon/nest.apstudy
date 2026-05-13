@@ -5,6 +5,12 @@
   "catalog_number": "379",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HSC",
+  "course_description": "Through a series of thematic units, case studies, and analytical writing assignments, this course examines the emergence and evolution of modern terrorism in the United States and the impact of international terrorism on American society and foreign policy.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Ward",
+      "instructors": [
+        {
+          "name": "J. Ward",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "J. Ward"
   ],
-  "scraped_at": "2026-04-20T20:50:54.870Z"
+  "scraped_at": "2026-05-13T00:40:30.511Z"
 }

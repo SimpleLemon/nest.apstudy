@@ -5,6 +5,12 @@
   "catalog_number": "371",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "An introduction to the application of the theories and principles of microeconomics to issues in health care. Increase understanding of microeconomic theory and the basic structure of health care delivery and health care financing in the United States and other countries.",
+  "course_notes": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as prerequisite.",
+  "requisites": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Markowitz",
+      "instructors": [
+        {
+          "name": "S. Markowitz",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "S. Markowitz"
   ],
-  "scraped_at": "2026-04-20T20:47:54.568Z"
+  "scraped_at": "2026-05-13T00:36:52.244Z"
 }

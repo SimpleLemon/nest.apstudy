@@ -5,6 +5,12 @@
   "catalog_number": "399R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 8",
+  "requirement_designation": "None",
+  "course_description": "Variable credit. Permission required. Intended for students who have had some prior introduction to research, either in ENVS 299 or in another class or field. In this individual research course, research skills are developed and refined under supervision of an ENVS faculty member.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,7 +21,14 @@
       "section_number": "1",
       "schedule_type": "RSC",
       "instructor": "S. Donaher",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "S. Donaher",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -30,12 +43,12 @@
     "labs": 0,
     "discussions": 0,
     "other": 1,
-    "open": 1,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
     "S. Donaher"
   ],
-  "scraped_at": "2026-04-20T20:50:43.287Z"
+  "scraped_at": "2026-05-13T00:40:11.210Z"
 }

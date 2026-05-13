@@ -5,6 +5,12 @@
   "catalog_number": "133",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "This course is an introduction to the central question of the philosophy of film. (1)What is film theory? (2)What is the nature of film? (3)Do films have authors? (4)How do films engage our emotions? (5)Can films be socially critical?",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "B. Brewer",
+      "instructors": [
+        {
+          "name": "B. Brewer",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "B. Brewer"
   ],
-  "scraped_at": "2026-04-20T20:48:47.559Z"
+  "scraped_at": "2026-05-13T00:38:53.512Z"
 }

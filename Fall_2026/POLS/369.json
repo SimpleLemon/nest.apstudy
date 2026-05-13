@@ -5,6 +5,12 @@
   "catalog_number": "369",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HSC",
+  "course_description": "Overview of the quantitative and qualitative methodologies employed by analysts in determining whether public programs and policies work. Attention is also given to research utilization and the role of analysis in the policymaking process.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Rich",
+      "instructors": [
+        {
+          "name": "M. Rich",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Rich"
   ],
-  "scraped_at": "2026-04-20T20:51:36.154Z"
+  "scraped_at": "2026-05-13T00:42:05.634Z"
 }

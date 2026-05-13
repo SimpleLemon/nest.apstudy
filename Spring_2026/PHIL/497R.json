@@ -5,6 +5,12 @@
   "catalog_number": "497R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "None",
+  "course_description": "A course of readings decided in consultation with a member of the faculty.",
+  "course_notes": "Two PHIL courses or equivalent transfer credit as prerequisite.",
+  "requisites": "Two PHIL courses or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "J. Lysaker",
+      "instructors": [
+        {
+          "name": "J. Lysaker",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "SUP",
       "instructor": "J. Wahman",
+      "instructors": [
+        {
+          "name": "J. Wahman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3",
       "schedule_type": "SUP",
       "instructor": "A. Mitchell",
+      "instructors": [
+        {
+          "name": "A. Mitchell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "4",
       "schedule_type": "SUP",
       "instructor": "N. McAfee",
+      "instructors": [
+        {
+          "name": "N. McAfee",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -79,5 +113,5 @@
     "J. Wahman",
     "N. McAfee"
   ],
-  "scraped_at": "2026-04-20T20:48:47.570Z"
+  "scraped_at": "2026-05-13T00:38:53.520Z"
 }

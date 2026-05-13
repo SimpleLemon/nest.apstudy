@@ -5,6 +5,12 @@
   "catalog_number": "422",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "ETHN",
+  "course_description": "Addresses the historical position and cultural production of Spanish and Latin American Jewry, from medieval Spain to the present. We examine how diasporic Jewish subjects have framed their identity while negotiating the pressures of exile, immigration, antisemitism, and political violence.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "JS 422",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "H. Gold",
+      "instructors": [
+        {
+          "name": "H. Gold",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "H. Gold"
   ],
-  "scraped_at": "2026-04-20T20:51:49.442Z"
+  "scraped_at": "2026-05-13T00:42:21.804Z"
 }

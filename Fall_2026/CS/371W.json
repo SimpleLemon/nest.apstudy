@@ -5,6 +5,12 @@
   "catalog_number": "371W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "CW",
+  "course_description": "This course guides students in developing the ability to conduct high-quality research in Artificial Intelligence (AI). Throughout the course, students will work on team projects, write research papers (both individually and in groups), peer-review papers from others, and give public presentations.",
+  "course_notes": "CS 325 or CS 334 or equivalent transfer credit as prerequisites.",
+  "requisites": "CS 325 or CS 334 or equivalent transfer credit as prerequisites.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Choi",
+      "instructors": [
+        {
+          "name": "J. Choi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "J. Choi"
   ],
-  "scraped_at": "2026-04-20T20:50:34.964Z"
+  "scraped_at": "2026-05-13T00:39:55.055Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "201",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "IC",
+  "course_description": "The first half of a yearlong review, with emphasis on continued development of the four basic linguistic skills (speaking, listening, reading, and writing) and knowledge of Hispanic cultures and societies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "C. Sierra",
+      "instructors": [
+        {
+          "name": "C. Sierra",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "C. Sierra",
+      "instructors": [
+        {
+          "name": "C. Sierra",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -63,6 +83,8 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -87,6 +109,8 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -111,6 +135,8 @@
       "section_number": "5",
       "schedule_type": "LEC",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -135,6 +161,8 @@
       "section_number": "6",
       "schedule_type": "LEC",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -159,6 +187,13 @@
       "section_number": "7",
       "schedule_type": "LEC",
       "instructor": "L. Dillman",
+      "instructors": [
+        {
+          "name": "L. Dillman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -183,6 +218,13 @@
       "section_number": "8",
       "schedule_type": "LEC",
       "instructor": "M. Gonzalez",
+      "instructors": [
+        {
+          "name": "M. Gonzalez",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -207,6 +249,13 @@
       "section_number": "9",
       "schedule_type": "LEC",
       "instructor": "M. Gonzalez",
+      "instructors": [
+        {
+          "name": "M. Gonzalez",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -231,6 +280,8 @@
       "section_number": "10",
       "schedule_type": "LEC",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -255,6 +306,8 @@
       "section_number": "11",
       "schedule_type": "LEC",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -290,5 +343,5 @@
     "L. Dillman",
     "M. Gonzalez"
   ],
-  "scraped_at": "2026-04-20T20:51:49.436Z"
+  "scraped_at": "2026-05-13T00:42:21.799Z"
 }

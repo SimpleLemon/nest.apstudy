@@ -5,6 +5,12 @@
   "catalog_number": "385",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "HSC",
+  "course_description": "Seminar or lecture series of topics of anthropological concern. May be repeated for credit when topic varies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "K. Phillips",
+      "instructors": [
+        {
+          "name": "K. Phillips",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,7 +52,14 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "S. Blakely",
-      "enrollment_status": "Closed",
+      "instructors": [
+        {
+          "name": "S. Blakely",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -63,6 +83,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "X. Marsilli-Vargas",
+      "instructors": [
+        {
+          "name": "X. Marsilli-Vargas",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -87,6 +114,13 @@
       "section_number": "5",
       "schedule_type": "LEC",
       "instructor": "L. Jones",
+      "instructors": [
+        {
+          "name": "L. Jones",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -108,8 +142,8 @@
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 3,
-    "closed": 1,
+    "open": 4,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -118,5 +152,5 @@
     "S. Blakely",
     "X. Marsilli-Vargas"
   ],
-  "scraped_at": "2026-04-20T20:50:20.084Z"
+  "scraped_at": "2026-05-13T00:39:30.872Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "344",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "MQR",
+  "course_description": "Curves and surfaces in 3-space. The geometry of the Gauss map. Special surfaces. The intrinsic geometry of surfaces. Surfaces and computer graphics.",
+  "course_notes": "(MATH 211 or PHYS 211 or MATH_OX 211 or MATH 276) and (MATH 221 or MATH_OX 221 or MATH 321) and (MATH 250 or MATH_OX 250 or MATH 276) or equivalent transfer credit as prerequisite.",
+  "requisites": "(MATH 211 or PHYS 211 or MATH_OX 211 or MATH 276) and (MATH 221 or MATH_OX 221 or MATH 321) and (MATH 250 or MATH_OX 250 or MATH 276) or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Y. Wang",
+      "instructors": [
+        {
+          "name": "Y. Wang",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "Y. Wang"
   ],
-  "scraped_at": "2026-04-20T20:48:29.466Z"
+  "scraped_at": "2026-05-13T00:37:47.211Z"
 }

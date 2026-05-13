@@ -5,6 +5,12 @@
   "catalog_number": "422",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "SNT",
+  "course_description": "The physics behind modern materials used in nanotechnology, information storage and processing, and energy generation such as semiconductor transistors, LEDs, solar cells, photodiodes, lasers, etc. Electronic, optical, magnetic and thermal properties of materials which have enabled the internet age.",
+  "course_notes": "PHYS 253 or PHYS_OX 253 or (CHEM 205 and CHEM 205L) or (CHEM 331 and CHEM 331L) or (CHEM 331 and CHEM 331LW) or equivalent transfer credit as prerequisite..",
+  "requisites": "PHYS 253 or PHYS_OX 253 or (CHEM 205 and CHEM 205L) or (CHEM 331 and CHEM 331L) or (CHEM 331 and CHEM 331LW) or equivalent transfer credit as prerequisite..",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "H. Harutyunyan",
+      "instructors": [
+        {
+          "name": "H. Harutyunyan",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "H. Harutyunyan"
   ],
-  "scraped_at": "2026-04-20T20:48:49.255Z"
+  "scraped_at": "2026-05-13T00:38:55.134Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "262",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HAE",
+  "course_description": "An overview of African-American literature since 1900. Students will read and examine writings by major contributors to each period in the genres of fiction (short story and novel) essay, poetry, and narratives of enslavement. Students will write and revise four five-page critical essays.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "AAS 262",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Gordon",
+      "instructors": [
+        {
+          "name": "M. Gordon",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Gordon"
   ],
-  "scraped_at": "2026-04-20T20:47:57.988Z"
+  "scraped_at": "2026-05-13T00:37:00.407Z"
 }

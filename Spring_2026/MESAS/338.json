@@ -5,6 +5,12 @@
   "catalog_number": "338",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HSC",
+  "course_description": "This course is intended to present an overview of the history of Tibet in an unbiased format. Beginning with an introduction to Tibet's geography, people, language and religion, students will then study selected events and episodes in the history of Tibet.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "REL 338",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "T. Rigzin",
+      "instructors": [
+        {
+          "name": "T. Rigzin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "T. Rigzin"
   ],
-  "scraped_at": "2026-04-20T21:51:20.482Z"
+  "scraped_at": "2026-05-13T00:37:48.829Z"
 }

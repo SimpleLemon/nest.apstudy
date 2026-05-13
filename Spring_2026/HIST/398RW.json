@@ -5,6 +5,12 @@
   "catalog_number": "398RW",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "XAW",
+  "course_description": "Variable credit. Prerequisite: approval of project by instructor. Focused on students' pursuing projects of their own design or gaining research skills through work with the instructor.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "RSC",
       "instructor": "M. Lowery",
+      "instructors": [
+        {
+          "name": "M. Lowery",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "M. Lowery"
   ],
-  "scraped_at": "2026-04-20T20:48:11.185Z"
+  "scraped_at": "2026-05-13T00:37:23.030Z"
 }

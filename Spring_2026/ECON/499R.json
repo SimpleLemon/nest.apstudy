@@ -5,6 +5,12 @@
   "catalog_number": "499R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3 - 4",
+  "requirement_designation": "XA",
+  "course_description": "Students will learn the craft of research in economics. Coursework will consist of synthesis of literature; collection, collation, cleaning of data; data analysis, contributing to manuscript preparation, and/or other work related to the sustaining of an academic research project.",
+  "course_notes": "(ECON 201 or ECON_OX 201 or ECON 212 or ECON_OX 212) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisites.",
+  "requisites": "(ECON 201 or ECON_OX 201 or ECON 212 or ECON_OX 212) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisites.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "RSC",
       "instructor": "S. O'Connell",
+      "instructors": [
+        {
+          "name": "S. O'Connell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "RSC",
       "instructor": "C. Blake",
+      "instructors": [
+        {
+          "name": "C. Blake",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3",
       "schedule_type": "RSC",
       "instructor": "C. Fohlin",
+      "instructors": [
+        {
+          "name": "C. Fohlin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "4",
       "schedule_type": "RSC",
       "instructor": "S. Wunderly",
+      "instructors": [
+        {
+          "name": "S. Wunderly",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -67,6 +101,13 @@
       "section_number": "5",
       "schedule_type": "RSC",
       "instructor": "E. Maasoumi",
+      "instructors": [
+        {
+          "name": "E. Maasoumi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -93,5 +134,5 @@
     "S. O'Connell",
     "S. Wunderly"
   ],
-  "scraped_at": "2026-04-20T20:47:54.578Z"
+  "scraped_at": "2026-05-13T00:36:52.252Z"
 }

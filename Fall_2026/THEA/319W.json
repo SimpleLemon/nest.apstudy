@@ -5,6 +5,12 @@
   "catalog_number": "319W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAPW",
+  "course_description": "The course is an introduction to traditional Chinese drama, from the 13th to the 20th century. We will focus on drama as literature but we will also explore the social, material, and performative dimensions of theater, including modern-day stage adaptations of traditional plays.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "CHN 319W EAS 319W",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Sibau",
+      "instructors": [
+        {
+          "name": "M. Sibau",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Sibau"
   ],
-  "scraped_at": "2026-04-20T20:51:51.078Z"
+  "scraped_at": "2026-05-13T00:42:25.023Z"
 }

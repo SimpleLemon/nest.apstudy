@@ -5,6 +5,12 @@
   "catalog_number": "296",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "A variety of outdoor topics will be introduced, including wilderness therapy, ethics, first aid, shelter, and survival essentials. Class/group projects and day outings will also be included.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,8 @@
       "section_number": "1",
       "schedule_type": "PE",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -41,5 +49,5 @@
     "waitlisted": 0
   },
   "instructors_unique": [],
-  "scraped_at": "2026-04-20T20:51:27.885Z"
+  "scraped_at": "2026-05-13T00:41:55.784Z"
 }

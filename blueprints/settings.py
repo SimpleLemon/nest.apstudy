@@ -572,7 +572,7 @@ def onboarding():
     Redirected here from auth.py if no feed URL is configured.
     """
     if current_user.onboarding_complete:
-        return redirect(url_for("dashboard.dashboard"))
+        return redirect(url_for("dashboard.calendar"))
 
     return render_template("onboarding.html", **_onboarding_context())
 

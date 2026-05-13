@@ -5,6 +5,12 @@
   "catalog_number": "331",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "IC",
+  "course_description": "This course focuses on the development of key concepts, ideas, or movements across historical periods and cultural contexts. By retracing their elaboration it serves to highlight continuities and discontinuities in the historical development of French and Francophone literatures and cultures.",
+  "course_notes": "FREN 310 or FREN_OX 310 and FREN 314 or FREN_OX 314 or equivalent transfer credit as prerequisite. Used for: FREN-331, 341, 351, 385, 391",
+  "requisites": "FREN 310 or FREN_OX 310 and FREN 314 or FREN_OX 314 or equivalent transfer credit as prerequisite. Used for: FREN-331, 341, 351, 385, 391",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "C. Nouvet",
+      "instructors": [
+        {
+          "name": "C. Nouvet",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "C. Nouvet"
   ],
-  "scraped_at": "2026-04-20T20:50:46.594Z"
+  "scraped_at": "2026-05-13T00:40:17.663Z"
 }

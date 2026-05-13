@@ -5,6 +5,12 @@
   "catalog_number": "226W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "CW",
+  "course_description": "In this course, students will produce written, visual, and interactive media. Their work will translate technical language for public-facing genres through techniques grounded in science communication theory. Intended for students in any major who are passionate about science.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. McDermott",
+      "instructors": [
+        {
+          "name": "D. McDermott",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "D. McDermott",
+      "instructors": [
+        {
+          "name": "D. McDermott",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -72,5 +92,5 @@
   "instructors_unique": [
     "D. McDermott"
   ],
-  "scraped_at": "2026-04-20T21:52:12.443Z"
+  "scraped_at": "2026-05-13T00:40:09.601Z"
 }

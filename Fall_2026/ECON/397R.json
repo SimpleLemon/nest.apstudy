@@ -1,0 +1,75 @@
+{
+  "course_code": "ECON 397R",
+  "course_title": "Directed Reading In Economics",
+  "subject": "ECON",
+  "catalog_number": "397R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1 - 3",
+  "requirement_designation": "None",
+  "course_description": "Up to three semester hours credit. For approval, a topic must be selected that is not included in a course to be offered before the student would normally graduate; a faculty adviser from among the full-time faculty must agree to supervise the study program, and a written description of the program must be submitted to and approved by the director of undergraduate studies in the semester preceding the one in which the student intends to participate.",
+  "course_notes": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as a prerequisite.",
+  "requisites": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "crn": "5719",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "T. Kim",
+      "instructors": [
+        {
+          "name": "T. Kim",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5761",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "S. Markowitz",
+      "instructors": [
+        {
+          "name": "S. Markowitz",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "S. Markowitz",
+    "T. Kim"
+  ],
+  "scraped_at": "2026-05-13T00:39:59.885Z"
+}

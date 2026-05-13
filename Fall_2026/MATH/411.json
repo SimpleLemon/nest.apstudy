@@ -5,6 +5,12 @@
   "catalog_number": "411",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "MQR",
+  "course_description": "Analysis of sets and functions in n-space which focuses on basic topological properties of sets as well as continuity and differentiation of functions.&nbsp;Topics: exterme value theorem, chain rule, and inverse function theorem.",
+  "course_notes": "(MATH 211 or PHYS 211 or MATH_OX 211 or MATH 276) and (MATH 221 or MATH_OX 221 or MATH 321) and (MATH 250 or MATH_OX 250 or MATH 276) or equivalent transfer credit as prerequisite.",
+  "requisites": "(MATH 211 or PHYS 211 or MATH_OX 211 or MATH 276) and (MATH 221 or MATH_OX 221 or MATH 321) and (MATH 250 or MATH_OX 250 or MATH 276) or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,8 +21,15 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Yang",
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
+      "instructors": [
+        {
+          "name": "S. Yang",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Closed",
+      "enrollment_count": "2",
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -33,20 +46,51 @@
           }
         ]
       }
+    },
+    {
+      "crn": "5736",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "S. Yang",
+      "instructors": [
+        {
+          "name": "S. Yang",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 0,
+    "closed": 1,
     "waitlisted": 1
   },
   "instructors_unique": [
     "S. Yang"
   ],
-  "scraped_at": "2026-04-20T20:51:13.095Z"
+  "scraped_at": "2026-05-13T00:40:54.688Z"
 }

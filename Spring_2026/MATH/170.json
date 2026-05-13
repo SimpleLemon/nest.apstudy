@@ -5,6 +5,12 @@
   "catalog_number": "170",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "NS",
+  "course_description": "The course introduces Python for Scientific Computing for students who will likely use it in upper-level courses. Students will know how to algorithmically formulate a mathematical problem, solve simple scientific computing problems, visualize data, and consider different programming paradigms.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "T. Xu",
+      "instructors": [
+        {
+          "name": "T. Xu",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "3",
       "schedule_type": "LAB",
       "instructor": "T. Xu",
+      "instructors": [
+        {
+          "name": "T. Xu",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -67,5 +87,5 @@
   "instructors_unique": [
     "T. Xu"
   ],
-  "scraped_at": "2026-04-20T20:48:29.460Z"
+  "scraped_at": "2026-05-13T00:37:47.208Z"
 }

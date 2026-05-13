@@ -5,6 +5,12 @@
   "catalog_number": "365",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HAP",
+  "course_description": "This course will examine ways in which food shapes contemporary Italian society. We will focus on the art of cuisine through the analysis of texts, films and cultural events. We will also examine the concepts of sustainability and the history and principles of the \"Slow Food Movement\"..",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,7 +21,14 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Muratore",
-      "enrollment_status": "Closed",
+      "instructors": [
+        {
+          "name": "S. Muratore",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -42,11 +55,11 @@
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 1,
-    "waitlisted": 0
+    "closed": 0,
+    "waitlisted": 1
   },
   "instructors_unique": [
     "S. Muratore"
   ],
-  "scraped_at": "2026-04-20T20:51:01.546Z"
+  "scraped_at": "2026-05-13T00:40:43.423Z"
 }

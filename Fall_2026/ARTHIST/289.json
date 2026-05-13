@@ -1,10 +1,16 @@
 {
   "course_code": "ARTHIST 289",
-  "course_title": "Perspectives on Non-Western Art Topics",
+  "course_title": "Perspectives on Non-Western Art Topics: Art & Arch.of Anc.Mesopotamia",
   "subject": "ARTHIST",
   "catalog_number": "289",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "HAP",
+  "course_description": "Focuses on one of several diverse, non-European art historical traditions, such as ancient Egypt, pre-Hispanic Americas, medieval Islam, Oceania, and sub-Saharan Africa. May be repeated for credit when topic changes.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "G. Lovisetto",
+      "instructors": [
+        {
+          "name": "G. Lovisetto",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "G. Lovisetto"
   ],
-  "scraped_at": "2026-04-20T21:51:57.791Z"
+  "scraped_at": "2026-05-13T00:39:34.119Z"
 }

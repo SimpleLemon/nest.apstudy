@@ -5,6 +5,12 @@
   "catalog_number": "236L",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "None",
+  "course_description": "Human Anatomy & Physiology I with Lab examines the interrelationship and integration of the structure and function of the human body on the molecular, cellular, tissue and organ system levels. Topics include body organization, homeostasis, cytology, histology, and the integumentary, skeletal, muscular, and nervous systems.",
+  "course_notes": "(BIOL 142 or BIOL_OX 142) and BIOL 142L or equivalent transfer credit as prerequisites.",
+  "requisites": "(BIOL 142 or BIOL_OX 142) and BIOL 142L or equivalent transfer credit as prerequisites.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Bou Dagher",
+      "instructors": [
+        {
+          "name": "J. Bou Dagher",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -44,6 +57,13 @@
       "section_number": "3",
       "schedule_type": "LAB",
       "instructor": "J. Bou Dagher",
+      "instructors": [
+        {
+          "name": "J. Bou Dagher",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "4",
       "schedule_type": "LAB",
       "instructor": "J. Bou Dagher",
+      "instructors": [
+        {
+          "name": "J. Bou Dagher",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -91,5 +118,5 @@
   "instructors_unique": [
     "J. Bou Dagher"
   ],
-  "scraped_at": "2026-04-20T20:50:26.627Z"
+  "scraped_at": "2026-05-13T00:39:38.938Z"
 }

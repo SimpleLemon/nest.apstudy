@@ -5,6 +5,12 @@
   "catalog_number": "329",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "We will explore the integrated functions of the neuromuscular, musculoskeletal, cardiorespiratory, and other body systems in regulating and supporting human movement. This includes how the body behaves at rest and in response to challenges, such as routine physical activity and disease.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Woodworth-Hobbs",
+      "instructors": [
+        {
+          "name": "M. Woodworth-Hobbs",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Woodworth-Hobbs"
   ],
-  "scraped_at": "2026-04-20T20:50:56.531Z"
+  "scraped_at": "2026-05-13T00:40:32.139Z"
 }

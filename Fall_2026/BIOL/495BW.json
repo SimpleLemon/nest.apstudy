@@ -5,6 +5,12 @@
   "catalog_number": "495BW",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "CW",
+  "course_description": "Prerequisite: consent of departmental honors coordinator. Final semester of independent research for students invited to participate in the biology department Honors Program. WR is satisfied by submission and acceptance of completed honors thesis based on this research.",
+  "course_notes": "This course requires BIOL 142 and BIOL 142L or BIOL_OX142 or BIOL 152 AND BIOL 495A or equivalent transfer credit as a prerequisite.",
+  "requisites": "This course requires BIOL 142 and BIOL 142L or BIOL_OX142 or BIOL 152 AND BIOL 495A or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "Rieder/Comstra",
+      "instructors": [
+        {
+          "name": "Rieder/Comstra",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "Rieder/Comstra"
   ],
-  "scraped_at": "2026-04-20T20:50:26.642Z"
+  "scraped_at": "2026-05-13T00:39:38.943Z"
 }

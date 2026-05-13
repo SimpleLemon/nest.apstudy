@@ -5,6 +5,12 @@
   "catalog_number": "385W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 5",
+  "requirement_designation": "HSCW",
+  "course_description": "(May be repeated for credit when topic varies.) Seminar or lecture series of topics of anthropological concern.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,7 +21,14 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "D. Vidali",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "D. Vidali",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "B. Holsey",
+      "instructors": [
+        {
+          "name": "B. Holsey",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -65,13 +85,13 @@
     "labs": 0,
     "discussions": 0,
     "other": 2,
-    "open": 2,
-    "closed": 0,
+    "open": 1,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
     "B. Holsey",
     "D. Vidali"
   ],
-  "scraped_at": "2026-04-20T20:50:20.084Z"
+  "scraped_at": "2026-05-13T00:39:30.872Z"
 }

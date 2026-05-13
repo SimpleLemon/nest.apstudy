@@ -5,6 +5,12 @@
   "catalog_number": "536",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "2168",
       "schedule_type": "LEC",
       "instructor": "Goebel/Martin",
+      "instructors": [
+        {
+          "name": "Goebel/Martin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "3268",
       "schedule_type": "LEC",
       "instructor": "Goebel/Martin",
+      "instructors": [
+        {
+          "name": "Goebel/Martin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -53,6 +73,13 @@
       "section_number": "4168",
       "schedule_type": "LEC",
       "instructor": "Goebel/Martin",
+      "instructors": [
+        {
+          "name": "Goebel/Martin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -72,6 +99,13 @@
       "section_number": "4268",
       "schedule_type": "LEC",
       "instructor": "Goebel/Martin",
+      "instructors": [
+        {
+          "name": "Goebel/Martin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -100,5 +134,5 @@
   "instructors_unique": [
     "Goebel/Martin"
   ],
-  "scraped_at": "2026-04-20T20:52:07.670Z"
+  "scraped_at": "2026-05-13T00:41:12.478Z"
 }

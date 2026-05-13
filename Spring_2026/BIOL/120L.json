@@ -5,6 +5,12 @@
   "catalog_number": "120L",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1",
+  "requirement_designation": "SNTL",
+  "course_description": "",
+  "course_notes": "BIOL 120 or BIOL_OX 120 as Corequisite",
+  "requisites": "BIOL 120 or BIOL_OX 120 as Corequisite",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "Cole/Schwab",
+      "instructors": [
+        {
+          "name": "Cole/Schwab",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "LAB",
       "instructor": "Cole/Roman",
+      "instructors": [
+        {
+          "name": "Cole/Roman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -53,6 +73,13 @@
       "section_number": "3",
       "schedule_type": "LAB",
       "instructor": "Cole/Schwab",
+      "instructors": [
+        {
+          "name": "Cole/Schwab",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -72,6 +99,13 @@
       "section_number": "4",
       "schedule_type": "LAB",
       "instructor": "Cole/Roman",
+      "instructors": [
+        {
+          "name": "Cole/Roman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -101,5 +135,5 @@
     "Cole/Roman",
     "Cole/Schwab"
   ],
-  "scraped_at": "2026-04-20T20:47:42.864Z"
+  "scraped_at": "2026-05-13T00:36:31.258Z"
 }

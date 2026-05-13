@@ -5,6 +5,12 @@
   "catalog_number": "200R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 8",
+  "requirement_designation": "None",
+  "course_description": "A required course for all majors and minors. Students undertake a substantial technical theater responsibility in a Theater Emory production (e.g. light or sound operator, costume crew, running props backstage, etc.)",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "PRA",
       "instructor": "B. Glenn",
+      "instructors": [
+        {
+          "name": "B. Glenn",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "B. Glenn"
   ],
-  "scraped_at": "2026-04-20T20:51:51.075Z"
+  "scraped_at": "2026-05-13T00:42:25.021Z"
 }

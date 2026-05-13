@@ -5,6 +5,12 @@
   "catalog_number": "414",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-10-14"
@@ -15,6 +21,8 @@
       "section_number": "101",
       "schedule_type": "CLN",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -28,6 +36,8 @@
       "section_number": "102",
       "schedule_type": "CLN",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -48,5 +58,5 @@
     "waitlisted": 0
   },
   "instructors_unique": [],
-  "scraped_at": "2026-04-20T20:52:09.333Z"
+  "scraped_at": "2026-05-13T00:41:09.199Z"
 }

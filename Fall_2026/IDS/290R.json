@@ -5,6 +5,12 @@
   "catalog_number": "290R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "None",
+  "course_description": "A side-car course brings together a subset of students from two courses that overlap in methodologies, topics, etc., to create a short interdisciplinary course that runs simultaneously with its two sponsoring courses. One credit, S/U only. Schedule and format arranged by sponsoring professors.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,7 +21,14 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "Team",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -28,20 +41,46 @@
           }
         ]
       }
+    },
+    {
+      "crn": "5698",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
+    "other": 2,
     "open": 1,
     "closed": 0,
-    "waitlisted": 0
+    "waitlisted": 1
   },
   "instructors_unique": [
     "Team"
   ],
-  "scraped_at": "2026-04-20T20:50:58.230Z"
+  "scraped_at": "2026-05-13T00:40:36.985Z"
 }

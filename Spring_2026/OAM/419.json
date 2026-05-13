@@ -5,6 +5,12 @@
   "catalog_number": "419",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1109",
       "schedule_type": "LEC",
       "instructor": "D. Clear",
+      "instructors": [
+        {
+          "name": "D. Clear",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "1120",
       "schedule_type": "LEC",
       "instructor": "S. Gaddis",
+      "instructors": [
+        {
+          "name": "S. Gaddis",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -52,6 +72,13 @@
       "section_number": "1193",
       "schedule_type": "LEC",
       "instructor": "S. Gaddis",
+      "instructors": [
+        {
+          "name": "S. Gaddis",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -76,6 +103,13 @@
       "section_number": "1194",
       "schedule_type": "LEC",
       "instructor": "S. Gaddis",
+      "instructors": [
+        {
+          "name": "S. Gaddis",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -100,6 +134,13 @@
       "section_number": "1493",
       "schedule_type": "LEC",
       "instructor": "S. Gaddis",
+      "instructors": [
+        {
+          "name": "S. Gaddis",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -124,6 +165,13 @@
       "section_number": "1494",
       "schedule_type": "LEC",
       "instructor": "S. Gaddis",
+      "instructors": [
+        {
+          "name": "S. Gaddis",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -158,5 +206,5 @@
     "D. Clear",
     "S. Gaddis"
   ],
-  "scraped_at": "2026-04-20T20:49:24.079Z"
+  "scraped_at": "2026-05-13T00:38:05.283Z"
 }

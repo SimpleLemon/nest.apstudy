@@ -5,6 +5,12 @@
   "catalog_number": "320",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1129",
       "schedule_type": "LEC",
       "instructor": "S. Ramachandran",
+      "instructors": [
+        {
+          "name": "S. Ramachandran",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "12",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "1130",
       "schedule_type": "LEC",
       "instructor": "B. Lee",
+      "instructors": [
+        {
+          "name": "B. Lee",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "12",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "1131",
       "schedule_type": "LEC",
       "instructor": "B. Lee",
+      "instructors": [
+        {
+          "name": "B. Lee",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "12",
       "is_cancelled": false,
@@ -87,6 +114,13 @@
       "section_number": "1132",
       "schedule_type": "LEC",
       "instructor": "T. Chordia",
+      "instructors": [
+        {
+          "name": "T. Chordia",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "12",
       "is_cancelled": false,
@@ -111,6 +145,13 @@
       "section_number": "1133",
       "schedule_type": "LEC",
       "instructor": "T. Chordia",
+      "instructors": [
+        {
+          "name": "T. Chordia",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "12",
       "is_cancelled": false,
@@ -135,6 +176,13 @@
       "section_number": "1134",
       "schedule_type": "LEC",
       "instructor": "S. Ramachandran",
+      "instructors": [
+        {
+          "name": "S. Ramachandran",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "12",
       "is_cancelled": false,
@@ -159,6 +207,13 @@
       "section_number": "1429",
       "schedule_type": "LEC",
       "instructor": "S. Ramachandran",
+      "instructors": [
+        {
+          "name": "S. Ramachandran",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "12",
       "is_cancelled": false,
@@ -183,6 +238,13 @@
       "section_number": "1430",
       "schedule_type": "LEC",
       "instructor": "B. Lee",
+      "instructors": [
+        {
+          "name": "B. Lee",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "12",
       "is_cancelled": false,
@@ -207,6 +269,13 @@
       "section_number": "1431",
       "schedule_type": "LEC",
       "instructor": "B. Lee",
+      "instructors": [
+        {
+          "name": "B. Lee",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "12",
       "is_cancelled": false,
@@ -231,7 +300,14 @@
       "section_number": "1432",
       "schedule_type": "LEC",
       "instructor": "T. Chordia",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "T. Chordia",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Closed",
       "enrollment_count": "12",
       "is_cancelled": false,
       "schedule": {
@@ -255,7 +331,14 @@
       "section_number": "1433",
       "schedule_type": "LEC",
       "instructor": "T. Chordia",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "T. Chordia",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Closed",
       "enrollment_count": "12",
       "is_cancelled": false,
       "schedule": {
@@ -279,6 +362,13 @@
       "section_number": "1434",
       "schedule_type": "LEC",
       "instructor": "S. Ramachandran",
+      "instructors": [
+        {
+          "name": "S. Ramachandran",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "12",
       "is_cancelled": false,
@@ -305,8 +395,8 @@
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 4,
+    "open": 2,
+    "closed": 6,
     "waitlisted": 4
   },
   "instructors_unique": [
@@ -314,5 +404,5 @@
     "S. Ramachandran",
     "T. Chordia"
   ],
-  "scraped_at": "2026-04-20T20:52:01.031Z"
+  "scraped_at": "2026-05-13T00:40:16.041Z"
 }

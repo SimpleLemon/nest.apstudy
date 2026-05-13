@@ -5,6 +5,12 @@
   "catalog_number": "201",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "IC",
+  "course_description": "The first half of a yearlong review, with emphasis on continued development of the four basic linguistic skills (speaking, listening, reading, and writing) and knowledge of Lusophone cultures and societies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Ribeiro",
+      "instructors": [
+        {
+          "name": "M. Ribeiro",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Ribeiro"
   ],
-  "scraped_at": "2026-04-20T20:51:37.789Z"
+  "scraped_at": "2026-05-13T00:42:07.271Z"
 }

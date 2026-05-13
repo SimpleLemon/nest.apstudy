@@ -5,6 +5,12 @@
   "catalog_number": "498R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 12",
+  "requirement_designation": "None",
+  "course_description": "Prerequisite: permission of faculty member required and consent of the director of undergraduate studies. Supervised reading, normally for students majoring in sociology.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "H. Sohn",
+      "instructors": [
+        {
+          "name": "H. Sohn",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "SUP",
       "instructor": "R. Franzosi",
+      "instructors": [
+        {
+          "name": "R. Franzosi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3",
       "schedule_type": "SUP",
       "instructor": "J. Mullis",
+      "instructors": [
+        {
+          "name": "J. Mullis",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -65,5 +92,5 @@
     "J. Mullis",
     "R. Franzosi"
   ],
-  "scraped_at": "2026-04-20T20:49:04.191Z"
+  "scraped_at": "2026-05-13T00:39:12.886Z"
 }

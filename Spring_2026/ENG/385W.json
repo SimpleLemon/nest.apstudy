@@ -5,6 +5,12 @@
   "catalog_number": "385W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "HSCW",
+  "course_description": "This course introduces students to the methods and materials of academic literary research and criticism. Focusing on a small body of literature and scholarship within one area of study, the course will teach students to engage with secondary sources, including contextual and/or archival material.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "W. Kalaidjian",
+      "instructors": [
+        {
+          "name": "W. Kalaidjian",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "W. Kalaidjian"
   ],
-  "scraped_at": "2026-04-20T20:47:58.000Z"
+  "scraped_at": "2026-05-13T00:37:00.413Z"
 }

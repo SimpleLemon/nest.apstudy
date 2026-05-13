@@ -5,6 +5,12 @@
   "catalog_number": "199",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "This course is an introduction to golf fundamentals. All aspects of the rules and golf swing techniques are covered. Driving range, classroom and course time are part of this class.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "PE",
       "instructor": "S. Butler",
+      "instructors": [
+        {
+          "name": "S. Butler",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "PE",
       "instructor": "J. Sjoberg",
+      "instructors": [
+        {
+          "name": "J. Sjoberg",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -63,5 +83,5 @@
     "J. Sjoberg",
     "S. Butler"
   ],
-  "scraped_at": "2026-04-20T20:48:44.271Z"
+  "scraped_at": "2026-05-13T00:38:48.682Z"
 }

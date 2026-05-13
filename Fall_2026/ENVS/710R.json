@@ -5,6 +5,12 @@
   "catalog_number": "710R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,7 +21,14 @@
       "section_number": "1",
       "schedule_type": "THE",
       "instructor": "S. Robinson",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "S. Robinson",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
       "schedule": {
@@ -28,7 +41,14 @@
       "section_number": "2",
       "schedule_type": "THE",
       "instructor": "J. Ajibade",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "J. Ajibade",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
       "schedule": {
@@ -41,7 +61,14 @@
       "section_number": "3",
       "schedule_type": "THE",
       "instructor": "X. Huang",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "X. Huang",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
       "schedule": {
@@ -54,7 +81,14 @@
       "section_number": "4",
       "schedule_type": "THE",
       "instructor": "M. Mucioki",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "M. Mucioki",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
       "schedule": {
@@ -69,8 +103,8 @@
     "labs": 0,
     "discussions": 0,
     "other": 4,
-    "open": 4,
-    "closed": 0,
+    "open": 0,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -79,5 +113,5 @@
     "S. Robinson",
     "X. Huang"
   ],
-  "scraped_at": "2026-04-20T20:50:43.289Z"
+  "scraped_at": "2026-05-13T00:40:11.215Z"
 }

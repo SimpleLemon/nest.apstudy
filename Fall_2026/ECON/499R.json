@@ -1,10 +1,16 @@
 {
   "course_code": "ECON 499R",
-  "course_title": "Undergraduate Research in Economics",
+  "course_title": "Undergraduate Research in Economics: ATL Economics",
   "subject": "ECON",
   "catalog_number": "499R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3 - 4",
+  "requirement_designation": "XA",
+  "course_description": "Students will learn the craft of research in economics. Coursework will consist of synthesis of literature; collection, collation, cleaning of data; data analysis, contributing to manuscript preparation, and/or other work related to the sustaining of an academic research project.",
+  "course_notes": "(ECON 201 or ECON_OX 201 or ECON 212 or ECON_OX 212) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisites.",
+  "requisites": "(ECON 201 or ECON_OX 201 or ECON 212 or ECON_OX 212) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisites.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,16 +21,23 @@
       "section_number": "2",
       "schedule_type": "RSC",
       "instructor": "Fohlin/Cherribi",
+      "instructors": [
+        {
+          "name": "Fohlin/Cherribi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
-        "display": "F 12-2:30p",
+        "display": "F 2-4:30p",
         "meetings": [
           {
             "day": "Fri",
-            "start": "1200",
-            "end": "1430"
+            "start": "1400",
+            "end": "1630"
           }
         ]
       }
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "Fohlin/Cherribi"
   ],
-  "scraped_at": "2026-04-20T20:50:38.314Z"
+  "scraped_at": "2026-05-13T00:39:59.887Z"
 }

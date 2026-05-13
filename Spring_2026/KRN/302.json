@@ -5,6 +5,12 @@
   "catalog_number": "302",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "IC",
+  "course_description": "This course, as a continuation of KRN 301, is designed to further develop advanced skills of speaking, listening, reading, writing and grammar in Korean. This course emphasizes reading and writing with advanced grammar, vocabulary and expressions. KRN 301 or instructor permission required.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "E. Jo",
+      "instructors": [
+        {
+          "name": "E. Jo",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "E. Jo"
   ],
-  "scraped_at": "2026-04-20T20:48:22.792Z"
+  "scraped_at": "2026-05-13T00:37:40.754Z"
 }

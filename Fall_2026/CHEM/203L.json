@@ -5,6 +5,12 @@
   "catalog_number": "203L",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": "None",
+  "course_description": "IN CHEM 203L students will be exposed to the practical aspects of working with small molecules, both organic and inorganic. Students will learn to analyze and synthesize compounds and analyze their characteristic properties such as structure, function, size distribution, and purity.",
+  "course_notes": "CHEM 202L or CHEM_OX 202L or CHEM 202ZL as prerequisite and CHEM 203 or CHEM_OX 203 as co-requisite, or equivalent transfer credit.",
+  "requisites": "CHEM 202L or CHEM_OX 202L or CHEM 202ZL as prerequisite and CHEM 203 or CHEM_OX 203 as co-requisite, or equivalent transfer credit.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "D. Mulford",
+      "instructors": [
+        {
+          "name": "D. Mulford",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LAB",
       "instructor": "D. Mulford",
+      "instructors": [
+        {
+          "name": "D. Mulford",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "LAB",
       "instructor": "D. Mulford",
+      "instructors": [
+        {
+          "name": "D. Mulford",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -87,6 +114,13 @@
       "section_number": "4",
       "schedule_type": "LAB",
       "instructor": "D. Mulford",
+      "instructors": [
+        {
+          "name": "D. Mulford",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -111,6 +145,13 @@
       "section_number": "5",
       "schedule_type": "LAB",
       "instructor": "D. Mulford",
+      "instructors": [
+        {
+          "name": "D. Mulford",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -135,6 +176,13 @@
       "section_number": "6",
       "schedule_type": "LAB",
       "instructor": "D. Mulford",
+      "instructors": [
+        {
+          "name": "D. Mulford",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -159,6 +207,13 @@
       "section_number": "7",
       "schedule_type": "LAB",
       "instructor": "D. Mulford",
+      "instructors": [
+        {
+          "name": "D. Mulford",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -192,5 +247,5 @@
   "instructors_unique": [
     "D. Mulford"
   ],
-  "scraped_at": "2026-04-20T20:50:30.043Z"
+  "scraped_at": "2026-05-13T00:39:46.994Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "211",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "Hands-on introduction to video post-production with an emphasis on narrative film editing. Learn the aesthetics, concepts and techniques behind film editing. Topics such as rhythm and pacing, narrative structure, continuity, scene design and dramatic progression will be covered.",
+  "course_notes": "FILM 107 or ARTVIS 107 or FILM_OX 107 or equivalent transfer credit as prerequisite.",
+  "requisites": "FILM 107 or ARTVIS 107 or FILM_OX 107 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "A. Llosa",
+      "instructors": [
+        {
+          "name": "A. Llosa",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "A. Llosa"
   ],
-  "scraped_at": "2026-04-20T20:50:44.937Z"
+  "scraped_at": "2026-05-13T00:40:14.425Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "597R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "P. Brennan",
+      "instructors": [
+        {
+          "name": "P. Brennan",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "SUP",
       "instructor": "R. Hampton",
+      "instructors": [
+        {
+          "name": "R. Hampton",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3",
       "schedule_type": "SUP",
       "instructor": "P. Hitchcock",
+      "instructors": [
+        {
+          "name": "P. Hitchcock",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "4",
       "schedule_type": "SUP",
       "instructor": "S. Lourenco",
+      "instructors": [
+        {
+          "name": "S. Lourenco",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -67,6 +101,13 @@
       "section_number": "5",
       "schedule_type": "SUP",
       "instructor": "J. Manns",
+      "instructors": [
+        {
+          "name": "J. Manns",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -80,6 +121,13 @@
       "section_number": "6",
       "schedule_type": "SUP",
       "instructor": "I. Waldman",
+      "instructors": [
+        {
+          "name": "I. Waldman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -93,6 +141,13 @@
       "section_number": "7",
       "schedule_type": "SUP",
       "instructor": "A. Klin",
+      "instructors": [
+        {
+          "name": "A. Klin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -106,6 +161,13 @@
       "section_number": "8",
       "schedule_type": "SUP",
       "instructor": "A. Tasimi",
+      "instructors": [
+        {
+          "name": "A. Tasimi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -119,6 +181,13 @@
       "section_number": "9",
       "schedule_type": "SUP",
       "instructor": "L. Nygaard",
+      "instructors": [
+        {
+          "name": "L. Nygaard",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -132,6 +201,13 @@
       "section_number": "10",
       "schedule_type": "SUP",
       "instructor": "J. Medina",
+      "instructors": [
+        {
+          "name": "J. Medina",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -163,5 +239,5 @@
     "R. Hampton",
     "S. Lourenco"
   ],
-  "scraped_at": "2026-04-20T20:51:39.456Z"
+  "scraped_at": "2026-05-13T00:42:08.920Z"
 }

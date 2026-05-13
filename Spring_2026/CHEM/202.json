@@ -5,6 +5,12 @@
   "catalog_number": "202",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "NS",
+  "course_description": "CHEM 202 provides a basic understanding of the kinetics and thermodynamics associated with reactions, how these are related to the structures of reactants and products and the pathways between them, and how reactivity can be controlled through choices of reacting molecules and conditions.",
+  "course_notes": "CHEM 141 or CHEM_OX 141 or CHEM 150 or CHEM_OX 150 or equivalent transfer credit as prerequisite.",
+  "requisites": "CHEM 141 or CHEM_OX 141 or CHEM 150 or CHEM_OX 150 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. Mulford",
+      "instructors": [
+        {
+          "name": "D. Mulford",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "L. Ackerman-Biegasiewicz",
+      "instructors": [
+        {
+          "name": "L. Ackerman-Biegasiewicz",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "T. McGill",
+      "instructors": [
+        {
+          "name": "T. McGill",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -87,6 +114,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "T. McGill",
+      "instructors": [
+        {
+          "name": "T. McGill",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -111,6 +145,13 @@
       "section_number": "5",
       "schedule_type": "LEC",
       "instructor": "J. Kindt",
+      "instructors": [
+        {
+          "name": "J. Kindt",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -147,5 +188,5 @@
     "L. Ackerman-Biegasiewicz",
     "T. McGill"
   ],
-  "scraped_at": "2026-04-20T20:47:46.126Z"
+  "scraped_at": "2026-05-13T00:36:39.340Z"
 }

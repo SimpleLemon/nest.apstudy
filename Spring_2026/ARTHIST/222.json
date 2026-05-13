@@ -5,6 +5,12 @@
   "catalog_number": "222",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "The Roman genius for cultural assimilation and innovative techniques transformed the art of the ancient Mediterranean. The course investigates major achievements in sculpture, painting, and architecture and their resonances with Roman politics, society, and religion.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "CL 222",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "E. Varner",
+      "instructors": [
+        {
+          "name": "E. Varner",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "E. Varner"
   ],
-  "scraped_at": "2026-04-20T21:51:17.189Z"
+  "scraped_at": "2026-05-13T00:36:26.427Z"
 }

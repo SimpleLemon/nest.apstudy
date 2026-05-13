@@ -1,10 +1,16 @@
 {
   "course_code": "PE 285",
-  "course_title": "Special Topics in PE",
+  "course_title": "Special Topics in PE: Intro to Sports Officiating",
   "subject": "PE",
   "catalog_number": "285",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "Course based on selected topics of interest in fitness and exercise. Activity focus will vary. May be repeated (up to 2 credit hours) for credit when topic varies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,8 @@
       "section_number": "1",
       "schedule_type": "PE",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -34,6 +42,13 @@
       "section_number": "2",
       "schedule_type": "PE",
       "instructor": "Flint/Bedzow",
+      "instructors": [
+        {
+          "name": "Flint/Bedzow",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -53,6 +68,13 @@
       "section_number": "3",
       "schedule_type": "PE",
       "instructor": "A. Murphy",
+      "instructors": [
+        {
+          "name": "A. Murphy",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -82,5 +104,5 @@
     "A. Murphy",
     "Flint/Bedzow"
   ],
-  "scraped_at": "2026-04-20T20:51:27.885Z"
+  "scraped_at": "2026-05-13T00:41:55.783Z"
 }

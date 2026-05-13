@@ -5,6 +5,12 @@
   "catalog_number": "305",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "IC",
+  "course_description": "Introduction to the study of the Spanish language and cultures in an academic context specifically designed for Spanish heritage speakers.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Boigues-Lopez",
+      "instructors": [
+        {
+          "name": "J. Boigues-Lopez",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "J. Boigues-Lopez"
   ],
-  "scraped_at": "2026-04-20T20:51:49.439Z"
+  "scraped_at": "2026-05-13T00:42:21.802Z"
 }

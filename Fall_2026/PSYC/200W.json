@@ -5,6 +5,12 @@
   "catalog_number": "200W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "5",
+  "requirement_designation": "SSW",
+  "course_description": "Introduction to basic methods and design of psychological research in the areas of learning, memory, sensation, perception, personality, and social processes. Laboratory exercises and fundamentals of scientific writing are emphasized.",
+  "course_notes": "(PSYC 110 or PSYC_OX 110 or PSYC 111 or PSYC_OX 111) and (PSYC 230 or QTM 100 or QTM_OX 100) or equivalent transfer credit as prerequisite.",
+  "requisites": "(PSYC 110 or PSYC_OX 110 or PSYC 111 or PSYC_OX 111) and (PSYC 230 or QTM 100 or QTM_OX 100) or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -14,7 +20,14 @@
       "crn": "2153",
       "section_number": "LAB1",
       "schedule_type": "LAB",
-      "instructor": "Staff",
+      "instructor": "N. Li",
+      "instructors": [
+        {
+          "name": "N. Li",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -33,7 +46,14 @@
       "crn": "2154",
       "section_number": "LAB2",
       "schedule_type": "LAB",
-      "instructor": "Staff",
+      "instructor": "R. Hennessy",
+      "instructors": [
+        {
+          "name": "R. Hennessy",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -52,7 +72,14 @@
       "crn": "2170",
       "section_number": "LAB3",
       "schedule_type": "LAB",
-      "instructor": "Staff",
+      "instructor": "A. Wong",
+      "instructors": [
+        {
+          "name": "A. Wong",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -71,7 +98,14 @@
       "crn": "2171",
       "section_number": "LAB4",
       "schedule_type": "LAB",
-      "instructor": "Staff",
+      "instructor": "P. Lashley",
+      "instructors": [
+        {
+          "name": "P. Lashley",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -90,7 +124,14 @@
       "crn": "2172",
       "section_number": "LAB5",
       "schedule_type": "LAB",
-      "instructor": "Staff",
+      "instructor": "A. Parker",
+      "instructors": [
+        {
+          "name": "A. Parker",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -110,6 +151,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "T. Medina",
+      "instructors": [
+        {
+          "name": "T. Medina",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -141,7 +189,12 @@
     "waitlisted": 0
   },
   "instructors_unique": [
+    "A. Parker",
+    "A. Wong",
+    "N. Li",
+    "P. Lashley",
+    "R. Hennessy",
     "T. Medina"
   ],
-  "scraped_at": "2026-04-20T20:51:39.441Z"
+  "scraped_at": "2026-05-13T00:42:08.896Z"
 }

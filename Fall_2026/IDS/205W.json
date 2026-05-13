@@ -5,6 +5,12 @@
   "catalog_number": "205W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "NSW",
+  "course_description": "IDS205 addresses: What is the nature of scientific evidence? How does it compare to other types of evidence? What counts as evidence in science? In other disciplines? What are the histories of the answers to these questions? How do they affect our everyday lives?",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Eisen",
+      "instructors": [
+        {
+          "name": "A. Eisen",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "A. Eisen"
   ],
-  "scraped_at": "2026-04-20T20:50:58.228Z"
+  "scraped_at": "2026-05-13T00:40:36.984Z"
 }

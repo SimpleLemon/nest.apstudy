@@ -5,6 +5,12 @@
   "catalog_number": "208",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "SS",
+  "course_description": "Fundamental concepts and quantitative techniques of empirical political inquiry. Introduction to concepts of measurement, parametric, and non-parametric statistics. Basic bivariate and univariate statistics used in political science.",
+  "course_notes": "QTM 100 or QTM_OX 100 or MATH_OX 117 or MATH_OX 117Q or QTM 220 or ECON 220 or ECON_OX 220 or POLS 310 or POLS 310W or ISOM 350 or BUS 350 or BUS_OX 350 or equivalent transfer credit as prerequisite.",
+  "requisites": "QTM 100 or QTM_OX 100 or MATH_OX 117 or MATH_OX 117Q or QTM 220 or ECON 220 or ECON_OX 220 or POLS 310 or POLS 310W or ISOM 350 or BUS 350 or BUS_OX 350 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "N. Bueno",
+      "instructors": [
+        {
+          "name": "N. Bueno",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "DIS",
       "instructor": "Bueno/Li",
+      "instructors": [
+        {
+          "name": "Bueno/Li",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -58,6 +78,13 @@
       "section_number": "3",
       "schedule_type": "DIS",
       "instructor": "Bueno/Lyu",
+      "instructors": [
+        {
+          "name": "Bueno/Lyu",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -77,6 +104,13 @@
       "section_number": "4",
       "schedule_type": "DIS",
       "instructor": "Bueno/Sylvia",
+      "instructors": [
+        {
+          "name": "Bueno/Sylvia",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -108,5 +142,5 @@
     "Bueno/Sylvia",
     "N. Bueno"
   ],
-  "scraped_at": "2026-04-20T20:48:52.590Z"
+  "scraped_at": "2026-05-13T00:38:58.359Z"
 }

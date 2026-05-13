@@ -5,6 +5,12 @@
   "catalog_number": "354RW",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAPW",
+  "course_description": "Analysis of methods and/or texts pertaining to ethical decision-making for individual and social problems such as race, sex/marriage, justice, war, biomedical technology, and environmental pollution. May be repeated for credit when topic varies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "JS 354RW",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "S. McClintock",
+      "instructors": [
+        {
+          "name": "S. McClintock",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "S. McClintock"
   ],
-  "scraped_at": "2026-04-20T20:51:44.519Z"
+  "scraped_at": "2026-05-13T00:42:13.744Z"
 }

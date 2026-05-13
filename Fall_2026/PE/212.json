@@ -5,6 +5,12 @@
   "catalog_number": "212",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "This course is specifically designed for students who wish to continue conditioning and exercise through swimming. This class is suited for moderate to strong swimmers. Rhythmic breathing (side breathing in freestyle) and back floating are requisite skills to enroll in this class.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "PE",
       "instructor": "C. Fontana",
+      "instructors": [
+        {
+          "name": "C. Fontana",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "C. Fontana"
   ],
-  "scraped_at": "2026-04-20T20:51:27.885Z"
+  "scraped_at": "2026-05-13T00:41:55.783Z"
 }

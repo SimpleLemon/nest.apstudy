@@ -5,6 +5,12 @@
   "catalog_number": "204L",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "2",
+  "requirement_designation": "SNTL",
+  "course_description": "The relationship between sequence, structure, and function of macromolecules focusing on the practical aspects of macromolecular synthesis, structural and functional characterization, and degradation.",
+  "course_notes": "CHEM 203L or CHEM_OX 203L or CHEM 203ZL or CHEM 222L or CHEM_OX 222L as prerequisite and CHEM 204 or CHEM_OX 204 as co-requisite or equivalent transfer credit.",
+  "requisites": "CHEM 203L or CHEM_OX 203L or CHEM 203ZL or CHEM 222L or CHEM_OX 222L as prerequisite and CHEM 204 or CHEM_OX 204 as co-requisite or equivalent transfer credit.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "J. Smith",
+      "instructors": [
+        {
+          "name": "J. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LAB",
       "instructor": "J. Smith",
+      "instructors": [
+        {
+          "name": "J. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "LAB",
       "instructor": "J. Smith",
+      "instructors": [
+        {
+          "name": "J. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -87,6 +114,13 @@
       "section_number": "4",
       "schedule_type": "LAB",
       "instructor": "J. Smith",
+      "instructors": [
+        {
+          "name": "J. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -111,6 +145,13 @@
       "section_number": "5",
       "schedule_type": "LAB",
       "instructor": "J. Smith",
+      "instructors": [
+        {
+          "name": "J. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -135,6 +176,13 @@
       "section_number": "6",
       "schedule_type": "LAB",
       "instructor": "J. Smith",
+      "instructors": [
+        {
+          "name": "J. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -168,5 +216,5 @@
   "instructors_unique": [
     "J. Smith"
   ],
-  "scraped_at": "2026-04-20T20:47:46.128Z"
+  "scraped_at": "2026-05-13T00:36:39.343Z"
 }

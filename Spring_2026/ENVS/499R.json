@@ -5,6 +5,12 @@
   "catalog_number": "499R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 12",
+  "requirement_designation": "XA",
+  "course_description": "Students design a research project in collaboration with ENVS faculty. Permission required. Intended for students with previous research experience. Fulfills the ENVS Independent Study requirement.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "RSC",
       "instructor": "E. Lonsdorf",
+      "instructors": [
+        {
+          "name": "E. Lonsdorf",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "RSC",
       "instructor": "T. Gillespie",
+      "instructors": [
+        {
+          "name": "T. Gillespie",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3",
       "schedule_type": "RSC",
       "instructor": "A. Avramov",
+      "instructors": [
+        {
+          "name": "A. Avramov",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "4",
       "schedule_type": "RSC",
       "instructor": "G. Vazquez Prokopec",
+      "instructors": [
+        {
+          "name": "G. Vazquez Prokopec",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -79,5 +113,5 @@
     "G. Vazquez Prokopec",
     "T. Gillespie"
   ],
-  "scraped_at": "2026-04-20T20:47:59.646Z"
+  "scraped_at": "2026-05-13T00:37:03.660Z"
 }

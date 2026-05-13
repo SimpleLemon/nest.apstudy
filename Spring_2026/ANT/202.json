@@ -5,6 +5,12 @@
   "catalog_number": "202",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "SS",
+  "course_description": "This course explores key concepts in cultural anthropology. Through engaging ethnographic accounts from different world areas, students will analyze anthropological debates about culture, race, religion, ritual, health, gender, sexuality, politics, and/or exchange and learn about fieldwork methods.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "D1",
       "schedule_type": "DIS",
       "instructor": "J. Abillama",
+      "instructors": [
+        {
+          "name": "J. Abillama",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "D2",
       "schedule_type": "DIS",
       "instructor": "R. K K",
+      "instructors": [
+        {
+          "name": "R. K K",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -53,6 +73,13 @@
       "section_number": "D3",
       "schedule_type": "DIS",
       "instructor": "L. Hickman",
+      "instructors": [
+        {
+          "name": "L. Hickman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -72,6 +99,13 @@
       "section_number": "D4",
       "schedule_type": "DIS",
       "instructor": "C. Paillot",
+      "instructors": [
+        {
+          "name": "C. Paillot",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -91,6 +125,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Glass",
+      "instructors": [
+        {
+          "name": "J. Glass",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -115,6 +156,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "J. Glass",
+      "instructors": [
+        {
+          "name": "J. Glass",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -152,5 +200,5 @@
     "L. Hickman",
     "R. K K"
   ],
-  "scraped_at": "2026-04-20T20:47:36.244Z"
+  "scraped_at": "2026-05-13T00:36:23.024Z"
 }

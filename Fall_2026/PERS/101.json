@@ -5,6 +5,12 @@
   "catalog_number": "101",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "5",
+  "requirement_designation": "IC",
+  "course_description": "First in a series of courses that develop speaking, writing, reading, and comprehension of modern Persian as it is used in Iran.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "H. Samei",
+      "instructors": [
+        {
+          "name": "H. Samei",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -53,5 +66,5 @@
   "instructors_unique": [
     "H. Samei"
   ],
-  "scraped_at": "2026-04-20T20:51:29.502Z"
+  "scraped_at": "2026-05-13T00:41:57.388Z"
 }

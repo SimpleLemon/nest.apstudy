@@ -5,6 +5,12 @@
   "catalog_number": "111",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "What is Existentialism? We will look at the history of existentialism and see how it challenged the traditional philosophical approaches to questions of human subjectivity and the nature of the good life. In particular, we will explore the works of Jean Paul Sartre and Albert Camus.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,8 +21,15 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "K. Brigham",
+      "instructors": [
+        {
+          "name": "K. Brigham",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "1",
+      "enrollment_count": "2",
       "is_cancelled": false,
       "schedule": {
         "display": "TThF 8:30-9:20a",
@@ -38,20 +51,57 @@
           }
         ]
       }
+    },
+    {
+      "crn": "5757",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "S. Iradukunda",
+      "instructors": [
+        {
+          "name": "S. Iradukunda",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MWF 4-4:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1650"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          },
+          {
+            "day": "Fri",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      }
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Brigham"
+    "K. Brigham",
+    "S. Iradukunda"
   ],
-  "scraped_at": "2026-04-20T20:51:31.138Z"
+  "scraped_at": "2026-05-13T00:42:00.729Z"
 }

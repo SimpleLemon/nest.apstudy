@@ -5,6 +5,12 @@
   "catalog_number": "190",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "Exclusively for first-year students. Seminar provides introduction to various historical, religious, cultural, and linguistic aspects of the Middle East and South Asia. Topics vary.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "C. Freer",
+      "instructors": [
+        {
+          "name": "C. Freer",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "B. Samarth",
+      "instructors": [
+        {
+          "name": "B. Samarth",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "SEM",
       "instructor": "H. Samei",
+      "instructors": [
+        {
+          "name": "H. Samei",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -98,5 +125,5 @@
     "C. Freer",
     "H. Samei"
   ],
-  "scraped_at": "2026-04-20T21:52:01.040Z"
+  "scraped_at": "2026-05-13T00:40:56.307Z"
 }

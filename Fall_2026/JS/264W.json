@@ -5,6 +5,12 @@
   "catalog_number": "264W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAWE",
+  "course_description": "Like most peoples in world history, Jews have been victims of enslavement as well as enslavers and owners of enslaved people. Students in this course will analyze Jewish sources and subjects to study slavery as a historical phenomenon in one of the pre-eminent Jewish communities of the Middle East.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "MESAS 264W HIST 264W",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "C. Perry",
+      "instructors": [
+        {
+          "name": "C. Perry",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "C. Perry"
   ],
-  "scraped_at": "2026-04-20T20:51:04.789Z"
+  "scraped_at": "2026-05-13T00:40:46.637Z"
 }

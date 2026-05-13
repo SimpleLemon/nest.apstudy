@@ -5,6 +5,12 @@
   "catalog_number": "798R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,7 +21,14 @@
       "section_number": "1",
       "schedule_type": "RSC",
       "instructor": "E. Wilson",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "E. Wilson",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
       "schedule": {
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "RSC",
       "instructor": "A. Finch",
+      "instructors": [
+        {
+          "name": "A. Finch",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3",
       "schedule_type": "RSC",
       "instructor": "S. Mulla",
+      "instructors": [
+        {
+          "name": "S. Mulla",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "4",
       "schedule_type": "RSC",
       "instructor": "K. Amin",
+      "instructors": [
+        {
+          "name": "K. Amin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -69,8 +103,8 @@
     "labs": 0,
     "discussions": 0,
     "other": 4,
-    "open": 4,
-    "closed": 0,
+    "open": 3,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -79,5 +113,5 @@
     "K. Amin",
     "S. Mulla"
   ],
-  "scraped_at": "2026-04-20T20:51:54.475Z"
+  "scraped_at": "2026-05-13T00:42:28.250Z"
 }

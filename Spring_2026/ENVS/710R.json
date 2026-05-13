@@ -5,6 +5,12 @@
   "catalog_number": "710R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "THE",
       "instructor": "X. Huang",
+      "instructors": [
+        {
+          "name": "X. Huang",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "THE",
       "instructor": "J. Ajibade",
+      "instructors": [
+        {
+          "name": "J. Ajibade",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3",
       "schedule_type": "THE",
       "instructor": "M. Mucioki",
+      "instructors": [
+        {
+          "name": "M. Mucioki",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "4",
       "schedule_type": "THE",
       "instructor": "S. Robinson",
+      "instructors": [
+        {
+          "name": "S. Robinson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -67,6 +101,13 @@
       "section_number": "5",
       "schedule_type": "THE",
       "instructor": "X. Huang",
+      "instructors": [
+        {
+          "name": "X. Huang",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -92,5 +133,5 @@
     "S. Robinson",
     "X. Huang"
   ],
-  "scraped_at": "2026-04-20T20:47:59.647Z"
+  "scraped_at": "2026-05-13T00:37:03.661Z"
 }

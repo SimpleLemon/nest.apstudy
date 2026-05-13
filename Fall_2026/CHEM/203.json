@@ -5,6 +5,12 @@
   "catalog_number": "203",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "NS",
+  "course_description": "CHEM 203 will focus on the chemistry of organic and organometallic compounds; specifically how the molecular orbital theory can be used to predict structure and properties. This course covers kinetics, mechanisms, and catalysis.",
+  "course_notes": "CHEM 202 or CHEM_OX 202 or CHEM 202Z or CHEM 221 or CHEM_OX 221 or equivalent transfer credit as prerequisite.",
+  "requisites": "CHEM 202 or CHEM_OX 202 or CHEM 202Z or CHEM 221 or CHEM_OX 221 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "F. McDonald",
+      "instructors": [
+        {
+          "name": "F. McDonald",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "W. Wuest",
+      "instructors": [
+        {
+          "name": "W. Wuest",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -63,6 +83,8 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -87,6 +109,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "M. Weinschenk",
+      "instructors": [
+        {
+          "name": "M. Weinschenk",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -111,6 +140,13 @@
       "section_number": "5",
       "schedule_type": "LEC",
       "instructor": "J. Smith",
+      "instructors": [
+        {
+          "name": "J. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -147,5 +183,5 @@
     "M. Weinschenk",
     "W. Wuest"
   ],
-  "scraped_at": "2026-04-20T20:50:30.042Z"
+  "scraped_at": "2026-05-13T00:39:46.994Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "210W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAW",
+  "course_description": "The close reading of plays with a view to production. Exercises and projects explore how a text emerges in performance from the combined perspectives of actors, directors, designers, and audience.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "M. Evenden",
+      "instructors": [
+        {
+          "name": "M. Evenden",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -38,8 +51,10 @@
       "crn": "2562",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "P. Brankin",
-      "enrollment_status": "Open",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
       "schedule": {
@@ -62,7 +77,9 @@
       "crn": "2564",
       "section_number": "3",
       "schedule_type": "SEM",
-      "instructor": "P. Brankin",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -89,13 +106,12 @@
     "labs": 0,
     "discussions": 0,
     "other": 3,
-    "open": 1,
-    "closed": 2,
+    "open": 0,
+    "closed": 3,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Evenden",
-    "P. Brankin"
+    "M. Evenden"
   ],
-  "scraped_at": "2026-04-20T20:51:51.075Z"
+  "scraped_at": "2026-05-13T00:42:25.021Z"
 }

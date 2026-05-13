@@ -5,6 +5,12 @@
   "catalog_number": "396R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "XA",
+  "course_description": "The basic internship course provides students with an opportunity to earn 1 to 4 hours of S/U academic credit while gaining practical workplace experience. Unlike the advanced internship course (POLS 496RW), this course has no prerequisites. May be repeated up to a total of 8 credit hours.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "IND",
       "instructor": "M. Baker",
+      "instructors": [
+        {
+          "name": "M. Baker",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "M. Baker"
   ],
-  "scraped_at": "2026-04-20T20:48:52.597Z"
+  "scraped_at": "2026-05-13T00:38:58.371Z"
 }

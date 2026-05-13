@@ -5,6 +5,12 @@
   "catalog_number": "498R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 8",
+  "requirement_designation": "None",
+  "course_description": "Variable credit. Permission of ENVS faculty supervisor required prior to enrollment. Course allows for students to work with faculty to explore topics that are not normally offered. Fulfills Independent Study requirement for ENVS majors (4 credit hours).",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "2",
       "schedule_type": "SUP",
       "instructor": "J. Clennon",
+      "instructors": [
+        {
+          "name": "J. Clennon",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "3",
       "schedule_type": "SUP",
       "instructor": "M. Mucioki",
+      "instructors": [
+        {
+          "name": "M. Mucioki",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -51,5 +71,5 @@
     "J. Clennon",
     "M. Mucioki"
   ],
-  "scraped_at": "2026-04-20T20:47:59.645Z"
+  "scraped_at": "2026-05-13T00:37:03.657Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "380",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-16",
     "end": "2026-03-03"
@@ -15,6 +21,13 @@
       "section_number": "1101",
       "schedule_type": "SEM",
       "instructor": "Leist/Morales",
+      "instructors": [
+        {
+          "name": "Leist/Morales",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "1102",
       "schedule_type": "SEM",
       "instructor": "Smith/Leist",
+      "instructors": [
+        {
+          "name": "Smith/Leist",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -53,6 +73,13 @@
       "section_number": "1104",
       "schedule_type": "SEM",
       "instructor": "Smith/Leist",
+      "instructors": [
+        {
+          "name": "Smith/Leist",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -82,5 +109,5 @@
     "Leist/Morales",
     "Smith/Leist"
   ],
-  "scraped_at": "2026-04-20T20:49:15.751Z"
+  "scraped_at": "2026-05-13T00:36:37.713Z"
 }

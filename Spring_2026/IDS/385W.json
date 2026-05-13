@@ -5,6 +5,12 @@
   "catalog_number": "385W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 5",
+  "requirement_designation": "CW",
+  "course_description": "Highly focused courses, drawing on multiple disciplines of the humanities and social sciences; may be repeated for credit when topics vary.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "V. Bergbauer",
+      "instructors": [
+        {
+          "name": "V. Bergbauer",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "K. Dimmery",
+      "instructors": [
+        {
+          "name": "K. Dimmery",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -58,6 +78,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "L. Koutsoukos Chalhoub",
+      "instructors": [
+        {
+          "name": "L. Koutsoukos Chalhoub",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -82,6 +109,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "J. Williams",
+      "instructors": [
+        {
+          "name": "J. Williams",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -106,6 +140,13 @@
       "section_number": "5",
       "schedule_type": "LEC",
       "instructor": "A. Prince",
+      "instructors": [
+        {
+          "name": "A. Prince",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -125,6 +166,13 @@
       "section_number": "7",
       "schedule_type": "LEC",
       "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -163,5 +211,5 @@
     "Team",
     "V. Bergbauer"
   ],
-  "scraped_at": "2026-04-20T20:48:14.492Z"
+  "scraped_at": "2026-05-13T00:37:29.491Z"
 }

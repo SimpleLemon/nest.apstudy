@@ -5,6 +5,12 @@
   "catalog_number": "499R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 5",
+  "requirement_designation": "HAP",
+  "course_description": "A supervised project in an area of study to be determined by the instructor and student in the semester preceding the independent study. Requires faculty approval prior to registration. Only four credit hours can be applied toward fulfillment of the requirement of the major.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,8 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -35,5 +43,5 @@
     "waitlisted": 0
   },
   "instructors_unique": [],
-  "scraped_at": "2026-04-20T20:50:44.940Z"
+  "scraped_at": "2026-05-13T00:40:14.430Z"
 }

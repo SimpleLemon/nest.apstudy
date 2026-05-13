@@ -5,6 +5,12 @@
   "catalog_number": "202",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-12",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "LAB1",
       "schedule_type": "LAB",
       "instructor": "J. Clark",
+      "instructors": [
+        {
+          "name": "J. Clark",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "LAB2",
       "schedule_type": "LAB",
       "instructor": "D. Lewis",
+      "instructors": [
+        {
+          "name": "D. Lewis",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Clark",
+      "instructors": [
+        {
+          "name": "J. Clark",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -65,6 +92,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "D. Lewis",
+      "instructors": [
+        {
+          "name": "D. Lewis",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -99,5 +133,5 @@
     "D. Lewis",
     "J. Clark"
   ],
-  "scraped_at": "2026-04-20T20:49:25.757Z"
+  "scraped_at": "2026-05-13T00:38:01.851Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "290",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "Long historical surveys of national, regional, or ethnic traditions; or of genres or subgenres. Examples: History of African Literature, History of Latinx Literature, History of Science Fiction, History of the Sonnet, History of Southern U.S. Literature, History of Drama.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "I. Goh",
+      "instructors": [
+        {
+          "name": "I. Goh",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "I. Goh"
   ],
-  "scraped_at": "2026-04-20T20:47:57.990Z"
+  "scraped_at": "2026-05-13T00:37:00.408Z"
 }

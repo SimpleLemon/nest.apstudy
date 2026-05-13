@@ -5,6 +5,12 @@
   "catalog_number": "370",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "None",
+  "course_description": "Introduction to the concepts of microbial physiology, biochemistry, genetics, and evolution.",
+  "course_notes": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
+  "requisites": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "E. Battaglioli",
+      "instructors": [
+        {
+          "name": "E. Battaglioli",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "DIS",
       "instructor": "E. Battaglioli",
+      "instructors": [
+        {
+          "name": "E. Battaglioli",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -58,6 +78,13 @@
       "section_number": "3",
       "schedule_type": "DIS",
       "instructor": "E. Battaglioli",
+      "instructors": [
+        {
+          "name": "E. Battaglioli",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -77,6 +104,13 @@
       "section_number": "4",
       "schedule_type": "DIS",
       "instructor": "E. Battaglioli",
+      "instructors": [
+        {
+          "name": "E. Battaglioli",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -96,6 +130,13 @@
       "section_number": "5",
       "schedule_type": "DIS",
       "instructor": "E. Battaglioli",
+      "instructors": [
+        {
+          "name": "E. Battaglioli",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -124,5 +165,5 @@
   "instructors_unique": [
     "E. Battaglioli"
   ],
-  "scraped_at": "2026-04-20T20:47:42.869Z"
+  "scraped_at": "2026-05-13T00:36:31.265Z"
 }

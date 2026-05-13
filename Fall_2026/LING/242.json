@@ -5,6 +5,12 @@
   "catalog_number": "242",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HSC",
+  "course_description": "Explores language diversity around the world. Students learn about language families and historical relationships, linguistic typology and language universals, sound and structural features of languages, writing systems, language endangerment and field methods.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Pak",
+      "instructors": [
+        {
+          "name": "M. Pak",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Pak"
   ],
-  "scraped_at": "2026-04-20T20:51:11.448Z"
+  "scraped_at": "2026-05-13T00:40:53.068Z"
 }

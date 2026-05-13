@@ -5,6 +5,12 @@
   "catalog_number": "278W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "HAW",
+  "course_description": "An intro to the theory and craft of dramatic screenwriting of the short film. Explores how a short script is developed from concept to final written form. Class includes lectures, film viewing, and exercises but is primarily a workshop where new writing receives weekly table reads and feedback.",
+  "course_notes": "FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
+  "requisites": "FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "D. Barba",
+      "instructors": [
+        {
+          "name": "D. Barba",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "J. Pellerito",
+      "instructors": [
+        {
+          "name": "J. Pellerito",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -63,5 +83,5 @@
     "D. Barba",
     "J. Pellerito"
   ],
-  "scraped_at": "2026-04-20T20:48:01.271Z"
+  "scraped_at": "2026-05-13T00:37:06.886Z"
 }

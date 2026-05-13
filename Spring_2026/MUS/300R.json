@@ -5,6 +5,12 @@
   "catalog_number": "300R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1",
+  "requirement_designation": "XA",
+  "course_description": "Group instruction in instrumental and/or vocal music and the performance of selected repertoire. Ensemble enrollment requires instructor approval. Interested students may participate in more than one ensemble; may be repeated for credit. For additional information, see music.emory.edu.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "MUS",
       "instructor": "P. Bhasin",
+      "instructors": [
+        {
+          "name": "P. Bhasin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -38,7 +51,14 @@
       "crn": "2984",
       "section_number": "2",
       "schedule_type": "MUS",
-      "instructor": "C. O'Hara",
+      "instructor": "Bhasin/O'Hara",
+      "instructors": [
+        {
+          "name": "Bhasin/O'Hara",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "MUS",
       "instructor": "P. Bhasin",
+      "instructors": [
+        {
+          "name": "P. Bhasin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -82,6 +109,13 @@
       "section_number": "4",
       "schedule_type": "MUS",
       "instructor": "L. Andonovska",
+      "instructors": [
+        {
+          "name": "L. Andonovska",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -106,6 +140,13 @@
       "section_number": "5",
       "schedule_type": "MUS",
       "instructor": "E. Nelson",
+      "instructors": [
+        {
+          "name": "E. Nelson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -125,6 +166,13 @@
       "section_number": "6",
       "schedule_type": "MUS",
       "instructor": "E. Nelson",
+      "instructors": [
+        {
+          "name": "E. Nelson",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -149,6 +197,13 @@
       "section_number": "7",
       "schedule_type": "MUS",
       "instructor": "E. Cholakova",
+      "instructors": [
+        {
+          "name": "E. Cholakova",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -168,6 +223,13 @@
       "section_number": "8",
       "schedule_type": "MUS",
       "instructor": "G. Motley",
+      "instructors": [
+        {
+          "name": "G. Motley",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -187,6 +249,13 @@
       "section_number": "9",
       "schedule_type": "MUS",
       "instructor": "G. Motley",
+      "instructors": [
+        {
+          "name": "G. Motley",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -206,6 +275,13 @@
       "section_number": "10",
       "schedule_type": "MUS",
       "instructor": "Mamola/Dinkins-Matthews",
+      "instructors": [
+        {
+          "name": "Mamola/Dinkins-Matthews",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -230,6 +306,13 @@
       "section_number": "11",
       "schedule_type": "MUS",
       "instructor": "E. Cholakova",
+      "instructors": [
+        {
+          "name": "E. Cholakova",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -243,6 +326,13 @@
       "section_number": "12",
       "schedule_type": "MUS",
       "instructor": "L. Andonovska",
+      "instructors": [
+        {
+          "name": "L. Andonovska",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -256,6 +346,13 @@
       "section_number": "13",
       "schedule_type": "MUS",
       "instructor": "F. Darsono",
+      "instructors": [
+        {
+          "name": "F. Darsono",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -275,6 +372,13 @@
       "section_number": "14",
       "schedule_type": "MUS",
       "instructor": "P. Bhasin",
+      "instructors": [
+        {
+          "name": "P. Bhasin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -301,7 +405,7 @@
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. O'Hara",
+    "Bhasin/O'Hara",
     "E. Cholakova",
     "E. Nelson",
     "F. Darsono",
@@ -310,5 +414,5 @@
     "Mamola/Dinkins-Matthews",
     "P. Bhasin"
   ],
-  "scraped_at": "2026-04-20T20:48:35.985Z"
+  "scraped_at": "2026-05-13T00:37:56.870Z"
 }

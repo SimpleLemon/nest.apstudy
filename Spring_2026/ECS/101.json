@@ -5,6 +5,12 @@
   "catalog_number": "101",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1",
+  "requirement_designation": "None",
+  "course_description": "Emory Essentials introduces Emory College first-year students to university resources, opportunities, and policies. Through class discussions, small-group activities, and homework assignments, students will reflect, explore, and begin designing their unique Emory experience.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "E. Morran",
+      "instructors": [
+        {
+          "name": "E. Morran",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "E. Morran",
+      "instructors": [
+        {
+          "name": "E. Morran",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -50,5 +70,5 @@
   "instructors_unique": [
     "E. Morran"
   ],
-  "scraped_at": "2026-04-20T21:51:28.565Z"
+  "scraped_at": "2026-05-13T00:36:53.862Z"
 }

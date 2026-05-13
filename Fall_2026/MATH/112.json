@@ -5,6 +5,12 @@
   "catalog_number": "112",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "QR",
+  "course_description": "Techniques of integration, exponential and logarithm functions, sequences and series, polar coordinates.",
+  "course_notes": "This course requires MATH 111 OR MATH_OX111 OR MATH 115 OR MATH 119 OR MATH_OX119 or equivalent transfer credit as a prerequisite.",
+  "requisites": "This course requires MATH 111 OR MATH_OX111 OR MATH 115 OR MATH 119 OR MATH_OX119 or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Darges",
+      "instructors": [
+        {
+          "name": "J. Darges",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "S. Longbrake",
+      "instructors": [
+        {
+          "name": "S. Longbrake",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -62,7 +82,14 @@
       "crn": "2736",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "Staff",
+      "instructor": "C. Drum",
+      "instructors": [
+        {
+          "name": "C. Drum",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -87,6 +114,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "J. Woods",
+      "instructors": [
+        {
+          "name": "J. Woods",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -111,6 +145,13 @@
       "section_number": "5",
       "schedule_type": "LEC",
       "instructor": "Y. Andoni",
+      "instructors": [
+        {
+          "name": "Y. Andoni",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -135,6 +176,13 @@
       "section_number": "6",
       "schedule_type": "LEC",
       "instructor": "S. Shah",
+      "instructors": [
+        {
+          "name": "S. Shah",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -159,6 +207,13 @@
       "section_number": "7",
       "schedule_type": "LEC",
       "instructor": "E. Mulrenin",
+      "instructors": [
+        {
+          "name": "E. Mulrenin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -190,6 +245,7 @@
     "waitlisted": 0
   },
   "instructors_unique": [
+    "C. Drum",
     "E. Mulrenin",
     "J. Darges",
     "J. Woods",
@@ -197,5 +253,5 @@
     "S. Shah",
     "Y. Andoni"
   ],
-  "scraped_at": "2026-04-20T20:51:13.086Z"
+  "scraped_at": "2026-05-13T00:40:54.682Z"
 }

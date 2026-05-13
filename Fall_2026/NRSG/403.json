@@ -1,0 +1,54 @@
+{
+  "course_code": "NRSG 403",
+  "course_title": "Pediatric Specialty Nursing",
+  "subject": "NRSG",
+  "catalog_number": "403",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "crn": "5788",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "C. Calamaro",
+      "instructors": [
+        {
+          "name": "C. Calamaro",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "C. Calamaro"
+  ],
+  "scraped_at": "2026-05-13T00:41:09.197Z"
+}

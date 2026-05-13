@@ -5,6 +5,12 @@
   "catalog_number": "575",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "2142",
       "schedule_type": "LEC",
       "instructor": "P. Parasurama",
+      "instructors": [
+        {
+          "name": "P. Parasurama",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "3201",
       "schedule_type": "LEC",
       "instructor": "A. Bharadwaj",
+      "instructors": [
+        {
+          "name": "A. Bharadwaj",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -58,6 +78,13 @@
       "section_number": "3242",
       "schedule_type": "LEC",
       "instructor": "P. Parasurama",
+      "instructors": [
+        {
+          "name": "P. Parasurama",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -87,5 +114,5 @@
     "A. Bharadwaj",
     "P. Parasurama"
   ],
-  "scraped_at": "2026-04-20T20:52:02.728Z"
+  "scraped_at": "2026-05-13T00:40:41.812Z"
 }

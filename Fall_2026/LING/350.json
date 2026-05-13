@@ -5,6 +5,12 @@
   "catalog_number": "350",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HSC",
+  "course_description": "We examine the language around health and health care as a type of intercultural discourse, including communication between doctors and patients, between health care providers, and discussions of health in the media. We also examine language as a diagnostic tool.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "HLTH 379",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Tamasi",
+      "instructors": [
+        {
+          "name": "S. Tamasi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "S. Tamasi"
   ],
-  "scraped_at": "2026-04-20T20:51:11.452Z"
+  "scraped_at": "2026-05-13T00:40:53.071Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "190",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "Open only to students with freshman standing. Topics and prerequisites vary; consult the Course Atlas.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "C. Fohlin",
+      "instructors": [
+        {
+          "name": "C. Fohlin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "M. Ayogu",
+      "instructors": [
+        {
+          "name": "M. Ayogu",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -58,6 +78,13 @@
       "section_number": "3",
       "schedule_type": "SEM",
       "instructor": "D. McMillon",
+      "instructors": [
+        {
+          "name": "D. McMillon",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -93,5 +120,5 @@
     "D. McMillon",
     "M. Ayogu"
   ],
-  "scraped_at": "2026-04-20T20:50:38.302Z"
+  "scraped_at": "2026-05-13T00:39:59.882Z"
 }

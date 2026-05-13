@@ -5,6 +5,12 @@
   "catalog_number": "254",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "SS",
+  "course_description": "This second-year seminar explores the development of transregional economies and cultures through the study of commodities originating in the Middle East and the Indian Ocean region by examining environmental, historical and economic data and concepts.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "MESAS 254",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "R. Margariti",
+      "instructors": [
+        {
+          "name": "R. Margariti",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "R. Margariti"
   ],
-  "scraped_at": "2026-04-20T20:48:11.178Z"
+  "scraped_at": "2026-05-13T00:37:23.024Z"
 }

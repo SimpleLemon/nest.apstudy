@@ -5,6 +5,12 @@
   "catalog_number": "321",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "This course examines the physiological basis for changing nutrient needs throughout the life cycle. Topics may include growth and development, nutrition assessment, age-specific dietary recommendations for optimal health and disease prevention, and sociocultural influences on dietary patterns.",
+  "course_notes": "HLTH 220 or HLTH 221 or equivalent transfer credit as prerequisite. Used for: HLTH 321",
+  "requisites": "HLTH 220 or HLTH 221 or equivalent transfer credit as prerequisite. Used for: HLTH 321",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Woodworth-Hobbs",
+      "instructors": [
+        {
+          "name": "M. Woodworth-Hobbs",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Woodworth-Hobbs"
   ],
-  "scraped_at": "2026-04-20T20:48:12.834Z"
+  "scraped_at": "2026-05-13T00:37:24.651Z"
 }

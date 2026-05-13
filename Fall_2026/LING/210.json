@@ -5,6 +5,12 @@
   "catalog_number": "210",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "This course focuses on the related areas of phonetics (the study of physical properties, both articulatory and acoustic, of the sounds of human language) and phonology (the study of the sound patterns of human languages and the nature of the knowledge that speakers have about the sound patterns of particular languages).",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Y. Kim",
+      "instructors": [
+        {
+          "name": "Y. Kim",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "Y. Kim"
   ],
-  "scraped_at": "2026-04-20T20:51:11.448Z"
+  "scraped_at": "2026-05-13T00:40:53.067Z"
 }

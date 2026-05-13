@@ -5,6 +5,12 @@
   "catalog_number": "317",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "SNT",
+  "course_description": "Neurobiological substrates supporting human social cognition and behavior. Review and synthesis of relevant research in neuropsychology, psychiatry, neuroimaging, and experimental animal research.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "PSYC 327 ANT 317",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Rilling",
+      "instructors": [
+        {
+          "name": "J. Rilling",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "J. Rilling"
   ],
-  "scraped_at": "2026-04-20T20:51:21.295Z"
+  "scraped_at": "2026-05-13T00:41:05.975Z"
 }

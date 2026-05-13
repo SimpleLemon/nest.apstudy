@@ -5,6 +5,12 @@
   "catalog_number": "499R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "XA",
+  "course_description": "For biology majors only. Permission required (see biology.emory.edu/research-opportunities). Must be taken for 4 credits/semester. Fulfills 4 elective credits (maximum) and upper-level lab requirement for Biology major only upon completion of two semesters.",
+  "course_notes": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
+  "requisites": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "N. Gerardo",
+      "instructors": [
+        {
+          "name": "N. Gerardo",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "N. Gerardo"
   ],
-  "scraped_at": "2026-04-20T20:50:26.642Z"
+  "scraped_at": "2026-05-13T00:39:38.943Z"
 }

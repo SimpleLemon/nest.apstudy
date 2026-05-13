@@ -5,6 +5,12 @@
   "catalog_number": "247LW",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "CW",
+  "course_description": "This is the laboratory portion of the Ecology class. Field studies will be conducted in various natural areas in Georgia, including a weekend trip to the mountains. Pre- or corequisite: Biology/ENVS 247. (This course meets the upper-level laboratory requirement for the biology major and the WR GER.)",
+  "course_notes": "This course requires BIOL 142, BIOL 142L or BIOL_OX142 AND BIOL/ENVS 247 or equivalent transfer credit as a prerequisite.",
+  "requisites": "This course requires BIOL 142, BIOL 142L or BIOL_OX142 AND BIOL/ENVS 247 or equivalent transfer credit as a prerequisite.",
+  "cross_listed": "ENVS 247LW",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "C. Beck",
+      "instructors": [
+        {
+          "name": "C. Beck",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "C. Beck"
   ],
-  "scraped_at": "2026-04-20T20:50:26.632Z"
+  "scraped_at": "2026-05-13T00:39:38.938Z"
 }

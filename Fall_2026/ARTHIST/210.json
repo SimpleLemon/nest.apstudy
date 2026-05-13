@@ -5,6 +5,12 @@
   "catalog_number": "210",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "An introduction to drafting, modeling, rendering and animation in which students explore the potential of the computer as an active analytical and design instrument. We take a hands-on approach, focusing on two projects selected according to students' own disciplinary interests.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "C. Newton",
+      "instructors": [
+        {
+          "name": "C. Newton",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "C. Newton"
   ],
-  "scraped_at": "2026-04-20T21:51:57.783Z"
+  "scraped_at": "2026-05-13T00:39:34.118Z"
 }

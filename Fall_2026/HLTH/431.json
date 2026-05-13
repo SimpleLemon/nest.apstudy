@@ -5,6 +5,12 @@
   "catalog_number": "431",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "This course explores stigma as a social construct that shapes many different health conditions and illness experiences. Focus areas include non-normative body appearance, impaired mobility, chronic disease, mental health, and reproductive health. Various anti-stigma interventions are also examined.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,7 +21,14 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Spangler",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "S. Spangler",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -36,12 +49,12 @@
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 0,
     "closed": 0,
-    "waitlisted": 0
+    "waitlisted": 1
   },
   "instructors_unique": [
     "S. Spangler"
   ],
-  "scraped_at": "2026-04-20T20:50:56.536Z"
+  "scraped_at": "2026-05-13T00:40:32.146Z"
 }

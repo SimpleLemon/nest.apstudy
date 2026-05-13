@@ -5,6 +5,12 @@
   "catalog_number": "304",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "IC",
+  "course_description": "Foundational course for the major and the minor that introduces students to the field of Hispanic linguistics, including phonetics, phonology, morphology, pragmatics, and linguistic variation in the Spanish-speaking world.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "SPAN 304",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Boigues-Lopez",
+      "instructors": [
+        {
+          "name": "J. Boigues-Lopez",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "J. Boigues-Lopez",
+      "instructors": [
+        {
+          "name": "J. Boigues-Lopez",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -72,5 +92,5 @@
   "instructors_unique": [
     "J. Boigues-Lopez"
   ],
-  "scraped_at": "2026-04-20T20:51:11.450Z"
+  "scraped_at": "2026-05-13T00:40:53.069Z"
 }

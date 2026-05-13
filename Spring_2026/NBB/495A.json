@@ -5,6 +5,12 @@
   "catalog_number": "495A",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "XA",
+  "course_description": "For senior NBB majors eligible for the College Honors Program. Must have permission of NBB honors coordinator and faculty research mentor. Cannot be taken concurrently with NBB 497WR, 498R, or 499R. Students attend regular meetings to integrate the project into their major.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "L. Roesch",
+      "instructors": [
+        {
+          "name": "L. Roesch",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "SUP",
       "instructor": "L. Roesch",
+      "instructors": [
+        {
+          "name": "L. Roesch",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -62,5 +82,5 @@
   "instructors_unique": [
     "L. Roesch"
   ],
-  "scraped_at": "2026-04-20T20:48:37.708Z"
+  "scraped_at": "2026-05-13T00:37:58.487Z"
 }

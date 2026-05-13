@@ -5,6 +5,12 @@
   "catalog_number": "234",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "NS",
+  "course_description": "Introduction to combinational and sequential logic circuits, and microprocessor hardware. Topics include transistors, gates, flipflops, counters, clocks, decoders, displays, microprocessors, memory, input/output circuits, and device interfacing.",
+  "course_notes": "This course requires PHYS 142/PHYS_OX 142 OR PHYS 152/PHYS_OX152 or equivalent transfer credit as prerequisites",
+  "requisites": "This course requires PHYS 142/PHYS_OX 142 OR PHYS 152/PHYS_OX152 or equivalent transfer credit as prerequisites",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Brody",
+      "instructors": [
+        {
+          "name": "J. Brody",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "J. Brody"
   ],
-  "scraped_at": "2026-04-20T20:51:32.836Z"
+  "scraped_at": "2026-05-13T00:42:02.386Z"
 }

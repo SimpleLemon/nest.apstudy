@@ -1,0 +1,96 @@
+{
+  "course_code": "ARTHIST 599R",
+  "course_title": "Thesis Research",
+  "subject": "ARTHIST",
+  "catalog_number": "599R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "crn": "5764",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "S. Gagliardi",
+      "instructors": [
+        {
+          "name": "S. Gagliardi",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5765",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "E. Varner",
+      "instructors": [
+        {
+          "name": "E. Varner",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5766",
+      "section_number": "3",
+      "schedule_type": "SUP",
+      "instructor": "T. Cronan",
+      "instructors": [
+        {
+          "name": "T. Cronan",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 3,
+    "open": 3,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "E. Varner",
+    "S. Gagliardi",
+    "T. Cronan"
+  ],
+  "scraped_at": "2026-05-13T00:39:34.123Z"
+}

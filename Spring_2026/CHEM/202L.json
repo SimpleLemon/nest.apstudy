@@ -5,6 +5,12 @@
   "catalog_number": "202L",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "2",
+  "requirement_designation": "None",
+  "course_description": "Students will learn several methods for separating and identifying small molecule organic reactants and products. They will make qualitative determinations based on quantitative data and equilibria and acid base properties. Students who withdraw from the laboratory course should withdraw from the co-requisite lecture course.",
+  "course_notes": "CHEM 141 or CHEM_OX 141 or CHEM 150L or CHEM_OX 150L as a prerequisite and CHEM 202 or CHEM_OX 202 as a corequisite.",
+  "requisites": "CHEM 141 or CHEM_OX 141 or CHEM 150L or CHEM_OX 150L as a prerequisite and CHEM 202 or CHEM_OX 202 as a corequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "M. McCormick",
+      "instructors": [
+        {
+          "name": "M. McCormick",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LAB",
       "instructor": "M. McCormick",
+      "instructors": [
+        {
+          "name": "M. McCormick",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "LAB",
       "instructor": "M. McCormick",
+      "instructors": [
+        {
+          "name": "M. McCormick",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -87,6 +114,13 @@
       "section_number": "4",
       "schedule_type": "LAB",
       "instructor": "M. McCormick",
+      "instructors": [
+        {
+          "name": "M. McCormick",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -111,6 +145,13 @@
       "section_number": "5",
       "schedule_type": "LAB",
       "instructor": "M. McCormick",
+      "instructors": [
+        {
+          "name": "M. McCormick",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -135,6 +176,13 @@
       "section_number": "6",
       "schedule_type": "LAB",
       "instructor": "M. McCormick",
+      "instructors": [
+        {
+          "name": "M. McCormick",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -168,5 +216,5 @@
   "instructors_unique": [
     "M. McCormick"
   ],
-  "scraped_at": "2026-04-20T20:47:46.127Z"
+  "scraped_at": "2026-05-13T00:36:39.341Z"
 }

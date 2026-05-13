@@ -5,6 +5,12 @@
   "catalog_number": "448W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "CW",
+  "course_description": "Provides an overview of Israeli foreign policy and Palestinian attempts at global outreach before the course moves on to explore the politics of the Israeli-Palestinian conflict in various regions of the world. Student will then lead a class session on their subject of interest/final paper topic.",
+  "course_notes": "Any JS or MESAS course or equivalent transfer credit as prerequisite.",
+  "requisites": "Any JS or MESAS course or equivalent transfer credit as prerequisite.",
+  "cross_listed": "JS 448W HIST 448W MESAS 448W",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "G. Levin",
+      "instructors": [
+        {
+          "name": "G. Levin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "G. Levin"
   ],
-  "scraped_at": "2026-04-20T20:51:36.157Z"
+  "scraped_at": "2026-05-13T00:42:05.645Z"
 }

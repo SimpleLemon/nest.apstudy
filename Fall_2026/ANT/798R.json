@@ -1,0 +1,138 @@
+{
+  "course_code": "ANT 798R",
+  "course_title": "Advanced Research",
+  "subject": "ANT",
+  "catalog_number": "798R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "crn": "5801",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Ozawa-de Silva/Ozawa-de Silva",
+      "instructors": [
+        {
+          "name": "Ozawa-de Silva/Ozawa-de Silva",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5802",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "K. Phillips",
+      "instructors": [
+        {
+          "name": "K. Phillips",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5803",
+      "section_number": "3",
+      "schedule_type": "SUP",
+      "instructor": "D. Stout",
+      "instructors": [
+        {
+          "name": "D. Stout",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5804",
+      "section_number": "4",
+      "schedule_type": "SUP",
+      "instructor": "D. Nugent",
+      "instructors": [
+        {
+          "name": "D. Nugent",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5805",
+      "section_number": "5",
+      "schedule_type": "SUP",
+      "instructor": "J. Lindo",
+      "instructors": [
+        {
+          "name": "J. Lindo",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 5,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 5,
+    "open": 5,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "D. Nugent",
+    "D. Stout",
+    "J. Lindo",
+    "K. Phillips",
+    "Ozawa-de Silva/Ozawa-de Silva"
+  ],
+  "scraped_at": "2026-05-13T00:39:30.908Z"
+}

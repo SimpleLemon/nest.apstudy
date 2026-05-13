@@ -5,6 +5,12 @@
   "catalog_number": "280W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 5",
+  "requirement_designation": "CW",
+  "course_description": "",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Eckert",
+      "instructors": [
+        {
+          "name": "A. Eckert",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "O. Yeglin",
+      "instructors": [
+        {
+          "name": "O. Yeglin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -73,5 +93,5 @@
     "A. Eckert",
     "O. Yeglin"
   ],
-  "scraped_at": "2026-04-20T20:48:21.159Z"
+  "scraped_at": "2026-05-13T00:37:39.145Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "223R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "This course builds on the technical skills introduced in Dance 123R. Emphasis is placed on centering, core support, breath support, full articulation of the body in three-dimensional space, fully integrating concepts of parallel and rotation, and the interplay of stability and mobility. At least three semesters in the Contemporary Modern Dance I and consultation with instructor is required before entry into this course. May be taken up to three times for credit.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "G. Staib",
+      "instructors": [
+        {
+          "name": "G. Staib",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "G. Staib"
   ],
-  "scraped_at": "2026-04-20T20:50:36.606Z"
+  "scraped_at": "2026-05-13T00:39:56.664Z"
 }

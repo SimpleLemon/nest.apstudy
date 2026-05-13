@@ -5,6 +5,12 @@
   "catalog_number": "324",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "Performing artists are subject to nutrition myths, making it difficult for them to manage the interaction between nutrient utilization and provision to assure a successful career. This course covers nutritional factors for helping performing artists achieve the desired performance outcomes.",
+  "course_notes": "HLTH 220 or equivalent transfer credit as prerequisite.",
+  "requisites": "HLTH 220 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Benardot/Klein",
+      "instructors": [
+        {
+          "name": "Benardot/Klein",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "Benardot/Klein"
   ],
-  "scraped_at": "2026-04-20T20:48:12.835Z"
+  "scraped_at": "2026-05-13T00:37:24.651Z"
 }

@@ -1,10 +1,16 @@
 {
   "course_code": "MESAS 270",
-  "course_title": "Special Topics MESAS-200 Level",
+  "course_title": "Special Topics MESAS-200 Level: Art & Arch.of Anc.Mesopotamia",
   "subject": "MESAS",
   "catalog_number": "270",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "HSC",
+  "course_description": "Special topics in Middle Eastern and South Asian Studies, at the 200 level; may be repeated when content varies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "G. Lovisetto",
+      "instructors": [
+        {
+          "name": "G. Lovisetto",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "G. Lovisetto"
   ],
-  "scraped_at": "2026-04-20T21:52:01.042Z"
+  "scraped_at": "2026-05-13T00:40:56.309Z"
 }

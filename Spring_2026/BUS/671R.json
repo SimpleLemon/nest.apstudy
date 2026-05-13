@@ -5,6 +5,12 @@
   "catalog_number": "671R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-05",
     "end": "2026-01-09"
@@ -15,6 +21,13 @@
       "section_number": "3201",
       "schedule_type": "LEC",
       "instructor": "Cutshaw/Bentley",
+      "instructors": [
+        {
+          "name": "Cutshaw/Bentley",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "3202",
       "schedule_type": "LEC",
       "instructor": "R. Hamilton",
+      "instructors": [
+        {
+          "name": "R. Hamilton",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3203",
       "schedule_type": "LEC",
       "instructor": "R. Dye",
+      "instructors": [
+        {
+          "name": "R. Dye",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "3204",
       "schedule_type": "LEC",
       "instructor": "S. Garate",
+      "instructors": [
+        {
+          "name": "S. Garate",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -67,6 +101,13 @@
       "section_number": "3205",
       "schedule_type": "LEC",
       "instructor": "D. Bowman",
+      "instructors": [
+        {
+          "name": "D. Bowman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -104,5 +145,5 @@
     "R. Hamilton",
     "S. Garate"
   ],
-  "scraped_at": "2026-04-20T20:49:15.758Z"
+  "scraped_at": "2026-05-13T00:36:37.725Z"
 }

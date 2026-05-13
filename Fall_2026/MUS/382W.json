@@ -5,6 +5,12 @@
   "catalog_number": "382W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "CWE",
+  "course_description": "This course investigates musical languages from musical cultures around the globe. Students will cultivate analytical listening skills to understand how musical elements form musical language. They will explore the cultural meanings embedded in music through various cultural contexts.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Ishiguro",
+      "instructors": [
+        {
+          "name": "M. Ishiguro",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Ishiguro"
   ],
-  "scraped_at": "2026-04-20T20:51:19.613Z"
+  "scraped_at": "2026-05-13T00:41:04.364Z"
 }

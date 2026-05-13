@@ -5,6 +5,12 @@
   "catalog_number": "495A",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "XA",
+  "course_description": "Fall semester component of the Honors Program. Student and faculty adviser meet regularly to discuss the syllabus agreed upon at the beginning of the term and evaluate progress in research/writing. Spanish 495A does not count as one of the 400-level seminars required for the major.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "L. Torres-Rodriguez",
+      "instructors": [
+        {
+          "name": "L. Torres-Rodriguez",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "L. Torres-Rodriguez"
   ],
-  "scraped_at": "2026-04-20T20:51:49.443Z"
+  "scraped_at": "2026-05-13T00:42:21.804Z"
 }

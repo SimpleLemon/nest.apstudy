@@ -7,7 +7,7 @@
  *
  * Usage:  node atlasClient.js
  *
- * Output: /atlas-data/{term}/{SUBJECT}/{catalogNum}.json
+ * Output: /{term}/{SUBJECT}/{catalogNum}.json
  *
  * Confirmed constraints (April 2026):
  *   - POST to https://atlas.emory.edu/api/?page=fose&route=search
@@ -18,7 +18,6 @@
  *   - meetingTimes is a JSON string inside JSON; must be double-parsed
  */
 
-const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
@@ -34,8 +33,20 @@ const TERMS = {
 /** Delay between subject requests in ms. Be respectful. */
 const REQUEST_DELAY_MS = 1500;
 
-/** Output root directory */
-const OUTPUT_DIR = path.join(__dirname, 'atlas-data');
+/** Output root directory. The Flask app reads term directories at repo root. */
+const OUTPUT_DIR = process.env.ATLAS_OUTPUT_DIR
+  ? path.resolve(process.env.ATLAS_OUTPUT_DIR)
+  : __dirname;
+
+const DRY_RUN = process.env.ATLAS_DRY_RUN === '1';
+const CATALOG_INDEX_URL = 'https://catalog.college.emory.edu/academics/departments/index.html';
+const CATALOG_DEPARTMENT_BASE_URL = 'https://catalog.college.emory.edu/academics/departments/';
+const CATALOG_HEADERS = {
+  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'User-Agent':
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 ' +
+    '(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+};
 
 /** Headers required by the FOSE engine. Without these, Atlas returns empty. */
 const REQUIRED_HEADERS = {
@@ -105,6 +116,23 @@ const SUBJECT_CODES = [
   'WGS', 'WRIT',
 ];
 
+function parseEnvList(value) {
+  return (value ?? '')
+    .split(',')
+    .map(item => item.trim())
+    .filter(Boolean);
+}
+
+const SELECTED_TERMS = parseEnvList(process.env.ATLAS_TERMS).length
+  ? Object.fromEntries(
+      Object.entries(TERMS).filter(([term]) => parseEnvList(process.env.ATLAS_TERMS).includes(term))
+    )
+  : TERMS;
+
+const SELECTED_SUBJECT_CODES = parseEnvList(process.env.ATLAS_SUBJECTS).length
+  ? SUBJECT_CODES.filter(subject => parseEnvList(process.env.ATLAS_SUBJECTS).includes(subject))
+  : SUBJECT_CODES;
+
 // ── Day code mapping ─────────────────────────────────────────────────────────
 
 const DAY_MAP = {
@@ -121,6 +149,42 @@ const DAY_MAP = {
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function fetchWithTimeout(url, options = {}, timeout = 15000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeout);
+  try {
+    const res = await fetch(url, { ...options, signal: controller.signal });
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
+    }
+    return res;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function fetchText(url, options = {}, timeout = 15000) {
+  const res = await fetchWithTimeout(url, options, timeout);
+  return res.text();
+}
+
+async function postJson(url, params, body, headers, timeout = 15000) {
+  const requestUrl = new URL(url);
+  for (const [key, value] of Object.entries(params ?? {})) {
+    requestUrl.searchParams.set(key, value);
+  }
+  const res = await fetchWithTimeout(
+    requestUrl.toString(),
+    {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(body),
+    },
+    timeout
+  );
+  return res.json();
 }
 
 /**
@@ -166,17 +230,142 @@ function splitCourseCode(code) {
   };
 }
 
+function decodeHtmlEntities(value) {
+  return String(value ?? '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
+    .replace(/&#x([a-fA-F0-9]+);/g, (_, code) => String.fromCharCode(parseInt(code, 16)));
+}
+
+function stripTags(html) {
+  return decodeHtmlEntities(String(html ?? '')
+    .replace(/<br\s*\/?>/gi, ' ')
+    .replace(/<\/p>/gi, ' ')
+    .replace(/<[^>]+>/g, ' '))
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function firstPresent(source, keys) {
+  for (const key of keys) {
+    const value = source?.[key];
+    if (value !== undefined && value !== null && value !== '') return value;
+  }
+  return null;
+}
+
+function parseInstructors(raw) {
+  const source = firstPresent(raw, ['instructors', 'instr', 'instructor']);
+  if (Array.isArray(source)) {
+    return source
+      .map(item => {
+        if (typeof item === 'object' && item !== null) {
+          const name = firstPresent(item, ['name', 'instructor', 'displayName']);
+          const email = firstPresent(item, ['email', 'mail']);
+          return name ? { name, email: email ?? null } : null;
+        }
+        const name = String(item ?? '').trim();
+        return name ? { name, email: null } : null;
+      })
+      .filter(Boolean);
+  }
+  return String(source ?? '')
+    .split(/\s*(?:;|\|)\s*/)
+    .map(name => name.trim())
+    .filter(name => name && name !== 'Staff' && name !== 'TBA')
+    .map(name => ({
+      name,
+      email: firstPresent(raw, ['instructor_email', 'email', 'mail']) ?? null,
+    }));
+}
+
+function parseCatalogCourseCards(html) {
+  const courses = {};
+  const cardPattern = /<div class="card"><div class="card-header"[\s\S]*?<button[^>]*>([\s\S]*?)<\/button>[\s\S]*?<div class="card-body">([\s\S]*?)<\/div><\/div><\/div>/g;
+  let match;
+  while ((match = cardPattern.exec(html))) {
+    const heading = stripTags(match[1]);
+    const headingMatch = /^([A-Z_]+)\s+([A-Z0-9]+[A-Z]?):\s*(.+)$/.exec(heading);
+    if (!headingMatch) continue;
+
+    const [, subject, catalog, title] = headingMatch;
+    const body = match[2];
+    const descriptionMatch = /<p class="card-text">([\s\S]*?)<\/p>/.exec(body);
+    const fields = {};
+    const fieldPattern = /<dt[^>]*>([\s\S]*?)<\/dt>\s*<dd[^>]*>([\s\S]*?)<\/dd>/g;
+    let fieldMatch;
+    while ((fieldMatch = fieldPattern.exec(body))) {
+      fields[stripTags(fieldMatch[1])] = stripTags(fieldMatch[2]);
+    }
+
+    const normalizedFields = Object.fromEntries(
+      Object.entries(fields).map(([key, value]) => [key.toLowerCase(), value])
+    );
+    const requisites = normalizedFields.requisites && normalizedFields.requisites !== 'None'
+      ? normalizedFields.requisites
+      : null;
+    courses[`${subject}|${catalog}`] = {
+      course_title: title,
+      credit_hours: normalizedFields['credit hours'] ?? null,
+      requirement_designation: normalizedFields.ger ?? normalizedFields.requirements ?? null,
+      course_description: descriptionMatch ? stripTags(descriptionMatch[1]) : null,
+      course_notes: firstPresent(normalizedFields, ['course notes', 'notes']) ?? requisites,
+      requisites,
+      cross_listed: normalizedFields['cross-listed'] && normalizedFields['cross-listed'] !== 'None'
+        ? normalizedFields['cross-listed']
+        : null,
+    };
+  }
+  return courses;
+}
+
+async function fetchCatalogCourseMap() {
+  const courses = {};
+  try {
+    const indexHtml = await fetchText(CATALOG_INDEX_URL, { headers: CATALOG_HEADERS }, 20000);
+    const links = new Set();
+    const linkPattern = /<a[^>]+href="([^"]+\.html)"[^>]*>\s*<div class="card-body">\s*<h2 class="card-title[^"]*">/g;
+    let linkMatch;
+    while ((linkMatch = linkPattern.exec(indexHtml))) {
+      const href = linkMatch[1];
+      if (!href || href === 'index.html') continue;
+      links.add(new URL(href, CATALOG_DEPARTMENT_BASE_URL).toString());
+    }
+
+    for (const url of links) {
+      try {
+        const html = await fetchText(url, { headers: CATALOG_HEADERS }, 20000);
+        Object.assign(courses, parseCatalogCourseCards(html));
+        await sleep(100);
+      } catch (err) {
+        console.warn(`  [WARN] Catalog enrichment skipped for ${url}: ${err.message}`);
+      }
+    }
+  } catch (err) {
+    console.warn(`  [WARN] Catalog enrichment unavailable: ${err.message}`);
+  }
+  return courses;
+}
+
 /**
  * Build the structured JSON object for a single course from its grouped sections.
  */
-function buildCourseObject(courseCode, sections, termLabel, srcdb) {
+function buildCourseObject(courseCode, sections, termLabel, srcdb, catalogCourseMap = {}) {
   const { subject, catalog } = splitCourseCode(courseCode);
+  const catalogInfo = catalogCourseMap[`${subject}|${catalog}`] ?? {};
 
   const structuredSections = sections.map(s => ({
     crn: s.crn ?? null,
     section_number: s.no ?? null,
     schedule_type: s.schd ?? null,
     instructor: s.instr ?? null,
+    instructors: parseInstructors(s),
+    location: firstPresent(s, ['location', 'loc', 'room', 'building', 'bldg_room', 'bldgRoom']),
     enrollment_status: parseEnrollmentStatus(s.enrl_stat),
     enrollment_count: s.total ?? null,
     is_cancelled: !!(s.isCancelled && s.isCancelled !== ''),
@@ -214,11 +403,17 @@ function buildCourseObject(courseCode, sections, termLabel, srcdb) {
 
   return {
     course_code: courseCode,
-    course_title: sections[0]?.title ?? null,
+    course_title: sections[0]?.title ?? catalogInfo.course_title ?? null,
     subject,
     catalog_number: catalog,
     term: termLabel,
     srcdb,
+    credit_hours: catalogInfo.credit_hours ?? firstPresent(sections[0], ['credit_hours', 'credits', 'hours']),
+    requirement_designation: catalogInfo.requirement_designation ?? firstPresent(sections[0], ['requirement_designation', 'ger', 'attributes']),
+    course_description: catalogInfo.course_description ?? firstPresent(sections[0], ['course_description', 'description', 'desc']),
+    course_notes: catalogInfo.course_notes ?? firstPresent(sections[0], ['course_notes', 'notes']),
+    requisites: catalogInfo.requisites ?? null,
+    cross_listed: catalogInfo.cross_listed ?? null,
     date_range: {
       start: startDate,
       end: endDate,
@@ -241,20 +436,16 @@ function buildCourseObject(courseCode, sections, termLabel, srcdb) {
  */
 async function fetchSubject(subject, srcdb) {
   try {
-    const res = await axios.post(
+    const data = await postJson(
       ATLAS_BASE,
+      { page: 'fose', route: 'search' },
       {
         other: { srcdb },
         criteria: [{ field: 'subject', value: subject }],
       },
-      {
-        params: { page: 'fose', route: 'search' },
-        headers: REQUIRED_HEADERS,
-        timeout: 15000,
-      }
+      REQUIRED_HEADERS,
+      15000
     );
-
-    const data = res.data;
 
     if (!data || data === '') {
       console.warn(`  [WARN] Empty response for ${subject} in ${srcdb}`);
@@ -278,6 +469,7 @@ async function fetchSubject(subject, srcdb) {
  * Write a course object to disk at /atlas-data/{term}/{SUBJECT}/{catalog}.json
  */
 function writeCourseFile(termLabel, courseObj) {
+  if (DRY_RUN) return;
   const termDir = path.join(OUTPUT_DIR, termLabel, courseObj.subject);
   fs.mkdirSync(termDir, { recursive: true });
 
@@ -290,20 +482,25 @@ function writeCourseFile(termLabel, courseObj) {
 
 async function runScrape() {
   console.log('=== Emory Atlas Bulk Scraper ===');
-  console.log(`Subjects to scan: ${SUBJECT_CODES.length}`);
-  console.log(`Terms: ${Object.keys(TERMS).join(', ')}`);
+  console.log(`Subjects to scan: ${SELECTED_SUBJECT_CODES.length}`);
+  console.log(`Terms: ${Object.keys(SELECTED_TERMS).join(', ')}`);
   console.log(`Output: ${OUTPUT_DIR}`);
+  if (DRY_RUN) console.log('Dry run: files will not be written.');
   console.log('');
 
   // Create output root
-  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+  if (!DRY_RUN) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+
+  console.log('Loading Emory College catalog enrichment...');
+  const catalogCourseMap = await fetchCatalogCourseMap();
+  console.log(`Catalog enrichment loaded for ${Object.keys(catalogCourseMap).length} courses.`);
 
   const meta = {
     scrape_started: new Date().toISOString(),
     terms: {},
   };
 
-  for (const [termLabel, srcdb] of Object.entries(TERMS)) {
+  for (const [termLabel, srcdb] of Object.entries(SELECTED_TERMS)) {
     console.log(`\n── ${termLabel} (srcdb: ${srcdb}) ──`);
 
     const termMeta = {
@@ -315,9 +512,9 @@ async function runScrape() {
       errors: [],
     };
 
-    for (let i = 0; i < SUBJECT_CODES.length; i++) {
-      const subject = SUBJECT_CODES[i];
-      const progress = `[${i + 1}/${SUBJECT_CODES.length}]`;
+    for (let i = 0; i < SELECTED_SUBJECT_CODES.length; i++) {
+      const subject = SELECTED_SUBJECT_CODES[i];
+      const progress = `[${i + 1}/${SELECTED_SUBJECT_CODES.length}]`;
 
       termMeta.subjects_attempted++;
 
@@ -362,7 +559,7 @@ async function runScrape() {
 
       // Write each course to its own file
       for (const [courseCode, sections] of Object.entries(grouped)) {
-        const courseObj = buildCourseObject(courseCode, sections, termLabel, srcdb);
+        const courseObj = buildCourseObject(courseCode, sections, termLabel, srcdb, catalogCourseMap);
         writeCourseFile(termLabel, courseObj);
         termMeta.courses_written++;
       }
@@ -377,7 +574,9 @@ async function runScrape() {
 
   // Write metadata file
   const metaPath = path.join(OUTPUT_DIR, '_meta.json');
-  fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2), 'utf-8');
+  if (!DRY_RUN) {
+    fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2), 'utf-8');
+  }
 
   // Print summary
   console.log('\n=== Scrape Complete ===');
@@ -390,7 +589,7 @@ async function runScrape() {
       console.log(`    Errors:             ${tm.errors.join(', ')}`);
     }
   }
-  console.log(`\nMetadata: ${metaPath}`);
+  console.log(`\nMetadata: ${DRY_RUN ? '(dry run skipped)' : metaPath}`);
 }
 
 // ── Entry point ──────────────────────────────────────────────────────────────

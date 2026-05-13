@@ -5,6 +5,12 @@
   "catalog_number": "470",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "This is a capstone course that combines health economics and human health content with data science. You will complete an empirical research project using raw data and employ econometric methods to analyze a research question relevant to contemporary health care issues and/or health.",
+  "course_notes": "ECON 320 and (ECON 371 or ECON 372 or ECON 372W or HLTH 370) or equivalent transfer credit as prerequisite.",
+  "requisites": "ECON 320 and (ECON 371 or ECON 372 or ECON 372W or HLTH 370) or equivalent transfer credit as prerequisite.",
+  "cross_listed": "HLTH 470",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "I. McCarthy",
+      "instructors": [
+        {
+          "name": "I. McCarthy",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "I. McCarthy"
   ],
-  "scraped_at": "2026-04-20T20:47:54.576Z"
+  "scraped_at": "2026-05-13T00:36:52.251Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "302",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "IC",
+  "course_description": "Sixth in a series of courses that develop reading, speaking, listening, writing, and cultural skills in Arabic. Course includes video materials and stresses communication in formal and spoken Arabic.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "R. Cornell",
+      "instructors": [
+        {
+          "name": "R. Cornell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "R. Cornell"
   ],
-  "scraped_at": "2026-04-20T20:47:37.934Z"
+  "scraped_at": "2026-05-13T00:36:24.814Z"
 }

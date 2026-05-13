@@ -5,6 +5,12 @@
   "catalog_number": "315",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "IC",
+  "course_description": "Reading of two or more plays of Plautus or Terence, with discussion of Roman comedy's predecessors and influence.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "N. Slater",
+      "instructors": [
+        {
+          "name": "N. Slater",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "N. Slater"
   ],
-  "scraped_at": "2026-04-20T20:51:09.759Z"
+  "scraped_at": "2026-05-13T00:40:51.460Z"
 }

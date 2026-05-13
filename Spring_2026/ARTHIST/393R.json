@@ -5,6 +5,12 @@
   "catalog_number": "393R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "HAP",
+  "course_description": "Advanced seminars dealing with various specialized problems in the history of art from antiquity to modern times, such as individual artists, genres (e.g. portraiture, landscape); themes (e.g. theory, iconography); artistic movements and museum studies. May be repeated for credit when topic varies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "Lee/Haugaard",
+      "instructors": [
+        {
+          "name": "Lee/Haugaard",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "Mundy/Burr",
+      "instructors": [
+        {
+          "name": "Mundy/Burr",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -68,5 +88,5 @@
     "Lee/Haugaard",
     "Mundy/Burr"
   ],
-  "scraped_at": "2026-04-20T21:51:17.191Z"
+  "scraped_at": "2026-05-13T00:36:26.434Z"
 }

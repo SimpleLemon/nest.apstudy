@@ -5,6 +5,12 @@
   "catalog_number": "321R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "This course continues to reinforce and build upon the skills learned in Ballet II. More emphasis is placed on style and execution of movement at an intermediate level. Movement sequences become more intricate. A more extensive movement vocabulary is introduced. At least 2-3 semesters in Ballet II and consultation with the instructor are required before enrolling in this course. May be taken up to six times for credit.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Mandradjieff",
+      "instructors": [
+        {
+          "name": "M. Mandradjieff",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Mandradjieff"
   ],
-  "scraped_at": "2026-04-20T20:47:52.915Z"
+  "scraped_at": "2026-05-13T00:36:49.023Z"
 }

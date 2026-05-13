@@ -5,6 +5,12 @@
   "catalog_number": "408",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "Health problems have many complex causes. After mapping the causes of a problem from a specific context (with research, theory & epidemiology), learners will create a proposal with real-world solutions. The proposal will be converted into a persuasive presentation to request funding for the work.",
+  "course_notes": "HLTH 207 or equivalent transfer credits as prerequisites.",
+  "requisites": "HLTH 207 or equivalent transfer credits as prerequisites.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Cranmer",
+      "instructors": [
+        {
+          "name": "J. Cranmer",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "J. Cranmer"
   ],
-  "scraped_at": "2026-04-20T20:50:56.536Z"
+  "scraped_at": "2026-05-13T00:40:32.146Z"
 }

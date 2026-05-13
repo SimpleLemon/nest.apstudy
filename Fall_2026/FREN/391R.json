@@ -1,0 +1,65 @@
+{
+  "course_code": "FREN 391R",
+  "course_title": "Francophone Studies",
+  "subject": "FREN",
+  "catalog_number": "391R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "ICE",
+  "course_description": "A survey of literary and cultural creations from the Francophone world, with a special emphasis on Africa, the Caribbean, and South East Asia.",
+  "course_notes": "FREN 310 or FREN_OX 310 and FREN 314 or FREN_OX 314 or equivalent transfer credit as prerequisite. Used for: FREN-331, 341, 351, 385, 391",
+  "requisites": "FREN 310 or FREN_OX 310 and FREN 314 or FREN_OX 314 or equivalent transfer credit as prerequisite. Used for: FREN-331, 341, 351, 385, 391",
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "crn": "5710",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "L. Ami Ali Barrow",
+      "instructors": [
+        {
+          "name": "L. Ami Ali Barrow",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "L. Ami Ali Barrow"
+  ],
+  "scraped_at": "2026-05-13T00:40:17.663Z"
+}

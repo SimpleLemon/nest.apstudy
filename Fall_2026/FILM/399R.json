@@ -5,6 +5,12 @@
   "catalog_number": "399R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "XA",
+  "course_description": "Variable credit; only four hours count toward major or minor. Need a department faculty advisor in advance. The internship must be at least 10 hours a week. Students must regularly meet their faculty advisor and complete writing assignments. Students must be a declared major/minor in the department.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,8 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -35,5 +43,5 @@
     "waitlisted": 0
   },
   "instructors_unique": [],
-  "scraped_at": "2026-04-20T20:50:44.939Z"
+  "scraped_at": "2026-05-13T00:40:14.429Z"
 }

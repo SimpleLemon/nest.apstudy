@@ -5,6 +5,12 @@
   "catalog_number": "250",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "None",
+  "course_description": "PORT 250 is a one-credit course in which students follow and discuss current events via critical analysis and discussion of Lusophone media. The focus will be on newspapers and magazines published in the Portuguese-speaking world. Pre-req: PORT 201 or equivalent.",
+  "course_notes": "PORT 201 or equivalent transfer credit as prerequisite.",
+  "requisites": "PORT 201 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,8 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -41,5 +49,5 @@
     "waitlisted": 0
   },
   "instructors_unique": [],
-  "scraped_at": "2026-04-20T20:51:37.790Z"
+  "scraped_at": "2026-05-13T00:42:07.273Z"
 }

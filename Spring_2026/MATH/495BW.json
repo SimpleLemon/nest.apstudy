@@ -5,6 +5,12 @@
   "catalog_number": "495BW",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 8",
+  "requirement_designation": "CW",
+  "course_description": "Normally taken in student's last semester, up to a maximum of 4 credit hours.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "Nurbekyan/Ruthotto",
+      "instructors": [
+        {
+          "name": "Nurbekyan/Ruthotto",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "27",
       "schedule_type": "SUP",
       "instructor": "Y. Xi",
+      "instructors": [
+        {
+          "name": "Y. Xi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "28",
       "schedule_type": "SUP",
       "instructor": "M. Chung",
+      "instructors": [
+        {
+          "name": "M. Chung",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "29",
       "schedule_type": "SUP",
       "instructor": "M. Manetta",
+      "instructors": [
+        {
+          "name": "M. Manetta",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -67,6 +101,13 @@
       "section_number": "30",
       "schedule_type": "SUP",
       "instructor": "M. Tezzele",
+      "instructors": [
+        {
+          "name": "M. Tezzele",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -80,6 +121,13 @@
       "section_number": "31",
       "schedule_type": "SUP",
       "instructor": "S. Venapally",
+      "instructors": [
+        {
+          "name": "S. Venapally",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -93,6 +141,13 @@
       "section_number": "32",
       "schedule_type": "SUP",
       "instructor": "J. Nagy",
+      "instructors": [
+        {
+          "name": "J. Nagy",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -106,6 +161,13 @@
       "section_number": "33",
       "schedule_type": "SUP",
       "instructor": "M. Lukic",
+      "instructors": [
+        {
+          "name": "M. Lukic",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -119,6 +181,13 @@
       "section_number": "34",
       "schedule_type": "SUP",
       "instructor": "A. Veneziani",
+      "instructors": [
+        {
+          "name": "A. Veneziani",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -149,5 +218,5 @@
     "S. Venapally",
     "Y. Xi"
   ],
-  "scraped_at": "2026-04-20T20:48:29.471Z"
+  "scraped_at": "2026-05-13T00:37:47.214Z"
 }

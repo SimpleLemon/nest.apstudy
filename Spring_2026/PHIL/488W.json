@@ -5,6 +5,12 @@
   "catalog_number": "488W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "CW",
+  "course_description": "A seminar reserved for senior PPL majors. It integrates each of the majors areas: the politics, law, and some subfield of philosophy such as ethics, epistemology, metaphysics, etc. The course is writing intensive and culminates in a final paper.",
+  "course_notes": "Two PHIL courses or equivalent transfer credit as prerequisite.",
+  "requisites": "Two PHIL courses or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "E. Blanes-Martinez",
+      "instructors": [
+        {
+          "name": "E. Blanes-Martinez",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "E. Blanes-Martinez"
   ],
-  "scraped_at": "2026-04-20T20:48:47.569Z"
+  "scraped_at": "2026-05-13T00:38:53.520Z"
 }

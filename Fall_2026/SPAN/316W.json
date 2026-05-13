@@ -5,6 +5,12 @@
   "catalog_number": "316W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -14,7 +20,9 @@
       "crn": "3437",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "X. Marsilli-Vargas",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -45,8 +53,6 @@
     "closed": 1,
     "waitlisted": 0
   },
-  "instructors_unique": [
-    "X. Marsilli-Vargas"
-  ],
-  "scraped_at": "2026-04-20T20:51:49.440Z"
+  "instructors_unique": [],
+  "scraped_at": "2026-05-13T00:42:21.803Z"
 }

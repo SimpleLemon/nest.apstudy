@@ -30,7 +30,7 @@ function renderSidebar() {
   const currentPath = window.location.pathname;
 
   const isActive = (routePath) => {
-    if (routePath === '/dashboard') return currentPath === '/dashboard' || currentPath === '/';
+    if (routePath === '/calendar') return currentPath === '/calendar' || currentPath === '/' || currentPath === '/dashboard';
     return currentPath === routePath;
   };
 
@@ -40,7 +40,7 @@ function renderSidebar() {
     <div class="sidebar-content">
       <!-- Dashboard Section -->
       <div class="sidebar-section">
-        <button class="sidebar-item ${isActive('/dashboard') ? 'active' : ''}" data-route="/dashboard" aria-label="Dashboard">
+        <button class="sidebar-item ${isActive('/calendar') ? 'active' : ''}" data-route="/calendar" aria-label="Dashboard">
           <span class="sidebar-item-icon">${SIDEBAR_ICONS.layoutDashboard}</span>
           <span class="sidebar-item-label">Dashboard</span>
         </button>
@@ -56,7 +56,7 @@ function renderSidebar() {
         </button>
 
         ${isEmoryStudent ? `
-        <button class="sidebar-item" data-route="/dashboard" data-courses="true" aria-label="Courses">
+        <button class="sidebar-item ${isActive('/courses') ? 'active' : ''}" data-route="/courses" aria-label="Courses">
           <span class="sidebar-item-icon">${SIDEBAR_ICONS.graduationCap}</span>
           <span class="sidebar-item-label">Courses</span>
         </button>` : ''}
@@ -218,20 +218,6 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
     item.addEventListener('click', (e) => {
       e.preventDefault();
       const route = item.dataset.route;
-      const isCoursesButton = item.dataset.courses === 'true';
-      const isDashboardRoute = window.location.pathname === '/dashboard' || window.location.pathname === '/';
-
-      if (isCoursesButton && isDashboardRoute) {
-        document.dispatchEvent(new Event('profile-my-courses-click'));
-        return;
-      }
-
-      if (isCoursesButton && !isDashboardRoute) {
-        sessionStorage.setItem('openCoursesPanelOnLoad', 'true');
-        window.location.href = '/dashboard';
-        return;
-      }
-
       if (route) {
         window.location.href = route;
       }

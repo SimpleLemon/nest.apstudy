@@ -5,6 +5,12 @@
   "catalog_number": "799R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "J. Paine",
+      "instructors": [
+        {
+          "name": "J. Paine",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "J. Paine"
   ],
-  "scraped_at": "2026-04-20T20:48:52.607Z"
+  "scraped_at": "2026-05-13T00:38:58.380Z"
 }

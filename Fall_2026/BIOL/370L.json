@@ -5,6 +5,12 @@
   "catalog_number": "370L",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": "None",
+  "course_description": "Introduction to basic laboratory techniques in microbiology. Experiments dealing with the physiology, biochemistry, genetics, and molecular biology of microbes will be included. (This course meets the upper-level laboratory requirement and will count as elective credit for the Biology major.)",
+  "course_notes": "[(BIOL 142 and BIOL 142L) or BIOL_OX142 or BIOL 152] and BIOL 370 or equivalent transfer credit as a prerequisite.",
+  "requisites": "[(BIOL 142 and BIOL 142L) or BIOL_OX142 or BIOL 152] and BIOL 370 or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "E. Battaglioli",
+      "instructors": [
+        {
+          "name": "E. Battaglioli",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "LAB",
       "instructor": "E. Battaglioli",
+      "instructors": [
+        {
+          "name": "E. Battaglioli",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -62,5 +82,5 @@
   "instructors_unique": [
     "E. Battaglioli"
   ],
-  "scraped_at": "2026-04-20T20:50:26.641Z"
+  "scraped_at": "2026-05-13T00:39:38.941Z"
 }

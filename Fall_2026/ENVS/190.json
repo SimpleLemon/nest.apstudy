@@ -5,6 +5,12 @@
   "catalog_number": "190",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "The topics for freshman seminars are variable and change every semester. Past offerings include Climate Change, Global Earth Systems, Interpreting Behavior That You Can't See, Ecological Economics, Plants, People and Places and Ecological Restoration.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "A. Martin",
+      "instructors": [
+        {
+          "name": "A. Martin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "A. Martin"
   ],
-  "scraped_at": "2026-04-20T20:50:43.280Z"
+  "scraped_at": "2026-05-13T00:40:11.206Z"
 }

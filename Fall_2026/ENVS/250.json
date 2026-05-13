@@ -5,6 +5,12 @@
   "catalog_number": "250",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "None",
+  "course_description": "Explores the study and design of maps and geographic information systems (GIS) as a problem-solving tool for geographic analysis with focus on applications of GIS, data collection and processing, cartographic design, and trends in geospatial technology.",
+  "course_notes": "QTM 100 or QTM_OX 100 or BUS 350 or BUS_OX 350 or equivalent transfer credit as prerequisite.",
+  "requisites": "QTM 100 or QTM_OX 100 or BUS 350 or BUS_OX 350 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Clennon",
+      "instructors": [
+        {
+          "name": "J. Clennon",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LAB",
       "instructor": "J. Clennon",
+      "instructors": [
+        {
+          "name": "J. Clennon",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -67,5 +87,5 @@
   "instructors_unique": [
     "J. Clennon"
   ],
-  "scraped_at": "2026-04-20T20:50:43.283Z"
+  "scraped_at": "2026-05-13T00:40:11.207Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "368",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-12",
     "end": "2026-03-04"
@@ -15,6 +21,13 @@
       "section_number": "101",
       "schedule_type": "CLN",
       "instructor": "D. Drobbin",
+      "instructors": [
+        {
+          "name": "D. Drobbin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "102",
       "schedule_type": "CLN",
       "instructor": "D. Drobbin",
+      "instructors": [
+        {
+          "name": "D. Drobbin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -50,5 +70,5 @@
   "instructors_unique": [
     "D. Drobbin"
   ],
-  "scraped_at": "2026-04-20T20:49:25.761Z"
+  "scraped_at": "2026-05-13T00:38:01.857Z"
 }

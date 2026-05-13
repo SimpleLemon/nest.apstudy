@@ -5,6 +5,12 @@
   "catalog_number": "403",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAP",
+  "course_description": "Examines American screen entertainment history, specifically the key trends, individuals, institutions and technologies that have shaped these different forms them from the 19th century through the present day. Students perform practical experiments in industrial analysis.",
+  "course_notes": "FILM 301 or FILM 301W or FILM 302 or equivalent transfer credit as prerequisite.",
+  "requisites": "FILM 301 or FILM 301W or FILM 302 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -14,7 +20,14 @@
       "crn": "3883",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Staff",
+      "instructor": "E. Walters",
+      "instructors": [
+        {
+          "name": "E. Walters",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -45,6 +58,8 @@
     "closed": 0,
     "waitlisted": 0
   },
-  "instructors_unique": [],
-  "scraped_at": "2026-04-20T20:50:44.940Z"
+  "instructors_unique": [
+    "E. Walters"
+  ],
+  "scraped_at": "2026-05-13T00:40:14.429Z"
 }

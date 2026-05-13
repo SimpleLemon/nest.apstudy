@@ -5,6 +5,12 @@
   "catalog_number": "411W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "CW",
+  "course_description": "Economics of money, credit, and banking with emphasis on factors influencing the quantity of money and effects on employment, output, and prices. Economic analysis of financial markets, financial institutions, monetary policy, and inflation.",
+  "course_notes": "(ECON 201 or ECON_OX 201) and (ECON 212 or ECON_OX 212) or equivalent transfer credit as a prerequisite.",
+  "requisites": "(ECON 201 or ECON_OX 201) and (ECON 212 or ECON_OX 212) or equivalent transfer credit as a prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Y. Wang",
+      "instructors": [
+        {
+          "name": "Y. Wang",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "Y. Wang"
   ],
-  "scraped_at": "2026-04-20T20:47:54.572Z"
+  "scraped_at": "2026-05-13T00:36:52.247Z"
 }

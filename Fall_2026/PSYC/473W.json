@@ -5,6 +5,12 @@
   "catalog_number": "473W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 5",
+  "requirement_designation": "CW",
+  "course_description": "Selected issues in psychopathology theory and research with a writing component.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "A. Kazama",
+      "instructors": [
+        {
+          "name": "A. Kazama",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "A. Kazama"
   ],
-  "scraped_at": "2026-04-20T20:51:39.454Z"
+  "scraped_at": "2026-05-13T00:42:08.911Z"
 }

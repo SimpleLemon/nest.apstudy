@@ -1,10 +1,16 @@
 {
   "course_code": "PHIL 480RW",
-  "course_title": "Seminar on Individual Philosophers",
+  "course_title": "Seminar on Individual Philosophers: Heidegger's Being and Time",
   "subject": "PHIL",
   "catalog_number": "480RW",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAPW",
+  "course_description": "Intensive study and analysis of the thought of one major philosopher. May be repeated for credit when the subject varies.",
+  "course_notes": "Two PHIL courses or equivalent transfer credit as prerequisite.",
+  "requisites": "Two PHIL courses or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "A. Mitchell",
+      "instructors": [
+        {
+          "name": "A. Mitchell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "A. Mitchell"
   ],
-  "scraped_at": "2026-04-20T20:51:31.144Z"
+  "scraped_at": "2026-05-13T00:42:00.732Z"
 }

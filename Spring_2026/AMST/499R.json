@@ -5,6 +5,12 @@
   "catalog_number": "499R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "2 - 4",
+  "requirement_designation": "XA",
+  "course_description": "Credit variable. Prerequisite: permission of instructor and the director of undergraduate studies. Independent research and writing on a topic associated with the area of concentration in the major, undertaken with faculty supervision.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "K. Loudermilk",
+      "instructors": [
+        {
+          "name": "K. Loudermilk",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "K. Loudermilk"
   ],
-  "scraped_at": "2026-04-20T20:47:34.613Z"
+  "scraped_at": "2026-05-13T00:36:21.417Z"
 }

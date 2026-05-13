@@ -5,6 +5,12 @@
   "catalog_number": "318",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "ETHN",
+  "course_description": "What is sex? How is our science impacted by gender? Students will examine neuroscience/biology from an intersectional feminist perspective, collapse the sex-gender divide to see how these racialized concepts co-create each other, and incorporate intersex and trans identities and materialities.",
+  "course_notes": "Any NBB or WGS course or equivalent transfer credit as prerequisite.",
+  "requisites": "Any NBB or WGS course or equivalent transfer credit as prerequisite.",
+  "cross_listed": "WGS 318",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Massa",
+      "instructors": [
+        {
+          "name": "M. Massa",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Massa"
   ],
-  "scraped_at": "2026-04-20T20:51:21.296Z"
+  "scraped_at": "2026-05-13T00:41:05.977Z"
 }

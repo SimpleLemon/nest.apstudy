@@ -5,6 +5,12 @@
   "catalog_number": "210",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "QR",
+  "course_description": "This course is a short treatment of MATH 112 and 211 with a lab component. It is not appropriate for students who have taken MATH 211. Topics include: advanced integration, Taylor series; and multivariable differentiation, optimization and integration; and applications to statistics and science.",
+  "course_notes": "MATH 111 or MATH 111L or MATH_OX 111 or equivalent transfer credit as prerequisite.",
+  "requisites": "MATH 111 or MATH 111L or MATH_OX 111 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,8 +21,15 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Carr",
+      "instructors": [
+        {
+          "name": "M. Carr",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "8",
+      "enrollment_count": "6",
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -39,8 +52,15 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "M. Carr",
+      "instructors": [
+        {
+          "name": "M. Carr",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "8",
+      "enrollment_count": "6",
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -63,8 +83,15 @@
       "section_number": "3",
       "schedule_type": "LAB",
       "instructor": "Carr/Brarda",
+      "instructors": [
+        {
+          "name": "Carr/Brarda",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "8",
+      "enrollment_count": "6",
       "is_cancelled": false,
       "schedule": {
         "display": "F 8:30-9:20a",
@@ -82,8 +109,15 @@
       "section_number": "4",
       "schedule_type": "LAB",
       "instructor": "Carr/Brarda",
+      "instructors": [
+        {
+          "name": "Carr/Brarda",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "8",
+      "enrollment_count": "6",
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-10:50a",
@@ -92,25 +126,6 @@
             "day": "Fri",
             "start": "1000",
             "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3407",
-      "section_number": "6",
-      "schedule_type": "LAB",
-      "instructor": "Carr/Brarda",
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 8:30-9:20a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "830",
-            "end": "920"
           }
         ]
       }
@@ -119,28 +134,16 @@
       "crn": "3412",
       "section_number": "7",
       "schedule_type": "LAB",
-      "instructor": "Carr/Brarda",
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3440",
-      "section_number": "8",
-      "schedule_type": "LAB",
       "instructor": "Carr/Scott",
+      "instructors": [
+        {
+          "name": "Carr/Scott",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "8",
+      "enrollment_count": "6",
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-10:50a",
@@ -158,8 +161,15 @@
       "section_number": "9",
       "schedule_type": "LAB",
       "instructor": "Carr/Scott",
+      "instructors": [
+        {
+          "name": "Carr/Scott",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "8",
+      "enrollment_count": "6",
       "is_cancelled": false,
       "schedule": {
         "display": "F 11:30a-12:20p",
@@ -174,12 +184,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 8,
+    "total_sections": 6,
     "lectures": 2,
-    "labs": 6,
+    "labs": 4,
     "discussions": 0,
     "other": 0,
-    "open": 8,
+    "open": 6,
     "closed": 0,
     "waitlisted": 0
   },
@@ -188,5 +198,5 @@
     "Carr/Scott",
     "M. Carr"
   ],
-  "scraped_at": "2026-04-20T20:51:13.088Z"
+  "scraped_at": "2026-05-13T00:40:54.684Z"
 }

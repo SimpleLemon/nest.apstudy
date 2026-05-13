@@ -5,6 +5,12 @@
   "catalog_number": "584",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,8 +21,10 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Waitlist",
-      "enrollment_count": "3",
+      "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -39,6 +47,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "Y. Rankin",
+      "instructors": [
+        {
+          "name": "Y. Rankin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -63,8 +78,15 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "D. Turakhia",
+      "instructors": [
+        {
+          "name": "D. Turakhia",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "3",
+      "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -87,6 +109,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "Y. Kwon",
+      "instructors": [
+        {
+          "name": "Y. Kwon",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -111,8 +140,15 @@
       "section_number": "5",
       "schedule_type": "LEC",
       "instructor": "Y. Bromberg",
+      "instructors": [
+        {
+          "name": "Y. Bromberg",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "3",
+      "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -129,23 +165,50 @@
           }
         ]
       }
+    },
+    {
+      "crn": "5817",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "Wall/Qin",
+      "instructors": [
+        {
+          "name": "Wall/Qin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 4-6:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1845"
+          }
+        ]
+      }
     }
   ],
   "section_summary": {
-    "total_sections": 5,
-    "lectures": 5,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 5,
     "closed": 0,
     "waitlisted": 1
   },
   "instructors_unique": [
     "D. Turakhia",
+    "Wall/Qin",
     "Y. Bromberg",
     "Y. Kwon",
     "Y. Rankin"
   ],
-  "scraped_at": "2026-04-20T20:50:34.968Z"
+  "scraped_at": "2026-05-13T00:39:55.058Z"
 }

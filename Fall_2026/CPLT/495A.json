@@ -5,6 +5,12 @@
   "catalog_number": "495A",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "XA",
+  "course_description": "Prerequisite: approval of the Director of Undergraduate Studies. Open to candidates for honors in their senior year.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "THE",
       "instructor": "M. Ozdemir",
+      "instructors": [
+        {
+          "name": "M. Ozdemir",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "M. Ozdemir"
   ],
-  "scraped_at": "2026-04-20T20:50:33.316Z"
+  "scraped_at": "2026-05-13T00:39:53.440Z"
 }

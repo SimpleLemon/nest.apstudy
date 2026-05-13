@@ -5,6 +5,12 @@
   "catalog_number": "250",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "A theoretical and practical introduction to the art of staging plays, including script analysis, rehearsal techniques, and presentation of scenes.",
+  "course_notes": "THEA 210 or THEA_OX 210 or equivalent transfer credit as prerequisite",
+  "requisites": "THEA 210 or THEA_OX 210 or equivalent transfer credit as prerequisite",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "H. Alvarez",
+      "instructors": [
+        {
+          "name": "H. Alvarez",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "H. Alvarez"
   ],
-  "scraped_at": "2026-04-20T20:49:07.462Z"
+  "scraped_at": "2026-05-13T00:39:17.718Z"
 }

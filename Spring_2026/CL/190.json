@@ -5,6 +5,12 @@
   "catalog_number": "190",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "Limited to freshmen. Topic changes to reflect changing interests of faculty and students.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "D. van Schoor",
+      "instructors": [
+        {
+          "name": "D. van Schoor",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "D. van Schoor"
   ],
-  "scraped_at": "2026-04-20T21:51:25.332Z"
+  "scraped_at": "2026-05-13T00:36:42.570Z"
 }

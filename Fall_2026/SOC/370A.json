@@ -5,6 +5,12 @@
   "catalog_number": "370A",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HSC",
+  "course_description": "Open only to undergraduate students by permission of the instructor. Additionally, this course is required for all students seeking to apply for the fellowship in Community Building and Social Change.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "POLS 370A CBSC 370A ENVS 370A",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Rich",
+      "instructors": [
+        {
+          "name": "M. Rich",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Rich"
   ],
-  "scraped_at": "2026-04-20T20:51:47.795Z"
+  "scraped_at": "2026-05-13T00:42:20.178Z"
 }

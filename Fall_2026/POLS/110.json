@@ -5,6 +5,12 @@
   "catalog_number": "110",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "SS",
+  "course_description": "Introduction to analytical concepts, nature of the interstate system, the assumptions and ideas of diplomacy, the determinants of foreign policy.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. Davis III",
+      "instructors": [
+        {
+          "name": "D. Davis III",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "D. Davis III"
   ],
-  "scraped_at": "2026-04-20T20:51:36.142Z"
+  "scraped_at": "2026-05-13T00:42:05.618Z"
 }

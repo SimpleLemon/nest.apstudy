@@ -5,6 +5,12 @@
   "catalog_number": "365W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HPWE",
+  "course_description": "Treatment of the major issues raised by the new genres of art that have resulted from the African experience of European colonization.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "AFS 386W",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Gagliardi",
+      "instructors": [
+        {
+          "name": "S. Gagliardi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "S. Gagliardi"
   ],
-  "scraped_at": "2026-04-20T21:51:57.793Z"
+  "scraped_at": "2026-05-13T00:39:34.120Z"
 }

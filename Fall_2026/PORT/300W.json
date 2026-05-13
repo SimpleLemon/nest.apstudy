@@ -5,6 +5,12 @@
   "catalog_number": "300W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "ICW",
+  "course_description": "This course examines Brazilian literature and film. Students formulate responses in Portuguese to the various themes addressed in the different texts and films, both orally and in writing.",
+  "course_notes": "PORT 201 or equivalent transfer credit as prerequisite.",
+  "requisites": "PORT 201 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Ribeiro",
+      "instructors": [
+        {
+          "name": "M. Ribeiro",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Ribeiro"
   ],
-  "scraped_at": "2026-04-20T20:51:37.791Z"
+  "scraped_at": "2026-05-13T00:42:07.274Z"
 }

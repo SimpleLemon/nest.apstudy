@@ -5,6 +5,12 @@
   "catalog_number": "121",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HA",
+  "course_description": "This course is an applied technical study of harmony and counterpoint focusing on the written and aural aspects of the common-practice period, but including repertory from earlier periods and modern times. This course is designed for music majors and minors.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,7 +21,9 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Staff",
-      "enrollment_status": "Waitlist",
+      "instructors": [],
+      "location": null,
+      "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
       "schedule": {
@@ -39,6 +47,8 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -63,7 +73,9 @@
       "section_number": "3",
       "schedule_type": "LAB",
       "instructor": "Staff",
-      "enrollment_status": "Waitlist",
+      "instructors": [],
+      "location": null,
+      "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
       "schedule": {
@@ -87,7 +99,14 @@
       "section_number": "4",
       "schedule_type": "LAB",
       "instructor": "J. Eklund",
-      "enrollment_status": "Waitlist",
+      "instructors": [
+        {
+          "name": "J. Eklund",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
       "schedule": {
@@ -111,6 +130,13 @@
       "section_number": "5",
       "schedule_type": "LAB",
       "instructor": "J. Eklund",
+      "instructors": [
+        {
+          "name": "J. Eklund",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -137,12 +163,12 @@
     "labs": 3,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 3,
     "closed": 0,
-    "waitlisted": 5
+    "waitlisted": 2
   },
   "instructors_unique": [
     "J. Eklund"
   ],
-  "scraped_at": "2026-04-20T20:51:19.600Z"
+  "scraped_at": "2026-05-13T00:41:04.340Z"
 }

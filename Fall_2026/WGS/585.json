@@ -1,10 +1,16 @@
 {
   "course_code": "WGS 585",
-  "course_title": "Special Topics: Women, Gender, & Sexuality Studies",
+  "course_title": "Special Topics: Women, Gender, & Sexuality Studies: Marx, Lacan, Fanon",
   "subject": "WGS",
   "catalog_number": "585",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,8 +21,15 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "L. Park",
+      "instructors": [
+        {
+          "name": "L. Park",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "2",
+      "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-6:45p",
@@ -34,8 +47,15 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "K. Amin",
+      "instructors": [
+        {
+          "name": "K. Amin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "2",
+      "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-5:30p",
@@ -53,6 +73,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "S. Cordis",
+      "instructors": [
+        {
+          "name": "S. Cordis",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -83,5 +110,5 @@
     "L. Park",
     "S. Cordis"
   ],
-  "scraped_at": "2026-04-20T20:51:54.470Z"
+  "scraped_at": "2026-05-13T00:42:28.248Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "260W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAW",
+  "course_description": "This course guides students through three music-and-sound-related writing projects (autobiographical, historical, and ethnographic) to develop foundational research and analytical skills, write persuasive arguments, use evidence responsibly, and engage with diverse styles of writing about music.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "D. Castro Pantoja",
+      "instructors": [
+        {
+          "name": "D. Castro Pantoja",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "D. Castro Pantoja"
   ],
-  "scraped_at": "2026-04-20T20:51:19.605Z"
+  "scraped_at": "2026-05-13T00:41:04.355Z"
 }

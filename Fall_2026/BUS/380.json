@@ -5,6 +5,12 @@
   "catalog_number": "380",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-09-04",
     "end": "2026-10-30"
@@ -15,6 +21,13 @@
       "section_number": "1101",
       "schedule_type": "SEM",
       "instructor": "Smith/Leist",
+      "instructors": [
+        {
+          "name": "Smith/Leist",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "1102",
       "schedule_type": "SEM",
       "instructor": "Smith/Leist",
+      "instructors": [
+        {
+          "name": "Smith/Leist",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -53,7 +73,14 @@
       "section_number": "1103",
       "schedule_type": "SEM",
       "instructor": "Timpone/Leist",
-      "enrollment_status": "Closed",
+      "instructors": [
+        {
+          "name": "Timpone/Leist",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
       "schedule": {
@@ -72,6 +99,13 @@
       "section_number": "1104",
       "schedule_type": "SEM",
       "instructor": "Timpone/Leist",
+      "instructors": [
+        {
+          "name": "Timpone/Leist",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -91,6 +125,13 @@
       "section_number": "1105",
       "schedule_type": "SEM",
       "instructor": "Morales/Leist",
+      "instructors": [
+        {
+          "name": "Morales/Leist",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -110,6 +151,13 @@
       "section_number": "1106",
       "schedule_type": "SEM",
       "instructor": "Morales/Leist",
+      "instructors": [
+        {
+          "name": "Morales/Leist",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -129,6 +177,13 @@
       "section_number": "1107",
       "schedule_type": "SEM",
       "instructor": "S. Leist",
+      "instructors": [
+        {
+          "name": "S. Leist",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -150,8 +205,8 @@
     "labs": 0,
     "discussions": 0,
     "other": 7,
-    "open": 2,
-    "closed": 5,
+    "open": 3,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -160,5 +215,5 @@
     "Smith/Leist",
     "Timpone/Leist"
   ],
-  "scraped_at": "2026-04-20T20:51:59.378Z"
+  "scraped_at": "2026-05-13T00:39:45.387Z"
 }

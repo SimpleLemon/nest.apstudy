@@ -5,6 +5,12 @@
   "catalog_number": "323",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "Machine learning techniques and their use in solving problems from multiple real-world domains. Topics covered include data analytics, regression, classification, clustering, decision trees, and neural networks using Python libraries. Focuses on applications and use rather than algorithms or theory.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Pouriyeh",
+      "instructors": [
+        {
+          "name": "A. Pouriyeh",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "A. Pouriyeh"
   ],
-  "scraped_at": "2026-04-20T20:47:51.234Z"
+  "scraped_at": "2026-05-13T00:36:47.405Z"
 }

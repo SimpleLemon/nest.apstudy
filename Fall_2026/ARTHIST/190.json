@@ -1,39 +1,33 @@
 {
   "course_code": "ARTHIST 190",
-  "course_title": "Freshman Seminar:Art History: The 12 Caesars:Sex, Lies& Politics in Ancient Rome",
+  "course_title": "Freshman Seminar:Art History: The Arch of Druid Hills",
   "subject": "ARTHIST",
   "catalog_number": "190",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "Limited to freshmen and introductory in nature, these seminars may feature discussion, readings, museum visits, and presentations.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
   },
   "sections": [
     {
-      "crn": "1503",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "E. Varner",
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
       "crn": "1747",
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "S. McPhee",
+      "instructors": [
+        {
+          "name": "S. McPhee",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -50,18 +44,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Varner",
     "S. McPhee"
   ],
-  "scraped_at": "2026-04-20T21:51:57.782Z"
+  "scraped_at": "2026-05-13T00:39:34.117Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "221",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "QR",
+  "course_description": "Systems of linear equations, matrices, determinants, linear transformations, eigenvalues and eigenvectors, least-squares.",
+  "course_notes": "MATH 111 or MATH_OX 111 or MATH 112 or MATH_OX 112 or MATH 112Z or equivalent transfer credit as prerequisite.",
+  "requisites": "MATH 111 or MATH_OX 111 or MATH 112 or MATH_OX 112 or MATH 112Z or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "/Chen",
+      "instructors": [
+        {
+          "name": "/Chen",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -44,6 +57,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "/Chen",
+      "instructors": [
+        {
+          "name": "/Chen",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -73,6 +93,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "Villeta-García/Grigoryan",
+      "instructors": [
+        {
+          "name": "Villeta-García/Grigoryan",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -102,6 +129,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "Villeta-García/Grigoryan",
+      "instructors": [
+        {
+          "name": "Villeta-García/Grigoryan",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -131,6 +165,13 @@
       "section_number": "5",
       "schedule_type": "LEC",
       "instructor": "Villeta-García/Wang",
+      "instructors": [
+        {
+          "name": "Villeta-García/Wang",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -160,6 +201,13 @@
       "section_number": "6",
       "schedule_type": "LEC",
       "instructor": "Villeta-García/Wang",
+      "instructors": [
+        {
+          "name": "Villeta-García/Wang",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -188,7 +236,14 @@
       "crn": "3436",
       "section_number": "7",
       "schedule_type": "LEC",
-      "instructor": "Chung/Armstrong",
+      "instructor": "/Armstrong",
+      "instructors": [
+        {
+          "name": "/Armstrong",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -217,7 +272,14 @@
       "crn": "3438",
       "section_number": "8",
       "schedule_type": "LEC",
-      "instructor": "Chung/Armstrong",
+      "instructor": "/Armstrong",
+      "instructors": [
+        {
+          "name": "/Armstrong",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -254,10 +316,10 @@
     "waitlisted": 3
   },
   "instructors_unique": [
+    "/Armstrong",
     "/Chen",
-    "Chung/Armstrong",
     "Villeta-García/Grigoryan",
     "Villeta-García/Wang"
   ],
-  "scraped_at": "2026-04-20T20:51:13.089Z"
+  "scraped_at": "2026-05-13T00:40:54.685Z"
 }

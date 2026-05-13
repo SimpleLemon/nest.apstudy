@@ -5,6 +5,12 @@
   "catalog_number": "300",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-26",
     "end": "2026-03-23"
@@ -15,6 +21,13 @@
       "section_number": "1101",
       "schedule_type": "LEC",
       "instructor": "U. Rackliffe",
+      "instructors": [
+        {
+          "name": "U. Rackliffe",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "1102",
       "schedule_type": "LEC",
       "instructor": "M. Schmees",
+      "instructors": [
+        {
+          "name": "M. Schmees",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -53,6 +73,13 @@
       "section_number": "1103",
       "schedule_type": "LEC",
       "instructor": "S. Cruz",
+      "instructors": [
+        {
+          "name": "S. Cruz",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -72,6 +99,13 @@
       "section_number": "1104",
       "schedule_type": "LEC",
       "instructor": "J. Ross",
+      "instructors": [
+        {
+          "name": "J. Ross",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -91,6 +125,13 @@
       "section_number": "1105",
       "schedule_type": "LEC",
       "instructor": "A. Gibbons",
+      "instructors": [
+        {
+          "name": "A. Gibbons",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -110,6 +151,13 @@
       "section_number": "1106",
       "schedule_type": "LEC",
       "instructor": "C. Frederick",
+      "instructors": [
+        {
+          "name": "C. Frederick",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -129,6 +177,13 @@
       "section_number": "1107",
       "schedule_type": "LEC",
       "instructor": "J. Billetdeaux",
+      "instructors": [
+        {
+          "name": "J. Billetdeaux",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -148,6 +203,13 @@
       "section_number": "1108",
       "schedule_type": "LEC",
       "instructor": "C. Frederick",
+      "instructors": [
+        {
+          "name": "C. Frederick",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -167,6 +229,13 @@
       "section_number": "1109",
       "schedule_type": "LEC",
       "instructor": "D. Clear",
+      "instructors": [
+        {
+          "name": "D. Clear",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -180,6 +249,13 @@
       "section_number": "1110",
       "schedule_type": "LEC",
       "instructor": "B. Baker",
+      "instructors": [
+        {
+          "name": "B. Baker",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -199,6 +275,13 @@
       "section_number": "1111",
       "schedule_type": "LEC",
       "instructor": "R. Bobowski",
+      "instructors": [
+        {
+          "name": "R. Bobowski",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -218,6 +301,13 @@
       "section_number": "1112",
       "schedule_type": "LEC",
       "instructor": "D. Clear",
+      "instructors": [
+        {
+          "name": "D. Clear",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -237,6 +327,13 @@
       "section_number": "1113",
       "schedule_type": "LEC",
       "instructor": "N. Smith",
+      "instructors": [
+        {
+          "name": "N. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -256,6 +353,13 @@
       "section_number": "1114",
       "schedule_type": "LEC",
       "instructor": "N. Smith",
+      "instructors": [
+        {
+          "name": "N. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -275,6 +379,13 @@
       "section_number": "1115",
       "schedule_type": "LEC",
       "instructor": "A. Gibbons",
+      "instructors": [
+        {
+          "name": "A. Gibbons",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -294,6 +405,13 @@
       "section_number": "1116",
       "schedule_type": "LEC",
       "instructor": "A. Errore",
+      "instructors": [
+        {
+          "name": "A. Errore",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -313,6 +431,13 @@
       "section_number": "1117",
       "schedule_type": "LEC",
       "instructor": "J. Lowy",
+      "instructors": [
+        {
+          "name": "J. Lowy",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -332,6 +457,13 @@
       "section_number": "1118",
       "schedule_type": "LEC",
       "instructor": "D. Clear",
+      "instructors": [
+        {
+          "name": "D. Clear",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -351,6 +483,13 @@
       "section_number": "1119",
       "schedule_type": "LEC",
       "instructor": "W. Gu",
+      "instructors": [
+        {
+          "name": "W. Gu",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -370,6 +509,13 @@
       "section_number": "1120",
       "schedule_type": "LEC",
       "instructor": "C. Morales",
+      "instructors": [
+        {
+          "name": "C. Morales",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -389,6 +535,13 @@
       "section_number": "1121",
       "schedule_type": "LEC",
       "instructor": "K. Timpone",
+      "instructors": [
+        {
+          "name": "K. Timpone",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -408,6 +561,13 @@
       "section_number": "1122",
       "schedule_type": "LEC",
       "instructor": "M. Foronda",
+      "instructors": [
+        {
+          "name": "M. Foronda",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -427,6 +587,13 @@
       "section_number": "1123",
       "schedule_type": "LEC",
       "instructor": "K. Timpone",
+      "instructors": [
+        {
+          "name": "K. Timpone",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -446,6 +613,13 @@
       "section_number": "1124",
       "schedule_type": "LEC",
       "instructor": "A. Kays",
+      "instructors": [
+        {
+          "name": "A. Kays",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -465,6 +639,13 @@
       "section_number": "1125",
       "schedule_type": "LEC",
       "instructor": "R. Bobowski",
+      "instructors": [
+        {
+          "name": "R. Bobowski",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -484,6 +665,13 @@
       "section_number": "1126",
       "schedule_type": "LEC",
       "instructor": "J. Lowy",
+      "instructors": [
+        {
+          "name": "J. Lowy",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -503,6 +691,13 @@
       "section_number": "1127",
       "schedule_type": "LEC",
       "instructor": "J. Lowy",
+      "instructors": [
+        {
+          "name": "J. Lowy",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -522,6 +717,13 @@
       "section_number": "1128",
       "schedule_type": "LEC",
       "instructor": "E. Bianchi",
+      "instructors": [
+        {
+          "name": "E. Bianchi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -541,6 +743,13 @@
       "section_number": "1129",
       "schedule_type": "LEC",
       "instructor": "S. Leist",
+      "instructors": [
+        {
+          "name": "S. Leist",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -560,6 +769,13 @@
       "section_number": "1130",
       "schedule_type": "LEC",
       "instructor": "S. Leist",
+      "instructors": [
+        {
+          "name": "S. Leist",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -579,6 +795,13 @@
       "section_number": "1131",
       "schedule_type": "LEC",
       "instructor": "D. Clear",
+      "instructors": [
+        {
+          "name": "D. Clear",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -598,6 +821,13 @@
       "section_number": "1132",
       "schedule_type": "LEC",
       "instructor": "R. Bobowski",
+      "instructors": [
+        {
+          "name": "R. Bobowski",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -617,6 +847,13 @@
       "section_number": "1133",
       "schedule_type": "LEC",
       "instructor": "S. Cruz",
+      "instructors": [
+        {
+          "name": "S. Cruz",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -636,6 +873,13 @@
       "section_number": "1136",
       "schedule_type": "LEC",
       "instructor": "S. Savage",
+      "instructors": [
+        {
+          "name": "S. Savage",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "34",
       "is_cancelled": false,
@@ -684,5 +928,5 @@
     "U. Rackliffe",
     "W. Gu"
   ],
-  "scraped_at": "2026-04-20T20:49:15.750Z"
+  "scraped_at": "2026-05-13T00:36:37.712Z"
 }

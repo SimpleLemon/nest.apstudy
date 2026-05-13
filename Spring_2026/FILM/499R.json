@@ -5,6 +5,12 @@
   "catalog_number": "499R",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 5",
+  "requirement_designation": "HAP",
+  "course_description": "A supervised project in an area of study to be determined by the instructor and student in the semester preceding the independent study. Requires faculty approval prior to registration. Only four credit hours can be applied toward fulfillment of the requirement of the major.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,8 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -34,6 +42,13 @@
       "section_number": "2",
       "schedule_type": "SUP",
       "instructor": "Porst/Barba",
+      "instructors": [
+        {
+          "name": "Porst/Barba",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -53,6 +68,13 @@
       "section_number": "3",
       "schedule_type": "SUP",
       "instructor": "D. Barba",
+      "instructors": [
+        {
+          "name": "D. Barba",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -66,6 +88,13 @@
       "section_number": "4",
       "schedule_type": "SUP",
       "instructor": "S. Garner",
+      "instructors": [
+        {
+          "name": "S. Garner",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -90,5 +119,5 @@
     "Porst/Barba",
     "S. Garner"
   ],
-  "scraped_at": "2026-04-20T20:48:01.282Z"
+  "scraped_at": "2026-05-13T00:37:06.889Z"
 }

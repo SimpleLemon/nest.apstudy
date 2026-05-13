@@ -5,6 +5,12 @@
   "catalog_number": "455W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "CW",
+  "course_description": "In this course, students will analyze popular films from the 1940s to present day, documentaries, social media posts, and television series to examine how media simultaneously portrays and constructs cultural representations of ballet through the tropes of pleasure and pain.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "WGS 455W",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "M. Mandradjieff",
+      "instructors": [
+        {
+          "name": "M. Mandradjieff",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Mandradjieff"
   ],
-  "scraped_at": "2026-04-20T20:50:36.609Z"
+  "scraped_at": "2026-05-13T00:39:56.668Z"
 }

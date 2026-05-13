@@ -5,6 +5,12 @@
   "catalog_number": "319",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "How do we understand the events that recently erupted with different degrees of violence in North African and Middle Eastern countries? Why were experts including diplomats, pundits, and politicians taken by surprise? How do media outlets like CNN, BBC, and Al Jazeera cover this \"social uprising\"?",
+  "course_notes": "FILM 102 and (FILM 201 or FILM 202 or FILM 203 or FILM 204) or equivalent transfer credit as prerequisite.",
+  "requisites": "FILM 102 and (FILM 201 or FILM 202 or FILM 203 or FILM 204) or equivalent transfer credit as prerequisite.",
+  "cross_listed": "AFS 319 FILM 319 MESAS 319",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Cherribi",
+      "instructors": [
+        {
+          "name": "S. Cherribi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "S. Cherribi"
   ],
-  "scraped_at": "2026-04-20T20:51:47.792Z"
+  "scraped_at": "2026-05-13T00:42:20.177Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "302W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAPW",
+  "course_description": "Learning to read literature from a rheoretical viewpoint, its formal properties, distinctive features, origins, purposes, and capacities for representing the world; representative critics and schools from contemporary and earlier periods. *Note: This course is non-repeatable.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "S. Meighoo",
+      "instructors": [
+        {
+          "name": "S. Meighoo",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "S. Meighoo"
   ],
-  "scraped_at": "2026-04-20T20:50:33.314Z"
+  "scraped_at": "2026-05-13T00:39:53.439Z"
 }

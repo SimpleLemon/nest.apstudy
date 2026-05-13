@@ -5,6 +5,12 @@
   "catalog_number": "495A",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 8",
+  "requirement_designation": "XA",
+  "course_description": "Permission of Honors Coordinator required. Restricted to students who are accepted into the departmental Honors program. Fulfills ENVS Independent Study requirement (4 credit hours).",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "RSC",
       "instructor": "J. Ajibade",
+      "instructors": [
+        {
+          "name": "J. Ajibade",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "RSC",
       "instructor": "T. Gillespie",
+      "instructors": [
+        {
+          "name": "T. Gillespie",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3",
       "schedule_type": "RSC",
       "instructor": "G. Vazquez Prokopec",
+      "instructors": [
+        {
+          "name": "G. Vazquez Prokopec",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "4",
       "schedule_type": "RSC",
       "instructor": "A. Avramov",
+      "instructors": [
+        {
+          "name": "A. Avramov",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -67,6 +101,13 @@
       "section_number": "5",
       "schedule_type": "RSC",
       "instructor": "E. Saikawa",
+      "instructors": [
+        {
+          "name": "E. Saikawa",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -93,5 +134,5 @@
     "J. Ajibade",
     "T. Gillespie"
   ],
-  "scraped_at": "2026-04-20T20:50:43.287Z"
+  "scraped_at": "2026-05-13T00:40:11.212Z"
 }

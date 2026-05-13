@@ -5,6 +5,12 @@
   "catalog_number": "190",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "FS",
+  "course_description": "Freshman seminar, for first year students only. Variable topics.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "T. Bing",
+      "instructors": [
+        {
+          "name": "T. Bing",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "J. Rieser",
+      "instructors": [
+        {
+          "name": "J. Rieser",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -73,5 +93,5 @@
     "J. Rieser",
     "T. Bing"
   ],
-  "scraped_at": "2026-04-20T20:48:49.253Z"
+  "scraped_at": "2026-05-13T00:38:55.131Z"
 }

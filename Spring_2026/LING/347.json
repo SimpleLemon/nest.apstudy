@@ -5,6 +5,12 @@
   "catalog_number": "347",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "ETHN",
+  "course_description": "African American Language explores present-day features of AAL, its history and ongoing trajectory, its origins and diverging from Mainstream American English, as well as AAL as an artistic expression and issues related to education, the justice system, and linguistic profiling and discrimination.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "AAS 347 ANT 347",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "E. Britt",
+      "instructors": [
+        {
+          "name": "E. Britt",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "E. Britt"
   ],
-  "scraped_at": "2026-04-20T20:48:27.751Z"
+  "scraped_at": "2026-05-13T00:37:45.582Z"
 }

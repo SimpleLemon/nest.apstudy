@@ -5,6 +5,12 @@
   "catalog_number": "220W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "CW",
+  "course_description": "Introduction to rhetoric and rhetorical analysis. While learning rhetorical tactics of Ancient Greece and Rome, students will apply that learning to their academic and vocational goals. Practice in writing and speaking, grounded in ethics, are central to the course.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "R. Spera",
+      "instructors": [
+        {
+          "name": "R. Spera",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "R. Spera",
+      "instructors": [
+        {
+          "name": "R. Spera",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -72,5 +92,5 @@
   "instructors_unique": [
     "R. Spera"
   ],
-  "scraped_at": "2026-04-20T21:51:31.846Z"
+  "scraped_at": "2026-05-13T00:37:02.040Z"
 }

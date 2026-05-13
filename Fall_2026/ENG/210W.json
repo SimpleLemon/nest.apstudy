@@ -1,10 +1,16 @@
 {
   "course_code": "ENG 210W",
-  "course_title": "Topics in Literature: Major Authors",
+  "course_title": "Topics in Literature: Major Authors: Shakespeare: Past and Present",
   "subject": "ENG",
   "catalog_number": "210W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAW",
+  "course_description": "An introduction to one or more major authors in English literature, with an emphasis on literary merit and its determination, canon formation, literary movements, and reading strategies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "H. Chambers",
+      "instructors": [
+        {
+          "name": "H. Chambers",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -33,20 +46,52 @@
           }
         ]
       }
+    },
+    {
+      "crn": "5793",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "A. Prince",
+      "instructors": [
+        {
+          "name": "A. Prince",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 1,
     "closed": 0,
     "waitlisted": 1
   },
   "instructors_unique": [
+    "A. Prince",
     "H. Chambers"
   ],
-  "scraped_at": "2026-04-20T20:50:41.615Z"
+  "scraped_at": "2026-05-13T00:40:07.981Z"
 }

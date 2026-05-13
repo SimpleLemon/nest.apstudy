@@ -127,6 +127,70 @@ def _serialize_user_event(doc):
     }
 
 
+def _coerce_utc(dt_value):
+    if dt_value is None:
+        return None
+    if dt_value.tzinfo is None:
+        return dt_value.replace(tzinfo=timezone.utc)
+    return dt_value.astimezone(timezone.utc)
+
+
+def _parse_range_param(value):
+    if not value:
+        return None
+    parsed = parse_datetime(value)
+    return _coerce_utc(parsed) if parsed else None
+
+
+def _event_overlaps_range(start_value, end_value, range_start, range_end):
+    if not range_start or not range_end:
+        return True
+    start_dt = _coerce_utc(parse_datetime(start_value))
+    end_dt = _coerce_utc(parse_datetime(end_value)) or start_dt
+    if not start_dt or not end_dt:
+        return False
+    return start_dt < range_end and end_dt > range_start
+
+
+def _resolve_last_fetched(user_id):
+    last_fetched = None
+    feed_table = COLLECTIONS.get("calendar_feeds")
+    latest_feed = None
+    if feed_table:
+        try:
+            latest_feed = first_row(
+                feed_table,
+                [
+                    Query.equal("user_id", [user_id]),
+                    Query.order_desc("last_fetched"),
+                ],
+            )
+        except AppwriteException:
+            latest_feed = None
+
+    if latest_feed and latest_feed.get("last_fetched"):
+        parsed = parse_datetime(latest_feed.get("last_fetched"))
+        if parsed:
+            return parsed.isoformat()
+
+    try:
+        latest_event = first_row(
+            COLLECTIONS["calendar_cache"],
+            [
+                Query.equal("user_id", [user_id]),
+                Query.order_desc("fetched_at"),
+            ],
+        )
+    except AppwriteException:
+        latest_event = None
+
+    if latest_event and latest_event.get("fetched_at"):
+        parsed = parse_datetime(latest_event.get("fetched_at"))
+        if parsed:
+            last_fetched = parsed.isoformat()
+    return last_fetched
+
+
 def _configured_feed_urls(settings):
     """Return all configured calendar feed URLs for a user."""
     if not settings:
@@ -156,7 +220,21 @@ def get_events():
     Returns cached calendar events for the authenticated user.
     """
     user_id = str(current_user.id)
+    range_start = _parse_range_param(request.args.get("start"))
+    range_end = _parse_range_param(request.args.get("end"))
+    if bool(request.args.get("start")) ^ bool(request.args.get("end")):
+        return jsonify({"error": "start and end are required together"}), 400
+    if (request.args.get("start") and not range_start) or (
+        request.args.get("end") and not range_end
+    ):
+        return jsonify({"error": "start and end must be valid ISO-8601"}), 400
+
     try:
+        settings = first_row(
+            COLLECTIONS["user_settings"],
+            [Query.equal("user_id", [user_id])],
+        )
+        feed_urls = _configured_feed_urls(settings)
         cache_events = list_rows_all(
             COLLECTIONS["calendar_cache"],
             [
@@ -175,6 +253,18 @@ def get_events():
         logger.exception("Failed to load calendar events")
         return jsonify({"error": "Unable to load calendar events."}), 500
 
+    if range_start and range_end:
+        cache_events = [
+            e
+            for e in cache_events
+            if _event_overlaps_range(e.get("event_start"), e.get("event_end"), range_start, range_end)
+        ]
+        created_events = [
+            e
+            for e in created_events
+            if _event_overlaps_range(e.get("start"), e.get("end"), range_start, range_end)
+        ]
+
     serialized = [_serialize_event(e) for e in cache_events] + [
         _serialize_user_event(e) for e in created_events
     ]
@@ -183,6 +273,9 @@ def get_events():
         "user_id": current_user.id,
         "count": len(serialized),
         "events": serialized,
+        "feed_configured": bool(feed_urls),
+        "refresh_interval_minutes": settings.get("feed_refresh_minutes") if settings else None,
+        "last_fetched": _resolve_last_fetched(user_id),
     })
 
 
@@ -411,14 +504,6 @@ def feed_status():
         )
         feed_urls = _configured_feed_urls(settings)
 
-        latest_event = first_row(
-            COLLECTIONS["calendar_cache"],
-            [
-                Query.equal("user_id", [user_id]),
-                Query.order_desc("fetched_at"),
-            ],
-        )
-
         count_response = list_rows_safe(
             COLLECTIONS["calendar_cache"],
             [Query.equal("user_id", [user_id]), Query.limit(1)],
@@ -427,17 +512,11 @@ def feed_status():
         logger.exception("Failed to load calendar status")
         return jsonify({"error": "Unable to load calendar status."}), 500
 
-    last_fetched = None
-    if latest_event and latest_event.get("fetched_at"):
-        parsed = parse_datetime(latest_event.get("fetched_at"))
-        if parsed:
-            last_fetched = parsed.isoformat()
-
     return jsonify({
         "feed_configured": bool(feed_urls),
         "configured_feed_count": len(feed_urls),
         "refresh_interval_minutes": settings.get("feed_refresh_minutes") if settings else None,
-        "last_fetched": last_fetched,
+        "last_fetched": _resolve_last_fetched(user_id),
         "cached_event_count": count_response.get("total", 0),
     })
 

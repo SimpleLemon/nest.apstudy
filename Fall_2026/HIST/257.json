@@ -5,6 +5,12 @@
   "catalog_number": "257",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HAE",
+  "course_description": "\"From Arab Jew to Mizrahi\" tells the story of Middle Eastern and North African (MENA) Jewish experiences in modern times, from these communities' lives in Islamic lands through their mass migration, mostly to Israel and the creation of a new culture there.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "MESAS 257 JS 257",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "G. Levin",
+      "instructors": [
+        {
+          "name": "G. Levin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "G. Levin"
   ],
-  "scraped_at": "2026-04-20T20:50:54.865Z"
+  "scraped_at": "2026-05-13T00:40:30.509Z"
 }

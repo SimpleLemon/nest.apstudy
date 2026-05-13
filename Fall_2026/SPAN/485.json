@@ -5,6 +5,12 @@
   "catalog_number": "485",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "None",
+  "course_description": "Upper-level research seminar on topics related to the language, discourse, literature, and/or culture of the Hispanic world. Students may take multiple SPAN 485 courses provided that they focus on different topics.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Herrero-Olaizola",
+      "instructors": [
+        {
+          "name": "A. Herrero-Olaizola",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -39,7 +52,9 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "Staff",
-      "enrollment_status": "Open",
+      "instructors": [],
+      "location": null,
+      "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -65,12 +80,12 @@
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 0,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 2
   },
   "instructors_unique": [
     "A. Herrero-Olaizola"
   ],
-  "scraped_at": "2026-04-20T20:51:49.443Z"
+  "scraped_at": "2026-05-13T00:42:21.804Z"
 }

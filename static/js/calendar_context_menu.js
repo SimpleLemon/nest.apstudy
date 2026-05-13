@@ -151,6 +151,9 @@
         if (window.state) {
             window.state.anchorDate = new Date();
             window.render && window.render();
+            if (window.ensureEventsForRange && window.getBufferedRangeForView) {
+                window.ensureEventsForRange(window.getBufferedRangeForView());
+            }
         }
     }
 

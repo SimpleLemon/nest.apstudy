@@ -1,10 +1,16 @@
 {
   "course_code": "CL 285",
-  "course_title": "Special Topics",
+  "course_title": "Special Topics: Art & Arch.of Anc.Mesopotamia",
   "subject": "CL",
   "catalog_number": "285",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "HAP",
+  "course_description": "Topic changes to meet current interest of students and faculty. Course may be repeated for credit as topic varies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "G. Lovisetto",
+      "instructors": [
+        {
+          "name": "G. Lovisetto",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "G. Lovisetto"
   ],
-  "scraped_at": "2026-04-20T21:52:05.928Z"
+  "scraped_at": "2026-05-13T00:39:50.217Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "661",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "2172",
       "schedule_type": "LEC",
       "instructor": "C. Goetz",
+      "instructors": [
+        {
+          "name": "C. Goetz",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -34,6 +47,13 @@
       "section_number": "2672",
       "schedule_type": "LEC",
       "instructor": "C. Goetz",
+      "instructors": [
+        {
+          "name": "C. Goetz",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -53,6 +73,13 @@
       "section_number": "3272",
       "schedule_type": "LEC",
       "instructor": "C. Goetz",
+      "instructors": [
+        {
+          "name": "C. Goetz",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -72,6 +99,13 @@
       "section_number": "4172",
       "schedule_type": "LEC",
       "instructor": "C. Goetz",
+      "instructors": [
+        {
+          "name": "C. Goetz",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -91,6 +125,13 @@
       "section_number": "4272",
       "schedule_type": "LEC",
       "instructor": "C. Goetz",
+      "instructors": [
+        {
+          "name": "C. Goetz",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -119,5 +160,5 @@
   "instructors_unique": [
     "C. Goetz"
   ],
-  "scraped_at": "2026-04-20T20:52:07.675Z"
+  "scraped_at": "2026-05-13T00:41:12.480Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "495BW",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 8",
+  "requirement_designation": "CW",
+  "course_description": "Honors research in Classics under the direct supervision of a faculty member. Open by invitation only. One semester of honors research can be used toward the College's Continuing Writing requirement.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "N. Slater",
+      "instructors": [
+        {
+          "name": "N. Slater",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "SUP",
       "instructor": "C. Campbell",
+      "instructors": [
+        {
+          "name": "C. Campbell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -41,6 +61,13 @@
       "section_number": "3",
       "schedule_type": "SUP",
       "instructor": "S. Blakely",
+      "instructors": [
+        {
+          "name": "S. Blakely",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -54,6 +81,13 @@
       "section_number": "4",
       "schedule_type": "SUP",
       "instructor": "E. Master",
+      "instructors": [
+        {
+          "name": "E. Master",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -67,6 +101,13 @@
       "section_number": "5",
       "schedule_type": "SUP",
       "instructor": "S. Blakely",
+      "instructors": [
+        {
+          "name": "S. Blakely",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -92,5 +133,5 @@
     "N. Slater",
     "S. Blakely"
   ],
-  "scraped_at": "2026-04-20T21:51:25.341Z"
+  "scraped_at": "2026-05-13T00:36:42.574Z"
 }

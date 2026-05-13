@@ -47,9 +47,30 @@ Table: user_courses
 - added_at DATETIME NOT NULL -> datetime attribute: added_at
 - UNIQUE (user_id, term, subject, catalog, crn)
 
+Table: course_seat_tracks
+- id INTEGER PRIMARY KEY -> use Appwrite $id (string); no separate attribute
+- user_id INTEGER FK users.id -> string attribute: user_id
+- term VARCHAR(64) NOT NULL -> string(64) attribute: term
+- subject VARCHAR(64) NOT NULL -> string(64) attribute: subject
+- catalog VARCHAR(64) NOT NULL -> string(64) attribute: catalog
+- crn VARCHAR(64) -> string(64) attribute: crn
+- section_id VARCHAR(255) -> string(255) attribute: section_id
+- course_code VARCHAR(64) -> string(64) attribute: course_code
+- course_title VARCHAR(255) -> string(255) attribute: course_title
+- last_status VARCHAR(64) -> string(64) attribute: last_status
+- last_seats_available INTEGER -> integer attribute: last_seats_available
+- enabled BOOLEAN NOT NULL DEFAULT 1 -> boolean attribute: enabled
+- last_checked_at DATETIME -> datetime attribute: last_checked_at
+- last_notified_at DATETIME -> datetime attribute: last_notified_at
+- created_at DATETIME NOT NULL -> datetime attribute: created_at
+- updated_at DATETIME -> datetime attribute: updated_at
+- UNIQUE (user_id, term, subject, catalog, crn)
+
 Table: calendar_cache
 - id INTEGER PRIMARY KEY -> use Appwrite $id (string); no separate attribute
 - user_id INTEGER FK users.id -> string attribute: user_id
+- feed_url TEXT -> string(2048) attribute: feed_url
+- feed_url_hash TEXT -> string(64) attribute: feed_url_hash
 - event_uid VARCHAR(255) -> string(255) attribute: event_uid
 - event_title TEXT -> string attribute: event_title
 - event_start DATETIME -> datetime attribute: event_start
@@ -59,7 +80,19 @@ Table: calendar_cache
 - course_name VARCHAR(255) -> string(255) attribute: course_name
 - raw_description TEXT -> string attribute: raw_description
 - fetched_at DATETIME -> datetime attribute: fetched_at
-- UNIQUE (user_id, event_uid)
+- UNIQUE (user_id, feed_url_hash, event_uid)
+
+Table: calendar_feeds
+- id INTEGER PRIMARY KEY -> use Appwrite $id (string); no separate attribute
+- user_id INTEGER FK users.id -> string attribute: user_id
+- feed_url TEXT -> string(2048) attribute: feed_url
+- feed_url_hash TEXT -> string(64) attribute: feed_url_hash
+- etag_header TEXT -> string(1024) attribute: etag_header
+- last_modified_header TEXT -> string(1024) attribute: last_modified_header
+- last_fetch_http_code INTEGER -> integer attribute: last_fetch_http_code
+- last_fetched DATETIME -> datetime attribute: last_fetched
+- created_at DATETIME -> datetime attribute: created_at
+- updated_at DATETIME -> datetime attribute: updated_at
 
 Table: user_calendar_preferences
 - id INTEGER PRIMARY KEY -> use Appwrite $id (string); no separate attribute
@@ -127,7 +160,9 @@ COLLECTIONS = {
 	"users": "users",
 	"user_settings": "user_settings",
 	"user_courses": "user_courses",
+	"course_seat_tracks": "course_seat_tracks",
 	"calendar_cache": "calendar_cache",
+	"calendar_feeds": "calendar_feeds",
 	"user_calendar_preferences": "user_calendar_preferences",
 	"user_events": "user_events",
 	"shared_files": "shared_files",

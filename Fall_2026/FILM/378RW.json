@@ -5,6 +5,12 @@
   "catalog_number": "378RW",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAPW",
+  "course_description": "A writing-intensive course in the construction and formatting of screenplays for upper-level undergraduates, which also broaches various aspects of pre-production planning. Weekly screenings required.",
+  "course_notes": "ENGCW 270/270W or ENGCW_OX 270 or ENGCW 271/271W or ENGCW_OX 271 or ENGCW 272/272W or FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
+  "requisites": "ENGCW 270/270W or ENGCW_OX 270 or ENGCW 271/271W or ENGCW_OX 271 or ENGCW 272/272W or FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
+  "cross_listed": "ENGCW 378RW",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "J. Conway",
+      "instructors": [
+        {
+          "name": "J. Conway",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "C. Kras",
+      "instructors": [
+        {
+          "name": "C. Kras",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -68,5 +88,5 @@
     "C. Kras",
     "J. Conway"
   ],
-  "scraped_at": "2026-04-20T20:50:44.939Z"
+  "scraped_at": "2026-05-13T00:40:14.428Z"
 }

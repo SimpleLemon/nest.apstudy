@@ -5,6 +5,12 @@
   "catalog_number": "400",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1 - 3",
+  "requirement_designation": "HAP",
+  "course_description": "This course considers in depth a particular fact of Ancient Greek Philosophy, building upon the survey offered in PHIL 200. For example, a topics course might focus on Ancient Greek Ethics, Epistemology, Metaphysics, or Political Philosophy among others.",
+  "course_notes": "Two PHIL courses or equivalent transfer credit as prerequisite.",
+  "requisites": "Two PHIL courses or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Owen",
+      "instructors": [
+        {
+          "name": "J. Owen",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "J. Owen"
   ],
-  "scraped_at": "2026-04-20T20:48:47.567Z"
+  "scraped_at": "2026-05-13T00:38:53.517Z"
 }

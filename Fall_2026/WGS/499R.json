@@ -5,6 +5,12 @@
   "catalog_number": "499R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "None",
+  "course_description": "Offered every semester by special arrangement with a member of the WGSS faculty. Students undertake their own independent research project or assist with the faculty member's on-going research, or some combination thereof. Variable credit: 1 credit hour requires 3-4 hours of research per week. Permission from WGSS faculty supervisor required prior to enrollment. Graduate students instructors may not serve as faculty advisor.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "RSC",
       "instructor": "S. Mulla",
+      "instructors": [
+        {
+          "name": "S. Mulla",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "S. Mulla"
   ],
-  "scraped_at": "2026-04-20T20:51:54.469Z"
+  "scraped_at": "2026-05-13T00:42:28.248Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "247",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "SSE",
+  "course_description": "Relations between and within groups, and conflict and cooperation in light of a number of models of social interaction. Application of principles to racial, religious, and ethnic minorities.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "AAS 247",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Sewell",
+      "instructors": [
+        {
+          "name": "A. Sewell",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "J. Easley",
+      "instructors": [
+        {
+          "name": "J. Easley",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -73,5 +93,5 @@
     "A. Sewell",
     "J. Easley"
   ],
-  "scraped_at": "2026-04-20T20:49:04.186Z"
+  "scraped_at": "2026-05-13T00:39:12.875Z"
 }

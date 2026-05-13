@@ -5,6 +5,12 @@
   "catalog_number": "637MN",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-12",
     "end": "2026-03-04"
@@ -15,6 +21,13 @@
       "section_number": "401",
       "schedule_type": "CLN",
       "instructor": "M. Fontaine",
+      "instructors": [
+        {
+          "name": "M. Fontaine",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "402",
       "schedule_type": "CLN",
       "instructor": "M. Fontaine",
+      "instructors": [
+        {
+          "name": "M. Fontaine",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -50,5 +70,5 @@
   "instructors_unique": [
     "M. Fontaine"
   ],
-  "scraped_at": "2026-04-20T20:49:25.780Z"
+  "scraped_at": "2026-05-13T00:38:01.993Z"
 }

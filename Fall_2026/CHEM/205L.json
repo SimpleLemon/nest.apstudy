@@ -5,6 +5,12 @@
   "catalog_number": "205L",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": "SNTL",
+  "course_description": "CHEM 205L will connect your understanding of the interaction of light & matter to the determination of molecular structure through spectroscopic methods. Students will assign atomic/molecular spectra & analyze results to determine critical properties of the compound using rigorous math on real molecules.",
+  "course_notes": "CHEM 203L or CHEM_OX 203L or CHEM 203ZL as prerequisites and CHEM 205 or CHEM_OX 205 as co-requisite or equivalent transfer credit.",
+  "requisites": "CHEM 203L or CHEM_OX 203L or CHEM 203ZL as prerequisites and CHEM 205 or CHEM_OX 205 as co-requisite or equivalent transfer credit.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "A. Brathwaite",
+      "instructors": [
+        {
+          "name": "A. Brathwaite",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LAB",
       "instructor": "A. Brathwaite",
+      "instructors": [
+        {
+          "name": "A. Brathwaite",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "LAB",
       "instructor": "A. Brathwaite",
+      "instructors": [
+        {
+          "name": "A. Brathwaite",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -87,6 +114,13 @@
       "section_number": "4",
       "schedule_type": "LAB",
       "instructor": "A. Brathwaite",
+      "instructors": [
+        {
+          "name": "A. Brathwaite",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -111,6 +145,13 @@
       "section_number": "5",
       "schedule_type": "LAB",
       "instructor": "A. Brathwaite",
+      "instructors": [
+        {
+          "name": "A. Brathwaite",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -135,6 +176,13 @@
       "section_number": "6",
       "schedule_type": "LAB",
       "instructor": "A. Brathwaite",
+      "instructors": [
+        {
+          "name": "A. Brathwaite",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -159,6 +207,13 @@
       "section_number": "7",
       "schedule_type": "LAB",
       "instructor": "A. Brathwaite",
+      "instructors": [
+        {
+          "name": "A. Brathwaite",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -192,5 +247,5 @@
   "instructors_unique": [
     "A. Brathwaite"
   ],
-  "scraped_at": "2026-04-20T20:50:30.045Z"
+  "scraped_at": "2026-05-13T00:39:46.996Z"
 }

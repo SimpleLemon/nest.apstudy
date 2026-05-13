@@ -5,6 +5,12 @@
   "catalog_number": "671",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "4201",
       "schedule_type": "PRA",
       "instructor": "T. Balch",
+      "instructors": [
+        {
+          "name": "T. Balch",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "4202",
       "schedule_type": "PRA",
       "instructor": "K. Travers-Uyham",
+      "instructors": [
+        {
+          "name": "K. Travers-Uyham",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -73,5 +93,5 @@
     "K. Travers-Uyham",
     "T. Balch"
   ],
-  "scraped_at": "2026-04-20T20:52:01.049Z"
+  "scraped_at": "2026-05-13T00:40:16.049Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "101",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HA",
+  "course_description": "Serves as an intro to analyzing film and media. Examines style, form, technology, industry and cultural meaning. Spans 19th to the 21st centuries, national contexts, genres and modes of production. Introduces ways of \"reading\" film and other visual media, to be a more informed and critical viewer.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. Reynolds",
+      "instructors": [
+        {
+          "name": "D. Reynolds",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -44,6 +57,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "G. Zinman",
+      "instructors": [
+        {
+          "name": "G. Zinman",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -73,6 +93,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "J. Wang",
+      "instructors": [
+        {
+          "name": "J. Wang",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -113,5 +140,5 @@
     "G. Zinman",
     "J. Wang"
   ],
-  "scraped_at": "2026-04-20T20:50:44.935Z"
+  "scraped_at": "2026-05-13T00:40:14.424Z"
 }

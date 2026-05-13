@@ -1,10 +1,16 @@
 {
   "course_code": "ARTHIST 789R",
-  "course_title": "Seminar: African Art/Architecture",
+  "course_title": "Seminar: African Art/Architecture: The Human in AH and Humanities",
   "subject": "ARTHIST",
   "catalog_number": "789R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "S. Gagliardi",
+      "instructors": [
+        {
+          "name": "S. Gagliardi",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "S. Gagliardi"
   ],
-  "scraped_at": "2026-04-20T21:51:57.795Z"
+  "scraped_at": "2026-05-13T00:39:34.123Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "249",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "SS",
+  "course_description": "Antisocial behavior in relation to cultural, social biological, and psychological factors.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Healy",
+      "instructors": [
+        {
+          "name": "A. Healy",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "A. Healy"
   ],
-  "scraped_at": "2026-04-20T20:49:04.187Z"
+  "scraped_at": "2026-05-13T00:39:12.875Z"
 }

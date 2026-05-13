@@ -5,6 +5,12 @@
   "catalog_number": "312W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAPW",
+  "course_description": "Special topics in the study of Shakespeare. May include historical approaches, thematic emphases, performance studies, etc.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Cavanagh",
+      "instructors": [
+        {
+          "name": "S. Cavanagh",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "S. Cavanagh"
   ],
-  "scraped_at": "2026-04-20T20:50:41.619Z"
+  "scraped_at": "2026-05-13T00:40:07.983Z"
 }

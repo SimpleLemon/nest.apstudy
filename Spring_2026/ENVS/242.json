@@ -5,6 +5,12 @@
   "catalog_number": "242",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "Field-based study of modern and ancient tropical environments on San Salvador Island, Bahamas. Topics: terrestrial, intertidal and subtidal environments; rocky and sandy shorelines; hypersaline lakes; caves; reefs; lagoons; biological and geological methods in the field. Fulfills ENVS field course.",
+  "course_notes": "This course requires ENVS 241 as a prerequisite OR permission of instructor.",
+  "requisites": "This course requires ENVS 241 as a prerequisite OR permission of instructor.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "DIS",
       "instructor": "A. Martin",
+      "instructors": [
+        {
+          "name": "A. Martin",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -37,5 +50,5 @@
   "instructors_unique": [
     "A. Martin"
   ],
-  "scraped_at": "2026-04-20T20:47:59.634Z"
+  "scraped_at": "2026-05-13T00:37:03.649Z"
 }

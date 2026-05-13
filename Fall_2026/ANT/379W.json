@@ -5,6 +5,12 @@
   "catalog_number": "379W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "CWE",
+  "course_description": "This course is an introduction to a diverse selection of Indigenous musics of North America. Particular attention will be paid to ways in which music articulates and shapes issues of tradition and modernity, place and identity, revitalization and resurgence, and sovereignty and self-determination.",
+  "course_notes": "MUS 200 or MUS_OX 200 or ANT 202 or ANT 202W or ANTH_OX 202 or equivalent transfer credit as prerequisite.",
+  "requisites": "MUS 200 or MUS_OX 200 or ANT 202 or ANT 202W or ANTH_OX 202 or equivalent transfer credit as prerequisite.",
+  "cross_listed": "MUS 379W",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "H. Senungetuk",
+      "instructors": [
+        {
+          "name": "H. Senungetuk",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "H. Senungetuk"
   ],
-  "scraped_at": "2026-04-20T20:50:20.083Z"
+  "scraped_at": "2026-05-13T00:39:30.872Z"
 }

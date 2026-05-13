@@ -5,6 +5,12 @@
   "catalog_number": "799R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,8 +21,15 @@
       "section_number": "1",
       "schedule_type": "SUP",
       "instructor": "Nugent/Holsey",
+      "instructors": [
+        {
+          "name": "Nugent/Holsey",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "4",
+      "enrollment_count": "11",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -28,8 +41,15 @@
       "section_number": "2",
       "schedule_type": "SUP",
       "instructor": "Knauft/Mulla",
+      "instructors": [
+        {
+          "name": "Knauft/Mulla",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "4",
+      "enrollment_count": "11",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -41,8 +61,15 @@
       "section_number": "3",
       "schedule_type": "SUP",
       "instructor": "Ozawa-de Silva/Phillips",
+      "instructors": [
+        {
+          "name": "Ozawa-de Silva/Phillips",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "4",
+      "enrollment_count": "11",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -54,8 +81,155 @@
       "section_number": "4",
       "schedule_type": "SUP",
       "instructor": "M. Benitez",
+      "instructors": [
+        {
+          "name": "M. Benitez",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
-      "enrollment_count": "4",
+      "enrollment_count": "11",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5794",
+      "section_number": "5",
+      "schedule_type": "SUP",
+      "instructor": "Lonsdorf/Benitez",
+      "instructors": [
+        {
+          "name": "Lonsdorf/Benitez",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "11",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5795",
+      "section_number": "6",
+      "schedule_type": "SUP",
+      "instructor": "Phillips/Sterk",
+      "instructors": [
+        {
+          "name": "Phillips/Sterk",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "11",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5796",
+      "section_number": "7",
+      "schedule_type": "SUP",
+      "instructor": "D. Stout",
+      "instructors": [
+        {
+          "name": "D. Stout",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "11",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5797",
+      "section_number": "8",
+      "schedule_type": "SUP",
+      "instructor": "D. Nugent",
+      "instructors": [
+        {
+          "name": "D. Nugent",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "11",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5798",
+      "section_number": "9",
+      "schedule_type": "SUP",
+      "instructor": "E. Lonsdorf",
+      "instructors": [
+        {
+          "name": "E. Lonsdorf",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "11",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5799",
+      "section_number": "10",
+      "schedule_type": "SUP",
+      "instructor": "K. Phillips",
+      "instructors": [
+        {
+          "name": "K. Phillips",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "11",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5800",
+      "section_number": "11",
+      "schedule_type": "SUP",
+      "instructor": "Nugent/Phillips",
+      "instructors": [
+        {
+          "name": "Nugent/Phillips",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
+      "enrollment_count": "11",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -64,20 +238,27 @@
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 11,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 4,
+    "other": 11,
+    "open": 11,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
+    "D. Nugent",
+    "D. Stout",
+    "E. Lonsdorf",
+    "K. Phillips",
     "Knauft/Mulla",
+    "Lonsdorf/Benitez",
     "M. Benitez",
     "Nugent/Holsey",
-    "Ozawa-de Silva/Phillips"
+    "Nugent/Phillips",
+    "Ozawa-de Silva/Phillips",
+    "Phillips/Sterk"
   ],
-  "scraped_at": "2026-04-20T20:50:20.086Z"
+  "scraped_at": "2026-05-13T00:39:30.908Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "435",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "ICE",
+  "course_description": "Advanced study of the language used in the Israeli media; includes selections from newspapers, radio, and television broadcasts.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "JS 435",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "P. Kahlon",
+      "instructors": [
+        {
+          "name": "P. Kahlon",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "P. Kahlon"
   ],
-  "scraped_at": "2026-04-20T20:50:53.205Z"
+  "scraped_at": "2026-05-13T00:40:27.294Z"
 }

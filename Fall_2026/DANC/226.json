@@ -5,6 +5,12 @@
   "catalog_number": "226",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "PE",
+  "course_description": "Somatic movement education builds a relationship between the body and mind by guiding the mover through a process of full body integration. A variety of somatic practices may be covered, including Bartenieff Fundamentals, Iyengar-based yoga, and core movement training. Somatic practices can be applied to everyday activities and performance, affecting levels of confidence and encouraging authenticity.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Mandradjieff",
+      "instructors": [
+        {
+          "name": "M. Mandradjieff",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Mandradjieff"
   ],
-  "scraped_at": "2026-04-20T20:50:36.607Z"
+  "scraped_at": "2026-05-13T00:39:56.665Z"
 }

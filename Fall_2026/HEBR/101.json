@@ -5,6 +5,12 @@
   "catalog_number": "101",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "IC",
+  "course_description": "First in a series of courses designed to teach speaking, writing, reading, and comprehension of modern Hebrew. No previous knowledge of Hebrew required.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "I. Ben-Simon",
+      "instructors": [
+        {
+          "name": "I. Ben-Simon",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -44,6 +57,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "P. Kahlon",
+      "instructors": [
+        {
+          "name": "P. Kahlon",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -73,6 +93,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "S. Shaked",
+      "instructors": [
+        {
+          "name": "S. Shaked",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -102,6 +129,13 @@
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "S. Shaked",
+      "instructors": [
+        {
+          "name": "S. Shaked",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -142,5 +176,5 @@
     "P. Kahlon",
     "S. Shaked"
   ],
-  "scraped_at": "2026-04-20T20:50:53.203Z"
+  "scraped_at": "2026-05-13T00:40:27.294Z"
 }

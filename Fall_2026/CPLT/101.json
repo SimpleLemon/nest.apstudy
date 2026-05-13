@@ -5,6 +5,12 @@
   "catalog_number": "101",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "FW",
+  "course_description": "Instruction in rhetorical composition, critical reading, reflection, and writing as recursive process. Across themed sections, students engage with diverse genres. Courses share some common assignments including research writing and final student-curated portfolio with reflection project.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "B. Schrenzel",
+      "instructors": [
+        {
+          "name": "B. Schrenzel",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "A. Ramirez Amaya",
+      "instructors": [
+        {
+          "name": "A. Ramirez Amaya",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "S. Cha",
+      "instructors": [
+        {
+          "name": "S. Cha",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -98,5 +125,5 @@
     "B. Schrenzel",
     "S. Cha"
   ],
-  "scraped_at": "2026-04-20T20:50:33.311Z"
+  "scraped_at": "2026-05-13T00:39:53.437Z"
 }

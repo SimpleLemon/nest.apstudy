@@ -5,6 +5,12 @@
   "catalog_number": "280",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "This course provides historical context and examines the competing identities of neuroethics; the ethics of neuroscience and the neuroscience of ethics. Students will explore ethical, legal & social implications and identify promise or limitations of neuroscientific advancements.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "G. Hue",
+      "instructors": [
+        {
+          "name": "G. Hue",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "G. Hue"
   ],
-  "scraped_at": "2026-04-20T20:51:21.295Z"
+  "scraped_at": "2026-05-13T00:41:05.975Z"
 }

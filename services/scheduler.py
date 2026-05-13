@@ -16,14 +16,22 @@ instance runs scheduled jobs [8].
 import os
 import json
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 
 from appwrite.exception import AppwriteException
+from appwrite.query import Query
 from appwrite_client import COLLECTIONS
-from appwrite_helpers import list_rows_all, update_row_safe, format_datetime
+from appwrite_helpers import (
+    first_row,
+    format_datetime,
+    list_rows_all,
+    parse_datetime,
+    update_row_safe,
+)
+from services.staleness import is_stale
 
 logger = logging.getLogger(__name__)
 
@@ -79,7 +87,44 @@ def _refresh_all_feeds(app):
             f"Feed refresh: processing {len(settings_with_feeds)} user(s)."
         )
 
+        now = datetime.now(timezone.utc)
         for settings in settings_with_feeds:
+            refresh_minutes = settings.get("feed_refresh_minutes")
+            try:
+                refresh_minutes = int(refresh_minutes) if refresh_minutes is not None else None
+            except (TypeError, ValueError):
+                refresh_minutes = None
+
+            if refresh_minutes is None:
+                refresh_minutes = int(os.environ.get("FEED_REFRESH_INTERVAL_MINUTES", "15"))
+
+            last_fetched = None
+            feed_table = COLLECTIONS.get("calendar_feeds")
+            if feed_table:
+                latest_feed = first_row(
+                    feed_table,
+                    [
+                        Query.equal("user_id", [settings.get("user_id")]),
+                        Query.order_desc("last_fetched"),
+                    ],
+                )
+                if latest_feed and latest_feed.get("last_fetched"):
+                    last_fetched = parse_datetime(latest_feed.get("last_fetched"))
+
+            if not last_fetched:
+                latest_event = first_row(
+                    COLLECTIONS["calendar_cache"],
+                    [
+                        Query.equal("user_id", [settings.get("user_id")]),
+                        Query.order_desc("fetched_at"),
+                    ],
+                )
+                if latest_event and latest_event.get("fetched_at"):
+                    last_fetched = parse_datetime(latest_event.get("fetched_at"))
+
+            # Refresh only when the user's interval has elapsed.
+            if not is_stale(last_fetched, refresh_minutes, now=now):
+                continue
             try:
                 count = fetch_and_cache_feeds(
                     settings.get("user_id"),
@@ -107,6 +152,18 @@ def _refresh_all_feeds(app):
                     settings.get("user_id"),
                     e,
                 )
+
+
+def _check_course_seat_tracks(app):
+    """Run course seat tracking checks inside the Flask app context."""
+    with app.app_context():
+        try:
+            from services.course_tracking import check_course_seat_tracks
+
+            notified_count = check_course_seat_tracks()
+            logger.info("Course seat tracking: %s notification(s) sent.", notified_count)
+        except Exception:
+            logger.exception("Course seat tracking failed")
 
 
 def init_scheduler(app):
@@ -149,6 +206,15 @@ def init_scheduler(app):
         name=f"Refresh Canvas feeds every {default_interval} min",
         replace_existing=True,
         max_instances=1,  # Prevent overlapping runs if a refresh takes longer than the interval
+    )
+
+    _scheduler.add_job(
+        func=lambda: _check_course_seat_tracks(app),
+        trigger=IntervalTrigger(minutes=10),
+        id="check_course_seat_tracks",
+        name="Check tracked Emory course seats every 10 min",
+        replace_existing=True,
+        max_instances=1,
     )
 
     _scheduler.start()

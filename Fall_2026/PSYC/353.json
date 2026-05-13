@@ -5,6 +5,12 @@
   "catalog_number": "353",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "SNT",
+  "course_description": "This course presents an integrated coverage of work at the intersection of animal behavior, evolution, and cellular/systems neuroscience. The course surveys the major areas of behavioral neuroscience.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "NBB 302",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Manns",
+      "instructors": [
+        {
+          "name": "J. Manns",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "J. Manns"
   ],
-  "scraped_at": "2026-04-20T20:51:39.452Z"
+  "scraped_at": "2026-05-13T00:42:08.911Z"
 }

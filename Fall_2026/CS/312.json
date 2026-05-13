@@ -5,6 +5,12 @@
   "catalog_number": "312",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "Understanding ethical and societal concerns introduced by computing and AI into human life, including privacy, online influence and disinformation, information ownership and responsibility, fairness and bias in computer and AI technologies such as facial recognition and robotic systems.",
+  "course_notes": "CS 211 or CS 323 or CS 325 or CS 334 or CS 470 or equivalent transfer credit as prerequisite.",
+  "requisites": "CS 211 or CS 323 or CS 325 or CS 334 or CS 470 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Emami",
+      "instructors": [
+        {
+          "name": "A. Emami",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "A. Emami"
   ],
-  "scraped_at": "2026-04-20T20:50:34.961Z"
+  "scraped_at": "2026-05-13T00:39:55.053Z"
 }

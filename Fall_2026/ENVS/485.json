@@ -5,6 +5,12 @@
   "catalog_number": "485",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "None",
+  "course_description": "A course designed for advanced students on topics of interest in environmental sciences. This course may count as elective credit for the ENVS major and minor; relevant topics may count towards the ENVS Sustainability Sciences or Earth and Atmospheric Sciences minors. See current course atlas.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Pynne",
+      "instructors": [
+        {
+          "name": "J. Pynne",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "J. Pynne"
   ],
-  "scraped_at": "2026-04-20T20:50:43.287Z"
+  "scraped_at": "2026-05-13T00:40:11.211Z"
 }

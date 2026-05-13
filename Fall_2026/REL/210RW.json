@@ -1,10 +1,16 @@
 {
   "course_code": "REL 210RW",
-  "course_title": "Classic Religious Texts",
+  "course_title": "Classic Religious Texts: Daoism",
   "subject": "REL",
   "catalog_number": "210RW",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAW",
+  "course_description": "This course will explore classic religious texts in depth, developing skills to interpret sacred, philosophical and ethical works. Social, cultural, and/or philosophical contexts at work will provide interpretive frameworks.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "JS 210RW",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "W. Wu",
+      "instructors": [
+        {
+          "name": "W. Wu",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "W. Wu"
   ],
-  "scraped_at": "2026-04-20T20:51:44.511Z"
+  "scraped_at": "2026-05-13T00:42:13.742Z"
 }

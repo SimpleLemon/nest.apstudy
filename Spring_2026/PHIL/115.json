@@ -5,6 +5,12 @@
   "catalog_number": "115",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "Introductory examination of fundamental moral questions, such as the best way of life for a human being, the relationship between happiness and moral excellence, and the nature of ethical reasoning, as treated by major philosophers in the history of philosophy.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Lysaker/Imran",
+      "instructors": [
+        {
+          "name": "Lysaker/Imran",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "D. Westbrook",
+      "instructors": [
+        {
+          "name": "D. Westbrook",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -78,5 +98,5 @@
     "D. Westbrook",
     "Lysaker/Imran"
   ],
-  "scraped_at": "2026-04-20T20:48:47.555Z"
+  "scraped_at": "2026-05-13T00:38:53.511Z"
 }

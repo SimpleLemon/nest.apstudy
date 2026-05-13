@@ -5,6 +5,12 @@
   "catalog_number": "433",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "This course provides an in-depth, technical study of financial markets and investments. We study measures of risk, capital allocation to risky portfolios, optimal portfolios, the capital asset pricing model, indicators of market efficiency, and valuation of various financial instruments.",
+  "course_notes": "(ECON 112 or ECON_OX 112) and (ECON 201 or ECON_OX 201) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisite.",
+  "requisites": "(ECON 112 or ECON_OX 112) and (ECON 201 or ECON_OX 201) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Toda/Pulavarti",
+      "instructors": [
+        {
+          "name": "Toda/Pulavarti",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "Toda/Pulavarti"
   ],
-  "scraped_at": "2026-04-20T20:47:54.575Z"
+  "scraped_at": "2026-05-13T00:36:52.248Z"
 }

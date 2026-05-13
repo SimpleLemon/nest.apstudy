@@ -5,6 +5,12 @@
   "catalog_number": "102",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3 - 4",
+  "requirement_designation": "HA",
+  "course_description": "An introduction to Greek and Roman myths and the variety of approaches available for their study.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Blakely",
+      "instructors": [
+        {
+          "name": "S. Blakely",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "S. Blakely"
   ],
-  "scraped_at": "2026-04-20T21:52:05.924Z"
+  "scraped_at": "2026-05-13T00:39:50.216Z"
 }

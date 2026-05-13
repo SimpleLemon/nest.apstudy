@@ -5,6 +5,12 @@
   "catalog_number": "330LW",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "A. Brathwaite",
+      "instructors": [
+        {
+          "name": "A. Brathwaite",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "LAB",
       "instructor": "A. Brathwaite",
+      "instructors": [
+        {
+          "name": "A. Brathwaite",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -63,7 +83,14 @@
       "section_number": "3",
       "schedule_type": "LAB",
       "instructor": "A. Brathwaite",
-      "enrollment_status": "Closed",
+      "instructors": [
+        {
+          "name": "A. Brathwaite",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
       "schedule": {
@@ -89,12 +116,12 @@
     "labs": 3,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 3,
+    "open": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "A. Brathwaite"
   ],
-  "scraped_at": "2026-04-20T20:50:30.046Z"
+  "scraped_at": "2026-05-13T00:39:46.996Z"
 }

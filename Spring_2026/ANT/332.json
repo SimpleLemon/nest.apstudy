@@ -5,6 +5,12 @@
   "catalog_number": "332",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "HSCE",
+  "course_description": "The course will take a contemporary view on how population genetics has changed our understating of the biological explanation of race.",
+  "course_notes": "Juniors or Seniors only or permission of instructor required for enrollment.",
+  "requisites": "Juniors or Seniors only or permission of instructor required for enrollment.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Lindo",
+      "instructors": [
+        {
+          "name": "J. Lindo",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "J. Lindo"
   ],
-  "scraped_at": "2026-04-20T20:47:36.247Z"
+  "scraped_at": "2026-05-13T00:36:23.133Z"
 }

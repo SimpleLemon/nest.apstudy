@@ -5,6 +5,12 @@
   "catalog_number": "365",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1101",
       "schedule_type": "LEC",
       "instructor": "N. Graves",
+      "instructors": [
+        {
+          "name": "N. Graves",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "1102",
       "schedule_type": "LEC",
       "instructor": "N. Graves",
+      "instructors": [
+        {
+          "name": "N. Graves",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -63,6 +83,13 @@
       "section_number": "1103",
       "schedule_type": "LEC",
       "instructor": "N. Graves",
+      "instructors": [
+        {
+          "name": "N. Graves",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -87,7 +114,14 @@
       "section_number": "1104",
       "schedule_type": "LEC",
       "instructor": "J. Lowy",
-      "enrollment_status": "Closed",
+      "instructors": [
+        {
+          "name": "J. Lowy",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
       "enrollment_count": "11",
       "is_cancelled": false,
       "schedule": {
@@ -111,6 +145,13 @@
       "section_number": "1105",
       "schedule_type": "LEC",
       "instructor": "J. Lowy",
+      "instructors": [
+        {
+          "name": "J. Lowy",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -135,6 +176,13 @@
       "section_number": "1106",
       "schedule_type": "LEC",
       "instructor": "J. Lowy",
+      "instructors": [
+        {
+          "name": "J. Lowy",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -159,6 +207,13 @@
       "section_number": "1107",
       "schedule_type": "LEC",
       "instructor": "J. Lowy",
+      "instructors": [
+        {
+          "name": "J. Lowy",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -183,7 +238,14 @@
       "section_number": "1108",
       "schedule_type": "LEC",
       "instructor": "S. Savage",
-      "enrollment_status": "Closed",
+      "instructors": [
+        {
+          "name": "S. Savage",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
       "enrollment_count": "11",
       "is_cancelled": false,
       "schedule": {
@@ -207,6 +269,13 @@
       "section_number": "1110",
       "schedule_type": "LEC",
       "instructor": "S. Savage",
+      "instructors": [
+        {
+          "name": "S. Savage",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -231,6 +300,13 @@
       "section_number": "1111",
       "schedule_type": "LEC",
       "instructor": "S. Savage",
+      "instructors": [
+        {
+          "name": "S. Savage",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "11",
       "is_cancelled": false,
@@ -255,7 +331,14 @@
       "section_number": "1112",
       "schedule_type": "LEC",
       "instructor": "S. Savage",
-      "enrollment_status": "Closed",
+      "instructors": [
+        {
+          "name": "S. Savage",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Open",
       "enrollment_count": "11",
       "is_cancelled": false,
       "schedule": {
@@ -281,8 +364,8 @@
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
-    "closed": 10,
+    "open": 4,
+    "closed": 7,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -290,5 +373,5 @@
     "N. Graves",
     "S. Savage"
   ],
-  "scraped_at": "2026-04-20T20:51:59.377Z"
+  "scraped_at": "2026-05-13T00:39:45.387Z"
 }

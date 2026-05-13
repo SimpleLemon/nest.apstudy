@@ -5,6 +5,12 @@
   "catalog_number": "200W",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HAW",
+  "course_description": "IDS 200 examines the origins and development of distinct disciplines in contemporary universities through the lens of what counts as evidence in different fields of human knowledge.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "P. Wakefield",
+      "instructors": [
+        {
+          "name": "P. Wakefield",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "P. Wakefield"
   ],
-  "scraped_at": "2026-04-20T20:50:58.228Z"
+  "scraped_at": "2026-05-13T00:40:36.984Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "212L",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1",
+  "requirement_designation": "None",
+  "course_description": "Math 212L is a one credit lab that can be taken concurrently with Math 212. Lab activities will be held in a dance studio, primarily led by a dance instructor, with a math instructor participating as well. Lab activities will connect the mathematical content from Math 212 to dance and movement.",
+  "course_notes": "MATH 112 or MATH_OX 112 or equivalent transfer credit as prerequisite.",
+  "requisites": "MATH 112 or MATH_OX 112 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LAB",
       "instructor": "Manetta/Teague",
+      "instructors": [
+        {
+          "name": "Manetta/Teague",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "Manetta/Teague"
   ],
-  "scraped_at": "2026-04-20T20:48:29.461Z"
+  "scraped_at": "2026-05-13T00:37:47.209Z"
 }

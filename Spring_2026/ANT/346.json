@@ -5,6 +5,12 @@
   "catalog_number": "346",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "course_description": "This course explores globalization of Japanese anime and manga, particularly how series highlight forms of diverse and marginalized identities; how it reflects issues of social and economic precarity in contemporary Japan; and how recreation facilitates re-creation of self, identity, and relations.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "JPN 346",
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Ozawa-de Silva/Ozawa-de Silva",
+      "instructors": [
+        {
+          "name": "Ozawa-de Silva/Ozawa-de Silva",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "Ozawa-de Silva/Ozawa-de Silva"
   ],
-  "scraped_at": "2026-04-20T20:47:36.247Z"
+  "scraped_at": "2026-05-13T00:36:23.134Z"
 }

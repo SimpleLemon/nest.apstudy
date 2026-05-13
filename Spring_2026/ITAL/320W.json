@@ -5,6 +5,12 @@
   "catalog_number": "320W",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "ICW",
+  "course_description": "Development of linguistic and communication skills needed to initiate a conversation with Italian speaking businesses and prospective employers, combined with an introduction of Italian business culture, practices and etiquette.",
+  "course_notes": "ITAL 202 or ITAL_OX 202 or equivalent transfer credit as prerequisite.",
+  "requisites": "ITAL 202 or ITAL_OX 202 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "S. Muratore",
+      "instructors": [
+        {
+          "name": "S. Muratore",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "S. Muratore"
   ],
-  "scraped_at": "2026-04-20T20:48:17.900Z"
+  "scraped_at": "2026-05-13T00:37:35.931Z"
 }

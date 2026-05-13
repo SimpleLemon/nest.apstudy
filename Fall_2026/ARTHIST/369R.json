@@ -5,6 +5,12 @@
   "catalog_number": "369R",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HAP",
+  "course_description": "Possible topics include Post-Impressionism and its consequences; Matisse &amp; Picasso; Art and Politics between the Wars; Dada and Surrealism; the Avant-Garde; Abstract Art; What is Art?; Theories of Modernism. May be repeated for credit when topic changes, up to a maximum of twelve hours.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "A. Patrao",
+      "instructors": [
+        {
+          "name": "A. Patrao",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "A. Patrao"
   ],
-  "scraped_at": "2026-04-20T21:51:57.794Z"
+  "scraped_at": "2026-05-13T00:39:34.120Z"
 }

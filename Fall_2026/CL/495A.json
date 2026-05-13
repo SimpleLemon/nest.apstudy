@@ -5,6 +5,12 @@
   "catalog_number": "495A",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "XA",
+  "course_description": "Honors research in Classics under the direct supervision of a faculty member. Open by invitation only.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "RSC",
       "instructor": "S. Blakely",
+      "instructors": [
+        {
+          "name": "S. Blakely",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -28,6 +41,13 @@
       "section_number": "2",
       "schedule_type": "RSC",
       "instructor": "E. Master",
+      "instructors": [
+        {
+          "name": "E. Master",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -51,5 +71,5 @@
     "E. Master",
     "S. Blakely"
   ],
-  "scraped_at": "2026-04-20T21:52:05.931Z"
+  "scraped_at": "2026-05-13T00:39:50.217Z"
 }

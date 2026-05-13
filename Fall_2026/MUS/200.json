@@ -5,6 +5,12 @@
   "catalog_number": "200",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "Students will be introduced to classical and vernacular traditions from throughout the world, and equipped with skills they need to research and write critically about musical cultures, repertoires, and practices.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "H. Senungetuk",
+      "instructors": [
+        {
+          "name": "H. Senungetuk",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "H. Senungetuk"
   ],
-  "scraped_at": "2026-04-20T20:51:19.601Z"
+  "scraped_at": "2026-05-13T00:41:04.342Z"
 }

@@ -5,6 +5,12 @@
   "catalog_number": "210",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "An introduction to one or more major authors in English literature, with an emphasis on literary merit and its determination, canon formation, literary movements, and reading strategies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -14,7 +20,9 @@
       "crn": "4005",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "I. Goh",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -45,8 +53,6 @@
     "closed": 1,
     "waitlisted": 0
   },
-  "instructors_unique": [
-    "I. Goh"
-  ],
-  "scraped_at": "2026-04-20T20:50:41.615Z"
+  "instructors_unique": [],
+  "scraped_at": "2026-05-13T00:40:07.981Z"
 }

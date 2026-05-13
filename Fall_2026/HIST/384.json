@@ -5,6 +5,12 @@
   "catalog_number": "384",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HSCE",
+  "course_description": "An in-depth study of the current historical knowledge of 19th century slavery in the southern United States; and how slavery has been depicted in popular culture, films and literature in the 20th and 21st centuries.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": "AAS 384",
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "M. Gordon",
+      "instructors": [
+        {
+          "name": "M. Gordon",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "M. Gordon"
   ],
-  "scraped_at": "2026-04-20T20:50:54.871Z"
+  "scraped_at": "2026-05-13T00:40:30.512Z"
 }

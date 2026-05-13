@@ -5,6 +5,12 @@
   "catalog_number": "205",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "HA",
+  "course_description": "Studies in poetry and poetic forms. Readings may vary in individual sections, but all sections emphasize critical reading and writing about poetic art. Required for English majors.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "W. Kalaidjian",
+      "instructors": [
+        {
+          "name": "W. Kalaidjian",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "2",
       "schedule_type": "SEM",
       "instructor": "W. Kalaidjian",
+      "instructors": [
+        {
+          "name": "W. Kalaidjian",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -63,7 +83,14 @@
       "section_number": "3",
       "schedule_type": "SEM",
       "instructor": "G. Higgins",
-      "enrollment_status": "Open",
+      "instructors": [
+        {
+          "name": "G. Higgins",
+          "email": null
+        }
+      ],
+      "location": null,
+      "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
       "schedule": {
@@ -89,13 +116,13 @@
     "labs": 0,
     "discussions": 0,
     "other": 3,
-    "open": 1,
+    "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 3
   },
   "instructors_unique": [
     "G. Higgins",
     "W. Kalaidjian"
   ],
-  "scraped_at": "2026-04-20T20:50:41.614Z"
+  "scraped_at": "2026-05-13T00:40:07.980Z"
 }

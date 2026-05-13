@@ -5,6 +5,12 @@
   "catalog_number": "201",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "HA",
+  "course_description": "Cinema from its origins in 19th century technological experimentation through the 1960s. Weekly screenings required.",
+  "course_notes": "FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
+  "requisites": "FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "D. Reynolds",
+      "instructors": [
+        {
+          "name": "D. Reynolds",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -53,5 +66,5 @@
   "instructors_unique": [
     "D. Reynolds"
   ],
-  "scraped_at": "2026-04-20T20:50:44.936Z"
+  "scraped_at": "2026-05-13T00:40:14.425Z"
 }

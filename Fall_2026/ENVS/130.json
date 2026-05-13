@@ -5,6 +5,12 @@
   "catalog_number": "130",
   "term": "Fall_2026",
   "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "NS",
+  "course_description": "This course is an introduction to the concepts and methods related to the study of environmental sciences. Students will be introduced to relevant theories from physical, ecological and social sciences. This course is intended for majors and minors in Environmental Sciences.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-08-26",
     "end": "2026-12-09"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "J. Deere",
+      "instructors": [
+        {
+          "name": "J. Deere",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,5 +61,5 @@
   "instructors_unique": [
     "J. Deere"
   ],
-  "scraped_at": "2026-04-20T20:50:43.278Z"
+  "scraped_at": "2026-05-13T00:40:11.205Z"
 }

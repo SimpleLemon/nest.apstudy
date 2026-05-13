@@ -5,6 +5,12 @@
   "catalog_number": "161",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": "1",
+  "requirement_designation": "PE",
+  "course_description": "CBCT is a system of meditative practices designed to expand and strengthen compassion for self and others. Practices include training in Attentional stability and increased emotional awareness, as well as targeted analytical reflections to better understand one's relationship with self and others.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1",
       "schedule_type": "PE",
       "instructor": "N. Alarcon",
+      "instructors": [
+        {
+          "name": "N. Alarcon",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,5 +56,5 @@
   "instructors_unique": [
     "N. Alarcon"
   ],
-  "scraped_at": "2026-04-20T20:48:44.265Z"
+  "scraped_at": "2026-05-13T00:38:48.678Z"
 }

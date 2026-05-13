@@ -131,7 +131,7 @@ function renderNavbar() {
 <div class="navbar-container" id="navbar-root">
   <div class="navbar-left">
     <img src="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy" class="navbar-logo" />
-    <a href="/dashboard" class="navbar-title">Nest.APStudy</a>
+    <a href="/calendar" class="navbar-title">Nest.APStudy</a>
   </div>
   
   <div class="navbar-right">

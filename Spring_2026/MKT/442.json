@@ -5,6 +5,12 @@
   "catalog_number": "442",
   "term": "Spring_2026",
   "srcdb": "5261",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
   "date_range": {
     "start": "2026-01-13",
     "end": "2026-04-27"
@@ -15,6 +21,13 @@
       "section_number": "1101",
       "schedule_type": "PRA",
       "instructor": "R. Shah",
+      "instructors": [
+        {
+          "name": "R. Shah",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -39,6 +52,13 @@
       "section_number": "1109",
       "schedule_type": "PRA",
       "instructor": "D. Clear",
+      "instructors": [
+        {
+          "name": "D. Clear",
+          "email": null
+        }
+      ],
+      "location": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -62,5 +82,5 @@
     "D. Clear",
     "R. Shah"
   ],
-  "scraped_at": "2026-04-20T20:49:20.820Z"
+  "scraped_at": "2026-05-13T00:37:50.440Z"
 }
