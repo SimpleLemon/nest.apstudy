@@ -19,7 +19,7 @@ def create_app():
     app.jinja_env.filters["avatar_url"] = avatar_url_for_size
     app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-fallback-key")
     app.config["APPWRITE_DATABASE_ID"] = os.environ.get("APPWRITE_DATABASE_ID", "")
-    app.config["MAX_CONTENT_LENGTH"] = 50 * 1024 * 1024
+    app.config["MAX_CONTENT_LENGTH"] = 5 * 50 * 1024 * 1024
     app.config["FILE_SHARE_UPLOAD_DIR"] = os.path.join(app.root_path, "uploads", "file_share")
     os.makedirs(app.config["FILE_SHARE_UPLOAD_DIR"], exist_ok=True)
 

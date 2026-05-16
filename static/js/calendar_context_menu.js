@@ -9,7 +9,7 @@
         menuEl = document.createElement("div");
         menuEl.setAttribute("role", "menu");
         menuEl.setAttribute("aria-label", "Calendar context menu");
-        menuEl.className = "z-50 p-1.5 rounded-xl border shadow-lg bg-surface-container text-on-surface border-outline-variant/10";
+        menuEl.className = "calendar-right-click-menu";
         menuEl.style.position = "fixed";
         menuEl.style.minWidth = "170px";
         menuEl.style.display = "none";
@@ -31,27 +31,21 @@
         items.forEach((it, i) => {
             const btn = document.createElement("button");
             btn.setAttribute("role", "menuitem");
-            btn.className = "w-full text-left px-3 py-1.5 text-sm rounded-md hover:bg-surface-container-highest";
-            btn.style.display = 'block';
-            btn.style.gap = '4px';
-            btn.textContent = it.label;
+            btn.className = `calendar-right-click-item${it.danger ? " is-danger" : ""}`;
+            btn.disabled = Boolean(it.disabled);
+            btn.innerHTML = `
+                <span class="material-symbols-outlined calendar-right-click-icon">${it.icon || "radio_button_unchecked"}</span>
+                <span>${it.label}</span>
+            `;
             btn.tabIndex = i === 0 ? 0 : -1;
             btn.addEventListener("click", (e) => {
+                if (btn.disabled) return;
                 it.onClick(currentContext);
                 closeMenu();
             });
             el.appendChild(btn);
         });
         return el;
-    }
-
-    function getClosestAttribute(el, attr) {
-        let cur = el;
-        while (cur && cur !== document.body) {
-            if (cur.hasAttribute && cur.hasAttribute(attr)) return cur.getAttribute(attr);
-            cur = cur.parentElement;
-        }
-        return null;
     }
 
     function onContextMenu(e) {
@@ -65,16 +59,20 @@
             x: e.clientX,
             y: e.clientY,
             eventId: null,
+            eventRef: null,
+            event: null,
             date: null,
             time: null,
             anchorEl: null,
         };
         // detect event element
-        const eventEl = e.target.closest && e.target.closest('[data-event-id]');
+        const eventEl = e.target.closest && e.target.closest('[data-event-ref], [data-event-id]');
         const dateAttrEl = e.target.closest && e.target.closest('[data-date]');
         const timeAttrEl = e.target.closest && e.target.closest('[data-time]');
 
         context.eventId = eventEl ? eventEl.getAttribute('data-event-id') : null;
+        context.eventRef = eventEl ? (eventEl.getAttribute('data-event-ref') || context.eventId) : null;
+        context.event = context.eventRef && window.getCalendarEventByRef ? window.getCalendarEventByRef(context.eventRef) : null;
         context.date = dateAttrEl ? dateAttrEl.getAttribute('data-date') : null;
         context.time = timeAttrEl ? timeAttrEl.getAttribute('data-time') : null;
         context.anchorEl = eventEl || dateAttrEl || e.target;
@@ -87,10 +85,11 @@
         currentContext = context;
 
         if (context.eventId) {
+            const isSimulated = context.event?.source === "simulated";
             const items = [
-                { label: 'View / Edit Event', onClick: openEdit },
-                { label: 'Duplicate Event', onClick: duplicateEvent },
-                { label: 'Delete Event', onClick: deleteEvent },
+                { label: 'View / Edit Event', icon: 'edit_calendar', onClick: openEdit, disabled: isSimulated || !context.event },
+                { label: 'Duplicate Event', icon: 'content_copy', onClick: duplicateEvent, disabled: !context.event },
+                { label: 'Delete Event', icon: 'delete', onClick: deleteEvent, danger: true, disabled: isSimulated || !context.event },
             ];
             const el = buildMenu(items);
             showMenuAt(context.x, context.y, el);
@@ -99,8 +98,8 @@
 
         // empty slot
         const items = [
-            { label: 'Create New Event', onClick: createNewFromContext },
-            { label: 'Go to Today', onClick: goToToday },
+            { label: 'Create New Event', icon: 'calendar_add_on', onClick: createNewFromContext },
+            { label: 'Go to Today', icon: 'today', onClick: goToToday },
         ];
         const el = buildMenu(items);
         showMenuAt(context.x, context.y, el);
@@ -139,8 +138,7 @@
             dt.setHours(dt.getHours() + 1);
             payload.end = dt.toISOString();
         } else if (startDate) {
-            payload.start = `${startDate}`;
-            // default to 9:00 - 10:00 local
+            payload.start = `${startDate}T09:00:00`;
             payload.end = `${startDate}T10:00:00`;
         }
         // open form
@@ -157,42 +155,53 @@
         }
     }
 
-    async function openEdit(ctx) {
-        if (!ctx.eventId) return;
-        try {
-            const res = await fetch(`/api/calendar/events/${ctx.eventId}`, { credentials: 'same-origin' });
-            if (!res.ok) throw new Error('fetch failed');
-            const payload = await res.json();
-            const ev = payload.event;
-            window.openCalendarEventForm && window.openCalendarEventForm({ mode: 'edit', data: ev });
-        } catch (err) {
-            alert('Unable to load event');
-        }
+    function formDataForEvent(event) {
+        if (!event) return null;
+        return {
+            ...event,
+            start: event.start || event.startDate,
+            end: event.end || event.endDate,
+            all_day: event.all_day || event.is_all_day || event.isAllDay,
+        };
     }
 
-    async function duplicateEvent(ctx) {
-        if (!ctx.eventId) return;
-        try {
-            const res = await fetch(`/api/calendar/events/${ctx.eventId}`, { credentials: 'same-origin' });
-            if (!res.ok) throw new Error('fetch failed');
-            const payload = await res.json();
-            const ev = payload.event;
-            ev.title = `${ev.title || 'Untitled'} (Copy)`;
-            // clear id to create new
-            delete ev.id;
-            window.openCalendarEventForm && window.openCalendarEventForm({ mode: 'create', data: ev });
-        } catch (err) {
-            alert('Unable to duplicate event');
-        }
+    function isImportedEvent(event) {
+        return Boolean(event?.event_ref && String(event.event_ref).startsWith("feed:"));
+    }
+
+    function openEdit(ctx) {
+        const event = ctx.event || null;
+        const data = formDataForEvent(event);
+        if (!data) return;
+        const mode = isImportedEvent(event) ? 'override' : 'edit';
+        window.openCalendarEventForm && window.openCalendarEventForm({ mode, data });
+    }
+
+    function duplicateEvent(ctx) {
+        const event = ctx.event || null;
+        const data = formDataForEvent(event);
+        if (!data) return;
+        data.title = `${data.title || 'Untitled'} (Copy)`;
+        delete data.id;
+        delete data.event_ref;
+        window.openCalendarEventForm && window.openCalendarEventForm({ mode: 'create', data });
     }
 
     async function deleteEvent(ctx) {
-        if (!ctx.eventId) return;
+        const event = ctx.event || null;
+        if (!event) return;
         if (!confirm('Are you sure you want to delete this event?')) return;
         try {
-            const res = await fetch(`/api/calendar/events/${ctx.eventId}`, { method: 'DELETE', credentials: 'same-origin' });
+            const res = isImportedEvent(event)
+                ? await fetch('/api/calendar/event-overrides/hide', {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ event_ref: event.event_ref }),
+                })
+                : await fetch(`/api/calendar/events/${encodeURIComponent(event.id || ctx.eventId)}`, { method: 'DELETE', credentials: 'same-origin' });
             if (!res.ok) throw new Error('delete failed');
-            // refresh calendar
+            localStorage.removeItem('calendarEventsCache');
             window.loadCalendarData && window.loadCalendarData();
         } catch (err) {
             alert('Unable to delete event');

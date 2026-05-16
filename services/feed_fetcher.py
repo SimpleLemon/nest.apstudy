@@ -10,6 +10,7 @@ import hashlib
 import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, date as date_type, timezone
+from urllib.parse import urlparse, urlunparse
 
 import icalendar
 import requests as http_requests
@@ -166,16 +167,29 @@ def _normalize_feed_url(feed_url):
     if feed_url is None:
         return ""
     normalized = str(feed_url).strip()
+    if not normalized:
+        return ""
     lower = normalized.lower()
     if lower.startswith("webcal://"):
-        return "https://" + normalized[len("webcal://"):]
-    if lower.startswith("http://"):
-        return "https://" + normalized[len("http://"):]
+        normalized = "https://" + normalized[len("webcal://"):]
+    elif lower.startswith("http://"):
+        normalized = "https://" + normalized[len("http://"):]
+
+    parsed = urlparse(normalized)
+    if parsed.scheme and parsed.netloc:
+        return urlunparse((
+            parsed.scheme.lower(),
+            parsed.netloc.lower(),
+            (parsed.path or "").rstrip("/"),
+            "",
+            parsed.query,
+            "",
+        ))
     return normalized
 
 
 def _feed_url_hash(feed_url):
-    return hashlib.sha256(feed_url.encode("utf-8")).hexdigest()
+    return hashlib.sha256(_normalize_feed_url(feed_url).encode("utf-8")).hexdigest()
 
 
 def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
@@ -233,6 +247,7 @@ def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
             "etag": response.headers.get("ETag") or etag,
             "last_modified": response.headers.get("Last-Modified") or last_modified,
             "feed_url": normalized_url,
+            "calendar_name": None,
         }
 
     raw_bytes = response.content
@@ -277,7 +292,7 @@ def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
         )
         raise ValueError(f"Feed parse failed for {normalized_url}: {exc}") from exc
 
-    calendar_name = _stringify_ical(cal.get("X-WR-CALNAME"))
+    calendar_name = _stringify_ical(cal.get("X-WR-CALNAME")) or _stringify_ical(cal.get("NAME"))
     prodid = _stringify_ical(cal.get("PRODID")) or ""
     is_canvas_feed = "canvas" in prodid.lower()
 
@@ -328,6 +343,7 @@ def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
         "etag": response.headers.get("ETag"),
         "last_modified": response.headers.get("Last-Modified"),
         "feed_url": normalized_url,
+        "calendar_name": calendar_name,
     }
 
 
@@ -374,28 +390,44 @@ def _upsert_feed_metadata(user_id, feed_url, result, fetched_at):
             etag_value = existing.get("etag_header")
         if last_modified_value is None:
             last_modified_value = existing.get("last_modified_header")
+    calendar_name = result.get("calendar_name")
+    if not calendar_name and existing:
+        calendar_name = existing.get("calendar_name")
 
     payload = {
         "user_id": str(user_id),
         "feed_url": feed_url,
         "feed_url_hash": feed_hash,
+        "calendar_name": calendar_name,
         "etag_header": etag_value,
         "last_modified_header": last_modified_value,
         "last_fetch_http_code": result.get("status_code"),
         "last_fetched": format_datetime(fetched_at),
         "updated_at": format_datetime(fetched_at),
     }
-    if existing:
-        update_row_safe(feed_table, existing.get("$id"), payload)
-    else:
-        create_row_safe(
+    def write_payload(data):
+        if existing:
+            return update_row_safe(feed_table, existing.get("$id"), data)
+        return create_row_safe(
             feed_table,
             row_id=ID.unique(),
             data={
-                **payload,
+                **data,
                 "created_at": format_datetime(fetched_at),
             },
         )
+
+    try:
+        write_payload(payload)
+    except AppwriteException as exc:
+        if "calendar_name" not in str(exc):
+            raise
+        logger.info(
+            "calendar_feeds.calendar_name is not available yet; retrying metadata write without it."
+        )
+        fallback_payload = dict(payload)
+        fallback_payload.pop("calendar_name", None)
+        write_payload(fallback_payload)
 
 
 def _apply_feed_diffs(user_id, feed_url, events, fetched_at, existing_rows=None):
@@ -452,37 +484,6 @@ def fetch_and_cache_feeds(user_id, feed_urls):
         normalized_urls.append(normalized)
         seen.add(normalized)
 
-    feed_meta = _load_feed_metadata(user_id)
-    results = []
-    errors = []
-
-    with ThreadPoolExecutor(max_workers=5) as executor:
-        futures = {}
-        for feed_url in normalized_urls:
-            feed_hash = _feed_url_hash(feed_url)
-            meta = feed_meta.get(feed_hash) or {}
-            futures[executor.submit(
-                fetch_and_parse_ical,
-                feed_url,
-                etag=meta.get("etag_header"),
-                last_modified=meta.get("last_modified_header"),
-            )] = feed_url
-        for future in as_completed(futures):
-            try:
-                results.append(future.result())
-            except Exception as exc:
-                normalized_url = futures.get(future)
-                logger.error(
-                    "Failed to fetch or parse calendar feed: url=%s error=%s",
-                    normalized_url,
-                    str(exc),
-                    exc_info=True,
-                )
-                errors.append(exc)
-
-    if errors:
-        raise errors[0]
-
     try:
         existing_rows = list_rows_all(
             COLLECTIONS["calendar_cache"],
@@ -519,7 +520,39 @@ def fetch_and_cache_feeds(user_id, feed_urls):
 
     existing_by_feed = {}
     for row in existing_rows:
-        existing_by_feed.setdefault(row.get("feed_url"), []).append(row)
+        existing_by_feed.setdefault(_normalize_feed_url(row.get("feed_url")), []).append(row)
+
+    feed_meta = _load_feed_metadata(user_id)
+    results = []
+    errors = []
+
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        futures = {}
+        for feed_url in normalized_urls:
+            feed_hash = _feed_url_hash(feed_url)
+            meta = feed_meta.get(feed_hash) or {}
+            has_cached_events = bool(existing_by_feed.get(feed_url))
+            futures[executor.submit(
+                fetch_and_parse_ical,
+                feed_url,
+                etag=meta.get("etag_header") if has_cached_events else None,
+                last_modified=meta.get("last_modified_header") if has_cached_events else None,
+            )] = feed_url
+        for future in as_completed(futures):
+            try:
+                results.append(future.result())
+            except Exception as exc:
+                normalized_url = futures.get(future)
+                logger.error(
+                    "Failed to fetch or parse calendar feed: url=%s error=%s",
+                    normalized_url,
+                    str(exc),
+                    exc_info=True,
+                )
+                errors.append(exc)
+
+    if errors:
+        raise errors[0]
 
     total_changes = 0
     fetched_at = datetime.utcnow()

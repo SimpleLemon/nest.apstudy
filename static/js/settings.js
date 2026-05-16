@@ -31,6 +31,8 @@ const SETTINGS_INTERFACE_THEME_TO_THEME = {
   'nest-light': 'light',
   'system-match': 'system',
 };
+const SETTINGS_PENDING_THEME_STORAGE_KEY = 'apstudy-theme-pending';
+const SETTINGS_PENDING_THEME_UPDATED_KEY = 'apstudy-theme-updated-at';
 const SETTINGS_MAX_OTHER_CALENDARS = 10;
 
 const SETTINGS_ENDPOINTS = {
@@ -42,6 +44,15 @@ const SETTINGS_ENDPOINTS = {
   exportData: '/settings/api/export',
   deleteAccount: '/settings/api/account/delete',
 };
+
+function clearPendingThemeStorage() {
+  try {
+    localStorage.removeItem(SETTINGS_PENDING_THEME_STORAGE_KEY);
+    localStorage.removeItem(SETTINGS_PENDING_THEME_UPDATED_KEY);
+  } catch (error) {
+    // Ignore storage failures so theme switching still works visually.
+  }
+}
 
 const elements = {};
 
@@ -746,6 +757,7 @@ async function savePreferences() {
       ...(SETTINGS_STATE.settings || {}),
       ...response,
     };
+    clearPendingThemeStorage();
     syncThemeControls();
     syncToggleControls();
     applyThemePreference(payload.theme);

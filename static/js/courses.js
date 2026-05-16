@@ -11,6 +11,25 @@ const COURSE_START_MINUTES = COURSE_START_HOUR * 60;
 const COURSE_END_MINUTES = COURSE_END_HOUR * 60;
 const COURSE_HOUR_HEIGHT = 64;
 const COURSE_RESULT_LIMIT = 100;
+const COURSE_COLOR_PALETTE = [
+  { key: "course-color-01" },
+  { key: "course-color-02" },
+  { key: "course-color-03" },
+  { key: "course-color-04" },
+  { key: "course-color-05" },
+  { key: "course-color-06" },
+  { key: "course-color-07" },
+  { key: "course-color-08" },
+  { key: "course-color-09" },
+  { key: "course-color-10" },
+  { key: "course-color-11" },
+  { key: "course-color-12" },
+  { key: "course-color-13" },
+  { key: "course-color-14" },
+  { key: "course-color-15" },
+  { key: "course-color-16" },
+];
+const COURSE_COLOR_KEYS = COURSE_COLOR_PALETTE.map((color) => color.key);
 
 const state = {
   loading: true,
@@ -31,9 +50,14 @@ const state = {
   timeEnd: "23:59",
   hoveredSectionId: null,
   detailSectionId: null,
+  editingSectionId: null,
+  editingSaving: false,
   detailLoading: false,
   detailLiveError: "",
   error: "",
+  weekScrollTop: null,
+  weekScrollLeft: null,
+  weekScrollResetPending: false,
   initialScrollDone: false,
 };
 
@@ -90,11 +114,9 @@ async function loadSectionsForTerm(term) {
   render();
   try {
     const payload = await fetchJson(`/api/atlas/sections?term=${encodeURIComponent(term)}&include_cancelled=0`);
-    state.sections = Array.isArray(payload.sections) ? payload.sections : [];
     state.sectionsById = {};
-    for (const section of state.sections) {
-      rememberSection(section);
-    }
+    const rawSections = Array.isArray(payload.sections) ? payload.sections : [];
+    state.sections = rawSections.map((section) => rememberSection(section)).filter(Boolean);
   } catch (error) {
     console.error(error);
     state.error = error.message || "Unable to load course sections.";
@@ -108,11 +130,15 @@ async function loadSavedCourses() {
   const payload = await fetchJson("/api/courses/saved");
   state.savedCoursesBySection = new Map();
   for (const course of payload.courses || []) {
-    if (course.section_id) {
-      state.savedCoursesBySection.set(String(course.section_id), course);
-      rememberSection(course);
-    }
+    applySavedCourse(course);
   }
+}
+
+function applySavedCourse(course) {
+  if (!course?.section_id) return;
+  const sectionId = String(course.section_id);
+  state.savedCoursesBySection.set(sectionId, course);
+  rememberSection(course);
 }
 
 async function loadTracks() {
@@ -126,19 +152,99 @@ async function loadTracks() {
 }
 
 function rememberSection(section) {
-  const id = String(section?.id || section?.section_id || "");
-  if (!id) return;
-  const searchBlob = [
+  const id = String(section?.section_id || section?.id || "");
+  if (!id) return null;
+  const normalized = { ...state.sectionsById[id], ...section, id };
+  if (state.savedCoursesBySection.has(id)) {
+    Object.assign(normalized, getDisplayCourse(id));
+  }
+  normalized.searchBlob = buildSectionSearchBlob(normalized);
+  state.sectionsById[id] = normalized;
+  return normalized;
+}
+
+function getDisplayCourse(sectionId) {
+  const savedCourse = state.savedCoursesBySection.get(String(sectionId));
+  if (!savedCourse) return {};
+  const display = {};
+  [
+    "term",
+    "subject",
+    "catalog",
+    "crn",
+    "course_code",
+    "course_title",
+    "course_name",
+    "section_number",
+    "instructor",
+    "instructor_name",
+    "instructors",
+    "schedule_type",
+    "schedule_display",
+    "meetings",
+    "date_range",
+    "location",
+    "credit_hours",
+    "requirement_designation",
+    "course_description",
+    "description",
+    "enrollment_status",
+    "enrollment_count",
+    "seats_available",
+    "is_cancelled",
+    "color_key",
+    "overrides",
+    "updated_at",
+  ].forEach((key) => {
+    if (typeof savedCourse[key] !== "undefined" && savedCourse[key] !== null) {
+      display[key] = savedCourse[key];
+    }
+  });
+  display.section_id = savedCourse.section_id || sectionId;
+  return display;
+}
+
+function buildSectionSearchBlob(section) {
+  const parts = [];
+  const push = (value) => {
+    if (value === null || typeof value === "undefined") return;
+    if (Array.isArray(value)) {
+      value.forEach(push);
+      return;
+    }
+    if (typeof value === "object") {
+      push(value.name);
+      push(value.email);
+      push(value.instructor);
+      push(value.course_title);
+      push(value.course_name);
+      return;
+    }
+    const text = String(value).trim();
+    if (text) parts.push(text);
+  };
+
+  push([
     section.course_title,
     section.course_name,
     section.subject,
+    section.catalog,
+    section.catalog_number,
     section.course_code,
     section.instructor,
     section.instructor_name,
+    section.instructors,
     section.crn,
     section.section_number,
-  ].join(" ").toLowerCase();
-  state.sectionsById[id] = { ...state.sectionsById[id], ...section, id, searchBlob };
+    section.requirement_designation,
+    section.requirement,
+    section.ger,
+    section.credit_hours,
+    section.course_description,
+    section.description,
+  ]);
+
+  return parts.join(" ").toLowerCase();
 }
 
 function wireControls() {
@@ -153,14 +259,16 @@ function wireControls() {
   document.getElementById("courses-search-input")?.addEventListener("input", (event) => {
     state.searchQuery = event.target.value || "";
     state.detailSectionId = null;
+    state.editingSectionId = null;
     renderPanel();
   });
 
   document.getElementById("courses-term-select")?.addEventListener("change", (event) => {
     state.selectedTerm = event.target.value || "";
     state.detailSectionId = null;
+    state.editingSectionId = null;
     state.filtersOpen = false;
-    state.initialScrollDone = false;
+    resetWeekScroll();
     void loadSectionsForTerm(state.selectedTerm);
   });
 
@@ -175,6 +283,7 @@ function wireControls() {
       state.dayFilters.add(day);
     }
     state.detailSectionId = null;
+    state.editingSectionId = null;
     renderPanel();
   });
 
@@ -183,6 +292,7 @@ function wireControls() {
     document.getElementById("courses-time-start").disabled = !state.timeEnabled;
     document.getElementById("courses-time-end").disabled = !state.timeEnabled;
     state.detailSectionId = null;
+    state.editingSectionId = null;
     renderPanel();
   });
 
@@ -197,11 +307,11 @@ function wireControls() {
   });
 
   document.getElementById("courses-prev-term")?.addEventListener("click", () => {
-    changeTermBy(1);
+    changeTermBy(-1);
   });
 
   document.getElementById("courses-next-term")?.addEventListener("click", () => {
-    changeTermBy(-1);
+    changeTermBy(1);
   });
 
   document.addEventListener("click", (event) => {
@@ -233,8 +343,47 @@ function wireControls() {
     const closeDetail = event.target.closest("[data-close-detail]");
     if (closeDetail) {
       state.detailSectionId = null;
+      state.editingSectionId = null;
       state.detailLiveError = "";
       renderPanel();
+      return;
+    }
+
+    const editButton = event.target.closest("[data-open-edit-section-id]");
+    if (editButton) {
+      event.preventDefault();
+      event.stopPropagation();
+      startEditingCourse(editButton.dataset.openEditSectionId);
+      return;
+    }
+
+    const cancelEdit = event.target.closest("[data-edit-cancel]");
+    if (cancelEdit) {
+      event.preventDefault();
+      event.stopPropagation();
+      state.editingSectionId = null;
+      renderPanel();
+      return;
+    }
+
+    const saveEdit = event.target.closest("[data-edit-save]");
+    if (saveEdit) {
+      event.preventDefault();
+      event.stopPropagation();
+      void saveEditedCourse(saveEdit.dataset.editSave);
+      return;
+    }
+
+    const colorButton = event.target.closest("[data-course-color-key]");
+    if (colorButton && !colorButton.disabled) {
+      event.preventDefault();
+      event.stopPropagation();
+      const form = colorButton.closest(".courses-edit");
+      form?.querySelectorAll("[data-course-color-key]").forEach((button) => {
+        const selected = button === colorButton;
+        button.classList.toggle("is-selected", selected);
+        button.setAttribute("aria-pressed", selected ? "true" : "false");
+      });
       return;
     }
 
@@ -283,6 +432,11 @@ function wireControls() {
       syncFilterControls();
       return;
     }
+    if (event.key === "Escape" && state.editingSectionId) {
+      state.editingSectionId = null;
+      renderPanel();
+      return;
+    }
     if (event.key === "Escape" && state.detailSectionId) {
       state.detailSectionId = null;
       state.detailLiveError = "";
@@ -312,7 +466,7 @@ function changeTermBy(delta) {
   state.selectedTerm = state.terms[nextIndex];
   state.detailSectionId = null;
   state.filtersOpen = false;
-  state.initialScrollDone = false;
+  resetWeekScroll();
   renderTermSelect();
   void loadSectionsForTerm(state.selectedTerm);
 }
@@ -322,7 +476,7 @@ function renderPanel() {
   const content = document.getElementById("courses-panel-content");
   if (!summary || !content) return;
 
-  document.querySelector(".courses-panel")?.classList.toggle("is-detailing", Boolean(state.detailSectionId));
+  document.querySelector(".courses-panel")?.classList.toggle("is-detailing", Boolean(state.detailSectionId || state.editingSectionId));
   syncFilterControls();
 
   if (state.loading) {
@@ -333,6 +487,11 @@ function renderPanel() {
   if (state.error) {
     summary.textContent = "Course search unavailable";
     content.innerHTML = `<div class="courses-state">${escapeHtml(state.error)}</div>`;
+    return;
+  }
+  if (state.editingSectionId) {
+    summary.textContent = "Edit class";
+    content.innerHTML = buildEditHtml(state.editingSectionId);
     return;
   }
   if (state.detailSectionId) {
@@ -395,12 +554,13 @@ function buildCourseCardHtml(section) {
   const id = section.id;
   const addedCourse = state.savedCoursesBySection.get(id);
   const isAdded = Boolean(addedCourse);
+  const colorClass = isAdded ? getCourseColor(addedCourse).key : "";
   const status = section.enrollment_status || "Unknown";
   const statusClass = status.toLowerCase() === "open" ? "is-open" : status.toLowerCase() === "closed" ? "is-closed" : "";
   const seats = formatSeats(section);
   const saving = state.savingIds.has(id);
   return `
-    <article class="course-card ${isAdded ? "is-added" : ""}" data-section-id="${escapeHtml(id)}" tabindex="0">
+    <article class="course-card ${isAdded ? `is-added ${escapeHtml(colorClass)}` : ""}" data-section-id="${escapeHtml(id)}" tabindex="0">
       <div class="course-card-top">
         <div class="course-card-title">
           <strong>${escapeHtml(section.course_code || "Course")} ${section.section_number ? `<span class="course-section-inline">Sec ${escapeHtml(section.section_number)}</span>` : ""}</strong>
@@ -455,6 +615,15 @@ function buildDetailHtml(sectionId) {
         <span class="course-chip">${escapeHtml(formatTermLabel(section.term))}</span>
         <span class="course-chip ${statusClass}">${escapeHtml(status)}</span>
       </div>
+      ${canTrack || track ? `
+        <section class="track-control">
+          <div class="track-control-text">
+            <strong>Track Class</strong>
+            <span>${trackEnabled ? "Email notifications are on for this section." : "Email me when a seat opens."}</span>
+          </div>
+          <button type="button" class="track-toggle" data-track-section-id="${escapeHtml(sectionId)}" aria-label="Track class" aria-pressed="${trackEnabled ? "true" : "false"}" ${tracking || (!canTrack && !trackEnabled) ? "disabled" : ""}></button>
+        </section>
+      ` : ""}
       <section class="courses-detail-card">
         ${detailRow("Instructor", formatInstructors(section))}
         ${detailRow("Schedule", section.schedule_display || "TBA")}
@@ -469,19 +638,16 @@ function buildDetailHtml(sectionId) {
       </section>
       <div class="courses-detail-actions">
         ${addedCourse
-          ? `<button type="button" class="courses-danger-action" data-remove-course-id="${escapeHtml(addedCourse.id)}" data-section-id="${escapeHtml(sectionId)}" ${saving ? "disabled" : ""}>Remove Class</button>`
+          ? `
+            <button type="button" class="courses-secondary-action" data-open-edit-section-id="${escapeHtml(sectionId)}" ${saving ? "disabled" : ""}>
+              <span class="material-symbols-outlined" aria-hidden="true">edit</span>
+              <span>Edit</span>
+            </button>
+            <button type="button" class="courses-danger-action" data-remove-course-id="${escapeHtml(addedCourse.id)}" data-section-id="${escapeHtml(sectionId)}" ${saving ? "disabled" : ""}>Remove Class</button>
+          `
           : `<button type="button" class="courses-primary-action" data-add-section-id="${escapeHtml(sectionId)}" ${saving ? "disabled" : ""}>Add Class</button>`
         }
       </div>
-      ${canTrack || track ? `
-        <section class="track-control">
-          <div class="track-control-text">
-            <strong>Track Class</strong>
-            <span>${trackEnabled ? "Email notifications are on for this section." : "Email me when a seat opens."}</span>
-          </div>
-          <button type="button" class="track-toggle" data-track-section-id="${escapeHtml(sectionId)}" aria-label="Track class" aria-pressed="${trackEnabled ? "true" : "false"}" ${tracking || (!canTrack && !trackEnabled) ? "disabled" : ""}></button>
-        </section>
-      ` : ""}
       <section class="courses-description-card">
         <span class="material-symbols-outlined" aria-hidden="true">notes</span>
         <div>
@@ -491,6 +657,146 @@ function buildDetailHtml(sectionId) {
       </section>
     </article>
   `;
+}
+
+function buildEditHtml(sectionId) {
+  const section = getSection(sectionId);
+  const savedCourse = state.savedCoursesBySection.get(String(sectionId));
+  if (!section || !savedCourse) return `<div class="courses-state">Saved course not found.</div>`;
+  const selectedColorKey = getCourseColor(savedCourse).key;
+  const meetings = normalizeMeetingsForEdit(section.meetings);
+  const saving = state.editingSaving || state.savingIds.has(sectionId);
+
+  return `
+    <article class="courses-edit" data-editing-section-id="${escapeHtml(sectionId)}">
+      <div class="courses-detail-header">
+        <div>
+          <h2>Edit Class</h2>
+          <p>${escapeHtml(section.course_code || "Course")} ${section.section_number ? `Section ${escapeHtml(section.section_number)}` : ""}</p>
+        </div>
+        <button class="courses-detail-close" type="button" data-edit-cancel aria-label="Close edit class">
+          <span class="material-symbols-outlined" aria-hidden="true">close</span>
+        </button>
+      </div>
+
+      <section class="courses-edit-card courses-edit-color-card">
+        <div class="courses-edit-section-heading">
+          <h3>Color</h3>
+          <span>Choose how this class appears on your week.</span>
+        </div>
+        <div class="courses-color-grid" role="group" aria-label="Course color">
+          ${COURSE_COLOR_PALETTE.map((color) => {
+            const isSelected = selectedColorKey === color.key;
+            return `
+              <button
+                type="button"
+                class="courses-color-swatch ${escapeHtml(color.key)} ${isSelected ? "is-selected" : ""}"
+                data-course-color-key="${escapeHtml(color.key)}"
+                aria-label="${escapeHtml(color.key.replace("course-color-", "Color "))}"
+                aria-pressed="${isSelected ? "true" : "false"}"
+              >
+                <span class="material-symbols-outlined" aria-hidden="true">check</span>
+              </button>
+            `;
+          }).join("")}
+        </div>
+      </section>
+
+      <section class="courses-edit-card">
+        <div class="courses-edit-grid">
+          ${editField("course_code", "Course Code", section.course_code || "")}
+          ${editField("section_number", "Section", section.section_number || "")}
+          ${editField("course_title", "Title", section.course_title || "", "wide")}
+          ${editField("instructor", "Instructor", section.instructor || section.instructor_name || "", "wide")}
+          ${editField("schedule_type", "Type", section.schedule_type || "")}
+          ${editField("credit_hours", "Credits", section.credit_hours || "")}
+          ${editField("location", "Location", section.location || "")}
+          ${editField("requirement_designation", "Requirement", formatRequirement(section) === "N/A" ? "" : formatRequirement(section))}
+          ${editField("schedule_display", "Schedule Text", section.schedule_display || "", "wide")}
+        </div>
+      </section>
+
+      <section class="courses-edit-card">
+        <div class="courses-edit-section-heading">
+          <h3>Meeting Times</h3>
+          <span>Checked days appear in the weekly view.</span>
+        </div>
+        <div class="courses-meeting-editor">
+          ${COURSE_DAYS.map((day) => {
+            const meeting = meetings.find((item) => item.day === day.key);
+            return `
+              <label class="courses-meeting-row">
+                <input type="checkbox" data-meeting-day="${escapeHtml(day.key)}" ${meeting ? "checked" : ""} />
+                <span>${escapeHtml(day.key)}</span>
+                <input type="time" data-meeting-start="${escapeHtml(day.key)}" value="${escapeHtml(meeting?.startInput || "09:00")}" min="06:00" max="23:59" />
+                <input type="time" data-meeting-end="${escapeHtml(day.key)}" value="${escapeHtml(meeting?.endInput || "09:50")}" min="06:00" max="23:59" />
+              </label>
+            `;
+          }).join("")}
+        </div>
+      </section>
+
+      <section class="courses-edit-card">
+        ${editTextarea("course_description", "Description", section.course_description || section.description || "")}
+        ${editTextarea("course_notes", "Notes", section.course_notes || "")}
+      </section>
+
+      <div class="courses-detail-actions courses-edit-actions">
+        <button type="button" class="courses-primary-action" data-edit-save="${escapeHtml(sectionId)}" ${saving ? "disabled" : ""}>${saving ? "Saving..." : "Save"}</button>
+        <button type="button" class="courses-secondary-action" data-edit-cancel ${saving ? "disabled" : ""}>Cancel</button>
+      </div>
+    </article>
+  `;
+}
+
+function editField(name, label, value, className = "") {
+  return `
+    <label class="courses-edit-field ${className}">
+      <span>${escapeHtml(label)}</span>
+      <input type="text" name="${escapeHtml(name)}" value="${escapeHtml(value)}" />
+    </label>
+  `;
+}
+
+function editTextarea(name, label, value) {
+  return `
+    <label class="courses-edit-field wide">
+      <span>${escapeHtml(label)}</span>
+      <textarea name="${escapeHtml(name)}" rows="5">${escapeHtml(value)}</textarea>
+    </label>
+  `;
+}
+
+function getCourseColor(course) {
+  return COURSE_COLOR_PALETTE.find((color) => color.key === course?.color_key) || COURSE_COLOR_PALETTE[0];
+}
+
+function normalizeMeetingsForEdit(meetings) {
+  return (meetings || [])
+    .map((meeting) => ({
+      day: meeting.day,
+      start: meeting.start,
+      end: meeting.end,
+      startInput: atlasTokenToTimeInput(meeting.start),
+      endInput: atlasTokenToTimeInput(meeting.end),
+    }))
+    .filter((meeting) => COURSE_DAYS.some((day) => day.key === meeting.day));
+}
+
+function atlasTokenToTimeInput(token) {
+  const minutes = parseAtlasTimeToken(token);
+  if (minutes === null) return "";
+  const hour = Math.floor(minutes / 60);
+  const minute = minutes % 60;
+  return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
+}
+
+function timeInputToAtlasToken(value) {
+  const minutes = parseTimeInput(value);
+  if (minutes === null) return "";
+  const hour = Math.floor(minutes / 60);
+  const minute = minutes % 60;
+  return `${String(hour).padStart(2, "0")}${String(minute).padStart(2, "0")}`;
 }
 
 function detailRow(label, value) {
@@ -520,8 +826,16 @@ function renderCalendar() {
   const title = document.getElementById("courses-week-title");
   const subtitle = document.getElementById("courses-term-dates");
   if (!root) return;
+  if (state.weekScrollResetPending) {
+    state.weekScrollTop = null;
+    state.weekScrollLeft = null;
+    state.weekScrollResetPending = false;
+  } else {
+    rememberWeekScroll();
+  }
   if (title) {
-    title.textContent = formatTermLabel(state.selectedTerm);
+    const credits = computeCalendarCredits();
+    title.innerHTML = `<strong>${escapeHtml(formatTermLabel(state.selectedTerm))}</strong> <span class="courses-term-credits">${escapeHtml(String(credits))} credits</span>`;
   }
   if (subtitle) {
     subtitle.textContent = getSelectedTermDateText();
@@ -561,16 +875,31 @@ function renderCalendar() {
       </div>
     </div>
   `;
+  applyEventLayoutStyles(root);
   alignWeekHeader();
-  scrollWeekIntoView();
+  restoreWeekScroll();
+}
+
+function computeCalendarCredits() {
+  let total = 0;
+  for (const course of state.savedCoursesBySection.values()) {
+    const c = Number(course?.credit_hours ?? course?.credits ?? 0);
+    if (!Number.isNaN(c)) total += c;
+  }
+  if (state.hoveredSectionId && !state.savedCoursesBySection.has(state.hoveredSectionId)) {
+    const s = getSection(state.hoveredSectionId);
+    const c = Number(s?.credit_hours ?? s?.credits ?? 0);
+    if (!Number.isNaN(c)) total += c;
+  }
+  return Math.round(total * 100) / 100;
 }
 
 function syncTermControls() {
   const currentIndex = state.terms.indexOf(state.selectedTerm);
   const prev = document.getElementById("courses-prev-term");
   const next = document.getElementById("courses-next-term");
-  if (prev) prev.disabled = currentIndex < 0 || currentIndex >= state.terms.length - 1 || state.sectionsLoading;
-  if (next) next.disabled = currentIndex <= 0 || state.sectionsLoading;
+  if (prev) prev.disabled = currentIndex <= 0 || state.sectionsLoading;
+  if (next) next.disabled = currentIndex < 0 || currentIndex >= state.terms.length - 1 || state.sectionsLoading;
 }
 
 function getSelectedTermDateText() {
@@ -633,7 +962,7 @@ function meetingEventsForSection(section, preview, savedCourseId) {
         return null;
       }
       return {
-        sectionId: section.id || section.section_id,
+        sectionId: section.section_id || section.id,
         savedCourseId,
         preview,
         day: meeting.day,
@@ -641,6 +970,7 @@ function meetingEventsForSection(section, preview, savedCourseId) {
         end: Math.min(end, COURSE_END_MINUTES),
         title: section.course_code || "Course",
         detail: `${formatAtlasTime(meeting.start)}-${formatAtlasTime(meeting.end)}${section.section_number ? ` | Sec ${section.section_number}` : ""}`,
+        colorKey: section.color_key,
       };
     })
     .filter(Boolean);
@@ -665,8 +995,9 @@ function renderCourseEvent(event) {
   const height = Math.max(((event.end - event.start) / 60) * COURSE_HOUR_HEIGHT, 26);
   const left = (event.lane / event.laneCount) * 100;
   const width = 100 / event.laneCount;
+  const colorClass = getCourseColor({ color_key: event.colorKey }).key;
   return `
-    <div class="courses-event ${event.preview ? "is-preview" : ""}" data-section-id="${escapeHtml(event.sectionId)}" style="top:${top}px; height:${height}px; left:${left}%; width:calc(${width}% - 2px);">
+    <div class="courses-event ${event.preview ? "is-preview" : ""} ${escapeHtml(colorClass)}" data-section-id="${escapeHtml(event.sectionId)}" data-top="${escapeHtml(top)}" data-height="${escapeHtml(height)}" data-left="${escapeHtml(left)}" data-width="${escapeHtml(width)}">
       ${event.savedCourseId ? `
         <button type="button" class="course-remove-button" data-remove-course-id="${escapeHtml(event.savedCourseId)}" data-section-id="${escapeHtml(event.sectionId)}" aria-label="Remove class">
           <span class="material-symbols-outlined" aria-hidden="true">close</span>
@@ -680,10 +1011,24 @@ function renderCourseEvent(event) {
   `;
 }
 
+function applyEventLayoutStyles(root) {
+  root.querySelectorAll(".courses-event").forEach((eventNode) => {
+    const top = Number(eventNode.dataset.top || 0);
+    const height = Number(eventNode.dataset.height || 0);
+    const left = Number(eventNode.dataset.left || 0);
+    const width = Number(eventNode.dataset.width || 100);
+    eventNode.style.top = `${top}px`;
+    eventNode.style.height = `${height}px`;
+    eventNode.style.left = `${left}%`;
+    eventNode.style.width = `calc(${width}% - 2px)`;
+  });
+}
+
 function getFilteredSections() {
   const query = state.searchQuery.trim().toLowerCase();
   return state.sections.filter((section) => {
-    if (query && !section.searchBlob.includes(query)) return false;
+    const searchBlob = section.searchBlob || buildSectionSearchBlob(section);
+    if (query && !searchBlob.includes(query)) return false;
     if (!sectionMatchesDay(section)) return false;
     if (!sectionMatchesTime(section)) return false;
     return true;
@@ -710,9 +1055,85 @@ function sectionMatchesTime(section) {
   });
 }
 
+function startEditingCourse(sectionId) {
+  if (!sectionId || !state.savedCoursesBySection.has(String(sectionId))) return;
+  state.detailSectionId = sectionId;
+  state.editingSectionId = sectionId;
+  state.filtersOpen = false;
+  renderPanel();
+}
+
+async function saveEditedCourse(sectionId) {
+  const savedCourse = state.savedCoursesBySection.get(String(sectionId));
+  if (!savedCourse?.id || state.editingSaving) return;
+  const form = document.querySelector(`.courses-edit[data-editing-section-id="${cssEscape(sectionId)}"]`);
+  if (!form) return;
+
+  const selectedColor = form.querySelector("[data-course-color-key].is-selected")?.dataset.courseColorKey
+    || savedCourse.color_key
+    || COURSE_COLOR_KEYS[0];
+  const overrides = collectEditOverrides(form);
+
+  state.editingSaving = true;
+  state.savingIds.add(sectionId);
+  renderPanel();
+  try {
+    const payload = await fetchJson(`/api/courses/saved/${encodeURIComponent(savedCourse.id)}`, {
+      method: "PATCH",
+      body: JSON.stringify({ color_key: selectedColor, overrides }),
+    });
+    if (payload.course?.section_id) {
+      applySavedCourse(payload.course);
+      state.detailSectionId = String(payload.course.section_id);
+      state.editingSectionId = null;
+    }
+    showToast("Class updated.");
+  } catch (error) {
+    console.error(error);
+    showToast(error.message || "Unable to update class.", true);
+  } finally {
+    state.editingSaving = false;
+    state.savingIds.delete(sectionId);
+    render();
+  }
+}
+
+function collectEditOverrides(form) {
+  const valueFor = (name) => form.querySelector(`[name="${name}"]`)?.value?.trim() || "";
+  const overrides = {
+    course_code: valueFor("course_code"),
+    course_title: valueFor("course_title"),
+    section_number: valueFor("section_number"),
+    instructor: valueFor("instructor"),
+    schedule_type: valueFor("schedule_type"),
+    schedule_display: valueFor("schedule_display"),
+    location: valueFor("location"),
+    credit_hours: valueFor("credit_hours"),
+    requirement_designation: valueFor("requirement_designation"),
+    course_description: valueFor("course_description"),
+    course_notes: valueFor("course_notes"),
+    meetings: [],
+  };
+
+  COURSE_DAYS.forEach((day) => {
+    const checked = form.querySelector(`[data-meeting-day="${day.key}"]`)?.checked;
+    if (!checked) return;
+    const startInput = form.querySelector(`[data-meeting-start="${day.key}"]`)?.value;
+    const endInput = form.querySelector(`[data-meeting-end="${day.key}"]`)?.value;
+    const start = timeInputToAtlasToken(startInput);
+    const end = timeInputToAtlasToken(endInput);
+    if (start && end && parseAtlasTimeToken(end) > parseAtlasTimeToken(start)) {
+      overrides.meetings.push({ day: day.key, start, end });
+    }
+  });
+
+  return overrides;
+}
+
 function openDetail(sectionId) {
   if (!sectionId) return;
   state.detailSectionId = sectionId;
+  state.editingSectionId = null;
   state.detailLiveError = "";
   state.filtersOpen = false;
   renderPanel();
@@ -752,8 +1173,7 @@ async function addCourse(sectionId) {
       body: JSON.stringify({ section_id: sectionId }),
     });
     if (payload.course?.section_id) {
-      state.savedCoursesBySection.set(String(payload.course.section_id), payload.course);
-      rememberSection(payload.course);
+      applySavedCourse(payload.course);
     }
     showToast("Class added.");
   } catch (error) {
@@ -775,6 +1195,9 @@ async function removeCourse(courseId, sectionId) {
     if (sectionId) state.savedCoursesBySection.delete(sectionId);
     if (state.detailSectionId === sectionId) {
       state.detailSectionId = null;
+    }
+    if (state.editingSectionId === sectionId) {
+      state.editingSectionId = null;
     }
     showToast("Class removed.");
   } catch (error) {
@@ -902,12 +1325,32 @@ function alignWeekHeader() {
   frame.style.setProperty("--courses-scrollbar-offset", `${scrollbarWidth}px`);
 }
 
-function scrollWeekIntoView() {
-  if (state.initialScrollDone) return;
+function rememberWeekScroll() {
   const scroller = document.getElementById("courses-week-scroller");
   if (!scroller) return;
-  scroller.scrollTop = Math.round(1.5 * COURSE_HOUR_HEIGHT);
-  state.initialScrollDone = true;
+  state.weekScrollTop = scroller.scrollTop;
+  state.weekScrollLeft = scroller.scrollLeft;
+}
+
+function resetWeekScroll() {
+  state.initialScrollDone = false;
+  state.weekScrollTop = null;
+  state.weekScrollLeft = null;
+  state.weekScrollResetPending = true;
+}
+
+function restoreWeekScroll() {
+  const scroller = document.getElementById("courses-week-scroller");
+  if (!scroller) return;
+  if (state.weekScrollTop !== null || state.weekScrollLeft !== null) {
+    scroller.scrollTop = state.weekScrollTop || 0;
+    scroller.scrollLeft = state.weekScrollLeft || 0;
+    return;
+  }
+  if (!state.initialScrollDone) {
+    scroller.scrollTop = Math.round(1.5 * COURSE_HOUR_HEIGHT);
+    state.initialScrollDone = true;
+  }
 }
 
 function showToast(message, isError = false) {
@@ -927,4 +1370,9 @@ function escapeHtml(value) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+function cssEscape(value) {
+  if (window.CSS?.escape) return window.CSS.escape(String(value));
+  return String(value).replace(/["\\]/g, "\\$&");
 }

@@ -1,4 +1,6 @@
 import logging
+import json
+import random
 from datetime import datetime
 
 from flask import Blueprint, jsonify, request
@@ -32,6 +34,25 @@ from services.course_catalog import get_course_catalog_metadata
 courses_bp = Blueprint("courses", __name__)
 logger = logging.getLogger(__name__)
 
+COURSE_COLOR_KEYS = tuple(f"course-color-{index:02d}" for index in range(1, 17))
+COURSE_OVERRIDE_STRING_FIELDS = {
+    "course_code": 64,
+    "course_title": 255,
+    "course_name": 255,
+    "section_number": 64,
+    "instructor": 255,
+    "instructor_name": 255,
+    "schedule_type": 64,
+    "schedule_display": 255,
+    "location": 255,
+    "credit_hours": 64,
+    "requirement_designation": 255,
+    "course_description": 4000,
+    "course_notes": 4000,
+}
+COURSE_OVERRIDE_FIELDS = set(COURSE_OVERRIDE_STRING_FIELDS) | {"meetings"}
+COURSE_DAY_KEYS = {"Mon", "Tue", "Wed", "Thu", "Fri"}
+
 
 def _current_user_id():
     return str(current_user.id)
@@ -58,6 +79,142 @@ def _get_section_by_id(section_id):
         if section.get("id") == section_id:
             return section
     return None
+
+
+def _course_row_id(course):
+    return course.get("$id") or course.get("id")
+
+
+def _parse_course_overrides(course):
+    raw = course.get("course_overrides_json")
+    if not raw:
+        return {}
+    if isinstance(raw, dict):
+        return raw
+    try:
+        parsed = json.loads(raw)
+    except (TypeError, ValueError):
+        return {}
+    return parsed if isinstance(parsed, dict) else {}
+
+
+def _sanitize_text(value, max_length):
+    if value is None:
+        return ""
+    text = str(value).strip()
+    return text[:max_length]
+
+
+def _normalize_meeting_time(value):
+    digits = "".join(ch for ch in str(value or "") if ch.isdigit())
+    if len(digits) == 3:
+        digits = f"0{digits}"
+    if len(digits) != 4:
+        return None
+    hour = int(digits[:2])
+    minute = int(digits[2:])
+    if hour > 24 or minute > 59:
+        return None
+    if hour == 24 and minute != 0:
+        return None
+    return digits
+
+
+def _sanitize_meetings(value):
+    if not isinstance(value, list):
+        return []
+    meetings = []
+    for item in value[:20]:
+        if not isinstance(item, dict):
+            continue
+        day = str(item.get("day") or "").strip()
+        start = _normalize_meeting_time(item.get("start"))
+        end = _normalize_meeting_time(item.get("end"))
+        if day not in COURSE_DAY_KEYS or not start or not end:
+            continue
+        if int(end) <= int(start):
+            continue
+        meetings.append({"day": day, "start": start, "end": end})
+    return meetings
+
+
+def _sanitize_course_overrides(value):
+    if not isinstance(value, dict):
+        return {}
+    overrides = {}
+    for key, limit in COURSE_OVERRIDE_STRING_FIELDS.items():
+        if key in value:
+            overrides[key] = _sanitize_text(value.get(key), limit)
+    if "meetings" in value:
+        overrides["meetings"] = _sanitize_meetings(value.get("meetings"))
+    return {key: val for key, val in overrides.items() if val not in (None, "")}
+
+
+def _used_color_keys(courses, term=None, exclude_course_id=None):
+    used = set()
+    for course in courses:
+        if term and course.get("term") != term:
+            continue
+        if exclude_course_id and _course_row_id(course) == exclude_course_id:
+            continue
+        color_key = course.get("color_key")
+        if color_key in COURSE_COLOR_KEYS:
+            used.add(color_key)
+    return used
+
+
+def _choose_course_color(courses, term, exclude_course_id=None):
+    used = _used_color_keys(courses, term=term, exclude_course_id=exclude_course_id)
+    available = [key for key in COURSE_COLOR_KEYS if key not in used]
+    return random.choice(available or list(COURSE_COLOR_KEYS))
+
+
+def _ensure_course_colors(user_id, courses):
+    changed = []
+    now = format_datetime(datetime.utcnow())
+    for course in courses:
+        if course.get("color_key") in COURSE_COLOR_KEYS:
+            continue
+        row_id = _course_row_id(course)
+        if not row_id:
+            continue
+        color_key = _choose_course_color(courses, course.get("term"), exclude_course_id=row_id)
+        try:
+            updated = update_row_safe(
+                COLLECTIONS["user_courses"],
+                row_id,
+                {"color_key": color_key, "updated_at": now},
+            )
+        except AppwriteException:
+            logger.exception("Failed to assign course color")
+            continue
+        course.update(updated)
+        changed.append(row_id)
+    return changed
+
+
+def _merge_course_overrides(serialized, overrides):
+    for key, value in overrides.items():
+        if key not in COURSE_OVERRIDE_FIELDS:
+            continue
+        if key == "course_name":
+            serialized["course_name"] = value
+            serialized["course_title"] = value
+            continue
+        if key == "course_title":
+            serialized["course_title"] = value
+            serialized["course_name"] = value
+            continue
+        if key == "instructor_name":
+            serialized["instructor_name"] = value
+            serialized["instructor"] = value
+            continue
+        if key == "instructor":
+            serialized["instructor"] = value
+            serialized["instructor_name"] = value
+            continue
+        serialized[key] = value
+    return serialized
 
 
 def _find_section_for_course(course, index_cache):
@@ -97,11 +254,12 @@ def _find_section_for_course(course, index_cache):
 
 def _serialize_course(course, section=None):
     section = section or {}
+    overrides = _parse_course_overrides(course)
     subject = course.get("subject") or section.get("subject")
     catalog = course.get("catalog") or section.get("catalog_number")
     course_code = section.get("course_code") or f"{subject} {catalog}".strip()
-    return {
-        "id": course.get("$id") or course.get("id"),
+    serialized = {
+        "id": _course_row_id(course),
         "section_id": section.get("id"),
         "term": course.get("term") or section.get("term"),
         "subject": subject,
@@ -128,7 +286,11 @@ def _serialize_course(course, section=None):
         "enrollment_count": section.get("enrollment_count"),
         "seats_available": section.get("seats_available"),
         "is_cancelled": section.get("is_cancelled", False),
+        "color_key": course.get("color_key"),
+        "overrides": overrides,
+        "updated_at": course.get("updated_at"),
     }
+    return _merge_course_overrides(serialized, overrides)
 
 
 def _track_for_section(user_id, section):
@@ -210,6 +372,7 @@ def list_saved_courses():
         logger.exception("Failed to list user courses")
         return jsonify({"error": "Unable to load courses."}), 500
 
+    _ensure_course_colors(_current_user_id(), courses)
     index_cache = {}
     serialized = [
         _serialize_course(course, _find_section_for_course(course, index_cache))
@@ -235,13 +398,11 @@ def add_saved_course():
 
     user_id = _current_user_id()
     try:
-        candidates = list_rows_all(
+        term_courses = list_rows_all(
             COLLECTIONS["user_courses"],
             [
                 Query.equal("user_id", [user_id]),
                 Query.equal("term", [section.get("term")]),
-                Query.equal("subject", [section.get("subject")]),
-                Query.equal("catalog", [section.get("catalog_number")]),
             ],
         )
     except AppwriteException:
@@ -249,12 +410,21 @@ def add_saved_course():
         return jsonify({"error": "Unable to add course."}), 500
 
     existing = next(
-        (doc for doc in candidates if str(doc.get("crn") or "") == str(section.get("crn") or "")),
+        (
+            doc for doc in term_courses
+            if str(doc.get("subject") or "").upper() == str(section.get("subject") or "").upper()
+            and str(doc.get("catalog") or "") == str(section.get("catalog_number") or "")
+            and str(doc.get("crn") or "") == str(section.get("crn") or "")
+        ),
         None,
     )
     if existing:
+        if existing.get("color_key") not in COURSE_COLOR_KEYS:
+            _ensure_course_colors(user_id, term_courses)
         return jsonify({"status": "ok", "course": _serialize_course(existing, section)})
 
+    now = format_datetime(datetime.utcnow())
+    color_key = _choose_course_color(term_courses, section.get("term"))
     try:
         course = create_row_safe(
             COLLECTIONS["user_courses"],
@@ -269,7 +439,10 @@ def add_saved_course():
                 "section_number": section.get("section_number") or "",
                 "instructor_name": section.get("instructor") or "",
                 "source": "courses",
-                "added_at": format_datetime(datetime.utcnow()),
+                "added_at": now,
+                "color_key": color_key,
+                "course_overrides_json": "{}",
+                "updated_at": now,
             },
         )
     except AppwriteException:
@@ -277,6 +450,51 @@ def add_saved_course():
         return jsonify({"error": "Unable to add course."}), 500
 
     return jsonify({"status": "ok", "course": _serialize_course(course, section)}), 201
+
+
+@courses_bp.route("/saved/<course_id>", methods=["PATCH"])
+@login_required
+def update_saved_course(course_id):
+    forbidden = _require_emory_student()
+    if forbidden:
+        return forbidden
+
+    try:
+        course = get_row_safe(COLLECTIONS["user_courses"], course_id)
+    except AppwriteException as exc:
+        if getattr(exc, "code", None) == 404:
+            return jsonify({"error": "Course not found."}), 404
+        logger.exception("Failed to load course")
+        return jsonify({"error": "Unable to update course."}), 500
+
+    user_id = _current_user_id()
+    if course.get("user_id") != user_id:
+        return jsonify({"error": "Course not found."}), 404
+
+    payload = request.get_json(silent=True) or {}
+    data = {"updated_at": format_datetime(datetime.utcnow())}
+
+    if "color_key" in payload:
+        color_key = str(payload.get("color_key") or "").strip()
+        if color_key not in COURSE_COLOR_KEYS:
+            return jsonify({"error": "Invalid course color."}), 400
+        data["color_key"] = color_key
+
+    if "overrides" in payload:
+        overrides = _sanitize_course_overrides(payload.get("overrides") or {})
+        data["course_overrides_json"] = json.dumps(overrides, separators=(",", ":"))
+
+    if len(data) == 1:
+        return jsonify({"error": "No changes provided."}), 400
+
+    try:
+        updated = update_row_safe(COLLECTIONS["user_courses"], course_id, data)
+    except AppwriteException:
+        logger.exception("Failed to update course")
+        return jsonify({"error": "Unable to update course."}), 500
+
+    section = _find_section_for_course(updated, {})
+    return jsonify({"status": "ok", "course": _serialize_course(updated, section)})
 
 
 @courses_bp.route("/saved/<course_id>", methods=["DELETE"])

@@ -22,6 +22,8 @@ MAX_APPWRITE_VARCHAR_SIZE = 16381
 PROFILE_AVATAR_BUCKET_ID = "profile_avatars"
 PROFILE_AVATAR_MAX_FILE_SIZE = 10 * 1024 * 1024
 PROFILE_AVATAR_EXTENSIONS = ["jpg", "jpeg", "png", "gif", "webp"]
+FILE_SHARE_BUCKET_ID = "file_share_files"
+FILE_SHARE_MAX_FILE_SIZE = 50 * 1024 * 1024
 
 def _require_env():
     missing = [key for key in REQUIRED_ENV_VARS if not os.environ.get(key)]
@@ -339,6 +341,30 @@ def _ensure_profile_avatar_bucket(storage):
             return
         raise
 
+def _ensure_file_share_bucket(storage):
+    existing_buckets = _list_existing_buckets(storage)
+    if FILE_SHARE_BUCKET_ID in existing_buckets:
+        logger.info("Storage bucket already exists: %s", FILE_SHARE_BUCKET_ID)
+        return
+
+    try:
+        storage.create_bucket(
+            bucket_id=FILE_SHARE_BUCKET_ID,
+            name="File Share Files",
+            permissions=[],
+            file_security=True,
+            enabled=True,
+            maximum_file_size=FILE_SHARE_MAX_FILE_SIZE,
+            encryption=True,
+            antivirus=True,
+        )
+        logger.info("Created storage bucket: %s", FILE_SHARE_BUCKET_ID)
+    except AppwriteException as exc:
+        if exc.code == 409:
+            logger.info("Storage bucket already exists: %s", FILE_SHARE_BUCKET_ID)
+            return
+        raise
+
 # ---------------------------------------------------------------------------
 # Apply a full table spec
 # ---------------------------------------------------------------------------
@@ -443,6 +469,9 @@ TABLE_SPECS = [
             {"key": "source", "type": "string", "size": 32, "xdefault": "settings"},
             {"key": "crn", "type": "string", "size": 64},
             {"key": "added_at", "type": "datetime", "xrequired": True},
+            {"key": "color_key", "type": "string", "size": 32},
+            {"key": "course_overrides_json", "type": "text"},
+            {"key": "updated_at", "type": "datetime"},
         ],
         "indexes": [
             {"key": "idx_user_courses_user_id", "type": "key", "columns": ["user_id"]},
@@ -522,6 +551,7 @@ TABLE_SPECS = [
             {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
             {"key": "feed_url", "type": "string", "size": 2048, "xrequired": True},
             {"key": "feed_url_hash", "type": "string", "size": 64, "xrequired": True},
+            {"key": "calendar_name", "type": "string", "size": 255},
             {"key": "etag_header", "type": "string", "size": 1024},
             {"key": "last_modified_header", "type": "string", "size": 1024},
             {"key": "last_fetch_http_code", "type": "integer"},
@@ -544,6 +574,7 @@ TABLE_SPECS = [
         "columns": [
             {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
             {"key": "calendar_name", "type": "string", "size": 255, "xrequired": True},
+            {"key": "display_name", "type": "string", "size": 255},
             {"key": "color_hex", "type": "string", "size": 7, "xdefault": "#6366f1"},
             {"key": "visible", "type": "boolean", "xdefault": True},
             {"key": "created_at", "type": "datetime", "xrequired": True},
@@ -568,12 +599,59 @@ TABLE_SPECS = [
             {"key": "end", "type": "datetime", "xrequired": True},
             {"key": "is_all_day", "type": "boolean", "xdefault": False},
             {"key": "color", "type": "string", "size": 7},
+            {"key": "calendar_id", "type": "string", "size": 255},
             {"key": "created_at", "type": "datetime", "xrequired": True},
             {"key": "updated_at", "type": "datetime"},
         ],
         "indexes": [
             {"key": "idx_user_events_user_id", "type": "key", "columns": ["user_id"]},
             {"key": "idx_user_events_start", "type": "key", "columns": ["start"]},
+            {"key": "idx_user_events_calendar", "type": "key", "columns": ["calendar_id"]},
+        ],
+    },
+    {
+        "id": "user_calendar_sources",
+        "name": "user_calendar_sources",
+        "permissions": [],
+        "row_security": True,
+        "columns": [
+            {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
+            {"key": "source_id", "type": "string", "size": 255, "xrequired": True},
+            {"key": "kind", "type": "string", "size": 32, "xdefault": "local"},
+            {"key": "default_name", "type": "string", "size": 255},
+            {"key": "created_at", "type": "datetime", "xrequired": True},
+            {"key": "updated_at", "type": "datetime"},
+        ],
+        "indexes": [
+            {"key": "idx_user_calendar_sources_user", "type": "key", "columns": ["user_id"]},
+            {"key": "idx_user_calendar_sources_source", "type": "key", "columns": ["source_id"]},
+            {"key": "idx_user_calendar_sources_unique", "type": "unique", "columns": ["user_id", "source_id"]},
+        ],
+    },
+    {
+        "id": "user_event_overrides",
+        "name": "user_event_overrides",
+        "permissions": [],
+        "row_security": True,
+        "columns": [
+            {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
+            {"key": "event_ref", "type": "string", "size": 255, "xrequired": True},
+            {"key": "hidden", "type": "boolean", "xdefault": False},
+            {"key": "title", "type": "string", "size": 255},
+            {"key": "description", "type": "text"},
+            {"key": "start", "type": "datetime"},
+            {"key": "end", "type": "datetime"},
+            {"key": "is_all_day", "type": "boolean"},
+            {"key": "calendar_id", "type": "string", "size": 255},
+            {"key": "color", "type": "string", "size": 7},
+            {"key": "created_at", "type": "datetime", "xrequired": True},
+            {"key": "updated_at", "type": "datetime"},
+        ],
+        "indexes": [
+            {"key": "idx_user_event_overrides_user", "type": "key", "columns": ["user_id"]},
+            {"key": "idx_user_event_overrides_ref", "type": "key", "columns": ["event_ref"]},
+            {"key": "idx_user_event_overrides_calendar", "type": "key", "columns": ["calendar_id"]},
+            {"key": "idx_user_event_overrides_unique", "type": "unique", "columns": ["user_id", "event_ref"]},
         ],
     },
     {
@@ -583,23 +661,56 @@ TABLE_SPECS = [
         "row_security": True,
         "columns": [
             {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
+            {"key": "folder_id", "type": "string", "size": 64},
             {"key": "original_filename", "type": "string", "size": 255, "xrequired": True},
             {"key": "stored_path", "type": "string", "size": 512, "xrequired": True},
+            {"key": "storage_backend", "type": "string", "size": 32, "xdefault": "appwrite"},
+            {"key": "storage_bucket_id", "type": "string", "size": 64},
+            {"key": "storage_file_id", "type": "string", "size": 64},
             {"key": "file_size_bytes", "type": "integer", "xrequired": True},
             {"key": "mime_type", "type": "string", "size": 127},
             {"key": "share_code", "type": "string", "size": 10},
             {"key": "is_public", "type": "boolean", "xdefault": False},
             {"key": "expires_at", "type": "datetime", "xrequired": True},
             {"key": "created_at", "type": "datetime", "xrequired": True},
+            {"key": "updated_at", "type": "datetime"},
             {"key": "downloaded_count", "type": "integer", "xdefault": 0},
         ],
         "indexes": [
             {"key": "idx_shared_files_user_id", "type": "key", "columns": ["user_id"]},
+            {"key": "idx_shared_files_folder_id", "type": "key", "columns": ["folder_id"]},
+            {"key": "idx_shared_files_user_folder", "type": "key", "columns": ["user_id", "folder_id"]},
             {"key": "idx_shared_files_expires_at", "type": "key", "columns": ["expires_at"]},
             {"key": "idx_shared_files_created_at", "type": "key", "columns": ["created_at"]},
+            {"key": "idx_shared_files_storage_file", "type": "key", "columns": ["storage_file_id"]},
             {"key": "idx_shared_files_share_code", "type": "key", "columns": ["share_code"]},
             {"key": "idx_shared_files_is_public", "type": "key", "columns": ["is_public"]},
             {"key": "idx_shared_files_share_code_unique", "type": "unique", "columns": ["share_code"]},
+        ],
+    },
+    {
+        "id": "file_folders",
+        "name": "file_folders",
+        "permissions": [],
+        "row_security": True,
+        "columns": [
+            {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
+            {"key": "name", "type": "string", "size": 255, "xrequired": True},
+            {"key": "parent_folder_id", "type": "string", "size": 64},
+            {"key": "is_public", "type": "boolean", "xdefault": False},
+            {"key": "share_code", "type": "string", "size": 10},
+            {"key": "order", "type": "integer"},
+            {"key": "created_at", "type": "datetime", "xrequired": True},
+            {"key": "updated_at", "type": "datetime"},
+        ],
+        "indexes": [
+            {"key": "idx_file_folders_user_id", "type": "key", "columns": ["user_id"]},
+            {"key": "idx_file_folders_parent", "type": "key", "columns": ["parent_folder_id"]},
+            {"key": "idx_file_folders_user_parent", "type": "key", "columns": ["user_id", "parent_folder_id"]},
+            {"key": "idx_file_folders_order", "type": "key", "columns": ["order"]},
+            {"key": "idx_file_folders_share_code", "type": "key", "columns": ["share_code"]},
+            {"key": "idx_file_folders_is_public", "type": "key", "columns": ["is_public"]},
+            {"key": "idx_file_folders_share_code_unique", "type": "unique", "columns": ["share_code"]},
         ],
     },
     {
@@ -669,6 +780,7 @@ def main():
         else:
             _apply_table(tablesdb, database_id, spec, create_table=True)
     _ensure_profile_avatar_bucket(storage)
+    _ensure_file_share_bucket(storage)
     logger.info("Appwrite database setup complete.")
 
 if __name__ == "__main__":

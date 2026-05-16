@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Shared Folder - APStudy Nest</title>
+    <script>window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";</script>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@17/dist/iife/sdk.js"></script>
+    <script src="{{ url_for('static', filename='js/appwrite.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
+    <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy Logo">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/themes.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/files.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <script src="{{ url_for('static', filename='js/global.js') }}" defer></script>
+    <meta name="description" content="Browse and download a shared APStudy folder." />
+</head>
+<global class="thenav"></global>
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-primary/30 selection:text-primary-fixed">
+    <main class="files-public-main">
+        <section class="files-public-shell" aria-labelledby="shared-folder-title">
+            {% if folder_tree %}
+                {% macro render_folder(folder, depth=0) %}
+                    <section class="files-public-folder" style="--folder-depth: {{ depth }};">
+                        <header class="files-public-folder-head">
+                            <div class="files-public-folder-name">
+                                <span class="material-symbols-outlined" aria-hidden="true">folder</span>
+                                <span>{{ folder.name }}</span>
+                            </div>
+                            <a class="files-secondary-button" href="{{ folder.zipUrl }}">
+                                <span class="material-symbols-outlined" aria-hidden="true">folder_zip</span>
+                                Download folder
+                            </a>
+                        </header>
+
+                        {% if folder.files %}
+                            <div class="files-public-list" aria-label="{{ folder.name }} files">
+                                {% for file in folder.files %}
+                                    <article class="files-public-row">
+                                        <span class="material-symbols-outlined files-public-file-icon" aria-hidden="true">description</span>
+                                        <div class="files-public-file-main">
+                                            <h3>{{ file.filename }}</h3>
+                                            <p>{{ file.fileSizeDisplay }}{% if file.expiresAt %} · Expires {{ file.expiresAt }}{% endif %}</p>
+                                        </div>
+                                        <a class="files-primary-button" href="{{ file.downloadUrl }}">
+                                            <span class="material-symbols-outlined" aria-hidden="true">download</span>
+                                            Download
+                                        </a>
+                                    </article>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        {% if folder.folders %}
+                            <div class="files-public-children">
+                                {% for child in folder.folders %}
+                                    {{ render_folder(child, depth + 1) }}
+                                {% endfor %}
+                            </div>
+                        {% elif not folder.files %}
+                            <p class="files-public-empty-folder">This folder is empty.</p>
+                        {% endif %}
+                    </section>
+                {% endmacro %}
+
+                <header class="files-public-header">
+                    <div>
+                        <p class="files-public-kicker">Shared folder</p>
+                        <h1 id="shared-folder-title">{{ folder_tree.name }}</h1>
+                    </div>
+                    <a class="files-primary-button" href="{{ folder_tree.zipUrl }}">
+                        <span class="material-symbols-outlined" aria-hidden="true">folder_zip</span>
+                        Download folder
+                    </a>
+                </header>
+                <p class="files-public-note">Only download files from people you trust. Folder downloads include files directly inside that folder.</p>
+                <div class="files-public-tree">
+                    {{ render_folder(folder_tree) }}
+                </div>
+            {% else %}
+                <div class="files-public-error">
+                    <span class="material-symbols-outlined" aria-hidden="true">folder_off</span>
+                    <p class="files-public-kicker">Folder unavailable</p>
+                    <h1 id="shared-folder-title">Folder Unavailable</h1>
+                    <p>{{ error_message }}</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>

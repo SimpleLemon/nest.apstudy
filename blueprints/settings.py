@@ -27,7 +27,7 @@ from appwrite.role import Role
 from appwrite.services.storage import Storage
 from appwrite.services.users import Users
 from appwrite_client import client as appwrite_client
-from appwrite_client import COLLECTIONS, ENDPOINT, PROFILE_AVATAR_BUCKET_ID, PROJECT_ID
+from appwrite_client import COLLECTIONS, ENDPOINT, FILE_SHARE_BUCKET_ID, PROFILE_AVATAR_BUCKET_ID, PROJECT_ID
 from appwrite_helpers import (
     create_row_safe,
     delete_row_safe,
@@ -114,6 +114,18 @@ def _delete_avatar_file(file_id):
         Storage(appwrite_client).delete_file(PROFILE_AVATAR_BUCKET_ID, file_id)
     except AppwriteException:
         logger.exception("Failed to delete old avatar file")
+
+
+def _delete_file_share_storage_file(file_row):
+    storage_file_id = file_row.get("storage_file_id")
+    if not storage_file_id:
+        return
+    try:
+        Storage(appwrite_client).delete_file(file_row.get("storage_bucket_id") or FILE_SHARE_BUCKET_ID, storage_file_id)
+    except AppwriteException as exc:
+        status = getattr(exc, "code", None) or getattr(exc, "response_code", None)
+        if int(status or 0) != 404:
+            logger.exception("Failed to delete shared file from Appwrite Storage")
 
 
 def _normalize_theme_value(value):
@@ -309,6 +321,7 @@ def _delete_user_artifacts(user_id):
         COLLECTIONS["user_calendar_preferences"],
         COLLECTIONS["user_events"],
         COLLECTIONS["shared_files"],
+        COLLECTIONS.get("file_folders", "file_folders"),
     ]
 
     for table_id in rows_to_delete:
@@ -325,21 +338,12 @@ def _delete_user_artifacts(user_id):
             row_id = row.get("$id") or row.get("id")
             if not row_id:
                 continue
+            if table_id == COLLECTIONS["shared_files"]:
+                _delete_file_share_storage_file(row)
             try:
                 delete_row_safe(table_id, row_id)
             except AppwriteException:
                 logger.exception("Failed to delete %s row %s", table_id, row_id)
-
-            if table_id == COLLECTIONS["shared_files"]:
-                stored_path = row.get("stored_path")
-                if not stored_path:
-                    continue
-                absolute_path = os.path.abspath(os.path.join("uploads", "file_share", stored_path))
-                try:
-                    if os.path.exists(absolute_path):
-                        os.remove(absolute_path)
-                except OSError:
-                    logger.exception("Failed to remove stored file %s", absolute_path)
 
     user_upload_root = os.path.abspath(os.path.join("uploads", "file_share", user_id))
     if os.path.isdir(user_upload_root):
@@ -1064,11 +1068,31 @@ def update_feed_url():
         logger.exception("Failed to save feed URL")
         return jsonify({"error": "Unable to save feed URL."}), 500
 
+    refresh_error = None
+    refresh_count = 0
+    feed_urls = []
+    if url:
+        feed_urls.append(url)
+    feed_urls.extend(other_ical_urls)
+    if feed_urls:
+        try:
+            from services.feed_fetcher import fetch_and_cache_feeds
+
+            refresh_count = fetch_and_cache_feeds(user_id, feed_urls)
+        except Exception as exc:
+            logger.exception(
+                "Failed to refresh calendar feeds after settings save",
+                extra={"user_id": user_id, "feed_count": len(feed_urls)},
+            )
+            refresh_error = str(exc)
+
     return jsonify({
         "status": "ok",
         "message": "Feed URL saved.",
         "canvas_ical_url": url or "",
         "other_ical_urls": other_ical_urls,
+        "refresh_count": refresh_count,
+        "refresh_error": refresh_error,
     })
 
 

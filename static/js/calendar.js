@@ -9,6 +9,10 @@ const WEEK_MINIMUM_DAY_WIDTH_PX = 100;
 const ALL_DAY_MIN_HEIGHT_PX = 44;
 const SIMULATED_CALENDAR_NAME = "Simulated Courses";
 const CANVAS_CALENDAR_NAME = "Canvas";
+const CANVAS_SOURCE_ID = "canvas";
+const LOCAL_SOURCE_PREFIX = "local:";
+const DEFAULT_LOCAL_CALENDAR_ID = "local:default";
+const DEFAULT_LOCAL_CALENDAR_NAME = "Personal";
 const COURSES_SELECTION_STORAGE_KEY = "coursesSelectedSectionIds";
 const COURSES_MODAL_ANIMATION_MS = 180;
 const THEME_LOADER_STYLE_ID = "apstudy-theme-loader-styles";
@@ -30,6 +34,7 @@ const state = {
     view: DEFAULT_DASHBOARD_VIEW,
     anchorDate: new Date(),
     calendars: {},
+    calendarSources: [],
     loadedRange: null,
     pendingRanges: new Set(),
     calendarColors: ["#ef4444", "#f97316", "#eab308", "#84cc16", "#0ea5e9", "#d946ef", "#b08968"],
@@ -56,40 +61,141 @@ const state = {
         calendarMenuOpen: false,
         contextMenuEl: null,
         rgbModalEl: null,
+        sourceInfoModalEl: null,
+        sourceCreateModalEl: null,
         contextAnchorEl: null,
         contextCalendarName: null,
         saveTimers: {},
         pendingCalendars: new Set(),
         weeklyAutoScrollKey: null,
+        hoverCardEl: null,
+        hoverCardAnchorEl: null,
+        hoverCardHideTimer: null,
+        expandedUpcomingRefs: new Set(),
     },
 };
 function initCalendarState() {
     const calendars = {};
-    calendars[CANVAS_CALENDAR_NAME] = {
-        visible: true,
-        color: state.calendarColors[0],
-        colorIndex: 0,
-    };
-    for (const event of state.events) {
-        const cal = event.course || "Other";
-        if (!calendars[cal]) {
-            const colorIndex = Object.keys(calendars).length % state.calendarColors.length;
-            calendars[cal] = {
-                visible: true,
-                color: state.calendarColors[colorIndex],
-                colorIndex,
-            };
-        }
-    }
-    if (state.courses.selectedSectionIds.size > 0 && !calendars[SIMULATED_CALENDAR_NAME]) {
+    const addCalendar = (key, options = {}) => {
+        if (!key || calendars[key]) return;
         const colorIndex = Object.keys(calendars).length % state.calendarColors.length;
-        calendars[SIMULATED_CALENDAR_NAME] = {
+        calendars[key] = {
             visible: true,
             color: state.calendarColors[colorIndex],
             colorIndex,
+            label: options.label || key,
+            defaultName: options.defaultName || options.label || key,
+            url: options.url || "",
+            kind: options.kind || "local",
+            editable: Boolean(options.editable),
+            sourceId: options.sourceId || null,
+            legacyNames: Array.isArray(options.legacyNames) ? options.legacyNames.filter(Boolean) : [],
         };
+    };
+    for (const source of state.calendarSources) {
+        const sourceId = source.id || "";
+        addCalendar(sourceId, {
+            label: source.display_name || source.default_name || sourceId,
+            defaultName: source.default_name || source.display_name || sourceId,
+            url: source.url || "",
+            kind: source.kind || "external",
+            editable: source.editable !== false,
+            sourceId,
+            legacyNames: [source.default_name, ...(Array.isArray(source.legacy_names) ? source.legacy_names : [])],
+        });
+    }
+    for (const event of state.events) {
+        const cal = getEventCalendarKey(event);
+        const fallbackLabel = cal === DEFAULT_LOCAL_CALENDAR_ID ? DEFAULT_LOCAL_CALENDAR_NAME : (event.course || "Other");
+        addCalendar(cal, {
+            label: fallbackLabel,
+            defaultName: fallbackLabel,
+            legacyNames: [fallbackLabel],
+        });
+    }
+    if (state.courses.selectedSectionIds.size > 0 && !calendars[SIMULATED_CALENDAR_NAME]) {
+        addCalendar(SIMULATED_CALENDAR_NAME, {
+            label: SIMULATED_CALENDAR_NAME,
+            defaultName: SIMULATED_CALENDAR_NAME,
+            legacyNames: [SIMULATED_CALENDAR_NAME],
+        });
     }
     state.calendars = calendars;
+}
+function getCalendarLabel(calendarName) {
+    return state.calendars[calendarName]?.label || calendarName || "Other";
+}
+function isLocalCalendar(calendarName) {
+    return String(calendarName || "").startsWith(LOCAL_SOURCE_PREFIX);
+}
+function getCalendarOptionsForEventForm() {
+    const entries = Object.entries(state.calendars)
+        .filter(([name]) => name !== SIMULATED_CALENDAR_NAME)
+        .sort(([, a], [, b]) => getCalendarLabelFromData(a).localeCompare(getCalendarLabelFromData(b)));
+    if (!entries.some(([name]) => name === DEFAULT_LOCAL_CALENDAR_ID)) {
+        entries.unshift([
+            DEFAULT_LOCAL_CALENDAR_ID,
+            {
+                label: DEFAULT_LOCAL_CALENDAR_NAME,
+                defaultName: DEFAULT_LOCAL_CALENDAR_NAME,
+                color: state.calendarColors[4] || "#0ea5e9",
+                kind: "local",
+                editable: true,
+                sourceId: DEFAULT_LOCAL_CALENDAR_ID,
+            },
+        ]);
+    }
+    return entries.map(([id, data]) => ({
+        id,
+        label: getCalendarLabelFromData(data) || id,
+        color: data.color || state.calendarColors[4] || "#0ea5e9",
+        kind: data.kind || (isLocalCalendar(id) ? "local" : "external"),
+    }));
+}
+function getDefaultCalendarIdForEventForm() {
+    const localVisible = Object.entries(state.calendars).find(([name, data]) => isLocalCalendar(name) && data.visible !== false);
+    if (localVisible) return localVisible[0];
+    const localAny = Object.keys(state.calendars).find((name) => isLocalCalendar(name));
+    return localAny || DEFAULT_LOCAL_CALENDAR_ID;
+}
+function getCalendarEventRef(event) {
+    if (!event) return "";
+    return event.event_ref || (event.id ? `user:${event.id}` : "") || (event.uid ? `legacy:${event.uid}` : "");
+}
+function getEventsForCurrentContextLookup() {
+    const range = getCurrentViewCountRange();
+    const events = [...state.events];
+    if (state.courses.selectedSectionIds.size > 0) {
+        events.push(...buildSimulatedMeetingEvents(range.start, range.end));
+    }
+    return events;
+}
+function getCalendarEventByRef(eventRef) {
+    if (!eventRef) return null;
+    return getEventsForCurrentContextLookup().find((event) => getCalendarEventRef(event) === eventRef) || null;
+}
+function getEventCalendarKey(event) {
+    if (event?.source_type === "user" || (event?.id && !event?.uid)) {
+        return event.calendar_id || DEFAULT_LOCAL_CALENDAR_ID;
+    }
+    return event.calendar_id || event.course || "Other";
+}
+function getEventCalendarLabel(event) {
+    return getCalendarLabel(getEventCalendarKey(event));
+}
+function getSavedCalendarInfo(saved, key) {
+    if (!saved || !key) return null;
+    if (saved[key]) return saved[key];
+    const legacyNames = state.calendars[key]?.legacyNames || [];
+    for (const legacyName of legacyNames) {
+        if (saved[legacyName]) return saved[legacyName];
+    }
+    return null;
+}
+function writeCalendarStateToStorage() {
+    localStorage.setItem("calendarState", JSON.stringify(Object.fromEntries(
+        Object.entries(state.calendars).map(([cal, data]) => [cal, { visible: data.visible, color: data.color }])
+    )));
 }
 function persistCalendarPreference(calendarName) {
     const pref = state.calendars[calendarName];
@@ -134,11 +240,11 @@ async function loadCalendarState() {
     if (saved) {
         try {
             const data = JSON.parse(saved);
-            for (const [cal, info] of Object.entries(data)) {
-                if (state.calendars[cal]) {
-                    state.calendars[cal].visible = info.visible;
-                    state.calendars[cal].color = info.color;
-                }
+            for (const cal of Object.keys(state.calendars)) {
+                const info = getSavedCalendarInfo(data, cal);
+                if (!info) continue;
+                if (typeof info.visible === "boolean") state.calendars[cal].visible = info.visible;
+                if (typeof info.color === "string") state.calendars[cal].color = info.color;
             }
         } catch (_) {
             // ignore
@@ -149,12 +255,16 @@ async function loadCalendarState() {
         if (!res.ok) return;
         const payload = await res.json();
         const prefs = Array.isArray(payload.preferences) ? payload.preferences : [];
-        for (const pref of prefs) {
-            const name = pref.calendar_name;
-            if (!name || !state.calendars[name]) continue;
-            if (typeof pref.visible === "boolean") state.calendars[name].visible = pref.visible;
+        const prefsByName = Object.fromEntries(prefs.filter((pref) => pref.calendar_name).map((pref) => [pref.calendar_name, pref]));
+        for (const cal of Object.keys(state.calendars)) {
+            const pref = getSavedCalendarInfo(prefsByName, cal);
+            if (!pref) continue;
+            if (typeof pref.visible === "boolean") state.calendars[cal].visible = pref.visible;
             if (typeof pref.color_hex === "string" && /^#[0-9a-fA-F]{6}$/.test(pref.color_hex)) {
-                state.calendars[name].color = pref.color_hex;
+                state.calendars[cal].color = pref.color_hex;
+            }
+            if (typeof pref.display_name === "string" && pref.display_name.trim() && state.calendars[cal].editable) {
+                state.calendars[cal].label = pref.display_name.trim();
             }
         }
     } catch (_) {
@@ -175,6 +285,11 @@ window.refreshCalendarFeed = refreshCalendarFeed;
 window.ensureEventsForRange = ensureEventsForRange;
 window.runManualRefresh = runManualRefresh;
 window.getBufferedRangeForView = () => getBufferedRange(getCurrentRenderRange());
+window.getCalendarEventByRef = getCalendarEventByRef;
+window.getCalendarOptionsForEventForm = getCalendarOptionsForEventForm;
+window.getDefaultCalendarIdForEventForm = getDefaultCalendarIdForEventForm;
+window.getCalendarColorForEventForm = (calendarName) => state.calendars[calendarName]?.color || state.calendarColors[4] || "#0ea5e9";
+window.getStandardCalendarColors = () => [...state.calendarColors];
 function initializeCourseSelectionsFromStorage() {
     const persistedSelections = loadSelectedCourseSectionIds();
     state.courses.selectedSectionIds = new Set(persistedSelections);
@@ -299,6 +414,7 @@ async function fetchEventsForRange(range) {
 }
 async function applyEventsPayload(payload, options = {}) {
     const range = options.range || null;
+    state.calendarSources = Array.isArray(payload?.calendar_sources) ? payload.calendar_sources : [];
     const newEvents = normalizeEventsList(payload?.events);
     const mergeRange = Boolean(options.mergeRange);
     state.events = mergeRange
@@ -938,7 +1054,7 @@ function buildCourseCardsHtml() {
 /* ── Calendar Filtering ────────────────────────────────────────────────────── */
 function getVisibleEvents() {
     const baseEvents = state.events.filter((e) => {
-        const cal = e.course || "Other";
+        const cal = getEventCalendarKey(e);
         return state.calendars[cal]?.visible !== false;
     });
     if (state.calendars[SIMULATED_CALENDAR_NAME]?.visible === false || state.courses.selectedSectionIds.size === 0) {
@@ -977,6 +1093,13 @@ function ensureSimulatedCalendarPreference() {
         visible: true,
         color: state.calendarColors[colorIndex],
         colorIndex,
+        label: SIMULATED_CALENDAR_NAME,
+        defaultName: SIMULATED_CALENDAR_NAME,
+        kind: "simulated",
+        editable: false,
+        sourceId: null,
+        url: "",
+        legacyNames: [SIMULATED_CALENDAR_NAME],
     };
 }
 function buildSimulatedMeetingEvents(startDate, endDate) {
@@ -1040,15 +1163,14 @@ function parseAtlasTimeToken(timeToken) {
     return { hour, minute };
 }
 function getEventCalendarColor(event) {
-    const cal = event.course || "Other";
+    if (event?.color) return event.color;
+    const cal = getEventCalendarKey(event);
     return state.calendars[cal]?.color || "#6366f1";
 }
 function toggleCalendarVisibility(calendarName) {
     if (state.calendars[calendarName]) {
         state.calendars[calendarName].visible = !state.calendars[calendarName].visible;
-        localStorage.setItem("calendarState", JSON.stringify(Object.fromEntries(
-            Object.entries(state.calendars).map(([cal, data]) => [cal, { visible: data.visible, color: data.color }])
-        )));
+        writeCalendarStateToStorage();
         queueCalendarPreferenceSave(calendarName);
         render();
     }
@@ -1056,9 +1178,7 @@ function toggleCalendarVisibility(calendarName) {
 function setCalendarColor(calendarName, color) {
     if (state.calendars[calendarName]) {
         state.calendars[calendarName].color = color;
-        localStorage.setItem("calendarState", JSON.stringify(Object.fromEntries(
-            Object.entries(state.calendars).map(([cal, data]) => [cal, { visible: data.visible, color: data.color }])
-        )));
+        writeCalendarStateToStorage();
         queueCalendarPreferenceSave(calendarName);
         render();
     }
@@ -1126,11 +1246,22 @@ function wireControls() {
         renderCalendarMenu();
     });
     document.getElementById("calendar-menu")?.addEventListener("click", (event) => {
+        const addBtn = event.target.closest(".js-calendar-add-source");
+        if (addBtn) {
+            event.preventDefault();
+            event.stopPropagation();
+            openCalendarSourceCreateModal();
+            return;
+        }
         const moreBtn = event.target.closest(".js-calendar-more");
         if (!moreBtn) return;
         event.stopPropagation();
         const calendarName = moreBtn.getAttribute("data-calendar-name");
         if (!calendarName) return;
+        if (state.ui.contextMenuEl && state.ui.contextCalendarName === calendarName && state.ui.contextAnchorEl === moreBtn) {
+            closeCalendarContextMenu();
+            return;
+        }
         openCalendarContextMenu(calendarName, moreBtn);
     });
     document.addEventListener("pointerdown", (event) => {
@@ -1138,7 +1269,9 @@ function wireControls() {
         const inRoot = popoverRoot ? popoverRoot.contains(event.target) : false;
         const inContext = state.ui.contextMenuEl ? state.ui.contextMenuEl.contains(event.target) : false;
         const inRgb = state.ui.rgbModalEl ? state.ui.rgbModalEl.contains(event.target) : false;
-        if (!inRoot && !inContext && !inRgb) {
+        const inSourceInfo = state.ui.sourceInfoModalEl ? state.ui.sourceInfoModalEl.contains(event.target) : false;
+        const inSourceCreate = state.ui.sourceCreateModalEl ? state.ui.sourceCreateModalEl.contains(event.target) : false;
+        if (!inRoot && !inContext && !inRgb && !inSourceInfo && !inSourceCreate) {
             closeAllCalendarPopups();
         }
     }, true);
@@ -1147,8 +1280,26 @@ function wireControls() {
     });
     window.addEventListener("scroll", () => {
         positionCalendarContextMenu();
+        positionCalendarHoverCard();
     }, true);
+    window.addEventListener("resize", () => {
+        positionCalendarHoverCard();
+    });
+    wireCalendarHoverCard();
     document.addEventListener("click", (event) => {
+        const upcomingToggle = event.target.closest(".js-upcoming-toggle");
+        if (upcomingToggle) {
+            event.preventDefault();
+            const eventRef = upcomingToggle.getAttribute("data-event-ref");
+            if (!eventRef) return;
+            if (state.ui.expandedUpcomingRefs.has(eventRef)) {
+                state.ui.expandedUpcomingRefs.delete(eventRef);
+            } else {
+                state.ui.expandedUpcomingRefs.add(eventRef);
+            }
+            renderAssignments();
+            return;
+        }
         const closeBtn = event.target.closest("#courses-modal-close");
         if (closeBtn) {
             closeCoursesModal();
@@ -1210,6 +1361,9 @@ function wireControls() {
         if (event.key === "Escape" && state.courses.modalOpen) {
             closeCoursesModal();
         }
+        if (event.key === "Escape") {
+            closeAllCalendarPopups();
+        }
     });
     window.addEventListener("popstate", () => {
         applyCoursesFiltersFromUrl();
@@ -1219,6 +1373,141 @@ function wireControls() {
             renderCoursesModal();
         }
     });
+}
+function wireCalendarHoverCard() {
+    const root = document.getElementById("calendar-view-root");
+    if (!root || root.dataset.hoverCardWired === "true") return;
+    root.dataset.hoverCardWired = "true";
+    root.addEventListener("pointerover", (event) => {
+        if (event.pointerType === "touch") return;
+        const eventEl = getCalendarEventElement(event.target);
+        if (!eventEl) return;
+        if (event.relatedTarget && eventEl.contains(event.relatedTarget)) return;
+        showCalendarHoverCard(eventEl);
+    });
+    root.addEventListener("pointerout", (event) => {
+        const eventEl = getCalendarEventElement(event.target);
+        if (!eventEl) return;
+        const related = event.relatedTarget;
+        if (related && (eventEl.contains(related) || state.ui.hoverCardEl?.contains(related))) return;
+        scheduleCalendarHoverCardHide();
+    });
+    root.addEventListener("focusin", (event) => {
+        const eventEl = getCalendarEventElement(event.target);
+        if (eventEl) showCalendarHoverCard(eventEl);
+    });
+    root.addEventListener("focusout", (event) => {
+        const related = event.relatedTarget;
+        if (related && state.ui.hoverCardEl?.contains(related)) return;
+        scheduleCalendarHoverCardHide(80);
+    });
+}
+function getCalendarEventElement(target) {
+    if (!(target instanceof Element)) return null;
+    const root = document.getElementById("calendar-view-root");
+    const eventEl = target.closest("[data-event-ref]");
+    return eventEl && root?.contains(eventEl) ? eventEl : null;
+}
+function ensureCalendarHoverCard() {
+    if (state.ui.hoverCardEl) return state.ui.hoverCardEl;
+    const card = document.createElement("div");
+    card.className = "calendar-event-hover-card";
+    card.setAttribute("role", "tooltip");
+    card.hidden = true;
+    card.addEventListener("pointerenter", () => {
+        if (state.ui.hoverCardHideTimer) {
+            clearTimeout(state.ui.hoverCardHideTimer);
+            state.ui.hoverCardHideTimer = null;
+        }
+    });
+    card.addEventListener("pointerleave", () => scheduleCalendarHoverCardHide());
+    document.body.appendChild(card);
+    state.ui.hoverCardEl = card;
+    return card;
+}
+function showCalendarHoverCard(anchorEl) {
+    const eventRef = anchorEl.getAttribute("data-event-ref");
+    const event = getCalendarEventByRef(eventRef);
+    if (!event) return;
+    if (state.ui.hoverCardHideTimer) {
+        clearTimeout(state.ui.hoverCardHideTimer);
+        state.ui.hoverCardHideTimer = null;
+    }
+    const card = ensureCalendarHoverCard();
+    state.ui.hoverCardAnchorEl = anchorEl;
+    card.innerHTML = buildCalendarHoverCardHtml(event);
+    card.hidden = false;
+    card.style.visibility = "hidden";
+    positionCalendarHoverCard();
+    card.style.visibility = "";
+}
+function scheduleCalendarHoverCardHide(delayMs = 120) {
+    if (state.ui.hoverCardHideTimer) clearTimeout(state.ui.hoverCardHideTimer);
+    state.ui.hoverCardHideTimer = setTimeout(() => {
+        hideCalendarHoverCard();
+    }, delayMs);
+}
+function hideCalendarHoverCard() {
+    if (state.ui.hoverCardHideTimer) {
+        clearTimeout(state.ui.hoverCardHideTimer);
+        state.ui.hoverCardHideTimer = null;
+    }
+    if (state.ui.hoverCardEl) {
+        state.ui.hoverCardEl.hidden = true;
+        state.ui.hoverCardEl.innerHTML = "";
+    }
+    state.ui.hoverCardAnchorEl = null;
+}
+function positionCalendarHoverCard() {
+    const card = state.ui.hoverCardEl;
+    const anchorEl = state.ui.hoverCardAnchorEl;
+    if (!card || card.hidden || !anchorEl || !document.body.contains(anchorEl)) return;
+    const margin = 12;
+    const gap = 8;
+    const wide = window.innerWidth >= 900;
+    const preferredWidth = wide ? 420 : 320;
+    const width = Math.max(260, Math.min(preferredWidth, window.innerWidth - margin * 2));
+    card.style.width = `${width}px`;
+    card.style.maxHeight = `${Math.max(180, window.innerHeight - margin * 2)}px`;
+    card.style.left = "0px";
+    card.style.top = "0px";
+    const anchorRect = anchorEl.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    let left = anchorRect.left;
+    let top = anchorRect.bottom + gap;
+    if (wide && anchorRect.right + gap + cardRect.width + margin <= window.innerWidth) {
+        left = anchorRect.right + gap;
+        top = anchorRect.top + (anchorRect.height - cardRect.height) / 2;
+    } else if (wide && anchorRect.left - gap - cardRect.width >= margin) {
+        left = anchorRect.left - cardRect.width - gap;
+        top = anchorRect.top + (anchorRect.height - cardRect.height) / 2;
+    } else {
+        const availableBelow = Math.max(0, window.innerHeight - anchorRect.bottom - gap - margin);
+        const availableAbove = Math.max(0, anchorRect.top - gap - margin);
+        const placeBelow = availableBelow >= availableAbove;
+        const availableHeight = Math.max(120, placeBelow ? availableBelow : availableAbove);
+        card.style.maxHeight = `${availableHeight}px`;
+        const adjustedRect = card.getBoundingClientRect();
+        if (left + cardRect.width + margin > window.innerWidth) {
+            left = window.innerWidth - adjustedRect.width - margin;
+        }
+        if (left < margin) left = margin;
+        top = placeBelow ? anchorRect.bottom + gap : anchorRect.top - adjustedRect.height - gap;
+    }
+    const finalRect = card.getBoundingClientRect();
+    top = Math.min(Math.max(top, margin), Math.max(margin, window.innerHeight - finalRect.height - margin));
+    card.style.left = `${Math.round(left)}px`;
+    card.style.top = `${Math.round(top)}px`;
+}
+function buildCalendarHoverCardHtml(event) {
+    const timeDisplay = event.isAllDay ? formatAllDayRange(event) : formatTimedEventRange(event);
+    const calendarLabel = getEventCalendarLabel(event);
+    return `
+        <div class="calendar-event-hover-title">${escapeHtml(event.title || "Untitled")}</div>
+        <div class="calendar-event-hover-meta">${escapeHtml(timeDisplay)}</div>
+        <div class="calendar-event-hover-calendar">${escapeHtml(calendarLabel)}</div>
+        ${event.description ? `<div class="calendar-event-hover-description">${formatMultilineText(event.description)}</div>` : ""}
+    `;
 }
 function closeCalendarDropdown() {
     state.ui.calendarMenuOpen = false;
@@ -1238,9 +1527,17 @@ function closeRgbModal() {
         state.ui.rgbModalEl = null;
     }
 }
+function closeSourceInfoModal() {
+    if (state.ui.sourceInfoModalEl) {
+        state.ui.sourceInfoModalEl.remove();
+        state.ui.sourceInfoModalEl = null;
+    }
+}
 function closeAllCalendarPopups() {
     closeCalendarContextMenu();
     closeRgbModal();
+    closeSourceInfoModal();
+    closeCalendarSourceCreateModal();
     closeCalendarDropdown();
 }
 function shiftAnchorDate(delta) {
@@ -1254,98 +1551,152 @@ function shiftAnchorDate(delta) {
 }
 /* ── Calendar Menu Rendering ─────────────────────────────────────────────── */
 function buildCalendarMenuHtml() {
-    const calendars = Object.entries(state.calendars).sort(([a], [b]) => a.localeCompare(b));
+    const calendars = Object.entries(state.calendars).sort(([, a], [, b]) => getCalendarLabelFromData(a).localeCompare(getCalendarLabelFromData(b)));
     const showSimulated = state.courses.selectedSectionIds.size > 0;
     const buildRows = (items) => items.map(([cal, data]) => {
         const checked = data.visible ? "checked" : "";
         const busy = state.ui.pendingCalendars.has(cal);
+        const label = getCalendarLabel(cal);
+        const eventCount = getCalendarEventCount(cal);
+        const kindLabel = data.kind === "local" ? "Local" : (data.editable ? "Feed" : "");
+        const meta = `${eventCount} event${eventCount === 1 ? "" : "s"}${kindLabel ? ` · ${kindLabel}` : ""}`;
         return `
-            <div class="flex items-center justify-between px-4 py-1.5 hover:bg-surface-container-high transition-colors gap-1.5 group">
-                <label class="flex items-center gap-2 flex-1 cursor-pointer">
+            <div class="calendar-source-row">
+                <label class="calendar-source-label">
                     <input type="checkbox" ${checked} ${busy ? "disabled" : ""}
-                        class="js-calendar-checkbox w-5 h-5 rounded border border-black/30 appearance-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
+                        class="js-calendar-checkbox calendar-source-checkbox"
                         data-calendar-name="${escapeHtml(cal)}"
                         style="background-color:${data.color};">
-                    <span class="text-sm text-on-surface truncate">${escapeHtml(cal)}</span>
+                    <span class="calendar-source-text">
+                        <span class="calendar-source-name">${escapeHtml(label)}</span>
+                        <span class="calendar-source-meta">${escapeHtml(meta)}</span>
+                    </span>
                 </label>
                 <button type="button"
-                    class="js-calendar-more p-1.5 hover:bg-surface-container rounded opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-40"
+                    class="js-calendar-more calendar-source-more"
                     data-calendar-name="${escapeHtml(cal)}"
                     ${busy ? "disabled" : ""}
                     aria-label="Calendar options">
-                    <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1,'wght' 700,'GRAD' 0,'opsz' 24;">more_horiz</span>
+                    <span class="material-symbols-outlined calendar-source-more-icon" style="font-variation-settings:'FILL' 1,'wght' 700,'GRAD' 0,'opsz' 24;">more_horiz</span>
                 </button>
             </div>
         `;
     }).join("");
     const nestCalendars = calendars.filter(([name]) => {
-        if (name === CANVAS_CALENDAR_NAME) return true;
+        if (name === CANVAS_SOURCE_ID || name === CANVAS_CALENDAR_NAME) return true;
         if (name === SIMULATED_CALENDAR_NAME) return showSimulated;
         return false;
     });
     const otherCalendars = calendars.filter(([name]) => {
-        if (name === CANVAS_CALENDAR_NAME) return false;
+        if (name === CANVAS_SOURCE_ID || name === CANVAS_CALENDAR_NAME) return false;
         if (name === SIMULATED_CALENDAR_NAME) return false;
         return true;
     });
     const nestSection = `
-        <div class="px-4 pt-1.5 pb-0.5 text-[10px] uppercase tracking-[0.08em] text-on-surface-variant font-semibold">Nest</div>
+        <div class="px-3 pt-3 pb-1 text-[10px] uppercase tracking-[0.08em] text-on-surface-variant font-semibold">Nest</div>
         ${buildRows(nestCalendars)}
     `;
     const otherSection = `
-        <div class="h-px bg-outline-variant/25 my-0.5"></div>
-        <div class="px-4 pt-1.5 pb-0.5 text-[10px] uppercase tracking-[0.08em] text-on-surface-variant font-semibold">Other</div>
-        ${otherCalendars.length ? buildRows(otherCalendars) : '<div class="px-4 py-1.5 text-sm text-on-surface-variant">No other calendars</div>'}
+        <div class="h-px bg-outline-variant/25 my-1"></div>
+        <div class="calendar-source-section-head">
+            <span>Other</span>
+            <button type="button" class="js-calendar-add-source calendar-source-add" aria-label="Add other calendar">
+                <span class="material-symbols-outlined calendar-source-add-icon">add</span>
+            </button>
+        </div>
+        ${otherCalendars.length ? buildRows(otherCalendars) : '<div class="px-3 py-2 text-sm text-on-surface-variant">No other calendars</div>'}
     `;
     return `
-        <div class="absolute top-full right-0 mt-1 w-64 rounded-lg border border-outline-variant/40 bg-surface shadow-xl shadow-black/20 z-50 py-0.5">
+        <div class="calendar-source-menu absolute top-full right-0 mt-2">
             ${nestSection}
             ${otherSection}
         </div>
     `;
+}
+function getCalendarLabelFromData(data) {
+    return data?.label || data?.defaultName || "";
+}
+function getCurrentViewCountRange() {
+    if (state.view === "month") {
+        const year = state.anchorDate.getFullYear();
+        const month = state.anchorDate.getMonth();
+        return {
+            start: new Date(year, month, 1, 0, 0, 0, 0),
+            end: new Date(year, month + 1, 1, 0, 0, 0, 0),
+        };
+    }
+    const start = getStartOfWeek(state.anchorDate);
+    const end = new Date(start);
+    end.setDate(start.getDate() + 7);
+    return { start, end };
+}
+function eventOverlapsCountRange(event, range) {
+    const start = event.startDate;
+    const end = event.endDate || event.startDate;
+    if (!start || !end) return false;
+    if (event.isAllDay) {
+        const eventStartDay = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+        const eventEndDay = new Date(end.getFullYear(), end.getMonth(), end.getDate());
+        return eventStartDay < range.end && eventEndDay > range.start;
+    }
+    return start < range.end && end > range.start;
+}
+function getCountableEventsForCurrentView() {
+    const range = getCurrentViewCountRange();
+    const events = [...state.events];
+    if (state.courses.selectedSectionIds.size > 0) {
+        events.push(...buildSimulatedMeetingEvents(range.start, range.end));
+    }
+    return events.filter((event) => eventOverlapsCountRange(event, range));
+}
+function getCalendarEventCount(calendarName) {
+    return getCountableEventsForCurrentView().filter((event) => getEventCalendarKey(event) === calendarName).length;
 }
 function openCalendarContextMenu(calendarName, anchorEl) {
     closeCalendarContextMenu();
     state.ui.contextCalendarName = calendarName;
     state.ui.contextAnchorEl = anchorEl;
     const currentColor = state.calendars[calendarName]?.color || "#6366f1";
-    const eventCount = state.events.filter((event) => (event.course || "Other") === calendarName).length;
+    const eventCount = getCalendarEventCount(calendarName);
+    const label = getCalendarLabel(calendarName);
     const pending = state.ui.pendingCalendars.has(calendarName);
     const menu = document.createElement("div");
-    menu.className = "fixed min-w-[260px] rounded-2xl border border-outline-variant/40 shadow-2xl z-[70] overflow-hidden";
-    menu.style.background = "linear-gradient(180deg, color-mix(in srgb, var(--color-surface-container-high) 90%, white 10%) 0%, color-mix(in srgb, var(--color-surface-container) 93%, black 7%) 100%)";
-    menu.style.backdropFilter = "blur(12px)";
+    menu.className = "calendar-context-menu fixed";
     menu.innerHTML = `
-        <div class="py-2">
-            <button type="button" ${pending ? "disabled" : ""} class="js-context-info w-full px-4 py-2.5 text-sm text-on-surface-variant bg-surface-container hover:bg-surface-container-high hover:text-on-surface transition-colors flex items-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed">
-                <span class="material-symbols-outlined text-[18px]">info</span>
+        <div class="calendar-context-header">
+            <div class="calendar-context-title">${escapeHtml(label)}</div>
+            <div class="calendar-context-meta">${eventCount} event${eventCount === 1 ? "" : "s"}</div>
+        </div>
+        <div class="calendar-context-body">
+            <button type="button" ${pending ? "disabled" : ""} class="js-context-info calendar-context-action">
+                <span class="material-symbols-outlined calendar-context-action-icon">info</span>
                 <span>Get Info</span>
             </button>
-            <div class="h-px bg-outline-variant/40 my-2"></div>
-            <div class="px-4 py-2">
-                <div class="text-[11px] uppercase tracking-[0.08em] text-on-surface-variant font-semibold mb-2">Colors</div>
-                <div class="flex gap-2.5 flex-wrap">
+            <div class="calendar-context-separator"></div>
+            <div class="calendar-context-colors">
+                <div class="calendar-context-section-label">Colors</div>
+                <div class="calendar-context-color-grid">
                     ${state.calendarColors.map((color) => `
                         <button type="button" ${pending ? "disabled" : ""}
-                            class="js-context-preset w-7 h-7 rounded-full border-2 transition-transform hover:scale-105 disabled:opacity-60 disabled:cursor-not-allowed"
+                            class="js-context-preset calendar-context-preset"
                             data-color="${color}"
-                            style="background:${color}; border-color:${currentColor === color ? "#111" : "transparent"};">
+                            aria-label="Use ${escapeHtml(color)}"
+                            style="background:${color}; border-color:${currentColor === color ? "var(--color-on-surface)" : "transparent"};">
                         </button>
                     `).join("")}
                 </div>
             </div>
-            <div class="h-px bg-outline-variant/40 my-2"></div>
-            <button type="button" ${pending ? "disabled" : ""} class="js-context-custom w-full px-4 py-2.5 text-sm text-on-surface-variant bg-surface-container hover:bg-surface-container-high hover:text-on-surface transition-colors flex items-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed">
-                <span class="material-symbols-outlined text-[18px]">palette</span>
+            <div class="calendar-context-separator"></div>
+            <button type="button" ${pending ? "disabled" : ""} class="js-context-custom calendar-context-action">
+                <span class="material-symbols-outlined calendar-context-action-icon">palette</span>
                 <span>Custom Color...</span>
             </button>
-            <div class="px-4 pt-2 text-[11px] text-on-surface-variant">${escapeHtml(calendarName)} · ${eventCount} events</div>
         </div>
     `;
     menu.addEventListener("click", async (event) => {
         const infoBtn = event.target.closest(".js-context-info");
         if (infoBtn) {
-            showCalendarInfo(calendarName, eventCount);
+            openCalendarInfoModal(calendarName);
             closeCalendarContextMenu();
             return;
         }
@@ -1369,10 +1720,6 @@ function openCalendarContextMenu(calendarName, anchorEl) {
     state.ui.contextMenuEl = menu;
     positionCalendarContextMenu();
 }
-function showCalendarInfo(calendarName, eventCount) {
-    const info = `Calendar: ${calendarName}\nEvents: ${eventCount}`;
-    alert(info);
-}
 function positionCalendarContextMenu() {
     if (!state.ui.contextMenuEl || !state.ui.contextAnchorEl) return;
     const menu = state.ui.contextMenuEl;
@@ -1388,6 +1735,252 @@ function positionCalendarContextMenu() {
     if (top < 8) top = 8;
     menu.style.left = `${left}px`;
     menu.style.top = `${top}px`;
+}
+function openCalendarInfoModal(calendarName) {
+    closeSourceInfoModal();
+    const calendar = state.calendars[calendarName];
+    if (!calendar) return;
+    const editable = Boolean(calendar.editable && calendar.sourceId);
+    const isLocal = calendar.kind === "local" || isLocalCalendar(calendarName);
+    const eventCount = getCalendarEventCount(calendarName);
+    const label = getCalendarLabel(calendarName);
+    const modal = document.createElement("div");
+    modal.className = "calendar-info-modal";
+    modal.innerHTML = `
+        <div class="calendar-info-dialog" role="dialog" aria-modal="true" aria-labelledby="calendar-info-title">
+            <div class="calendar-info-header">
+                <div class="calendar-info-heading">
+                    <h3 id="calendar-info-title" class="calendar-info-title">Calendar Info</h3>
+                    <p class="calendar-info-subtitle">${escapeHtml(label)}</p>
+                </div>
+                <button type="button" class="js-source-info-close calendar-info-close" aria-label="Close calendar info">
+                    <span class="material-symbols-outlined calendar-info-close-icon">close</span>
+                </button>
+            </div>
+            <div class="calendar-info-body">
+                <div class="calendar-info-stats">
+                    <div class="calendar-info-stat">
+                        <div class="calendar-info-stat-label">Events</div>
+                        <div class="calendar-info-stat-value">${eventCount}</div>
+                    </div>
+                    <div class="calendar-info-stat">
+                        <div class="calendar-info-stat-label">Type</div>
+                        <div class="calendar-info-stat-value">${escapeHtml(calendar.kind || "local")}</div>
+                    </div>
+                </div>
+                <label class="calendar-info-field">
+                    <span class="calendar-info-label">Name</span>
+                    <input class="js-source-info-name calendar-info-input" type="text" value="${escapeHtml(label)}" ${editable ? "" : "disabled"}>
+                </label>
+                ${isLocal ? "" : `<label class="calendar-info-field">
+                    <span class="calendar-info-label">URL</span>
+                    <input class="js-source-info-url calendar-info-input" type="url" inputmode="url" value="${escapeHtml(calendar.url || "")}" placeholder="https://calendar.example.com/feed.ics" ${editable ? "" : "disabled"}>
+                </label>`}
+                ${editable ? "" : '<p class="calendar-info-note">This calendar is generated inside Nest and does not have an editable feed URL.</p>'}
+                <p class="js-source-info-error calendar-info-error hidden"></p>
+            </div>
+            <div class="calendar-info-footer">
+                <button type="button" class="js-source-info-cancel calendar-info-button calendar-info-button-secondary">Close</button>
+                ${editable ? '<button type="button" class="js-source-info-save calendar-info-button calendar-info-button-primary">Save</button>' : ""}
+            </div>
+        </div>
+    `;
+    modal.addEventListener("click", async (event) => {
+        if (event.target === modal || event.target.closest(".js-source-info-close") || event.target.closest(".js-source-info-cancel")) {
+            closeSourceInfoModal();
+            return;
+        }
+        const saveButton = event.target.closest(".js-source-info-save");
+        if (!saveButton || saveButton.disabled) return;
+        await saveCalendarSourceInfo(calendarName, modal, saveButton);
+    });
+    document.body.appendChild(modal);
+    state.ui.sourceInfoModalEl = modal;
+    modal.querySelector(".js-source-info-name")?.focus();
+}
+async function saveCalendarSourceInfo(calendarName, modal, saveButton) {
+    const calendar = state.calendars[calendarName];
+    if (!calendar?.sourceId) return;
+    const nameInput = modal.querySelector(".js-source-info-name");
+    const urlInput = modal.querySelector(".js-source-info-url");
+    const errorEl = modal.querySelector(".js-source-info-error");
+    const payload = {
+        source_id: calendar.sourceId,
+        display_name: nameInput?.value?.trim() || "",
+        url: urlInput?.value?.trim() || "",
+    };
+    const showError = (message) => {
+        if (!errorEl) return;
+        errorEl.textContent = message || "Unable to save calendar.";
+        errorEl.classList.remove("hidden");
+    };
+    if (calendar.kind !== "local" && !payload.url) {
+        showError("Calendar URL is required.");
+        return;
+    }
+    saveButton.disabled = true;
+    const previousLabel = saveButton.textContent;
+    saveButton.textContent = "Saving...";
+    try {
+        const res = await fetch("/api/calendar/sources", {
+            method: "POST",
+            credentials: "same-origin",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+        });
+        const response = await res.json().catch(() => ({}));
+        if (!res.ok) {
+            throw new Error(response.error || "Unable to save calendar.");
+        }
+        localStorage.removeItem(EVENTS_CACHE_KEY);
+        closeSourceInfoModal();
+        closeCalendarContextMenu();
+        state.ui.calendarMenuOpen = true;
+        if (response.refresh_required) {
+            await runManualRefresh(getBufferedRange(getCurrentRenderRange()));
+        } else {
+            await loadCalendarData();
+        }
+    } catch (err) {
+        showError(err.message || "Unable to save calendar.");
+    } finally {
+        saveButton.disabled = false;
+        saveButton.textContent = previousLabel;
+    }
+}
+function closeCalendarSourceCreateModal() {
+    if (state.ui.sourceCreateModalEl) {
+        state.ui.sourceCreateModalEl.remove();
+        state.ui.sourceCreateModalEl = null;
+    }
+}
+function openCalendarSourceCreateModal() {
+    closeCalendarSourceCreateModal();
+    closeCalendarContextMenu();
+    closeRgbModal();
+    const modal = document.createElement("div");
+    modal.className = "calendar-info-modal";
+    const colors = state.calendarColors;
+    let mode = "url";
+    let selectedColor = colors[4] || "#0ea5e9";
+    let draftName = "";
+    let draftUrl = "";
+    const renderBody = () => {
+        modal.innerHTML = `
+            <div class="calendar-info-dialog" role="dialog" aria-modal="true" aria-labelledby="calendar-source-create-title">
+                <div class="calendar-info-header">
+                    <div class="calendar-info-heading">
+                        <h3 id="calendar-source-create-title" class="calendar-info-title">Add Calendar</h3>
+                        <p class="calendar-info-subtitle">Create a local calendar or subscribe from a URL.</p>
+                    </div>
+                    <button type="button" class="js-source-create-close calendar-info-close" aria-label="Close add calendar">
+                        <span class="material-symbols-outlined calendar-info-close-icon">close</span>
+                    </button>
+                </div>
+                <div class="calendar-info-body">
+                    <div class="calendar-source-mode-toggle" role="group" aria-label="Calendar source type">
+                        <button type="button" class="js-source-create-mode calendar-source-mode ${mode === "url" ? "is-active" : ""}" data-mode="url">From URL</button>
+                        <button type="button" class="js-source-create-mode calendar-source-mode ${mode === "local" ? "is-active" : ""}" data-mode="local">Create New Calendar</button>
+                    </div>
+                    <label class="calendar-info-field">
+                        <span class="calendar-info-label">Name</span>
+                        <input class="js-source-create-name calendar-info-input" type="text" value="${escapeHtml(draftName)}" placeholder="${mode === "url" ? "Subscribed Calendar" : "Personal"}">
+                    </label>
+                    ${mode === "url" ? `
+                    <label class="calendar-info-field">
+                        <span class="calendar-info-label">URL</span>
+                        <input class="js-source-create-url calendar-info-input" type="url" inputmode="url" value="${escapeHtml(draftUrl)}" placeholder="https://calendar.example.com/feed.ics">
+                    </label>
+                    ` : ""}
+                    <div class="calendar-info-field">
+                        <span class="calendar-info-label">Color</span>
+                        <div class="calendar-context-color-grid">
+                            ${colors.map((color) => `
+                                <button type="button"
+                                    class="js-source-create-color calendar-context-preset"
+                                    data-color="${color}"
+                                    aria-label="Use ${escapeHtml(color)}"
+                                    style="background:${color}; border-color:${selectedColor === color ? "var(--color-on-surface)" : "transparent"};">
+                                </button>
+                            `).join("")}
+                        </div>
+                    </div>
+                    <p class="js-source-create-error calendar-info-error hidden"></p>
+                </div>
+                <div class="calendar-info-footer">
+                    <button type="button" class="js-source-create-cancel calendar-info-button calendar-info-button-secondary">Cancel</button>
+                    <button type="button" class="js-source-create-save calendar-info-button calendar-info-button-primary">Add</button>
+                </div>
+            </div>
+        `;
+        modal.querySelector(".js-source-create-name")?.focus();
+    };
+    renderBody();
+    modal.addEventListener("click", async (event) => {
+        if (event.target === modal || event.target.closest(".js-source-create-close") || event.target.closest(".js-source-create-cancel")) {
+            closeCalendarSourceCreateModal();
+            return;
+        }
+        const modeBtn = event.target.closest(".js-source-create-mode");
+        if (modeBtn) {
+            draftName = modal.querySelector(".js-source-create-name")?.value?.trim() || draftName;
+            draftUrl = modal.querySelector(".js-source-create-url")?.value?.trim() || draftUrl;
+            mode = modeBtn.getAttribute("data-mode") === "local" ? "local" : "url";
+            renderBody();
+            return;
+        }
+        const colorBtn = event.target.closest(".js-source-create-color");
+        if (colorBtn) {
+            draftName = modal.querySelector(".js-source-create-name")?.value?.trim() || draftName;
+            draftUrl = modal.querySelector(".js-source-create-url")?.value?.trim() || draftUrl;
+            selectedColor = colorBtn.getAttribute("data-color") || selectedColor;
+            renderBody();
+            return;
+        }
+        const saveButton = event.target.closest(".js-source-create-save");
+        if (!saveButton || saveButton.disabled) return;
+        const name = modal.querySelector(".js-source-create-name")?.value?.trim() || "";
+        const url = modal.querySelector(".js-source-create-url")?.value?.trim() || "";
+        const errorEl = modal.querySelector(".js-source-create-error");
+        const showError = (message) => {
+            if (!errorEl) return;
+            errorEl.textContent = message || "Unable to add calendar.";
+            errorEl.classList.remove("hidden");
+        };
+        if (mode === "url" && !url) {
+            showError("Calendar URL is required.");
+            return;
+        }
+        saveButton.disabled = true;
+        saveButton.textContent = "Adding...";
+        try {
+            const res = await fetch(mode === "local" ? "/api/calendar/sources/local" : "/api/calendar/sources/url", {
+                method: "POST",
+                credentials: "same-origin",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    display_name: name,
+                    url,
+                    color_hex: selectedColor,
+                }),
+            });
+            const response = await res.json().catch(() => ({}));
+            if (!res.ok) {
+                throw new Error(response.error || "Unable to add calendar.");
+            }
+            localStorage.removeItem(EVENTS_CACHE_KEY);
+            closeCalendarSourceCreateModal();
+            state.ui.calendarMenuOpen = true;
+            await loadCalendarData();
+        } catch (err) {
+            showError(err.message || "Unable to add calendar.");
+            saveButton.disabled = false;
+            saveButton.textContent = "Add";
+        }
+    });
+    document.body.appendChild(modal);
+    state.ui.sourceCreateModalEl = modal;
+    modal.querySelector(".js-source-create-name")?.focus();
 }
 function rgbToHex(r, g, b) {
     const toHex = (value) => Math.max(0, Math.min(255, Number(value) || 0)).toString(16).padStart(2, "0");
@@ -1562,6 +2155,7 @@ function updateViewToggleButtons() {
 function renderCalendarView() {
     const root = document.getElementById("calendar-view-root");
     if (!root) return;
+    hideCalendarHoverCard();
     if (state.loadingDashboard) {
         root.innerHTML = `
             <div class="rounded-2xl border border-calendar-rule bg-surface-container shadow-2xl shadow-black/10 p-10 min-h-[420px] flex items-center justify-center">
@@ -1603,33 +2197,168 @@ function buildMonthViewHtml() {
     const monthEnd = new Date(year, month + 1, 0);
     const gridStart = new Date(monthStart);
     gridStart.setDate(monthStart.getDate() - monthStart.getDay());
-    const cells = [];
-    for (let i = 0; i < 42; i++) {
-        const day = new Date(gridStart);
-        day.setDate(gridStart.getDate() + i);
-        const inMonth = day >= monthStart && day <= monthEnd;
-        const dayEvents = getEventsForDay(day);
-        const isCurrentDay = isToday(day);
-        const todayMarkerClass = isCurrentDay ? "calendar-today-marker calendar-today-marker-month" : "";
-        const todayTextClass = isCurrentDay ? "text-red-500 font-bold" : "text-on-surface-variant";
-        cells.push(`
-            <div data-date="${day.getFullYear()}-${String(day.getMonth() + 1).padStart(2, "0")}-${String(day.getDate()).padStart(2, "0")}" class="rounded-lg border ${inMonth ? "border-outline-variant/10 bg-surface-container" : "border-outline-variant/5 bg-surface-container/40 opacity-70"} p-2.5 min-h-[98px] flex flex-col gap-1.5">
-                <div class="inline-flex h-7 w-7 items-center justify-center text-xs font-semibold ${todayTextClass} ${todayMarkerClass}">
-                    ${day.getDate()}
+    const weeks = [];
+    for (let weekIndex = 0; weekIndex < 6; weekIndex++) {
+        const weekStart = new Date(gridStart);
+        weekStart.setDate(gridStart.getDate() + weekIndex * 7);
+        const days = Array.from({ length: 7 }, (_, dayIndex) => {
+            const day = new Date(weekStart);
+            day.setDate(weekStart.getDate() + dayIndex);
+            return day;
+        });
+        const { events: allDayEvents, rowsCount } = getAllDayEventsForMonthWeek(days);
+        const allDayRowCount = rowsCount || 0;
+        const gridEndLine = allDayRowCount + 3;
+        const occupiedAllDayRowsByDay = days.map((_, dayIndex) => {
+            return allDayEvents.reduce((max, event) => {
+                const start = event.gridColStart;
+                const end = event.gridColStart + event.gridSpan - 1;
+                if (dayIndex < start || dayIndex > end) return max;
+                return Math.max(max, (event.rowIndex || 0) + 1);
+            }, 0);
+        });
+        const rowTemplate = allDayRowCount > 0
+            ? `2.75rem repeat(${allDayRowCount}, 1.65rem) minmax(3.25rem, 1fr)`
+            : "2.75rem minmax(4.9rem, 1fr)";
+        const rowMinHeight = Math.max(120, 96 + allDayRowCount * 26);
+        const dayCells = days.map((day, dayIndex) => {
+            const inMonth = day >= monthStart && day <= monthEnd;
+            const bgClass = inMonth ? "bg-surface-container" : "opacity-70";
+            const backgroundStyle = inMonth ? "" : "background:color-mix(in srgb, var(--color-surface-container) 40%, transparent);";
+            return `
+                <div
+                    data-date="${formatDateKey(day)}"
+                    class="calendar-month-day-cell ${dayIndex === 6 ? "calendar-month-day-cell-edge" : ""} ${bgClass} border-r border-b border-calendar-rule ${dayIndex === 6 ? "border-r-0" : ""}"
+                    style="grid-column:${dayIndex + 1}; grid-row:1 / ${gridEndLine}; ${backgroundStyle}"
+                ></div>
+            `;
+        }).join("");
+        const dayNumbers = days.map((day, dayIndex) => {
+            const isCurrentDay = isToday(day);
+            const todayMarkerClass = isCurrentDay ? "calendar-today-marker calendar-today-marker-month" : "";
+            const todayTextClass = isCurrentDay ? "text-red-500 font-bold" : "text-on-surface-variant";
+            return `
+                <div class="calendar-month-day-number-slot relative" style="grid-column:${dayIndex + 1}; grid-row:1; z-index:10;">
+                    <div class="inline-flex h-7 w-7 items-center justify-center text-xs font-semibold ${todayTextClass} ${todayMarkerClass}">
+                        ${day.getDate()}
+                    </div>
                 </div>
-                <div class="space-y-1">
+            `;
+        }).join("");
+        const allDayBars = allDayEvents.map((event) => renderMonthAllDayEvent(event)).join("");
+        const timedEventColumns = days.map((day, dayIndex) => {
+            const dayEvents = getEventsForDay(day).filter((event) => !event.isAllDay);
+            const dayTimedRowStart = (occupiedAllDayRowsByDay[dayIndex] || 0) + 2;
+            return `
+                <div class="relative px-2.5 pb-2.5 space-y-1" style="grid-column:${dayIndex + 1}; grid-row:${dayTimedRowStart} / ${gridEndLine}; z-index:10;">
                     ${dayEvents.slice(0, 3).map((e) => buildEventChip(e, { monthView: true })).join("")}
                     ${dayEvents.length > 3 ? `<div class="text-[10px] text-on-surface-variant">+${dayEvents.length - 3} more</div>` : ""}
                 </div>
+            `;
+        }).join("");
+        weeks.push(`
+            <div class="grid relative" style="grid-template-columns:repeat(7, minmax(0, 1fr)); grid-template-rows:${rowTemplate}; min-height:${rowMinHeight}px;">
+                ${dayCells}
+                ${dayNumbers}
+                ${allDayBars}
+                ${timedEventColumns}
             </div>
         `);
     }
     return `
-        <div class="grid grid-cols-7 gap-2 mb-2">
-            ${WEEKDAYS.map((d) => `<div class="text-[11px] uppercase tracking-[0.05em] text-center text-on-surface-variant font-semibold">${d}</div>`).join("")}
+        <div class="calendar-month-header grid grid-cols-7 border-l border-t border-r border-calendar-rule bg-surface-container-low" style="border-top-left-radius:1rem; border-top-right-radius:1rem;">
+            ${WEEKDAYS.map((d, index) => `<div class="calendar-month-header-cell ${index === 6 ? "calendar-month-header-cell-edge" : ""} text-[11px] uppercase tracking-[0.05em] text-center text-on-surface-variant font-semibold py-2 border-r border-b border-calendar-rule ${index === 6 ? "border-r-0" : ""}">${d}</div>`).join("")}
         </div>
-        <div class="grid grid-cols-7 gap-2" style="min-height:680px;">
-            ${cells.join("")}
+        <div class="calendar-month-grid border-l border-r border-calendar-rule shadow-2xl shadow-black/10" style="border-bottom-left-radius:1rem; border-bottom-right-radius:1rem;">
+            ${weeks.join("")}
+        </div>
+    `;
+}
+function formatDateKey(date) {
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+}
+function getAllDayEventsForMonthWeek(days) {
+    const weekStart = new Date(days[0].getFullYear(), days[0].getMonth(), days[0].getDate());
+    const weekEndExclusive = new Date(days[6].getFullYear(), days[6].getMonth(), days[6].getDate() + 1);
+    const seen = new Set();
+    const candidates = [];
+    for (const event of getVisibleEvents()) {
+        if (!event.isAllDay) continue;
+        const eStart = new Date(event.startDate.getFullYear(), event.startDate.getMonth(), event.startDate.getDate());
+        const rawEnd = event.endDate && event.endDate > event.startDate
+            ? new Date(event.endDate.getFullYear(), event.endDate.getMonth(), event.endDate.getDate())
+            : new Date(event.startDate.getFullYear(), event.startDate.getMonth(), event.startDate.getDate() + 1);
+        const eEnd = rawEnd > eStart ? rawEnd : new Date(eStart.getFullYear(), eStart.getMonth(), eStart.getDate() + 1);
+        if (eStart >= weekEndExclusive || eEnd <= weekStart) continue;
+        const key = event.uid || `${event.title}|${event.startDate.getTime()}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        const lastVisibleDay = new Date(eEnd);
+        lastVisibleDay.setDate(lastVisibleDay.getDate() - 1);
+        const clampedStart = Math.max(0, dateToDayIndex(eStart, days));
+        const clampedEnd = Math.min(6, dateToDayIndex(lastVisibleDay, days));
+        const span = clampedEnd - clampedStart + 1;
+        if (span <= 0) continue;
+        candidates.push({
+            ...event,
+            gridColStart: clampedStart,
+            gridSpan: span,
+            continuesFromPreviousWeek: eStart < weekStart,
+            continuesToNextWeek: eEnd > weekEndExclusive,
+        });
+    }
+    packAllDayEvents(candidates);
+    const rowsCount = candidates.reduce((max, event) => Math.max(max, (event.rowIndex || 0) + 1), 0);
+    return {
+        events: candidates.sort((a, b) => (a.rowIndex - b.rowIndex) || (a.gridColStart - b.gridColStart)),
+        rowsCount,
+    };
+}
+function packAllDayEvents(events) {
+    events.sort((a, b) => a.gridColStart - b.gridColStart || b.gridSpan - a.gridSpan || (a.title || "").localeCompare(b.title || ""));
+    const occupancy = [];
+    for (const event of events) {
+        let placed = false;
+        for (let row = 0; row < occupancy.length; row++) {
+            let canFit = true;
+            for (let col = event.gridColStart; col < event.gridColStart + event.gridSpan; col++) {
+                if (occupancy[row][col]) {
+                    canFit = false;
+                    break;
+                }
+            }
+            if (!canFit) continue;
+            for (let col = event.gridColStart; col < event.gridColStart + event.gridSpan; col++) occupancy[row][col] = true;
+            event.rowIndex = row;
+            placed = true;
+            break;
+        }
+        if (placed) continue;
+        const newRow = Array(7).fill(false);
+        for (let col = event.gridColStart; col < event.gridColStart + event.gridSpan; col++) newRow[col] = true;
+        occupancy.push(newRow);
+        event.rowIndex = occupancy.length - 1;
+    }
+}
+function getEventElementAttributes(event) {
+    const dataId = event.id || event.uid || "";
+    const eventRef = getCalendarEventRef(event) || dataId;
+    const sourceType = event.source_type || event.source || (event.id ? "user" : "feed");
+    return `data-event-id="${escapeHtml(dataId)}" data-event-ref="${escapeHtml(eventRef)}" data-event-source="${escapeHtml(sourceType)}" tabindex="0"`;
+}
+function renderMonthAllDayEvent(event) {
+    const badgeStyle = getEventBadgeStyle(event);
+    const colStart = event.gridColStart + 1;
+    const colEnd = colStart + event.gridSpan;
+    const row = (event.rowIndex || 0) + 2;
+    const radiusStyle = `border-top-left-radius:${event.continuesFromPreviousWeek ? "0" : "0.375rem"}; border-bottom-left-radius:${event.continuesFromPreviousWeek ? "0" : "0.375rem"}; border-top-right-radius:${event.continuesToNextWeek ? "0" : "0.375rem"}; border-bottom-right-radius:${event.continuesToNextWeek ? "0" : "0.375rem"};`;
+    const padLeft = event.continuesFromPreviousWeek ? "0" : "0.25rem";
+    const padRight = event.continuesToNextWeek ? "0" : "0.25rem";
+    return `
+        <div ${getEventElementAttributes(event)} class="calendar-event-shell relative" style="grid-column:${colStart} / ${colEnd}; grid-row:${row}; z-index:20; padding-left:${padLeft}; padding-right:${padRight};">
+            <div class="text-[11px] px-2 py-1 border truncate leading-none" style="${badgeStyle}; ${radiusStyle}">
+                ${escapeHtml(event.title || "Untitled")}
+            </div>
         </div>
     `;
 }
@@ -1675,15 +2404,9 @@ function buildWeekViewHtml() {
         const colEnd = colStart + ev.gridSpan;
         const row = typeof ev.rowIndex === "number" ? ev.rowIndex + 1 : 1;
         return `
-            <div class="group relative" style="grid-column: ${colStart} / ${colEnd}; grid-row: ${row};">
+            <div ${getEventElementAttributes(ev)} class="calendar-event-shell relative" style="grid-column: ${colStart} / ${colEnd}; grid-row: ${row};">
                 <div class="text-[10px] px-2 py-1 rounded-md border truncate" style="${badgeStyle}">
                     ${escapeHtml(ev.title || "Untitled")}
-                </div>
-                <div class="hidden group-hover:block absolute left-0 top-full mt-1 z-40 w-64 rounded-lg border border-outline-variant/30 bg-surface p-2.5 shadow-xl shadow-black/20">
-                    <div class="text-xs font-semibold text-on-surface mb-1">${escapeHtml(ev.title || "Untitled")}</div>
-                    <div class="text-[11px] text-on-surface-variant">${escapeHtml(formatAllDayRange(ev))}</div>
-                    ${ev.course ? `<div class="text-[10px] text-on-surface-variant mt-1">${escapeHtml(ev.course)}</div>` : ""}
-                    ${ev.description ? `<div class="text-[11px] text-on-surface-variant mt-1.5 leading-relaxed">${escapeHtml(ev.description)}</div>` : ""}
                 </div>
             </div>
         `;
@@ -1817,22 +2540,13 @@ function renderTimedEvent(event) {
     const leftPct = (event.layoutLane / event.layoutLaneCount) * 100;
     const widthPct = 100 / event.layoutLaneCount;
     const badgeStyle = getEventBadgeStyle(event);
-    const course = event.course ? `<div class="text-[10px] text-on-surface-variant mt-1">${escapeHtml(event.course)}</div>` : "";
-    const timeDisplay = formatTimedEventRange(event);
-    const dataId = event.id || event.uid || "";
     return `
-        <div data-event-id="${dataId}" class="group absolute px-0.5" style="top:${topPx}px; left:${leftPct}%; width:calc(${widthPct}% - 0.25rem); height:${heightPx}px; z-index: 10;">
+        <div ${getEventElementAttributes(event)} class="calendar-event-shell absolute px-0.5" style="top:${topPx}px; left:${leftPct}%; width:calc(${widthPct}% - 0.25rem); height:${heightPx}px; z-index: 10;">
             <div class="h-full rounded-lg border overflow-hidden shadow-lg shadow-black/10" style="${badgeStyle}">
                 <div class="h-full px-2 py-1.5 flex flex-col gap-0.5 text-left">
                     <div class="text-[11px] font-semibold leading-tight line-clamp-2">${escapeHtml(event.title || "Untitled")}</div>
                     <div class="text-[10px]">${escapeHtml(formatTimeOnly(event.startDate))}</div>
                 </div>
-            </div>
-            <div class="hidden group-hover:block absolute left-0 top-full mt-1 z-40 w-64 rounded-lg border border-outline-variant/30 bg-surface p-2.5 shadow-xl shadow-black/20 pointer-events-none">
-                <div class="text-xs font-semibold text-on-surface mb-1">${escapeHtml(event.title || "Untitled")}</div>
-                <div class="text-[11px] text-on-surface-variant">${escapeHtml(timeDisplay)}</div>
-                ${course}
-                ${event.description ? `<div class="text-[11px] text-on-surface-variant mt-1.5 leading-relaxed">${escapeHtml(event.description)}</div>` : ""}
             </div>
         </div>
     `;
@@ -1844,48 +2558,32 @@ function buildEventChip(event, options = {}) {
     const badgeColors = getEventBadgeColors(event);
     const calendarColor = getEventCalendarColor(event);
     const isMonthTimedChip = Boolean(options.monthView) && !event.isAllDay;
-    const course = event.course ? `<div class="text-[10px] text-on-surface-variant mt-1">${escapeHtml(event.course)}</div>` : "";
-    const timeDisplay = event.isAllDay ? formatAllDayRange(event) : formatTimedEventRange(event);
     if (isMonthTimedChip) {
-        const dataId = event.id || event.uid || "";
         return `
-            <div data-event-id="${dataId}" class="group relative">
+            <div ${getEventElementAttributes(event)} class="calendar-event-shell relative">
                 <div class="${sizeClass} rounded-md border bg-surface-container-high/50 truncate flex items-center gap-2" style="border-color: ${badgeColors.border};">
                     <span class="inline-block h-4 w-1 rounded-full shrink-0" style="background-color: ${calendarColor};"></span>
                     <span class="truncate text-on-surface font-medium">${escapeHtml(event.title || "Untitled")}</span>
                 </div>
-                <div class="hidden group-hover:block absolute left-0 top-full mt-1 z-20 w-64 rounded-lg border border-outline-variant/30 bg-surface p-2.5 shadow-xl shadow-black/20">
-                    <div class="text-xs font-semibold text-on-surface mb-1">${escapeHtml(event.title || "Untitled")}</div>
-                    <div class="text-[11px] text-on-surface-variant">${escapeHtml(timeDisplay)}</div>
-                    ${course}
-                    ${event.description ? `<div class="text-[11px] text-on-surface-variant mt-1.5 leading-relaxed">${escapeHtml(event.description)}</div>` : ""}
-                </div>
             </div>
         `;
     }
-    const dataId = event.id || event.uid || "";
     return `
-        <div data-event-id="${dataId}" class="group relative">
+        <div ${getEventElementAttributes(event)} class="calendar-event-shell relative">
             <div class="${sizeClass} rounded-md border truncate" style="${badgeStyle}">
                 ${escapeHtml(event.title || "Untitled")}
-            </div>
-            <div class="hidden group-hover:block absolute left-0 top-full mt-1 z-20 w-64 rounded-lg border border-outline-variant/30 bg-surface p-2.5 shadow-xl shadow-black/20">
-                <div class="text-xs font-semibold text-on-surface mb-1">${escapeHtml(event.title || "Untitled")}</div>
-                <div class="text-[11px] text-on-surface-variant">${escapeHtml(timeDisplay)}</div>
-                ${course}
-                ${event.description ? `<div class="text-[11px] text-on-surface-variant mt-1.5 leading-relaxed">${escapeHtml(event.description)}</div>` : ""}
             </div>
         </div>
     `;
 }
-/* ── Assignments Section ───────────────────────────────────────────────────── */
+/* ── Upcoming Events Section ───────────────────────────────────────────────── */
 function renderAssignments() {
     const root = document.getElementById("assignments-root");
     if (!root) return;
     if (state.loadingDashboard) {
         root.innerHTML = `
             <div class="md:col-span-2 lg:col-span-3 rounded-xl border border-outline-variant/20 bg-surface-container p-10 text-center">
-                ${buildLoadingIndicatorHtml("Loading upcoming assignments...", { sizePx: 46, textToneClass: "text-on-surface" })}
+                ${buildLoadingIndicatorHtml("Loading upcoming events...", { sizePx: 46, textToneClass: "text-on-surface" })}
             </div>
         `;
         return;
@@ -1898,30 +2596,56 @@ function renderAssignments() {
     if (!upcoming.length) {
         root.innerHTML = `
             <div class="md:col-span-2 lg:col-span-3 rounded-xl border border-outline-variant/20 bg-surface-container p-6 text-sm text-on-surface-variant">
-                No assignments found yet. Your calendar is still available above.
+                No upcoming events found yet. Your calendar is still available above.
             </div>
         `;
         return;
     }
-    root.innerHTML = upcoming.map((event) => {
+    root.innerHTML = upcoming.map((event, index) => {
+        const eventRef = getUpcomingEventRef(event);
         const urgency = event.isAllDay ? getUrgencyLabelAllDay(event) : getUrgencyLabel(event.startDate);
         const accent = getAccent(event.type, event.startDate);
-        const timeDisplay = event.isAllDay ? formatAllDayRange(event) : formatDateTime(event.startDate);
+        const calendarColor = getEventCalendarColor(event);
+        const timeDisplay = event.isAllDay ? formatAllDayRange(event) : formatTimedEventRange(event);
+        const calendarLabel = getEventCalendarLabel(event);
+        const description = String(event.description || "").trim();
+        const isExpanded = state.ui.expandedUpcomingRefs.has(eventRef);
+        const descriptionId = `upcoming-event-description-${index}`;
+        const canExpand = description.length > 140 || description.split(/\r\n|\r|\n/).length > 2;
+        const descriptionClampClass = canExpand && !isExpanded ? "line-clamp-3" : "";
+        const descriptionHtml = description
+            ? `
+                <div id="${descriptionId}" class="text-sm text-on-surface-variant leading-relaxed break-words ${descriptionClampClass}">
+                    ${formatMultilineText(description)}
+                </div>
+                ${canExpand ? `
+                    <button type="button" class="js-upcoming-toggle calendar-upcoming-toggle" data-event-ref="${escapeHtml(eventRef)}" aria-expanded="${isExpanded ? "true" : "false"}" aria-controls="${descriptionId}">
+                        ${isExpanded ? "Show less" : "Show more"}
+                    </button>
+                ` : ""}
+            `
+            : "";
         return `
-            <article class="bg-surface-container hover:bg-surface-container-high transition-all duration-300 rounded-xl p-5 relative overflow-hidden flex flex-col gap-3">
+            <article class="bg-surface-container hover:bg-surface-container-high transition-all duration-300 rounded-xl p-5 sm:p-6 relative overflow-hidden flex flex-col gap-4">
                 <div class="absolute left-0 top-0 bottom-0 w-1 ${accent.bar}"></div>
-                <div class="flex justify-between items-start gap-3">
-                    <span class="text-[10px] uppercase tracking-[0.05em] font-bold px-2 py-1 rounded ${accent.tag}">${escapeHtml(urgency)}</span>
-                    <span class="text-[11px] text-on-surface-variant">${escapeHtml(timeDisplay)}</span>
+                <div class="flex flex-wrap items-start justify-between gap-3">
+                    <span class="text-[11px] uppercase tracking-[0.05em] font-bold px-2.5 py-1 rounded-md ${accent.tag}">${escapeHtml(urgency)}</span>
+                    <span class="text-sm text-on-surface-variant text-right">${escapeHtml(timeDisplay)}</span>
                 </div>
-                <div>
-                    <h3 class="text-base font-headline font-semibold text-on-surface leading-tight mb-1">${escapeHtml(event.title || "Untitled")}</h3>
-                    <p class="text-sm text-on-surface-variant">${escapeHtml(event.course || "Other")}</p>
+                <div class="space-y-2">
+                    <h3 class="text-lg font-headline font-semibold text-on-surface leading-snug">${escapeHtml(event.title || "Untitled")}</h3>
+                    <div class="flex items-center gap-2 text-sm text-on-surface-variant">
+                        <span class="h-2.5 w-2.5 rounded-full shrink-0" style="background-color:${calendarColor};"></span>
+                        <span class="truncate">${escapeHtml(calendarLabel)}</span>
+                    </div>
                 </div>
-                ${event.description ? `<p class="text-xs text-on-surface-variant line-clamp-3">${escapeHtml(event.description)}</p>` : ""}
+                ${descriptionHtml}
             </article>
         `;
     }).join("");
+}
+function getUpcomingEventRef(event) {
+    return getCalendarEventRef(event) || event.id || event.uid || `${event.title || "event"}|${event.startDate?.getTime?.() || ""}`;
 }
 /* ── Event Query Helpers ───────────────────────────────────────────────────── */
 function getEventsForDay(date) {
@@ -2017,10 +2741,10 @@ function isToday(date) {
 /* ── Urgency & Accent ──────────────────────────────────────────────────────── */
 function getUrgencyLabel(startDate) {
     const diffDays = Math.floor((startDate - new Date()) / (1000 * 60 * 60 * 24));
-    if (diffDays < 0) return "Past Due";
-    if (diffDays === 0) return "Due Today";
-    if (diffDays === 1) return "Due Tomorrow";
-    if (diffDays < 7) return `Due in ${diffDays} days`;
+    if (diffDays < 0) return "Past";
+    if (diffDays === 0) return "Today";
+    if (diffDays === 1) return "Tomorrow";
+    if (diffDays < 7) return `In ${diffDays} days`;
     return startDate.toLocaleDateString(undefined, { month: "short", day: "numeric" });
 }
 function getUrgencyLabelAllDay(event) {
@@ -2101,4 +2825,7 @@ function hexToRgba(hex, alpha) {
 /* ── HTML Escaping ─────────────────────────────────────────────────────────── */
 function escapeHtml(text) {
     return String(text).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
+}
+function formatMultilineText(text) {
+    return escapeHtml(text).replace(/\r\n|\r|\n/g, "<br>");
 }

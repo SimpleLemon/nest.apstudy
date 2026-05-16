@@ -1,6 +1,7 @@
 import * as React from 'https://esm.sh/react@18.3.1?dev';
 import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client?dev&deps=react@18.3.1';
 import { Command } from 'https://esm.sh/cmdk@1.1.1?dev&deps=react@18.3.1,react-dom@18.3.1';
+import * as Dialog from 'https://esm.sh/@radix-ui/react-dialog@1.1.15?dev&deps=react@18.3.1,react-dom@18.3.1';
 
 const h = React.createElement;
 
@@ -88,9 +89,55 @@ const THEME_ITEMS = [
   },
 ];
 
+const THEME_STORAGE_KEY = 'apstudy-theme';
+const PENDING_THEME_STORAGE_KEY = 'apstudy-theme-pending';
+const PENDING_THEME_UPDATED_KEY = 'apstudy-theme-updated-at';
+const THEME_TO_INTERFACE_THEME = {
+  dark: 'obsidian-dark',
+  light: 'parchment-light',
+  system: 'system-match',
+};
+const INTERFACE_THEME_TO_THEME = {
+  'obsidian-dark': 'dark',
+  'nest-dark': 'dark',
+  'parchment-light': 'light',
+  'nest-light': 'light',
+  'system-match': 'system',
+};
+
 let root = null;
 let setOpenState = null;
 let currentOpen = false;
+let activeThemeSaveController = null;
+
+function resolveInterfaceTheme(value) {
+  const normalized = String(value || '').trim().toLowerCase();
+  if (INTERFACE_THEME_TO_THEME[normalized]) {
+    return normalized;
+  }
+  if (THEME_TO_INTERFACE_THEME[normalized]) {
+    return THEME_TO_INTERFACE_THEME[normalized];
+  }
+  return THEME_TO_INTERFACE_THEME.dark;
+}
+
+function storePendingTheme(interfaceTheme) {
+  try {
+    localStorage.setItem(PENDING_THEME_STORAGE_KEY, interfaceTheme);
+    localStorage.setItem(PENDING_THEME_UPDATED_KEY, String(Date.now()));
+  } catch (error) {
+    // Ignore storage failures so theme switching still works visually.
+  }
+}
+
+function clearPendingTheme() {
+  try {
+    localStorage.removeItem(PENDING_THEME_STORAGE_KEY);
+    localStorage.removeItem(PENDING_THEME_UPDATED_KEY);
+  } catch (error) {
+    // Ignore storage failures so theme switching still works visually.
+  }
+}
 
 function ensureMounted() {
   if (root) return;
@@ -122,38 +169,85 @@ function navigateTo(route) {
   window.location.assign(route);
 }
 
-async function persistTheme(theme) {
+async function persistTheme(interfaceTheme) {
+  if (!interfaceTheme) {
+    return null;
+  }
+
+  if (activeThemeSaveController) {
+    activeThemeSaveController.abort();
+  }
+
+  const controller = new AbortController();
+  activeThemeSaveController = controller;
+
   try {
     const response = await fetch('/settings/api/interface-preferences', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ theme }),
+      body: JSON.stringify({ interface_theme: interfaceTheme }),
+      signal: controller.signal,
     });
 
     if (!response.ok) {
       throw new Error('Theme preference was not saved.');
     }
+
+    const payload = await response.json().catch(() => null);
+    if (activeThemeSaveController === controller) {
+      activeThemeSaveController = null;
+    }
+    return payload || { interface_theme: interfaceTheme };
   } catch (error) {
+    if (error && error.name === 'AbortError') {
+      return null;
+    }
+    if (activeThemeSaveController === controller) {
+      activeThemeSaveController = null;
+    }
     console.warn('Unable to persist command palette theme preference.', error);
+    return null;
   }
 }
 
 function setTheme(theme) {
+  let interfaceTheme = '';
   if (typeof window.APSTUDY_SET_THEME_PREFERENCE === 'function') {
-    window.APSTUDY_SET_THEME_PREFERENCE(theme);
-  } else {
-    const interfaceTheme = theme === 'light'
-      ? 'parchment-light'
-      : theme === 'system'
-        ? 'system-match'
-        : 'obsidian-dark';
+    interfaceTheme = window.APSTUDY_SET_THEME_PREFERENCE(theme);
+  }
 
-    localStorage.setItem('apstudy-theme', interfaceTheme);
+  if (!interfaceTheme) {
+    interfaceTheme = resolveInterfaceTheme(theme);
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, interfaceTheme);
+    } catch (error) {
+      // Ignore storage failures so theme switching still works visually.
+    }
     document.documentElement.setAttribute('data-theme', interfaceTheme);
     document.documentElement.classList.toggle('dark', interfaceTheme === 'obsidian-dark');
   }
 
-  void persistTheme(theme);
+  storePendingTheme(interfaceTheme);
+  void persistTheme(interfaceTheme).then((payload) => {
+    if (!payload) {
+      return;
+    }
+    clearPendingTheme();
+    const persistedTheme = resolveInterfaceTheme(payload.interface_theme || interfaceTheme);
+    if (persistedTheme !== interfaceTheme) {
+      if (typeof window.APSTUDY_SET_THEME_PREFERENCE === 'function') {
+        window.APSTUDY_SET_THEME_PREFERENCE(persistedTheme);
+      } else {
+        try {
+          localStorage.setItem(THEME_STORAGE_KEY, persistedTheme);
+        } catch (error) {
+          // Ignore storage failures so theme switching still works visually.
+        }
+        document.documentElement.setAttribute('data-theme', persistedTheme);
+        document.documentElement.classList.toggle('dark', persistedTheme === 'obsidian-dark');
+      }
+    }
+  });
 }
 
 function CommandPaletteApp() {
@@ -187,6 +281,16 @@ function CommandPaletteApp() {
       },
     },
     h(
+      Dialog.Title,
+      { className: 'apstudy-visually-hidden' },
+      'Command palette',
+    ),
+    h(
+      Dialog.Description,
+      { className: 'apstudy-visually-hidden' },
+      'Search navigation, help links, and theme commands.',
+    ),
+    h(
       'div',
       { className: 'apstudy-command-palette-input-row' },
       h(Command.Input, {
@@ -210,7 +314,7 @@ function CommandPaletteApp() {
         Command.Group,
         { heading: 'NAVIGATION' },
         COMMAND_PALETTE_PAGES.map((item) => h(CommandRow, {
-          key: `navigation-${item.route}`,
+          key: `navigation-${item.name}-${item.route}`,
           icon: item.icon,
           label: item.name,
           value: item.name,

@@ -87,6 +87,7 @@ Table: calendar_feeds
 - user_id INTEGER FK users.id -> string attribute: user_id
 - feed_url TEXT -> string(2048) attribute: feed_url
 - feed_url_hash TEXT -> string(64) attribute: feed_url_hash
+- calendar_name VARCHAR(255) -> string(255) attribute: calendar_name
 - etag_header TEXT -> string(1024) attribute: etag_header
 - last_modified_header TEXT -> string(1024) attribute: last_modified_header
 - last_fetch_http_code INTEGER -> integer attribute: last_fetch_http_code
@@ -98,6 +99,7 @@ Table: user_calendar_preferences
 - id INTEGER PRIMARY KEY -> use Appwrite $id (string); no separate attribute
 - user_id INTEGER FK users.id -> string attribute: user_id
 - calendar_name VARCHAR(255) -> string(255) attribute: calendar_name
+- display_name VARCHAR(255) -> string(255) attribute: display_name
 - color_hex VARCHAR(7) NOT NULL DEFAULT '#6366f1' -> string(7) attribute: color_hex
 - visible BOOLEAN NOT NULL DEFAULT 1 -> boolean attribute: visible
 - created_at DATETIME -> datetime attribute: created_at
@@ -113,21 +115,64 @@ Table: user_events
 - end DATETIME NOT NULL -> datetime attribute: end
 - is_all_day BOOLEAN NOT NULL DEFAULT 0 -> boolean attribute: is_all_day
 - color VARCHAR(7) -> string(7) attribute: color
+- calendar_id VARCHAR(255) -> string(255) attribute: calendar_id
 - created_at DATETIME NOT NULL -> datetime attribute: created_at
 - updated_at DATETIME -> datetime attribute: updated_at
+
+Table: user_calendar_sources
+- id INTEGER PRIMARY KEY -> use Appwrite $id (string); no separate attribute
+- user_id INTEGER FK users.id -> string attribute: user_id
+- source_id VARCHAR(255) -> string(255) attribute: source_id
+- kind VARCHAR(32) -> string(32) attribute: kind
+- default_name VARCHAR(255) -> string(255) attribute: default_name
+- created_at DATETIME NOT NULL -> datetime attribute: created_at
+- updated_at DATETIME -> datetime attribute: updated_at
+- UNIQUE (user_id, source_id)
+
+Table: user_event_overrides
+- id INTEGER PRIMARY KEY -> use Appwrite $id (string); no separate attribute
+- user_id INTEGER FK users.id -> string attribute: user_id
+- event_ref VARCHAR(255) -> string(255) attribute: event_ref
+- hidden BOOLEAN NOT NULL DEFAULT 0 -> boolean attribute: hidden
+- title VARCHAR(255) -> string(255) attribute: title
+- description TEXT -> string attribute: description
+- start DATETIME -> datetime attribute: start
+- end DATETIME -> datetime attribute: end
+- is_all_day BOOLEAN -> boolean attribute: is_all_day
+- calendar_id VARCHAR(255) -> string(255) attribute: calendar_id
+- color VARCHAR(7) -> string(7) attribute: color
+- created_at DATETIME NOT NULL -> datetime attribute: created_at
+- updated_at DATETIME -> datetime attribute: updated_at
+- UNIQUE (user_id, event_ref)
 
 Table: shared_files
 - id VARCHAR(36) PRIMARY KEY -> use Appwrite $id (string); no separate attribute
 - user_id INTEGER FK users.id -> string attribute: user_id
+- folder_id VARCHAR(64) -> string(64) attribute: folder_id
 - original_filename VARCHAR(255) NOT NULL -> string(255) attribute: original_filename
 - stored_path VARCHAR(512) NOT NULL -> string(512) attribute: stored_path
+- storage_backend VARCHAR(32) -> string(32) attribute: storage_backend
+- storage_bucket_id VARCHAR(64) -> string(64) attribute: storage_bucket_id
+- storage_file_id VARCHAR(64) -> string(64) attribute: storage_file_id
 - file_size_bytes INTEGER NOT NULL -> integer attribute: file_size_bytes
 - mime_type VARCHAR(127) -> string(127) attribute: mime_type
 - share_code VARCHAR(10) UNIQUE -> string(10) attribute: share_code (unique)
 - is_public BOOLEAN NOT NULL DEFAULT 0 -> boolean attribute: is_public
 - expires_at DATETIME NOT NULL -> datetime attribute: expires_at
 - created_at DATETIME NOT NULL -> datetime attribute: created_at
+- updated_at DATETIME -> datetime attribute: updated_at
 - downloaded_count INTEGER NOT NULL DEFAULT 0 -> integer attribute: downloaded_count
+
+Table: file_folders
+- id VARCHAR(36) PRIMARY KEY -> use Appwrite $id (string); no separate attribute
+- user_id INTEGER FK users.id -> string attribute: user_id
+- name VARCHAR(255) NOT NULL -> string(255) attribute: name
+- parent_folder_id VARCHAR(64) -> string(64) attribute: parent_folder_id
+- is_public BOOLEAN NOT NULL DEFAULT 0 -> boolean attribute: is_public
+- share_code VARCHAR(10) UNIQUE -> string(10) attribute: share_code (unique)
+- order INTEGER -> integer attribute: order
+- created_at DATETIME NOT NULL -> datetime attribute: created_at
+- updated_at DATETIME -> datetime attribute: updated_at
 """
 
 import os
@@ -155,6 +200,7 @@ DATABASE_ID = _database_id
 PROJECT_ID = _project
 ENDPOINT = _endpoint
 PROFILE_AVATAR_BUCKET_ID = os.environ.get("APPWRITE_PROFILE_AVATAR_BUCKET_ID", "profile_avatars")
+FILE_SHARE_BUCKET_ID = os.environ.get("APPWRITE_FILE_SHARE_BUCKET_ID", "file_share_files")
 
 COLLECTIONS = {
 	"users": "users",
@@ -165,7 +211,10 @@ COLLECTIONS = {
 	"calendar_feeds": "calendar_feeds",
 	"user_calendar_preferences": "user_calendar_preferences",
 	"user_events": "user_events",
+	"user_calendar_sources": "user_calendar_sources",
+	"user_event_overrides": "user_event_overrides",
 	"shared_files": "shared_files",
+	"file_folders": "file_folders",
 	"note_folders": "note_folders",
 	"notes": "notes",
 }

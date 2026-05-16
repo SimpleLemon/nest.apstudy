@@ -1,135 +1,285 @@
-<!-- HTML Meta Tags -->
-<title>File Share - APStudy Nest</title>
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<script>
-    window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";
-</script>
-<script src="https://cdn.jsdelivr.net/npm/appwrite@17/dist/iife/sdk.js"></script>
-<script src="{{ url_for('static', filename='js/appwrite.js') }}"></script>
-<script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/themes.css') }}">
-<link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy Logo">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>File Share - APStudy Nest</title>
+    <script>window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";</script>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@17/dist/iife/sdk.js"></script>
+    <script src="{{ url_for('static', filename='js/appwrite.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
+    <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy Logo">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/themes.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/layout.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
-<script src="https://kit.fontawesome.com/a7731f7ef8.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<script src="{{ url_for('static', filename='js/global.js') }}" defer></script>
-<script src="{{ url_for('static', filename='js/navbar.js') }}" defer></script>
-<script src="{{ url_for('static', filename='js/sidebar.js') }}" defer></script>
-<script>
-    window.FILE_SHARE_CONFIG = {
-        allowedExpiryOptions: {{ allowed_expiry_options|tojson }},
-        defaultExpiryDays: {{ default_expiry_days }}
-    };
-</script>
-<script src="{{ url_for('static', filename='js/files.js') }}" defer></script>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<meta name="description" content="Upload and share files securely with automatic expiration for APStudy."/>
-<!-- Facebook Meta Tags -->
-<meta property="og:url" content="https://nest.apstudy.org/files">
-<meta property="og:type" content="website">
-<meta property="og:title" content="File Share | APStudy">
-<meta property="og:description" content="Upload and share files securely with automatic expiration for APStudy."/>
-<meta property="og:image" content="https://resources.apstudy.org/images/APResourcesBanner.png">
-<!-- Twitter Meta Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta property="twitter:domain" content="nest.apstudy.org">
-<meta property="twitter:url" content="https://nest.apstudy.org/files">
-<meta name="twitter:title" content="File Share | APStudy">
-<meta name="twitter:description" content="Upload and share files securely with automatic expiration for APStudy."/>
-<meta name="twitter:image" content="https://resources.apstudy.org/images/APResourcesBanner.png">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0NT330ZX5L"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-0NT330ZX5L');
-</script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/files.css') }}">
+    <script src="{{ url_for('static', filename='js/global.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/navbar.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/sidebar.js') }}" defer></script>
+    <script>
+        window.FILE_SHARE_CONFIG = {
+            allowedExpiryOptions: {{ allowed_expiry_options|tojson }},
+            defaultExpiryDays: {{ default_expiry_days }},
+            maxFileSize: {{ max_file_size }},
+            maxUploadFiles: {{ max_upload_files }}
+        };
+    </script>
+    <script src="{{ url_for('static', filename='js/files.js') }}" defer></script>
+    <meta name="description" content="Upload and share files securely with automatic expiration for APStudy." />
+    <meta property="og:url" content="https://nest.apstudy.org/files">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="File Share | APStudy">
+    <meta property="og:description" content="Upload and share files securely with automatic expiration for APStudy." />
+    <meta property="og:image" content="https://resources.apstudy.org/images/APResourcesBanner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="nest.apstudy.org">
+    <meta property="twitter:url" content="https://nest.apstudy.org/files">
+    <meta name="twitter:title" content="File Share | APStudy">
+    <meta name="twitter:description" content="Upload and share files securely with automatic expiration for APStudy." />
+    <meta name="twitter:image" content="https://resources.apstudy.org/images/APResourcesBanner.png">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0NT330ZX5L"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-0NT330ZX5L');
+    </script>
 </head>
 <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
 <global class="thesidebar" data-user-emory-student="{{ user.emory_student }}" data-sidebar-default="{{ sidebar_default|default('expanded') }}"></global>
 <body class="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-primary/30 selection:text-primary-fixed">
+    <main class="files-main">
+        <section id="file-share-page" class="files-page" aria-labelledby="file-share-title">
+            <h1 id="file-share-title" class="files-visually-hidden">File manager</h1>
+            <header class="files-toolbar" aria-label="File manager controls">
+                <div class="files-toolbar-path">
+                    <nav id="file-share-breadcrumbs" class="files-breadcrumbs" aria-label="Folder path"></nav>
+                    <p id="file-share-folder-meta">0 folders / 0 files</p>
+                </div>
+                <div class="files-header-actions">
+                    <button id="file-share-refresh" class="files-icon-button" type="button" aria-label="Refresh files">
+                        <span class="material-symbols-outlined" aria-hidden="true">refresh</span>
+                    </button>
+                    <div class="files-new-menu-wrap">
+                        <button id="file-share-new-button" class="files-primary-button" type="button" aria-haspopup="menu" aria-expanded="false">
+                            <span class="material-symbols-outlined" aria-hidden="true">add</span>
+                            <span>New</span>
+                            <span class="material-symbols-outlined files-button-caret" aria-hidden="true">expand_more</span>
+                        </button>
+                        <div id="file-share-new-menu" class="files-new-menu" role="menu" hidden>
+                            <button type="button" role="menuitem" data-new-folder>
+                                <span class="material-symbols-outlined" aria-hidden="true">create_new_folder</span>
+                                <span>
+                                    <strong>New Folder</strong>
+                                    <small>Organize files in this folder</small>
+                                </span>
+                            </button>
+                            <button type="button" role="menuitem" data-file-upload>
+                                <span class="material-symbols-outlined" aria-hidden="true">upload_file</span>
+                                <span>
+                                    <strong>File Upload</strong>
+                                    <small>Select or drop up to 5 files</small>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
 
-<main class="flex-1 w-full max-w-[1600px] mx-auto px-6 md:px-8 pt-6 pb-10 flex flex-col gap-12 relative z-10">
-<section class="flex flex-col gap-4 w-full animate-fade-in-up">
-<div>
-<h1 class="text-3xl font-headline font-semibold text-on-surface tracking-tight mb-1">File Share</h1>
-<p class="text-on-surface-variant text-sm flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px]">upload_file</span>
-<span>Upload and share files up to 50 MB</span>
-</p>
-</div>
+            <section id="file-share-drop-surface" class="files-surface" aria-label="File manager">
+                <div id="file-share-alert" class="files-alert" role="status" hidden></div>
+                <div id="file-share-loading" class="files-loading">
+                    <span class="material-symbols-outlined" aria-hidden="true">progress_activity</span>
+                    Loading files...
+                </div>
 
-<div class="flex items-center justify-between">
-    <div>
-        <button id="file-share-open-modal" type="button" class="inline-flex items-center gap-3 rounded-2xl bg-surface-container-high px-4 py-3 shadow-md hover:bg-surface-container transition-colors">
-            <span class="material-symbols-outlined text-[20px]">add</span>
-            <span class="font-medium">New</span>
-        </button>
-    </div>
-    <div class="text-sm text-on-surface-variant">Upload files or manage your existing files below.</div>
-</div>
+                <section id="file-share-folders-section" class="files-section" hidden>
+                    <h3>Folders</h3>
+                    <div id="file-share-folders" class="files-folder-grid"></div>
+                </section>
 
-<!-- Modal (hidden by default) -->
-<div id="file-share-modal" class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-    <div class="w-full max-w-2xl bg-surface-container-low rounded-2xl p-6 border border-outline-variant/10 shadow-2xl">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-semibold">Upload Files</h3>
-            <button id="file-share-close-modal" class="text-on-surface-variant">Close</button>
-        </div>
+                <section id="file-share-files-section" class="files-section" hidden>
+                    <h3>Files</h3>
+                    <div id="file-share-files" class="files-file-grid"></div>
+                </section>
 
-        <input id="file-share-input" class="hidden" type="file" multiple />
-        <div id="file-share-dropzone" class="border-2 border-dashed border-outline-variant/30 rounded-2xl p-6 text-center bg-surface-container-lowest hover:bg-surface-container-low transition-colors cursor-pointer mb-4">
-            <div class="flex flex-col items-center gap-2">
-                <span class="material-symbols-outlined text-4xl text-on-surface-variant/40">description</span>
-                <div>
-                    <h4 class="text-base font-semibold text-on-surface">Drag files here</h4>
-                    <p class="text-sm text-on-surface-variant mt-1">Or <button id="file-share-pick" type="button" class="text-primary hover:underline font-medium">choose files</button></p>
-                    <p class="text-xs text-on-surface-variant mt-2">You may upload up to 5 files at once. Each file is limited to 50 MB.</p>
+                <div id="file-share-empty" class="files-empty" hidden>
+                    <h3>Drop files here</h3>
+                    <p>or use the "New" button.</p>
+                </div>
+            </section>
+
+            <div id="file-share-selection-bar" class="files-selection-bar" role="region" aria-label="Selected file actions" hidden>
+                <button id="file-share-selection-clear" class="files-icon-button" type="button" aria-label="Clear selection">
+                    <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                </button>
+                <span id="file-share-selection-count" class="files-selection-count">0 selected</span>
+                <div class="files-selection-actions">
+                    <button id="file-share-bulk-move" class="files-secondary-button" type="button">
+                        <span class="material-symbols-outlined" aria-hidden="true">drive_file_move</span>
+                        Move
+                    </button>
+                    <button id="file-share-bulk-download" class="files-primary-button" type="button">
+                        <span class="material-symbols-outlined" aria-hidden="true">download</span>
+                        Bulk Download
+                    </button>
+                    <button id="file-share-bulk-delete" class="files-danger-button" type="button">
+                        <span class="material-symbols-outlined" aria-hidden="true">delete</span>
+                        Delete
+                    </button>
                 </div>
             </div>
-        </div>
+        </section>
+    </main>
 
-        <div id="file-share-selected-list" class="flex flex-col gap-3 max-h-64 overflow-auto mb-4"></div>
-
-        <div id="file-share-progress-wrap" class="hidden mb-4">
-            <div class="w-full rounded-full bg-surface-container-highest overflow-hidden h-2">
-                <div id="file-share-progress-bar" class="bg-primary h-full transition-all" style="width: 0%;"></div>
+    <div id="file-share-upload-modal" class="files-modal" role="dialog" aria-modal="true" aria-labelledby="file-share-upload-title" hidden>
+        <div class="files-modal-panel files-upload-panel">
+            <header class="files-modal-header">
+                <div>
+                    <h2 id="file-share-upload-title">Upload files</h2>
+                    <p id="file-share-upload-target">My Files</p>
+                </div>
+                <button type="button" class="files-icon-button" data-close-modal aria-label="Close upload dialog">
+                    <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                </button>
+            </header>
+            <input id="file-share-input" type="file" multiple hidden />
+            <div id="file-share-dropzone" class="files-upload-dropzone" tabindex="0" role="button">
+                <span class="material-symbols-outlined" aria-hidden="true">upload_file</span>
+                <h3>Drag files here</h3>
+                <p>or <button id="file-share-pick" type="button">choose files</button></p>
+                <small>You may upload up to {{ max_upload_files }} files at once. Each file is limited to 50 MB.</small>
             </div>
-        </div>
-
-        <div id="file-share-error" class="hidden text-sm text-error mb-3"></div>
-
-        <div class="flex justify-end">
-            <button id="file-share-upload" class="inline-flex items-center gap-2 rounded-md bg-primary text-on-primary px-4 py-2 text-sm font-medium hover:opacity-95 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed">Upload</button>
+            <div id="file-share-selected-list" class="files-selected-list"></div>
+            <div id="file-share-progress-wrap" class="files-progress" hidden>
+                <div id="file-share-progress-bar"></div>
+            </div>
+            <div id="file-share-error" class="files-form-error" role="alert" hidden></div>
+            <footer class="files-modal-actions">
+                <button type="button" class="files-secondary-button" data-close-modal>Cancel</button>
+                <button id="file-share-upload" type="button" class="files-primary-button">Upload</button>
+            </footer>
         </div>
     </div>
-</div>
-</section>
 
-<section class="flex flex-col gap-6 w-full animate-fade-in-up" style="animation-delay: 100ms;">
-<div class="flex items-center justify-between border-b border-surface-container-low pb-4">
-<h2 class="text-xl font-headline font-semibold text-on-surface tracking-tight flex items-center gap-2">
-<span class="material-symbols-outlined text-primary">folder_shared</span>
-My Files
-</h2>
-</div>
-<div id="file-share-files" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
-</section>
-</main>
+    <div id="file-share-folder-modal" class="files-modal" role="dialog" aria-modal="true" aria-labelledby="file-share-folder-modal-title" hidden>
+        <form id="file-share-folder-form" class="files-modal-panel files-small-panel">
+            <header class="files-modal-header">
+                <div>
+                    <h2 id="file-share-folder-modal-title">New folder</h2>
+                    <p id="file-share-folder-modal-subtitle">Create a folder in My Files.</p>
+                </div>
+                <button type="button" class="files-icon-button" data-close-modal aria-label="Close folder dialog">
+                    <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                </button>
+            </header>
+            <label class="files-field">
+                <span>Folder name</span>
+                <input id="file-share-folder-name" type="text" maxlength="255" autocomplete="off" required />
+            </label>
+            <div id="file-share-folder-error" class="files-form-error" role="alert" hidden></div>
+            <footer class="files-modal-actions">
+                <button type="button" class="files-secondary-button" data-close-modal>Cancel</button>
+                <button id="file-share-folder-save" type="submit" class="files-primary-button">Create folder</button>
+            </footer>
+        </form>
+    </div>
 
-<global class="thefooter"></global>
+    <div id="file-share-move-modal" class="files-modal" role="dialog" aria-modal="true" aria-labelledby="file-share-move-title" hidden>
+        <form id="file-share-move-form" class="files-modal-panel files-small-panel">
+            <header class="files-modal-header">
+                <div>
+                    <h2 id="file-share-move-title">Move item</h2>
+                    <p id="file-share-move-subtitle">Choose a destination folder.</p>
+                </div>
+                <button type="button" class="files-icon-button" data-close-modal aria-label="Close move dialog">
+                    <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                </button>
+            </header>
+            <label class="files-field">
+                <span>Destination</span>
+                <select id="file-share-move-destination"></select>
+            </label>
+            <div id="file-share-move-error" class="files-form-error" role="alert" hidden></div>
+            <footer class="files-modal-actions">
+                <button type="button" class="files-secondary-button" data-close-modal>Cancel</button>
+                <button id="file-share-move-save" type="submit" class="files-primary-button">Move</button>
+            </footer>
+        </form>
+    </div>
 
-</body></html>
+    <div id="file-share-share-modal" class="files-modal" role="dialog" aria-modal="true" aria-labelledby="file-share-share-title" hidden>
+        <div class="files-modal-panel files-small-panel files-share-panel">
+            <header class="files-modal-header">
+                <div>
+                    <h2 id="file-share-share-title">Share</h2>
+                    <p id="file-share-share-subtitle">Update sharing for this item.</p>
+                </div>
+                <button type="button" class="files-icon-button" data-close-modal aria-label="Close sharing dialog">
+                    <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                </button>
+            </header>
+            <div class="files-share-body">
+                <div class="files-share-card">
+                    <div>
+                        <h3 id="file-share-share-name">Selected item</h3>
+                        <p id="file-share-share-status">Private</p>
+                    </div>
+                    <label class="files-switch">
+                        <input id="file-share-share-visibility" type="checkbox" />
+                        <span aria-hidden="true"></span>
+                        <strong>Public link</strong>
+                    </label>
+                </div>
+                <label id="file-share-expiry-field" class="files-field">
+                    <span>File expires</span>
+                    <select id="file-share-share-expiry"></select>
+                </label>
+                <p id="file-share-folder-note" class="files-share-note" hidden>Folder links do not expire. Files inside this folder still follow their own expiration dates.</p>
+                <div id="file-share-link-wrap" class="files-share-link" hidden>
+                    <label class="files-field">
+                        <span>Share link</span>
+                        <input id="file-share-share-link" type="text" readonly />
+                    </label>
+                    <button id="file-share-copy-link" class="files-secondary-button" type="button">
+                        <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+                        Copy link
+                    </button>
+                </div>
+                <div id="file-share-share-error" class="files-form-error" role="alert" hidden></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="file-share-confirm-modal" class="files-modal" role="dialog" aria-modal="true" aria-labelledby="file-share-confirm-title" hidden>
+        <form id="file-share-confirm-form" class="files-modal-panel files-small-panel">
+            <header class="files-modal-header">
+                <div>
+                    <h2 id="file-share-confirm-title">Confirm action</h2>
+                    <p id="file-share-confirm-message"></p>
+                </div>
+                <button type="button" class="files-icon-button" data-close-modal aria-label="Close confirmation dialog">
+                    <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                </button>
+            </header>
+            <label id="file-share-confirm-field" class="files-field" hidden>
+                <span id="file-share-confirm-field-label">Type to confirm</span>
+                <input id="file-share-confirm-input" type="text" autocomplete="off" />
+            </label>
+            <div id="file-share-confirm-error" class="files-form-error" role="alert" hidden></div>
+            <footer class="files-modal-actions">
+                <button type="button" class="files-secondary-button" data-close-modal>Cancel</button>
+                <button id="file-share-confirm-submit" type="submit" class="files-danger-button">Delete</button>
+            </footer>
+        </form>
+    </div>
+
+    <global class="thefooter"></global>
+</body>
+</html>
