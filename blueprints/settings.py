@@ -50,6 +50,30 @@ DEFAULT_BANNER_COLOR = "#fecae1"
 MAX_AVATAR_BYTES = 10 * 1024 * 1024
 ALLOWED_AVATAR_MIME_TYPES = {"image/jpeg", "image/png", "image/gif", "image/webp"}
 ALLOWED_AVATAR_EXTENSIONS = {"jpg", "jpeg", "png", "gif", "webp"}
+USERNAME_MIN_LENGTH = 3
+USERNAME_MAX_LENGTH = 20
+USERNAME_PATTERN = re.compile(r"^[a-zA-Z0-9_-]+$")
+USERNAME_RESERVED = {
+    "account",
+    "admin",
+    "api",
+    "auth",
+    "calendar",
+    "dashboard",
+    "data",
+    "files",
+    "login",
+    "logout",
+    "notes",
+    "onboarding",
+    "preferences",
+    "profile",
+    "settings",
+    "signup",
+    "u",
+    "user",
+    "users",
+}
 
 THEME_TO_INTERFACE_THEME = {
     "dark": "obsidian-dark",
@@ -166,6 +190,38 @@ def _normalize_timezone(value):
     return value.strip()
 
 
+def _normalize_username(value):
+    if not isinstance(value, str):
+        return ""
+    return value.strip().lower()
+
+
+def _validate_username(value):
+    normalized = _normalize_username(value)
+    if not normalized:
+        raise ValueError("Username is required.")
+    if normalized in USERNAME_RESERVED:
+        raise ValueError("That username is reserved.")
+    if not USERNAME_PATTERN.fullmatch(normalized):
+        raise ValueError("Please only use numbers, letters, dashes -, or underscores _." )
+    if len(normalized) < USERNAME_MIN_LENGTH or len(normalized) > USERNAME_MAX_LENGTH:
+        raise ValueError("Username must be between 3 and 20 characters.")
+    return normalized
+
+
+def _username_is_taken(username, user_id):
+    if not username:
+        return False
+    existing = first_row(
+        COLLECTIONS["users"],
+        [Query.equal("username", [username])],
+    )
+    if not existing:
+        return False
+    existing_id = existing.get("$id") or existing.get("id")
+    return str(existing_id) != str(user_id)
+
+
 def _normalize_bool(value, default=False):
     if value is None:
         return default
@@ -185,8 +241,8 @@ def _normalize_bool(value, default=False):
 def _profile_doc_payload():
     return {
         "id": str(current_user.id),
-        "public_user_id": current_user.public_user_id,
         "name": current_user.name,
+        "username": current_user.username,
         "email": current_user.email,
         "picture_url": current_user.picture_url,
         "banner_color": _normalize_banner_color(current_user.banner_color),
@@ -320,6 +376,7 @@ def _delete_user_artifacts(user_id):
         COLLECTIONS["calendar_cache"],
         COLLECTIONS["user_calendar_preferences"],
         COLLECTIONS["user_events"],
+        COLLECTIONS.get("calendar_shares", "calendar_shares"),
         COLLECTIONS["shared_files"],
         COLLECTIONS.get("file_folders", "file_folders"),
     ]
@@ -541,6 +598,7 @@ def _onboarding_context():
     return {
         "user": {
             "name": current_user.name,
+            "username": current_user.username,
             "email": current_user.email,
             "picture": current_user.picture_url,
         },
@@ -591,17 +649,35 @@ def save_onboarding():
     user_id = str(current_user.id)
 
     if step == 1:
+        display_name = (payload.get("display_name") or "").strip()
+        if not display_name:
+            return jsonify({"error": "Display name is required."}), 400
+
+        try:
+            username = _validate_username(payload.get("username"))
+        except ValueError as error:
+            return jsonify({"error": str(error)}), 400
+
+        if _username_is_taken(username, user_id):
+            return jsonify({"error": "That username is already taken."}), 409
+
         next_step = max(current_user.onboarding_step or 1, 2)
         try:
             update_row_safe(
                 COLLECTIONS["users"],
                 user_id,
-                {"onboarding_step": next_step},
+                {
+                    "name": display_name,
+                    "username": username,
+                    "onboarding_step": next_step,
+                },
             )
         except AppwriteException:
             logger.exception("Failed to update onboarding step")
             return jsonify({"error": "Unable to save onboarding."}), 500
         current_user.onboarding_step = next_step
+        current_user.name = display_name
+        current_user.username = username
         return jsonify({"status": "ok", "next_step": 2})
 
     if step == 2:
@@ -803,6 +879,7 @@ def settings_page():
 
     return render_template("settings.html", user={
         "name": current_user.name or current_user.email,
+        "username": current_user.username,
         "email": current_user.email,
         "picture": current_user.picture_url,
         "banner_color": _normalize_banner_color(current_user.banner_color),
@@ -845,6 +922,7 @@ def update_profile():
     """Update editable profile fields for the authenticated user."""
     data = request.get_json(silent=True) or {}
     name = (data.get("name") or "").strip()
+    username_value = data.get("username")
     picture_url = (data.get("picture_url") or "").strip() or None
     avatar_source = _normalize_avatar_source(data.get("avatar_source"), picture_url)
     banner_color = _normalize_banner_color(data.get("banner_color"))
@@ -854,6 +932,16 @@ def update_profile():
 
     if not name:
         return jsonify({"error": "Name is required."}), 400
+
+    if username_value is not None:
+        try:
+            username = _validate_username(username_value)
+        except ValueError as error:
+            return jsonify({"error": str(error)}), 400
+        if _username_is_taken(username, str(current_user.id)):
+            return jsonify({"error": "That username is already taken."}), 409
+    else:
+        username = current_user.username
 
     if graduation_year and (len(graduation_year) != 4 or not graduation_year.isdigit()):
         return jsonify({"error": "Graduation year must be a 4-digit year."}), 400
@@ -868,6 +956,7 @@ def update_profile():
 
     updates = {
         "name": name,
+        "username": username,
         "picture_url": picture_url,
         "banner_color": banner_color,
         "avatar_file_id": avatar_file_id,
@@ -890,6 +979,7 @@ def update_profile():
         return jsonify({"error": "Unable to update profile."}), 500
 
     current_user.name = name
+    current_user.username = username
     current_user.picture_url = picture_url
     current_user.banner_color = banner_color
     current_user.avatar_file_id = avatar_file_id
@@ -905,6 +995,7 @@ def update_profile():
     return jsonify({
         "status": "ok",
         "name": current_user.name,
+        "username": current_user.username,
         "picture_url": current_user.picture_url,
         "banner_color": current_user.banner_color,
         "avatar_file_id": current_user.avatar_file_id,

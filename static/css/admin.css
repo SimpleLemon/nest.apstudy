@@ -1,0 +1,370 @@
+:root {
+    --admin-accent: var(--color-primary, #0060aa);
+    --admin-accent-soft: color-mix(in srgb, var(--admin-accent) 18%, transparent);
+    --admin-surface: var(--color-surface, #ffffff);
+    --admin-panel: var(--color-surface-container-low, #f7f6f3);
+    --admin-panel-strong: var(--color-surface-container-high, #e8e6e1);
+    --admin-ink: var(--color-on-surface, #1f1f1e);
+    --admin-muted: var(--color-on-surface-variant, #4b4a47);
+    --admin-border: color-mix(in srgb, var(--color-outline-variant, #c5c3ba) 70%, transparent);
+    --admin-danger: var(--color-error, #ba1a1a);
+    --admin-success: #1f7a4d;
+    --admin-shadow: 0 24px 60px rgba(0, 0, 0, 0.16);
+}
+
+body.admin-page {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(1200px 600px at 12% -10%, color-mix(in srgb, var(--admin-accent) 18%, transparent), transparent),
+        radial-gradient(900px 500px at 92% -5%, color-mix(in srgb, var(--color-tertiary, #f2a900) 20%, transparent), transparent),
+        var(--admin-surface);
+    color: var(--admin-ink);
+    font-family: "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+}
+
+.admin-shell {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+    animation: admin-fade-in 420ms ease-out;
+}
+
+@keyframes admin-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.admin-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.admin-eyebrow {
+    margin: 0 0 6px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--admin-muted);
+}
+
+.admin-title {
+    font-family: "Space Grotesk", "Source Sans 3", sans-serif;
+    font-size: clamp(28px, 4vw, 38px);
+    margin: 0;
+}
+
+.admin-subtitle {
+    margin: 10px 0 0;
+    color: var(--admin-muted);
+    max-width: 520px;
+}
+
+.admin-header-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.admin-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    background: var(--admin-accent);
+    color: var(--color-on-primary, #ffffff);
+    transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease, border-color 140ms ease;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+}
+
+.admin-button:hover,
+.admin-button:focus-visible {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+    outline: none;
+}
+
+.admin-button--ghost {
+    background: transparent;
+    color: var(--admin-ink);
+    border-color: var(--admin-border);
+    box-shadow: none;
+}
+
+.admin-button--danger {
+    background: var(--admin-danger);
+    color: var(--color-on-error, #ffffff);
+}
+
+.admin-alert {
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    border: 1px solid var(--admin-border);
+    background: var(--admin-panel);
+    color: var(--admin-muted);
+    font-weight: 600;
+}
+
+.admin-alert--error {
+    border-color: color-mix(in srgb, var(--admin-danger) 40%, transparent);
+    color: var(--admin-danger);
+    background: color-mix(in srgb, var(--admin-danger) 12%, transparent);
+}
+
+.admin-alert--success {
+    border-color: color-mix(in srgb, var(--admin-success) 40%, transparent);
+    color: var(--admin-success);
+    background: color-mix(in srgb, var(--admin-success) 10%, transparent);
+}
+
+.admin-card {
+    background: var(--admin-panel);
+    border: 1px solid var(--admin-border);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: var(--admin-shadow);
+}
+
+.admin-card + .admin-card {
+    margin-top: 16px;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+}
+
+.admin-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.admin-field-label {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--admin-muted);
+}
+
+.admin-field-value {
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.admin-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    margin-bottom: 18px;
+}
+
+.admin-search {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.admin-search input,
+.admin-search select {
+    border-radius: 10px;
+    border: 1px solid var(--admin-border);
+    background: var(--admin-surface);
+    color: var(--admin-ink);
+    padding: 10px 12px;
+    min-width: 200px;
+    font-size: 14px;
+}
+
+.admin-search input:focus,
+.admin-search select:focus {
+    outline: 2px solid var(--admin-accent-soft);
+    border-color: color-mix(in srgb, var(--admin-accent) 55%, transparent);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--admin-panel);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--admin-border);
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px 14px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--admin-border);
+    font-size: 14px;
+}
+
+.admin-table th {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--admin-muted);
+    background: var(--admin-panel-strong);
+}
+
+.admin-table tr:hover td {
+    background: color-mix(in srgb, var(--admin-accent) 8%, transparent);
+}
+
+.admin-link {
+    color: var(--admin-accent);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.admin-link:hover {
+    text-decoration: underline;
+}
+
+.admin-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--admin-accent-soft);
+    color: var(--admin-accent);
+}
+
+.admin-badge--muted {
+    background: color-mix(in srgb, var(--admin-muted) 12%, transparent);
+    color: var(--admin-muted);
+}
+
+.admin-tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 0 18px;
+}
+
+.admin-tab {
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--admin-border);
+    background: transparent;
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--admin-muted);
+    transition: all 140ms ease;
+}
+
+.admin-tab.is-active,
+.admin-tab:hover {
+    color: var(--admin-ink);
+    border-color: color-mix(in srgb, var(--admin-accent) 55%, transparent);
+    background: var(--admin-accent-soft);
+}
+
+.admin-form {
+    display: grid;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.admin-form input[type="text"],
+.admin-form input[type="number"] {
+    border-radius: 10px;
+    border: 1px solid var(--admin-border);
+    padding: 10px 12px;
+    background: var(--admin-surface);
+    color: var(--admin-ink);
+}
+
+.admin-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--admin-ink);
+}
+
+.admin-form .admin-inline {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-form input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+.admin-section {
+    margin-top: 18px;
+}
+
+.admin-code-block {
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: var(--admin-surface);
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px dashed var(--admin-border);
+    font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+    font-size: 13px;
+}
+
+.admin-note-content {
+    white-space: pre-wrap;
+    padding: 12px;
+    border-radius: 12px;
+    background: var(--admin-surface);
+    border: 1px solid var(--admin-border);
+    font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+    font-size: 13px;
+    max-height: 280px;
+    overflow: auto;
+}
+
+.admin-danger-zone {
+    border: 1px solid color-mix(in srgb, var(--admin-danger) 40%, transparent);
+    background: color-mix(in srgb, var(--admin-danger) 10%, transparent);
+}
+
+@media (max-width: 720px) {
+    .admin-header {
+        align-items: flex-start;
+    }
+
+    .admin-search input,
+    .admin-search select {
+        min-width: 160px;
+        flex: 1 1 160px;
+    }
+
+    .admin-table th,
+    .admin-table td {
+        padding: 10px;
+    }
+}

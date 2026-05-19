@@ -99,6 +99,49 @@ def calendar():
     )
 
 
+@dashboard_bp.route("/calendar/share/<share_code>")
+def public_calendar_share(share_code):
+    """Render a public read-only shared calendar page."""
+    from blueprints.calendar_api import _public_calendar_share_context, _resolve_calendar_share_by_code
+
+    try:
+        share = _resolve_calendar_share_by_code(share_code, active_only=True)
+    except AppwriteException:
+        logger.exception("Failed to resolve public calendar share")
+        share = None
+
+    theme_preference = None
+    if current_user.is_authenticated:
+        theme_preference = _theme_from_settings(_load_user_settings())
+
+    try:
+        calendar_buffer_days = int(os.environ.get("CALENDAR_DATE_BUFFER_DAYS", "7"))
+    except (TypeError, ValueError):
+        calendar_buffer_days = 7
+
+    if not share:
+        return render_template(
+            "calendar_share.html",
+            share_found=False,
+            share_code=share_code,
+            owner_name="",
+            scope_label="",
+            theme_preference=theme_preference,
+            preferred_calendar_view="month",
+            calendar_buffer_days=calendar_buffer_days,
+        ), 404
+
+    context = _public_calendar_share_context(share)
+    return render_template(
+        "calendar_share.html",
+        share_found=True,
+        preferred_calendar_view="month",
+        theme_preference=theme_preference,
+        calendar_buffer_days=calendar_buffer_days,
+        **context,
+    )
+
+
 @dashboard_bp.route("/courses")
 @login_required
 def courses():
@@ -127,6 +170,21 @@ def notes():
     return render_template(
         "notes.html",
         user=_user_payload(),
+    )
+
+
+@dashboard_bp.route("/task")
+@login_required
+def task():
+    """Render the task management page."""
+    if not current_user.onboarding_complete:
+        return redirect(url_for("settings.onboarding"))
+
+    user_settings = _load_user_settings()
+    return render_template(
+        "task.html",
+        user=_user_payload(),
+        theme_preference=_theme_from_settings(user_settings),
     )
 
 

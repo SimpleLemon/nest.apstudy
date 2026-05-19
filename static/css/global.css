@@ -696,6 +696,428 @@ global.thefooter {
 	opacity: 0.6;
 }
 
+.calendar-share-dialog {
+	width: min(780px, calc(100vw - 32px));
+	border-color: rgba(148, 163, 184, 0.16);
+	border-radius: 18px;
+	background: #0f141b;
+	box-shadow: 0 30px 90px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(255, 255, 255, 0.025);
+	color: #e5e7eb;
+}
+
+.calendar-share-modal {
+	background: rgba(2, 6, 12, 0.64);
+	backdrop-filter: blur(5px);
+	animation: calendar-share-overlay-in 140ms ease-out both;
+}
+
+.calendar-share-modal.is-closing {
+	pointer-events: none;
+	animation: calendar-share-overlay-out 120ms ease-in both;
+}
+
+.calendar-share-modal .calendar-share-dialog {
+	animation: calendar-share-dialog-in 160ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.calendar-share-modal.is-closing .calendar-share-dialog {
+	animation: calendar-share-dialog-out 120ms ease-in both;
+}
+
+.calendar-share-dialog .calendar-info-header,
+.calendar-share-dialog .calendar-info-footer {
+	border-color: rgba(148, 163, 184, 0.12);
+}
+
+.calendar-share-dialog .calendar-info-header {
+	padding: 22px 24px 20px;
+}
+
+.calendar-share-dialog .calendar-info-body {
+	gap: 20px;
+	padding: 22px 24px;
+}
+
+.calendar-share-dialog .calendar-info-footer {
+	padding: 16px 24px 22px;
+}
+
+.calendar-share-dialog .calendar-info-title {
+	color: #f4f7fb;
+	font-size: 20px;
+	letter-spacing: 0;
+}
+
+.calendar-share-dialog .calendar-info-subtitle,
+.calendar-share-dialog .calendar-info-note {
+	color: #a9b1bf;
+}
+
+.calendar-share-dialog .calendar-info-close {
+	border: 0;
+	border-radius: 14px;
+	background: rgba(255, 255, 255, 0.045);
+	color: #b9c1cd;
+}
+
+.calendar-share-dialog .calendar-info-close:hover,
+.calendar-share-dialog .calendar-info-close:focus-visible {
+	background: rgba(255, 255, 255, 0.08);
+	color: #f3f4f6;
+	box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.14);
+}
+
+.calendar-share-dialog .calendar-info-label {
+	color: #8e98a8;
+	font-size: 10px;
+	letter-spacing: 0.12em;
+}
+
+.calendar-share-dialog .calendar-info-input {
+	border: 1px solid rgba(148, 163, 184, 0.16);
+	border-radius: 12px;
+	background: rgba(255, 255, 255, 0.035);
+	color: #e7ebf2;
+	color-scheme: dark;
+	transition: background-color 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.calendar-share-dialog .calendar-info-input:hover {
+	border-color: rgba(148, 163, 184, 0.22);
+	background: rgba(255, 255, 255, 0.055);
+}
+
+.calendar-share-dialog .calendar-info-input:focus {
+	border-color: rgba(96, 165, 250, 0.42);
+	background: rgba(255, 255, 255, 0.065);
+	box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.14);
+}
+
+.calendar-share-dialog .calendar-info-input::placeholder {
+	color: #788394;
+}
+
+.calendar-share-dialog .calendar-info-button {
+	border-radius: 12px;
+	font-weight: 650;
+}
+
+.calendar-share-dialog .calendar-info-button-secondary {
+	background: rgba(255, 255, 255, 0.055);
+	color: #bdc5d1;
+}
+
+.calendar-share-dialog .calendar-info-button-secondary:hover,
+.calendar-share-dialog .calendar-info-button-secondary:focus-visible {
+	background: rgba(255, 255, 255, 0.09);
+	color: #f3f4f6;
+}
+
+.calendar-share-dialog .calendar-info-button-primary {
+	background: #93c5fd;
+	color: #08213f;
+}
+
+.calendar-share-dialog .calendar-info-button-primary:hover,
+.calendar-share-dialog .calendar-info-button-primary:focus-visible {
+	background: #bfdbfe;
+	color: #071a33;
+}
+
+.calendar-share-dialog .calendar-info-error {
+	border-color: rgba(248, 113, 113, 0.24);
+	background: rgba(248, 113, 113, 0.1);
+	color: #fecaca;
+}
+
+.calendar-share-options,
+.calendar-share-fixed-fields {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
+}
+
+.calendar-share-editing-banner {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	border: 1px solid rgba(96, 165, 250, 0.24);
+	border-radius: 14px;
+	background: linear-gradient(135deg, rgba(96, 165, 250, 0.13), rgba(147, 197, 253, 0.055));
+	color: #dbeafe;
+	padding: 12px 14px;
+}
+
+.calendar-share-editing-banner > span:last-child {
+	display: grid;
+	gap: 2px;
+	min-width: 0;
+}
+
+.calendar-share-editing-banner strong {
+	color: #eff6ff;
+	font-size: 13px;
+	line-height: 1.25;
+}
+
+.calendar-share-editing-banner span span {
+	overflow: hidden;
+	color: #a9bfe3;
+	font-size: 12px;
+	line-height: 1.35;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.calendar-share-editing-icon {
+	width: 28px;
+	height: 28px;
+	flex: 0 0 28px;
+	border-radius: 9px;
+	background: rgba(96, 165, 250, 0.18);
+	color: #bfdbfe;
+	font-size: 17px;
+	line-height: 28px;
+	text-align: center;
+}
+
+.calendar-share-radio {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	min-width: 0;
+	border: 1px solid rgba(148, 163, 184, 0.14);
+	border-radius: 13px;
+	background: rgba(255, 255, 255, 0.035);
+	color: #dbe2ec;
+	font-size: 13px;
+	line-height: 1.35;
+	padding: 11px 13px;
+	transition: background-color 140ms ease, border-color 140ms ease;
+}
+
+.calendar-share-radio:hover,
+.calendar-share-radio:has(input:focus-visible) {
+	border-color: rgba(148, 163, 184, 0.22);
+	background: rgba(255, 255, 255, 0.055);
+}
+
+.calendar-share-radio:has(input:checked) {
+	border-color: rgba(96, 165, 250, 0.34);
+	background: rgba(96, 165, 250, 0.08);
+}
+
+.calendar-share-calendar-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+	gap: 9px 16px;
+	padding: 0 2px;
+	transition: opacity 140ms ease, filter 140ms ease;
+}
+
+.calendar-share-calendar-grid.is-disabled {
+	opacity: 0.4;
+	filter: saturate(0.75);
+}
+
+.calendar-share-calendar-choice {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	min-width: 0;
+	color: #d6dce6;
+	font-size: 13px;
+	line-height: 1.35;
+	padding: 4px 0;
+}
+
+.calendar-share-calendar-choice span:last-child {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.calendar-share-calendar-choice input {
+	accent-color: #60a5fa;
+}
+
+.calendar-share-calendar-choice input:disabled {
+	opacity: 0.55;
+}
+
+.calendar-share-calendar-dot {
+	width: 10px;
+	height: 10px;
+	flex: 0 0 10px;
+	border-radius: 999px;
+}
+
+.calendar-share-fixed-fields[hidden],
+.calendar-share-rolling-field[hidden] {
+	display: none !important;
+}
+
+.calendar-share-list {
+	display: grid;
+	gap: 10px;
+}
+
+.calendar-share-list-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	color: #e5e7eb;
+	font-size: 13px;
+	font-weight: 700;
+}
+
+.calendar-share-row {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	gap: 12px;
+	border: 1px solid rgba(148, 163, 184, 0.13);
+	border-radius: 14px;
+	background: rgba(255, 255, 255, 0.032);
+	padding: 12px;
+}
+
+.calendar-share-row.is-inactive {
+	opacity: 0.72;
+}
+
+.calendar-share-row.is-editing {
+	border-color: rgba(96, 165, 250, 0.38);
+	background: rgba(96, 165, 250, 0.08);
+	box-shadow: inset 3px 0 0 rgba(147, 197, 253, 0.76);
+	opacity: 1;
+}
+
+.calendar-share-row.is-editing .calendar-share-row-title span:first-child {
+	color: #bfdbfe;
+}
+
+.calendar-share-row-main {
+	display: grid;
+	gap: 8px;
+	min-width: 0;
+}
+
+.calendar-share-row-title {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	font-size: 13px;
+	font-weight: 700;
+}
+
+.calendar-share-row-title span:first-child {
+	color: #e8edf5;
+}
+
+.calendar-share-code {
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.06);
+	color: #9ca7b7;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+	font-size: 11px;
+	padding: 3px 7px;
+}
+
+.calendar-share-row-meta,
+.calendar-share-empty,
+.calendar-share-notice {
+	color: #9ca7b7;
+	font-size: 12px;
+	line-height: 1.4;
+}
+
+.calendar-share-empty {
+	display: flex;
+	min-height: 82px;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.calendar-share-empty .text-on-surface {
+	color: #9ca7b7 !important;
+}
+
+.calendar-share-url {
+	font-size: 12px;
+	padding: 8px 10px;
+}
+
+.calendar-share-actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	align-content: flex-start;
+	gap: 8px;
+}
+
+.calendar-share-notice {
+	border: 1px solid rgba(96, 165, 250, 0.2);
+	border-radius: 12px;
+	background: rgba(96, 165, 250, 0.08);
+	padding: 10px 12px;
+}
+
+@keyframes calendar-share-overlay-in {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes calendar-share-overlay-out {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
+@keyframes calendar-share-dialog-in {
+	from {
+		opacity: 0;
+		transform: translateY(8px) scale(0.985);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+@keyframes calendar-share-dialog-out {
+	from {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+	to {
+		opacity: 0;
+		transform: translateY(6px) scale(0.99);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.calendar-share-modal,
+	.calendar-share-modal.is-closing,
+	.calendar-share-modal .calendar-share-dialog,
+	.calendar-share-modal.is-closing .calendar-share-dialog {
+		animation: none;
+	}
+}
+
+@media (max-width: 720px) {
+	.calendar-share-options,
+	.calendar-share-fixed-fields,
+	.calendar-share-row {
+		grid-template-columns: 1fr;
+	}
+
+	.calendar-share-actions {
+		justify-content: flex-start;
+	}
+}
+
 .calendar-event-modal {
 	position: fixed;
 	inset: 0;

@@ -145,6 +145,20 @@ Table: user_event_overrides
 - updated_at DATETIME -> datetime attribute: updated_at
 - UNIQUE (user_id, event_ref)
 
+Table: calendar_shares
+- id INTEGER PRIMARY KEY -> use Appwrite $id (string); no separate attribute
+- user_id INTEGER FK users.id -> string attribute: user_id
+- share_code VARCHAR(16) UNIQUE -> string(16) attribute: share_code (unique)
+- is_active BOOLEAN NOT NULL DEFAULT 1 -> boolean attribute: is_active
+- include_all_calendars BOOLEAN NOT NULL DEFAULT 1 -> boolean attribute: include_all_calendars
+- calendar_ids_json TEXT -> string/text attribute: calendar_ids_json
+- date_scope VARCHAR(16) NOT NULL DEFAULT 'all' -> string(16) attribute: date_scope
+- fixed_start DATETIME -> datetime attribute: fixed_start
+- fixed_end DATETIME -> datetime attribute: fixed_end
+- rolling_days INTEGER -> integer attribute: rolling_days
+- created_at DATETIME NOT NULL -> datetime attribute: created_at
+- updated_at DATETIME -> datetime attribute: updated_at
+
 Table: shared_files
 - id VARCHAR(36) PRIMARY KEY -> use Appwrite $id (string); no separate attribute
 - user_id INTEGER FK users.id -> string attribute: user_id
@@ -213,6 +227,10 @@ COLLECTIONS = {
 	"user_events": "user_events",
 	"user_calendar_sources": "user_calendar_sources",
 	"user_event_overrides": "user_event_overrides",
+	"calendar_shares": "calendar_shares",
+	"task_lists": "task_lists",
+	"tasks": "tasks",
+	"task_completions": "task_completions",
 	"shared_files": "shared_files",
 	"file_folders": "file_folders",
 	"note_folders": "note_folders",

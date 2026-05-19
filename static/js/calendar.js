@@ -13,6 +13,8 @@ const CANVAS_SOURCE_ID = "canvas";
 const LOCAL_SOURCE_PREFIX = "local:";
 const DEFAULT_LOCAL_CALENDAR_ID = "local:default";
 const DEFAULT_LOCAL_CALENDAR_NAME = "Personal";
+const TASK_CALENDAR_ID = "local:tasks";
+const TASK_CALENDAR_NAME = "Tasks";
 const COURSES_SELECTION_STORAGE_KEY = "coursesSelectedSectionIds";
 const COURSES_MODAL_ANIMATION_MS = 180;
 const THEME_LOADER_STYLE_ID = "apstudy-theme-loader-styles";
@@ -24,6 +26,11 @@ const CALENDAR_BUFFER_DAYS = Number.isFinite(
 )
     ? Number.parseInt(document.body?.dataset.calendarBufferDays, 10)
     : DEFAULT_CALENDAR_BUFFER_DAYS;
+const CALENDAR_READ_ONLY = document.body?.dataset.calendarReadonly === "true";
+const PUBLIC_SHARE_CODE = document.body?.dataset.publicShareCode || "";
+const PUBLIC_CALENDAR_TITLE = document.body?.dataset.publicCalendarTitle || "Shared Calendar";
+const PUBLIC_CALENDAR_RANGE_LABEL = document.body?.dataset.publicCalendarRangeLabel || "Shared dates";
+const CALENDAR_SHARE_CLOSE_MS = 140;
 /* ── Application State ─────────────────────────────────────────────────────── */
 const state = {
     events: [],
@@ -38,6 +45,21 @@ const state = {
     loadedRange: null,
     pendingRanges: new Set(),
     calendarColors: ["#ef4444", "#f97316", "#eab308", "#84cc16", "#0ea5e9", "#d946ef", "#b08968"],
+    public: {
+        readOnly: CALENDAR_READ_ONLY,
+        shareCode: PUBLIC_SHARE_CODE,
+        title: PUBLIC_CALENDAR_TITLE,
+        rangeLabel: PUBLIC_CALENDAR_RANGE_LABEL,
+    },
+    shares: {
+        items: [],
+        loading: false,
+        saving: false,
+        loaded: false,
+        editingId: null,
+        error: "",
+        notice: "",
+    },
     courses: {
         terms: [],
         sections: [],
@@ -72,6 +94,7 @@ const state = {
         hoverCardAnchorEl: null,
         hoverCardHideTimer: null,
         expandedUpcomingRefs: new Set(),
+        shareModalEl: null,
     },
 };
 function initCalendarState() {
@@ -81,7 +104,7 @@ function initCalendarState() {
         const colorIndex = Object.keys(calendars).length % state.calendarColors.length;
         calendars[key] = {
             visible: true,
-            color: state.calendarColors[colorIndex],
+            color: options.color || options.color_hex || state.calendarColors[colorIndex],
             colorIndex,
             label: options.label || key,
             defaultName: options.defaultName || options.label || key,
@@ -98,6 +121,7 @@ function initCalendarState() {
             label: source.display_name || source.default_name || sourceId,
             defaultName: source.default_name || source.display_name || sourceId,
             url: source.url || "",
+            color: source.color_hex || source.color || "",
             kind: source.kind || "external",
             editable: source.editable !== false,
             sourceId,
@@ -113,7 +137,7 @@ function initCalendarState() {
             legacyNames: [fallbackLabel],
         });
     }
-    if (state.courses.selectedSectionIds.size > 0 && !calendars[SIMULATED_CALENDAR_NAME]) {
+    if (!state.public.readOnly && state.courses.selectedSectionIds.size > 0 && !calendars[SIMULATED_CALENDAR_NAME]) {
         addCalendar(SIMULATED_CALENDAR_NAME, {
             label: SIMULATED_CALENDAR_NAME,
             defaultName: SIMULATED_CALENDAR_NAME,
@@ -165,7 +189,7 @@ function getCalendarEventRef(event) {
 function getEventsForCurrentContextLookup() {
     const range = getCurrentViewCountRange();
     const events = [...state.events];
-    if (state.courses.selectedSectionIds.size > 0) {
+    if (!state.public.readOnly && state.courses.selectedSectionIds.size > 0) {
         events.push(...buildSimulatedMeetingEvents(range.start, range.end));
     }
     return events;
@@ -193,11 +217,13 @@ function getSavedCalendarInfo(saved, key) {
     return null;
 }
 function writeCalendarStateToStorage() {
+    if (state.public.readOnly) return;
     localStorage.setItem("calendarState", JSON.stringify(Object.fromEntries(
         Object.entries(state.calendars).map(([cal, data]) => [cal, { visible: data.visible, color: data.color }])
     )));
 }
 function persistCalendarPreference(calendarName) {
+    if (state.public.readOnly) return Promise.resolve();
     const pref = state.calendars[calendarName];
     if (!pref) return Promise.resolve();
     state.ui.pendingCalendars.add(calendarName);
@@ -228,6 +254,7 @@ function queueCalendarPreferenceSave(calendarName, delayMs = 220) {
     }, delayMs);
 }
 function saveCalendarState() {
+    if (state.public.readOnly) return;
     const toSave = {};
     for (const [cal, data] of Object.entries(state.calendars)) {
         toSave[cal] = { visible: data.visible, color: data.color };
@@ -236,6 +263,7 @@ function saveCalendarState() {
     localStorage.setItem("calendarState", JSON.stringify(toSave));
 }
 async function loadCalendarState() {
+    if (state.public.readOnly) return;
     const saved = localStorage.getItem("calendarState");
     if (saved) {
         try {
@@ -273,8 +301,10 @@ async function loadCalendarState() {
 }
 /* ── Bootstrap ─────────────────────────────────────────────────────────────── */
 document.addEventListener("DOMContentLoaded", () => {
-    applyCoursesFiltersFromUrl();
-    initializeCourseSelectionsFromStorage();
+    if (!state.public.readOnly) {
+        applyCoursesFiltersFromUrl();
+        initializeCourseSelectionsFromStorage();
+    }
     wireControls();
     loadCalendarData();
 });
@@ -396,12 +426,15 @@ function getBufferedRange(baseRange) {
     return { start, end };
 }
 function buildEventsUrl(range) {
-    if (!range) return "/api/calendar/events";
+    const baseUrl = state.public.readOnly && state.public.shareCode
+        ? `/api/calendar/share/${encodeURIComponent(state.public.shareCode)}/events`
+        : "/api/calendar/events";
+    if (!range) return baseUrl;
     const params = new URLSearchParams({
         start: range.start.toISOString(),
         end: range.end.toISOString(),
     });
-    return `/api/calendar/events?${params.toString()}`;
+    return `${baseUrl}?${params.toString()}`;
 }
 function getRangeKey(range) {
     return `${range.start.toISOString()}|${range.end.toISOString()}`;
@@ -436,13 +469,15 @@ async function applyEventsPayload(payload, options = {}) {
     }
 
     initCalendarState();
-    await loadCalendarState();
-    ensureSimulatedCalendarPreference();
+    if (!state.public.readOnly) {
+        await loadCalendarState();
+        ensureSimulatedCalendarPreference();
+    }
     render();
-    if (options.shouldHydrate) {
+    if (!state.public.readOnly && options.shouldHydrate) {
         await hydrateSelectedSimulatedSections();
     }
-    if (!options.fromCache) {
+    if (!state.public.readOnly && !options.fromCache) {
         writeEventsCache(payload, range);
     }
 }
@@ -457,6 +492,7 @@ function shouldRefreshInBackground(payload) {
     return Date.now() - lastFetched.getTime() > interval * 60 * 1000;
 }
 async function maybeRefreshIfStale(payload, range) {
+    if (state.public.readOnly) return;
     if (!shouldRefreshInBackground(payload) || state.refreshInFlight) return;
     state.refreshInFlight = true;
     try {
@@ -484,6 +520,7 @@ async function ensureEventsForRange(range) {
     }
 }
 async function runManualRefresh(range) {
+    if (state.public.readOnly) return;
     if (state.refreshInFlight) return;
     state.refreshInFlight = true;
     try {
@@ -500,9 +537,9 @@ async function loadCalendarData() {
     state.loadingDashboard = true;
     render();
 
-    const cached = readEventsCache();
-    const cachedRange = parseCachedRange(cached?.range);
-    if (cached?.payload) {
+    const cached = state.public.readOnly ? null : readEventsCache();
+    const cachedRange = state.public.readOnly ? null : parseCachedRange(cached?.range);
+    if (!state.public.readOnly && cached?.payload) {
         state.loadingDashboard = false;
         await applyEventsPayload(cached.payload, {
             range: cachedRange,
@@ -527,10 +564,14 @@ async function loadCalendarData() {
             state.feedConfigured = false;
             state.events = [];
             initCalendarState();
-            await loadCalendarState();
-            ensureSimulatedCalendarPreference();
+            if (!state.public.readOnly) {
+                await loadCalendarState();
+                ensureSimulatedCalendarPreference();
+            }
             render();
-            hydrateSelectedSimulatedSections();
+            if (!state.public.readOnly) {
+                hydrateSelectedSimulatedSections();
+            }
         }
         console.error(err);
     } finally {
@@ -1057,7 +1098,7 @@ function getVisibleEvents() {
         const cal = getEventCalendarKey(e);
         return state.calendars[cal]?.visible !== false;
     });
-    if (state.calendars[SIMULATED_CALENDAR_NAME]?.visible === false || state.courses.selectedSectionIds.size === 0) {
+    if (state.public.readOnly || state.calendars[SIMULATED_CALENDAR_NAME]?.visible === false || state.courses.selectedSectionIds.size === 0) {
         return baseEvents;
     }
     const renderRange = getCurrentRenderRange();
@@ -1170,12 +1211,15 @@ function getEventCalendarColor(event) {
 function toggleCalendarVisibility(calendarName) {
     if (state.calendars[calendarName]) {
         state.calendars[calendarName].visible = !state.calendars[calendarName].visible;
-        writeCalendarStateToStorage();
-        queueCalendarPreferenceSave(calendarName);
+        if (!state.public.readOnly) {
+            writeCalendarStateToStorage();
+            queueCalendarPreferenceSave(calendarName);
+        }
         render();
     }
 }
 function setCalendarColor(calendarName, color) {
+    if (state.public.readOnly) return;
     if (state.calendars[calendarName]) {
         state.calendars[calendarName].color = color;
         writeCalendarStateToStorage();
@@ -1186,7 +1230,7 @@ function setCalendarColor(calendarName, color) {
 /* ── Controls ──────────────────────────────────────────────────────────────── */
 function wireControls() {
     // Check if courses panel should be opened on load (e.g., from redirect)
-    if (sessionStorage.getItem("openCoursesPanelOnLoad") === "true") {
+    if (!state.public.readOnly && sessionStorage.getItem("openCoursesPanelOnLoad") === "true") {
         sessionStorage.removeItem("openCoursesPanelOnLoad");
         // Open courses modal after a short delay to ensure DOM is ready
         setTimeout(() => {
@@ -1196,13 +1240,15 @@ function wireControls() {
         }, 100);
     }
     // Handle My Courses button from profile menu
-    document.addEventListener("profile-my-courses-click", () => {
-        if (state.courses.modalOpen) {
-            closeCoursesModal();
-            return;
-        }
-        openCoursesModal();
-    });
+    if (!state.public.readOnly) {
+        document.addEventListener("profile-my-courses-click", () => {
+            if (state.courses.modalOpen) {
+                closeCoursesModal();
+                return;
+            }
+            openCoursesModal();
+        });
+    }
     document.getElementById("calendar-view-week")?.addEventListener("click", () => {
         state.view = "week";
         render();
@@ -1225,6 +1271,9 @@ function wireControls() {
     });
     document.getElementById("calendar-refresh")?.addEventListener("click", () => {
         void runManualRefresh(getBufferedRange(getCurrentRenderRange()));
+    });
+    document.getElementById("calendar-share")?.addEventListener("click", () => {
+        openCalendarShareModal();
     });
     document.getElementById("calendar-toggle-menu")?.addEventListener("click", (event) => {
         event.stopPropagation();
@@ -1250,12 +1299,14 @@ function wireControls() {
         if (addBtn) {
             event.preventDefault();
             event.stopPropagation();
+            if (state.public.readOnly) return;
             openCalendarSourceCreateModal();
             return;
         }
         const moreBtn = event.target.closest(".js-calendar-more");
         if (!moreBtn) return;
         event.stopPropagation();
+        if (state.public.readOnly) return;
         const calendarName = moreBtn.getAttribute("data-calendar-name");
         if (!calendarName) return;
         if (state.ui.contextMenuEl && state.ui.contextCalendarName === calendarName && state.ui.contextAnchorEl === moreBtn) {
@@ -1271,7 +1322,8 @@ function wireControls() {
         const inRgb = state.ui.rgbModalEl ? state.ui.rgbModalEl.contains(event.target) : false;
         const inSourceInfo = state.ui.sourceInfoModalEl ? state.ui.sourceInfoModalEl.contains(event.target) : false;
         const inSourceCreate = state.ui.sourceCreateModalEl ? state.ui.sourceCreateModalEl.contains(event.target) : false;
-        if (!inRoot && !inContext && !inRgb && !inSourceInfo && !inSourceCreate) {
+        const inShare = state.ui.shareModalEl ? state.ui.shareModalEl.contains(event.target) : false;
+        if (!inRoot && !inContext && !inRgb && !inSourceInfo && !inSourceCreate && !inShare) {
             closeAllCalendarPopups();
         }
     }, true);
@@ -1533,11 +1585,28 @@ function closeSourceInfoModal() {
         state.ui.sourceInfoModalEl = null;
     }
 }
+function closeCalendarShareModal(immediate = false) {
+    if (state.ui.shareModalEl) {
+        const modal = state.ui.shareModalEl;
+        if (immediate) {
+            modal.remove();
+        } else {
+            modal.classList.add("is-closing");
+            window.setTimeout(() => {
+                modal.remove();
+            }, CALENDAR_SHARE_CLOSE_MS);
+        }
+        state.ui.shareModalEl = null;
+    }
+    state.shares.editingId = null;
+    state.shares.error = "";
+}
 function closeAllCalendarPopups() {
     closeCalendarContextMenu();
     closeRgbModal();
     closeSourceInfoModal();
     closeCalendarSourceCreateModal();
+    closeCalendarShareModal();
     closeCalendarDropdown();
 }
 function shiftAnchorDate(delta) {
@@ -1560,6 +1629,15 @@ function buildCalendarMenuHtml() {
         const eventCount = getCalendarEventCount(cal);
         const kindLabel = data.kind === "local" ? "Local" : (data.editable ? "Feed" : "");
         const meta = `${eventCount} event${eventCount === 1 ? "" : "s"}${kindLabel ? ` · ${kindLabel}` : ""}`;
+        const moreButton = state.public.readOnly ? "" : `
+                <button type="button"
+                    class="js-calendar-more calendar-source-more"
+                    data-calendar-name="${escapeHtml(cal)}"
+                    ${busy ? "disabled" : ""}
+                    aria-label="Calendar options">
+                    <span class="material-symbols-outlined calendar-source-more-icon" style="font-variation-settings:'FILL' 1,'wght' 700,'GRAD' 0,'opsz' 24;">more_horiz</span>
+                </button>
+        `;
         return `
             <div class="calendar-source-row">
                 <label class="calendar-source-label">
@@ -1572,23 +1650,19 @@ function buildCalendarMenuHtml() {
                         <span class="calendar-source-meta">${escapeHtml(meta)}</span>
                     </span>
                 </label>
-                <button type="button"
-                    class="js-calendar-more calendar-source-more"
-                    data-calendar-name="${escapeHtml(cal)}"
-                    ${busy ? "disabled" : ""}
-                    aria-label="Calendar options">
-                    <span class="material-symbols-outlined calendar-source-more-icon" style="font-variation-settings:'FILL' 1,'wght' 700,'GRAD' 0,'opsz' 24;">more_horiz</span>
-                </button>
+                ${moreButton}
             </div>
         `;
     }).join("");
     const nestCalendars = calendars.filter(([name]) => {
         if (name === CANVAS_SOURCE_ID || name === CANVAS_CALENDAR_NAME) return true;
+        if (name === TASK_CALENDAR_ID || name === TASK_CALENDAR_NAME) return true;
         if (name === SIMULATED_CALENDAR_NAME) return showSimulated;
         return false;
     });
     const otherCalendars = calendars.filter(([name]) => {
         if (name === CANVAS_SOURCE_ID || name === CANVAS_CALENDAR_NAME) return false;
+        if (name === TASK_CALENDAR_ID || name === TASK_CALENDAR_NAME) return false;
         if (name === SIMULATED_CALENDAR_NAME) return false;
         return true;
     });
@@ -1600,9 +1674,9 @@ function buildCalendarMenuHtml() {
         <div class="h-px bg-outline-variant/25 my-1"></div>
         <div class="calendar-source-section-head">
             <span>Other</span>
-            <button type="button" class="js-calendar-add-source calendar-source-add" aria-label="Add other calendar">
+            ${state.public.readOnly ? "" : `<button type="button" class="js-calendar-add-source calendar-source-add" aria-label="Add other calendar">
                 <span class="material-symbols-outlined calendar-source-add-icon">add</span>
-            </button>
+            </button>`}
         </div>
         ${otherCalendars.length ? buildRows(otherCalendars) : '<div class="px-3 py-2 text-sm text-on-surface-variant">No other calendars</div>'}
     `;
@@ -1644,7 +1718,7 @@ function eventOverlapsCountRange(event, range) {
 function getCountableEventsForCurrentView() {
     const range = getCurrentViewCountRange();
     const events = [...state.events];
-    if (state.courses.selectedSectionIds.size > 0) {
+    if (!state.public.readOnly && state.courses.selectedSectionIds.size > 0) {
         events.push(...buildSimulatedMeetingEvents(range.start, range.end));
     }
     return events.filter((event) => eventOverlapsCountRange(event, range));
@@ -1883,7 +1957,7 @@ function openCalendarSourceCreateModal() {
                         <button type="button" class="js-source-create-mode calendar-source-mode ${mode === "local" ? "is-active" : ""}" data-mode="local">Create New Calendar</button>
                     </div>
                     <label class="calendar-info-field">
-                        <span class="calendar-info-label">Name</span>
+                        <span class="calendar-info-label">Name (optional)</span>
                         <input class="js-source-create-name calendar-info-input" type="text" value="${escapeHtml(draftName)}" placeholder="${mode === "url" ? "Subscribed Calendar" : "Personal"}">
                     </label>
                     ${mode === "url" ? `
@@ -2092,6 +2166,348 @@ function openRgbModal(calendarName) {
     state.ui.rgbModalEl = modal;
     paintPreview();
 }
+/* ── Calendar Sharing ─────────────────────────────────────────────────────── */
+async function loadCalendarShares(force = false) {
+    if (state.public.readOnly) return;
+    if (state.shares.loading || (state.shares.loaded && !force)) return;
+    state.shares.loading = true;
+    state.shares.error = "";
+    renderCalendarShareModal();
+    try {
+        const res = await fetch("/api/calendar/shares", { credentials: "same-origin" });
+        const payload = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(payload.error || "Unable to load share links.");
+        state.shares.items = Array.isArray(payload.shares) ? payload.shares : [];
+        state.shares.loaded = true;
+    } catch (err) {
+        state.shares.error = err.message || "Unable to load share links.";
+    } finally {
+        state.shares.loading = false;
+        renderCalendarShareModal();
+    }
+}
+function openCalendarShareModal() {
+    if (state.public.readOnly) return;
+    closeCalendarShareModal(true);
+    const modal = document.createElement("div");
+    modal.className = "calendar-info-modal calendar-share-modal";
+    modal.addEventListener("click", onCalendarShareModalClick);
+    modal.addEventListener("change", onCalendarShareModalChange);
+    modal.addEventListener("submit", onCalendarShareModalSubmit);
+    document.body.appendChild(modal);
+    state.ui.shareModalEl = modal;
+    renderCalendarShareModal();
+    void loadCalendarShares();
+}
+function renderCalendarShareModal() {
+    const modal = state.ui.shareModalEl;
+    if (!modal) return;
+    const editingShare = state.shares.items.find((share) => share.id === state.shares.editingId) || null;
+    const seed = editingShare || {
+        includeAllCalendars: true,
+        calendarIds: [],
+        dateScope: "all",
+        fixedStart: "",
+        fixedEnd: "",
+        rollingDays: 30,
+    };
+    const shareableCalendars = Object.entries(state.calendars)
+        .filter(([name]) => name !== SIMULATED_CALENDAR_NAME)
+        .sort(([, a], [, b]) => getCalendarLabelFromData(a).localeCompare(getCalendarLabelFromData(b)));
+    const selectedIds = new Set(seed.calendarIds || []);
+    const includeAll = seed.includeAllCalendars !== false;
+    const editingCode = editingShare?.shareCode || "";
+    const modalTitle = editingShare ? "Edit Shared Link" : "Share Calendar";
+    const modalSubtitle = editingShare
+        ? `Updating settings for share link ${editingCode || "selected link"}.`
+        : "Create reusable read-only links for selected calendars and dates.";
+    const editingBanner = editingShare ? `
+        <div class="calendar-share-editing-banner" role="status">
+            <span class="material-symbols-outlined calendar-share-editing-icon" aria-hidden="true">edit</span>
+            <span>
+                <strong>Editing shared link</strong>
+                <span>${escapeHtml(editingCode || "Selected link")} · ${escapeHtml(editingShare.scopeLabel || "All shared dates")}</span>
+            </span>
+        </div>
+    ` : "";
+    const calendarChoices = shareableCalendars.length
+        ? shareableCalendars.map(([calendarName, data]) => `
+            <label class="calendar-share-calendar-choice">
+                <input type="checkbox" name="calendar_ids" value="${escapeHtml(calendarName)}" ${includeAll || selectedIds.has(calendarName) ? "checked" : ""} ${includeAll ? "disabled" : ""}>
+                <span class="calendar-share-calendar-dot" style="background:${data.color};"></span>
+                <span>${escapeHtml(getCalendarLabel(calendarName))}</span>
+            </label>
+        `).join("")
+        : '<p class="calendar-info-note">Load or add a calendar before limiting by calendar.</p>';
+    const sharesList = state.shares.loading
+        ? `<div class="calendar-share-empty">${buildLoadingIndicatorHtml("Loading share links...", { sizePx: 30, textToneClass: "text-on-surface" })}</div>`
+        : state.shares.items.length
+            ? state.shares.items.map((share) => buildCalendarShareRowHtml(share, editingShare?.id)).join("")
+            : '<div class="calendar-share-empty">No share links yet.</div>';
+    modal.innerHTML = `
+        <div class="calendar-info-dialog calendar-share-dialog" role="dialog" aria-modal="true" aria-labelledby="calendar-share-title">
+            <div class="calendar-info-header">
+                <div class="calendar-info-heading">
+                    <h3 id="calendar-share-title" class="calendar-info-title">${escapeHtml(modalTitle)}</h3>
+                    <p class="calendar-info-subtitle">${escapeHtml(modalSubtitle)}</p>
+                </div>
+                <button type="button" class="js-share-close calendar-info-close" aria-label="Close calendar sharing">
+                    <span class="material-symbols-outlined calendar-info-close-icon">close</span>
+                </button>
+            </div>
+            <form id="calendar-share-form">
+                <div class="calendar-info-body">
+                    ${editingBanner}
+                    <div class="calendar-share-options">
+                        <label class="calendar-share-radio">
+                            <input type="radio" name="include_scope" value="all" ${includeAll ? "checked" : ""}>
+                            <span>All calendars</span>
+                        </label>
+                        <label class="calendar-share-radio">
+                            <input type="radio" name="include_scope" value="selected" ${includeAll ? "" : "checked"}>
+                            <span>Selected calendars</span>
+                        </label>
+                    </div>
+                    <div class="calendar-share-calendar-grid ${includeAll ? "is-disabled" : ""}" aria-disabled="${includeAll ? "true" : "false"}">
+                        ${calendarChoices}
+                    </div>
+                    <label class="calendar-info-field">
+                        <span class="calendar-info-label">Date range</span>
+                        <select name="date_scope" class="calendar-info-input">
+                            <option value="all" ${seed.dateScope === "all" ? "selected" : ""}>All shared dates</option>
+                            <option value="fixed" ${seed.dateScope === "fixed" ? "selected" : ""}>Fixed date range</option>
+                            <option value="rolling" ${seed.dateScope === "rolling" ? "selected" : ""}>Rolling window</option>
+                        </select>
+                    </label>
+                    <div class="calendar-share-fixed-fields">
+                        <label class="calendar-info-field">
+                            <span class="calendar-info-label">Start</span>
+                            <input name="fixed_start" type="date" class="calendar-info-input" value="${escapeHtml(seed.fixedStart || "")}">
+                        </label>
+                        <label class="calendar-info-field">
+                            <span class="calendar-info-label">End</span>
+                            <input name="fixed_end" type="date" class="calendar-info-input" value="${escapeHtml(seed.fixedEnd || "")}">
+                        </label>
+                    </div>
+                    <label class="calendar-info-field calendar-share-rolling-field">
+                        <span class="calendar-info-label">Rolling days</span>
+                        <input name="rolling_days" type="number" min="1" max="366" step="1" class="calendar-info-input" value="${escapeHtml(seed.rollingDays || 30)}">
+                    </label>
+                    ${state.shares.error ? `<p class="calendar-info-error">${escapeHtml(state.shares.error)}</p>` : ""}
+                    ${state.shares.notice ? `<p class="calendar-share-notice">${escapeHtml(state.shares.notice)}</p>` : ""}
+                    <section class="calendar-share-list" aria-label="Calendar share links">
+                        <div class="calendar-share-list-head">
+                            <span>Links</span>
+                            ${editingShare ? '<button type="button" class="js-share-new calendar-info-button calendar-info-button-secondary">New Link</button>' : ""}
+                        </div>
+                        ${sharesList}
+                    </section>
+                </div>
+                <div class="calendar-info-footer">
+                    <button type="submit" class="calendar-info-button calendar-info-button-primary" ${state.shares.saving ? "disabled" : ""}>
+                        ${state.shares.saving ? "Saving..." : editingShare ? "Save Link" : "Create Link"}
+                    </button>
+                </div>
+            </form>
+        </div>
+    `;
+    syncCalendarShareModalFields();
+}
+function buildCalendarShareRowHtml(share, editingId = null) {
+    const inactive = !share.isActive;
+    const isEditing = share.id === editingId;
+    const statusLabel = isEditing ? "Editing now" : inactive ? "Revoked link" : "Active link";
+    return `
+        <article class="calendar-share-row ${inactive ? "is-inactive" : ""} ${isEditing ? "is-editing" : ""}">
+            <div class="calendar-share-row-main">
+                <div class="calendar-share-row-title">
+                    <span>${statusLabel}</span>
+                    <span class="calendar-share-code">${escapeHtml(share.shareCode || "")}</span>
+                </div>
+                <div class="calendar-share-row-meta">${escapeHtml(share.scopeLabel || "All shared dates")}</div>
+                <input class="calendar-info-input calendar-share-url" readonly value="${escapeHtml(share.shareUrl || "")}">
+            </div>
+            <div class="calendar-share-actions">
+                <button type="button" class="js-share-copy calendar-info-button calendar-info-button-secondary" data-share-id="${escapeHtml(share.id)}" ${inactive ? "disabled" : ""}>Copy</button>
+                <button type="button" class="js-share-edit calendar-info-button calendar-info-button-secondary" data-share-id="${escapeHtml(share.id)}" ${isEditing ? "disabled" : ""}>${isEditing ? "Editing" : "Edit"}</button>
+                <button type="button" class="js-share-regenerate calendar-info-button calendar-info-button-secondary" data-share-id="${escapeHtml(share.id)}">Regenerate</button>
+                ${inactive
+                    ? `<button type="button" class="js-share-activate calendar-info-button calendar-info-button-primary" data-share-id="${escapeHtml(share.id)}">Reactivate</button>`
+                    : `<button type="button" class="js-share-revoke calendar-info-button calendar-info-button-secondary" data-share-id="${escapeHtml(share.id)}">Revoke</button>`}
+            </div>
+        </article>
+    `;
+}
+function syncCalendarShareModalFields() {
+    const modal = state.ui.shareModalEl;
+    if (!modal) return;
+    const form = modal.querySelector("#calendar-share-form");
+    if (!form) return;
+    const includeAll = form.include_scope?.value !== "selected";
+    form.querySelectorAll("input[name='calendar_ids']").forEach((input) => {
+        input.disabled = includeAll;
+        if (includeAll) input.checked = true;
+    });
+    const calendarGrid = modal.querySelector(".calendar-share-calendar-grid");
+    if (calendarGrid) {
+        calendarGrid.classList.toggle("is-disabled", includeAll);
+        calendarGrid.setAttribute("aria-disabled", includeAll ? "true" : "false");
+    }
+    const scope = form.date_scope?.value || "all";
+    const fixedFields = modal.querySelector(".calendar-share-fixed-fields");
+    const rollingField = modal.querySelector(".calendar-share-rolling-field");
+    if (fixedFields) fixedFields.hidden = scope !== "fixed";
+    if (rollingField) rollingField.hidden = scope !== "rolling";
+}
+function calendarShareFormPayload(form) {
+    const includeAll = form.include_scope?.value !== "selected";
+    return {
+        includeAllCalendars: includeAll,
+        calendarIds: includeAll
+            ? []
+            : Array.from(form.querySelectorAll("input[name='calendar_ids']:checked")).map((input) => input.value),
+        dateScope: form.date_scope?.value || "all",
+        fixedStart: form.fixed_start?.value || null,
+        fixedEnd: form.fixed_end?.value || null,
+        rollingDays: form.rolling_days?.value ? Number(form.rolling_days.value) : null,
+    };
+}
+async function saveCalendarSharePayload(payload) {
+    state.shares.saving = true;
+    state.shares.error = "";
+    state.shares.notice = "";
+    const editingId = state.shares.editingId;
+    renderCalendarShareModal();
+    try {
+        const res = await fetch(editingId ? `/api/calendar/shares/${encodeURIComponent(editingId)}` : "/api/calendar/shares", {
+            method: editingId ? "PATCH" : "POST",
+            credentials: "same-origin",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+        });
+        const response = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(response.error || "Unable to save share link.");
+        const share = response.share;
+        if (share?.id) {
+            const index = state.shares.items.findIndex((item) => item.id === share.id);
+            if (index >= 0) state.shares.items.splice(index, 1, share);
+            else state.shares.items.unshift(share);
+        }
+        state.shares.editingId = null;
+        state.shares.notice = editingId ? "Share link updated." : "Share link created.";
+    } catch (err) {
+        state.shares.error = err.message || "Unable to save share link.";
+    } finally {
+        state.shares.saving = false;
+        renderCalendarShareModal();
+    }
+}
+async function updateCalendarShare(shareId, path, options = {}) {
+    state.shares.error = "";
+    state.shares.notice = "";
+    renderCalendarShareModal();
+    try {
+        const res = await fetch(path, {
+            method: options.method || "POST",
+            credentials: "same-origin",
+            headers: { "Content-Type": "application/json" },
+            body: options.body ? JSON.stringify(options.body) : undefined,
+        });
+        const response = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(response.error || "Unable to update share link.");
+        const share = response.share;
+        if (share?.id) {
+            const index = state.shares.items.findIndex((item) => item.id === share.id);
+            if (index >= 0) state.shares.items.splice(index, 1, share);
+            else state.shares.items.unshift(share);
+        }
+        state.shares.notice = options.notice || "Share link updated.";
+    } catch (err) {
+        state.shares.error = err.message || "Unable to update share link.";
+    } finally {
+        renderCalendarShareModal();
+    }
+}
+async function copyTextToClipboard(value) {
+    if (!value) return false;
+    if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+        return true;
+    }
+    const textarea = document.createElement("textarea");
+    textarea.value = value;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    document.body.appendChild(textarea);
+    textarea.select();
+    const ok = document.execCommand("copy");
+    textarea.remove();
+    return ok;
+}
+function onCalendarShareModalChange(event) {
+    if (event.target?.name === "include_scope" || event.target?.name === "date_scope") {
+        syncCalendarShareModalFields();
+    }
+}
+async function onCalendarShareModalSubmit(event) {
+    if (event.target?.id !== "calendar-share-form") return;
+    event.preventDefault();
+    await saveCalendarSharePayload(calendarShareFormPayload(event.target));
+}
+async function onCalendarShareModalClick(event) {
+    if (event.target === state.ui.shareModalEl || event.target.closest(".js-share-close")) {
+        closeCalendarShareModal();
+        return;
+    }
+    const newBtn = event.target.closest(".js-share-new");
+    if (newBtn) {
+        state.shares.editingId = null;
+        state.shares.error = "";
+        state.shares.notice = "";
+        renderCalendarShareModal();
+        return;
+    }
+    const copyBtn = event.target.closest(".js-share-copy");
+    if (copyBtn) {
+        const share = state.shares.items.find((item) => item.id === copyBtn.getAttribute("data-share-id"));
+        if (!share?.shareUrl) return;
+        await copyTextToClipboard(share.shareUrl);
+        state.shares.notice = "Share link copied.";
+        renderCalendarShareModal();
+        return;
+    }
+    const editBtn = event.target.closest(".js-share-edit");
+    if (editBtn) {
+        state.shares.editingId = editBtn.getAttribute("data-share-id");
+        state.shares.error = "";
+        state.shares.notice = "";
+        renderCalendarShareModal();
+        return;
+    }
+    const regenerateBtn = event.target.closest(".js-share-regenerate");
+    if (regenerateBtn) {
+        const shareId = regenerateBtn.getAttribute("data-share-id");
+        await updateCalendarShare(shareId, `/api/calendar/shares/${encodeURIComponent(shareId)}/regenerate`, { notice: "Share link regenerated." });
+        return;
+    }
+    const revokeBtn = event.target.closest(".js-share-revoke");
+    if (revokeBtn) {
+        const shareId = revokeBtn.getAttribute("data-share-id");
+        await updateCalendarShare(shareId, `/api/calendar/shares/${encodeURIComponent(shareId)}`, { method: "DELETE", notice: "Share link revoked." });
+        return;
+    }
+    const activateBtn = event.target.closest(".js-share-activate");
+    if (activateBtn) {
+        const shareId = activateBtn.getAttribute("data-share-id");
+        const share = state.shares.items.find((item) => item.id === shareId);
+        await updateCalendarShare(shareId, `/api/calendar/shares/${encodeURIComponent(shareId)}`, {
+            method: "PATCH",
+            body: { ...share, isActive: true },
+            notice: "Share link reactivated.",
+        });
+    }
+}
 /* ── Top-Level Render ──────────────────────────────────────────────────────── */
 function render() {
     updateHeader();
@@ -2099,7 +2515,9 @@ function render() {
     renderCalendarMenu();
     renderCalendarView();
     renderAssignments();
-    renderCoursesModal();
+    if (!state.public.readOnly) {
+        renderCoursesModal();
+    }
 }
 function renderCalendarMenu() {
     const container = document.getElementById("calendar-menu");
@@ -2117,6 +2535,19 @@ function updateHeader() {
     const subtitle = document.getElementById("calendar-subtitle");
     if (!title || !subtitle) return;
     const monthLabel = state.anchorDate.toLocaleDateString(undefined, { month: "long", year: "numeric" });
+    if (state.public.readOnly) {
+        const periodLabel = state.view === "month"
+            ? monthLabel
+            : (() => {
+                const start = getStartOfWeek(state.anchorDate);
+                const end = new Date(start);
+                end.setDate(end.getDate() + 6);
+                return `Week of ${start.toLocaleDateString(undefined, { month: "short", day: "numeric" })} - ${end.toLocaleDateString(undefined, { month: "short", day: "numeric" })}`;
+            })();
+        title.textContent = state.public.title || "Shared Calendar";
+        subtitle.textContent = `${periodLabel} · ${state.public.rangeLabel || "Shared dates"}`;
+        return;
+    }
     if (state.view === "month") {
         title.textContent = monthLabel;
         subtitle.textContent = state.feedConfigured
@@ -2344,7 +2775,8 @@ function getEventElementAttributes(event) {
     const dataId = event.id || event.uid || "";
     const eventRef = getCalendarEventRef(event) || dataId;
     const sourceType = event.source_type || event.source || (event.id ? "user" : "feed");
-    return `data-event-id="${escapeHtml(dataId)}" data-event-ref="${escapeHtml(eventRef)}" data-event-source="${escapeHtml(sourceType)}" tabindex="0"`;
+    const taskId = event.task_id ? ` data-task-id="${escapeHtml(event.task_id)}"` : "";
+    return `data-event-id="${escapeHtml(dataId)}" data-event-ref="${escapeHtml(eventRef)}" data-event-source="${escapeHtml(sourceType)}"${taskId} tabindex="0"`;
 }
 function renderMonthAllDayEvent(event) {
     const badgeStyle = getEventBadgeStyle(event);
@@ -2540,12 +2972,15 @@ function renderTimedEvent(event) {
     const leftPct = (event.layoutLane / event.layoutLaneCount) * 100;
     const widthPct = 100 / event.layoutLaneCount;
     const badgeStyle = getEventBadgeStyle(event);
+    const isTask = isTaskEvent(event);
+    const taskClasses = isTask ? ` ${event.completed ? "opacity-65" : ""}` : "";
+    const priorityLabel = isTask && event.priority && event.priority !== "none" ? event.priority : "";
     return `
-        <div ${getEventElementAttributes(event)} class="calendar-event-shell absolute px-0.5" style="top:${topPx}px; left:${leftPct}%; width:calc(${widthPct}% - 0.25rem); height:${heightPx}px; z-index: 10;">
+        <div ${getEventElementAttributes(event)} class="calendar-event-shell absolute px-0.5${taskClasses}" style="top:${topPx}px; left:${leftPct}%; width:calc(${widthPct}% - 0.25rem); height:${heightPx}px; z-index: 10;">
             <div class="h-full rounded-lg border overflow-hidden shadow-lg shadow-black/10" style="${badgeStyle}">
                 <div class="h-full px-2 py-1.5 flex flex-col gap-0.5 text-left">
-                    <div class="text-[11px] font-semibold leading-tight line-clamp-2">${escapeHtml(event.title || "Untitled")}</div>
-                    <div class="text-[10px]">${escapeHtml(formatTimeOnly(event.startDate))}</div>
+                    <div class="text-[11px] font-semibold leading-tight line-clamp-2">${isTask && event.completed ? "✓ " : ""}${escapeHtml(event.title || "Untitled")}</div>
+                    <div class="text-[10px]">${priorityLabel ? `${escapeHtml(priorityLabel)} · ` : ""}${escapeHtml(formatTimeOnly(event.startDate))}</div>
                 </div>
             </div>
         </div>
@@ -2559,11 +2994,14 @@ function buildEventChip(event, options = {}) {
     const calendarColor = getEventCalendarColor(event);
     const isMonthTimedChip = Boolean(options.monthView) && !event.isAllDay;
     if (isMonthTimedChip) {
+        const taskLabel = isTaskEvent(event) && event.priority && event.priority !== "none" ? event.priority.slice(0, 1).toUpperCase() : "";
+        const completedClass = isTaskEvent(event) && event.completed ? " opacity-65" : "";
         return `
-            <div ${getEventElementAttributes(event)} class="calendar-event-shell relative">
+            <div ${getEventElementAttributes(event)} class="calendar-event-shell relative${completedClass}">
                 <div class="${sizeClass} rounded-md border bg-surface-container-high/50 truncate flex items-center gap-2" style="border-color: ${badgeColors.border};">
                     <span class="inline-block h-4 w-1 rounded-full shrink-0" style="background-color: ${calendarColor};"></span>
-                    <span class="truncate text-on-surface font-medium">${escapeHtml(event.title || "Untitled")}</span>
+                    ${taskLabel ? `<span class="text-[9px] font-bold uppercase" style="color:${badgeColors.text};">${escapeHtml(taskLabel)}</span>` : ""}
+                    <span class="truncate text-on-surface font-medium">${isTaskEvent(event) && event.completed ? "✓ " : ""}${escapeHtml(event.title || "Untitled")}</span>
                 </div>
             </div>
         `;
@@ -2765,6 +3203,7 @@ function getUrgencyLabelAllDay(event) {
 function getAccent(type, startDate) {
     const soon = (startDate - new Date()) / (1000 * 60 * 60 * 24) <= 1;
     if (soon) return { bar: "bg-error", tag: "bg-error-container/20 text-error" };
+    if (type === "task") return { bar: "bg-secondary", tag: "bg-secondary-container/30 text-secondary" };
     if (type === "quiz") return { bar: "bg-tertiary", tag: "bg-tertiary-container/30 text-tertiary" };
     return { bar: "bg-primary", tag: "bg-primary/20 text-primary-fixed" };
 }
@@ -2780,7 +3219,34 @@ function getEventBadgeStyle(event) {
     const colors = getEventBadgeColors(event);
     return `background-color: ${colors.background}; color: ${colors.text}; border: 1px solid ${colors.border};`;
 }
+function isTaskEvent(event) {
+    return event?.source_type === "task" || event?.type === "task" || event?.calendar_id === TASK_CALENDAR_ID;
+}
+function getTaskPriorityColor(priority) {
+    const value = String(priority || "none").toLowerCase();
+    if (value === "high") return "#ef4444";
+    if (value === "medium") return "#f59e0b";
+    if (value === "low") return "#22c55e";
+    return "#0ea5e9";
+}
 function getEventBadgeColors(event) {
+    if (isTaskEvent(event)) {
+        if (event.completed) {
+            const muted = document.documentElement.classList.contains("dark") ? "#94a3b8" : "#64748b";
+            return {
+                background: hexToRgba(muted, document.documentElement.classList.contains("dark") ? 0.18 : 0.12),
+                text: muted,
+                border: hexToRgba(muted, 0.34),
+            };
+        }
+        const priorityColor = getTaskPriorityColor(event.priority);
+        const isDarkTask = document.documentElement.classList.contains("dark");
+        return {
+            background: hexToRgba(priorityColor, isDarkTask ? 0.24 : 0.13),
+            text: adjustHexLuminance(priorityColor, isDarkTask ? 0.28 : -0.22),
+            border: hexToRgba(priorityColor, isDarkTask ? 0.5 : 0.36),
+        };
+    }
     const color = getEventCalendarColor(event);
     const isDark = document.documentElement.classList.contains("dark");
     const textColor = adjustHexLuminance(color, isDark ? 0.34 : -0.30);

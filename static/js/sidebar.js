@@ -13,6 +13,7 @@ const SIDEBAR_ICONS = {
   graduationCap: `<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M10.394 2.08a1 1 0 0 0-.788 0l-7 3.5a1 1 0 0 0 0 1.84L5 8.445v3.192a1 1 0 0 0 .553.894C6.736 13.155 8.29 13.75 10 13.75c1.71 0 3.264-.594 4.447-1.219a1 1 0 0 0 .553-.894V8.445l1.5-.75v4.555a.75.75 0 0 0 1.5 0V7.17a1 1 0 0 0-.053-.22l.003-.002-7-3.5a1 1 0 0 0-.556-.368z"/></svg>`,
   folderOpen: `<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M2 6a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v1H2V6z"/><path fill-rule="evenodd" d="M2 9h16v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9z" clip-rule="evenodd"/></svg>`,
   notebookPen: `<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4zm3 2a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5H7zm0 3a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5H7zm0 3a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5H7z" clip-rule="evenodd"/></svg>`,
+  checklist: `<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-7.5 9.75a.75.75 0 0 1-1.127.075l-4.5-4.5A.75.75 0 0 1 4.78 9.47l3.897 3.897 6.974-9.071a.75.75 0 0 1 1.052-.143z" clip-rule="evenodd"/><path d="M4.75 4.5a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5zM4.75 14a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5z"/></svg>`,
   messageSquare: `<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 5v8a2 2 0 0 1-2 2h-5l-5 4v-4H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z" clip-rule="evenodd"/></svg>`,
   chevronsLeft: `<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M15.78 5.22a.75.75 0 0 1 0 1.06L12.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0z" clip-rule="evenodd"/></svg>`,
   chevronsRight: `<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M4.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 1 1-1.06-1.06L7.94 10 4.22 6.28a.75.75 0 0 1 0-1.06z" clip-rule="evenodd"/></svg>`,
@@ -69,6 +70,11 @@ function renderSidebar() {
         <button class="sidebar-item ${isActive('/notes') ? 'active' : ''}" data-route="/notes" aria-label="Notes">
           <span class="sidebar-item-icon">${SIDEBAR_ICONS.notebookPen}</span>
           <span class="sidebar-item-label">Notes</span>
+        </button>
+
+        <button class="sidebar-item ${isActive('/task') ? 'active' : ''}" data-route="/task" aria-label="Tasks">
+          <span class="sidebar-item-icon">${SIDEBAR_ICONS.checklist}</span>
+          <span class="sidebar-item-label">Tasks</span>
         </button>
       </div>
 

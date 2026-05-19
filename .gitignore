@@ -5,3 +5,9 @@ __pycache__/
 *.pyc
 node_modules/
 .aider*
+.aider.chat.history.md
+.aider.input.history
+.aider.model.metadata.json
+.aider.model.settings.yml
+.codex
+AGENTS.md

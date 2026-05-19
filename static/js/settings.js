@@ -34,6 +34,30 @@ const SETTINGS_INTERFACE_THEME_TO_THEME = {
 const SETTINGS_PENDING_THEME_STORAGE_KEY = 'apstudy-theme-pending';
 const SETTINGS_PENDING_THEME_UPDATED_KEY = 'apstudy-theme-updated-at';
 const SETTINGS_MAX_OTHER_CALENDARS = 10;
+const USERNAME_MIN_LENGTH = 3;
+const USERNAME_MAX_LENGTH = 20;
+const USERNAME_PATTERN = /^[a-zA-Z0-9_-]+$/;
+const USERNAME_RESERVED = new Set([
+  'account',
+  'admin',
+  'api',
+  'auth',
+  'calendar',
+  'dashboard',
+  'data',
+  'files',
+  'login',
+  'logout',
+  'notes',
+  'onboarding',
+  'preferences',
+  'profile',
+  'settings',
+  'signup',
+  'u',
+  'user',
+  'users',
+]);
 
 const SETTINGS_ENDPOINTS = {
   bootstrap: '/settings/api/bootstrap',
@@ -111,10 +135,12 @@ function cacheElements() {
   elements.bannerColorPicker = document.getElementById('settings-banner-color-picker');
   elements.bannerSwatch = document.getElementById('settings-banner-swatch');
   elements.displayName = document.getElementById('settings-display-name');
+  elements.username = document.getElementById('settings-username-input');
   elements.email = document.getElementById('settings-email');
   elements.accountCreated = document.getElementById('settings-account-created');
   elements.accountCreatedData = document.getElementById('settings-account-created-data');
   elements.userId = document.getElementById('settings-user-id');
+  elements.accountUsername = document.getElementById('settings-username');
   elements.school = document.getElementById('settings-school');
   elements.major = document.getElementById('settings-major');
   elements.graduationYear = document.getElementById('settings-graduation-year');
@@ -219,6 +245,8 @@ function bindProfilePreviewControls() {
   });
   elements.displayName?.addEventListener('input', renderProfilePreview);
   elements.displayName?.addEventListener('input', updateProfileDirtyState);
+  elements.username?.addEventListener('input', renderProfilePreview);
+  elements.username?.addEventListener('input', updateProfileDirtyState);
   elements.school?.addEventListener('input', renderProfilePreview);
   elements.school?.addEventListener('input', updateProfileDirtyState);
   elements.major?.addEventListener('input', renderProfilePreview);
@@ -235,8 +263,11 @@ function bindProfilePreviewControls() {
 function getProfileUrl() {
   const profile = SETTINGS_STATE.profile || {};
   const accountData = SETTINGS_STATE.account || {};
-  const userId = profile.public_user_id
-    || profile.id
+  const username = elements.username?.value.trim() || profile.username || '';
+  if (username) {
+    return `${window.location.origin}/u/${encodeURIComponent(username)}`;
+  }
+  const userId = profile.id
     || elements.userId?.value
     || accountData.$id
     || accountData.id
@@ -348,14 +379,18 @@ function populateFields() {
   const settings = SETTINGS_STATE.settings || {};
 
   const displayName = profile.name || accountData.name || '';
+  const username = profile.username || '';
   const email = profile.email || accountData.email || '';
-  const accountId = profile.public_user_id || profile.id || accountData.$id || accountData.id || '';
+  const accountId = profile.id || accountData.$id || accountData.id || '';
   const createdAt = profile.member_since || formatDate(profile.created_at || accountData.registration || accountData.$createdAt);
   const avatarUrl = profile.picture_url || accountData.avatar || accountData.picture_url || '';
   const bannerColor = normalizeHexColor(profile.banner_color || '#fecae1');
 
   if (elements.displayName) {
     elements.displayName.value = displayName;
+  }
+  if (elements.username) {
+    elements.username.value = username;
   }
   if (elements.email) {
     elements.email.value = email;
@@ -368,6 +403,9 @@ function populateFields() {
   }
   if (elements.userId) {
     elements.userId.value = accountId;
+  }
+  if (elements.accountUsername) {
+    elements.accountUsername.value = username;
   }
   if (elements.school) {
     elements.school.value = profile.school || '';
@@ -611,8 +649,30 @@ function activateSection(sectionId, options = {}) {
 
 async function saveProfile() {
   const currentProfile = SETTINGS_STATE.profile || {};
+  const rawUsername = elements.username?.value.trim() || '';
+  if (!rawUsername) {
+    showToast('Username is required.', 'error');
+    return;
+  }
+  const normalizedUsername = normalizeUsername(rawUsername);
+  if (!USERNAME_PATTERN.test(normalizedUsername)) {
+    showToast('Please only use numbers, letters, dashes -, or underscores _.', 'error');
+    return;
+  }
+  if (normalizedUsername.length < USERNAME_MIN_LENGTH || normalizedUsername.length > USERNAME_MAX_LENGTH) {
+    showToast('Username must be between 3 and 20 characters.', 'error');
+    return;
+  }
+  if (USERNAME_RESERVED.has(normalizedUsername)) {
+    showToast('That username is reserved.', 'error');
+    return;
+  }
+  if (elements.username) {
+    elements.username.value = normalizedUsername;
+  }
   const payload = {
     name: elements.displayName?.value.trim() || '',
+    username: normalizedUsername,
     picture_url: currentProfile.picture_url || '',
     avatar_source: currentProfile.avatar_source || (currentProfile.picture_url ? 'provider' : ''),
     banner_color: normalizeHexColor(elements.bannerColorPicker?.value || currentProfile.banner_color || '#fecae1'),
@@ -883,6 +943,7 @@ function renderProfilePreview() {
   const profile = SETTINGS_STATE.profile || {};
   const accountData = SETTINGS_STATE.account || {};
   const displayName = elements.displayName?.value.trim() || profile.name || accountData.name || 'APStudy User';
+  const username = elements.username?.value.trim() || profile.username || '';
   const school = elements.school?.value.trim() || profile.school || 'Not set';
   const major = elements.major?.value.trim() || profile.major || 'Not set';
   const graduation = elements.graduationYear?.value.trim()
@@ -896,7 +957,13 @@ function renderProfilePreview() {
     || 'Not set';
 
   if (elements.previewName) elements.previewName.textContent = displayName;
-  if (elements.previewHandle) elements.previewHandle.textContent = profileHandle(displayName, profile.id || accountData.$id || accountData.id);
+  if (elements.previewHandle) {
+    elements.previewHandle.textContent = profileHandle(
+      displayName,
+      username,
+      profile.id || accountData.$id || accountData.id,
+    );
+  }
   if (elements.previewSchool) elements.previewSchool.textContent = school;
   if (elements.previewMajor) elements.previewMajor.textContent = major;
   if (elements.previewGraduation) elements.previewGraduation.textContent = graduation;
@@ -917,6 +984,7 @@ function captureProfileBaseline() {
 function getProfileFormValues() {
   return {
     name: elements.displayName?.value.trim() || '',
+    username: elements.username?.value.trim() || '',
     school: elements.school?.value.trim() || '',
     major: elements.major?.value.trim() || '',
     graduation_year: elements.graduationYear?.value.trim() || '',
@@ -1015,7 +1083,15 @@ function normalizeHexColor(value) {
   return /^#[0-9a-fA-F]{6}$/.test(normalized) ? normalized.toLowerCase() : '#fecae1';
 }
 
-function profileHandle(name, userId) {
+function normalizeUsername(value) {
+  return String(value || '').trim().toLowerCase();
+}
+
+function profileHandle(name, username, userId) {
+  const normalizedUsername = String(username || '').trim();
+  if (normalizedUsername) {
+    return `@${normalizedUsername}`;
+  }
   const slug = String(name || '')
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')

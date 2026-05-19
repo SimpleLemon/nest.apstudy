@@ -125,6 +125,43 @@ def _list_indexes(tablesdb, database_id, table_id):
     return {index.key for index in response.indexes}
 
 # ---------------------------------------------------------------------------
+# Delete helpers
+# ---------------------------------------------------------------------------
+
+def _delete_index_if_exists(tablesdb, database_id, table_id, key):
+    existing_indexes = _list_indexes(tablesdb, database_id, table_id)
+    if key not in existing_indexes:
+        return
+    try:
+        tablesdb.delete_index(
+            database_id=database_id,
+            table_id=table_id,
+            key=key,
+        )
+        logger.info("Deleted index: %s.%s", table_id, key)
+    except AppwriteException as exc:
+        if exc.code == 404:
+            return
+        raise
+
+
+def _delete_column_if_exists(tablesdb, database_id, table_id, key):
+    existing_columns = _list_columns(tablesdb, database_id, table_id)
+    if key not in existing_columns:
+        return
+    try:
+        tablesdb.delete_column(
+            database_id=database_id,
+            table_id=table_id,
+            key=key,
+        )
+        logger.info("Deleted column: %s.%s", table_id, key)
+    except AppwriteException as exc:
+        if exc.code == 404:
+            return
+        raise
+
+# ---------------------------------------------------------------------------
 # Ensure helpers
 # ---------------------------------------------------------------------------
 
@@ -399,9 +436,9 @@ TABLE_SPECS = [
         "row_security": True,
         "columns": [
             {"key": "google_id", "type": "string", "size": 255, "xrequired": True},
-            {"key": "public_user_id", "type": "string", "size": 10},
             {"key": "email", "type": "email", "xrequired": True},
             {"key": "name", "type": "string", "size": 255},
+            {"key": "username", "type": "string", "size": 32},
             {"key": "picture_url", "type": "url"},
             {"key": "school", "type": "string", "size": 255},
             {"key": "major", "type": "string", "size": 255},
@@ -422,7 +459,7 @@ TABLE_SPECS = [
         "indexes": [
             {"key": "idx_users_google_id", "type": "unique", "columns": ["google_id"]},
             {"key": "idx_users_email", "type": "unique", "columns": ["email"]},
-            {"key": "idx_users_public_user_id", "type": "key", "columns": ["public_user_id"]},
+            {"key": "idx_users_username", "type": "unique", "columns": ["username"]},
         ],
     },
     {
@@ -655,6 +692,95 @@ TABLE_SPECS = [
         ],
     },
     {
+        "id": "calendar_shares",
+        "name": "calendar_shares",
+        "permissions": [],
+        "row_security": True,
+        "columns": [
+            {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
+            {"key": "share_code", "type": "string", "size": 16, "xrequired": True},
+            {"key": "is_active", "type": "boolean", "xdefault": True},
+            {"key": "include_all_calendars", "type": "boolean", "xdefault": True},
+            {"key": "calendar_ids_json", "type": "text"},
+            {"key": "date_scope", "type": "string", "size": 16, "xdefault": "all"},
+            {"key": "fixed_start", "type": "datetime"},
+            {"key": "fixed_end", "type": "datetime"},
+            {"key": "rolling_days", "type": "integer"},
+            {"key": "created_at", "type": "datetime", "xrequired": True},
+            {"key": "updated_at", "type": "datetime"},
+        ],
+        "indexes": [
+            {"key": "idx_calendar_shares_user", "type": "key", "columns": ["user_id"]},
+            {"key": "idx_calendar_shares_code", "type": "key", "columns": ["share_code"]},
+            {"key": "idx_calendar_shares_active", "type": "key", "columns": ["is_active"]},
+            {"key": "idx_calendar_shares_code_unique", "type": "unique", "columns": ["share_code"]},
+        ],
+    },
+    {
+        "id": "task_lists",
+        "name": "task_lists",
+        "permissions": [],
+        "row_security": True,
+        "columns": [
+            {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
+            {"key": "name", "type": "string", "size": 120, "xrequired": True},
+            {"key": "order", "type": "integer"},
+            {"key": "collapsed", "type": "boolean", "xdefault": False},
+            {"key": "created_at", "type": "datetime", "xrequired": True},
+            {"key": "updated_at", "type": "datetime"},
+        ],
+        "indexes": [
+            {"key": "idx_task_lists_user", "type": "key", "columns": ["user_id"]},
+            {"key": "idx_task_lists_order", "type": "key", "columns": ["order"]},
+        ],
+    },
+    {
+        "id": "tasks",
+        "name": "tasks",
+        "permissions": [],
+        "row_security": True,
+        "columns": [
+            {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
+            {"key": "list_id", "type": "string", "size": 64, "xrequired": True},
+            {"key": "title", "type": "string", "size": 255, "xrequired": True},
+            {"key": "priority", "type": "string", "size": 16, "xdefault": "none"},
+            {"key": "deadline_at", "type": "datetime"},
+            {"key": "deadline_time", "type": "string", "size": 5},
+            {"key": "timezone", "type": "string", "size": 64},
+            {"key": "recurrence_json", "type": "text"},
+            {"key": "order", "type": "integer"},
+            {"key": "completed", "type": "boolean", "xdefault": False},
+            {"key": "completed_at", "type": "datetime"},
+            {"key": "created_at", "type": "datetime", "xrequired": True},
+            {"key": "updated_at", "type": "datetime"},
+        ],
+        "indexes": [
+            {"key": "idx_tasks_user", "type": "key", "columns": ["user_id"]},
+            {"key": "idx_tasks_list", "type": "key", "columns": ["list_id"]},
+            {"key": "idx_tasks_user_list", "type": "key", "columns": ["user_id", "list_id"]},
+            {"key": "idx_tasks_deadline", "type": "key", "columns": ["deadline_at"]},
+            {"key": "idx_tasks_order", "type": "key", "columns": ["order"]},
+        ],
+    },
+    {
+        "id": "task_completions",
+        "name": "task_completions",
+        "permissions": [],
+        "row_security": True,
+        "columns": [
+            {"key": "user_id", "type": "string", "size": 64, "xrequired": True},
+            {"key": "task_id", "type": "string", "size": 64, "xrequired": True},
+            {"key": "occurrence_key", "type": "string", "size": 64, "xrequired": True},
+            {"key": "completed_at", "type": "datetime", "xrequired": True},
+        ],
+        "indexes": [
+            {"key": "idx_task_completions_user", "type": "key", "columns": ["user_id"]},
+            {"key": "idx_task_completions_task", "type": "key", "columns": ["task_id"]},
+            {"key": "idx_task_completions_occurrence", "type": "key", "columns": ["occurrence_key"]},
+            {"key": "idx_task_completions_unique", "type": "unique", "columns": ["user_id", "task_id", "occurrence_key"]},
+        ],
+    },
+    {
         "id": "shared_files",
         "name": "shared_files",
         "permissions": [],
@@ -765,6 +891,11 @@ TABLE_SPECS = [
 # Main
 # ---------------------------------------------------------------------------
 
+def _cleanup_users_table(tablesdb, database_id):
+    table_id = "users"
+    _delete_index_if_exists(tablesdb, database_id, table_id, "idx_users_public_user_id")
+    _delete_column_if_exists(tablesdb, database_id, table_id, "public_user_id")
+
 def main():
     _require_env()
     client = _init_client()
@@ -773,6 +904,8 @@ def main():
     database_id = os.environ["APPWRITE_DATABASE_ID"]
 
     existing_tables = _list_existing_tables(tablesdb, database_id)
+    if "users" in existing_tables:
+        _cleanup_users_table(tablesdb, database_id)
     for spec in TABLE_SPECS:
         if spec["id"] in existing_tables:
             logger.info("Table already exists: %s", spec["id"])

@@ -86,6 +86,16 @@
 
         if (context.eventId) {
             const isSimulated = context.event?.source === "simulated";
+            const isTask = context.event?.source_type === "task" || context.event?.type === "task";
+            if (isTask) {
+                const items = [
+                    { label: 'Open Task', icon: 'open_in_new', onClick: openTask, disabled: !context.event?.task_id },
+                    { label: 'Go to Today', icon: 'today', onClick: goToToday },
+                ];
+                const el = buildMenu(items);
+                showMenuAt(context.x, context.y, el);
+                return;
+            }
             const items = [
                 { label: 'View / Edit Event', icon: 'edit_calendar', onClick: openEdit, disabled: isSimulated || !context.event },
                 { label: 'Duplicate Event', icon: 'content_copy', onClick: duplicateEvent, disabled: !context.event },
@@ -153,6 +163,12 @@
                 window.ensureEventsForRange(window.getBufferedRangeForView());
             }
         }
+    }
+
+    function openTask(ctx) {
+        const taskId = ctx?.event?.task_id;
+        if (!taskId) return;
+        window.location.href = `/task?task=${encodeURIComponent(taskId)}`;
     }
 
     function formDataForEvent(event) {

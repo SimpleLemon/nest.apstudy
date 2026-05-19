@@ -31,6 +31,12 @@ export const COMMAND_PALETTE_PAGES = [
     keywords: ['documents', 'study', 'notebook', 'editor', 'writing'],
   },
   {
+    name: 'Tasks',
+    route: '/task',
+    icon: 'task',
+    keywords: ['todo', 'to-do', 'deadline', 'repeat', 'checklist'],
+  },
+  {
     name: 'Files',
     route: '/files',
     icon: 'files',
@@ -410,6 +416,13 @@ function renderIcon(name) {
         h('path', { d: 'M14 3v4h4' }),
         h('path', { d: 'M9 13h6' }),
         h('path', { d: 'M9 17h4' }),
+      );
+    case 'task':
+      return h('svg', iconProps,
+        h('path', { d: 'M9 11l2 2 4-5' }),
+        h('path', { d: 'M5 6h7' }),
+        h('path', { d: 'M5 18h10' }),
+        h('rect', { x: 3, y: 3, width: 18, height: 18, rx: 3 }),
       );
     case 'files':
       return h('svg', iconProps,

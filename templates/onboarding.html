@@ -45,19 +45,31 @@
                         <section class="wizard-step transition duration-200 ease-out space-y-6" data-step="1">
                             <div class="space-y-3 text-center md:text-left">
                                 <p class="text-xs uppercase tracking-[0.2em] text-on-surface-variant">Step 1: Welcome</p>
-                                <h2 class="text-2xl font-headline font-semibold">Let's confirm your identity.</h2>
-                                <p class="text-sm text-on-surface-variant">We pulled this from Google sign-in so you do not need to re-enter it.</p>
+                                <h2 class="text-2xl font-headline font-semibold">Let's create your account.</h2>
+                                <p class="text-sm text-on-surface-variant">We pulled this from your sign-in so you do not need to re-enter it.</p>
                                 <div class="hidden sm:flex items-center justify-between self-stretch rounded-2xl bg-surface-container-lowest/80 border border-outline-variant/20 p-3">
                                     <div class="flex items-center gap-3">
-                                        <img alt="Profile" class="w-14 h-14 rounded-2xl object-cover border border-outline-variant/30" src="{{ user.picture or 'https://lh3.googleusercontent.com/aida-public/AB6AXuBIfYSsGVwQhSKDisBejBzu2WjfUSy7ZvB6EuSniyEVL0AFAL-zPWMSUf7nY7dcreb3wFIGRN0FldnYUKwUD8biMdNGR7mQgOBdpWxWYeAOZ3T6RxewSCPkDsTNfT9wHiMcWitHbciCn4Rdm0e4jxbaEEd1UxWduW8n_MF_2DUm_MfIUs2TnGVWHOV7I9vPjdY_PQYLR9EDW4JqkFUaA3SeQRORrzX7nb7lO2JSgUCGjY36VsPPGZjED0Zc56B7JbjQhDVVIa6TIdY' }}">
+                                        <img alt="Profile" class="w-14 h-14 rounded-2xl object-cover border border-outline-variant/30" src="{{ user.picture or 'https://i.sstatic.net/34AD2.jpg' }}">
                                         <div class="min-w-0">
                                             <p class="text-xs uppercase tracking-[0.16em] text-on-surface-variant">Signed in as {{ user.name }}</p>
                                             <p class="text-[clamp(0.7rem,0.9vw,0.9rem)] font-medium leading-tight break-all">{{ user.email }}</p>
                                         </div>
                                     </div>
-                                    <a href="{{ url_for('auth.logout') }}" data-logout class="ml-4 flex items-center justify-center rounded-xl bg-surface-container px-4 py-2 text-sm font-medium text-on-surface-variant hover:text-error hover:bg-error-container/10 transition-colors">
+                                    <a href="{{ url_for('auth.logout') }}" data-logout class="ml-4 flex items-center justify-center rounded-xl bg-surface-container px-4 py-2 text-sm font-medium text-on-surface-variant no-underline hover:no-underline hover:text-error hover:bg-error-container/10 transition-colors">
                                         Wrong account? Sign out
                                     </a>
+                                </div>
+                                <div class="grid gap-4 sm:grid-cols-2">
+                                    <label class="space-y-2">
+                                        <span class="text-xs uppercase tracking-[0.16em] text-on-surface-variant">Display name</span>
+                                        <input id="onboarding-display-name" class="w-full rounded-xl bg-surface-container-lowest border border-outline-variant/25 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 px-4 py-3 text-sm" type="text" autocomplete="name" value="{{ user.name or '' }}" aria-describedby="onboarding-display-name-help" />
+                                        <p id="onboarding-display-name-help" class="hidden text-xs text-on-surface-variant">This is how others will see you. You may include special characters and Emojis.</p>
+                                    </label>
+                                    <label class="space-y-2">
+                                        <span class="text-xs uppercase tracking-[0.16em] text-on-surface-variant">Username</span>
+                                        <input id="onboarding-username" class="w-full rounded-xl bg-surface-container-lowest border border-outline-variant/25 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 px-4 py-3 text-sm" type="text" autocomplete="off" value="{{ user.username or '' }}" aria-describedby="onboarding-username-help" />
+                                        <p id="onboarding-username-help" class="hidden text-xs text-on-surface-variant">Please only use numbers, letters, dashes -, or underscores _ .</p>
+                                    </label>
                                 </div>
                             </div>
                             <div class="flex justify-end">
@@ -84,15 +96,15 @@
                                         <button type="button" class="inline-flex w-full items-center justify-center rounded-xl bg-surface-container/[0.65] px-4 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:bg-primary/15" data-education-level="Other">Other</button>
                                     </div>
                                 </div>
-                                <div id="class-year-field" class="space-y-2 hidden">
+                                <label id="class-year-field" class="space-y-2 block hidden">
                                     <span class="text-xs uppercase tracking-[0.16em] text-on-surface-variant">Class year</span>
-                                    <input id="class-year" class="w-full rounded-xl bg-surface-container-lowest border border-outline-variant/25 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 px-4 py-3 text-sm" type="text" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="2028" />
-                                </div>
+                                    <input id="class-year" class="max-w-xs rounded-xl bg-surface-container-lowest border border-outline-variant/25 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 px-4 py-3 text-sm" type="text" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="2028" />
+                                </label>
                                 <div id="emory-student-field" class="space-y-2 hidden">
                                     <span class="text-xs uppercase tracking-[0.16em] text-on-surface-variant">Are you an Emory University student?</span>
                                     <div class="grid grid-cols-2 gap-3" id="emory-student-group">
-                                        <button type="button" class="inline-flex w-full items-center justify-center rounded-xl bg-surface-container/[0.65] px-4 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:bg-primary/15" data-emory-student="yes">Yes</button>
-                                        <button type="button" class="inline-flex w-full items-center justify-center rounded-xl bg-surface-container/[0.65] px-4 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:bg-primary/15" data-emory-student="no">No</button>
+                                        <button type="button" class="inline-flex w-auto justify-self-start items-center justify-center rounded-xl bg-surface-container/[0.65] px-6 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:bg-primary/15" data-emory-student="yes">Yes</button>
+                                        <button type="button" class="inline-flex w-auto justify-self-start items-center justify-center rounded-xl bg-surface-container/[0.65] px-6 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:bg-primary/15" data-emory-student="no">No</button>
                                     </div>
                                 </div>
                                 <div id="emory-email-field" class="space-y-2 hidden">
@@ -115,7 +127,7 @@
                         <section class="wizard-step transition duration-200 ease-out hidden space-y-6" data-step="3" id="courses-step" hidden>
                             <div class="space-y-2">
                                 <p class="text-xs uppercase tracking-[0.2em] text-on-surface-variant">Step 3: Courses</p>
-                                <h2 class="text-2xl font-headline font-semibold">What courses are you taking this semester?</h2>
+                                <h2 class="text-2xl font-headline font-semibold">What courses are you taking/planning on taking at Emory?</h2>
                                 <p class="text-sm text-on-surface-variant">Search the catalog, then add courses one at a time from the results.</p>
                             </div>
                             <div class="grid gap-4 lg:grid-cols-[1.05fr_0.95fr] items-start">
@@ -302,7 +314,7 @@
                                 <div class="bg-surface-container-lowest border border-outline-variant/20 rounded-2xl p-5">
                                     <div class="flex items-center justify-between gap-3 mb-3">
                                         <h3 class="font-headline font-semibold">Academic profile</h3>
-                                        <button class="edit-step text-xs uppercase tracking-[0.16em] text-primary" type="button" data-go="2">Edit</button>
+                                        <button class="edit-step text-xs uppercase tracking-[0.16em] text-primary bg-transparent border-0 p-0 hover:bg-transparent focus-visible:outline-none focus-visible:ring-0" type="button" data-go="2">Edit</button>
                                     </div>
                                     <p id="review-education-level" class="text-sm text-on-surface-variant"></p>
                                     <p id="review-class-year" class="text-sm text-on-surface-variant mt-1"></p>
@@ -312,7 +324,7 @@
                                 <div id="review-courses-card" class="bg-surface-container-lowest border border-outline-variant/20 rounded-2xl p-5 lg:col-span-2">
                                     <div class="flex items-center justify-between gap-3 mb-3">
                                         <h3 class="font-headline font-semibold">Courses</h3>
-                                        <button class="edit-step text-xs uppercase tracking-[0.16em] text-primary" type="button" data-go="3">Edit</button>
+                                        <button class="edit-step text-xs uppercase tracking-[0.16em] text-primary bg-transparent border-0 p-0 hover:bg-transparent focus-visible:outline-none focus-visible:ring-0" type="button" data-go="3">Edit</button>
                                     </div>
                                     <div id="review-courses" class="grid gap-3 sm:grid-cols-2"></div>
                                     <div id="review-courses-empty" class="hidden text-sm text-on-surface-variant">Course entry skipped.</div>
@@ -342,6 +354,8 @@
     <global class="thefooter"></global>
     <script type="application/json" id="onboarding-data">
         {
+            "displayName": {{ user.name | tojson }},
+            "username": {{ user.username | tojson }},
             "educationLevel": {{ education_level | tojson }},
             "classYear": {{ class_year | tojson }},
             "emoryStudent": {{ emory_student | tojson }},
@@ -353,6 +367,8 @@
         const onboardingData = JSON.parse(document.getElementById('onboarding-data').textContent);
         const onboardingState = {
             step: 1,
+            displayName: onboardingData.displayName,
+            username: onboardingData.username,
             educationLevel: onboardingData.educationLevel,
             classYear: onboardingData.classYear,
             emoryStudent: onboardingData.emoryStudent,
@@ -367,6 +383,10 @@
         const progressBar = document.getElementById('progress-bar');
         const stepLabel = document.getElementById('step-label');
         const wizardStatus = document.getElementById('wizard-status');
+        const displayNameInput = document.getElementById('onboarding-display-name');
+        const usernameInput = document.getElementById('onboarding-username');
+        const displayNameHelp = document.getElementById('onboarding-display-name-help');
+        const usernameHelp = document.getElementById('onboarding-username-help');
         const courseSearch = document.getElementById('course-search');
         const courseSuggestions = document.getElementById('course-suggestions');
         const courseCode = document.getElementById('course-code');
@@ -411,6 +431,55 @@
         function clearDirty() {
             onboardingState.dirty = false;
         }
+
+        function bindHelperText(input, helper) {
+            if (!input || !helper) {
+                return;
+            }
+            input.addEventListener('focus', () => helper.classList.remove('hidden'));
+            input.addEventListener('blur', () => helper.classList.add('hidden'));
+        }
+
+        function suggestUsername(value) {
+            const base = String(value || '')
+                .trim()
+                .toLowerCase()
+                .replace(/[^a-z0-9_-]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+            return base.slice(0, USERNAME_MAX_LENGTH);
+        }
+
+        function validateAccountStep() {
+            const displayName = displayNameInput?.value.trim() || '';
+            if (!displayName) {
+                showError('Display name is required.');
+                return false;
+            }
+            const rawUsername = usernameInput?.value.trim() || '';
+            if (!rawUsername) {
+                showError('Username is required.');
+                return false;
+            }
+            const normalizedUsername = rawUsername.toLowerCase();
+            if (!USERNAME_PATTERN.test(normalizedUsername)) {
+                showError('Please only use numbers, letters, dashes -, or underscores _.');
+                return false;
+            }
+            if (normalizedUsername.length < USERNAME_MIN_LENGTH || normalizedUsername.length > USERNAME_MAX_LENGTH) {
+                showError('Username must be between 3 and 20 characters.');
+                return false;
+            }
+            if (USERNAME_RESERVED.has(normalizedUsername)) {
+                showError('That username is reserved.');
+                return false;
+            }
+            onboardingState.displayName = displayName;
+            onboardingState.username = normalizedUsername;
+            if (usernameInput) {
+                usernameInput.value = normalizedUsername;
+            }
+            return true;
+        }
         function fetchJson(url, options = {}) {
             return fetch(url, {
                 headers: { 'Content-Type': 'application/json' },
@@ -427,6 +496,30 @@
         const VALID_THEMES = ['obsidian-dark', 'parchment-light', 'system-match', 'nest-light', 'nest-dark'];
         const STORAGE_KEY = 'apstudy-theme';
         const MAX_OTHER_CALENDARS = 10;
+        const USERNAME_MIN_LENGTH = 3;
+        const USERNAME_MAX_LENGTH = 20;
+        const USERNAME_PATTERN = /^[a-zA-Z0-9_-]+$/;
+        const USERNAME_RESERVED = new Set([
+            'account',
+            'admin',
+            'api',
+            'auth',
+            'calendar',
+            'dashboard',
+            'data',
+            'files',
+            'login',
+            'logout',
+            'notes',
+            'onboarding',
+            'preferences',
+            'profile',
+            'settings',
+            'signup',
+            'u',
+            'user',
+            'users',
+        ]);
         const SEGMENTED_OPTION_CLASSES = 'inline-flex w-full items-center justify-center rounded-xl bg-surface-container/[0.65] px-4 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:bg-primary/15';
         const COURSE_CARD_CLASSES = 'rounded-2xl border border-outline-variant/20 bg-surface-container p-4';
         const REMOVE_CALENDAR_BUTTON_CLASSES = 'btn-remove-calendar inline-flex items-center justify-center rounded-lg h-10 w-10 bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors';
@@ -1013,7 +1106,13 @@
                 const currentStep = onboardingState.step;
                 try {
                     if (currentStep === 1) {
-                        await saveStep(1);
+                        if (!validateAccountStep()) {
+                            return;
+                        }
+                        await saveStep(1, {
+                            display_name: onboardingState.displayName,
+                            username: onboardingState.username,
+                        });
                         setStep(2);
                         return;
                     }
@@ -1098,6 +1197,16 @@
             button.addEventListener('click', () => onEmoryStudentSelected(button.dataset.emoryStudent));
         });
         form.addEventListener('input', (event) => {
+            if (event.target === displayNameInput) {
+                onboardingState.displayName = displayNameInput.value;
+                markDirty();
+                return;
+            }
+            if (event.target === usernameInput) {
+                onboardingState.username = usernameInput.value;
+                markDirty();
+                return;
+            }
             if (event.target === classYearInput) {
                 sanitizeClassYearInput();
                 return;
@@ -1197,12 +1306,26 @@
             if (onboardingState.step === 3 && !shouldShowCoursesStep()) {
                 onboardingState.step = 4;
             }
+            if (displayNameInput && onboardingState.displayName) {
+                displayNameInput.value = onboardingState.displayName;
+            }
+            if (usernameInput) {
+                if (onboardingState.username) {
+                    usernameInput.value = onboardingState.username;
+                } else if (displayNameInput?.value) {
+                    const suggestion = suggestUsername(displayNameInput.value);
+                    usernameInput.value = suggestion;
+                    onboardingState.username = suggestion;
+                }
+            }
             if (onboardingState.classYear) {
                 classYearInput.value = onboardingState.classYear;
             }
             if (onboardingState.emoryEmail) {
                 emoryEmailInput.value = onboardingState.emoryEmail;
             }
+            bindHelperText(displayNameInput, displayNameHelp);
+            bindHelperText(usernameInput, usernameHelp);
             syncEducationVisibility();
             renderCourseList();
             updateAddCourseButtonState();

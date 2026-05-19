@@ -83,6 +83,15 @@
                                             </div>
                                         </div>
                                         <div class="settings-field settings-field-readonly">
+                                            <span class="settings-field-label">Username</span>
+                                            <div class="settings-copy-field">
+                                                <input id="settings-username" type="text" readonly />
+                                                <button type="button" class="settings-copy-button" data-copy-target="settings-username" aria-label="Copy username">
+                                                    <span class="material-symbols-outlined">content_copy</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="settings-field settings-field-readonly">
                                             <span class="settings-field-label">Account Created</span>
                                             <input id="settings-account-created-data" type="text" readonly />
                                         </div>
@@ -111,6 +120,10 @@
                                             <label class="settings-field">
                                                 <span class="settings-field-label">Display Name</span>
                                                 <input id="settings-display-name" type="text" autocomplete="name" placeholder="Your name" />
+                                            </label>
+                                            <label class="settings-field">
+                                                <span class="settings-field-label">Username</span>
+                                                <input id="settings-username-input" type="text" autocomplete="off" placeholder="your-username" />
                                             </label>
                                             <div class="settings-field">
                                                 <span class="settings-field-label">Avatar</span>
@@ -167,7 +180,7 @@
                                     </div>
                                     <div class="profile-tile-heading">
                                         <h3 id="settings-preview-name">{{ user.name or 'APStudy User' }}</h3>
-                                        <p id="settings-preview-handle">@{{ (user.name or 'apstudy-user')|lower|replace(' ', '-') }}</p>
+                                        <p id="settings-preview-handle">@{{ user.username or (user.name or 'apstudy-user')|lower|replace(' ', '-') }}</p>
                                     </div>
                                     <div class="profile-tile-details">
                                         <div id="settings-preview-school-card">

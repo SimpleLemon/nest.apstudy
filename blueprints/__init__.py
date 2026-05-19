@@ -12,7 +12,9 @@ from blueprints.calendar_api import calendar_bp
 from blueprints.courses import courses_bp
 from blueprints.file_share import file_share_bp
 from blueprints.notes_api import notes_api_bp
+from blueprints.tasks_api import tasks_api_bp
 from blueprints.settings import settings_bp
+from blueprints.admin import admin_bp
 
 
 def register_blueprints(app):
@@ -24,4 +26,6 @@ def register_blueprints(app):
     app.register_blueprint(courses_bp, url_prefix="/api/courses")
     app.register_blueprint(file_share_bp)
     app.register_blueprint(notes_api_bp)
+    app.register_blueprint(tasks_api_bp)
     app.register_blueprint(settings_bp, url_prefix="/settings")
+    app.register_blueprint(admin_bp)

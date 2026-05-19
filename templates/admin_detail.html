@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Admin - {{ user.name or user.id }}</title>
+    <script>window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";</script>
+    <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
+    <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy Logo">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/themes.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
+</head>
+<body class="admin-page">
+    <main class="admin-shell">
+        <header class="admin-header">
+            <div>
+                <p class="admin-eyebrow">Admin Portal</p>
+                <h1 class="admin-title">{{ user.name or "User" }}</h1>
+                <p class="admin-subtitle">Appwrite ID: {{ user.id }}</p>
+            </div>
+            <div class="admin-header-actions">
+                <a class="admin-button admin-button--ghost" href="{{ url_for('admin.admin_index') }}">All users</a>
+                <a class="admin-button" href="{{ url_for('admin.admin_detail_export', user_id=user.id) }}">Export JSON</a>
+            </div>
+        </header>
+
+        {% set status_map = {
+            "onboarding-updated": "Onboarding updated.",
+            "token-reset": "ICS token reset.",
+            "file-deleted": "File deleted.",
+            "folder-deleted": "Folder deleted.",
+        } %}
+        {% if status %}
+            <div class="admin-alert admin-alert--success">{{ status_map.get(status, status|replace('-', ' ')) }}</div>
+        {% endif %}
+        {% if error %}
+            <div class="admin-alert admin-alert--error">{{ error }}</div>
+        {% endif %}
+
+        <section class="admin-card">
+            <h2 class="admin-title">Profile</h2>
+            <div class="admin-grid">
+                <div class="admin-field">
+                    <span class="admin-field-label">User ID</span>
+                    <span class="admin-field-value">{{ user.id }}</span>
+                </div>
+                <div class="admin-field">
+                    <span class="admin-field-label">Username</span>
+                    <span class="admin-field-value">{{ user.username or "--" }}</span>
+                </div>
+                <div class="admin-field">
+                    <span class="admin-field-label">Email</span>
+                    <span class="admin-field-value">{{ user.email or "--" }}</span>
+                </div>
+                <div class="admin-field">
+                    <span class="admin-field-label">School</span>
+                    <span class="admin-field-value">{{ user.school or "--" }}</span>
+                </div>
+                <div class="admin-field">
+                    <span class="admin-field-label">Major</span>
+                    <span class="admin-field-value">{{ user.major or "--" }}</span>
+                </div>
+                <div class="admin-field">
+                    <span class="admin-field-label">Graduation Year</span>
+                    <span class="admin-field-value">{{ user.graduation_year or "--" }}</span>
+                </div>
+                <div class="admin-field">
+                    <span class="admin-field-label">Created</span>
+                    <span class="admin-field-value">{{ user.created_at or "--" }}</span>
+                </div>
+                <div class="admin-field">
+                    <span class="admin-field-label">Last Login</span>
+                    <span class="admin-field-value">{{ user.last_login or "--" }}</span>
+                </div>
+                <div class="admin-field">
+                    <span class="admin-field-label">Onboarding</span>
+                    <span class="admin-field-value">{{ "Complete" if user.onboarding_complete else "Step " ~ user.onboarding_step }}</span>
+                </div>
+                <div class="admin-field">
+                    <span class="admin-field-label">Emory Student</span>
+                    <span class="admin-field-value">{{ "Yes" if user.emory_student else "No" }}</span>
+                </div>
+            </div>
+        </section>
+
+        <nav class="admin-tabs">
+            <a class="admin-tab {% if section == 'overview' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='overview') }}">Overview</a>
+            <a class="admin-tab {% if section == 'settings' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='settings') }}">Settings</a>
+            <a class="admin-tab {% if section == 'files' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='files') }}">Files</a>
+            <a class="admin-tab {% if section == 'notes' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='notes') }}">Notes</a>
+            <a class="admin-tab {% if section == 'calendars' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='calendars') }}">Calendars</a>
+            <a class="admin-tab {% if section == 'courses' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='courses') }}">Courses</a>
+            <a class="admin-tab {% if section == 'seat_tracks' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='seat_tracks') }}">Seat Tracks</a>
+        </nav>
+
+        {% if section == 'overview' %}
+            <section class="admin-section">
+                <div class="admin-card">
+                    <h2 class="admin-title">Quick Stats</h2>
+                    <div class="admin-grid">
+                        <div class="admin-field">
+                            <span class="admin-field-label">Files</span>
+                            <span class="admin-field-value">{{ overview_counts.files if overview_counts else "--" }}</span>
+                        </div>
+                        <div class="admin-field">
+                            <span class="admin-field-label">Folders</span>
+                            <span class="admin-field-value">{{ overview_counts.folders if overview_counts else "--" }}</span>
+                        </div>
+                        <div class="admin-field">
+                            <span class="admin-field-label">Notes</span>
+                            <span class="admin-field-value">{{ overview_counts.notes if overview_counts else "--" }}</span>
+                        </div>
+                        <div class="admin-field">
+                            <span class="admin-field-label">Calendar Events</span>
+                            <span class="admin-field-value">{{ overview_counts.calendar_cache if overview_counts else "--" }}</span>
+                        </div>
+                        <div class="admin-field">
+                            <span class="admin-field-label">Calendar Feeds</span>
+                            <span class="admin-field-value">{{ overview_counts.calendar_feeds if overview_counts else "--" }}</span>
+                        </div>
+                        <div class="admin-field">
+                            <span class="admin-field-label">Courses</span>
+                            <span class="admin-field-value">{{ overview_counts.courses if overview_counts else "--" }}</span>
+                        </div>
+                        <div class="admin-field">
+                            <span class="admin-field-label">Seat Tracks</span>
+                            <span class="admin-field-value">{{ overview_counts.seat_tracks if overview_counts else "--" }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-card">
+                    <h2 class="admin-title">Onboarding Controls</h2>
+                    <form class="admin-form" method="post" action="{{ url_for('admin.update_onboarding', user_id=user.id) }}">
+                        <input type="hidden" name="section" value="overview" />
+                        <label class="admin-inline">
+                            <input type="checkbox" name="onboarding_complete" {% if user.onboarding_complete %}checked{% endif %} />
+                            Onboarding complete
+                        </label>
+                        <label>
+                            Onboarding step
+                            <input type="number" name="onboarding_step" value="{{ user.onboarding_step }}" min="1" />
+                        </label>
+                        <button class="admin-button" type="submit">Update onboarding</button>
+                    </form>
+                </div>
+
+                {% if account_data %}
+                    <div class="admin-card">
+                        <h2 class="admin-title">Appwrite Account</h2>
+                        <pre class="admin-code-block">{{ account_data | tojson }}</pre>
+                    </div>
+                {% endif %}
+
+                <div class="admin-card admin-danger-zone">
+                    <h2 class="admin-title">Danger Zone</h2>
+                    <p class="admin-subtitle">Deleting an account removes the Appwrite user and all related data.</p>
+                    <form class="admin-form" method="post" action="{{ url_for('admin.delete_user', user_id=user.id) }}">
+                        <label>
+                            Type DELETE to confirm
+                            <input type="text" name="confirm" placeholder="DELETE" required />
+                        </label>
+                        <button class="admin-button admin-button--danger" type="submit">Delete user</button>
+                    </form>
+                </div>
+            </section>
+        {% endif %}
+
+        {% if section == 'settings' %}
+            {% set settings = section_data.settings %}
+            <section class="admin-section">
+                <div class="admin-card">
+                    <h2 class="admin-title">User Settings</h2>
+                    {% if settings %}
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for key, value in settings|dictsort %}
+                                    <tr>
+                                        <td>{{ key }}</td>
+                                        <td>
+                                            {% if value is string %}
+                                                {{ value }}
+                                            {% else %}
+                                                {{ value | tojson }}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No settings found.</p>
+                    {% endif %}
+                </div>
+
+                <div class="admin-card">
+                    <h2 class="admin-title">ICS Token</h2>
+                    <form class="admin-form" method="post" action="{{ url_for('admin.reset_ics_token', user_id=user.id) }}">
+                        <input type="hidden" name="section" value="settings" />
+                        <button class="admin-button" type="submit">Reset ICS token</button>
+                    </form>
+                </div>
+            </section>
+        {% endif %}
+
+        {% if section == 'files' %}
+            {% set folders = section_data.folders %}
+            {% set files = section_data.files %}
+            <section class="admin-section">
+                <div class="admin-card">
+                    <h2 class="admin-title">Folders</h2>
+                    {% if folders %}
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parent</th>
+                                    <th>Shared</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for folder in folders %}
+                                    {% set folder_id = folder.get('$id') or folder.get('id') %}
+                                    <tr>
+                                        <td>{{ folder.get('name') or 'Untitled Folder' }}</td>
+                                        <td>{{ folder.get('parent_folder_id') or '--' }}</td>
+                                        <td>{{ 'Yes' if folder.get('is_public') else 'No' }}</td>
+                                        <td>{{ folder.get('created_at') or '--' }}</td>
+                                        <td>
+                                            <form method="post" action="{{ url_for('admin.delete_shared_folder', user_id=user.id, folder_id=folder_id) }}">
+                                                <input type="hidden" name="section" value="files" />
+                                                <button class="admin-button admin-button--danger" type="submit">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <details>
+                                                <summary>Raw folder data</summary>
+                                                <pre class="admin-code-block">{{ folder | tojson }}</pre>
+                                            </details>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No folders found.</p>
+                    {% endif %}
+                </div>
+
+                <div class="admin-card">
+                    <h2 class="admin-title">Files</h2>
+                    {% if files %}
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Filename</th>
+                                    <th>Size</th>
+                                    <th>Visibility</th>
+                                    <th>Expires</th>
+                                    <th>Downloads</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for file in files %}
+                                    {% set file_id = file.get('$id') or file.get('id') %}
+                                    <tr>
+                                        <td>{{ file.get('original_filename') }}</td>
+                                        <td>{{ file.get('file_size_bytes') or 0 }}</td>
+                                        <td>{{ 'Public' if file.get('is_public') else 'Private' }}</td>
+                                        <td>{{ file.get('expires_at') or '--' }}</td>
+                                        <td>{{ file.get('downloaded_count') or 0 }}</td>
+                                        <td>
+                                            <div class="admin-header-actions">
+                                                <a class="admin-button admin-button--ghost" href="{{ url_for('admin.download_shared_file', user_id=user.id, file_id=file_id) }}">Download</a>
+                                                <form method="post" action="{{ url_for('admin.delete_shared_file', user_id=user.id, file_id=file_id) }}">
+                                                    <input type="hidden" name="section" value="files" />
+                                                    <button class="admin-button admin-button--danger" type="submit">Delete</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">
+                                            <details>
+                                                <summary>Raw file data</summary>
+                                                <pre class="admin-code-block">{{ file | tojson }}</pre>
+                                            </details>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No files found.</p>
+                    {% endif %}
+                </div>
+            </section>
+        {% endif %}
+
+        {% if section == 'notes' %}
+            {% set notes = section_data.notes %}
+            {% set note_folders = section_data.note_folders %}
+            <section class="admin-section">
+                <div class="admin-card">
+                    <h2 class="admin-title">Note Folders</h2>
+                    {% if note_folders %}
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Order</th>
+                                    <th>Created</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for folder in note_folders %}
+                                    <tr>
+                                        <td>{{ folder.get('name') or 'Untitled Folder' }}</td>
+                                        <td>{{ folder.get('order') or 0 }}</td>
+                                        <td>{{ folder.get('created_at') or '--' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <details>
+                                                <summary>Raw folder data</summary>
+                                                <pre class="admin-code-block">{{ folder | tojson }}</pre>
+                                            </details>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No note folders found.</p>
+                    {% endif %}
+                </div>
+
+                <div class="admin-card">
+                    <h2 class="admin-title">Notes</h2>
+                    {% if notes %}
+                        {% for note in notes %}
+                            <div class="admin-card">
+                                <div class="admin-grid">
+                                    <div class="admin-field">
+                                        <span class="admin-field-label">Title</span>
+                                        <span class="admin-field-value">{{ note.get('title') or 'Untitled' }}</span>
+                                    </div>
+                                    <div class="admin-field">
+                                        <span class="admin-field-label">Folder</span>
+                                        <span class="admin-field-value">{{ note.get('folder_id') or '--' }}</span>
+                                    </div>
+                                    <div class="admin-field">
+                                        <span class="admin-field-label">Updated</span>
+                                        <span class="admin-field-value">{{ note.get('updated_at') or '--' }}</span>
+                                    </div>
+                                </div>
+                                <div class="admin-section">
+                                    <span class="admin-field-label">Content</span>
+                                    <div class="admin-note-content">{{ note.get('content') or '' }}</div>
+                                </div>
+                                <details class="admin-section">
+                                    <summary>Raw note data</summary>
+                                    <pre class="admin-code-block">{{ note | tojson }}</pre>
+                                </details>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No notes found.</p>
+                    {% endif %}
+                </div>
+            </section>
+        {% endif %}
+
+        {% if section == 'calendars' %}
+            <section class="admin-section">
+                <div class="admin-card">
+                    <h2 class="admin-title">Calendar Feeds</h2>
+                    {% set feeds = section_data.calendar_feeds %}
+                    {% if feeds %}
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>URL</th>
+                                    <th>Last Fetch</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for feed in feeds %}
+                                    <tr>
+                                        <td>{{ feed.get('calendar_name') or '--' }}</td>
+                                        <td>{{ feed.get('feed_url') or '--' }}</td>
+                                        <td>{{ feed.get('last_fetched') or '--' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <details>
+                                                <summary>Raw feed data</summary>
+                                                <pre class="admin-code-block">{{ feed | tojson }}</pre>
+                                            </details>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No calendar feeds found.</p>
+                    {% endif %}
+                </div>
+
+                <div class="admin-card">
+                    <h2 class="admin-title">Calendar Cache</h2>
+                    {% set cache_rows = section_data.calendar_cache %}
+                    {% if cache_rows %}
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th>Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in cache_rows %}
+                                    <tr>
+                                        <td>{{ row.get('event_title') or '--' }}</td>
+                                        <td>{{ row.get('event_start') or '--' }}</td>
+                                        <td>{{ row.get('event_end') or '--' }}</td>
+                                        <td>{{ row.get('event_type') or '--' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <details>
+                                                <summary>Raw cache data</summary>
+                                                <pre class="admin-code-block">{{ row | tojson }}</pre>
+                                            </details>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No cached events found.</p>
+                    {% endif %}
+                </div>
+
+                <div class="admin-card">
+                    <h2 class="admin-title">Calendar Preferences</h2>
+                    {% set prefs = section_data.calendar_preferences %}
+                    {% if prefs %}
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Calendar</th>
+                                    <th>Display Name</th>
+                                    <th>Color</th>
+                                    <th>Visible</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for pref in prefs %}
+                                    <tr>
+                                        <td>{{ pref.get('calendar_name') or '--' }}</td>
+                                        <td>{{ pref.get('display_name') or '--' }}</td>
+                                        <td>{{ pref.get('color_hex') or '--' }}</td>
+                                        <td>{{ 'Yes' if pref.get('visible') else 'No' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <details>
+                                                <summary>Raw preference data</summary>
+                                                <pre class="admin-code-block">{{ pref | tojson }}</pre>
+                                            </details>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No preferences found.</p>
+                    {% endif %}
+                </div>
+
+                <div class="admin-card">
+                    <h2 class="admin-title">Calendar Sources</h2>
+                    {% set sources = section_data.calendar_sources %}
+                    {% if sources %}
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Source</th>
+                                    <th>Kind</th>
+                                    <th>Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for source in sources %}
+                                    <tr>
+                                        <td>{{ source.get('source_id') or '--' }}</td>
+                                        <td>{{ source.get('kind') or '--' }}</td>
+                                        <td>{{ source.get('updated_at') or '--' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <details>
+                                                <summary>Raw source data</summary>
+                                                <pre class="admin-code-block">{{ source | tojson }}</pre>
+                                            </details>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No sources found.</p>
+                    {% endif %}
+                </div>
+
+                <div class="admin-card">
+                    <h2 class="admin-title">User Events</h2>
+                    {% set events = section_data.calendar_events %}
+                    {% if events %}
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th>All Day</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for event in events %}
+                                    <tr>
+                                        <td>{{ event.get('title') or '--' }}</td>
+                                        <td>{{ event.get('start') or '--' }}</td>
+                                        <td>{{ event.get('end') or '--' }}</td>
+                                        <td>{{ 'Yes' if event.get('is_all_day') else 'No' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <details>
+                                                <summary>Raw event data</summary>
+                                                <pre class="admin-code-block">{{ event | tojson }}</pre>
+                                            </details>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No user events found.</p>
+                    {% endif %}
+                </div>
+
+                <div class="admin-card">
+                    <h2 class="admin-title">Event Overrides</h2>
+                    {% set overrides = section_data.calendar_overrides %}
+                    {% if overrides %}
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Event Ref</th>
+                                    <th>Hidden</th>
+                                    <th>Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for override in overrides %}
+                                    <tr>
+                                        <td>{{ override.get('event_ref') or '--' }}</td>
+                                        <td>{{ 'Yes' if override.get('hidden') else 'No' }}</td>
+                                        <td>{{ override.get('updated_at') or '--' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <details>
+                                                <summary>Raw override data</summary>
+                                                <pre class="admin-code-block">{{ override | tojson }}</pre>
+                                            </details>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No overrides found.</p>
+                    {% endif %}
+                </div>
+            </section>
+        {% endif %}
+
+        {% if section == 'courses' %}
+            {% set courses = section_data.courses %}
+            <section class="admin-section">
+                <div class="admin-card">
+                    <h2 class="admin-title">Courses</h2>
+                    {% if courses %}
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Term</th>
+                                    <th>Subject</th>
+                                    <th>Catalog</th>
+                                    <th>CRN</th>
+                                    <th>Course Name</th>
+                                    <th>Added</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for course in courses %}
+                                    <tr>
+                                        <td>{{ course.get('term') or '--' }}</td>
+                                        <td>{{ course.get('subject') or '--' }}</td>
+                                        <td>{{ course.get('catalog') or '--' }}</td>
+                                        <td>{{ course.get('crn') or '--' }}</td>
+                                        <td>{{ course.get('course_name') or '--' }}</td>
+                                        <td>{{ course.get('added_at') or '--' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">
+                                            <details>
+                                                <summary>Raw course data</summary>
+                                                <pre class="admin-code-block">{{ course | tojson }}</pre>
+                                            </details>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No courses found.</p>
+                    {% endif %}
+                </div>
+            </section>
+        {% endif %}
+
+        {% if section == 'seat_tracks' %}
+            {% set tracks = section_data.seat_tracks %}
+            <section class="admin-section">
+                <div class="admin-card">
+                    <h2 class="admin-title">Seat Tracks</h2>
+                    <form class="admin-form" method="post" action="{{ url_for('admin.disable_seat_tracks', user_id=user.id) }}">
+                        <input type="hidden" name="section" value="seat_tracks" />
+                        <button class="admin-button" type="submit">Disable all seat tracks</button>
+                    </form>
+                    {% if tracks %}
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Course Code</th>
+                                    <th>Status</th>
+                                    <th>Seats</th>
+                                    <th>Enabled</th>
+                                    <th>Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for track in tracks %}
+                                    <tr>
+                                        <td>{{ track.get('course_code') or track.get('course_title') or '--' }}</td>
+                                        <td>{{ track.get('last_status') or '--' }}</td>
+                                        <td>{{ track.get('last_seats_available') or '--' }}</td>
+                                        <td>{{ 'Yes' if track.get('enabled') else 'No' }}</td>
+                                        <td>{{ track.get('updated_at') or '--' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <details>
+                                                <summary>Raw seat track data</summary>
+                                                <pre class="admin-code-block">{{ track | tojson }}</pre>
+                                            </details>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No seat tracks found.</p>
+                    {% endif %}
+                </div>
+            </section>
+        {% endif %}
+    </main>
+</body>
+</html>

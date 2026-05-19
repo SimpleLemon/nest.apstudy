@@ -12,7 +12,7 @@ Requires: client_secret.json in project root,
 import os
 import secrets
 import logging
-import random
+import re
 from datetime import datetime
 
 # Must be set before OAuth flow objects are created during local HTTP testing.
@@ -33,6 +33,7 @@ from appwrite_helpers import (
     create_row_safe,
     format_datetime,
     get_row_safe,
+    first_row,
     list_rows_safe,
     update_row_safe,
 )
@@ -73,6 +74,9 @@ SCOPES = [
     "https://www.googleapis.com/auth/userinfo.email",
     "https://www.googleapis.com/auth/userinfo.profile",
 ]
+USERNAME_MIN_LENGTH = 3
+USERNAME_MAX_LENGTH = 20
+USERNAME_PATTERN = re.compile(r"^[a-zA-Z0-9_-]+$")
 
 
 def _set_oauth_session(provider, user_id, email, name=None, picture_url=None):
@@ -132,7 +136,20 @@ def _normalize_banner_color(value):
     return "#fecae1"
 
 
-def _profile_handle(name, user_id):
+def _normalize_username(value):
+    if not value:
+        return ""
+    normalized = str(value).strip().lower()
+    if not USERNAME_PATTERN.fullmatch(normalized):
+        return ""
+    if len(normalized) < USERNAME_MIN_LENGTH or len(normalized) > USERNAME_MAX_LENGTH:
+        return ""
+    return normalized
+
+
+def _profile_handle(name, user_id, username=None):
+    if username:
+        return f"@{username}"
     base = "".join(
         char.lower() if char.isalnum() else "-"
         for char in (name or "")
@@ -164,11 +181,12 @@ def _is_early_member(value):
 def _public_profile_payload(user_doc):
     user_id = user_doc.get("$id") or user_doc.get("id")
     name = user_doc.get("name") or "APStudy User"
+    username = user_doc.get("username")
     return {
         "id": user_id,
-        "public_user_id": user_doc.get("public_user_id"),
         "name": name,
-        "handle": _profile_handle(name, user_id),
+        "username": username,
+        "handle": _profile_handle(name, user_id, username),
         "picture_url": user_doc.get("picture_url"),
         "banner_color": _normalize_banner_color(user_doc.get("banner_color")),
         "school": user_doc.get("school"),
@@ -239,21 +257,6 @@ def _find_user_by_email(email):
     return rows[0] if rows else None
 
 
-def _generate_public_user_id(max_attempts=20):
-    from appwrite_client import COLLECTIONS
-
-    for _ in range(max_attempts):
-        # 10-digit numeric, first digit non-zero to preserve fixed width.
-        candidate = f"{random.randint(1000000000, 9999999999)}"
-        response = list_rows_safe(
-            COLLECTIONS["users"],
-            [Query.equal("public_user_id", [candidate]), Query.limit(1)],
-        )
-        if not response.get("rows"):
-            return candidate
-    raise RuntimeError("Unable to allocate unique public user ID")
-
-
 @auth_bp.route("/")
 def index():
     """Root redirect: dashboard if authenticated, login if not."""
@@ -284,7 +287,32 @@ def public_user_profile(user_id):
         abort(404)
     if not user_doc:
         abort(404)
+    return _render_public_profile(user_doc)
 
+
+@auth_bp.route("/u/<username>")
+def public_user_profile_by_username(username):
+    """Render a public profile card for a username."""
+    normalized = _normalize_username(username)
+    if not normalized:
+        abort(404)
+
+    from appwrite_client import COLLECTIONS
+    try:
+        user_doc = first_row(
+            COLLECTIONS["users"],
+            [Query.equal("username", [normalized])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to load public user profile by username")
+        abort(404)
+    if not user_doc:
+        abort(404)
+
+    return _render_public_profile(user_doc)
+
+
+def _render_public_profile(user_doc):
     viewer = None
     theme_preference = "system-match"
     if current_user.is_authenticated:
@@ -377,14 +405,8 @@ def appwrite_session():
 
     if not user_doc:
         created_at = format_datetime(datetime.utcnow())
-        try:
-            public_user_id = _generate_public_user_id()
-        except Exception:
-            logger.exception("Failed to generate public user id")
-            return jsonify({"error": "Unable to create user."}), 500
         row_data = {
             "google_id": appwrite_user_id,
-            "public_user_id": public_user_id,
             "email": email,
             "name": name or remote_user.get("name"),
             "picture_url": picture_url,
@@ -547,17 +569,11 @@ def oauth2callback():
     if not user_doc:
         created_at = format_datetime(datetime.utcnow())
         try:
-            public_user_id = _generate_public_user_id()
-        except Exception:
-            logger.exception("Failed to generate public user id")
-            return redirect(url_for("auth.login"))
-        try:
             user_doc = create_row_safe(
                 COLLECTIONS["users"],
                 row_id=google_id,
                 data={
                     "google_id": google_id,
-                    "public_user_id": public_user_id,
                     "email": email,
                     "name": user_info.get("name"),
                     "picture_url": user_info.get("picture"),
