@@ -230,7 +230,6 @@ function persistCalendarPreference(calendarName) {
     renderCalendarMenu();
     return fetch("/api/calendar/preferences", {
         method: "POST",
-        credentials: "same-origin",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             calendar_name: calendarName,
@@ -274,12 +273,13 @@ async function loadCalendarState() {
                 if (typeof info.visible === "boolean") state.calendars[cal].visible = info.visible;
                 if (typeof info.color === "string") state.calendars[cal].color = info.color;
             }
-        } catch (_) {
-            // ignore
+        } catch (err) {
+            console.warn("Ignoring invalid saved calendar state:", err);
+            localStorage.removeItem("calendarState");
         }
     }
     try {
-        const res = await fetch("/api/calendar/preferences", { credentials: "same-origin" });
+        const res = await fetch("/api/calendar/preferences");
         if (!res.ok) return;
         const payload = await res.json();
         const prefs = Array.isArray(payload.preferences) ? payload.preferences : [];
@@ -295,8 +295,8 @@ async function loadCalendarState() {
                 state.calendars[cal].label = pref.display_name.trim();
             }
         }
-    } catch (_) {
-        // ignore
+    } catch (err) {
+        console.warn("Failed to load calendar preferences:", err);
     }
 }
 /* ── Bootstrap ─────────────────────────────────────────────────────────────── */
@@ -355,7 +355,9 @@ function readEventsCache() {
     if (!raw) return null;
     try {
         return JSON.parse(raw);
-    } catch (_) {
+    } catch (err) {
+        console.warn("Ignoring invalid cached calendar events:", err);
+        localStorage.removeItem(EVENTS_CACHE_KEY);
         return null;
     }
 }
@@ -373,8 +375,8 @@ function writeEventsCache(payload, range) {
             range: range ? { start: range.start.toISOString(), end: range.end.toISOString() } : null,
             payload,
         }));
-    } catch (_) {
-        // ignore quota errors
+    } catch (err) {
+        console.warn("Failed to cache calendar events:", err);
     }
 }
 function normalizeEventsList(events) {
@@ -441,7 +443,7 @@ function getRangeKey(range) {
 }
 /* ── Data Loading ──────────────────────────────────────────────────────────── */
 async function fetchEventsForRange(range) {
-    const res = await fetch(buildEventsUrl(range), { credentials: "same-origin" });
+    const res = await fetch(buildEventsUrl(range));
     if (!res.ok) throw new Error("Unable to fetch calendar events");
     return res.json();
 }
@@ -591,7 +593,6 @@ async function hydrateSelectedSimulatedSections() {
     try {
         const res = await fetch("/api/atlas/sections/by-id", {
             method: "POST",
-            credentials: "same-origin",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 section_ids: missingIds,
@@ -633,10 +634,10 @@ async function hydrateSelectedSimulatedSections() {
 }
 async function refreshCalendarFeed() {
     try {
-        const res = await fetch("/api/calendar/refresh", { method: "POST", credentials: "same-origin" });
+        const res = await fetch("/api/calendar/refresh", { method: "POST" });
         return res.ok;
-    } catch (_) {
-        /* silent */
+    } catch (err) {
+        console.warn("Calendar feed refresh request failed:", err);
     }
     return false;
 }
@@ -777,7 +778,9 @@ function loadSelectedCourseSectionIds() {
     try {
         const parsed = JSON.parse(raw);
         return Array.isArray(parsed) ? parsed.map((item) => String(item)) : [];
-    } catch (_) {
+    } catch (err) {
+        console.warn("Ignoring invalid saved course selections:", err);
+        localStorage.removeItem(COURSES_SELECTION_STORAGE_KEY);
         return [];
     }
 }
@@ -800,8 +803,8 @@ async function loadCoursesIndex() {
     renderCoursesModal();
     try {
         const [termsRes, sectionsRes] = await Promise.all([
-            fetch("/api/atlas/terms", { credentials: "same-origin" }),
-            fetch("/api/atlas/sections?include_cancelled=1", { credentials: "same-origin" }),
+            fetch("/api/atlas/terms"),
+            fetch("/api/atlas/sections?include_cancelled=1"),
         ]);
         if (!termsRes.ok) throw new Error("Unable to load terms");
         if (!sectionsRes.ok) throw new Error("Unable to load sections");
@@ -1898,7 +1901,6 @@ async function saveCalendarSourceInfo(calendarName, modal, saveButton) {
     try {
         const res = await fetch("/api/calendar/sources", {
             method: "POST",
-            credentials: "same-origin",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
         });
@@ -2014,14 +2016,14 @@ function openCalendarSourceCreateModal() {
         const saveButton = event.target.closest(".js-source-create-save");
         if (!saveButton || saveButton.disabled) return;
         const name = modal.querySelector(".js-source-create-name")?.value?.trim() || "";
-        const url = modal.querySelector(".js-source-create-url")?.value?.trim() || "";
+        const calendarUrl = modal.querySelector(".js-source-create-url")?.value?.trim() || "";
         const errorEl = modal.querySelector(".js-source-create-error");
         const showError = (message) => {
             if (!errorEl) return;
             errorEl.textContent = message || "Unable to add calendar.";
             errorEl.classList.remove("hidden");
         };
-        if (mode === "url" && !url) {
+        if (mode === "url" && !calendarUrl) {
             showError("Calendar URL is required.");
             return;
         }
@@ -2030,11 +2032,10 @@ function openCalendarSourceCreateModal() {
         try {
             const res = await fetch(mode === "local" ? "/api/calendar/sources/local" : "/api/calendar/sources/url", {
                 method: "POST",
-                credentials: "same-origin",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     display_name: name,
-                    url,
+                    url: calendarUrl,
                     color_hex: selectedColor,
                 }),
             });
@@ -2174,7 +2175,7 @@ async function loadCalendarShares(force = false) {
     state.shares.error = "";
     renderCalendarShareModal();
     try {
-        const res = await fetch("/api/calendar/shares", { credentials: "same-origin" });
+        const res = await fetch("/api/calendar/shares");
         const payload = await res.json().catch(() => ({}));
         if (!res.ok) throw new Error(payload.error || "Unable to load share links.");
         state.shares.items = Array.isArray(payload.shares) ? payload.shares : [];
@@ -2381,7 +2382,6 @@ async function saveCalendarSharePayload(payload) {
     try {
         const res = await fetch(editingId ? `/api/calendar/shares/${encodeURIComponent(editingId)}` : "/api/calendar/shares", {
             method: editingId ? "PATCH" : "POST",
-            credentials: "same-origin",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
         });
@@ -2409,7 +2409,6 @@ async function updateCalendarShare(shareId, path, options = {}) {
     try {
         const res = await fetch(path, {
             method: options.method || "POST",
-            credentials: "same-origin",
             headers: { "Content-Type": "application/json" },
             body: options.body ? JSON.stringify(options.body) : undefined,
         });
@@ -2681,7 +2680,7 @@ function buildMonthViewHtml() {
             const dayEvents = getEventsForDay(day).filter((event) => !event.isAllDay);
             const dayTimedRowStart = (occupiedAllDayRowsByDay[dayIndex] || 0) + 2;
             return `
-                <div class="relative px-2.5 pb-2.5 space-y-1" style="grid-column:${dayIndex + 1}; grid-row:${dayTimedRowStart} / ${gridEndLine}; z-index:10;">
+                <div class="relative px-1 pb-2.5 space-y-1" style="grid-column:${dayIndex + 1}; grid-row:${dayTimedRowStart} / ${gridEndLine}; z-index:10;">
                     ${dayEvents.slice(0, 3).map((e) => buildEventChip(e, { monthView: true })).join("")}
                     ${dayEvents.length > 3 ? `<div class="text-[10px] text-on-surface-variant">+${dayEvents.length - 3} more</div>` : ""}
                 </div>

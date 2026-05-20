@@ -2,10 +2,11 @@ import io
 import logging
 import os
 import secrets
+from functools import wraps
 from datetime import datetime
 
 from flask import Blueprint, abort, jsonify, redirect, render_template, request, send_file, url_for
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 from appwrite.exception import AppwriteException
 from appwrite.query import Query
@@ -55,6 +56,18 @@ def _require_admin():
     if not user_id or user_id not in _admin_ids():
         return redirect(url_for("dashboard.dashboard"))
     return None
+
+
+def admin_required(view):
+    @wraps(view)
+    @login_required
+    def wrapped(*args, **kwargs):
+        gate = _require_admin()
+        if gate:
+            return gate
+        return view(*args, **kwargs)
+
+    return wrapped
 
 
 def _theme_preference():
@@ -450,11 +463,8 @@ def _redirect_detail(user_id, section, status=None, error=None):
 
 
 @admin_bp.route("/admin")
+@admin_required
 def admin_index():
-    gate = _require_admin()
-    if gate:
-        return gate
-
     query = (request.args.get("q") or "").strip()
     field = (request.args.get("field") or "").strip()
     error = None
@@ -484,11 +494,8 @@ def admin_index():
 
 
 @admin_bp.route("/admin/<user_id>")
+@admin_required
 def admin_detail(user_id):
-    gate = _require_admin()
-    if gate:
-        return gate
-
     section = (request.args.get("section") or "overview").strip().lower()
     if section not in ALLOWED_SECTIONS:
         section = "overview"
@@ -528,11 +535,8 @@ def admin_detail(user_id):
 
 
 @admin_bp.route("/admin/<user_id>.json")
+@admin_required
 def admin_detail_export(user_id):
-    gate = _require_admin()
-    if gate:
-        return gate
-
     payload = _export_payload(user_id)
     if not payload:
         abort(404)
@@ -540,11 +544,8 @@ def admin_detail_export(user_id):
 
 
 @admin_bp.route("/admin/<user_id>/onboarding", methods=["POST"])
+@admin_required
 def update_onboarding(user_id):
-    gate = _require_admin()
-    if gate:
-        return gate
-
     section = (request.form.get("section") or "overview").strip() or "overview"
     onboarding_complete = bool(request.form.get("onboarding_complete"))
     step_raw = (request.form.get("onboarding_step") or "").strip()
@@ -570,11 +571,8 @@ def update_onboarding(user_id):
 
 
 @admin_bp.route("/admin/<user_id>/reset-ics-token", methods=["POST"])
+@admin_required
 def reset_ics_token(user_id):
-    gate = _require_admin()
-    if gate:
-        return gate
-
     section = (request.form.get("section") or "settings").strip() or "settings"
     token = secrets.token_urlsafe(32)
     now = format_datetime(datetime.utcnow())
@@ -604,11 +602,8 @@ def reset_ics_token(user_id):
 
 
 @admin_bp.route("/admin/<user_id>/seat-tracks/disable", methods=["POST"])
+@admin_required
 def disable_seat_tracks(user_id):
-    gate = _require_admin()
-    if gate:
-        return gate
-
     section = (request.form.get("section") or "seat_tracks").strip() or "seat_tracks"
     now = format_datetime(datetime.utcnow())
     updated = 0
@@ -633,11 +628,8 @@ def disable_seat_tracks(user_id):
 
 
 @admin_bp.route("/admin/<user_id>/files/<file_id>/delete", methods=["POST"])
+@admin_required
 def delete_shared_file(user_id, file_id):
-    gate = _require_admin()
-    if gate:
-        return gate
-
     section = (request.form.get("section") or "files").strip() or "files"
     shared_file = get_row_safe(COLLECTIONS["shared_files"], file_id, allow_missing=True)
     if not shared_file or shared_file.get("user_id") != user_id:
@@ -653,11 +645,8 @@ def delete_shared_file(user_id, file_id):
 
 
 @admin_bp.route("/admin/<user_id>/folders/<folder_id>/delete", methods=["POST"])
+@admin_required
 def delete_shared_folder(user_id, folder_id):
-    gate = _require_admin()
-    if gate:
-        return gate
-
     section = (request.form.get("section") or "files").strip() or "files"
     folder = get_row_safe(COLLECTIONS["file_folders"], folder_id, allow_missing=True)
     if not folder or folder.get("user_id") != user_id:
@@ -682,11 +671,8 @@ def delete_shared_folder(user_id, folder_id):
 
 
 @admin_bp.route("/admin/users/<user_id>/files/<file_id>/download")
+@admin_required
 def download_shared_file(user_id, file_id):
-    gate = _require_admin()
-    if gate:
-        return gate
-
     shared_file = get_row_safe(COLLECTIONS["shared_files"], file_id, allow_missing=True)
     if not shared_file or shared_file.get("user_id") != user_id:
         abort(404)
@@ -725,11 +711,8 @@ def download_shared_file(user_id, file_id):
 
 
 @admin_bp.route("/admin/<user_id>/delete", methods=["POST"])
+@admin_required
 def delete_user(user_id):
-    gate = _require_admin()
-    if gate:
-        return gate
-
     confirm = (request.form.get("confirm") or "").strip()
     if confirm != "DELETE":
         return _redirect_detail(user_id, "overview", error="Type DELETE to confirm removal.")

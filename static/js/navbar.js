@@ -62,6 +62,8 @@ function googleAvatarUrlForSize(url, size) {
   return `${url}${url.includes('?') ? '&' : '?'}sz=${size}`;
 }
 
+window.APSTUDY_AVATAR_URL_FOR_SIZE = avatarUrlForSize;
+
 function getCommandPaletteShortcutLabel() {
   const platform = (
     navigator.userAgentData?.platform ||

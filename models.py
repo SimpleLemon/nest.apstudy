@@ -56,4 +56,4 @@ def load_user(user_id):
     except AppwriteException as exc:
         logger.exception("Failed to load user row")
         return None
-    return User(doc)
+    return User(doc) if doc else None

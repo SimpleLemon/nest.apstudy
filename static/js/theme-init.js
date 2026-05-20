@@ -16,10 +16,15 @@
     var lockTheme = window.APSTUDY_THEME_LOCKED === true || root.dataset.apstudyThemeLocked === 'true';
     var theme;
 
+    function warnThemeInitFailure(action, error) {
+        console.warn('Theme init: unable to ' + action + '.', error);
+    }
+
     function getStoredTheme() {
         try {
             return localStorage.getItem(STORAGE_KEY);
         } catch (error) {
+            warnThemeInitFailure('read saved theme', error);
             return '';
         }
     }
@@ -28,6 +33,7 @@
         try {
             return localStorage.getItem(PENDING_STORAGE_KEY);
         } catch (error) {
+            warnThemeInitFailure('read pending theme', error);
             return '';
         }
     }
@@ -37,7 +43,7 @@
             localStorage.removeItem(PENDING_STORAGE_KEY);
             localStorage.removeItem(PENDING_UPDATED_KEY);
         } catch (error) {
-            // Ignore storage failures so theme switching still works visually.
+            warnThemeInitFailure('clear pending theme', error);
         }
     }
 
@@ -82,7 +88,7 @@
             try {
                 localStorage.setItem(STORAGE_KEY, normalizedTheme);
             } catch (error) {
-                // Ignore storage failures so theme switching still works visually.
+                warnThemeInitFailure('save theme preference', error);
             }
         }
 
@@ -123,8 +129,8 @@
                 if (response.ok) {
                     clearPendingTheme();
                 }
-            }).catch(function() {
-                // Keep pending theme for later retry.
+            }).catch(function(error) {
+                warnThemeInitFailure('persist pending theme; keeping it for retry', error);
             });
         };
 

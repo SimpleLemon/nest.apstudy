@@ -69,12 +69,16 @@ const SETTINGS_ENDPOINTS = {
   deleteAccount: '/settings/api/account/delete',
 };
 
+function warnSettingsStorageFailure(action, error) {
+  console.warn(`Unable to ${action}; settings theme preview will continue visually.`, error);
+}
+
 function clearPendingThemeStorage() {
   try {
     localStorage.removeItem(SETTINGS_PENDING_THEME_STORAGE_KEY);
     localStorage.removeItem(SETTINGS_PENDING_THEME_UPDATED_KEY);
   } catch (error) {
-    // Ignore storage failures so theme switching still works visually.
+    warnSettingsStorageFailure('clear pending theme storage', error);
   }
 }
 
@@ -697,7 +701,7 @@ async function saveProfile() {
     const nextAvatar = response.picture_url || '';
     const fallbackAvatar = 'https://resources.apstudy.org/images/AP-Resources-Logo.png';
     if (navbarAvatar) {
-      navbarAvatar.src = avatarUrlForSize(nextAvatar || fallbackAvatar, 32);
+      navbarAvatar.src = settingsAvatarUrlForSize(nextAvatar || fallbackAvatar, 32);
     }
     captureProfileBaseline();
     showToast('Profile saved.', 'success');
@@ -735,7 +739,7 @@ async function uploadAvatar(file) {
     updateAvatarPreview(response.picture_url || '');
     const navbarAvatar = document.querySelector('#navbar-avatar-btn img');
     if (navbarAvatar && response.picture_url) {
-      navbarAvatar.src = avatarUrlForSize(response.picture_url, 32);
+      navbarAvatar.src = settingsAvatarUrlForSize(response.picture_url, 32);
     }
     if (elements.avatarUploadStatus) elements.avatarUploadStatus.textContent = 'Avatar uploaded.';
     captureProfileBaseline();
@@ -881,62 +885,19 @@ function updateAvatarPreview(value) {
     return;
   }
   const fallback = 'https://resources.apstudy.org/images/AP-Resources-Logo.png';
-  elements.avatarPreview.src = avatarUrlForSize(value && value.trim() ? value.trim() : fallback, 150);
+  elements.avatarPreview.src = settingsAvatarUrlForSize(value && value.trim() ? value.trim() : fallback, 150);
   elements.avatarPreview.onerror = () => {
     elements.avatarPreview.onerror = null;
-    elements.avatarPreview.src = avatarUrlForSize(fallback, 150);
+    elements.avatarPreview.src = settingsAvatarUrlForSize(fallback, 150);
   };
   renderProfilePreview();
 }
 
-function avatarUrlForSize(url, size = 32) {
-  const rawUrl = String(url || '').trim();
-  if (!rawUrl) return rawUrl;
-
-  let parsedUrl;
-  try {
-    parsedUrl = new URL(rawUrl, window.location.origin);
-  } catch (error) {
-    return rawUrl;
+function settingsAvatarUrlForSize(url, size = 32) {
+  if (typeof window.APSTUDY_AVATAR_URL_FOR_SIZE === 'function') {
+    return window.APSTUDY_AVATAR_URL_FOR_SIZE(url, size);
   }
-
-  const host = parsedUrl.hostname.toLowerCase();
-  const normalizedSize = Math.max(16, Math.min(Number.parseInt(size, 10) || 32, 512));
-
-  if (host.includes('githubusercontent.com')) {
-    parsedUrl.searchParams.set('s', String(normalizedSize));
-    return parsedUrl.toString();
-  }
-
-  if (host.includes('discordapp.com') || host.includes('discord.com')) {
-    parsedUrl.searchParams.set('size', String(nearestDiscordAvatarSize(normalizedSize)));
-    return parsedUrl.toString();
-  }
-
-  if (host.includes('googleusercontent.com')) {
-    return googleAvatarUrlForSize(rawUrl, normalizedSize);
-  }
-
-  if (host.includes('cloud.appwrite.io') && parsedUrl.pathname.includes('/storage/buckets/')) {
-    parsedUrl.searchParams.set('width', String(normalizedSize));
-    parsedUrl.searchParams.set('height', String(normalizedSize));
-    return parsedUrl.toString();
-  }
-
-  return rawUrl;
-}
-
-function nearestDiscordAvatarSize(size) {
-  return [16, 32, 64, 128, 256, 512]
-    .reduce((closest, candidate) => (
-      Math.abs(candidate - size) < Math.abs(closest - size) ? candidate : closest
-    ), 32);
-}
-
-function googleAvatarUrlForSize(url, size) {
-  const sizedUrl = url.replace(/([=?&]s(?:z)?=?)\d+/, `$1${size}`);
-  if (sizedUrl !== url) return sizedUrl;
-  return `${url}${url.includes('?') ? '&' : '?'}sz=${size}`;
+  return String(url || '').trim();
 }
 
 function renderProfilePreview() {
@@ -1166,7 +1127,6 @@ function formatDate(value) {
 
 async function fetchJson(url, options = {}) {
   const response = await fetch(url, {
-    credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
       ...(options.headers || {}),
@@ -1186,7 +1146,6 @@ async function fetchJson(url, options = {}) {
 async function fetchFormData(url, formData) {
   const response = await fetch(url, {
     method: 'POST',
-    credentials: 'same-origin',
     body: formData,
   });
   const contentType = response.headers.get('content-type') || '';

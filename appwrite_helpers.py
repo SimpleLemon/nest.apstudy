@@ -79,15 +79,82 @@ def parse_datetime(value):
     return None
 
 
-def list_rows_safe(table_id, queries=None):
-    try:
+class AppwriteRepository:
+    def __init__(self, tables_db, database_id):
+        self.tablesdb = tables_db
+        self.database_id = database_id
+
+    def _require_configured(self):
+        if self.tablesdb is None or not self.database_id:
+            raise AttributeError("Appwrite TablesDB list_rows is not configured.")
+
+    def list_rows(self, table_id, queries=None):
+        self._require_configured()
         return _row_list_to_dict(
-            tablesdb.list_rows(
-                database_id=DATABASE_ID,
+            self.tablesdb.list_rows(
+                database_id=self.database_id,
                 table_id=table_id,
                 queries=queries or [],
             )
         )
+
+    def get_row(self, table_id, row_id, *, allow_missing=False):
+        self._require_configured()
+        try:
+            return _row_to_dict(
+                self.tablesdb.get_row(
+                    database_id=self.database_id,
+                    table_id=table_id,
+                    row_id=row_id,
+                )
+            )
+        except AppwriteException as exc:
+            status_code = getattr(exc, "code", None)
+            if status_code is None:
+                status_code = getattr(exc, "response_code", None)
+            if allow_missing and int(status_code or 0) == 404:
+                return None
+            raise
+
+    def create_row(self, table_id, row_id, data, permissions=None):
+        self._require_configured()
+        return _row_to_dict(
+            self.tablesdb.create_row(
+                database_id=self.database_id,
+                table_id=table_id,
+                row_id=row_id,
+                data=data,
+                permissions=permissions,
+            )
+        )
+
+    def update_row(self, table_id, row_id, data, permissions=None):
+        self._require_configured()
+        return _row_to_dict(
+            self.tablesdb.update_row(
+                database_id=self.database_id,
+                table_id=table_id,
+                row_id=row_id,
+                data=data,
+                permissions=permissions,
+            )
+        )
+
+    def delete_row(self, table_id, row_id):
+        self._require_configured()
+        self.tablesdb.delete_row(
+            database_id=self.database_id,
+            table_id=table_id,
+            row_id=row_id,
+        )
+
+
+DEFAULT_REPOSITORY = AppwriteRepository(tablesdb, DATABASE_ID)
+
+
+def list_rows_safe(table_id, queries=None):
+    try:
+        return DEFAULT_REPOSITORY.list_rows(table_id, queries)
     except AppwriteException as exc:
         logger.exception("Appwrite list_rows failed: %s", table_id)
         raise
@@ -111,34 +178,15 @@ def list_rows_all(table_id, queries=None, limit=DEFAULT_LIMIT):
 
 def get_row_safe(table_id, row_id, *, allow_missing=False):
     try:
-        return _row_to_dict(
-            tablesdb.get_row(
-                database_id=DATABASE_ID,
-                table_id=table_id,
-                row_id=row_id,
-            )
-        )
+        return DEFAULT_REPOSITORY.get_row(table_id, row_id, allow_missing=allow_missing)
     except AppwriteException as exc:
-        status_code = getattr(exc, "code", None)
-        if status_code is None:
-            status_code = getattr(exc, "response_code", None)
-        if allow_missing and int(status_code or 0) == 404:
-            return None
         logger.exception("Appwrite get_row failed: %s", table_id)
         raise
 
 
 def create_row_safe(table_id, row_id, data, permissions=None):
     try:
-        return _row_to_dict(
-            tablesdb.create_row(
-                database_id=DATABASE_ID,
-                table_id=table_id,
-                row_id=row_id,
-                data=data,
-                permissions=permissions,
-            )
-        )
+        return DEFAULT_REPOSITORY.create_row(table_id, row_id, data, permissions)
     except AppwriteException as exc:
         logger.exception("Appwrite create_row failed: %s", table_id)
         raise
@@ -146,15 +194,7 @@ def create_row_safe(table_id, row_id, data, permissions=None):
 
 def update_row_safe(table_id, row_id, data, permissions=None):
     try:
-        return _row_to_dict(
-            tablesdb.update_row(
-                database_id=DATABASE_ID,
-                table_id=table_id,
-                row_id=row_id,
-                data=data,
-                permissions=permissions,
-            )
-        )
+        return DEFAULT_REPOSITORY.update_row(table_id, row_id, data, permissions)
     except AppwriteException as exc:
         logger.exception("Appwrite update_row failed: %s", table_id)
         raise
@@ -162,11 +202,7 @@ def update_row_safe(table_id, row_id, data, permissions=None):
 
 def delete_row_safe(table_id, row_id):
     try:
-        tablesdb.delete_row(
-            database_id=DATABASE_ID,
-            table_id=table_id,
-            row_id=row_id,
-        )
+        DEFAULT_REPOSITORY.delete_row(table_id, row_id)
     except AppwriteException as exc:
         logger.exception("Appwrite delete_row failed: %s", table_id)
         raise

@@ -8,7 +8,50 @@
         return window.account || (typeof account !== "undefined" ? account : null);
     }
 
-    function exchangeAppwriteSession(provider, accountData, providerAccessToken) {
+    function warnSessionStorageFailure(action, error) {
+        console.warn(`Unable to ${action} session storage.`, error);
+    }
+
+    function readSessionStorageItem(key) {
+        try {
+            return sessionStorage.getItem(key);
+        } catch (error) {
+            warnSessionStorageFailure("read from", error);
+            return null;
+        }
+    }
+
+    function writeSessionStorageItem(key, value) {
+        try {
+            sessionStorage.setItem(key, value);
+        } catch (error) {
+            warnSessionStorageFailure("write to", error);
+        }
+    }
+
+    function removeSessionStorageItem(key) {
+        try {
+            sessionStorage.removeItem(key);
+        } catch (error) {
+            warnSessionStorageFailure("remove from", error);
+        }
+    }
+
+    function createSessionJwt() {
+        const appwriteAccount = getAccount();
+        if (!appwriteAccount || typeof appwriteAccount.createJWT !== "function") {
+            return Promise.reject(new Error("Appwrite JWT creation is not available"));
+        }
+        return appwriteAccount.createJWT().then(function(jwtData) {
+            const jwt = jwtData && (jwtData.jwt || jwtData.secret);
+            if (!jwt) {
+                throw new Error("Appwrite JWT response did not include a token");
+            }
+            return jwt;
+        });
+    }
+
+    function exchangeAppwriteSession(provider, accountData, providerAccessToken, jwt) {
         if (!accountData) {
             return Promise.reject(new Error("Missing Appwrite account data"));
         }
@@ -17,7 +60,10 @@
         if (!userId) {
             return Promise.reject(new Error("Missing Appwrite user id"));
         }
-        const body = { user_id: userId, email: email };
+        if (!jwt) {
+            return Promise.reject(new Error("Missing Appwrite session proof"));
+        }
+        const body = { user_id: userId, email: email, jwt: jwt };
         if (provider) body.provider = provider;
         if (providerAccessToken) body.provider_access_token = providerAccessToken;
         return fetch("/auth/session", {
@@ -54,11 +100,7 @@
         if (params.get("logged_out") === "1") {
             return true;
         }
-        try {
-            return sessionStorage.getItem("apstudy-logged-out") === "true";
-        } catch (error) {
-            return false;
-        }
+        return readSessionStorageItem("apstudy-logged-out") === "true";
     }
 
     const skipAutoLogin = shouldSkipAutoLogin();
@@ -68,18 +110,23 @@
         appwriteAccount.get()
             .then(function(acc) {
                 return getCurrentSessionDetails().then(function(sessionDetails) {
-                    const provider = sessionStorage.getItem(providerStorageKey)
+                    const provider = readSessionStorageItem(providerStorageKey)
                         || sessionDetails.provider
                         || "appwrite";
-                    return exchangeAppwriteSession(
-                        provider,
-                        acc,
-                        sessionDetails.providerAccessToken
-                    ).then(function(data) {
-                        sessionStorage.removeItem(providerStorageKey);
-                        const redirectTo = (data && data.redirect) ? data.redirect : defaultRedirect;
-                        window.location.href = redirectTo;
-                    });
+                    return createSessionJwt()
+                        .then(function(jwt) {
+                            return exchangeAppwriteSession(
+                                provider,
+                                acc,
+                                sessionDetails.providerAccessToken,
+                                jwt
+                            );
+                        })
+                        .then(function(data) {
+                            removeSessionStorageItem(providerStorageKey);
+                            const redirectTo = (data && data.redirect) ? data.redirect : defaultRedirect;
+                            window.location.href = redirectTo;
+                        });
                 });
             })
             .catch(function() {
@@ -88,11 +135,7 @@
     }
 
     if (skipAutoLogin) {
-        try {
-            sessionStorage.removeItem("apstudy-logged-out");
-        } catch (error) {
-            // Ignore storage errors.
-        }
+        removeSessionStorageItem("apstudy-logged-out");
     }
 
     [
@@ -110,7 +153,7 @@
                 console.error("Appwrite account client is not available.");
                 return;
             }
-            sessionStorage.setItem(providerStorageKey, entry.provider);
+            writeSessionStorageItem(providerStorageKey, entry.provider);
             accountForProvider.createOAuth2Session(entry.provider, successRedirect, failureRedirect);
         });
     });

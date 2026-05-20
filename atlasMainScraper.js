@@ -1,11 +1,11 @@
 /**
- * atlasClient.js -- Bulk Atlas Scraper
+ * atlasMainScraper.js -- Bulk Atlas Scraper
  *
  * One-time scraper that pulls all course sections from Emory Atlas
  * for specified terms, grouped by subject and catalog number,
  * and writes structured JSON files to disk.
  *
- * Usage:  node atlasClient.js
+ * Usage:  npm run scrape:atlas
  *
  * Output: /{term}/{SUBJECT}/{catalogNum}.json
  *
@@ -527,21 +527,9 @@ async function runScrape() {
         continue;
       }
 
-      // Parse meetingTimes on each result (it's a JSON string inside JSON)
-      const parsed = results.map(r => {
-        let mt = [];
-        try {
-          mt = typeof r.meetingTimes === 'string'
-            ? JSON.parse(r.meetingTimes)
-            : (r.meetingTimes ?? []);
-        } catch { /* leave empty */ }
-        return { ...r, meetingTimes: r.meetingTimes };
-        // Keep raw meetingTimes for buildCourseObject to re-parse via parseMeetingTimes
-      });
-
       // Group sections by course code
       const grouped = {};
-      for (const section of parsed) {
+      for (const section of results) {
         const code = (section.code ?? '').trim();
         if (!code) continue;
         if (!grouped[code]) grouped[code] = [];
@@ -549,7 +537,7 @@ async function runScrape() {
       }
 
       const courseCount = Object.keys(grouped).length;
-      const sectionCount = parsed.length;
+      const sectionCount = results.length;
       termMeta.subjects_with_data++;
       termMeta.total_sections += sectionCount;
 

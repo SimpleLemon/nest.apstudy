@@ -1089,7 +1089,6 @@
             setButtonBusy(els.bulkDownload, true);
             const response = await fetch("/api/files/bulk-download.zip", {
                 method: "POST",
-                credentials: "same-origin",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ fileIds }),
             });
@@ -1222,7 +1221,6 @@
             headers["Content-Type"] = "application/json";
         }
         const response = await fetch(url, {
-            credentials: "same-origin",
             ...options,
             headers,
         });

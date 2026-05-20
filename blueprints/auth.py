@@ -15,8 +15,8 @@ import logging
 import re
 from datetime import datetime
 
-# Must be set before OAuth flow objects are created during local HTTP testing.
-os.environ.setdefault("OAUTHLIB_INSECURE_TRANSPORT", "1")
+if os.environ.get("APSTUDY_ALLOW_INSECURE_OAUTH") == "1" or os.environ.get("FLASK_DEBUG") == "1":
+    os.environ.setdefault("OAUTHLIB_INSECURE_TRANSPORT", "1")
 
 import requests as http_requests
 import google_auth_oauthlib.flow
@@ -28,7 +28,9 @@ from flask_login import login_user, logout_user, current_user
 from appwrite.client import Client
 from appwrite.exception import AppwriteException
 from appwrite.query import Query
+from appwrite.services.account import Account
 from appwrite.services.users import Users
+from appwrite_client import ENDPOINT as APPWRITE_ENDPOINT, PROJECT_ID as APPWRITE_PROJECT_ID
 from appwrite_helpers import (
     create_row_safe,
     format_datetime,
@@ -98,6 +100,18 @@ def _account_to_dict(value):
     if hasattr(value, "model_dump"):
         return value.model_dump(by_alias=True, mode="json")
     return {}
+
+
+def _account_from_jwt(jwt):
+    if not jwt:
+        return {}
+    if not APPWRITE_ENDPOINT or not APPWRITE_PROJECT_ID:
+        raise RuntimeError("Appwrite endpoint/project is not configured.")
+    jwt_client = Client()
+    jwt_client.set_endpoint(APPWRITE_ENDPOINT)
+    jwt_client.set_project(APPWRITE_PROJECT_ID)
+    jwt_client.set_jwt(jwt)
+    return _account_to_dict(Account(jwt_client).get())
 
 
 def _discord_avatar_url(profile):
@@ -360,32 +374,35 @@ def appwrite_session():
     payload = request.get_json(silent=True) or {}
     user_id = payload.get("user_id")
     email = payload.get("email")
+    jwt = payload.get("jwt")
     provider = payload.get("provider") or "appwrite"
     provider_access_token = payload.get("provider_access_token") or payload.get("providerAccessToken")
 
-    if not user_id:
-        return jsonify({"error": "Missing user_id."}), 400
+    if not jwt:
+        return jsonify({"error": "Missing Appwrite session proof."}), 401
 
-    # Verify user exists in Appwrite via server-side Users service using API key
     try:
-        from appwrite_client import client as appwrite_client, COLLECTIONS
-        users_service = Users(appwrite_client)
-        remote_user = users_service.get(user_id)
+        from appwrite_client import COLLECTIONS
+        remote_user = _account_from_jwt(jwt)
     except Exception:
-        logger.exception("Failed to verify Appwrite user via server SDK")
+        logger.exception("Failed to verify Appwrite session JWT")
         return jsonify({"error": "Invalid Appwrite user."}), 401
 
-    remote_user = _account_to_dict(remote_user)
+    remote_user_id = remote_user.get("$id") or remote_user.get("id")
     remote_email = remote_user.get("email") or ""
+    if not remote_user_id:
+        return jsonify({"error": "Invalid Appwrite user."}), 401
+    if user_id and str(user_id) != str(remote_user_id):
+        logger.warning("User id mismatch during Appwrite session exchange: %s vs %s", user_id, remote_user_id)
+        return jsonify({"error": "User mismatch."}), 401
     if email and remote_email and email.lower() != remote_email.lower():
-        # Email mismatch -- fail the exchange
         logger.warning("Email mismatch during Appwrite session exchange: %s vs %s", email, remote_email)
         return jsonify({"error": "Email mismatch."}), 401
 
     if not email:
         email = remote_email
 
-    appwrite_user_id = user_id
+    appwrite_user_id = remote_user_id
     user_doc = get_row_safe(COLLECTIONS["users"], appwrite_user_id, allow_missing=True)
     if not user_doc and email:
         user_doc = _find_user_by_email(email)

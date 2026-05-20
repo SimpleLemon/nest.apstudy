@@ -4,10 +4,12 @@ uploads/
 __pycache__/
 *.pyc
 node_modules/
+.next/
 .aider*
 .aider.chat.history.md
 .aider.input.history
 .aider.model.metadata.json
 .aider.model.settings.yml
 .codex
+.desloppify/
 AGENTS.md

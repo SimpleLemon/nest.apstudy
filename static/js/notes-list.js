@@ -77,13 +77,17 @@
         }
     }
 
+    function reportNotesActionFailure(message) {
+        console.warn(message);
+    }
+
     async function fetchData() {
         try {
-            const res = await fetch('/api/notes', { credentials: 'same-origin' });
+            const res = await fetch('/api/notes');
             if (!res.ok) throw new Error('Failed to fetch');
             return await res.json();
-        } catch (err) {
-            console.error(err);
+        } catch {
+            reportNotesActionFailure('Failed to load notes.');
             return { notes: [], folders: [] };
         }
     }
@@ -120,12 +124,11 @@
         try {
             const response = await fetch(`/api/notes/${encodeURIComponent(noteId)}`, {
                 method: 'DELETE',
-                credentials: 'same-origin',
             });
             if (!response.ok) throw new Error('Failed to delete note');
             await loadAndRender();
-        } catch (err) {
-            console.error(err);
+        } catch {
+            reportNotesActionFailure('Failed to delete note.');
         } finally {
             if (loadingState) setLoadingState(false);
         }
@@ -138,12 +141,11 @@
         try {
             const response = await fetch(`/api/notes/folders/${encodeURIComponent(folderId)}`, {
                 method: 'DELETE',
-                credentials: 'same-origin',
             });
             if (!response.ok) throw new Error('Failed to delete folder');
             await loadAndRender();
-        } catch (err) {
-            console.error(err);
+        } catch {
+            reportNotesActionFailure('Failed to delete folder.');
         } finally {
             if (loadingState) setLoadingState(false);
         }
@@ -214,13 +216,12 @@
                 const response = await fetch(`/api/notes/${encodeURIComponent(noteId)}`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
-                    credentials: 'same-origin',
                     body: JSON.stringify({ folder_id: folderId }),
                 });
                 if (!response.ok) throw new Error('Failed to move note');
                 await loadAndRender();
-            } catch (err) {
-                console.error(err);
+            } catch {
+                reportNotesActionFailure('Failed to move note.');
             }
         });
 
@@ -280,7 +281,17 @@
             e.stopPropagation();
             const name = prompt('Rename folder', folder.name || '');
             if (name === null) return;
-            try { await fetch(`/api/notes/folders/${encodeURIComponent(folderId)}`, { method: 'PATCH', headers: {'Content-Type':'application/json'}, credentials:'same-origin', body: JSON.stringify({ name }) }); loadAndRender(); } catch (err) { console.error(err); }
+            try {
+                const response = await fetch(`/api/notes/folders/${encodeURIComponent(folderId)}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name }),
+                });
+                if (!response.ok) throw new Error('Failed to rename folder');
+                await loadAndRender();
+            } catch {
+                reportNotesActionFailure('Failed to rename folder.');
+            }
         });
         return el;
     }
@@ -379,11 +390,10 @@
             await fetch(`/api/notes/${encodeURIComponent(noteId)}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
-                credentials: 'same-origin',
                 body: JSON.stringify({ folder_id: newFolderId, order: newOrder }),
             });
-        } catch (err) {
-            console.error('Failed to update note position:', err);
+        } catch {
+            reportNotesActionFailure('Failed to update note position.');
         }
     }
 
@@ -397,22 +407,31 @@
     // New note / folder
     btnNewNote?.addEventListener('click', async () => {
         try {
-            const res = await fetch('/api/notes', { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin', body: JSON.stringify({ title: '', content: '' }) });
+            const res = await fetch('/api/notes', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title: '', content: '' }) });
             if (!res.ok) throw new Error('Failed');
             const note = await res.json();
             const nid = note.$id || note.id;
             if (nid) { window.location.href = `/notes/editor/${encodeURIComponent(nid)}`; return; }
             await loadAndRender();
-        } catch (err) { console.error(err); }
+        } catch {
+            reportNotesActionFailure('Failed to create note.');
+        }
     });
 
     btnNewFolder?.addEventListener('click', async () => {
         const name = prompt('Folder name', 'New Folder');
         if (name === null) return;
         try {
-            await fetch('/api/notes/folders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin', body: JSON.stringify({ name }) });
+            const response = await fetch('/api/notes/folders', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name }),
+            });
+            if (!response.ok) throw new Error('Failed to create folder');
             await loadAndRender();
-        } catch (err) { console.error(err); }
+        } catch {
+            reportNotesActionFailure('Failed to create folder.');
+        }
     });
 
     document.addEventListener('click', async (event) => {

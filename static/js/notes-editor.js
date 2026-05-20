@@ -281,7 +281,6 @@ async function saveNote() {
     try {
         const response = await fetch(`/api/notes/${noteId}`, {
             method: 'PATCH',
-            credentials: 'same-origin',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 title: titleInput.value,
@@ -923,7 +922,7 @@ async function initEditorPage() {
     let note = null;
 
     try {
-        const response = await fetch(`/api/notes/${noteId}`, { credentials: 'same-origin' });
+        const response = await fetch(`/api/notes/${noteId}`);
         if (!response.ok) {
             throw new Error('Failed to fetch note');
         }

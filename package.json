@@ -4,6 +4,7 @@
   "description": "Startup command: ```if [[ -f /home/container/requirements.txt ]]; then pip install -U --prefix .local -r requirements.txt; fi; SCHEDULER_ENABLED=1 python -m gunicorn -w 1 -b 0.0.0.0:${SERVER_PORT} \"app:create_app()\"```",
   "main": "atlasMainScraper.js",
   "scripts": {
+    "scrape:atlas": "node atlasMainScraper.js",
     "build:css": "tailwindcss -c ./tailwind.config.cjs -i ./static/css/tailwind-input.css -o ./static/css/tailwind.css --minify",
     "watch:css": "tailwindcss -c ./tailwind.config.cjs -i ./static/css/tailwind-input.css -o ./static/css/tailwind.css --watch",
     "test": "echo \"Error: no test specified\" && exit 1"

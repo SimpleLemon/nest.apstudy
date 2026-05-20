@@ -83,7 +83,6 @@ async function bootstrap() {
 
 async function fetchJson(url, options = {}) {
   const response = await fetch(url, {
-    credentials: "same-origin",
     headers: { "Content-Type": "application/json", ...(options.headers || {}) },
     ...options,
   });

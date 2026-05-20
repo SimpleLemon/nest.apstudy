@@ -256,21 +256,18 @@
             if (currentMode === "override") {
                 res = await fetch("/api/calendar/event-overrides", {
                     method: "POST",
-                    credentials: "same-origin",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload),
                 });
             } else if (currentMode === "edit" && currentEventId) {
                 res = await fetch(`/api/calendar/events/${encodeURIComponent(currentEventId)}`, {
                     method: "PUT",
-                    credentials: "same-origin",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload),
                 });
             } else {
                 res = await fetch("/api/calendar/events", {
                     method: "POST",
-                    credentials: "same-origin",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload),
                 });

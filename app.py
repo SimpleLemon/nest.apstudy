@@ -4,9 +4,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Flask CLI imports this module without executing __main__, so set this here
-# for local HTTP OAuth callbacks in development environments.
-os.environ.setdefault("OAUTHLIB_INSECURE_TRANSPORT", "1")
+if os.environ.get("APSTUDY_ALLOW_INSECURE_OAUTH") == "1" or os.environ.get("FLASK_DEBUG") == "1":
+    os.environ.setdefault("OAUTHLIB_INSECURE_TRANSPORT", "1")
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

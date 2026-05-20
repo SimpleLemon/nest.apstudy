@@ -24,6 +24,16 @@ NOTES_TABLE_ID = "notes"
 FOLDERS_TABLE_ID = "note_folders"
 
 
+@notes_api_bp.errorhandler(404)
+def notes_not_found(error):
+    return jsonify({"error": "Not found."}), 404
+
+
+@notes_api_bp.errorhandler(500)
+def notes_server_error(error):
+    return jsonify({"error": "Unable to complete notes request."}), 500
+
+
 def _utcnow_iso():
     return format_datetime(datetime.now(timezone.utc))
 
@@ -77,6 +87,16 @@ def _folder_owner_or_404(folder_id):
     return folder
 
 
+def _normalize_owned_folder_id(folder_id):
+    if not folder_id:
+        return None
+    normalized = str(folder_id).strip()
+    if not normalized:
+        return None
+    _folder_owner_or_404(normalized)
+    return normalized
+
+
 @notes_api_bp.route("/api/notes", methods=["GET"])
 @login_required
 def list_notes():
@@ -108,7 +128,7 @@ def create_note():
     payload = request.get_json(silent=True) or {}
     title = (payload.get("title") or "Untitled").strip() or "Untitled"
     content = payload.get("content") or ""
-    folder_id = payload.get("folder_id")
+    folder_id = _normalize_owned_folder_id(payload.get("folder_id"))
 
     try:
         notes = list_rows_all(
@@ -154,6 +174,8 @@ def update_note(note_id):
     updates = {key: payload[key] for key in allowed if key in payload}
     if "title" in updates:
         updates["title"] = (updates.get("title") or "").strip() or "Untitled"
+    if "folder_id" in updates:
+        updates["folder_id"] = _normalize_owned_folder_id(updates.get("folder_id"))
 
     if not updates:
         return jsonify({"error": "No updatable fields were provided."}), 400
@@ -214,6 +236,7 @@ def create_folder():
 
 
 @notes_api_bp.route("/api/notes/folders/<folder_id>", methods=["PATCH"])
+@notes_api_bp.route("/api/note-folders/<folder_id>", methods=["PATCH"])
 @login_required
 def update_folder(folder_id):
     _folder_owner_or_404(folder_id)
@@ -241,6 +264,7 @@ def update_folder(folder_id):
 
 
 @notes_api_bp.route("/api/notes/folders/<folder_id>", methods=["DELETE"])
+@notes_api_bp.route("/api/note-folders/<folder_id>", methods=["DELETE"])
 @login_required
 def delete_folder(folder_id):
     _folder_owner_or_404(folder_id)

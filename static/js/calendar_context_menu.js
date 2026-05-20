@@ -211,11 +211,10 @@
             const res = isImportedEvent(event)
                 ? await fetch('/api/calendar/event-overrides/hide', {
                     method: 'POST',
-                    credentials: 'same-origin',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ event_ref: event.event_ref }),
                 })
-                : await fetch(`/api/calendar/events/${encodeURIComponent(event.id || ctx.eventId)}`, { method: 'DELETE', credentials: 'same-origin' });
+                : await fetch(`/api/calendar/events/${encodeURIComponent(event.id || ctx.eventId)}`, { method: 'DELETE' });
             if (!res.ok) throw new Error('delete failed');
             localStorage.removeItem('calendarEventsCache');
             window.loadCalendarData && window.loadCalendarData();

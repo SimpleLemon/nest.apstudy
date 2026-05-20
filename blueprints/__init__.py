@@ -9,6 +9,7 @@ from blueprints.auth import auth_bp
 from blueprints.dashboard import dashboard_bp
 from blueprints.atlas_api import atlas_bp
 from blueprints.calendar_api import calendar_bp
+from blueprints.calendar_sources_api import calendar_sources_bp
 from blueprints.courses import courses_bp
 from blueprints.file_share import file_share_bp
 from blueprints.notes_api import notes_api_bp
@@ -23,6 +24,7 @@ def register_blueprints(app):
     app.register_blueprint(dashboard_bp)
     app.register_blueprint(atlas_bp, url_prefix="/api/atlas")
     app.register_blueprint(calendar_bp, url_prefix="/api/calendar")
+    app.register_blueprint(calendar_sources_bp, url_prefix="/api/calendar")
     app.register_blueprint(courses_bp, url_prefix="/api/courses")
     app.register_blueprint(file_share_bp)
     app.register_blueprint(notes_api_bp)

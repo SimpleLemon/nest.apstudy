@@ -127,12 +127,16 @@ function resolveInterfaceTheme(value) {
   return THEME_TO_INTERFACE_THEME.dark;
 }
 
+function warnThemeStorageFailure(action, error) {
+  console.warn(`Unable to ${action}; theme switching will continue visually.`, error);
+}
+
 function storePendingTheme(interfaceTheme) {
   try {
     localStorage.setItem(PENDING_THEME_STORAGE_KEY, interfaceTheme);
     localStorage.setItem(PENDING_THEME_UPDATED_KEY, String(Date.now()));
   } catch (error) {
-    // Ignore storage failures so theme switching still works visually.
+    warnThemeStorageFailure('store pending theme preference', error);
   }
 }
 
@@ -141,7 +145,7 @@ function clearPendingTheme() {
     localStorage.removeItem(PENDING_THEME_STORAGE_KEY);
     localStorage.removeItem(PENDING_THEME_UPDATED_KEY);
   } catch (error) {
-    // Ignore storage failures so theme switching still works visually.
+    warnThemeStorageFailure('clear pending theme preference', error);
   }
 }
 
@@ -227,7 +231,7 @@ function setTheme(theme) {
     try {
       localStorage.setItem(THEME_STORAGE_KEY, interfaceTheme);
     } catch (error) {
-      // Ignore storage failures so theme switching still works visually.
+      warnThemeStorageFailure('store local theme preference', error);
     }
     document.documentElement.setAttribute('data-theme', interfaceTheme);
     document.documentElement.classList.toggle('dark', interfaceTheme === 'obsidian-dark');
@@ -247,7 +251,7 @@ function setTheme(theme) {
         try {
           localStorage.setItem(THEME_STORAGE_KEY, persistedTheme);
         } catch (error) {
-          // Ignore storage failures so theme switching still works visually.
+          warnThemeStorageFailure('store persisted theme preference', error);
         }
         document.documentElement.setAttribute('data-theme', persistedTheme);
         document.documentElement.classList.toggle('dark', persistedTheme === 'obsidian-dark');
