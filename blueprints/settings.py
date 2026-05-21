@@ -269,6 +269,7 @@ def _settings_defaults(user_id):
         "sidebar_default": "expanded",
         "email_notifications": True,
         "product_updates": True,
+        "task_sound_enabled": True,
         "language": "en",
         "timezone": "",
         "created_at": format_datetime(datetime.utcnow()),
@@ -282,6 +283,7 @@ def _settings_payload(settings):
             "sidebar_default": "expanded",
             "email_notifications": True,
             "product_updates": True,
+            "task_sound_enabled": True,
             "language": "en",
             "timezone": "",
             "interface_theme": "obsidian-dark",
@@ -295,6 +297,7 @@ def _settings_payload(settings):
         "sidebar_default": (settings.get("sidebar_default") or "expanded").strip().lower(),
         "email_notifications": bool(settings.get("email_notifications", True)),
         "product_updates": bool(settings.get("product_updates", True)),
+        "task_sound_enabled": bool(settings.get("task_sound_enabled", True)),
         "language": settings.get("language") or "en",
         "timezone": settings.get("timezone") or "",
         "interface_theme": settings.get("interface_theme") or _interface_theme_from_value(settings.get("theme") or "dark"),
@@ -1244,6 +1247,7 @@ def update_interface_preferences():
     timezone = _normalize_timezone(data.get("timezone")) if "timezone" in data else None
     email_notifications = _normalize_bool(data.get("email_notifications"), True) if "email_notifications" in data else None
     product_updates = _normalize_bool(data.get("product_updates"), True) if "product_updates" in data else None
+    task_sound_enabled = _normalize_bool(data.get("task_sound_enabled"), True) if "task_sound_enabled" in data else None
 
     valid_interface_themes = {"obsidian-dark", "parchment-light", "system-match", "nest-light", "nest-dark"}
     if preferred_calendar_view and preferred_calendar_view not in {"week", "month"}:
@@ -1279,6 +1283,8 @@ def update_interface_preferences():
         updates["email_notifications"] = email_notifications
     if product_updates is not None:
         updates["product_updates"] = product_updates
+    if task_sound_enabled is not None:
+        updates["task_sound_enabled"] = task_sound_enabled
     if language:
         updates["language"] = language
     if timezone is not None:
@@ -1305,6 +1311,7 @@ def update_interface_preferences():
         "sidebar_default": settings.get("sidebar_default") or "expanded",
         "email_notifications": settings.get("email_notifications", True),
         "product_updates": settings.get("product_updates", True),
+        "task_sound_enabled": settings.get("task_sound_enabled", True),
         "language": settings.get("language") or "en",
         "timezone": settings.get("timezone") or "",
     })

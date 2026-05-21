@@ -582,7 +582,22 @@ async function runScrape() {
 
 // ── Entry point ──────────────────────────────────────────────────────────────
 
-runScrape().catch(err => {
-  console.error('Fatal scrape error:', err);
-  process.exit(1);
-});
+if (require.main === module) {
+  runScrape().catch(err => {
+    console.error('Fatal scrape error:', err);
+    process.exit(1);
+  });
+}
+
+module.exports = {
+  buildCourseObject,
+  decodeHtmlEntities,
+  firstPresent,
+  parseCatalogCourseCards,
+  parseEnrollmentStatus,
+  parseEnvList,
+  parseInstructors,
+  parseMeetingTimes,
+  splitCourseCode,
+  stripTags,
+};

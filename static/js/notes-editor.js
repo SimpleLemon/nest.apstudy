@@ -33,7 +33,6 @@ import {
 const noteId = window.location.pathname.split('/').pop();
 const SAVE_DEBOUNCE_MS = 800;
 const SAVED_TIME_REFRESH_MS = 60000;
-const LOADER_STYLE_ID = 'apstudy-theme-loader-styles';
 const COLOR_OPTIONS = [
     { key: 'default', label: 'Default', text: 'currentColor', highlight: 'transparent' },
     { key: 'gray', label: 'Gray', text: '#9b9a97', highlight: '#ebeced' },
@@ -87,58 +86,13 @@ let editorInstance = null;
 let saveDebounceTimer = null;
 let savedTimeRefreshTimer = null;
 let lastSavedAt = null;
+let noteHasPendingChanges = false;
 
 const titleInput = document.getElementById('note-title-input');
 const saveStatus = document.getElementById('save-status');
 
-function ensureThemeLoaderStyles() {
-    if (document.getElementById(LOADER_STYLE_ID)) return;
-
-    const style = document.createElement('style');
-    style.id = LOADER_STYLE_ID;
-    style.textContent = `
-        .loader {
-            display: inline-block;
-            border-radius: 9999px;
-            background: linear-gradient(180deg, rgba(99, 102, 241, 0.25), rgba(99, 102, 241, 0.08));
-            position: relative;
-            overflow: hidden;
-        }
-        .loader::before,
-        .loader::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-        }
-        .loader::before {
-            border: 2px solid rgba(255, 255, 255, 0.14);
-        }
-        .loader::after {
-            inset: 18%;
-            border-radius: 9999px;
-            border: 3px solid transparent;
-            border-top-color: var(--border-accent, #6366f1);
-            animation: apstudyLoaderRotation 0.85s linear infinite;
-        }
-        @keyframes apstudyLoaderRotation {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    `;
-    document.head.appendChild(style);
-}
-
 function buildLoadingIndicatorHtml(label = 'Loading...', options = {}) {
-    ensureThemeLoaderStyles();
-    const sizePx = Number(options.sizePx) > 0 ? Number(options.sizePx) : 42;
-    const textToneClass = options.textToneClass || 'text-on-surface-variant';
-    return `
-        <div class="flex w-full flex-col items-center justify-center gap-2 text-center text-sm ${textToneClass}">
-            <span class="loader" style="width:${sizePx}px; height:${sizePx}px;" aria-hidden="true"></span>
-            <span>${label}</span>
-        </div>
-    `;
+    return window.APStudyLoader.html(label, options);
 }
 
 function getColorOption(colorKey) {
@@ -279,20 +233,28 @@ async function saveNote() {
     setSaveStatus('saving');
 
     try {
-        const response = await fetch(`/api/notes/${noteId}`, {
+        const response = await (window.APStudyPendingMutations?.track(fetch(`/api/notes/${noteId}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 title: titleInput.value,
                 content: JSON.stringify(editorInstance.document),
             }),
-        });
+        }), 'notes-save') || fetch(`/api/notes/${noteId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                title: titleInput.value,
+                content: JSON.stringify(editorInstance.document),
+            }),
+        }));
 
         if (!response.ok) {
             throw new Error('Save request failed');
         }
 
         const updatedNote = await response.json();
+        noteHasPendingChanges = false;
         setSaveStatus('saved', { savedAt: updatedNote?.updated_at });
     } catch (error) {
         console.error(error);
@@ -301,6 +263,7 @@ async function saveNote() {
 }
 
 function triggerDebouncedSave() {
+    noteHasPendingChanges = true;
     if (saveDebounceTimer) {
         clearTimeout(saveDebounceTimer);
     }
@@ -309,6 +272,12 @@ function triggerDebouncedSave() {
         saveNote();
     }, SAVE_DEBOUNCE_MS);
 }
+
+window.addEventListener('beforeunload', (event) => {
+    if (!noteHasPendingChanges) return;
+    event.preventDefault();
+    event.returnValue = '';
+});
 
 function CleanDragHandleMenu(props) {
     return React.createElement(

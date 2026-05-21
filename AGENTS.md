@@ -45,3 +45,10 @@ npm run watch:css
 - The workspace path is `/workspaces/emory.apstudy`.
 - The sandbox runner may fail if `bubblewrap` is unavailable; harmless read-only commands may need approval to run outside the sandbox.
 - A previous init found many modified and untracked files, including app, blueprint, static, and template files. Assume those are user-owned unless proven otherwise.
+
+## Test Account Notes
+
+- User-provided test account ICS token for calendar/feed QA: `w0axCnncys2prdbfMd9v-mU5IPdM0nJCGxz-v3eWGm4`.
+- Permission: the user explicitly allowed agents to run, add, and change data on this test account when it helps UI implementation or QA.
+- The token is for the calendar subscription endpoint, not a browser login credential. To verify the feed, start Flask locally and request `/api/calendar/feed.ics?token=w0axCnncys2prdbfMd9v-mU5IPdM0nJCGxz-v3eWGm4`.
+- For authenticated UI routes like `/task`, use the normal `/login` Appwrite/OAuth flow with the test account browser session when available. If that session is unavailable, use mocked API Playwright smoke tests for frontend-only validation.

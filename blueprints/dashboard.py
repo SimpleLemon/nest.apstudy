@@ -8,7 +8,7 @@ All data fetching happens client-side via the Atlas and Calendar API blueprints.
 import logging
 import os
 
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, request, url_for
 from flask_login import login_required, current_user
 
 from appwrite.exception import AppwriteException
@@ -175,7 +175,14 @@ def notes():
 
 @dashboard_bp.route("/task")
 @login_required
-def task():
+def task_redirect():
+    """Redirect the legacy task URL to the canonical tasks page."""
+    return redirect(url_for("dashboard.tasks", **request.args))
+
+
+@dashboard_bp.route("/tasks")
+@login_required
+def tasks():
     """Render the task management page."""
     if not current_user.onboarding_complete:
         return redirect(url_for("settings.onboarding"))

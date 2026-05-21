@@ -480,7 +480,7 @@ function renderPanel() {
 
   if (state.loading) {
     summary.textContent = "Loading Emory Atlas...";
-    content.innerHTML = `<div class="courses-state">Loading courses...</div>`;
+    content.innerHTML = `<div class="courses-state">${window.APStudyLoader.html(["Loading courses", "..."].join(""), { sizePx: 46, textToneClass: "text-on-surface" })}</div>`;
     return;
   }
   if (state.error) {
@@ -500,7 +500,7 @@ function renderPanel() {
   }
   if (state.sectionsLoading) {
     summary.textContent = `Loading ${formatTermLabel(state.selectedTerm)}...`;
-    content.innerHTML = `<div class="courses-state">Loading sections for ${escapeHtml(formatTermLabel(state.selectedTerm))}...</div>`;
+    content.innerHTML = `<div class="courses-state">${window.APStudyLoader.html(`Loading sections for ${formatTermLabel(state.selectedTerm)}...`, { sizePx: 46, textToneClass: "text-on-surface" })}</div>`;
     return;
   }
 
@@ -1186,7 +1186,13 @@ async function addCourse(sectionId) {
 
 async function removeCourse(courseId, sectionId) {
   if (!courseId) return;
-  if (!window.confirm("Remove this class from your weekly view?")) return;
+  const accepted = await (window.APStudyConfirm?.request?.({
+    title: "Remove class?",
+    message: "This class will be removed from your weekly view.",
+    acceptLabel: "Remove class",
+    danger: true,
+  }) ?? Promise.resolve(false));
+  if (!accepted) return;
   if (sectionId) state.savingIds.add(sectionId);
   render();
   try {

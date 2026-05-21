@@ -168,7 +168,7 @@
     function openTask(ctx) {
         const taskId = ctx?.event?.task_id;
         if (!taskId) return;
-        window.location.href = `/task?task=${encodeURIComponent(taskId)}`;
+        window.location.href = `/tasks?task=${encodeURIComponent(taskId)}`;
     }
 
     function formDataForEvent(event) {
@@ -206,7 +206,13 @@
     async function deleteEvent(ctx) {
         const event = ctx.event || null;
         if (!event) return;
-        if (!confirm('Are you sure you want to delete this event?')) return;
+        const accepted = await (window.APStudyConfirm?.request?.({
+            title: 'Delete event?',
+            message: 'This event will be removed from your calendar.',
+            acceptLabel: 'Delete event',
+            danger: true,
+        }) ?? Promise.resolve(false));
+        if (!accepted) return;
         try {
             const res = isImportedEvent(event)
                 ? await fetch('/api/calendar/event-overrides/hide', {

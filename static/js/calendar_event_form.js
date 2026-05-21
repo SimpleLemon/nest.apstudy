@@ -77,14 +77,11 @@
     }
 
     function dateToInputValue(date) {
-        const pad = (n) => String(n).padStart(2, "0");
-        return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+        return window.APStudyDate?.toLocalInputValue ? window.APStudyDate.toLocalInputValue(date) : "";
     }
 
     function inputValueToIso(value) {
-        if (!value) return null;
-        const date = new Date(value);
-        return Number.isNaN(date.getTime()) ? null : date.toISOString();
+        return window.APStudyDate?.localInputToIso ? window.APStudyDate.localInputToIso(value) : null;
     }
 
     function renderModal(data = {}) {

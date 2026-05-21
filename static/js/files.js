@@ -807,31 +807,38 @@
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "/api/files/upload", true);
         xhr.responseType = "json";
+        const finishUploadMutation = window.APStudyPendingMutations?.begin("file-upload");
         xhr.upload.onprogress = (event) => {
             if (!event.lengthComputable) return;
             showProgress(Math.round((event.loaded / event.total) * 100));
         };
         xhr.onload = async () => {
-            setButtonBusy(els.uploadButton, false);
-            resetProgress();
-            const payload = xhr.response || {};
-            if (xhr.status < 200 || xhr.status >= 300) {
-                showFormError(els.uploadError, payload.error || firstUploadError(payload) || "Upload failed.");
-                return;
-            }
-            closeModal(els.uploadModal);
-            await loadFolder(state.currentFolderId);
-            if (payload.errors?.length) {
-                showAlert(firstUploadError(payload) || "Some files could not be uploaded.", "error");
-            } else {
-                showAlert("Upload complete.");
+            try {
+                setButtonBusy(els.uploadButton, false);
+                resetProgress();
+                const payload = xhr.response || {};
+                if (xhr.status < 200 || xhr.status >= 300) {
+                    showFormError(els.uploadError, payload.error || firstUploadError(payload) || "Upload failed.");
+                    return;
+                }
+                closeModal(els.uploadModal);
+                await loadFolder(state.currentFolderId);
+                if (payload.errors?.length) {
+                    showAlert(firstUploadError(payload) || "Some files could not be uploaded.", "error");
+                } else {
+                    showAlert("Upload complete.");
+                }
+            } finally {
+                finishUploadMutation?.();
             }
         };
         xhr.onerror = () => {
             setButtonBusy(els.uploadButton, false);
             resetProgress();
             showFormError(els.uploadError, "Upload failed.");
+            finishUploadMutation?.();
         };
+        xhr.onabort = () => finishUploadMutation?.();
         xhr.send(formData);
     }
 
@@ -1220,10 +1227,14 @@
         if (options.body && !(options.body instanceof FormData) && !headers["Content-Type"]) {
             headers["Content-Type"] = "application/json";
         }
-        const response = await fetch(url, {
+        const method = String(options.method || "GET").toUpperCase();
+        const request = fetch(url, {
             ...options,
             headers,
         });
+        const response = await (method === "GET"
+            ? request
+            : window.APStudyPendingMutations?.track(request, "files-save") || request);
         const contentType = response.headers.get("Content-Type") || "";
         const payload = contentType.includes("application/json") ? await response.json() : null;
         if (!response.ok) {

@@ -35,6 +35,7 @@ TASK_CALENDAR_NAME = "Tasks"
 TASK_CALENDAR_COLOR = "#0ea5e9"
 PRIORITIES = {"none", "low", "medium", "high"}
 RECURRENCE_UNITS = {"day", "week", "month", "year"}
+LIST_SORT_MODES = {"default", "date", "deadline", "title"}
 MAX_EXPANDED_OCCURRENCES = 1500
 
 
@@ -90,6 +91,13 @@ def _parse_date(value):
 def _normalize_priority(value):
     priority = str(value or "none").strip().lower()
     return priority if priority in PRIORITIES else "none"
+
+
+def _normalize_sort_mode(value):
+    mode = str(value or "default").strip().lower()
+    if mode not in LIST_SORT_MODES:
+        raise ValueError("List sort must be default, date, deadline, or title.")
+    return mode
 
 
 def _normalize_deadline_time(value, deadline_dt=None, tz_name=None):
@@ -206,6 +214,7 @@ def _task_to_payload(task, completions=None):
         "order": task.get("order") or 0,
         "completed": bool(task.get("completed", False)),
         "completed_at": task.get("completed_at"),
+        "starred": bool(task.get("starred", False)),
         "completed_occurrences": task_completions,
         "next_occurrence_key": _next_occurrence_key(task),
         "created_at": task.get("created_at"),
@@ -219,8 +228,11 @@ def _list_to_payload(row):
         "$id": list_id,
         "id": list_id,
         "name": row.get("name") or "Untitled List",
+        "description": row.get("description") or "",
         "order": row.get("order") or 0,
         "collapsed": bool(row.get("collapsed", False)),
+        "hidden": bool(row.get("hidden", False)),
+        "sort_mode": row.get("sort_mode") or "default",
         "created_at": row.get("created_at"),
         "updated_at": row.get("updated_at"),
     }
@@ -249,6 +261,17 @@ def _load_user_task_payload(user_id):
             _task_to_payload(row, completions_by_task.get(_row_id(row), []))
             for row in sorted(tasks, key=lambda item: ((item.get("list_id") or ""), item.get("order") or 0))
         ],
+        "preferences": _task_preferences_for_user(user_id),
+    }
+
+
+def _task_preferences_for_user(user_id):
+    settings = first_row(
+        COLLECTIONS["user_settings"],
+        [Query.equal("user_id", [str(user_id)])],
+    )
+    return {
+        "task_sound_enabled": True if settings is None else bool(settings.get("task_sound_enabled", True)),
     }
 
 
@@ -276,6 +299,10 @@ def _clean_name(value, fallback="Untitled List"):
 
 def _clean_title(value):
     return " ".join(str(value or "").strip().split())[:255]
+
+
+def _clean_description(value):
+    return str(value or "").strip()[:1000]
 
 
 def _task_updates_from_payload(payload, *, creating=False, existing=None):
@@ -325,6 +352,9 @@ def _task_updates_from_payload(payload, *, creating=False, existing=None):
         updates["completed"] = completed
         updates["completed_at"] = _utcnow_iso() if completed else None
 
+    if creating or "starred" in payload:
+        updates["starred"] = bool(payload.get("starred", False))
+
     return updates
 
 
@@ -345,6 +375,10 @@ def create_task_list():
     payload = request.get_json(silent=True) or {}
     name = _clean_name(payload.get("name"), "New List")
     try:
+        sort_mode = _normalize_sort_mode(payload.get("sort_mode", payload.get("sortMode", "default")))
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
+    try:
         existing = list_rows_all(TASK_LISTS_TABLE_ID, [Query.equal("user_id", [str(current_user.id)])])
         now = _utcnow_iso()
         created = create_row_safe(
@@ -353,8 +387,11 @@ def create_task_list():
             data={
                 "user_id": str(current_user.id),
                 "name": name,
+                "description": _clean_description(payload.get("description")),
                 "order": _max_order(existing) + 1000,
                 "collapsed": False,
+                "hidden": bool(payload.get("hidden", False)),
+                "sort_mode": sort_mode,
                 "created_at": now,
                 "updated_at": now,
             },
@@ -373,10 +410,19 @@ def update_task_list(list_id):
     updates = {}
     if "name" in payload:
         updates["name"] = _clean_name(payload.get("name"))
+    if "description" in payload:
+        updates["description"] = _clean_description(payload.get("description"))
     if "order" in payload:
         updates["order"] = int(payload.get("order") or 0)
     if "collapsed" in payload:
         updates["collapsed"] = bool(payload.get("collapsed"))
+    if "hidden" in payload:
+        updates["hidden"] = bool(payload.get("hidden"))
+    if "sort_mode" in payload or "sortMode" in payload:
+        try:
+            updates["sort_mode"] = _normalize_sort_mode(payload.get("sort_mode", payload.get("sortMode")))
+        except ValueError as exc:
+            return jsonify({"error": str(exc)}), 400
     if not updates:
         return jsonify({"error": "No updatable fields were provided."}), 400
     updates["updated_at"] = _utcnow_iso()
@@ -411,6 +457,48 @@ def delete_task_list(list_id):
         logger.exception("Failed to delete task list")
         return jsonify({"error": "Unable to delete list."}), 500
     return jsonify({"ok": True})
+
+
+@tasks_api_bp.route("/api/task-lists/<list_id>/completed-tasks", methods=["DELETE"])
+@login_required
+def delete_completed_tasks_in_list(list_id):
+    _list_owner_or_404(list_id)
+    user_id = str(current_user.id)
+    deleted_tasks = 0
+    cleared_completions = 0
+
+    try:
+        tasks = list_rows_all(
+            TASKS_TABLE_ID,
+            [
+                Query.equal("user_id", [user_id]),
+                Query.equal("list_id", [list_id]),
+            ],
+        )
+        for task in tasks:
+            task_id = _row_id(task)
+            completions = _completion_rows_for_task(user_id, task_id)
+            recurrence = _task_recurrence(task)
+            if recurrence:
+                for completion in completions:
+                    delete_row_safe(TASK_COMPLETIONS_TABLE_ID, _row_id(completion))
+                    cleared_completions += 1
+                continue
+            if bool(task.get("completed", False)):
+                for completion in completions:
+                    delete_row_safe(TASK_COMPLETIONS_TABLE_ID, _row_id(completion))
+                    cleared_completions += 1
+                delete_row_safe(TASKS_TABLE_ID, task_id)
+                deleted_tasks += 1
+    except AppwriteException:
+        logger.exception("Failed to delete completed tasks")
+        return jsonify({"error": "Unable to delete completed tasks."}), 500
+
+    return jsonify({
+        "ok": True,
+        "deleted_tasks": deleted_tasks,
+        "cleared_completions": cleared_completions,
+    })
 
 
 @tasks_api_bp.route("/api/tasks", methods=["POST"])

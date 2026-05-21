@@ -13,3 +13,54 @@ node_modules/
 .codex
 .desloppify/
 AGENTS.md
+
+# Added ignores
+# Python virtualenvs and packaging
+env/
+venv/
+.venv/
+venv.bak/
+pip-wheel-metadata/
+*.egg-info/
+.eggs/
+*.egg
+build/
+dist/
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Type checkers / caches
+.mypy_cache/
+.pyre/
+.pytype/
+
+# IDEs
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node logs
+yarn-error.log*
+npm-debug.log*
+yarn-debug.log*
+
+# Static/build artifacts
+static/dist/
+static/build/
+
+# Logs and misc
+*.log
+logs/
+.cache/
+*.swp
+
+# Local project runtime / secrets
+instance/

@@ -31,6 +31,7 @@ from appwrite.query import Query
 from appwrite.services.account import Account
 from appwrite.services.users import Users
 from appwrite_client import ENDPOINT as APPWRITE_ENDPOINT, PROJECT_ID as APPWRITE_PROJECT_ID
+from appwrite_client import client as appwrite_client
 from appwrite_helpers import (
     create_row_safe,
     format_datetime,
@@ -114,6 +115,12 @@ def _account_from_jwt(jwt):
     return _account_to_dict(Account(jwt_client).get())
 
 
+def _account_from_user_id(user_id):
+    if not user_id:
+        return {}
+    return _account_to_dict(Users(appwrite_client).get(str(user_id)))
+
+
 def _discord_avatar_url(profile):
     user_id = profile.get("id")
     avatar_hash = profile.get("avatar")
@@ -121,6 +128,100 @@ def _discord_avatar_url(profile):
         return None
     extension = "gif" if avatar_hash.startswith("a_") else "png"
     return f"https://cdn.discordapp.com/avatars/{user_id}/{avatar_hash}.{extension}?size=256"
+
+
+def _fetch_provider_identity(provider, access_token):
+    if not provider or not access_token:
+        return {}
+
+    provider_key = provider.lower()
+    try:
+        if provider_key == "google":
+            response = http_requests.get(
+                "https://www.googleapis.com/oauth2/v2/userinfo",
+                headers={"Authorization": f"Bearer {access_token}"},
+                timeout=8,
+            )
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("verified_email") is False:
+                    logger.warning("Google token email is not verified")
+                    return {}
+                return {
+                    "id": data.get("id"),
+                    "email": data.get("email"),
+                    "name": data.get("name"),
+                    "avatar_url": data.get("picture"),
+                }
+            logger.warning("Google identity fetch failed: %s", response.status_code)
+            return {}
+
+        if provider_key == "github":
+            response = http_requests.get(
+                "https://api.github.com/user",
+                headers={
+                    "Authorization": f"Bearer {access_token}",
+                    "Accept": "application/vnd.github+json",
+                },
+                timeout=8,
+            )
+            if response.status_code != 200:
+                logger.warning("GitHub identity fetch failed: %s", response.status_code)
+                return {}
+
+            data = response.json()
+            email = data.get("email")
+            if not email:
+                emails_response = http_requests.get(
+                    "https://api.github.com/user/emails",
+                    headers={
+                        "Authorization": f"Bearer {access_token}",
+                        "Accept": "application/vnd.github+json",
+                    },
+                    timeout=8,
+                )
+                if emails_response.status_code == 200:
+                    emails = emails_response.json()
+                    primary_email = next(
+                        (
+                            item.get("email")
+                            for item in emails
+                            if item.get("primary") and item.get("verified")
+                        ),
+                        None,
+                    )
+                    email = primary_email
+
+            return {
+                "id": data.get("id"),
+                "email": email,
+                "name": data.get("name") or data.get("login"),
+                "avatar_url": data.get("avatar_url"),
+            }
+
+        if provider_key == "discord":
+            response = http_requests.get(
+                "https://discord.com/api/users/@me",
+                headers={"Authorization": f"Bearer {access_token}"},
+                timeout=8,
+            )
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("verified") is False:
+                    logger.warning("Discord token email is not verified")
+                    return {}
+                return {
+                    "id": data.get("id"),
+                    "email": data.get("email"),
+                    "name": data.get("global_name") or data.get("username"),
+                    "avatar_url": _discord_avatar_url(data),
+                }
+            logger.warning("Discord identity fetch failed: %s", response.status_code)
+            return {}
+    except Exception:
+        logger.exception("Failed to fetch provider identity: %s", provider)
+
+    return {}
 
 
 def _format_member_since(value):
@@ -215,47 +316,11 @@ def _public_profile_payload(user_doc):
 
 
 def _fetch_provider_profile(provider, access_token):
-    if not provider or not access_token:
-        return {}
-
-    provider_key = provider.lower()
-    try:
-        if provider_key == "github":
-            response = http_requests.get(
-                "https://api.github.com/user",
-                headers={
-                    "Authorization": f"Bearer {access_token}",
-                    "Accept": "application/vnd.github+json",
-                },
-                timeout=8,
-            )
-            if response.status_code == 200:
-                data = response.json()
-                return {
-                    "name": data.get("name") or data.get("login"),
-                    "avatar_url": data.get("avatar_url"),
-                }
-            logger.warning("GitHub profile fetch failed: %s", response.status_code)
-            return {}
-
-        if provider_key == "discord":
-            response = http_requests.get(
-                "https://discord.com/api/users/@me",
-                headers={"Authorization": f"Bearer {access_token}"},
-                timeout=8,
-            )
-            if response.status_code == 200:
-                data = response.json()
-                return {
-                    "name": data.get("global_name") or data.get("username"),
-                    "avatar_url": _discord_avatar_url(data),
-                }
-            logger.warning("Discord profile fetch failed: %s", response.status_code)
-            return {}
-    except Exception:
-        logger.exception("Failed to fetch provider profile: %s", provider)
-
-    return {}
+    identity = _fetch_provider_identity(provider, access_token)
+    return {
+        "name": identity.get("name"),
+        "avatar_url": identity.get("avatar_url"),
+    } if identity else {}
 
 
 
@@ -378,20 +443,34 @@ def appwrite_session():
     provider = payload.get("provider") or "appwrite"
     provider_access_token = payload.get("provider_access_token") or payload.get("providerAccessToken")
 
-    if not jwt:
+    if not jwt and not provider_access_token:
         return jsonify({"error": "Missing Appwrite session proof."}), 401
 
     try:
         from appwrite_client import COLLECTIONS
-        remote_user = _account_from_jwt(jwt)
+        if jwt:
+            remote_user = _account_from_jwt(jwt)
+            provider_identity = {}
+        else:
+            provider_identity = _fetch_provider_identity(provider, provider_access_token)
+            if not provider_identity:
+                return jsonify({"error": "Invalid provider session."}), 401
+            remote_user = _account_from_user_id(user_id)
     except Exception:
-        logger.exception("Failed to verify Appwrite session JWT")
+        logger.exception("Failed to verify Appwrite session")
         return jsonify({"error": "Invalid Appwrite user."}), 401
 
     remote_user_id = remote_user.get("$id") or remote_user.get("id")
     remote_email = remote_user.get("email") or ""
     if not remote_user_id:
         return jsonify({"error": "Invalid Appwrite user."}), 401
+    provider_email = (provider_identity or {}).get("email") or ""
+    if not jwt and not provider_email:
+        logger.warning("Provider token did not expose an email during session exchange: %s", provider)
+        return jsonify({"error": "Provider email is required."}), 401
+    if provider_email and remote_email and provider_email.lower() != remote_email.lower():
+        logger.warning("Provider/Appwrite email mismatch during session exchange: %s vs %s", provider_email, remote_email)
+        return jsonify({"error": "Email mismatch."}), 401
     if user_id and str(user_id) != str(remote_user_id):
         logger.warning("User id mismatch during Appwrite session exchange: %s vs %s", user_id, remote_user_id)
         return jsonify({"error": "User mismatch."}), 401
@@ -463,6 +542,7 @@ def appwrite_session():
                     "sidebar_default": "expanded",
                     "email_notifications": True,
                     "product_updates": True,
+                    "task_sound_enabled": True,
                     "language": "en",
                     "timezone": "",
                     "created_at": created_at,
@@ -621,6 +701,7 @@ def oauth2callback():
                     "sidebar_default": "expanded",
                     "email_notifications": True,
                     "product_updates": True,
+                    "task_sound_enabled": True,
                     "language": "en",
                     "timezone": "",
                     "created_at": created_at,

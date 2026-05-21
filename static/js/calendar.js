@@ -17,7 +17,6 @@ const TASK_CALENDAR_ID = "local:tasks";
 const TASK_CALENDAR_NAME = "Tasks";
 const COURSES_SELECTION_STORAGE_KEY = "coursesSelectedSectionIds";
 const COURSES_MODAL_ANIMATION_MS = 180;
-const THEME_LOADER_STYLE_ID = "apstudy-theme-loader-styles";
 const DEFAULT_DASHBOARD_VIEW = document.body?.dataset.defaultDashboardView === "month" ? "month" : "week";
 const EVENTS_CACHE_KEY = "calendarEventsCache";
 const DEFAULT_CALENDAR_BUFFER_DAYS = 7;
@@ -222,13 +221,16 @@ function writeCalendarStateToStorage() {
         Object.entries(state.calendars).map(([cal, data]) => [cal, { visible: data.visible, color: data.color }])
     )));
 }
+function trackCalendarMutation(request, label = "calendar-save") {
+    return window.APStudyPendingMutations?.track(request, label) || request;
+}
 function persistCalendarPreference(calendarName) {
     if (state.public.readOnly) return Promise.resolve();
     const pref = state.calendars[calendarName];
     if (!pref) return Promise.resolve();
     state.ui.pendingCalendars.add(calendarName);
     renderCalendarMenu();
-    return fetch("/api/calendar/preferences", {
+    return trackCalendarMutation(fetch("/api/calendar/preferences", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -236,7 +238,7 @@ function persistCalendarPreference(calendarName) {
             color_hex: pref.color,
             visible: pref.visible,
         }),
-    }).catch((err) => {
+    })).catch((err) => {
         console.error("Failed to save preference:", err);
     }).finally(() => {
         state.ui.pendingCalendars.delete(calendarName);
@@ -707,60 +709,6 @@ function closeCoursesModal() {
         renderCoursesModal();
     }, COURSES_MODAL_ANIMATION_MS);
 }
-function ensureThemeLoaderStyles() {
-    if (document.getElementById(THEME_LOADER_STYLE_ID)) return;
-    const style = document.createElement("style");
-    style.id = THEME_LOADER_STYLE_ID;
-    style.textContent = `
-        .loader {
-            width: 42px;
-            height: 42px;
-            display: inline-block;
-            position: relative;
-            box-sizing: border-box;
-            color: var(--color-primary, #3b82f6);
-            animation: apstudyLoaderRotation 1s linear infinite;
-        }
-        .loader::after,
-        .loader::before {
-            content: "";
-            box-sizing: border-box;
-            position: absolute;
-            width: 50%;
-            height: 50%;
-            top: 0;
-            border-radius: 50%;
-            background-color: var(--color-error, #ef4444);
-            animation: apstudyLoaderScale50 1s infinite ease-in-out;
-        }
-        .loader::before {
-            top: auto;
-            bottom: 0;
-            background-color: var(--color-primary, #3b82f6);
-            animation-delay: 0.5s;
-        }
-        @keyframes apstudyLoaderRotation {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        @keyframes apstudyLoaderScale50 {
-            0%, 100% { transform: scale(0); }
-            50% { transform: scale(1); }
-        }
-    `;
-    document.head.appendChild(style);
-}
-function buildLoadingIndicatorHtml(label = "Loading...", options = {}) {
-    ensureThemeLoaderStyles();
-    const sizePx = Number(options.sizePx) > 0 ? Number(options.sizePx) : 42;
-    const textToneClass = options.textToneClass || "text-on-surface-variant";
-    return `
-        <div class="flex w-full flex-col items-center justify-center gap-2 text-center text-sm ${textToneClass}">
-            <span class="loader" style="width:${sizePx}px; height:${sizePx}px;" aria-hidden="true"></span>
-            <span>${escapeHtml(label)}</span>
-        </div>
-    `;
-}
 async function submitCoursesSearch() {
     state.courses.searchQuery = (state.courses.searchInput || "").trim();
     state.courses.showSelectedOnly = false;
@@ -975,18 +923,18 @@ function renderCoursesModal() {
         ? "Press Enter or Search to load and find more courses"
         : "Search title, subject, code, or instructor";
     const statusLine = state.courses.loading || (!state.courses.indexLoaded && !state.courses.error)
-        ? "Loading courses..."
+        ? ["Loading courses", "..."].join("")
         : state.courses.error
             ? escapeHtml(state.courses.error)
             : isSelectedOnly
                 ? `${resultCount.toLocaleString()} pinned in this session · ${selectedCount.toLocaleString()} selected`
                 : `${resultCount.toLocaleString()} sections · ${selectedCount.toLocaleString()} selected`;
     const content = state.courses.loading
-        ? `<div class="py-12">${buildLoadingIndicatorHtml("Loading full course index...", { sizePx: 54, textToneClass: "text-on-surface" })}</div>`
+        ? `<div class="py-12">${window.APStudyLoader.html("Loading full course index...", { sizePx: 54, textToneClass: "text-on-surface" })}</div>`
         : state.courses.error
             ? `<div class="py-12 text-center text-sm text-error">${escapeHtml(state.courses.error)}</div>`
             : !state.courses.indexLoaded
-                ? `<div class="py-12">${buildLoadingIndicatorHtml("Loading full course index...", { sizePx: 54, textToneClass: "text-on-surface" })}</div>`
+                ? `<div class="py-12">${window.APStudyLoader.html("Loading full course index...", { sizePx: 54, textToneClass: "text-on-surface" })}</div>`
             : buildCourseCardsHtml();
     overlay.innerHTML = `
         <section id="courses-modal-panel" class="w-full max-w-[1200px] h-[88vh] rounded-3xl border border-outline-variant/30 bg-surface shadow-2xl shadow-black/30 flex flex-col overflow-hidden transition-all duration-200 ${state.courses.animateOnOpen ? "-translate-y-3 opacity-0" : "translate-y-0 opacity-100"}">
@@ -1899,11 +1847,11 @@ async function saveCalendarSourceInfo(calendarName, modal, saveButton) {
     const previousLabel = saveButton.textContent;
     saveButton.textContent = "Saving...";
     try {
-        const res = await fetch("/api/calendar/sources", {
+        const res = await trackCalendarMutation(fetch("/api/calendar/sources", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
-        });
+        }));
         const response = await res.json().catch(() => ({}));
         if (!res.ok) {
             throw new Error(response.error || "Unable to save calendar.");
@@ -2030,7 +1978,7 @@ function openCalendarSourceCreateModal() {
         saveButton.disabled = true;
         saveButton.textContent = "Adding...";
         try {
-            const res = await fetch(mode === "local" ? "/api/calendar/sources/local" : "/api/calendar/sources/url", {
+            const res = await trackCalendarMutation(fetch(mode === "local" ? "/api/calendar/sources/local" : "/api/calendar/sources/url", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -2038,7 +1986,7 @@ function openCalendarSourceCreateModal() {
                     url: calendarUrl,
                     color_hex: selectedColor,
                 }),
-            });
+            }));
             const response = await res.json().catch(() => ({}));
             if (!res.ok) {
                 throw new Error(response.error || "Unable to add calendar.");
@@ -2241,7 +2189,7 @@ function renderCalendarShareModal() {
         `).join("")
         : '<p class="calendar-info-note">Load or add a calendar before limiting by calendar.</p>';
     const sharesList = state.shares.loading
-        ? `<div class="calendar-share-empty">${buildLoadingIndicatorHtml("Loading share links...", { sizePx: 30, textToneClass: "text-on-surface" })}</div>`
+        ? `<div class="calendar-share-empty">${window.APStudyLoader.html("Loading share links...", { sizePx: 30, textToneClass: "text-on-surface" })}</div>`
         : state.shares.items.length
             ? state.shares.items.map((share) => buildCalendarShareRowHtml(share, editingShare?.id)).join("")
             : '<div class="calendar-share-empty">No share links yet.</div>';
@@ -2380,11 +2328,11 @@ async function saveCalendarSharePayload(payload) {
     const editingId = state.shares.editingId;
     renderCalendarShareModal();
     try {
-        const res = await fetch(editingId ? `/api/calendar/shares/${encodeURIComponent(editingId)}` : "/api/calendar/shares", {
+        const res = await trackCalendarMutation(fetch(editingId ? `/api/calendar/shares/${encodeURIComponent(editingId)}` : "/api/calendar/shares", {
             method: editingId ? "PATCH" : "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
-        });
+        }));
         const response = await res.json().catch(() => ({}));
         if (!res.ok) throw new Error(response.error || "Unable to save share link.");
         const share = response.share;
@@ -2407,11 +2355,11 @@ async function updateCalendarShare(shareId, path, options = {}) {
     state.shares.notice = "";
     renderCalendarShareModal();
     try {
-        const res = await fetch(path, {
+        const res = await trackCalendarMutation(fetch(path, {
             method: options.method || "POST",
             headers: { "Content-Type": "application/json" },
             body: options.body ? JSON.stringify(options.body) : undefined,
-        });
+        }));
         const response = await res.json().catch(() => ({}));
         if (!res.ok) throw new Error(response.error || "Unable to update share link.");
         const share = response.share;
@@ -2589,7 +2537,7 @@ function renderCalendarView() {
     if (state.loadingDashboard) {
         root.innerHTML = `
             <div class="rounded-2xl border border-calendar-rule bg-surface-container shadow-2xl shadow-black/10 p-10 min-h-[420px] flex items-center justify-center">
-                ${buildLoadingIndicatorHtml("Loading calendar...", { sizePx: 54, textToneClass: "text-on-surface" })}
+                ${window.APStudyLoader.html("Loading calendar...", { sizePx: 54, textToneClass: "text-on-surface" })}
             </div>
         `;
         return;
@@ -3020,7 +2968,7 @@ function renderAssignments() {
     if (state.loadingDashboard) {
         root.innerHTML = `
             <div class="md:col-span-2 lg:col-span-3 rounded-xl border border-outline-variant/20 bg-surface-container p-10 text-center">
-                ${buildLoadingIndicatorHtml("Loading upcoming events...", { sizePx: 46, textToneClass: "text-on-surface" })}
+                ${window.APStudyLoader.html("Loading upcoming events...", { sizePx: 46, textToneClass: "text-on-surface" })}
             </div>
         `;
         return;

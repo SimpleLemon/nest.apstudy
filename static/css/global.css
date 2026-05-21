@@ -33,6 +33,171 @@ global.thefooter {
 	max-width: 100%;
 }
 
+body.apstudy-confirm-open {
+	overflow: hidden;
+}
+
+.apstudy-confirm[hidden] {
+	display: none !important;
+}
+
+.apstudy-confirm {
+	position: fixed;
+	inset: 0;
+	z-index: 10080;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	background: rgba(0, 0, 0, 0.46);
+	backdrop-filter: blur(6px);
+}
+
+.apstudy-confirm__panel {
+	display: grid;
+	width: min(440px, 100%);
+	grid-template-columns: 44px minmax(0, 1fr);
+	gap: 14px;
+	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 58%, transparent);
+	border-radius: 16px;
+	background: var(--color-surface, #ffffff);
+	color: var(--color-on-surface, #202124);
+	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+	padding: 18px;
+}
+
+.apstudy-confirm__icon {
+	display: inline-flex;
+	width: 44px;
+	height: 44px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 12px;
+	background: color-mix(in srgb, var(--color-primary, #3b82f6) 14%, transparent);
+	color: var(--color-primary, #3b82f6);
+}
+
+.apstudy-confirm.is-danger .apstudy-confirm__icon {
+	background: color-mix(in srgb, var(--color-error, #ba1a1a) 14%, transparent);
+	color: var(--color-error, #ba1a1a);
+}
+
+.apstudy-confirm__icon .material-symbols-outlined {
+	font-size: 24px;
+}
+
+.apstudy-confirm__copy h2 {
+	margin: 0;
+	color: var(--color-on-surface, #202124);
+	font-size: 20px;
+	font-weight: 760;
+	letter-spacing: 0;
+}
+
+.apstudy-confirm__copy p {
+	margin: 6px 0 0;
+	color: var(--color-on-surface-variant, #5f6368);
+	font-size: 14px;
+	line-height: 1.45;
+}
+
+.apstudy-confirm__actions {
+	grid-column: 1 / -1;
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+	margin-top: 6px;
+}
+
+.apstudy-confirm__actions button {
+	display: inline-flex;
+	min-height: 40px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 10px;
+	font: inherit;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1;
+	cursor: pointer;
+	padding: 0 16px;
+	transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+}
+
+.apstudy-confirm__cancel {
+	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 62%, transparent) !important;
+	background: var(--color-surface-container-low, #f7f6f3);
+	color: var(--color-on-surface, #202124);
+}
+
+.apstudy-confirm__accept {
+	border: 1px solid color-mix(in srgb, var(--color-primary, #3b82f6) 58%, transparent) !important;
+	background: var(--color-primary, #3b82f6);
+	color: var(--color-on-primary, #ffffff);
+}
+
+.apstudy-confirm.is-danger .apstudy-confirm__accept {
+	border-color: color-mix(in srgb, var(--color-error, #ba1a1a) 55%, transparent) !important;
+	background: var(--color-error, #ba1a1a);
+	color: var(--color-on-error, #ffffff);
+}
+
+.apstudy-confirm__actions button:hover,
+.apstudy-confirm__actions button:focus-visible {
+	outline: none;
+	transform: translateY(-1px);
+	box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16);
+}
+
+.loader {
+	width: 42px;
+	height: 42px;
+	display: inline-block;
+	position: relative;
+	box-sizing: border-box;
+	color: var(--color-primary, #3b82f6);
+	animation: apstudyLoaderRotation 1s linear infinite;
+}
+
+.loader::after,
+.loader::before {
+	content: "";
+	box-sizing: border-box;
+	position: absolute;
+	width: 50%;
+	height: 50%;
+	top: 0;
+	border-radius: 50%;
+	background-color: var(--color-error, #ef4444);
+	animation: apstudyLoaderScale50 1s infinite ease-in-out;
+}
+
+.loader::before {
+	top: auto;
+	bottom: 0;
+	background-color: var(--color-primary, #3b82f6);
+	animation-delay: 0.5s;
+}
+
+@keyframes apstudyLoaderRotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes apstudyLoaderScale50 {
+	0%,
+	100% {
+		transform: scale(0);
+	}
+	50% {
+		transform: scale(1);
+	}
+}
+
 .js-calendar-checkbox {
 	background-repeat: no-repeat;
 	background-position: center;

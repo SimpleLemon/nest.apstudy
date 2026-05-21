@@ -15,54 +15,8 @@
         return div.innerHTML;
     }
 
-    function ensureThemeLoaderStyles() {
-        const styleId = 'apstudy-theme-loader-styles';
-        if (document.getElementById(styleId)) return;
-        const style = document.createElement('style');
-        style.id = styleId;
-        style.textContent = `
-            .loader {
-                display: inline-block;
-                border-radius: 9999px;
-                background: linear-gradient(180deg, rgba(99, 102, 241, 0.25), rgba(99, 102, 241, 0.08));
-                position: relative;
-                overflow: hidden;
-            }
-            .loader::before,
-            .loader::after {
-                content: '';
-                position: absolute;
-                inset: 0;
-                border-radius: inherit;
-            }
-            .loader::before {
-                border: 2px solid rgba(255, 255, 255, 0.14);
-            }
-            .loader::after {
-                inset: 18%;
-                border-radius: 9999px;
-                border: 3px solid transparent;
-                border-top-color: var(--border-accent, #6366f1);
-                animation: apstudyLoaderRotation 0.85s linear infinite;
-            }
-            @keyframes apstudyLoaderRotation {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
     function buildLoadingIndicatorHtml(label = 'Loading...', options = {}) {
-        ensureThemeLoaderStyles();
-        const sizePx = Number(options.sizePx) > 0 ? Number(options.sizePx) : 42;
-        const textToneClass = options.textToneClass || 'text-on-surface-variant';
-        return `
-            <div class="flex w-full flex-col items-center justify-center gap-2 text-center text-sm ${textToneClass}">
-                <span class="loader" style="width:${sizePx}px; height:${sizePx}px;" aria-hidden="true"></span>
-                <span>${escapeHtml(label)}</span>
-            </div>
-        `;
+        return window.APStudyLoader.html(label, options);
     }
 
     function setLoadingState(isLoading, label = 'Loading notes...') {
@@ -81,9 +35,17 @@
         console.warn(message);
     }
 
+    function trackedFetch(url, options = {}) {
+        const method = String(options.method || 'GET').toUpperCase();
+        const request = fetch(url, options);
+        return method === 'GET'
+            ? request
+            : window.APStudyPendingMutations?.track(request, 'notes-save') || request;
+    }
+
     async function fetchData() {
         try {
-            const res = await fetch('/api/notes');
+            const res = await trackedFetch('/api/notes');
             if (!res.ok) throw new Error('Failed to fetch');
             return await res.json();
         } catch {
@@ -122,7 +84,7 @@
         if (menuEl) menuEl.classList.add('note-menu-hidden');
         setLoadingState(true, 'Deleting note...');
         try {
-            const response = await fetch(`/api/notes/${encodeURIComponent(noteId)}`, {
+            const response = await trackedFetch(`/api/notes/${encodeURIComponent(noteId)}`, {
                 method: 'DELETE',
             });
             if (!response.ok) throw new Error('Failed to delete note');
@@ -139,7 +101,7 @@
         if (menuEl) menuEl.classList.add('note-menu-hidden');
         setLoadingState(true, 'Deleting folder...');
         try {
-            const response = await fetch(`/api/notes/folders/${encodeURIComponent(folderId)}`, {
+            const response = await trackedFetch(`/api/notes/folders/${encodeURIComponent(folderId)}`, {
                 method: 'DELETE',
             });
             if (!response.ok) throw new Error('Failed to delete folder');
@@ -213,7 +175,7 @@
             const folderId = rawValue.toLowerCase() === 'none' || rawValue === '' ? null : rawValue;
 
             try {
-                const response = await fetch(`/api/notes/${encodeURIComponent(noteId)}`, {
+                const response = await trackedFetch(`/api/notes/${encodeURIComponent(noteId)}`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ folder_id: folderId }),
@@ -282,7 +244,7 @@
             const name = prompt('Rename folder', folder.name || '');
             if (name === null) return;
             try {
-                const response = await fetch(`/api/notes/folders/${encodeURIComponent(folderId)}`, {
+                const response = await trackedFetch(`/api/notes/folders/${encodeURIComponent(folderId)}`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name }),
@@ -387,7 +349,7 @@
         const newOrder = evt.newIndex;
 
         try {
-            await fetch(`/api/notes/${encodeURIComponent(noteId)}`, {
+            await trackedFetch(`/api/notes/${encodeURIComponent(noteId)}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ folder_id: newFolderId, order: newOrder }),
@@ -407,7 +369,7 @@
     // New note / folder
     btnNewNote?.addEventListener('click', async () => {
         try {
-            const res = await fetch('/api/notes', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title: '', content: '' }) });
+            const res = await trackedFetch('/api/notes', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title: '', content: '' }) });
             if (!res.ok) throw new Error('Failed');
             const note = await res.json();
             const nid = note.$id || note.id;
@@ -422,7 +384,7 @@
         const name = prompt('Folder name', 'New Folder');
         if (name === null) return;
         try {
-            const response = await fetch('/api/notes/folders', {
+            const response = await trackedFetch('/api/notes/folders', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name }),
@@ -440,7 +402,13 @@
             const noteCard = deleteNoteButton.closest('.note-card');
             const noteId = noteCard?.dataset.noteId;
             const menuEl = deleteNoteButton.closest('.note-card-menu');
-            if (!confirm('Delete this note?')) return;
+            const accepted = await (window.APStudyConfirm?.request?.({
+                title: 'Delete note?',
+                message: 'This note will be permanently removed.',
+                acceptLabel: 'Delete note',
+                danger: true,
+            }) ?? Promise.resolve(false));
+            if (!accepted) return;
             await deleteNote(noteId, menuEl);
             return;
         }
@@ -450,7 +418,13 @@
             const folderCard = deleteFolderButton.closest('.folder-card');
             const folderId = folderCard?.dataset.folderId;
             const menuEl = deleteFolderButton.closest('.folder-card-menu');
-            if (!confirm('Delete folder and its notes?')) return;
+            const accepted = await (window.APStudyConfirm?.request?.({
+                title: 'Delete folder?',
+                message: 'This folder and every note inside it will be permanently removed.',
+                acceptLabel: 'Delete folder',
+                danger: true,
+            }) ?? Promise.resolve(false));
+            if (!accepted) return;
             await deleteFolder(folderId, menuEl);
         }
     });

@@ -32,7 +32,7 @@ export const COMMAND_PALETTE_PAGES = [
   },
   {
     name: 'Tasks',
-    route: '/task',
+    route: '/tasks',
     icon: 'task',
     keywords: ['todo', 'to-do', 'deadline', 'repeat', 'checklist'],
   },

@@ -323,11 +323,14 @@
 
 .files-loading {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     min-height: 140px;
     color: var(--color-on-surface-variant);
     font-size: 14px;
+    text-align: center;
 }
 
 .files-loading[hidden],
@@ -345,11 +348,6 @@
 #file-share-expiry-field[hidden],
 #file-share-confirm-field[hidden] {
     display: none !important;
-}
-
-.files-loading .material-symbols-outlined {
-    color: var(--color-primary);
-    animation: files-spin 1s linear infinite;
 }
 
 .files-section {
@@ -923,11 +921,6 @@ body.files-modal-open {
     color: var(--color-on-error-container);
     font-size: 13px;
     line-height: 1.4;
-}
-
-@keyframes files-spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
 }
 
 .files-public-main {

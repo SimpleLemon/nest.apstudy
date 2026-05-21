@@ -72,7 +72,7 @@ function renderSidebar() {
           <span class="sidebar-item-label">Notes</span>
         </button>
 
-        <button class="sidebar-item ${isActive('/task') ? 'active' : ''}" data-route="/task" aria-label="Tasks">
+        <button class="sidebar-item ${isActive('/tasks') ? 'active' : ''}" data-route="/tasks" aria-label="Tasks">
           <span class="sidebar-item-icon">${SIDEBAR_ICONS.checklist}</span>
           <span class="sidebar-item-label">Tasks</span>
         </button>

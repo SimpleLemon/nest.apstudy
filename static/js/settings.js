@@ -807,6 +807,7 @@ async function savePreferences() {
     sidebar_default: normalizeSidebarDefault(elements.sidebarDefault?.value),
     email_notifications: getToggleState('email_notifications'),
     product_updates: getToggleState('product_updates'),
+    task_sound_enabled: getToggleState('task_sound_enabled'),
     language: elements.language?.value || 'en',
     timezone: elements.timezone?.value.trim() || '',
   };
@@ -854,7 +855,12 @@ async function handlePasswordReset() {
 }
 
 async function handleDeleteAccount() {
-  const confirmed = window.confirm('Delete your APStudy account? This removes your profile, settings, and saved data.');
+  const confirmed = await (window.APStudyConfirm?.request?.({
+    title: 'Delete account?',
+    message: 'This removes your profile, settings, and saved data.',
+    acceptLabel: 'Delete account',
+    danger: true,
+  }) ?? Promise.resolve(false));
   if (!confirmed) {
     return;
   }
@@ -1126,13 +1132,17 @@ function formatDate(value) {
 }
 
 async function fetchJson(url, options = {}) {
-  const response = await fetch(url, {
+  const method = String(options.method || 'GET').toUpperCase();
+  const request = fetch(url, {
     headers: {
       'Content-Type': 'application/json',
       ...(options.headers || {}),
     },
     ...options,
   });
+  const response = await (method === 'GET'
+    ? request
+    : window.APStudyPendingMutations?.track(request, 'settings-save') || request);
 
   const contentType = response.headers.get('content-type') || '';
   const data = contentType.includes('application/json') ? await response.json() : null;
@@ -1144,10 +1154,11 @@ async function fetchJson(url, options = {}) {
 }
 
 async function fetchFormData(url, formData) {
-  const response = await fetch(url, {
+  const request = fetch(url, {
     method: 'POST',
     body: formData,
   });
+  const response = await (window.APStudyPendingMutations?.track(request, 'settings-save') || request);
   const contentType = response.headers.get('content-type') || '';
   const data = contentType.includes('application/json') ? await response.json() : null;
   if (!response.ok) {
