@@ -38,6 +38,7 @@ from appwrite_helpers import (
     update_row_safe,
 )
 from services.atlas_client import DEFAULT_TERM
+from services.universities import school_payload
 
 settings_bp = Blueprint("settings", __name__)
 logger = logging.getLogger(__name__)
@@ -249,6 +250,9 @@ def _profile_doc_payload():
         "avatar_file_id": current_user.avatar_file_id,
         "avatar_source": current_user.avatar_source,
         "school": current_user.school,
+        "school_key": getattr(current_user, "school_key", None),
+        "school_source": getattr(current_user, "school_source", None),
+        "scorecard_id": getattr(current_user, "scorecard_id", None),
         "major": current_user.major,
         "graduation_year": current_user.graduation_year,
         "education_level": current_user.education_level,
@@ -270,6 +274,7 @@ def _settings_defaults(user_id):
         "email_notifications": True,
         "product_updates": True,
         "task_sound_enabled": True,
+        "chat_sound_enabled": True,
         "language": "en",
         "timezone": "",
         "created_at": format_datetime(datetime.utcnow()),
@@ -284,6 +289,7 @@ def _settings_payload(settings):
             "email_notifications": True,
             "product_updates": True,
             "task_sound_enabled": True,
+            "chat_sound_enabled": True,
             "language": "en",
             "timezone": "",
             "interface_theme": "obsidian-dark",
@@ -298,6 +304,7 @@ def _settings_payload(settings):
         "email_notifications": bool(settings.get("email_notifications", True)),
         "product_updates": bool(settings.get("product_updates", True)),
         "task_sound_enabled": bool(settings.get("task_sound_enabled", True)),
+        "chat_sound_enabled": bool(settings.get("chat_sound_enabled", True)),
         "language": settings.get("language") or "en",
         "timezone": settings.get("timezone") or "",
         "interface_theme": settings.get("interface_theme") or _interface_theme_from_value(settings.get("theme") or "dark"),
@@ -382,6 +389,9 @@ def _delete_user_artifacts(user_id):
         COLLECTIONS.get("calendar_shares", "calendar_shares"),
         COLLECTIONS["shared_files"],
         COLLECTIONS.get("file_folders", "file_folders"),
+        COLLECTIONS.get("chat_messages", "chat_messages"),
+        COLLECTIONS.get("chat_presence", "chat_presence"),
+        COLLECTIONS.get("chat_read_states", "chat_read_states"),
     ]
 
     for table_id in rows_to_delete:
@@ -404,6 +414,24 @@ def _delete_user_artifacts(user_id):
                 delete_row_safe(table_id, row_id)
             except AppwriteException:
                 logger.exception("Failed to delete %s row %s", table_id, row_id)
+
+    for table_id, fields in (
+        (COLLECTIONS.get("chat_dm_threads", "chat_dm_threads"), ("participant_a", "participant_b")),
+        (COLLECTIONS.get("chat_blocks", "chat_blocks"), ("blocker_id", "blocked_id")),
+    ):
+        for field in fields:
+            try:
+                rows = list_rows_all(table_id, [Query.equal(field, [user_id])])
+            except AppwriteException:
+                logger.exception("Failed to list rows for deletion: %s", table_id)
+                continue
+            for row in rows:
+                row_id = row.get("$id") or row.get("id")
+                if row_id:
+                    try:
+                        delete_row_safe(table_id, row_id)
+                    except AppwriteException:
+                        logger.exception("Failed to delete %s row %s", table_id, row_id)
 
     user_upload_root = os.path.abspath(os.path.join("uploads", "file_share", user_id))
     if os.path.isdir(user_upload_root):
@@ -611,6 +639,7 @@ def _onboarding_context():
         "class_year": current_user.class_year,
         "emory_student": current_user.emory_student,
         "emory_email": current_user.emory_email,
+        "school": current_user.school,
         "courses": [
             {
                 "id": course.get("$id"),
@@ -691,6 +720,7 @@ def save_onboarding():
         class_year = (payload.get("class_year") or "").strip() or None
         emory_student = _normalize_emory_student(payload.get("emory_student"))
         emory_email = payload.get("emory_email")
+        school_updates = school_payload(payload.get("school"))
 
         if education_level in {"High School", "Undergraduate"}:
             if not class_year or len(class_year) != 4 or not class_year.isdigit():
@@ -723,6 +753,7 @@ def save_onboarding():
                     "class_year": class_year,
                     "emory_student": emory_student,
                     "emory_email": emory_email,
+                    **school_updates,
                     "onboarding_step": next_step,
                 },
             )
@@ -733,6 +764,10 @@ def save_onboarding():
         current_user.class_year = class_year
         current_user.emory_student = emory_student
         current_user.emory_email = emory_email
+        current_user.school = school_updates.get("school")
+        current_user.school_key = school_updates.get("school_key")
+        current_user.school_source = school_updates.get("school_source")
+        current_user.scorecard_id = school_updates.get("scorecard_id")
         current_user.onboarding_step = next_step
         return jsonify({"status": "ok", "next_step": next_step})
 
@@ -889,6 +924,9 @@ def settings_page():
         "avatar_source": current_user.avatar_source,
         "emory_student": current_user.emory_student,
         "school": current_user.school,
+        "school_key": current_user.school_key,
+        "school_source": current_user.school_source,
+        "scorecard_id": current_user.scorecard_id,
         "major": current_user.major,
         "graduation_year": current_user.graduation_year,
         "education_level": current_user.education_level,
@@ -929,7 +967,7 @@ def update_profile():
     picture_url = (data.get("picture_url") or "").strip() or None
     avatar_source = _normalize_avatar_source(data.get("avatar_source"), picture_url)
     banner_color = _normalize_banner_color(data.get("banner_color"))
-    school = (data.get("school") or "").strip() or None
+    school_updates = school_payload(data.get("school"))
     major = (data.get("major") or "").strip() or None
     graduation_year = (data.get("graduation_year") or "").strip() or None
 
@@ -964,7 +1002,7 @@ def update_profile():
         "banner_color": banner_color,
         "avatar_file_id": avatar_file_id,
         "avatar_source": avatar_source,
-        "school": school,
+        **school_updates,
         "major": major,
         "graduation_year": graduation_year,
     }
@@ -987,7 +1025,10 @@ def update_profile():
     current_user.banner_color = banner_color
     current_user.avatar_file_id = avatar_file_id
     current_user.avatar_source = avatar_source
-    current_user.school = school
+    current_user.school = school_updates.get("school")
+    current_user.school_key = school_updates.get("school_key")
+    current_user.school_source = school_updates.get("school_source")
+    current_user.scorecard_id = school_updates.get("scorecard_id")
     current_user.major = major
     current_user.graduation_year = graduation_year
     if updates.get("created_at"):
@@ -1004,6 +1045,9 @@ def update_profile():
         "avatar_file_id": current_user.avatar_file_id,
         "avatar_source": current_user.avatar_source,
         "school": current_user.school,
+        "school_key": current_user.school_key,
+        "school_source": current_user.school_source,
+        "scorecard_id": current_user.scorecard_id,
         "major": current_user.major,
         "graduation_year": current_user.graduation_year,
         "education_level": current_user.education_level,
@@ -1248,6 +1292,7 @@ def update_interface_preferences():
     email_notifications = _normalize_bool(data.get("email_notifications"), True) if "email_notifications" in data else None
     product_updates = _normalize_bool(data.get("product_updates"), True) if "product_updates" in data else None
     task_sound_enabled = _normalize_bool(data.get("task_sound_enabled"), True) if "task_sound_enabled" in data else None
+    chat_sound_enabled = _normalize_bool(data.get("chat_sound_enabled"), True) if "chat_sound_enabled" in data else None
 
     valid_interface_themes = {"obsidian-dark", "parchment-light", "system-match", "nest-light", "nest-dark"}
     if preferred_calendar_view and preferred_calendar_view not in {"week", "month"}:
@@ -1285,6 +1330,8 @@ def update_interface_preferences():
         updates["product_updates"] = product_updates
     if task_sound_enabled is not None:
         updates["task_sound_enabled"] = task_sound_enabled
+    if chat_sound_enabled is not None:
+        updates["chat_sound_enabled"] = chat_sound_enabled
     if language:
         updates["language"] = language
     if timezone is not None:
@@ -1312,6 +1359,7 @@ def update_interface_preferences():
         "email_notifications": settings.get("email_notifications", True),
         "product_updates": settings.get("product_updates", True),
         "task_sound_enabled": settings.get("task_sound_enabled", True),
+        "chat_sound_enabled": settings.get("chat_sound_enabled", True),
         "language": settings.get("language") or "en",
         "timezone": settings.get("timezone") or "",
     })

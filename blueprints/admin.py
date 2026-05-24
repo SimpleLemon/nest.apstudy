@@ -3,7 +3,7 @@ import logging
 import os
 import secrets
 from functools import wraps
-from datetime import datetime
+from datetime import datetime, timezone
 
 from flask import Blueprint, abort, jsonify, redirect, render_template, request, send_file, url_for
 from flask_login import current_user, login_required
@@ -24,6 +24,7 @@ from appwrite_helpers import (
     update_row_safe,
 )
 from blueprints.settings import _settings_defaults
+from blueprints.chat_api import create_university_channel, emit_chat_event
 
 
 admin_bp = Blueprint("admin", __name__)
@@ -37,6 +38,7 @@ ALLOWED_SECTIONS = {
     "calendars",
     "courses",
     "seat_tracks",
+    "chat",
 }
 
 
@@ -170,8 +172,84 @@ def _count_rows(table_id, queries):
     total = response.get("total")
     if isinstance(total, int):
         return total
-    rows = response.get("rows", [])
-    return len(rows)
+    try:
+        return len(list_rows_all(table_id, queries))
+    except AppwriteException:
+        logger.exception("Failed to fully count rows for %s", table_id)
+        return None
+
+
+def _safe_count_rows(table_id, queries):
+    value = _count_rows(table_id, queries)
+    return value if isinstance(value, int) else 0
+
+
+def _user_chat_messages(user_id):
+    try:
+        return list_rows_all(
+            COLLECTIONS["chat_messages"],
+            [Query.equal("user_id", [user_id]), Query.order_desc("created_at")],
+        )
+    except AppwriteException:
+        logger.exception("Failed to load chat history for admin")
+        return []
+
+
+def _user_dm_threads(user_id):
+    threads = {}
+    for field in ("participant_a", "participant_b"):
+        try:
+            rows = list_rows_all(
+                COLLECTIONS["chat_dm_threads"],
+                [Query.equal(field, [user_id]), Query.order_desc("updated_at")],
+            )
+        except AppwriteException:
+            logger.exception("Failed to load chat threads for admin")
+            rows = []
+        for row in rows:
+            row_id = _row_id(row)
+            if row_id:
+                threads[row_id] = row
+    return sorted(
+        threads.values(),
+        key=lambda row: row.get("last_message_at") or row.get("updated_at") or row.get("created_at") or "",
+        reverse=True,
+    )
+
+
+def _user_chat_blocks(user_id):
+    blocks = {}
+    for field in ("blocker_id", "blocked_id"):
+        try:
+            rows = list_rows_all(
+                COLLECTIONS["chat_blocks"],
+                [Query.equal(field, [user_id])],
+            )
+        except AppwriteException:
+            logger.exception("Failed to load chat blocks for admin")
+            rows = []
+        for row in rows:
+            row_id = _row_id(row)
+            if row_id:
+                blocks[row_id] = row
+    return sorted(blocks.values(), key=lambda row: row.get("created_at") or "", reverse=True)
+
+
+def _chat_count_summary(user_id):
+    messages = _user_chat_messages(user_id)
+    return {
+        "chat_messages": len(messages),
+        "deleted_chat_messages": sum(1 for row in messages if row.get("deleted_at")),
+        "dm_threads": len(_user_dm_threads(user_id)),
+        "chat_blocks": len(_user_chat_blocks(user_id)),
+    }
+
+
+def _pending_admin_request_count():
+    return _count_rows(
+        COLLECTIONS["admin_requests"],
+        [Query.equal("status", ["pending"])],
+    ) or 0
 
 
 def _storage_service():
@@ -246,6 +324,9 @@ def _delete_user_rows(user_id):
         COLLECTIONS["note_folders"],
         COLLECTIONS["shared_files"],
         COLLECTIONS["file_folders"],
+        COLLECTIONS["chat_messages"],
+        COLLECTIONS["chat_presence"],
+        COLLECTIONS["chat_read_states"],
     ]
 
     for table_id in table_ids:
@@ -269,6 +350,24 @@ def _delete_user_rows(user_id):
                 delete_row_safe(table_id, row_id)
             except AppwriteException:
                 logger.exception("Failed to delete %s row %s", table_id, row_id)
+
+    for table_id, fields in (
+        (COLLECTIONS["chat_dm_threads"], ("participant_a", "participant_b")),
+        (COLLECTIONS["chat_blocks"], ("blocker_id", "blocked_id")),
+    ):
+        for field in fields:
+            try:
+                rows = list_rows_all(table_id, [Query.equal(field, [user_id])])
+            except AppwriteException:
+                logger.exception("Failed to list %s rows for deletion", table_id)
+                continue
+            for row in rows:
+                row_id = _row_id(row)
+                if row_id:
+                    try:
+                        delete_row_safe(table_id, row_id)
+                    except AppwriteException:
+                        logger.exception("Failed to delete %s row %s", table_id, row_id)
 
 
 def _load_section(section, user_id):
@@ -387,6 +486,13 @@ def _load_section(section, user_id):
             tracks = []
         return {"seat_tracks": tracks}
 
+    if section == "chat":
+        return {
+            "messages": _user_chat_messages(user_id),
+            "dm_threads": _user_dm_threads(user_id),
+            "blocks": _user_chat_blocks(user_id),
+        }
+
     return {}
 
 
@@ -450,6 +556,9 @@ def _export_payload(user_id):
             COLLECTIONS["course_seat_tracks"],
             [Query.equal("user_id", [user_id])],
         ),
+        "chat_messages": _user_chat_messages(user_id),
+        "chat_dm_threads": _user_dm_threads(user_id),
+        "chat_blocks": _user_chat_blocks(user_id),
     }
 
 
@@ -490,7 +599,102 @@ def admin_index():
         error=error,
         status=request.args.get("status"),
         theme_preference=_theme_preference(),
+        pending_request_count=_pending_admin_request_count(),
     )
+
+
+@admin_bp.route("/admin/requests")
+@admin_required
+def admin_requests():
+    status_filter = (request.args.get("status") or "pending").strip().lower()
+    if status_filter not in {"pending", "approved", "denied", "all"}:
+        status_filter = "pending"
+    queries = [Query.order_desc("created_at")]
+    if status_filter != "all":
+        queries.insert(0, Query.equal("status", [status_filter]))
+    try:
+        requests_rows = list_rows_all(COLLECTIONS["admin_requests"], queries)
+    except AppwriteException:
+        logger.exception("Failed to load admin requests")
+        requests_rows = []
+    return render_template(
+        "admin_requests.html",
+        requests=requests_rows,
+        status_filter=status_filter,
+        status=request.args.get("notice"),
+        error=request.args.get("error"),
+        theme_preference=_theme_preference(),
+        pending_request_count=_pending_admin_request_count(),
+    )
+
+
+@admin_bp.route("/admin/requests/<request_id>/approve", methods=["POST"])
+@admin_required
+def approve_admin_request(request_id):
+    request_row = get_row_safe(COLLECTIONS["admin_requests"], request_id, allow_missing=True)
+    if not request_row:
+        abort(404)
+    if request_row.get("request_type") != "uni_channel_approval":
+        return redirect(url_for("admin.admin_requests", error="Unsupported request type."))
+    school_key = request_row.get("school_key")
+    school_name = request_row.get("school_name")
+    if not school_key or not school_name:
+        return redirect(url_for("admin.admin_requests", error="Request is missing school data."))
+    now = format_datetime(datetime.now(timezone.utc))
+    try:
+        channel = create_university_channel(school_key, school_name)
+        update_row_safe(
+            COLLECTIONS["admin_requests"],
+            request_id,
+            {
+                "status": "approved",
+                "resolved_by": str(current_user.id),
+                "resolved_at": now,
+                "updated_at": now,
+            },
+        )
+        emit_chat_event(
+            "university",
+            school_key,
+            "university_approved",
+            channel_id=_row_id(channel),
+            actor_id=str(current_user.id),
+        )
+    except AppwriteException:
+        logger.exception("Failed to approve admin request")
+        return redirect(url_for("admin.admin_requests", error="Unable to approve request."))
+    return redirect(url_for("admin.admin_requests", notice="request-approved"))
+
+
+@admin_bp.route("/admin/requests/<request_id>/deny", methods=["POST"])
+@admin_required
+def deny_admin_request(request_id):
+    request_row = get_row_safe(COLLECTIONS["admin_requests"], request_id, allow_missing=True)
+    if not request_row:
+        abort(404)
+    now = format_datetime(datetime.now(timezone.utc))
+    try:
+        update_row_safe(
+            COLLECTIONS["admin_requests"],
+            request_id,
+            {
+                "status": "denied",
+                "resolved_by": str(current_user.id),
+                "resolved_at": now,
+                "updated_at": now,
+            },
+        )
+        if request_row.get("school_key"):
+            emit_chat_event(
+                "university",
+                request_row.get("school_key"),
+                "university_denied",
+                actor_id=str(current_user.id),
+            )
+    except AppwriteException:
+        logger.exception("Failed to deny admin request")
+        return redirect(url_for("admin.admin_requests", error="Unable to deny request."))
+    return redirect(url_for("admin.admin_requests", notice="request-denied"))
 
 
 @admin_bp.route("/admin/<user_id>")
@@ -509,13 +713,14 @@ def admin_detail(user_id):
     if section == "overview":
         account_data = _fetch_account(user_id)
         overview_counts = {
-            "files": _count_rows(COLLECTIONS["shared_files"], [Query.equal("user_id", [user_id])]),
-            "folders": _count_rows(COLLECTIONS["file_folders"], [Query.equal("user_id", [user_id])]),
-            "notes": _count_rows(COLLECTIONS["notes"], [Query.equal("user_id", [user_id])]),
-            "calendar_cache": _count_rows(COLLECTIONS["calendar_cache"], [Query.equal("user_id", [user_id])]),
-            "calendar_feeds": _count_rows(COLLECTIONS["calendar_feeds"], [Query.equal("user_id", [user_id])]),
-            "courses": _count_rows(COLLECTIONS["user_courses"], [Query.equal("user_id", [user_id])]),
-            "seat_tracks": _count_rows(COLLECTIONS["course_seat_tracks"], [Query.equal("user_id", [user_id])]),
+            "files": _safe_count_rows(COLLECTIONS["shared_files"], [Query.equal("user_id", [user_id])]),
+            "folders": _safe_count_rows(COLLECTIONS["file_folders"], [Query.equal("user_id", [user_id])]),
+            "notes": _safe_count_rows(COLLECTIONS["notes"], [Query.equal("user_id", [user_id])]),
+            "calendar_cache": _safe_count_rows(COLLECTIONS["calendar_cache"], [Query.equal("user_id", [user_id])]),
+            "calendar_feeds": _safe_count_rows(COLLECTIONS["calendar_feeds"], [Query.equal("user_id", [user_id])]),
+            "courses": _safe_count_rows(COLLECTIONS["user_courses"], [Query.equal("user_id", [user_id])]),
+            "seat_tracks": _safe_count_rows(COLLECTIONS["course_seat_tracks"], [Query.equal("user_id", [user_id])]),
+            **_chat_count_summary(user_id),
         }
 
     section_data = _load_section(section, user_id)

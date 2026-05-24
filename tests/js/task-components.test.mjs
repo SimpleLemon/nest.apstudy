@@ -36,3 +36,16 @@ test("task component module exposes completed section and quick-add popover cont
     assert.match(source, /task-add-popover/);
     assert.match(source, /data-task-add-popover-trigger/);
 });
+
+test("task repeat editor uses menu actions and end options instead of an inner toggle", () => {
+    assert.doesNotMatch(source, /function repeatToggle\b/);
+    assert.match(source, /function RepeatMenuContent\b/);
+    assert.match(source, /task-add-repeat-popover/);
+    assert.match(source, /onCancel/);
+    assert.match(source, /onDone/);
+    assert.match(source, /"Cancel"/);
+    assert.match(source, /"Done"/);
+    assert.match(source, /"Never"/);
+    assert.match(source, /"On"/);
+    assert.match(source, /task-repeat-end-option/);
+});

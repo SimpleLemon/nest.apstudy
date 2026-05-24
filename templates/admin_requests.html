@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Admin Requests - APStudy Nest</title>
+    <script>window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";</script>
+    <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
+    <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy Logo">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/themes.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
+</head>
+<body class="admin-page">
+    <main class="admin-shell">
+        <header class="admin-header">
+            <div>
+                <p class="admin-eyebrow">Admin Portal</p>
+                <h1 class="admin-title">Requests{% if pending_request_count %} ({{ pending_request_count }} pending){% endif %}</h1>
+                <p class="admin-subtitle">Review channel approvals and other platform requests.</p>
+            </div>
+            <div class="admin-header-actions">
+                <a class="admin-button admin-button--ghost" href="{{ url_for('admin.admin_index') }}">User directory</a>
+                <a class="admin-button admin-button--ghost" href="/dashboard">Back to dashboard</a>
+            </div>
+        </header>
+
+        {% set status_map = {
+            "request-approved": "Request approved.",
+            "request-denied": "Request denied.",
+        } %}
+        {% if status %}
+            <div class="admin-alert admin-alert--success">{{ status_map.get(status, status|replace('-', ' ')) }}</div>
+        {% endif %}
+        {% if error %}
+            <div class="admin-alert admin-alert--error">{{ error }}</div>
+        {% endif %}
+
+        <nav class="admin-tabs">
+            {% for value, label in [("pending", "Pending"), ("approved", "Approved"), ("denied", "Denied"), ("all", "All")] %}
+                <a class="admin-tab {% if status_filter == value %}is-active{% endif %}" href="{{ url_for('admin.admin_requests', status=value) }}">{{ label }}</a>
+            {% endfor %}
+        </nav>
+
+        {% if requests %}
+            <table class="admin-table" aria-label="Admin requests">
+                <thead>
+                    <tr>
+                        <th>Label</th>
+                        <th>School</th>
+                        <th>Status</th>
+                        <th>Requests</th>
+                        <th>Created</th>
+                        <th>Resolved</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in requests %}
+                        {% set request_id = item.get('$id') or item.get('id') %}
+                        <tr>
+                            <td><strong>{{ item.get('label') or item.get('request_type') }}</strong></td>
+                            <td>{{ item.get('school_name') or '--' }}</td>
+                            <td>
+                                {% if item.get('status') == 'pending' %}
+                                    <span class="admin-badge">Pending</span>
+                                {% else %}
+                                    <span class="admin-badge admin-badge--muted">{{ item.get('status') or '--' }}</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ item.get('request_count') or 1 }}</td>
+                            <td>{{ item.get('created_at') or '--' }}</td>
+                            <td>{{ item.get('resolved_at') or '--' }}</td>
+                            <td>
+                                {% if item.get('status') == 'pending' %}
+                                    <div class="admin-header-actions">
+                                        <form method="post" action="{{ url_for('admin.approve_admin_request', request_id=request_id) }}">
+                                            <button class="admin-button" type="submit">Approve</button>
+                                        </form>
+                                        <form method="post" action="{{ url_for('admin.deny_admin_request', request_id=request_id) }}">
+                                            <button class="admin-button admin-button--ghost" type="submit">Deny</button>
+                                        </form>
+                                    </div>
+                                {% else %}
+                                    --
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <details>
+                                    <summary>Raw request data</summary>
+                                    <pre class="admin-code-block">{{ item | tojson }}</pre>
+                                </details>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="admin-card">No requests found.</div>
+        {% endif %}
+    </main>
+</body>
+</html>

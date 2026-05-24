@@ -24,6 +24,21 @@ export function todayDateString() {
     return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
 }
 
+function dateString(date) {
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+}
+
+export function defaultRecurrenceEndDate(baseDate = new Date()) {
+    const source = baseDate instanceof Date && !Number.isNaN(baseDate.getTime()) ? baseDate : new Date();
+    const year = source.getFullYear();
+    const targetMonth = source.getMonth() + 1;
+    const lastDayOfTargetMonth = new Date(year, targetMonth + 1, 0).getDate();
+    const clampedDay = Math.min(source.getDate(), lastDayOfTargetMonth);
+    const endDate = new Date(year, targetMonth, clampedDay);
+    endDate.setDate(endDate.getDate() - 1);
+    return dateString(endDate);
+}
+
 export function createDefaultRecurrence() {
     return { every: 1, unit: DEFAULT_RECURRENCE_UNIT, startDate: todayDateString(), endDate: null };
 }

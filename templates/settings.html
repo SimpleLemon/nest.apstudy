@@ -142,7 +142,8 @@
                                             </label>
                                             <label class="settings-field">
                                                 <span class="settings-field-label">School</span>
-                                                <input id="settings-school" type="text" autocomplete="organization" placeholder="Nest University" />
+                                                <input id="settings-school" type="text" autocomplete="organization" placeholder="Nest University" list="settings-university-options" />
+                                                <datalist id="settings-university-options"></datalist>
                                             </label>
                                             <label class="settings-field">
                                                 <span class="settings-field-label">Graduation Year</span>
@@ -346,6 +347,13 @@
                                     <span>
                                         <strong>Task Sounds</strong>
                                         <small>Play a short sound when tasks are checked or unchecked.</small>
+                                    </span>
+                                    <span class="settings-toggle-pill" aria-hidden="true"></span>
+                                </button>
+                                <button type="button" class="settings-toggle" data-toggle-field="chat_sound_enabled" aria-pressed="true">
+                                    <span>
+                                        <strong>Chat Sounds</strong>
+                                        <small>Play a short sound for new chat messages.</small>
                                     </span>
                                     <span class="settings-toggle-pill" aria-hidden="true"></span>
                                 </button>

@@ -56,26 +56,26 @@
             <!-- Top bar -->
             <div id="editor-topbar" class="editor-topbar">
                 <a href="/notes" class="editor-back-link">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M10 12L6 8L10 4"/>
-                    </svg>
+                    <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
                     <span>Notes</span>
                 </a>
                 <div id="save-status" class="save-status save-status-hidden">Saved</div>
             </div>
 
-            <!-- Title input -->
-            <input
-                id="note-title-input"
-                type="text"
-                class="editor-title-input"
-                placeholder="Untitled"
-                autocomplete="off"
-                spellcheck="true"
-            />
+            <div class="notes-editor-surface">
+                <!-- Title input -->
+                <input
+                    id="note-title-input"
+                    type="text"
+                    class="editor-title-input"
+                    placeholder="Untitled"
+                    autocomplete="off"
+                    spellcheck="true"
+                />
 
-            <!-- BlockNote editor mounts here via createRoot -->
-            <div id="blocknote-root" class="blocknote-container"></div>
+                <!-- BlockNote editor mounts here via createRoot -->
+                <div id="blocknote-root" class="blocknote-container"></div>
+            </div>
         </div>
     </main>
     <global class="thefooter"></global>

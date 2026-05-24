@@ -5,6 +5,7 @@ import {
     PRIORITY_OPTIONS,
     REPEAT_UNITS,
     createDefaultRecurrence,
+    defaultRecurrenceEndDate,
     formatDeadline,
     formatRepeat,
     isRepeatingTaskCompleted,
@@ -106,67 +107,83 @@ function prioritySelect(value, onChange) {
     return h("select", { value, onChange: (event) => onChange(event.target.value) }, optionNodes(PRIORITY_OPTIONS));
 }
 
-function repeatToggle(checked, onChange) {
-    return h("label", { className: "task-repeat-toggle" },
-        h("input", { type: "checkbox", checked, onChange: (event) => onChange(event.target.checked) }),
-        h("span", null, "Repeat")
-    );
-}
-
-function recurrenceFields(recurrence, onChange, { compact = false } = {}) {
+function recurrenceFields(recurrence, onChange, { compact = false, endName = "repeat-end" } = {}) {
     const update = (updates) => onChange({ ...recurrence, ...updates });
-    const controls = [
-        {
-            key: "every",
-            label: "Every",
-            node: h("input", {
-                key: "every-input",
+    const onDate = Boolean(recurrence.endDate);
+    const onDateValue = recurrence.endDate || defaultRecurrenceEndDate();
+
+    return h("div", { className: cx("task-repeat-grid", compact && "task-repeat-grid-compact") },
+        h("label", { className: "task-repeat-every-field" },
+            h("span", null, "Every"),
+            h("input", {
                 type: "number",
                 min: "1",
                 max: "365",
                 value: recurrence.every || 1,
                 onChange: (event) => update({ every: Number(event.target.value || 1) }),
                 "aria-label": compact ? "Repeat every" : undefined,
-            }),
-        },
-        {
-            key: "unit",
-            label: "Unit",
-            node: h("select", {
-                key: "unit-select",
+            })
+        ),
+        h("label", { className: "task-repeat-unit-field" },
+            h("span", null, "Unit"),
+            h("select", {
                 value: recurrence.unit || "week",
                 onChange: (event) => update({ unit: event.target.value }),
                 "aria-label": compact ? "Repeat unit" : undefined,
-            }, optionNodes(REPEAT_UNITS)),
-        },
-        {
-            key: "start",
-            label: "Start",
-            node: h("input", {
-                key: "start-input",
+            }, optionNodes(REPEAT_UNITS))
+        ),
+        h("label", { className: "task-repeat-start-field" },
+            h("span", null, "Starts"),
+            h("input", {
                 type: "date",
                 value: recurrence.startDate || todayDateString(),
                 onChange: (event) => update({ startDate: event.target.value || todayDateString() }),
                 "aria-label": compact ? "Repeat start date" : undefined,
-            }),
-        },
-        {
-            key: "end",
-            label: "End",
-            node: h("input", {
-                key: "end-input",
-                type: "date",
-                value: recurrence.endDate || "",
-                onChange: (event) => update({ endDate: event.target.value || null }),
-                "aria-label": compact ? "Repeat end date" : undefined,
-            }),
-        },
-    ];
+            })
+        ),
+        h("fieldset", { className: "task-repeat-end-field" },
+            h("legend", null, "End"),
+            h("div", { className: "task-repeat-end-options" },
+                h("label", { className: cx("task-repeat-end-option", !onDate && "is-selected") },
+                    h("input", {
+                        type: "radio",
+                        name: endName,
+                        checked: !onDate,
+                        onChange: () => update({ endDate: null }),
+                    }),
+                    h("span", null, "Never")
+                ),
+                h("label", { className: cx("task-repeat-end-option", onDate && "is-selected") },
+                    h("input", {
+                        type: "radio",
+                        name: endName,
+                        checked: onDate,
+                        onChange: () => update({ endDate: onDateValue }),
+                    }),
+                    h("span", null, "On"),
+                    h("input", {
+                        type: "date",
+                        value: onDateValue,
+                        disabled: !onDate,
+                        onFocus: () => {
+                            if (!onDate) update({ endDate: onDateValue });
+                        },
+                        onChange: (event) => update({ endDate: event.target.value || defaultRecurrenceEndDate() }),
+                        "aria-label": "Repeat end date",
+                    })
+                )
+            )
+        )
+    );
+}
 
-    return h("div", { className: cx("task-repeat-grid", compact && "task-repeat-grid-compact") },
-        controls.map((control) => compact
-            ? React.cloneElement(control.node, { key: control.key })
-            : h("label", { key: control.key }, h("span", null, control.label), control.node)
+function RepeatMenuContent({ recurrence, onChange, onCancel, onDone }) {
+    const endName = React.useId();
+    return h("div", { className: "task-add-repeat-popover" },
+        recurrenceFields(recurrence, onChange, { compact: true, endName }),
+        h("div", { className: "task-add-popover-actions" },
+            h("button", { type: "button", className: "task-secondary-button", onClick: onCancel }, "Cancel"),
+            h("button", { type: "button", className: "task-primary-button", onClick: onDone }, "Done")
         )
     );
 }
@@ -408,6 +425,7 @@ export function ListRail(props) {
         tasksByList,
         reorderLists,
         updateList,
+        toggleListVisibility,
         openListDialog,
         openListMenu,
     } = props;
@@ -464,8 +482,7 @@ export function ListRail(props) {
                             className: cx("task-list-visibility", !list.hidden && "is-checked"),
                             onClick: (event) => {
                                 event.stopPropagation();
-                                if (!list.hidden && selectedListId === list.id) setSelectedListId("all");
-                                updateList(list.id, { hidden: !list.hidden });
+                                toggleListVisibility(list.id);
                             },
                             "aria-label": list.hidden ? `Show ${list.name}` : `Hide ${list.name}`,
                             "aria-pressed": list.hidden ? "false" : "true",
@@ -686,9 +703,46 @@ function PriorityBadge({ priority }) {
 }
 
 function TaskDetails({ task, updateTask }) {
-    const [repeatEnabled, setRepeatEnabled] = React.useState(Boolean(task.recurrence));
-    const recurrence = task.recurrence || createDefaultRecurrence();
-    React.useEffect(() => setRepeatEnabled(Boolean(task.recurrence)), [task.recurrence]);
+    const [repeatPopover, setRepeatPopover] = React.useState(null);
+    const [repeatDraft, setRepeatDraft] = React.useState(task.recurrence || createDefaultRecurrence());
+
+    React.useEffect(() => {
+        if (!repeatPopover) setRepeatDraft(task.recurrence || createDefaultRecurrence());
+    }, [repeatPopover, task.recurrence]);
+
+    const openRepeatPopover = (event) => {
+        event.preventDefault();
+        const rect = event.currentTarget.getBoundingClientRect();
+        setRepeatDraft(task.recurrence || createDefaultRecurrence());
+        setRepeatPopover((current) => current
+            ? null
+            : {
+                type: "repeat",
+                nonce: Date.now(),
+                anchor: {
+                    top: rect.top,
+                    right: rect.right,
+                    bottom: rect.bottom,
+                    left: rect.left,
+                },
+            });
+    };
+
+    const closeRepeatPopover = () => {
+        setRepeatDraft(task.recurrence || createDefaultRecurrence());
+        setRepeatPopover(null);
+    };
+
+    const clearRepeat = () => {
+        updateTask(task.id, { recurrence: null });
+        setRepeatDraft(createDefaultRecurrence());
+        setRepeatPopover(null);
+    };
+
+    const saveRepeat = () => {
+        updateTask(task.id, { recurrence: repeatDraft });
+        setRepeatPopover(null);
+    };
 
     return h("div", { className: "task-details" },
         h("label", null,
@@ -707,11 +761,27 @@ function TaskDetails({ task, updateTask }) {
                 }),
             })
         ),
-        repeatToggle(repeatEnabled, (checked) => {
-            setRepeatEnabled(checked);
-            updateTask(task.id, { recurrence: checked ? recurrence : null });
-        }),
-        repeatEnabled ? recurrenceFields(recurrence, (next) => updateTask(task.id, { recurrence: next })) : null
+        h("div", { className: "task-detail-repeat-field" },
+            h("span", null, "Repeat"),
+            h("button", {
+                type: "button",
+                className: cx("task-add-control", task.recurrence && "is-active"),
+                onClick: openRepeatPopover,
+                "aria-expanded": repeatPopover ? "true" : "false",
+                "data-task-add-popover-trigger": "repeat-detail",
+            },
+                h(MaterialIcon, { name: task.recurrence ? "repeat_on" : "repeat" }),
+                h("span", null, task.recurrence ? formatRepeat(task.recurrence) : "Repeat")
+            )
+        ),
+        h(AddTaskPopover, { popover: repeatPopover, onClose: closeRepeatPopover },
+            h(RepeatMenuContent, {
+                recurrence: repeatDraft,
+                onChange: setRepeatDraft,
+                onCancel: clearRepeat,
+                onDone: saveRepeat,
+            })
+        )
     );
 }
 
@@ -722,6 +792,7 @@ export function AddTaskForm({ listId, createTask }) {
     const [deadline, setDeadline] = React.useState("");
     const [repeatEnabled, setRepeatEnabled] = React.useState(false);
     const [recurrence, setRecurrence] = React.useState(createDefaultRecurrence);
+    const [repeatDraft, setRepeatDraft] = React.useState(createDefaultRecurrence);
     const [popover, setPopover] = React.useState(null);
     const [saving, setSaving] = React.useState(false);
     const expanded = focused || title || deadline || repeatEnabled || priority !== "none" || Boolean(popover);
@@ -732,12 +803,16 @@ export function AddTaskForm({ listId, createTask }) {
         setDeadline("");
         setRepeatEnabled(false);
         setRecurrence(createDefaultRecurrence());
+        setRepeatDraft(createDefaultRecurrence());
         setPopover(null);
     };
 
     const openPopover = (type, event) => {
         event.preventDefault();
         const rect = event.currentTarget.getBoundingClientRect();
+        if (type === "repeat") {
+            setRepeatDraft(repeatEnabled ? recurrence : createDefaultRecurrence());
+        }
         setPopover((current) => current?.type === type
             ? null
             : {
@@ -801,29 +876,21 @@ export function AddTaskForm({ listId, createTask }) {
                 ))
             );
         }
-        return h("div", { className: "task-add-repeat-popover" },
-            h("button", {
-                type: "button",
-                className: cx("task-repeat-option", repeatEnabled && "is-active"),
-                onClick: () => setRepeatEnabled((current) => !current),
-                "aria-pressed": repeatEnabled ? "true" : "false",
+        return h(RepeatMenuContent, {
+            recurrence: repeatDraft,
+            onChange: setRepeatDraft,
+            onCancel: () => {
+                setRepeatEnabled(false);
+                setRecurrence(createDefaultRecurrence());
+                setRepeatDraft(createDefaultRecurrence());
+                setPopover(null);
             },
-                h(MaterialIcon, { name: repeatEnabled ? "check_circle" : "repeat" }),
-                h("span", null, repeatEnabled ? "Repeating" : "Repeat task")
-            ),
-            repeatEnabled ? recurrenceFields(recurrence, setRecurrence) : null,
-            h("div", { className: "task-add-popover-actions" },
-                h("button", {
-                    type: "button",
-                    className: "task-secondary-button",
-                    onClick: () => {
-                        setRepeatEnabled(false);
-                        setPopover(null);
-                    },
-                }, "Clear"),
-                h("button", { type: "button", className: "task-primary-button", onClick: () => setPopover(null) }, "Done")
-            )
-        );
+            onDone: () => {
+                setRepeatEnabled(true);
+                setRecurrence(repeatDraft);
+                setPopover(null);
+            },
+        });
     };
 
     return h("form", {

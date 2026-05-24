@@ -22,6 +22,9 @@
                 <p class="admin-subtitle">Search by exact Appwrite ID, email, or username. Select a user to view full details.</p>
             </div>
             <div class="admin-header-actions">
+                <a class="admin-button {% if pending_request_count %}admin-button--danger{% else %}admin-button--ghost{% endif %}" href="{{ url_for('admin.admin_requests') }}">
+                    Requests{% if pending_request_count %} ({{ pending_request_count }}){% endif %}
+                </a>
                 <a class="admin-button admin-button--ghost" href="/dashboard">Back to dashboard</a>
             </div>
         </header>

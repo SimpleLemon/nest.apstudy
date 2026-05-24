@@ -100,6 +100,11 @@
                                     <span class="text-xs uppercase tracking-[0.16em] text-on-surface-variant">Class year</span>
                                     <input id="class-year" class="max-w-xs rounded-xl bg-surface-container-lowest border border-outline-variant/25 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 px-4 py-3 text-sm" type="text" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="2028" />
                                 </label>
+                                <label id="university-field" class="space-y-2 block hidden">
+                                    <span class="text-xs uppercase tracking-[0.16em] text-on-surface-variant">University</span>
+                                    <input id="university-school" class="w-full rounded-xl bg-surface-container-lowest border border-outline-variant/25 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 px-4 py-3 text-sm" type="text" autocomplete="organization" list="university-options" placeholder="Emory University" />
+                                    <datalist id="university-options"></datalist>
+                                </label>
                                 <div id="emory-student-field" class="space-y-2 hidden">
                                     <span class="text-xs uppercase tracking-[0.16em] text-on-surface-variant">Are you an Emory University student?</span>
                                     <div class="grid grid-cols-2 gap-3" id="emory-student-group">
@@ -360,6 +365,7 @@
             "classYear": {{ class_year | tojson }},
             "emoryStudent": {{ emory_student | tojson }},
             "emoryEmail": {{ emory_email | tojson }},
+            "school": {{ school | tojson }},
             "courses": {{ courses | tojson }}
         }
     </script>
@@ -373,6 +379,7 @@
             classYear: onboardingData.classYear,
             emoryStudent: onboardingData.emoryStudent,
             emoryEmail: onboardingData.emoryEmail,
+            school: onboardingData.school,
             courses: onboardingData.courses,
             defaultTerm: document.getElementById('default-term').value,
             term: document.getElementById('default-term').value,
@@ -405,6 +412,9 @@
         const emoryStudentField = document.getElementById('emory-student-field');
         const emoryEmailField = document.getElementById('emory-email-field');
         const emoryEmailInput = document.getElementById('emory-email');
+        const universityField = document.getElementById('university-field');
+        const universityInput = document.getElementById('university-school');
+        const universityOptions = document.getElementById('university-options');
         const reviewEducationLevel = document.getElementById('review-education-level');
         const reviewClassYear = document.getElementById('review-class-year');
         const reviewEmoryStudent = document.getElementById('review-emory-student');
@@ -524,6 +534,7 @@
         const COURSE_CARD_CLASSES = 'rounded-2xl border border-outline-variant/20 bg-surface-container p-4';
         const REMOVE_CALENDAR_BUTTON_CLASSES = 'btn-remove-calendar inline-flex items-center justify-center rounded-lg h-10 w-10 bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors';
         let courseSearchTimeout = null;
+        let universitySearchTimeout = null;
         function applyTheme(theme, persist) {
             if (VALID_THEMES.indexOf(theme) === -1) theme = 'obsidian-dark';
             document.documentElement.setAttribute('data-theme', theme);
@@ -694,6 +705,9 @@
         function shouldShowEmoryStudentToggle() {
             return getSelectedEducationLevel() === 'Undergraduate';
         }
+        function shouldShowUniversityField() {
+            return getSelectedEducationLevel() === 'Undergraduate';
+        }
         function shouldShowEmoryEmail() {
             return getSelectedEducationLevel() === 'Undergraduate' && onboardingState.emoryStudent === true;
         }
@@ -715,9 +729,11 @@
         function syncEducationVisibility() {
             const educationLevel = getSelectedEducationLevel();
             const classYearVisible = shouldShowClassYear();
+            const universityVisible = shouldShowUniversityField();
             const emoryStudentVisible = shouldShowEmoryStudentToggle();
             const emoryEmailVisible = shouldShowEmoryEmail();
             classYearField.classList.toggle('hidden', !classYearVisible);
+            universityField.classList.toggle('hidden', !universityVisible);
             emoryStudentField.classList.toggle('hidden', !emoryStudentVisible);
             emoryEmailField.classList.toggle('hidden', !emoryEmailVisible);
             if (!classYearVisible) {
@@ -729,6 +745,12 @@
             if (!emoryStudentVisible) {
                 onboardingState.emoryStudent = null;
                 onboardingState.emoryEmail = '';
+            }
+            if (!universityVisible) {
+                onboardingState.school = '';
+                universityInput.value = '';
+            } else {
+                universityInput.value = onboardingState.school || '';
             }
             if (!emoryEmailVisible) {
                 onboardingState.emoryEmail = '';
@@ -903,6 +925,10 @@
             } else {
                 reviewClassYear.classList.add('hidden');
             }
+            if (shouldShowUniversityField() && onboardingState.school) {
+                reviewClassYear.textContent += ` • University: ${onboardingState.school}`;
+                reviewClassYear.classList.remove('hidden');
+            }
             if (educationLevel === 'Undergraduate' && onboardingState.emoryStudent === true) {
                 reviewEmoryStudent.textContent = 'Emory student: Yes';
                 reviewEmoryStudent.classList.remove('hidden');
@@ -1069,12 +1095,37 @@
                 courseSuggestions.classList.add('hidden');
             }
         }
+        function escapeOptionAttribute(value) {
+            return String(value || '')
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+        }
+        async function searchUniversities(query) {
+            const term = String(query || '').trim();
+            if (!universityOptions || term.length < 2) {
+                return;
+            }
+            try {
+                const data = await fetchJson(`/api/universities?q=${encodeURIComponent(term)}`,
+                    { method: 'GET', headers: { 'Content-Type': 'application/json' } });
+                const results = Array.isArray(data.results) ? data.results : [];
+                universityOptions.innerHTML = results.map((school) => {
+                    const label = [school.name, school.city, school.state].filter(Boolean).join(' - ');
+                    return `<option value="${escapeOptionAttribute(school.name)}" label="${escapeOptionAttribute(label)}"></option>`;
+                }).join('');
+            } catch (error) {
+                universityOptions.innerHTML = '';
+            }
+        }
         function onEducationLevelSelected(level) {
             onboardingState.educationLevel = level;
             markDirty();
             if (level !== 'Undergraduate') {
                 onboardingState.emoryStudent = null;
                 onboardingState.emoryEmail = '';
+                onboardingState.school = '';
             }
             if (level !== 'High School' && level !== 'Undergraduate') {
                 onboardingState.classYear = '';
@@ -1123,6 +1174,7 @@
                         const payload = {
                             education_level: onboardingState.educationLevel,
                             class_year: shouldShowClassYear() ? onboardingState.classYear : null,
+                            school: shouldShowUniversityField() ? onboardingState.school : null,
                             emory_student: shouldShowEmoryStudentToggle() ? onboardingState.emoryStudent : null,
                             emory_email: shouldShowEmoryEmail() ? onboardingState.emoryEmail : null,
                         };
@@ -1215,6 +1267,14 @@
                 syncFieldFromInput(emoryEmailInput, 'emoryEmail');
                 return;
             }
+            if (event.target === universityInput) {
+                syncFieldFromInput(universityInput, 'school');
+                if (universitySearchTimeout) {
+                    window.clearTimeout(universitySearchTimeout);
+                }
+                universitySearchTimeout = window.setTimeout(() => searchUniversities(universityInput.value), 180);
+                return;
+            }
             if (event.target === courseSearch) {
                 if (courseSearchTimeout) {
                     window.clearTimeout(courseSearchTimeout);
@@ -1228,6 +1288,9 @@
         form.addEventListener('change', (event) => {
             if (event.target === emoryEmailInput) {
                 syncFieldFromInput(emoryEmailInput, 'emoryEmail');
+            }
+            if (event.target === universityInput) {
+                syncFieldFromInput(universityInput, 'school');
             }
         });
         document.getElementById('add-course-button').addEventListener('click', async () => {
@@ -1323,6 +1386,9 @@
             }
             if (onboardingState.emoryEmail) {
                 emoryEmailInput.value = onboardingState.emoryEmail;
+            }
+            if (onboardingState.school) {
+                universityInput.value = onboardingState.school;
             }
             bindHelperText(displayNameInput, displayNameHelp);
             bindHelperText(usernameInput, usernameHelp);

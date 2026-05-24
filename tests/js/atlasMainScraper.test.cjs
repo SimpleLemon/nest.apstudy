@@ -6,7 +6,9 @@ const {
   parseCatalogCourseCards,
   parseEnrollmentStatus,
   parseEnvList,
+  firstPresent,
   parseInstructors,
+  decodeHtmlEntities,
   parseMeetingTimes,
   splitCourseCode,
   stripTags,
@@ -39,8 +41,14 @@ test('normalizes enrollment, course codes, tags, and instructors', () => {
   assert.deepEqual(splitCourseCode('CS 253'), { subject: 'CS', catalog: '253' });
   assert.deepEqual(splitCourseCode('BADCODE'), { subject: 'BADCODE', catalog: 'UNKNOWN' });
   assert.equal(stripTags('<p>Data &amp; Society&nbsp;</p>'), 'Data & Society');
+  assert.equal(decodeHtmlEntities('MATH &#65; &lt;CS&gt;'), 'MATH A <CS>');
+  assert.equal(firstPresent({ empty: '', fallback: 'room 101' }, ['missing', 'empty', 'fallback']), 'room 101');
   assert.deepEqual(parseInstructors({ instructors: [{ name: 'Ada', email: 'ada@example.test' }, 'Grace Hopper'] }), [
     { name: 'Ada', email: 'ada@example.test' },
+    { name: 'Grace Hopper', email: null },
+  ]);
+  assert.deepEqual(parseInstructors({ instr: 'Staff; Ada Lovelace | TBA; Grace Hopper' }), [
+    { name: 'Ada Lovelace', email: null },
     { name: 'Grace Hopper', email: null },
   ]);
 });

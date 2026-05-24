@@ -3,51 +3,115 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <script>
-        window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";
-    </script>
+    <script>window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";</script>
     <script src="https://cdn.jsdelivr.net/npm/appwrite@17/dist/iife/sdk.js"></script>
     <script src="{{ url_for('static', filename='js/appwrite.js') }}"></script>
     <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/themes.css') }}">
     <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy Logo">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/layout.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/themes.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>Chat - APStudy Nest</title>
     <script src="{{ url_for('static', filename='js/global.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/navbar.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/sidebar.js') }}" defer></script>
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-    </style>
+    <script src="{{ url_for('static', filename='js/chat.js') }}" defer></script>
 </head>
 <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
 <global class="thesidebar" data-user-emory-student="{{ user.emory_student }}" data-sidebar-default="{{ sidebar_default|default('expanded') }}"></global>
-<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-primary/30 selection:text-primary-fixed">
-    <main class="flex-1 w-full max-w-[1600px] mx-auto px-6 md:px-8 pt-6 pb-10 flex flex-col gap-12 relative z-10">
-        <section class="flex flex-col gap-4 w-full animate-fade-in-up">
-            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+<body class="chat-body bg-surface text-on-surface font-body antialiased selection:bg-primary/30 selection:text-primary-fixed">
+    <main class="chat-app"
+          data-discord-invite-url="{{ discord_invite_url or '' }}"
+          data-appwrite-database-id="{{ appwrite_database_id or '' }}"
+          data-chat-events-table-id="{{ chat_events_table_id or 'chat_events' }}">
+        <section class="chat-rail" id="chat-rail" aria-label="Chat channels">
+            <div class="chat-rail-head">
                 <div>
-                    <h1 class="text-3xl font-headline font-semibold text-on-surface tracking-tight mb-1">Chat</h1>
-                    <p class="text-on-surface-variant text-sm flex items-center gap-2">
-                        <span class="material-symbols-outlined text-[18px]">chat</span>
-                        <span>Connect and chat with classmates</span>
-                    </p>
+                    <p>Nest</p>
+                    <h1>Chat</h1>
                 </div>
+                <button class="chat-icon-button chat-mobile-close" type="button" data-close-rail aria-label="Close channels">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
             </div>
-            <div class="bg-surface-container/95 border border-outline-variant/20 rounded-2xl p-8 text-center">
-                <p class="text-on-surface-variant">Chat feature coming soon...</p>
+
+            <div class="chat-section">
+                <div class="chat-section-title">Nest</div>
+                <div id="chat-channel-list" class="chat-list"></div>
+            </div>
+
+            <div class="chat-section chat-section-grow">
+                <div class="chat-section-title-row">
+                    <span class="chat-section-title">Direct Messages</span>
+                    <button id="chat-dm-new" class="chat-icon-button" type="button" aria-label="Find people">
+                        <span class="material-symbols-outlined">person_add</span>
+                    </button>
+                </div>
+                <div id="chat-dm-search" class="chat-dm-search" hidden>
+                    <input id="chat-dm-search-input" type="search" placeholder="Find users" autocomplete="off">
+                    <div id="chat-dm-results" class="chat-dm-results"></div>
+                </div>
+                <div id="chat-dm-list" class="chat-list"></div>
             </div>
         </section>
+
+        <section class="chat-main-panel">
+            <header class="chat-topbar">
+                <button class="chat-icon-button chat-mobile-only" type="button" data-open-rail aria-label="Open channels">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <div class="chat-room-title">
+                    <span id="chat-room-symbol">#</span>
+                    <div>
+                        <h2 id="chat-room-name">Chat</h2>
+                        <p id="chat-room-meta">Loading...</p>
+                    </div>
+                </div>
+                <button class="chat-icon-button chat-mobile-only" type="button" data-open-members aria-label="Open members">
+                    <span class="material-symbols-outlined">group</span>
+                </button>
+            </header>
+
+            <div id="chat-status" class="chat-status" hidden></div>
+            <div id="chat-history-limited" class="chat-history-limited" hidden>
+                <span>Older Discord history lives in the server.</span>
+                <a id="chat-join-discord" href="#" target="_blank" rel="noopener noreferrer">Join Discord</a>
+            </div>
+            <div id="chat-messages" class="chat-messages" aria-live="polite"></div>
+
+            <form id="chat-composer" class="chat-composer" autocomplete="off">
+                <textarea id="chat-message-input" rows="1" maxlength="2000" placeholder="Message #chat"></textarea>
+                <button class="chat-send-button" type="submit" aria-label="Send message">
+                    <span class="material-symbols-outlined">send</span>
+                </button>
+            </form>
+        </section>
+
+        <aside class="chat-members" id="chat-members" aria-label="Active users and profile">
+            <div class="chat-members-head">
+                <div>
+                    <p>Active</p>
+                    <h2 id="chat-members-count">0 users</h2>
+                </div>
+                <button class="chat-icon-button chat-collapse-members" type="button" data-collapse-members aria-label="Collapse active users">
+                    <span class="material-symbols-outlined">right_panel_close</span>
+                </button>
+                <button class="chat-icon-button chat-mobile-close" type="button" data-close-members aria-label="Close members">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <button class="chat-members-restore" type="button" data-restore-members aria-label="Show active users">
+                <span class="material-symbols-outlined">group</span>
+                <span id="chat-members-restore-count">0</span>
+            </button>
+            <div id="chat-member-list" class="chat-member-list"></div>
+            <div id="chat-profile-panel" class="chat-profile-panel" hidden></div>
+        </aside>
     </main>
-    <global class="thefooter"></global>
+    <audio id="chat-audio" preload="auto" src="{{ url_for('static', filename='audio/task-pop.mp3') }}"></audio>
 </body>
 </html>

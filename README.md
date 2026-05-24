@@ -3,3 +3,6 @@ Startup command:
 
 Tailwind import guard:
 ```python scripts/check_tailwind_imports.py```
+
+source .venv/bin/activate
+flask --app app:create_app run --host 127.0.0.1 --port 8000

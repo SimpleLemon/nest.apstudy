@@ -13,7 +13,7 @@ from flask_login import login_required, current_user
 
 from appwrite.exception import AppwriteException
 from appwrite.query import Query
-from appwrite_client import COLLECTIONS
+from appwrite_client import COLLECTIONS, DATABASE_ID
 from appwrite_helpers import first_row
 from services.atlas_client import DEFAULT_TERM
 
@@ -23,10 +23,14 @@ logger = logging.getLogger(__name__)
 
 def _user_payload():
     return {
+        "id": str(current_user.id),
         "name": current_user.name,
+        "username": current_user.username,
         "email": current_user.email,
         "picture": current_user.picture_url,
         "emory_student": current_user.emory_student,
+        "school": current_user.school,
+        "school_key": getattr(current_user, "school_key", None),
     }
 
 
@@ -203,10 +207,12 @@ def notes_editor(note_id):
     if not current_user.onboarding_complete:
         return redirect(url_for("settings.onboarding"))
 
+    user_settings = _load_user_settings()
     return render_template(
         "notes_editor.html",
         user=_user_payload(),
         note_id=note_id,
+        theme_preference=_theme_from_settings(user_settings),
     )
 
 
@@ -216,8 +222,13 @@ def chat():
     """Render the chat page."""
     if not current_user.onboarding_complete:
         return redirect(url_for("settings.onboarding"))
-    
+
+    user_settings = _load_user_settings()
     return render_template(
         "chat.html",
         user=_user_payload(),
+        theme_preference=_theme_from_settings(user_settings),
+        discord_invite_url=os.environ.get("DISCORD_INVITE_URL", ""),
+        appwrite_database_id=DATABASE_ID or "",
+        chat_events_table_id=COLLECTIONS.get("chat_events", "chat_events"),
     )

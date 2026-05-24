@@ -47,6 +47,12 @@ test("builds fresh default recurrence rules", () => {
     assert.notEqual(first, second);
 });
 
+test("computes default recurrence end date one clamped month minus one day ahead", () => {
+    assert.equal(utils.defaultRecurrenceEndDate(new Date(2026, 4, 22)), "2026-06-21");
+    assert.equal(utils.defaultRecurrenceEndDate(new Date(2026, 0, 31)), "2026-02-27");
+    assert.equal(utils.defaultRecurrenceEndDate(new Date(2024, 0, 31)), "2024-02-28");
+});
+
 test("sorts task lists and tasks with stable fallback fields", () => {
     assert.deepEqual(
         utils.sortedLists([

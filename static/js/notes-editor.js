@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import {
     useCreateBlockNote,
     FormattingToolbar,
+    FormattingToolbarController,
     BasicTextStyleButton,
     NestBlockButton,
     UnnestBlockButton,
@@ -33,26 +34,13 @@ import {
 const noteId = window.location.pathname.split('/').pop();
 const SAVE_DEBOUNCE_MS = 800;
 const SAVED_TIME_REFRESH_MS = 60000;
-const COLOR_OPTIONS = [
-    { key: 'default', label: 'Default', text: 'currentColor', highlight: 'transparent' },
-    { key: 'gray', label: 'Gray', text: '#9b9a97', highlight: '#ebeced' },
-    { key: 'brown', label: 'Brown', text: '#64473a', highlight: '#e9e5e3' },
-    { key: 'red', label: 'Red', text: '#e03e3e', highlight: '#fbe4e4' },
-    { key: 'orange', label: 'Orange', text: '#d9730d', highlight: '#f6e9d9' },
-    { key: 'yellow', label: 'Yellow', text: '#dfab01', highlight: '#fbf3db' },
-    { key: 'green', label: 'Green', text: '#4d6461', highlight: '#ddedea' },
-    { key: 'blue', label: 'Blue', text: '#0b6e99', highlight: '#ddebf1' },
-    { key: 'purple', label: 'Purple', text: '#6940a5', highlight: '#eae4f2' },
-    { key: 'pink', label: 'Pink', text: '#ad1a72', highlight: '#f4dfeb' },
-];
-const FONT_SIZE_OPTIONS = [12, 14, 16, 18, 20, 24, 28, 32, 40];
-const DEFAULT_FONT_SIZE = 16;
-const BLOCK_STYLE_OPTIONS = [
+const TEXT_BLOCK_OPTIONS = [
     { label: 'Paragraph', type: 'paragraph', icon: 'subject' },
     { label: 'Heading 1', type: 'heading', props: { level: 1 }, icon: 'text:H1' },
     { label: 'Heading 2', type: 'heading', props: { level: 2 }, icon: 'text:H2' },
     { label: 'Heading 3', type: 'heading', props: { level: 3 }, icon: 'text:H3' },
-    { label: 'Quote', type: 'quote', icon: 'format_quote' },
+];
+const LIST_STYLE_OPTIONS = [
     { label: 'Bulleted list', type: 'bulletListItem', icon: 'format_list_bulleted' },
     { label: 'Numbered list', type: 'numberedListItem', icon: 'format_list_numbered' },
     { label: 'Checklist', type: 'checkListItem', icon: 'checklist' },
@@ -95,10 +83,6 @@ function buildLoadingIndicatorHtml(label = 'Loading...', options = {}) {
     return window.APStudyLoader.html(label, options);
 }
 
-function getColorOption(colorKey) {
-    return COLOR_OPTIONS.find((option) => option.key === colorKey) || COLOR_OPTIONS[0];
-}
-
 function isMacPlatform() {
     const platform = navigator.userAgentData?.platform || navigator.platform || '';
     return /mac|iphone|ipad|ipod/i.test(platform);
@@ -125,7 +109,8 @@ function tooltipForLabel(label) {
         link: `Create link (${shortcutLabel(['Mod', 'K'])})`,
         nest: 'Indent block (Tab)',
         unnest: 'Outdent block (Shift Tab)',
-        colors: 'Text color',
+        lists: 'List style',
+        'block style': 'Block style',
     };
 
     return tooltipMap[normalizedLabel] || label;
@@ -330,22 +315,44 @@ function isBlockStyleSelected(block, option) {
     return Object.entries(option.props).every(([key, value]) => block.props?.[key] === value);
 }
 
-function BlockStyleDropdown() {
+function ToolbarGroup({ label, children }) {
+    return React.createElement(
+        'div',
+        {
+            className: 'notes-toolbar-group',
+            role: 'group',
+            'aria-label': label,
+        },
+        children
+    );
+}
+
+function BlockStyleDropdown({
+    options,
+    fallbackLabel = 'Block style',
+    fallbackIcon = 'subject',
+    triggerClassName = '',
+    showLabel = true,
+}) {
     const Components = useComponentsContext();
     const editor = useBlockNoteEditor();
     const selectedBlocks = useSelectedBlocks(editor);
     const [block, setBlock] = React.useState(editor.getTextCursorPosition().block);
     const filteredOptions = React.useMemo(
-        () => BLOCK_STYLE_OPTIONS.filter((option) => option.type in editor.schema.blockSchema),
-        [editor]
+        () => options.filter((option) => option.type in editor.schema.blockSchema),
+        [editor, options]
     );
     const selectedOption = filteredOptions.find((option) => isBlockStyleSelected(block, option));
+    const displayedOption = selectedOption || {
+        label: fallbackLabel,
+        icon: fallbackIcon,
+    };
 
     useEditorContentOrSelectionChange(() => {
         setBlock(editor.getTextCursorPosition().block);
     }, editor);
 
-    if (!selectedOption || !editor.isEditable) return null;
+    if (!filteredOptions.length || !editor.isEditable) return null;
 
     const selectBlockStyle = (option) => {
         editor.focus();
@@ -367,13 +374,15 @@ function BlockStyleDropdown() {
                 'button',
                 {
                     type: 'button',
-                    className: 'notes-toolbar-menu-trigger notes-style-trigger',
-                    title: 'Block style',
-                    'aria-label': 'Block style',
+                    className: `notes-toolbar-menu-trigger ${triggerClassName}`.trim(),
+                    title: fallbackLabel,
+                    'aria-label': fallbackLabel,
                     onMouseDown: (event) => event.preventDefault(),
                 },
-                React.createElement(ToolbarIcon, { name: selectedOption.icon }),
-                React.createElement('span', { className: 'notes-toolbar-trigger-label' }, selectedOption.label),
+                React.createElement(ToolbarIcon, { name: displayedOption.icon }),
+                showLabel
+                    ? React.createElement('span', { className: 'notes-toolbar-trigger-label' }, displayedOption.label)
+                    : null,
                 React.createElement(MenuChevron, null)
             )
         ),
@@ -510,302 +519,55 @@ function AlignmentDropdown() {
     );
 }
 
-function normalizeFontSize(value) {
-    if (typeof value !== 'string') return DEFAULT_FONT_SIZE;
-    const parsed = Number.parseInt(value, 10);
-    return Number.isFinite(parsed) ? parsed : DEFAULT_FONT_SIZE;
-}
-
-function clampFontSize(value) {
-    const parsed = Number.parseInt(value, 10);
-    if (!Number.isFinite(parsed)) return DEFAULT_FONT_SIZE;
-
-    return Math.min(96, Math.max(8, parsed));
-}
-
-function nearestFontSizeIndex(fontSize) {
-    const nearest = FONT_SIZE_OPTIONS.reduce((bestIndex, option, index) => {
-        const bestDistance = Math.abs(FONT_SIZE_OPTIONS[bestIndex] - fontSize);
-        const nextDistance = Math.abs(option - fontSize);
-        return nextDistance < bestDistance ? index : bestIndex;
-    }, 0);
-
-    return nearest;
-}
-
-function FontSizeControl() {
-    const Components = useComponentsContext();
-    const editor = useBlockNoteEditor();
-    const selectedBlocks = useSelectedBlocks(editor);
-    const fontSizeInSchema = editor.schema.styleSchema.fontSize?.propSchema === 'string';
-    const [currentFontSize, setCurrentFontSize] = React.useState(
-        normalizeFontSize(editor.getActiveStyles().fontSize)
-    );
-    const [fontSizeDraft, setFontSizeDraft] = React.useState(String(currentFontSize));
-    const show = fontSizeInSchema && selectedBlocks.some((block) => block.content !== undefined);
-
-    useEditorContentOrSelectionChange(() => {
-        if (fontSizeInSchema) {
-            const nextFontSize = normalizeFontSize(editor.getActiveStyles().fontSize);
-            setCurrentFontSize(nextFontSize);
-            setFontSizeDraft(String(nextFontSize));
-        }
-    }, editor);
-
-    const applyFontSize = React.useCallback((fontSize) => {
-        if (fontSize === DEFAULT_FONT_SIZE) {
-            editor.removeStyles({ fontSize: `${fontSize}px` });
-        } else {
-            editor.addStyles({ fontSize: `${fontSize}px` });
-        }
-
-        setCurrentFontSize(fontSize);
-        window.setTimeout(() => {
-            editor.focus();
-        });
-    }, [editor]);
-
-    const applyDraftFontSize = React.useCallback(() => {
-        const nextFontSize = clampFontSize(fontSizeDraft);
-        applyFontSize(nextFontSize);
-        setFontSizeDraft(String(nextFontSize));
-    }, [applyFontSize, fontSizeDraft]);
-
-    if (!show || !editor.isEditable) return null;
-
-    const currentIndex = nearestFontSizeIndex(currentFontSize);
-    const smallerSize = FONT_SIZE_OPTIONS[Math.max(0, currentIndex - 1)];
-    const largerSize = FONT_SIZE_OPTIONS[Math.min(FONT_SIZE_OPTIONS.length - 1, currentIndex + 1)];
-
+function ContextualNotesToolbar() {
     return React.createElement(
-        'div',
-        { className: 'notes-font-size-control', role: 'group', 'aria-label': 'Font size' },
-        React.createElement(
-            'button',
-            {
-                type: 'button',
-                className: 'notes-font-size-step',
-                title: 'Decrease font size',
-                'aria-label': 'Decrease font size',
-                disabled: currentFontSize <= FONT_SIZE_OPTIONS[0],
-                onMouseDown: (event) => event.preventDefault(),
-                onClick: () => applyFontSize(smallerSize),
-            },
-            React.createElement(ToolbarIcon, { name: 'remove' })
-        ),
-        React.createElement(
-            Components.Generic.Menu.Root,
-            { position: 'bottom-start' },
-            React.createElement(
-                Components.Generic.Menu.Trigger,
-                null,
-                React.createElement(
-                    'button',
-                    {
-                        type: 'button',
-                        className: 'notes-font-size-value',
-                        title: 'Font size',
-                        'aria-label': 'Font size',
-                        onMouseDown: (event) => event.preventDefault(),
-                    },
-                    React.createElement('span', { className: 'notes-font-size-value-text' }, currentFontSize),
-                    React.createElement(MenuChevron, null)
-                )
-            ),
-            React.createElement(
-                Components.Generic.Menu.Dropdown,
-                { className: 'bn-menu-dropdown notes-toolbar-menu notes-font-size-menu' },
-                React.createElement(
-                    'div',
-                    {
-                        className: 'notes-font-size-custom',
-                        onClick: (event) => event.stopPropagation(),
-                        onMouseDown: (event) => event.stopPropagation(),
-                    },
-                    React.createElement('label', { className: 'notes-font-size-custom-label', htmlFor: 'notes-font-size-input' }, 'Custom size'),
-                    React.createElement(
-                        'div',
-                        { className: 'notes-font-size-input-row' },
-                        React.createElement('input', {
-                            id: 'notes-font-size-input',
-                            className: 'notes-font-size-input',
-                            inputMode: 'numeric',
-                            min: '8',
-                            max: '96',
-                            type: 'number',
-                            value: fontSizeDraft,
-                            onChange: (event) => setFontSizeDraft(event.target.value),
-                            onKeyDown: (event) => {
-                                if (event.key === 'Enter') {
-                                    event.preventDefault();
-                                    applyDraftFontSize();
-                                }
-                            },
-                        }),
-                        React.createElement(
-                            'button',
-                            {
-                                type: 'button',
-                                className: 'notes-font-size-apply',
-                                onClick: applyDraftFontSize,
-                            },
-                            'Apply'
-                        )
-                    )
-                ),
-                FONT_SIZE_OPTIONS.map((fontSize) => (
-                    React.createElement(
-                        Components.Generic.Menu.Item,
-                        {
-                            key: fontSize,
-                            className: 'notes-toolbar-menu-item',
-                            checked: currentFontSize === fontSize,
-                            onClick: () => applyFontSize(fontSize),
-                        },
-                        `${fontSize}px`
-                    )
-                ))
-            )
-        ),
-        React.createElement(
-            'button',
-            {
-                type: 'button',
-                className: 'notes-font-size-step',
-                title: 'Increase font size',
-                'aria-label': 'Increase font size',
-                disabled: currentFontSize >= FONT_SIZE_OPTIONS[FONT_SIZE_OPTIONS.length - 1],
-                onMouseDown: (event) => event.preventDefault(),
-                onClick: () => applyFontSize(largerSize),
-            },
-            React.createElement(ToolbarIcon, { name: 'add' })
-        )
-    );
-}
-
-function ColorSwatch({ color, type }) {
-    const colorOption = getColorOption(color);
-    const backgroundColor = type === 'highlight' ? colorOption.highlight : colorOption.text;
-    const className = [
-        'notes-color-swatch',
-        type === 'highlight' ? 'notes-color-swatch-highlight' : 'notes-color-swatch-text',
-        color === 'default' ? 'notes-color-swatch-default' : '',
-    ].filter(Boolean).join(' ');
-
-    return React.createElement('span', {
-        className,
-        style: { '--notes-swatch-color': backgroundColor },
-        'aria-hidden': 'true',
-    });
-}
-
-function ColorMenuSection({ title, type, currentColor, onSelect }) {
-    const Components = useComponentsContext();
-
-    return React.createElement(
-        React.Fragment,
+        FormattingToolbar,
         null,
-        React.createElement(Components.Generic.Menu.Label, { className: 'notes-color-menu-label' }, title),
-        COLOR_OPTIONS.map((color) => (
-            React.createElement(
-                Components.Generic.Menu.Item,
-                {
-                    key: `${type}-${color.key}`,
-                    className: 'notes-color-menu-item',
-                    checked: currentColor === color.key,
-                    icon: React.createElement(ColorSwatch, { color: color.key, type }),
-                    onClick: () => onSelect(color.key),
-                },
-                color.label
-            )
-        ))
-    );
-}
-
-function TextColorDropdown() {
-    const Components = useComponentsContext();
-    const editor = useBlockNoteEditor();
-    const selectedBlocks = useSelectedBlocks(editor);
-    const textColorInSchema = editor.schema.styleSchema.textColor?.propSchema === 'string';
-    const highlightColorInSchema = editor.schema.styleSchema.backgroundColor?.propSchema === 'string';
-    const [currentTextColor, setCurrentTextColor] = React.useState(
-        textColorInSchema ? editor.getActiveStyles().textColor || 'default' : 'default'
-    );
-    const [currentHighlightColor, setCurrentHighlightColor] = React.useState(
-        highlightColorInSchema ? editor.getActiveStyles().backgroundColor || 'default' : 'default'
-    );
-
-    useEditorContentOrSelectionChange(() => {
-        if (textColorInSchema) {
-            setCurrentTextColor(editor.getActiveStyles().textColor || 'default');
-        }
-        if (highlightColorInSchema) {
-            setCurrentHighlightColor(editor.getActiveStyles().backgroundColor || 'default');
-        }
-    }, editor);
-
-    const applyStyle = React.useCallback((styleName, color) => {
-        if (color === 'default') {
-            editor.removeStyles({ [styleName]: color });
-        } else {
-            editor.addStyles({ [styleName]: color });
-        }
-
-        window.setTimeout(() => {
-            editor.focus();
-        });
-    }, [editor]);
-
-    const show = React.useMemo(() => {
-        if (!textColorInSchema && !highlightColorInSchema) return false;
-        return selectedBlocks.some((block) => block.content !== undefined);
-    }, [highlightColorInSchema, selectedBlocks, textColorInSchema]);
-
-    if (!show || !editor.isEditable) return null;
-
-    return React.createElement(
-        Components.Generic.Menu.Root,
-        { position: 'bottom-start' },
         React.createElement(
-            Components.Generic.Menu.Trigger,
-            null,
-            React.createElement(Components.FormattingToolbar.Button, {
-                className: 'bn-button notes-color-trigger',
-                label: 'Text color',
-                mainTooltip: 'Text color',
-                icon: React.createElement(
-                    'span',
-                    {
-                        className: 'notes-color-trigger-icon',
-                        style: {
-                            '--notes-current-text-color': getColorOption(currentTextColor).text,
-                            '--notes-current-highlight-color': getColorOption(currentHighlightColor).highlight,
-                        },
-                        'aria-hidden': 'true',
-                    },
-                    'A'
-                ),
+            ToolbarGroup,
+            { label: 'Block type' },
+            React.createElement(BlockStyleDropdown, {
+                options: TEXT_BLOCK_OPTIONS,
+                fallbackLabel: 'Block style',
+                fallbackIcon: 'subject',
+                triggerClassName: 'notes-style-trigger',
             })
         ),
         React.createElement(
-            Components.Generic.Menu.Dropdown,
-            { className: 'bn-menu-dropdown bn-color-picker-dropdown notes-color-menu' },
-            textColorInSchema
-                ? React.createElement(ColorMenuSection, {
-                    title: 'Text color',
-                    type: 'text',
-                    currentColor: currentTextColor,
-                    onSelect: (color) => applyStyle('textColor', color),
-                })
-                : null,
-            highlightColorInSchema
-                ? React.createElement(ColorMenuSection, {
-                    title: 'Highlight color',
-                    type: 'highlight',
-                    currentColor: currentHighlightColor,
-                    onSelect: (color) => applyStyle('backgroundColor', color),
-                })
-                : null
+            ToolbarGroup,
+            { label: 'Text style' },
+            React.createElement(BasicTextStyleButton, { basicTextStyle: 'bold' }),
+            React.createElement(BasicTextStyleButton, { basicTextStyle: 'italic' }),
+            React.createElement(BasicTextStyleButton, { basicTextStyle: 'underline' }),
+            React.createElement(BasicTextStyleButton, { basicTextStyle: 'strike' })
+        ),
+        React.createElement(
+            ToolbarGroup,
+            { label: 'Code' },
+            React.createElement(BasicTextStyleButton, { basicTextStyle: 'code' })
+        ),
+        React.createElement(
+            ToolbarGroup,
+            { label: 'Alignment' },
+            React.createElement(AlignmentDropdown, null)
+        ),
+        React.createElement(
+            ToolbarGroup,
+            { label: 'Lists' },
+            React.createElement(BlockStyleDropdown, {
+                options: LIST_STYLE_OPTIONS,
+                fallbackLabel: 'Lists',
+                fallbackIcon: 'format_list_bulleted',
+                triggerClassName: 'notes-list-trigger',
+                showLabel: false,
+            }),
+            React.createElement(NestBlockButton, null),
+            React.createElement(UnnestBlockButton, null)
+        ),
+        React.createElement(
+            ToolbarGroup,
+            { label: 'Link' },
+            React.createElement(CreateLinkButton, null)
         )
     );
 }
@@ -856,22 +618,9 @@ function NoteEditor({ initialContent }) {
                 triggerDebouncedSave();
             },
         },
-        React.createElement(
-            FormattingToolbar,
-            null,
-            React.createElement(BlockStyleDropdown, null),
-            React.createElement(FontSizeControl, null),
-            React.createElement(BasicTextStyleButton, { basicTextStyle: 'bold' }),
-            React.createElement(BasicTextStyleButton, { basicTextStyle: 'italic' }),
-            React.createElement(BasicTextStyleButton, { basicTextStyle: 'underline' }),
-            React.createElement(BasicTextStyleButton, { basicTextStyle: 'strike' }),
-            React.createElement(BasicTextStyleButton, { basicTextStyle: 'code' }),
-            React.createElement(TextColorDropdown, null),
-            React.createElement(AlignmentDropdown, null),
-            React.createElement(NestBlockButton, null),
-            React.createElement(UnnestBlockButton, null),
-            React.createElement(CreateLinkButton, null)
-        ),
+        React.createElement(FormattingToolbarController, {
+            formattingToolbar: ContextualNotesToolbar,
+        }),
         React.createElement(SideMenuController, { sideMenu: CleanSideMenu })
     );
 }

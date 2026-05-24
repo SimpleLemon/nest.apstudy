@@ -67,6 +67,7 @@ const SETTINGS_ENDPOINTS = {
   preferences: '/settings/api/interface-preferences',
   exportData: '/settings/api/export',
   deleteAccount: '/settings/api/account/delete',
+  universities: '/api/universities',
 };
 
 function warnSettingsStorageFailure(action, error) {
@@ -146,6 +147,7 @@ function cacheElements() {
   elements.userId = document.getElementById('settings-user-id');
   elements.accountUsername = document.getElementById('settings-username');
   elements.school = document.getElementById('settings-school');
+  elements.universityOptions = document.getElementById('settings-university-options');
   elements.major = document.getElementById('settings-major');
   elements.graduationYear = document.getElementById('settings-graduation-year');
   elements.storageUsed = Array.from(document.querySelectorAll('[data-storage-used]'));
@@ -253,6 +255,7 @@ function bindProfilePreviewControls() {
   elements.username?.addEventListener('input', updateProfileDirtyState);
   elements.school?.addEventListener('input', renderProfilePreview);
   elements.school?.addEventListener('input', updateProfileDirtyState);
+  elements.school?.addEventListener('input', debounceSchoolSuggestions);
   elements.major?.addEventListener('input', renderProfilePreview);
   elements.major?.addEventListener('input', updateProfileDirtyState);
   elements.graduationYear?.addEventListener('input', renderProfilePreview);
@@ -808,6 +811,7 @@ async function savePreferences() {
     email_notifications: getToggleState('email_notifications'),
     product_updates: getToggleState('product_updates'),
     task_sound_enabled: getToggleState('task_sound_enabled'),
+    chat_sound_enabled: getToggleState('chat_sound_enabled'),
     language: elements.language?.value || 'en',
     timezone: elements.timezone?.value.trim() || '',
   };
@@ -830,6 +834,35 @@ async function savePreferences() {
     showToast('Preferences saved.', 'success');
   } catch (error) {
     showToast(error.message || 'Unable to save preferences.', 'error');
+  }
+}
+
+let schoolSuggestionTimer = null;
+
+function debounceSchoolSuggestions() {
+  if (!elements.school || !elements.universityOptions) {
+    return;
+  }
+  window.clearTimeout(schoolSuggestionTimer);
+  schoolSuggestionTimer = window.setTimeout(() => {
+    void loadSchoolSuggestions(elements.school.value);
+  }, 180);
+}
+
+async function loadSchoolSuggestions(query) {
+  const term = String(query || '').trim();
+  if (term.length < 2 || !elements.universityOptions) {
+    return;
+  }
+  try {
+    const data = await fetchJson(`${SETTINGS_ENDPOINTS.universities}?q=${encodeURIComponent(term)}`);
+    const results = Array.isArray(data.results) ? data.results : [];
+    elements.universityOptions.innerHTML = results.map((school) => {
+      const label = [school.name, school.city, school.state].filter(Boolean).join(' - ');
+      return `<option value="${escapeHtml(school.name)}" label="${escapeHtml(label)}"></option>`;
+    }).join('');
+  } catch (error) {
+    console.warn('Unable to load school suggestions', error);
   }
 }
 

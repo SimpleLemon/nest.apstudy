@@ -3225,11 +3225,6 @@ function hexToRgb(hex) {
         b: parseInt(normalized.slice(4, 6), 16),
     };
 }
-function rgbToHex(r, g, b) {
-    const clamp = (n) => Math.max(0, Math.min(255, n));
-    const toHex = (n) => clamp(n).toString(16).padStart(2, "0");
-    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-}
 function hexToRgba(hex, alpha) {
     const rgb = hexToRgb(hex);
     if (!rgb) return `rgba(99, 102, 241, ${alpha})`;

@@ -94,6 +94,7 @@
             <a class="admin-tab {% if section == 'calendars' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='calendars') }}">Calendars</a>
             <a class="admin-tab {% if section == 'courses' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='courses') }}">Courses</a>
             <a class="admin-tab {% if section == 'seat_tracks' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='seat_tracks') }}">Seat Tracks</a>
+            <a class="admin-tab {% if section == 'chat' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='chat') }}">Chat History</a>
         </nav>
 
         {% if section == 'overview' %}
@@ -128,6 +129,22 @@
                         <div class="admin-field">
                             <span class="admin-field-label">Seat Tracks</span>
                             <span class="admin-field-value">{{ overview_counts.seat_tracks if overview_counts else "--" }}</span>
+                        </div>
+                        <div class="admin-field">
+                            <span class="admin-field-label">Chat Messages</span>
+                            <span class="admin-field-value">{{ overview_counts.chat_messages if overview_counts else "--" }}</span>
+                        </div>
+                        <div class="admin-field">
+                            <span class="admin-field-label">Deleted Chat Messages</span>
+                            <span class="admin-field-value">{{ overview_counts.deleted_chat_messages if overview_counts else "--" }}</span>
+                        </div>
+                        <div class="admin-field">
+                            <span class="admin-field-label">DM Threads</span>
+                            <span class="admin-field-value">{{ overview_counts.dm_threads if overview_counts else "--" }}</span>
+                        </div>
+                        <div class="admin-field">
+                            <span class="admin-field-label">Chat Blocks</span>
+                            <span class="admin-field-value">{{ overview_counts.chat_blocks if overview_counts else "--" }}</span>
                         </div>
                     </div>
                 </div>
@@ -692,6 +709,138 @@
                         </table>
                     {% else %}
                         <p>No seat tracks found.</p>
+                    {% endif %}
+                </div>
+            </section>
+        {% endif %}
+
+        {% if section == 'chat' %}
+            {% set messages = section_data.messages %}
+            {% set dm_threads = section_data.dm_threads %}
+            {% set blocks = section_data.blocks %}
+            <section class="admin-section">
+                <div class="admin-card">
+                    <h2 class="admin-title">Chat Messages</h2>
+                    <p class="admin-subtitle">Includes messages deleted by the user so abuse and spam reports can be audited.</p>
+                    {% if messages %}
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Created</th>
+                                    <th>Status</th>
+                                    <th>Scope</th>
+                                    <th>Source</th>
+                                    <th>Content</th>
+                                    <th>Deleted</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for message in messages %}
+                                    <tr>
+                                        <td>{{ message.get('created_at') or '--' }}</td>
+                                        <td>
+                                            {% if message.get('deleted_at') %}
+                                                <span class="admin-badge admin-badge--muted">Deleted</span>
+                                            {% else %}
+                                                <span class="admin-badge">Visible</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if message.get('channel_id') %}
+                                                Channel: {{ message.get('channel_id') }}
+                                            {% elif message.get('thread_id') %}
+                                                DM: {{ message.get('thread_id') }}
+                                            {% else %}
+                                                --
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ message.get('source') or 'appwrite' }}</td>
+                                        <td>{{ message.get('content') or '--' }}</td>
+                                        <td>{{ message.get('deleted_at') or '--' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">
+                                            <details>
+                                                <summary>Raw message data</summary>
+                                                <pre class="admin-code-block">{{ message | tojson }}</pre>
+                                            </details>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No chat messages found.</p>
+                    {% endif %}
+                </div>
+
+                <div class="admin-card">
+                    <h2 class="admin-title">Direct Message Threads</h2>
+                    {% if dm_threads %}
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Thread</th>
+                                    <th>Participant A</th>
+                                    <th>Participant B</th>
+                                    <th>Last Message</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for thread in dm_threads %}
+                                    <tr>
+                                        <td>{{ thread.get('$id') or thread.get('id') }}</td>
+                                        <td>{{ thread.get('participant_a') or '--' }}</td>
+                                        <td>{{ thread.get('participant_b') or '--' }}</td>
+                                        <td>{{ thread.get('last_message_at') or thread.get('updated_at') or '--' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <details>
+                                                <summary>Raw thread data</summary>
+                                                <pre class="admin-code-block">{{ thread | tojson }}</pre>
+                                            </details>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No direct message threads found.</p>
+                    {% endif %}
+                </div>
+
+                <div class="admin-card">
+                    <h2 class="admin-title">Blocks</h2>
+                    {% if blocks %}
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Blocker</th>
+                                    <th>Blocked</th>
+                                    <th>Created</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for block in blocks %}
+                                    <tr>
+                                        <td>{{ block.get('blocker_id') or '--' }}</td>
+                                        <td>{{ block.get('blocked_id') or '--' }}</td>
+                                        <td>{{ block.get('created_at') or '--' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <details>
+                                                <summary>Raw block data</summary>
+                                                <pre class="admin-code-block">{{ block | tojson }}</pre>
+                                            </details>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No blocks found.</p>
                     {% endif %}
                 </div>
             </section>
