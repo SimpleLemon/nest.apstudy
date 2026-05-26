@@ -39,6 +39,7 @@ from blueprints.settings import (
     _settings_defaults,
     _validate_other_calendar_urls,
 )
+from services.discord_audit import emit_creation_event, format_actor
 
 calendar_bp = Blueprint("calendar", __name__)
 logger = logging.getLogger(__name__)
@@ -55,6 +56,7 @@ CALENDAR_SHARE_CODE_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmno
 CALENDAR_SHARE_DATE_SCOPES = {"all", "fixed", "rolling"}
 CALENDAR_SHARE_MIN_ROLLING_DAYS = 1
 CALENDAR_SHARE_MAX_ROLLING_DAYS = 366
+PREFERENCES_BATCH_LIMIT = 50
 
 
 def _canonical_feed_url(feed_url):
@@ -125,6 +127,33 @@ def _normalize_color(value):
         if all(ch in "0123456789abcdefABCDEF" for ch in hex_part):
             return f"#{hex_part.lower()}"
     raise ValueError("Color must be a valid #RRGGBB value.")
+
+
+def _calendar_preference_updates(payload):
+    updates = {}
+    if "color_hex" in payload and payload.get("color_hex") is not None:
+        updates["color_hex"] = _normalize_color(payload.get("color_hex"))
+    if "visible" in payload and payload.get("visible") is not None:
+        updates["visible"] = bool(payload.get("visible"))
+    if "display_name" in payload:
+        updates["display_name"] = _normalize_display_name(payload.get("display_name"))
+    return updates
+
+
+def _calendar_preference_unchanged(pref, updates):
+    if not pref:
+        return False
+    for key, value in updates.items():
+        current = pref.get(key)
+        if key == "display_name":
+            current = current or ""
+        if key == "color_hex" and isinstance(current, str):
+            current = current.lower()
+        if key == "visible" and current is not None:
+            current = bool(current)
+        if current != value:
+            return False
+    return True
 
 
 def _normalize_calendar_id(value):
@@ -1392,6 +1421,19 @@ def create_calendar_share():
         logger.exception("Failed to create calendar share")
         return jsonify({"error": "Unable to create calendar share."}), 500
 
+    emit_creation_event(
+        "Calendar Share Created",
+        actor=format_actor(current_user),
+        target=share.get("$id") or share.get("id"),
+        metadata={
+            "page_context": "calendar/shares",
+            "resource_type": "calendar_share",
+            "resource_id": share.get("$id") or share.get("id"),
+            "date_scope": config.get("date_scope"),
+            "include_all_calendars": config.get("include_all_calendars"),
+        },
+        color="green",
+    )
     return jsonify({"share": _calendar_share_payload(share)}), 201
 
 
@@ -1594,6 +1636,21 @@ def create_event():
         logger.exception("Failed to create user event")
         return jsonify({"error": "Unable to create event."}), 500
 
+    emit_creation_event(
+        "Calendar Event Created",
+        actor=format_actor(current_user),
+        target=title,
+        metadata={
+            "page_context": "calendar/events",
+            "resource_type": "user_event",
+            "resource_id": ev.get("$id") or ev.get("id"),
+            "calendar_id": calendar_id,
+            "is_all_day": all_day,
+            "start": format_datetime(start_dt),
+            "end": format_datetime(end_dt),
+        },
+        color="green",
+    )
     return jsonify({"success": True, "event": _serialize_user_event(ev)})
 
 
@@ -1884,24 +1941,34 @@ def update_calendar_preferences():
     """
     data = request.get_json() or {}
     calendar_name = data.get("calendar_name")
-    color_hex = data.get("color_hex")
-    visible = data.get("visible")
-    display_name = data.get("display_name")
 
     if not calendar_name:
         return jsonify({"error": "calendar_name is required"}), 400
 
     user_id = str(current_user.id)
-    updates = {}
-    if color_hex:
-        updates["color_hex"] = color_hex
-    if visible is not None:
-        updates["visible"] = bool(visible)
-    if display_name is not None:
-        updates["display_name"] = _normalize_display_name(display_name)
+    try:
+        updates = _calendar_preference_updates(data)
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
 
     try:
-        pref = _upsert_calendar_preference(user_id, calendar_name, updates)
+        pref = first_row(
+            COLLECTIONS["user_calendar_preferences"],
+            [
+                Query.equal("user_id", [user_id]),
+                Query.equal("calendar_name", [calendar_name]),
+            ],
+        )
+        if pref and updates and _calendar_preference_unchanged(pref, updates):
+            return jsonify({
+                "status": "ok",
+                "calendar_name": calendar_name,
+                "color_hex": pref.get("color_hex"),
+                "visible": pref.get("visible"),
+                "display_name": pref.get("display_name") or "",
+            })
+        if updates or not pref:
+            pref = _upsert_calendar_preference(user_id, calendar_name, updates)
     except AppwriteException:
         logger.exception("Failed to update calendar preference")
         return jsonify({"error": "Unable to update preferences."}), 500
@@ -1912,6 +1979,70 @@ def update_calendar_preferences():
         "color_hex": pref.get("color_hex"),
         "visible": pref.get("visible"),
         "display_name": pref.get("display_name") or "",
+    })
+
+
+@calendar_bp.route("/preferences/batch", methods=["POST"])
+@login_required
+def update_calendar_preferences_batch():
+    """
+    POST /api/calendar/preferences/batch
+    """
+    data = request.get_json() or {}
+    entries = data.get("preferences")
+    if not isinstance(entries, list):
+        return jsonify({"error": "preferences must be a list"}), 400
+    if len(entries) > PREFERENCES_BATCH_LIMIT:
+        return jsonify({"error": f"preferences batch must be <= {PREFERENCES_BATCH_LIMIT}"}), 400
+
+    user_id = str(current_user.id)
+    updated = []
+    skipped = []
+    errors = []
+
+    for index, entry in enumerate(entries):
+        if not isinstance(entry, dict):
+            logger.warning("Invalid calendar preference entry", extra={"index": index})
+            errors.append({"index": index, "error": "Invalid preference entry."})
+            continue
+        calendar_name = entry.get("calendar_name")
+        if not calendar_name:
+            logger.warning("Missing calendar_name in preference batch", extra={"index": index})
+            errors.append({"index": index, "error": "calendar_name is required."})
+            continue
+
+        try:
+            updates = _calendar_preference_updates(entry)
+        except ValueError as exc:
+            logger.warning("Invalid calendar preference update", extra={"calendar_name": calendar_name, "error": str(exc)})
+            errors.append({"calendar_name": calendar_name, "error": str(exc)})
+            continue
+
+        try:
+            pref = first_row(
+                COLLECTIONS["user_calendar_preferences"],
+                [
+                    Query.equal("user_id", [user_id]),
+                    Query.equal("calendar_name", [calendar_name]),
+                ],
+            )
+            if pref and updates and _calendar_preference_unchanged(pref, updates):
+                skipped.append(calendar_name)
+                continue
+            if updates or not pref:
+                _upsert_calendar_preference(user_id, calendar_name, updates)
+                updated.append(calendar_name)
+            else:
+                skipped.append(calendar_name)
+        except AppwriteException:
+            logger.exception("Failed to update calendar preference", extra={"calendar_name": calendar_name})
+            errors.append({"calendar_name": calendar_name, "error": "Unable to update preferences."})
+
+    return jsonify({
+        "status": "ok",
+        "updated": updated,
+        "skipped": skipped,
+        "errors": errors,
     })
 
 

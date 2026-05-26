@@ -7,7 +7,9 @@ from unittest.mock import Mock, patch
 from flask import Flask
 
 import blueprints.chat_api as chat_api
+import services.chat_presence as chat_presence
 from services.chat_formatting import render_markdown
+from services.chat_presence import CHAT_UNIVERSITY_LABEL_PREFIX, university_presence_label
 from services.universities import school_payload, search_universities
 import services.discord_bridge as discord_bridge
 
@@ -136,7 +138,7 @@ class TestChatFeature(unittest.TestCase):
             ['read("user:user-a")', 'read("user:user-b")'],
         )
 
-    def test_dm_thread_payload_reports_online_presence(self):
+    def test_dm_thread_payload_includes_presence_permissions(self):
         thread = {
             "$id": "thread-1",
             "participant_a": "user-1",
@@ -148,16 +150,113 @@ class TestChatFeature(unittest.TestCase):
             "name": "Test Account",
             "username": "test",
             "school": "Emory University",
+            "major": "Biology",
+            "graduation_year": "2027",
+            "education_level": "Undergraduate",
+            "banner_color": "#aabbcc",
+            "created_at": "2026-05-20T20:00:00Z",
         }
         with patch.object(chat_api, "current_user", self.user), \
                 patch.object(chat_api, "_other_participant", return_value=other_user), \
-                patch.object(chat_api, "_is_user_online", return_value=True), \
-                patch.object(chat_api, "_active_users", return_value=[]), \
                 patch.object(chat_api, "_is_blocked_between", return_value=False):
             payload = chat_api._thread_payload(thread)
 
-        self.assertEqual(payload["presence_status"], "online")
-        self.assertTrue(payload["other_user"]["online"])
+        self.assertEqual(payload["presence_status"], "offline")
+        self.assertFalse(payload["other_user"]["online"])
+        self.assertEqual(payload["presence_scope"], {
+            "scope_type": "thread",
+            "scope_id": "thread-1",
+            "room_key": "thread:thread-1",
+        })
+        self.assertEqual(
+            payload["presence_read_permissions"],
+            ['read("user:user-1")', 'read("user:user-2")'],
+        )
+        self.assertTrue(payload["presence_profile_resolve_allowed"])
+        self.assertEqual(payload["other_user"]["handle"], "@test")
+        self.assertEqual(payload["other_user"]["banner_color"], "#aabbcc")
+        self.assertEqual(payload["other_user"]["member_since"], "May 20, 2026")
+        self.assertTrue(payload["other_user"]["is_emory_school"])
+        self.assertTrue(payload["other_user"]["is_early_member"])
+        self.assertEqual(payload["other_user"]["major"], "Biology")
+
+    def test_channel_payload_includes_presence_permissions(self):
+        discord_payload = chat_api._channel_payload({
+            "$id": "nest_chat",
+            "kind": "discord",
+            "name": "chat",
+            "label": "Chat",
+            "approved": True,
+        })
+        self.assertEqual(discord_payload["presence_read_permissions"], ['read("users")'])
+        self.assertEqual(discord_payload["presence_scope"]["room_key"], "channel:nest_chat")
+        self.assertTrue(discord_payload["presence_profile_resolve_allowed"])
+
+        label = university_presence_label("emory-university")
+        self.assertTrue(label.startswith(CHAT_UNIVERSITY_LABEL_PREFIX))
+        university_payload = chat_api._channel_payload({
+            "$id": "uni_emory-university",
+            "kind": "university",
+            "name": "Emory University",
+            "label": "Emory University",
+            "school_key": "emory-university",
+            "approved": True,
+        })
+        self.assertEqual(university_payload["presence_read_permissions"], [f'read("label:{label}")'])
+
+    def test_current_appwrite_labels_accepts_dict_response(self):
+        users_service = Mock()
+        users_service.get.return_value = {"labels": ["student", "chat_uni_old"]}
+        with patch.object(chat_presence, "Users", return_value=users_service):
+            labels = chat_presence._current_appwrite_labels("user-1")
+
+        self.assertEqual(labels, ["student", "chat_uni_old"])
+
+    def test_current_appwrite_labels_accepts_model_dump_response(self):
+        account = Mock()
+        account.model_dump.return_value = {"labels": ["student"]}
+        del account.to_dict
+        users_service = Mock()
+        users_service.get.return_value = account
+        with patch.object(chat_presence, "Users", return_value=users_service):
+            labels = chat_presence._current_appwrite_labels("user-1")
+
+        self.assertEqual(labels, ["student"])
+        account.model_dump.assert_called_once_with(by_alias=True, mode="json")
+
+    def test_current_appwrite_labels_accepts_to_dict_response(self):
+        account = Mock()
+        account.to_dict.return_value = {"labels": ["mentor"]}
+        users_service = Mock()
+        users_service.get.return_value = account
+        with patch.object(chat_presence, "Users", return_value=users_service):
+            labels = chat_presence._current_appwrite_labels("user-1")
+
+        self.assertEqual(labels, ["mentor"])
+
+    def test_current_appwrite_labels_missing_labels_returns_empty_list(self):
+        users_service = Mock()
+        users_service.get.return_value = {}
+        with patch.object(chat_presence, "Users", return_value=users_service):
+            labels = chat_presence._current_appwrite_labels("user-1")
+
+        self.assertEqual(labels, [])
+
+    def test_sync_chat_presence_preserves_unrelated_labels(self):
+        label = university_presence_label("emory-university")
+        users_service = Mock()
+        users_service.get.return_value = {
+            "labels": ["student", f"{CHAT_UNIVERSITY_LABEL_PREFIX}obsolete"],
+        }
+        with patch.object(chat_presence, "Users", return_value=users_service), \
+                patch.object(chat_presence, "_school_has_approved_channel", return_value=True):
+            labels = chat_presence.sync_chat_presence_labels_for_user(
+                "user-1",
+                {"$id": "user-1", "school_key": "emory-university"},
+            )
+
+        self.assertEqual(labels, ["student", label])
+        users_service.update_labels.assert_called_once_with("user-1", ["student", label])
 
     def test_discord_webhook_send_suppresses_mentions(self):
         response = Mock()

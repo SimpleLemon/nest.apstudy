@@ -30,6 +30,14 @@ const PUBLIC_SHARE_CODE = document.body?.dataset.publicShareCode || "";
 const PUBLIC_CALENDAR_TITLE = document.body?.dataset.publicCalendarTitle || "Shared Calendar";
 const PUBLIC_CALENDAR_RANGE_LABEL = document.body?.dataset.publicCalendarRangeLabel || "Shared dates";
 const CALENDAR_SHARE_CLOSE_MS = 140;
+const PREFERENCE_SAVE_DELAY_MS = 1000;
+const PREFERENCE_SAVE_TIMEOUT_MS = 5000;
+const PREFERENCE_SAVE_RETRY_DELAYS_MS = [1000, 3000];
+const PREFERENCE_SAVE_WARNING_COOLDOWN_MS = 60000;
+const PREFERENCE_BATCH_LIMIT = 50;
+const PREFERENCE_BATCH_ENDPOINT = "/api/calendar/preferences/batch";
+const PREFERENCE_LOAD_RETRY_COOLDOWN_MS = 15000;
+const TOGGLE_REFRESH_DELAY_MS = 1000;
 /* ── Application State ─────────────────────────────────────────────────────── */
 const state = {
     events: [],
@@ -86,14 +94,29 @@ const state = {
         sourceCreateModalEl: null,
         contextAnchorEl: null,
         contextCalendarName: null,
-        saveTimers: {},
-        pendingCalendars: new Set(),
         weeklyAutoScrollKey: null,
         hoverCardEl: null,
         hoverCardAnchorEl: null,
         hoverCardHideTimer: null,
         expandedUpcomingRefs: new Set(),
         shareModalEl: null,
+        preferenceDirty: new Set(),
+        preferenceFlushTimer: null,
+        preferenceInFlight: false,
+        preferenceRetryCount: 0,
+        preferenceRetryTimer: null,
+        preferenceNotice: "",
+        preferenceNoticeAt: 0,
+        toggleRefreshTimer: null,
+        toggleRefreshNeedsFeed: false,
+        toggleRefreshNeedsEvents: false,
+    },
+    preferences: {
+        loaded: false,
+        loading: null,
+        cache: {},
+        lastLoadedAt: null,
+        lastAttemptAt: null,
     },
 };
 function initCalendarState() {
@@ -224,82 +247,226 @@ function writeCalendarStateToStorage() {
 function trackCalendarMutation(request, label = "calendar-save") {
     return window.APStudyPendingMutations?.track(request, label) || request;
 }
-function persistCalendarPreference(calendarName) {
-    if (state.public.readOnly) return Promise.resolve();
-    const pref = state.calendars[calendarName];
-    if (!pref) return Promise.resolve();
-    state.ui.pendingCalendars.add(calendarName);
-    renderCalendarMenu();
-    return trackCalendarMutation(fetch("/api/calendar/preferences", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            calendar_name: calendarName,
-            color_hex: pref.color,
-            visible: pref.visible,
-        }),
-    })).catch((err) => {
-        console.error("Failed to save preference:", err);
-    }).finally(() => {
-        state.ui.pendingCalendars.delete(calendarName);
-        renderCalendarMenu();
+function fetchWithTimeout(url, options = {}, timeoutMs = PREFERENCE_SAVE_TIMEOUT_MS) {
+    const controller = new AbortController();
+    const { signal, ...rest } = options || {};
+    if (signal) {
+        signal.addEventListener("abort", () => controller.abort(), { once: true });
+    }
+    const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs);
+    return fetch(url, { ...rest, signal: controller.signal }).finally(() => {
+        window.clearTimeout(timeoutId);
     });
 }
-function queueCalendarPreferenceSave(calendarName, delayMs = 220) {
-    if (state.ui.saveTimers[calendarName]) {
-        clearTimeout(state.ui.saveTimers[calendarName]);
+function buildCalendarPreferencePayload(calendarName) {
+    const pref = state.calendars[calendarName];
+    if (!pref) return null;
+    return {
+        calendar_name: calendarName,
+        color_hex: pref.color,
+        visible: pref.visible,
+    };
+}
+function markCalendarPreferenceDirty(calendarName) {
+    if (state.public.readOnly) return;
+    if (!state.calendars[calendarName]) return;
+    state.ui.preferenceDirty.add(calendarName);
+}
+function clearPreferenceNotice() {
+    if (!state.ui.preferenceNotice) return;
+    state.ui.preferenceNotice = "";
+    state.ui.preferenceNoticeAt = 0;
+    renderCalendarMenu();
+}
+function showPreferenceNotice() {
+    const now = Date.now();
+    if (state.ui.preferenceNotice && now - state.ui.preferenceNoticeAt < PREFERENCE_SAVE_WARNING_COOLDOWN_MS) {
+        return;
     }
-    state.ui.saveTimers[calendarName] = setTimeout(() => {
-        delete state.ui.saveTimers[calendarName];
-        persistCalendarPreference(calendarName);
+    state.ui.preferenceNotice = "Calendar changes are taking longer to save. We will keep trying in the background.";
+    state.ui.preferenceNoticeAt = now;
+    renderCalendarMenu();
+}
+function scheduleCalendarPreferenceFlush(delayMs = PREFERENCE_SAVE_DELAY_MS) {
+    if (state.public.readOnly) return;
+    if (state.ui.preferenceFlushTimer) {
+        clearTimeout(state.ui.preferenceFlushTimer);
+    }
+    if (state.ui.preferenceRetryTimer) {
+        clearTimeout(state.ui.preferenceRetryTimer);
+        state.ui.preferenceRetryTimer = null;
+    }
+    state.ui.preferenceFlushTimer = setTimeout(() => {
+        state.ui.preferenceFlushTimer = null;
+        void flushCalendarPreferenceQueue();
     }, delayMs);
+}
+function scheduleCalendarPreferenceRetry() {
+    const attempt = state.ui.preferenceRetryCount || 0;
+    if (attempt < PREFERENCE_SAVE_RETRY_DELAYS_MS.length) {
+        const delay = PREFERENCE_SAVE_RETRY_DELAYS_MS[attempt];
+        state.ui.preferenceRetryCount = attempt + 1;
+        if (state.ui.preferenceRetryTimer) {
+            clearTimeout(state.ui.preferenceRetryTimer);
+        }
+        state.ui.preferenceRetryTimer = setTimeout(() => {
+            state.ui.preferenceRetryTimer = null;
+            void flushCalendarPreferenceQueue();
+        }, delay);
+        return;
+    }
+    state.ui.preferenceRetryCount = attempt + 1;
+    showPreferenceNotice();
+}
+async function flushCalendarPreferenceQueue() {
+    if (state.public.readOnly) return;
+    if (state.ui.preferenceInFlight) return;
+    if (!state.ui.preferenceDirty.size) return;
+
+    const pending = Array.from(state.ui.preferenceDirty).slice(0, PREFERENCE_BATCH_LIMIT);
+    pending.forEach((calendarName) => state.ui.preferenceDirty.delete(calendarName));
+    const preferences = pending.map(buildCalendarPreferencePayload).filter(Boolean);
+    if (!preferences.length) return;
+
+    state.ui.preferenceInFlight = true;
+    const request = trackCalendarMutation(fetchWithTimeout(PREFERENCE_BATCH_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ preferences }),
+    }), "calendar-save");
+
+    try {
+        const res = await request;
+        const payload = await res.json().catch(() => ({}));
+        if (!res.ok) {
+            throw new Error(payload.error || "Unable to save calendar preferences.");
+        }
+
+        state.ui.preferenceRetryCount = 0;
+        clearPreferenceNotice();
+
+        if (state.preferences.cache && typeof state.preferences.cache === "object") {
+            for (const pref of preferences) {
+                if (!pref?.calendar_name) continue;
+                state.preferences.cache[pref.calendar_name] = {
+                    ...state.preferences.cache[pref.calendar_name],
+                    calendar_name: pref.calendar_name,
+                    color_hex: pref.color_hex,
+                    visible: pref.visible,
+                };
+            }
+        }
+
+        const errors = Array.isArray(payload.errors) ? payload.errors : [];
+        if (errors.length) {
+            for (const err of errors) {
+                if (err?.calendar_name) {
+                    state.ui.preferenceDirty.add(err.calendar_name);
+                }
+            }
+            scheduleCalendarPreferenceFlush();
+        }
+    } catch (err) {
+        console.warn("Failed to save calendar preferences:", err);
+        pending.forEach((calendarName) => state.ui.preferenceDirty.add(calendarName));
+        scheduleCalendarPreferenceRetry();
+    } finally {
+        state.ui.preferenceInFlight = false;
+        if (state.ui.preferenceDirty.size && !state.ui.preferenceFlushTimer && !state.ui.preferenceRetryTimer) {
+            scheduleCalendarPreferenceFlush();
+        }
+    }
+}
+function queueCalendarPreferenceSave(calendarName, delayMs = PREFERENCE_SAVE_DELAY_MS) {
+    markCalendarPreferenceDirty(calendarName);
+    scheduleCalendarPreferenceFlush(delayMs);
 }
 function saveCalendarState() {
     if (state.public.readOnly) return;
     const toSave = {};
     for (const [cal, data] of Object.entries(state.calendars)) {
         toSave[cal] = { visible: data.visible, color: data.color };
-        queueCalendarPreferenceSave(cal, 0);
+        markCalendarPreferenceDirty(cal);
     }
     localStorage.setItem("calendarState", JSON.stringify(toSave));
+    scheduleCalendarPreferenceFlush(0);
 }
-async function loadCalendarState() {
+function applyStoredCalendarState(saved) {
+    if (!saved) return;
+    try {
+        const data = JSON.parse(saved);
+        for (const cal of Object.keys(state.calendars)) {
+            const info = getSavedCalendarInfo(data, cal);
+            if (!info) continue;
+            if (typeof info.visible === "boolean") state.calendars[cal].visible = info.visible;
+            if (typeof info.color === "string") state.calendars[cal].color = info.color;
+        }
+    } catch (err) {
+        console.warn("Ignoring invalid saved calendar state:", err);
+        localStorage.removeItem("calendarState");
+    }
+}
+function applyCachedCalendarPreferences(prefsByName) {
+    if (!prefsByName) return;
+    for (const cal of Object.keys(state.calendars)) {
+        if (state.ui.preferenceDirty.has(cal)) continue;
+        const pref = getSavedCalendarInfo(prefsByName, cal);
+        if (!pref) continue;
+        if (typeof pref.visible === "boolean") state.calendars[cal].visible = pref.visible;
+        if (typeof pref.color_hex === "string" && /^#[0-9a-fA-F]{6}$/.test(pref.color_hex)) {
+            state.calendars[cal].color = pref.color_hex;
+        }
+        if (typeof pref.display_name === "string" && pref.display_name.trim() && state.calendars[cal].editable) {
+            state.calendars[cal].label = pref.display_name.trim();
+        }
+    }
+}
+function invalidateCalendarPreferencesCache() {
+    state.preferences.loaded = false;
+    state.preferences.loading = null;
+    state.preferences.cache = {};
+    state.preferences.lastLoadedAt = null;
+    state.preferences.lastAttemptAt = null;
+}
+async function ensureCalendarPreferencesLoaded(force = false) {
+    if (state.public.readOnly) return;
+    if (state.preferences.loading) return state.preferences.loading;
+    if (state.preferences.loaded && !force) return;
+
+    const now = Date.now();
+    if (!force && state.preferences.lastAttemptAt && now - state.preferences.lastAttemptAt < PREFERENCE_LOAD_RETRY_COOLDOWN_MS) {
+        return;
+    }
+    state.preferences.lastAttemptAt = now;
+
+    state.preferences.loading = (async () => {
+        try {
+            const res = await fetch("/api/calendar/preferences");
+            if (!res.ok) return;
+            const payload = await res.json().catch(() => ({}));
+            const prefs = Array.isArray(payload.preferences) ? payload.preferences : [];
+            state.preferences.cache = Object.fromEntries(
+                prefs.filter((pref) => pref.calendar_name).map((pref) => [pref.calendar_name, pref])
+            );
+            state.preferences.loaded = true;
+            state.preferences.lastLoadedAt = Date.now();
+        } catch (err) {
+            console.warn("Failed to load calendar preferences:", err);
+        } finally {
+            state.preferences.loading = null;
+        }
+    })();
+
+    return state.preferences.loading;
+}
+async function loadCalendarState(options = {}) {
     if (state.public.readOnly) return;
     const saved = localStorage.getItem("calendarState");
     if (saved) {
-        try {
-            const data = JSON.parse(saved);
-            for (const cal of Object.keys(state.calendars)) {
-                const info = getSavedCalendarInfo(data, cal);
-                if (!info) continue;
-                if (typeof info.visible === "boolean") state.calendars[cal].visible = info.visible;
-                if (typeof info.color === "string") state.calendars[cal].color = info.color;
-            }
-        } catch (err) {
-            console.warn("Ignoring invalid saved calendar state:", err);
-            localStorage.removeItem("calendarState");
-        }
+        applyStoredCalendarState(saved);
     }
-    try {
-        const res = await fetch("/api/calendar/preferences");
-        if (!res.ok) return;
-        const payload = await res.json();
-        const prefs = Array.isArray(payload.preferences) ? payload.preferences : [];
-        const prefsByName = Object.fromEntries(prefs.filter((pref) => pref.calendar_name).map((pref) => [pref.calendar_name, pref]));
-        for (const cal of Object.keys(state.calendars)) {
-            const pref = getSavedCalendarInfo(prefsByName, cal);
-            if (!pref) continue;
-            if (typeof pref.visible === "boolean") state.calendars[cal].visible = pref.visible;
-            if (typeof pref.color_hex === "string" && /^#[0-9a-fA-F]{6}$/.test(pref.color_hex)) {
-                state.calendars[cal].color = pref.color_hex;
-            }
-            if (typeof pref.display_name === "string" && pref.display_name.trim() && state.calendars[cal].editable) {
-                state.calendars[cal].label = pref.display_name.trim();
-            }
-        }
-    } catch (err) {
-        console.warn("Failed to load calendar preferences:", err);
-    }
+    await ensureCalendarPreferencesLoaded(Boolean(options.force));
+    applyCachedCalendarPreferences(state.preferences.cache);
 }
 /* ── Bootstrap ─────────────────────────────────────────────────────────────── */
 document.addEventListener("DOMContentLoaded", () => {
@@ -1159,15 +1326,84 @@ function getEventCalendarColor(event) {
     const cal = getEventCalendarKey(event);
     return state.calendars[cal]?.color || "#6366f1";
 }
-function toggleCalendarVisibility(calendarName) {
-    if (state.calendars[calendarName]) {
-        state.calendars[calendarName].visible = !state.calendars[calendarName].visible;
-        if (!state.public.readOnly) {
-            writeCalendarStateToStorage();
-            queueCalendarPreferenceSave(calendarName);
-        }
-        render();
+function isExternalFeedCalendar(calendarName, calendarData) {
+    if (!calendarData) return false;
+    if (calendarName === SIMULATED_CALENDAR_NAME) return false;
+    if (calendarName === TASK_CALENDAR_ID || calendarName === TASK_CALENDAR_NAME) return false;
+    if (calendarData.kind === "canvas" || calendarData.kind === "external") return true;
+    if (calendarName === CANVAS_SOURCE_ID || String(calendarName).startsWith("feed:")) return true;
+    return false;
+}
+function scheduleCalendarToggleRefresh(delayMs = TOGGLE_REFRESH_DELAY_MS) {
+    if (state.ui.toggleRefreshTimer) {
+        clearTimeout(state.ui.toggleRefreshTimer);
     }
+    state.ui.toggleRefreshTimer = setTimeout(() => {
+        state.ui.toggleRefreshTimer = null;
+        void runCalendarToggleRefresh();
+    }, delayMs);
+}
+function queueCalendarVisibilityRefresh(calendarName, visible) {
+    if (state.public.readOnly) return;
+    if (!visible) return;
+    const calendar = state.calendars[calendarName];
+    if (!calendar) return;
+    if (isExternalFeedCalendar(calendarName, calendar)) {
+        state.ui.toggleRefreshNeedsFeed = true;
+        state.ui.toggleRefreshNeedsEvents = true;
+    } else {
+        state.ui.toggleRefreshNeedsEvents = true;
+    }
+    scheduleCalendarToggleRefresh();
+}
+async function runCalendarToggleRefresh() {
+    if (state.public.readOnly) return;
+    const needsFeed = state.ui.toggleRefreshNeedsFeed;
+    const needsEvents = state.ui.toggleRefreshNeedsEvents;
+    state.ui.toggleRefreshNeedsFeed = false;
+    state.ui.toggleRefreshNeedsEvents = false;
+
+    if (!needsFeed && !needsEvents) return;
+    if (state.refreshInFlight) {
+        state.ui.toggleRefreshNeedsFeed = state.ui.toggleRefreshNeedsFeed || needsFeed;
+        state.ui.toggleRefreshNeedsEvents = state.ui.toggleRefreshNeedsEvents || needsEvents;
+        scheduleCalendarToggleRefresh();
+        return;
+    }
+
+    const range = getBufferedRange(getCurrentRenderRange());
+    if (!needsFeed && needsEvents && state.loadedRange && rangeCovers(state.loadedRange, range)) {
+        render();
+        return;
+    }
+
+    try {
+        if (needsFeed) {
+            state.refreshInFlight = true;
+            await refreshCalendarFeed();
+        }
+        if (needsEvents) {
+            const payload = await fetchEventsForRange(range);
+            await applyEventsPayload(payload, { range, mergeRange: true });
+        }
+    } catch (err) {
+        console.error("Calendar refresh after toggle failed:", err);
+    } finally {
+        if (needsFeed) {
+            state.refreshInFlight = false;
+        }
+    }
+}
+function toggleCalendarVisibility(calendarName) {
+    const calendar = state.calendars[calendarName];
+    if (!calendar) return;
+    calendar.visible = !calendar.visible;
+    if (!state.public.readOnly) {
+        writeCalendarStateToStorage();
+        queueCalendarPreferenceSave(calendarName);
+    }
+    queueCalendarVisibilityRefresh(calendarName, calendar.visible);
+    render();
 }
 function setCalendarColor(calendarName, color) {
     if (state.public.readOnly) return;
@@ -1228,10 +1464,16 @@ function wireControls() {
     });
     document.getElementById("calendar-toggle-menu")?.addEventListener("click", (event) => {
         event.stopPropagation();
-        state.ui.calendarMenuOpen = !state.ui.calendarMenuOpen;
+        const opening = !state.ui.calendarMenuOpen;
+        state.ui.calendarMenuOpen = opening;
         if (!state.ui.calendarMenuOpen) {
             closeCalendarContextMenu();
             closeRgbModal();
+        } else {
+            void ensureCalendarPreferencesLoaded();
+            if (state.ui.preferenceDirty.size) {
+                scheduleCalendarPreferenceFlush(0);
+            }
         }
         renderCalendarMenu();
     });
@@ -1573,9 +1815,11 @@ function shiftAnchorDate(delta) {
 function buildCalendarMenuHtml() {
     const calendars = Object.entries(state.calendars).sort(([, a], [, b]) => getCalendarLabelFromData(a).localeCompare(getCalendarLabelFromData(b)));
     const showSimulated = state.courses.selectedSectionIds.size > 0;
+    const notice = state.ui.preferenceNotice
+        ? `<div class="calendar-source-notice" role="status">${escapeHtml(state.ui.preferenceNotice)}</div>`
+        : "";
     const buildRows = (items) => items.map(([cal, data]) => {
         const checked = data.visible ? "checked" : "";
-        const busy = state.ui.pendingCalendars.has(cal);
         const label = getCalendarLabel(cal);
         const eventCount = getCalendarEventCount(cal);
         const kindLabel = data.kind === "local" ? "Local" : (data.editable ? "Feed" : "");
@@ -1584,7 +1828,6 @@ function buildCalendarMenuHtml() {
                 <button type="button"
                     class="js-calendar-more calendar-source-more"
                     data-calendar-name="${escapeHtml(cal)}"
-                    ${busy ? "disabled" : ""}
                     aria-label="Calendar options">
                     <span class="material-symbols-outlined calendar-source-more-icon" style="font-variation-settings:'FILL' 1,'wght' 700,'GRAD' 0,'opsz' 24;">more_horiz</span>
                 </button>
@@ -1592,7 +1835,7 @@ function buildCalendarMenuHtml() {
         return `
             <div class="calendar-source-row">
                 <label class="calendar-source-label">
-                    <input type="checkbox" ${checked} ${busy ? "disabled" : ""}
+                    <input type="checkbox" ${checked}
                         class="js-calendar-checkbox calendar-source-checkbox"
                         data-calendar-name="${escapeHtml(cal)}"
                         style="background-color:${data.color};">
@@ -1633,6 +1876,7 @@ function buildCalendarMenuHtml() {
     `;
     return `
         <div class="calendar-source-menu absolute top-full right-0 mt-2">
+            ${notice}
             ${nestSection}
             ${otherSection}
         </div>
@@ -1684,7 +1928,6 @@ function openCalendarContextMenu(calendarName, anchorEl) {
     const currentColor = state.calendars[calendarName]?.color || "#6366f1";
     const eventCount = getCalendarEventCount(calendarName);
     const label = getCalendarLabel(calendarName);
-    const pending = state.ui.pendingCalendars.has(calendarName);
     const menu = document.createElement("div");
     menu.className = "calendar-context-menu fixed";
     menu.innerHTML = `
@@ -1693,7 +1936,7 @@ function openCalendarContextMenu(calendarName, anchorEl) {
             <div class="calendar-context-meta">${eventCount} event${eventCount === 1 ? "" : "s"}</div>
         </div>
         <div class="calendar-context-body">
-            <button type="button" ${pending ? "disabled" : ""} class="js-context-info calendar-context-action">
+            <button type="button" class="js-context-info calendar-context-action">
                 <span class="material-symbols-outlined calendar-context-action-icon">info</span>
                 <span>Get Info</span>
             </button>
@@ -1702,7 +1945,7 @@ function openCalendarContextMenu(calendarName, anchorEl) {
                 <div class="calendar-context-section-label">Colors</div>
                 <div class="calendar-context-color-grid">
                     ${state.calendarColors.map((color) => `
-                        <button type="button" ${pending ? "disabled" : ""}
+                        <button type="button"
                             class="js-context-preset calendar-context-preset"
                             data-color="${color}"
                             aria-label="Use ${escapeHtml(color)}"
@@ -1712,7 +1955,7 @@ function openCalendarContextMenu(calendarName, anchorEl) {
                 </div>
             </div>
             <div class="calendar-context-separator"></div>
-            <button type="button" ${pending ? "disabled" : ""} class="js-context-custom calendar-context-action">
+            <button type="button" class="js-context-custom calendar-context-action">
                 <span class="material-symbols-outlined calendar-context-action-icon">palette</span>
                 <span>Custom Color...</span>
             </button>
@@ -1728,7 +1971,7 @@ function openCalendarContextMenu(calendarName, anchorEl) {
         const presetBtn = event.target.closest(".js-context-preset");
         if (presetBtn) {
             const color = presetBtn.getAttribute("data-color");
-            if (color && !state.ui.pendingCalendars.has(calendarName)) {
+            if (color) {
                 setCalendarColor(calendarName, color);
                 closeCalendarContextMenu();
             }
@@ -1736,9 +1979,7 @@ function openCalendarContextMenu(calendarName, anchorEl) {
         }
         const customBtn = event.target.closest(".js-context-custom");
         if (customBtn) {
-            if (!state.ui.pendingCalendars.has(calendarName)) {
-                openRgbModal(calendarName);
-            }
+            openRgbModal(calendarName);
         }
     });
     document.body.appendChild(menu);
@@ -1857,6 +2098,7 @@ async function saveCalendarSourceInfo(calendarName, modal, saveButton) {
             throw new Error(response.error || "Unable to save calendar.");
         }
         localStorage.removeItem(EVENTS_CACHE_KEY);
+        invalidateCalendarPreferencesCache();
         closeSourceInfoModal();
         closeCalendarContextMenu();
         state.ui.calendarMenuOpen = true;
@@ -1992,6 +2234,7 @@ function openCalendarSourceCreateModal() {
                 throw new Error(response.error || "Unable to add calendar.");
             }
             localStorage.removeItem(EVENTS_CACHE_KEY);
+            invalidateCalendarPreferencesCache();
             closeCalendarSourceCreateModal();
             state.ui.calendarMenuOpen = true;
             await loadCalendarData();
@@ -2104,7 +2347,7 @@ function openRgbModal(calendarName) {
                 saveButton.innerHTML = `<span class="inline-flex flex-col items-center justify-center gap-1 leading-none"><span class="loader" style="width:16px; height:16px;" aria-hidden="true"></span><span class="text-[10px]">Saving...</span></span>`;
             }
             setCalendarColor(calendarName, hexValue);
-            await persistCalendarPreference(calendarName);
+            queueCalendarPreferenceSave(calendarName, 0);
             closeRgbModal();
             closeCalendarContextMenu();
             state.ui.calendarMenuOpen = true;
@@ -2617,8 +2860,8 @@ function buildMonthViewHtml() {
             const todayTextClass = isCurrentDay ? "text-red-500 font-bold" : "text-on-surface-variant";
             return `
                 <div class="calendar-month-day-number-slot relative" style="grid-column:${dayIndex + 1}; grid-row:1; z-index:10;">
-                    <div class="inline-flex h-7 w-7 items-center justify-center text-xs font-semibold ${todayTextClass} ${todayMarkerClass}">
-                        ${day.getDate()}
+                    <div class="calendar-month-day-number inline-flex items-center justify-center text-xs font-semibold ${todayTextClass} ${todayMarkerClass}">
+                        ${escapeHtml(formatMonthGridDayLabel(day))}
                     </div>
                 </div>
             `;
@@ -2654,6 +2897,10 @@ function buildMonthViewHtml() {
 }
 function formatDateKey(date) {
     return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+}
+function formatMonthGridDayLabel(date) {
+    if (date.getDate() !== 1) return String(date.getDate());
+    return date.toLocaleDateString(undefined, { month: "short", day: "numeric" });
 }
 function getAllDayEventsForMonthWeek(days) {
     const weekStart = new Date(days[0].getFullYear(), days[0].getMonth(), days[0].getDate());
@@ -3086,8 +3333,8 @@ function formatHourLabel(hour) {
 function formatTimeOnly(date) {
     return date.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
 }
-function formatDateTime(date) {
-    return date.toLocaleDateString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+function formatDateTime(value) {
+    return value.toLocaleDateString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
 }
 function formatTimedEventRange(event) {
     const start = event.startDate;
@@ -3231,8 +3478,8 @@ function hexToRgba(hex, alpha) {
     return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha})`;
 }
 /* ── HTML Escaping ─────────────────────────────────────────────────────────── */
-function escapeHtml(text) {
-    return String(text).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
+function escapeHtml(value) {
+    return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
 }
 function formatMultilineText(text) {
     return escapeHtml(text).replace(/\r\n|\r|\n/g, "<br>");

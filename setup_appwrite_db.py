@@ -487,6 +487,8 @@ TABLE_SPECS = [
             {"key": "chat_sound_enabled", "type": "boolean", "xdefault": True},
             {"key": "language", "type": "string", "size": 16, "xdefault": "en"},
             {"key": "timezone", "type": "string", "size": 64, "xdefault": ""},
+            {"key": "dashboard_layout_json", "type": "text"},
+            {"key": "dashboard_checklist_hidden_signature", "type": "string", "size": 64},
             {"key": "created_at", "type": "datetime", "xrequired": True},
             {"key": "updated_at", "type": "datetime"},
         ],

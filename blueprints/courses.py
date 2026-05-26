@@ -29,6 +29,11 @@ from services.atlas_client import (
     parse_section_id,
 )
 from services.course_catalog import get_course_catalog_metadata
+from services.discord_audit import (
+    emit_course_track_event,
+    emit_creation_event,
+    format_actor,
+)
 
 
 courses_bp = Blueprint("courses", __name__)
@@ -449,6 +454,21 @@ def add_saved_course():
         logger.exception("Failed to add course")
         return jsonify({"error": "Unable to add course."}), 500
 
+    emit_creation_event(
+        "Saved Course Added",
+        actor=format_actor(current_user),
+        target=section.get("course_code") or f"{section.get('subject')} {section.get('catalog_number')}".strip(),
+        metadata={
+            "page_context": "courses",
+            "resource_type": "user_course",
+            "resource_id": course.get("$id") or course.get("id"),
+            "course_name": section.get("course_title"),
+            "section_number": section.get("section_number"),
+            "teacher": section.get("instructor"),
+            "term": section.get("term"),
+        },
+        color="green",
+    )
     return jsonify({"status": "ok", "course": _serialize_course(course, section)}), 201
 
 
@@ -614,6 +634,23 @@ def upsert_track():
         logger.exception("Failed to update course track")
         return jsonify({"error": "Unable to update course tracking."}), 500
 
+    emit_course_track_event(
+        "Course Track Requested" if enabled else "Course Track Updated",
+        actor=format_actor(current_user),
+        target=section.get("course_code") or data["course_code"] or data["section_id"],
+        metadata={
+            "course_name": section.get("course_title") or data["course_title"],
+            "teacher": section.get("instructor"),
+            "section_number": section.get("section_number"),
+            "seats_open": section.get("seats_available"),
+            "enrollment_type": section.get("enrollment_status"),
+            "request_source": "manual",
+            "track_id": track.get("$id") or track.get("id"),
+            "enabled": enabled,
+            "was_existing": bool(existing),
+        },
+        color="green" if enabled and not existing else "gray",
+    )
     return jsonify({
         "status": "ok",
         "track": _serialize_track(track),

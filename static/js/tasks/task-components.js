@@ -677,7 +677,7 @@ function TaskRow({ task, isExpanded, setExpandedTaskId, updateTask, completeTask
                 "aria-label": task.starred ? "Remove star" : "Star task",
                 "aria-pressed": task.starred ? "true" : "false",
                 title: task.starred ? "Remove star" : "Star task",
-            }, h(MaterialIcon, { name: task.starred ? "star" : "star_border" })),
+            }, h(MaterialIcon, { name: "star" })),
             menuTrigger({
                 id: task.id,
                 kind: "task",

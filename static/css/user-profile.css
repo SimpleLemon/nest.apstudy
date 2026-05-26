@@ -198,10 +198,12 @@ body.user-profile-page > global.thenav {
     justify-content: center;
 }
 
-.user-profile-page .profile-dropdown-icon svg,
-.user-profile-page .navbar-button svg {
+.user-profile-page .profile-dropdown-icon .material-symbols-outlined,
+.user-profile-page .navbar-button .material-symbols-outlined {
     display: block;
     height: 20px;
+    font-size: 20px;
+    line-height: 20px;
     width: 20px;
 }
 

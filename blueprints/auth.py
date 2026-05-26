@@ -41,6 +41,8 @@ from appwrite_helpers import (
     update_row_safe,
 )
 from models import User, user_from_doc
+from services.chat_presence import sync_chat_presence_labels_for_user
+from services.discord_audit import emit_creation_event, format_actor, format_user_target
 
 auth_bp = Blueprint("auth", __name__)
 logger = logging.getLogger(__name__)
@@ -50,11 +52,11 @@ LOGIN_CSP = "; ".join([
     "base-uri 'self'",
     "object-src 'none'",
     "frame-ancestors 'none'",
-    "script-src 'self' https://cdn.jsdelivr.net",
+    "script-src 'self' https://cdn.jsdelivr.net https://static.cloudflareinsights.com",
     "style-src 'self' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' https://resources.apstudy.org data:",
-    "connect-src 'self' https://nyc.cloud.appwrite.io",
+    "connect-src 'self' https://nyc.cloud.appwrite.io https://cloudflareinsights.com https://static.cloudflareinsights.com",
     "form-action 'self'",
 ])
 
@@ -340,7 +342,7 @@ def _find_user_by_email(email):
 def index():
     """Root redirect: dashboard if authenticated, login if not."""
     if current_user.is_authenticated:
-        return redirect(url_for("dashboard.calendar"))
+        return redirect(url_for("dashboard.dashboard"))
     return redirect(url_for("auth.login"))
 
 
@@ -348,7 +350,7 @@ def index():
 def login():
     """Render the sign-in page."""
     if current_user.is_authenticated:
-        return redirect(url_for("dashboard.calendar"))
+        return redirect(url_for("dashboard.dashboard"))
     response = make_response(render_template("login.html"))
     response.headers["Content-Security-Policy"] = LOGIN_CSP
     return response
@@ -485,6 +487,7 @@ def appwrite_session():
     user_doc = get_row_safe(COLLECTIONS["users"], appwrite_user_id, allow_missing=True)
     if not user_doc and email:
         user_doc = _find_user_by_email(email)
+    created_user = False
 
     # Normalize profile fields from Appwrite's user object
     provider_profile = _fetch_provider_profile(provider, provider_access_token)
@@ -527,6 +530,7 @@ def appwrite_session():
         except AppwriteException:
             logger.exception("Failed to create user row from Appwrite auth")
             return jsonify({"error": "Unable to create user."}), 500
+        created_user = True
 
         try:
             create_row_safe(
@@ -578,6 +582,7 @@ def appwrite_session():
             logger.exception("Failed to update user row from Appwrite auth")
             return jsonify({"error": "Unable to update user."}), 500
 
+    sync_chat_presence_labels_for_user(user_doc.get("$id") or user_doc.get("id"), user_doc)
     login_user(user_from_doc(user_doc))
     session["user_id"] = user_doc.get("$id") or user_doc.get("id")
     session["email"] = email or remote_email
@@ -585,6 +590,22 @@ def appwrite_session():
     redirect_to = url_for("settings.onboarding")
     if user_doc.get("onboarding_complete"):
         redirect_to = url_for("dashboard.dashboard")
+
+    if created_user:
+        emit_creation_event(
+            "New User Created",
+            actor=format_actor(user_id=user_doc.get("$id") or user_doc.get("id"), username=user_doc.get("username") or user_doc.get("name")),
+            target=format_user_target(user_doc),
+            metadata={
+                "page_context": "auth/session",
+                "resource_type": "user",
+                "resource_id": user_doc.get("$id") or user_doc.get("id"),
+                "provider": provider,
+                "email": email or remote_email,
+                "default_settings_created": True,
+            },
+            color="green",
+        )
 
     return jsonify({"status": "ok", "user_id": session["user_id"], "redirect": redirect_to})
 
@@ -656,6 +677,7 @@ def oauth2callback():
         picture_url=user_info.get("picture"),
     )
     user_doc = None
+    created_user = False
 
     try:
         user_doc = get_row_safe(COLLECTIONS["users"], google_id)
@@ -686,6 +708,7 @@ def oauth2callback():
             )
         except AppwriteException:
             return redirect(url_for("auth.login"))
+        created_user = True
 
         # Create default settings with a unique .ics subscription token
         try:
@@ -726,15 +749,32 @@ def oauth2callback():
         except AppwriteException:
             return redirect(url_for("auth.login"))
 
+    sync_chat_presence_labels_for_user(user_doc.get("$id") or user_doc.get("id"), user_doc)
     login_user(user_from_doc(user_doc))
     session["user_id"] = user_doc.get("$id") or user_doc.get("id")
     session.pop("oauth_state", None)
+
+    if created_user:
+        emit_creation_event(
+            "New User Created",
+            actor=format_actor(user_id=user_doc.get("$id") or user_doc.get("id"), username=user_doc.get("username") or user_doc.get("name")),
+            target=format_user_target(user_doc),
+            metadata={
+                "page_context": "oauth2callback",
+                "resource_type": "user",
+                "resource_id": user_doc.get("$id") or user_doc.get("id"),
+                "provider": "google",
+                "email": email,
+                "default_settings_created": True,
+            },
+            color="green",
+        )
 
     # Redirect users who have not completed onboarding yet.
     if not user_doc.get("onboarding_complete"):
         return redirect(url_for("settings.onboarding"))
 
-    return redirect(url_for("dashboard.calendar"))
+    return redirect(url_for("dashboard.dashboard"))
 
 
 @auth_bp.route("/logout")

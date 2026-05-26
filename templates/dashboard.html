@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Your APStudy Nest morning brief." />
+    <title>Dashboard - APStudy Nest</title>
+    <script>
+        window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@25.0.0/dist/iife/sdk.js"></script>
+    <script src="{{ url_for('static', filename='js/appwrite.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
+    <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/themes.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/layout.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <script src="{{ url_for('static', filename='js/global-chrome.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/global.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/navbar.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/sidebar.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js" defer></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}" defer></script>
+</head>
+<global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
+<global class="thesidebar" data-user-emory-student="{{ user.emory_student }}" data-sidebar-default="{{ sidebar_default|default('expanded') }}"></global>
+<body class="dashboard-body bg-surface text-on-surface font-body min-h-screen antialiased selection:bg-primary/30 selection:text-primary-fixed">
+    <main class="dashboard-main" aria-labelledby="dashboard-title">
+        <header class="dashboard-header">
+            <div>
+                <p class="dashboard-kicker">Morning Brief</p>
+                <h1 id="dashboard-title">Dashboard</h1>
+            </div>
+            <div class="dashboard-header-actions">
+                <button id="dashboard-edit-layout" class="dashboard-header-link dashboard-edit-toggle" type="button" aria-pressed="false">
+                    <span class="material-symbols-outlined" aria-hidden="true">dashboard_customize</span>
+                    <span>Edit</span>
+                </button>
+            </div>
+        </header>
+
+        <section id="dashboard-checklist" class="dashboard-checklist" aria-label="Academic setup checklist" hidden></section>
+
+        <section class="dashboard-tiles-region" aria-label="Dashboard tiles">
+            <div id="dashboard-tiles" class="dashboard-tiles" aria-live="polite">
+                <div class="dashboard-loading">
+                    <span class="loader" aria-hidden="true"></span>
+                    <span>Loading your morning brief...</span>
+                </div>
+            </div>
+        </section>
+        <global class="thefooter"></global>
+    </main>
+</body>
+</html>

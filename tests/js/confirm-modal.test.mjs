@@ -15,9 +15,9 @@ const confirmCallsites = [
 ];
 
 test("destructive flows use the shared website confirmation modal", async () => {
-    const globalSource = await readFile(path.join(repoRoot, "static/js/global.js"), "utf8");
-    assert.match(globalSource, /window\.APStudyConfirm/);
-    assert.match(globalSource, /apstudy-confirm/);
+    const chromeSource = await readFile(path.join(repoRoot, "static/js/global-chrome.js"), "utf8");
+    assert.match(chromeSource, /window\.APStudyConfirm/);
+    assert.match(chromeSource, /apstudy-confirm/);
 
     for (const relativePath of confirmCallsites) {
         const source = await readFile(path.join(repoRoot, relativePath), "utf8");

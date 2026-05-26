@@ -20,10 +20,19 @@ def create_app():
     app.config["APPWRITE_DATABASE_ID"] = os.environ.get("APPWRITE_DATABASE_ID", "")
     app.config["MAX_CONTENT_LENGTH"] = 5 * 50 * 1024 * 1024
     app.config["FILE_SHARE_UPLOAD_DIR"] = os.path.join(app.root_path, "uploads", "file_share")
+    allow_insecure_http = (
+        os.environ.get("APSTUDY_ALLOW_INSECURE_HTTP") == "1"
+        or os.environ.get("FLASK_DEBUG") == "1"
+    )
+    app.config["SESSION_COOKIE_SECURE"] = not allow_insecure_http
+    app.config["SESSION_COOKIE_HTTPONLY"] = True
+    app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+    app.config["WTF_CSRF_CHECK_DEFAULT"] = False
     os.makedirs(app.config["FILE_SHARE_UPLOAD_DIR"], exist_ok=True)
 
     # Initialize extensions
-    from extensions import login_manager
+    from extensions import csrf, login_manager
+    csrf.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = "auth.login"
 
@@ -69,6 +78,8 @@ def create_app():
 
     from services.scheduler import init_scheduler
     init_scheduler(app)
+    from services.discord_audit import init_discord_audit
+    init_discord_audit(app)
 
     return app
 

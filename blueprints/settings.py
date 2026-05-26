@@ -38,6 +38,8 @@ from appwrite_helpers import (
     update_row_safe,
 )
 from services.atlas_client import DEFAULT_TERM
+from services.chat_presence import sync_chat_presence_labels_for_user
+from services.discord_audit import emit_creation_event, format_actor
 from services.universities import school_payload
 
 settings_bp = Blueprint("settings", __name__)
@@ -277,6 +279,8 @@ def _settings_defaults(user_id):
         "chat_sound_enabled": True,
         "language": "en",
         "timezone": "",
+        "dashboard_layout_json": "[]",
+        "dashboard_checklist_hidden_signature": "",
         "created_at": format_datetime(datetime.utcnow()),
     }
 
@@ -297,6 +301,8 @@ def _settings_payload(settings):
             "feed_refresh_minutes": 15,
             "canvas_ical_url": "",
             "other_calendar_urls": [],
+            "dashboard_layout_json": "[]",
+            "dashboard_checklist_hidden_signature": "",
         }
     return {
         "theme": _theme_from_interface_theme(settings.get("interface_theme") or settings.get("theme")),
@@ -312,6 +318,8 @@ def _settings_payload(settings):
         "feed_refresh_minutes": settings.get("feed_refresh_minutes") or 15,
         "canvas_ical_url": settings.get("canvas_ical_url") or "",
         "other_calendar_urls": _load_other_calendar_urls(settings),
+        "dashboard_layout_json": settings.get("dashboard_layout_json") or "[]",
+        "dashboard_checklist_hidden_signature": settings.get("dashboard_checklist_hidden_signature") or "",
     }
 
 
@@ -666,7 +674,7 @@ def onboarding():
     Redirected here from auth.py if no feed URL is configured.
     """
     if current_user.onboarding_complete:
-        return redirect(url_for("dashboard.calendar"))
+        return redirect(url_for("dashboard.dashboard"))
 
     return render_template("onboarding.html", **_onboarding_context())
 
@@ -769,6 +777,7 @@ def save_onboarding():
         current_user.school_source = school_updates.get("school_source")
         current_user.scorecard_id = school_updates.get("scorecard_id")
         current_user.onboarding_step = next_step
+        sync_chat_presence_labels_for_user(user_id)
         return jsonify({"status": "ok", "next_step": next_step})
 
     if step == 3:
@@ -833,6 +842,21 @@ def save_onboarding():
                 logger.exception("Failed to add onboarding course")
                 return jsonify({"error": "Unable to save course."}), 500
 
+            emit_creation_event(
+                "Onboarding Course Added",
+                actor=format_actor(current_user),
+                target=f"{subject} {catalog}",
+                metadata={
+                    "page_context": "onboarding",
+                    "resource_type": "user_course",
+                    "resource_id": course.get("$id") or course.get("id"),
+                    "course_name": course_name,
+                    "section_number": section_number,
+                    "teacher": instructor_name,
+                    "term": term,
+                },
+                color="green",
+            )
             return jsonify({
                 "status": "ok",
                 "course": {
@@ -873,6 +897,19 @@ def save_onboarding():
                 return jsonify({"error": "Unable to save onboarding."}), 500
             current_user.onboarding_step = 4
             current_user.onboarding_complete = True
+            emit_creation_event(
+                "Onboarding Complete",
+                actor=format_actor(current_user),
+                target=str(current_user.id),
+                metadata={
+                    "page_context": "onboarding",
+                    "resource_type": "user",
+                    "resource_id": user_id,
+                    "education_level": getattr(current_user, "education_level", None),
+                    "school": getattr(current_user, "school", None),
+                },
+                color="green",
+            )
             return jsonify({"status": "ok", "redirect_url": url_for("dashboard.dashboard")})
 
     if step in {4, 5}:
@@ -890,6 +927,19 @@ def save_onboarding():
             return jsonify({"error": "Unable to save onboarding."}), 500
         current_user.onboarding_complete = True
         current_user.onboarding_step = 4
+        emit_creation_event(
+            "Onboarding Complete",
+            actor=format_actor(current_user),
+            target=str(current_user.id),
+            metadata={
+                "page_context": "onboarding",
+                "resource_type": "user",
+                "resource_id": user_id,
+                "education_level": getattr(current_user, "education_level", None),
+                "school": getattr(current_user, "school", None),
+            },
+            color="green",
+        )
         return jsonify({"status": "ok", "redirect_url": url_for("dashboard.dashboard")})
 
     return jsonify({"error": "Invalid onboarding step."}), 400
@@ -1035,7 +1085,23 @@ def update_profile():
         current_user.created_at = datetime.utcnow()
     if should_delete_uploaded_avatar:
         _delete_avatar_file(old_avatar_file_id)
+    sync_chat_presence_labels_for_user(str(current_user.id))
 
+    emit_creation_event(
+        "Profile Configuration Updated",
+        actor=format_actor(current_user),
+        target=str(current_user.id),
+        metadata={
+            "page_context": "settings/profile",
+            "resource_type": "user_profile",
+            "resource_id": str(current_user.id),
+            "username": current_user.username,
+            "school": current_user.school,
+            "avatar_source": current_user.avatar_source,
+            "banner_color": current_user.banner_color,
+        },
+        color="gray",
+    )
     return jsonify({
         "status": "ok",
         "name": current_user.name,
@@ -1125,6 +1191,19 @@ def upload_avatar():
     current_user.avatar_file_id = file_id
     current_user.avatar_source = "upload"
 
+    emit_creation_event(
+        "Profile Avatar Uploaded",
+        actor=format_actor(current_user),
+        target=str(current_user.id),
+        metadata={
+            "page_context": "settings/avatar",
+            "resource_type": "profile_avatar",
+            "resource_id": file_id,
+            "mime_type": uploaded_file.mimetype,
+            "size_bytes": len(file_bytes),
+        },
+        color="green",
+    )
     return jsonify({
         "status": "ok",
         "picture_url": picture_url,
@@ -1224,6 +1303,21 @@ def update_feed_url():
             )
             refresh_error = str(exc)
 
+    emit_creation_event(
+        "Calendar Feed Configuration Updated",
+        actor=format_actor(current_user),
+        target=str(current_user.id),
+        metadata={
+            "page_context": "settings/feed-url",
+            "resource_type": "user_settings",
+            "resource_id": settings.get("$id") or settings.get("id"),
+            "canvas_feed_configured": bool(url),
+            "other_calendar_count": len(other_ical_urls),
+            "refresh_count": refresh_count,
+            "refresh_error": refresh_error,
+        },
+        color="gray" if not refresh_error else "yellow",
+    )
     return jsonify({
         "status": "ok",
         "message": "Feed URL saved.",
@@ -1275,6 +1369,18 @@ def update_refresh_interval():
         logger.exception("Failed to update refresh interval")
         return jsonify({"error": "Unable to update refresh interval."}), 500
 
+    emit_creation_event(
+        "Refresh Interval Updated",
+        actor=format_actor(current_user),
+        target=str(current_user.id),
+        metadata={
+            "page_context": "settings/refresh-interval",
+            "resource_type": "user_settings",
+            "resource_id": settings.get("$id") or settings.get("id"),
+            "feed_refresh_minutes": minutes,
+        },
+        color="gray",
+    )
     return jsonify({"status": "ok", "refresh_interval_minutes": minutes})
 
 
@@ -1350,6 +1456,18 @@ def update_interface_preferences():
         logger.exception("Failed to update interface preferences")
         return jsonify({"error": "Unable to update preferences."}), 500
 
+    emit_creation_event(
+        "Interface Preferences Updated",
+        actor=format_actor(current_user),
+        target=str(current_user.id),
+        metadata={
+            "page_context": "settings/interface-preferences",
+            "resource_type": "user_settings",
+            "resource_id": settings.get("$id") or settings.get("id"),
+            "updated_keys": sorted(key for key in updates.keys() if key != "updated_at"),
+        },
+        color="gray",
+    )
     return jsonify({
         "status": "ok",
         "preferred_calendar_view": settings.get("preferred_calendar_view"),
@@ -1434,6 +1552,18 @@ def regenerate_ics_token():
         logger.exception("Failed to regenerate token")
         return jsonify({"error": "Unable to regenerate token."}), 500
 
+    emit_creation_event(
+        "Calendar Token Regenerated",
+        actor=format_actor(current_user),
+        target=str(current_user.id),
+        metadata={
+            "page_context": "settings/regenerate-token",
+            "resource_type": "user_settings",
+            "resource_id": settings.get("$id") or settings.get("id"),
+            "token_rotated": True,
+        },
+        color="yellow",
+    )
     return jsonify({
         "status": "ok",
         "message": "Token regenerated. Update your calendar subscription URL.",
@@ -1547,6 +1677,19 @@ def add_course():
         logger.exception("Failed to add course")
         return jsonify({"error": "Unable to add course."}), 500
 
+    emit_creation_event(
+        "Settings Course Added",
+        actor=format_actor(current_user),
+        target=f"{subject} {catalog}",
+        metadata={
+            "page_context": "settings/courses",
+            "resource_type": "user_course",
+            "resource_id": course.get("$id") or course.get("id"),
+            "term": term,
+            "crn": crn,
+        },
+        color="green",
+    )
     return jsonify({
         "status": "ok",
         "course": {

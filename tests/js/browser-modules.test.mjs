@@ -54,7 +54,7 @@ test("calendar dashboard keeps cache, public-share, and event-form contracts wir
     assert.match(source, /\/api\/calendar\/share\/\$\{encodeURIComponent\(state\.public\.shareCode\)\}\/events/);
     assert.match(source, /fetch\("\/api\/calendar\/refresh", \{ method: "POST" \}\)/);
     assert.match(source, /fetch\("\/api\/atlas\/sections\/by-id"/);
-    assert.match(source, /function escapeHtml\(text\)/);
+    assert.match(source, /function escapeHtml\(value\)/);
 });
 
 test("sidebar keeps persisted collapse state, route targets, and preference event bridge", async () => {
@@ -199,6 +199,9 @@ test("appwrite bootstrap exposes configured SDK clients globally", async () => {
     assert.match(source, /window\.account = account/);
     assert.match(source, /window\.databases = databases/);
     assert.match(source, /window\.storage = storage/);
+    assert.match(source, /window\.presences = presences/);
+    assert.match(source, /window\.realtime = realtime/);
+    assert.match(source, /window\.Channel = Appwrite\.Channel/);
 });
 
 test("calendar context menu keeps task, event, override, and keyboard flows wired", async () => {
@@ -217,16 +220,19 @@ test("calendar context menu keeps task, event, override, and keyboard flows wire
 });
 
 test("global chrome keeps pending mutation, confirmation, loader, date, and auth helpers", async () => {
+    const chromeSource = await sourceFor("static/js/global-chrome.js");
     const source = await sourceFor("static/js/global.js");
 
-    assert.match(source, /window\.APStudyPendingMutations = \{/);
-    assert.match(source, /new CustomEvent\("apstudy-pending-save-change"/);
-    assert.match(source, /window\.APStudyConfirm = \{ request \}/);
-    assert.match(source, /id = "apstudy-confirm-root"/);
-    assert.match(source, /window\.APStudyLoader = \{/);
-    assert.match(source, /window\.APStudyDate = \{/);
+    assert.match(chromeSource, /window\.APStudyPendingMutations = \{/);
+    assert.match(chromeSource, /new CustomEvent\("apstudy-pending-save-change"/);
+    assert.match(chromeSource, /window\.APStudyConfirm = \{ request \}/);
+    assert.match(chromeSource, /id = "apstudy-confirm-root"/);
+    assert.match(chromeSource, /window\.APStudyLoader = \{/);
+    assert.match(chromeSource, /window\.APStudyDate = \{/);
     assert.match(source, /function clearClientState\(\)/);
+    assert.match(source, /function markClientLoggedOut\(\)/);
     assert.match(source, /function shouldEnforceAuth\(\)/);
+    assert.match(source, /window\.location\.replace\(`\$\{window\.location\.origin\}\/logout`\)/);
     assert.match(source, /account\.deleteSession\("current"\)/);
     assert.match(source, /document\.querySelectorAll\("\[data-logout\]"\)/);
 });
@@ -235,7 +241,11 @@ test("login page keeps OAuth provider storage and Flask session exchange guarded
     const source = await sourceFor("static/js/login.js");
 
     assert.match(source, /const providerStorageKey = "apstudy-oauth-provider"/);
-    assert.match(source, /function exchangeAppwriteSession\(provider, accountData, providerAccessToken\)/);
+    assert.match(source, /function createAppwriteJwt\(appwriteAccount\)/);
+    assert.match(source, /appwriteAccount\.createJWT\(\)/);
+    assert.match(source, /function exchangeAppwriteSession\(provider, accountData, proof\)/);
+    assert.match(source, /if \(!jwt && !providerAccessToken\) \{/);
+    assert.match(source, /if \(jwt\) body\.jwt = jwt/);
     assert.match(source, /fetch\("\/auth\/session", \{/);
     assert.match(source, /method: "POST"/);
     assert.match(source, /appwriteAccount\.get\(\)/);

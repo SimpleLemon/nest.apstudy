@@ -33,6 +33,7 @@ from appwrite_helpers import (
     parse_datetime,
     update_row_safe,
 )
+from services.discord_audit import emit_creation_event, format_actor
 
 
 file_share_bp = Blueprint("file_share", __name__)
@@ -684,6 +685,22 @@ def upload_file():
             continue
 
         created.append(_shared_file_payload(shared_file))
+        emit_creation_event(
+            "Shared File Created",
+            actor=format_actor(current_user),
+            target=display_filename,
+            metadata={
+                "page_context": "files/upload",
+                "resource_type": "shared_file",
+                "resource_id": shared_file.get("$id") or shared_file.get("id"),
+                "folder_id": folder_id,
+                "is_public": is_public,
+                "file_size_bytes": file_size_bytes,
+                "mime_type": uploaded_file.mimetype,
+                "expiry_days": expiry_days,
+            },
+            color="green",
+        )
 
     response = {"files": created}
     if skipped:
@@ -763,6 +780,18 @@ def create_folder():
         logger.exception("Failed to create file folder")
         return jsonify({"error": "Unable to create folder."}), 500
 
+    emit_creation_event(
+        "File Folder Created",
+        actor=format_actor(current_user),
+        target=name,
+        metadata={
+            "page_context": "files/folders",
+            "resource_type": "file_folder",
+            "resource_id": created.get("$id") or created.get("id"),
+            "parent_folder_id": parent_folder_id,
+        },
+        color="green",
+    )
     return jsonify(_folder_payload(created)), 201
 
 

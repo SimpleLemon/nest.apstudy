@@ -31,6 +31,7 @@ from services.discord_bridge import (
     execute_chat_webhook,
     fetch_channel_messages,
 )
+from services.chat_presence import sync_chat_presence_labels_for_user, university_presence_label
 from services.universities import normalize_school_key, school_payload, search_universities
 
 
@@ -40,8 +41,8 @@ logger = logging.getLogger(__name__)
 DISCORD_MESSAGE_LIMIT = 50
 MESSAGE_PAGE_SIZE = 50
 DELETE_WINDOW_SECONDS = 5 * 60
-PRESENCE_TTL_SECONDS = 90
 DEFAULT_AVATAR = "https://resources.apstudy.org/images/AP-Resources-Logo.png"
+DEFAULT_BANNER_COLOR = "#fecae1"
 
 
 def _now():
@@ -61,6 +62,31 @@ def _readable_by_users(user_ids=None):
     if ids:
         return [Permission.read(Role.user(user_id)) for user_id in sorted(set(ids))]
     return [Permission.read(Role.users())]
+
+
+def _presence_read_permissions_for_channel(channel):
+    if not channel:
+        return []
+    if channel.get("kind") == "discord":
+        return [Permission.read(Role.users())]
+    if channel.get("kind") == "university" and channel.get("approved"):
+        label = university_presence_label(channel.get("school_key"))
+        return [Permission.read(Role.label(label))] if label else []
+    return []
+
+
+def _presence_read_permissions_for_thread(thread):
+    return _readable_by_users(_thread_participant_ids(thread or {}))
+
+
+def _presence_scope(scope_type, scope_id):
+    if not scope_type or not scope_id:
+        return None
+    return {
+        "scope_type": str(scope_type),
+        "scope_id": str(scope_id),
+        "room_key": f"{scope_type}:{scope_id}",
+    }
 
 
 def emit_chat_event(
@@ -105,20 +131,71 @@ def _message_timestamp(row):
     return value
 
 
+def _format_member_since(value):
+    parsed = parse_datetime(value)
+    if parsed:
+        return parsed.strftime("%b %d, %Y")
+    return str(value) if value else ""
+
+
+def _normalize_banner_color(value):
+    if not isinstance(value, str):
+        return DEFAULT_BANNER_COLOR
+    normalized = value.strip()
+    if not normalized.startswith("#"):
+        normalized = f"#{normalized}"
+    if len(normalized) != 7:
+        return DEFAULT_BANNER_COLOR
+    try:
+        int(normalized[1:], 16)
+    except ValueError:
+        return DEFAULT_BANNER_COLOR
+    return normalized.lower()
+
+
+def _profile_handle(name, user_id, username=None):
+    if username:
+        return f"@{username}"
+    base = "".join(char.lower() if char.isalnum() else "-" for char in (name or "")).strip("-")
+    base = "-".join(part for part in base.split("-") if part)
+    return f"@{base or user_id or 'apstudy-user'}"
+
+
+def _is_emory_school(value):
+    return str(value or "").strip().lower() in {"emory", "emory university"}
+
+
+def _is_early_member(value):
+    created_at = parse_datetime(value)
+    if not created_at:
+        return False
+    if created_at.tzinfo is not None:
+        created_at = created_at.replace(tzinfo=None)
+    return created_at < datetime(2026, 8, 20)
+
+
 def _public_user(row):
     if not row:
         return None
     user_id = _row_id(row)
+    name = row.get("name") or row.get("username") or "Nest User"
+    username = row.get("username") or ""
     return {
         "id": user_id,
-        "name": row.get("name") or row.get("username") or "Nest User",
-        "username": row.get("username") or "",
+        "name": name,
+        "username": username,
+        "handle": _profile_handle(name, user_id, username),
         "picture_url": row.get("picture_url") or DEFAULT_AVATAR,
+        "banner_color": _normalize_banner_color(row.get("banner_color")),
         "school": row.get("school") or "",
         "major": row.get("major") or "",
         "graduation_year": row.get("graduation_year") or row.get("class_year") or "",
+        "class_year": row.get("class_year") or "",
         "education_level": row.get("education_level") or "",
-        "profile_url": f"/u/{row.get('username')}" if row.get("username") else f"/user/{user_id}",
+        "member_since": _format_member_since(row.get("created_at")),
+        "is_emory_school": _is_emory_school(row.get("school")),
+        "is_early_member": _is_early_member(row.get("created_at")),
+        "profile_url": f"/u/{username}" if username else f"/user/{user_id}",
     }
 
 
@@ -128,11 +205,13 @@ def _current_user_payload():
         "name": current_user.name,
         "username": current_user.username,
         "picture_url": current_user.picture_url,
+        "banner_color": current_user.banner_color,
         "school": current_user.school,
         "major": current_user.major,
         "graduation_year": current_user.graduation_year,
         "class_year": current_user.class_year,
         "education_level": current_user.education_level,
+        "created_at": current_user.created_at,
     })
 
 
@@ -319,7 +398,6 @@ def _channel_payload(channel, university_status=None):
     if not channel:
         return None
     channel_id = _row_id(channel)
-    active = _active_users("channel", channel_id)
     return {
         "id": channel_id,
         "kind": channel.get("kind"),
@@ -329,10 +407,13 @@ def _channel_payload(channel, university_status=None):
         "school_name": channel.get("school_name"),
         "read_only": bool(channel.get("read_only")),
         "approved": bool(channel.get("approved")),
-        "active_count": len(active),
-        "active_users": active,
+        "active_count": 0,
+        "active_users": [],
         "history_limited": channel.get("kind") == "discord",
         "university_status": university_status or channel.get("university_status"),
+        "presence_scope": _presence_scope("channel", channel_id),
+        "presence_read_permissions": _presence_read_permissions_for_channel(channel),
+        "presence_profile_resolve_allowed": bool(channel.get("approved") or channel.get("kind") == "discord"),
     }
 
 
@@ -619,84 +700,6 @@ def _thread_participant_ids(thread):
     ]
 
 
-def _is_user_online(user_id):
-    if not user_id:
-        return False
-    cutoff = _now() - timedelta(seconds=PRESENCE_TTL_SECONDS)
-    try:
-        rows = list_rows_all(
-            COLLECTIONS["chat_presence"],
-            [Query.equal("user_id", [str(user_id)]), Query.order_desc("last_seen_at")],
-        )
-    except AppwriteException:
-        logger.exception("Failed to load user presence")
-        return False
-    for row in rows:
-        last_seen = parse_datetime(row.get("last_seen_at"))
-        if last_seen and last_seen >= cutoff:
-            return True
-    return False
-
-
-def _dm_presence_statuses():
-    statuses = {}
-    for thread in _threads_for_current_user():
-        other = _public_user(_other_participant(thread))
-        if other:
-            statuses[other["id"]] = "online" if _is_user_online(other["id"]) else "offline"
-    return statuses
-
-
-def _active_users(scope_type, scope_id):
-    cutoff = _now() - timedelta(seconds=PRESENCE_TTL_SECONDS)
-    try:
-        rows = list_rows_all(
-            COLLECTIONS["chat_presence"],
-            [
-                Query.equal("scope_type", [scope_type]),
-                Query.equal("scope_id", [scope_id]),
-            ],
-        )
-    except AppwriteException:
-        return []
-    user_ids = []
-    for row in rows:
-        last_seen = parse_datetime(row.get("last_seen_at"))
-        if last_seen and last_seen >= cutoff and row.get("user_id") not in user_ids:
-            user_ids.append(row.get("user_id"))
-    users = []
-    for user_id in user_ids[:60]:
-        try:
-            user = get_row_safe(COLLECTIONS["users"], user_id, allow_missing=True)
-        except AppwriteException:
-            user = None
-        if user:
-            users.append(_public_user(user))
-    return users
-
-
-def _heartbeat(scope_type, scope_id):
-    if scope_type not in {"channel", "thread"} or not scope_id:
-        return
-    key = f"{_current_user_id()}:{scope_type}:{scope_id}"
-    now = format_datetime(_now())
-    try:
-        existing = first_row(COLLECTIONS["chat_presence"], [Query.equal("presence_key", [key])])
-        payload = {
-            "user_id": _current_user_id(),
-            "scope_type": scope_type,
-            "scope_id": scope_id,
-            "presence_key": key,
-            "last_seen_at": now,
-        }
-        if existing:
-            update_row_safe(COLLECTIONS["chat_presence"], _row_id(existing), payload)
-        else:
-            create_row_safe(COLLECTIONS["chat_presence"], row_id=ID.unique(), data=payload)
-    except AppwriteException:
-        logger.exception("Failed to update chat presence")
-
-
 @chat_api_bp.route("/api/universities")
 @login_required
 def universities():
@@ -711,6 +714,7 @@ def bootstrap():
     university = _ensure_university_request()
     if university.get("channel"):
         channels.append(university["channel"])
+    sync_chat_presence_labels_for_user(_current_user_id())
     dm_threads = _list_threads()
     return jsonify({
         "user": _current_user_payload(),
@@ -744,15 +748,18 @@ def _thread_payload(thread):
     other = _public_user(_other_participant(thread))
     if not other:
         return None
-    online = _is_user_online(other["id"])
-    other["online"] = online
+    other["online"] = False
+    thread_id = _row_id(thread)
     return {
-        "id": _row_id(thread),
+        "id": thread_id,
         "other_user": other,
         "last_message_at": thread.get("last_message_at") or thread.get("updated_at") or thread.get("created_at"),
         "blocked": _is_blocked_between(_current_user_id(), other["id"]),
-        "active_count": len(_active_users("thread", _row_id(thread))),
-        "presence_status": "online" if online else "offline",
+        "active_count": 0,
+        "presence_status": "offline",
+        "presence_scope": _presence_scope("thread", thread_id),
+        "presence_read_permissions": _presence_read_permissions_for_thread(thread),
+        "presence_profile_resolve_allowed": True,
     }
 
 
@@ -775,7 +782,6 @@ def channel_messages(channel_id):
         return jsonify({"error": "Channel unavailable."}), 404
     if channel.get("kind") == "discord" and not request.args.get("before"):
         _sync_discord_channel(channel)
-    _heartbeat("channel", channel_id)
     after = request.args.get("after")
     rows = _list_messages("channel", channel_id, request.args.get("before"), after)
     return jsonify({
@@ -967,7 +973,6 @@ def dm_thread_messages(thread_id):
         return jsonify({"error": "Thread unavailable."}), 404
     other = _public_user(_other_participant(thread))
     if request.method == "GET":
-        _heartbeat("thread", thread_id)
         after = request.args.get("after")
         rows = _list_messages("thread", thread_id, request.args.get("before"), after)
         thread_payload = _thread_payload(thread) or {}
@@ -978,8 +983,11 @@ def dm_thread_messages(thread_id):
                 "id": thread_id,
                 "other_user": thread_payload.get("other_user", other),
                 "blocked": thread_payload.get("blocked", _is_blocked_between(_current_user_id(), other["id"]) if other else False),
-                "active_count": len(_active_users("thread", thread_id)),
+                "active_count": 0,
                 "presence_status": thread_payload.get("presence_status", "offline"),
+                "presence_scope": thread_payload.get("presence_scope") or _presence_scope("thread", thread_id),
+                "presence_read_permissions": thread_payload.get("presence_read_permissions") or _presence_read_permissions_for_thread(thread),
+                "presence_profile_resolve_allowed": True,
             },
         })
 
@@ -1084,15 +1092,55 @@ def blocks(user_id):
     return jsonify({"status": "ok", "blocked": True})
 
 
+@chat_api_bp.route("/api/chat/presence/users", methods=["POST"])
+@login_required
+def presence_users():
+    data = request.get_json(silent=True) or {}
+    scope_type = str(data.get("scope_type") or "").strip()
+    scope_id = str(data.get("scope_id") or "").strip()
+    requested_ids = []
+    for value in data.get("user_ids") or []:
+        user_id = str(value or "").strip()
+        if user_id and user_id not in requested_ids:
+            requested_ids.append(user_id)
+        if len(requested_ids) >= 80:
+            break
+
+    allowed_ids = None
+    if scope_type == "channel":
+        channel = get_row_safe(COLLECTIONS["chat_channels"], scope_id, allow_missing=True)
+        if not _can_access_channel(channel):
+            return jsonify({"error": "Presence scope unavailable."}), 404
+    elif scope_type == "thread":
+        thread = _thread_for_user(scope_id)
+        if not thread:
+            return jsonify({"error": "Presence scope unavailable."}), 404
+        allowed_ids = set(_thread_participant_ids(thread))
+    else:
+        return jsonify({"error": "Unsupported presence scope."}), 400
+
+    users = []
+    for user_id in requested_ids:
+        if allowed_ids is not None and user_id not in allowed_ids:
+            continue
+        try:
+            user = get_row_safe(COLLECTIONS["users"], user_id, allow_missing=True)
+        except AppwriteException:
+            logger.exception("Failed to resolve presence user %s", user_id)
+            continue
+        public_user = _public_user(user)
+        if public_user:
+            users.append(public_user)
+    return jsonify({"users": users})
+
+
 @chat_api_bp.route("/api/chat/presence", methods=["POST"])
 @login_required
 def presence():
-    data = request.get_json(silent=True) or {}
-    scope_type = data.get("scope_type")
-    scope_id = data.get("scope_id")
-    _heartbeat(scope_type, scope_id)
+    # Compatibility endpoint for older clients. Live chat presence now uses
+    # Appwrite Presences directly from the browser.
     return jsonify({
         "status": "ok",
-        "users": _active_users(scope_type, scope_id),
-        "dm_statuses": _dm_presence_statuses(),
+        "users": [],
+        "dm_statuses": {},
     })

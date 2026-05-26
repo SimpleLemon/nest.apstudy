@@ -15,6 +15,7 @@ from appwrite_helpers import (
     list_rows_all,
     update_row_safe,
 )
+from services.discord_audit import emit_creation_event, format_actor
 
 
 notes_api_bp = Blueprint("notes_api", __name__)
@@ -154,6 +155,18 @@ def create_note():
         logger.exception("Failed to create note")
         return jsonify({"error": "Unable to create note."}), 500
 
+    emit_creation_event(
+        "New Note Created",
+        actor=format_actor(current_user),
+        target=title,
+        metadata={
+            "page_context": "notes",
+            "resource_type": "note",
+            "resource_id": created.get("$id") or created.get("id"),
+            "folder_id": folder_id,
+        },
+        color="green",
+    )
     return jsonify(_note_to_payload(created)), 201
 
 
@@ -232,6 +245,17 @@ def create_folder():
         logger.exception("Failed to create note folder")
         return jsonify({"error": "Unable to create folder."}), 500
 
+    emit_creation_event(
+        "New Note Folder Created",
+        actor=format_actor(current_user),
+        target=name,
+        metadata={
+            "page_context": "notes",
+            "resource_type": "note_folder",
+            "resource_id": created.get("$id") or created.get("id"),
+        },
+        color="green",
+    )
     return jsonify(_folder_to_payload(created)), 201
 
 

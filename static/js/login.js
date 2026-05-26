@@ -37,7 +37,21 @@
         }
     }
 
-    function exchangeAppwriteSession(provider, accountData, providerAccessToken) {
+    function createAppwriteJwt(appwriteAccount) {
+        if (!appwriteAccount || typeof appwriteAccount.createJWT !== "function") {
+            return Promise.resolve("");
+        }
+        return appwriteAccount.createJWT()
+            .then(function(data) {
+                return (data && (data.jwt || data.secret || data.token)) || "";
+            })
+            .catch(function(error) {
+                console.warn("Unable to create Appwrite JWT for session exchange.", error);
+                return "";
+            });
+    }
+
+    function exchangeAppwriteSession(provider, accountData, proof) {
         if (!accountData) {
             return Promise.reject(new Error("Missing Appwrite account data"));
         }
@@ -46,11 +60,14 @@
         if (!userId) {
             return Promise.reject(new Error("Missing Appwrite user id"));
         }
-        if (!providerAccessToken) {
-            return Promise.reject(new Error("Missing Appwrite session proof"));
+        const jwt = proof && proof.jwt;
+        const providerAccessToken = proof && proof.providerAccessToken;
+        if (!jwt && !providerAccessToken) {
+            return Promise.resolve(null);
         }
         const body = { user_id: userId, email: email };
         if (provider) body.provider = provider;
+        if (jwt) body.jwt = jwt;
         if (providerAccessToken) body.provider_access_token = providerAccessToken;
         return fetch("/auth/session", {
             method: "POST",
@@ -95,16 +112,27 @@
     if (appwriteAccount && typeof appwriteAccount.get === "function" && !skipAutoLogin) {
         appwriteAccount.get()
             .then(function(acc) {
-                return getCurrentSessionDetails().then(function(sessionDetails) {
+                return Promise.all([
+                    getCurrentSessionDetails(),
+                    createAppwriteJwt(appwriteAccount),
+                ]).then(function(results) {
+                    const sessionDetails = results[0] || {};
+                    const jwt = results[1] || "";
                     const provider = readSessionStorageItem(providerStorageKey)
                         || sessionDetails.provider
                         || "appwrite";
                     return exchangeAppwriteSession(
                         provider,
                         acc,
-                        sessionDetails.providerAccessToken
+                        {
+                            jwt: jwt,
+                            providerAccessToken: sessionDetails.providerAccessToken,
+                        }
                     )
                         .then(function(data) {
+                            if (!data) {
+                                return;
+                            }
                             removeSessionStorageItem(providerStorageKey);
                             const redirectTo = (data && data.redirect) ? data.redirect : defaultRedirect;
                             window.location.href = redirectTo;

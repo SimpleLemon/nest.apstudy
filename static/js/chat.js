@@ -3,11 +3,23 @@
   if (!root) return;
 
   const DEFAULT_AVATAR = "https://resources.apstudy.org/images/AP-Resources-Logo.png";
-  const PRESENCE_INTERVAL_MS = 30000;
+  const PRESENCE_APP_ID = "nest-chat";
+  const VIEWING_PRESENCE_REFRESH_MS = 45000;
+  const VIEWING_PRESENCE_TTL_MS = 90000;
+  const TYPING_PRESENCE_TTL_MS = 8000;
+  const CHAT_TAB_ID_KEY = "apstudy-chat-tab-id";
   const ROOM_SCROLL_RESTORE_DELAY = 0;
+  const MESSAGE_GROUP_WINDOW_MS = 7 * 60 * 1000;
+  const DISCORD_HISTORY_CHANNEL_IDS = new Set(["nest_announcements", "nest_chat"]);
+  const CHAT_CACHE_DB_NAME = "apstudy-chat-cache";
+  const CHAT_CACHE_DB_VERSION = 1;
+  const CHAT_CACHE_STORE = "items";
+  const CHAT_CACHE_SCHEMA = "v1";
+  const CHAT_CACHE_MESSAGE_LIMIT = 50;
+  const CHAT_PREFETCH_ROOM_LIMIT = 8;
 
   const state = {
-    user: null,
+    user: root.dataset.currentUserId ? { id: root.dataset.currentUserId } : null,
     settings: { chat_sound_enabled: true },
     channels: [],
     threads: [],
@@ -15,12 +27,30 @@
     activeRoom: null,
     activeProfile: null,
     roomCache: new Map(),
-    presenceTimer: null,
+    presenceRefreshTimer: null,
+    typingInputTimer: null,
+    typingClearTimer: null,
+    presenceUnsubscribe: null,
+    presenceReady: false,
+    presenceConnecting: false,
+    presenceRecords: new Map(),
+    knownUsers: new Map(),
+    resolvingPresenceUsers: new Set(),
+    lastViewingPresenceId: null,
+    lastTypingPresenceId: null,
+    tabId: null,
     searchTimer: null,
+    scrollSaveTimer: null,
     realtimeUnsubscribe: null,
     realtimeReady: false,
+    realtimeConnecting: false,
     loadingMessages: false,
+    closedHistoryBanners: new Set(),
     membersCollapsed: sessionStorage.getItem("apstudy-chat-members-collapsed") === "true",
+    hydratedFromPersistentCache: false,
+    persistentCacheReady: false,
+    serverBootstrapped: false,
+    prefetchingRooms: new Set(),
   };
 
   window.NestChat = state;
@@ -38,7 +68,9 @@
     status: document.getElementById("chat-status"),
     historyLimited: document.getElementById("chat-history-limited"),
     joinDiscord: document.getElementById("chat-join-discord"),
+    historyClose: document.getElementById("chat-history-close"),
     messages: document.getElementById("chat-messages"),
+    typing: document.getElementById("chat-typing-indicator"),
     composer: document.getElementById("chat-composer"),
     input: document.getElementById("chat-message-input"),
     sendButton: document.querySelector(".chat-send-button"),
@@ -47,6 +79,7 @@
     membersCount: document.getElementById("chat-members-count"),
     membersRestoreCount: document.getElementById("chat-members-restore-count"),
     profilePanel: document.getElementById("chat-profile-panel"),
+    profileToggle: document.querySelector("[data-toggle-members]"),
     audio: document.getElementById("chat-audio"),
   };
 
@@ -67,16 +100,77 @@
     return candidate;
   }
 
-  function formatTime(value) {
-    if (!value) return "";
+  function parseMessageDate(value) {
+    if (!value) return null;
     const date = new Date(value);
-    if (Number.isNaN(date.getTime())) return "";
+    return Number.isNaN(date.getTime()) ? null : date;
+  }
+
+  function localDateKey(date) {
+    if (!date) return "";
+    return [
+      date.getFullYear(),
+      String(date.getMonth() + 1).padStart(2, "0"),
+      String(date.getDate()).padStart(2, "0"),
+    ].join("-");
+  }
+
+  function calendarDayDifference(date, now = new Date()) {
+    if (!date) return 0;
+    const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const target = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    return Math.round((start - target) / 86400000);
+  }
+
+  function formatClockTime(date) {
+    if (!date) return "";
     return new Intl.DateTimeFormat(undefined, {
-      month: "numeric",
-      day: "numeric",
       hour: "numeric",
       minute: "2-digit",
     }).format(date);
+  }
+
+  function formatMessageTimestamp(value, now = new Date()) {
+    const date = parseMessageDate(value);
+    if (!date) return "";
+    const time = formatClockTime(date);
+    const dayDifference = calendarDayDifference(date, now);
+    if (dayDifference === 0) return time;
+    if (dayDifference === 1) return `Yesterday at ${time}`;
+    return new Intl.DateTimeFormat(undefined, {
+      month: "numeric",
+      day: "numeric",
+      year: "2-digit",
+      hour: "numeric",
+      minute: "2-digit",
+    }).format(date);
+  }
+
+  function messageAuthorKey(message) {
+    return String(message?.user_id || message?.author_username || message?.author_name || "");
+  }
+
+  function shouldGroupMessage(previous, next) {
+    const previousDate = parseMessageDate(previous?.created_at);
+    const nextDate = parseMessageDate(next?.created_at);
+    if (!previousDate || !nextDate) return false;
+    if (messageAuthorKey(previous) !== messageAuthorKey(next)) return false;
+    if (localDateKey(previousDate) !== localDateKey(nextDate)) return false;
+    return nextDate - previousDate <= MESSAGE_GROUP_WINDOW_MS;
+  }
+
+  function groupMessages(messages) {
+    const groups = [];
+    for (const message of messages || []) {
+      const lastGroup = groups[groups.length - 1];
+      const previous = lastGroup?.messages[lastGroup.messages.length - 1];
+      if (previous && shouldGroupMessage(previous, message)) {
+        lastGroup.messages.push(message);
+      } else {
+        groups.push({ id: message.id, messages: [message] });
+      }
+    }
+    return groups;
   }
 
   function plural(value, singular, pluralLabel) {
@@ -87,6 +181,278 @@
   function roomKey(room) {
     if (!room || !room.id || !room.type) return "";
     return `${room.type}:${room.id}`;
+  }
+
+  function currentUserId() {
+    return String(state.user?.id || root.dataset.currentUserId || "");
+  }
+
+  function currentTabId() {
+    if (state.tabId) return state.tabId;
+    try {
+      state.tabId = sessionStorage.getItem(CHAT_TAB_ID_KEY);
+      if (!state.tabId) {
+        state.tabId = Math.random().toString(36).slice(2, 12);
+        sessionStorage.setItem(CHAT_TAB_ID_KEY, state.tabId);
+      }
+    } catch (_) {
+      state.tabId = state.tabId || Math.random().toString(36).slice(2, 12);
+    }
+    return state.tabId;
+  }
+
+  function compactHash(value) {
+    let hash = 2166136261;
+    const text = String(value || "");
+    for (let index = 0; index < text.length; index += 1) {
+      hash ^= text.charCodeAt(index);
+      hash = Math.imul(hash, 16777619);
+    }
+    return (hash >>> 0).toString(36);
+  }
+
+  function registerKnownUser(user) {
+    if (!user?.id) return;
+    state.knownUsers.set(String(user.id), { ...(state.knownUsers.get(String(user.id)) || {}), ...user });
+  }
+
+  function registerKnownUsersFromState() {
+    registerKnownUser(state.user);
+    for (const channel of state.channels || []) {
+      for (const user of channel.active_users || []) registerKnownUser(user);
+    }
+    for (const thread of state.threads || []) {
+      registerKnownUser(thread.other_user);
+    }
+  }
+
+  function staleChannelPresence(channel) {
+    return {
+      ...channel,
+      active_count: 0,
+      active_users: [],
+    };
+  }
+
+  function staleThreadPresence(thread) {
+    const other = thread?.other_user ? { ...thread.other_user, online: false } : thread?.other_user;
+    return {
+      ...thread,
+      other_user: other,
+      active_count: 0,
+      presence_status: "offline",
+    };
+  }
+
+  function roomTarget(room) {
+    if (!room) return null;
+    if (room.type === "channel") return state.channels.find((channel) => channel.id === room.id) || null;
+    if (room.type === "thread") return state.threads.find((thread) => thread.id === room.id) || null;
+    return null;
+  }
+
+  function roomPresenceScope(room) {
+    const target = roomTarget(room);
+    if (target?.presence_scope?.scope_type && target?.presence_scope?.scope_id) return target.presence_scope;
+    if (!room?.type || !room?.id) return null;
+    return {
+      scope_type: room.type,
+      scope_id: room.id,
+      room_key: `${room.type}:${room.id}`,
+    };
+  }
+
+  function roomPresencePermissions(room) {
+    const target = roomTarget(room);
+    return Array.isArray(target?.presence_read_permissions) ? target.presence_read_permissions : [];
+  }
+
+  function presenceScopeKey(scopeOrMetadata) {
+    const scopeType = scopeOrMetadata?.scope_type || scopeOrMetadata?.scopeType;
+    const scopeId = scopeOrMetadata?.scope_id || scopeOrMetadata?.scopeId;
+    return scopeType && scopeId ? `${scopeType}:${scopeId}` : "";
+  }
+
+  function knownPresenceScopeKeys() {
+    const keys = new Set();
+    for (const channel of state.channels || []) {
+      const key = presenceScopeKey(channel.presence_scope || { scope_type: "channel", scope_id: channel.id });
+      if (key) keys.add(key);
+    }
+    for (const thread of state.threads || []) {
+      const key = presenceScopeKey(thread.presence_scope || { scope_type: "thread", scope_id: thread.id });
+      if (key) keys.add(key);
+    }
+    return keys;
+  }
+
+  function persistentCacheKey(suffix) {
+    const userId = currentUserId();
+    return userId ? `${CHAT_CACHE_SCHEMA}:user:${userId}:${suffix}` : "";
+  }
+
+  function openChatCacheDb() {
+    if (!window.indexedDB) return Promise.resolve(null);
+    if (state.chatCacheDb) return Promise.resolve(state.chatCacheDb);
+    if (state.chatCacheDbPromise) return state.chatCacheDbPromise;
+    state.chatCacheDbPromise = new Promise((resolve) => {
+      const request = window.indexedDB.open(CHAT_CACHE_DB_NAME, CHAT_CACHE_DB_VERSION);
+      request.onupgradeneeded = () => {
+        const db = request.result;
+        if (!db.objectStoreNames.contains(CHAT_CACHE_STORE)) {
+          db.createObjectStore(CHAT_CACHE_STORE, { keyPath: "key" });
+        }
+      };
+      request.onsuccess = () => {
+        state.chatCacheDb = request.result;
+        resolve(state.chatCacheDb);
+      };
+      request.onerror = () => {
+        console.warn("Chat cache unavailable", request.error);
+        resolve(null);
+      };
+      request.onblocked = () => resolve(null);
+    });
+    return state.chatCacheDbPromise;
+  }
+
+  async function readPersistentCache(key) {
+    if (!key) return null;
+    const db = await openChatCacheDb();
+    if (!db) return null;
+    return new Promise((resolve) => {
+      const request = db.transaction(CHAT_CACHE_STORE, "readonly")
+        .objectStore(CHAT_CACHE_STORE)
+        .get(key);
+      request.onsuccess = () => resolve(request.result?.value || null);
+      request.onerror = () => resolve(null);
+    });
+  }
+
+  async function writePersistentCache(key, value) {
+    if (!key || !value) return;
+    const db = await openChatCacheDb();
+    if (!db) return;
+    await new Promise((resolve) => {
+      const request = db.transaction(CHAT_CACHE_STORE, "readwrite")
+        .objectStore(CHAT_CACHE_STORE)
+        .put({ key, value, updatedAt: Date.now() });
+      request.onsuccess = () => resolve();
+      request.onerror = () => {
+        console.warn("Failed to persist chat cache", request.error);
+        resolve();
+      };
+    });
+  }
+
+  function normalizeCachedMessage(message) {
+    if (!message) return null;
+    const normalized = { ...message };
+    const deleteExpiry = parseMessageDate(normalized.delete_expires_at);
+    if (deleteExpiry && deleteExpiry.getTime() <= Date.now()) {
+      normalized.can_delete = false;
+    }
+    return normalized;
+  }
+
+  function trimMessagesForPersistentCache(messages) {
+    return (messages || [])
+      .map(normalizeCachedMessage)
+      .filter((message) => message && message.id)
+      .sort((a, b) => String(a.created_at || "").localeCompare(String(b.created_at || "")))
+      .slice(-CHAT_CACHE_MESSAGE_LIMIT);
+  }
+
+  function roomCachePayload(room, cache) {
+    return {
+      room,
+      messages: trimMessagesForPersistentCache(cache?.messages || []),
+      hasMore: Boolean(cache?.hasMore),
+      scrollTop: Number(cache?.scrollTop) || 0,
+      savedAt: Date.now(),
+    };
+  }
+
+  function applyRoomCachePayload(payload) {
+    if (!payload?.room) return false;
+    const cache = cacheFor(payload.room);
+    if (!cache) return false;
+    cache.messages = trimMessagesForPersistentCache(payload.messages || []);
+    cache.hasMore = Boolean(payload.hasMore);
+    cache.loaded = true;
+    cache.stale = true;
+    cache.scrollTop = Number(payload.scrollTop) || 0;
+    updateCacheCursors(cache);
+    return true;
+  }
+
+  async function persistRoomCache(room) {
+    const cache = cacheFor(room);
+    if (!cache?.loaded) return;
+    await writePersistentCache(
+      persistentCacheKey(`room:${roomKey(room)}`),
+      roomCachePayload(room, cache)
+    );
+  }
+
+  async function hydrateRoomFromPersistentCache(room) {
+    const payload = await readPersistentCache(persistentCacheKey(`room:${roomKey(room)}`));
+    return applyRoomCachePayload(payload);
+  }
+
+  async function persistBootstrapCache() {
+    if (!currentUserId()) return;
+    await writePersistentCache(persistentCacheKey("bootstrap"), {
+      user: state.user,
+      settings: state.settings,
+      channels: (state.channels || []).map(staleChannelPresence),
+      threads: (state.threads || []).map(staleThreadPresence),
+      university: state.university,
+      activeRoom: state.activeRoom,
+      discordInviteUrl: root.dataset.discordInviteUrl || "",
+      membersCollapsed: state.membersCollapsed,
+      savedAt: Date.now(),
+    });
+  }
+
+  async function hydrateFromPersistentCache() {
+    const payload = await readPersistentCache(persistentCacheKey("bootstrap"));
+    state.persistentCacheReady = true;
+    if (!payload) return false;
+    if (state.serverBootstrapped) return false;
+
+    state.user = payload.user || state.user;
+    state.settings = { ...state.settings, ...(payload.settings || {}) };
+    state.channels = Array.isArray(payload.channels) ? payload.channels.map(staleChannelPresence) : [];
+    state.threads = Array.isArray(payload.threads) ? payload.threads.map(staleThreadPresence) : [];
+    state.university = payload.university || null;
+    registerKnownUsersFromState();
+    if (payload.discordInviteUrl) root.dataset.discordInviteUrl = payload.discordInviteUrl;
+    if (typeof payload.membersCollapsed === "boolean") setMembersCollapsed(payload.membersCollapsed);
+    updateRoomLists();
+    initializeRealtime();
+    initializePresenceRealtime();
+    void loadInitialPresences();
+
+    const room = payload.activeRoom || (state.channels[0] && { type: "channel", id: state.channels[0].id });
+    if (room) {
+      await hydrateRoomFromPersistentCache(room);
+      state.hydratedFromPersistentCache = true;
+      await selectRoom(room, { fromCacheHydration: true, quiet: true });
+    }
+    return true;
+  }
+
+  function schedulePersistentBootstrapSave() {
+    window.setTimeout(() => {
+      void persistBootstrapCache();
+    }, 0);
+  }
+
+  function schedulePersistentRoomSave(room) {
+    window.setTimeout(() => {
+      void persistRoomCache(room);
+    }, 0);
   }
 
   function cacheFor(room) {
@@ -132,6 +498,7 @@
     const cache = cacheFor(state.activeRoom);
     if (cache && els.messages) {
       cache.scrollTop = els.messages.scrollTop;
+      schedulePersistentRoomSave(state.activeRoom);
     }
   }
 
@@ -154,12 +521,11 @@
     return remaining < 140;
   }
 
-  async function fetchJson(url, options = {}) {
-    const response = await fetch(url, {
-      credentials: "same-origin",
-      headers: { "Content-Type": "application/json", ...(options.headers || {}) },
-      ...options,
-    });
+	  async function fetchJson(url, options = {}) {
+	    const response = await fetch(url, {
+	      headers: { "Content-Type": "application/json", ...(options.headers || {}) },
+	      ...options,
+	    });
     const payload = await response.json().catch(() => ({}));
     if (!response.ok) {
       throw new Error(payload.error || "Something went wrong.");
@@ -178,6 +544,19 @@
     els.status.hidden = false;
     els.status.dataset.tone = tone;
     els.status.textContent = message;
+  }
+
+  function renderMessageLoader(label = "Loading messages...") {
+    if (!els.messages) return;
+    const loader = window.APStudyLoader?.html
+      ? window.APStudyLoader.html(label, { sizePx: 46, textToneClass: "text-on-surface" })
+      : `<div class="chat-empty">${escapeHtml(label)}</div>`;
+    els.messages.innerHTML = `<div class="chat-message-loader">${loader}</div>`;
+  }
+
+  function focusComposerSoon() {
+    if (!els.input || els.input.disabled || els.composer?.hidden) return;
+    window.setTimeout(() => els.input?.focus({ preventScroll: true }), 0);
   }
 
   function playChatSound(actorId) {
@@ -272,7 +651,6 @@
     const label = status === "online" ? "Online" : "Offline";
     return `
       <small class="chat-presence-line">
-        <span class="chat-presence-dot is-${status}" aria-hidden="true"></span>
         <span>${label}</span>
       </small>
     `;
@@ -317,8 +695,19 @@
 
   function setHistoryBanner(channel) {
     if (!els.historyLimited) return;
-    const shouldShow = Boolean(channel?.history_limited);
+    const shouldShow = Boolean(
+      channel
+      && channel.kind === "discord"
+      && DISCORD_HISTORY_CHANNEL_IDS.has(channel.id)
+      && channel.history_limited === true
+      && !state.closedHistoryBanners.has(channel.id)
+    );
     els.historyLimited.hidden = !shouldShow;
+    if (channel?.id) {
+      els.historyLimited.dataset.channelId = channel.id;
+    } else {
+      delete els.historyLimited.dataset.channelId;
+    }
     if (els.joinDiscord) {
       const invite = root.dataset.discordInviteUrl || "";
       els.joinDiscord.hidden = !invite;
@@ -358,9 +747,15 @@
     if (thread) {
       const other = thread.other_user || {};
       els.roomSymbol.classList.add("is-avatar");
-      els.roomSymbol.innerHTML = `<img src="${escapeHtml(avatarUrl(other.picture_url, 48))}" alt="">`;
+      const status = dmPresenceStatus(thread);
+      els.roomSymbol.innerHTML = `
+        <span class="chat-room-avatar-wrap">
+          <img src="${escapeHtml(avatarUrl(other.picture_url, 48))}" alt="">
+          <span class="chat-presence-dot chat-presence-overlay is-${status}" aria-hidden="true"></span>
+        </span>
+      `;
       els.roomName.textContent = other.name || other.username || "Nest User";
-      els.roomMeta.textContent = dmPresenceStatus(thread) === "online" ? "Online" : "Offline";
+      els.roomMeta.textContent = "";
       setHistoryBanner(null);
       setComposer(!thread.blocked, thread.blocked ? "This conversation is blocked" : `Message ${other.name || other.username || ""}`.trim());
       return;
@@ -391,17 +786,38 @@
   function renderMessages(messages) {
     if (!els.messages) return;
     if (!messages || !messages.length) {
-      els.messages.innerHTML = `<div class="chat-empty">No messages yet.</div>`;
+      els.messages.innerHTML = `<div class="chat-message-stack"><div class="chat-empty">No messages yet.</div></div>`;
       return;
     }
-    els.messages.innerHTML = messages.map(renderMessage).join("");
+    els.messages.innerHTML = `
+      <div class="chat-message-stack">
+        ${groupMessages(messages).map(renderMessageGroup).join("")}
+      </div>
+    `;
   }
 
-  function renderMessage(message) {
+  function renderMessageGroup(group) {
+    const [lead, ...continuations] = group.messages;
+    return `
+      <div class="chat-message-group" data-message-group="${escapeHtml(group.id)}">
+        ${renderLeadMessage(lead)}
+        ${continuations.map(renderContinuationMessage).join("")}
+      </div>
+    `;
+  }
+
+  function renderDeleteButton(message) {
+    if (!message.can_delete) return "";
+    return `
+      <button class="chat-delete" type="button" data-delete-message="${escapeHtml(message.id)}" aria-label="Delete message">
+        <span class="material-symbols-outlined">delete</span>
+      </button>
+    `;
+  }
+
+  function renderLeadMessage(message) {
     const deleteButton = message.can_delete
-      ? `<button class="chat-delete" type="button" data-delete-message="${escapeHtml(message.id)}" aria-label="Delete message">
-          <span class="material-symbols-outlined">delete</span>
-        </button>`
+      ? renderDeleteButton(message)
       : "";
     return `
       <article class="chat-message" data-message-id="${escapeHtml(message.id)}">
@@ -409,12 +825,25 @@
         <div class="chat-message-content">
           <div class="chat-message-head">
             <span class="chat-message-author">${escapeHtml(message.author_name || "Nest User")}</span>
-            <span class="chat-message-time">${escapeHtml(formatTime(message.created_at))}</span>
+            <span class="chat-message-time">${escapeHtml(formatMessageTimestamp(message.created_at))}</span>
           </div>
           <div class="chat-message-body">${message.rendered_html || escapeHtml(message.content || "")}</div>
           ${renderPreviews(message.previews || [])}
         </div>
         ${deleteButton}
+      </article>
+    `;
+  }
+
+  function renderContinuationMessage(message) {
+    return `
+      <article class="chat-message chat-message-continuation" data-message-id="${escapeHtml(message.id)}">
+        <span class="chat-message-continuation-time">${escapeHtml(formatClockTime(parseMessageDate(message.created_at)))}</span>
+        <div class="chat-message-content">
+          <div class="chat-message-body">${message.rendered_html || escapeHtml(message.content || "")}</div>
+          ${renderPreviews(message.previews || [])}
+        </div>
+        ${renderDeleteButton(message)}
       </article>
     `;
   }
@@ -479,24 +908,55 @@
     });
   }
 
+  function normalizeHexColor(value) {
+    const candidate = String(value || "").trim();
+    const normalized = candidate.startsWith("#") ? candidate : `#${candidate}`;
+    return /^#[0-9a-f]{6}$/i.test(normalized) ? normalized.toLowerCase() : "#fecae1";
+  }
+
+  function profileDetail(label, value, className = "") {
+    return `
+      <div class="${className}">
+        <span>${escapeHtml(label)}</span>
+        <strong>${escapeHtml(value || "Not set")}</strong>
+      </div>
+    `;
+  }
+
   function profileMarkup(user, options = {}) {
     const status = options.status || (user?.online ? "online" : "offline");
-    const schoolLine = [user?.school, user?.major, user?.graduation_year].filter(Boolean).join(" · ");
+    const handle = user?.handle || (user?.username ? `@${user.username}` : `@${user?.id || "apstudy-user"}`);
+    const graduation = user?.graduation_year || user?.class_year || "";
+    const memberSince = user?.member_since || "";
+    const bannerColor = normalizeHexColor(user?.banner_color);
     const blockLabel = options.blocked ? "Unblock" : "Block";
     const blockAction = options.showBlock
       ? `<button type="button" data-block-user="${escapeHtml(user.id)}" data-blocked="${options.blocked ? "true" : "false"}">${blockLabel}</button>`
       : "";
     return `
       <div class="chat-profile-card">
-        <img src="${escapeHtml(avatarUrl(user?.picture_url, 128))}" alt="">
-        <div>
-          <h3>${escapeHtml(user?.name || user?.username || "Nest User")}</h3>
-          ${user?.username ? `<p>@${escapeHtml(user.username)}</p>` : ""}
-          <p class="chat-presence-line chat-profile-presence">
-            <span class="chat-presence-dot is-${status}" aria-hidden="true"></span>
-            <span>${status === "online" ? "Online" : "Offline"}</span>
-          </p>
-          ${schoolLine ? `<p>${escapeHtml(schoolLine)}</p>` : ""}
+        <div class="profile-tile" style="--profile-banner-color: ${escapeHtml(bannerColor)};">
+          <div class="profile-tile-banner" aria-hidden="true"></div>
+          <div class="profile-tile-body">
+            <div class="profile-tile-avatar-frame">
+              <img class="profile-tile-avatar" src="${escapeHtml(avatarUrl(user?.picture_url, 150))}" alt="${escapeHtml(user?.name || "Nest User")} avatar" width="150" height="150" decoding="async">
+            </div>
+            <div class="profile-tile-heading">
+              <h3>${escapeHtml(user?.name || user?.username || "Nest User")}</h3>
+              <p>${escapeHtml(handle)}</p>
+              <p class="chat-presence-line chat-profile-presence">
+                <span class="chat-presence-dot is-${status}" aria-hidden="true"></span>
+                <span>${status === "online" ? "Online" : "Offline"}</span>
+              </p>
+            </div>
+            <div class="profile-tile-details">
+              ${profileDetail("School", user?.school, user?.is_emory_school ? "profile-tile-detail-emory" : "")}
+              ${profileDetail("Major", user?.major)}
+              ${profileDetail("Graduation", graduation)}
+              ${profileDetail("Education", user?.education_level)}
+              ${profileDetail("Member Since", memberSince, user?.is_early_member ? "profile-tile-detail-early-member" : "")}
+            </div>
+          </div>
         </div>
       </div>
       <div class="chat-profile-actions">
@@ -507,12 +967,10 @@
   }
 
   function updateCurrentMembersFromPayload(payload) {
-    if (payload.channel && state.activeRoom?.type === "channel" && state.activeRoom.id === payload.channel.id) {
-      renderMembers(payload.channel.active_users || []);
-    }
     if (payload.thread && state.activeRoom?.type === "thread" && state.activeRoom.id === payload.thread.id) {
       renderDmProfile(payload.thread);
     }
+    renderPresenceDrivenUi();
   }
 
   function updateChannel(payload) {
@@ -527,6 +985,7 @@
 
   function updateThread(payload) {
     if (!payload?.id) return;
+    registerKnownUser(payload.other_user);
     const index = state.threads.findIndex((thread) => thread.id === payload.id);
     if (index >= 0) {
       state.threads[index] = { ...state.threads[index], ...payload };
@@ -534,6 +993,199 @@
       state.threads.unshift(payload);
     }
     state.threads.sort((a, b) => String(b.last_message_at || "").localeCompare(String(a.last_message_at || "")));
+  }
+
+  function normalizePresenceMetadata(metadata) {
+    if (!metadata) return {};
+    if (typeof metadata === "string") {
+      try {
+        return JSON.parse(metadata);
+      } catch (_) {
+        return {};
+      }
+    }
+    return metadata;
+  }
+
+  function presenceUserId(record) {
+    return String(record?.userId || record?.user_id || record?.userInternalId || "");
+  }
+
+  function presenceExpiresAt(record) {
+    return parseMessageDate(record?.expiresAt || record?.expires_at);
+  }
+
+  function presenceIsExpired(record) {
+    const expiresAt = presenceExpiresAt(record);
+    return Boolean(expiresAt && expiresAt.getTime() <= Date.now());
+  }
+
+  function normalizePresenceRecord(record) {
+    if (!record) return null;
+    const metadata = normalizePresenceMetadata(record.metadata);
+    if (metadata.app !== PRESENCE_APP_ID) return null;
+    const scopeKey = presenceScopeKey(metadata);
+    if (!scopeKey || !knownPresenceScopeKeys().has(scopeKey)) return null;
+    const userId = presenceUserId(record);
+    if (!userId || presenceIsExpired(record)) return null;
+    return {
+      ...record,
+      userId,
+      status: record.status || "",
+      metadata,
+    };
+  }
+
+  function presenceAction(response) {
+    const events = response?.events || [];
+    if (events.some((event) => String(event).endsWith(".delete") || String(event).includes(".delete"))) return "delete";
+    if (events.some((event) => String(event).endsWith(".update") || String(event).includes(".update"))) return "update";
+    if (events.some((event) => String(event).endsWith(".upsert") || String(event).includes(".upsert"))) return "upsert";
+    return "upsert";
+  }
+
+  function applyPresenceRecord(record, action = "upsert") {
+    const presenceId = String(record?.$id || record?.id || "");
+    if (!presenceId) return;
+    if (action === "delete") {
+      state.presenceRecords.delete(presenceId);
+      return;
+    }
+    const normalized = normalizePresenceRecord(record);
+    if (normalized) {
+      state.presenceRecords.set(presenceId, normalized);
+    } else {
+      state.presenceRecords.delete(presenceId);
+    }
+  }
+
+  function pruneExpiredPresences() {
+    for (const [presenceId, record] of state.presenceRecords.entries()) {
+      if (presenceIsExpired(record)) state.presenceRecords.delete(presenceId);
+    }
+  }
+
+  function presenceRecordsForScope(scopeType, scopeId, kind = "viewing") {
+    pruneExpiredPresences();
+    const key = `${scopeType}:${scopeId}`;
+    return Array.from(state.presenceRecords.values()).filter((record) => {
+      const metadata = record.metadata || {};
+      if (presenceScopeKey(metadata) !== key) return false;
+      if (kind === "viewing") return metadata.kind === "viewing" && record.status === "online";
+      if (kind === "typing") return metadata.kind === "typing" && record.status === "typing";
+      return false;
+    });
+  }
+
+  function presenceUserIdsForScope(scopeType, scopeId, kind = "viewing") {
+    const ids = [];
+    for (const record of presenceRecordsForScope(scopeType, scopeId, kind)) {
+      const userId = presenceUserId(record);
+      if (userId && !ids.includes(userId)) ids.push(userId);
+    }
+    return ids;
+  }
+
+  function onlineUserIds() {
+    pruneExpiredPresences();
+    const ids = new Set();
+    for (const record of state.presenceRecords.values()) {
+      if (record.status === "online" && record.metadata?.kind === "viewing") {
+        ids.add(presenceUserId(record));
+      }
+    }
+    return ids;
+  }
+
+  function usersForPresenceScope(scopeType, scopeId) {
+    return presenceUserIdsForScope(scopeType, scopeId, "viewing")
+      .map((userId) => state.knownUsers.get(userId) || { id: userId, name: "Nest User" });
+  }
+
+  function typingUsersForActiveRoom() {
+    const scope = roomPresenceScope(state.activeRoom);
+    if (!scope) return [];
+    return presenceUserIdsForScope(scope.scope_type, scope.scope_id, "typing")
+      .filter((userId) => userId !== currentUserId())
+      .map((userId) => state.knownUsers.get(userId) || { id: userId, name: "Someone" });
+  }
+
+  function renderTypingIndicator() {
+    if (!els.typing) return;
+    const users = typingUsersForActiveRoom();
+    if (!users.length) {
+      els.typing.hidden = true;
+      els.typing.textContent = "";
+      return;
+    }
+    const names = users.map((user) => user.name || user.username || "Someone");
+    let label = "Several people are typing...";
+    if (names.length === 1) label = `${names[0]} is typing...`;
+    if (names.length === 2) label = `${names[0]} and ${names[1]} are typing...`;
+    els.typing.hidden = false;
+    els.typing.textContent = label;
+  }
+
+  function renderPresenceDrivenUi() {
+    registerKnownUsersFromState();
+    const onlineIds = onlineUserIds();
+    for (const channel of state.channels) {
+      const scope = channel.presence_scope || { scope_type: "channel", scope_id: channel.id };
+      const users = usersForPresenceScope(scope.scope_type, scope.scope_id);
+      channel.active_users = users;
+      channel.active_count = users.length;
+      for (const user of users) registerKnownUser(user);
+    }
+    for (const thread of state.threads) {
+      const other = thread.other_user || {};
+      const isOnline = Boolean(other.id && onlineIds.has(String(other.id)));
+      thread.presence_status = isOnline ? "online" : "offline";
+      other.online = isOnline;
+      const scope = thread.presence_scope || { scope_type: "thread", scope_id: thread.id };
+      thread.active_count = presenceUserIdsForScope(scope.scope_type, scope.scope_id, "viewing").length;
+    }
+    updateRoomLists();
+    renderHeader();
+    const channel = activeChannel();
+    const thread = activeThread();
+    if (thread) {
+      renderDmProfile(thread);
+    } else if (channel && !channelIsPending(channel)) {
+      renderMembers(channel.active_users || []);
+    }
+    renderTypingIndicator();
+    void resolvePresenceUsersForActiveRoom();
+  }
+
+  async function resolvePresenceUsersForActiveRoom() {
+    const room = state.activeRoom;
+    const target = roomTarget(room);
+    const scope = roomPresenceScope(room);
+    if (!room || !target?.presence_profile_resolve_allowed || !scope) return;
+    const unknownIds = presenceUserIdsForScope(scope.scope_type, scope.scope_id, "viewing")
+      .concat(presenceUserIdsForScope(scope.scope_type, scope.scope_id, "typing"))
+      .filter((userId, index, all) => all.indexOf(userId) === index)
+      .filter((userId) => !state.knownUsers.has(userId));
+    if (!unknownIds.length) return;
+    const resolveKey = `${scope.scope_type}:${scope.scope_id}:${unknownIds.sort().join(",")}`;
+    if (state.resolvingPresenceUsers.has(resolveKey)) return;
+    state.resolvingPresenceUsers.add(resolveKey);
+    try {
+      const payload = await fetchJson("/api/chat/presence/users", {
+        method: "POST",
+        body: JSON.stringify({
+          scope_type: scope.scope_type,
+          scope_id: scope.scope_id,
+          user_ids: unknownIds,
+        }),
+      });
+      for (const user of payload.users || []) registerKnownUser(user);
+      if (roomKey(state.activeRoom) === roomKey(room)) renderPresenceDrivenUi();
+    } catch (_) {
+      // Profile resolution is best-effort; presence counts can still render.
+    } finally {
+      state.resolvingPresenceUsers.delete(resolveKey);
+    }
   }
 
   function currentRoomUrl(room, params = {}) {
@@ -565,7 +1217,7 @@
     const previousHeight = els.messages.scrollHeight;
     const previousTop = els.messages.scrollTop;
     state.loadingMessages = true;
-    if (!quiet && !before && !after) setStatus("Loading messages...");
+    if (!quiet && !before && !after && !cache.loaded) renderMessageLoader();
 
     try {
       const payload = await fetchJson(currentRoomUrl(room, { before, after }));
@@ -584,6 +1236,7 @@
       cache.stale = false;
       cache.hasMore = Boolean(payload.has_more);
       updateCacheCursors(cache);
+      schedulePersistentRoomSave(room);
       renderHeader();
       updateRoomLists();
       renderMessages(cache.messages);
@@ -598,12 +1251,65 @@
       } else {
         restoreScroll(cache, !preserveScroll);
       }
+      schedulePersistentBootstrapSave();
       return messages;
     } catch (error) {
       setStatus(error.message || "Unable to load messages.", "error");
       return [];
     } finally {
       state.loadingMessages = false;
+    }
+  }
+
+  async function prefetchRoomMessages(room) {
+    const key = roomKey(room);
+    if (!key || state.prefetchingRooms.has(key)) return;
+    const cache = cacheFor(room);
+    if (cache?.loaded && !cache.stale) return;
+    state.prefetchingRooms.add(key);
+    try {
+      await hydrateRoomFromPersistentCache(room);
+      const roomCache = cacheFor(room);
+      const params = roomCache?.latestCursor ? { after: roomCache.latestCursor } : {};
+      const payload = await fetchJson(currentRoomUrl(room, params));
+      if (payload.channel) updateChannel(payload.channel);
+      if (payload.thread) updateThread(payload.thread);
+      const messages = payload.messages || [];
+      roomCache.messages = params.after
+        ? mergeMessages(roomCache.messages, messages)
+        : mergeMessages([], messages);
+      roomCache.loaded = true;
+      roomCache.stale = false;
+      roomCache.hasMore = Boolean(payload.has_more);
+      updateCacheCursors(roomCache);
+      schedulePersistentRoomSave(room);
+      schedulePersistentBootstrapSave();
+    } catch (_) {
+      const roomCache = cacheFor(room);
+      if (roomCache) roomCache.stale = true;
+    } finally {
+      state.prefetchingRooms.delete(key);
+    }
+  }
+
+  function scheduleRoomPrefetches() {
+    const rooms = [
+      ...state.channels.map((channel) => ({ type: "channel", id: channel.id })),
+      ...state.threads.slice(0, CHAT_PREFETCH_ROOM_LIMIT).map((thread) => ({ type: "thread", id: thread.id })),
+    ]
+      .filter((room) => room.id)
+      .filter((room) => roomKey(room) !== roomKey(state.activeRoom))
+      .slice(0, CHAT_PREFETCH_ROOM_LIMIT);
+    if (!rooms.length) return;
+    const run = () => {
+      for (const room of rooms) {
+        void prefetchRoomMessages(room);
+      }
+    };
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(run, { timeout: 2500 });
+    } else {
+      window.setTimeout(run, 700);
     }
   }
 
@@ -623,27 +1329,32 @@
 
   function removeMessageFromCaches(messageId) {
     if (!messageId) return;
-    for (const cache of state.roomCache.values()) {
+    for (const [key, cache] of state.roomCache.entries()) {
       cache.messages = cache.messages.filter((message) => message.id !== messageId);
       updateCacheCursors(cache);
+      const [type, id] = key.split(":");
+      if (type && id) schedulePersistentRoomSave({ type, id });
     }
     const activeCache = cacheFor(state.activeRoom);
     if (activeCache) renderMessages(activeCache.messages);
   }
 
-  async function selectRoom(room) {
+  async function selectRoom(room, options = {}) {
+    const previousRoom = state.activeRoom;
     saveActiveScroll();
     state.activeRoom = room;
     state.activeProfile = null;
     updateRoomLists();
     renderHeader();
+    if (!options.suppressFocus) focusComposerSoon();
     setStatus(null);
+    handleActiveRoomPresenceChange(previousRoom);
 
     const channel = activeChannel();
     const thread = activeThread();
     if (channelIsPending(channel)) {
       renderApprovalNotice(channel);
-      sendPresence();
+      schedulePersistentBootstrapSave();
       return;
     }
 
@@ -654,83 +1365,138 @@
     }
 
     const cache = cacheFor(room);
+    if (!cache.loaded) {
+      await hydrateRoomFromPersistentCache(room);
+    }
     if (renderCachedRoom(room)) {
       if (cache.stale && cache.latestCursor) {
         await loadMessages({ after: cache.latestCursor, quiet: true });
+      } else if (cache.stale) {
+        await loadMessages({ force: true, quiet: true });
       }
     } else {
       await loadMessages({ force: true });
     }
-    sendPresence();
+    renderPresenceDrivenUi();
+    schedulePersistentBootstrapSave();
   }
 
   async function bootstrap({ preserveActive = false } = {}) {
-    const activeKey = roomKey(state.activeRoom);
     const payload = await fetchJson("/api/chat/bootstrap");
     state.user = payload.user || state.user;
     state.settings = { ...state.settings, ...(payload.settings || {}) };
-    state.channels = payload.sections?.nest || [];
-    state.threads = payload.sections?.direct_messages || [];
+    state.channels = (payload.sections?.nest || []).map(staleChannelPresence);
+    state.threads = (payload.sections?.direct_messages || []).map(staleThreadPresence);
     state.university = payload.university || null;
+    registerKnownUsersFromState();
     if (payload.discord_invite_url) root.dataset.discordInviteUrl = payload.discord_invite_url;
+    state.serverBootstrapped = true;
     updateRoomLists();
     initializeRealtime();
+    initializePresenceRealtime();
+    void loadInitialPresences();
     setMembersCollapsed(state.membersCollapsed);
+    schedulePersistentBootstrapSave();
 
-    if (preserveActive && activeKey) {
+    const activeKey = roomKey(state.activeRoom);
+    if (activeKey) {
       const [type, id] = activeKey.split(":");
       const stillExists = type === "channel"
         ? state.channels.some((channel) => channel.id === id)
         : state.threads.some((thread) => thread.id === id);
       if (stillExists) {
-        await selectRoom({ type, id });
+        await selectRoom({ type, id }, { suppressFocus: preserveActive });
+        scheduleRoomPrefetches();
         return;
       }
     }
 
-    if (!state.activeRoom) {
-      const firstChannel = state.channels[0];
-      const firstThread = state.threads[0];
-      if (firstChannel) {
-        await selectRoom({ type: "channel", id: firstChannel.id });
-      } else if (firstThread) {
-        await selectRoom({ type: "thread", id: firstThread.id });
-      } else {
-        renderHeader();
-        renderMessages([]);
-      }
+    const firstChannel = state.channels[0];
+    const firstThread = state.threads[0];
+    if (firstChannel) {
+      await selectRoom({ type: "channel", id: firstChannel.id });
+    } else if (firstThread) {
+      await selectRoom({ type: "thread", id: firstThread.id });
+    } else {
+      renderHeader();
+      renderMessages([]);
     }
+    scheduleRoomPrefetches();
   }
 
   function realtimeChannelName() {
     const databaseId = root.dataset.appwriteDatabaseId || "";
     const tableId = root.dataset.chatEventsTableId || "chat_events";
-    const Channel = window.Appwrite && window.Appwrite.Channel;
+    const Channel = window.Channel || (window.Appwrite && window.Appwrite.Channel);
     if (Channel?.tablesdb) return Channel.tablesdb(databaseId).table(tableId).row();
     if (Channel?.tablesDB) return Channel.tablesDB(databaseId).table(tableId).row();
     return `tablesdb.${databaseId}.tables.${tableId}.rows`;
   }
 
-  function initializeRealtime() {
-    if (state.realtimeReady || state.realtimeUnsubscribe) return;
+  function presenceChannelName() {
+    const Channel = window.Channel || (window.Appwrite && window.Appwrite.Channel);
+    if (Channel?.presences) return Channel.presences();
+    return "presences";
+  }
+
+  function normalizeRealtimeUnsubscribe(subscription) {
+    if (typeof subscription === "function") return subscription;
+    if (subscription && typeof subscription.unsubscribe === "function") {
+      return () => subscription.unsubscribe();
+    }
+    if (subscription && typeof subscription.close === "function") {
+      return () => subscription.close();
+    }
+    return null;
+  }
+
+  async function subscribeRealtime(channel, callback) {
+    const realtime = window.realtime || (window.Appwrite?.Realtime && window.client ? new window.Appwrite.Realtime(window.client) : null);
+    if (realtime?.subscribe) {
+      const subscription = await realtime.subscribe(channel, callback);
+      return normalizeRealtimeUnsubscribe(subscription);
+    }
+    if (typeof window.client?.subscribe === "function") {
+      const subscription = window.client.subscribe(channel, callback);
+      return normalizeRealtimeUnsubscribe(subscription);
+    }
+    return null;
+  }
+
+  async function initializeRealtime() {
+    if (state.realtimeReady || state.realtimeUnsubscribe || state.realtimeConnecting) return;
     if (!root.dataset.appwriteDatabaseId || !root.dataset.chatEventsTableId) return;
     if (!window.Appwrite || !window.client) return;
 
     const channel = realtimeChannelName();
+    state.realtimeConnecting = true;
     try {
-      let unsubscribe = null;
-      if (window.Appwrite.Realtime) {
-        const realtime = new window.Appwrite.Realtime(window.client);
-        unsubscribe = realtime.subscribe(channel, handleRealtimePayload);
-      } else if (typeof window.client.subscribe === "function") {
-        unsubscribe = window.client.subscribe(channel, handleRealtimePayload);
-      }
+      const unsubscribe = await subscribeRealtime(channel, handleRealtimePayload);
       if (typeof unsubscribe === "function") {
         state.realtimeUnsubscribe = unsubscribe;
         state.realtimeReady = true;
       }
     } catch (error) {
       console.warn("Chat realtime unavailable", error);
+    } finally {
+      state.realtimeConnecting = false;
+    }
+  }
+
+  async function initializePresenceRealtime() {
+    if (state.presenceReady || state.presenceUnsubscribe || state.presenceConnecting) return;
+    if (!window.presences && !window.realtime) return;
+    state.presenceConnecting = true;
+    try {
+      const unsubscribe = await subscribeRealtime(presenceChannelName(), handlePresenceRealtimePayload);
+      if (typeof unsubscribe === "function") {
+        state.presenceUnsubscribe = unsubscribe;
+        state.presenceReady = true;
+      }
+    } catch (error) {
+      console.warn("Appwrite presence realtime unavailable", error);
+    } finally {
+      state.presenceConnecting = false;
     }
   }
 
@@ -783,56 +1549,134 @@
     }
   }
 
-  async function sendPresence() {
-    const room = state.activeRoom;
-    if (!room) return;
+  async function handlePresenceRealtimePayload(response) {
+    applyPresenceRecord(response?.payload || response?.presence || response, presenceAction(response));
+    renderPresenceDrivenUi();
+  }
+
+  async function loadInitialPresences() {
+    if (!window.presences?.list || !window.Query) {
+      renderPresenceDrivenUi();
+      return;
+    }
     try {
-      const payload = await fetchJson("/api/chat/presence", {
-        method: "POST",
-        body: JSON.stringify({ scope_type: room.type, scope_id: room.id }),
+      const payload = await window.presences.list({
+        queries: [window.Query.equal("status", ["online", "typing"])],
+        total: false,
+        ttl: 0,
       });
-      updateDmPresenceStatuses(payload.dm_statuses || {});
-      if (room.type === "channel") {
-        const channel = activeChannel();
-        if (channel) {
-          channel.active_users = payload.users || [];
-          channel.active_count = channel.active_users.length;
-          renderHeader();
-          renderChannels();
-          renderMembers(channel.active_users);
-        }
+      state.presenceRecords.clear();
+      for (const record of payload.presences || payload.rows || payload.documents || []) {
+        applyPresenceRecord(record, "upsert");
       }
+      renderPresenceDrivenUi();
+    } catch (error) {
+      console.warn("Unable to load Appwrite presences", error);
+      renderPresenceDrivenUi();
+    }
+  }
+
+  function activePresencePayload(kind, room = state.activeRoom) {
+    const scope = roomPresenceScope(room);
+    const permissions = roomPresencePermissions(room);
+    const userId = currentUserId();
+    if (!userId || !scope || !permissions.length) return null;
+    const status = kind === "typing" ? "typing" : "online";
+    const prefix = kind === "typing" ? "ct" : "cv";
+    const presenceId = `${prefix}_${compactHash(`${userId}:${currentTabId()}:${kind}:${scope.scope_type}:${scope.scope_id}`)}`;
+    return {
+      presenceId,
+      status,
+      permissions,
+      expiresAt: new Date(Date.now() + (kind === "typing" ? TYPING_PRESENCE_TTL_MS : VIEWING_PRESENCE_TTL_MS)).toISOString(),
+      metadata: {
+        app: PRESENCE_APP_ID,
+        kind,
+        scopeType: scope.scope_type,
+        scopeId: scope.scope_id,
+        roomKey: scope.room_key || `${scope.scope_type}:${scope.scope_id}`,
+        tabId: currentTabId(),
+      },
+    };
+  }
+
+  async function upsertPresence(kind, room = state.activeRoom) {
+    const payload = activePresencePayload(kind, room);
+    if (!payload || document.visibilityState === "hidden") return null;
+    try {
+      if (window.presences?.upsert) {
+        await window.presences.upsert(payload);
+      } else {
+        const realtime = window.realtime;
+        if (!realtime?.upsertPresence) return null;
+        const { expiresAt, ...realtimePayload } = payload;
+        await realtime.upsertPresence(realtimePayload);
+      }
+      if (kind === "typing") state.lastTypingPresenceId = payload.presenceId;
+      else state.lastViewingPresenceId = payload.presenceId;
+      return payload.presenceId;
+    } catch (error) {
+      console.warn("Unable to update chat presence", error);
+      return null;
+    }
+  }
+
+  async function deletePresence(presenceId) {
+    if (!presenceId || !window.presences?.delete) return;
+    try {
+      await window.presences.delete({ presenceId });
+      state.presenceRecords.delete(presenceId);
+      renderPresenceDrivenUi();
     } catch (_) {
-      // Presence is opportunistic; the message view should keep working.
+      // Expiration will clean this up if the delete races navigation or reconnects.
     }
   }
 
-  function updateDmPresenceStatuses(statuses) {
-    if (!statuses || typeof statuses !== "object") return;
-    let changed = false;
-    for (const thread of state.threads) {
-      const other = thread.other_user || {};
-      if (!other.id || !statuses[other.id]) continue;
-      const nextStatus = statuses[other.id] === "online" ? "online" : "offline";
-      if (thread.presence_status !== nextStatus || Boolean(other.online) !== (nextStatus === "online")) {
-        thread.presence_status = nextStatus;
-        other.online = nextStatus === "online";
-        changed = true;
-      }
-    }
-    if (changed) {
-      renderThreads();
-      if (state.activeRoom?.type === "thread") {
-        const thread = activeThread();
-        renderHeader();
-        renderDmProfile(thread);
-      }
-    }
+  function presenceIdFor(kind, room) {
+    return activePresencePayload(kind, room)?.presenceId || null;
   }
 
-  function startPresenceTimer() {
-    window.clearInterval(state.presenceTimer);
-    state.presenceTimer = window.setInterval(sendPresence, PRESENCE_INTERVAL_MS);
+  function clearTypingPresence(room = state.activeRoom) {
+    window.clearTimeout(state.typingInputTimer);
+    window.clearTimeout(state.typingClearTimer);
+    const presenceId = presenceIdFor("typing", room) || state.lastTypingPresenceId;
+    state.lastTypingPresenceId = null;
+    void deletePresence(presenceId);
+  }
+
+  function refreshViewingPresence() {
+    void upsertPresence("viewing");
+  }
+
+  function handleActiveRoomPresenceChange(previousRoom) {
+    if (previousRoom && roomKey(previousRoom) !== roomKey(state.activeRoom)) {
+      clearTypingPresence(previousRoom);
+      const previousViewingId = presenceIdFor("viewing", previousRoom) || state.lastViewingPresenceId;
+      state.lastViewingPresenceId = null;
+      void deletePresence(previousViewingId);
+    }
+    refreshViewingPresence();
+  }
+
+  function scheduleTypingPresence() {
+    const channel = activeChannel();
+    const thread = activeThread();
+    if (!els.input || !els.input.value.trim()) {
+      clearTypingPresence();
+      return;
+    }
+    if ((channel && !channelIsWritable(channel)) || thread?.blocked) return;
+    window.clearTimeout(state.typingInputTimer);
+    state.typingInputTimer = window.setTimeout(() => {
+      void upsertPresence("typing");
+      window.clearTimeout(state.typingClearTimer);
+      state.typingClearTimer = window.setTimeout(() => clearTypingPresence(), TYPING_PRESENCE_TTL_MS + 400);
+    }, 150);
+  }
+
+  function startPresenceRefreshTimer() {
+    window.clearInterval(state.presenceRefreshTimer);
+    state.presenceRefreshTimer = window.setInterval(refreshViewingPresence, VIEWING_PRESENCE_REFRESH_MS);
   }
 
   async function sendActiveMessage(event) {
@@ -847,6 +1691,7 @@
     if (thread?.blocked) return;
 
     els.sendButton.disabled = true;
+    clearTypingPresence(room);
     try {
       const url = currentRoomUrl(room);
       const payload = await fetchJson(url, {
@@ -862,8 +1707,10 @@
         updateCacheCursors(cache);
         renderMessages(cache.messages);
         restoreScroll(cache, true);
+        schedulePersistentRoomSave(room);
       }
-      await sendPresence();
+      refreshViewingPresence();
+      schedulePersistentBootstrapSave();
     } catch (error) {
       setStatus(error.message || "Unable to send message.", "error");
     } finally {
@@ -935,6 +1782,7 @@
       els.dmSearchInput.value = "";
       els.dmResults.innerHTML = "";
       await selectRoom({ type: "thread", id: payload.thread.id });
+      schedulePersistentBootstrapSave();
     } catch (error) {
       setStatus(error.message || "Unable to start direct message.", "error");
     }
@@ -950,6 +1798,7 @@
         thread.blocked = Boolean(payload.blocked);
         renderHeader();
         renderDmProfile(thread);
+        schedulePersistentBootstrapSave();
       }
     } catch (error) {
       setStatus(error.message || "Unable to update block.", "error");
@@ -960,14 +1809,29 @@
     state.membersCollapsed = Boolean(collapsed);
     sessionStorage.setItem("apstudy-chat-members-collapsed", String(state.membersCollapsed));
     root.classList.toggle("members-collapsed", state.membersCollapsed);
+    els.profileToggle?.classList.toggle("is-active", !state.membersCollapsed);
+    els.profileToggle?.setAttribute("aria-pressed", String(!state.membersCollapsed));
+    const label = state.membersCollapsed ? "Show user profile" : "Hide user profile";
+    els.profileToggle?.setAttribute("aria-label", label);
+    els.profileToggle?.setAttribute("title", label);
+    if (state.persistentCacheReady || state.serverBootstrapped) {
+      schedulePersistentBootstrapSave();
+    }
   }
 
   function bindEvents() {
     els.composer?.addEventListener("submit", sendActiveMessage);
-    els.input?.addEventListener("input", autosizeComposer);
+    els.input?.addEventListener("input", () => {
+      autosizeComposer();
+      scheduleTypingPresence();
+    });
     els.messages?.addEventListener("scroll", () => {
       const cache = cacheFor(state.activeRoom);
       if (cache) cache.scrollTop = els.messages.scrollTop;
+      window.clearTimeout(state.scrollSaveTimer);
+      state.scrollSaveTimer = window.setTimeout(() => {
+        schedulePersistentRoomSave(state.activeRoom);
+      }, 350);
       if (els.messages.scrollTop <= 16 && cache?.hasMore && cache.oldestCursor && !state.loadingMessages) {
         void loadMessages({ before: cache.oldestCursor, preserveScroll: true, quiet: true });
       }
@@ -991,6 +1855,11 @@
       if (!blockButton) return;
       void toggleBlock(blockButton.dataset.blockUser, blockButton.dataset.blocked === "true");
     });
+    els.historyClose?.addEventListener("click", () => {
+      const channelId = els.historyLimited?.dataset.channelId;
+      if (channelId) state.closedHistoryBanners.add(channelId);
+      setHistoryBanner(activeChannel());
+    });
     els.dmNew?.addEventListener("click", () => {
       els.dmSearch.hidden = !els.dmSearch.hidden;
       if (!els.dmSearch.hidden) els.dmSearchInput.focus();
@@ -1003,7 +1872,7 @@
       const button = event.target.closest("[data-start-dm]");
       if (button) void startDm(button.dataset.startDm);
     });
-    document.querySelector("[data-collapse-members]")?.addEventListener("click", () => setMembersCollapsed(true));
+    els.profileToggle?.addEventListener("click", () => setMembersCollapsed(!state.membersCollapsed));
     document.querySelector("[data-restore-members]")?.addEventListener("click", () => setMembersCollapsed(false));
     document.querySelector("[data-open-rail]")?.addEventListener("click", () => document.getElementById("chat-rail")?.classList.add("is-open"));
     document.querySelector("[data-close-rail]")?.addEventListener("click", () => document.getElementById("chat-rail")?.classList.remove("is-open"));
@@ -1015,17 +1884,42 @@
         if (cache?.loaded && cache.latestCursor) {
           void loadMessages({ after: cache.latestCursor, quiet: true });
         }
-        void sendPresence();
+        void loadInitialPresences();
+        refreshViewingPresence();
+      } else {
+        clearTypingPresence();
+        const presenceId = state.lastViewingPresenceId;
+        state.lastViewingPresenceId = null;
+        void deletePresence(presenceId);
       }
     });
     window.addEventListener("beforeunload", () => {
+      saveActiveScroll();
+      clearTypingPresence();
+      const presenceId = state.lastViewingPresenceId;
+      state.lastViewingPresenceId = null;
+      void deletePresence(presenceId);
       if (state.realtimeUnsubscribe) state.realtimeUnsubscribe();
+      if (state.presenceUnsubscribe) state.presenceUnsubscribe();
     });
   }
 
+  async function startChat() {
+    setMembersCollapsed(state.membersCollapsed);
+    renderMessageLoader();
+    const cachePromise = hydrateFromPersistentCache().catch((error) => {
+      console.warn("Unable to hydrate chat cache", error);
+      state.persistentCacheReady = true;
+      return false;
+    });
+    const bootstrapPromise = bootstrap().catch((error) => {
+      setStatus(error.message || "Unable to load chat.", "error");
+      throw error;
+    });
+    await Promise.allSettled([cachePromise, bootstrapPromise]);
+  }
+
   bindEvents();
-  startPresenceTimer();
-  bootstrap().catch((error) => {
-    setStatus(error.message || "Unable to load chat.", "error");
-  });
+  startPresenceRefreshTimer();
+  void startChat();
 })();

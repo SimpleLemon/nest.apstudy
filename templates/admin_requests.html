@@ -77,9 +77,11 @@
                                 {% if item.get('status') == 'pending' %}
                                     <div class="admin-header-actions">
                                         <form method="post" action="{{ url_for('admin.approve_admin_request', request_id=request_id) }}">
+                                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                                             <button class="admin-button" type="submit">Approve</button>
                                         </form>
                                         <form method="post" action="{{ url_for('admin.deny_admin_request', request_id=request_id) }}">
+                                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                                             <button class="admin-button admin-button--ghost" type="submit">Deny</button>
                                         </form>
                                     </div>

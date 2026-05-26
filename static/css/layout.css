@@ -255,6 +255,14 @@ body {
   justify-content: center;
   color: inherit;
 }
+.sidebar-material-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  line-height: 20px;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
 .sidebar-item-label {
   font-size: 14px;
   font-weight: 500;
@@ -496,6 +504,14 @@ body.with-sidebar > footer {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+}
+.profile-dropdown-icon .material-symbols-outlined,
+.navbar-button .material-symbols-outlined {
+  display: block;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  line-height: 20px;
 }
 /* ============================================
    RESPONSIVE

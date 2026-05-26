@@ -9,9 +9,9 @@
     let cachedFolders = [];
     let loadingState = false;
 
-    function escapeHtml(text) {
+    function escapeHtml(value) {
         const div = document.createElement('div');
-        div.textContent = text || '';
+        div.textContent = value || '';
         return div.innerHTML;
     }
 
@@ -127,11 +127,7 @@
             <div class="note-card-header">
                 <span class="note-card-title">${escapeHtml(note.title || 'Untitled')}</span>
                 <button type="button" class="note-card-menu-btn" aria-label="Note options">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                        <circle cx="8" cy="3" r="1.5"/>
-                        <circle cx="8" cy="8" r="1.5"/>
-                        <circle cx="8" cy="13" r="1.5"/>
-                    </svg>
+                    <span class="material-symbols-outlined" aria-hidden="true">more_vert</span>
                 </button>
             </div>
             <div class="note-card-date">${formattedDate}</div>
@@ -208,14 +204,14 @@
         el.innerHTML = `
             <div class="folder-card-inner">
                 <div class="folder-card-icon">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 5C2 3.89543 2.89543 3 4 3H7.17157C7.70201 3 8.21071 3.21071 8.58579 3.58579L9.41421 4.41421C9.78929 4.78929 10.298 5 10.8284 5H16C17.1046 5 18 5.89543 18 7V15C18 16.1046 17.1046 17 16 17H4C2.89543 17 2 16.1046 2 15V5Z" fill="#6366f1" opacity="0.2" stroke="#6366f1" stroke-width="1.5"/></svg>
+                    <span class="material-symbols-outlined" aria-hidden="true">folder</span>
                 </div>
                 <div class="folder-card-info">
                     <span class="folder-card-name">${escapeHtml(folder.name)}</span>
                     <span class="folder-card-count">${noteCount} note${noteCount !== 1 ? 's' : ''}</span>
                 </div>
                 <button type="button" class="folder-card-menu-btn" aria-label="Folder options">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="3" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="8" cy="13" r="1.5"/></svg>
+                    <span class="material-symbols-outlined" aria-hidden="true">more_vert</span>
                 </button>
             </div>
             <div class="folder-card-menu note-menu-hidden">

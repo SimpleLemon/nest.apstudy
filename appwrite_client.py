@@ -30,6 +30,8 @@ Table: user_settings
 - feed_refresh_minutes INTEGER NOT NULL DEFAULT 15 -> integer attribute: feed_refresh_minutes
 - preferred_calendar_view VARCHAR(16) NOT NULL DEFAULT 'week' -> string(16) attribute: preferred_calendar_view
 - interface_theme VARCHAR(32) DEFAULT 'system-match' -> string(32) attribute: interface_theme
+- dashboard_layout_json TEXT -> text attribute: dashboard_layout_json
+- dashboard_checklist_hidden_signature VARCHAR(64) -> string(64) attribute: dashboard_checklist_hidden_signature
 - created_at DATETIME NOT NULL -> datetime attribute: created_at
 - updated_at DATETIME -> datetime attribute: updated_at
 

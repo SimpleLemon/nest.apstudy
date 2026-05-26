@@ -1189,6 +1189,14 @@
 .task-star-button.is-starred {
     outline: none;
     background: color-mix(in srgb, #f59e0b 13%, transparent);
+}
+
+.task-star-button.is-starred {
+    color: #f59e0b;
+}
+
+.task-star-button:hover:not(.is-starred),
+.task-star-button:focus-visible:not(.is-starred) {
     color: #b45309;
 }
 
@@ -1198,6 +1206,7 @@
 
 .task-star-button .material-symbols-outlined {
     font-size: 21px;
+    font-variation-settings: 'FILL' 0, 'wght' 450, 'GRAD' 0, 'opsz' 24;
 }
 
 .task-star-button.is-starred .material-symbols-outlined {

@@ -23,7 +23,10 @@
             </div>
             <div class="admin-header-actions">
                 <a class="admin-button admin-button--ghost" href="{{ url_for('admin.admin_index') }}">All users</a>
-                <a class="admin-button" href="{{ url_for('admin.admin_detail_export', user_id=user.id) }}">Export JSON</a>
+                <form method="post" action="{{ url_for('admin.admin_detail_export', user_id=user.id) }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                    <button class="admin-button" type="submit">Export JSON</button>
+                </form>
             </div>
         </header>
 
@@ -152,6 +155,7 @@
                 <div class="admin-card">
                     <h2 class="admin-title">Onboarding Controls</h2>
                     <form class="admin-form" method="post" action="{{ url_for('admin.update_onboarding', user_id=user.id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="section" value="overview" />
                         <label class="admin-inline">
                             <input type="checkbox" name="onboarding_complete" {% if user.onboarding_complete %}checked{% endif %} />
@@ -176,6 +180,7 @@
                     <h2 class="admin-title">Danger Zone</h2>
                     <p class="admin-subtitle">Deleting an account removes the Appwrite user and all related data.</p>
                     <form class="admin-form" method="post" action="{{ url_for('admin.delete_user', user_id=user.id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <label>
                             Type DELETE to confirm
                             <input type="text" name="confirm" placeholder="DELETE" required />
@@ -222,6 +227,7 @@
                 <div class="admin-card">
                     <h2 class="admin-title">ICS Token</h2>
                     <form class="admin-form" method="post" action="{{ url_for('admin.reset_ics_token', user_id=user.id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="section" value="settings" />
                         <button class="admin-button" type="submit">Reset ICS token</button>
                     </form>
@@ -256,6 +262,7 @@
                                         <td>{{ folder.get('created_at') or '--' }}</td>
                                         <td>
                                             <form method="post" action="{{ url_for('admin.delete_shared_folder', user_id=user.id, folder_id=folder_id) }}">
+                                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                                                 <input type="hidden" name="section" value="files" />
                                                 <button class="admin-button admin-button--danger" type="submit">Delete</button>
                                             </form>
@@ -304,6 +311,7 @@
                                             <div class="admin-header-actions">
                                                 <a class="admin-button admin-button--ghost" href="{{ url_for('admin.download_shared_file', user_id=user.id, file_id=file_id) }}">Download</a>
                                                 <form method="post" action="{{ url_for('admin.delete_shared_file', user_id=user.id, file_id=file_id) }}">
+                                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                                                     <input type="hidden" name="section" value="files" />
                                                     <button class="admin-button admin-button--danger" type="submit">Delete</button>
                                                 </form>
@@ -673,6 +681,7 @@
                 <div class="admin-card">
                     <h2 class="admin-title">Seat Tracks</h2>
                     <form class="admin-form" method="post" action="{{ url_for('admin.disable_seat_tracks', user_id=user.id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="section" value="seat_tracks" />
                         <button class="admin-button" type="submit">Disable all seat tracks</button>
                     </form>

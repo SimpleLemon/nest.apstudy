@@ -10,6 +10,7 @@ from appwrite.services.messaging import Messaging
 from appwrite_client import COLLECTIONS, client as appwrite_client
 from appwrite_helpers import format_datetime, list_rows_all, parse_datetime, update_row_safe
 from services.atlas_client import fetch_live_section_status
+from services.discord_audit import emit_course_track_event
 
 
 logger = logging.getLogger(__name__)
@@ -107,6 +108,22 @@ def check_course_seat_tracks():
 
         if "error" in result:
             logger.warning("Course track %s live check failed: %s", row_id, result["error"])
+            emit_course_track_event(
+                "Automated Course Track Check Failed",
+                actor="System",
+                target=track.get("course_code") or row_id,
+                metadata={
+                    "course_name": track.get("course_title"),
+                    "teacher": track.get("instructor_name"),
+                    "section_number": track.get("section_id"),
+                    "seats_open": track.get("last_seats_available"),
+                    "enrollment_type": track.get("last_status"),
+                    "request_source": "automated",
+                    "track_id": row_id,
+                    "error": result["error"],
+                },
+                color="yellow",
+            )
             try:
                 update_row_safe(table_id, row_id, updates)
             except AppwriteException:
@@ -122,6 +139,22 @@ def check_course_seat_tracks():
                 _send_open_email(track, section)
                 updates["last_notified_at"] = format_datetime(now)
                 notified_count += 1
+                emit_course_track_event(
+                    "Tracked Course Seat Opened",
+                    actor="System",
+                    target=section.get("course_code") or track.get("course_code") or row_id,
+                    metadata={
+                        "course_name": section.get("course_title") or track.get("course_title"),
+                        "teacher": section.get("instructor") or track.get("instructor_name"),
+                        "section_number": section.get("section_number") or track.get("section_id"),
+                        "seats_open": section.get("seats_available"),
+                        "enrollment_type": section.get("enrollment_status"),
+                        "request_source": "automated",
+                        "track_id": row_id,
+                        "user_id": track.get("user_id"),
+                    },
+                    color="green",
+                )
             except Exception:
                 logger.exception("Failed to send course opening email for track %s", row_id)
 
@@ -129,5 +162,23 @@ def check_course_seat_tracks():
             update_row_safe(table_id, row_id, updates)
         except AppwriteException:
             logger.exception("Failed to update course track: %s", row_id)
+            continue
+
+        emit_course_track_event(
+            "Automated Course Track Checked",
+            actor="System",
+            target=section.get("course_code") or track.get("course_code") or row_id,
+            metadata={
+                "course_name": section.get("course_title") or track.get("course_title"),
+                "teacher": section.get("instructor") or track.get("instructor_name"),
+                "section_number": section.get("section_number") or track.get("section_id"),
+                "seats_open": section.get("seats_available"),
+                "enrollment_type": section.get("enrollment_status"),
+                "request_source": "automated",
+                "track_id": row_id,
+                "user_id": track.get("user_id"),
+            },
+            color="gray",
+        )
 
     return notified_count

@@ -23,12 +23,16 @@ from appwrite_helpers import (
     list_rows_safe,
     update_row_safe,
 )
+from extensions import csrf
 from blueprints.settings import _settings_defaults
 from blueprints.chat_api import create_university_channel, emit_chat_event
+from services.chat_presence import sync_chat_presence_labels_for_school
+from services.discord_audit import emit_admin_event, format_actor, format_user_target
 
 
 admin_bp = Blueprint("admin", __name__)
 logger = logging.getLogger(__name__)
+admin_actions_logger = logging.getLogger("admin_actions")
 
 ALLOWED_SECTIONS = {
     "overview",
@@ -58,6 +62,65 @@ def _require_admin():
     if not user_id or user_id not in _admin_ids():
         return redirect(url_for("dashboard.dashboard"))
     return None
+
+
+@admin_bp.before_request
+def _protect_admin_csrf():
+    if request.method in {"POST", "PUT", "PATCH", "DELETE"}:
+        csrf.protect()
+
+
+def _admin_client_ip():
+    return request.remote_addr or ""
+
+
+def _admin_request_metadata(action, extra=None):
+    metadata = {
+        "action_type": action,
+        "ip": _admin_client_ip(),
+    }
+    session_hint = (request.cookies.get("session") or "")[:16]
+    if session_hint:
+        metadata["session_identifier"] = session_hint
+    if extra:
+        metadata.update(extra)
+    return metadata
+
+
+def _admin_event_title(action):
+    labels = {
+        "view_admin_index": "Admin Viewed Dashboard",
+        "view_admin_requests": "Admin Viewed Requests",
+        "view_admin_detail": "Admin Viewed Profile",
+        "export_admin_detail": "Admin Exported User Data",
+        "update_onboarding": "Admin Updated Onboarding",
+        "reset_ics_token": "Admin Reset ICS Token",
+        "disable_seat_tracks": "Admin Disabled Seat Tracks",
+        "delete_shared_file": "Admin Deleted Shared File",
+        "delete_shared_folder": "Admin Deleted Shared Folder",
+        "delete_user": "Admin Deleted User",
+        "approve_admin_request": "Admin Approved Request",
+        "deny_admin_request": "Admin Denied Request",
+    }
+    return labels.get(action, "Admin Action")
+
+
+def _log_admin_action(action, target, *, target_user=None, metadata=None, color="gray"):
+    admin_actions_logger.info(
+        "admin_id=%s action=%s target=%s ip=%s",
+        str(getattr(current_user, "id", "") or ""),
+        action,
+        target,
+        _admin_client_ip(),
+    )
+    event_target = format_user_target(target_user) if target_user else target
+    emit_admin_event(
+        _admin_event_title(action),
+        actor=format_actor(current_user),
+        target=event_target,
+        metadata=_admin_request_metadata(action, metadata),
+        color=color,
+    )
 
 
 def admin_required(view):
@@ -591,6 +654,7 @@ def admin_index():
         users = []
         error = "Unable to load users right now."
 
+    _log_admin_action("view_admin_index", "admin dashboard", metadata={"query": query, "field": field})
     return render_template(
         "admin.html",
         users=[_user_summary(user) for user in users],
@@ -617,6 +681,7 @@ def admin_requests():
     except AppwriteException:
         logger.exception("Failed to load admin requests")
         requests_rows = []
+    _log_admin_action("view_admin_requests", "admin requests", metadata={"status_filter": status_filter})
     return render_template(
         "admin_requests.html",
         requests=requests_rows,
@@ -660,9 +725,16 @@ def approve_admin_request(request_id):
             channel_id=_row_id(channel),
             actor_id=str(current_user.id),
         )
+        sync_chat_presence_labels_for_school(school_key)
     except AppwriteException:
         logger.exception("Failed to approve admin request")
         return redirect(url_for("admin.admin_requests", error="Unable to approve request."))
+    _log_admin_action(
+        "approve_admin_request",
+        f"request:{request_id}",
+        metadata={"request_type": request_row.get("request_type"), "school_name": school_name},
+        color="green",
+    )
     return redirect(url_for("admin.admin_requests", notice="request-approved"))
 
 
@@ -691,9 +763,16 @@ def deny_admin_request(request_id):
                 "university_denied",
                 actor_id=str(current_user.id),
             )
+            sync_chat_presence_labels_for_school(request_row.get("school_key"))
     except AppwriteException:
         logger.exception("Failed to deny admin request")
         return redirect(url_for("admin.admin_requests", error="Unable to deny request."))
+    _log_admin_action(
+        "deny_admin_request",
+        f"request:{request_id}",
+        metadata={"request_type": request_row.get("request_type"), "school_name": request_row.get("school_name")},
+        color="yellow",
+    )
     return redirect(url_for("admin.admin_requests", notice="request-denied"))
 
 
@@ -725,6 +804,13 @@ def admin_detail(user_id):
 
     section_data = _load_section(section, user_id)
 
+    _log_admin_action(
+        "view_admin_detail",
+        f"user:{user_id}",
+        target_user=user_doc,
+        metadata={"section": section},
+    )
+
     return render_template(
         "admin_detail.html",
         user=_user_summary(user_doc),
@@ -739,12 +825,19 @@ def admin_detail(user_id):
     )
 
 
-@admin_bp.route("/admin/<user_id>.json")
+@admin_bp.route("/admin/<user_id>.json", methods=["POST"])
 @admin_required
 def admin_detail_export(user_id):
     payload = _export_payload(user_id)
     if not payload:
         abort(404)
+    _log_admin_action(
+        "export_admin_detail",
+        f"user:{user_id}",
+        target_user=payload.get("user"),
+        metadata={"exported_sections": sorted(payload.keys())},
+        color="yellow",
+    )
     return jsonify(payload)
 
 
@@ -772,6 +865,16 @@ def update_onboarding(user_id):
         logger.exception("Failed to update onboarding for %s", user_id)
         return _redirect_detail(user_id, section, error="Unable to update onboarding.")
 
+    _log_admin_action(
+        "update_onboarding",
+        f"user:{user_id}",
+        target_user={"$id": user_id},
+        metadata={
+            "onboarding_complete": onboarding_complete,
+            "onboarding_step": onboarding_step,
+        },
+        color="green" if onboarding_complete else "gray",
+    )
     return _redirect_detail(user_id, section, status="onboarding-updated")
 
 
@@ -803,6 +906,7 @@ def reset_ics_token(user_id):
         logger.exception("Failed to reset ICS token for %s", user_id)
         return _redirect_detail(user_id, section, error="Unable to reset token.")
 
+    _log_admin_action("reset_ics_token", f"user:{user_id}", target_user={"$id": user_id}, color="yellow")
     return _redirect_detail(user_id, section, status="token-reset")
 
 
@@ -829,6 +933,13 @@ def disable_seat_tracks(user_id):
         logger.exception("Failed to disable seat tracks for %s", user_id)
         return _redirect_detail(user_id, section, error="Unable to disable seat tracks.")
 
+    _log_admin_action(
+        "disable_seat_tracks",
+        f"user:{user_id}",
+        target_user={"$id": user_id},
+        metadata={"tracks_disabled": updated},
+        color="yellow",
+    )
     return _redirect_detail(user_id, section, status=f"disabled-{updated}")
 
 
@@ -846,6 +957,13 @@ def delete_shared_file(user_id, file_id):
         logger.exception("Failed to delete shared file %s", file_id)
         return _redirect_detail(user_id, section, error="Unable to delete file.")
 
+    _log_admin_action(
+        "delete_shared_file",
+        f"user:{user_id} file:{file_id}",
+        target_user={"$id": user_id},
+        metadata={"resource_type": "shared_file", "resource_id": file_id},
+        color="yellow",
+    )
     return _redirect_detail(user_id, section, status="file-deleted")
 
 
@@ -872,6 +990,13 @@ def delete_shared_folder(user_id, folder_id):
         logger.exception("Failed to delete shared folder %s", folder_id)
         return _redirect_detail(user_id, section, error="Unable to delete folder.")
 
+    _log_admin_action(
+        "delete_shared_folder",
+        f"user:{user_id} folder:{folder_id}",
+        target_user={"$id": user_id},
+        metadata={"resource_type": "file_folder", "resource_id": folder_id},
+        color="yellow",
+    )
     return _redirect_detail(user_id, section, status="folder-deleted")
 
 
@@ -933,6 +1058,8 @@ def delete_user(user_id):
     except Exception:
         logger.exception("Failed to delete Appwrite account for %s", user_id)
         return _redirect_detail(user_id, "overview", error="Unable to delete Appwrite user.")
+
+    _log_admin_action("delete_user", f"user:{user_id}", target_user=user_doc, color="red")
 
     try:
         _delete_user_rows(user_id)
