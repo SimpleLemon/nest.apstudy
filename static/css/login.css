@@ -92,6 +92,7 @@ body.login-page {
     color: #c9d1d9;
     font-weight: 600;
     min-height: 52px;
+    text-decoration: none;
     transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease;
 }
 

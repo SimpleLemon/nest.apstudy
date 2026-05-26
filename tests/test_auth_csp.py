@@ -1,6 +1,9 @@
 import unittest
 
-from blueprints.auth import LOGIN_CSP
+from flask import Flask
+
+from blueprints.auth import LOGIN_CSP, auth_bp
+from extensions import login_manager
 
 
 def _csp_directives(policy):
@@ -19,6 +22,18 @@ class LoginCspTestCase(unittest.TestCase):
         self.assertIn("https://static.cloudflareinsights.com", directives["script-src"])
         self.assertIn("https://cloudflareinsights.com", directives["connect-src"])
         self.assertIn("https://static.cloudflareinsights.com", directives["connect-src"])
+
+    def test_login_route_renders_with_csp(self):
+        app = Flask(__name__, template_folder="../templates", static_folder="../static")
+        app.secret_key = "test"
+        login_manager.init_app(app)
+        app.register_blueprint(auth_bp)
+
+        response = app.test_client().get("/login")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.headers["Content-Security-Policy"], LOGIN_CSP)
+        self.assertIn(b"Sign in to Nest", response.data)
 
 
 if __name__ == "__main__":

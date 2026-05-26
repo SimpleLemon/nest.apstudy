@@ -1,6 +1,9 @@
+import html
 import json
 import logging
 import os
+import re
+import secrets
 from datetime import datetime, timedelta, timezone
 
 from flask import Blueprint, jsonify, request
@@ -30,7 +33,10 @@ from services.discord_bridge import (
     delete_webhook_message,
     execute_chat_webhook,
     fetch_channel_messages,
+    fetch_discord_user,
+    fetch_guild_roles,
 )
+from services.discord_audit import DiscordAuditEvent, emit_audit_event, format_actor
 from services.chat_presence import sync_chat_presence_labels_for_user, university_presence_label
 from services.universities import normalize_school_key, school_payload, search_universities
 
@@ -43,6 +49,11 @@ MESSAGE_PAGE_SIZE = 50
 DELETE_WINDOW_SECONDS = 5 * 60
 DEFAULT_AVATAR = "https://resources.apstudy.org/images/AP-Resources-Logo.png"
 DEFAULT_BANNER_COLOR = "#fecae1"
+DISCORD_IMAGE_EXTENSIONS = {".gif", ".jpeg", ".jpg", ".png", ".webp"}
+DISCORD_USER_MENTION_RE = re.compile(r"&lt;@!?(\d+)&gt;")
+DISCORD_ROLE_MENTION_RE = re.compile(r"&lt;@(?:&amp;|&)(\d+)&gt;")
+DISCORD_CUSTOM_EMOJI_RE = re.compile(r"&lt;(a?):([A-Za-z0-9_]{2,32}):(\d+)&gt;")
+DISCORD_INGEST_SECRET_ENV_KEYS = ("DISCORD_CHAT_INGEST_SECRET", "DISCORD_CHAT_SYNC_SECRET", "DISCORD_BRIDGE_SECRET")
 
 
 def _now():
@@ -498,6 +509,105 @@ def _discord_previews(message):
     return previews[:2]
 
 
+def _discord_images(message):
+    images = []
+    for attachment in message.get("attachments") or []:
+        if not _discord_attachment_is_image(attachment):
+            continue
+        url = attachment.get("url") or attachment.get("proxy_url") or ""
+        if not url:
+            continue
+        images.append({
+            "kind": "discord_image",
+            "url": url,
+            "proxy_url": attachment.get("proxy_url") or "",
+            "filename": attachment.get("filename") or "Image",
+            "width": attachment.get("width"),
+            "height": attachment.get("height"),
+            "content_type": attachment.get("content_type") or "",
+        })
+    return images[:4]
+
+
+def _discord_attachment_is_image(attachment):
+    content_type = str(attachment.get("content_type") or "").split(";", 1)[0].strip().lower()
+    if content_type.startswith("image/"):
+        return True
+    filename = str(attachment.get("filename") or "").lower()
+    return any(filename.endswith(extension) for extension in DISCORD_IMAGE_EXTENSIONS)
+
+
+def _discord_mention_name(user):
+    return (
+        user.get("global_name")
+        or user.get("nick")
+        or user.get("username")
+        or "Discord User"
+    )
+
+
+def _discord_user_mentions(message):
+    mentions = {}
+    for user in message.get("mentions") or []:
+        user_id = str(user.get("id") or "")
+        if user_id:
+            mentions[user_id] = _discord_mention_name(user)
+    return mentions
+
+
+def _discord_user_mention_label(user_id, mentions):
+    label = mentions.get(user_id)
+    if label:
+        return label
+    fetched = fetch_discord_user(user_id)
+    if fetched:
+        return _discord_mention_name(fetched)
+    return "Discord User"
+
+
+def _discord_role_mentions():
+    roles = {}
+    for role in fetch_guild_roles():
+        role_id = str(role.get("id") or "")
+        if role_id:
+            roles[role_id] = role.get("name") or "Unknown Role"
+    return roles
+
+
+def _mention_span(label, class_name="chat-mention"):
+    return f'<span class="{class_name}">{html.escape(label)}</span>'
+
+
+def _emoji_img(animated, name, emoji_id):
+    extension = "gif" if animated else "png"
+    url = f"https://cdn.discordapp.com/emojis/{emoji_id}.{extension}?size=48&quality=lossless"
+    escaped_url = html.escape(url, quote=True)
+    escaped_name = html.escape(name)
+    return (
+        f'<img class="chat-custom-emoji" '
+        f'src="{escaped_url}" alt=":{escaped_name}:" title=":{escaped_name}:" '
+        'loading="lazy" decoding="async">'
+    )
+
+
+def _render_discord_content(content, message):
+    rendered = render_markdown(content)
+    user_mentions = _discord_user_mentions(message)
+    role_mentions = _discord_role_mentions() if "&lt;@&" in rendered or "&lt;@&amp;" in rendered else {}
+
+    def replace_user(match):
+        label = _discord_user_mention_label(match.group(1), user_mentions)
+        return _mention_span(f"@{label}")
+
+    def replace_role(match):
+        label = role_mentions.get(match.group(1), "Unknown Role")
+        return _mention_span(f"@{label}", "chat-mention chat-mention-role")
+
+    rendered = DISCORD_ROLE_MENTION_RE.sub(replace_role, rendered)
+    rendered = DISCORD_USER_MENTION_RE.sub(replace_user, rendered)
+    return DISCORD_CUSTOM_EMOJI_RE.sub(lambda match: _emoji_img(match.group(1), match.group(2), match.group(3)), rendered)
+
+
 def _serialize_message(row):
     created = _message_timestamp(row)
     user_id = row.get("user_id")
@@ -508,11 +618,14 @@ def _serialize_message(row):
         and (_now() - created).total_seconds() <= DELETE_WINDOW_SECONDS
     )
     previews = []
+    images = []
     if row.get("link_preview_json"):
         try:
-            previews = json.loads(row.get("link_preview_json")) or []
+            media = json.loads(row.get("link_preview_json")) or []
         except (TypeError, json.JSONDecodeError):
-            previews = []
+            media = []
+        previews = [item for item in media if not isinstance(item, dict) or item.get("kind") != "discord_image"]
+        images = [item for item in media if isinstance(item, dict) and item.get("kind") == "discord_image"]
     return {
         "id": _row_id(row),
         "channel_id": row.get("channel_id"),
@@ -525,9 +638,14 @@ def _serialize_message(row):
         "content": row.get("content") or "",
         "rendered_html": row.get("rendered_html") or render_markdown(row.get("content") or ""),
         "previews": previews,
+        "images": images,
         "created_at": format_datetime(created),
         "can_delete": bool(can_delete),
-        "delete_expires_at": format_datetime(created + timedelta(seconds=DELETE_WINDOW_SECONDS)) if user_id == _current_user_id() else None,
+        "delete_expires_at": (
+            format_datetime(created + timedelta(seconds=DELETE_WINDOW_SECONDS))
+            if user_id and str(user_id) == _current_user_id()
+            else None
+        ),
     }
 
 
@@ -557,16 +675,17 @@ def _list_messages(scope_type, scope_id, before=None, after=None):
     return visible
 
 
-def _upsert_discord_message(channel, message):
+def _upsert_discord_message(channel, message, emit_event=False):
     channel_id = _row_id(channel)
     discord_id = str(message.get("id") or "")
     if not discord_id:
-        return None
+        return None, False
     external_id = f"discord:{channel.get('discord_channel_id')}:{discord_id}"
     author = message.get("author") or {}
     content = message.get("content") or ""
     created_at = message.get("timestamp") or format_datetime(_now())
     previews = _discord_previews(message)
+    images = _discord_images(message)
     payload = {
         "channel_id": channel_id,
         "source": "discord",
@@ -575,8 +694,8 @@ def _upsert_discord_message(channel, message):
         "author_username": author.get("username") or "",
         "author_avatar_url": _discord_avatar(author),
         "content": content,
-        "rendered_html": render_markdown(content),
-        "link_preview_json": json.dumps(previews),
+        "rendered_html": _render_discord_content(content, message),
+        "link_preview_json": json.dumps(previews + images),
         "discord_message_id": discord_id,
         "discord_webhook_id": message.get("webhook_id"),
         "created_at": created_at,
@@ -585,11 +704,20 @@ def _upsert_discord_message(channel, message):
     try:
         existing = first_row(COLLECTIONS["chat_messages"], [Query.equal("external_id", [external_id])])
         if existing:
-            return update_row_safe(COLLECTIONS["chat_messages"], _row_id(existing), payload)
-        return create_row_safe(COLLECTIONS["chat_messages"], row_id=ID.unique(), data=payload)
+            return update_row_safe(COLLECTIONS["chat_messages"], _row_id(existing), payload), False
+        row = create_row_safe(COLLECTIONS["chat_messages"], row_id=ID.unique(), data=payload)
+        if emit_event:
+            emit_chat_event(
+                "channel",
+                channel_id,
+                "message_created",
+                message_id=_row_id(row),
+                channel_id=channel_id,
+            )
+        return row, True
     except AppwriteException:
         logger.exception("Failed to upsert Discord message")
-        return None
+        return None, False
 
 
 def _discord_avatar(author):
@@ -601,14 +729,110 @@ def _discord_avatar(author):
     return DEFAULT_AVATAR
 
 
-def _sync_discord_channel(channel):
+def _emit_chat_delete_audit(row, deleted_at):
+    try:
+        emit_audit_event(
+            DiscordAuditEvent(
+                channel="chat_deletes",
+                title="Chat Message Deleted",
+                actor=format_actor(current_user),
+                target=str(_row_id(row) or ""),
+                metadata={
+                    "message_id": _row_id(row),
+                    "source": row.get("source") or "appwrite",
+                    "channel_id": row.get("channel_id"),
+                    "thread_id": row.get("thread_id"),
+                    "author_user_id": row.get("user_id"),
+                    "author_name": row.get("author_name"),
+                    "author_username": row.get("author_username"),
+                    "created_at": row.get("created_at"),
+                    "deleted_at": deleted_at,
+                    "discord_message_id": row.get("discord_message_id"),
+                    "discord_webhook_id": row.get("discord_webhook_id"),
+                    "content": row.get("content") or "",
+                },
+                color="red",
+            )
+        )
+    except Exception:
+        logger.exception("Failed to emit chat delete audit event")
+
+
+def _sync_discord_channel(channel, emit_events=False):
     discord_channel_id = channel.get("discord_channel_id")
     if not discord_channel_id:
-        return
+        return 0
     messages = fetch_channel_messages(discord_channel_id, DISCORD_MESSAGE_LIMIT)
+    created_count = 0
     for message in messages:
-        _upsert_discord_message(channel, message)
+        _, created = _upsert_discord_message(channel, message, emit_event=emit_events)
+        if created:
+            created_count += 1
     _prune_discord_messages(_row_id(channel))
+    return created_count
+
+
+def sync_discord_channels(emit_events=True):
+    _default_channels()
+    try:
+        channels = list_rows_all(
+            COLLECTIONS["chat_channels"],
+            [Query.equal("kind", ["discord"])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to list Discord chat channels for sync")
+        return 0
+    created_count = 0
+    for channel in channels:
+        if not _can_sync_discord_channel(channel):
+            continue
+        created_count += _sync_discord_channel(channel, emit_events=emit_events)
+    return created_count
+
+
+def _can_sync_discord_channel(channel):
+    return bool(channel and channel.get("kind") == "discord" and channel.get("discord_channel_id"))
+
+
+def _discord_channel_for_discord_id(discord_channel_id):
+    if not discord_channel_id:
+        return None
+    try:
+        channel = first_row(
+            COLLECTIONS["chat_channels"],
+            [Query.equal("discord_channel_id", [str(discord_channel_id)])],
+        )
+        if channel:
+            return channel
+        _default_channels()
+        return first_row(
+            COLLECTIONS["chat_channels"],
+            [Query.equal("discord_channel_id", [str(discord_channel_id)])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to resolve Discord chat channel %s", discord_channel_id)
+        return None
+
+
+def _discord_ingest_secret():
+    for key in DISCORD_INGEST_SECRET_ENV_KEYS:
+        value = os.environ.get(key)
+        if value:
+            return value.strip()
+    return ""
+
+
+def _discord_ingest_token():
+    auth_header = request.headers.get("Authorization", "")
+    if auth_header.lower().startswith("bearer "):
+        return auth_header[7:].strip()
+    return (request.headers.get("X-Discord-Bridge-Secret") or "").strip()
+
+
+def _valid_discord_ingest_request():
+    expected = _discord_ingest_secret()
+    provided = _discord_ingest_token()
+    return bool(expected and provided and secrets.compare_digest(provided, expected))
 
 
 def _prune_discord_messages(channel_id):
@@ -707,6 +931,32 @@ def universities():
     return jsonify({"results": search_universities(query)})
 
 
+@chat_api_bp.route("/api/chat/discord/messages", methods=["POST"])
+def discord_message_ingest():
+    if not _valid_discord_ingest_request():
+        return jsonify({"error": "Discord chat ingest is unavailable."}), 403
+    raw_payload = request.get_json(silent=True) or {}
+    payload = raw_payload if isinstance(raw_payload, dict) else {}
+    message = payload.get("message") if isinstance(payload.get("message"), dict) else payload
+    discord_channel_id = (
+        payload.get("discord_channel_id")
+        or message.get("channel_id")
+        or message.get("channel")
+    )
+    channel = _discord_channel_for_discord_id(discord_channel_id)
+    if not _can_sync_discord_channel(channel):
+        return jsonify({"error": "Discord channel is not mapped to /chat."}), 404
+    row, created = _upsert_discord_message(channel, message, emit_event=True)
+    if not row:
+        return jsonify({"error": "Unable to ingest Discord message."}), 502
+    return jsonify({
+        "ok": True,
+        "created": bool(created),
+        "message_id": _row_id(row),
+        "channel_id": _row_id(channel),
+    })
+
+
 @chat_api_bp.route("/api/chat/bootstrap")
 @login_required
 def bootstrap():
@@ -781,7 +1031,7 @@ def channel_messages(channel_id):
     if not _can_access_channel(channel):
         return jsonify({"error": "Channel unavailable."}), 404
     if channel.get("kind") == "discord" and not request.args.get("before"):
-        _sync_discord_channel(channel)
+        _sync_discord_channel(channel, emit_events=True)
     after = request.args.get("after")
     rows = _list_messages("channel", channel_id, request.args.get("before"), after)
     return jsonify({
@@ -908,6 +1158,7 @@ def delete_message(message_id):
                 actor_id=_current_user_id(),
                 readable_user_ids=_thread_participant_ids(thread or {}),
             )
+        _emit_chat_delete_audit(row, deleted_at)
     except AppwriteException:
         logger.exception("Failed to delete chat message")
         return jsonify({"error": "Unable to delete message."}), 500

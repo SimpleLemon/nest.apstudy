@@ -51,6 +51,14 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
         self.assertIn("2026-05-25T00:00:00Z", embed["footer"]["text"])
         self.assertIn("event-1", embed["footer"]["text"])
 
+    def test_chat_delete_channel_defaults_to_requested_channel(self):
+        with patch.dict(os.environ, {}, clear=True):
+            self.assertEqual(discord_audit._env_channel_id("chat_deletes"), "1508949346639675543")
+
+    def test_chat_delete_channel_env_override(self):
+        with patch.dict(os.environ, {"DISCORD_AUDIT_CHAT_DELETES_CHANNEL_ID": "override-channel"}):
+            self.assertEqual(discord_audit._env_channel_id("chat_deletes"), "override-channel")
+
     def test_token_bucket_caps_four_messages_per_five_seconds(self):
         bucket = TokenBucket(capacity=4, refill_amount=4, refill_seconds=5)
         bucket.updated_at = 0.0

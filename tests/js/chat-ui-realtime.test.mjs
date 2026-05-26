@@ -10,6 +10,13 @@ async function sourceFor(relativePath) {
   return readFile(path.join(repoRoot, relativePath), "utf8");
 }
 
+function cssBlock(source, selector) {
+  const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match = source.match(new RegExp(`${escaped}\\s*\\{[^}]*\\}`));
+  assert.ok(match, `Missing CSS block for ${selector}`);
+  return match[0];
+}
+
 test("chat uses realtime event signals instead of message polling", async () => {
   const source = await sourceFor("static/js/chat.js");
 
@@ -44,6 +51,8 @@ test("chat uses Appwrite Presences for online and typing state", async () => {
   assert.doesNotMatch(script, /metadata:\s*\{[^}]*content/s);
   assert.match(script, /function renderTypingIndicator/);
   assert.match(script, /Several people are typing\.\.\./);
+  assert.match(script, /applyPresenceRecord\(\{\s*\.\.\.\(presence \|\| \{\}\)/);
+  assert.match(script, /renderPresenceDrivenUi\(\)/);
 });
 
 test("chat keeps a page lifetime room cache with delta loading", async () => {
@@ -137,11 +146,79 @@ test("chat groups close same-author messages and formats timestamps compactly", 
 
 test("chat keeps the composer compact and message stack bottom aligned", async () => {
   const styles = await sourceFor("static/css/chat.css");
+  const composer = cssBlock(styles, ".chat-composer");
 
-  assert.match(styles, /grid-template-rows: auto auto auto minmax\(0, 1fr\) auto max-content/);
+  assert.match(styles, /\.chat-main-panel\s*\{[\s\S]*display: flex[\s\S]*flex-direction: column/);
+  assert.match(styles, /\.chat-messages\s*\{[\s\S]*flex: 1 1 auto[\s\S]*min-height: 0[\s\S]*overflow-y: auto/);
   assert.match(styles, /\.chat-message-stack\s*\{[^}]*margin-top: auto/s);
-  assert.match(styles, /\.chat-composer\s*\{[^}]*align-self: end/s);
+  assert.match(composer, /flex: 0 0 auto/);
+  assert.match(composer, /align-self: stretch/);
+  assert.doesNotMatch(composer, /align-self: end/);
+  assert.doesNotMatch(composer, /position: sticky/);
+  assert.doesNotMatch(composer, /position: absolute/);
   assert.match(styles, /\.chat-typing-indicator/);
+});
+
+test("chat renders discord image attachments as plain lazy images", async () => {
+  const script = await sourceFor("static/js/chat.js");
+  const styles = await sourceFor("static/css/chat.css");
+
+  assert.match(script, /function renderImages\(images\)/);
+  assert.match(script, /renderImages\(message\.images \|\| \[\]\)/);
+  assert.match(script, /class="chat-message-image"/);
+  assert.match(script, /loading="lazy"/);
+  assert.match(styles, /\.chat-message-images/);
+  assert.match(styles, /\.chat-message-image/);
+});
+
+test("chat styles discord custom emojis as inline lazy images", async () => {
+  const styles = await sourceFor("static/css/chat.css");
+
+  assert.match(styles, /\.chat-custom-emoji\s*\{/);
+  assert.match(styles, /width: 1\.375em/);
+  assert.match(styles, /height: 1\.375em/);
+  assert.match(styles, /object-fit: contain/);
+  assert.match(styles, /vertical-align: -0\.32em/);
+});
+
+test("scheduler syncs discord chat rooms and emits realtime events", async () => {
+  const scheduler = await sourceFor("services/scheduler.py");
+  const api = await sourceFor("blueprints/chat_api.py");
+
+  assert.match(scheduler, /def _sync_discord_chat\(app\):/);
+  assert.match(scheduler, /sync_discord_channels\(emit_events=True\)/);
+  assert.match(scheduler, /DISCORD_CHAT_SYNC_SECONDS/);
+  assert.match(scheduler, /id="sync_discord_chat"/);
+  assert.match(api, /def sync_discord_channels\(emit_events=True\):/);
+  assert.match(api, /_sync_discord_channel\(channel, emit_events=emit_events\)/);
+  assert.match(api, /_upsert_discord_message\(channel, message, emit_event=emit_events\)/);
+  assert.match(api, /emit_chat_event\(\s*"channel",\s*channel_id,\s*"message_created"/);
+  assert.match(api, /@chat_api_bp\.route\("\/api\/chat\/discord\/messages", methods=\["POST"\]\)/);
+  assert.match(api, /def discord_message_ingest\(\):/);
+  assert.match(api, /_valid_discord_ingest_request\(\)/);
+});
+
+test("chat textarea enter sends and shift enter keeps multiline input", async () => {
+  const script = await sourceFor("static/js/chat.js");
+
+  assert.match(script, /function handleComposerKeydown\(event\)/);
+  assert.match(script, /event\.key !== "Enter"/);
+  assert.match(script, /event\.shiftKey/);
+  assert.match(script, /event\.preventDefault\(\)/);
+  assert.match(script, /els\.composer\.requestSubmit\(\)/);
+  assert.match(script, /addEventListener\("keydown", handleComposerKeydown\)/);
+});
+
+test("chat renders discord mention pills and scalable message avatars", async () => {
+  const styles = await sourceFor("static/css/chat.css");
+
+  assert.match(styles, /--chat-message-avatar-size: 42px/);
+  assert.match(styles, /grid-template-columns: var\(--chat-message-avatar-size\) minmax\(0, 1fr\)/);
+  assert.match(styles, /\.chat-message-avatar\s*\{[\s\S]*width: 100%[\s\S]*aspect-ratio: 1/);
+  assert.match(styles, /--chat-message-avatar-size: 34px/);
+  assert.match(styles, /\.chat-mention\s*\{/);
+  assert.match(styles, /\.chat-mention-role\s*\{/);
+  assert.match(styles, /font-weight: 650/);
 });
 
 test("chat history banner is closeable per session and only for discord history rooms", async () => {

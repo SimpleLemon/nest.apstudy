@@ -180,7 +180,8 @@
     };
 })();
 
-function clearClientState() {
+function clearClientState(options = {}) {
+    const includeCookies = options.includeCookies !== false;
     try {
         sessionStorage.clear();
     } catch (error) {
@@ -201,13 +202,15 @@ function clearClientState() {
         console.warn("Failed to clear chat cache", error);
     }
 
-    document.cookie.split(";").forEach((cookie) => {
-        const name = cookie.split("=")[0].trim();
-        if (!name) {
-            return;
-        }
-        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
-    });
+    if (includeCookies) {
+        document.cookie.split(";").forEach((cookie) => {
+            const name = cookie.split("=")[0].trim();
+            if (!name) {
+                return;
+            }
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+        });
+    }
 }
 
 function markClientLoggedOut() {
@@ -240,11 +243,7 @@ async function ensureAppwriteSession() {
     try {
         await account.get();
     } catch (error) {
-        clearClientState();
-        markClientLoggedOut();
-        if (window.location.pathname !== "/logout") {
-            window.location.replace(`${window.location.origin}/logout`);
-        }
+        console.warn("Appwrite client session is unavailable; continuing with Flask session.", error);
     }
 }
 
@@ -257,7 +256,7 @@ async function runLogoutFlow() {
         }
     }
 
-    clearClientState();
+    clearClientState({ includeCookies: false });
     markClientLoggedOut();
     window.location.assign(`${window.location.origin}/logout`);
 }

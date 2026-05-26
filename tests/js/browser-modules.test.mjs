@@ -229,32 +229,25 @@ test("global chrome keeps pending mutation, confirmation, loader, date, and auth
     assert.match(chromeSource, /id = "apstudy-confirm-root"/);
     assert.match(chromeSource, /window\.APStudyLoader = \{/);
     assert.match(chromeSource, /window\.APStudyDate = \{/);
-    assert.match(source, /function clearClientState\(\)/);
+    assert.match(source, /function clearClientState\(options = \{\}\)/);
     assert.match(source, /function markClientLoggedOut\(\)/);
     assert.match(source, /function shouldEnforceAuth\(\)/);
-    assert.match(source, /window\.location\.replace\(`\$\{window\.location\.origin\}\/logout`\)/);
+    assert.match(source, /Appwrite client session is unavailable; continuing with Flask session/);
+    assert.doesNotMatch(source, /window\.location\.replace\(`\$\{window\.location\.origin\}\/logout`\)/);
     assert.match(source, /account\.deleteSession\("current"\)/);
+    assert.match(source, /clearClientState\(\{ includeCookies: false \}\)/);
     assert.match(source, /document\.querySelectorAll\("\[data-logout\]"\)/);
 });
 
-test("login page keeps OAuth provider storage and Flask session exchange guarded", async () => {
-    const source = await sourceFor("static/js/login.js");
+test("login template uses server-started Appwrite OAuth links", async () => {
+    const source = await sourceFor("templates/login.html");
 
-    assert.match(source, /const providerStorageKey = "apstudy-oauth-provider"/);
-    assert.match(source, /function createAppwriteJwt\(appwriteAccount\)/);
-    assert.match(source, /appwriteAccount\.createJWT\(\)/);
-    assert.match(source, /function exchangeAppwriteSession\(provider, accountData, proof\)/);
-    assert.match(source, /if \(!jwt && !providerAccessToken\) \{/);
-    assert.match(source, /if \(jwt\) body\.jwt = jwt/);
-    assert.match(source, /fetch\("\/auth\/session", \{/);
-    assert.match(source, /method: "POST"/);
-    assert.match(source, /appwriteAccount\.get\(\)/);
-    assert.match(source, /getCurrentSessionDetails\(\)/);
-    assert.match(source, /readSessionStorageItem\("apstudy-logged-out"\)/);
-    for (const provider of ["github", "discord", "google"]) {
-        assert.match(source, new RegExp(`provider: "${provider}"`));
-    }
-    assert.match(source, /createOAuth2Session\(entry\.provider, successRedirect, failureRedirect\)/);
+    assert.match(source, /url_for\('auth\.appwrite_oauth_start', provider='google'\)/);
+    assert.match(source, /url_for\('auth\.appwrite_oauth_start', provider='github'\)/);
+    assert.match(source, /url_for\('auth\.appwrite_oauth_start', provider='discord'\)/);
+    assert.doesNotMatch(source, /createOAuth2Session/);
+    assert.doesNotMatch(source, /js\/login\.js/);
+    assert.doesNotMatch(source, /js\/appwrite\.js/);
 });
 
 test("navbar keeps avatar sizing, command palette shortcut, and logout/account flows", async () => {

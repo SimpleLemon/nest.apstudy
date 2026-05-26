@@ -27,9 +27,11 @@ from flask_login import login_user, logout_user, current_user
 
 from appwrite.client import Client
 from appwrite.exception import AppwriteException
+from appwrite.enums.o_auth_provider import OAuthProvider
 from appwrite.query import Query
 from appwrite.services.account import Account
 from appwrite.services.users import Users
+from appwrite_client import COLLECTIONS
 from appwrite_client import ENDPOINT as APPWRITE_ENDPOINT, PROJECT_ID as APPWRITE_PROJECT_ID
 from appwrite_client import client as appwrite_client
 from appwrite_helpers import (
@@ -82,6 +84,13 @@ SCOPES = [
 USERNAME_MIN_LENGTH = 3
 USERNAME_MAX_LENGTH = 20
 USERNAME_PATTERN = re.compile(r"^[a-zA-Z0-9_-]+$")
+APPWRITE_OAUTH_PROVIDERS = {
+    "discord": OAuthProvider.DISCORD,
+    "github": OAuthProvider.GITHUB,
+    "google": OAuthProvider.GOOGLE,
+}
+APPWRITE_OAUTH_STATE_KEY = "appwrite_oauth_state"
+APPWRITE_OAUTH_PROVIDER_KEY = "appwrite_oauth_provider"
 
 
 def _set_oauth_session(provider, user_id, email, name=None, picture_url=None):
@@ -329,13 +338,159 @@ def _fetch_provider_profile(provider, access_token):
 def _find_user_by_email(email):
     if not email:
         return None
-    from appwrite_client import COLLECTIONS
     response = list_rows_safe(
         COLLECTIONS["users"],
         [Query.equal("email", [email]), Query.limit(1)],
     )
     rows = response.get("rows", [])
     return rows[0] if rows else None
+
+
+def _login_error_redirect():
+    return redirect(url_for("auth.login", auth_error=1))
+
+
+def _clear_appwrite_oauth_state():
+    session.pop(APPWRITE_OAUTH_STATE_KEY, None)
+    session.pop(APPWRITE_OAUTH_PROVIDER_KEY, None)
+
+
+def _redirect_for_user_doc(user_doc):
+    if user_doc.get("onboarding_complete"):
+        return url_for("dashboard.dashboard")
+    return url_for("settings.onboarding")
+
+
+def _complete_appwrite_login(
+    remote_user,
+    provider="appwrite",
+    email=None,
+    provider_access_token=None,
+    page_context="auth/session",
+):
+    remote_user = remote_user or {}
+    remote_user_id = remote_user.get("$id") or remote_user.get("id")
+    remote_email = remote_user.get("email") or ""
+    if not remote_user_id:
+        raise ValueError("Invalid Appwrite user.")
+    if not email:
+        email = remote_email
+
+    appwrite_user_id = str(remote_user_id)
+    user_doc = get_row_safe(COLLECTIONS["users"], appwrite_user_id, allow_missing=True)
+    if not user_doc and email:
+        user_doc = _find_user_by_email(email)
+    created_user = False
+
+    provider_profile = _fetch_provider_profile(provider, provider_access_token)
+    provider_name = provider_profile.get("name")
+    provider_avatar_url = provider_profile.get("avatar_url")
+
+    name = provider_name or remote_user.get("name") or remote_user.get("displayName")
+    picture_url = (
+        provider_avatar_url
+        or remote_user.get("photoUrl")
+        or remote_user.get("avatar")
+        or remote_user.get("picture_url")
+    )
+
+    if not user_doc:
+        created_at = format_datetime(datetime.utcnow())
+        row_data = {
+            "google_id": appwrite_user_id,
+            "email": email,
+            "name": name or remote_user.get("name"),
+            "picture_url": picture_url,
+            "banner_color": "#fecae1",
+            "avatar_source": "provider" if picture_url else None,
+            "school": None,
+            "major": None,
+            "graduation_year": None,
+            "onboarding_complete": False,
+            "onboarding_step": 1,
+            "created_at": created_at,
+            "last_login": created_at,
+        }
+        if provider and provider != "appwrite":
+            row_data["provider"] = provider
+        user_doc = create_row_safe(
+            COLLECTIONS["users"],
+            row_id=appwrite_user_id,
+            data=row_data,
+        )
+        created_user = True
+
+        create_row_safe(
+            COLLECTIONS["user_settings"],
+            row_id=appwrite_user_id,
+            data={
+                "user_id": appwrite_user_id,
+                "ics_secret_token": secrets.token_urlsafe(32),
+                "feed_refresh_minutes": 15,
+                "preferred_calendar_view": "week",
+                "interface_theme": "obsidian-dark",
+                "theme": "dark",
+                "sidebar_default": "expanded",
+                "email_notifications": True,
+                "product_updates": True,
+                "task_sound_enabled": True,
+                "chat_sound_enabled": True,
+                "language": "en",
+                "timezone": "",
+                "created_at": created_at,
+            },
+        )
+    else:
+        updates = {"last_login": format_datetime(datetime.utcnow())}
+        if name:
+            updates["name"] = name
+        existing_avatar_source = user_doc.get("avatar_source")
+        if picture_url and (not user_doc.get("picture_url") or existing_avatar_source == "provider"):
+            updates["picture_url"] = picture_url
+            updates["avatar_source"] = "provider"
+        if email:
+            updates["email"] = email
+        if provider and provider != "appwrite":
+            updates["provider"] = provider
+
+        row_id = user_doc.get("$id") or user_doc.get("id")
+        if not row_id:
+            raise ValueError("User lookup failed.")
+        user_doc = update_row_safe(
+            COLLECTIONS["users"],
+            row_id,
+            updates,
+        )
+
+    sync_chat_presence_labels_for_user(user_doc.get("$id") or user_doc.get("id"), user_doc)
+    login_user(user_from_doc(user_doc))
+    session["user_id"] = user_doc.get("$id") or user_doc.get("id")
+    session["email"] = email or remote_email
+    _set_oauth_session(provider, appwrite_user_id, email, name=name, picture_url=picture_url)
+
+    if created_user:
+        emit_creation_event(
+            "New User Created",
+            actor=format_actor(user_id=user_doc.get("$id") or user_doc.get("id"), username=user_doc.get("username") or user_doc.get("name")),
+            target=format_user_target(user_doc),
+            metadata={
+                "page_context": page_context,
+                "resource_type": "user",
+                "resource_id": user_doc.get("$id") or user_doc.get("id"),
+                "provider": provider,
+                "email": email or remote_email,
+                "default_settings_created": True,
+            },
+            color="green",
+        )
+
+    return {
+        "created_user": created_user,
+        "email": email or remote_email,
+        "redirect": _redirect_for_user_doc(user_doc),
+        "user_doc": user_doc,
+        "user_id": session["user_id"],
+    }
 
 
 @auth_bp.route("/")
@@ -351,9 +506,79 @@ def login():
     """Render the sign-in page."""
     if current_user.is_authenticated:
         return redirect(url_for("dashboard.dashboard"))
-    response = make_response(render_template("login.html"))
+    error = None
+    if request.args.get("auth_error") == "1":
+        error = "We couldn't complete sign-in. Please try again."
+    response = make_response(render_template("login.html", error=error))
     response.headers["Content-Security-Policy"] = LOGIN_CSP
     return response
+
+
+@auth_bp.route("/auth/appwrite/<provider>")
+def appwrite_oauth_start(provider):
+    """Start an Appwrite OAuth token flow from the server."""
+    if current_user.is_authenticated:
+        return redirect(url_for("dashboard.dashboard"))
+
+    provider_key = str(provider or "").strip().lower()
+    appwrite_provider = APPWRITE_OAUTH_PROVIDERS.get(provider_key)
+    if not appwrite_provider:
+        abort(404)
+
+    state = secrets.token_urlsafe(32)
+    session[APPWRITE_OAUTH_STATE_KEY] = state
+    session[APPWRITE_OAUTH_PROVIDER_KEY] = provider_key
+    success_url = url_for("auth.appwrite_oauth_callback", state=state, _external=True)
+    failure_url = url_for("auth.login", auth_error=1, _external=True)
+
+    try:
+        redirect_url = Account(appwrite_client).create_o_auth2_token(
+            provider=appwrite_provider,
+            success=success_url,
+            failure=failure_url,
+        )
+    except Exception:
+        logger.exception("Failed to start Appwrite OAuth flow")
+        _clear_appwrite_oauth_state()
+        return _login_error_redirect()
+
+    return redirect(redirect_url)
+
+
+@auth_bp.route("/auth/appwrite/callback/<state>")
+def appwrite_oauth_callback(state):
+    """Complete Appwrite OAuth without relying on client-side Appwrite cookies."""
+    expected_state = session.get(APPWRITE_OAUTH_STATE_KEY)
+    provider = session.get(APPWRITE_OAUTH_PROVIDER_KEY) or "appwrite"
+    if not expected_state or state != expected_state:
+        logger.warning("Rejected Appwrite OAuth callback with invalid state")
+        return _login_error_redirect()
+
+    user_id = request.args.get("userId") or request.args.get("user_id")
+    secret = request.args.get("secret")
+    if not user_id or not secret:
+        logger.warning("Rejected Appwrite OAuth callback with missing credentials")
+        _clear_appwrite_oauth_state()
+        return _login_error_redirect()
+
+    try:
+        appwrite_session = _account_to_dict(Account(appwrite_client).create_session(user_id, secret))
+        provider = appwrite_session.get("provider") or provider
+        provider_access_token = appwrite_session.get("providerAccessToken")
+        remote_user = _account_from_user_id(user_id)
+        result = _complete_appwrite_login(
+            remote_user,
+            provider=provider,
+            provider_access_token=provider_access_token,
+            page_context="auth/appwrite/callback",
+        )
+    except Exception:
+        logger.exception("Failed to complete Appwrite OAuth callback")
+        _clear_appwrite_oauth_state()
+        return _login_error_redirect()
+
+    _clear_appwrite_oauth_state()
+    return redirect(result["redirect"])
 
 
 @auth_bp.route("/user/<user_id>")
@@ -483,131 +708,22 @@ def appwrite_session():
     if not email:
         email = remote_email
 
-    appwrite_user_id = remote_user_id
-    user_doc = get_row_safe(COLLECTIONS["users"], appwrite_user_id, allow_missing=True)
-    if not user_doc and email:
-        user_doc = _find_user_by_email(email)
-    created_user = False
-
-    # Normalize profile fields from Appwrite's user object
-    provider_profile = _fetch_provider_profile(provider, provider_access_token)
-    provider_name = provider_profile.get("name")
-    provider_avatar_url = provider_profile.get("avatar_url")
-
-    name = provider_name or remote_user.get("name") or remote_user.get("displayName")
-    picture_url = (
-        provider_avatar_url
-        or remote_user.get("photoUrl")
-        or remote_user.get("avatar")
-        or remote_user.get("picture_url")
-    )
-
-    if not user_doc:
-        created_at = format_datetime(datetime.utcnow())
-        row_data = {
-            "google_id": appwrite_user_id,
-            "email": email,
-            "name": name or remote_user.get("name"),
-            "picture_url": picture_url,
-            "banner_color": "#fecae1",
-            "avatar_source": "provider" if picture_url else None,
-            "school": None,
-            "major": None,
-            "graduation_year": None,
-            "onboarding_complete": False,
-            "onboarding_step": 1,
-            "created_at": created_at,
-            "last_login": created_at,
-        }
-        if provider and provider != "appwrite":
-            row_data["provider"] = provider
-        try:
-            user_doc = create_row_safe(
-                COLLECTIONS["users"],
-                row_id=appwrite_user_id,
-                data=row_data,
-            )
-        except AppwriteException:
-            logger.exception("Failed to create user row from Appwrite auth")
-            return jsonify({"error": "Unable to create user."}), 500
-        created_user = True
-
-        try:
-            create_row_safe(
-                COLLECTIONS["user_settings"],
-                row_id=appwrite_user_id,
-                data={
-                    "user_id": appwrite_user_id,
-                    "ics_secret_token": secrets.token_urlsafe(32),
-                    "feed_refresh_minutes": 15,
-                    "preferred_calendar_view": "week",
-                    "interface_theme": "obsidian-dark",
-                    "theme": "dark",
-                    "sidebar_default": "expanded",
-                    "email_notifications": True,
-                    "product_updates": True,
-                    "task_sound_enabled": True,
-                    "chat_sound_enabled": True,
-                    "language": "en",
-                    "timezone": "",
-                    "created_at": created_at,
-                },
-            )
-        except AppwriteException:
-            logger.exception("Failed to create user settings from Appwrite auth")
-            return jsonify({"error": "Unable to create user settings."}), 500
-    else:
-        updates = {"last_login": format_datetime(datetime.utcnow())}
-        if name:
-            updates["name"] = name
-        existing_avatar_source = user_doc.get("avatar_source")
-        if picture_url and (not user_doc.get("picture_url") or existing_avatar_source == "provider"):
-            updates["picture_url"] = picture_url
-            updates["avatar_source"] = "provider"
-        if email:
-            updates["email"] = email
-        if provider and provider != "appwrite":
-            updates["provider"] = provider
-
-        row_id = user_doc.get("$id") or user_doc.get("id")
-        if not row_id:
-            return jsonify({"error": "User lookup failed."}), 500
-        try:
-            user_doc = update_row_safe(
-                COLLECTIONS["users"],
-                row_id,
-                updates,
-            )
-        except AppwriteException:
-            logger.exception("Failed to update user row from Appwrite auth")
-            return jsonify({"error": "Unable to update user."}), 500
-
-    sync_chat_presence_labels_for_user(user_doc.get("$id") or user_doc.get("id"), user_doc)
-    login_user(user_from_doc(user_doc))
-    session["user_id"] = user_doc.get("$id") or user_doc.get("id")
-    session["email"] = email or remote_email
-    _set_oauth_session(provider, appwrite_user_id, email, name=name, picture_url=picture_url)
-    redirect_to = url_for("settings.onboarding")
-    if user_doc.get("onboarding_complete"):
-        redirect_to = url_for("dashboard.dashboard")
-
-    if created_user:
-        emit_creation_event(
-            "New User Created",
-            actor=format_actor(user_id=user_doc.get("$id") or user_doc.get("id"), username=user_doc.get("username") or user_doc.get("name")),
-            target=format_user_target(user_doc),
-            metadata={
-                "page_context": "auth/session",
-                "resource_type": "user",
-                "resource_id": user_doc.get("$id") or user_doc.get("id"),
-                "provider": provider,
-                "email": email or remote_email,
-                "default_settings_created": True,
-            },
-            color="green",
+    try:
+        result = _complete_appwrite_login(
+            remote_user,
+            provider=provider,
+            email=email,
+            provider_access_token=provider_access_token,
+            page_context="auth/session",
         )
+    except ValueError as exc:
+        logger.warning("Unable to complete Appwrite session exchange: %s", exc)
+        return jsonify({"error": str(exc)}), 500
+    except AppwriteException:
+        logger.exception("Failed to complete Appwrite session exchange")
+        return jsonify({"error": "Unable to complete session exchange."}), 500
 
-    return jsonify({"status": "ok", "user_id": session["user_id"], "redirect": redirect_to})
+    return jsonify({"status": "ok", "user_id": result["user_id"], "redirect": result["redirect"]})
 
 
 @auth_bp.route("/authorize")

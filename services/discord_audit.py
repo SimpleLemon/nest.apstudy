@@ -20,6 +20,7 @@ DEFAULT_CHANNEL_IDS = {
     "admin": "1508544226491633834",
     "course_tracks": "1508544241679335555",
     "creation": "1508544277318467685",
+    "chat_deletes": "1508949346639675543",
 }
 
 COLOR_VALUES = {
@@ -47,6 +48,7 @@ def _env_channel_id(channel):
         "admin": "DISCORD_AUDIT_ADMIN_CHANNEL_ID",
         "course_tracks": "DISCORD_AUDIT_COURSE_TRACKS_CHANNEL_ID",
         "creation": "DISCORD_AUDIT_CREATION_CHANNEL_ID",
+        "chat_deletes": "DISCORD_AUDIT_CHAT_DELETES_CHANNEL_ID",
     }.get(channel)
     return (os.environ.get(env_name or "") or DEFAULT_CHANNEL_IDS.get(channel) or "").strip()
 
@@ -154,7 +156,7 @@ class DiscordAuditEvent:
                 {"name": "Event ID", "value": self.event_id, "inline": False},
             ],
             "footer": {
-                "text": f"{self.event_timestamp}"
+                "text": f"{self.event_timestamp} | {self.event_id}"
             },
         }
 

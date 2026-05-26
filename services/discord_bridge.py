@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+import time
 from datetime import datetime, timezone
 
 import requests
@@ -15,6 +16,10 @@ from appwrite_helpers import create_row_safe, first_row, format_datetime, update
 logger = logging.getLogger(__name__)
 DISCORD_API_BASE = "https://discord.com/api/v10"
 WEBHOOK_CONFIG_KEY = "nest_chat_webhook"
+DEFAULT_GUILD_ID = "867928393558151228"
+GUILD_ROLES_CACHE_SECONDS = 10 * 60
+_guild_roles_cache = {}
+_user_cache = {}
 
 
 class DiscordBridgeError(RuntimeError):
@@ -60,6 +65,40 @@ def fetch_channel_messages(channel_id, limit=50):
     except (DiscordBridgeError, requests.RequestException):
         logger.exception("Failed to fetch Discord channel messages")
         return []
+
+
+def fetch_guild_roles(guild_id=None):
+    guild_id = str(guild_id or os.environ.get("DISCORD_GUILD_ID") or DEFAULT_GUILD_ID).strip()
+    if not guild_id or not _bot_token():
+        return []
+    now = time.monotonic()
+    cached = _guild_roles_cache.get(guild_id)
+    if cached and now - cached["loaded_at"] < GUILD_ROLES_CACHE_SECONDS:
+        return cached["roles"]
+    try:
+        roles = _request("GET", f"/guilds/{guild_id}/roles") or []
+    except (DiscordBridgeError, requests.RequestException):
+        logger.exception("Failed to fetch Discord guild roles")
+        return cached["roles"] if cached else []
+    _guild_roles_cache[guild_id] = {"loaded_at": now, "roles": roles}
+    return roles
+
+
+def fetch_discord_user(user_id):
+    user_id = str(user_id or "").strip()
+    if not user_id or not _bot_token():
+        return None
+    now = time.monotonic()
+    cached = _user_cache.get(user_id)
+    if cached and now - cached["loaded_at"] < GUILD_ROLES_CACHE_SECONDS:
+        return cached["user"]
+    try:
+        user = _request("GET", f"/users/{user_id}") or None
+    except (DiscordBridgeError, requests.RequestException):
+        logger.exception("Failed to fetch Discord user %s", user_id)
+        return cached["user"] if cached else None
+    _user_cache[user_id] = {"loaded_at": now, "user": user}
+    return user
 
 
 def _get_bridge_config():

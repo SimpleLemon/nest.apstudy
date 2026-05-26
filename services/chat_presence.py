@@ -1,5 +1,6 @@
 import hashlib
 import logging
+import re
 
 from appwrite.exception import AppwriteException
 from appwrite.query import Query
@@ -13,7 +14,9 @@ from services.universities import normalize_school_key, school_payload
 
 logger = logging.getLogger(__name__)
 
-CHAT_UNIVERSITY_LABEL_PREFIX = "chat_uni_"
+CHAT_UNIVERSITY_LABEL_PREFIX = "chatuni"
+LEGACY_CHAT_UNIVERSITY_LABEL_PREFIX = "chat_uni_"
+APPWRITE_LABEL_RE = re.compile(r"^[A-Za-z0-9]{1,36}$")
 
 
 def university_presence_label(school_key):
@@ -23,6 +26,15 @@ def university_presence_label(school_key):
         return None
     digest = hashlib.sha1(normalized.encode("utf-8")).hexdigest()[:24]
     return f"{CHAT_UNIVERSITY_LABEL_PREFIX}{digest}"
+
+
+def _is_chat_presence_label(label):
+    text = str(label or "")
+    return text.startswith(CHAT_UNIVERSITY_LABEL_PREFIX) or text.startswith(LEGACY_CHAT_UNIVERSITY_LABEL_PREFIX)
+
+
+def _is_valid_appwrite_label(label):
+    return bool(APPWRITE_LABEL_RE.fullmatch(str(label or "")))
 
 
 def _row_id(row):
@@ -101,7 +113,7 @@ def sync_chat_presence_labels_for_user(user_id, user_doc=None):
     preserved = [
         label
         for label in current_labels
-        if not str(label).startswith(CHAT_UNIVERSITY_LABEL_PREFIX)
+        if not _is_chat_presence_label(label) and _is_valid_appwrite_label(label)
     ]
     next_labels = preserved + sorted(desired)
     if set(next_labels) == set(current_labels) and len(next_labels) == len(current_labels):

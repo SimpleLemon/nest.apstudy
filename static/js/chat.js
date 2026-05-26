@@ -828,6 +828,7 @@
             <span class="chat-message-time">${escapeHtml(formatMessageTimestamp(message.created_at))}</span>
           </div>
           <div class="chat-message-body">${message.rendered_html || escapeHtml(message.content || "")}</div>
+          ${renderImages(message.images || [])}
           ${renderPreviews(message.previews || [])}
         </div>
         ${deleteButton}
@@ -841,10 +842,28 @@
         <span class="chat-message-continuation-time">${escapeHtml(formatClockTime(parseMessageDate(message.created_at)))}</span>
         <div class="chat-message-content">
           <div class="chat-message-body">${message.rendered_html || escapeHtml(message.content || "")}</div>
+          ${renderImages(message.images || [])}
           ${renderPreviews(message.previews || [])}
         </div>
         ${renderDeleteButton(message)}
       </article>
+    `;
+  }
+
+  function renderImages(images) {
+    if (!images.length) return "";
+    return `
+      <div class="chat-message-images">
+        ${images.map((image) => `
+          <img
+            class="chat-message-image"
+            src="${escapeHtml(image.proxy_url || image.url)}"
+            alt="${escapeHtml(image.filename || "Discord image")}"
+            loading="lazy"
+            decoding="async"
+          >
+        `).join("")}
+      </div>
     `;
   }
 
@@ -1605,12 +1624,31 @@
     if (!payload || document.visibilityState === "hidden") return null;
     try {
       if (window.presences?.upsert) {
-        await window.presences.upsert(payload);
+        const presence = await window.presences.upsert(payload);
+        applyPresenceRecord({
+          ...(presence || {}),
+          $id: presence?.$id || presence?.id || payload.presenceId,
+          id: presence?.id || presence?.$id || payload.presenceId,
+          userId: presence?.userId || currentUserId(),
+          status: presence?.status || payload.status,
+          expiresAt: presence?.expiresAt || payload.expiresAt,
+          metadata: presence?.metadata || payload.metadata,
+        });
+        renderPresenceDrivenUi();
       } else {
         const realtime = window.realtime;
         if (!realtime?.upsertPresence) return null;
         const { expiresAt, ...realtimePayload } = payload;
         await realtime.upsertPresence(realtimePayload);
+        applyPresenceRecord({
+          $id: payload.presenceId,
+          id: payload.presenceId,
+          userId: currentUserId(),
+          status: payload.status,
+          expiresAt: payload.expiresAt,
+          metadata: payload.metadata,
+        });
+        renderPresenceDrivenUi();
       }
       if (kind === "typing") state.lastTypingPresenceId = payload.presenceId;
       else state.lastViewingPresenceId = payload.presenceId;
@@ -1719,6 +1757,23 @@
     }
   }
 
+  function handleComposerKeydown(event) {
+    if (event.key !== "Enter" || event.isComposing) return;
+    if (event.shiftKey) {
+      window.setTimeout(() => {
+        autosizeComposer();
+        scheduleTypingPresence();
+      }, 0);
+      return;
+    }
+    event.preventDefault();
+    if (els.composer?.requestSubmit) {
+      els.composer.requestSubmit();
+    } else {
+      void sendActiveMessage(event);
+    }
+  }
+
   async function deleteMessage(messageId) {
     if (!messageId) return;
     const ok = window.APStudyConfirm
@@ -1821,6 +1876,7 @@
 
   function bindEvents() {
     els.composer?.addEventListener("submit", sendActiveMessage);
+    els.input?.addEventListener("keydown", handleComposerKeydown);
     els.input?.addEventListener("input", () => {
       autosizeComposer();
       scheduleTypingPresence();

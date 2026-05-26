@@ -1,4 +1,5 @@
 import json
+import os
 import unittest
 from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
@@ -63,7 +64,8 @@ class TestChatFeature(unittest.TestCase):
             with patch.object(chat_api, "current_user", self.user), \
                     patch.object(chat_api, "get_row_safe", return_value=row), \
                     patch.object(chat_api, "update_row_safe") as update_row, \
-                    patch.object(chat_api, "emit_chat_event") as emit_event:
+                    patch.object(chat_api, "emit_chat_event") as emit_event, \
+                    patch.object(chat_api, "emit_audit_event") as emit_audit:
                 response = chat_api.delete_message.__wrapped__("message-1")
 
         self.assertEqual(response.status_code if hasattr(response, "status_code") else 200, 200)
@@ -73,6 +75,10 @@ class TestChatFeature(unittest.TestCase):
         self.assertIn("deleted_at", payload)
         emit_event.assert_called_once()
         self.assertEqual(emit_event.call_args.args[:3], ("channel", "nest_chat", "message_deleted"))
+        emit_audit.assert_called_once()
+        audit_event = emit_audit.call_args.args[0]
+        self.assertEqual(audit_event.channel, "chat_deletes")
+        self.assertEqual(audit_event.metadata["message_id"], "message-1")
 
     def test_delete_message_rejects_after_five_minutes(self):
         created_at = (datetime.now(timezone.utc) - timedelta(minutes=6)).isoformat()
@@ -194,6 +200,8 @@ class TestChatFeature(unittest.TestCase):
 
         label = university_presence_label("emory-university")
         self.assertTrue(label.startswith(CHAT_UNIVERSITY_LABEL_PREFIX))
+        self.assertLessEqual(len(label), 36)
+        self.assertRegex(label, r"^[A-Za-z0-9]+$")
         university_payload = chat_api._channel_payload({
             "$id": "uni_emory-university",
             "kind": "university",
@@ -246,7 +254,7 @@ class TestChatFeature(unittest.TestCase):
         label = university_presence_label("emory-university")
         users_service = Mock()
         users_service.get.return_value = {
-            "labels": ["student", f"{CHAT_UNIVERSITY_LABEL_PREFIX}obsolete"],
+            "labels": ["student", "chat_uni_old", "bad-label!"],
         }
         with patch.object(chat_presence, "Users", return_value=users_service), \
                 patch.object(chat_presence, "_school_has_approved_channel", return_value=True):
@@ -270,6 +278,171 @@ class TestChatFeature(unittest.TestCase):
         payload = post.call_args.kwargs["json"]
         self.assertEqual(payload["allowed_mentions"], {"parse": []})
         self.assertEqual(payload["username"], "Derek")
+
+    def test_discord_image_attachments_become_images_not_previews(self):
+        message = {
+            "attachments": [{
+                "filename": "schedule.png",
+                "url": "https://cdn.discordapp.com/attachments/channel/message/schedule.png",
+                "proxy_url": "https://media.discordapp.net/attachments/channel/message/schedule.png",
+                "content_type": "image/png",
+                "width": 640,
+                "height": 360,
+            }],
+        }
+        previews = chat_api._discord_previews(message)
+        images = chat_api._discord_images(message)
+
+        self.assertEqual(previews, [])
+        self.assertEqual(len(images), 1)
+        self.assertEqual(images[0]["kind"], "discord_image")
+        self.assertEqual(images[0]["filename"], "schedule.png")
+        self.assertEqual(images[0]["url"], "https://cdn.discordapp.com/attachments/channel/message/schedule.png")
+        self.assertEqual(images[0]["proxy_url"], "https://media.discordapp.net/attachments/channel/message/schedule.png")
+
+    def test_serialize_message_splits_discord_images_from_previews(self):
+        row = {
+            "$id": "message-1",
+            "created_at": "2026-05-23T20:00:00Z",
+            "link_preview_json": json.dumps([
+                {"url": "https://example.test", "title": "Example"},
+                {"kind": "discord_image", "url": "https://cdn.discordapp.com/image.png"},
+            ]),
+        }
+        payload = chat_api._serialize_message(row)
+
+        self.assertEqual(payload["previews"], [{"url": "https://example.test", "title": "Example"}])
+        self.assertEqual(payload["images"], [{"kind": "discord_image", "url": "https://cdn.discordapp.com/image.png"}])
+
+    def test_discord_mentions_render_as_inert_pills(self):
+        message = {
+            "content": "hi <@123> and <@&456>",
+            "mentions": [{"id": "123", "global_name": "Derek Chen", "username": "derek"}],
+        }
+        with patch.object(chat_api, "fetch_guild_roles", return_value=[{"id": "456", "name": "Beta Tester"}]):
+            rendered = chat_api._render_discord_content(message["content"], message)
+
+        self.assertIn('<span class="chat-mention">@Derek Chen</span>', rendered)
+        self.assertIn('<span class="chat-mention chat-mention-role">@Beta Tester</span>', rendered)
+        self.assertNotIn("&lt;@123&gt;", rendered)
+        self.assertNotIn("&lt;@&456&gt;", rendered)
+
+    def test_discord_mentions_fetch_user_name_when_payload_missing(self):
+        message = {"content": "hi <@123>", "mentions": []}
+        with patch.object(chat_api, "fetch_discord_user", return_value={"id": "123", "global_name": "Fetched User"}):
+            rendered = chat_api._render_discord_content(message["content"], message)
+
+        self.assertIn('<span class="chat-mention">@Fetched User</span>', rendered)
+
+    def test_discord_custom_emojis_render_as_lazy_cdn_images(self):
+        message = {
+            "content": "look <:bleak:1320062766026854541> <a:party:123456789012345678>",
+            "mentions": [],
+        }
+
+        rendered = chat_api._render_discord_content(message["content"], message)
+
+        self.assertIn('class="chat-custom-emoji"', rendered)
+        self.assertIn("https://cdn.discordapp.com/emojis/1320062766026854541.png?size=48&amp;quality=lossless", rendered)
+        self.assertIn("https://cdn.discordapp.com/emojis/123456789012345678.gif?size=48&amp;quality=lossless", rendered)
+        self.assertIn('alt=":bleak:"', rendered)
+        self.assertIn('loading="lazy"', rendered)
+        self.assertNotIn("&lt;:bleak:1320062766026854541&gt;", rendered)
+
+    def test_discord_upsert_emits_realtime_event_for_new_message(self):
+        channel = {
+            "$id": "nest_chat",
+            "kind": "discord",
+            "discord_channel_id": "discord-channel",
+        }
+        message = {
+            "id": "discord-message-1",
+            "content": "fresh from discord",
+            "timestamp": "2026-05-26T22:00:00Z",
+            "author": {"id": "author-1", "username": "UrbanPanda"},
+        }
+
+        with patch.object(chat_api, "first_row", return_value=None), \
+                patch.object(chat_api, "create_row_safe", return_value={"$id": "row-1"}) as create_row, \
+                patch.object(chat_api, "emit_chat_event") as emit_event:
+            row, created = chat_api._upsert_discord_message(channel, message, emit_event=True)
+
+        self.assertTrue(created)
+        self.assertEqual(row["$id"], "row-1")
+        create_row.assert_called_once()
+        emit_event.assert_called_once()
+        self.assertEqual(emit_event.call_args.args[:3], ("channel", "nest_chat", "message_created"))
+        self.assertEqual(emit_event.call_args.kwargs["message_id"], "row-1")
+        self.assertEqual(emit_event.call_args.kwargs["channel_id"], "nest_chat")
+
+    def test_discord_upsert_does_not_emit_event_for_existing_message(self):
+        channel = {
+            "$id": "nest_chat",
+            "kind": "discord",
+            "discord_channel_id": "discord-channel",
+        }
+        message = {
+            "id": "discord-message-1",
+            "content": "edited discord payload",
+            "timestamp": "2026-05-26T22:00:00Z",
+            "author": {"id": "author-1", "username": "UrbanPanda"},
+        }
+
+        with patch.object(chat_api, "first_row", return_value={"$id": "existing-row"}), \
+                patch.object(chat_api, "update_row_safe", return_value={"$id": "existing-row"}) as update_row, \
+                patch.object(chat_api, "emit_chat_event") as emit_event:
+            row, created = chat_api._upsert_discord_message(channel, message, emit_event=True)
+
+        self.assertFalse(created)
+        self.assertEqual(row["$id"], "existing-row")
+        update_row.assert_called_once()
+        emit_event.assert_not_called()
+
+    def test_discord_ingest_endpoint_upserts_and_emits_for_bot_message(self):
+        channel = {
+            "$id": "nest_chat",
+            "kind": "discord",
+            "discord_channel_id": "discord-channel",
+        }
+        payload = {
+            "message": {
+                "id": "discord-message-2",
+                "channel_id": "discord-channel",
+                "content": "bot saw this first",
+                "timestamp": "2026-05-26T22:01:00Z",
+                "author": {"id": "author-1", "username": "UrbanPanda"},
+            },
+        }
+
+        with self.app.test_request_context(
+            "/api/chat/discord/messages",
+            method="POST",
+            json=payload,
+            headers={"Authorization": "Bearer ingest-secret"},
+        ):
+            with patch.dict(os.environ, {"DISCORD_CHAT_INGEST_SECRET": "ingest-secret"}, clear=False), \
+                    patch.object(chat_api, "first_row", side_effect=[channel, None]), \
+                    patch.object(chat_api, "create_row_safe", return_value={"$id": "row-2"}) as create_row, \
+                    patch.object(chat_api, "emit_chat_event") as emit_event:
+                response = chat_api.discord_message_ingest()
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json()["message_id"], "row-2")
+        create_row.assert_called_once()
+        emit_event.assert_called_once()
+        self.assertEqual(emit_event.call_args.args[:3], ("channel", "nest_chat", "message_created"))
+
+    def test_discord_ingest_endpoint_requires_shared_secret(self):
+        with self.app.test_request_context(
+            "/api/chat/discord/messages",
+            method="POST",
+            json={"message": {"id": "discord-message-2", "channel_id": "discord-channel"}},
+        ):
+            with patch.dict(os.environ, {"DISCORD_CHAT_INGEST_SECRET": "ingest-secret"}, clear=False):
+                response, status = chat_api.discord_message_ingest()
+
+        self.assertEqual(status, 403)
+        self.assertIn("unavailable", response.get_json()["error"])
 
 
 if __name__ == "__main__":

@@ -166,6 +166,19 @@ def _check_course_seat_tracks(app):
             logger.exception("Course seat tracking failed")
 
 
+def _sync_discord_chat(app):
+    """Poll Discord-backed chat channels and notify /chat clients via chat events."""
+    with app.app_context():
+        try:
+            from blueprints.chat_api import sync_discord_channels
+
+            created_count = sync_discord_channels(emit_events=True)
+            if created_count:
+                logger.info("Discord chat sync: %s new message(s).", created_count)
+        except Exception:
+            logger.exception("Discord chat sync failed")
+
+
 def init_scheduler(app):
     """
     Initialize and start the background scheduler.
@@ -216,6 +229,18 @@ def init_scheduler(app):
         replace_existing=True,
         max_instances=1,
     )
+
+    discord_sync_seconds = int(os.environ.get("DISCORD_CHAT_SYNC_SECONDS", "5"))
+    if os.environ.get("DISCORD_CHAT_SYNC_ENABLED", "1") != "0" and discord_sync_seconds > 0:
+        _scheduler.add_job(
+            func=lambda: _sync_discord_chat(app),
+            trigger=IntervalTrigger(seconds=discord_sync_seconds),
+            id="sync_discord_chat",
+            name=f"Sync Discord chat every {discord_sync_seconds} sec",
+            replace_existing=True,
+            max_instances=1,
+            coalesce=True,
+        )
 
     _scheduler.start()
     logger.info(
