@@ -34,15 +34,15 @@ DASHBOARD_DEFAULT_TILE_SIZES = {
     "files": "standard",
     "notes": "standard",
     "messages": "standard",
-    "courses": "large",
+    "courses": "wide",
 }
 DASHBOARD_ALLOWED_TILE_SIZES = {
-    "calendar": ("standard", "tall", "large"),
-    "tasks": ("standard", "tall", "large"),
-    "files": ("standard", "tall", "large"),
-    "notes": ("standard", "tall", "large"),
-    "messages": ("standard", "tall", "large"),
-    "courses": ("standard", "large"),
+    "calendar": ("standard", "tall", "wide"),
+    "tasks": ("standard", "tall", "wide"),
+    "files": ("standard", "tall", "wide"),
+    "notes": ("standard", "tall", "wide"),
+    "messages": ("standard", "tall", "wide"),
+    "courses": ("standard", "wide"),
 }
 DASHBOARD_LAYOUT_VERSION = 3
 DASHBOARD_CALENDAR_VIEWS = ("month", "week", "upcoming")
@@ -146,8 +146,8 @@ def _normalize_tile_size(tile_id, size):
     normalized = str(size or "").strip().lower()
     if normalized in {"compact", "medium"}:
         normalized = "standard"
-    elif normalized == "wide":
-        normalized = "large"
+    elif normalized == "large":
+        normalized = "wide"
     if normalized not in DASHBOARD_ALLOWED_TILE_SIZES.get(tile_id, ()):
         return _default_tile_size(tile_id)
     return normalized
@@ -248,8 +248,8 @@ def _validated_tile_size(tile_id, raw_size):
     normalized = str(raw_size).strip().lower()
     if normalized in {"compact", "medium"}:
         normalized = "standard"
-    elif normalized == "wide":
-        normalized = "large"
+    elif normalized == "large":
+        normalized = "wide"
     if normalized not in DASHBOARD_ALLOWED_TILE_SIZES.get(tile_id, ()):
         return None
     return normalized

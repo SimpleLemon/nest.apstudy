@@ -51,12 +51,12 @@
     };
 
     const TILE_SIZE_RULES = {
-        calendar: ["standard", "tall", "large"],
-        tasks: ["standard", "tall", "large"],
-        files: ["standard", "tall", "large"],
-        notes: ["standard", "tall", "large"],
-        messages: ["standard", "tall", "large"],
-        courses: ["standard", "large"],
+        calendar: ["standard", "tall", "wide"],
+        tasks: ["standard", "tall", "wide"],
+        files: ["standard", "tall", "wide"],
+        notes: ["standard", "tall", "wide"],
+        messages: ["standard", "tall", "wide"],
+        courses: ["standard", "wide"],
     };
 
     const DEFAULT_TILE_SIZES = {
@@ -65,13 +65,13 @@
         files: "standard",
         notes: "standard",
         messages: "standard",
-        courses: "large",
+        courses: "wide",
     };
 
     const TILE_SIZE_LABELS = {
         standard: "Standard",
         tall: "Tall",
-        large: "Large",
+        wide: "Wide",
     };
 
     const CALENDAR_VIEW_RULES = ["month", "week", "upcoming"];
@@ -174,7 +174,7 @@
         const allowed = TILE_SIZE_RULES[tileId] || [];
         let normalized = String(size || DEFAULT_TILE_SIZES[tileId] || allowed[0] || "standard").trim().toLowerCase();
         if (normalized === "compact" || normalized === "medium") normalized = "standard";
-        if (normalized === "wide") normalized = "large";
+        if (normalized === "large") normalized = "wide";
         return allowed.includes(normalized) ? normalized : (DEFAULT_TILE_SIZES[tileId] || allowed[0] || "standard");
     }
 
@@ -242,14 +242,14 @@
         const shrinkY = deltaY < -96;
 
         if ((shrinkX || shrinkY) && allowed.includes("standard")) {
-            if (current === "large" && shrinkX && !shrinkY && allowed.includes("tall")) return "tall";
+            if (current === "wide" && shrinkX && !shrinkY && allowed.includes("tall")) return "tall";
             return "standard";
         }
         if ((growX && growY) || (current === "tall" && growX) || ((growX || growY) && !allowed.includes("tall"))) {
-            if (allowed.includes("large")) return "large";
+            if (allowed.includes("wide")) return "wide";
         }
         if (growY && allowed.includes("tall")) return "tall";
-        if (growX && allowed.includes("large")) return "large";
+        if (growX && allowed.includes("wide")) return "wide";
         return current;
     }
 

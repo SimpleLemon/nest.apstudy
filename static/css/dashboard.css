@@ -335,7 +335,7 @@
     grid-row: span 2;
 }
 
-.dashboard-tile[data-tile-size="large"] {
+.dashboard-tile[data-tile-size="wide"] {
     grid-column: 1 / -1;
     grid-row: span 1;
 }
