@@ -100,6 +100,12 @@
     return candidate;
   }
 
+  function avatarAttrs(url, size = 64, sizes = `${size}px`) {
+    const src = escapeHtml(avatarUrl(url, size));
+    const src2x = escapeHtml(avatarUrl(url, size * 2));
+    return `src="${src}" srcset="${src} 1x, ${src2x} 2x" sizes="${escapeHtml(sizes)}" loading="lazy" decoding="async"`;
+  }
+
   function parseMessageDate(value) {
     if (!value) return null;
     const date = new Date(value);
@@ -672,7 +678,7 @@
       const active = state.activeRoom?.type === "thread" && state.activeRoom.id === thread.id;
       const leading = `
         <span class="chat-avatar-wrap">
-          <img class="chat-avatar-mini" src="${escapeHtml(avatarUrl(other.picture_url, 48))}" alt="">
+          <img class="chat-avatar-mini" ${avatarAttrs(other.picture_url, 48, "48px")} alt="">
           <span class="chat-presence-dot chat-presence-overlay is-${status}" aria-hidden="true"></span>
         </span>
       `;
@@ -750,7 +756,7 @@
       const status = dmPresenceStatus(thread);
       els.roomSymbol.innerHTML = `
         <span class="chat-room-avatar-wrap">
-          <img src="${escapeHtml(avatarUrl(other.picture_url, 48))}" alt="">
+          <img ${avatarAttrs(other.picture_url, 48, "48px")} alt="">
           <span class="chat-presence-dot chat-presence-overlay is-${status}" aria-hidden="true"></span>
         </span>
       `;
@@ -821,7 +827,7 @@
       : "";
     return `
       <article class="chat-message" data-message-id="${escapeHtml(message.id)}">
-        <img class="chat-message-avatar" src="${escapeHtml(avatarUrl(message.author_avatar_url, 84))}" alt="">
+        <img class="chat-message-avatar" ${avatarAttrs(message.author_avatar_url, 84, "42px")} alt="">
         <div class="chat-message-content">
           <div class="chat-message-head">
             <span class="chat-message-author">${escapeHtml(message.author_name || "Nest User")}</span>
@@ -861,6 +867,7 @@
             alt="${escapeHtml(image.filename || "Discord image")}"
             loading="lazy"
             decoding="async"
+            sizes="(max-width: 640px) 92vw, 520px"
           >
         `).join("")}
       </div>
@@ -871,7 +878,7 @@
     if (!previews.length) return "";
     return previews.map((preview) => {
       const image = preview.image_url
-        ? `<img src="${escapeHtml(preview.image_url)}" alt="" loading="lazy">`
+        ? `<img src="${escapeHtml(preview.image_url)}" alt="" loading="lazy" decoding="async" sizes="(max-width: 640px) 92vw, 128px">`
         : "";
       return `
         <div class="chat-preview">
@@ -902,7 +909,7 @@
     }
     els.memberList.innerHTML = activeUsers.map((user) => `
       <button class="chat-member" type="button" data-profile-id="${escapeHtml(user.id)}">
-        <img src="${escapeHtml(avatarUrl(user.picture_url, 72))}" alt="">
+        <img ${avatarAttrs(user.picture_url, 72, "36px")} alt="">
         <span>
           <strong>${escapeHtml(user.name || user.username || "Nest User")}</strong>
           <small>${escapeHtml(user.school || user.username || "Active now")}</small>
@@ -958,7 +965,7 @@
           <div class="profile-tile-banner" aria-hidden="true"></div>
           <div class="profile-tile-body">
             <div class="profile-tile-avatar-frame">
-              <img class="profile-tile-avatar" src="${escapeHtml(avatarUrl(user?.picture_url, 150))}" alt="${escapeHtml(user?.name || "Nest User")} avatar" width="150" height="150" decoding="async">
+              <img class="profile-tile-avatar" ${avatarAttrs(user?.picture_url, 150, "(max-width: 640px) 96px, 150px")} alt="${escapeHtml(user?.name || "Nest User")} avatar" width="150" height="150">
             </div>
             <div class="profile-tile-heading">
               <h3>${escapeHtml(user?.name || user?.username || "Nest User")}</h3>
@@ -1812,7 +1819,7 @@
       els.dmResults.innerHTML = results.length
         ? results.map((user) => `
           <button type="button" class="chat-member chat-dm-result" data-start-dm="${escapeHtml(user.id)}">
-            <img src="${escapeHtml(avatarUrl(user.picture_url, 72))}" alt="">
+            <img ${avatarAttrs(user.picture_url, 72, "36px")} alt="">
             <span>
               <strong>${escapeHtml(user.name || user.username || "Nest User")}</strong>
               <small>${escapeHtml([user.school, user.major].filter(Boolean).join(" · ") || user.username || "User")}</small>
@@ -1930,10 +1937,33 @@
     });
     els.profileToggle?.addEventListener("click", () => setMembersCollapsed(!state.membersCollapsed));
     document.querySelector("[data-restore-members]")?.addEventListener("click", () => setMembersCollapsed(false));
-    document.querySelector("[data-open-rail]")?.addEventListener("click", () => document.getElementById("chat-rail")?.classList.add("is-open"));
-    document.querySelector("[data-close-rail]")?.addEventListener("click", () => document.getElementById("chat-rail")?.classList.remove("is-open"));
-    document.querySelector("[data-open-members]")?.addEventListener("click", () => els.members?.classList.add("is-open"));
-    document.querySelector("[data-close-members]")?.addEventListener("click", () => els.members?.classList.remove("is-open"));
+    const rail = document.getElementById("chat-rail");
+    const backdrop = document.getElementById("chat-drawer-backdrop");
+    const closeChatDrawers = () => {
+      rail?.classList.remove("is-open");
+      els.members?.classList.remove("is-open");
+      if (backdrop) backdrop.hidden = true;
+      document.body.classList.remove("chat-drawer-open");
+    };
+    const openChatDrawer = (drawer) => {
+      if (!drawer) return;
+      if (drawer === rail) els.members?.classList.remove("is-open");
+      else rail?.classList.remove("is-open");
+      drawer.classList.add("is-open");
+      if (backdrop) backdrop.hidden = false;
+      document.body.classList.add("chat-drawer-open");
+    };
+    document.querySelector("[data-open-rail]")?.addEventListener("click", () => openChatDrawer(rail));
+    document.querySelector("[data-close-rail]")?.addEventListener("click", closeChatDrawers);
+    document.querySelector("[data-open-members]")?.addEventListener("click", () => openChatDrawer(els.members));
+    document.querySelector("[data-close-members]")?.addEventListener("click", closeChatDrawers);
+    backdrop?.addEventListener("click", closeChatDrawers);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeChatDrawers();
+    });
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 1100) closeChatDrawers();
+    });
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible") {
         const cache = cacheFor(state.activeRoom);

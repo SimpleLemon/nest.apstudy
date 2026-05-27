@@ -1111,6 +1111,9 @@ body.courses-body {
   top: 4px;
   right: 7px;
   z-index: 9;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
   transform: scale(0.92);
   width: 16px;
@@ -1150,7 +1153,7 @@ body.courses-body {
   color: var(--color-on-error-container);
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1024px) {
   body.courses-body {
     overflow: auto;
   }
@@ -1187,6 +1190,42 @@ body.courses-body {
     padding-right: 12px;
   }
 
+  .courses-main {
+    min-height: calc(100dvh - var(--navbar-height));
+  }
+
+  .courses-panel-header {
+    padding: 20px 16px 14px;
+  }
+
+  .courses-panel-header h1 {
+    font-size: 26px;
+    line-height: 1.15;
+  }
+
+  .courses-search-field input,
+  .courses-filter-row select,
+  .courses-time-filter input[type="time"],
+  .courses-filter-button,
+  .courses-day-toggle button,
+  .courses-week-controls button,
+  .courses-detail-actions button,
+  .course-card-action,
+  .track-toggle {
+    min-height: 48px;
+    font-size: 16px;
+  }
+
+  .courses-filter-button,
+  .courses-week-controls button {
+    width: 48px;
+    height: 48px;
+  }
+
+  .courses-day-toggle {
+    grid-template-columns: 1fr;
+  }
+
   .courses-time-filter {
     grid-template-columns: 1fr 1fr;
   }
@@ -1198,5 +1237,119 @@ body.courses-body {
   .courses-calendar-header {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .courses-calendar-shell {
+    min-height: 0;
+  }
+
+  .courses-calendar-root {
+    overflow: visible;
+  }
+
+  .courses-mobile-agenda {
+    display: grid;
+    gap: 12px;
+  }
+
+  .courses-mobile-day {
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant) 50%, transparent);
+    border-radius: 14px;
+    background: var(--color-surface);
+  }
+
+  .courses-mobile-day-header {
+    display: flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 12px;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-outline-variant) 35%, transparent);
+    background: var(--color-surface-container-low);
+    color: var(--color-on-surface);
+    font-weight: 800;
+  }
+
+  .courses-mobile-day-header strong {
+    display: inline-flex;
+    min-width: 28px;
+    min-height: 28px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-primary) 13%, transparent);
+    color: var(--color-primary);
+    font-size: 12px;
+  }
+
+  .courses-mobile-event-list {
+    display: grid;
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .courses-mobile-event {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    min-height: 64px;
+    border: 1px solid var(--course-color-border, color-mix(in srgb, var(--color-primary) 42%, transparent));
+    border-left: 5px solid var(--course-color, var(--color-primary));
+    border-radius: 12px;
+    background: var(--course-color-soft, color-mix(in srgb, var(--color-primary) 18%, var(--color-surface-container-low)));
+    padding: 10px 10px 10px 12px;
+  }
+
+  .courses-mobile-event.is-preview {
+    opacity: 0.62;
+    border-style: dashed;
+  }
+
+  .courses-mobile-event-copy {
+    min-width: 0;
+  }
+
+  .courses-mobile-event-copy h3,
+  .courses-mobile-event-copy p,
+  .courses-mobile-empty {
+    margin: 0;
+  }
+
+  .courses-mobile-event-copy h3 {
+    color: var(--color-on-surface);
+    font-size: 15px;
+    line-height: 1.25;
+    font-weight: 800;
+  }
+
+  .courses-mobile-event-copy p {
+    margin-top: 4px;
+    color: var(--color-on-surface-variant);
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .course-remove-button.courses-mobile-remove {
+    position: static;
+    width: 48px;
+    height: 48px;
+    min-height: 48px;
+    opacity: 1;
+    transform: none;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--color-surface) 80%, transparent);
+  }
+
+  .course-remove-button.courses-mobile-remove .material-symbols-outlined {
+    font-size: 20px;
+  }
+
+  .courses-mobile-empty {
+    color: var(--color-on-surface-variant);
+    font-size: 13px;
+    padding: 6px 2px 8px;
   }
 }

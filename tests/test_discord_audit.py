@@ -223,12 +223,13 @@ class DiscordAuditRouteInstrumentationTestCase(unittest.TestCase):
                     patch.object(auth, "sync_chat_presence_labels_for_user"), \
                     patch.object(auth, "login_user"), \
                     patch.object(auth, "url_for", side_effect=lambda endpoint, **kwargs: f"/{endpoint}"), \
-                    patch.object(auth, "emit_creation_event") as emit_event:
+                    patch.object(auth, "emit_user_event") as emit_event:
                 response = auth.appwrite_session()
 
         self.assertEqual(response.get_json()["status"], "ok")
-        emit_event.assert_called_once()
-        self.assertEqual(emit_event.call_args.args[0], "New User Created")
+        self.assertEqual(len(emit_event.call_args_list), 2)
+        self.assertEqual(emit_event.call_args_list[0].args[0], "New User Created")
+        self.assertEqual(emit_event.call_args_list[1].args[0], "User Login")
 
     def test_admin_detail_view_emits_admin_event(self):
         admin_user = SimpleNamespace(id="admin-1", username="admin", name="Admin", is_authenticated=True)

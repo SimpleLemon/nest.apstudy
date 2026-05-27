@@ -89,6 +89,10 @@ body.user-profile-page > global.thenav {
     transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
 }
 
+.user-profile-page .navbar-menu-button {
+    display: none;
+}
+
 .user-profile-page .navbar-button {
     border-radius: 6px;
     height: 36px;
@@ -290,15 +294,43 @@ body.user-profile-page > global.thenav + .user-profile-shell {
 @media (max-width: 640px) {
     .user-profile-page .navbar-container {
         padding: 0 14px;
+        gap: 8px;
     }
 
     .user-profile-page .navbar-title {
         display: none;
     }
 
+    .user-profile-page .navbar-button,
+    .user-profile-page .navbar-avatar,
+    .user-profile-page .navbar-avatar-wrapper {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        min-height: 48px;
+    }
+
+    .user-profile-page .profile-dropdown {
+        position: fixed;
+        top: calc(var(--navbar-height) + 8px);
+        right: 12px;
+        width: min(300px, calc(100vw - 24px));
+    }
+
+    .user-profile-page .profile-dropdown-item,
+    .user-profile-page .profile-dropdown-button {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+    }
+
     .user-profile-content {
         align-items: flex-start;
-        padding-top: 56px;
+        padding: 42px 14px 48px;
+    }
+
+    .user-profile-card {
+        width: 100%;
     }
 
     .user-profile-footer-chrome footer div {
@@ -312,6 +344,10 @@ body.user-profile-page > global.thenav + .user-profile-shell {
     }
 
     .user-profile-footer-chrome footer a {
+        display: inline-flex;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
         padding: 6px 12px;
     }
 }

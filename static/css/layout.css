@@ -37,7 +37,8 @@ body {
   grid-template-columns: var(--sidebar-expanded) 1fr;
   grid-template-rows: var(--navbar-height) 1fr;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   transition: grid-template-columns 0.2s ease;
 }
 /* ============================================
@@ -105,6 +106,9 @@ body {
   cursor: pointer;
   border-radius: 6px;
   transition: all 0.2s ease;
+}
+.navbar-menu-button {
+  display: none;
 }
 .navbar-button:hover {
   background: var(--color-shell-dropdown-hover-bg);
@@ -399,6 +403,16 @@ body {
 .sidebar-tooltip.visible {
   display: block;
 }
+.sidebar-mobile-backdrop {
+  position: fixed;
+  inset: var(--navbar-height) 0 0;
+  z-index: 10040;
+  background: rgba(0, 0, 0, 0.46);
+  backdrop-filter: blur(3px);
+}
+.sidebar-mobile-backdrop[hidden] {
+  display: none !important;
+}
 /* ============================================
    MAIN CONTENT
    ============================================ */
@@ -410,6 +424,7 @@ main {
   overflow: visible;
   height: auto;
   min-height: 0;
+  min-width: 0;
 }
 /* When sidebar is present, adjust grid */
 body.with-sidebar {
@@ -516,7 +531,7 @@ body.with-sidebar > footer {
 /* ============================================
    RESPONSIVE
    ============================================ */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   body {
     grid-template-columns: 1fr;
   }
@@ -528,27 +543,118 @@ body.with-sidebar > footer {
   .sidebar-container {
     position: fixed;
     top: var(--navbar-height);
-    width: var(--sidebar-collapsed);
+    left: 0;
+    bottom: 0;
+    width: min(320px, calc(100vw - 32px));
+    max-width: calc(100vw - 32px);
+    height: calc(100dvh - var(--navbar-height));
+    z-index: 10050;
+    transform: translateX(-105%);
+    box-shadow: 18px 0 44px rgba(0, 0, 0, 0.26);
+    transition: transform 180ms ease;
+    overflow: hidden;
+  }
+  .sidebar-container.mobile-open {
+    transform: translateX(0);
   }
   body.with-sidebar {
     display: grid !important;
   }
+  .sidebar-container.collapsed,
+  .sidebar-container {
+    width: min(320px, calc(100vw - 32px));
+  }
   .sidebar-container.collapsed .sidebar-item-label,
-  .sidebar-container .sidebar-item-label {
-    display: none;
+  .sidebar-container .sidebar-item-label,
+  .sidebar-container.collapsed .sidebar-section-label,
+  .sidebar-container .sidebar-section-label {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    max-width: none;
+    color: inherit;
+    font-size: inherit;
+    line-height: normal;
   }
   .sidebar-section-label {
+    color: var(--text-muted) !important;
+    font-size: 11px !important;
+    line-height: normal !important;
+  }
+  .sidebar-container.collapsed .sidebar-section-label::after {
     display: none;
+  }
+  .sidebar-container.collapsed .sidebar-item,
+  .sidebar-container.collapsed.collapsed-aligned .sidebar-item,
+  .sidebar-item {
+    justify-content: flex-start;
+    width: auto;
+    min-height: 48px;
+    gap: 12px;
+    padding: 0 16px;
+    margin: 0 8px;
+  }
+  .sidebar-container.collapsed.collapsed-aligned .sidebar-item-icon {
+    margin: 0;
+  }
+  .sidebar-toggle-handle,
+  .sidebar-toggle-tooltip,
+  .sidebar-tooltip {
+    display: none !important;
+  }
+  body.mobile-sidebar-open {
+    overflow: hidden;
   }
   main {
     grid-column: 1;
     grid-row: 2;
+    width: 100%;
+    max-width: 100%;
   }
   body.with-sidebar > global.thefooter,
   body.with-sidebar > footer {
     grid-column: 1;
     grid-row: 3;
   }
+  .navbar-container {
+    padding: 0 max(12px, env(safe-area-inset-right)) 0 max(12px, env(safe-area-inset-left));
+    gap: 10px;
+  }
+  .navbar-menu-button {
+    display: flex;
+  }
+  .navbar-button,
+  .navbar-avatar,
+  .navbar-avatar-wrapper {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 10px;
+  }
+  .navbar-avatar {
+    border-radius: 999px;
+    padding: 4px;
+  }
+  .navbar-left,
+  .navbar-right {
+    gap: 6px;
+  }
+  .profile-dropdown {
+    position: fixed;
+    top: calc(var(--navbar-height) + 8px);
+    right: max(12px, env(safe-area-inset-right));
+    width: min(300px, calc(100vw - 24px));
+  }
+  .profile-dropdown-button,
+  .profile-dropdown-item {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
   .navbar-title {
     display: none;
   }

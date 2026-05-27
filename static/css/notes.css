@@ -625,22 +625,90 @@
 }
 
 @media (max-width: 700px) {
+  .notes-page {
+    width: 100%;
+    max-width: 100%;
+    padding: 22px 0;
+  }
+
+  .notes-page-header {
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .notes-page-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+    font-size: 15px;
+  }
+
+  .folders-grid,
+  .notes-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .folder-card-inner,
+  .note-card {
+    min-height: 64px;
+  }
+
+  .folder-card-menu-btn,
+  .note-card-menu-btn {
+    width: 48px;
+    height: 48px;
+    opacity: 1;
+  }
+
   .notes-editor-page {
     border-right: 0;
     border-left: 0;
     border-radius: 0;
+    min-height: calc(100dvh - var(--navbar-height, 64px));
+  }
+
+  .editor-topbar {
+    min-height: 56px;
+    padding: 0 14px;
+  }
+
+  .editor-back-link {
+    min-height: 48px;
+    padding: 0 12px 0 4px;
   }
 
   .notes-editor-surface {
-    padding: 48px 20px 64px;
+    min-height: calc(100dvh - 120px);
+    padding: 36px 16px 64px;
   }
 
   .editor-title-input {
-    font-size: 28px;
+    font-size: 26px;
   }
 
   .blocknote-container .bn-formatting-toolbar {
     max-width: calc(100vw - 24px);
+    min-height: 48px;
+  }
+
+  .blocknote-container .bn-formatting-toolbar button,
+  .blocknote-container .bn-formatting-toolbar [role="button"],
+  .blocknote-container .bn-formatting-toolbar select,
+  .blocknote-container .bn-menu-item,
+  .blocknote-container .bn-menu-dropdown button,
+  .blocknote-container .bn-menu-dropdown [role="menuitem"],
+  .notes-toolbar-menu-item,
+  .notes-toolbar-menu-trigger {
+    min-height: 48px !important;
+    height: auto !important;
+    max-height: none !important;
   }
 
   .notes-style-trigger {

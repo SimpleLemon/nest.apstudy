@@ -139,7 +139,15 @@ body.login-page {
 @media (max-width: 640px) {
     .login-content {
         align-items: flex-start;
-        padding-top: 56px;
+        padding: 40px 14px 48px;
+    }
+
+    .login-card {
+        padding: 28px 20px;
+    }
+
+    .oauth-button {
+        width: 100%;
     }
 
     .login-footer footer div {
@@ -153,6 +161,10 @@ body.login-page {
     }
 
     .login-footer footer a {
+        display: inline-flex;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
         padding: 6px 12px;
     }
 }

@@ -39,7 +39,7 @@
         </div>
         {% if shared_file %}
         <p class="text-xs uppercase tracking-[0.18em] text-on-surface-variant mb-2">{{ shared_by_name }}</p>
-        <h1 class="text-3xl font-headline font-semibold text-on-surface tracking-tight">{{ shared_file.original_filename }}</h1>
+        <h1 class="text-3xl font-headline font-semibold text-on-surface">{{ shared_file.original_filename }}</h1>
         <div class="mt-4 text-sm text-on-surface-variant space-y-1">
             <p>{{ file_size_display }}</p>
             <p>This file expires on {{ expires_at_display }}.</p>
@@ -56,7 +56,7 @@
         </div>
         {% else %}
         <p class="text-xs uppercase tracking-[0.18em] text-on-surface-variant mb-2">File unavailable</p>
-        <h1 class="text-3xl font-headline font-semibold text-on-surface tracking-tight">File Unavailable</h1>
+        <h1 class="text-3xl font-headline font-semibold text-on-surface">File Unavailable</h1>
         <p class="mt-4 text-sm text-on-surface-variant">{{ error_message }}</p>
         {% endif %}
     </section>

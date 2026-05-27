@@ -51,28 +51,35 @@
     };
 
     const TILE_SIZE_RULES = {
-        calendar: ["medium", "wide", "large"],
-        tasks: ["compact", "medium", "wide"],
-        files: ["compact", "medium", "wide"],
-        notes: ["compact", "medium", "wide"],
-        messages: ["compact", "medium", "wide"],
-        courses: ["wide", "large"],
+        calendar: ["standard", "tall", "large"],
+        tasks: ["standard", "tall", "large"],
+        files: ["standard", "tall", "large"],
+        notes: ["standard", "tall", "large"],
+        messages: ["standard", "tall", "large"],
+        courses: ["standard", "large"],
     };
 
     const DEFAULT_TILE_SIZES = {
-        calendar: "medium",
-        tasks: "medium",
-        files: "medium",
-        notes: "medium",
-        messages: "medium",
-        courses: "wide",
+        calendar: "standard",
+        tasks: "standard",
+        files: "standard",
+        notes: "standard",
+        messages: "standard",
+        courses: "large",
     };
 
     const TILE_SIZE_LABELS = {
-        compact: "Compact",
-        medium: "Medium",
-        wide: "Wide",
+        standard: "Standard",
+        tall: "Tall",
         large: "Large",
+    };
+
+    const CALENDAR_VIEW_RULES = ["month", "week", "upcoming"];
+    const DEFAULT_CALENDAR_VIEW = "month";
+    const CALENDAR_VIEW_LABELS = {
+        month: "Month",
+        week: "Week",
+        upcoming: "Upcoming",
     };
 
     const state = {
@@ -81,12 +88,15 @@
         activePopoverLocked: false,
         editMode: false,
         resize: null,
+        controlsBound: false,
     };
 
     const els = {
         tiles: document.getElementById("dashboard-tiles"),
         checklist: document.getElementById("dashboard-checklist"),
         editToggle: document.getElementById("dashboard-edit-layout"),
+        addTile: document.getElementById("dashboard-add-tile"),
+        addMenu: document.getElementById("dashboard-add-menu"),
     };
 
     function escapeHtml(value) {
@@ -156,17 +166,31 @@
 
     function tileLayoutFromDom() {
         return Array.from(els.tiles?.querySelectorAll(".dashboard-tile[data-tile-id]") || [])
-            .map((tile) => ({
-                id: tile.dataset.tileId,
-                size: normalizeTileSize(tile.dataset.tileId, tile.dataset.tileSize),
-            }))
+            .map((tile) => tilePayload(tile.dataset.tileId, tile.dataset.tileSize, tile.dataset.calendarView))
             .filter((tile) => tile.id && TILE_META[tile.id]);
     }
 
     function normalizeTileSize(tileId, size) {
         const allowed = TILE_SIZE_RULES[tileId] || [];
-        const normalized = String(size || DEFAULT_TILE_SIZES[tileId] || allowed[0] || "medium").trim();
-        return allowed.includes(normalized) ? normalized : (DEFAULT_TILE_SIZES[tileId] || allowed[0] || "medium");
+        let normalized = String(size || DEFAULT_TILE_SIZES[tileId] || allowed[0] || "standard").trim().toLowerCase();
+        if (normalized === "compact" || normalized === "medium") normalized = "standard";
+        if (normalized === "wide") normalized = "large";
+        return allowed.includes(normalized) ? normalized : (DEFAULT_TILE_SIZES[tileId] || allowed[0] || "standard");
+    }
+
+    function normalizeCalendarView(tileId, view) {
+        if (tileId !== "calendar") return "";
+        const normalized = String(view || DEFAULT_CALENDAR_VIEW).trim().toLowerCase();
+        return CALENDAR_VIEW_RULES.includes(normalized) ? normalized : DEFAULT_CALENDAR_VIEW;
+    }
+
+    function tilePayload(tileId, size, view) {
+        const payload = {
+            id: tileId,
+            size: normalizeTileSize(tileId, size),
+        };
+        if (tileId === "calendar") payload.view = normalizeCalendarView(tileId, view);
+        return payload;
     }
 
     function normalizeTileOrder(preferredOrder, availableTiles) {
@@ -187,6 +211,7 @@
         const available = Array.isArray(availableTiles)
             ? availableTiles.filter((tileId) => TILE_META[tileId])
             : Object.keys(TILE_META);
+        const isVersionThree = Number(preferredLayout?.version || 0) >= 3;
         const source = Array.isArray(preferredLayout)
             ? preferredLayout
             : Array.isArray(preferredLayout?.tiles)
@@ -196,36 +221,46 @@
         for (const item of source) {
             const tileId = typeof item === "string" ? item : item?.id;
             if (!available.includes(tileId) || layout.some((tile) => tile.id === tileId)) continue;
-            layout.push({
-                id: tileId,
-                size: normalizeTileSize(tileId, typeof item === "string" ? null : item?.size),
-            });
+            layout.push(tilePayload(tileId, typeof item === "string" ? null : item?.size, typeof item === "string" ? null : item?.view));
         }
-        for (const tileId of Object.keys(TILE_META)) {
-            if (available.includes(tileId) && !layout.some((tile) => tile.id === tileId)) {
-                layout.push({ id: tileId, size: normalizeTileSize(tileId) });
+        if (!isVersionThree) {
+            for (const tileId of Object.keys(TILE_META)) {
+                if (available.includes(tileId) && !layout.some((tile) => tile.id === tileId)) {
+                    layout.push(tilePayload(tileId));
+                }
             }
         }
         return layout;
     }
 
-    function nextTileSize(tileId, currentSize, direction) {
-        const allowed = TILE_SIZE_RULES[tileId] || [];
-        if (!allowed.length) return currentSize;
-        const currentIndex = Math.max(0, allowed.indexOf(normalizeTileSize(tileId, currentSize)));
-        const nextIndex = Math.min(allowed.length - 1, Math.max(0, currentIndex + direction));
-        return allowed[nextIndex];
-    }
-
     function nearestTileSize(tileId, deltaX, deltaY, startSize) {
         const allowed = TILE_SIZE_RULES[tileId] || [];
-        if (!allowed.length) return startSize;
-        const startIndex = Math.max(0, allowed.indexOf(normalizeTileSize(tileId, startSize)));
-        const step = Math.abs(deltaY) > Math.abs(deltaX) ? deltaY : deltaX;
-        const threshold = 72;
-        const offset = Math.trunc(step / threshold);
-        const targetIndex = Math.min(allowed.length - 1, Math.max(0, startIndex + offset));
-        return allowed[targetIndex];
+        const current = normalizeTileSize(tileId, startSize);
+        const growX = deltaX > 96;
+        const growY = deltaY > 96;
+        const shrinkX = deltaX < -96;
+        const shrinkY = deltaY < -96;
+
+        if ((shrinkX || shrinkY) && allowed.includes("standard")) {
+            if (current === "large" && shrinkX && !shrinkY && allowed.includes("tall")) return "tall";
+            return "standard";
+        }
+        if ((growX && growY) || (current === "tall" && growX) || ((growX || growY) && !allowed.includes("tall"))) {
+            if (allowed.includes("large")) return "large";
+        }
+        if (growY && allowed.includes("tall")) return "tall";
+        if (growX && allowed.includes("large")) return "large";
+        return current;
+    }
+
+    function summaryLayoutSource(summary) {
+        if (Array.isArray(summary?.tile_layout)) {
+            return {
+                version: Number(summary.tile_layout_version || 3),
+                tiles: summary.tile_layout,
+            };
+        }
+        return summary?.tile_layout || summary?.tile_order;
     }
 
     function renderChecklist(checklist) {
@@ -279,16 +314,42 @@
         }
     }
 
-    function tileShell(tileId, size, bodyHtml) {
+    function tileShell(tileId, size, view, bodyHtml) {
         const meta = TILE_META[tileId];
         const safeSize = normalizeTileSize(tileId, size);
+        const safeView = normalizeCalendarView(tileId, view);
         const sizeOptions = (TILE_SIZE_RULES[tileId] || []).map((option) => `
-            <button class="dashboard-layout-button dashboard-resize-step ${option === safeSize ? "is-active" : ""}" type="button" data-size="${escapeHtml(option)}" aria-label="Set ${escapeHtml(meta.title)} tile to ${escapeHtml(TILE_SIZE_LABELS[option] || option)}">
+            <button class="dashboard-config-option ${option === safeSize ? "is-active" : ""}" type="button" data-config-kind="size" data-value="${escapeHtml(option)}" role="menuitemradio" aria-checked="${option === safeSize ? "true" : "false"}">
                 ${escapeHtml(TILE_SIZE_LABELS[option] || option)}
             </button>
         `).join("");
+        const viewOptions = tileId === "calendar" ? `
+            <div class="dashboard-config-group" aria-label="Calendar view">
+                <span class="dashboard-config-label">View</span>
+                ${CALENDAR_VIEW_RULES.map((option) => `
+                    <button class="dashboard-config-option ${option === safeView ? "is-active" : ""}" type="button" data-config-kind="view" data-value="${escapeHtml(option)}" role="menuitemradio" aria-checked="${option === safeView ? "true" : "false"}">
+                        ${escapeHtml(CALENDAR_VIEW_LABELS[option] || option)}
+                    </button>
+                `).join("")}
+            </div>
+        ` : "";
         return `
-            <article class="dashboard-tile" data-tile-id="${escapeHtml(tileId)}" data-tile-size="${escapeHtml(safeSize)}" tabindex="0">
+            <article class="dashboard-tile" data-tile-id="${escapeHtml(tileId)}" data-tile-size="${escapeHtml(safeSize)}" ${tileId === "calendar" ? `data-calendar-view="${escapeHtml(safeView)}"` : ""} tabindex="0">
+                <div class="dashboard-tile-edit-controls" aria-label="${escapeHtml(meta.title)} edit controls">
+                    <button class="dashboard-tile-remove" type="button" aria-label="Remove ${escapeHtml(meta.title)} tile">
+                        <span class="material-symbols-outlined" aria-hidden="true">remove</span>
+                    </button>
+                    <button class="dashboard-tile-config-toggle" type="button" aria-label="Configure ${escapeHtml(meta.title)} tile" aria-expanded="false">
+                        <span class="material-symbols-outlined" aria-hidden="true">tune</span>
+                    </button>
+                </div>
+                <div class="dashboard-config-menu" role="menu" hidden>
+                    <div class="dashboard-config-group" aria-label="Tile size">
+                        <span class="dashboard-config-label">Size</span>
+                        ${sizeOptions}
+                    </div>
+                    ${viewOptions}
+                </div>
                 <div class="dashboard-tile-inner">
                     <header class="dashboard-tile-head">
                         <div class="dashboard-tile-title-row">
@@ -306,11 +367,8 @@
                         </div>
                     </header>
                     ${bodyHtml}
-                    <div class="dashboard-layout-controls" aria-label="${escapeHtml(meta.title)} layout controls">
-                        ${sizeOptions}
-                    </div>
-                    <button class="dashboard-resize-grip" type="button" aria-label="Resize ${escapeHtml(meta.title)} tile"></button>
                 </div>
+                <button class="dashboard-resize-grip" type="button" aria-label="Resize ${escapeHtml(meta.title)} tile"></button>
             </article>
         `;
     }
@@ -328,37 +386,52 @@
 
     function renderTiles(summary) {
         if (!els.tiles) return;
-        const layout = normalizeTileLayout(summary.tile_layout || summary.tile_order, summary.available_tiles);
-        els.tiles.innerHTML = layout.map((tile) => renderTile(tile.id, tile.size, summary.tiles?.[tile.id] || {})).join("");
+        const layout = normalizeTileLayout(summaryLayoutSource(summary), summary.available_tiles);
+        summary.tile_layout_version = 3;
+        summary.tile_layout = layout;
+        els.tiles.innerHTML = layout.map((tile) => renderTile(tile.id, tile.size, summary.tiles?.[tile.id] || {}, tile)).join("");
         applyEditMode();
         bindTileControls();
         bindCalendarPopovers();
         setupSortable();
+        updateAddTileMenu();
     }
 
-    function renderTile(tileId, size, data) {
-        if (tileId === "calendar") return tileShell(tileId, size, renderCalendar(data));
-        if (tileId === "tasks") return tileShell(tileId, size, renderTasks(data));
-        if (tileId === "files") return tileShell(tileId, size, renderFiles(data));
-        if (tileId === "notes") return tileShell(tileId, size, renderNotes(data));
-        if (tileId === "messages") return tileShell(tileId, size, renderMessages(data));
-        if (tileId === "courses") return tileShell(tileId, size, renderCourses(data));
+    function renderTile(tileId, size, data, layoutItem = {}) {
+        if (tileId === "calendar") return tileShell(tileId, size, layoutItem.view, renderCalendar(data, layoutItem.view));
+        if (tileId === "tasks") return tileShell(tileId, size, "", renderTasks(data));
+        if (tileId === "files") return tileShell(tileId, size, "", renderFiles(data));
+        if (tileId === "notes") return tileShell(tileId, size, "", renderNotes(data));
+        if (tileId === "messages") return tileShell(tileId, size, "", renderMessages(data));
+        if (tileId === "courses") return tileShell(tileId, size, "", renderCourses(data));
         return "";
     }
 
-    function renderCalendar(data) {
-        const events = Array.isArray(data.events) ? data.events : [];
+    function renderCalendar(data, view) {
+        const safeView = normalizeCalendarView("calendar", view);
+        if (safeView === "week") return renderCalendarGrid(data, "week");
+        if (safeView === "upcoming") return renderUpcomingCalendar(data);
+        return renderCalendarGrid(data, "month");
+    }
+
+    function renderCalendarGrid(data, view) {
+        const events = view === "week"
+            ? (Array.isArray(data.week_events) ? data.week_events : [])
+            : (Array.isArray(data.events) ? data.events : []);
         const month = String(data.month || new Date().toISOString().slice(0, 7));
         const [yearValue, monthValue] = month.split("-").map((part) => Number(part));
         const year = Number.isFinite(yearValue) ? yearValue : new Date().getFullYear();
         const monthIndex = Number.isFinite(monthValue) ? monthValue - 1 : new Date().getMonth();
-        const first = new Date(year, monthIndex, 1);
+        const first = view === "week"
+            ? new Date(`${data.week_start || localDateKey(new Date())}T00:00:00`)
+            : new Date(year, monthIndex, 1);
         const start = new Date(first);
-        start.setDate(first.getDate() - first.getDay());
+        if (view !== "week") start.setDate(first.getDate() - first.getDay());
         const todayKey = localDateKey(new Date());
         const eventMap = groupEventsByDate(events);
         const cells = [];
-        for (let index = 0; index < 42; index += 1) {
+        const cellCount = view === "week" ? 7 : 42;
+        for (let index = 0; index < cellCount; index += 1) {
             const day = new Date(start);
             day.setDate(start.getDate() + index);
             const key = localDateKey(day);
@@ -373,11 +446,29 @@
             `);
         }
         return `
-            <div class="dashboard-calendar" data-calendar-events="${escapeHtml(JSON.stringify(events))}">
+            <div class="dashboard-calendar" data-calendar-events="${escapeHtml(JSON.stringify(events))}" data-calendar-view="${escapeHtml(view)}">
                 <div class="dashboard-calendar-weekdays" aria-hidden="true">
                     ${["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => `<span>${day}</span>`).join("")}
                 </div>
                 <div class="dashboard-calendar-grid">${cells.join("")}</div>
+            </div>
+        `;
+    }
+
+    function renderUpcomingCalendar(data) {
+        const items = Array.isArray(data.upcoming_events) ? data.upcoming_events : [];
+        if (!items.length) return emptyState("calendar");
+        return `
+            <div class="dashboard-calendar-upcoming">
+                ${items.map((event) => `
+                    <div class="dashboard-list-item">
+                        <div class="dashboard-list-main">
+                            <span class="dashboard-list-title">${escapeHtml(event.title || "Untitled event")}</span>
+                            <span class="dashboard-list-meta">${escapeHtml(formatDateTime(event.start) || event.date || "Upcoming")}</span>
+                        </div>
+                        <span class="dashboard-marker" style="--marker-color:${escapeHtml(event.color || "#6366f1")}" aria-hidden="true"></span>
+                    </div>
+                `).join("")}
             </div>
         `;
     }
@@ -491,18 +582,52 @@
     }
 
     function bindTileControls() {
-        els.editToggle?.addEventListener("click", () => {
-            state.editMode = !state.editMode;
-            applyEditMode();
-        });
-        els.tiles?.querySelectorAll(".dashboard-resize-step").forEach((button) => {
+        if (!state.controlsBound) {
+            bindPageControls();
+            state.controlsBound = true;
+        }
+        els.tiles?.querySelectorAll(".dashboard-tile-remove").forEach((button) => {
             button.addEventListener("click", () => {
                 const tile = button.closest(".dashboard-tile");
-                setTileSize(tile, button.dataset.size, true);
+                removeTile(tile);
+            });
+        });
+        els.tiles?.querySelectorAll(".dashboard-tile-config-toggle").forEach((button) => {
+            button.addEventListener("click", (event) => {
+                event.stopPropagation();
+                const tile = button.closest(".dashboard-tile");
+                toggleTileConfig(tile, button);
+            });
+        });
+        els.tiles?.querySelectorAll(".dashboard-config-option").forEach((button) => {
+            button.addEventListener("click", () => {
+                const tile = button.closest(".dashboard-tile");
+                applyTileOption(tile, button.dataset.configKind, button.dataset.value);
             });
         });
         els.tiles?.querySelectorAll(".dashboard-resize-grip").forEach((grip) => {
             grip.addEventListener("pointerdown", startResize);
+        });
+    }
+
+    function bindPageControls() {
+        els.editToggle?.addEventListener("click", () => {
+            state.editMode = !state.editMode;
+            applyEditMode();
+            setupSortable();
+            updateAddTileMenu();
+        });
+        els.addTile?.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const isOpen = els.addTile.getAttribute("aria-expanded") === "true";
+            setAddMenuOpen(!isOpen);
+        });
+        els.addMenu?.addEventListener("click", (event) => {
+            const button = event.target.closest("[data-add-tile-id]");
+            if (!button) return;
+            event.preventDefault();
+            event.stopPropagation();
+            addTile(button.dataset.addTileId);
         });
     }
 
@@ -513,50 +638,46 @@
             const label = els.editToggle.querySelector("span:last-child");
             if (label) label.textContent = state.editMode ? "Done" : "Edit layout";
         }
+        els.tiles?.querySelectorAll(".dashboard-tile-inner").forEach((inner) => {
+            inner.inert = state.editMode;
+            inner.setAttribute("aria-hidden", state.editMode ? "true" : "false");
+        });
+        if (!state.editMode) {
+            closeTileConfigMenus();
+            setAddMenuOpen(false);
+        }
     }
 
-    function setTileSize(tile, size, shouldPersist) {
+    function setTileSize(tile, size) {
         if (!tile) return;
         const tileId = tile.dataset.tileId;
         const nextSize = normalizeTileSize(tileId, size);
         tile.dataset.tileSize = nextSize;
-        tile.querySelectorAll(".dashboard-resize-step").forEach((button) => {
-            button.classList.toggle("is-active", button.dataset.size === nextSize);
-        });
-        if (shouldPersist) void persistLayout();
     }
 
-    function setupSortable() {
-        if (!els.tiles || typeof Sortable === "undefined") return;
-        if (state.sortable) state.sortable.destroy();
-        state.sortable = Sortable.create(els.tiles, {
-            animation: 150,
-            draggable: ".dashboard-tile",
-            filter: "a,button,input,select,textarea,.dashboard-tile-title-row,.dashboard-day,.dashboard-list-item,.dashboard-course,.dashboard-resize-grip,.dashboard-layout-controls,.dashboard-popover",
-            ghostClass: "dashboard-tile-ghost",
-            dragClass: "is-dragging",
-            preventOnFilter: false,
-            onEnd: () => void persistLayout(),
-        });
+    function setCalendarView(tile, view) {
+        if (!tile || tile.dataset.tileId !== "calendar") return;
+        tile.dataset.calendarView = normalizeCalendarView("calendar", view);
     }
 
-    async function persistLayout() {
-        const tile_layout = tileLayoutFromDom();
-        try {
-            await fetchJson("/api/dashboard/layout", {
-                method: "PATCH",
-                body: JSON.stringify({ tile_layout: { version: 2, tiles: tile_layout } }),
-            });
-        } catch (error) {
-            showToast(error.message || "Unable to save dashboard layout.");
+    function applyTileOption(tile, kind, value) {
+        if (!tile) return;
+        if (kind === "size") {
+            setTileSize(tile, value);
+        } else if (kind === "view") {
+            setCalendarView(tile, value);
         }
+        syncSummaryLayoutFromDom();
+        renderTiles(state.summary);
+        void persistLayout();
     }
 
     function startResize(event) {
         const tile = event.currentTarget?.closest(".dashboard-tile");
-        if (!tile || event.button !== 0) return;
+        if (!tile || !state.editMode || event.button !== 0) return;
         event.preventDefault();
         event.stopPropagation();
+        closeTileConfigMenus();
         const startSize = normalizeTileSize(tile.dataset.tileId, tile.dataset.tileSize);
         state.resize = {
             tile,
@@ -578,8 +699,8 @@
         const { tile, startX, startY, startSize } = state.resize;
         const targetSize = nearestTileSize(tile.dataset.tileId, event.clientX - startX, event.clientY - startY, startSize);
         state.resize.targetSize = targetSize;
-        tile.dataset.previewSize = targetSize;
-        setTileSize(tile, targetSize, false);
+        tile.dataset.previewSize = TILE_SIZE_LABELS[targetSize] || targetSize;
+        setTileSize(tile, targetSize);
     }
 
     function finishResize(event) {
@@ -590,7 +711,9 @@
         state.resize = null;
         document.removeEventListener("pointermove", updateResize);
         document.removeEventListener("pointerup", finishResize);
-        setTileSize(tile, targetSize, true);
+        setTileSize(tile, targetSize);
+        syncSummaryLayoutFromDom();
+        void persistLayout();
     }
 
     function cancelResize() {
@@ -601,8 +724,122 @@
         state.resize = null;
         document.removeEventListener("pointermove", updateResize);
         document.removeEventListener("pointerup", finishResize);
-        setTileSize(tile, startSize, false);
+        setTileSize(tile, startSize);
         return true;
+    }
+
+    function toggleTileConfig(tile, button) {
+        if (!tile || !state.editMode) return;
+        const menu = tile.querySelector(".dashboard-config-menu");
+        if (!menu) return;
+        const shouldOpen = menu.hidden;
+        closeTileConfigMenus();
+        menu.hidden = !shouldOpen;
+        button?.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
+    }
+
+    function closeTileConfigMenus() {
+        els.tiles?.querySelectorAll(".dashboard-config-menu").forEach((menu) => {
+            menu.hidden = true;
+        });
+        els.tiles?.querySelectorAll(".dashboard-tile-config-toggle").forEach((button) => {
+            button.setAttribute("aria-expanded", "false");
+        });
+    }
+
+    function syncSummaryLayoutFromDom() {
+        if (!state.summary) return;
+        state.summary.tile_layout_version = 3;
+        state.summary.tile_layout = tileLayoutFromDom();
+        state.summary.tile_order = state.summary.tile_layout.map((tile) => tile.id);
+    }
+
+    function removeTile(tile) {
+        if (!tile) return;
+        tile.remove();
+        syncSummaryLayoutFromDom();
+        updateAddTileMenu();
+        void persistLayout();
+    }
+
+    function addTile(tileId) {
+        if (!state.summary || !TILE_META[tileId]) return;
+        const available = Array.isArray(state.summary.available_tiles) ? state.summary.available_tiles : Object.keys(TILE_META);
+        if (!available.includes(tileId)) return;
+        const layout = normalizeTileLayout({ version: 3, tiles: state.summary.tile_layout || [] }, available);
+        if (layout.some((tile) => tile.id === tileId)) return;
+        layout.push(tilePayload(tileId));
+        state.summary.tile_layout_version = 3;
+        state.summary.tile_layout = layout;
+        state.summary.tile_order = layout.map((tile) => tile.id);
+        setAddMenuOpen(false);
+        renderTiles(state.summary);
+        void persistLayout();
+    }
+
+    function hiddenTileIds() {
+        const available = Array.isArray(state.summary?.available_tiles)
+            ? state.summary.available_tiles.filter((tileId) => TILE_META[tileId])
+            : Object.keys(TILE_META);
+        const visible = new Set((state.summary?.tile_layout || tileLayoutFromDom()).map((tile) => tile.id));
+        return available.filter((tileId) => !visible.has(tileId));
+    }
+
+    function updateAddTileMenu() {
+        if (!els.addTile || !els.addMenu) return;
+        const hidden = hiddenTileIds();
+        const shouldShow = state.editMode && hidden.length > 0;
+        els.addTile.hidden = !shouldShow;
+        els.addTile.disabled = !shouldShow;
+        if (!shouldShow) {
+            setAddMenuOpen(false);
+            return;
+        }
+        els.addMenu.innerHTML = hidden.map((tileId) => `
+            <button class="dashboard-add-menu-item" type="button" role="menuitem" data-add-tile-id="${escapeHtml(tileId)}">
+                <span class="material-symbols-outlined" aria-hidden="true">${escapeHtml(TILE_META[tileId].icon)}</span>
+                <span>${escapeHtml(TILE_META[tileId].title)}</span>
+            </button>
+        `).join("");
+    }
+
+    function setAddMenuOpen(isOpen) {
+        if (!els.addTile || !els.addMenu) return;
+        els.addMenu.hidden = !isOpen;
+        els.addTile.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    }
+
+    function setupSortable() {
+        if (!els.tiles || typeof Sortable === "undefined") return;
+        if (state.sortable) state.sortable.destroy();
+        state.sortable = null;
+        if (!state.editMode) return;
+        state.sortable = Sortable.create(els.tiles, {
+            animation: 150,
+            draggable: ".dashboard-tile",
+            filter: ".dashboard-tile-edit-controls,.dashboard-tile-edit-controls *, .dashboard-config-menu, .dashboard-config-menu *, .dashboard-resize-grip",
+            ghostClass: "dashboard-tile-ghost",
+            dragClass: "is-dragging",
+            preventOnFilter: false,
+            onStart: closeTileConfigMenus,
+            onEnd: () => {
+                syncSummaryLayoutFromDom();
+                updateAddTileMenu();
+                void persistLayout();
+            },
+        });
+    }
+
+    async function persistLayout() {
+        const tile_layout = tileLayoutFromDom();
+        try {
+            await fetchJson("/api/dashboard/layout", {
+                method: "PATCH",
+                body: JSON.stringify({ tile_layout: { version: 3, tiles: tile_layout } }),
+            });
+        } catch (error) {
+            showToast(error.message || "Unable to save dashboard layout.");
+        }
     }
 
     function bindCalendarPopovers() {
@@ -632,6 +869,7 @@
                 if (!state.activePopoverLocked) hidePopover();
             });
             dayButton.addEventListener("click", (event) => {
+                if (state.editMode) return;
                 event.stopPropagation();
                 state.activePopoverLocked = true;
                 showPopover(dayButton, date, dayEvents);
@@ -720,6 +958,8 @@
     document.addEventListener("click", () => {
         state.activePopoverLocked = false;
         hidePopover();
+        closeTileConfigMenus();
+        setAddMenuOpen(false);
     });
     document.addEventListener("keydown", (event) => {
         if (event.key !== "Escape") return;
@@ -729,6 +969,8 @@
         }
         state.activePopoverLocked = false;
         hidePopover();
+        closeTileConfigMenus();
+        setAddMenuOpen(false);
     });
     document.addEventListener("DOMContentLoaded", loadDashboard);
 
@@ -739,7 +981,9 @@
         normalizeTileOrder,
         normalizeTileLayout,
         normalizeTileSize,
+        normalizeCalendarView,
         nearestTileSize,
+        summaryLayoutSource,
         tileOrderFromDom,
         tileLayoutFromDom,
     };

@@ -29,21 +29,25 @@ logger = logging.getLogger(__name__)
 DASHBOARD_TILE_IDS = ("calendar", "tasks", "files", "notes", "messages", "courses")
 DEFAULT_DASHBOARD_TILE_ORDER = ("calendar", "tasks", "files", "notes", "messages", "courses")
 DASHBOARD_DEFAULT_TILE_SIZES = {
-    "calendar": "medium",
-    "tasks": "medium",
-    "files": "medium",
-    "notes": "medium",
-    "messages": "medium",
-    "courses": "wide",
+    "calendar": "standard",
+    "tasks": "standard",
+    "files": "standard",
+    "notes": "standard",
+    "messages": "standard",
+    "courses": "large",
 }
 DASHBOARD_ALLOWED_TILE_SIZES = {
-    "calendar": ("medium", "wide", "large"),
-    "tasks": ("compact", "medium", "wide"),
-    "files": ("compact", "medium", "wide"),
-    "notes": ("compact", "medium", "wide"),
-    "messages": ("compact", "medium", "wide"),
-    "courses": ("wide", "large"),
+    "calendar": ("standard", "tall", "large"),
+    "tasks": ("standard", "tall", "large"),
+    "files": ("standard", "tall", "large"),
+    "notes": ("standard", "tall", "large"),
+    "messages": ("standard", "tall", "large"),
+    "courses": ("standard", "large"),
 }
+DASHBOARD_LAYOUT_VERSION = 3
+DASHBOARD_CALENDAR_VIEWS = ("month", "week", "upcoming")
+DASHBOARD_DEFAULT_CALENDAR_VIEW = "month"
+DASHBOARD_CALENDAR_UPCOMING_LIMIT = 6
 DASHBOARD_LIST_LIMIT = 4
 DASHBOARD_TASK_LIMIT = 5
 
@@ -124,7 +128,41 @@ def _sort_key(value):
 
 
 def _default_tile_size(tile_id):
-    return DASHBOARD_DEFAULT_TILE_SIZES.get(tile_id, "medium")
+    return DASHBOARD_DEFAULT_TILE_SIZES.get(tile_id, "standard")
+
+
+def _layout_version(parsed):
+    if isinstance(parsed, dict):
+        try:
+            return int(parsed.get("version") or 2)
+        except (TypeError, ValueError):
+            return 2
+    if isinstance(parsed, list):
+        return 1
+    return 2
+
+
+def _normalize_tile_size(tile_id, size):
+    normalized = str(size or "").strip().lower()
+    if normalized in {"compact", "medium"}:
+        normalized = "standard"
+    elif normalized == "wide":
+        normalized = "large"
+    if normalized not in DASHBOARD_ALLOWED_TILE_SIZES.get(tile_id, ()):
+        return _default_tile_size(tile_id)
+    return normalized
+
+
+def _normalize_calendar_view(view):
+    normalized = str(view or DASHBOARD_DEFAULT_CALENDAR_VIEW).strip().lower()
+    return normalized if normalized in DASHBOARD_CALENDAR_VIEWS else DASHBOARD_DEFAULT_CALENDAR_VIEW
+
+
+def _layout_tile_payload(tile_id, size=None, view=None):
+    payload = {"id": tile_id, "size": _normalize_tile_size(tile_id, size)}
+    if tile_id == "calendar":
+        payload["view"] = _normalize_calendar_view(view)
+    return payload
 
 
 def _coerce_layout(raw_value):
@@ -136,6 +174,7 @@ def _coerce_layout(raw_value):
         except (TypeError, ValueError):
             parsed = {}
 
+    version = _layout_version(parsed)
     source_tiles = []
     if isinstance(parsed, dict):
         source_tiles = parsed.get("tiles") if isinstance(parsed.get("tiles"), list) else []
@@ -147,17 +186,17 @@ def _coerce_layout(raw_value):
     for item in source_tiles:
         if isinstance(item, dict):
             tile_id = str(item.get("id") or "").strip()
-            size = str(item.get("size") or _default_tile_size(tile_id)).strip()
+            size = item.get("size")
+            view = item.get("view")
         else:
             tile_id = str(item or "").strip()
-            size = _default_tile_size(tile_id)
+            size = None
+            view = None
         if tile_id not in DASHBOARD_TILE_IDS or tile_id in seen:
             continue
-        if size not in DASHBOARD_ALLOWED_TILE_SIZES.get(tile_id, ()):
-            size = _default_tile_size(tile_id)
-        tiles.append({"id": tile_id, "size": size})
+        tiles.append(_layout_tile_payload(tile_id, size, view))
         seen.add(tile_id)
-    return {"version": 2, "tiles": tiles}
+    return {"version": version, "tiles": tiles}
 
 
 def _coerce_layout_order(raw_value):
@@ -166,6 +205,7 @@ def _coerce_layout_order(raw_value):
 
 def _ordered_tile_layout(saved_layout, available_tile_ids):
     available = [tile_id for tile_id in available_tile_ids if tile_id in DASHBOARD_TILE_IDS]
+    version = int(saved_layout.get("version") or 2) if isinstance(saved_layout, dict) else 2
     saved_tiles = saved_layout.get("tiles") if isinstance(saved_layout, dict) else []
     ordered = []
     seen = set()
@@ -173,18 +213,17 @@ def _ordered_tile_layout(saved_layout, available_tile_ids):
         tile_id = str(item.get("id") or "").strip() if isinstance(item, dict) else ""
         if tile_id not in available or tile_id in seen:
             continue
-        size = str(item.get("size") or _default_tile_size(tile_id)).strip()
-        if size not in DASHBOARD_ALLOWED_TILE_SIZES.get(tile_id, ()):
-            size = _default_tile_size(tile_id)
-        ordered.append({"id": tile_id, "size": size})
+        ordered.append(_layout_tile_payload(tile_id, item.get("size"), item.get("view")))
         seen.add(tile_id)
+    if version >= DASHBOARD_LAYOUT_VERSION:
+        return ordered
     for tile_id in DEFAULT_DASHBOARD_TILE_ORDER:
         if tile_id in available and tile_id not in seen:
-            ordered.append({"id": tile_id, "size": _default_tile_size(tile_id)})
+            ordered.append(_layout_tile_payload(tile_id))
             seen.add(tile_id)
     for tile_id in available:
         if tile_id not in seen:
-            ordered.append({"id": tile_id, "size": _default_tile_size(tile_id)})
+            ordered.append(_layout_tile_payload(tile_id))
             seen.add(tile_id)
     return ordered
 
@@ -201,6 +240,26 @@ def _ordered_tiles(saved_order, available_tile_ids):
     ordered.extend(tile_id for tile_id in DEFAULT_DASHBOARD_TILE_ORDER if tile_id in available and tile_id not in ordered)
     ordered.extend(tile_id for tile_id in available if tile_id not in ordered)
     return ordered
+
+
+def _validated_tile_size(tile_id, raw_size):
+    if raw_size is None or str(raw_size).strip() == "":
+        return _default_tile_size(tile_id)
+    normalized = str(raw_size).strip().lower()
+    if normalized in {"compact", "medium"}:
+        normalized = "standard"
+    elif normalized == "wide":
+        normalized = "large"
+    if normalized not in DASHBOARD_ALLOWED_TILE_SIZES.get(tile_id, ()):
+        return None
+    return normalized
+
+
+def _validated_calendar_view(raw_view):
+    if raw_view is None or str(raw_view).strip() == "":
+        return DASHBOARD_DEFAULT_CALENDAR_VIEW
+    normalized = str(raw_view).strip().lower()
+    return normalized if normalized in DASHBOARD_CALENDAR_VIEWS else None
 
 
 def _checklist_signature(items):
@@ -260,11 +319,18 @@ def _build_checklist(calendar_complete=False, tasks_complete=False):
 
 def _load_calendar_summary(user_id, user_settings):
     today = datetime.now(timezone.utc).date()
+    today_start = datetime(today.year, today.month, today.day, tzinfo=timezone.utc)
+    week_start_date = today - timedelta(days=(today.weekday() + 1) % 7)
+    week_start = datetime(week_start_date.year, week_start_date.month, week_start_date.day, tzinfo=timezone.utc)
+    week_end = week_start + timedelta(days=7)
+    upcoming_end = today_start + timedelta(days=8)
     month_start = datetime(today.year, today.month, 1, tzinfo=timezone.utc)
     if today.month == 12:
         month_end = datetime(today.year + 1, 1, 1, tzinfo=timezone.utc)
     else:
         month_end = datetime(today.year, today.month + 1, 1, tzinfo=timezone.utc)
+    range_start = min(month_start, week_start, today_start)
+    range_end = max(month_end, week_end, upcoming_end)
 
     try:
         from blueprints.calendar_api import (
@@ -312,7 +378,7 @@ def _load_calendar_summary(user_id, user_settings):
         try:
             from blueprints.tasks_api import task_calendar_events_for_user
 
-            serialized.extend(task_calendar_events_for_user(user_id, month_start, month_end))
+            serialized.extend(task_calendar_events_for_user(user_id, range_start, range_end))
         except (AppwriteException, AttributeError):
             logger.exception("Failed to load task events for dashboard calendar")
 
@@ -323,9 +389,9 @@ def _load_calendar_summary(user_id, user_settings):
             end = _as_utc(event.get("end")) or start
             if not start:
                 continue
-            if end and end < month_start:
+            if end and end < range_start:
                 continue
-            if start >= month_end:
+            if start >= range_end:
                 continue
             source = source_by_id.get(event.get("calendar_id")) or {}
             color = event.get("color") or source.get("color_hex") or "#6366f1"
@@ -339,10 +405,27 @@ def _load_calendar_summary(user_id, user_settings):
                 "all_day": bool(event.get("is_all_day")),
             })
         visible.sort(key=lambda item: _sort_key(item.get("start")))
+        month_events = [
+            event for event in visible
+            if _sort_key(event.get("end") or event.get("start")) >= month_start and _sort_key(event.get("start")) < month_end
+        ]
+        week_events = [
+            event for event in visible
+            if _sort_key(event.get("end") or event.get("start")) >= week_start and _sort_key(event.get("start")) < week_end
+        ]
+        upcoming_events = [
+            event for event in visible
+            if _sort_key(event.get("end") or event.get("start")) >= today_start and _sort_key(event.get("start")) < upcoming_end
+        ]
         return {
             "month": today.isoformat()[:7],
-            "events": visible[:80],
-            "event_count": len(visible),
+            "week_start": week_start.date().isoformat(),
+            "upcoming_start": today.isoformat(),
+            "upcoming_end": (today + timedelta(days=7)).isoformat(),
+            "events": month_events[:80],
+            "week_events": week_events[:40],
+            "upcoming_events": upcoming_events[:DASHBOARD_CALENDAR_UPCOMING_LIMIT],
+            "event_count": len(month_events),
             "setup_complete": bool(feed_urls or local_sources or event_rows),
             "error": None,
         }
@@ -350,7 +433,12 @@ def _load_calendar_summary(user_id, user_settings):
         logger.exception("Failed to build dashboard calendar summary")
         return {
             "month": today.isoformat()[:7],
+            "week_start": week_start.date().isoformat(),
+            "upcoming_start": today.isoformat(),
+            "upcoming_end": (today + timedelta(days=7)).isoformat(),
             "events": [],
+            "week_events": [],
+            "upcoming_events": [],
             "event_count": 0,
             "setup_complete": False,
             "error": "Unable to load calendar.",
@@ -597,6 +685,7 @@ def _dashboard_summary_payload():
     return {
         "user": _user_payload(),
         "generated_at": format_datetime(datetime.now(timezone.utc)),
+        "tile_layout_version": saved_layout.get("version", DASHBOARD_LAYOUT_VERSION),
         "tile_layout": tile_layout,
         "tile_order": [tile["id"] for tile in tile_layout],
         "available_tiles": available_tiles,
@@ -648,7 +737,7 @@ def dashboard_summary():
 @dashboard_bp.route("/api/dashboard/layout", methods=["PATCH"])
 @login_required
 def update_dashboard_layout():
-    """Persist the user's dashboard tile order and preset sizes."""
+    """Persist the user's visible dashboard tiles, preset sizes, and tile views."""
     if not current_user.onboarding_complete:
         return jsonify({"error": "Onboarding is required."}), 403
 
@@ -670,19 +759,29 @@ def update_dashboard_layout():
     for item in raw_tiles:
         if isinstance(item, dict):
             tile_id = str(item.get("id") or "").strip()
-            size = str(item.get("size") or _default_tile_size(tile_id)).strip()
+            raw_size = item.get("size")
+            raw_view = item.get("view")
         else:
             tile_id = str(item or "").strip()
-            size = _default_tile_size(tile_id)
+            raw_size = None
+            raw_view = None
         if tile_id not in DASHBOARD_TILE_IDS:
             return jsonify({"error": f"Unknown dashboard tile: {tile_id or 'blank'}."}), 400
-        if size not in DASHBOARD_ALLOWED_TILE_SIZES.get(tile_id, ()):
-            return jsonify({"error": f"Invalid size '{size or 'blank'}' for dashboard tile: {tile_id}."}), 400
-        if tile_id not in seen:
-            normalized_tiles.append({"id": tile_id, "size": size})
-            seen.add(tile_id)
+        if tile_id in seen:
+            return jsonify({"error": f"Duplicate dashboard tile: {tile_id}."}), 400
+        size = _validated_tile_size(tile_id, raw_size)
+        if size is None:
+            return jsonify({"error": f"Invalid size '{raw_size or 'blank'}' for dashboard tile: {tile_id}."}), 400
+        tile_payload = {"id": tile_id, "size": size}
+        if tile_id == "calendar":
+            view = _validated_calendar_view(raw_view)
+            if view is None:
+                return jsonify({"error": f"Invalid calendar view '{raw_view or 'blank'}'."}), 400
+            tile_payload["view"] = view
+        normalized_tiles.append(tile_payload)
+        seen.add(tile_id)
 
-    normalized = {"version": 2, "tiles": normalized_tiles}
+    normalized = {"version": DASHBOARD_LAYOUT_VERSION, "tiles": normalized_tiles}
 
     user_id = str(current_user.id)
     try:

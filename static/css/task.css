@@ -1371,15 +1371,26 @@
 }
 
 @media (max-width: 720px) {
+    .task-page-shell {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
+
     .task-header,
     .task-header-actions {
         align-items: stretch;
         flex-direction: column;
     }
 
+    .task-title {
+        font-size: 28px;
+        line-height: 1.14;
+    }
+
     .task-list-create input {
         flex: 1;
         width: auto;
+        min-height: 48px;
     }
 
     .task-row-main {
@@ -1428,6 +1439,76 @@
 
     .task-star-button {
         opacity: 1;
+    }
+
+    .task-icon-button,
+    .task-list-create button,
+    .task-add-primary button,
+    .task-empty-actions button,
+    .task-danger-button,
+    .task-list-all,
+    .task-list-nav-item,
+    .task-rail-primary,
+    .task-create-list-small,
+    .task-row-menu-button,
+    .task-list-row-menu,
+    .task-completed-toggle,
+    .task-add-control,
+    .task-primary-button,
+    .task-secondary-button,
+    .task-action-menu button,
+    .task-add-choice-list button,
+    .task-repeat-option {
+        min-height: 48px;
+    }
+
+    .task-icon-button,
+    .task-checkbox,
+    .task-star-button,
+    .task-row-menu-button,
+    .task-list-row-menu,
+    .task-list-visibility {
+        width: 48px;
+        height: 48px;
+        flex-basis: 48px;
+    }
+
+    .task-row-main {
+        min-height: 64px;
+    }
+
+    .task-title-input,
+    .task-list-title-input,
+    .task-add-primary input,
+    .task-details input,
+    .task-details select,
+    .task-add-details input,
+    .task-add-details select,
+    .task-add-popover input,
+    .task-add-popover select {
+        min-height: 48px;
+        height: auto;
+        font-size: 16px;
+    }
+
+    .task-modal {
+        align-items: flex-end;
+        padding: 12px max(12px, env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+    }
+
+    .task-modal-panel {
+        width: 100%;
+        max-height: calc(100dvh - 24px);
+        overflow: auto;
+        border-radius: 16px;
+    }
+
+    .task-modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .task-modal-actions button {
+        width: 100%;
     }
 }
 

@@ -50,7 +50,7 @@ function renderSidebar() {
   };
 
   const sidebarHTML = `
-<div class="sidebar-container" id="sidebar-root">
+<div class="sidebar-container" id="sidebar-root" role="navigation" aria-label="Primary navigation">
   <div class="sidebar-scroll">
     <div class="sidebar-content">
       <!-- Dashboard Section -->
@@ -123,6 +123,7 @@ function renderSidebar() {
 
 <!-- Tooltip for collapsed state -->
 <div class="sidebar-tooltip" id="sidebar-tooltip"></div>
+<div class="sidebar-mobile-backdrop" id="sidebar-mobile-backdrop" hidden></div>
   `;
 
   const temp = document.createElement('div');
@@ -139,6 +140,11 @@ function renderSidebar() {
     document.body.appendChild(tooltip);
   }
 
+  const backdrop = temp.querySelector('.sidebar-mobile-backdrop');
+  if (backdrop && !document.querySelector('.sidebar-mobile-backdrop')) {
+    document.body.appendChild(backdrop);
+  }
+
   setupSidebarInteractions(sidebarDefault);
 }
 
@@ -152,9 +158,72 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
 
   const toggleHandle = document.getElementById('sidebar-toggle-handle');
   const tooltip = document.getElementById('sidebar-tooltip');
+  const backdrop = document.getElementById('sidebar-mobile-backdrop');
   const toggleTooltip = toggleHandle?.querySelector('.sidebar-toggle-tooltip');
   const items = document.querySelectorAll('.sidebar-item');
+  const mobileQuery = window.matchMedia('(max-width: 1024px)');
   let collapseAnimationPending = false;
+
+  function isMobileShell() {
+    return mobileQuery.matches;
+  }
+
+  function syncMobileNavButton(isOpen) {
+    if (typeof window.APSTUDY_SYNC_MOBILE_NAV_BUTTON === 'function') {
+      window.APSTUDY_SYNC_MOBILE_NAV_BUTTON(isOpen);
+      return;
+    }
+
+    const menuButton = document.getElementById('navbar-menu-btn');
+    if (!menuButton) return;
+    menuButton.setAttribute('aria-expanded', String(isOpen));
+    menuButton.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+  }
+
+  function setMobileSidebarOpen(isOpen) {
+    const shouldOpen = Boolean(isOpen) && isMobileShell();
+    sidebar.classList.toggle('mobile-open', shouldOpen);
+    document.body.classList.toggle('mobile-sidebar-open', shouldOpen);
+    if (backdrop) {
+      backdrop.hidden = !shouldOpen;
+    }
+    sidebar.setAttribute('aria-hidden', shouldOpen || !isMobileShell() ? 'false' : 'true');
+    syncMobileNavButton(shouldOpen);
+    if (!shouldOpen && tooltip) tooltip.classList.remove('visible');
+  }
+
+  function toggleMobileSidebar() {
+    setMobileSidebarOpen(!sidebar.classList.contains('mobile-open'));
+  }
+
+  window.APSTUDY_SET_MOBILE_SIDEBAR_OPEN = setMobileSidebarOpen;
+  window.APSTUDY_TOGGLE_MOBILE_SIDEBAR = toggleMobileSidebar;
+
+  document.addEventListener('apstudy-mobile-sidebar-toggle', toggleMobileSidebar);
+
+  if (backdrop) {
+    backdrop.addEventListener('click', () => setMobileSidebarOpen(false));
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && sidebar.classList.contains('mobile-open')) {
+      setMobileSidebarOpen(false);
+    }
+  });
+
+  const handleShellSizeChange = () => {
+    if (!isMobileShell()) {
+      setMobileSidebarOpen(false);
+      sidebar.setAttribute('aria-hidden', 'false');
+    } else {
+      sidebar.setAttribute('aria-hidden', sidebar.classList.contains('mobile-open') ? 'false' : 'true');
+    }
+  };
+  if (typeof mobileQuery.addEventListener === 'function') {
+    mobileQuery.addEventListener('change', handleShellSizeChange);
+  } else if (typeof mobileQuery.addListener === 'function') {
+    mobileQuery.addListener(handleShellSizeChange);
+  }
 
   function updateToggleHandleState() {
     if (!toggleHandle) return;
@@ -239,6 +308,7 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
       e.preventDefault();
       const route = item.dataset.route;
       if (route) {
+        setMobileSidebarOpen(false);
         window.location.href = route;
       }
     });
@@ -269,6 +339,8 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
   sidebar.addEventListener('mouseleave', () => {
     if (tooltip) tooltip.classList.remove('visible');
   });
+
+  setMobileSidebarOpen(false);
 }
 
 // Initialize sidebar when DOM is ready

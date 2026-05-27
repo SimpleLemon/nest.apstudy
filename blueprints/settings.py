@@ -39,7 +39,7 @@ from appwrite_helpers import (
 )
 from services.atlas_client import DEFAULT_TERM
 from services.chat_presence import sync_chat_presence_labels_for_user
-from services.discord_audit import emit_creation_event, format_actor
+from services.discord_audit import emit_creation_event, emit_user_event, format_actor
 from services.universities import school_payload
 
 settings_bp = Blueprint("settings", __name__)
@@ -897,7 +897,7 @@ def save_onboarding():
                 return jsonify({"error": "Unable to save onboarding."}), 500
             current_user.onboarding_step = 4
             current_user.onboarding_complete = True
-            emit_creation_event(
+            emit_user_event(
                 "Onboarding Complete",
                 actor=format_actor(current_user),
                 target=str(current_user.id),
@@ -927,7 +927,7 @@ def save_onboarding():
             return jsonify({"error": "Unable to save onboarding."}), 500
         current_user.onboarding_complete = True
         current_user.onboarding_step = 4
-        emit_creation_event(
+        emit_user_event(
             "Onboarding Complete",
             actor=format_actor(current_user),
             target=str(current_user.id),

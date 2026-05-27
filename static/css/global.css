@@ -193,6 +193,152 @@ body.apstudy-confirm-open {
 	}
 }
 
+.calendar-mobile-agenda {
+	display: grid;
+	gap: 12px;
+}
+
+.calendar-mobile-day {
+	overflow: hidden;
+	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 44%, transparent);
+	border-radius: 14px;
+	background: var(--color-surface, #ffffff);
+}
+
+.calendar-mobile-day.is-today {
+	border-color: color-mix(in srgb, var(--color-primary, #3b82f6) 55%, var(--color-outline-variant, #8f929c));
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary, #3b82f6) 12%, transparent);
+}
+
+.calendar-mobile-day-header {
+	display: flex;
+	min-height: 48px;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	padding: 10px 12px;
+	border-bottom: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 30%, transparent);
+	background: var(--color-surface-container-low, #f7f6f3);
+	color: var(--color-on-surface, #202124);
+	font-size: 14px;
+	font-weight: 760;
+}
+
+.calendar-mobile-day-header strong {
+	display: inline-flex;
+	min-width: 28px;
+	min-height: 28px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--color-primary, #3b82f6) 13%, transparent);
+	color: var(--color-primary, #3b82f6);
+	font-size: 12px;
+}
+
+.calendar-mobile-event-list {
+	display: grid;
+	gap: 8px;
+	padding: 10px;
+}
+
+.calendar-mobile-event {
+	display: grid;
+	grid-template-columns: 5px minmax(0, 1fr);
+	gap: 10px;
+	min-height: 64px;
+	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 28%, transparent);
+	border-radius: 12px;
+	background: var(--color-surface-container-lowest, #ffffff);
+	color: var(--color-on-surface, #202124);
+	padding: 10px;
+	text-decoration: none;
+}
+
+.calendar-mobile-event.is-completed {
+	opacity: 0.72;
+}
+
+.calendar-mobile-event-bar {
+	width: 5px;
+	border-radius: 999px;
+}
+
+.calendar-mobile-event-copy {
+	min-width: 0;
+}
+
+.calendar-mobile-event-copy h3,
+.calendar-mobile-event-copy p,
+.calendar-mobile-event-copy small,
+.calendar-mobile-empty {
+	margin: 0;
+}
+
+.calendar-mobile-event-copy h3 {
+	color: var(--color-on-surface, #202124);
+	font-size: 15px;
+	line-height: 1.25;
+	font-weight: 760;
+	overflow-wrap: anywhere;
+}
+
+.calendar-mobile-event-copy p {
+	margin-top: 4px;
+	color: var(--color-on-surface-variant, #5f6368);
+	font-size: 13px;
+	line-height: 1.35;
+}
+
+.calendar-mobile-event-copy small {
+	display: block;
+	margin-top: 5px;
+	color: var(--color-on-surface-variant, #5f6368);
+	font-size: 12px;
+}
+
+.calendar-mobile-empty {
+	color: var(--color-on-surface-variant, #5f6368);
+	font-size: 13px;
+	padding: 6px 2px 8px;
+}
+
+@media (max-width: 640px) {
+	#calendar-view-week,
+	#calendar-view-month,
+	#calendar-toggle-menu,
+	#calendar-share,
+	#calendar-prev,
+	#calendar-next,
+	#courses-modal-close,
+	#courses-search-submit,
+	#courses-search-input,
+	#courses-term-select,
+	.js-course-info-toggle,
+	.js-course-toggle {
+		min-width: 48px;
+		min-height: 48px;
+	}
+
+	#calendar-view-week,
+	#calendar-view-month,
+	#calendar-toggle-menu,
+	#courses-search-submit,
+	.js-course-toggle {
+		height: auto !important;
+	}
+
+	#courses-modal-overlay {
+		align-items: flex-end;
+		padding: 10px max(10px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left)) !important;
+	}
+
+	#courses-modal-panel {
+		height: min(92dvh, calc(100dvh - 20px)) !important;
+		border-radius: 16px !important;
+	}
+}
+
 @keyframes apstudyLoaderScale50 {
 	0%,
 	100% {
@@ -1856,6 +2002,100 @@ body.apstudy-confirm-open {
 }
 
 @media (max-width: 640px) {
+	button,
+	input,
+	select,
+	textarea {
+		font-size: 16px;
+	}
+
+	.apstudy-confirm {
+		align-items: flex-end;
+		padding: 12px max(12px, env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+	}
+
+	.apstudy-confirm__panel {
+		width: 100%;
+		max-height: calc(100dvh - 24px);
+		overflow: auto;
+		border-radius: 16px;
+		grid-template-columns: 40px minmax(0, 1fr);
+	}
+
+	.apstudy-confirm__actions {
+		flex-direction: column-reverse;
+		align-items: stretch;
+	}
+
+	.apstudy-confirm__actions button {
+		width: 100%;
+		min-height: 48px;
+	}
+
+	.calendar-info-modal,
+	.calendar-event-modal,
+	.calendar-share-modal {
+		align-items: flex-end;
+		padding: 12px max(12px, env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+	}
+
+	.calendar-info-dialog,
+	.calendar-share-dialog,
+	.calendar-event-dialog {
+		width: 100%;
+		max-height: calc(100dvh - 24px);
+		border-radius: 16px;
+		overflow: auto;
+	}
+
+	.calendar-info-footer,
+	.calendar-share-dialog .calendar-info-footer,
+	.calendar-event-footer {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.calendar-info-button,
+	.calendar-share-dialog .calendar-info-button,
+	.calendar-event-button,
+	.calendar-source-row,
+	.calendar-context-action,
+	.calendar-source-mode {
+		min-height: 48px;
+	}
+
+	.calendar-info-button,
+	.calendar-share-dialog .calendar-info-button,
+	.calendar-event-button {
+		width: 100%;
+	}
+
+	.calendar-source-add,
+	.calendar-source-more,
+	.calendar-info-close,
+	.calendar-share-dialog .calendar-info-close,
+	.calendar-event-icon-button,
+	.calendar-context-preset,
+	.calendar-event-color-choice {
+		min-width: 48px;
+		min-height: 48px;
+	}
+
+	.calendar-info-input,
+	.calendar-share-dialog .calendar-info-input,
+	.calendar-event-field input,
+	.calendar-event-field textarea,
+	.calendar-event-field select {
+		min-height: 48px;
+		font-size: 16px;
+	}
+
+	.calendar-source-menu,
+	.calendar-context-menu,
+	.calendar-right-click-menu {
+		max-width: calc(100vw - 24px);
+	}
+
 	[cmdk-dialog] {
 		inset: 0;
 		width: 100vw;

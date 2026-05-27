@@ -79,30 +79,60 @@ test("dashboard utility normalizes v1 and v2 tile layouts", async () => {
     assert.deepEqual(
         plain(utils.normalizeTileLayout(["messages", "calendar"], ["calendar", "tasks", "messages"])),
         [
-            { id: "messages", size: "medium" },
-            { id: "calendar", size: "medium" },
-            { id: "tasks", size: "medium" },
+            { id: "messages", size: "standard" },
+            { id: "calendar", size: "standard", view: "month" },
+            { id: "tasks", size: "standard" },
         ],
     );
 
     assert.deepEqual(
         plain(utils.normalizeTileLayout(
-            { version: 2, tiles: [{ id: "calendar", size: "large" }, { id: "tasks", size: "large" }] },
+            { version: 2, tiles: [{ id: "calendar", size: "wide" }, { id: "tasks", size: "compact" }] },
             ["calendar", "tasks"],
         )),
         [
-            { id: "calendar", size: "large" },
-            { id: "tasks", size: "medium" },
+            { id: "calendar", size: "large", view: "month" },
+            { id: "tasks", size: "standard" },
+        ],
+    );
+
+    assert.deepEqual(
+        plain(utils.normalizeTileLayout(
+            { version: 3, tiles: [{ id: "calendar", size: "tall", view: "week" }] },
+            ["calendar", "tasks"],
+        )),
+        [
+            { id: "calendar", size: "tall", view: "week" },
         ],
     );
 });
 
-test("dashboard utility snaps resize to allowed presets", async () => {
+test("dashboard utility applies new size and calendar view rules", async () => {
     const source = await readFile(path.join(repoRoot, "static/js/dashboard.js"), "utf8");
     const utils = loadDashboardUtils(source);
 
-    assert.equal(utils.nearestTileSize("calendar", 120, 20, "medium"), "wide");
-    assert.equal(utils.nearestTileSize("calendar", 220, 20, "medium"), "large");
-    assert.equal(utils.nearestTileSize("tasks", -120, 0, "medium"), "compact");
-    assert.equal(utils.normalizeTileSize("courses", "compact"), "wide");
+    assert.equal(utils.normalizeTileSize("calendar", "medium"), "standard");
+    assert.equal(utils.normalizeTileSize("tasks", "wide"), "large");
+    assert.equal(utils.normalizeTileSize("courses", "tall"), "large");
+    assert.equal(utils.normalizeCalendarView("calendar", "upcoming"), "upcoming");
+    assert.equal(utils.normalizeCalendarView("calendar", "agenda"), "month");
+    assert.equal(utils.nearestTileSize("tasks", 0, 140, "standard"), "tall");
+    assert.equal(utils.nearestTileSize("tasks", 140, 140, "standard"), "large");
+    assert.equal(utils.nearestTileSize("courses", 0, 140, "standard"), "large");
+});
+
+test("dashboard summary tile layout arrays preserve v3 hidden tiles", async () => {
+    const source = await readFile(path.join(repoRoot, "static/js/dashboard.js"), "utf8");
+    const utils = loadDashboardUtils(source);
+
+    const summaryLayout = utils.summaryLayoutSource({
+        tile_layout_version: 3,
+        tile_layout: [{ id: "calendar", size: "standard", view: "month" }],
+        tile_order: ["calendar"],
+    });
+
+    assert.deepEqual(
+        plain(utils.normalizeTileLayout(summaryLayout, ["calendar", "tasks"])),
+        [{ id: "calendar", size: "standard", view: "month" }],
+    );
 });

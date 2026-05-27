@@ -71,6 +71,49 @@ test("sidebar keeps persisted collapse state, route targets, and preference even
     assert.match(source, /apstudy-sidebar-default-change/);
 });
 
+test("mobile shell uses a hamburger drawer without breaking desktop sidebar persistence", async () => {
+    const navbarSource = await sourceFor("static/js/navbar.js");
+    const sidebarSource = await sourceFor("static/js/sidebar.js");
+    const layoutStyles = await sourceFor("static/css/layout.css");
+
+    assert.match(navbarSource, /id="navbar-menu-btn"/);
+    assert.match(navbarSource, /window\.APSTUDY_SYNC_MOBILE_NAV_BUTTON/);
+    assert.match(navbarSource, /APSTUDY_TOGGLE_MOBILE_SIDEBAR/);
+
+    assert.match(sidebarSource, /window\.matchMedia\('\(max-width: 1024px\)'\)/);
+    assert.match(sidebarSource, /sidebar-mobile-backdrop/);
+    assert.match(sidebarSource, /mobile-sidebar-open/);
+    assert.match(sidebarSource, /window\.APSTUDY_SET_MOBILE_SIDEBAR_OPEN = setMobileSidebarOpen/);
+    assert.match(sidebarSource, /localStorage\.setItem\('sidebar-collapsed', String\(shouldCollapse\)\)/);
+
+    assert.match(layoutStyles, /\.navbar-menu-button/);
+    assert.match(layoutStyles, /\.sidebar-container\.mobile-open/);
+    assert.match(layoutStyles, /transform: translateX\(-105%\)/);
+    assert.match(layoutStyles, /body\.mobile-sidebar-open/);
+    assert.match(layoutStyles, /min-height: 48px/);
+});
+
+test("calendar and courses switch dense schedules to compact mobile agenda renderers", async () => {
+    const calendarSource = await sourceFor("static/js/calendar.js");
+    const coursesSource = await sourceFor("static/js/courses.js");
+    const globalStyles = await sourceFor("static/css/global.css");
+    const coursesStyles = await sourceFor("static/css/courses.css");
+
+    assert.match(calendarSource, /COMPACT_CALENDAR_QUERY = window\.matchMedia\("\(max-width: 640px\)"\)/);
+    assert.match(calendarSource, /buildMobileCalendarAgendaHtml/);
+    assert.match(calendarSource, /calendar-mobile-agenda/);
+    assert.match(calendarSource, /compactCalendar \? buildMobileCalendarAgendaHtml\(\)/);
+
+    assert.match(coursesSource, /COMPACT_COURSES_QUERY = window\.matchMedia\("\(max-width: 640px\)"\)/);
+    assert.match(coursesSource, /buildMobileCoursesAgenda/);
+    assert.match(coursesSource, /courses-mobile-agenda/);
+    assert.match(coursesSource, /isCompactCoursesViewport\(\)/);
+
+    assert.match(globalStyles, /\.calendar-mobile-agenda/);
+    assert.match(coursesStyles, /\.courses-mobile-agenda/);
+    assert.match(coursesStyles, /\.course-remove-button\.courses-mobile-remove/);
+});
+
 test("theme init normalizes theme aliases and persists pending settings safely", async () => {
     const source = await sourceFor("static/js/theme-init.js");
 

@@ -44,7 +44,7 @@ from appwrite_helpers import (
 )
 from models import User, user_from_doc
 from services.chat_presence import sync_chat_presence_labels_for_user
-from services.discord_audit import emit_creation_event, format_actor, format_user_target
+from services.discord_audit import emit_user_event, format_actor, format_user_target
 
 auth_bp = Blueprint("auth", __name__)
 logger = logging.getLogger(__name__)
@@ -469,7 +469,7 @@ def _complete_appwrite_login(
     _set_oauth_session(provider, appwrite_user_id, email, name=name, picture_url=picture_url)
 
     if created_user:
-        emit_creation_event(
+        emit_user_event(
             "New User Created",
             actor=format_actor(user_id=user_doc.get("$id") or user_doc.get("id"), username=user_doc.get("username") or user_doc.get("name")),
             target=format_user_target(user_doc),
@@ -483,6 +483,20 @@ def _complete_appwrite_login(
             },
             color="green",
         )
+
+    emit_user_event(
+        "User Login",
+        actor=format_actor(user_id=user_doc.get("$id") or user_doc.get("id"), username=user_doc.get("username") or user_doc.get("name")),
+        target=format_user_target(user_doc),
+        metadata={
+            "page_context": page_context,
+            "resource_type": "user",
+            "resource_id": user_doc.get("$id") or user_doc.get("id"),
+            "provider": provider,
+            "created_user": created_user,
+        },
+        color="green",
+    )
 
     return {
         "created_user": created_user,
@@ -871,7 +885,7 @@ def oauth2callback():
     session.pop("oauth_state", None)
 
     if created_user:
-        emit_creation_event(
+        emit_user_event(
             "New User Created",
             actor=format_actor(user_id=user_doc.get("$id") or user_doc.get("id"), username=user_doc.get("username") or user_doc.get("name")),
             target=format_user_target(user_doc),
@@ -886,6 +900,20 @@ def oauth2callback():
             color="green",
         )
 
+    emit_user_event(
+        "User Login",
+        actor=format_actor(user_id=user_doc.get("$id") or user_doc.get("id"), username=user_doc.get("username") or user_doc.get("name")),
+        target=format_user_target(user_doc),
+        metadata={
+            "page_context": "oauth2callback",
+            "resource_type": "user",
+            "resource_id": user_doc.get("$id") or user_doc.get("id"),
+            "provider": "google",
+            "created_user": created_user,
+        },
+        color="green",
+    )
+
     # Redirect users who have not completed onboarding yet.
     if not user_doc.get("onboarding_complete"):
         return redirect(url_for("settings.onboarding"))
@@ -898,6 +926,20 @@ def logout():
     """Clear session and revoke Google token if possible."""
     credentials_data = session.get("credentials")
     user_id = session.get("oauth_user_id") or session.get("user_id")
+    if current_user.is_authenticated:
+        emit_user_event(
+            "User Logout",
+            actor=format_actor(current_user),
+            target=format_user_target(user_id=str(current_user.id), username=current_user.username or current_user.name),
+            metadata={
+                "page_context": "auth/logout",
+                "resource_type": "user",
+                "resource_id": str(current_user.id),
+                "provider": session.get("oauth_provider") or "appwrite",
+                "oauth_user_id": session.get("oauth_user_id"),
+            },
+            color="gray",
+        )
     if user_id:
         try:
             from appwrite_client import client as appwrite_client

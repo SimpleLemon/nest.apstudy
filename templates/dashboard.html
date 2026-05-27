@@ -32,10 +32,16 @@
     <main class="dashboard-main" aria-labelledby="dashboard-title">
         <header class="dashboard-header">
             <div>
-                <p class="dashboard-kicker">Morning Brief</p>
                 <h1 id="dashboard-title">Dashboard</h1>
             </div>
             <div class="dashboard-header-actions">
+                <div class="dashboard-add-wrap">
+                    <button id="dashboard-add-tile" class="dashboard-header-link dashboard-add-toggle" type="button" aria-expanded="false" aria-haspopup="menu" hidden>
+                        <span class="material-symbols-outlined" aria-hidden="true">add</span>
+                        <span>Add tile</span>
+                    </button>
+                    <div id="dashboard-add-menu" class="dashboard-add-menu" role="menu" hidden></div>
+                </div>
                 <button id="dashboard-edit-layout" class="dashboard-header-link dashboard-edit-toggle" type="button" aria-pressed="false">
                     <span class="material-symbols-outlined" aria-hidden="true">dashboard_customize</span>
                     <span>Edit</span>
@@ -49,7 +55,7 @@
             <div id="dashboard-tiles" class="dashboard-tiles" aria-live="polite">
                 <div class="dashboard-loading">
                     <span class="loader" aria-hidden="true"></span>
-                    <span>Loading your morning brief...</span>
+                    <span>Loading your dashboard...</span>
                 </div>
             </div>
         </section>

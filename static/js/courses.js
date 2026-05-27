@@ -11,6 +11,7 @@ const COURSE_START_MINUTES = COURSE_START_HOUR * 60;
 const COURSE_END_MINUTES = COURSE_END_HOUR * 60;
 const COURSE_HOUR_HEIGHT = 64;
 const COURSE_RESULT_LIMIT = 100;
+const COMPACT_COURSES_QUERY = window.matchMedia("(max-width: 640px)");
 const COURSE_COLOR_PALETTE = [
   { key: "course-color-01" },
   { key: "course-color-02" },
@@ -247,6 +248,14 @@ function buildSectionSearchBlob(section) {
 }
 
 function wireControls() {
+  let lastCompactCourses = isCompactCoursesViewport();
+  window.addEventListener("resize", () => {
+    const nextCompactCourses = isCompactCoursesViewport();
+    if (nextCompactCourses === lastCompactCourses) return;
+    lastCompactCourses = nextCompactCourses;
+    renderCalendar();
+  });
+
   const filterButton = document.getElementById("courses-filter-button");
   filterButton?.addEventListener("click", (event) => {
     event.preventDefault();
@@ -413,7 +422,7 @@ function wireControls() {
       return;
     }
 
-    const eventBlock = event.target.closest(".courses-event[data-section-id]");
+    const eventBlock = event.target.closest(".courses-event[data-section-id], .courses-mobile-event[data-section-id]");
     if (eventBlock) {
       openDetail(eventBlock.dataset.sectionId);
       return;
@@ -841,6 +850,11 @@ function renderCalendar() {
   }
   syncTermControls();
 
+  if (isCompactCoursesViewport()) {
+    root.innerHTML = buildMobileCoursesAgenda();
+    return;
+  }
+
   const header = `
     <div class="courses-week-header">
       <div class="courses-week-header-cell"></div>
@@ -877,6 +891,52 @@ function renderCalendar() {
   applyEventLayoutStyles(root);
   alignWeekHeader();
   restoreWeekScroll();
+}
+
+function isCompactCoursesViewport() {
+  return COMPACT_COURSES_QUERY.matches;
+}
+
+function buildMobileCoursesAgenda() {
+  return `
+    <div class="courses-mobile-agenda" aria-label="Weekly course agenda">
+      ${COURSE_DAYS.map((day) => renderMobileCoursesDay(day)).join("")}
+    </div>
+  `;
+}
+
+function renderMobileCoursesDay(day) {
+  const events = getCalendarEventsForDay(day.key)
+    .slice()
+    .sort((a, b) => a.start - b.start || a.end - b.end || (a.title || "").localeCompare(b.title || ""));
+  return `
+    <section class="courses-mobile-day">
+      <header class="courses-mobile-day-header">
+        <span>${escapeHtml(formatDayName(day.key))}</span>
+        <strong>${events.length}</strong>
+      </header>
+      <div class="courses-mobile-event-list">
+        ${events.length ? events.map(renderMobileCourseEvent).join("") : '<p class="courses-mobile-empty">No classes scheduled</p>'}
+      </div>
+    </section>
+  `;
+}
+
+function renderMobileCourseEvent(event) {
+  const colorClass = getCourseColor({ color_key: event.colorKey }).key;
+  return `
+    <article class="courses-mobile-event ${event.preview ? "is-preview" : ""} ${escapeHtml(colorClass)}" data-section-id="${escapeHtml(event.sectionId)}">
+      <div class="courses-mobile-event-copy">
+        <h3>${escapeHtml(event.title)}</h3>
+        <p>${escapeHtml(event.detail)}</p>
+      </div>
+      ${event.savedCourseId ? `
+        <button type="button" class="course-remove-button courses-mobile-remove" data-remove-course-id="${escapeHtml(event.savedCourseId)}" data-section-id="${escapeHtml(event.sectionId)}" aria-label="Remove class">
+          <span class="material-symbols-outlined" aria-hidden="true">close</span>
+        </button>
+      ` : ""}
+    </article>
+  `;
 }
 
 function computeCalendarCredits() {

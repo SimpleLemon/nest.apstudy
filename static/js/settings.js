@@ -704,7 +704,9 @@ async function saveProfile() {
     const nextAvatar = response.picture_url || '';
     const fallbackAvatar = 'https://resources.apstudy.org/images/AP-Resources-Logo.png';
     if (navbarAvatar) {
-      navbarAvatar.src = settingsAvatarUrlForSize(nextAvatar || fallbackAvatar, 32);
+      navbarAvatar.src = settingsAvatarUrlForSize(nextAvatar || fallbackAvatar, 48);
+      navbarAvatar.srcset = `${settingsAvatarUrlForSize(nextAvatar || fallbackAvatar, 48)} 1x, ${settingsAvatarUrlForSize(nextAvatar || fallbackAvatar, 96)} 2x`;
+      navbarAvatar.sizes = '48px';
     }
     captureProfileBaseline();
     showToast('Profile saved.', 'success');
@@ -742,7 +744,9 @@ async function uploadAvatar(file) {
     updateAvatarPreview(response.picture_url || '');
     const navbarAvatar = document.querySelector('#navbar-avatar-btn img');
     if (navbarAvatar && response.picture_url) {
-      navbarAvatar.src = settingsAvatarUrlForSize(response.picture_url, 32);
+      navbarAvatar.src = settingsAvatarUrlForSize(response.picture_url, 48);
+      navbarAvatar.srcset = `${settingsAvatarUrlForSize(response.picture_url, 48)} 1x, ${settingsAvatarUrlForSize(response.picture_url, 96)} 2x`;
+      navbarAvatar.sizes = '48px';
     }
     if (elements.avatarUploadStatus) elements.avatarUploadStatus.textContent = 'Avatar uploaded.';
     captureProfileBaseline();
@@ -924,10 +928,14 @@ function updateAvatarPreview(value) {
     return;
   }
   const fallback = 'https://resources.apstudy.org/images/AP-Resources-Logo.png';
-  elements.avatarPreview.src = settingsAvatarUrlForSize(value && value.trim() ? value.trim() : fallback, 150);
+  const avatarValue = value && value.trim() ? value.trim() : fallback;
+  elements.avatarPreview.src = settingsAvatarUrlForSize(avatarValue, 150);
+  elements.avatarPreview.srcset = `${settingsAvatarUrlForSize(avatarValue, 150)} 1x, ${settingsAvatarUrlForSize(avatarValue, 300)} 2x`;
+  elements.avatarPreview.sizes = '(max-width: 640px) 96px, 150px';
   elements.avatarPreview.onerror = () => {
     elements.avatarPreview.onerror = null;
     elements.avatarPreview.src = settingsAvatarUrlForSize(fallback, 150);
+    elements.avatarPreview.srcset = `${settingsAvatarUrlForSize(fallback, 150)} 1x, ${settingsAvatarUrlForSize(fallback, 300)} 2x`;
   };
   renderProfilePreview();
 }

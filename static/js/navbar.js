@@ -7,6 +7,7 @@
  */
 
 const NAVBAR_ICONS = {
+  menu: materialIcon("menu"),
   search: `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>`,
   account: materialIcon("account_circle"),
   signOut: materialIcon("logout"),
@@ -126,9 +127,11 @@ function renderNavbar() {
   const navPlaceholder = document.querySelector('global.thenav');
   if (!navPlaceholder) return;
 
-  const profileImage = avatarUrlForSize(navPlaceholder.dataset.profilePicture || 
-    document.body?.dataset?.profilePicture || 
-    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"%3E%3Crect width="32" height="32" fill="%23ccc"/%3E%3C/svg%3E', 32);
+  const rawProfileImage = navPlaceholder.dataset.profilePicture ||
+    document.body?.dataset?.profilePicture ||
+    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"%3E%3Crect width="32" height="32" fill="%23ccc"/%3E%3C/svg%3E';
+  const profileImage = avatarUrlForSize(rawProfileImage, 48);
+  const profileImage2x = avatarUrlForSize(rawProfileImage, 96);
   
   const userEmail = navPlaceholder.dataset.userEmail || 'user@example.com';
   const commandShortcut = getCommandPaletteShortcutLabel();
@@ -136,7 +139,10 @@ function renderNavbar() {
   const navbarHTML = `
 <div class="navbar-container" id="navbar-root">
   <div class="navbar-left">
-    <img src="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy" class="navbar-logo" />
+    <button type="button" class="navbar-button navbar-menu-button" id="navbar-menu-btn" aria-label="Open navigation menu" aria-controls="sidebar-root" aria-expanded="false">
+      ${NAVBAR_ICONS.menu}
+    </button>
+    <img src="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy" class="navbar-logo" width="32" height="32" decoding="async" />
     <a href="/dashboard" class="navbar-title">Nest.APStudy</a>
   </div>
   
@@ -148,7 +154,7 @@ function renderNavbar() {
     
     <div class="navbar-avatar-wrapper">
       <button type="button" class="navbar-avatar" id="navbar-avatar-btn" aria-label="Profile menu">
-        <img src="${profileImage}" alt="Profile" width="32" height="32" decoding="async" />
+        <img src="${profileImage}" srcset="${profileImage} 1x, ${profileImage2x} 2x" sizes="48px" alt="Profile" width="48" height="48" decoding="async" />
       </button>
       
       <div id="profile-dropdown" class="profile-dropdown">
@@ -179,6 +185,27 @@ function setupNavbarInteractions(userEmail) {
   const accountBtn = document.getElementById('navbar-account-btn');
   const logoutBtn = document.getElementById('navbar-logout-btn');
   const searchBtn = document.getElementById('navbar-search-btn');
+  const menuBtn = document.getElementById('navbar-menu-btn');
+
+  function syncMobileMenuButton(isOpen) {
+    if (!menuBtn) return;
+    menuBtn.setAttribute('aria-expanded', String(isOpen));
+    menuBtn.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+  }
+
+  window.APSTUDY_SYNC_MOBILE_NAV_BUTTON = syncMobileMenuButton;
+
+  if (menuBtn) {
+    menuBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      dropdown?.classList.remove('visible');
+      if (typeof window.APSTUDY_TOGGLE_MOBILE_SIDEBAR === 'function') {
+        window.APSTUDY_TOGGLE_MOBILE_SIDEBAR();
+        return;
+      }
+      document.dispatchEvent(new CustomEvent('apstudy-mobile-sidebar-toggle'));
+    });
+  }
 
   if (avatarBtn && dropdown) {
     avatarBtn.addEventListener('click', (e) => {

@@ -38,6 +38,7 @@ const PREFERENCE_BATCH_LIMIT = 50;
 const PREFERENCE_BATCH_ENDPOINT = "/api/calendar/preferences/batch";
 const PREFERENCE_LOAD_RETRY_COOLDOWN_MS = 15000;
 const TOGGLE_REFRESH_DELAY_MS = 1000;
+const COMPACT_CALENDAR_QUERY = window.matchMedia("(max-width: 640px)");
 /* ── Application State ─────────────────────────────────────────────────────── */
 const state = {
     events: [],
@@ -1107,7 +1108,7 @@ function renderCoursesModal() {
         <section id="courses-modal-panel" class="w-full max-w-[1200px] h-[88vh] rounded-3xl border border-outline-variant/30 bg-surface shadow-2xl shadow-black/30 flex flex-col overflow-hidden transition-all duration-200 ${state.courses.animateOnOpen ? "-translate-y-3 opacity-0" : "translate-y-0 opacity-100"}">
             <header class="px-5 sm:px-7 pt-5 sm:pt-6 pb-4 border-b border-outline-variant/20 bg-surface-container-low">
                 <div class="flex items-center justify-between gap-3 mb-4">
-                    <h2 class="text-2xl font-headline font-semibold text-on-surface tracking-tight">Courses</h2>
+                    <h2 class="text-2xl font-headline font-semibold text-on-surface">Courses</h2>
                     <button id="courses-modal-close" type="button" class="h-9 w-9 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" aria-label="Close courses search">✕</button>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-[1fr_220px] gap-3">
@@ -1416,6 +1417,13 @@ function setCalendarColor(calendarName, color) {
 }
 /* ── Controls ──────────────────────────────────────────────────────────────── */
 function wireControls() {
+    let lastCompactCalendar = isCompactCalendarViewport();
+    window.addEventListener("resize", () => {
+        const nextCompactCalendar = isCompactCalendarViewport();
+        if (nextCompactCalendar === lastCompactCalendar) return;
+        lastCompactCalendar = nextCompactCalendar;
+        renderCalendarView();
+    });
     // Check if courses panel should be opened on load (e.g., from redirect)
     if (!state.public.readOnly && sessionStorage.getItem("openCoursesPanelOnLoad") === "true") {
         sessionStorage.removeItem("openCoursesPanelOnLoad");
@@ -2785,10 +2793,77 @@ function renderCalendarView() {
         `;
         return;
     }
-    root.innerHTML = state.view === "month" ? buildMonthViewHtml() : buildWeekViewHtml();
-    if (state.view === "week") {
+    const compactCalendar = isCompactCalendarViewport();
+    root.innerHTML = compactCalendar ? buildMobileCalendarAgendaHtml() : (state.view === "month" ? buildMonthViewHtml() : buildWeekViewHtml());
+    if (state.view === "week" && !compactCalendar) {
         applyWeekAutoScroll();
     }
+}
+function isCompactCalendarViewport() {
+    return COMPACT_CALENDAR_QUERY.matches;
+}
+function buildMobileCalendarAgendaHtml() {
+    const allDays = getMobileAgendaDays();
+    const days = state.view === "month"
+        ? allDays.filter((day) => getEventsForDay(day).length > 0 || isToday(day))
+        : allDays;
+    const visibleDays = days.length ? days : allDays.slice(0, 1);
+    return `
+        <div class="calendar-mobile-agenda" data-calendar-mobile-view="${escapeHtml(state.view)}">
+            ${visibleDays.map((day) => renderMobileAgendaDay(day)).join("")}
+        </div>
+    `;
+}
+function getMobileAgendaDays() {
+    if (state.view === "month") {
+        const year = state.anchorDate.getFullYear();
+        const month = state.anchorDate.getMonth();
+        const monthEnd = new Date(year, month + 1, 0);
+        return Array.from({ length: monthEnd.getDate() }, (_, index) => new Date(year, month, index + 1));
+    }
+    const weekStart = getStartOfWeek(state.anchorDate);
+    return Array.from({ length: 7 }, (_, index) => {
+        const day = new Date(weekStart);
+        day.setDate(weekStart.getDate() + index);
+        return day;
+    });
+}
+function renderMobileAgendaDay(day) {
+    const dayEvents = getEventsForDay(day)
+        .slice()
+        .sort((a, b) => {
+            if (a.isAllDay !== b.isAllDay) return a.isAllDay ? -1 : 1;
+            return a.startDate - b.startDate || (a.title || "").localeCompare(b.title || "");
+        });
+    const dateLabel = day.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+    const todayClass = isToday(day) ? " is-today" : "";
+    return `
+        <section class="calendar-mobile-day${todayClass}">
+            <header class="calendar-mobile-day-header">
+                <span>${escapeHtml(dateLabel)}</span>
+                <strong>${dayEvents.length}</strong>
+            </header>
+            <div class="calendar-mobile-event-list">
+                ${dayEvents.length ? dayEvents.map(renderMobileAgendaEvent).join("") : '<p class="calendar-mobile-empty">No events</p>'}
+            </div>
+        </section>
+    `;
+}
+function renderMobileAgendaEvent(event) {
+    const timeDisplay = event.isAllDay ? formatAllDayRange(event) : formatTimedEventRange(event);
+    const calendarLabel = getEventCalendarLabel(event);
+    const calendarColor = getEventCalendarColor(event);
+    const completedClass = isTaskEvent(event) && event.completed ? " is-completed" : "";
+    return `
+        <article ${getEventElementAttributes(event)} class="calendar-mobile-event calendar-event-shell${completedClass}">
+            <span class="calendar-mobile-event-bar" style="background-color:${escapeHtml(calendarColor)}"></span>
+            <div class="calendar-mobile-event-copy">
+                <h3>${isTaskEvent(event) && event.completed ? "✓ " : ""}${escapeHtml(event.title || "Untitled")}</h3>
+                <p>${escapeHtml(timeDisplay)}</p>
+                <small>${escapeHtml(calendarLabel)}</small>
+            </div>
+        </article>
+    `;
 }
 function getWeekKeyFromAnchor(anchorDate) {
     const weekStart = getStartOfWeek(anchorDate);

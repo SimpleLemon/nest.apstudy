@@ -1061,7 +1061,8 @@ body.files-modal-open {
 
 @media (max-width: 760px) {
     .files-main {
-        padding: 24px 14px 38px;
+        max-width: 100%;
+        padding: 22px 14px 38px;
     }
 
     .files-toolbar,
@@ -1071,8 +1072,29 @@ body.files-modal-open {
     }
 
     .files-header-actions {
+        width: 100%;
         flex-wrap: wrap;
         justify-content: flex-start;
+    }
+
+    .files-primary-button,
+    .files-secondary-button,
+    .files-danger-button,
+    .files-icon-button,
+    .files-new-menu button,
+    .files-breadcrumbs button {
+        min-height: 48px;
+    }
+
+    .files-icon-button {
+        width: 48px;
+        height: 48px;
+    }
+
+    .files-primary-button,
+    .files-secondary-button,
+    .files-danger-button {
+        flex: 1 1 auto;
     }
 
     .files-header-actions .files-secondary-button {
@@ -1139,11 +1161,30 @@ body.files-modal-open {
 
     .files-modal {
         align-items: flex-end;
-        padding: 10px;
+        padding: 10px max(10px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
     }
 
     .files-modal-panel {
-        max-height: calc(100vh - 20px);
+        width: 100%;
+        max-height: calc(100dvh - 20px);
         border-radius: 16px;
+    }
+
+    .files-modal-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .files-field input,
+    .files-field select,
+    .files-upload-dropzone,
+    .files-share-link input {
+        min-height: 48px;
+        font-size: 16px;
+    }
+
+    .files-selection-actions {
+        flex-direction: column;
+        align-items: stretch;
     }
 }

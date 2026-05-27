@@ -46,7 +46,7 @@
 .settings-title {
   margin: 0;
   line-height: 1.05;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
 .settings-subtitle {
@@ -78,7 +78,7 @@
   color: var(--color-on-surface-variant);
   font-size: 0.95rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   text-decoration: none;
   transition: background-color 150ms ease, color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
 }
@@ -108,7 +108,7 @@
   margin: 0;
   font-size: 1.25rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .settings-section-head p {
@@ -141,7 +141,7 @@
   margin: 0;
   font-size: 1.1rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .settings-card-summary p {
@@ -596,7 +596,7 @@
   padding: 0.82rem 1.1rem;
   font-size: 0.94rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   transition: transform 150ms ease, box-shadow 150ms ease, background-color 150ms ease, color 150ms ease, opacity 150ms ease;
 }
 
@@ -758,7 +758,7 @@
   display: block;
   margin-top: 0.3rem;
   font-size: 1.25rem;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
 }
 
 .settings-toggle-stack {
@@ -866,7 +866,7 @@
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
   font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   transition: opacity 120ms ease, transform 120ms ease;
   z-index: 2;
 }
@@ -1046,6 +1046,7 @@
 
   .settings-tab {
     width: 100%;
+    min-height: 3rem;
     padding-inline: 0.4rem;
     font-size: 0.85rem;
   }
@@ -1080,5 +1081,40 @@
 
   .settings-calendar-remove {
     width: 2.75rem;
+  }
+
+  .settings-card-footer {
+    align-items: stretch;
+    flex-direction: column-reverse;
+  }
+
+  .settings-button,
+  .settings-icon-button,
+  .settings-copy-button,
+  .settings-calendar-remove,
+  .settings-theme-choice,
+  .settings-toggle {
+    min-height: 48px;
+  }
+
+  .settings-icon-button,
+  .settings-copy-button,
+  .settings-calendar-remove {
+    width: 48px;
+    height: 48px;
+  }
+
+  .settings-copy-field input {
+    padding-right: 3.75rem;
+  }
+
+  .settings-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .settings-field input,
+  .settings-field select {
+    font-size: 16px;
   }
 }
