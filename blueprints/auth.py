@@ -47,7 +47,7 @@ from appwrite_helpers import (
 )
 from models import User, user_from_doc
 from services.chat_presence import sync_chat_presence_labels_for_user
-from services.discord_audit import emit_user_event, format_actor, format_user_target
+from services.discord_audit import emit_server_log_event, emit_user_event, format_actor, format_user_target
 
 auth_bp = Blueprint("auth", __name__)
 logger = logging.getLogger(__name__)
@@ -155,12 +155,12 @@ def _log_oauth_exception(message, exc, *args):
     details = _appwrite_exception_details(exc)
     if isinstance(exc, AppwriteException):
         logger.error(f"{message}: appwrite_error=%s", *args, details)
-        return
+        return details
     logger.exception(f"{message}: appwrite_error=%s", *args, details)
+    return details
 
 
-def _oauth_start_error_code(exc):
-    details = _appwrite_exception_details(exc)
+def _oauth_start_error_code(details):
     if "sessions.write" in details.get("missing_scopes", ""):
         return AUTH_ERROR_OAUTH_START_SCOPE
     return AUTH_ERROR_OAUTH_START
@@ -465,8 +465,45 @@ def _find_user_by_email(email):
     return rows[0] if rows else None
 
 
-def _login_error_redirect(error_code):
+def _auth_error_title(error_code):
+    return {
+        AUTH_ERROR_OAUTH_START_SCOPE: "OAuth Login Error: Missing Appwrite Scope",
+        AUTH_ERROR_OAUTH_START: "OAuth Login Error: Start Failed",
+        AUTH_ERROR_OAUTH_STATE: "OAuth Login Error: Invalid State",
+        AUTH_ERROR_OAUTH_CREDENTIALS: "OAuth Login Error: Missing Credentials",
+        AUTH_ERROR_OAUTH_CALLBACK: "OAuth Login Error: Callback Failed",
+        AUTH_ERROR_OAUTH_PROVIDER: "OAuth Login Error: Provider Failed",
+    }.get(error_code, "OAuth Login Error")
+
+
+def _login_error_metadata(error_code, metadata=None):
+    details = {
+        "error_code": error_code,
+        "path": request.path,
+        "method": request.method,
+        "remote_addr": request.headers.get("X-Forwarded-For", request.remote_addr or ""),
+        "user_agent": _sanitize_log_text(request.headers.get("User-Agent", ""), limit=180),
+    }
+    details.update(metadata or {})
+    return {key: value for key, value in details.items() if value not in (None, "")}
+
+
+def _emit_login_error(error_code, metadata=None):
+    try:
+        emit_server_log_event(
+            _auth_error_title(error_code),
+            actor="System",
+            target="OAuth sign-in",
+            metadata=_login_error_metadata(error_code, metadata),
+            color="red",
+        )
+    except Exception:
+        logger.exception("Failed to emit OAuth login error to Discord server log")
+
+
+def _login_error_redirect(error_code, metadata=None):
     session[AUTH_ERROR_SESSION_KEY] = error_code
+    _emit_login_error(error_code, metadata)
     return redirect(url_for("auth.login"))
 
 
@@ -671,15 +708,21 @@ def appwrite_oauth_start(provider):
     try:
         redirect_url = _appwrite_oauth_redirect_url(provider_key, success_url, failure_url)
     except Exception as exc:
-        _log_oauth_exception(
+        details = _log_oauth_exception(
             "Failed to start Appwrite OAuth flow: provider=%s success_scheme=%s",
             exc,
             provider_key,
             request.scheme,
         )
-        error_code = _oauth_start_error_code(exc)
+        error_code = _oauth_start_error_code(details)
         _clear_appwrite_oauth_state()
-        return _login_error_redirect(error_code)
+        return _login_error_redirect(error_code, {
+            "provider": provider_key,
+            "request_scheme": request.scheme,
+            "success_url_scheme": success_url.split(":", 1)[0],
+            "failure_url_scheme": failure_url.split(":", 1)[0],
+            "appwrite_error": details,
+        })
 
     return redirect(redirect_url)
 
@@ -692,11 +735,17 @@ def appwrite_oauth_failure(state):
     if not expected_state or state != expected_state:
         logger.warning("Rejected Appwrite OAuth failure redirect with invalid state")
         _clear_appwrite_oauth_state()
-        return _login_error_redirect(AUTH_ERROR_OAUTH_STATE)
+        return _login_error_redirect(AUTH_ERROR_OAUTH_STATE, {
+            "provider": provider,
+            "failure_phase": "provider_failure_redirect",
+        })
 
     logger.warning("Appwrite OAuth provider flow failed: provider=%s", provider)
     _clear_appwrite_oauth_state()
-    return _login_error_redirect(AUTH_ERROR_OAUTH_PROVIDER)
+    return _login_error_redirect(AUTH_ERROR_OAUTH_PROVIDER, {
+        "provider": provider,
+        "failure_phase": "provider_failure_redirect",
+    })
 
 
 @auth_bp.route("/auth/appwrite/callback/<state>")
@@ -707,14 +756,22 @@ def appwrite_oauth_callback(state):
     if not expected_state or state != expected_state:
         logger.warning("Rejected Appwrite OAuth callback with invalid state")
         _clear_appwrite_oauth_state()
-        return _login_error_redirect(AUTH_ERROR_OAUTH_STATE)
+        return _login_error_redirect(AUTH_ERROR_OAUTH_STATE, {
+            "provider": provider,
+            "failure_phase": "callback",
+        })
 
     user_id = request.args.get("userId") or request.args.get("user_id")
     secret = request.args.get("secret")
     if not user_id or not secret:
         logger.warning("Rejected Appwrite OAuth callback with missing credentials")
         _clear_appwrite_oauth_state()
-        return _login_error_redirect(AUTH_ERROR_OAUTH_CREDENTIALS)
+        return _login_error_redirect(AUTH_ERROR_OAUTH_CREDENTIALS, {
+            "provider": provider,
+            "failure_phase": "callback",
+            "has_user_id": bool(user_id),
+            "has_secret": bool(secret),
+        })
 
     try:
         appwrite_session = _account_to_dict(Account(appwrite_client).create_session(user_id, secret))
@@ -728,13 +785,17 @@ def appwrite_oauth_callback(state):
             page_context="auth/appwrite/callback",
         )
     except Exception as exc:
-        _log_oauth_exception(
+        details = _log_oauth_exception(
             "Failed to complete Appwrite OAuth callback: provider=%s",
             exc,
             provider,
         )
         _clear_appwrite_oauth_state()
-        return _login_error_redirect(AUTH_ERROR_OAUTH_CALLBACK)
+        return _login_error_redirect(AUTH_ERROR_OAUTH_CALLBACK, {
+            "provider": provider,
+            "failure_phase": "callback",
+            "appwrite_error": details,
+        })
 
     _clear_appwrite_oauth_state()
     return redirect(result["redirect"])

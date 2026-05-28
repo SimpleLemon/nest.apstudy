@@ -1,3 +1,5 @@
+import hashlib
+import hmac
 import json
 import os
 import tempfile
@@ -11,6 +13,7 @@ import blueprints.notes_api as notes_api
 import blueprints.admin as admin
 import blueprints.auth as auth
 import blueprints.courses as courses
+import blueprints.webhooks as webhooks
 from services import discord_audit
 from services.discord_audit import (
     DiscordAuditEvent,
@@ -55,9 +58,52 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
         with patch.dict(os.environ, {}, clear=True):
             self.assertEqual(discord_audit._env_channel_id("chat_deletes"), "1508949346639675543")
 
+    def test_server_logs_channel_defaults_to_requested_channel(self):
+        with patch.dict(os.environ, {}, clear=True):
+            self.assertEqual(discord_audit._env_channel_id("server_logs"), "1509603923433099356")
+
     def test_chat_delete_channel_env_override(self):
         with patch.dict(os.environ, {"DISCORD_AUDIT_CHAT_DELETES_CHANNEL_ID": "override-channel"}):
             self.assertEqual(discord_audit._env_channel_id("chat_deletes"), "override-channel")
+
+    def test_server_log_channel_env_override(self):
+        with patch.dict(os.environ, {"DISCORD_AUDIT_SERVER_LOGS_CHANNEL_ID": "override-channel"}):
+            self.assertEqual(discord_audit._env_channel_id("server_logs"), "override-channel")
+
+    def test_emit_server_log_event_targets_server_logs_channel(self):
+        with patch.object(discord_audit, "emit_audit_event", return_value=True) as emit_event:
+            sent = discord_audit.emit_server_log_event(
+                "OAuth Login Error",
+                metadata={"error_code": "AUTH-OAUTH-START-SCOPE"},
+                color="red",
+            )
+
+        self.assertTrue(sent)
+        event = emit_event.call_args.args[0]
+        self.assertEqual(event.channel, "server_logs")
+        self.assertEqual(event.title, "OAuth Login Error")
+        self.assertEqual(event.metadata["error_code"], "AUTH-OAUTH-START-SCOPE")
+        self.assertEqual(event.color, "red")
+
+    def test_unhandled_request_exception_emits_sanitized_server_log(self):
+        app = Flask(__name__)
+        with app.test_request_context(
+            "/broken?token=secret-token",
+            headers={"User-Agent": "Unit Test"},
+        ):
+            with patch.object(discord_audit, "emit_server_log_event") as emit_event:
+                discord_audit._emit_unhandled_request_exception(
+                    app,
+                    RuntimeError("boom token=super-secret"),
+                )
+
+        emit_event.assert_called_once()
+        self.assertEqual(emit_event.call_args.args[0], "Unhandled Server Error")
+        metadata = emit_event.call_args.kwargs["metadata"]
+        self.assertEqual(metadata["exception_class"], "RuntimeError")
+        self.assertEqual(metadata["path"], "/broken")
+        self.assertNotIn("super-secret", metadata["message"])
+        self.assertIn("token=[redacted]", metadata["message"])
 
     def test_token_bucket_caps_four_messages_per_five_seconds(self):
         bucket = TokenBucket(capacity=4, refill_amount=4, refill_seconds=5)
@@ -185,6 +231,100 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
 
         self.assertTrue(service.pause_warning_pending)
         self.assertGreater(service.pause_until, discord_audit.time.monotonic())
+
+
+class GitHubWebhookTestCase(unittest.TestCase):
+    def setUp(self):
+        self.app = Flask(__name__)
+        self.app.secret_key = "test"
+        self.app.register_blueprint(webhooks.webhooks_bp)
+
+    def _signature(self, body, secret):
+        digest = hmac.new(secret.encode("utf-8"), body, hashlib.sha256).hexdigest()
+        return f"sha256={digest}"
+
+    def test_github_webhook_requires_secret_by_default(self):
+        with patch.dict(os.environ, {"FLASK_DEBUG": "0"}, clear=True), \
+                patch.object(webhooks, "emit_server_log_event") as emit_event:
+            response = self.app.test_client().post(
+                "/webhooks/github",
+                data=b"{}",
+                headers={"X-GitHub-Event": "push"},
+                content_type="application/json",
+            )
+
+        self.assertEqual(response.status_code, 503)
+        emit_event.assert_not_called()
+
+    def test_github_webhook_rejects_bad_signature(self):
+        with patch.dict(os.environ, {"GITHUB_WEBHOOK_SECRET": "secret"}, clear=True), \
+                patch.object(webhooks, "emit_server_log_event") as emit_event:
+            response = self.app.test_client().post(
+                "/webhooks/github",
+                data=b"{}",
+                headers={"X-GitHub-Event": "push", "X-Hub-Signature-256": "sha256=bad"},
+                content_type="application/json",
+            )
+
+        self.assertEqual(response.status_code, 401)
+        emit_event.assert_not_called()
+
+    def test_github_push_emits_one_server_log_event_per_commit(self):
+        payload = {
+            "ref": "refs/heads/main",
+            "compare": "https://github.com/apstudy/nest/compare/a...b",
+            "repository": {"full_name": "apstudy/nest"},
+            "pusher": {"name": "Derek"},
+            "commits": [
+                {
+                    "id": "abcdef1234567890",
+                    "message": "Update website auth errors\n\nDetails",
+                    "url": "https://github.com/apstudy/nest/commit/abcdef1",
+                    "author": {"name": "Derek Chen", "email": "derek@example.com"},
+                },
+                {
+                    "id": "1234567890abcdef",
+                    "message": "Notify server logs",
+                    "url": "https://github.com/apstudy/nest/commit/1234567",
+                    "author": {"name": "Derek Chen"},
+                },
+            ],
+        }
+        body = json.dumps(payload).encode("utf-8")
+
+        with patch.dict(os.environ, {"GITHUB_WEBHOOK_SECRET": "secret"}, clear=True), \
+                patch.object(webhooks, "emit_server_log_event", return_value=True) as emit_event:
+            response = self.app.test_client().post(
+                "/webhooks/github",
+                data=body,
+                headers={
+                    "X-GitHub-Event": "push",
+                    "X-Hub-Signature-256": self._signature(body, "secret"),
+                },
+                content_type="application/json",
+            )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json()["commits"], 2)
+        self.assertEqual(emit_event.call_count, 2)
+        first_call = emit_event.call_args_list[0]
+        self.assertEqual(first_call.args[0], "GitHub Commit Pushed")
+        self.assertEqual(first_call.kwargs["actor"], "Derek")
+        self.assertEqual(first_call.kwargs["target"], "apstudy/nest@main")
+        self.assertEqual(first_call.kwargs["metadata"]["commit"], "abcdef1")
+        self.assertEqual(first_call.kwargs["metadata"]["message"], "Update website auth errors")
+
+    def test_github_webhook_ignores_non_push_events(self):
+        with patch.dict(os.environ, {"GITHUB_WEBHOOK_ALLOW_UNSIGNED": "1"}, clear=True), \
+                patch.object(webhooks, "emit_server_log_event") as emit_event:
+            response = self.app.test_client().post(
+                "/webhooks/github",
+                json={"action": "opened"},
+                headers={"X-GitHub-Event": "pull_request"},
+            )
+
+        self.assertEqual(response.status_code, 202)
+        emit_event.assert_not_called()
 
 
 class DiscordAuditRouteInstrumentationTestCase(unittest.TestCase):

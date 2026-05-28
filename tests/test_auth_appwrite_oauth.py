@@ -75,6 +75,7 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
 
         with self.app.test_request_context("/auth/appwrite/google"):
             with patch.object(auth, "Account", return_value=fake_account), \
+                    patch.object(auth, "emit_server_log_event") as emit_server_log, \
                     self.assertLogs("blueprints.auth", level="ERROR") as logs:
                 response = auth.appwrite_oauth_start("google")
                 state_present = auth.APPWRITE_OAUTH_STATE_KEY in session
@@ -90,6 +91,10 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         self.assertIn("general_unauthorized_scope", output)
         self.assertIn("sessions.write", output)
         self.assertNotIn("super-secret-token", output)
+        emit_server_log.assert_called_once()
+        self.assertEqual(emit_server_log.call_args.args[0], "OAuth Login Error: Missing Appwrite Scope")
+        self.assertEqual(emit_server_log.call_args.kwargs["metadata"]["error_code"], auth.AUTH_ERROR_OAUTH_START_SCOPE)
+        self.assertIn("sessions.write", str(emit_server_log.call_args.kwargs["metadata"]["appwrite_error"]))
         self.assert_login_error_is_rendered_and_consumed(auth.AUTH_ERROR_OAUTH_START_SCOPE)
 
     def test_oauth_start_uses_generic_code_for_other_start_failures(self):
@@ -99,6 +104,7 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
 
         with self.app.test_request_context("/auth/appwrite/google"):
             with patch.object(auth, "Account", return_value=fake_account), \
+                    patch.object(auth, "emit_server_log_event") as emit_server_log, \
                     self.assertLogs("blueprints.auth", level="ERROR"):
                 response = auth.appwrite_oauth_start("google")
                 error_code = session.get(auth.AUTH_ERROR_SESSION_KEY)
@@ -106,6 +112,7 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.headers["Location"], "/login")
         self.assertEqual(error_code, auth.AUTH_ERROR_OAUTH_START)
+        emit_server_log.assert_called_once()
 
     def test_appwrite_oauth_preflight_reports_missing_sessions_scope(self):
         error = AppwriteException(
@@ -201,7 +208,8 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         with self.app.test_request_context("/auth/appwrite/callback/bad?userId=user-1&secret=secret"):
             session[auth.APPWRITE_OAUTH_STATE_KEY] = "good"
             session[auth.APPWRITE_OAUTH_PROVIDER_KEY] = "google"
-            with patch.object(auth, "Account") as account_class:
+            with patch.object(auth, "Account") as account_class, \
+                    patch.object(auth, "emit_server_log_event") as emit_server_log:
                 response = auth.appwrite_oauth_callback("bad")
                 error_code = session.get(auth.AUTH_ERROR_SESSION_KEY)
 
@@ -209,17 +217,20 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         self.assertEqual(response.headers["Location"], "/login")
         self.assertEqual(error_code, auth.AUTH_ERROR_OAUTH_STATE)
         account_class.assert_not_called()
+        emit_server_log.assert_called_once()
 
     def test_callback_rejects_missing_credentials(self):
         with self.app.test_request_context("/auth/appwrite/callback/state?userId=user-1"):
             session[auth.APPWRITE_OAUTH_STATE_KEY] = "state"
             session[auth.APPWRITE_OAUTH_PROVIDER_KEY] = "google"
-            response = auth.appwrite_oauth_callback("state")
-            error_code = session.get(auth.AUTH_ERROR_SESSION_KEY)
+            with patch.object(auth, "emit_server_log_event") as emit_server_log:
+                response = auth.appwrite_oauth_callback("state")
+                error_code = session.get(auth.AUTH_ERROR_SESSION_KEY)
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.headers["Location"], "/login")
         self.assertEqual(error_code, auth.AUTH_ERROR_OAUTH_CREDENTIALS)
+        emit_server_log.assert_called_once()
 
     def test_callback_completion_failure_uses_callback_error_code(self):
         fake_account = SimpleNamespace(
@@ -235,6 +246,7 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
             with patch.object(auth, "Account", return_value=fake_account), \
                     patch.object(auth, "_account_from_user_id", return_value={"$id": "user-1"}), \
                     patch.object(auth, "_complete_appwrite_login", side_effect=RuntimeError("profile create failed")), \
+                    patch.object(auth, "emit_server_log_event") as emit_server_log, \
                     self.assertLogs("blueprints.auth", level="ERROR"):
                 response = auth.appwrite_oauth_callback("state")
                 error_code = session.get(auth.AUTH_ERROR_SESSION_KEY)
@@ -242,12 +254,14 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.headers["Location"], "/login")
         self.assertEqual(error_code, auth.AUTH_ERROR_OAUTH_CALLBACK)
+        emit_server_log.assert_called_once()
 
     def test_provider_failure_route_sets_provider_error_and_clears_state(self):
         with self.app.test_request_context("/auth/appwrite/failure/state"):
             session[auth.APPWRITE_OAUTH_STATE_KEY] = "state"
             session[auth.APPWRITE_OAUTH_PROVIDER_KEY] = "discord"
-            with self.assertLogs("blueprints.auth", level="WARNING") as logs:
+            with patch.object(auth, "emit_server_log_event") as emit_server_log, \
+                    self.assertLogs("blueprints.auth", level="WARNING") as logs:
                 response = auth.appwrite_oauth_failure("state")
                 error_code = session.get(auth.AUTH_ERROR_SESSION_KEY)
                 state_present = auth.APPWRITE_OAUTH_STATE_KEY in session
@@ -259,12 +273,14 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         self.assertFalse(state_present)
         self.assertFalse(provider_present)
         self.assertIn("provider=discord", "\n".join(logs.output))
+        emit_server_log.assert_called_once()
 
     def test_provider_failure_route_rejects_invalid_state(self):
         with self.app.test_request_context("/auth/appwrite/failure/bad"):
             session[auth.APPWRITE_OAUTH_STATE_KEY] = "good"
             session[auth.APPWRITE_OAUTH_PROVIDER_KEY] = "github"
-            with self.assertLogs("blueprints.auth", level="WARNING"):
+            with patch.object(auth, "emit_server_log_event") as emit_server_log, \
+                    self.assertLogs("blueprints.auth", level="WARNING"):
                 response = auth.appwrite_oauth_failure("bad")
                 error_code = session.get(auth.AUTH_ERROR_SESSION_KEY)
                 state_present = auth.APPWRITE_OAUTH_STATE_KEY in session
@@ -275,6 +291,7 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         self.assertEqual(error_code, auth.AUTH_ERROR_OAUTH_STATE)
         self.assertFalse(state_present)
         self.assertFalse(provider_present)
+        emit_server_log.assert_called_once()
 
     def test_valid_callback_creates_session_and_completes_login(self):
         fake_account = SimpleNamespace(

@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import random
+import re
 import threading
 import time
 import uuid
@@ -22,6 +23,7 @@ DEFAULT_CHANNEL_IDS = {
     "creation": "1508544277318467685",
     "chat_deletes": "1508949346639675543",
     "user_logs": "1509036183865262100",
+    "server_logs": "1509603923433099356",
 }
 
 COLOR_VALUES = {
@@ -38,6 +40,7 @@ MAX_QUEUE_EVENTS = 200
 INVALID_WINDOW_SECONDS = 10 * 60
 INVALID_PAUSE_SECONDS = 10 * 60
 INVALID_PAUSE_THRESHOLD = 50
+SECRET_TEXT_RE = re.compile(r"((?:[?&]|\b)(?:secret|key|token|password)=)[^&\s]+", re.IGNORECASE)
 
 
 def _utcnow_iso():
@@ -51,6 +54,7 @@ def _env_channel_id(channel):
         "creation": "DISCORD_AUDIT_CREATION_CHANNEL_ID",
         "chat_deletes": "DISCORD_AUDIT_CHAT_DELETES_CHANNEL_ID",
         "user_logs": "DISCORD_AUDIT_USER_LOGS_CHANNEL_ID",
+        "server_logs": "DISCORD_AUDIT_SERVER_LOGS_CHANNEL_ID",
     }.get(channel)
     return (os.environ.get(env_name or "") or DEFAULT_CHANNEL_IDS.get(channel) or "").strip()
 
@@ -64,6 +68,12 @@ def _truncate(value, limit=MAX_FIELD_CHARS):
     if len(text) <= limit:
         return text
     return f"{text[: max(0, limit - 1)]}..."
+
+
+def _sanitize_error_text(value, limit=500):
+    text = SECRET_TEXT_RE.sub(r"\1[redacted]", str(value or ""))
+    text = " ".join(text.split())
+    return _truncate(text, limit)
 
 
 def _compact_metadata(metadata):
@@ -477,7 +487,43 @@ def init_discord_audit(app):
         fallback_path = os.path.join(app.instance_path, "discord_audit_fallback.jsonl")
     _service = _service or DiscordAuditService(fallback_path=fallback_path)
     _service.start()
+    init_discord_error_reporting(app)
     return _service
+
+
+def init_discord_error_reporting(app):
+    if app.extensions.get("discord_audit_error_reporting"):
+        return
+    from flask import got_request_exception
+
+    got_request_exception.connect(_emit_unhandled_request_exception, app, weak=False)
+    app.extensions["discord_audit_error_reporting"] = True
+
+
+def _emit_unhandled_request_exception(sender, exception, **extra):
+    try:
+        from flask import has_request_context, request
+
+        metadata = {
+            "exception_class": exception.__class__.__name__,
+            "message": _sanitize_error_text(exception),
+        }
+        if has_request_context():
+            metadata.update({
+                "path": request.path,
+                "method": request.method,
+                "remote_addr": request.headers.get("X-Forwarded-For", request.remote_addr or ""),
+                "user_agent": _sanitize_error_text(request.headers.get("User-Agent", ""), limit=180),
+            })
+        emit_server_log_event(
+            "Unhandled Server Error",
+            actor="System",
+            target="Flask request",
+            metadata=metadata,
+            color="red",
+        )
+    except Exception:
+        logger.exception("Failed to emit unhandled server error to Discord server log")
 
 
 def shutdown_discord_audit():
@@ -542,6 +588,19 @@ def emit_user_event(title, *, actor, target, metadata=None, color="green"):
     return emit_audit_event(
         DiscordAuditEvent(
             channel="user_logs",
+            title=title,
+            actor=actor,
+            target=target,
+            metadata=metadata or {},
+            color=color,
+        )
+    )
+
+
+def emit_server_log_event(title, *, actor="System", target="Server", metadata=None, color="gray"):
+    return emit_audit_event(
+        DiscordAuditEvent(
+            channel="server_logs",
             title=title,
             actor=actor,
             target=target,

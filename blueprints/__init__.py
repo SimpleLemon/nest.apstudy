@@ -17,6 +17,7 @@ from blueprints.tasks_api import tasks_api_bp
 from blueprints.chat_api import chat_api_bp
 from blueprints.settings import settings_bp
 from blueprints.admin import admin_bp
+from blueprints.webhooks import webhooks_bp
 
 
 def register_blueprints(app):
@@ -33,3 +34,4 @@ def register_blueprints(app):
     app.register_blueprint(chat_api_bp)
     app.register_blueprint(settings_bp, url_prefix="/settings")
     app.register_blueprint(admin_bp)
+    app.register_blueprint(webhooks_bp)
