@@ -1,4 +1,5 @@
 import os
+import html
 import unittest
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -14,10 +15,32 @@ from extensions import login_manager
 
 class AppwriteOauthRouteTestCase(unittest.TestCase):
     def setUp(self):
-        self.app = Flask(__name__)
+        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        self.app = Flask(
+            __name__,
+            template_folder=os.path.join(project_root, "templates"),
+            static_folder=os.path.join(project_root, "static"),
+        )
         self.app.secret_key = "test"
         login_manager.init_app(self.app)
         self.app.register_blueprint(auth.auth_bp)
+
+    def assert_login_error_is_rendered_and_consumed(self, error_code):
+        with self.app.test_client() as client:
+            with client.session_transaction() as client_session:
+                client_session[auth.AUTH_ERROR_SESSION_KEY] = error_code
+
+            response = client.get("/login")
+            body = html.unescape(response.get_data(as_text=True))
+
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(auth.AUTH_ERROR_MESSAGE, body)
+            self.assertIn(f"Error code: {error_code}", body)
+            with client.session_transaction() as client_session:
+                self.assertNotIn(auth.AUTH_ERROR_SESSION_KEY, client_session)
+
+    def test_login_renders_and_consumes_session_error_code(self):
+        self.assert_login_error_is_rendered_and_consumed(auth.AUTH_ERROR_OAUTH_CALLBACK)
 
     def test_valid_provider_initiates_appwrite_oauth_token_flow(self):
         calls = []
@@ -39,7 +62,8 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         self.assertEqual(len(calls), 1)
         self.assertEqual(calls[0]["provider"], auth.OAuthProvider.GOOGLE)
         self.assertIn("/auth/appwrite/callback/", calls[0]["success"])
-        self.assertIn("/login?auth_error=1", calls[0]["failure"])
+        self.assertIn("/auth/appwrite/failure/", calls[0]["failure"])
+        self.assertNotIn("auth_error", calls[0]["failure"])
 
     def test_oauth_start_logs_missing_sessions_scope_without_secret(self):
         error = AppwriteException(
@@ -55,15 +79,33 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
                 response = auth.appwrite_oauth_start("google")
                 state_present = auth.APPWRITE_OAUTH_STATE_KEY in session
                 provider_present = auth.APPWRITE_OAUTH_PROVIDER_KEY in session
+                error_code = session.get(auth.AUTH_ERROR_SESSION_KEY)
 
         output = "\n".join(logs.output)
         self.assertEqual(response.status_code, 302)
-        self.assertIn("/login?auth_error=1", response.headers["Location"])
+        self.assertEqual(response.headers["Location"], "/login")
+        self.assertEqual(error_code, auth.AUTH_ERROR_OAUTH_START_SCOPE)
         self.assertFalse(state_present)
         self.assertFalse(provider_present)
         self.assertIn("general_unauthorized_scope", output)
         self.assertIn("sessions.write", output)
         self.assertNotIn("super-secret-token", output)
+        self.assert_login_error_is_rendered_and_consumed(auth.AUTH_ERROR_OAUTH_START_SCOPE)
+
+    def test_oauth_start_uses_generic_code_for_other_start_failures(self):
+        fake_account = SimpleNamespace(
+            create_o_auth2_token=lambda **_kwargs: (_ for _ in ()).throw(RuntimeError("network down"))
+        )
+
+        with self.app.test_request_context("/auth/appwrite/google"):
+            with patch.object(auth, "Account", return_value=fake_account), \
+                    self.assertLogs("blueprints.auth", level="ERROR"):
+                response = auth.appwrite_oauth_start("google")
+                error_code = session.get(auth.AUTH_ERROR_SESSION_KEY)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.headers["Location"], "/login")
+        self.assertEqual(error_code, auth.AUTH_ERROR_OAUTH_START)
 
     def test_appwrite_oauth_preflight_reports_missing_sessions_scope(self):
         error = AppwriteException(
@@ -118,7 +160,8 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         self.assertEqual(response.headers["Location"], "https://appwrite.example/oauth")
         self.assertEqual(len(calls), 1)
         self.assertRegex(calls[0]["success"], r"^https://nest\.apstudy\.org/auth/appwrite/callback/")
-        self.assertEqual(calls[0]["failure"], "https://nest.apstudy.org/login?auth_error=1")
+        self.assertRegex(calls[0]["failure"], r"^https://nest\.apstudy\.org/auth/appwrite/failure/")
+        self.assertNotIn("auth_error", calls[0]["failure"])
 
     def test_app_factory_oauth_urls_allow_local_insecure_http(self):
         calls = []
@@ -146,7 +189,8 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         self.assertEqual(response.headers["Location"], "https://appwrite.example/oauth")
         self.assertEqual(len(calls), 1)
         self.assertRegex(calls[0]["success"], r"^http://localhost:8000/auth/appwrite/callback/")
-        self.assertEqual(calls[0]["failure"], "http://localhost:8000/login?auth_error=1")
+        self.assertRegex(calls[0]["failure"], r"^http://localhost:8000/auth/appwrite/failure/")
+        self.assertNotIn("auth_error", calls[0]["failure"])
 
     def test_invalid_provider_is_rejected(self):
         with self.app.test_request_context("/auth/appwrite/not-real"):
@@ -159,9 +203,11 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
             session[auth.APPWRITE_OAUTH_PROVIDER_KEY] = "google"
             with patch.object(auth, "Account") as account_class:
                 response = auth.appwrite_oauth_callback("bad")
+                error_code = session.get(auth.AUTH_ERROR_SESSION_KEY)
 
         self.assertEqual(response.status_code, 302)
-        self.assertIn("/login?auth_error=1", response.headers["Location"])
+        self.assertEqual(response.headers["Location"], "/login")
+        self.assertEqual(error_code, auth.AUTH_ERROR_OAUTH_STATE)
         account_class.assert_not_called()
 
     def test_callback_rejects_missing_credentials(self):
@@ -169,9 +215,66 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
             session[auth.APPWRITE_OAUTH_STATE_KEY] = "state"
             session[auth.APPWRITE_OAUTH_PROVIDER_KEY] = "google"
             response = auth.appwrite_oauth_callback("state")
+            error_code = session.get(auth.AUTH_ERROR_SESSION_KEY)
 
         self.assertEqual(response.status_code, 302)
-        self.assertIn("/login?auth_error=1", response.headers["Location"])
+        self.assertEqual(response.headers["Location"], "/login")
+        self.assertEqual(error_code, auth.AUTH_ERROR_OAUTH_CREDENTIALS)
+
+    def test_callback_completion_failure_uses_callback_error_code(self):
+        fake_account = SimpleNamespace(
+            create_session=lambda user_id, secret: {
+                "provider": "google",
+                "providerAccessToken": "provider-token",
+                "userId": user_id,
+            },
+        )
+        with self.app.test_request_context("/auth/appwrite/callback/state?userId=user-1&secret=secret"):
+            session[auth.APPWRITE_OAUTH_STATE_KEY] = "state"
+            session[auth.APPWRITE_OAUTH_PROVIDER_KEY] = "google"
+            with patch.object(auth, "Account", return_value=fake_account), \
+                    patch.object(auth, "_account_from_user_id", return_value={"$id": "user-1"}), \
+                    patch.object(auth, "_complete_appwrite_login", side_effect=RuntimeError("profile create failed")), \
+                    self.assertLogs("blueprints.auth", level="ERROR"):
+                response = auth.appwrite_oauth_callback("state")
+                error_code = session.get(auth.AUTH_ERROR_SESSION_KEY)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.headers["Location"], "/login")
+        self.assertEqual(error_code, auth.AUTH_ERROR_OAUTH_CALLBACK)
+
+    def test_provider_failure_route_sets_provider_error_and_clears_state(self):
+        with self.app.test_request_context("/auth/appwrite/failure/state"):
+            session[auth.APPWRITE_OAUTH_STATE_KEY] = "state"
+            session[auth.APPWRITE_OAUTH_PROVIDER_KEY] = "discord"
+            with self.assertLogs("blueprints.auth", level="WARNING") as logs:
+                response = auth.appwrite_oauth_failure("state")
+                error_code = session.get(auth.AUTH_ERROR_SESSION_KEY)
+                state_present = auth.APPWRITE_OAUTH_STATE_KEY in session
+                provider_present = auth.APPWRITE_OAUTH_PROVIDER_KEY in session
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.headers["Location"], "/login")
+        self.assertEqual(error_code, auth.AUTH_ERROR_OAUTH_PROVIDER)
+        self.assertFalse(state_present)
+        self.assertFalse(provider_present)
+        self.assertIn("provider=discord", "\n".join(logs.output))
+
+    def test_provider_failure_route_rejects_invalid_state(self):
+        with self.app.test_request_context("/auth/appwrite/failure/bad"):
+            session[auth.APPWRITE_OAUTH_STATE_KEY] = "good"
+            session[auth.APPWRITE_OAUTH_PROVIDER_KEY] = "github"
+            with self.assertLogs("blueprints.auth", level="WARNING"):
+                response = auth.appwrite_oauth_failure("bad")
+                error_code = session.get(auth.AUTH_ERROR_SESSION_KEY)
+                state_present = auth.APPWRITE_OAUTH_STATE_KEY in session
+                provider_present = auth.APPWRITE_OAUTH_PROVIDER_KEY in session
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.headers["Location"], "/login")
+        self.assertEqual(error_code, auth.AUTH_ERROR_OAUTH_STATE)
+        self.assertFalse(state_present)
+        self.assertFalse(provider_present)
 
     def test_valid_callback_creates_session_and_completes_login(self):
         fake_account = SimpleNamespace(

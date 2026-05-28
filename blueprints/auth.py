@@ -95,6 +95,14 @@ APPWRITE_OAUTH_PROVIDERS = {
 APPWRITE_OAUTH_STATE_KEY = "appwrite_oauth_state"
 APPWRITE_OAUTH_PROVIDER_KEY = "appwrite_oauth_provider"
 APPWRITE_OAUTH_REQUIRED_SCOPES = ("sessions.write",)
+AUTH_ERROR_SESSION_KEY = "auth_error_code"
+AUTH_ERROR_OAUTH_START_SCOPE = "AUTH-OAUTH-START-SCOPE"
+AUTH_ERROR_OAUTH_START = "AUTH-OAUTH-START"
+AUTH_ERROR_OAUTH_STATE = "AUTH-OAUTH-STATE"
+AUTH_ERROR_OAUTH_CREDENTIALS = "AUTH-OAUTH-CREDENTIALS"
+AUTH_ERROR_OAUTH_CALLBACK = "AUTH-OAUTH-CALLBACK"
+AUTH_ERROR_OAUTH_PROVIDER = "AUTH-OAUTH-PROVIDER"
+AUTH_ERROR_MESSAGE = "We couldn't complete sign-in. Please try again."
 
 
 def _sanitize_log_text(value, limit=500):
@@ -131,6 +139,10 @@ def _appwrite_exception_details(exc):
     return details
 
 
+def _appwrite_oauth_failure_url(state):
+    return url_for("auth.appwrite_oauth_failure", state=state, _external=True)
+
+
 def _appwrite_oauth_redirect_url(provider_key, success_url, failure_url):
     return Account(appwrite_client).create_o_auth2_token(
         provider=APPWRITE_OAUTH_PROVIDERS[provider_key],
@@ -145,6 +157,13 @@ def _log_oauth_exception(message, exc, *args):
         logger.error(f"{message}: appwrite_error=%s", *args, details)
         return
     logger.exception(f"{message}: appwrite_error=%s", *args, details)
+
+
+def _oauth_start_error_code(exc):
+    details = _appwrite_exception_details(exc)
+    if "sessions.write" in details.get("missing_scopes", ""):
+        return AUTH_ERROR_OAUTH_START_SCOPE
+    return AUTH_ERROR_OAUTH_START
 
 
 @auth_bp.cli.command("appwrite-oauth-preflight")
@@ -167,7 +186,7 @@ def appwrite_oauth_preflight(provider, base_url):
     normalized_base_url = str(base_url or "").rstrip("/") or "https://nest.apstudy.org"
     with current_app.test_request_context(base_url=normalized_base_url):
         success_url = url_for("auth.appwrite_oauth_callback", state="preflight", _external=True)
-        failure_url = url_for("auth.login", auth_error=1, _external=True)
+        failure_url = _appwrite_oauth_failure_url("preflight")
 
     try:
         _appwrite_oauth_redirect_url(provider_key, success_url, failure_url)
@@ -446,8 +465,15 @@ def _find_user_by_email(email):
     return rows[0] if rows else None
 
 
-def _login_error_redirect():
-    return redirect(url_for("auth.login", auth_error=1))
+def _login_error_redirect(error_code):
+    session[AUTH_ERROR_SESSION_KEY] = error_code
+    return redirect(url_for("auth.login"))
+
+
+def _login_error_text(error_code):
+    if not error_code:
+        return None
+    return f"{AUTH_ERROR_MESSAGE} Error code: {error_code}"
 
 
 def _clear_appwrite_oauth_state():
@@ -620,9 +646,7 @@ def login():
     """Render the sign-in page."""
     if current_user.is_authenticated:
         return redirect(url_for("dashboard.dashboard"))
-    error = None
-    if request.args.get("auth_error") == "1":
-        error = "We couldn't complete sign-in. Please try again."
+    error = _login_error_text(session.pop(AUTH_ERROR_SESSION_KEY, None))
     response = make_response(render_template("login.html", error=error))
     response.headers["Content-Security-Policy"] = LOGIN_CSP
     return response
@@ -642,7 +666,7 @@ def appwrite_oauth_start(provider):
     session[APPWRITE_OAUTH_STATE_KEY] = state
     session[APPWRITE_OAUTH_PROVIDER_KEY] = provider_key
     success_url = url_for("auth.appwrite_oauth_callback", state=state, _external=True)
-    failure_url = url_for("auth.login", auth_error=1, _external=True)
+    failure_url = _appwrite_oauth_failure_url(state)
 
     try:
         redirect_url = _appwrite_oauth_redirect_url(provider_key, success_url, failure_url)
@@ -653,10 +677,26 @@ def appwrite_oauth_start(provider):
             provider_key,
             request.scheme,
         )
+        error_code = _oauth_start_error_code(exc)
         _clear_appwrite_oauth_state()
-        return _login_error_redirect()
+        return _login_error_redirect(error_code)
 
     return redirect(redirect_url)
+
+
+@auth_bp.route("/auth/appwrite/failure/<state>")
+def appwrite_oauth_failure(state):
+    """Handle Appwrite/provider OAuth failure redirects without exposing query flags."""
+    expected_state = session.get(APPWRITE_OAUTH_STATE_KEY)
+    provider = session.get(APPWRITE_OAUTH_PROVIDER_KEY) or "appwrite"
+    if not expected_state or state != expected_state:
+        logger.warning("Rejected Appwrite OAuth failure redirect with invalid state")
+        _clear_appwrite_oauth_state()
+        return _login_error_redirect(AUTH_ERROR_OAUTH_STATE)
+
+    logger.warning("Appwrite OAuth provider flow failed: provider=%s", provider)
+    _clear_appwrite_oauth_state()
+    return _login_error_redirect(AUTH_ERROR_OAUTH_PROVIDER)
 
 
 @auth_bp.route("/auth/appwrite/callback/<state>")
@@ -666,14 +706,15 @@ def appwrite_oauth_callback(state):
     provider = session.get(APPWRITE_OAUTH_PROVIDER_KEY) or "appwrite"
     if not expected_state or state != expected_state:
         logger.warning("Rejected Appwrite OAuth callback with invalid state")
-        return _login_error_redirect()
+        _clear_appwrite_oauth_state()
+        return _login_error_redirect(AUTH_ERROR_OAUTH_STATE)
 
     user_id = request.args.get("userId") or request.args.get("user_id")
     secret = request.args.get("secret")
     if not user_id or not secret:
         logger.warning("Rejected Appwrite OAuth callback with missing credentials")
         _clear_appwrite_oauth_state()
-        return _login_error_redirect()
+        return _login_error_redirect(AUTH_ERROR_OAUTH_CREDENTIALS)
 
     try:
         appwrite_session = _account_to_dict(Account(appwrite_client).create_session(user_id, secret))
@@ -693,7 +734,7 @@ def appwrite_oauth_callback(state):
             provider,
         )
         _clear_appwrite_oauth_state()
-        return _login_error_redirect()
+        return _login_error_redirect(AUTH_ERROR_OAUTH_CALLBACK)
 
     _clear_appwrite_oauth_state()
     return redirect(result["redirect"])
