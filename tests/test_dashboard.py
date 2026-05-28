@@ -1,6 +1,7 @@
 import json
 import os
 import unittest
+from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 from unittest.mock import patch
 
@@ -237,6 +238,132 @@ class TestDashboardPreferenceRoutes(unittest.TestCase):
 
         self.assertTrue(response.get_json()["hidden"])
         self.assertEqual(update_row.call_args.args[2]["dashboard_checklist_hidden_signature"], "abc123")
+
+
+class TestDashboardTasksSummary(unittest.TestCase):
+    def test_tasks_summary_falls_back_to_thirty_day_and_no_deadline_tasks(self):
+        now = datetime.now(timezone.utc)
+        rows = [
+            {
+                "$id": "far",
+                "title": "Far task",
+                "priority": "high",
+                "deadline_at": (now + timedelta(days=45)).isoformat(),
+                "completed": False,
+            },
+            {
+                "$id": "no-deadline-low",
+                "title": "No deadline low",
+                "priority": "low",
+                "deadline_at": None,
+                "completed": False,
+            },
+            {
+                "$id": "thirty-medium",
+                "title": "Thirty medium",
+                "priority": "medium",
+                "deadline_at": (now + timedelta(days=20)).isoformat(),
+                "completed": False,
+            },
+            {
+                "$id": "no-deadline-high",
+                "title": "No deadline high",
+                "priority": "high",
+                "deadline_at": None,
+                "completed": False,
+            },
+        ]
+
+        with patch.object(dashboard_bp, "list_rows_all", return_value=rows):
+            summary = dashboard_bp._load_tasks_summary("user-1")
+
+        self.assertEqual(
+            [item["id"] for item in summary["items"]],
+            ["thirty-medium", "no-deadline-high", "no-deadline-low"],
+        )
+        self.assertEqual(summary["total_count"], 3)
+
+    def test_tasks_summary_prioritizes_seven_day_tasks_before_later_tasks(self):
+        now = datetime.now(timezone.utc)
+        rows = [
+            {
+                "$id": "thirty-high",
+                "title": "Thirty high",
+                "priority": "high",
+                "deadline_at": (now + timedelta(days=20)).isoformat(),
+                "completed": False,
+            },
+            {
+                "$id": "seven-low",
+                "title": "Seven low",
+                "priority": "low",
+                "deadline_at": (now + timedelta(days=2)).isoformat(),
+                "completed": False,
+            },
+            {
+                "$id": "seven-high",
+                "title": "Seven high",
+                "priority": "high",
+                "deadline_at": (now + timedelta(days=6)).isoformat(),
+                "completed": False,
+            },
+            {
+                "$id": "no-deadline-high",
+                "title": "No deadline high",
+                "priority": "high",
+                "deadline_at": None,
+                "completed": False,
+            },
+        ]
+
+        with patch.object(dashboard_bp, "list_rows_all", return_value=rows):
+            summary = dashboard_bp._load_tasks_summary("user-1")
+
+        self.assertEqual(
+            [item["id"] for item in summary["items"]],
+            ["seven-high", "seven-low", "thirty-high", "no-deadline-high"],
+        )
+
+
+class TestDashboardFilesSummary(unittest.TestCase):
+    def setUp(self):
+        self.app = Flask(__name__)
+        self.app.secret_key = "test"
+        self.app.config["SERVER_NAME"] = "example.test"
+        self.app.add_url_rule("/files", endpoint="file_share.file_share_page", view_func=lambda: "")
+
+    def test_recent_files_excludes_expired_files(self):
+        now = datetime.now(timezone.utc)
+        rows = [
+            {
+                "$id": "active",
+                "original_filename": "active.pdf",
+                "file_size_bytes": 1200,
+                "expires_at": (now + timedelta(days=1)).isoformat(),
+                "updated_at": (now - timedelta(minutes=5)).isoformat(),
+            },
+            {
+                "$id": "expired",
+                "original_filename": "expired.pdf",
+                "file_size_bytes": 2400,
+                "expires_at": (now - timedelta(minutes=1)).isoformat(),
+                "updated_at": now.isoformat(),
+            },
+            {
+                "$id": "no-expiry",
+                "original_filename": "no-expiry.pdf",
+                "file_size_bytes": 3600,
+                "expires_at": None,
+                "updated_at": (now - timedelta(minutes=10)).isoformat(),
+            },
+        ]
+
+        with self.app.test_request_context("/api/dashboard/summary"):
+            with patch.object(dashboard_bp, "list_rows_all", return_value=rows):
+                summary = dashboard_bp._load_recent_files("user-1")
+
+        self.assertEqual([item["id"] for item in summary["items"]], ["active", "no-expiry"])
+        self.assertEqual(summary["total_count"], 2)
 
 
 if __name__ == "__main__":

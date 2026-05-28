@@ -688,7 +688,7 @@
     flex: 1;
     min-height: 0;
     flex-direction: column;
-    gap: 8px;
+    gap: clamp(5px, 0.7vw, 8px);
 }
 
 .dashboard-calendar-weekdays,
@@ -699,7 +699,7 @@
 
 .dashboard-calendar-weekdays span {
     color: var(--color-on-surface-variant);
-    font-size: 11px;
+    font-size: clamp(9px, 0.8vw, 11px);
     font-weight: 760;
     text-align: center;
     text-transform: uppercase;
@@ -718,6 +718,19 @@
     grid-template-rows: minmax(0, 1fr);
 }
 
+.dashboard-calendar[data-calendar-view="week"] .dashboard-day {
+    gap: 8px;
+    padding: 8px;
+}
+
+.dashboard-calendar[data-calendar-view="week"] .dashboard-day-markers {
+    flex: 1;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 4px;
+    max-height: none;
+}
+
 .dashboard-calendar-upcoming {
     display: flex;
     flex: 1;
@@ -727,8 +740,15 @@
 }
 
 .dashboard-calendar-upcoming .dashboard-marker {
+    align-self: center;
     width: 12px;
     height: 12px;
+}
+
+.dashboard-calendar-upcoming-item {
+    border: 0;
+    font: inherit;
+    text-align: left;
 }
 
 .dashboard-day {
@@ -740,13 +760,13 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 3px;
+    gap: clamp(2px, 0.35vw, 3px);
     border: 0;
     border-right: 1px solid color-mix(in srgb, var(--color-outline-variant) 52%, transparent);
     border-bottom: 1px solid color-mix(in srgb, var(--color-outline-variant) 52%, transparent);
     background: var(--color-surface);
     color: var(--color-on-surface);
-    padding: 5px;
+    padding: clamp(3px, 0.55vw, 5px);
     text-align: left;
     cursor: pointer;
     outline: 0;
@@ -787,7 +807,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 12px;
+    font-size: clamp(10px, 0.9vw, 12px);
     font-weight: 720;
     line-height: 1.1;
 }
@@ -799,13 +819,23 @@
     min-width: 0;
     flex-wrap: wrap;
     gap: 2px;
-    max-height: 18px;
+    max-height: clamp(12px, 1.5vw, 18px);
     overflow: hidden;
 }
 
 .dashboard-marker {
     width: clamp(5px, 0.7vw, 8px);
     height: clamp(5px, 0.7vw, 8px);
+    border-radius: 999px;
+    background: var(--marker-color, var(--color-primary));
+}
+
+.dashboard-week-event-bar {
+    display: block;
+    width: 100%;
+    min-height: 7px;
+    max-height: 12px;
+    flex: 1 1 7px;
     border-radius: 999px;
     background: var(--marker-color, var(--color-primary));
 }

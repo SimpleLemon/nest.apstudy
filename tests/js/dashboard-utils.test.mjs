@@ -121,6 +121,19 @@ test("dashboard utility applies new size and calendar view rules", async () => {
     assert.equal(utils.nearestTileSize("courses", 0, 140, "standard"), "wide");
 });
 
+test("dashboard calendar helpers label views and derive event dates", async () => {
+    const source = await readFile(path.join(repoRoot, "static/js/dashboard.js"), "utf8");
+    const utils = loadDashboardUtils(source);
+
+    assert.equal(utils.tileTitle("calendar", "month"), "Calendar: Month");
+    assert.equal(utils.tileTitle("calendar", "week"), "Calendar: Week");
+    assert.equal(utils.tileTitle("calendar", "upcoming"), "Calendar: Upcoming");
+    assert.equal(utils.tileTitle("tasks"), "Upcoming Tasks");
+    assert.equal(utils.eventDateKey({ date: "2026-05-27" }), "2026-05-27");
+    assert.equal(utils.eventDateKey({ start: "2026-05-28T12:00:00Z" }), "2026-05-28");
+    assert.equal(utils.escapeAttr('"quoted"'), "&quot;quoted&quot;");
+});
+
 test("dashboard summary tile layout arrays preserve v3 hidden tiles", async () => {
     const source = await readFile(path.join(repoRoot, "static/js/dashboard.js"), "utf8");
     const utils = loadDashboardUtils(source);

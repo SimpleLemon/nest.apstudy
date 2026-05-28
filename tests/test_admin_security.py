@@ -6,7 +6,9 @@ from unittest.mock import patch
 
 from flask import Flask
 from flask_login import UserMixin
+from werkzeug.middleware.proxy_fix import ProxyFix
 
+from app import create_app
 from extensions import csrf, login_manager
 import blueprints.admin as admin
 
@@ -82,6 +84,21 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertTrue(self.app.config["SESSION_COOKIE_SECURE"])
         self.assertTrue(self.app.config["SESSION_COOKIE_HTTPONLY"])
         self.assertEqual(self.app.config["SESSION_COOKIE_SAMESITE"], "Lax")
+
+    def test_app_factory_hardens_production_session_and_url_scheme(self):
+        with patch.dict(os.environ, {
+            "APSTUDY_ALLOW_INSECURE_HTTP": "0",
+            "FLASK_DEBUG": "0",
+        }, clear=False), \
+                patch("services.scheduler.init_scheduler"), \
+                patch("services.discord_audit.init_discord_audit"):
+            app = create_app()
+
+        self.assertTrue(app.config["SESSION_COOKIE_SECURE"])
+        self.assertTrue(app.config["SESSION_COOKIE_HTTPONLY"])
+        self.assertEqual(app.config["SESSION_COOKIE_SAMESITE"], "Lax")
+        self.assertEqual(app.config["PREFERRED_URL_SCHEME"], "https")
+        self.assertIsInstance(app.wsgi_app, ProxyFix)
 
     def test_admin_detail_renders_csrf_tokens(self):
         with self.app.test_client() as client:

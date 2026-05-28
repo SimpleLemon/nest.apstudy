@@ -105,6 +105,10 @@
         return div.innerHTML;
     }
 
+    function escapeAttr(value) {
+        return escapeHtml(value).replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
+
     function fetchJson(url, options = {}) {
         return fetch(url, {
             headers: { "Content-Type": "application/json", ...(options.headers || {}) },
@@ -314,10 +318,18 @@
         }
     }
 
+    function tileTitle(tileId, view) {
+        const meta = TILE_META[tileId];
+        if (tileId !== "calendar") return meta?.title || "";
+        const safeView = normalizeCalendarView(tileId, view);
+        return `Calendar: ${CALENDAR_VIEW_LABELS[safeView] || "Month"}`;
+    }
+
     function tileShell(tileId, size, view, bodyHtml) {
         const meta = TILE_META[tileId];
         const safeSize = normalizeTileSize(tileId, size);
         const safeView = normalizeCalendarView(tileId, view);
+        const title = tileTitle(tileId, safeView);
         const sizeOptions = (TILE_SIZE_RULES[tileId] || []).map((option) => `
             <button class="dashboard-config-option ${option === safeSize ? "is-active" : ""}" type="button" data-config-kind="size" data-value="${escapeHtml(option)}" role="menuitemradio" aria-checked="${option === safeSize ? "true" : "false"}">
                 ${escapeHtml(TILE_SIZE_LABELS[option] || option)}
@@ -335,11 +347,11 @@
         ` : "";
         return `
             <article class="dashboard-tile" data-tile-id="${escapeHtml(tileId)}" data-tile-size="${escapeHtml(safeSize)}" ${tileId === "calendar" ? `data-calendar-view="${escapeHtml(safeView)}"` : ""} tabindex="0">
-                <div class="dashboard-tile-edit-controls" aria-label="${escapeHtml(meta.title)} edit controls">
-                    <button class="dashboard-tile-remove" type="button" aria-label="Remove ${escapeHtml(meta.title)} tile">
+                <div class="dashboard-tile-edit-controls" aria-label="${escapeHtml(title)} edit controls">
+                    <button class="dashboard-tile-remove" type="button" aria-label="Remove ${escapeHtml(title)} tile">
                         <span class="material-symbols-outlined" aria-hidden="true">remove</span>
                     </button>
-                    <button class="dashboard-tile-config-toggle" type="button" aria-label="Configure ${escapeHtml(meta.title)} tile" aria-expanded="false">
+                    <button class="dashboard-tile-config-toggle" type="button" aria-label="Configure ${escapeHtml(title)} tile" aria-expanded="false">
                         <span class="material-symbols-outlined" aria-hidden="true">tune</span>
                     </button>
                 </div>
@@ -357,18 +369,18 @@
                                 <span class="material-symbols-outlined" aria-hidden="true">${escapeHtml(meta.icon)}</span>
                             </span>
                             <div>
-                                <h2>${escapeHtml(meta.title)}</h2>
+                                <h2>${escapeHtml(title)}</h2>
                             </div>
                         </div>
                         <div class="dashboard-tile-actions">
-                            <a class="dashboard-tile-link" href="${escapeHtml(meta.href)}" aria-label="Open ${escapeHtml(meta.title)}">
+                            <a class="dashboard-tile-link" href="${escapeHtml(meta.href)}" aria-label="Open ${escapeHtml(title)}">
                                 <span class="material-symbols-outlined" aria-hidden="true">open_in_new</span>
                             </a>
                         </div>
                     </header>
                     ${bodyHtml}
                 </div>
-                <button class="dashboard-resize-grip" type="button" aria-label="Resize ${escapeHtml(meta.title)} tile"></button>
+                <button class="dashboard-resize-grip" type="button" aria-label="Resize ${escapeHtml(title)} tile"></button>
             </article>
         `;
     }
@@ -436,17 +448,20 @@
             day.setDate(start.getDate() + index);
             const key = localDateKey(day);
             const dayEvents = eventMap.get(key) || [];
+            const markerHtml = view === "week"
+                ? dayEvents.slice(0, 5).map((event) => `<span class="dashboard-week-event-bar" style="--marker-color:${escapeHtml(event.color || "#6366f1")}"></span>`).join("")
+                : dayEvents.slice(0, 5).map((event) => `<span class="dashboard-marker" style="--marker-color:${escapeHtml(event.color || "#6366f1")}"></span>`).join("");
             cells.push(`
                 <button class="dashboard-day ${day.getMonth() === monthIndex ? "" : "is-muted"} ${key === todayKey ? "is-today" : ""}" type="button" data-date="${escapeHtml(key)}" ${dayEvents.length ? "" : "aria-disabled=\"true\""}>
                     <span class="dashboard-day-number">${escapeHtml(formatMonthGridDayLabel(day))}</span>
                     <span class="dashboard-day-markers" aria-hidden="true">
-                        ${dayEvents.slice(0, 5).map((event) => `<span class="dashboard-marker" style="--marker-color:${escapeHtml(event.color || "#6366f1")}"></span>`).join("")}
+                        ${markerHtml}
                     </span>
                 </button>
             `);
         }
         return `
-            <div class="dashboard-calendar" data-calendar-events="${escapeHtml(JSON.stringify(events))}" data-calendar-view="${escapeHtml(view)}">
+            <div class="dashboard-calendar" data-calendar-events="${escapeAttr(JSON.stringify(events))}" data-calendar-view="${escapeHtml(view)}">
                 <div class="dashboard-calendar-weekdays" aria-hidden="true">
                     ${["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => `<span>${day}</span>`).join("")}
                 </div>
@@ -461,13 +476,13 @@
         return `
             <div class="dashboard-calendar-upcoming">
                 ${items.map((event) => `
-                    <div class="dashboard-list-item">
+                    <button class="dashboard-list-item dashboard-calendar-upcoming-item" type="button" data-date="${escapeHtml(event.date || String(event.start || "").slice(0, 10))}" data-calendar-event="${escapeAttr(JSON.stringify(event))}">
                         <div class="dashboard-list-main">
                             <span class="dashboard-list-title">${escapeHtml(event.title || "Untitled event")}</span>
                             <span class="dashboard-list-meta">${escapeHtml(formatDateTime(event.start) || event.date || "Upcoming")}</span>
                         </div>
                         <span class="dashboard-marker" style="--marker-color:${escapeHtml(event.color || "#6366f1")}" aria-hidden="true"></span>
-                    </div>
+                    </button>
                 `).join("")}
             </div>
         `;
@@ -487,6 +502,10 @@
             map.get(key).push(event);
         }
         return map;
+    }
+
+    function eventDateKey(event) {
+        return event?.date || String(event?.start || "").slice(0, 10) || localDateKey(new Date());
     }
 
     function localDateKey(date) {
@@ -842,38 +861,52 @@
         }
     }
 
+    function bindCalendarPopoverTrigger(trigger, date, events) {
+        if (!trigger || !date || !events.length) return;
+        trigger.addEventListener("mouseenter", () => {
+            if (!state.editMode && !state.activePopoverLocked) showPopover(trigger, date, events);
+        });
+        trigger.addEventListener("mouseleave", () => {
+            if (!state.editMode && !state.activePopoverLocked) hidePopover();
+        });
+        trigger.addEventListener("focus", () => {
+            if (!state.editMode && !state.activePopoverLocked) showPopover(trigger, date, events);
+        });
+        trigger.addEventListener("blur", () => {
+            if (!state.editMode && !state.activePopoverLocked) hidePopover();
+        });
+        trigger.addEventListener("click", (event) => {
+            if (state.editMode) return;
+            event.stopPropagation();
+            state.activePopoverLocked = true;
+            showPopover(trigger, date, events);
+        });
+    }
+
     function bindCalendarPopovers() {
-        const root = document.querySelector(".dashboard-calendar");
-        if (!root) return;
-        let events = [];
-        try {
-            events = JSON.parse(root.dataset.calendarEvents || "[]");
-        } catch {
-            events = [];
-        }
-        const eventsByDate = groupEventsByDate(events);
-        root.querySelectorAll(".dashboard-day").forEach((dayButton) => {
-            const date = dayButton.dataset.date;
-            const dayEvents = eventsByDate.get(date) || [];
-            if (!dayEvents.length) return;
-            dayButton.addEventListener("mouseenter", () => {
-                if (!state.activePopoverLocked) showPopover(dayButton, date, dayEvents);
+        document.querySelectorAll(".dashboard-calendar").forEach((root) => {
+            let events = [];
+            try {
+                events = JSON.parse(root.dataset.calendarEvents || "[]");
+            } catch {
+                events = [];
+            }
+            const eventsByDate = groupEventsByDate(events);
+            root.querySelectorAll(".dashboard-day").forEach((dayButton) => {
+                const date = dayButton.dataset.date;
+                bindCalendarPopoverTrigger(dayButton, date, eventsByDate.get(date) || []);
             });
-            dayButton.addEventListener("mouseleave", () => {
-                if (!state.activePopoverLocked) hidePopover();
-            });
-            dayButton.addEventListener("focus", () => {
-                if (!state.activePopoverLocked) showPopover(dayButton, date, dayEvents);
-            });
-            dayButton.addEventListener("blur", () => {
-                if (!state.activePopoverLocked) hidePopover();
-            });
-            dayButton.addEventListener("click", (event) => {
-                if (state.editMode) return;
-                event.stopPropagation();
-                state.activePopoverLocked = true;
-                showPopover(dayButton, date, dayEvents);
-            });
+        });
+
+        document.querySelectorAll(".dashboard-calendar-upcoming-item").forEach((item) => {
+            let eventData = null;
+            try {
+                eventData = JSON.parse(item.dataset.calendarEvent || "null");
+            } catch {
+                eventData = null;
+            }
+            if (!eventData) return;
+            bindCalendarPopoverTrigger(item, item.dataset.date || eventDateKey(eventData), [eventData]);
         });
     }
 
@@ -982,6 +1015,9 @@
         normalizeTileLayout,
         normalizeTileSize,
         normalizeCalendarView,
+        tileTitle,
+        eventDateKey,
+        escapeAttr,
         nearestTileSize,
         summaryLayoutSource,
         tileOrderFromDom,

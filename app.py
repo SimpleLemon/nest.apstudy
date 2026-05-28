@@ -1,6 +1,7 @@
 import os
 from flask import Flask, redirect, url_for
 from dotenv import load_dotenv
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 load_dotenv()
 
@@ -13,6 +14,14 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def create_app():
     app = Flask(__name__)
+    app.wsgi_app = ProxyFix(
+        app.wsgi_app,
+        x_for=1,
+        x_proto=1,
+        x_host=1,
+        x_port=1,
+        x_prefix=1,
+    )
     from avatar_images import avatar_url_for_size
 
     app.jinja_env.filters["avatar_url"] = avatar_url_for_size
@@ -27,6 +36,7 @@ def create_app():
     app.config["SESSION_COOKIE_SECURE"] = not allow_insecure_http
     app.config["SESSION_COOKIE_HTTPONLY"] = True
     app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+    app.config["PREFERRED_URL_SCHEME"] = "http" if allow_insecure_http else "https"
     app.config["WTF_CSRF_CHECK_DEFAULT"] = False
     os.makedirs(app.config["FILE_SHARE_UPLOAD_DIR"], exist_ok=True)
 

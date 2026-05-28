@@ -89,9 +89,9 @@ module.exports = {
                 full: "9999px",
             },
             fontFamily: {
-                headline: ["Inter"],
-                body: ["Inter"],
-                label: ["Inter"],
+                headline: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Arial", "sans-serif"],
+                body: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Arial", "sans-serif"],
+                label: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Arial", "sans-serif"],
             },
             keyframes: {
                 "fade-in-up": {

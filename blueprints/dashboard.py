@@ -50,6 +50,11 @@ DASHBOARD_DEFAULT_CALENDAR_VIEW = "month"
 DASHBOARD_CALENDAR_UPCOMING_LIMIT = 6
 DASHBOARD_LIST_LIMIT = 4
 DASHBOARD_TASK_LIMIT = 5
+DASHBOARD_TASK_PRIORITY_RANK = {
+    "high": 0,
+    "medium": 1,
+    "low": 2,
+}
 
 
 def _user_payload():
@@ -464,9 +469,26 @@ def _task_payload(row, now):
     }
 
 
+def _task_priority_rank(row):
+    priority = str(row.get("priority") or "").strip().lower()
+    return DASHBOARD_TASK_PRIORITY_RANK.get(priority, len(DASHBOARD_TASK_PRIORITY_RANK))
+
+
+def _dashboard_task_bucket(row, now, seven_day_end, thirty_day_end):
+    deadline = _as_utc(row.get("deadline_at"))
+    if not deadline:
+        return 2
+    if deadline <= seven_day_end:
+        return 0
+    if deadline <= thirty_day_end:
+        return 1
+    return None
+
+
 def _load_tasks_summary(user_id):
     now = datetime.now(timezone.utc)
-    deadline_end = now + timedelta(days=7)
+    seven_day_end = now + timedelta(days=7)
+    thirty_day_end = now + timedelta(days=30)
     try:
         rows = list_rows_all(
             COLLECTIONS["tasks"],
@@ -479,16 +501,21 @@ def _load_tasks_summary(user_id):
         logger.exception("Failed to build dashboard task summary")
         return {"items": [], "total_count": 0, "setup_complete": False, "error": "Unable to load tasks."}
 
-    upcoming = []
+    candidates = []
     for row in rows:
         if _task_is_complete(row):
             continue
-        deadline = _as_utc(row.get("deadline_at"))
-        if not deadline:
+        bucket = _dashboard_task_bucket(row, now, seven_day_end, thirty_day_end)
+        if bucket is None:
             continue
-        if deadline <= deadline_end:
-            upcoming.append(row)
-    upcoming.sort(key=lambda row: (_as_utc(row.get("deadline_at")) or datetime.max.replace(tzinfo=timezone.utc), row.get("title") or ""))
+        candidates.append((bucket, row))
+    candidates.sort(key=lambda item: (
+        item[0],
+        _task_priority_rank(item[1]),
+        _as_utc(item[1].get("deadline_at")) or datetime.max.replace(tzinfo=timezone.utc),
+        item[1].get("title") or "",
+    ))
+    upcoming = [row for _, row in candidates]
     return {
         "items": [_task_payload(row, now) for row in upcoming[:DASHBOARD_TASK_LIMIT]],
         "total_count": len(upcoming),
@@ -498,6 +525,7 @@ def _load_tasks_summary(user_id):
 
 
 def _load_recent_files(user_id):
+    now = datetime.now(timezone.utc)
     try:
         rows = list_rows_all(
             COLLECTIONS["shared_files"],
@@ -506,6 +534,10 @@ def _load_recent_files(user_id):
     except AppwriteException:
         logger.exception("Failed to build dashboard file summary")
         return {"items": [], "total_count": 0, "error": "Unable to load files."}
+    rows = [
+        row for row in rows
+        if not (expires_at := _as_utc(row.get("expires_at"))) or expires_at > now
+    ]
     rows.sort(key=lambda row: _sort_key(row.get("updated_at") or row.get("created_at")), reverse=True)
     return {
         "items": [

@@ -1,3 +1,4 @@
+import os
 import unittest
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -6,6 +7,7 @@ from flask import Flask, session
 from werkzeug.exceptions import NotFound
 
 import blueprints.auth as auth
+from app import create_app
 from extensions import login_manager
 
 
@@ -37,6 +39,63 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         self.assertEqual(calls[0]["provider"], auth.OAuthProvider.GOOGLE)
         self.assertIn("/auth/appwrite/callback/", calls[0]["success"])
         self.assertIn("/login?auth_error=1", calls[0]["failure"])
+
+    def test_app_factory_oauth_urls_use_forwarded_https(self):
+        calls = []
+
+        def create_o_auth2_token(**kwargs):
+            calls.append(kwargs)
+            return "https://appwrite.example/oauth"
+
+        fake_account = SimpleNamespace(create_o_auth2_token=create_o_auth2_token)
+        with patch("services.scheduler.init_scheduler"), \
+                patch("services.discord_audit.init_discord_audit"), \
+                patch.object(auth, "Account", return_value=fake_account):
+            app = create_app()
+            app.config["SERVER_NAME"] = "nest.apstudy.org"
+            app.config["TESTING"] = True
+            response = app.test_client().get(
+                "/auth/appwrite/google",
+                headers={
+                    "Host": "nest.apstudy.org",
+                    "X-Forwarded-Proto": "https",
+                    "X-Forwarded-Host": "nest.apstudy.org",
+                },
+            )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.headers["Location"], "https://appwrite.example/oauth")
+        self.assertEqual(len(calls), 1)
+        self.assertRegex(calls[0]["success"], r"^https://nest\.apstudy\.org/auth/appwrite/callback/")
+        self.assertEqual(calls[0]["failure"], "https://nest.apstudy.org/login?auth_error=1")
+
+    def test_app_factory_oauth_urls_allow_local_insecure_http(self):
+        calls = []
+
+        def create_o_auth2_token(**kwargs):
+            calls.append(kwargs)
+            return "https://appwrite.example/oauth"
+
+        fake_account = SimpleNamespace(create_o_auth2_token=create_o_auth2_token)
+        with patch.dict(os.environ, {
+            "APSTUDY_ALLOW_INSECURE_HTTP": "1",
+            "FLASK_DEBUG": "0",
+        }, clear=False), \
+                patch("services.scheduler.init_scheduler"), \
+                patch("services.discord_audit.init_discord_audit"), \
+                patch.object(auth, "Account", return_value=fake_account):
+            app = create_app()
+            app.config["TESTING"] = True
+            response = app.test_client().get(
+                "/auth/appwrite/google",
+                base_url="http://localhost:8000",
+            )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.headers["Location"], "https://appwrite.example/oauth")
+        self.assertEqual(len(calls), 1)
+        self.assertRegex(calls[0]["success"], r"^http://localhost:8000/auth/appwrite/callback/")
+        self.assertEqual(calls[0]["failure"], "http://localhost:8000/login?auth_error=1")
 
     def test_invalid_provider_is_rejected(self):
         with self.app.test_request_context("/auth/appwrite/not-real"):
