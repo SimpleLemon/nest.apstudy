@@ -4,6 +4,7 @@ from types import SimpleNamespace
 from unittest.mock import patch
 
 from flask import Flask, session
+from appwrite.exception import AppwriteException
 from werkzeug.exceptions import NotFound
 
 import blueprints.auth as auth
@@ -39,6 +40,56 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         self.assertEqual(calls[0]["provider"], auth.OAuthProvider.GOOGLE)
         self.assertIn("/auth/appwrite/callback/", calls[0]["success"])
         self.assertIn("/login?auth_error=1", calls[0]["failure"])
+
+    def test_oauth_start_logs_missing_sessions_scope_without_secret(self):
+        error = AppwriteException(
+            "<html>missing scopes ([\"sessions.write\"]) secret=super-secret-token</html>",
+            401,
+            "general_unauthorized_scope",
+        )
+        fake_account = SimpleNamespace(create_o_auth2_token=lambda **_kwargs: (_ for _ in ()).throw(error))
+
+        with self.app.test_request_context("/auth/appwrite/google"):
+            with patch.object(auth, "Account", return_value=fake_account), \
+                    self.assertLogs("blueprints.auth", level="ERROR") as logs:
+                response = auth.appwrite_oauth_start("google")
+                state_present = auth.APPWRITE_OAUTH_STATE_KEY in session
+                provider_present = auth.APPWRITE_OAUTH_PROVIDER_KEY in session
+
+        output = "\n".join(logs.output)
+        self.assertEqual(response.status_code, 302)
+        self.assertIn("/login?auth_error=1", response.headers["Location"])
+        self.assertFalse(state_present)
+        self.assertFalse(provider_present)
+        self.assertIn("general_unauthorized_scope", output)
+        self.assertIn("sessions.write", output)
+        self.assertNotIn("super-secret-token", output)
+
+    def test_appwrite_oauth_preflight_reports_missing_sessions_scope(self):
+        error = AppwriteException(
+            "app role missing scopes ([\"sessions.write\"])",
+            401,
+            "general_unauthorized_scope",
+        )
+        fake_account = SimpleNamespace(create_o_auth2_token=lambda **_kwargs: (_ for _ in ()).throw(error))
+
+        with patch.object(auth, "Account", return_value=fake_account), \
+                self.assertLogs("blueprints.auth", level="ERROR"):
+            result = self.app.test_cli_runner().invoke(
+                args=[
+                    "auth",
+                    "appwrite-oauth-preflight",
+                    "--provider",
+                    "google",
+                    "--base-url",
+                    "https://nest.apstudy.org",
+                ],
+            )
+
+        self.assertNotEqual(result.exit_code, 0)
+        self.assertIn("Appwrite OAuth preflight failed.", result.output)
+        self.assertIn("general_unauthorized_scope", result.output)
+        self.assertIn("required_scope_hint: sessions.write", result.output)
 
     def test_app_factory_oauth_urls_use_forwarded_https(self):
         calls = []

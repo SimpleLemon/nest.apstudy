@@ -13,15 +13,18 @@ import os
 import secrets
 import logging
 import re
+import html
 from datetime import datetime
 
+import click
 if os.environ.get("APSTUDY_ALLOW_INSECURE_OAUTH") == "1" or os.environ.get("FLASK_DEBUG") == "1":
     os.environ.setdefault("OAUTHLIB_INSECURE_TRANSPORT", "1")
 
 import requests as http_requests
 import google_auth_oauthlib.flow
 from flask import (
-    Blueprint, Response, abort, redirect, url_for, session, render_template, request, jsonify, make_response
+    Blueprint, Response, abort, redirect, url_for, session, render_template, request, jsonify, make_response,
+    current_app
 )
 from flask_login import login_user, logout_user, current_user
 
@@ -91,6 +94,103 @@ APPWRITE_OAUTH_PROVIDERS = {
 }
 APPWRITE_OAUTH_STATE_KEY = "appwrite_oauth_state"
 APPWRITE_OAUTH_PROVIDER_KEY = "appwrite_oauth_provider"
+APPWRITE_OAUTH_REQUIRED_SCOPES = ("sessions.write",)
+
+
+def _sanitize_log_text(value, limit=500):
+    text = str(value or "")
+    text = re.sub(r"((?:[?&]|\b)(?:secret|key|token)=)[^&\s]+", r"\1[redacted]", text, flags=re.IGNORECASE)
+    text = re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", text, flags=re.IGNORECASE | re.DOTALL)
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = html.unescape(text)
+    text = " ".join(text.split())
+    if len(text) > limit:
+        return f"{text[:limit]}..."
+    return text
+
+
+def _appwrite_exception_details(exc):
+    message = getattr(exc, "message", None) or str(exc)
+    details = {
+        "class": exc.__class__.__name__,
+        "message": _sanitize_log_text(message),
+    }
+    for attr in ("code", "response_code", "type"):
+        value = getattr(exc, attr, None)
+        if value not in (None, ""):
+            details[attr] = value
+
+    text = str(message)
+    missing_scopes = [
+        scope
+        for scope in APPWRITE_OAUTH_REQUIRED_SCOPES
+        if scope in text
+    ]
+    if missing_scopes:
+        details["missing_scopes"] = ",".join(missing_scopes)
+    return details
+
+
+def _appwrite_oauth_redirect_url(provider_key, success_url, failure_url):
+    return Account(appwrite_client).create_o_auth2_token(
+        provider=APPWRITE_OAUTH_PROVIDERS[provider_key],
+        success=success_url,
+        failure=failure_url,
+    )
+
+
+def _log_oauth_exception(message, exc, *args):
+    details = _appwrite_exception_details(exc)
+    if isinstance(exc, AppwriteException):
+        logger.error(f"{message}: appwrite_error=%s", *args, details)
+        return
+    logger.exception(f"{message}: appwrite_error=%s", *args, details)
+
+
+@auth_bp.cli.command("appwrite-oauth-preflight")
+@click.option(
+    "--provider",
+    default="google",
+    type=click.Choice(sorted(APPWRITE_OAUTH_PROVIDERS.keys())),
+    show_default=True,
+    help="OAuth provider to use for the Appwrite token preflight.",
+)
+@click.option(
+    "--base-url",
+    default="https://nest.apstudy.org",
+    show_default=True,
+    help="Public app origin used to build OAuth callback URLs.",
+)
+def appwrite_oauth_preflight(provider, base_url):
+    """Verify the configured Appwrite API key can start SSR OAuth."""
+    provider_key = str(provider or "").strip().lower()
+    normalized_base_url = str(base_url or "").rstrip("/") or "https://nest.apstudy.org"
+    with current_app.test_request_context(base_url=normalized_base_url):
+        success_url = url_for("auth.appwrite_oauth_callback", state="preflight", _external=True)
+        failure_url = url_for("auth.login", auth_error=1, _external=True)
+
+    try:
+        _appwrite_oauth_redirect_url(provider_key, success_url, failure_url)
+    except Exception as exc:
+        details = _appwrite_exception_details(exc)
+        logger.error(
+            "Appwrite OAuth preflight failed: provider=%s appwrite_error=%s",
+            provider_key,
+            details,
+        )
+        click.echo("Appwrite OAuth preflight failed.")
+        click.echo(f"provider: {provider_key}")
+        click.echo(f"success_url: {success_url}")
+        click.echo(f"failure_url: {failure_url}")
+        click.echo(f"appwrite_error: {details}")
+        if "sessions.write" in details.get("missing_scopes", ""):
+            click.echo("required_scope_hint: sessions.write")
+        raise click.ClickException("Appwrite API key cannot start OAuth token flow.")
+
+    click.echo("Appwrite OAuth preflight passed.")
+    click.echo(f"provider: {provider_key}")
+    click.echo(f"success_url: {success_url}")
+    click.echo(f"failure_url: {failure_url}")
 
 
 def _set_oauth_session(provider, user_id, email, name=None, picture_url=None):
@@ -535,8 +635,7 @@ def appwrite_oauth_start(provider):
         return redirect(url_for("dashboard.dashboard"))
 
     provider_key = str(provider or "").strip().lower()
-    appwrite_provider = APPWRITE_OAUTH_PROVIDERS.get(provider_key)
-    if not appwrite_provider:
+    if provider_key not in APPWRITE_OAUTH_PROVIDERS:
         abort(404)
 
     state = secrets.token_urlsafe(32)
@@ -546,13 +645,14 @@ def appwrite_oauth_start(provider):
     failure_url = url_for("auth.login", auth_error=1, _external=True)
 
     try:
-        redirect_url = Account(appwrite_client).create_o_auth2_token(
-            provider=appwrite_provider,
-            success=success_url,
-            failure=failure_url,
+        redirect_url = _appwrite_oauth_redirect_url(provider_key, success_url, failure_url)
+    except Exception as exc:
+        _log_oauth_exception(
+            "Failed to start Appwrite OAuth flow: provider=%s success_scheme=%s",
+            exc,
+            provider_key,
+            request.scheme,
         )
-    except Exception:
-        logger.exception("Failed to start Appwrite OAuth flow")
         _clear_appwrite_oauth_state()
         return _login_error_redirect()
 
@@ -586,8 +686,12 @@ def appwrite_oauth_callback(state):
             provider_access_token=provider_access_token,
             page_context="auth/appwrite/callback",
         )
-    except Exception:
-        logger.exception("Failed to complete Appwrite OAuth callback")
+    except Exception as exc:
+        _log_oauth_exception(
+            "Failed to complete Appwrite OAuth callback: provider=%s",
+            exc,
+            provider,
+        )
         _clear_appwrite_oauth_state()
         return _login_error_redirect()
 
