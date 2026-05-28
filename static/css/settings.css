@@ -896,10 +896,12 @@
   --theme-ring: #7fa1ff;
 }
 .settings-theme-choice.theme-nest-dark {
-  background: #151722;
-  border-color: rgba(255,255,255,0.06);
-  --theme-accent: #6173ff;
-  --theme-ring: #8a96ff;
+  background:
+    linear-gradient(90deg, #d4af37 0 18%, transparent 18%),
+    linear-gradient(135deg, #0a0f22 0 64%, #101730 64% 100%);
+  border-color: rgba(212, 175, 55, 0.34);
+  --theme-accent: #d4af37;
+  --theme-ring: #d4af37;
 }
 .settings-theme-choice.theme-parchment-light {
   background: #f6efe4;
@@ -908,10 +910,12 @@
   --theme-ring: #e5c99c;
 }
 .settings-theme-choice.theme-nest-light {
-  background: #0b0b0b;
-  border-color: rgba(255,255,255,0.06);
-  --theme-accent: #f1f1f1;
-  --theme-ring: #ffffff;
+  background:
+    linear-gradient(90deg, #012169 0 20%, #f2a900 20% 32%, transparent 32%),
+    linear-gradient(135deg, #ffffff 0 58%, #f6f6f2 58% 100%);
+  border-color: rgba(1, 33, 105, 0.18);
+  --theme-accent: #012169;
+  --theme-ring: #f2a900;
 }
 .settings-theme-choice.theme-system {
   background: linear-gradient(135deg, #2e3136 50%, #f6efe4 50%);

@@ -54,6 +54,33 @@ DISCORD_USER_MENTION_RE = re.compile(r"&lt;@!?(\d+)&gt;")
 DISCORD_ROLE_MENTION_RE = re.compile(r"&lt;@(?:&amp;|&)(\d+)&gt;")
 DISCORD_CUSTOM_EMOJI_RE = re.compile(r"&lt;(a?):([A-Za-z0-9_]{2,32}):(\d+)&gt;")
 DISCORD_INGEST_SECRET_ENV_KEYS = ("DISCORD_CHAT_INGEST_SECRET", "DISCORD_CHAT_SYNC_SECRET", "DISCORD_BRIDGE_SECRET")
+CHAT_MESSAGE_STRING_LIMITS = {
+    "channel_id": 64,
+    "thread_id": 64,
+    "source": 32,
+    "external_id": 255,
+    "user_id": 64,
+    "author_name": 120,
+    "author_username": 64,
+    "author_avatar_url": 2048,
+    "discord_message_id": 32,
+    "discord_webhook_id": 32,
+}
+CHAT_MESSAGE_TEXT_LIMIT = 60000
+DISCORD_SYNC_COMPARE_FIELDS = (
+    "channel_id",
+    "source",
+    "external_id",
+    "author_name",
+    "author_username",
+    "author_avatar_url",
+    "content",
+    "rendered_html",
+    "link_preview_json",
+    "discord_message_id",
+    "discord_webhook_id",
+    "created_at",
+)
 
 
 def _now():
@@ -62,6 +89,24 @@ def _now():
 
 def _row_id(row):
     return row.get("$id") or row.get("id")
+
+
+def _bounded_string(value, limit, *, empty_as_none=False):
+    if value is None:
+        return None
+    text = str(value)
+    if empty_as_none and not text:
+        return None
+    return text[:limit]
+
+
+def _bounded_chat_message_value(key, value):
+    limit = CHAT_MESSAGE_STRING_LIMITS.get(key)
+    if limit:
+        return _bounded_string(value, limit, empty_as_none=key in {"discord_webhook_id"})
+    if key in {"content", "rendered_html"} and isinstance(value, str):
+        return value[:CHAT_MESSAGE_TEXT_LIMIT]
+    return value
 
 
 def _current_user_id():
@@ -537,6 +582,81 @@ def _discord_attachment_is_image(attachment):
     return any(filename.endswith(extension) for extension in DISCORD_IMAGE_EXTENSIONS)
 
 
+def _discord_media_json(previews, images):
+    media = list(previews or []) + list(images or [])
+    compact_media = []
+    for item in media:
+        if not isinstance(item, dict):
+            continue
+        compact_media.append({
+            key: _bounded_string(value, 2048) if isinstance(value, str) else value
+            for key, value in item.items()
+            if value not in (None, "")
+        })
+
+    while compact_media:
+        text = json.dumps(compact_media, separators=(",", ":"))
+        if len(text) <= CHAT_MESSAGE_TEXT_LIMIT:
+            return text
+        compact_media.pop()
+    return "[]"
+
+
+def _discord_message_payload(channel, message):
+    channel_id = _row_id(channel)
+    discord_id = str(message.get("id") or "")
+    if not discord_id:
+        return None
+    external_id = f"discord:{channel.get('discord_channel_id')}:{discord_id}"
+    author = message.get("author") or {}
+    content = message.get("content") or ""
+    created_at = message.get("timestamp") or format_datetime(_now())
+    payload = {
+        "channel_id": channel_id,
+        "source": "discord",
+        "external_id": external_id,
+        "author_name": author.get("global_name") or author.get("username") or "Discord User",
+        "author_username": author.get("username") or "",
+        "author_avatar_url": _discord_avatar(author),
+        "content": content,
+        "rendered_html": _render_discord_content(content, message),
+        "link_preview_json": _discord_media_json(_discord_previews(message), _discord_images(message)),
+        "discord_message_id": discord_id,
+        "discord_webhook_id": message.get("webhook_id"),
+        "created_at": created_at,
+        "updated_at": format_datetime(_now()),
+    }
+    return {
+        key: _bounded_chat_message_value(key, value)
+        for key, value in payload.items()
+    }
+
+
+def _discord_message_changes(existing, payload):
+    changes = {}
+    for key in DISCORD_SYNC_COMPARE_FIELDS:
+        incoming = payload.get(key)
+        if existing.get(key) != incoming:
+            changes[key] = incoming
+    if changes:
+        changes["updated_at"] = payload.get("updated_at")
+    return changes
+
+
+def _log_discord_upsert_failure(row_id, external_id, discord_id, changes):
+    logger.exception(
+        "Failed to upsert Discord message row_id=%s external_id=%s discord_message_id=%s changed_fields=%s value_lengths=%s",
+        row_id,
+        external_id,
+        discord_id,
+        sorted((changes or {}).keys()),
+        {
+            key: len(value) if isinstance(value, str) else None
+            for key, value in (changes or {}).items()
+        },
+    )
+
+
 def _discord_mention_name(user):
     return (
         user.get("global_name")
@@ -676,35 +796,22 @@ def _list_messages(scope_type, scope_id, before=None, after=None):
 
 
 def _upsert_discord_message(channel, message, emit_event=False):
-    channel_id = _row_id(channel)
-    discord_id = str(message.get("id") or "")
-    if not discord_id:
+    payload = _discord_message_payload(channel, message)
+    if not payload:
         return None, False
-    external_id = f"discord:{channel.get('discord_channel_id')}:{discord_id}"
-    author = message.get("author") or {}
-    content = message.get("content") or ""
-    created_at = message.get("timestamp") or format_datetime(_now())
-    previews = _discord_previews(message)
-    images = _discord_images(message)
-    payload = {
-        "channel_id": channel_id,
-        "source": "discord",
-        "external_id": external_id,
-        "author_name": author.get("global_name") or author.get("username") or "Discord User",
-        "author_username": author.get("username") or "",
-        "author_avatar_url": _discord_avatar(author),
-        "content": content,
-        "rendered_html": _render_discord_content(content, message),
-        "link_preview_json": json.dumps(previews + images),
-        "discord_message_id": discord_id,
-        "discord_webhook_id": message.get("webhook_id"),
-        "created_at": created_at,
-        "updated_at": format_datetime(_now()),
-    }
+    channel_id = payload.get("channel_id")
+    external_id = payload.get("external_id")
+    discord_id = payload.get("discord_message_id")
+    changes = payload
+    row_id = None
     try:
         existing = first_row(COLLECTIONS["chat_messages"], [Query.equal("external_id", [external_id])])
         if existing:
-            return update_row_safe(COLLECTIONS["chat_messages"], _row_id(existing), payload), False
+            row_id = _row_id(existing)
+            changes = _discord_message_changes(existing, payload)
+            if not changes:
+                return existing, False
+            return update_row_safe(COLLECTIONS["chat_messages"], row_id, changes), False
         row = create_row_safe(COLLECTIONS["chat_messages"], row_id=ID.unique(), data=payload)
         if emit_event:
             emit_chat_event(
@@ -716,7 +823,7 @@ def _upsert_discord_message(channel, message, emit_event=False):
             )
         return row, True
     except AppwriteException:
-        logger.exception("Failed to upsert Discord message")
+        _log_discord_upsert_failure(row_id, external_id, discord_id, changes)
         return None, False
 
 

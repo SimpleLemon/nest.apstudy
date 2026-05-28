@@ -79,18 +79,28 @@ const HELP_ITEMS = [
 
 const THEME_ITEMS = [
   {
-    name: 'Set theme to light',
-    theme: 'light',
-    keywords: ['light', 'theme', 'appearance', 'parchment'],
-  },
-  {
-    name: 'Set theme to dark',
-    theme: 'dark',
+    name: 'Set theme to Obsidian Dark',
+    theme: 'obsidian-dark',
     keywords: ['dark', 'theme', 'appearance', 'obsidian'],
   },
   {
+    name: 'Set theme to Nest Dark',
+    theme: 'nest-dark',
+    keywords: ['dark', 'theme', 'appearance', 'nest', 'gold', 'navy'],
+  },
+  {
+    name: 'Set theme to Parchment Light',
+    theme: 'parchment-light',
+    keywords: ['light', 'theme', 'appearance', 'parchment'],
+  },
+  {
+    name: 'Set theme to Nest Light',
+    theme: 'nest-light',
+    keywords: ['light', 'theme', 'appearance', 'nest', 'blue', 'gold'],
+  },
+  {
     name: 'Set theme to auto',
-    theme: 'system',
+    theme: 'system-match',
     keywords: ['auto', 'system', 'theme', 'appearance', 'preference'],
   },
 ];
@@ -98,18 +108,19 @@ const THEME_ITEMS = [
 const THEME_STORAGE_KEY = 'apstudy-theme';
 const PENDING_THEME_STORAGE_KEY = 'apstudy-theme-pending';
 const PENDING_THEME_UPDATED_KEY = 'apstudy-theme-updated-at';
+const INTERFACE_THEMES = [
+  'obsidian-dark',
+  'parchment-light',
+  'system-match',
+  'nest-light',
+  'nest-dark',
+];
 const THEME_TO_INTERFACE_THEME = {
   dark: 'obsidian-dark',
   light: 'parchment-light',
   system: 'system-match',
 };
-const INTERFACE_THEME_TO_THEME = {
-  'obsidian-dark': 'dark',
-  'nest-dark': 'dark',
-  'parchment-light': 'light',
-  'nest-light': 'light',
-  'system-match': 'system',
-};
+const DARK_THEMES = ['obsidian-dark', 'nest-dark'];
 
 let root = null;
 let setOpenState = null;
@@ -118,7 +129,7 @@ let activeThemeSaveController = null;
 
 function resolveInterfaceTheme(value) {
   const normalized = String(value || '').trim().toLowerCase();
-  if (INTERFACE_THEME_TO_THEME[normalized]) {
+  if (INTERFACE_THEMES.includes(normalized)) {
     return normalized;
   }
   if (THEME_TO_INTERFACE_THEME[normalized]) {
@@ -234,7 +245,10 @@ function setTheme(theme) {
       warnThemeStorageFailure('store local theme preference', error);
     }
     document.documentElement.setAttribute('data-theme', interfaceTheme);
-    document.documentElement.classList.toggle('dark', interfaceTheme === 'obsidian-dark');
+    const isDark = interfaceTheme === 'system-match'
+      ? window.matchMedia('(prefers-color-scheme: dark)').matches
+      : DARK_THEMES.includes(interfaceTheme);
+    document.documentElement.classList.toggle('dark', isDark);
   }
 
   storePendingTheme(interfaceTheme);
@@ -254,7 +268,10 @@ function setTheme(theme) {
           warnThemeStorageFailure('store persisted theme preference', error);
         }
         document.documentElement.setAttribute('data-theme', persistedTheme);
-        document.documentElement.classList.toggle('dark', persistedTheme === 'obsidian-dark');
+        const isDark = persistedTheme === 'system-match'
+          ? window.matchMedia('(prefers-color-scheme: dark)').matches
+          : DARK_THEMES.includes(persistedTheme);
+        document.documentElement.classList.toggle('dark', isDark);
       }
     }
   });

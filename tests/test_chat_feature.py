@@ -398,6 +398,140 @@ class TestChatFeature(unittest.TestCase):
         update_row.assert_called_once()
         emit_event.assert_not_called()
 
+    def test_discord_upsert_skips_update_for_unchanged_existing_message(self):
+        channel = {
+            "$id": "nest_chat",
+            "kind": "discord",
+            "discord_channel_id": "discord-channel",
+        }
+        message = {
+            "id": "discord-message-1",
+            "content": "same discord payload",
+            "timestamp": "2026-05-26T22:00:00Z",
+            "author": {"id": "author-1", "username": "UrbanPanda"},
+        }
+        existing = {
+            "$id": "existing-row",
+            **chat_api._discord_message_payload(channel, message),
+            "updated_at": "2026-05-26T22:01:00Z",
+        }
+
+        with patch.object(chat_api, "first_row", return_value=existing), \
+                patch.object(chat_api, "update_row_safe") as update_row, \
+                patch.object(chat_api, "emit_chat_event") as emit_event:
+            row, created = chat_api._upsert_discord_message(channel, message, emit_event=True)
+
+        self.assertFalse(created)
+        self.assertEqual(row["$id"], "existing-row")
+        update_row.assert_not_called()
+        emit_event.assert_not_called()
+
+    def test_discord_upsert_updates_only_changed_fields_for_existing_message(self):
+        channel = {
+            "$id": "nest_chat",
+            "kind": "discord",
+            "discord_channel_id": "discord-channel",
+        }
+        original = {
+            "id": "discord-message-1",
+            "content": "old discord payload",
+            "timestamp": "2026-05-26T22:00:00Z",
+            "author": {"id": "author-1", "username": "UrbanPanda"},
+        }
+        edited = {
+            **original,
+            "content": "edited discord payload",
+        }
+        existing = {
+            "$id": "existing-row",
+            **chat_api._discord_message_payload(channel, original),
+            "updated_at": "2026-05-26T22:01:00Z",
+        }
+
+        with patch.object(chat_api, "first_row", return_value=existing), \
+                patch.object(chat_api, "update_row_safe", return_value={"$id": "existing-row"}) as update_row:
+            row, created = chat_api._upsert_discord_message(channel, edited)
+
+        self.assertFalse(created)
+        self.assertEqual(row["$id"], "existing-row")
+        update_row.assert_called_once()
+        payload = update_row.call_args.args[2]
+        self.assertEqual(set(payload), {"content", "rendered_html", "updated_at"})
+        self.assertEqual(payload["content"], "edited discord payload")
+
+    def test_discord_message_payload_normalizes_schema_bounded_values(self):
+        channel = {
+            "$id": "nest_chat",
+            "kind": "discord",
+            "discord_channel_id": "discord-channel",
+        }
+        message = {
+            "id": "discord-message-1",
+            "content": "payload with media",
+            "timestamp": "2026-05-26T22:00:00Z",
+            "webhook_id": "w" * 100,
+            "author": {
+                "id": "author-1",
+                "global_name": "D" * 200,
+                "username": "u" * 100,
+                "avatar": "avatarhash",
+            },
+            "embeds": [{
+                "url": "https://example.test/" + ("x" * 3000),
+                "title": "T" * 3000,
+                "description": "D" * 3000,
+                "provider": {"name": "Example"},
+                "type": "link",
+            }],
+            "attachments": [{
+                "filename": "schedule-" + ("x" * 3000) + ".png",
+                "url": "https://cdn.discordapp.com/attachments/image.png",
+                "content_type": "image/png",
+                "width": 640,
+                "height": 360,
+            }],
+        }
+
+        payload = chat_api._discord_message_payload(channel, message)
+
+        self.assertEqual(len(payload["author_name"]), 120)
+        self.assertEqual(len(payload["author_username"]), 64)
+        self.assertEqual(len(payload["discord_webhook_id"]), 32)
+        self.assertLessEqual(len(payload["link_preview_json"]), chat_api.CHAT_MESSAGE_TEXT_LIMIT)
+        media = json.loads(payload["link_preview_json"])
+        self.assertEqual(media[1]["kind"], "discord_image")
+        self.assertLessEqual(len(media[0]["title"]), 2048)
+
+    def test_discord_upsert_returns_false_when_existing_update_fails(self):
+        channel = {
+            "$id": "nest_chat",
+            "kind": "discord",
+            "discord_channel_id": "discord-channel",
+        }
+        original = {
+            "id": "discord-message-1",
+            "content": "old discord payload",
+            "timestamp": "2026-05-26T22:00:00Z",
+            "author": {"id": "author-1", "username": "UrbanPanda"},
+        }
+        edited = {
+            **original,
+            "content": "edited discord payload",
+        }
+        existing = {
+            "$id": "existing-row",
+            **chat_api._discord_message_payload(channel, original),
+        }
+
+        with patch.object(chat_api, "first_row", return_value=existing), \
+                patch.object(chat_api, "update_row_safe", side_effect=chat_api.AppwriteException("Server Error")), \
+                patch.object(chat_api.logger, "exception") as log_exception:
+            row, created = chat_api._upsert_discord_message(channel, edited)
+
+        self.assertIsNone(row)
+        self.assertFalse(created)
+        log_exception.assert_called_once()
+
     def test_discord_ingest_endpoint_upserts_and_emits_for_bot_message(self):
         channel = {
             "$id": "nest_chat",

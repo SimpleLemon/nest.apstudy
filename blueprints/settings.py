@@ -634,6 +634,7 @@ def _onboarding_courses():
 
 
 def _onboarding_context():
+    user_settings = _load_user_settings(str(current_user.id))
     return {
         "user": {
             "name": current_user.name,
@@ -660,6 +661,9 @@ def _onboarding_context():
             for course in _onboarding_courses()
         ],
         "default_term": DEFAULT_TERM,
+        "settings": user_settings,
+        "other_calendar_urls": _load_other_calendar_urls(user_settings),
+        "theme_preference": user_settings.get("interface_theme") if user_settings else None,
     }
 
 
@@ -1422,12 +1426,12 @@ def update_interface_preferences():
     updates = {"updated_at": format_datetime(datetime.utcnow())}
     if preferred_calendar_view:
         updates["preferred_calendar_view"] = preferred_calendar_view
-    if theme is not None:
+    if interface_theme:
+        updates["interface_theme"] = interface_theme
+        updates["theme"] = theme or _theme_from_interface_theme(interface_theme)
+    elif theme is not None:
         updates["theme"] = theme
         updates["interface_theme"] = _interface_theme_from_value(theme)
-    elif interface_theme:
-        updates["interface_theme"] = interface_theme
-        updates["theme"] = _theme_from_interface_theme(interface_theme)
     if sidebar_default:
         updates["sidebar_default"] = sidebar_default
     if email_notifications is not None:

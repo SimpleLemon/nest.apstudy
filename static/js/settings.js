@@ -19,17 +19,17 @@ const SETTINGS_STATE = {
 };
 
 const SETTINGS_SECTION_IDS = ['account', 'data', 'preferences'];
+const SETTINGS_INTERFACE_THEMES = [
+  'obsidian-dark',
+  'parchment-light',
+  'system-match',
+  'nest-light',
+  'nest-dark',
+];
 const SETTINGS_THEME_TO_INTERFACE_THEME = {
   dark: 'obsidian-dark',
   light: 'parchment-light',
   system: 'system-match',
-};
-const SETTINGS_INTERFACE_THEME_TO_THEME = {
-  'obsidian-dark': 'dark',
-  'nest-dark': 'dark',
-  'parchment-light': 'light',
-  'nest-light': 'light',
-  'system-match': 'system',
 };
 const SETTINGS_PENDING_THEME_STORAGE_KEY = 'apstudy-theme-pending';
 const SETTINGS_PENDING_THEME_UPDATED_KEY = 'apstudy-theme-updated-at';
@@ -458,7 +458,7 @@ function populateFields() {
 
 function syncThemeControls() {
   const settings = SETTINGS_STATE.settings || {};
-  const themeValue = normalizeThemeValue(settings.theme || settings.interface_theme);
+  const themeValue = normalizeThemeValue(settings.interface_theme || settings.theme);
   SETTINGS_STATE.pendingTheme = '';
   const sidebarValue = normalizeSidebarDefault(settings.sidebar_default);
   if (elements.theme) {
@@ -473,7 +473,7 @@ function syncThemeControls() {
 function syncThemeChoices() {
   if (!elements.themeChoices) return;
   const settings = SETTINGS_STATE.settings || {};
-  const current = SETTINGS_STATE.pendingTheme || normalizeThemeValue(settings.theme || settings.interface_theme);
+  const current = SETTINGS_STATE.pendingTheme || normalizeThemeValue(settings.interface_theme || settings.theme);
   elements.themeChoices.forEach((btn) => {
     const btnTheme = btn.getAttribute('data-theme') || '';
     const normalized = normalizeThemeValue(btnTheme);
@@ -809,8 +809,9 @@ async function saveCalendarLinks() {
 }
 
 async function savePreferences() {
+  const interfaceTheme = normalizeThemeValue(elements.theme?.value);
   const payload = {
-    theme: normalizeThemeValue(elements.theme?.value),
+    interface_theme: interfaceTheme,
     sidebar_default: normalizeSidebarDefault(elements.sidebarDefault?.value),
     email_notifications: getToggleState('email_notifications'),
     product_updates: getToggleState('product_updates'),
@@ -833,7 +834,7 @@ async function savePreferences() {
     clearPendingThemeStorage();
     syncThemeControls();
     syncToggleControls();
-    applyThemePreference(payload.theme);
+    applyThemePreference(response.interface_theme || payload.interface_theme);
     applySidebarDefault(response.sidebar_default || payload.sidebar_default);
     showToast('Preferences saved.', 'success');
   } catch (error) {
@@ -1038,18 +1039,17 @@ function getToggleState(fieldName) {
 
 function normalizeThemeValue(value) {
   const normalized = String(value || '').trim().toLowerCase();
-  if (SETTINGS_THEME_TO_INTERFACE_THEME[normalized]) {
+  if (SETTINGS_INTERFACE_THEMES.includes(normalized)) {
     return normalized;
   }
-  if (SETTINGS_INTERFACE_THEME_TO_THEME[normalized]) {
-    return SETTINGS_INTERFACE_THEME_TO_THEME[normalized];
+  if (SETTINGS_THEME_TO_INTERFACE_THEME[normalized]) {
+    return SETTINGS_THEME_TO_INTERFACE_THEME[normalized];
   }
-  return 'dark';
+  return 'obsidian-dark';
 }
 
 function applyThemePreference(theme) {
-  const normalizedTheme = normalizeThemeValue(theme);
-  const interfaceTheme = SETTINGS_THEME_TO_INTERFACE_THEME[normalizedTheme] || 'obsidian-dark';
+  const interfaceTheme = normalizeThemeValue(theme);
   window.APSTUDY_THEME_PREFERENCE = interfaceTheme;
   localStorage.setItem('apstudy-theme', interfaceTheme);
   document.documentElement.setAttribute('data-theme', interfaceTheme);

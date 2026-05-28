@@ -19,6 +19,9 @@ test("command palette keeps primary navigation, theme actions, and global contro
 
     assert.match(source, /export const COMMAND_PALETTE_PAGES\b/);
     assert.match(source, /const THEME_TO_INTERFACE_THEME = \{/);
+    assert.match(source, /const INTERFACE_THEMES = \[/);
+    assert.match(source, /'nest-light'/);
+    assert.match(source, /'nest-dark'/);
     assert.match(source, /dark: ['"]obsidian-dark['"]/);
     assert.match(source, /light: ['"]parchment-light['"]/);
     assert.match(source, /system: ['"]system-match['"]/);
@@ -209,6 +212,10 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
     }
 
     assert.match(source, /const SETTINGS_SECTION_IDS = \['account', 'data', 'preferences'\]/);
+    assert.match(source, /const SETTINGS_INTERFACE_THEMES = \[/);
+    assert.match(source, /'nest-light'/);
+    assert.match(source, /'nest-dark'/);
+    assert.match(source, /interface_theme: interfaceTheme/);
     assert.match(source, /const SETTINGS_MAX_OTHER_CALENDARS = 10/);
     assert.match(source, /const USERNAME_RESERVED = new Set\(\[/);
     assert.match(source, /window\.APSTUDY_THEME_PREFERENCE = interfaceTheme/);

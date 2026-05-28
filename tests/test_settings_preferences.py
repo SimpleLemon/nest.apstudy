@@ -64,6 +64,36 @@ class TestSettingsPreferences(unittest.TestCase):
         self.assertFalse(payload["chat_sound_enabled"])
         self.assertFalse(update_row.call_args.args[2]["chat_sound_enabled"])
 
+    def test_interface_preferences_accept_nest_theme_variants(self):
+        for interface_theme, legacy_theme in (
+            ("nest-light", "light"),
+            ("nest-dark", "dark"),
+        ):
+            with self.subTest(interface_theme=interface_theme):
+                existing = {"$id": "settings-1", "user_id": "user-1"}
+                updated = {
+                    **existing,
+                    "interface_theme": interface_theme,
+                    "theme": legacy_theme,
+                }
+
+                with self.app.test_request_context(
+                    "/settings/api/interface-preferences",
+                    method="POST",
+                    json={"interface_theme": interface_theme},
+                ):
+                    with patch.object(settings_bp, "current_user", self.user), \
+                            patch.object(settings_bp, "_load_user_settings", return_value=existing), \
+                            patch.object(settings_bp, "update_row_safe", return_value=updated) as update_row:
+                        response = settings_bp.update_interface_preferences.__wrapped__()
+
+                payload = response.get_json()
+                updates = update_row.call_args.args[2]
+                self.assertEqual(payload["interface_theme"], interface_theme)
+                self.assertEqual(payload["theme"], legacy_theme)
+                self.assertEqual(updates["interface_theme"], interface_theme)
+                self.assertEqual(updates["theme"], legacy_theme)
+
 
 if __name__ == "__main__":
     unittest.main()
