@@ -43,6 +43,7 @@ const state = {
   sectionsById: {},
   savedCoursesBySection: new Map(),
   tracksBySection: new Map(),
+  activeCourseView: "search",
   searchQuery: "",
   dayFilters: new Set(),
   filtersOpen: false,
@@ -257,6 +258,18 @@ function wireControls() {
   });
 
   const filterButton = document.getElementById("courses-filter-button");
+  document.querySelector(".courses-view-toggle")?.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-course-view]");
+    if (!button) return;
+    const nextView = button.dataset.courseView || "search";
+    if (state.activeCourseView === nextView) return;
+    state.activeCourseView = nextView;
+    state.detailSectionId = null;
+    state.editingSectionId = null;
+    state.filtersOpen = false;
+    renderPanel();
+  });
+
   filterButton?.addEventListener("click", (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -485,6 +498,7 @@ function renderPanel() {
   if (!summary || !content) return;
 
   document.querySelector(".courses-panel")?.classList.toggle("is-detailing", Boolean(state.detailSectionId || state.editingSectionId));
+  syncViewControls();
   syncFilterControls();
 
   if (state.loading) {
@@ -515,9 +529,9 @@ function renderPanel() {
 
   const filtered = getFilteredSections();
   const visible = filtered.slice(0, COURSE_RESULT_LIMIT);
-  summary.textContent = `${filtered.length.toLocaleString()} sections in ${formatTermLabel(state.selectedTerm)}`;
+  summary.textContent = getPanelSummaryText(filtered.length);
   if (!visible.length) {
-    content.innerHTML = `<div class="courses-state">No sections match your filters.</div>`;
+    content.innerHTML = `<div class="courses-state">${escapeHtml(getEmptyStateText())}</div>`;
     return;
   }
 
@@ -525,6 +539,31 @@ function renderPanel() {
     ? `<div class="courses-state">Showing first ${COURSE_RESULT_LIMIT.toLocaleString()} matches. Refine your search for more specific results.</div>`
     : "";
   content.innerHTML = visible.map(buildCourseCardHtml).join("") + capNote;
+}
+
+function syncViewControls() {
+  document.querySelectorAll("[data-course-view]").forEach((button) => {
+    const selected = button.dataset.courseView === state.activeCourseView;
+    button.classList.toggle("is-active", selected);
+    button.setAttribute("aria-pressed", selected ? "true" : "false");
+  });
+}
+
+function getPanelSummaryText(count) {
+  const term = formatTermLabel(state.selectedTerm);
+  if (state.activeCourseView === "selected") {
+    return `${count.toLocaleString()} selected ${count === 1 ? "course" : "courses"} in ${term}`;
+  }
+  if (state.activeCourseView === "tracked") {
+    return `${count.toLocaleString()} tracked ${count === 1 ? "course" : "courses"} in ${term}`;
+  }
+  return `${count.toLocaleString()} sections in ${term}`;
+}
+
+function getEmptyStateText() {
+  if (state.activeCourseView === "selected") return "No selected courses match your filters.";
+  if (state.activeCourseView === "tracked") return "No tracked courses match your filters.";
+  return "No sections match your filters.";
 }
 
 function syncFilterControls() {
@@ -567,22 +606,23 @@ function buildCourseCardHtml(section) {
   const statusClass = status.toLowerCase() === "open" ? "is-open" : status.toLowerCase() === "closed" ? "is-closed" : "";
   const seats = formatSeats(section);
   const saving = state.savingIds.has(id);
+  const sectionLabel = section.section_number ? ` <span class="course-section-inline">&middot; Sec ${escapeHtml(section.section_number)}</span>` : "";
+  const scheduleDetail = formatCourseCardSchedule(section);
   return `
     <article class="course-card ${isAdded ? `is-added ${escapeHtml(colorClass)}` : ""}" data-section-id="${escapeHtml(id)}" tabindex="0">
       <div class="course-card-top">
         <div class="course-card-title">
-          <strong>${escapeHtml(section.course_code || "Course")} ${section.section_number ? `<span class="course-section-inline">Sec ${escapeHtml(section.section_number)}</span>` : ""}</strong>
+          <strong>${escapeHtml(section.course_code || "Course")}${sectionLabel}</strong>
           <span>${escapeHtml(section.course_title || "Untitled course")}</span>
         </div>
         <button type="button" class="course-card-action ${isAdded ? "is-added" : ""}" data-add-section-id="${escapeHtml(id)}" ${saving ? "disabled" : ""}>${isAdded ? "Added" : "Add"}</button>
       </div>
+      <div class="course-card-schedule">${escapeHtml(scheduleDetail)}</div>
       <div class="course-card-meta">
         <span class="course-chip ${statusClass}">${escapeHtml(status)}</span>
         <span class="course-chip">${escapeHtml(seats)}</span>
         <span class="course-chip">${escapeHtml(section.schedule_type || "Type")}</span>
       </div>
-      <div class="course-card-schedule">${escapeHtml(section.schedule_display || "TBA")}</div>
-      <div class="course-card-schedule">${escapeHtml(section.instructor || "TBA")}</div>
     </article>
   `;
 }
@@ -634,7 +674,7 @@ function buildDetailHtml(sectionId) {
       ` : ""}
       <section class="courses-detail-card">
         ${detailRow("Instructor", formatInstructors(section))}
-        ${detailRow("Schedule", section.schedule_display || "TBA")}
+        ${detailRow("Schedule", normalizeScheduleDisplay(section.schedule_display || "TBA"))}
         ${detailRow("CRN", section.crn || "N/A")}
         ${detailRow("Type", section.schedule_type || "N/A")}
         ${detailRow("Location", section.location || "TBA")}
@@ -1085,13 +1125,36 @@ function applyEventLayoutStyles(root) {
 
 function getFilteredSections() {
   const query = state.searchQuery.trim().toLowerCase();
-  return state.sections.filter((section) => {
+  return getSectionsForActiveView().filter((section) => {
+    if (section.term && section.term !== state.selectedTerm) return false;
     const searchBlob = section.searchBlob || buildSectionSearchBlob(section);
     if (query && !searchBlob.includes(query)) return false;
     if (!sectionMatchesDay(section)) return false;
     if (!sectionMatchesTime(section)) return false;
     return true;
   });
+}
+
+function getSectionsForActiveView() {
+  if (state.activeCourseView === "selected") {
+    return Array.from(state.savedCoursesBySection.entries())
+      .map(([sectionId, course]) => resolvePanelSection(sectionId, course))
+      .filter(Boolean);
+  }
+  if (state.activeCourseView === "tracked") {
+    return Array.from(state.tracksBySection.entries())
+      .filter(([, track]) => Boolean(track?.enabled))
+      .map(([sectionId, track]) => resolvePanelSection(sectionId, track))
+      .filter(Boolean);
+  }
+  return state.sections;
+}
+
+function resolvePanelSection(sectionId, fallback) {
+  const section = getSection(sectionId) || rememberSection(fallback);
+  if (!section) return null;
+  if (!section.searchBlob) section.searchBlob = buildSectionSearchBlob(section);
+  return section;
 }
 
 function sectionMatchesDay(section) {
@@ -1315,6 +1378,19 @@ function formatSeats(section) {
   return `${seats} ${Number(seats) === 1 ? "seat" : "seats"}`;
 }
 
+function formatCourseCardSchedule(section) {
+  const schedule = normalizeScheduleDisplay(section?.schedule_display || "");
+  const instructor = section?.instructor || section?.instructor_name || "";
+  const parts = [schedule, instructor].map((value) => String(value || "").trim()).filter(Boolean);
+  return parts.length ? parts.join(" | ") : "TBA";
+}
+
+function normalizeScheduleDisplay(value) {
+  return String(value || "").replace(/(\d(?::\d{2})?)\s*([ap])\b/gi, (_, time, suffix) => {
+    return `${time} ${suffix.toLowerCase() === "a" ? "AM" : "PM"}`;
+  });
+}
+
 function formatTermLabel(term) {
   const parts = String(term || "").split("_");
   if (parts.length !== 2) return term || "Term";
@@ -1345,10 +1421,10 @@ function formatAtlasTime(token) {
   if (minutes === null) return "TBA";
   const hour24 = Math.floor(minutes / 60);
   const minute = minutes % 60;
-  const suffix = hour24 >= 12 ? "p" : "a";
+  const suffix = hour24 >= 12 ? "PM" : "AM";
   let hour = hour24 % 12;
   if (hour === 0) hour = 12;
-  return `${hour}:${String(minute).padStart(2, "0")}${suffix}`;
+  return `${hour}:${String(minute).padStart(2, "0")} ${suffix}`;
 }
 
 function formatHourLabel(hour) {

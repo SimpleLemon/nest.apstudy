@@ -39,6 +39,20 @@
                 </div>
             </section>
             <section class="courses-search-stack" id="courses-search-stack" aria-label="Course filters">
+                <div class="courses-view-toggle" role="group" aria-label="Course list view">
+                    <button type="button" data-course-view="search" aria-pressed="true">
+                        <span class="material-symbols-outlined" aria-hidden="true">search</span>
+                        <span>Search</span>
+                    </button>
+                    <button type="button" data-course-view="selected" aria-pressed="false">
+                        <span class="material-symbols-outlined" aria-hidden="true">playlist_add_check</span>
+                        <span>Selected Courses</span>
+                    </button>
+                    <button type="button" data-course-view="tracked" aria-pressed="false">
+                        <span class="material-symbols-outlined" aria-hidden="true">visibility</span>
+                        <span>Tracked Courses</span>
+                    </button>
+                </div>
                 <div class="courses-search-row">
                     <label class="courses-search-field">
                         <span class="material-symbols-outlined" aria-hidden="true">search</span>

@@ -72,6 +72,50 @@ body.courses-body {
   display: none;
 }
 
+.courses-view-toggle {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  border-radius: 9px;
+  border: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent);
+  background: color-mix(in srgb, var(--color-surface) 72%, #000 28%);
+}
+
+.courses-view-toggle button {
+  min-width: 0;
+  min-height: 44px;
+  border: 0;
+  border-radius: 7px;
+  padding: 0 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: transparent;
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+  font: 800 12px/1.15 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-align: center;
+  transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.courses-view-toggle button:hover,
+.courses-view-toggle button.is-active {
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
+.courses-view-toggle .material-symbols-outlined {
+  flex: 0 0 auto;
+  font-size: 20px;
+}
+
+.courses-view-toggle button span:last-child {
+  min-width: 0;
+}
+
 .courses-search-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 44px;
@@ -443,6 +487,16 @@ body.courses-body {
   display: block;
   font-size: 14px;
   line-height: 1.25;
+}
+
+.course-card-title strong .course-section-inline {
+  display: inline;
+  margin-top: 0;
+  color: var(--color-on-surface);
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 800;
+  overflow: visible;
 }
 
 .course-card-title span {
@@ -1206,6 +1260,7 @@ body.courses-body {
   .courses-search-field input,
   .courses-filter-row select,
   .courses-time-filter input[type="time"],
+  .courses-view-toggle button,
   .courses-filter-button,
   .courses-day-toggle button,
   .courses-week-controls button,
@@ -1220,6 +1275,13 @@ body.courses-body {
   .courses-week-controls button {
     width: 48px;
     height: 48px;
+  }
+
+  .courses-view-toggle button {
+    flex-direction: column;
+    gap: 3px;
+    padding: 6px 4px;
+    font-size: 11px;
   }
 
   .courses-day-toggle {

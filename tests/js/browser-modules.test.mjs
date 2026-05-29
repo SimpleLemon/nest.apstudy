@@ -174,15 +174,26 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
 
 test("courses page keeps Atlas APIs, filtering state, and schedule constants connected", async () => {
     const source = await sourceFor("static/js/courses.js");
+    const styles = await sourceFor("static/css/courses.css");
 
     assert.match(source, /const COURSE_DAYS = \[/);
     assert.match(source, /const COURSE_RESULT_LIMIT = 100/);
     assert.match(source, /selectedTerm: window\.APSTUDY_COURSES_DEFAULT_TERM/);
+    assert.match(source, /activeCourseView: "search"/);
+    assert.match(source, /button\[data-course-view\]/);
+    assert.match(source, /state\.activeCourseView = nextView/);
     assert.match(source, /fetchJson\("\/api\/atlas\/terms"\)/);
     assert.match(source, /fetchJson\(`\/api\/atlas\/sections\?term=\$\{encodeURIComponent\(term\)\}&include_cancelled=0`\)/);
     assert.match(source, /fetchJson\("\/api\/courses\/saved"\)/);
     assert.match(source, /fetchJson\("\/api\/courses\/tracks"\)/);
     assert.match(source, /buildSectionSearchBlob\(normalized\)/);
+    assert.match(source, /state\.activeCourseView === "selected"/);
+    assert.match(source, /state\.activeCourseView === "tracked"/);
+    assert.match(source, /\.filter\(\(\[, track\]\) => Boolean\(track\?\.enabled\)\)/);
+    assert.match(source, /normalizeScheduleDisplay/);
+    assert.match(source, /No tracked courses match your filters\./);
+    assert.match(styles, /\.courses-view-toggle/);
+    assert.match(styles, /\.course-section-inline/);
 });
 
 test("files page keeps upload limits, modal elements, and share/delete endpoints wired", async () => {
