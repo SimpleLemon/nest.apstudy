@@ -43,6 +43,7 @@ const state = {
   sectionsById: {},
   savedCoursesBySection: new Map(),
   tracksBySection: new Map(),
+  removedSelectedSections: new Map(),
   activeCourseView: "search",
   searchQuery: "",
   dayFilters: new Set(),
@@ -130,6 +131,7 @@ async function loadSectionsForTerm(term) {
 async function loadSavedCourses() {
   const payload = await fetchJson("/api/courses/saved");
   state.savedCoursesBySection = new Map();
+  state.removedSelectedSections.clear();
   for (const course of payload.courses || []) {
     applySavedCourse(course);
   }
@@ -263,6 +265,9 @@ function wireControls() {
     if (!button) return;
     const nextView = button.dataset.courseView || "search";
     if (state.activeCourseView === nextView) return;
+    if (state.activeCourseView === "selected" && nextView !== "selected") {
+      state.removedSelectedSections.clear();
+    }
     state.activeCourseView = nextView;
     state.detailSectionId = null;
     state.editingSectionId = null;
@@ -289,6 +294,7 @@ function wireControls() {
     state.detailSectionId = null;
     state.editingSectionId = null;
     state.filtersOpen = false;
+    state.removedSelectedSections.clear();
     resetWeekScroll();
     void loadSectionsForTerm(state.selectedTerm);
   });
@@ -412,7 +418,13 @@ function wireControls() {
     if (addButton) {
       event.preventDefault();
       event.stopPropagation();
-      void addCourse(addButton.dataset.addSectionId);
+      const sectionId = addButton.dataset.addSectionId;
+      const addedCourse = state.savedCoursesBySection.get(String(sectionId));
+      if (addedCourse?.id) {
+        void removeCourse(addedCourse.id, sectionId);
+      } else {
+        void addCourse(sectionId);
+      }
       return;
     }
 
@@ -486,7 +498,9 @@ function changeTermBy(delta) {
   if (nextIndex < 0 || nextIndex >= state.terms.length) return;
   state.selectedTerm = state.terms[nextIndex];
   state.detailSectionId = null;
+  state.editingSectionId = null;
   state.filtersOpen = false;
+  state.removedSelectedSections.clear();
   resetWeekScroll();
   renderTermSelect();
   void loadSectionsForTerm(state.selectedTerm);
@@ -601,6 +615,7 @@ function buildCourseCardHtml(section) {
   const id = section.id;
   const addedCourse = state.savedCoursesBySection.get(id);
   const isAdded = Boolean(addedCourse);
+  const isTracked = Boolean(state.tracksBySection.get(id)?.enabled);
   const colorClass = isAdded ? getCourseColor(addedCourse).key : "";
   const status = section.enrollment_status || "Unknown";
   const statusClass = status.toLowerCase() === "open" ? "is-open" : status.toLowerCase() === "closed" ? "is-closed" : "";
@@ -623,6 +638,7 @@ function buildCourseCardHtml(section) {
         <span class="course-chip">${escapeHtml(seats)}</span>
         <span class="course-chip">${escapeHtml(section.schedule_type || "Type")}</span>
       </div>
+      ${isAdded && isTracked ? `<div class="course-card-tracked">Tracked</div>` : ""}
     </article>
   `;
 }
@@ -672,18 +688,6 @@ function buildDetailHtml(sectionId) {
           <button type="button" class="track-toggle" data-track-section-id="${escapeHtml(sectionId)}" aria-label="Track class" aria-pressed="${trackEnabled ? "true" : "false"}" ${tracking || (!canTrack && !trackEnabled) ? "disabled" : ""}></button>
         </section>
       ` : ""}
-      <section class="courses-detail-card">
-        ${detailRow("Instructor", formatInstructors(section))}
-        ${detailRow("Schedule", normalizeScheduleDisplay(section.schedule_display || "TBA"))}
-        ${detailRow("CRN", section.crn || "N/A")}
-        ${detailRow("Type", section.schedule_type || "N/A")}
-        ${detailRow("Location", section.location || "TBA")}
-        ${detailRow("Seats", formatSeats(section))}
-        ${detailRow("Credits", section.credit_hours || "N/A")}
-        ${detailRow("Requirement", formatRequirement(section))}
-        ${detailRow("Dates", formatDateRange(section.date_range))}
-        ${detailRow("Live Status", liveText)}
-      </section>
       <div class="courses-detail-actions">
         ${addedCourse
           ? `
@@ -696,6 +700,18 @@ function buildDetailHtml(sectionId) {
           : `<button type="button" class="courses-primary-action" data-add-section-id="${escapeHtml(sectionId)}" ${saving ? "disabled" : ""}>Add Class</button>`
         }
       </div>
+      <section class="courses-detail-card">
+        ${detailRow("Instructor", formatInstructors(section))}
+        ${detailRow("Schedule", normalizeScheduleDisplay(section.schedule_display || "TBA"))}
+        ${detailRow("CRN", section.crn || "N/A")}
+        ${detailRow("Type", section.schedule_type || "N/A")}
+        ${detailRow("Location", section.location || "TBA")}
+        ${detailRow("Seats", formatSeats(section))}
+        ${detailRow("Credits", section.credit_hours || "N/A")}
+        ${detailRow("Requirement", formatRequirement(section))}
+        ${detailRow("Dates", formatDateRange(section.date_range))}
+        ${detailRow("Live Status", liveText)}
+      </section>
       <section class="courses-description-card">
         <span class="material-symbols-outlined" aria-hidden="true">notes</span>
         <div>
@@ -1043,7 +1059,11 @@ function getCalendarEventsForDay(dayKey) {
     const section = getSection(sectionId) || course;
     events.push(...meetingEventsForSection(section, false, course.id));
   }
-  if (state.hoveredSectionId && !state.savedCoursesBySection.has(state.hoveredSectionId)) {
+  if (
+    state.hoveredSectionId
+    && !state.savedCoursesBySection.has(state.hoveredSectionId)
+    && !state.removedSelectedSections.has(state.hoveredSectionId)
+  ) {
     const section = getSection(state.hoveredSectionId);
     events.push(...meetingEventsForSection(section, true, null));
   }
@@ -1068,7 +1088,7 @@ function meetingEventsForSection(section, preview, savedCourseId) {
         start: Math.max(start, COURSE_START_MINUTES),
         end: Math.min(end, COURSE_END_MINUTES),
         title: section.course_code || "Course",
-        detail: `${formatAtlasTime(meeting.start)}-${formatAtlasTime(meeting.end)}${section.section_number ? ` | Sec ${section.section_number}` : ""}`,
+        detail: `${formatAtlasTime(meeting.start)}-${formatAtlasTime(meeting.end)}`,
         colorKey: section.color_key,
       };
     })
@@ -1077,8 +1097,23 @@ function meetingEventsForSection(section, preview, savedCourseId) {
 
 function layoutEvents(events) {
   const sorted = events.slice().sort((a, b) => a.start - b.start || a.end - b.end);
-  const lanes = [];
+  const groups = [];
   for (const event of sorted) {
+    const activeGroup = groups[groups.length - 1];
+    if (!activeGroup || event.start >= activeGroup.end) {
+      groups.push({ end: event.end, events: [event] });
+    } else {
+      activeGroup.end = Math.max(activeGroup.end, event.end);
+      activeGroup.events.push(event);
+    }
+  }
+
+  return groups.flatMap((group) => layoutConflictGroup(group.events));
+}
+
+function layoutConflictGroup(events) {
+  const lanes = [];
+  for (const event of events) {
     let lane = 0;
     while (lane < lanes.length && lanes[lane] > event.start) lane += 1;
     if (lane === lanes.length) lanes.push(0);
@@ -1086,7 +1121,7 @@ function layoutEvents(events) {
     event.lane = lane;
   }
   const laneCount = Math.max(1, lanes.length);
-  return sorted.map((event) => ({ ...event, laneCount }));
+  return events.map((event) => ({ ...event, laneCount }));
 }
 
 function renderCourseEvent(event) {
@@ -1137,17 +1172,40 @@ function getFilteredSections() {
 
 function getSectionsForActiveView() {
   if (state.activeCourseView === "selected") {
-    return Array.from(state.savedCoursesBySection.entries())
+    const sections = Array.from(state.savedCoursesBySection.entries())
       .map(([sectionId, course]) => resolvePanelSection(sectionId, course))
       .filter(Boolean);
+    for (const [sectionId, section] of state.removedSelectedSections.entries()) {
+      if (state.savedCoursesBySection.has(sectionId)) continue;
+      const resolved = resolvePanelSection(sectionId, section);
+      if (resolved) sections.push(resolved);
+    }
+    return sections.sort(compareCourseSections);
   }
   if (state.activeCourseView === "tracked") {
     return Array.from(state.tracksBySection.entries())
       .filter(([, track]) => Boolean(track?.enabled))
       .map(([sectionId, track]) => resolvePanelSection(sectionId, track))
-      .filter(Boolean);
+      .filter(Boolean)
+      .sort(compareCourseSections);
   }
   return state.sections;
+}
+
+function compareCourseSections(a, b) {
+  return compareText(a?.term, b?.term)
+    || compareText(a?.course_code || courseCodeFromSection(a), b?.course_code || courseCodeFromSection(b))
+    || compareText(a?.course_title || a?.course_name, b?.course_title || b?.course_name)
+    || compareText(a?.section_number, b?.section_number)
+    || compareText(a?.crn, b?.crn);
+}
+
+function courseCodeFromSection(section) {
+  return `${section?.subject || ""} ${section?.catalog || section?.catalog_number || ""}`.trim();
+}
+
+function compareText(a, b) {
+  return String(a || "").localeCompare(String(b || ""), undefined, { numeric: true, sensitivity: "base" });
 }
 
 function resolvePanelSection(sectionId, fallback) {
@@ -1183,6 +1241,7 @@ function startEditingCourse(sectionId) {
   state.editingSectionId = sectionId;
   state.filtersOpen = false;
   renderPanel();
+  scrollPanelContentToTop();
 }
 
 async function saveEditedCourse(sectionId) {
@@ -1259,6 +1318,7 @@ function openDetail(sectionId) {
   state.detailLiveError = "";
   state.filtersOpen = false;
   renderPanel();
+  scrollPanelContentToTop();
   void refreshSectionStatus(sectionId);
 }
 
@@ -1296,6 +1356,7 @@ async function addCourse(sectionId) {
     });
     if (payload.course?.section_id) {
       applySavedCourse(payload.course);
+      state.removedSelectedSections.delete(String(payload.course.section_id));
     }
     showToast("Class added.");
   } catch (error) {
@@ -1319,8 +1380,12 @@ async function removeCourse(courseId, sectionId) {
   if (sectionId) state.savingIds.add(sectionId);
   render();
   try {
+    const removedSection = sectionId ? getSection(sectionId) : null;
     await fetchJson(`/api/courses/saved/${encodeURIComponent(courseId)}`, { method: "DELETE" });
     if (sectionId) state.savedCoursesBySection.delete(sectionId);
+    if (sectionId && state.activeCourseView === "selected" && removedSection) {
+      state.removedSelectedSections.set(String(sectionId), { ...removedSection, id: String(sectionId) });
+    }
     if (state.detailSectionId === sectionId) {
       state.detailSectionId = null;
     }
@@ -1492,6 +1557,15 @@ function restoreWeekScroll() {
     scroller.scrollTop = Math.round(1.5 * COURSE_HOUR_HEIGHT);
     state.initialScrollDone = true;
   }
+}
+
+function scrollPanelContentToTop() {
+  const content = document.getElementById("courses-panel-content");
+  if (!content) return;
+  content.scrollTop = 0;
+  window.requestAnimationFrame?.(() => {
+    content.scrollTop = 0;
+  });
 }
 
 function showToast(message, isError = false) {

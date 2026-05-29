@@ -223,9 +223,9 @@ def init_scheduler(app):
 
     _scheduler.add_job(
         func=lambda: _check_course_seat_tracks(app),
-        trigger=IntervalTrigger(minutes=10),
+        trigger=IntervalTrigger(minutes=5),
         id="check_course_seat_tracks",
-        name="Check tracked Emory course seats every 10 min",
+        name="Check tracked Emory course seats every 5 min",
         replace_existing=True,
         max_instances=1,
     )

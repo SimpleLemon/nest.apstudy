@@ -190,10 +190,20 @@ test("courses page keeps Atlas APIs, filtering state, and schedule constants con
     assert.match(source, /state\.activeCourseView === "selected"/);
     assert.match(source, /state\.activeCourseView === "tracked"/);
     assert.match(source, /\.filter\(\(\[, track\]\) => Boolean\(track\?\.enabled\)\)/);
+    assert.match(source, /removedSelectedSections: new Map\(\)/);
+    assert.match(source, /state\.removedSelectedSections\.set\(String\(sectionId\), \{ \.\.\.removedSection, id: String\(sectionId\) \}\)/);
+    assert.match(source, /return sections\.sort\(compareCourseSections\)/);
+    assert.match(source, /\.filter\(Boolean\)\s*\.sort\(compareCourseSections\)/);
+    assert.match(source, /function layoutConflictGroup\(events\)/);
+    assert.match(source, /event\.start >= activeGroup\.end/);
+    assert.match(source, /course-card-tracked/);
     assert.match(source, /normalizeScheduleDisplay/);
+    assert.match(source, /detail: `\$\{formatAtlasTime\(meeting\.start\)\}-\$\{formatAtlasTime\(meeting\.end\)\}`/);
+    assert.doesNotMatch(source, /detail: `[^`]*\| Sec/);
     assert.match(source, /No tracked courses match your filters\./);
     assert.match(styles, /\.courses-view-toggle/);
     assert.match(styles, /\.course-section-inline/);
+    assert.match(styles, /\.course-card-tracked/);
 });
 
 test("files page keeps upload limits, modal elements, and share/delete endpoints wired", async () => {

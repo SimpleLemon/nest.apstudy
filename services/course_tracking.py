@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 from datetime import datetime, timedelta, timezone
 
 from appwrite.exception import AppwriteException
@@ -15,6 +16,7 @@ from services.discord_audit import emit_course_track_event
 
 logger = logging.getLogger(__name__)
 NOTIFICATION_COOLDOWN = timedelta(hours=1)
+SECRET_TEXT_RE = re.compile(r"((?:[?&]|\b)(?:secret|key|token|password)=)[^&\s]+", re.IGNORECASE)
 
 
 def _now_utc():
@@ -75,6 +77,54 @@ def _send_open_email(track, section):
     )
 
 
+def _track_group_key(track):
+    section_id = str(track.get("section_id") or "").strip()
+    if section_id:
+        return f"section:{section_id}"
+    return "|".join([
+        "course",
+        str(track.get("term") or "").strip(),
+        str(track.get("subject") or "").strip().upper(),
+        str(track.get("catalog") or "").strip(),
+        str(track.get("crn") or "").strip(),
+    ])
+
+
+def _group_metadata(tracks, section=None, error=None):
+    representative = tracks[0] if tracks else {}
+    section = section or {}
+    user_ids = {
+        str(track.get("user_id"))
+        for track in tracks
+        if track.get("user_id")
+    }
+    metadata = {
+        "course_name": section.get("course_title") or representative.get("course_title"),
+        "term": section.get("term") or representative.get("term"),
+        "crn": section.get("crn") or representative.get("crn"),
+        "section_number": section.get("section_number") or representative.get("section_id"),
+        "seats_open": section.get("seats_available") if section else representative.get("last_seats_available"),
+        "enrollment_type": section.get("enrollment_status") if section else representative.get("last_status"),
+        "track_count": len(tracks),
+        "user_count": len(user_ids),
+        "request_source": "automated",
+    }
+    if error:
+        metadata["error"] = _sanitize_track_error(error)
+    return metadata
+
+
+def _group_target(tracks, section=None):
+    representative = tracks[0] if tracks else {}
+    section = section or {}
+    return section.get("course_code") or representative.get("course_code") or representative.get("section_id") or "Tracked course"
+
+
+def _sanitize_track_error(error):
+    text = SECRET_TEXT_RE.sub(r"\1[redacted]", str(error or ""))
+    return " ".join(text.split())[:500]
+
+
 def check_course_seat_tracks():
     """Poll enabled course seat trackers and notify users when seats open."""
     table_id = COLLECTIONS.get("course_seat_tracks")
@@ -90,16 +140,22 @@ def check_course_seat_tracks():
 
     now = _now_utc()
     notified_count = 0
+    if not tracks:
+        logger.info("Course tracking skipped: no enabled course seat tracks.")
+        return 0
+
+    grouped_tracks = {}
     for track in tracks:
-        row_id = track.get("$id") or track.get("id")
-        if not row_id:
-            continue
+        grouped_tracks.setdefault(_track_group_key(track), []).append(track)
+
+    for grouped in grouped_tracks.values():
+        representative = grouped[0]
 
         result = fetch_live_section_status(
-            track.get("term"),
-            track.get("subject"),
-            track.get("catalog"),
-            crn=track.get("crn"),
+            representative.get("term"),
+            representative.get("subject"),
+            representative.get("catalog"),
+            crn=representative.get("crn"),
         )
         updates = {
             "last_checked_at": format_datetime(now),
@@ -107,78 +163,69 @@ def check_course_seat_tracks():
         }
 
         if "error" in result:
-            logger.warning("Course track %s live check failed: %s", row_id, result["error"])
+            logger.warning("Course track group %s live check failed: %s", _track_group_key(representative), result["error"])
             emit_course_track_event(
                 "Automated Course Track Check Failed",
                 actor="System",
-                target=track.get("course_code") or row_id,
-                metadata={
-                    "course_name": track.get("course_title"),
-                    "teacher": track.get("instructor_name"),
-                    "section_number": track.get("section_id"),
-                    "seats_open": track.get("last_seats_available"),
-                    "enrollment_type": track.get("last_status"),
-                    "request_source": "automated",
-                    "track_id": row_id,
-                    "error": result["error"],
-                },
+                target=_group_target(grouped),
+                metadata=_group_metadata(grouped, error=result["error"]),
                 color="yellow",
             )
-            try:
-                update_row_safe(table_id, row_id, updates)
-            except AppwriteException:
-                logger.exception("Failed to update failed course track check: %s", row_id)
+            for track in grouped:
+                row_id = track.get("$id") or track.get("id")
+                if not row_id:
+                    continue
+                try:
+                    update_row_safe(table_id, row_id, updates)
+                except AppwriteException:
+                    logger.exception("Failed to update failed course track check: %s", row_id)
             continue
 
         section = result.get("section") or {}
         updates["last_status"] = section.get("enrollment_status")
         updates["last_seats_available"] = section.get("seats_available")
 
-        if _section_open_for_notification(section) and _notification_allowed(track, now):
-            try:
-                _send_open_email(track, section)
-                updates["last_notified_at"] = format_datetime(now)
-                notified_count += 1
-                emit_course_track_event(
-                    "Tracked Course Seat Opened",
-                    actor="System",
-                    target=section.get("course_code") or track.get("course_code") or row_id,
-                    metadata={
-                        "course_name": section.get("course_title") or track.get("course_title"),
-                        "teacher": section.get("instructor") or track.get("instructor_name"),
-                        "section_number": section.get("section_number") or track.get("section_id"),
-                        "seats_open": section.get("seats_available"),
-                        "enrollment_type": section.get("enrollment_status"),
-                        "request_source": "automated",
-                        "track_id": row_id,
-                        "user_id": track.get("user_id"),
-                    },
-                    color="green",
-                )
-            except Exception:
-                logger.exception("Failed to send course opening email for track %s", row_id)
-
-        try:
-            update_row_safe(table_id, row_id, updates)
-        except AppwriteException:
-            logger.exception("Failed to update course track: %s", row_id)
-            continue
-
         emit_course_track_event(
             "Automated Course Track Checked",
             actor="System",
-            target=section.get("course_code") or track.get("course_code") or row_id,
-            metadata={
-                "course_name": section.get("course_title") or track.get("course_title"),
-                "teacher": section.get("instructor") or track.get("instructor_name"),
-                "section_number": section.get("section_number") or track.get("section_id"),
-                "seats_open": section.get("seats_available"),
-                "enrollment_type": section.get("enrollment_status"),
-                "request_source": "automated",
-                "track_id": row_id,
-                "user_id": track.get("user_id"),
-            },
+            target=_group_target(grouped, section),
+            metadata=_group_metadata(grouped, section),
             color="gray",
         )
+
+        for track in grouped:
+            row_id = track.get("$id") or track.get("id")
+            if not row_id:
+                continue
+            track_updates = dict(updates)
+            if _section_open_for_notification(section) and _notification_allowed(track, now):
+                try:
+                    _send_open_email(track, section)
+                    track_updates["last_notified_at"] = format_datetime(now)
+                    notified_count += 1
+                    emit_course_track_event(
+                        "Tracked Course Seat Opened",
+                        actor="System",
+                        target=section.get("course_code") or track.get("course_code") or row_id,
+                        metadata={
+                            "course_name": section.get("course_title") or track.get("course_title"),
+                            "teacher": section.get("instructor") or track.get("instructor_name"),
+                            "section_number": section.get("section_number") or track.get("section_id"),
+                            "seats_open": section.get("seats_available"),
+                            "enrollment_type": section.get("enrollment_status"),
+                            "request_source": "automated",
+                            "track_id": row_id,
+                            "user_id": track.get("user_id"),
+                        },
+                        color="green",
+                    )
+                except Exception:
+                    logger.exception("Failed to send course opening email for track %s", row_id)
+
+            try:
+                update_row_safe(table_id, row_id, track_updates)
+            except AppwriteException:
+                logger.exception("Failed to update course track: %s", row_id)
+                continue
 
     return notified_count
