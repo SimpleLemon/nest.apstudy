@@ -131,7 +131,7 @@ test("theme init normalizes theme aliases and persists pending settings safely",
 });
 
 test("notes list guards destructive actions and supports folder/export workflows", async () => {
-    const source = await sourceFor("static/js/notes-list.js");
+    const source = await sourceFor("static/js/notes/list.js");
 
     assert.match(source, /function trackedFetch\(url, options = \{\}\)/);
     assert.match(source, /APStudyPendingMutations\?\.track\(request, 'notes-save'\)/);
@@ -143,16 +143,18 @@ test("notes list guards destructive actions and supports folder/export workflows
 });
 
 test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wired", async () => {
-    const source = await sourceFor("static/js/notes-editor.js");
+    const source = await sourceFor("static/js/notes/editor.js");
+    const toolbarSource = await sourceFor("static/js/notes/toolbar.js");
     const styles = await sourceFor("static/css/notes.css");
 
     assert.match(source, /const SAVE_DEBOUNCE_MS = 800/);
     assert.match(source, /const SAVED_TIME_REFRESH_MS = 60000/);
-    assert.match(source, /const notesEditorSchema = BlockNoteSchema\.create/);
-    assert.match(source, /createReactStyleSpec/);
-    assert.match(source, /fontSizeStyle/);
+    assert.match(source, /from '\.\/toolbar\.js'/);
+    assert.match(toolbarSource, /const notesEditorSchema = BlockNoteSchema\.create/);
+    assert.match(toolbarSource, /createReactStyleSpec/);
+    assert.match(toolbarSource, /fontSizeStyle/);
     assert.match(source, /FormattingToolbarController/);
-    assert.match(source, /function ContextualNotesToolbar\(\)/);
+    assert.match(toolbarSource, /function ContextualNotesToolbar\(\)/);
     assert.match(source, /formattingToolbar: false/);
     assert.doesNotMatch(source, /slashMenu:\s*false/);
     assert.doesNotMatch(source, /function FontSizeControl/);
@@ -224,12 +226,16 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
 
 test("task app shell keeps data-layer wiring, destructive confirms, and mount contract", async () => {
     const source = await sourceFor("static/js/tasks/task.js");
+    const helperSource = await sourceFor("static/js/tasks/task-app-helpers.js");
 
     assert.match(source, /from "\.\/task-components\.js"/);
+    assert.match(source, /from "\.\/task-app-helpers\.js"/);
     assert.match(source, /from "\.\/task-data\.js"/);
     assert.match(source, /from "\.\/task-utils\.js"/);
-    assert.match(source, /function requestDestructiveAction\(\{ title, message, acceptLabel \}\)/);
-    assert.match(source, /window\.APStudyConfirm\?\.request\?\.\(\{/);
+    assert.match(helperSource, /function requestDestructiveAction\(\{ title, message, acceptLabel \}\)/);
+    assert.match(helperSource, /window\.APStudyConfirm\?\.request\?\.\(\{/);
+    assert.match(helperSource, /function groupTasksByList\(lists, tasks, listById\)/);
+    assert.match(helperSource, /function PrintSheet\(\{ list, tasks \}\)/);
     assert.match(source, /const \{ lists: nextLists, tasks: nextTasks, preferences \} = await fetchTaskBoard\(\)/);
     assert.match(source, /buildCompletedTaskOptimistic\(task, completed\)/);
     assert.match(source, /completeTaskRecord\(task\.id, completed, optimistic\.occurrenceKey\)/);
@@ -273,12 +279,15 @@ test("global chrome keeps pending mutation, confirmation, loader, date, and auth
     const chromeSource = await sourceFor("static/js/global-chrome.js");
     const source = await sourceFor("static/js/global.js");
 
-    assert.match(chromeSource, /window\.APStudyPendingMutations = \{/);
-    assert.match(chromeSource, /new CustomEvent\("apstudy-pending-save-change"/);
-    assert.match(chromeSource, /window\.APStudyConfirm = \{ request \}/);
-    assert.match(chromeSource, /id = "apstudy-confirm-root"/);
-    assert.match(chromeSource, /window\.APStudyLoader = \{/);
-    assert.match(chromeSource, /window\.APStudyDate = \{/);
+    assert.match(chromeSource, /Compatibility shim/);
+    assert.match(chromeSource, /global\.js/);
+    assert.doesNotMatch(chromeSource, /window\.APStudyPendingMutations = \{/);
+    assert.match(source, /window\.APStudyPendingMutations = \{/);
+    assert.match(source, /new CustomEvent\("apstudy-pending-save-change"/);
+    assert.match(source, /window\.APStudyConfirm = \{ request \}/);
+    assert.match(source, /id = "apstudy-confirm-root"/);
+    assert.match(source, /window\.APStudyLoader = \{/);
+    assert.match(source, /window\.APStudyDate = \{/);
     assert.match(source, /function clearClientState\(options = \{\}\)/);
     assert.match(source, /function markClientLoggedOut\(\)/);
     assert.match(source, /function shouldEnforceAuth\(\)/);
@@ -314,7 +323,7 @@ test("navbar keeps avatar sizing, command palette shortcut, and logout/account f
 });
 
 test("notes export keeps markdown/plain-text conversion and PDF fallback paths", async () => {
-    const source = await sourceFor("static/js/notes-export.js");
+    const source = await sourceFor("static/js/notes/export.js");
 
     assert.match(source, /function blockNoteJsonToMarkdown\(blockNoteJson\)/);
     assert.match(source, /function blockNoteJsonToPlainText\(blockNoteJson\)/);

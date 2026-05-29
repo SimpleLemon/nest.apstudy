@@ -22,8 +22,8 @@
     <script src="{{ url_for('static', filename='js/navbar.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/sidebar.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
-    <script src="{{ url_for('static', filename='js/notes-export.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/notes-list.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/notes/export.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/notes/list.js') }}" defer></script>
 </head>
 <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
 <global class="thesidebar" data-user-emory-student="{{ user.emory_student }}" data-sidebar-default="{{ sidebar_default|default('expanded') }}"></global>

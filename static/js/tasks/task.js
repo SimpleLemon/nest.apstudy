@@ -1,11 +1,21 @@
 import { ActionMenu, EmptyStarter, ListEditorDialog, ListRail, MaterialIcon, TaskSection } from "./task-components.js";
 import {
+    PrintSheet,
+    groupTasksByList,
+    listMenuItems,
+    mergeById,
+    removeById,
+    replaceById,
+    requestDestructiveAction,
+    taskMenuItems,
+    toggleActionMenu,
+} from "./task-app-helpers.js";
+import {
     appendTask,
     applyListOrderUpdates,
     applyTaskOrderUpdates,
     buildCompletedTaskOptimistic,
     buildListOrderUpdates,
-    completedForDeleteSweep,
     completeTaskRecord,
     createTaskList,
     createTaskRecord,
@@ -21,13 +31,8 @@ import {
     updateTaskRecord,
 } from "./task-data.js";
 import {
-    LIST_SORT_OPTIONS,
-    formatDeadline,
-    formatRepeat,
-    isRepeatingTaskCompleted,
     normalizeList,
     normalizeTask,
-    sortTasksForList,
     sortedLists,
 } from "./task-utils.js";
 import * as React from "react";
@@ -35,99 +40,6 @@ import { createRoot } from "react-dom/client";
 import useSound from "use-sound";
 
 const h = React.createElement;
-
-function PrintSheet({ list, tasks }) {
-    if (!list) return null;
-    return h("section", { className: "task-print-sheet", "aria-hidden": "true" },
-        h("header", null,
-            h("h1", null, list.name),
-            list.description ? h("p", null, list.description) : null
-        ),
-        tasks.length
-            ? h("ol", null, tasks.map((task) => {
-                const completed = isRepeatingTaskCompleted(task);
-                return h("li", { key: task.id, className: completed ? "is-completed" : "" },
-                    h("div", { className: "task-print-title" }, task.title),
-                    h("div", { className: "task-print-meta" },
-                        task.priority && task.priority !== "none" ? h("span", null, `Priority: ${task.priority}`) : null,
-                        task.deadline_at ? h("span", null, `Deadline: ${formatDeadline(task.deadline_at)}`) : null,
-                        task.recurrence ? h("span", null, formatRepeat(task.recurrence)) : null,
-                        completed ? h("span", null, "Completed") : null
-                    )
-                );
-            }))
-            : h("p", null, "No tasks in this list.")
-    );
-}
-
-function replaceById(items, id, nextItem) {
-    return items.map((item) => item.id === id ? nextItem : item);
-}
-
-function mergeById(items, id, updates, normalize) {
-    const existing = items.find((item) => item.id === id);
-    return existing ? replaceById(items, id, normalize({ ...existing, ...updates })) : items;
-}
-
-function removeById(items, id) {
-    return items.filter((item) => item.id !== id);
-}
-
-function groupTasksByList(lists, tasks, listById) {
-    const grouped = new Map(lists.map((list) => [list.id, []]));
-    for (const task of tasks) {
-        const listTasks = grouped.get(task.list_id) || [];
-        listTasks.push(task);
-        grouped.set(task.list_id, listTasks);
-    }
-    for (const [listId, listTasks] of grouped) {
-        grouped.set(listId, sortTasksForList(listTasks, listById.get(listId)?.sort_mode));
-    }
-    return grouped;
-}
-
-function toggleActionMenu(setActionMenu, type, id, buildMenu) {
-    setActionMenu((current) => current?.type === type && current.id === id
-        ? null
-        : { type, id, nonce: Date.now(), ...buildMenu() });
-}
-
-function listMenuItems({ list, listTasks, updateList, openListDialog, printListById, deleteCompletedTasks, deleteList }) {
-    return [
-        ...LIST_SORT_OPTIONS.map((option) => ({
-            label: option.label,
-            icon: option.icon,
-            checked: (list.sort_mode || "default") === option.value,
-            onClick: () => updateList(list.id, { sort_mode: option.value }),
-        })),
-        { separator: true },
-        { label: "Rename list", icon: "edit", onClick: () => openListDialog({ mode: "edit", list }) },
-        { label: "Print list", icon: "print", onClick: () => printListById(list.id) },
-        {
-            label: "Delete all completed tasks",
-            icon: "playlist_remove",
-            disabled: !listTasks.some(completedForDeleteSweep),
-            onClick: () => deleteCompletedTasks(list.id),
-        },
-        { label: "Delete list", icon: "delete", danger: true, onClick: () => deleteList(list.id) },
-    ];
-}
-
-function taskMenuItems(taskId, position, deleteTask) {
-    return [
-        { label: "Configure task", icon: "tune", onClick: () => position.configure?.() },
-        { label: "Delete task", icon: "delete", danger: true, onClick: () => deleteTask(taskId) },
-    ];
-}
-
-function requestDestructiveAction({ title, message, acceptLabel }) {
-    return window.APStudyConfirm?.request?.({
-        title,
-        message,
-        acceptLabel,
-        danger: true,
-    }) ?? Promise.resolve(false);
-}
 
 function TaskApp({ completeSound, uncompleteSound }) {
     const [lists, setLists] = React.useState([]);

@@ -7,6 +7,11 @@ import { fileURLToPath } from "node:url";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const plain = (value) => JSON.parse(JSON.stringify(value));
+const dashboardBundle = (await Promise.all([
+    "static/js/dashboard/utils.js",
+    "static/js/dashboard/renderers.js",
+    "static/js/dashboard.js",
+].map((relativePath) => readFile(path.join(repoRoot, relativePath), "utf8")))).join("\n");
 
 function loadDashboardUtils(source) {
     const document = {
@@ -48,8 +53,7 @@ function loadDashboardUtils(source) {
 }
 
 test("dashboard utilities group events and format bytes", async () => {
-    const source = await readFile(path.join(repoRoot, "static/js/dashboard.js"), "utf8");
-    const utils = loadDashboardUtils(source);
+    const utils = loadDashboardUtils(dashboardBundle);
 
     const grouped = utils.groupEventsByDate([
         { title: "A", date: "2026-05-01" },
@@ -63,8 +67,7 @@ test("dashboard utilities group events and format bytes", async () => {
 });
 
 test("dashboard utility applies saved tile order while appending missing tiles", async () => {
-    const source = await readFile(path.join(repoRoot, "static/js/dashboard.js"), "utf8");
-    const utils = loadDashboardUtils(source);
+    const utils = loadDashboardUtils(dashboardBundle);
 
     assert.deepEqual(
         Array.from(utils.normalizeTileOrder(["messages", "calendar", "messages"], ["calendar", "tasks", "messages"])),
@@ -73,8 +76,7 @@ test("dashboard utility applies saved tile order while appending missing tiles",
 });
 
 test("dashboard utility normalizes v1 and v2 tile layouts", async () => {
-    const source = await readFile(path.join(repoRoot, "static/js/dashboard.js"), "utf8");
-    const utils = loadDashboardUtils(source);
+    const utils = loadDashboardUtils(dashboardBundle);
 
     assert.deepEqual(
         plain(utils.normalizeTileLayout(["messages", "calendar"], ["calendar", "tasks", "messages"])),
@@ -108,8 +110,7 @@ test("dashboard utility normalizes v1 and v2 tile layouts", async () => {
 });
 
 test("dashboard utility applies new size and calendar view rules", async () => {
-    const source = await readFile(path.join(repoRoot, "static/js/dashboard.js"), "utf8");
-    const utils = loadDashboardUtils(source);
+    const utils = loadDashboardUtils(dashboardBundle);
 
     assert.equal(utils.normalizeTileSize("calendar", "medium"), "standard");
     assert.equal(utils.normalizeTileSize("tasks", "large"), "wide");
@@ -122,8 +123,7 @@ test("dashboard utility applies new size and calendar view rules", async () => {
 });
 
 test("dashboard calendar helpers label views and derive event dates", async () => {
-    const source = await readFile(path.join(repoRoot, "static/js/dashboard.js"), "utf8");
-    const utils = loadDashboardUtils(source);
+    const utils = loadDashboardUtils(dashboardBundle);
 
     assert.equal(utils.tileTitle("calendar", "month"), "Calendar: Month");
     assert.equal(utils.tileTitle("calendar", "week"), "Calendar: Week");
@@ -135,8 +135,7 @@ test("dashboard calendar helpers label views and derive event dates", async () =
 });
 
 test("dashboard summary tile layout arrays preserve v3 hidden tiles", async () => {
-    const source = await readFile(path.join(repoRoot, "static/js/dashboard.js"), "utf8");
-    const utils = loadDashboardUtils(source);
+    const utils = loadDashboardUtils(dashboardBundle);
 
     const summaryLayout = utils.summaryLayoutSource({
         tile_layout_version: 3,

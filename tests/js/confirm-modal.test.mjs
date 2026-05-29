@@ -9,15 +9,15 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../
 const confirmCallsites = [
     "static/js/calendar_context_menu.js",
     "static/js/courses.js",
-    "static/js/notes-list.js",
+    "static/js/notes/list.js",
     "static/js/settings.js",
-    "static/js/tasks/task.js",
+    "static/js/tasks/task-app-helpers.js",
 ];
 
 test("destructive flows use the shared website confirmation modal", async () => {
-    const chromeSource = await readFile(path.join(repoRoot, "static/js/global-chrome.js"), "utf8");
-    assert.match(chromeSource, /window\.APStudyConfirm/);
-    assert.match(chromeSource, /apstudy-confirm/);
+    const globalSource = await readFile(path.join(repoRoot, "static/js/global.js"), "utf8");
+    assert.match(globalSource, /window\.APStudyConfirm/);
+    assert.match(globalSource, /apstudy-confirm/);
 
     for (const relativePath of confirmCallsites) {
         const source = await readFile(path.join(repoRoot, relativePath), "utf8");
