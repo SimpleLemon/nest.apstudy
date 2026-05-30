@@ -1,6 +1,7 @@
 import io
 import logging
 import os
+import platform
 import secrets
 from functools import wraps
 from datetime import datetime, timezone
@@ -29,6 +30,11 @@ from blueprints.chat_api import create_university_channel, emit_chat_event
 from services.chat_presence import sync_chat_presence_labels_for_school
 from services.discord_audit import emit_admin_event, format_actor, format_user_target
 
+try:
+    import psutil
+except ImportError:  # pragma: no cover - optional dependency for monitoring
+    psutil = None
+
 
 admin_bp = Blueprint("admin", __name__)
 logger = logging.getLogger(__name__)
@@ -53,6 +59,52 @@ def _row_id(row):
 def _admin_ids():
     raw = os.environ.get("ADMIN_USER_IDS") or os.environ.get("ADMIN_USER_ID") or ""
     return {item.strip() for item in raw.split(",") if item.strip()}
+
+
+def _read_os_pretty():
+    try:
+        if hasattr(platform, "freedesktop_os_release"):
+            release = platform.freedesktop_os_release()
+            pretty = release.get("PRETTY_NAME")
+            if pretty:
+                return pretty
+    except Exception:
+        pass
+    try:
+        return platform.platform()
+    except Exception:
+        return "Unknown"
+
+
+def _system_status():
+    status = {
+        "os_pretty": _read_os_pretty(),
+        "cpu_percent": None,
+        "cpu_logical": None,
+        "cpu_physical": None,
+        "mem_percent": None,
+        "mem_used_gb": None,
+        "mem_total_gb": None,
+    }
+    if psutil is None:
+        return status
+    try:
+        status["cpu_percent"] = round(psutil.cpu_percent(interval=0.1), 1)
+    except Exception:
+        pass
+    try:
+        status["cpu_logical"] = psutil.cpu_count(logical=True)
+        status["cpu_physical"] = psutil.cpu_count(logical=False)
+    except Exception:
+        pass
+    try:
+        memory = psutil.virtual_memory()
+        status["mem_percent"] = round(memory.percent, 1)
+        status["mem_used_gb"] = round(memory.used / (1024**3), 1)
+        status["mem_total_gb"] = round(memory.total / (1024**3), 1)
+    except Exception:
+        pass
+    return status
 
 
 def _require_admin():
@@ -662,9 +714,16 @@ def admin_index():
         field=field,
         error=error,
         status=request.args.get("status"),
+        system_status=_system_status(),
         theme_preference=_theme_preference(),
         pending_request_count=_pending_admin_request_count(),
     )
+
+
+@admin_bp.route("/admin/system-status")
+@admin_required
+def admin_system_status():
+    return jsonify(_system_status())
 
 
 @admin_bp.route("/admin/requests")

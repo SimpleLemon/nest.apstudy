@@ -50,6 +50,78 @@
             </form>
         </section>
 
+        {% set system_status = system_status or {} %}
+        {% set cpu_percent = system_status.get("cpu_percent") %}
+        {% set mem_percent = system_status.get("mem_percent") %}
+        {% set mem_used = system_status.get("mem_used_gb") %}
+        {% set mem_total = system_status.get("mem_total_gb") %}
+        {% set cpu_physical = system_status.get("cpu_physical") %}
+        {% set cpu_logical = system_status.get("cpu_logical") %}
+
+        <section class="admin-card admin-system-card" aria-labelledby="system-monitor-title">
+            <div class="admin-system-header">
+                <div>
+                    <h2 id="system-monitor-title" class="admin-title admin-title--small">System Monitor</h2>
+                    <p class="admin-subtitle admin-subtitle--compact">Live server health updates every 15 seconds.</p>
+                </div>
+                <div class="admin-system-meta">
+                    <div class="admin-field">
+                        <span class="admin-field-label">OS</span>
+                        <span class="admin-field-value" data-role="os">{{ system_status.get("os_pretty") or "--" }}</span>
+                    </div>
+                    <div class="admin-field">
+                        <span class="admin-field-label">CPU Cores</span>
+                        <span class="admin-field-value" data-role="cpu-cores">
+                            {% if cpu_physical and cpu_logical %}
+                                {{ cpu_physical }}C / {{ cpu_logical }}T
+                            {% elif cpu_logical %}
+                                {{ cpu_logical }}T
+                            {% else %}
+                                --
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-system-rings">
+                <div class="admin-ring" data-ring="cpu" role="img" aria-label="CPU usage" style="--progress: {{ cpu_percent if cpu_percent is not none else 0 }};">
+                    <svg viewBox="0 0 120 120" class="admin-ring-svg" aria-hidden="true">
+                        <circle class="admin-ring-track" cx="60" cy="60" r="54"></circle>
+                        <circle class="admin-ring-progress" cx="60" cy="60" r="54"></circle>
+                    </svg>
+                    <div class="admin-ring-value">
+                        <span class="admin-ring-number" data-role="cpu-percent">
+                            {% if cpu_percent is not none %}{{ "%.1f"|format(cpu_percent) }}%{% else %}--{% endif %}
+                        </span>
+                        <span class="admin-ring-label">CPU</span>
+                    </div>
+                </div>
+                <div class="admin-ring" data-ring="memory" role="img" aria-label="Memory usage" style="--progress: {{ mem_percent if mem_percent is not none else 0 }};">
+                    <svg viewBox="0 0 120 120" class="admin-ring-svg" aria-hidden="true">
+                        <circle class="admin-ring-track" cx="60" cy="60" r="54"></circle>
+                        <circle class="admin-ring-progress" cx="60" cy="60" r="54"></circle>
+                    </svg>
+                    <div class="admin-ring-value">
+                        <span class="admin-ring-number" data-role="mem-percent">
+                            {% if mem_percent is not none %}{{ "%.1f"|format(mem_percent) }}%{% else %}--{% endif %}
+                        </span>
+                        <span class="admin-ring-label">Memory</span>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-system-footer">
+                <div class="admin-system-stat">
+                    <span class="admin-system-stat-label">Memory Used</span>
+                    <span class="admin-system-stat-value">
+                        <span data-role="mem-used">{% if mem_used is not none %}{{ "%.1f"|format(mem_used) }}{% else %}--{% endif %}</span>
+                        /
+                        <span data-role="mem-total">{% if mem_total is not none %}{{ "%.1f"|format(mem_total) }}{% else %}--{% endif %}</span>
+                        GB
+                    </span>
+                </div>
+            </div>
+        </section>
+
         {% if users %}
             <table class="admin-table" aria-label="User list">
                 <thead>
@@ -91,5 +163,66 @@
             <div class="admin-card">No users found.</div>
         {% endif %}
     </main>
+
+    <script>
+        (() => {
+            const endpoint = "{{ url_for('admin.admin_system_status') }}";
+            const refreshMs = 15000;
+
+            const clampPercent = (value) => Math.max(0, Math.min(100, value));
+            const toNumber = (value) => (typeof value === "number" && !Number.isNaN(value) ? value : null);
+            const formatPercent = (value) => (value === null ? "--" : `${value.toFixed(1)}%`);
+            const formatGB = (value) => (value === null ? "--" : value.toFixed(1));
+
+            const setText = (selector, text) => {
+                const el = document.querySelector(selector);
+                if (el) {
+                    el.textContent = text;
+                }
+            };
+
+            const setProgress = (selector, value) => {
+                const el = document.querySelector(selector);
+                if (el) {
+                    el.style.setProperty("--progress", clampPercent(value ?? 0));
+                }
+            };
+
+            const update = (data) => {
+                if (!data) {
+                    return;
+                }
+                const cpu = toNumber(data.cpu_percent);
+                const mem = toNumber(data.mem_percent);
+                setText('[data-role="cpu-percent"]', formatPercent(cpu));
+                setText('[data-role="mem-percent"]', formatPercent(mem));
+                setProgress('[data-ring="cpu"]', cpu);
+                setProgress('[data-ring="memory"]', mem);
+                setText('[data-role="os"]', data.os_pretty || "--");
+
+                const physical = data.cpu_physical;
+                const logical = data.cpu_logical;
+                let cores = "--";
+                if (physical && logical) {
+                    cores = `${physical}C / ${logical}T`;
+                } else if (logical) {
+                    cores = `${logical}T`;
+                }
+                setText('[data-role="cpu-cores"]', cores);
+                setText('[data-role="mem-used"]', formatGB(toNumber(data.mem_used_gb)));
+                setText('[data-role="mem-total"]', formatGB(toNumber(data.mem_total_gb)));
+            };
+
+            const fetchStatus = () => {
+                fetch(endpoint, { credentials: "same-origin" })
+                    .then((response) => (response.ok ? response.json() : null))
+                    .then(update)
+                    .catch(() => {});
+            };
+
+            fetchStatus();
+            setInterval(fetchStatus, refreshMs);
+        })();
+    </script>
 </body>
 </html>

@@ -352,6 +352,121 @@ body.admin-page {
     background: color-mix(in srgb, var(--admin-danger) 10%, transparent);
 }
 
+.admin-title--small {
+    font-size: clamp(20px, 2.6vw, 26px);
+}
+
+.admin-subtitle--compact {
+    margin-top: 6px;
+    font-size: 13px;
+}
+
+.admin-system-card {
+    display: grid;
+    gap: 16px;
+}
+
+.admin-system-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.admin-system-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    min-width: 260px;
+}
+
+.admin-system-rings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.admin-ring {
+    --progress: 0;
+    --admin-ring-circumference: 339.292;
+    position: relative;
+    width: 140px;
+    height: 140px;
+    display: grid;
+    place-items: center;
+}
+
+.admin-ring-svg {
+    width: 140px;
+    height: 140px;
+    transform: rotate(-90deg);
+}
+
+.admin-ring-track {
+    stroke: var(--admin-panel-strong);
+    stroke-width: 12;
+    fill: none;
+}
+
+.admin-ring-progress {
+    stroke: var(--admin-accent);
+    stroke-width: 12;
+    fill: none;
+    stroke-linecap: round;
+    stroke-dasharray: var(--admin-ring-circumference);
+    stroke-dashoffset: calc(var(--admin-ring-circumference) * (1 - var(--progress) / 100));
+    transition: stroke-dashoffset 300ms ease;
+}
+
+.admin-ring[data-ring="memory"] .admin-ring-progress {
+    stroke: var(--color-tertiary, #f2a900);
+}
+
+.admin-ring-value {
+    position: absolute;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-weight: 600;
+    color: var(--admin-ink);
+}
+
+.admin-ring-number {
+    font-size: 20px;
+}
+
+.admin-ring-label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--admin-muted);
+}
+
+.admin-system-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.admin-system-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.admin-system-stat-label {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--admin-muted);
+}
+
+.admin-system-stat-value {
+    font-weight: 600;
+}
+
 @media (max-width: 720px) {
     .admin-shell {
         max-width: 100%;
@@ -407,5 +522,15 @@ body.admin-page {
     .admin-table th,
     .admin-table td {
         padding: 10px;
+    }
+
+    .admin-system-rings {
+        justify-content: space-between;
+    }
+
+    .admin-ring,
+    .admin-ring-svg {
+        width: 120px;
+        height: 120px;
     }
 }
