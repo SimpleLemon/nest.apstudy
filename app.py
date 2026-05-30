@@ -1,5 +1,5 @@
 import os
-from flask import Flask, redirect, url_for
+from flask import Flask, jsonify, redirect, render_template, request, url_for
 from dotenv import load_dotenv
 from werkzeug.middleware.proxy_fix import ProxyFix
 
@@ -79,6 +79,16 @@ def create_app():
     # Register all blueprints
     from blueprints import register_blueprints
     register_blueprints(app)
+
+    @app.errorhandler(404)
+    def page_not_found(error):
+        if request.path.startswith("/api/"):
+            return jsonify({"error": "not_found"}), 404
+
+        from flask_login import current_user
+
+        home_url = url_for("dashboard.dashboard") if current_user.is_authenticated else url_for("auth.login")
+        return render_template("404.html", home_url=home_url), 404
 
     @app.cli.command("cleanup-files")
     def cleanup_files_command():
