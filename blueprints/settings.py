@@ -732,7 +732,7 @@ def save_onboarding():
         class_year = (payload.get("class_year") or "").strip() or None
         emory_student = _normalize_emory_student(payload.get("emory_student"))
         emory_email = payload.get("emory_email")
-        school_updates = school_payload(payload.get("school"))
+        school_updates = school_payload(None)
 
         if education_level in {"High School", "Undergraduate"}:
             if not class_year or len(class_year) != 4 or not class_year.isdigit():
@@ -748,8 +748,10 @@ def save_onboarding():
                     emory_email = _normalize_emory_email(emory_email)
                 except ValueError as error:
                     return jsonify({"error": str(error)}), 400
+                school_updates = school_payload("Emory University")
             else:
                 emory_email = None
+                school_updates = school_payload(payload.get("school"))
         else:
             emory_student = None
             emory_email = None
@@ -887,50 +889,36 @@ def save_onboarding():
             return jsonify({"status": "ok", "next_step": 4})
 
         if action == "complete":
-            try:
-                update_row_safe(
-                    COLLECTIONS["users"],
-                    user_id,
-                    {
-                        "onboarding_step": 4,
-                        "onboarding_complete": True,
-                    },
-                )
-            except AppwriteException:
-                logger.exception("Failed to complete onboarding")
-                return jsonify({"error": "Unable to save onboarding."}), 500
-            current_user.onboarding_step = 4
-            current_user.onboarding_complete = True
-            emit_user_event(
-                "Onboarding Complete",
-                actor=format_actor(current_user),
-                target=str(current_user.id),
-                metadata={
-                    "page_context": "onboarding",
-                    "resource_type": "user",
-                    "resource_id": user_id,
-                    "education_level": getattr(current_user, "education_level", None),
-                    "school": getattr(current_user, "school", None),
-                },
-                color="green",
-            )
-            return jsonify({"status": "ok", "redirect_url": url_for("dashboard.dashboard")})
+            return jsonify({"error": "Complete onboarding from the confirm step."}), 400
 
-    if step in {4, 5}:
+    if step == 4:
+        try:
+            update_row_safe(
+                COLLECTIONS["users"],
+                user_id,
+                {"onboarding_step": 5},
+            )
+        except AppwriteException:
+            logger.exception("Failed to update onboarding step")
+            return jsonify({"error": "Unable to save onboarding."}), 500
+        current_user.onboarding_step = 5
+        return jsonify({"status": "ok", "next_step": 5})
+
+    if step == 5:
         try:
             update_row_safe(
                 COLLECTIONS["users"],
                 user_id,
                 {
                     "onboarding_complete": True,
-                    "onboarding_step": 4,
+                    "onboarding_step": 5,
                 },
             )
         except AppwriteException:
             logger.exception("Failed to complete onboarding")
             return jsonify({"error": "Unable to save onboarding."}), 500
         current_user.onboarding_complete = True
-        current_user.onboarding_step = 4
+        current_user.onboarding_step = 5
         emit_user_event(
             "Onboarding Complete",
             actor=format_actor(current_user),

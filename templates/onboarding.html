@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <!-- Welcome header -->
-                    <div>
+                    <div id="onboarding-welcome-header">
                         <p class="text-xs uppercase tracking-[0.2em] text-on-surface-variant">Onboarding</p>
                         <h1 class="mt-2 text-3xl sm:text-4xl font-headline font-semibold">Welcome, {{ first_name }}!</h1>
                         <p class="mt-2 text-sm sm:text-base text-on-surface-variant max-w-2xl">Complete a quick setup so Nest.APStudy can personalize your experience and send you straight to the dashboard next time.</p>
@@ -92,28 +92,28 @@
                                 <div class="space-y-2">
                                     <span class="text-xs uppercase tracking-[0.16em] text-on-surface-variant">Education level</span>
                                     <div class="grid grid-cols-2 gap-3 sm:grid-cols-4" id="education-level-group">
-                                        <button type="button" class="inline-flex w-full items-center justify-center rounded-xl bg-surface-container/[0.65] px-4 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:bg-primary/15" data-education-level="High School">High School</button>
-                                        <button type="button" class="inline-flex w-full items-center justify-center rounded-xl bg-surface-container/[0.65] px-4 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:bg-primary/15" data-education-level="Undergraduate">Undergraduate</button>
-                                        <button type="button" class="inline-flex w-full items-center justify-center rounded-xl bg-surface-container/[0.65] px-4 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:bg-primary/15" data-education-level="Graduate">Graduate</button>
-                                        <button type="button" class="inline-flex w-full items-center justify-center rounded-xl bg-surface-container/[0.65] px-4 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:bg-primary/15" data-education-level="Other">Other</button>
+                                        <button type="button" class="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container/[0.65] px-4 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:border-outline-variant/50 hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:border-primary/30 aria-pressed:bg-primary/15" data-education-level="High School">High School</button>
+                                        <button type="button" class="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container/[0.65] px-4 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:border-outline-variant/50 hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:border-primary/30 aria-pressed:bg-primary/15" data-education-level="Undergraduate">Undergraduate</button>
+                                        <button type="button" class="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container/[0.65] px-4 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:border-outline-variant/50 hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:border-primary/30 aria-pressed:bg-primary/15" data-education-level="Graduate">Graduate</button>
+                                        <button type="button" class="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container/[0.65] px-4 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:border-outline-variant/50 hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:border-primary/30 aria-pressed:bg-primary/15" data-education-level="Other">Other</button>
                                     </div>
                                 </div>
                                 <label id="class-year-field" class="space-y-2 block hidden">
                                     <span class="text-xs uppercase tracking-[0.16em] text-on-surface-variant">Class year</span>
                                     <input id="class-year" class="max-w-xs rounded-xl bg-surface-container-lowest border border-outline-variant/25 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 px-4 py-3 text-sm" type="text" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="2028" />
                                 </label>
-                                <label id="university-field" class="space-y-2 block hidden">
-                                    <span class="text-xs uppercase tracking-[0.16em] text-on-surface-variant">University</span>
-                                    <input id="university-school" class="w-full rounded-xl bg-surface-container-lowest border border-outline-variant/25 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 px-4 py-3 text-sm" type="text" autocomplete="organization" list="university-options" placeholder="Emory University" />
-                                    <datalist id="university-options"></datalist>
-                                </label>
                                 <div id="emory-student-field" class="space-y-2 hidden">
                                     <span class="text-xs uppercase tracking-[0.16em] text-on-surface-variant">Are you an Emory University student?</span>
                                     <div class="grid grid-cols-2 gap-3" id="emory-student-group">
-                                        <button type="button" class="inline-flex w-auto justify-self-start items-center justify-center rounded-xl bg-surface-container/[0.65] px-6 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:bg-primary/15" data-emory-student="yes">Yes</button>
-                                        <button type="button" class="inline-flex w-auto justify-self-start items-center justify-center rounded-xl bg-surface-container/[0.65] px-6 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:bg-primary/15" data-emory-student="no">No</button>
+                                        <button type="button" class="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container/[0.65] px-6 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:border-outline-variant/50 hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:border-primary/30 aria-pressed:bg-primary/15" data-emory-student="yes">Yes</button>
+                                        <button type="button" class="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container/[0.65] px-6 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:border-outline-variant/50 hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:border-primary/30 aria-pressed:bg-primary/15" data-emory-student="no">No</button>
                                     </div>
                                 </div>
+                                <label id="university-field" class="space-y-2 block hidden">
+                                    <span class="text-xs uppercase tracking-[0.16em] text-on-surface-variant">University</span>
+                                    <input id="university-school" class="w-full rounded-xl bg-surface-container-lowest border border-outline-variant/25 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 px-4 py-3 text-sm" type="text" autocomplete="organization" list="university-options" placeholder="" />
+                                    <datalist id="university-options"></datalist>
+                                </label>
                                 <div id="emory-email-field" class="space-y-2 hidden">
                                     <span class="text-xs uppercase tracking-[0.16em] text-on-surface-variant">Emory email</span>
                                     <input id="emory-email" class="w-full rounded-xl bg-surface-container-lowest border border-outline-variant/25 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 px-4 py-3 text-sm" type="email" inputmode="email" pattern=".+@emory\\.edu$" placeholder="yournetid@emory.edu" />
@@ -374,7 +374,7 @@
     <script>
         const onboardingData = JSON.parse(document.getElementById('onboarding-data').textContent);
         const onboardingState = {
-            step: 1,
+            step: Number(document.getElementById('active-step')?.value || 1) || 1,
             displayName: onboardingData.displayName,
             username: onboardingData.username,
             educationLevel: onboardingData.educationLevel,
@@ -391,6 +391,7 @@
         const form = document.getElementById('onboarding-form');
         const progressBar = document.getElementById('progress-bar');
         const stepLabel = document.getElementById('step-label');
+        const welcomeHeader = document.getElementById('onboarding-welcome-header');
         const wizardStatus = document.getElementById('wizard-status');
         const displayNameInput = document.getElementById('onboarding-display-name');
         const usernameInput = document.getElementById('onboarding-username');
@@ -532,8 +533,10 @@
             'user',
             'users',
         ]);
-        const SEGMENTED_OPTION_CLASSES = 'inline-flex w-full items-center justify-center rounded-xl bg-surface-container/[0.65] px-4 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:bg-primary/15';
+        const EMORY_SCHOOL_NAME = 'Emory University';
+        const SEGMENTED_OPTION_CLASSES = 'inline-flex min-h-[48px] w-full items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container/[0.65] px-4 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:border-outline-variant/50 hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:border-primary/30 aria-pressed:bg-primary/15';
         const COURSE_CARD_CLASSES = 'rounded-2xl border border-outline-variant/20 bg-surface-container p-4';
+        const COURSE_SUGGESTION_CLASSES = 'block w-full appearance-none border-0 bg-transparent px-4 py-3 text-left text-sm text-on-surface transition-colors hover:bg-surface-container-high focus:bg-surface-container-high focus:outline-none';
         const REMOVE_CALENDAR_BUTTON_CLASSES = 'btn-remove-calendar inline-flex items-center justify-center rounded-lg h-10 w-10 bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors';
         let courseSearchTimeout = null;
         let universitySearchTimeout = null;
@@ -715,7 +718,7 @@
             return getSelectedEducationLevel() === 'Undergraduate';
         }
         function shouldShowUniversityField() {
-            return getSelectedEducationLevel() === 'Undergraduate';
+            return getSelectedEducationLevel() === 'Undergraduate' && onboardingState.emoryStudent === false;
         }
         function shouldShowEmoryEmail() {
             return getSelectedEducationLevel() === 'Undergraduate' && onboardingState.emoryStudent === true;
@@ -755,8 +758,13 @@
                 onboardingState.emoryStudent = null;
                 onboardingState.emoryEmail = '';
             }
+            if (emoryStudentVisible && onboardingState.emoryStudent === true) {
+                onboardingState.school = EMORY_SCHOOL_NAME;
+            }
             if (!universityVisible) {
-                onboardingState.school = '';
+                if (onboardingState.emoryStudent !== true) {
+                    onboardingState.school = '';
+                }
                 universityInput.value = '';
             } else {
                 universityInput.value = onboardingState.school || '';
@@ -845,9 +853,12 @@
                     panel.classList.remove('is-active');
                 }
             });
+            if (welcomeHeader) {
+                welcomeHeader.classList.toggle('hidden', safeStep !== 1);
+            }
             syncEducationVisibility();
             updateProgress(safeStep);
-            if (safeStep === 4) {
+            if (safeStep === 5) {
                 renderReview();
             }
         }
@@ -934,8 +945,11 @@
             } else {
                 reviewClassYear.classList.add('hidden');
             }
-            if (shouldShowUniversityField() && onboardingState.school) {
-                reviewClassYear.textContent += ` • University: ${onboardingState.school}`;
+            const reviewSchool = onboardingState.emoryStudent === true ? EMORY_SCHOOL_NAME : onboardingState.school;
+            if (getSelectedEducationLevel() === 'Undergraduate' && reviewSchool) {
+                reviewClassYear.textContent = reviewClassYear.classList.contains('hidden')
+                    ? `University: ${reviewSchool}`
+                    : `${reviewClassYear.textContent} • University: ${reviewSchool}`;
                 reviewClassYear.classList.remove('hidden');
             }
             if (educationLevel === 'Undergraduate' && onboardingState.emoryStudent === true) {
@@ -1080,7 +1094,7 @@
                         const subtitle = subtitleParts.join(' • ');
                         const item = document.createElement('button');
                         item.type = 'button';
-                        item.className = 'w-full text-left px-4 py-3 hover:bg-surface-container-high transition-colors text-sm';
+                        item.className = COURSE_SUGGESTION_CLASSES;
                         item.innerHTML = `
                             <div class="font-medium">${label}</div>
                             <div class="text-xs text-on-surface-variant mt-1">${courseTitle}</div>
@@ -1143,8 +1157,11 @@
         }
         function onEmoryStudentSelected(value) {
             onboardingState.emoryStudent = value === 'yes';
-            if (value !== 'yes') {
+            if (value === 'yes') {
+                onboardingState.school = EMORY_SCHOOL_NAME;
+            } else {
                 onboardingState.emoryEmail = '';
+                onboardingState.school = '';
             }
             markDirty();
             syncEducationVisibility();
@@ -1183,7 +1200,7 @@
                         const payload = {
                             education_level: onboardingState.educationLevel,
                             class_year: shouldShowClassYear() ? onboardingState.classYear : null,
-                            school: shouldShowUniversityField() ? onboardingState.school : null,
+                            school: onboardingState.emoryStudent === true ? EMORY_SCHOOL_NAME : (shouldShowUniversityField() ? onboardingState.school : null),
                             emory_student: shouldShowEmoryStudentToggle() ? onboardingState.emoryStudent : null,
                             emory_email: shouldShowEmoryEmail() ? onboardingState.emoryEmail : null,
                         };
