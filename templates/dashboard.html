@@ -12,6 +12,7 @@
     <script src="{{ url_for('static', filename='js/appwrite.js') }}"></script>
     <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
     <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/themes.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
@@ -26,6 +27,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js" defer></script>
     <script src="{{ url_for('static', filename='js/dashboard/utils.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/dashboard/renderers.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/dashboard/daily-quote.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/dashboard.js') }}" defer></script>
 </head>
 <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
@@ -52,6 +54,8 @@
         </header>
 
         <section id="dashboard-checklist" class="dashboard-checklist" aria-label="Academic setup checklist" hidden></section>
+
+        <section id="dashboard-daily-quote" class="dashboard-daily-quote-slot" aria-live="polite"></section>
 
         <section class="dashboard-tiles-region" aria-label="Dashboard tiles">
             <div id="dashboard-tiles" class="dashboard-tiles" aria-live="polite">

@@ -15,7 +15,6 @@
         summaryLayoutSource,
     } = window.APStudyDashboardUtils;
     const { checklistHtml, renderTile } = window.APStudyDashboardRenderers;
-
     const state = {
         summary: null,
         sortable: null,
@@ -24,7 +23,6 @@
         resize: null,
         controlsBound: false,
     };
-
     const els = {
         tiles: document.getElementById("dashboard-tiles"),
         checklist: document.getElementById("dashboard-checklist"),
@@ -32,30 +30,25 @@
         addTile: document.getElementById("dashboard-add-tile"),
         addMenu: document.getElementById("dashboard-add-menu"),
     };
-
     function tileOrderFromDom() {
         return Array.from(els.tiles?.querySelectorAll(".dashboard-tile[data-tile-id]") || [])
             .map((tile) => tile.dataset.tileId)
             .filter(Boolean);
     }
-
     function tileLayoutFromDom() {
         return Array.from(els.tiles?.querySelectorAll(".dashboard-tile[data-tile-id]") || [])
             .map((tile) => tilePayload(tile.dataset.tileId, tile.dataset.tileSize, tile.dataset.calendarView))
             .filter((tile) => tile.id && TILE_META[tile.id]);
     }
-
     function renderChecklist(checklist) {
         if (!els.checklist || !checklist || checklist.hidden) {
             if (els.checklist) els.checklist.hidden = true;
             return;
         }
-
         els.checklist.hidden = false;
         els.checklist.innerHTML = checklistHtml(checklist);
         els.checklist.querySelector(".dashboard-checklist-hide")?.addEventListener("click", hideChecklist);
     }
-
     async function hideChecklist() {
         if (els.checklist) els.checklist.hidden = true;
         try {
@@ -68,7 +61,6 @@
             if (els.checklist) els.checklist.hidden = false;
         }
     }
-
     function renderTiles(summary) {
         if (!els.tiles) return;
         const layout = normalizeTileLayout(summaryLayoutSource(summary), summary.available_tiles);
@@ -81,7 +73,6 @@
         setupSortable();
         updateAddTileMenu();
     }
-
     function bindTileControls() {
         if (!state.controlsBound) {
             bindPageControls();
@@ -110,7 +101,6 @@
             grip.addEventListener("pointerdown", startResize);
         });
     }
-
     function bindPageControls() {
         els.editToggle?.addEventListener("click", () => {
             state.editMode = !state.editMode;
@@ -124,6 +114,15 @@
             setAddMenuOpen(!isOpen);
         });
         els.addMenu?.addEventListener("click", (event) => {
+            const quoteButton = event.target.closest("[data-add-quote-tile]");
+            if (quoteButton) {
+                event.preventDefault();
+                event.stopPropagation();
+                window.APStudyDashboardDailyQuote?.show?.();
+                setAddMenuOpen(false);
+                updateAddTileMenu();
+                return;
+            }
             const button = event.target.closest("[data-add-tile-id]");
             if (!button) return;
             event.preventDefault();
@@ -131,7 +130,6 @@
             addTile(button.dataset.addTileId);
         });
     }
-
     function applyEditMode() {
         document.body.classList.toggle("dashboard-editing-layout", state.editMode);
         if (els.editToggle) {
@@ -148,19 +146,16 @@
             setAddMenuOpen(false);
         }
     }
-
     function setTileSize(tile, size) {
         if (!tile) return;
         const tileId = tile.dataset.tileId;
         const nextSize = normalizeTileSize(tileId, size);
         tile.dataset.tileSize = nextSize;
     }
-
     function setCalendarView(tile, view) {
         if (!tile || tile.dataset.tileId !== "calendar") return;
         tile.dataset.calendarView = normalizeCalendarView("calendar", view);
     }
-
     function applyTileOption(tile, kind, value) {
         if (!tile) return;
         if (kind === "size") {
@@ -172,7 +167,6 @@
         renderTiles(state.summary);
         void persistLayout();
     }
-
     function startResize(event) {
         const tile = event.currentTarget?.closest(".dashboard-tile");
         if (!tile || !state.editMode || event.button !== 0) return;
@@ -194,7 +188,6 @@
         document.addEventListener("pointermove", updateResize);
         document.addEventListener("pointerup", finishResize);
     }
-
     function updateResize(event) {
         if (!state.resize || event.pointerId !== state.resize.pointerId) return;
         const { tile, startX, startY, startSize } = state.resize;
@@ -203,7 +196,6 @@
         tile.dataset.previewSize = TILE_SIZE_LABELS[targetSize] || targetSize;
         setTileSize(tile, targetSize);
     }
-
     function finishResize(event) {
         if (!state.resize || event.pointerId !== state.resize.pointerId) return;
         const { tile, targetSize } = state.resize;
@@ -216,7 +208,6 @@
         syncSummaryLayoutFromDom();
         void persistLayout();
     }
-
     function cancelResize() {
         if (!state.resize) return false;
         const { tile, startSize } = state.resize;
@@ -228,7 +219,6 @@
         setTileSize(tile, startSize);
         return true;
     }
-
     function toggleTileConfig(tile, button) {
         if (!tile || !state.editMode) return;
         const menu = tile.querySelector(".dashboard-config-menu");
@@ -238,7 +228,6 @@
         menu.hidden = !shouldOpen;
         button?.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
     }
-
     function closeTileConfigMenus() {
         els.tiles?.querySelectorAll(".dashboard-config-menu").forEach((menu) => {
             menu.hidden = true;
@@ -247,14 +236,12 @@
             button.setAttribute("aria-expanded", "false");
         });
     }
-
     function syncSummaryLayoutFromDom() {
         if (!state.summary) return;
         state.summary.tile_layout_version = 3;
         state.summary.tile_layout = tileLayoutFromDom();
         state.summary.tile_order = state.summary.tile_layout.map((tile) => tile.id);
     }
-
     function removeTile(tile) {
         if (!tile) return;
         tile.remove();
@@ -262,7 +249,6 @@
         updateAddTileMenu();
         void persistLayout();
     }
-
     function addTile(tileId) {
         if (!state.summary || !TILE_META[tileId]) return;
         const available = Array.isArray(state.summary.available_tiles) ? state.summary.available_tiles : Object.keys(TILE_META);
@@ -277,7 +263,6 @@
         renderTiles(state.summary);
         void persistLayout();
     }
-
     function hiddenTileIds() {
         const available = Array.isArray(state.summary?.available_tiles)
             ? state.summary.available_tiles.filter((tileId) => TILE_META[tileId])
@@ -285,31 +270,36 @@
         const visible = new Set((state.summary?.tile_layout || tileLayoutFromDom()).map((tile) => tile.id));
         return available.filter((tileId) => !visible.has(tileId));
     }
-
     function updateAddTileMenu() {
         if (!els.addTile || !els.addMenu) return;
         const hidden = hiddenTileIds();
-        const shouldShow = state.editMode && hidden.length > 0;
+        const quoteHidden = Boolean(window.APStudyDashboardDailyQuote?.isHidden?.());
+        const shouldShow = state.editMode && (hidden.length > 0 || quoteHidden);
         els.addTile.hidden = !shouldShow;
         els.addTile.disabled = !shouldShow;
         if (!shouldShow) {
             setAddMenuOpen(false);
             return;
         }
-        els.addMenu.innerHTML = hidden.map((tileId) => `
+        const dashboardTileItems = hidden.map((tileId) => `
             <button class="dashboard-add-menu-item" type="button" role="menuitem" data-add-tile-id="${escapeHtml(tileId)}">
                 <span class="material-symbols-outlined" aria-hidden="true">${escapeHtml(TILE_META[tileId].icon)}</span>
                 <span>${escapeHtml(TILE_META[tileId].title)}</span>
             </button>
         `).join("");
+        const quoteItem = quoteHidden ? `
+            <button class="dashboard-add-menu-item" type="button" role="menuitem" data-add-quote-tile="true">
+                <span class="material-symbols-outlined" aria-hidden="true">format_quote</span>
+                <span>Daily quote</span>
+            </button>
+        ` : "";
+        els.addMenu.innerHTML = `${quoteItem}${dashboardTileItems}`;
     }
-
     function setAddMenuOpen(isOpen) {
         if (!els.addTile || !els.addMenu) return;
         els.addMenu.hidden = !isOpen;
         els.addTile.setAttribute("aria-expanded", isOpen ? "true" : "false");
     }
-
     function setupSortable() {
         if (!els.tiles || typeof Sortable === "undefined") return;
         if (state.sortable) state.sortable.destroy();
@@ -330,7 +320,6 @@
             },
         });
     }
-
     async function persistLayout() {
         const tile_layout = tileLayoutFromDom();
         try {
@@ -342,7 +331,6 @@
             showToast(error.message || "Unable to save dashboard layout.");
         }
     }
-
     function bindCalendarPopoverTrigger(trigger, date, events) {
         if (!trigger || !date || !events.length) return;
         trigger.addEventListener("mouseenter", () => {
@@ -364,7 +352,6 @@
             showPopover(trigger, date, events);
         });
     }
-
     function bindCalendarPopovers() {
         document.querySelectorAll(".dashboard-calendar").forEach((root) => {
             let events = [];
@@ -379,7 +366,6 @@
                 bindCalendarPopoverTrigger(dayButton, date, eventsByDate.get(date) || []);
             });
         });
-
         document.querySelectorAll(".dashboard-calendar-upcoming-item").forEach((item) => {
             let eventData = null;
             try {
@@ -391,7 +377,6 @@
             bindCalendarPopoverTrigger(item, item.dataset.date || eventDateKey(eventData), [eventData]);
         });
     }
-
     function ensurePopover() {
         let popover = document.getElementById("dashboard-popover");
         if (popover) return popover;
@@ -402,7 +387,6 @@
         document.body.appendChild(popover);
         return popover;
     }
-
     function showPopover(anchor, date, events) {
         const popover = ensurePopover();
         const labelDate = new Date(`${date}T00:00:00`);
@@ -435,12 +419,10 @@
         popover.style.left = `${Math.max(gap, left)}px`;
         popover.style.top = `${top}px`;
     }
-
     function hidePopover() {
         const popover = document.getElementById("dashboard-popover");
         if (popover) popover.hidden = true;
     }
-
     function showToast(message) {
         const existing = document.querySelector(".dashboard-toast");
         existing?.remove();
@@ -450,7 +432,6 @@
         document.body.appendChild(toast);
         window.setTimeout(() => toast.remove(), 3200);
     }
-
     async function loadDashboard() {
         try {
             const summary = await fetchJson("/api/dashboard/summary");
@@ -469,7 +450,6 @@
             }
         }
     }
-
     document.addEventListener("click", () => {
         state.activePopoverLocked = false;
         hidePopover();
@@ -487,8 +467,8 @@
         closeTileConfigMenus();
         setAddMenuOpen(false);
     });
+    window.addEventListener?.("apstudy:dashboard-quote-visibility", updateAddTileMenu);
     document.addEventListener("DOMContentLoaded", loadDashboard);
-
     Object.assign(window.APStudyDashboardUtils, {
         tileOrderFromDom,
         tileLayoutFromDom,

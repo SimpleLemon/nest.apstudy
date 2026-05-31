@@ -243,7 +243,7 @@ async function ensureAppwriteSession() {
     try {
         await account.get();
     } catch (error) {
-        console.warn("Appwrite client session is unavailable; continuing with Flask session.", error);
+        console.debug("Appwrite client session is unavailable; continuing with Flask session.");
     }
 }
 

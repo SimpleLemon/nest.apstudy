@@ -80,6 +80,10 @@ def create_app():
     from blueprints import register_blueprints
     register_blueprints(app)
 
+    @app.route("/apple-touch-icon.png")
+    def apple_touch_icon():
+        return app.send_static_file("apple-touch-icon.png")
+
     @app.errorhandler(404)
     def page_not_found(error):
         if request.path.startswith("/api/"):
