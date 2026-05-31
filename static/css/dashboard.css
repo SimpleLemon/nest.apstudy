@@ -991,6 +991,10 @@
         flex-direction: column;
     }
 
+    .dashboard-tile-head {
+        margin-bottom: 8px;
+    }
+
     .dashboard-tile-link span:last-child {
         display: none;
     }

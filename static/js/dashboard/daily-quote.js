@@ -62,7 +62,7 @@
         .dashboard-egg-experience[data-phase="split"] .dashboard-egg-aura,.dashboard-egg-experience[data-phase="hold"] .dashboard-egg-aura{opacity:1;transform:translate3d(-50%,-50%,0) scale3d(1,1,1)}
         .dashboard-egg-experience[data-phase="hold"] .dashboard-egg-core{opacity:1;animation:dashboardEggCorePulse 1250ms ease-in-out infinite}
         .dashboard-egg-experience[data-phase="reveal"]{opacity:0;transform:translate3d(0,-10px,0) scale3d(0.985,0.985,1);filter:blur(5px);pointer-events:none}
-        .dashboard-egg-quote{position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:7px;min-height:86px;align-content:center;border:1px solid color-mix(in srgb,var(--color-primary) 24%,var(--color-outline-variant));border-radius:8px;background:radial-gradient(circle at 14% 18%,color-mix(in srgb,var(--color-tertiary) 18%,transparent),transparent 28%),linear-gradient(135deg,color-mix(in srgb,var(--color-surface-container-low) 92%,#101828),var(--color-surface));color:var(--color-on-surface);box-shadow:0 18px 46px rgba(0,0,0,0.13);padding:clamp(16px,2vw,22px);text-align:center;opacity:0;transform:translate3d(0,8px,0) scale3d(0.99,0.99,1);transition:opacity 420ms ease,transform 420ms cubic-bezier(0.16,1,0.3,1)}
+        .dashboard-egg-quote{position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:7px;min-height:86px;align-content:center;width:min(920px,100%);margin:0 auto;border:1px solid color-mix(in srgb,var(--color-primary) 24%,var(--color-outline-variant));border-radius:8px;background:radial-gradient(circle at 14% 18%,color-mix(in srgb,var(--color-tertiary) 18%,transparent),transparent 28%),linear-gradient(135deg,color-mix(in srgb,var(--color-surface-container-low) 92%,#101828),var(--color-surface));color:var(--color-on-surface);box-shadow:0 18px 46px rgba(0,0,0,0.13);padding:clamp(16px,2vw,22px);text-align:center;opacity:0;transform:translate3d(0,8px,0) scale3d(0.99,0.99,1);transition:opacity 420ms ease,transform 420ms cubic-bezier(0.16,1,0.3,1)}
         .dashboard-egg-quote.is-visible{opacity:1;transform:translate3d(0,0,0) scale3d(1,1,1)}
         .dashboard-egg-quote p{max-width:920px;margin:0 auto;color:var(--color-on-surface);font-size:clamp(16px,2vw,22px);font-weight:760;line-height:1.25;letter-spacing:0}
         .dashboard-egg-quote cite{color:var(--color-on-surface-variant);font-size:13px;font-style:normal;font-weight:720;text-align:center}
@@ -82,7 +82,7 @@
         @media (prefers-reduced-motion:reduce){.dashboard-egg-experience,.dashboard-egg-drop,.dashboard-egg-figure,.dashboard-egg-half,.dashboard-egg-crack,.dashboard-egg-crack path,.dashboard-egg-aura,.dashboard-egg-core,.dashboard-egg-quote{animation:none !important;transition:none !important}
         }
         @media (max-width:640px){.dashboard-egg-experience{min-height:136px}
-        .dashboard-egg-quote{min-height:100px;padding-right:18px}
+        .dashboard-egg-quote{width:100%;min-height:100px;padding-right:18px}
         }
     `;
 

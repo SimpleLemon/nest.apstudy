@@ -1940,6 +1940,31 @@ body.apstudy-confirm-open {
 	line-height: 1.2;
 }
 
+.apstudy-command-palette-close {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	border: 0;
+	background: none;
+	color: inherit;
+	font: inherit;
+	cursor: pointer;
+	padding: 0;
+}
+
+.apstudy-command-palette-close:focus-visible {
+	outline: 2px solid color-mix(in srgb, var(--color-primary) 55%, transparent);
+	outline-offset: 3px;
+}
+
+@media (max-width: 860px) {
+	.apstudy-command-palette-close {
+		min-height: 36px;
+		padding: 4px 6px;
+		border-radius: 8px;
+	}
+}
+
 .apstudy-command-palette-footer span {
 	display: inline-flex;
 	align-items: center;

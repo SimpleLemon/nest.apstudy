@@ -186,6 +186,21 @@ function openExternalLink(href) {
   }
 }
 
+function normalizeRoutePath(route) {
+  try {
+    const url = new URL(route, window.location.origin);
+    return url.pathname.replace(/\/+$/, '') || '/';
+  } catch (error) {
+    return String(route || '').replace(/\/+$/, '') || '/';
+  }
+}
+
+function isCurrentRoute(route) {
+  const targetPath = normalizeRoutePath(route);
+  const currentPath = normalizeRoutePath(window.location.pathname || '/');
+  return targetPath === currentPath;
+}
+
 function navigateTo(route) {
   window.location.assign(route);
 }
@@ -347,6 +362,10 @@ function CommandPaletteApp() {
           value: item.name,
           keywords: item.keywords,
           onSelect: () => {
+            if (isCurrentRoute(item.route)) {
+              close();
+              return;
+            }
             close();
             navigateTo(item.route);
           },
@@ -387,7 +406,16 @@ function CommandPaletteApp() {
       'div',
       { className: 'apstudy-command-palette-footer' },
       h('span', null, h('kbd', null, 'Enter'), ' to select'),
-      h('span', null, h('kbd', null, 'Esc'), ' to close'),
+      h(
+        'button',
+        {
+          type: 'button',
+          className: 'apstudy-command-palette-close',
+          onClick: close,
+        },
+        h('kbd', null, 'Esc'),
+        ' to close',
+      ),
     ),
   );
 }
