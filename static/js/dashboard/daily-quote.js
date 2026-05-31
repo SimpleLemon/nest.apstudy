@@ -38,10 +38,10 @@
         :root{--dashboard-egg-elastic:${EGG_ELASTIC_EASING};--dashboard-egg-wobble:${WOBBLE_DEGREES}deg}
         .dashboard-daily-quote-slot:empty{display:none}
         .dashboard-daily-quote-slot{position:relative;isolation:isolate}
-        .dashboard-egg-experience{position:relative;min-height:clamp(142px,15vw,176px);overflow:hidden;border:1px solid color-mix(in srgb,var(--color-outline-variant) 58%,transparent);border-radius:8px;background:radial-gradient(circle at 50% 44%,color-mix(in srgb,var(--color-primary) 16%,transparent),transparent 32%),linear-gradient(135deg,color-mix(in srgb,var(--color-surface-container-low) 88%,#111827),var(--color-surface));color:#fff7dc;box-shadow:0 16px 36px rgba(0,0,0,0.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:opacity 420ms ease,transform 420ms ease,filter 420ms ease}
+        .dashboard-egg-experience{position:relative;display:grid;place-items:center;min-height:clamp(142px,15vw,176px);overflow:hidden;border:1px solid color-mix(in srgb,var(--color-outline-variant) 58%,transparent);border-radius:8px;background:radial-gradient(circle at 50% 44%,color-mix(in srgb,var(--color-primary) 16%,transparent),transparent 32%),linear-gradient(135deg,color-mix(in srgb,var(--color-surface-container-low) 88%,#111827),var(--color-surface));color:#fff7dc;box-shadow:0 16px 36px rgba(0,0,0,0.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:opacity 420ms ease,transform 420ms ease,filter 420ms ease}
         .dashboard-egg-experience::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.07),transparent),radial-gradient(circle at 50% 50%,transparent 0 35%,rgba(0,0,0,0.26) 78%);pointer-events:none}
-        .dashboard-egg-experience.is-complete{display:none;pointer-events:none}
-        .dashboard-egg-stage{position:absolute;inset:0;display:grid;gap:10px;place-items:center;align-content:center;pointer-events:none}
+        .dashboard-egg-experience.is-complete{overflow:visible}
+        .dashboard-egg-stage{position:absolute;inset:0;z-index:1;display:grid;gap:10px;place-items:center;align-content:center;pointer-events:none;transition:opacity 360ms ease,transform 420ms cubic-bezier(0.16,1,0.3,1),filter 420ms ease;will-change:opacity,transform,filter}
         .dashboard-egg-drop{position:relative;width:clamp(54px,7vw,76px);height:clamp(72px,9.4vw,102px);transform-origin:50% 72%;animation:dashboardEggDrop 800ms var(--dashboard-egg-elastic) both;will-change:transform}
         .dashboard-egg-figure{position:relative;width:100%;height:100%;transform-origin:50% 72%;animation:dashboardEggWobble 92ms ease-in-out 8 120ms alternate;will-change:transform}
         .dashboard-egg-half{position:absolute;inset:0;border-radius:54% 54% 46% 46% / 62% 62% 40% 40%;background:radial-gradient(circle at 40% 23%,rgba(255,255,255,0.96),rgba(255,250,228,0.75) 20%,transparent 40%),linear-gradient(150deg,#fff9df 0%,#f2dfaa 52%,#d7ad68 100%);box-shadow:inset -10px -14px 26px rgba(114,73,28,0.22),inset 9px 8px 18px rgba(255,255,255,0.56),0 16px 28px rgba(0,0,0,0.24);transition:transform 760ms cubic-bezier(0.2,0.78,0.25,1),opacity 620ms ease;will-change:transform,opacity}
@@ -61,9 +61,10 @@
         .dashboard-egg-experience[data-phase="split"] .dashboard-egg-half-right,.dashboard-egg-experience[data-phase="hold"] .dashboard-egg-half-right{opacity:0;transform:translate3d(28px,3px,0) rotate3d(0,0,1,18deg) scale3d(0.88,0.88,1)}
         .dashboard-egg-experience[data-phase="split"] .dashboard-egg-aura,.dashboard-egg-experience[data-phase="hold"] .dashboard-egg-aura{opacity:1;transform:translate3d(-50%,-50%,0) scale3d(1,1,1)}
         .dashboard-egg-experience[data-phase="hold"] .dashboard-egg-core{opacity:1;animation:dashboardEggCorePulse 1250ms ease-in-out infinite}
-        .dashboard-egg-experience[data-phase="reveal"]{opacity:0;transform:translate3d(0,-10px,0) scale3d(0.985,0.985,1);filter:blur(5px);pointer-events:none}
-        .dashboard-egg-quote{position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:7px;min-height:86px;align-content:center;width:min(920px,100%);margin:0 auto;border:1px solid color-mix(in srgb,var(--color-primary) 24%,var(--color-outline-variant));border-radius:8px;background:radial-gradient(circle at 14% 18%,color-mix(in srgb,var(--color-tertiary) 18%,transparent),transparent 28%),linear-gradient(135deg,color-mix(in srgb,var(--color-surface-container-low) 92%,#101828),var(--color-surface));color:var(--color-on-surface);box-shadow:0 18px 46px rgba(0,0,0,0.13);padding:clamp(16px,2vw,22px);text-align:center;opacity:0;transform:translate3d(0,8px,0) scale3d(0.99,0.99,1);transition:opacity 420ms ease,transform 420ms cubic-bezier(0.16,1,0.3,1)}
-        .dashboard-egg-quote.is-visible{opacity:1;transform:translate3d(0,0,0) scale3d(1,1,1)}
+        .dashboard-egg-experience[data-phase="quote"]{overflow:visible}
+        .dashboard-egg-experience[data-phase="quote"] .dashboard-egg-stage{opacity:0;transform:translate3d(0,-4px,0) scale3d(0.96,0.96,1);filter:blur(4px)}
+        .dashboard-egg-quote{position:absolute;left:50%;top:50%;z-index:2;display:grid;grid-template-columns:minmax(0,1fr);gap:7px;min-height:86px;align-content:center;width:min(920px,calc(100% - 32px));margin:0;border:1px solid color-mix(in srgb,var(--color-primary) 24%,var(--color-outline-variant));border-radius:8px;background:radial-gradient(circle at 50% 44%,color-mix(in srgb,var(--color-primary) 12%,transparent),transparent 30%),linear-gradient(135deg,color-mix(in srgb,var(--color-surface-container-low) 92%,#101828),var(--color-surface));color:var(--color-on-surface);box-shadow:0 18px 46px rgba(0,0,0,0.13);padding:clamp(16px,2vw,22px);text-align:center;opacity:0;pointer-events:none;transform:translate3d(-50%,-50%,0) scale3d(0.92,0.92,1);transition:opacity 420ms ease,transform 520ms cubic-bezier(0.16,1,0.3,1)}
+        .dashboard-egg-quote.is-visible{opacity:1;pointer-events:auto;transform:translate3d(-50%,-50%,0) scale3d(1,1,1)}
         .dashboard-egg-quote p{max-width:920px;margin:0 auto;color:var(--color-on-surface);font-size:clamp(16px,2vw,22px);font-weight:760;line-height:1.25;letter-spacing:0}
         .dashboard-egg-quote cite{color:var(--color-on-surface-variant);font-size:13px;font-style:normal;font-weight:720;text-align:center}
         .dashboard-egg-quote-remove{position:absolute;left:-13px;top:-13px;z-index:4;display:none;width:30px;height:30px;align-items:center;justify-content:center;border:1px solid color-mix(in srgb,var(--color-outline-variant) 84%,transparent);border-radius:999px;background:color-mix(in srgb,#6b7280 34%,var(--color-surface-container-high));color:var(--color-error);box-shadow:0 10px 26px rgba(0,0,0,0.24);cursor:pointer}
@@ -201,14 +202,43 @@
                     </div>
                     <span class="dashboard-egg-loading-text">Opening today's quote...</span>
                 </div>
+                <figure class="dashboard-egg-quote">
+                    <button class="dashboard-egg-quote-remove" type="button" aria-label="Hide daily quote">
+                        <span class="material-symbols-outlined" aria-hidden="true">remove</span>
+                    </button>
+                    <p></p>
+                    <cite></cite>
+                </figure>
             </div>
         `;
         return slot.querySelector(".dashboard-egg-experience");
     }
 
+    function ensureQuoteShell(slot) {
+        let root = slot.querySelector(".dashboard-egg-experience");
+        if (root) return root;
+        slot.innerHTML = '<div class="dashboard-egg-experience is-complete" data-phase="quote"></div>';
+        return slot.querySelector(".dashboard-egg-experience");
+    }
+
+    function bindQuoteRemove(slot, banner) {
+        const button = banner.querySelector(".dashboard-egg-quote-remove");
+        if (!button || button.dataset.bound === "true") return;
+        button.dataset.bound = "true";
+        button.addEventListener("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            hideQuote(slot);
+        });
+    }
+
     function ensureQuoteBanner(slot) {
-        let banner = slot.querySelector(".dashboard-egg-quote");
-        if (banner) return banner;
+        const root = ensureQuoteShell(slot);
+        let banner = root.querySelector(".dashboard-egg-quote");
+        if (banner) {
+            bindQuoteRemove(slot, banner);
+            return banner;
+        }
         banner = document.createElement("figure");
         banner.className = "dashboard-egg-quote";
         banner.innerHTML = `
@@ -218,22 +248,23 @@
             <p></p>
             <cite></cite>
         `;
-        slot.appendChild(banner);
-        banner.querySelector(".dashboard-egg-quote-remove")?.addEventListener("click", (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            hideQuote(slot);
-        });
+        root.appendChild(banner);
+        bindQuoteRemove(slot, banner);
         return banner;
     }
 
     function renderQuote(slot, quote) {
+        const root = ensureQuoteShell(slot);
         const banner = ensureQuoteBanner(slot);
         const text = banner.querySelector("p");
         const author = banner.querySelector("cite");
         if (text) text.textContent = quote.text;
         if (author) author.textContent = quote.author ? `- ${quote.author}` : "";
-        requestAnimationFrame(() => banner.classList.add("is-visible"));
+        root.dataset.phase = "quote";
+        requestAnimationFrame(() => {
+            root.classList.add("is-complete");
+            banner.classList.add("is-visible");
+        });
         return banner;
     }
 
@@ -381,14 +412,12 @@
             if (revealed || !quote) return;
             revealed = true;
             waitingForQuote = false;
-            root.dataset.phase = "reveal";
             clearParticles();
             renderQuote(slot, quote);
             setTimer(() => {
-                root.style.pointerEvents = "none";
                 root.classList.add("is-complete");
-                root.remove();
-            }, 460);
+                root.querySelector(".dashboard-egg-stage")?.remove();
+            }, 540);
         }
 
         setTimer(() => {
