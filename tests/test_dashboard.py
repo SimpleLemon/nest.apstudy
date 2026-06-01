@@ -239,49 +239,6 @@ class TestDashboardPreferenceRoutes(unittest.TestCase):
         self.assertTrue(response.get_json()["hidden"])
         self.assertEqual(update_row.call_args.args[2]["dashboard_checklist_hidden_signature"], "abc123")
 
-    def test_quote_today_normalizes_zenquotes_payload(self):
-        payload = [{
-            "q": "Adapt and enjoy something better.",
-            "a": "Spencer Johnson",
-            "i": "https://zenquotes.io/img/spencer-johnson.jpg",
-            "h": "<blockquote>ignored</blockquote>",
-            "date": "2026-05-31",
-        }]
-
-        class FakeResponse:
-            def raise_for_status(self):
-                return None
-
-            def json(self):
-                return payload
-
-        with self.app.test_request_context("/api/dashboard/quote/today"):
-            with patch.object(dashboard_bp, "current_user", self.user), \
-                    patch.object(dashboard_bp.http_requests, "get", return_value=FakeResponse()) as get_quote:
-                response = dashboard_bp.dashboard_quote_today.__wrapped__()
-
-        self.assertEqual(response.get_json(), {
-            "quote": {
-                "text": "Adapt and enjoy something better.",
-                "author": "Spencer Johnson",
-                "date": "2026-05-31",
-            },
-        })
-        get_quote.assert_called_once_with(dashboard_bp.DASHBOARD_QUOTE_URL, timeout=dashboard_bp.DASHBOARD_QUOTE_TIMEOUT)
-
-    def test_quote_today_returns_fallback_on_fetch_failure(self):
-        with self.app.test_request_context("/api/dashboard/quote/today"):
-            with patch.object(dashboard_bp, "current_user", self.user), \
-                    patch.object(
-                        dashboard_bp.http_requests,
-                        "get",
-                        side_effect=dashboard_bp.http_requests.RequestException("offline"),
-                    ):
-                response = dashboard_bp.dashboard_quote_today.__wrapped__()
-
-        self.assertEqual(response.get_json(), {"quote": dashboard_bp.DASHBOARD_FALLBACK_QUOTE})
-
-
 class TestDashboardTasksSummary(unittest.TestCase):
     def test_tasks_summary_falls_back_to_thirty_day_and_no_deadline_tasks(self):
         now = datetime.now(timezone.utc)

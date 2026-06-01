@@ -6,7 +6,6 @@ import logging
 import os
 from datetime import datetime, timedelta, timezone
 
-import requests as http_requests
 from flask import Blueprint, jsonify, render_template, redirect, request, url_for
 from flask_login import login_required, current_user
 
@@ -56,29 +55,6 @@ DASHBOARD_TASK_PRIORITY_RANK = {
     "medium": 1,
     "low": 2,
 }
-DASHBOARD_QUOTE_URL = "https://zenquotes.io/api/today"
-DASHBOARD_QUOTE_TIMEOUT = 5
-DASHBOARD_FALLBACK_QUOTE = {
-    "text": "Small steps every day become the work you are proud of.",
-    "author": "APStudy Nest",
-    "date": "",
-}
-
-
-def _normalize_dashboard_quote(data):
-    item = data[0] if isinstance(data, list) and data else data
-    if not isinstance(item, dict):
-        return None
-    text = str(item.get("q") or "").strip()
-    if not text:
-        return None
-    return {
-        "text": text,
-        "author": str(item.get("a") or "").strip() or DASHBOARD_FALLBACK_QUOTE["author"],
-        "date": str(item.get("date") or "").strip(),
-    }
-
-
 def _user_payload():
     return {
         "id": str(current_user.id),
@@ -786,24 +762,6 @@ def dashboard_summary():
     if not current_user.onboarding_complete:
         return jsonify({"error": "Onboarding is required."}), 403
     return jsonify(_dashboard_summary_payload())
-
-
-@dashboard_bp.route("/api/dashboard/quote/today")
-@login_required
-def dashboard_quote_today():
-    """Proxy and normalize today's dashboard quote to avoid browser CORS failures."""
-    if not current_user.onboarding_complete:
-        return jsonify({"error": "Onboarding is required."}), 403
-
-    try:
-        response = http_requests.get(DASHBOARD_QUOTE_URL, timeout=DASHBOARD_QUOTE_TIMEOUT)
-        response.raise_for_status()
-        quote = _normalize_dashboard_quote(response.json())
-    except (http_requests.RequestException, ValueError):
-        logger.info("Failed to load ZenQuotes daily quote; using fallback.")
-        quote = None
-
-    return jsonify({"quote": quote or DASHBOARD_FALLBACK_QUOTE})
 
 
 @dashboard_bp.route("/api/dashboard/layout", methods=["PATCH"])

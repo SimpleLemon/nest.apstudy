@@ -5,7 +5,7 @@
     const STYLE_ID = "dashboard-daily-quote-style";
     const CACHE_KEY = "apstudy.dashboard.eggCrackQuote.v2";
     const VISIBILITY_KEY = "apstudy.dashboard.eggCrackQuote.visible.v1";
-    const QUOTE_URL = "/api/dashboard/quote/today";
+    const QUOTE_URL = "https://zenquotes.io/api/today";
     const FETCH_TIMEOUT_MS = 8000;
     const FALLBACK_QUOTE = {
         text: "Small steps every day become the work you are proud of.",
@@ -38,14 +38,14 @@
         :root{--dashboard-egg-elastic:${EGG_ELASTIC_EASING};--dashboard-egg-wobble:${WOBBLE_DEGREES}deg}
         .dashboard-daily-quote-slot:empty{display:none}
         .dashboard-daily-quote-slot{position:relative;isolation:isolate}
-        .dashboard-egg-experience{position:relative;display:grid;place-items:center;min-height:clamp(142px,15vw,176px);overflow:hidden;border:1px solid color-mix(in srgb,var(--color-outline-variant) 58%,transparent);border-radius:8px;background:radial-gradient(circle at 50% 44%,color-mix(in srgb,var(--color-primary) 16%,transparent),transparent 32%),linear-gradient(135deg,color-mix(in srgb,var(--color-surface-container-low) 88%,#111827),var(--color-surface));color:#fff7dc;box-shadow:0 16px 36px rgba(0,0,0,0.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:opacity 420ms ease,transform 420ms ease,filter 420ms ease,min-height 420ms ease}
-        .dashboard-egg-experience::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.07),transparent),radial-gradient(circle at 50% 50%,transparent 0 35%,rgba(0,0,0,0.26) 78%);pointer-events:none}
-        .dashboard-egg-experience.is-complete{display:block;min-height:0;overflow:visible;border-color:transparent;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
-        .dashboard-egg-experience.is-complete::before{display:none}
+        .dashboard-egg-experience{position:relative;display:grid;box-sizing:border-box;place-items:center;width:min(920px,100%);min-height:clamp(142px,15vw,176px);margin:0 auto;overflow:hidden;border:1px solid color-mix(in srgb,var(--color-primary) 24%,var(--color-outline-variant));border-radius:8px;background:radial-gradient(circle at 50% 44%,color-mix(in srgb,var(--color-primary) 12%,transparent),transparent 30%),linear-gradient(135deg,color-mix(in srgb,var(--color-surface-container-low) 92%,#101828),var(--color-surface));color:var(--color-on-surface);box-shadow:0 18px 46px rgba(0,0,0,0.13);padding:clamp(16px,2vw,22px);text-align:center;transition:opacity 420ms ease,transform 420ms ease,filter 420ms ease,min-height 420ms ease}
+        .dashboard-egg-experience::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.05),transparent);pointer-events:none}
+        .dashboard-egg-experience.is-complete{min-height:86px;overflow:visible}
         .dashboard-egg-stage{position:absolute;inset:0;z-index:1;display:grid;gap:10px;place-items:center;align-content:center;pointer-events:none;transition:opacity 360ms ease,transform 420ms cubic-bezier(0.16,1,0.3,1),filter 420ms ease;will-change:opacity,transform,filter}
         .dashboard-egg-drop{position:relative;width:clamp(54px,7vw,76px);height:clamp(72px,9.4vw,102px);transform-origin:50% 72%;animation:dashboardEggDrop 800ms var(--dashboard-egg-elastic) both;will-change:transform}
         .dashboard-egg-figure{position:relative;width:100%;height:100%;transform-origin:50% 72%;animation:dashboardEggWobble 92ms ease-in-out 8 120ms alternate;will-change:transform}
-        .dashboard-egg-half{position:absolute;inset:0;border-radius:54% 54% 46% 46% / 62% 62% 40% 40%;background:radial-gradient(circle at 40% 23%,rgba(255,255,255,0.96),rgba(255,250,228,0.75) 20%,transparent 40%),linear-gradient(150deg,#fff9df 0%,#f2dfaa 52%,#d7ad68 100%);box-shadow:inset -10px -14px 26px rgba(114,73,28,0.22),inset 9px 8px 18px rgba(255,255,255,0.56),0 16px 28px rgba(0,0,0,0.24);transition:transform 760ms cubic-bezier(0.2,0.78,0.25,1),opacity 620ms ease;will-change:transform,opacity}
+        .dashboard-egg-shell,.dashboard-egg-half{position:absolute;inset:0;border-radius:54% 54% 46% 46% / 62% 62% 40% 40%;background:radial-gradient(circle at 40% 23%,rgba(255,255,255,0.96),rgba(255,250,228,0.75) 20%,transparent 40%),linear-gradient(150deg,#fff9df 0%,#f2dfaa 52%,#d7ad68 100%);box-shadow:inset -10px -14px 26px rgba(114,73,28,0.22),inset 9px 8px 18px rgba(255,255,255,0.56),0 16px 28px rgba(0,0,0,0.24);transition:transform 760ms cubic-bezier(0.2,0.78,0.25,1),opacity 620ms ease;will-change:transform,opacity}
+        .dashboard-egg-half{opacity:0}
         .dashboard-egg-half-left{clip-path:polygon(0 0,53% 0,48% 31%,55% 39%,46% 48%,53% 58%,45% 68%,52% 100%,0 100%)}
         .dashboard-egg-half-right{clip-path:polygon(48% 0,100% 0,100% 100%,48% 100%,55% 68%,47% 58%,56% 48%,49% 39%,57% 31%)}
         .dashboard-egg-crack{position:absolute;left:15%;top:40%;width:70%;height:28%;overflow:visible;opacity:0;filter:drop-shadow(0 0 10px rgba(255,235,155,0.72));transition:opacity 90ms linear}
@@ -56,6 +56,8 @@
         .dashboard-egg-particles{position:absolute;left:50%;top:50%;width:1px;height:1px;overflow:visible;pointer-events:none}
         .dashboard-egg-particle{position:absolute;width:9px;height:7px;border-radius:70% 35% 60% 40%;background:linear-gradient(135deg,#fff6ce,#d9ad63);box-shadow:0 0 10px rgba(255,228,143,0.5);will-change:transform,opacity}
         .dashboard-egg-loading-text{position:relative;z-index:1;color:var(--color-on-surface-variant);font-size:13px;font-weight:720;letter-spacing:0}
+        .dashboard-egg-experience[data-phase="fracture"] .dashboard-egg-shell,.dashboard-egg-experience[data-phase="split"] .dashboard-egg-shell,.dashboard-egg-experience[data-phase="hold"] .dashboard-egg-shell{opacity:0}
+        .dashboard-egg-experience[data-phase="fracture"] .dashboard-egg-half{opacity:1}
         .dashboard-egg-experience[data-phase="fracture"] .dashboard-egg-crack,.dashboard-egg-experience[data-phase="split"] .dashboard-egg-crack,.dashboard-egg-experience[data-phase="hold"] .dashboard-egg-crack{opacity:1}
         .dashboard-egg-experience[data-phase="fracture"] .dashboard-egg-crack path,.dashboard-egg-experience[data-phase="split"] .dashboard-egg-crack path,.dashboard-egg-experience[data-phase="hold"] .dashboard-egg-crack path{stroke-dashoffset:0}
         .dashboard-egg-experience[data-phase="split"] .dashboard-egg-half-left,.dashboard-egg-experience[data-phase="hold"] .dashboard-egg-half-left{opacity:0;transform:translate3d(-28px,-5px,0) rotate3d(0,0,1,-18deg) scale3d(0.88,0.88,1)}
@@ -64,9 +66,9 @@
         .dashboard-egg-experience[data-phase="hold"] .dashboard-egg-core{opacity:1;animation:dashboardEggCorePulse 1250ms ease-in-out infinite}
         .dashboard-egg-experience[data-phase="quote"]{overflow:visible}
         .dashboard-egg-experience[data-phase="quote"] .dashboard-egg-stage{opacity:0;transform:translate3d(0,-4px,0) scale3d(0.96,0.96,1);filter:blur(4px)}
-        .dashboard-egg-quote{position:absolute;left:50%;top:50%;z-index:2;display:grid;grid-template-columns:minmax(0,1fr);gap:7px;min-height:86px;align-content:center;width:min(920px,calc(100% - 32px));margin:0;border:1px solid color-mix(in srgb,var(--color-primary) 24%,var(--color-outline-variant));border-radius:8px;background:radial-gradient(circle at 50% 44%,color-mix(in srgb,var(--color-primary) 12%,transparent),transparent 30%),linear-gradient(135deg,color-mix(in srgb,var(--color-surface-container-low) 92%,#101828),var(--color-surface));color:var(--color-on-surface);box-shadow:0 18px 46px rgba(0,0,0,0.13);padding:clamp(16px,2vw,22px);text-align:center;opacity:0;pointer-events:none;transform:translate3d(-50%,-50%,0) scale3d(0.92,0.92,1);transition:opacity 420ms ease,transform 520ms cubic-bezier(0.16,1,0.3,1)}
-        .dashboard-egg-experience.is-complete .dashboard-egg-quote{position:relative;left:auto;top:auto;width:min(920px,100%);margin:0 auto;transform:scale3d(0.98,0.98,1)}
-        .dashboard-egg-quote.is-visible{opacity:1;pointer-events:auto;transform:translate3d(-50%,-50%,0) scale3d(1,1,1)}
+        .dashboard-egg-quote{position:absolute;inset:clamp(16px,2vw,22px);z-index:2;display:grid;grid-template-columns:minmax(0,1fr);gap:7px;min-height:86px;align-content:center;margin:0;color:var(--color-on-surface);opacity:0;pointer-events:none;transform:scale3d(0.92,0.92,1);transition:opacity 420ms ease,transform 520ms cubic-bezier(0.16,1,0.3,1)}
+        .dashboard-egg-experience.is-complete .dashboard-egg-quote{position:relative;inset:auto;transform:scale3d(0.98,0.98,1)}
+        .dashboard-egg-quote.is-visible{opacity:1;pointer-events:auto;transform:scale3d(1,1,1)}
         .dashboard-egg-experience.is-complete .dashboard-egg-quote.is-visible{transform:scale3d(1,1,1)}
         .dashboard-egg-quote p{max-width:920px;margin:0 auto;color:var(--color-on-surface);font-size:clamp(16px,2vw,22px);font-weight:760;line-height:1.25;letter-spacing:0}
         .dashboard-egg-quote cite{color:var(--color-on-surface-variant);font-size:13px;font-style:normal;font-weight:720;text-align:center}
@@ -83,11 +85,11 @@
         @keyframes dashboardEggCorePulse{0%,100%{transform:translate3d(-50%,-50%,0) scale3d(0.82,0.82,1);opacity:0.76}
         50%{transform:translate3d(-50%,-50%,0) scale3d(1.08,1.08,1);opacity:1}
         }
-        @media (prefers-reduced-motion:reduce){.dashboard-egg-experience,.dashboard-egg-drop,.dashboard-egg-figure,.dashboard-egg-half,.dashboard-egg-crack,.dashboard-egg-crack path,.dashboard-egg-aura,.dashboard-egg-core,.dashboard-egg-quote{animation:none !important;transition:none !important}
+        @media (prefers-reduced-motion:reduce){.dashboard-egg-experience,.dashboard-egg-drop,.dashboard-egg-figure,.dashboard-egg-shell,.dashboard-egg-half,.dashboard-egg-crack,.dashboard-egg-crack path,.dashboard-egg-aura,.dashboard-egg-core,.dashboard-egg-quote{animation:none !important;transition:none !important}
         }
         @media (max-width:640px){.dashboard-egg-experience{min-height:136px}
-        .dashboard-egg-experience.is-complete{min-height:0}
-        .dashboard-egg-quote{width:100%;min-height:100px;padding-right:18px}
+        .dashboard-egg-experience.is-complete{min-height:100px}
+        .dashboard-egg-quote{min-height:100px;padding-right:18px}
         }
     `;
 
@@ -196,11 +198,7 @@
                     <div class="dashboard-egg-core"></div>
                     <div class="dashboard-egg-drop">
                         <div class="dashboard-egg-figure">
-                            <div class="dashboard-egg-half dashboard-egg-half-left"></div>
-                            <div class="dashboard-egg-half dashboard-egg-half-right"></div>
-                            <svg class="dashboard-egg-crack" viewBox="0 0 180 80" focusable="false">
-                                <path d="M8 42 L34 34 L54 48 L74 28 L96 45 L116 31 L139 47 L172 38"></path>
-                            </svg>
+                            <div class="dashboard-egg-shell"></div>
                             <div class="dashboard-egg-particles"></div>
                         </div>
                     </div>
@@ -216,6 +214,26 @@
             </div>
         `;
         return slot.querySelector(".dashboard-egg-experience");
+    }
+
+    function addFractureGeometry(root) {
+        const figure = root.querySelector(".dashboard-egg-figure");
+        if (!figure || figure.querySelector(".dashboard-egg-crack")) return;
+        const particles = figure.querySelector(".dashboard-egg-particles");
+        const fragment = document.createDocumentFragment();
+        const left = document.createElement("div");
+        left.className = "dashboard-egg-half dashboard-egg-half-left";
+        const right = document.createElement("div");
+        right.className = "dashboard-egg-half dashboard-egg-half-right";
+        const crack = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        crack.setAttribute("class", "dashboard-egg-crack");
+        crack.setAttribute("viewBox", "0 0 180 80");
+        crack.setAttribute("focusable", "false");
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", "M8 42 L34 34 L54 48 L74 28 L96 45 L116 31 L139 47 L172 38");
+        crack.appendChild(path);
+        fragment.append(left, right, crack);
+        figure.insertBefore(fragment, particles);
     }
 
     function ensureQuoteShell(slot) {
@@ -425,6 +443,7 @@
         }
 
         setTimer(() => {
+            addFractureGeometry(root);
             root.dataset.phase = "fracture";
             clearParticles = runParticles(root);
         }, PHASE_FRACTURE_MS);

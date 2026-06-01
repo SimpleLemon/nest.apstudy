@@ -60,6 +60,20 @@ test("calendar dashboard keeps cache, public-share, and event-form contracts wir
     assert.match(source, /function escapeHtml\(value\)/);
 });
 
+test("dashboard daily quote fetches ZenQuotes directly and uses one smooth egg card", async () => {
+    const source = await sourceFor("static/js/dashboard/daily-quote.js");
+
+    assert.match(source, /QUOTE_URL = "https:\/\/zenquotes\.io\/api\/today"/);
+    assert.doesNotMatch(source, /\/api\/dashboard\/quote\/today/);
+    assert.match(source, /item\?\.q/);
+    assert.match(source, /item\?\.a/);
+    assert.match(source, /dashboard-egg-shell/);
+    assert.match(source, /function addFractureGeometry\(root\)/);
+    assert.match(source, /addFractureGeometry\(root\);\s*root\.dataset\.phase = "fracture"/);
+    assert.doesNotMatch(source, /\.dashboard-egg-quote\{[^}]*border:1px/);
+    assert.doesNotMatch(source, /\.dashboard-egg-quote\{[^}]*box-shadow/);
+});
+
 test("sidebar keeps persisted collapse state, route targets, and preference event bridge", async () => {
     const source = await sourceFor("static/js/sidebar.js");
 
