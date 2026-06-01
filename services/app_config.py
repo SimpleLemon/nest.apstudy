@@ -10,6 +10,8 @@ from appwrite_helpers import create_row_safe, first_row, format_datetime, update
 
 
 SPRING_COURSE_TRACKING_OPEN_KEY = "spring_course_tracking_open"
+COURSE_TRACKING_REFRESH_INTERVAL_KEY = "course_tracking_refresh_interval"
+COURSE_TRACKING_REFRESH_INTERVAL_CHOICES = (5, 10, 30, 60)
 
 
 def _now():
@@ -56,3 +58,19 @@ def set_spring_course_tracking_open(enabled):
         SPRING_COURSE_TRACKING_OPEN_KEY,
         {"enabled": bool(enabled), "updated_at": _now()},
     )
+
+
+def get_course_tracking_refresh_minutes(default=COURSE_TRACKING_REFRESH_INTERVAL_CHOICES[0]):
+    config = get_config(COURSE_TRACKING_REFRESH_INTERVAL_KEY, default)
+    try:
+        minutes = int(config)
+    except (TypeError, ValueError):
+        minutes = default
+    return minutes if minutes in COURSE_TRACKING_REFRESH_INTERVAL_CHOICES else default
+
+
+def set_course_tracking_refresh_minutes(minutes):
+    minutes = int(minutes)
+    if minutes not in COURSE_TRACKING_REFRESH_INTERVAL_CHOICES:
+        raise ValueError("Invalid course tracking refresh interval.")
+    return set_config(COURSE_TRACKING_REFRESH_INTERVAL_KEY, minutes)

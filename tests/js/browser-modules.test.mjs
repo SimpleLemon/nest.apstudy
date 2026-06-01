@@ -29,7 +29,7 @@ test("command palette keeps primary navigation, theme actions, and global contro
 });
 
 test("calendar event form preserves escaping, API routes, and cache refresh behavior", async () => {
-    const source = await sourceFor("static/js/calendar_event_form.js");
+    const source = await sourceFor("static/js/calendar/event-form.js");
 
     for (const replacement of ["&amp;", "&lt;", "&gt;", "&quot;", "&#39;"]) {
         assert.match(source, new RegExp(replacement.replace("&", "&")));
@@ -44,7 +44,12 @@ test("calendar event form preserves escaping, API routes, and cache refresh beha
 });
 
 test("calendar dashboard keeps cache, public-share, and event-form contracts wired", async () => {
-    const source = await sourceFor("static/js/calendar.js");
+    const source = [
+        await sourceFor("static/js/calendar.js"),
+        await sourceFor("static/js/calendar/utils.js"),
+        await sourceFor("static/js/calendar/course-modal.js"),
+        await sourceFor("static/js/calendar/courses.js"),
+    ].join("\n");
 
     assert.match(source, /const WEEKDAYS = \["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"\]/);
     assert.match(source, /const EVENTS_CACHE_KEY = "calendarEventsCache"/);
@@ -237,7 +242,7 @@ test("courses page keeps Atlas APIs, filtering state, and schedule constants con
 });
 
 test("files page keeps upload limits, modal elements, and share/delete endpoints wired", async () => {
-    const source = await sourceFor("static/js/files.js");
+    const source = await sourceFor("static/js/files/index.js");
     const utilsSource = await sourceFor("static/js/files/utils.js");
     const renderersSource = await sourceFor("static/js/files/renderers.js");
     const combinedSource = `${source}\n${utilsSource}\n${renderersSource}`;
@@ -315,7 +320,7 @@ test("appwrite bootstrap exposes configured SDK clients globally", async () => {
 });
 
 test("calendar context menu keeps task, event, override, and keyboard flows wired", async () => {
-    const source = await sourceFor("static/js/calendar_context_menu.js");
+    const source = await sourceFor("static/js/calendar/context-menu.js");
 
     assert.match(source, /const rootSelector = "#calendar-view-root"/);
     assert.match(source, /role", "menu"/);

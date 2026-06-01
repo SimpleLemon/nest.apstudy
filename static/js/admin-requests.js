@@ -5,9 +5,8 @@
   const springTrackingButton = document.getElementById("admin-spring-tracking-toggle");
   const trackingList = document.getElementById("admin-tracking-list");
   const refreshSelect = document.getElementById("admin-tracking-refresh");
-  const refreshStorageKey = "adminCourseTrackingRefreshMinutes";
-  const legacyRefreshStorageKey = "adminCourseTrackingRefreshSeconds";
   let refreshTimer = null;
+  let currentRefreshMinutes = null;
 
   function setNotice(message, isError = false) {
     if (!alertEl) return;
@@ -39,36 +38,32 @@
     return [5, 10, 30, 60].includes(value) ? value : 5;
   }
 
-  function startRefreshTimer() {
+  function startRefreshTimer(minutes) {
     if (!refreshSelect) return;
     if (refreshTimer) {
       window.clearInterval(refreshTimer);
     }
     refreshTimer = window.setInterval(() => {
       window.location.reload();
-    }, refreshMinutes() * 60 * 1000);
+    }, (minutes || refreshMinutes()) * 60 * 1000);
   }
 
   if (refreshSelect) {
-    const saved = Number(
-      window.localStorage.getItem(refreshStorageKey)
-      || window.localStorage.getItem(legacyRefreshStorageKey)
-      || 5
-    );
-    if ([5, 10, 30, 60].includes(saved)) {
-      refreshSelect.value = String(saved);
-    }
-    window.localStorage.setItem(refreshStorageKey, refreshSelect.value);
-    startRefreshTimer();
+    currentRefreshMinutes = refreshMinutes();
+    startRefreshTimer(currentRefreshMinutes);
     refreshSelect.addEventListener("change", async () => {
+      const previousMinutes = currentRefreshMinutes || refreshMinutes();
       const minutes = refreshMinutes();
-      window.localStorage.setItem(refreshStorageKey, String(minutes));
-      startRefreshTimer();
       try {
         await postJson("/admin/course-tracking/refresh-interval", { minutes });
+        currentRefreshMinutes = minutes;
+        startRefreshTimer(currentRefreshMinutes);
         setNotice(`Course tracking refresh set to ${minutes}m.`);
       } catch (error) {
         console.error("[Admin Course Tracking] Refresh interval update failed", error);
+        refreshSelect.value = String(previousMinutes);
+        currentRefreshMinutes = previousMinutes;
+        startRefreshTimer(currentRefreshMinutes);
         setNotice(error.message || "Unable to update refresh interval.", true);
       }
     });

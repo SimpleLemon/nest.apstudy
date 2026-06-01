@@ -72,8 +72,11 @@ class AdminSecurityTestCase(unittest.TestCase):
             session["_fresh"] = True
 
     def _get_csrf_token(self, client, url, patches):
+        extra_patches = []
+        if url == "/admin/requests":
+            extra_patches.append(patch.object(admin, "get_course_tracking_refresh_minutes", return_value=5))
         with ExitStack() as stack:
-            for patcher in patches:
+            for patcher in [*patches, *extra_patches]:
                 stack.enter_context(patcher)
             response = client.get(url)
         html = response.get_data(as_text=True)
@@ -477,7 +480,9 @@ class AdminSecurityTestCase(unittest.TestCase):
                     patch.object(admin, "_pending_admin_request_count", return_value=0),
                 ],
             )
-            with patch.object(admin, "_log_admin_action") as log_action:
+            with patch.object(admin, "set_course_tracking_refresh_minutes") as set_refresh, \
+                    patch.object(admin, "update_course_tracking_refresh_interval", return_value=True) as update_refresh, \
+                    patch.object(admin, "_log_admin_action") as log_action:
                 missing_token = client.post("/admin/course-tracking/refresh-interval", json={"minutes": 10})
                 response = client.post(
                     "/admin/course-tracking/refresh-interval",
@@ -493,7 +498,10 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertEqual(missing_token.status_code, 400)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_json()["refresh_interval_minutes"], 10)
+        self.assertTrue(response.get_json()["scheduler_updated"])
         self.assertEqual(invalid.status_code, 400)
+        set_refresh.assert_called_once_with(10)
+        update_refresh.assert_called_once_with(10)
         log_action.assert_called_once()
         self.assertEqual(log_action.call_args.args[0], "course_tracking_refresh_interval")
         self.assertEqual(log_action.call_args.kwargs["metadata"]["refresh_interval_minutes"], 10)

@@ -28,7 +28,7 @@
     <script src="{{ url_for('static', filename='js/dashboard/utils.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/dashboard/renderers.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/dashboard/daily-quote.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/dashboard.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/dashboard/index.js') }}" defer></script>
 </head>
 <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
 <global class="thesidebar" data-user-emory-student="{{ user.emory_student }}" data-sidebar-default="{{ sidebar_default|default('expanded') }}"></global>

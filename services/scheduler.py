@@ -32,6 +32,10 @@ from appwrite_helpers import (
     list_rows_all,
     parse_datetime,
 )
+from services.app_config import (
+    COURSE_TRACKING_REFRESH_INTERVAL_CHOICES,
+    get_course_tracking_refresh_minutes,
+)
 from services.staleness import is_stale
 
 logger = logging.getLogger(__name__)
@@ -275,6 +279,38 @@ def _check_course_seat_tracks(app):
             )
 
 
+def update_course_tracking_refresh_interval(minutes):
+    """Reschedule the course seat tracking job if the scheduler is active."""
+    global _scheduler
+
+    try:
+        minutes = int(minutes)
+    except (TypeError, ValueError):
+        return False
+
+    if minutes not in COURSE_TRACKING_REFRESH_INTERVAL_CHOICES:
+        return False
+    if _scheduler is None or not _scheduler.running:
+        return False
+
+    try:
+        _scheduler.reschedule_job(
+            "check_course_seat_tracks",
+            trigger=IntervalTrigger(minutes=minutes),
+        )
+        try:
+            _scheduler.modify_job(
+                "check_course_seat_tracks",
+                name=f"Check tracked Emory course seats every {minutes} min",
+            )
+        except Exception:
+            logger.exception("Failed to update course tracking scheduler job metadata")
+        return True
+    except Exception:
+        logger.exception("Failed to reschedule course tracking job")
+        return False
+
+
 def _sync_discord_chat(app):
     """Poll Discord-backed chat channels and notify /chat clients via chat events."""
     with app.app_context():
@@ -330,6 +366,7 @@ def init_scheduler(app):
     default_interval = int(
         os.environ.get("FEED_REFRESH_INTERVAL_MINUTES", "15")
     )
+    course_tracking_interval = get_course_tracking_refresh_minutes()
 
     try:
         _scheduler = BackgroundScheduler(daemon=True)
@@ -345,9 +382,9 @@ def init_scheduler(app):
 
         _scheduler.add_job(
             func=lambda: _check_course_seat_tracks(app),
-            trigger=IntervalTrigger(minutes=5),
+            trigger=IntervalTrigger(minutes=course_tracking_interval),
             id="check_course_seat_tracks",
-            name="Check tracked Emory course seats every 5 min",
+            name=f"Check tracked Emory course seats every {course_tracking_interval} min",
             replace_existing=True,
             max_instances=1,
         )
@@ -381,6 +418,7 @@ def init_scheduler(app):
             "scheduler_process_id": os.getpid(),
             "scheduler_hostname": socket.gethostname(),
             "feed_refresh_interval_minutes": default_interval,
+            "course_tracking_refresh_interval_minutes": course_tracking_interval,
             "job_ids": ", ".join(job["id"] for job in scheduler_status()["jobs"]),
         },
         color="green",

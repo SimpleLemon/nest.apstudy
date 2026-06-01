@@ -10,7 +10,7 @@ const plain = (value) => JSON.parse(JSON.stringify(value));
 const dashboardBundle = (await Promise.all([
     "static/js/dashboard/utils.js",
     "static/js/dashboard/renderers.js",
-    "static/js/dashboard.js",
+    "static/js/dashboard/index.js",
 ].map((relativePath) => readFile(path.join(repoRoot, relativePath), "utf8")))).join("\n");
 
 function loadDashboardUtils(source) {

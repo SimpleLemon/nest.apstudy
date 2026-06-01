@@ -30,7 +30,13 @@ from extensions import csrf
 from blueprints.settings import _settings_defaults
 from blueprints.chat_api import create_university_channel, emit_chat_event
 from services.chat_presence import sync_chat_presence_labels_for_school
-from services.app_config import set_spring_course_tracking_open, spring_course_tracking_open
+from services.app_config import (
+    get_course_tracking_refresh_minutes,
+    set_course_tracking_refresh_minutes,
+    set_spring_course_tracking_open,
+    spring_course_tracking_open,
+)
+from services.scheduler import update_course_tracking_refresh_interval
 from services.discord_audit import discord_audit_status, emit_admin_event, format_actor, format_user_target
 
 try:
@@ -1152,13 +1158,25 @@ def admin_course_tracking_refresh_interval():
     if minutes not in {5, 10, 30, 60}:
         return jsonify({"error": "Invalid refresh interval."}), 400
 
+    try:
+        set_course_tracking_refresh_minutes(minutes)
+    except Exception as exc:
+        logger.exception("Failed to update course tracking refresh interval")
+        return jsonify({"error": "Unable to update course tracking refresh interval.", "message": _sanitize_admin_error(exc)}), 500
+
+    scheduler_updated = update_course_tracking_refresh_interval(minutes)
+
     _log_admin_action(
         "course_tracking_refresh_interval",
         "course_tracking",
-        metadata={"refresh_interval_minutes": minutes},
+        metadata={"refresh_interval_minutes": minutes, "scheduler_updated": scheduler_updated},
         color="gray",
     )
-    return jsonify({"status": "ok", "refresh_interval_minutes": minutes})
+    return jsonify({
+        "status": "ok",
+        "refresh_interval_minutes": minutes,
+        "scheduler_updated": scheduler_updated,
+    })
 
 
 @admin_bp.route("/admin/course-tracking/test-chem-150", methods=["POST"])
@@ -1239,6 +1257,7 @@ def admin_requests():
         requests=requests_rows,
         tracking_groups=tracking_groups,
         tracking_error=tracking_error,
+        course_tracking_refresh_minutes=get_course_tracking_refresh_minutes(),
         spring_tracking_open=spring_course_tracking_open(),
         status_filter=status_filter,
         status=request.args.get("notice"),

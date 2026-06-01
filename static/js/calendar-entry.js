@@ -1,3 +1,6 @@
+import "./calendar/utils.js";
+import "./calendar/course-modal.js";
+import "./calendar/courses.js";
 import "./calendar.js";
-import "./calendar_context_menu.js";
-import "./calendar_event_form.js";
+import "./calendar/context-menu.js";
+import "./calendar/event-form.js";

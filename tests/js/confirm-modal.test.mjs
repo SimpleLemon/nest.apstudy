@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 
 const confirmCallsites = [
-    "static/js/calendar_context_menu.js",
+    "static/js/calendar/context-menu.js",
     "static/js/courses.js",
     "static/js/notes/list.js",
     "static/js/settings.js",
