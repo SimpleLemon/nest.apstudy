@@ -164,6 +164,7 @@ def _admin_event_title(action):
         "manual_course_tracking_run": "Admin Ran Course Tracking Diagnostics",
         "toggle_course_tracking": "Admin Updated Course Tracking",
         "test_chem_150_tracking": "Admin Tested CHEM 150 Tracking",
+        "course_tracking_refresh_interval": "Admin Updated Course Tracking Refresh",
     }
     return labels.get(action, "Admin Action")
 
@@ -1042,6 +1043,26 @@ def admin_course_tracking_track_toggle(track_id):
         color="green" if enabled else "yellow",
     )
     return jsonify({"status": "ok", "track": _serialize_admin_track(updated)})
+
+
+@admin_bp.route("/admin/course-tracking/refresh-interval", methods=["POST"])
+@admin_required
+def admin_course_tracking_refresh_interval():
+    payload = request.get_json(silent=True) or request.form or {}
+    try:
+        seconds = int(payload.get("seconds"))
+    except (TypeError, ValueError):
+        return jsonify({"error": "Invalid refresh interval."}), 400
+    if seconds not in {5, 10, 30, 60}:
+        return jsonify({"error": "Invalid refresh interval."}), 400
+
+    _log_admin_action(
+        "course_tracking_refresh_interval",
+        "course_tracking",
+        metadata={"refresh_interval_seconds": seconds},
+        color="gray",
+    )
+    return jsonify({"status": "ok", "refresh_interval_seconds": seconds})
 
 
 @admin_bp.route("/admin/course-tracking/test-chem-150", methods=["POST"])

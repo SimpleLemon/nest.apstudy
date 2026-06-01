@@ -43,10 +43,21 @@
                     <h2 id="course-tracking-title" class="admin-title admin-title--small">Course Tracking</h2>
                     <p class="admin-subtitle admin-subtitle--compact">Pause or resume grouped tracking and inspect individual user track rows.</p>
                 </div>
-                <button id="admin-test-chem-150" class="admin-button" type="button">
-                    <span class="material-symbols-outlined" aria-hidden="true">bug_report</span>
-                    Test Fall 2026 CHEM 150
-                </button>
+                <div class="admin-tracking-tools">
+                    <label class="admin-select-field" for="admin-tracking-refresh">
+                        <span>Refresh</span>
+                        <select id="admin-tracking-refresh">
+                            <option value="5" selected>5s (default)</option>
+                            <option value="10">10s</option>
+                            <option value="30">30s</option>
+                            <option value="60">60s</option>
+                        </select>
+                    </label>
+                    <button id="admin-test-chem-150" class="admin-button" type="button">
+                        <span class="material-symbols-outlined" aria-hidden="true">bug_report</span>
+                        Test Fall 2026 CHEM 150
+                    </button>
+                </div>
             </div>
             <input type="hidden" id="admin-csrf-token" name="csrf_token" value="{{ csrf_token() }}" />
             <div id="admin-tracking-alert" class="admin-inline-notice" role="status" hidden></div>

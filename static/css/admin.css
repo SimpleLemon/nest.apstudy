@@ -656,6 +656,45 @@ body.admin-page {
     color: var(--admin-danger);
 }
 
+.admin-tracking-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.admin-select-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 148px;
+    color: var(--admin-muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.admin-select-field select {
+    min-height: 42px;
+    border: 1px solid var(--admin-border);
+    border-radius: 8px;
+    padding: 0 34px 0 12px;
+    background: var(--admin-surface);
+    color: var(--admin-ink);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.admin-select-field select:focus {
+    outline: 2px solid var(--admin-accent-soft);
+    border-color: var(--admin-accent);
+}
+
 .admin-tracking-list {
     display: grid;
     gap: 12px;

@@ -59,6 +59,37 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
         with patch.dict(os.environ, {}, clear=True):
             self.assertEqual(discord_audit._env_channel_id("chat_deletes"), "1508949346639675543")
 
+    def test_course_track_checked_embed_is_course_first(self):
+        event = DiscordAuditEvent(
+            channel="course_tracks",
+            title="Automated Course Track Checked",
+            actor="System",
+            target="JPN 101",
+            metadata={
+                "course_name": "Elementary Japanese I",
+                "term": "Fall_2026",
+                "crn": "12345",
+                "section_number": "1",
+                "enrollment_type": "Open",
+                "seats_open": 4,
+                "user_count": 3,
+                "request_source": "automated",
+            },
+            color="gray",
+            event_timestamp="2026-05-25T00:00:00Z",
+        )
+
+        embed = event.embed()
+
+        self.assertEqual(embed["title"], "JPN 101")
+        self.assertEqual(embed["description"], "Elementary Japanese I | 3 Tracking")
+        self.assertEqual([field["name"] for field in embed["fields"]], ["Section #", "Enrollment", "Seats Open"])
+        self.assertTrue(all(field["inline"] is True for field in embed["fields"]))
+        self.assertEqual([field["value"] for field in embed["fields"]], ["1", "Open", "4"])
+        self.assertEqual(embed["timestamp"], "2026-05-25T00:00:00Z")
+        self.assertIn('"crn": "12345"', embed["footer"]["text"])
+        self.assertNotIn("2026-05-25T00:00:00Z", embed["footer"]["text"])
+
     def test_server_logs_channel_defaults_to_requested_channel(self):
         with patch.dict(os.environ, {}, clear=True):
             self.assertEqual(discord_audit._env_channel_id("server_logs"), "1509603923433099356")
@@ -409,7 +440,9 @@ class DiscordAuditRouteInstrumentationTestCase(unittest.TestCase):
                     patch.object(admin, "_safe_count_rows", return_value=0), \
                     patch.object(admin, "_chat_count_summary", return_value={}), \
                     patch.object(admin, "_load_section", return_value={}), \
+                    patch.object(admin, "_pending_admin_request_count", return_value=0), \
                     patch.object(admin, "_theme_preference", return_value=None), \
+                    patch.object(admin, "url_for", side_effect=lambda endpoint, **kwargs: f"/{endpoint}"), \
                     patch.object(admin, "render_template", return_value="ok"), \
                     patch.object(admin, "emit_admin_event") as emit_event:
                 response = self._unwrap(admin.admin_detail)("user-1")

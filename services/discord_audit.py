@@ -104,6 +104,27 @@ def _compact_metadata(metadata):
     return _truncate(metadata, MAX_METADATA_CHARS)
 
 
+def _compact_footer_json(metadata):
+    if not isinstance(metadata, dict):
+        return None
+    footer_payload = {
+        key: value
+        for key, value in metadata.items()
+        if value is not None
+        and value != ""
+        and key not in {
+            "course_name",
+            "section_number",
+            "enrollment_type",
+            "seats_open",
+            "user_count",
+        }
+    }
+    if not footer_payload:
+        return None
+    return _truncate(json.dumps(footer_payload, default=str, sort_keys=True), 2048)
+
+
 def format_actor(user=None, *, user_id=None, username=None, system=False):
     if system:
         return "System"
@@ -167,7 +188,30 @@ class DiscordAuditEvent:
     def channel_id(self):
         return _env_channel_id(self.channel)
 
+    def _course_track_checked_embed(self):
+        metadata = self.metadata if isinstance(self.metadata, dict) else {}
+        color_name = self.color if self.color in COLOR_VALUES else "gray"
+        course_name = metadata.get("course_name") or self.target
+        tracking_count = metadata.get("user_count") or metadata.get("track_count") or 0
+        footer_text = _compact_footer_json(metadata)
+        embed = {
+            "title": _truncate(self.target, 256),
+            "description": _truncate(f"{course_name} | {tracking_count} Tracking", 4096),
+            "color": COLOR_VALUES[color_name],
+            "fields": [
+                {"name": "Section #", "value": _truncate(metadata.get("section_number") or "N/A"), "inline": True},
+                {"name": "Enrollment", "value": _truncate(metadata.get("enrollment_type") or "N/A"), "inline": True},
+                {"name": "Seats Open", "value": _truncate(metadata.get("seats_open") if metadata.get("seats_open") is not None else "N/A"), "inline": True},
+            ],
+            "timestamp": self.event_timestamp,
+        }
+        if footer_text:
+            embed["footer"] = {"text": footer_text}
+        return embed
+
     def embed(self):
+        if self.channel == "course_tracks" and self.title == "Automated Course Track Checked":
+            return self._course_track_checked_embed()
         color_name = self.color if self.color in COLOR_VALUES else "gray"
         return {
             "title": _truncate(self.title, 256),

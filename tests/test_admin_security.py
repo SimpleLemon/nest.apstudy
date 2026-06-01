@@ -230,6 +230,9 @@ class AdminSecurityTestCase(unittest.TestCase):
         html = response.get_data(as_text=True)
         self.assertLess(html.index("Course Tracking"), html.index("University Channel Requests"))
         self.assertIn("CHEM 150", html)
+        self.assertIn('id="admin-tracking-refresh"', html)
+        self.assertIn("5s (default)", html)
+        self.assertIn("60s", html)
 
     def test_admin_export_requires_post_and_csrf(self):
         export_payload = {"user": self.user_doc, "settings": self.settings_doc}
@@ -452,6 +455,40 @@ class AdminSecurityTestCase(unittest.TestCase):
         update_row.assert_called_once()
         self.assertEqual(update_row.call_args.args[1], "track-1")
         self.assertEqual(update_row.call_args.args[2]["enabled"], False)
+
+    def test_course_tracking_refresh_interval_requires_csrf_and_logs(self):
+        with self.app.test_client() as client:
+            self._login(client)
+            token = self._get_csrf_token(
+                client,
+                "/admin/requests",
+                [
+                    patch.object(admin, "list_rows_all", return_value=[]),
+                    patch.object(admin, "_course_tracking_groups", return_value=([], None)),
+                    patch.object(admin, "_theme_preference", return_value=None),
+                    patch.object(admin, "_pending_admin_request_count", return_value=0),
+                ],
+            )
+            with patch.object(admin, "_log_admin_action") as log_action:
+                missing_token = client.post("/admin/course-tracking/refresh-interval", json={"seconds": 10})
+                response = client.post(
+                    "/admin/course-tracking/refresh-interval",
+                    json={"seconds": 10},
+                    headers={"X-CSRFToken": token},
+                )
+                invalid = client.post(
+                    "/admin/course-tracking/refresh-interval",
+                    json={"seconds": 15},
+                    headers={"X-CSRFToken": token},
+                )
+
+        self.assertEqual(missing_token.status_code, 400)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json()["refresh_interval_seconds"], 10)
+        self.assertEqual(invalid.status_code, 400)
+        log_action.assert_called_once()
+        self.assertEqual(log_action.call_args.args[0], "course_tracking_refresh_interval")
+        self.assertEqual(log_action.call_args.kwargs["metadata"]["refresh_interval_seconds"], 10)
 
     def test_chem_150_diagnostic_is_non_mutating(self):
         with self.app.test_client() as client:
