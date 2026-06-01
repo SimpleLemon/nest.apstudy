@@ -6,6 +6,7 @@
     const CACHE_KEY = "apstudy.dashboard.eggCrackQuote.v2";
     const VISIBILITY_KEY = "apstudy.dashboard.eggCrackQuote.visible.v1";
     const QUOTE_URL = "https://zenquotes.io/api/today";
+    const ERROR_REPORT_URL = "/api/dashboard/quote/error";
     const FETCH_TIMEOUT_MS = 8000;
     const FALLBACK_QUOTE = {
         text: "Small steps every day become the work you are proud of.",
@@ -116,6 +117,33 @@
         }
     }
 
+    function errorMessage(error) {
+        if (!error) return "";
+        return String(error.message || error.name || error);
+    }
+
+    function reportQuoteError(reason, details = {}) {
+        try {
+            if (typeof fetch !== "function") return;
+            const payload = {
+                reason,
+                message: String(details.message || "").slice(0, 500),
+                status: details.status,
+                dateKey: details.dateKey,
+                quoteUrl: details.quoteUrl || QUOTE_URL,
+                phase: details.phase,
+            };
+            fetch(ERROR_REPORT_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+                keepalive: true,
+            }).catch(() => {});
+        } catch {
+            // Reporting should never affect quote rendering.
+        }
+    }
+
     function readCache(dateKey) {
         try {
             const raw = window.localStorage.getItem(CACHE_KEY);
@@ -123,7 +151,12 @@
             if (cached?.dateKey === dateKey && cached?.completed && cached?.quote?.text) {
                 return cached.quote;
             }
-        } catch {
+        } catch (error) {
+            reportQuoteError("cache_read_failed", {
+                message: errorMessage(error),
+                dateKey,
+                phase: "cache",
+            });
             return null;
         }
         return null;
@@ -132,7 +165,11 @@
     function isVisible() {
         try {
             return window.localStorage.getItem(VISIBILITY_KEY) !== "hidden";
-        } catch {
+        } catch (error) {
+            reportQuoteError("visibility_storage_failed", {
+                message: errorMessage(error),
+                phase: "visibility_read",
+            });
             return true;
         }
     }
@@ -144,7 +181,11 @@
             } else {
                 window.localStorage.setItem(VISIBILITY_KEY, "hidden");
             }
-        } catch {
+        } catch (error) {
+            reportQuoteError("visibility_storage_failed", {
+                message: errorMessage(error),
+                phase: visible ? "visibility_show" : "visibility_hide",
+            });
             // Visibility should still update for the current page when storage is unavailable.
         }
         window.dispatchEvent(new CustomEvent("apstudy:dashboard-quote-visibility", {
@@ -160,16 +201,28 @@
                 fetchedAt: new Date().toISOString(),
                 quote,
             }));
-        } catch {
+        } catch (error) {
+            reportQuoteError("cache_write_failed", {
+                message: errorMessage(error),
+                dateKey,
+                phase: "cache",
+            });
             // localStorage can be disabled; the animation should still complete normally.
         }
     }
 
-    function normalizeQuote(data) {
+    function normalizeQuote(data, context = {}) {
         const item = data?.quote || (Array.isArray(data) ? data[0] : data);
         const text = String(item?.text || item?.q || "").trim();
         const author = String(item?.author || item?.a || "").trim();
-        if (!text) return FALLBACK_QUOTE;
+        if (!text) {
+            reportQuoteError("invalid_payload", {
+                message: "ZenQuotes response did not include a quote in q.",
+                dateKey: context.dateKey,
+                phase: context.phase || "normalize",
+            });
+            return FALLBACK_QUOTE;
+        }
         return {
             text,
             author: author || FALLBACK_QUOTE.author,
@@ -177,14 +230,31 @@
         };
     }
 
-    function fetchQuote(signal) {
+    function fetchQuote(signal, context = {}) {
         return fetch(QUOTE_URL, { signal })
             .then((response) => {
-                if (!response.ok) throw new Error("Quote request failed");
+                if (!response.ok) {
+                    reportQuoteError("http_error", {
+                        message: `ZenQuotes request failed with status ${response.status}.`,
+                        status: response.status,
+                        dateKey: context.dateKey,
+                        phase: context.phase || "fetch",
+                    });
+                    const error = new Error("Quote request failed");
+                    error.quoteErrorReported = true;
+                    throw error;
+                }
                 return response.json();
             })
-            .then(normalizeQuote)
+            .then((data) => normalizeQuote(data, context))
             .catch((error) => {
+                if (!error?.quoteErrorReported) {
+                    reportQuoteError("fetch_failed", {
+                        message: errorMessage(error),
+                        dateKey: context.dateKey,
+                        phase: context.phase || "fetch",
+                    });
+                }
                 if (error?.name === "AbortError") return FALLBACK_QUOTE;
                 return FALLBACK_QUOTE;
             });
@@ -386,7 +456,7 @@
         if (options.skipAnimation) {
             const controller = new AbortController();
             const timeoutId = window.setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
-            fetchQuote(controller.signal).then((nextQuote) => {
+            fetchQuote(controller.signal, { dateKey, phase: "skip_animation" }).then((nextQuote) => {
                 window.clearTimeout(timeoutId);
                 writeCache(dateKey, nextQuote);
                 renderQuote(slot, nextQuote);
@@ -405,7 +475,7 @@
         const timeoutId = window.setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
         timers.add(timeoutId);
 
-        const quotePromise = fetchQuote(controller.signal).then((nextQuote) => {
+        const quotePromise = fetchQuote(controller.signal, { dateKey, phase: "animation" }).then((nextQuote) => {
             window.clearTimeout(timeoutId);
             timers.delete(timeoutId);
             quote = nextQuote;

@@ -91,7 +91,7 @@
                                     <span class="admin-badge">{{ group.active_count }} active</span>
                                     <span class="admin-badge admin-badge--muted">{{ group.paused_count }} paused</span>
                                     <span>{{ group.user_count }} users</span>
-                                    <span>Last ping: {{ group.last_checked_at or "--" }}</span>
+                                    <span>Last result change: {{ group.last_checked_at or "--" }}</span>
                                 </span>
                             </summary>
                             <div class="admin-track-group-body">
@@ -112,7 +112,7 @@
                                             <th>Enabled</th>
                                             <th>Last Status</th>
                                             <th>Seats</th>
-                                            <th>Last Pinged</th>
+                                            <th>Last Result Change</th>
                                             <th>Last Notified</th>
                                             <th>Actions</th>
                                         </tr>
@@ -124,7 +124,7 @@
                                                 <td data-label="Enabled">{{ "Yes" if track.enabled else "No" }}</td>
                                                 <td data-label="Last Status">{{ track.last_status or "--" }}</td>
                                                 <td data-label="Seats">{{ track.last_seats_available if track.last_seats_available is not none else "--" }}</td>
-                                                <td data-label="Last Pinged">{{ track.last_checked_at or "--" }}</td>
+                                                <td data-label="Last Result Change">{{ track.last_checked_at or "--" }}</td>
                                                 <td data-label="Last Notified">{{ track.last_notified_at or "--" }}</td>
                                                 <td data-label="Actions">
                                                     <button class="admin-button admin-button--ghost" type="button" data-track-toggle="{{ 'false' if track.enabled else 'true' }}">

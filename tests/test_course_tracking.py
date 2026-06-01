@@ -40,6 +40,13 @@ class CourseTrackingTests(unittest.TestCase):
             "seats_available": 2,
         }
 
+    def _closed_section(self):
+        return {
+            **self._open_section(),
+            "enrollment_status": "Closed",
+            "seats_available": 0,
+        }
+
     def test_scheduler_course_tracking_interval_is_five_minutes(self):
         root = os.path.dirname(os.path.dirname(__file__))
         with open(os.path.join(root, "services", "scheduler.py"), encoding="utf-8") as handle:
@@ -131,6 +138,119 @@ class CourseTrackingTests(unittest.TestCase):
         self.assertEqual(summary["atlas_checks_failed"], 0)
         self.assertEqual(summary["row_updates"], 2)
         self.assertEqual(summary["email_notifications"], 2)
+        self.assertEqual(summary["changed_rows_written"], 2)
+        self.assertEqual(summary["unchanged_rows_skipped"], 0)
+        self.assertEqual(summary["notifications_sent"], 2)
+
+    def test_unchanged_closed_result_skips_appwrite_writes(self):
+        tracks = [self._track("track-1", "user-1"), self._track("track-2", "user-2")]
+        section = self._closed_section()
+
+        with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
+                patch.object(course_tracking, "list_rows_all", return_value=tracks), \
+                patch.object(course_tracking, "fetch_live_section_status", return_value={"section": section}) as fetch_status, \
+                patch.object(course_tracking, "_send_open_email") as send_email, \
+                patch.object(course_tracking, "update_row_safe") as update_row, \
+                patch.object(course_tracking, "emit_course_track_event") as emit_event, \
+                patch.object(course_tracking, "_now_utc", return_value=datetime(2026, 5, 29, tzinfo=timezone.utc)):
+            notified = course_tracking.check_course_seat_tracks()
+
+        self.assertEqual(notified, 0)
+        fetch_status.assert_called_once_with("Fall_2026", "CS", "170", crn="1234")
+        send_email.assert_not_called()
+        update_row.assert_not_called()
+
+        completed_events = [
+            call for call in emit_event.call_args_list
+            if call.args[0] == "Automated Course Track Poll Completed"
+        ]
+        summary = completed_events[0].kwargs["metadata"]
+        self.assertEqual(summary["row_updates"], 0)
+        self.assertEqual(summary["changed_rows_written"], 0)
+        self.assertEqual(summary["unchanged_rows_skipped"], 2)
+        self.assertEqual(summary["notifications_sent"], 0)
+
+    def test_unchanged_open_result_sends_no_reminder_and_writes_nothing(self):
+        tracks = [{
+            **self._track("track-1", "user-1"),
+            "last_status": "Open",
+            "last_seats_available": 2,
+        }]
+        section = self._open_section()
+
+        with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
+                patch.object(course_tracking, "list_rows_all", return_value=tracks), \
+                patch.object(course_tracking, "fetch_live_section_status", return_value={"section": section}), \
+                patch.object(course_tracking, "_send_open_email") as send_email, \
+                patch.object(course_tracking, "update_row_safe") as update_row, \
+                patch.object(course_tracking, "emit_course_track_event") as emit_event, \
+                patch.object(course_tracking, "_now_utc", return_value=datetime(2026, 5, 29, tzinfo=timezone.utc)):
+            notified = course_tracking.check_course_seat_tracks()
+
+        self.assertEqual(notified, 0)
+        send_email.assert_not_called()
+        update_row.assert_not_called()
+        completed_events = [
+            call for call in emit_event.call_args_list
+            if call.args[0] == "Automated Course Track Poll Completed"
+        ]
+        summary = completed_events[0].kwargs["metadata"]
+        self.assertEqual(summary["unchanged_rows_skipped"], 1)
+        self.assertEqual(summary["notifications_sent"], 0)
+
+    def test_open_seat_count_change_updates_without_repeat_notification(self):
+        tracks = [{
+            **self._track("track-1", "user-1"),
+            "last_status": "Open",
+            "last_seats_available": 1,
+        }]
+        section = self._open_section()
+
+        with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
+                patch.object(course_tracking, "list_rows_all", return_value=tracks), \
+                patch.object(course_tracking, "fetch_live_section_status", return_value={"section": section}), \
+                patch.object(course_tracking, "_send_open_email") as send_email, \
+                patch.object(course_tracking, "update_row_safe", side_effect=lambda table, row_id, data: {"$id": row_id, **data}) as update_row, \
+                patch.object(course_tracking, "emit_course_track_event") as emit_event, \
+                patch.object(course_tracking, "_now_utc", return_value=datetime(2026, 5, 29, tzinfo=timezone.utc)):
+            notified = course_tracking.check_course_seat_tracks()
+
+        self.assertEqual(notified, 0)
+        send_email.assert_not_called()
+        update_row.assert_called_once()
+        self.assertNotIn("last_notified_at", update_row.call_args.args[2])
+        completed_events = [
+            call for call in emit_event.call_args_list
+            if call.args[0] == "Automated Course Track Poll Completed"
+        ]
+        summary = completed_events[0].kwargs["metadata"]
+        self.assertEqual(summary["changed_rows_written"], 1)
+        self.assertEqual(summary["notifications_sent"], 0)
+
+    def test_open_transition_email_failure_does_not_write_open_state(self):
+        tracks = [self._track("track-1", "user-1")]
+        section = self._open_section()
+
+        with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
+                patch.object(course_tracking, "list_rows_all", return_value=tracks), \
+                patch.object(course_tracking, "fetch_live_section_status", return_value={"section": section}), \
+                patch.object(course_tracking, "_send_open_email", side_effect=RuntimeError("email failed")) as send_email, \
+                patch.object(course_tracking, "update_row_safe") as update_row, \
+                patch.object(course_tracking, "emit_course_track_event") as emit_event, \
+                patch.object(course_tracking, "_now_utc", return_value=datetime(2026, 5, 29, tzinfo=timezone.utc)):
+            notified = course_tracking.check_course_seat_tracks()
+
+        self.assertEqual(notified, 0)
+        send_email.assert_called_once()
+        update_row.assert_not_called()
+        completed_events = [
+            call for call in emit_event.call_args_list
+            if call.args[0] == "Automated Course Track Poll Completed"
+        ]
+        summary = completed_events[0].kwargs["metadata"]
+        self.assertEqual(summary["email_failures"], 1)
+        self.assertEqual(summary["changed_rows_written"], 0)
+        self.assertEqual(summary["notifications_sent"], 0)
 
     def test_manual_filter_only_pings_matching_course_tracks(self):
         tracks = [
@@ -182,7 +302,7 @@ class CourseTrackingTests(unittest.TestCase):
 
         self.assertEqual(notified, 0)
         fetch_status.assert_called_once_with("Fall_2026", "CS", "170", crn="1234")
-        self.assertEqual(update_row.call_count, 2)
+        update_row.assert_not_called()
 
         failed_events = [
             call for call in emit_event.call_args_list
@@ -205,8 +325,10 @@ class CourseTrackingTests(unittest.TestCase):
         self.assertEqual(summary["atlas_checks_attempted"], 1)
         self.assertEqual(summary["atlas_checks_succeeded"], 0)
         self.assertEqual(summary["atlas_checks_failed"], 1)
-        self.assertEqual(summary["row_updates"], 2)
+        self.assertEqual(summary["row_updates"], 0)
         self.assertEqual(summary["email_notifications"], 0)
+        self.assertEqual(summary["failed_rows_skipped"], 2)
+        self.assertEqual(summary["changed_rows_written"], 0)
 
     def test_live_check_exception_logs_failure_and_completed_poll(self):
         tracks = [self._track("track-1", "user-1")]
@@ -214,12 +336,13 @@ class CourseTrackingTests(unittest.TestCase):
         with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
                 patch.object(course_tracking, "list_rows_all", return_value=tracks), \
                 patch.object(course_tracking, "fetch_live_section_status", side_effect=RuntimeError("Atlas exploded token=secret")), \
-                patch.object(course_tracking, "update_row_safe", side_effect=lambda table, row_id, data: {"$id": row_id, **data}), \
+                patch.object(course_tracking, "update_row_safe") as update_row, \
                 patch.object(course_tracking, "emit_course_track_event") as emit_event, \
                 patch.object(course_tracking, "_now_utc", return_value=datetime(2026, 5, 29, tzinfo=timezone.utc)):
             notified = course_tracking.check_course_seat_tracks()
 
         self.assertEqual(notified, 0)
+        update_row.assert_not_called()
         failed_events = [
             call for call in emit_event.call_args_list
             if call.args[0] == "Automated Course Track Check Failed"

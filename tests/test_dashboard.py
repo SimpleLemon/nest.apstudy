@@ -239,6 +239,80 @@ class TestDashboardPreferenceRoutes(unittest.TestCase):
         self.assertTrue(response.get_json()["hidden"])
         self.assertEqual(update_row.call_args.args[2]["dashboard_checklist_hidden_signature"], "abc123")
 
+    def test_quote_error_report_logs_and_emits_server_event(self):
+        with self.app.test_request_context(
+            "/api/dashboard/quote/error",
+            method="POST",
+            json={
+                "reason": "fetch_failed",
+                "message": "NetworkError when attempting to fetch resource.",
+                "dateKey": "2026-06-01",
+                "quoteUrl": "https://zenquotes.io/api/today",
+                "phase": "animation",
+            },
+        ):
+            with patch.object(dashboard_bp, "current_user", self.user), \
+                    patch.object(dashboard_bp.logger, "warning") as log_warning, \
+                    patch.object(dashboard_bp, "emit_server_log_event", return_value=True) as emit_event:
+                response = dashboard_bp.report_dashboard_quote_error.__wrapped__()
+
+        self.assertEqual(response.get_json(), {"status": "ok", "reason": "fetch_failed"})
+        log_warning.assert_called_once()
+        logged = log_warning.call_args.kwargs["extra"]["daily_quote_error"]
+        self.assertEqual(logged["user_id"], "user-1")
+        self.assertEqual(logged["reason"], "fetch_failed")
+        self.assertEqual(logged["dateKey"], "2026-06-01")
+        emit_event.assert_called_once_with(
+            "Daily Quote Error",
+            actor="user-1",
+            target="Dashboard Daily Quote",
+            metadata=logged,
+            color="yellow",
+        )
+
+    def test_quote_error_report_sanitizes_unknown_and_oversized_payload(self):
+        oversized_message = "x" * 600
+        oversized_phase = "phase-" + ("y" * 200)
+
+        with self.app.test_request_context(
+            "/api/dashboard/quote/error",
+            method="POST",
+            json={
+                "reason": "surprising",
+                "message": oversized_message,
+                "status": 429,
+                "phase": oversized_phase,
+            },
+        ):
+            with patch.object(dashboard_bp, "current_user", self.user), \
+                    patch.object(dashboard_bp.logger, "warning") as log_warning, \
+                    patch.object(dashboard_bp, "emit_server_log_event", return_value=True) as emit_event:
+                response = dashboard_bp.report_dashboard_quote_error.__wrapped__()
+
+        self.assertEqual(response.get_json(), {"status": "ok", "reason": "unknown"})
+        metadata = emit_event.call_args.kwargs["metadata"]
+        self.assertEqual(metadata["reason"], "unknown")
+        self.assertEqual(metadata["status"], "429")
+        self.assertEqual(len(metadata["message"]), dashboard_bp.DASHBOARD_QUOTE_ERROR_MAX_MESSAGE_LENGTH)
+        self.assertEqual(len(metadata["phase"]), dashboard_bp.DASHBOARD_QUOTE_ERROR_MAX_FIELD_LENGTH)
+        self.assertEqual(log_warning.call_args.kwargs["extra"]["daily_quote_error"], metadata)
+
+    def test_quote_error_report_rejects_non_onboarded_user(self):
+        self.user.onboarding_complete = False
+
+        with self.app.test_request_context(
+            "/api/dashboard/quote/error",
+            method="POST",
+            json={"reason": "fetch_failed"},
+        ):
+            with patch.object(dashboard_bp, "current_user", self.user), \
+                    patch.object(dashboard_bp, "emit_server_log_event") as emit_event:
+                response, status = dashboard_bp.report_dashboard_quote_error.__wrapped__()
+
+        self.assertEqual(status, 403)
+        self.assertEqual(response.get_json(), {"error": "Onboarding is required."})
+        emit_event.assert_not_called()
+
 class TestDashboardTasksSummary(unittest.TestCase):
     def test_tasks_summary_falls_back_to_thirty_day_and_no_deadline_tasks(self):
         now = datetime.now(timezone.utc)

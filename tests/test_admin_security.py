@@ -501,12 +501,17 @@ class AdminSecurityTestCase(unittest.TestCase):
     def test_spring_course_tracking_toggle_requires_csrf_and_logs(self):
         with self.app.test_client() as client:
             self._login(client)
-            with patch.object(admin, "_course_tracking_groups", return_value=([], None)), \
-                    patch.object(admin, "_theme_preference", return_value=None), \
-                    patch.object(admin, "_pending_admin_request_count", return_value=0), \
-                    patch.object(admin, "spring_course_tracking_open", return_value=False):
-                html = client.get("/admin/requests").get_data(as_text=True)
-            token = re.search(r'name="csrf_token" value="([^"]+)"', html).group(1)
+            token = self._get_csrf_token(
+                client,
+                "/admin/requests",
+                [
+                    patch.object(admin, "list_rows_all", return_value=[]),
+                    patch.object(admin, "_course_tracking_groups", return_value=([], None)),
+                    patch.object(admin, "_theme_preference", return_value=None),
+                    patch.object(admin, "_pending_admin_request_count", return_value=0),
+                    patch.object(admin, "spring_course_tracking_open", return_value=False),
+                ],
+            )
 
             missing_token = client.post("/admin/course-tracking/spring-toggle", json={"enabled": True})
             self.assertEqual(missing_token.status_code, 400)

@@ -21,6 +21,7 @@ from appwrite_helpers import (
     parse_datetime,
     update_row_safe,
 )
+from services.discord_audit import emit_server_log_event
 from services.atlas_client import DEFAULT_TERM
 
 dashboard_bp = Blueprint("dashboard", __name__)
@@ -55,6 +56,43 @@ DASHBOARD_TASK_PRIORITY_RANK = {
     "medium": 1,
     "low": 2,
 }
+
+DASHBOARD_QUOTE_ERROR_REASONS = {
+    "fetch_failed",
+    "http_error",
+    "invalid_payload",
+    "cache_read_failed",
+    "cache_write_failed",
+    "visibility_storage_failed",
+    "unknown",
+}
+DASHBOARD_QUOTE_ERROR_FIELDS = ("status", "dateKey", "quoteUrl", "phase")
+DASHBOARD_QUOTE_ERROR_MAX_MESSAGE_LENGTH = 500
+DASHBOARD_QUOTE_ERROR_MAX_FIELD_LENGTH = 160
+
+
+def _trimmed_text(value, max_length):
+    text = str(value or "").strip()
+    return text[:max_length]
+
+
+def _daily_quote_error_metadata(payload):
+    reason = str(payload.get("reason") or "").strip()
+    if reason not in DASHBOARD_QUOTE_ERROR_REASONS:
+        reason = "unknown"
+
+    metadata = {
+        "reason": reason,
+        "message": _trimmed_text(payload.get("message"), DASHBOARD_QUOTE_ERROR_MAX_MESSAGE_LENGTH),
+    }
+    for field in DASHBOARD_QUOTE_ERROR_FIELDS:
+        value = payload.get(field)
+        if value is None:
+            continue
+        metadata[field] = _trimmed_text(value, DASHBOARD_QUOTE_ERROR_MAX_FIELD_LENGTH)
+    return metadata
+
+
 def _user_payload():
     return {
         "id": str(current_user.id),
@@ -762,6 +800,34 @@ def dashboard_summary():
     if not current_user.onboarding_complete:
         return jsonify({"error": "Onboarding is required."}), 403
     return jsonify(_dashboard_summary_payload())
+
+
+@dashboard_bp.route("/api/dashboard/quote/error", methods=["POST"])
+@login_required
+def report_dashboard_quote_error():
+    """Record client-side daily quote failures without proxying the quote API."""
+    if not current_user.onboarding_complete:
+        return jsonify({"error": "Onboarding is required."}), 403
+
+    payload = request.get_json(silent=True) or {}
+    metadata = _daily_quote_error_metadata(payload)
+    user_id = str(current_user.id)
+    actor = getattr(current_user, "email", None) or user_id
+    log_metadata = {**metadata, "user_id": user_id}
+
+    logger.warning("Daily quote error reported", extra={"daily_quote_error": log_metadata})
+    try:
+        emit_server_log_event(
+            "Daily Quote Error",
+            actor=actor,
+            target="Dashboard Daily Quote",
+            metadata=log_metadata,
+            color="yellow",
+        )
+    except Exception:
+        logger.exception("Failed to emit daily quote error to Discord server log")
+
+    return jsonify({"status": "ok", "reason": metadata["reason"]})
 
 
 @dashboard_bp.route("/api/dashboard/layout", methods=["PATCH"])

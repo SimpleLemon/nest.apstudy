@@ -64,9 +64,23 @@ test("dashboard daily quote fetches ZenQuotes directly and uses one smooth egg c
     const source = await sourceFor("static/js/dashboard/daily-quote.js");
 
     assert.match(source, /QUOTE_URL = "https:\/\/zenquotes\.io\/api\/today"/);
+    assert.match(source, /ERROR_REPORT_URL = "\/api\/dashboard\/quote\/error"/);
     assert.doesNotMatch(source, /\/api\/dashboard\/quote\/today/);
     assert.match(source, /item\?\.q/);
     assert.match(source, /item\?\.a/);
+    assert.match(source, /function reportQuoteError\(reason, details = \{\}\)/);
+    assert.match(source, /fetch\(ERROR_REPORT_URL, \{/);
+    assert.match(source, /keepalive: true/);
+    for (const reason of [
+        "fetch_failed",
+        "http_error",
+        "invalid_payload",
+        "cache_read_failed",
+        "cache_write_failed",
+        "visibility_storage_failed",
+    ]) {
+        assert.match(source, new RegExp(`reportQuoteError\\("${reason}"`));
+    }
     assert.match(source, /dashboard-egg-shell/);
     assert.match(source, /function addFractureGeometry\(root\)/);
     assert.match(source, /addFractureGeometry\(root\);\s*root\.dataset\.phase = "fracture"/);

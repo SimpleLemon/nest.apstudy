@@ -1,7 +1,7 @@
 import logging
 import os
 import re
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 
 from appwrite.exception import AppwriteException
 from appwrite.id import ID
@@ -9,13 +9,12 @@ from appwrite.query import Query
 from appwrite.services.messaging import Messaging
 
 from appwrite_client import COLLECTIONS, client as appwrite_client
-from appwrite_helpers import format_datetime, list_rows_all, parse_datetime, update_row_safe
+from appwrite_helpers import format_datetime, list_rows_all, update_row_safe
 from services.atlas_client import fetch_live_section_status
 from services.discord_audit import emit_course_track_event
 
 
 logger = logging.getLogger(__name__)
-NOTIFICATION_COOLDOWN = timedelta(hours=1)
 SECRET_TEXT_RE = re.compile(r"((?:[?&]|\b)(?:secret|key|token|password)=)[^&\s]+", re.IGNORECASE)
 _last_poll_metadata = None
 
@@ -24,18 +23,14 @@ def _now_utc():
     return datetime.now(timezone.utc)
 
 
-def _as_utc(value):
-    parsed = parse_datetime(value)
-    if not parsed:
-        return None
-    if parsed.tzinfo is None:
-        return parsed.replace(tzinfo=timezone.utc)
-    return parsed.astimezone(timezone.utc)
-
-
 def _section_open_for_notification(section):
     status = str(section.get("enrollment_status") or "").strip().lower()
     seats_available = section.get("seats_available")
+    return _open_from_values(status, seats_available)
+
+
+def _open_from_values(status, seats_available):
+    status = str(status or "").strip().lower()
     try:
         seats_available = int(seats_available) if seats_available is not None else None
     except (TypeError, ValueError):
@@ -43,11 +38,30 @@ def _section_open_for_notification(section):
     return status == "open" or (seats_available is not None and seats_available > 0)
 
 
-def _notification_allowed(track, now):
-    last_notified_at = _as_utc(track.get("last_notified_at"))
-    if not last_notified_at:
-        return True
-    return now - last_notified_at >= NOTIFICATION_COOLDOWN
+def _normalize_status(value):
+    return str(value or "").strip().lower()
+
+
+def _normalize_seats(value):
+    if value is None or value == "":
+        return None
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        match = re.search(r"-?\d+", str(value))
+        return int(match.group(0)) if match else None
+
+
+def _track_result_changed(track, section):
+    old_status = _normalize_status(track.get("last_status"))
+    new_status = _normalize_status(section.get("enrollment_status"))
+    old_seats = _normalize_seats(track.get("last_seats_available"))
+    new_seats = _normalize_seats(section.get("seats_available"))
+    return old_status != new_status or old_seats != new_seats
+
+
+def _track_was_open(track):
+    return _open_from_values(track.get("last_status"), track.get("last_seats_available"))
 
 
 def _send_open_email(track, section):
@@ -236,6 +250,10 @@ def check_course_seat_tracks(*, term=None, subject=None, catalog=None, poll_sour
         "row_update_failures": 0,
         "email_notifications": 0,
         "email_failures": 0,
+        "changed_rows_written": 0,
+        "unchanged_rows_skipped": 0,
+        "failed_rows_skipped": 0,
+        "notifications_sent": 0,
     }
 
     for grouped in grouped_tracks.values():
@@ -276,16 +294,7 @@ def check_course_seat_tracks(*, term=None, subject=None, catalog=None, poll_sour
                 metadata=_group_metadata(grouped, error=result["error"]),
                 color="yellow",
             )
-            for track in grouped:
-                row_id = track.get("$id") or track.get("id")
-                if not row_id:
-                    continue
-                try:
-                    update_row_safe(table_id, row_id, updates)
-                    poll_metadata["row_updates"] += 1
-                except AppwriteException:
-                    poll_metadata["row_update_failures"] += 1
-                    logger.exception("Failed to update failed course track check: %s", row_id)
+            poll_metadata["failed_rows_skipped"] += len(grouped)
             continue
 
         poll_metadata["atlas_checks_succeeded"] += 1
@@ -305,13 +314,18 @@ def check_course_seat_tracks(*, term=None, subject=None, catalog=None, poll_sour
             row_id = track.get("$id") or track.get("id")
             if not row_id:
                 continue
+            if not _track_result_changed(track, section):
+                poll_metadata["unchanged_rows_skipped"] += 1
+                continue
             track_updates = dict(updates)
-            if _section_open_for_notification(section) and _notification_allowed(track, now):
+            should_notify = _section_open_for_notification(section) and not _track_was_open(track)
+            if should_notify:
                 try:
                     _send_open_email(track, section)
                     track_updates["last_notified_at"] = format_datetime(now)
                     notified_count += 1
                     poll_metadata["email_notifications"] += 1
+                    poll_metadata["notifications_sent"] += 1
                     emit_course_track_event(
                         "Tracked Course Seat Opened",
                         actor="System",
@@ -331,10 +345,12 @@ def check_course_seat_tracks(*, term=None, subject=None, catalog=None, poll_sour
                 except Exception:
                     poll_metadata["email_failures"] += 1
                     logger.exception("Failed to send course opening email for track %s", row_id)
+                    continue
 
             try:
                 update_row_safe(table_id, row_id, track_updates)
                 poll_metadata["row_updates"] += 1
+                poll_metadata["changed_rows_written"] += 1
             except AppwriteException:
                 poll_metadata["row_update_failures"] += 1
                 logger.exception("Failed to update course track: %s", row_id)
