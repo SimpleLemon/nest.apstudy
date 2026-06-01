@@ -145,13 +145,22 @@ function timestamp(value, fallback = 0) {
     return Number.isNaN(time) ? fallback : time;
 }
 
+function priorityRank(value) {
+    return { high: 3, medium: 2, low: 1, none: 0 }[String(value || "none").toLowerCase()] || 0;
+}
+
 export function sortTasksForList(tasks, sortMode = "default") {
     if (sortMode === "date") {
         return [...tasks].sort((a, b) => timestamp(b.created_at) - timestamp(a.created_at) || (a.order || 0) - (b.order || 0));
     }
     if (sortMode === "deadline") {
         const noDeadline = Number.MAX_SAFE_INTEGER;
-        return [...tasks].sort((a, b) => timestamp(a.deadline_at, noDeadline) - timestamp(b.deadline_at, noDeadline) || (a.order || 0) - (b.order || 0));
+        return [...tasks].sort((a, b) => (
+            timestamp(a.deadline_at, noDeadline) - timestamp(b.deadline_at, noDeadline)
+            || priorityRank(b.priority) - priorityRank(a.priority)
+            || (a.order || 0) - (b.order || 0)
+            || (a.title || "").localeCompare(b.title || "")
+        ));
     }
     if (sortMode === "title") {
         return [...tasks].sort((a, b) => (a.title || "").localeCompare(b.title || "") || (a.order || 0) - (b.order || 0));

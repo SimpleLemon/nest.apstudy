@@ -2,9 +2,11 @@
   const csrfToken = document.getElementById("admin-csrf-token")?.value || "";
   const alertEl = document.getElementById("admin-tracking-alert");
   const testChemButton = document.getElementById("admin-test-chem-150");
+  const springTrackingButton = document.getElementById("admin-spring-tracking-toggle");
   const trackingList = document.getElementById("admin-tracking-list");
   const refreshSelect = document.getElementById("admin-tracking-refresh");
-  const refreshStorageKey = "adminCourseTrackingRefreshSeconds";
+  const refreshStorageKey = "adminCourseTrackingRefreshMinutes";
+  const legacyRefreshStorageKey = "adminCourseTrackingRefreshSeconds";
   let refreshTimer = null;
 
   function setNotice(message, isError = false) {
@@ -32,7 +34,7 @@
     return payload;
   }
 
-  function refreshSeconds() {
+  function refreshMinutes() {
     const value = Number(refreshSelect?.value || 5);
     return [5, 10, 30, 60].includes(value) ? value : 5;
   }
@@ -44,22 +46,27 @@
     }
     refreshTimer = window.setInterval(() => {
       window.location.reload();
-    }, refreshSeconds() * 1000);
+    }, refreshMinutes() * 60 * 1000);
   }
 
   if (refreshSelect) {
-    const saved = Number(window.localStorage.getItem(refreshStorageKey) || 5);
+    const saved = Number(
+      window.localStorage.getItem(refreshStorageKey)
+      || window.localStorage.getItem(legacyRefreshStorageKey)
+      || 5
+    );
     if ([5, 10, 30, 60].includes(saved)) {
       refreshSelect.value = String(saved);
     }
+    window.localStorage.setItem(refreshStorageKey, refreshSelect.value);
     startRefreshTimer();
     refreshSelect.addEventListener("change", async () => {
-      const seconds = refreshSeconds();
-      window.localStorage.setItem(refreshStorageKey, String(seconds));
+      const minutes = refreshMinutes();
+      window.localStorage.setItem(refreshStorageKey, String(minutes));
       startRefreshTimer();
       try {
-        await postJson("/admin/course-tracking/refresh-interval", { seconds });
-        setNotice(`Course tracking refresh set to ${seconds}s.`);
+        await postJson("/admin/course-tracking/refresh-interval", { minutes });
+        setNotice(`Course tracking refresh set to ${minutes}m.`);
       } catch (error) {
         console.error("[Admin Course Tracking] Refresh interval update failed", error);
         setNotice(error.message || "Unable to update refresh interval.", true);
@@ -84,6 +91,20 @@
       setNotice(error.message || "CHEM 150 diagnostic failed.", true);
     } finally {
       testChemButton.disabled = false;
+    }
+  });
+
+  springTrackingButton?.addEventListener("click", async () => {
+    const enabled = springTrackingButton.dataset.enabled === "true";
+    springTrackingButton.disabled = true;
+    try {
+      await postJson("/admin/course-tracking/spring-toggle", { enabled });
+      setNotice(enabled ? "Spring course tracking is open." : "Spring course tracking is closed.");
+      window.location.reload();
+    } catch (error) {
+      console.error("[Admin Course Tracking] Spring tracking toggle failed", error);
+      setNotice(error.message || "Unable to update Spring course tracking.", true);
+      springTrackingButton.disabled = false;
     }
   });
 

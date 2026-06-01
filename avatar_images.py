@@ -1,11 +1,21 @@
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 
+DEFAULT_AVATAR_URL = (
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E"
+    "%3Crect width='96' height='96' rx='24' fill='%23e5e7eb'/%3E"
+    "%3Ccircle cx='48' cy='35' r='17' fill='%239ca3af'/%3E"
+    "%3Cpath d='M20 82c4-18 17-28 28-28s24 10 28 28' fill='%239ca3af'/%3E"
+    "%3C/svg%3E"
+)
+APSTUDY_LOGO_URL = "https://resources.apstudy.org/images/AP-Resources-Logo.png"
+
+
 def avatar_url_for_size(url, size=32):
     """Return a provider URL that asks for a smaller avatar when supported."""
     raw_url = str(url or "").strip()
     if not raw_url:
-        return raw_url
+        return DEFAULT_AVATAR_URL
 
     try:
         normalized_size = int(size)

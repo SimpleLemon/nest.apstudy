@@ -81,14 +81,54 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
 
         embed = event.embed()
 
-        self.assertEqual(embed["title"], "JPN 101")
-        self.assertEqual(embed["description"], "Elementary Japanese I | 3 Tracking")
-        self.assertEqual([field["name"] for field in embed["fields"]], ["Section #", "Enrollment", "Seats Open"])
+        self.assertEqual(embed["title"], "JPN 101: Elementary Japanese I")
+        self.assertEqual(embed["description"], "Sec # 1 | 3 Tracking")
+        self.assertEqual([field["name"] for field in embed["fields"]], ["Enrollment", "Seats Open"])
         self.assertTrue(all(field["inline"] is True for field in embed["fields"]))
-        self.assertEqual([field["value"] for field in embed["fields"]], ["1", "Open", "4"])
+        self.assertEqual([field["value"] for field in embed["fields"]], ["Open", "4"])
         self.assertEqual(embed["timestamp"], "2026-05-25T00:00:00Z")
-        self.assertIn('"crn": "12345"', embed["footer"]["text"])
-        self.assertNotIn("2026-05-25T00:00:00Z", embed["footer"]["text"])
+        self.assertEqual(embed["footer"]["text"], "2026-05-25T00:00:00Z")
+        self.assertNotIn("12345", embed["footer"]["text"])
+        self.assertNotIn("automated", embed["footer"]["text"])
+        self.assertNotIn("Fall_2026", embed["footer"]["text"])
+
+    def test_course_track_checked_embed_keeps_zero_open_seats(self):
+        event = DiscordAuditEvent(
+            channel="course_tracks",
+            title="Automated Course Track Checked",
+            actor="System",
+            target="JPN 101",
+            metadata={
+                "course_name": "Elementary Japanese I",
+                "term": "Fall_2026",
+                "enrollment_type": "Closed",
+                "seats_open": 0,
+                "user_count": 1,
+            },
+            color="gray",
+        )
+
+        embed = event.embed()
+
+        self.assertEqual(embed["fields"][1]["name"], "Seats Open")
+        self.assertEqual(embed["fields"][1]["value"], "0")
+
+    def test_course_track_request_embed_uses_timestamp_footer(self):
+        event = DiscordAuditEvent(
+            channel="course_tracks",
+            title="Course Track Requested",
+            actor="user-1 (student)",
+            target="JPN 101",
+            metadata={"term": "Spring_2026", "request_source": "manual"},
+            color="green",
+            event_timestamp="2026-05-25T00:00:00Z",
+        )
+
+        embed = event.embed()
+
+        self.assertEqual(embed["footer"]["text"], "2026-05-25T00:00:00Z")
+        self.assertNotIn("Spring_2026", embed["footer"]["text"])
+        self.assertNotIn("{", embed["footer"]["text"])
 
     def test_server_logs_channel_defaults_to_requested_channel(self):
         with patch.dict(os.environ, {}, clear=True):
@@ -490,6 +530,92 @@ class DiscordAuditRouteInstrumentationTestCase(unittest.TestCase):
         self.assertEqual(payload["status"], "ok")
         emit_event.assert_called_once()
         self.assertEqual(emit_event.call_args.args[0], "Course Track Requested")
+
+    def test_spring_course_track_upsert_requires_admin_open_gate(self):
+        section = {
+            "id": "Spring_2026-CS-170-1234-1",
+            "term": "Spring_2026",
+            "subject": "CS",
+            "catalog_number": "170",
+            "crn": "1234",
+            "course_code": "CS 170",
+            "course_title": "Intro CS",
+            "section_number": "1",
+            "enrollment_status": "Closed",
+            "seats_available": 0,
+        }
+        user = SimpleNamespace(id="user-1", username="student", name="Student", emory_student=True)
+
+        with self.app.test_request_context("/api/courses/tracks", method="POST", json={"section_id": section["id"], "enabled": True}):
+            with patch.object(courses, "current_user", user), \
+                    patch.object(courses, "_require_emory_student", return_value=None), \
+                    patch.object(courses, "_get_section_by_id", return_value=section), \
+                    patch.object(courses, "spring_course_tracking_open", return_value=False), \
+                    patch.object(courses, "_merge_live_section") as merge_live:
+                response, status = self._unwrap(courses.upsert_track)()
+
+        self.assertEqual(status, 403)
+        self.assertIn("Spring course tracking", response.get_json()["error"])
+        merge_live.assert_not_called()
+
+    def test_spring_course_track_upsert_works_when_admin_gate_open(self):
+        section = {
+            "id": "Spring_2026-CS-170-1234-1",
+            "term": "Spring_2026",
+            "subject": "CS",
+            "catalog_number": "170",
+            "crn": "1234",
+            "course_code": "CS 170",
+            "course_title": "Intro CS",
+            "section_number": "1",
+            "enrollment_status": "Closed",
+            "seats_available": 0,
+        }
+        track = {"$id": "track-1", "user_id": "user-1", "section_id": section["id"], "enabled": True}
+        user = SimpleNamespace(id="user-1", username="student", name="Student", emory_student=True)
+
+        with self.app.test_request_context("/api/courses/tracks", method="POST", json={"section_id": section["id"], "enabled": True}):
+            with patch.object(courses, "current_user", user), \
+                    patch.object(courses, "_require_emory_student", return_value=None), \
+                    patch.object(courses, "_get_section_by_id", return_value=section), \
+                    patch.object(courses, "spring_course_tracking_open", return_value=True), \
+                    patch.object(courses, "_merge_live_section", return_value=(section, None, "2026-05-25T00:00:00Z")), \
+                    patch.object(courses, "is_section_trackable", return_value=True), \
+                    patch.object(courses, "_track_for_section", return_value=None), \
+                    patch.object(courses, "create_row_safe", return_value=track), \
+                    patch.object(courses, "emit_course_track_event"):
+                response = self._unwrap(courses.upsert_track)()
+
+        self.assertEqual(response.get_json()["status"], "ok")
+
+    def test_spring_course_track_disable_works_while_gate_closed(self):
+        section = {
+            "id": "Spring_2026-CS-170-1234-1",
+            "term": "Spring_2026",
+            "subject": "CS",
+            "catalog_number": "170",
+            "crn": "1234",
+            "course_code": "CS 170",
+            "course_title": "Intro CS",
+            "section_number": "1",
+            "enrollment_status": "Closed",
+            "seats_available": 0,
+        }
+        existing = {"$id": "track-1", "enabled": True}
+        updated = {"$id": "track-1", "user_id": "user-1", "section_id": section["id"], "enabled": False}
+        user = SimpleNamespace(id="user-1", username="student", name="Student", emory_student=True)
+
+        with self.app.test_request_context("/api/courses/tracks", method="POST", json={"section_id": section["id"], "enabled": False}):
+            with patch.object(courses, "current_user", user), \
+                    patch.object(courses, "_require_emory_student", return_value=None), \
+                    patch.object(courses, "_get_section_by_id", return_value=section), \
+                    patch.object(courses, "spring_course_tracking_open", return_value=False), \
+                    patch.object(courses, "_track_for_section", return_value=existing), \
+                    patch.object(courses, "update_row_safe", return_value=updated), \
+                    patch.object(courses, "emit_course_track_event"):
+                response = self._unwrap(courses.upsert_track)()
+
+        self.assertEqual(response.get_json()["track"]["enabled"], False)
 
     def test_note_creation_emits_creation_event(self):
         created_note = {

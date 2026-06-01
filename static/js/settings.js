@@ -702,10 +702,9 @@ async function saveProfile() {
     populateFields();
     const navbarAvatar = document.querySelector('#navbar-avatar-btn img');
     const nextAvatar = response.picture_url || '';
-    const fallbackAvatar = 'https://resources.apstudy.org/images/AP-Resources-Logo.png';
     if (navbarAvatar) {
-      navbarAvatar.src = settingsAvatarUrlForSize(nextAvatar || fallbackAvatar, 48);
-      navbarAvatar.srcset = `${settingsAvatarUrlForSize(nextAvatar || fallbackAvatar, 48)} 1x, ${settingsAvatarUrlForSize(nextAvatar || fallbackAvatar, 96)} 2x`;
+      navbarAvatar.src = settingsAvatarUrlForSize(nextAvatar, 48);
+      navbarAvatar.srcset = `${settingsAvatarUrlForSize(nextAvatar, 48)} 1x, ${settingsAvatarUrlForSize(nextAvatar, 96)} 2x`;
       navbarAvatar.sizes = '48px';
     }
     captureProfileBaseline();
@@ -928,15 +927,14 @@ function updateAvatarPreview(value) {
   if (!elements.avatarPreview) {
     return;
   }
-  const fallback = 'https://resources.apstudy.org/images/AP-Resources-Logo.png';
-  const avatarValue = value && value.trim() ? value.trim() : fallback;
+  const avatarValue = value && value.trim() ? value.trim() : '';
   elements.avatarPreview.src = settingsAvatarUrlForSize(avatarValue, 150);
   elements.avatarPreview.srcset = `${settingsAvatarUrlForSize(avatarValue, 150)} 1x, ${settingsAvatarUrlForSize(avatarValue, 300)} 2x`;
   elements.avatarPreview.sizes = '(max-width: 640px) 96px, 150px';
   elements.avatarPreview.onerror = () => {
     elements.avatarPreview.onerror = null;
-    elements.avatarPreview.src = settingsAvatarUrlForSize(fallback, 150);
-    elements.avatarPreview.srcset = `${settingsAvatarUrlForSize(fallback, 150)} 1x, ${settingsAvatarUrlForSize(fallback, 300)} 2x`;
+    elements.avatarPreview.src = settingsAvatarUrlForSize('', 150);
+    elements.avatarPreview.srcset = `${settingsAvatarUrlForSize('', 150)} 1x, ${settingsAvatarUrlForSize('', 300)} 2x`;
   };
   renderProfilePreview();
 }

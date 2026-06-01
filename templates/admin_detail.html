@@ -39,48 +39,84 @@
             <div class="admin-alert admin-alert--error">{{ error }}</div>
         {% endif %}
 
-        <section class="admin-card">
-            <h2 class="admin-title">Profile</h2>
-            <div class="admin-grid">
-                <div class="admin-field">
-                    <span class="admin-field-label">User ID</span>
-                    <span class="admin-field-value">{{ user.id }}</span>
+        <section class="admin-profile-overview" aria-label="User profile overview">
+            <div class="admin-profile-preview">
+                <div class="profile-tile" style="--profile-banner-color: {{ profile.banner_color or '#fecae1' }};">
+                    <div class="profile-tile-banner"></div>
+                    <div class="profile-tile-body">
+                        <div class="profile-tile-avatar-frame">
+                            <img
+                                class="profile-tile-avatar"
+                                src="{{ (profile.picture_url or '')|avatar_url(150) }}"
+                                srcset="{{ (profile.picture_url or '')|avatar_url(150) }} 1x, {{ (profile.picture_url or '')|avatar_url(300) }} 2x"
+                                sizes="(max-width: 720px) 112px, 150px"
+                                alt="{{ profile.name }} avatar"
+                                width="150"
+                                height="150"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <div class="profile-tile-heading">
+                            <h3>{{ profile.name }}</h3>
+                            <p>{{ profile.handle or profile.id }}</p>
+                        </div>
+                        <div class="profile-tile-details">
+                            <div class="{{ 'profile-tile-detail-emory' if profile.is_emory_school else '' }}">
+                                <span>School</span>
+                                <strong>{{ profile.school or 'Not set' }}</strong>
+                            </div>
+                            <div>
+                                <span>Major</span>
+                                <strong>{{ profile.major or 'Not set' }}</strong>
+                            </div>
+                            <div>
+                                <span>Graduation</span>
+                                <strong>{{ profile.graduation_year or profile.class_year or 'Not set' }}</strong>
+                            </div>
+                            <div>
+                                <span>Education</span>
+                                <strong>{{ profile.education_level or 'Not set' }}</strong>
+                            </div>
+                            <div class="{{ 'profile-tile-detail-early-member' if profile.is_early_member else '' }}">
+                                <span>Member Since</span>
+                                <strong>{{ profile.member_since or 'Not set' }}</strong>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="admin-field">
-                    <span class="admin-field-label">Username</span>
-                    <span class="admin-field-value">{{ user.username or "--" }}</span>
-                </div>
-                <div class="admin-field">
-                    <span class="admin-field-label">Email</span>
-                    <span class="admin-field-value">{{ user.email or "--" }}</span>
-                </div>
-                <div class="admin-field">
-                    <span class="admin-field-label">School</span>
-                    <span class="admin-field-value">{{ user.school or "--" }}</span>
-                </div>
-                <div class="admin-field">
-                    <span class="admin-field-label">Major</span>
-                    <span class="admin-field-value">{{ user.major or "--" }}</span>
-                </div>
-                <div class="admin-field">
-                    <span class="admin-field-label">Graduation Year</span>
-                    <span class="admin-field-value">{{ user.graduation_year or "--" }}</span>
-                </div>
-                <div class="admin-field">
-                    <span class="admin-field-label">Created</span>
-                    <span class="admin-field-value">{{ user.created_at or "--" }}</span>
-                </div>
-                <div class="admin-field">
-                    <span class="admin-field-label">Last Login</span>
-                    <span class="admin-field-value">{{ user.last_login or "--" }}</span>
-                </div>
-                <div class="admin-field">
-                    <span class="admin-field-label">Onboarding</span>
-                    <span class="admin-field-value">{{ "Complete" if user.onboarding_complete else "Step " ~ user.onboarding_step }}</span>
-                </div>
-                <div class="admin-field">
-                    <span class="admin-field-label">Emory Student</span>
-                    <span class="admin-field-value">{{ "Yes" if user.emory_student else "No" }}</span>
+            </div>
+            <div class="admin-card admin-profile-admin-card">
+                <h2 class="admin-title admin-title--small">Admin Profile</h2>
+                <div class="admin-grid">
+                    <div class="admin-field">
+                        <span class="admin-field-label">User ID</span>
+                        <span class="admin-field-value">{{ user.id }}</span>
+                    </div>
+                    <div class="admin-field">
+                        <span class="admin-field-label">Username</span>
+                        <span class="admin-field-value">{{ user.username or "--" }}</span>
+                    </div>
+                    <div class="admin-field">
+                        <span class="admin-field-label">Email</span>
+                        <span class="admin-field-value">{{ user.email or "--" }}</span>
+                    </div>
+                    <div class="admin-field">
+                        <span class="admin-field-label">Created</span>
+                        <span class="admin-field-value">{{ user.created_at or "--" }}</span>
+                    </div>
+                    <div class="admin-field">
+                        <span class="admin-field-label">Last Login</span>
+                        <span class="admin-field-value">{{ user.last_login or "--" }}</span>
+                    </div>
+                    <div class="admin-field">
+                        <span class="admin-field-label">Onboarding</span>
+                        <span class="admin-field-value">{{ "Complete" if user.onboarding_complete else "Step " ~ user.onboarding_step }}</span>
+                    </div>
+                    <div class="admin-field">
+                        <span class="admin-field-label">Emory Student</span>
+                        <span class="admin-field-value">{{ "Yes" if user.emory_student else "No" }}</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -203,8 +239,8 @@
                             <tbody>
                                 {% for key, value in settings|dictsort %}
                                     <tr>
-                                        <td>{{ key }}</td>
-                                        <td>
+                                        <td data-label="Key">{{ key }}</td>
+                                        <td data-label="Value">
                                             {% if value is string %}
                                                 {{ value }}
                                             {% else %}
@@ -252,11 +288,11 @@
                                 {% for folder in folders %}
                                     {% set folder_id = folder.get('$id') or folder.get('id') %}
                                     <tr>
-                                        <td>{{ folder.get('name') or 'Untitled Folder' }}</td>
-                                        <td>{{ folder.get('parent_folder_id') or '--' }}</td>
-                                        <td>{{ 'Yes' if folder.get('is_public') else 'No' }}</td>
-                                        <td>{{ folder.get('created_at') or '--' }}</td>
-                                        <td>
+                                        <td data-label="Name">{{ folder.get('name') or 'Untitled Folder' }}</td>
+                                        <td data-label="Parent">{{ folder.get('parent_folder_id') or '--' }}</td>
+                                        <td data-label="Shared">{{ 'Yes' if folder.get('is_public') else 'No' }}</td>
+                                        <td data-label="Created">{{ folder.get('created_at') or '--' }}</td>
+                                        <td data-label="Actions">
                                             <form method="post" action="{{ url_for('admin.delete_shared_folder', user_id=user.id, folder_id=folder_id) }}">
                                                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                                                 <input type="hidden" name="section" value="files" />
@@ -298,12 +334,12 @@
                                 {% for file in files %}
                                     {% set file_id = file.get('$id') or file.get('id') %}
                                     <tr>
-                                        <td>{{ file.get('original_filename') }}</td>
-                                        <td>{{ file.get('file_size_bytes') or 0 }}</td>
-                                        <td>{{ 'Public' if file.get('is_public') else 'Private' }}</td>
-                                        <td>{{ file.get('expires_at') or '--' }}</td>
-                                        <td>{{ file.get('downloaded_count') or 0 }}</td>
-                                        <td>
+                                        <td data-label="Filename">{{ file.get('original_filename') }}</td>
+                                        <td data-label="Size">{{ file.get('file_size_bytes') or 0 }}</td>
+                                        <td data-label="Visibility">{{ 'Public' if file.get('is_public') else 'Private' }}</td>
+                                        <td data-label="Expires">{{ file.get('expires_at') or '--' }}</td>
+                                        <td data-label="Downloads">{{ file.get('downloaded_count') or 0 }}</td>
+                                        <td data-label="Actions">
                                             <div class="admin-action-row">
                                                 <a class="admin-button admin-button--ghost" href="{{ url_for('admin.download_shared_file', user_id=user.id, file_id=file_id) }}">Download</a>
                                                 <form method="post" action="{{ url_for('admin.delete_shared_file', user_id=user.id, file_id=file_id) }}">
@@ -350,9 +386,9 @@
                             <tbody>
                                 {% for folder in note_folders %}
                                     <tr>
-                                        <td>{{ folder.get('name') or 'Untitled Folder' }}</td>
-                                        <td>{{ folder.get('order') or 0 }}</td>
-                                        <td>{{ folder.get('created_at') or '--' }}</td>
+                                        <td data-label="Name">{{ folder.get('name') or 'Untitled Folder' }}</td>
+                                        <td data-label="Order">{{ folder.get('order') or 0 }}</td>
+                                        <td data-label="Created">{{ folder.get('created_at') or '--' }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="3">
@@ -423,9 +459,9 @@
                             <tbody>
                                 {% for feed in feeds %}
                                     <tr>
-                                        <td>{{ feed.get('calendar_name') or '--' }}</td>
-                                        <td>{{ feed.get('feed_url') or '--' }}</td>
-                                        <td>{{ feed.get('last_fetched') or '--' }}</td>
+                                        <td data-label="Name">{{ feed.get('calendar_name') or '--' }}</td>
+                                        <td data-label="URL">{{ feed.get('feed_url') or '--' }}</td>
+                                        <td data-label="Last Fetch">{{ feed.get('last_fetched') or '--' }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="3">
@@ -459,10 +495,10 @@
                             <tbody>
                                 {% for row in cache_rows %}
                                     <tr>
-                                        <td>{{ row.get('event_title') or '--' }}</td>
-                                        <td>{{ row.get('event_start') or '--' }}</td>
-                                        <td>{{ row.get('event_end') or '--' }}</td>
-                                        <td>{{ row.get('event_type') or '--' }}</td>
+                                        <td data-label="Title">{{ row.get('event_title') or '--' }}</td>
+                                        <td data-label="Start">{{ row.get('event_start') or '--' }}</td>
+                                        <td data-label="End">{{ row.get('event_end') or '--' }}</td>
+                                        <td data-label="Type">{{ row.get('event_type') or '--' }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="4">
@@ -496,10 +532,10 @@
                             <tbody>
                                 {% for pref in prefs %}
                                     <tr>
-                                        <td>{{ pref.get('calendar_name') or '--' }}</td>
-                                        <td>{{ pref.get('display_name') or '--' }}</td>
-                                        <td>{{ pref.get('color_hex') or '--' }}</td>
-                                        <td>{{ 'Yes' if pref.get('visible') else 'No' }}</td>
+                                        <td data-label="Calendar">{{ pref.get('calendar_name') or '--' }}</td>
+                                        <td data-label="Display Name">{{ pref.get('display_name') or '--' }}</td>
+                                        <td data-label="Color">{{ pref.get('color_hex') or '--' }}</td>
+                                        <td data-label="Visible">{{ 'Yes' if pref.get('visible') else 'No' }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="4">
@@ -532,9 +568,9 @@
                             <tbody>
                                 {% for source in sources %}
                                     <tr>
-                                        <td>{{ source.get('source_id') or '--' }}</td>
-                                        <td>{{ source.get('kind') or '--' }}</td>
-                                        <td>{{ source.get('updated_at') or '--' }}</td>
+                                        <td data-label="Source">{{ source.get('source_id') or '--' }}</td>
+                                        <td data-label="Kind">{{ source.get('kind') or '--' }}</td>
+                                        <td data-label="Updated">{{ source.get('updated_at') or '--' }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="3">
@@ -568,10 +604,10 @@
                             <tbody>
                                 {% for event in events %}
                                     <tr>
-                                        <td>{{ event.get('title') or '--' }}</td>
-                                        <td>{{ event.get('start') or '--' }}</td>
-                                        <td>{{ event.get('end') or '--' }}</td>
-                                        <td>{{ 'Yes' if event.get('is_all_day') else 'No' }}</td>
+                                        <td data-label="Title">{{ event.get('title') or '--' }}</td>
+                                        <td data-label="Start">{{ event.get('start') or '--' }}</td>
+                                        <td data-label="End">{{ event.get('end') or '--' }}</td>
+                                        <td data-label="All Day">{{ 'Yes' if event.get('is_all_day') else 'No' }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="4">
@@ -604,9 +640,9 @@
                             <tbody>
                                 {% for override in overrides %}
                                     <tr>
-                                        <td>{{ override.get('event_ref') or '--' }}</td>
-                                        <td>{{ 'Yes' if override.get('hidden') else 'No' }}</td>
-                                        <td>{{ override.get('updated_at') or '--' }}</td>
+                                        <td data-label="Event Ref">{{ override.get('event_ref') or '--' }}</td>
+                                        <td data-label="Hidden">{{ 'Yes' if override.get('hidden') else 'No' }}</td>
+                                        <td data-label="Updated">{{ override.get('updated_at') or '--' }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="3">
@@ -646,12 +682,12 @@
                             <tbody>
                                 {% for course in courses %}
                                     <tr>
-                                        <td>{{ course.get('term') or '--' }}</td>
-                                        <td>{{ course.get('subject') or '--' }}</td>
-                                        <td>{{ course.get('catalog') or '--' }}</td>
-                                        <td>{{ course.get('crn') or '--' }}</td>
-                                        <td>{{ course.get('course_name') or '--' }}</td>
-                                        <td>{{ course.get('added_at') or '--' }}</td>
+                                        <td data-label="Term">{{ course.get('term') or '--' }}</td>
+                                        <td data-label="Subject">{{ course.get('subject') or '--' }}</td>
+                                        <td data-label="Catalog">{{ course.get('catalog') or '--' }}</td>
+                                        <td data-label="CRN">{{ course.get('crn') or '--' }}</td>
+                                        <td data-label="Course Name">{{ course.get('course_name') or '--' }}</td>
+                                        <td data-label="Added">{{ course.get('added_at') or '--' }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="6">
@@ -695,11 +731,11 @@
                             <tbody>
                                 {% for track in tracks %}
                                     <tr>
-                                        <td>{{ track.get('course_code') or track.get('course_title') or '--' }}</td>
-                                        <td>{{ track.get('last_status') or '--' }}</td>
-                                        <td>{{ track.get('last_seats_available') or '--' }}</td>
-                                        <td>{{ 'Yes' if track.get('enabled') else 'No' }}</td>
-                                        <td>{{ track.get('updated_at') or '--' }}</td>
+                                        <td data-label="Course Code">{{ track.get('course_code') or track.get('course_title') or '--' }}</td>
+                                        <td data-label="Status">{{ track.get('last_status') or '--' }}</td>
+                                        <td data-label="Seats">{{ track.get('last_seats_available') or '--' }}</td>
+                                        <td data-label="Enabled">{{ 'Yes' if track.get('enabled') else 'No' }}</td>
+                                        <td data-label="Updated">{{ track.get('updated_at') or '--' }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="5">
@@ -742,15 +778,15 @@
                             <tbody>
                                 {% for message in messages %}
                                     <tr>
-                                        <td>{{ message.get('created_at') or '--' }}</td>
-                                        <td>
+                                        <td data-label="Created">{{ message.get('created_at') or '--' }}</td>
+                                        <td data-label="Status">
                                             {% if message.get('deleted_at') %}
                                                 <span class="admin-badge admin-badge--muted">Deleted</span>
                                             {% else %}
                                                 <span class="admin-badge">Visible</span>
                                             {% endif %}
                                         </td>
-                                        <td>
+                                        <td data-label="Scope">
                                             {% if message.get('channel_id') %}
                                                 Channel: {{ message.get('channel_id') }}
                                             {% elif message.get('thread_id') %}
@@ -759,9 +795,9 @@
                                                 --
                                             {% endif %}
                                         </td>
-                                        <td>{{ message.get('source') or 'appwrite' }}</td>
-                                        <td>{{ message.get('content') or '--' }}</td>
-                                        <td>{{ message.get('deleted_at') or '--' }}</td>
+                                        <td data-label="Source">{{ message.get('source') or 'appwrite' }}</td>
+                                        <td data-label="Content">{{ message.get('content') or '--' }}</td>
+                                        <td data-label="Deleted">{{ message.get('deleted_at') or '--' }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="6">
@@ -794,10 +830,10 @@
                             <tbody>
                                 {% for thread in dm_threads %}
                                     <tr>
-                                        <td>{{ thread.get('$id') or thread.get('id') }}</td>
-                                        <td>{{ thread.get('participant_a') or '--' }}</td>
-                                        <td>{{ thread.get('participant_b') or '--' }}</td>
-                                        <td>{{ thread.get('last_message_at') or thread.get('updated_at') or '--' }}</td>
+                                        <td data-label="Thread">{{ thread.get('$id') or thread.get('id') }}</td>
+                                        <td data-label="Participant A">{{ thread.get('participant_a') or '--' }}</td>
+                                        <td data-label="Participant B">{{ thread.get('participant_b') or '--' }}</td>
+                                        <td data-label="Last Message">{{ thread.get('last_message_at') or thread.get('updated_at') or '--' }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="4">
@@ -829,9 +865,9 @@
                             <tbody>
                                 {% for block in blocks %}
                                     <tr>
-                                        <td>{{ block.get('blocker_id') or '--' }}</td>
-                                        <td>{{ block.get('blocked_id') or '--' }}</td>
-                                        <td>{{ block.get('created_at') or '--' }}</td>
+                                        <td data-label="Blocker">{{ block.get('blocker_id') or '--' }}</td>
+                                        <td data-label="Blocked">{{ block.get('blocked_id') or '--' }}</td>
+                                        <td data-label="Created">{{ block.get('created_at') or '--' }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="3">
@@ -851,5 +887,6 @@
             </section>
         {% endif %}
     </main>
+    <script src="{{ url_for('static', filename='js/admin-nav.js') }}" defer></script>
 </body>
 </html>

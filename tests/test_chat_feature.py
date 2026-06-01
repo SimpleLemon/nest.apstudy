@@ -8,6 +8,7 @@ from unittest.mock import Mock, patch
 from flask import Flask
 
 import blueprints.chat_api as chat_api
+from avatar_images import APSTUDY_LOGO_URL
 import services.chat_presence as chat_presence
 from services.chat_formatting import render_markdown
 from services.chat_presence import CHAT_UNIVERSITY_LABEL_PREFIX, university_presence_label
@@ -50,6 +51,27 @@ class TestChatFeature(unittest.TestCase):
         self.assertIn("&lt;script&gt;", rendered)
         self.assertNotIn("<script>", rendered)
         self.assertIn('rel="noopener noreferrer nofollow"', rendered)
+
+    def test_missing_public_user_avatar_uses_neutral_default(self):
+        payload = chat_api._public_user({"$id": "user-2", "name": "No Avatar"})
+
+        self.assertTrue(payload["picture_url"].startswith("data:image/svg+xml"))
+        self.assertNotEqual(payload["picture_url"], APSTUDY_LOGO_URL)
+
+    def test_missing_message_avatar_serializes_neutral_default(self):
+        row = {
+            "$id": "message-1",
+            "user_id": "user-1",
+            "source": "appwrite",
+            "author_name": "No Avatar",
+            "created_at": "2026-05-25T00:00:00Z",
+        }
+        with self.app.test_request_context("/api/chat/channels/nest_chat/messages"):
+            with patch.object(chat_api, "current_user", self.user):
+                payload = chat_api._serialize_message(row)
+
+        self.assertTrue(payload["author_avatar_url"].startswith("data:image/svg+xml"))
+        self.assertNotEqual(payload["author_avatar_url"], APSTUDY_LOGO_URL)
 
     def test_delete_message_allows_owner_within_five_minutes(self):
         created_at = (datetime.now(timezone.utc) - timedelta(minutes=4)).isoformat()

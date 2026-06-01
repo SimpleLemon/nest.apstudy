@@ -75,7 +75,7 @@ def _fallback_line_count(path):
 
 
 def _truncate(value, limit=MAX_FIELD_CHARS):
-    text = str(value or "")
+    text = "" if value is None else str(value)
     if len(text) <= limit:
         return text
     return f"{text[: max(0, limit - 1)]}..."
@@ -102,27 +102,6 @@ def _compact_metadata(metadata):
             lines.append(f"{key}: {value}")
         return _truncate("\n".join(lines) or "None", MAX_METADATA_CHARS)
     return _truncate(metadata, MAX_METADATA_CHARS)
-
-
-def _compact_footer_json(metadata):
-    if not isinstance(metadata, dict):
-        return None
-    footer_payload = {
-        key: value
-        for key, value in metadata.items()
-        if value is not None
-        and value != ""
-        and key not in {
-            "course_name",
-            "section_number",
-            "enrollment_type",
-            "seats_open",
-            "user_count",
-        }
-    }
-    if not footer_payload:
-        return None
-    return _truncate(json.dumps(footer_payload, default=str, sort_keys=True), 2048)
 
 
 def format_actor(user=None, *, user_id=None, username=None, system=False):
@@ -192,22 +171,26 @@ class DiscordAuditEvent:
         metadata = self.metadata if isinstance(self.metadata, dict) else {}
         color_name = self.color if self.color in COLOR_VALUES else "gray"
         course_name = metadata.get("course_name") or self.target
+        course_label = self.target
+        if course_name and course_name not in {self.target, "N/A"}:
+            course_label = f"{self.target}: {course_name}"
         tracking_count = metadata.get("user_count") or metadata.get("track_count") or 0
-        footer_text = _compact_footer_json(metadata)
-        embed = {
-            "title": _truncate(self.target, 256),
-            "description": _truncate(f"{course_name} | {tracking_count} Tracking", 4096),
+        section_number = metadata.get("section_number")
+        description_parts = []
+        if section_number:
+            description_parts.append(f"Sec # {section_number}")
+        description_parts.append(f"{tracking_count} Tracking")
+        return {
+            "title": _truncate(course_label, 256),
+            "description": _truncate(" | ".join(description_parts), 4096),
             "color": COLOR_VALUES[color_name],
             "fields": [
-                {"name": "Section #", "value": _truncate(metadata.get("section_number") or "N/A"), "inline": True},
                 {"name": "Enrollment", "value": _truncate(metadata.get("enrollment_type") or "N/A"), "inline": True},
                 {"name": "Seats Open", "value": _truncate(metadata.get("seats_open") if metadata.get("seats_open") is not None else "N/A"), "inline": True},
             ],
             "timestamp": self.event_timestamp,
+            "footer": {"text": self.event_timestamp},
         }
-        if footer_text:
-            embed["footer"] = {"text": footer_text}
-        return embed
 
     def embed(self):
         if self.channel == "course_tracks" and self.title == "Automated Course Track Checked":

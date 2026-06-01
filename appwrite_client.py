@@ -246,5 +246,6 @@ COLLECTIONS = {
 	"chat_events": "chat_events",
 	"chat_link_previews": "chat_link_previews",
 	"chat_bridge_config": "chat_bridge_config",
+	"app_config": "chat_bridge_config",
 	"admin_requests": "admin_requests",
 }

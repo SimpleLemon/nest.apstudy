@@ -177,7 +177,7 @@
                                 <div class="profile-tile-banner" id="settings-preview-banner"></div>
                                 <div class="profile-tile-body">
                                     <div class="profile-tile-avatar-frame">
-                                        <img id="settings-avatar-preview" class="profile-tile-avatar" src="{{ (user.picture or 'https://resources.apstudy.org/images/AP-Resources-Logo.png')|avatar_url(150) }}" srcset="{{ (user.picture or 'https://resources.apstudy.org/images/AP-Resources-Logo.png')|avatar_url(150) }} 1x, {{ (user.picture or 'https://resources.apstudy.org/images/AP-Resources-Logo.png')|avatar_url(300) }} 2x" sizes="(max-width: 640px) 96px, 150px" alt="Profile preview" width="150" height="150" loading="lazy" decoding="async" />
+                                        <img id="settings-avatar-preview" class="profile-tile-avatar" src="{{ (user.picture or '')|avatar_url(150) }}" srcset="{{ (user.picture or '')|avatar_url(150) }} 1x, {{ (user.picture or '')|avatar_url(300) }} 2x" sizes="(max-width: 640px) 96px, 150px" alt="Profile preview" width="150" height="150" loading="lazy" decoding="async" />
                                     </div>
                                     <div class="profile-tile-heading">
                                         <h3 id="settings-preview-name">{{ user.name or 'APStudy User' }}</h3>

@@ -36,6 +36,7 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
         login_manager.init_app(self.app)
         csrf.init_app(self.app)
+        self.app.jinja_env.filters["avatar_url"] = lambda url, size=32: url
         self.app.register_blueprint(admin.admin_bp)
         os.environ["ADMIN_USER_IDS"] = "admin-1"
 
@@ -120,6 +121,9 @@ class AdminSecurityTestCase(unittest.TestCase):
 
         html = response.get_data(as_text=True)
         self.assertGreaterEqual(html.count('name="csrf_token"'), 1)
+        self.assertIn("May 25, 2026", html)
+        self.assertIn("May 25, 2026 1:00 AM", html)
+        self.assertIn("@testuser", html)
 
     def test_admin_requests_renders_csrf_tokens(self):
         requests_rows = [{
@@ -182,6 +186,8 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertIn("User Directory", html)
         self.assertIn('action="/admin/users"', html)
         self.assertIn("user@example.com", html)
+        self.assertIn("May 25, 2026", html)
+        self.assertIn("May 25, 2026 1:00 AM", html)
 
     def test_admin_requests_places_course_tracking_before_university_requests(self):
         requests_rows = [{
@@ -231,8 +237,10 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertLess(html.index("Course Tracking"), html.index("University Channel Requests"))
         self.assertIn("CHEM 150", html)
         self.assertIn('id="admin-tracking-refresh"', html)
-        self.assertIn("5s (default)", html)
-        self.assertIn("60s", html)
+        self.assertIn("5m (default)", html)
+        self.assertIn("60m", html)
+        self.assertIn("Spring tracking", html)
+        self.assertIn("Open Spring", html)
 
     def test_admin_export_requires_post_and_csrf(self):
         export_payload = {"user": self.user_doc, "settings": self.settings_doc}
@@ -470,25 +478,52 @@ class AdminSecurityTestCase(unittest.TestCase):
                 ],
             )
             with patch.object(admin, "_log_admin_action") as log_action:
-                missing_token = client.post("/admin/course-tracking/refresh-interval", json={"seconds": 10})
+                missing_token = client.post("/admin/course-tracking/refresh-interval", json={"minutes": 10})
                 response = client.post(
                     "/admin/course-tracking/refresh-interval",
-                    json={"seconds": 10},
+                    json={"minutes": 10},
                     headers={"X-CSRFToken": token},
                 )
                 invalid = client.post(
                     "/admin/course-tracking/refresh-interval",
-                    json={"seconds": 15},
+                    json={"minutes": 15},
                     headers={"X-CSRFToken": token},
                 )
 
         self.assertEqual(missing_token.status_code, 400)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.get_json()["refresh_interval_seconds"], 10)
+        self.assertEqual(response.get_json()["refresh_interval_minutes"], 10)
         self.assertEqual(invalid.status_code, 400)
         log_action.assert_called_once()
         self.assertEqual(log_action.call_args.args[0], "course_tracking_refresh_interval")
-        self.assertEqual(log_action.call_args.kwargs["metadata"]["refresh_interval_seconds"], 10)
+        self.assertEqual(log_action.call_args.kwargs["metadata"]["refresh_interval_minutes"], 10)
+
+    def test_spring_course_tracking_toggle_requires_csrf_and_logs(self):
+        with self.app.test_client() as client:
+            self._login(client)
+            with patch.object(admin, "_course_tracking_groups", return_value=([], None)), \
+                    patch.object(admin, "_theme_preference", return_value=None), \
+                    patch.object(admin, "_pending_admin_request_count", return_value=0), \
+                    patch.object(admin, "spring_course_tracking_open", return_value=False):
+                html = client.get("/admin/requests").get_data(as_text=True)
+            token = re.search(r'name="csrf_token" value="([^"]+)"', html).group(1)
+
+            missing_token = client.post("/admin/course-tracking/spring-toggle", json={"enabled": True})
+            self.assertEqual(missing_token.status_code, 400)
+
+            with patch.object(admin, "set_spring_course_tracking_open") as set_open, \
+                    patch.object(admin, "_log_admin_action") as log_action:
+                response = client.post(
+                    "/admin/course-tracking/spring-toggle",
+                    json={"enabled": True},
+                    headers={"X-CSRFToken": token},
+                )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.get_json()["enabled"])
+        set_open.assert_called_once_with(True)
+        self.assertEqual(log_action.call_args.args[0], "spring_course_tracking_toggle")
+        self.assertTrue(log_action.call_args.kwargs["metadata"]["enabled"])
 
     def test_chem_150_diagnostic_is_non_mutating(self):
         with self.app.test_client() as client:

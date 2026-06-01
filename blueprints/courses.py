@@ -28,6 +28,7 @@ from services.atlas_client import (
     is_section_trackable,
     parse_section_id,
 )
+from services.app_config import spring_course_tracking_open
 from services.course_catalog import get_course_catalog_metadata
 from services.discord_audit import (
     emit_course_track_event,
@@ -329,6 +330,11 @@ def _serialize_track(track):
     }
 
 
+def _spring_tracking_closed_for_section(section):
+    term = str((section or {}).get("term") or "").strip()
+    return term.startswith("Spring_") and not spring_course_tracking_open()
+
+
 def _merge_live_section(section):
     timestamp = format_datetime(datetime.utcnow())
     catalog_info = get_course_catalog_metadata(section.get("subject"), section.get("catalog_number"))
@@ -585,6 +591,13 @@ def upsert_track():
     section = _get_section_by_id(section_id)
     if not section:
         return jsonify({"error": "Course section not found."}), 404
+
+    if enabled and _spring_tracking_closed_for_section(section):
+        return jsonify({
+            "error": "Spring course tracking is not open yet.",
+            "section": section,
+            "spring_course_tracking_open": False,
+        }), 403
 
     live_error = None
     last_updated_at = None

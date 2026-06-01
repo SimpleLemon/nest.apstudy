@@ -23,12 +23,14 @@ from appwrite_helpers import (
     get_row_safe,
     list_rows_all,
     list_rows_safe,
+    parse_datetime,
     update_row_safe,
 )
 from extensions import csrf
 from blueprints.settings import _settings_defaults
 from blueprints.chat_api import create_university_channel, emit_chat_event
 from services.chat_presence import sync_chat_presence_labels_for_school
+from services.app_config import set_spring_course_tracking_open, spring_course_tracking_open
 from services.discord_audit import discord_audit_status, emit_admin_event, format_actor, format_user_target
 
 try:
@@ -56,6 +58,95 @@ ALLOWED_SECTIONS = {
 
 def _row_id(row):
     return row.get("$id") or row.get("id")
+
+
+def _format_admin_date(value):
+    parsed = parse_datetime(value)
+    if parsed:
+        return parsed.strftime("%B %-d, %Y")
+    return str(value) if value else None
+
+
+def _format_admin_datetime(value):
+    parsed = parse_datetime(value)
+    if parsed:
+        return parsed.strftime("%B %-d, %Y %-I:%M %p")
+    return str(value) if value else None
+
+
+def _normalize_banner_color(value):
+    if not isinstance(value, str):
+        return "#fecae1"
+    normalized = value.strip()
+    if not normalized.startswith("#"):
+        normalized = f"#{normalized}"
+    if len(normalized) == 7:
+        try:
+            int(normalized[1:], 16)
+            return normalized.lower()
+        except ValueError:
+            return "#fecae1"
+    return "#fecae1"
+
+
+def _profile_handle(name, user_id, username=None):
+    if username:
+        return f"@{username}"
+    base = "".join(char.lower() if char.isalnum() else "-" for char in (name or "")).strip("-")
+    base = "-".join(part for part in base.split("-") if part)
+    return f"@{base or user_id or 'apstudy-user'}"
+
+
+def _is_emory_school(value):
+    normalized = str(value or "").strip().lower()
+    return normalized in {"emory", "emory university"}
+
+
+def _is_early_member(value):
+    parsed = parse_datetime(value)
+    if not parsed:
+        return False
+    if parsed.tzinfo is not None:
+        parsed = parsed.replace(tzinfo=None)
+    return parsed < datetime(2026, 8, 20)
+
+
+def _admin_profile_payload(user_doc):
+    user_id = _row_id(user_doc)
+    name = user_doc.get("name") or "APStudy User"
+    username = user_doc.get("username")
+    return {
+        "id": user_id,
+        "name": name,
+        "username": username,
+        "handle": _profile_handle(name, user_id, username),
+        "picture_url": user_doc.get("picture_url"),
+        "banner_color": _normalize_banner_color(user_doc.get("banner_color")),
+        "school": user_doc.get("school"),
+        "major": user_doc.get("major"),
+        "graduation_year": user_doc.get("graduation_year"),
+        "education_level": user_doc.get("education_level"),
+        "class_year": user_doc.get("class_year"),
+        "member_since": _format_admin_date(user_doc.get("created_at")),
+        "is_emory_school": _is_emory_school(user_doc.get("school")),
+        "is_early_member": _is_early_member(user_doc.get("created_at")),
+    }
+
+
+def _admin_viewer_payload():
+    if not current_user.is_authenticated:
+        return None
+    return {
+        "id": str(getattr(current_user, "id", "") or ""),
+        "name": getattr(current_user, "name", None) or "Admin",
+        "email": getattr(current_user, "email", None),
+        "picture_url": getattr(current_user, "picture_url", None),
+    }
+
+
+@admin_bp.context_processor
+def _admin_template_context():
+    return {"admin_viewer": _admin_viewer_payload()}
 
 
 def _admin_ids():
@@ -165,6 +256,7 @@ def _admin_event_title(action):
         "toggle_course_tracking": "Admin Updated Course Tracking",
         "test_chem_150_tracking": "Admin Tested CHEM 150 Tracking",
         "course_tracking_refresh_interval": "Admin Updated Course Tracking Refresh",
+        "spring_course_tracking_toggle": "Admin Updated Spring Course Tracking",
     }
     return labels.get(action, "Admin Action")
 
@@ -236,14 +328,18 @@ def _user_summary(user_doc):
         "username": user_doc.get("username"),
         "name": user_doc.get("name"),
         "email": user_doc.get("email"),
-        "created_at": format_datetime(user_doc.get("created_at")),
-        "last_login": format_datetime(user_doc.get("last_login")),
+        "created_at": _format_admin_date(user_doc.get("created_at")),
+        "last_login": _format_admin_datetime(user_doc.get("last_login")),
         "onboarding_complete": bool(user_doc.get("onboarding_complete")),
         "onboarding_step": user_doc.get("onboarding_step") or 1,
         "emory_student": bool(user_doc.get("emory_student")),
         "school": user_doc.get("school"),
         "major": user_doc.get("major"),
         "graduation_year": user_doc.get("graduation_year"),
+        "education_level": user_doc.get("education_level"),
+        "class_year": user_doc.get("class_year"),
+        "picture_url": user_doc.get("picture_url"),
+        "banner_color": _normalize_banner_color(user_doc.get("banner_color")),
     }
 
 
@@ -1050,19 +1146,19 @@ def admin_course_tracking_track_toggle(track_id):
 def admin_course_tracking_refresh_interval():
     payload = request.get_json(silent=True) or request.form or {}
     try:
-        seconds = int(payload.get("seconds"))
+        minutes = int(payload.get("minutes"))
     except (TypeError, ValueError):
         return jsonify({"error": "Invalid refresh interval."}), 400
-    if seconds not in {5, 10, 30, 60}:
+    if minutes not in {5, 10, 30, 60}:
         return jsonify({"error": "Invalid refresh interval."}), 400
 
     _log_admin_action(
         "course_tracking_refresh_interval",
         "course_tracking",
-        metadata={"refresh_interval_seconds": seconds},
+        metadata={"refresh_interval_minutes": minutes},
         color="gray",
     )
-    return jsonify({"status": "ok", "refresh_interval_seconds": seconds})
+    return jsonify({"status": "ok", "refresh_interval_minutes": minutes})
 
 
 @admin_bp.route("/admin/course-tracking/test-chem-150", methods=["POST"])
@@ -1143,6 +1239,7 @@ def admin_requests():
         requests=requests_rows,
         tracking_groups=tracking_groups,
         tracking_error=tracking_error,
+        spring_tracking_open=spring_course_tracking_open(),
         status_filter=status_filter,
         status=request.args.get("notice"),
         error=request.args.get("error"),
@@ -1151,6 +1248,26 @@ def admin_requests():
         active_admin_page="requests",
         breadcrumbs=[("Admin", url_for("admin.admin_index")), ("Requests", None)],
     )
+
+
+@admin_bp.route("/admin/course-tracking/spring-toggle", methods=["POST"])
+@admin_required
+def admin_course_tracking_spring_toggle():
+    payload = request.get_json(silent=True) or request.form or {}
+    enabled = str(payload.get("enabled", "")).strip().lower() in {"1", "true", "yes", "on"}
+    try:
+        set_spring_course_tracking_open(enabled)
+    except Exception as exc:
+        logger.exception("Failed to update Spring course tracking gate")
+        return jsonify({"error": "Unable to update Spring course tracking.", "message": _sanitize_admin_error(exc)}), 500
+
+    _log_admin_action(
+        "spring_course_tracking_toggle",
+        "spring_course_tracking",
+        metadata={"enabled": enabled},
+        color="green" if enabled else "yellow",
+    )
+    return jsonify({"status": "ok", "enabled": enabled})
 
 
 @admin_bp.route("/admin/requests/<request_id>/approve", methods=["POST"])
@@ -1274,6 +1391,7 @@ def admin_detail(user_id):
     return render_template(
         "admin_detail.html",
         user=_user_summary(user_doc),
+        profile=_admin_profile_payload(user_doc),
         user_doc=user_doc,
         account_data=account_data,
         overview_counts=overview_counts,

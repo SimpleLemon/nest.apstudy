@@ -27,6 +27,7 @@ from appwrite_helpers import (
     update_row_safe,
     parse_datetime,
 )
+from avatar_images import DEFAULT_AVATAR_URL
 from services.chat_formatting import extract_links, fetch_link_preview, render_markdown, url_hash
 from services.discord_bridge import (
     DiscordBridgeError,
@@ -47,7 +48,7 @@ logger = logging.getLogger(__name__)
 DISCORD_MESSAGE_LIMIT = 50
 MESSAGE_PAGE_SIZE = 50
 DELETE_WINDOW_SECONDS = 5 * 60
-DEFAULT_AVATAR = "https://resources.apstudy.org/images/AP-Resources-Logo.png"
+DEFAULT_AVATAR = DEFAULT_AVATAR_URL
 DEFAULT_BANNER_COLOR = "#fecae1"
 DISCORD_IMAGE_EXTENSIONS = {".gif", ".jpeg", ".jpg", ".png", ".webp"}
 DISCORD_USER_MENTION_RE = re.compile(r"&lt;@!?(\d+)&gt;")
@@ -1170,7 +1171,7 @@ def send_channel_message(channel_id):
         "user_id": _current_user_id(),
         "author_name": current_user.name or current_user.username or "Nest User",
         "author_username": current_user.username or "",
-        "author_avatar_url": current_user.picture_url or DEFAULT_AVATAR,
+        "author_avatar_url": current_user.picture_url or "",
         "content": content,
         "rendered_html": render_markdown(content),
         "link_preview_json": json.dumps(previews),
@@ -1370,7 +1371,7 @@ def dm_thread_messages(thread_id):
                 "user_id": _current_user_id(),
                 "author_name": current_user.name or current_user.username or "Nest User",
                 "author_username": current_user.username or "",
-                "author_avatar_url": current_user.picture_url or DEFAULT_AVATAR,
+                "author_avatar_url": current_user.picture_url or "",
                 "content": content,
                 "rendered_html": render_markdown(content),
                 "link_preview_json": json.dumps(previews),

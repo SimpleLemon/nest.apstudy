@@ -5,22 +5,54 @@
         </a>
         <span class="admin-sidebar-logo material-symbols-outlined" aria-hidden="true">admin_panel_settings</span>
         <span class="admin-sidebar-name">Admin</span>
+        <button
+            class="admin-sidebar-menu"
+            type="button"
+            aria-label="Open admin navigation"
+            aria-controls="admin-sidebar-drawer"
+            aria-expanded="false"
+            data-admin-menu-toggle
+        >
+            <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+        </button>
     </div>
-    <nav class="admin-sidebar-nav">
-        <a class="admin-sidebar-item {% if active_admin_page == 'home' %}is-active{% endif %}" href="{{ url_for('admin.admin_index') }}">
-            <span class="admin-sidebar-icon material-symbols-outlined" aria-hidden="true">home</span>
-            <span>Home</span>
-        </a>
-        <a class="admin-sidebar-item {% if active_admin_page == 'users' %}is-active{% endif %}" href="{{ url_for('admin.admin_users') }}">
-            <span class="admin-sidebar-icon material-symbols-outlined" aria-hidden="true">group</span>
-            <span>User Directory</span>
-        </a>
-        <a class="admin-sidebar-item {% if active_admin_page == 'requests' %}is-active{% endif %}" href="{{ url_for('admin.admin_requests') }}">
-            <span class="admin-sidebar-icon material-symbols-outlined" aria-hidden="true">inbox</span>
-            <span>Requests</span>
-            {% if pending_request_count %}
-                <span class="admin-sidebar-count">{{ pending_request_count }}</span>
-            {% endif %}
-        </a>
-    </nav>
+    <div class="admin-sidebar-drawer" id="admin-sidebar-drawer">
+        <nav class="admin-sidebar-nav">
+            <a class="admin-sidebar-item {% if active_admin_page == 'home' %}is-active{% endif %}" href="{{ url_for('admin.admin_index') }}">
+                <span class="admin-sidebar-icon material-symbols-outlined" aria-hidden="true">home</span>
+                <span>Home</span>
+            </a>
+            <a class="admin-sidebar-item {% if active_admin_page == 'users' %}is-active{% endif %}" href="{{ url_for('admin.admin_users') }}">
+                <span class="admin-sidebar-icon material-symbols-outlined" aria-hidden="true">group</span>
+                <span>User Directory</span>
+            </a>
+            <a class="admin-sidebar-item {% if active_admin_page == 'requests' %}is-active{% endif %}" href="{{ url_for('admin.admin_requests') }}">
+                <span class="admin-sidebar-icon material-symbols-outlined" aria-hidden="true">inbox</span>
+                <span>Requests</span>
+                {% if pending_request_count %}
+                    <span class="admin-sidebar-count">{{ pending_request_count }}</span>
+                {% endif %}
+            </a>
+        </nav>
+        {% if admin_viewer %}
+            <div class="admin-sidebar-profile">
+                <img
+                    class="admin-sidebar-avatar"
+                    src="{{ (admin_viewer.picture_url or '')|avatar_url(40) }}"
+                    srcset="{{ (admin_viewer.picture_url or '')|avatar_url(40) }} 1x, {{ (admin_viewer.picture_url or '')|avatar_url(80) }} 2x"
+                    sizes="40px"
+                    alt="{{ admin_viewer.name }} avatar"
+                    width="40"
+                    height="40"
+                    loading="lazy"
+                    decoding="async"
+                />
+                <div class="admin-sidebar-profile-text">
+                    <strong>{{ admin_viewer.name }}</strong>
+                    <span>{{ admin_viewer.email or admin_viewer.id }}</span>
+                </div>
+            </div>
+        {% endif %}
+    </div>
 </aside>
+<div class="admin-sidebar-scrim" data-admin-sidebar-scrim hidden></div>

@@ -44,13 +44,27 @@
                     <p class="admin-subtitle admin-subtitle--compact">Pause or resume grouped tracking and inspect individual user track rows.</p>
                 </div>
                 <div class="admin-tracking-tools">
+                    <div class="admin-tracking-gate" data-spring-tracking-gate>
+                        <span class="admin-field-label">Spring tracking</span>
+                        <span class="admin-badge {{ '' if spring_tracking_open else 'admin-badge--muted' }}" data-spring-tracking-state>
+                            {{ "Open" if spring_tracking_open else "Closed" }}
+                        </span>
+                        <button
+                            id="admin-spring-tracking-toggle"
+                            class="admin-button admin-button--ghost"
+                            type="button"
+                            data-enabled="{{ 'false' if spring_tracking_open else 'true' }}"
+                        >
+                            {{ "Close Spring" if spring_tracking_open else "Open Spring" }}
+                        </button>
+                    </div>
                     <label class="admin-select-field" for="admin-tracking-refresh">
                         <span>Refresh</span>
                         <select id="admin-tracking-refresh">
-                            <option value="5" selected>5s (default)</option>
-                            <option value="10">10s</option>
-                            <option value="30">30s</option>
-                            <option value="60">60s</option>
+                            <option value="5" selected>5m (default)</option>
+                            <option value="10">10m</option>
+                            <option value="30">30m</option>
+                            <option value="60">60m</option>
                         </select>
                     </label>
                     <button id="admin-test-chem-150" class="admin-button" type="button">
@@ -106,13 +120,13 @@
                                     <tbody>
                                         {% for track in group.tracks %}
                                             <tr data-track-id="{{ track.id }}">
-                                                <td><a class="admin-link" href="{{ url_for('admin.admin_detail', user_id=track.user_id, section='seat_tracks') }}">{{ track.user_id }}</a></td>
-                                                <td>{{ "Yes" if track.enabled else "No" }}</td>
-                                                <td>{{ track.last_status or "--" }}</td>
-                                                <td>{{ track.last_seats_available if track.last_seats_available is not none else "--" }}</td>
-                                                <td>{{ track.last_checked_at or "--" }}</td>
-                                                <td>{{ track.last_notified_at or "--" }}</td>
-                                                <td>
+                                                <td data-label="User ID"><a class="admin-link" href="{{ url_for('admin.admin_detail', user_id=track.user_id, section='seat_tracks') }}">{{ track.user_id }}</a></td>
+                                                <td data-label="Enabled">{{ "Yes" if track.enabled else "No" }}</td>
+                                                <td data-label="Last Status">{{ track.last_status or "--" }}</td>
+                                                <td data-label="Seats">{{ track.last_seats_available if track.last_seats_available is not none else "--" }}</td>
+                                                <td data-label="Last Pinged">{{ track.last_checked_at or "--" }}</td>
+                                                <td data-label="Last Notified">{{ track.last_notified_at or "--" }}</td>
+                                                <td data-label="Actions">
                                                     <button class="admin-button admin-button--ghost" type="button" data-track-toggle="{{ 'false' if track.enabled else 'true' }}">
                                                         {{ "Pause" if track.enabled else "Resume" }}
                                                     </button>
@@ -160,19 +174,19 @@
                         {% for item in requests %}
                             {% set request_id = item.get('$id') or item.get('id') %}
                             <tr>
-                                <td><strong>{{ item.get('label') or item.get('request_type') }}</strong></td>
-                                <td>{{ item.get('school_name') or '--' }}</td>
-                                <td>
+                                <td data-label="Label"><strong>{{ item.get('label') or item.get('request_type') }}</strong></td>
+                                <td data-label="School">{{ item.get('school_name') or '--' }}</td>
+                                <td data-label="Status">
                                     {% if item.get('status') == 'pending' %}
                                         <span class="admin-badge">Pending</span>
                                     {% else %}
                                         <span class="admin-badge admin-badge--muted">{{ item.get('status') or '--' }}</span>
                                     {% endif %}
                                 </td>
-                                <td>{{ item.get('request_count') or 1 }}</td>
-                                <td>{{ item.get('created_at') or '--' }}</td>
-                                <td>{{ item.get('resolved_at') or '--' }}</td>
-                                <td>
+                                <td data-label="Requests">{{ item.get('request_count') or 1 }}</td>
+                                <td data-label="Created">{{ item.get('created_at') or '--' }}</td>
+                                <td data-label="Resolved">{{ item.get('resolved_at') or '--' }}</td>
+                                <td data-label="Actions">
                                     {% if item.get('status') == 'pending' %}
                                         <div class="admin-action-row">
                                             <form method="post" action="{{ url_for('admin.approve_admin_request', request_id=request_id) }}">
@@ -206,6 +220,7 @@
         </section>
     </main>
 
+    <script src="{{ url_for('static', filename='js/admin-nav.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/admin-requests.js') }}" defer></script>
 </body>
 </html>

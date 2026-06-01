@@ -2,7 +2,7 @@
   const root = document.querySelector(".chat-app");
   if (!root) return;
 
-  const DEFAULT_AVATAR = "https://resources.apstudy.org/images/AP-Resources-Logo.png";
+  const DEFAULT_AVATAR = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='24' fill='%23e5e7eb'/%3E%3Ccircle cx='48' cy='35' r='17' fill='%239ca3af'/%3E%3Cpath d='M20 82c4-18 17-28 28-28s24 10 28 28' fill='%239ca3af'/%3E%3C/svg%3E";
   const PRESENCE_APP_ID = "nest-chat";
   const VIEWING_PRESENCE_REFRESH_MS = 45000;
   const VIEWING_PRESENCE_TTL_MS = 90000;

@@ -86,6 +86,21 @@ test("sorts visible task rows by user-selected list mode", () => {
     assert.deepEqual(tasks.map((item) => item.id), ["no-deadline", "late", "early"]);
 });
 
+test("sorts deadline ties by priority before manual order", () => {
+    const tasks = [
+        { id: "same-low", title: "Low", priority: "low", order: 0, deadline_at: "2026-05-21T12:00:00Z" },
+        { id: "same-high", title: "High", priority: "high", order: 2, deadline_at: "2026-05-21T12:00:00Z" },
+        { id: "same-medium", title: "Medium", priority: "medium", order: 1, deadline_at: "2026-05-21T12:00:00Z" },
+        { id: "no-deadline-high", title: "No Deadline High", priority: "high", order: 0 },
+        { id: "no-deadline-none", title: "No Deadline None", priority: "none", order: 1 },
+    ];
+
+    assert.deepEqual(
+        utils.sortTasksForList(tasks, "deadline").map((item) => item.id),
+        ["same-high", "same-medium", "same-low", "no-deadline-high", "no-deadline-none"]
+    );
+});
+
 test("detects completed recurring occurrences by next occurrence key", () => {
     assert.equal(utils.isRepeatingTaskCompleted({ completed: true }), true);
     assert.equal(utils.isRepeatingTaskCompleted({

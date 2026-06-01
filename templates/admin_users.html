@@ -64,22 +64,22 @@
                 <tbody>
                     {% for user in users %}
                         <tr>
-                            <td>
+                            <td data-label="User ID">
                                 <a class="admin-link" href="{{ url_for('admin.admin_detail', user_id=user.id) }}">{{ user.id }}</a>
                             </td>
-                            <td>{{ user.name or "--" }}</td>
-                            <td>{{ user.email or "--" }}</td>
-                            <td>{{ user.username or "--" }}</td>
-                            <td>
+                            <td data-label="Display Name">{{ user.name or "--" }}</td>
+                            <td data-label="Email">{{ user.email or "--" }}</td>
+                            <td data-label="Username">{{ user.username or "--" }}</td>
+                            <td data-label="Onboarding">
                                 {% if user.onboarding_complete %}
                                     <span class="admin-badge">Complete</span>
                                 {% else %}
                                     <span class="admin-badge admin-badge--muted">Step {{ user.onboarding_step }}</span>
                                 {% endif %}
                             </td>
-                            <td>{{ "Yes" if user.emory_student else "No" }}</td>
-                            <td>{{ user.created_at or "--" }}</td>
-                            <td>{{ user.last_login or "--" }}</td>
+                            <td data-label="Emory">{{ "Yes" if user.emory_student else "No" }}</td>
+                            <td data-label="Created">{{ user.created_at or "--" }}</td>
+                            <td data-label="Last Login">{{ user.last_login or "--" }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -88,5 +88,6 @@
             <div class="admin-card">No users found.</div>
         {% endif %}
     </main>
+    <script src="{{ url_for('static', filename='js/admin-nav.js') }}" defer></script>
 </body>
 </html>
