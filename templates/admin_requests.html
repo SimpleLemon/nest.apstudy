@@ -9,22 +9,23 @@
     <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy Logo">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/themes.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
 </head>
 <body class="admin-page">
+    {% include "_admin_sidebar.html" %}
     <main class="admin-shell">
         <header class="admin-header">
             <div>
-                <p class="admin-eyebrow">Admin Portal</p>
+                {% include "_admin_breadcrumbs.html" %}
                 <h1 class="admin-title">Requests{% if pending_request_count %} ({{ pending_request_count }} pending){% endif %}</h1>
-                <p class="admin-subtitle">Review channel approvals and other platform requests.</p>
+                <p class="admin-subtitle">Review course tracking diagnostics and university channel approvals.</p>
             </div>
             <div class="admin-header-actions">
-                <a class="admin-button admin-button--ghost" href="{{ url_for('admin.admin_index') }}">User directory</a>
-                <a class="admin-button admin-button--ghost" href="/dashboard">Back to dashboard</a>
+                <a class="admin-button admin-button--ghost" href="{{ url_for('admin.admin_users') }}">User Directory</a>
             </div>
         </header>
 
@@ -39,72 +40,164 @@
             <div class="admin-alert admin-alert--error">{{ error }}</div>
         {% endif %}
 
-        <nav class="admin-tabs">
-            {% for value, label in [("pending", "Pending"), ("approved", "Approved"), ("denied", "Denied"), ("all", "All")] %}
-                <a class="admin-tab {% if status_filter == value %}is-active{% endif %}" href="{{ url_for('admin.admin_requests', status=value) }}">{{ label }}</a>
-            {% endfor %}
-        </nav>
-
-        {% if requests %}
-            <table class="admin-table" aria-label="Admin requests">
-                <thead>
-                    <tr>
-                        <th>Label</th>
-                        <th>School</th>
-                        <th>Status</th>
-                        <th>Requests</th>
-                        <th>Created</th>
-                        <th>Resolved</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in requests %}
-                        {% set request_id = item.get('$id') or item.get('id') %}
-                        <tr>
-                            <td><strong>{{ item.get('label') or item.get('request_type') }}</strong></td>
-                            <td>{{ item.get('school_name') or '--' }}</td>
-                            <td>
-                                {% if item.get('status') == 'pending' %}
-                                    <span class="admin-badge">Pending</span>
-                                {% else %}
-                                    <span class="admin-badge admin-badge--muted">{{ item.get('status') or '--' }}</span>
-                                {% endif %}
-                            </td>
-                            <td>{{ item.get('request_count') or 1 }}</td>
-                            <td>{{ item.get('created_at') or '--' }}</td>
-                            <td>{{ item.get('resolved_at') or '--' }}</td>
-                            <td>
-                                {% if item.get('status') == 'pending' %}
-                                    <div class="admin-header-actions">
-                                        <form method="post" action="{{ url_for('admin.approve_admin_request', request_id=request_id) }}">
-                                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                                            <button class="admin-button" type="submit">Approve</button>
-                                        </form>
-                                        <form method="post" action="{{ url_for('admin.deny_admin_request', request_id=request_id) }}">
-                                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                                            <button class="admin-button admin-button--ghost" type="submit">Deny</button>
-                                        </form>
+        <section class="admin-card admin-tracking-panel" aria-labelledby="course-tracking-title">
+            <div class="admin-section-heading">
+                <div>
+                    <h2 id="course-tracking-title" class="admin-title admin-title--small">Course Tracking</h2>
+                    <p class="admin-subtitle admin-subtitle--compact">Pause or resume grouped tracking and inspect individual user track rows.</p>
+                </div>
+                <button id="admin-test-chem-150" class="admin-button" type="button">
+                    <span class="material-symbols-outlined" aria-hidden="true">bug_report</span>
+                    Test Fall 2026 CHEM 150
+                </button>
+            </div>
+            <input type="hidden" id="admin-csrf-token" name="csrf_token" value="{{ csrf_token() }}" />
+            <div id="admin-tracking-alert" class="admin-inline-notice" role="status" hidden></div>
+            {% if tracking_error %}
+                <div class="admin-alert admin-alert--error">{{ tracking_error }}</div>
+            {% endif %}
+            {% if tracking_groups %}
+                <div class="admin-tracking-list" id="admin-tracking-list">
+                    {% for group in tracking_groups %}
+                        <details class="admin-track-group" data-track-group data-term="{{ group.term }}" data-subject="{{ group.subject }}" data-catalog="{{ group.catalog }}" data-crn="{{ group.crn }}">
+                            <summary>
+                                <span class="admin-track-summary-main">
+                                    <strong>{{ group.course_code or (group.subject ~ " " ~ group.catalog) }}</strong>
+                                    <span>{{ group.course_title or "Tracked course" }}</span>
+                                </span>
+                                <span class="admin-track-summary-meta">
+                                    <span class="admin-badge">{{ group.active_count }} active</span>
+                                    <span class="admin-badge admin-badge--muted">{{ group.paused_count }} paused</span>
+                                    <span>{{ group.user_count }} users</span>
+                                    <span>Last ping: {{ group.last_checked_at or "--" }}</span>
+                                </span>
+                            </summary>
+                            <div class="admin-track-group-body">
+                                <div class="admin-track-group-actions">
+                                    <div class="admin-field">
+                                        <span class="admin-field-label">Status</span>
+                                        <span class="admin-field-value">{{ group.last_status or "--" }} / {{ group.last_seats_available if group.last_seats_available is not none else "--" }} seats</span>
                                     </div>
-                                {% else %}
-                                    --
-                                {% endif %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="7">
-                                <details>
-                                    <summary>Raw request data</summary>
-                                    <pre class="admin-code-block">{{ item | tojson }}</pre>
-                                </details>
-                            </td>
-                        </tr>
+                                    <div class="admin-header-actions">
+                                        <button class="admin-button admin-button--ghost" type="button" data-group-toggle="true">Resume group</button>
+                                        <button class="admin-button admin-button--ghost" type="button" data-group-toggle="false">Pause group</button>
+                                    </div>
+                                </div>
+                                <table class="admin-table admin-track-table">
+                                    <thead>
+                                        <tr>
+                                            <th>User ID</th>
+                                            <th>Enabled</th>
+                                            <th>Last Status</th>
+                                            <th>Seats</th>
+                                            <th>Last Pinged</th>
+                                            <th>Last Notified</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for track in group.tracks %}
+                                            <tr data-track-id="{{ track.id }}">
+                                                <td><a class="admin-link" href="{{ url_for('admin.admin_detail', user_id=track.user_id, section='seat_tracks') }}">{{ track.user_id }}</a></td>
+                                                <td>{{ "Yes" if track.enabled else "No" }}</td>
+                                                <td>{{ track.last_status or "--" }}</td>
+                                                <td>{{ track.last_seats_available if track.last_seats_available is not none else "--" }}</td>
+                                                <td>{{ track.last_checked_at or "--" }}</td>
+                                                <td>{{ track.last_notified_at or "--" }}</td>
+                                                <td>
+                                                    <button class="admin-button admin-button--ghost" type="button" data-track-toggle="{{ 'false' if track.enabled else 'true' }}">
+                                                        {{ "Pause" if track.enabled else "Resume" }}
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </details>
                     {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <div class="admin-card">No requests found.</div>
-        {% endif %}
+                </div>
+            {% else %}
+                <p>No course tracking rows found.</p>
+            {% endif %}
+        </section>
+
+        <section class="admin-card" aria-labelledby="university-channel-requests-title">
+            <div class="admin-section-heading">
+                <div>
+                    <h2 id="university-channel-requests-title" class="admin-title admin-title--small">University Channel Requests</h2>
+                    <p class="admin-subtitle admin-subtitle--compact">Review channel approvals and other platform requests.</p>
+                </div>
+            </div>
+            <nav class="admin-tabs">
+                {% for value, label in [("pending", "Pending"), ("approved", "Approved"), ("denied", "Denied"), ("all", "All")] %}
+                    <a class="admin-tab {% if status_filter == value %}is-active{% endif %}" href="{{ url_for('admin.admin_requests', status=value) }}">{{ label }}</a>
+                {% endfor %}
+            </nav>
+
+            {% if requests %}
+                <table class="admin-table" aria-label="Admin requests">
+                    <thead>
+                        <tr>
+                            <th>Label</th>
+                            <th>School</th>
+                            <th>Status</th>
+                            <th>Requests</th>
+                            <th>Created</th>
+                            <th>Resolved</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in requests %}
+                            {% set request_id = item.get('$id') or item.get('id') %}
+                            <tr>
+                                <td><strong>{{ item.get('label') or item.get('request_type') }}</strong></td>
+                                <td>{{ item.get('school_name') or '--' }}</td>
+                                <td>
+                                    {% if item.get('status') == 'pending' %}
+                                        <span class="admin-badge">Pending</span>
+                                    {% else %}
+                                        <span class="admin-badge admin-badge--muted">{{ item.get('status') or '--' }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ item.get('request_count') or 1 }}</td>
+                                <td>{{ item.get('created_at') or '--' }}</td>
+                                <td>{{ item.get('resolved_at') or '--' }}</td>
+                                <td>
+                                    {% if item.get('status') == 'pending' %}
+                                        <div class="admin-header-actions">
+                                            <form method="post" action="{{ url_for('admin.approve_admin_request', request_id=request_id) }}">
+                                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                                                <button class="admin-button" type="submit">Approve</button>
+                                            </form>
+                                            <form method="post" action="{{ url_for('admin.deny_admin_request', request_id=request_id) }}">
+                                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                                                <button class="admin-button admin-button--ghost" type="submit">Deny</button>
+                                            </form>
+                                        </div>
+                                    {% else %}
+                                        --
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="7">
+                                    <details>
+                                        <summary>Raw request data</summary>
+                                        <pre class="admin-code-block">{{ item | tojson }}</pre>
+                                    </details>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="admin-card admin-empty-card">No requests found.</div>
+            {% endif %}
+        </section>
     </main>
+
+    <script src="{{ url_for('static', filename='js/admin-requests.js') }}" defer></script>
 </body>
 </html>

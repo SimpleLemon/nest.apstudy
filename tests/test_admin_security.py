@@ -142,6 +142,94 @@ class AdminSecurityTestCase(unittest.TestCase):
         html = response.get_data(as_text=True)
         self.assertGreaterEqual(html.count('name="csrf_token"'), 2)
 
+    def test_admin_home_renders_home_metrics(self):
+        metrics = {
+            "total_users": 3,
+            "emory_users": 2,
+            "non_emory_users": 1,
+            "pending_requests": 1,
+            "saved_courses": 4,
+            "active_course_tracks": 5,
+            "paused_course_tracks": 6,
+            "file_storage": {"formatted": "1.5 MB", "file_count": 7, "avatar_count": 2, "error": None},
+        }
+        with self.app.test_client() as client:
+            self._login(client)
+            with patch.object(admin, "_admin_home_metrics", return_value=metrics), \
+                    patch.object(admin, "_system_status", return_value={}), \
+                    patch.object(admin, "_theme_preference", return_value=None), \
+                    patch.object(admin, "_pending_admin_request_count", return_value=1):
+                response = client.get("/admin")
+
+        html = response.get_data(as_text=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("System Numbers", html)
+        self.assertIn("Total Users", html)
+        self.assertIn("1.5 MB", html)
+        self.assertNotIn('action="/admin"', html)
+
+    def test_admin_users_renders_directory(self):
+        with self.app.test_client() as client:
+            self._login(client)
+            with patch.object(admin, "list_rows_all", return_value=[self.user_doc]), \
+                    patch.object(admin, "_theme_preference", return_value=None), \
+                    patch.object(admin, "_pending_admin_request_count", return_value=0):
+                response = client.get("/admin/users")
+
+        html = response.get_data(as_text=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("User Directory", html)
+        self.assertIn('action="/admin/users"', html)
+        self.assertIn("user@example.com", html)
+
+    def test_admin_requests_places_course_tracking_before_university_requests(self):
+        requests_rows = [{
+            "$id": "request-1",
+            "id": "request-1",
+            "label": "University Channel",
+            "request_type": "uni_channel_approval",
+            "school_name": "Emory University",
+            "status": "pending",
+            "request_count": 1,
+            "created_at": "2026-05-25T00:00:00Z",
+            "resolved_at": None,
+        }]
+        groups = [{
+            "id": "Fall_2026|CHEM|150|1234",
+            "term": "Fall_2026",
+            "subject": "CHEM",
+            "catalog": "150",
+            "crn": "1234",
+            "course_code": "CHEM 150",
+            "course_title": "Structure and Properties",
+            "active_count": 1,
+            "paused_count": 0,
+            "user_count": 1,
+            "last_checked_at": "2026-05-25T00:00:00Z",
+            "last_status": "Closed",
+            "last_seats_available": 0,
+            "tracks": [{
+                "id": "track-1",
+                "user_id": "user-1",
+                "enabled": True,
+                "last_status": "Closed",
+                "last_seats_available": 0,
+                "last_checked_at": "2026-05-25T00:00:00Z",
+                "last_notified_at": None,
+            }],
+        }]
+        with self.app.test_client() as client:
+            self._login(client)
+            with patch.object(admin, "list_rows_all", return_value=requests_rows), \
+                    patch.object(admin, "_course_tracking_groups", return_value=(groups, None)), \
+                    patch.object(admin, "_theme_preference", return_value=None), \
+                    patch.object(admin, "_pending_admin_request_count", return_value=1):
+                response = client.get("/admin/requests")
+
+        html = response.get_data(as_text=True)
+        self.assertLess(html.index("Course Tracking"), html.index("University Channel Requests"))
+        self.assertIn("CHEM 150", html)
+
     def test_admin_export_requires_post_and_csrf(self):
         export_payload = {"user": self.user_doc, "settings": self.settings_doc}
         with self.app.test_client() as client:
@@ -293,6 +381,102 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertEqual(payload["diagnostics"]["enabled_track_count"], 2)
         run_tracker.assert_called_once()
         log_action.assert_called_once()
+
+    def test_course_tracking_group_toggle_requires_csrf_and_updates_matching_rows(self):
+        tracks = [
+            {"$id": "track-1", "term": "Fall_2026", "subject": "CHEM", "catalog": "150", "crn": "1234", "enabled": True},
+            {"$id": "track-2", "term": "Fall_2026", "subject": "CHEM", "catalog": "150", "crn": "1234", "enabled": True},
+        ]
+        with self.app.test_client() as client:
+            self._login(client)
+            token = self._get_csrf_token(
+                client,
+                "/admin/requests",
+                [
+                    patch.object(admin, "list_rows_all", return_value=[]),
+                    patch.object(admin, "_course_tracking_groups", return_value=([], None)),
+                    patch.object(admin, "_theme_preference", return_value=None),
+                    patch.object(admin, "_pending_admin_request_count", return_value=0),
+                ],
+            )
+            with patch.object(admin, "list_rows_all", return_value=tracks), \
+                    patch.object(admin, "update_row_safe", side_effect=lambda table, row_id, data: {"$id": row_id, **data}) as update_row, \
+                    patch.object(admin, "_course_tracking_groups", return_value=([], None)), \
+                    patch.object(admin, "_log_admin_action"):
+                missing_token = client.post("/admin/course-tracking/groups/toggle", data={
+                    "term": "Fall_2026",
+                    "subject": "CHEM",
+                    "catalog": "150",
+                    "crn": "1234",
+                    "enabled": "false",
+                })
+                response = client.post("/admin/course-tracking/groups/toggle", data={
+                    "csrf_token": token,
+                    "term": "Fall_2026",
+                    "subject": "CHEM",
+                    "catalog": "150",
+                    "crn": "1234",
+                    "enabled": "false",
+                })
+
+        self.assertEqual(missing_token.status_code, 400)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual([call.args[1] for call in update_row.call_args_list], ["track-1", "track-2"])
+        for call in update_row.call_args_list:
+            self.assertEqual(call.args[2]["enabled"], False)
+
+    def test_course_tracking_track_toggle_updates_single_row(self):
+        track = {"$id": "track-1", "term": "Fall_2026", "subject": "CHEM", "catalog": "150", "crn": "1234", "enabled": True}
+        with self.app.test_client() as client:
+            self._login(client)
+            token = self._get_csrf_token(
+                client,
+                "/admin/requests",
+                [
+                    patch.object(admin, "list_rows_all", return_value=[]),
+                    patch.object(admin, "_course_tracking_groups", return_value=([], None)),
+                    patch.object(admin, "_theme_preference", return_value=None),
+                    patch.object(admin, "_pending_admin_request_count", return_value=0),
+                ],
+            )
+            with patch.object(admin, "get_row_safe", return_value=track), \
+                    patch.object(admin, "update_row_safe", side_effect=lambda table, row_id, data: {"$id": row_id, **track, **data}) as update_row, \
+                    patch.object(admin, "_log_admin_action"):
+                response = client.post(
+                    "/admin/course-tracking/tracks/track-1/toggle",
+                    data={"csrf_token": token, "enabled": "false"},
+                )
+
+        self.assertEqual(response.status_code, 200)
+        update_row.assert_called_once()
+        self.assertEqual(update_row.call_args.args[1], "track-1")
+        self.assertEqual(update_row.call_args.args[2]["enabled"], False)
+
+    def test_chem_150_diagnostic_is_non_mutating(self):
+        result = {"term": "Fall_2026", "subject": "CHEM", "sections": [{"course_code": "CHEM 150"}], "count": 1}
+        with self.app.test_client() as client:
+            self._login(client)
+            token = self._get_csrf_token(
+                client,
+                "/admin/requests",
+                [
+                    patch.object(admin, "list_rows_all", return_value=[]),
+                    patch.object(admin, "_course_tracking_groups", return_value=([], None)),
+                    patch.object(admin, "_theme_preference", return_value=None),
+                    patch.object(admin, "_pending_admin_request_count", return_value=0),
+                ],
+            )
+            with patch("services.atlas_client.fetch_live_subject_sections", return_value=result) as fetch_sections, \
+                    patch.object(admin, "create_row_safe") as create_row, \
+                    patch.object(admin, "update_row_safe") as update_row, \
+                    patch.object(admin, "_log_admin_action"):
+                response = client.post("/admin/course-tracking/test-chem-150", data={"csrf_token": token})
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json()["section_count"], 1)
+        fetch_sections.assert_called_once_with("Fall_2026", "CHEM", catalog="150")
+        create_row.assert_not_called()
+        update_row.assert_not_called()
 
 
 if __name__ == "__main__":

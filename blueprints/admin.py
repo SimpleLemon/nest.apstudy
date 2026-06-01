@@ -291,7 +291,7 @@ def _count_rows(table_id, queries):
             table_id,
             queries + [Query.limit(1)],
         )
-    except AppwriteException:
+    except Exception:
         logger.exception("Failed to count rows for %s", table_id)
         return None
 
@@ -300,7 +300,7 @@ def _count_rows(table_id, queries):
         return total
     try:
         return len(list_rows_all(table_id, queries))
-    except AppwriteException:
+    except Exception:
         logger.exception("Failed to fully count rows for %s", table_id)
         return None
 
@@ -700,6 +700,31 @@ def _redirect_detail(user_id, section, status=None, error=None):
 @admin_bp.route("/admin")
 @admin_required
 def admin_index():
+    error = None
+    metrics = {}
+    try:
+        metrics = _admin_home_metrics()
+    except AppwriteException:
+        logger.exception("Failed to load admin home metrics")
+        error = "Unable to load all admin metrics right now."
+
+    _log_admin_action("view_admin_index", "admin home")
+    return render_template(
+        "admin.html",
+        metrics=metrics,
+        error=error,
+        status=request.args.get("status"),
+        system_status=_system_status(),
+        theme_preference=_theme_preference(),
+        pending_request_count=_pending_admin_request_count(),
+        active_admin_page="home",
+        breadcrumbs=[("Admin", url_for("admin.admin_index")), ("Home", None)],
+    )
+
+
+@admin_bp.route("/admin/users")
+@admin_required
+def admin_users():
     query = (request.args.get("q") or "").strip()
     field = (request.args.get("field") or "").strip()
     error = None
@@ -717,17 +742,18 @@ def admin_index():
         users = []
         error = "Unable to load users right now."
 
-    _log_admin_action("view_admin_index", "admin dashboard", metadata={"query": query, "field": field})
+    _log_admin_action("view_admin_users", "admin user directory", metadata={"query": query, "field": field})
     return render_template(
-        "admin.html",
+        "admin_users.html",
         users=[_user_summary(user) for user in users],
         q=query,
         field=field,
         error=error,
         status=request.args.get("status"),
-        system_status=_system_status(),
         theme_preference=_theme_preference(),
         pending_request_count=_pending_admin_request_count(),
+        active_admin_page="users",
+        breadcrumbs=[("Admin", url_for("admin.admin_index")), ("User Directory", None)],
     )
 
 
@@ -768,7 +794,7 @@ def _format_bytes(value):
 def _storage_usage_summary():
     try:
         files = list_rows_all(COLLECTIONS["shared_files"])
-    except AppwriteException as exc:
+    except Exception as exc:
         logger.exception("Failed to load file storage summary")
         return {
             "bytes": 0,
@@ -788,7 +814,7 @@ def _storage_usage_summary():
     try:
         users = list_rows_all(COLLECTIONS["users"])
         avatar_count = sum(1 for user in users if user.get("avatar_file_id"))
-    except AppwriteException:
+    except Exception:
         logger.exception("Failed to count avatar storage rows")
         avatar_count = 0
     return {
@@ -874,13 +900,15 @@ def _course_tracking_groups():
             COLLECTIONS["course_seat_tracks"],
             [Query.order_desc("updated_at")],
         )
-    except AppwriteException:
+    except Exception:
         logger.exception("Failed to load course tracking rows")
         return [], "Unable to load course tracking."
 
     grouped = {}
     for track in tracks:
         key = _track_group_key(track)
+        if not key["term"] or not key["subject"] or not key["catalog"]:
+            continue
         group_id = _track_group_id(key)
         group = grouped.setdefault(group_id, {
             "id": group_id,
@@ -942,6 +970,115 @@ def admin_course_tracking_status():
     return jsonify(_course_tracking_diagnostics())
 
 
+@admin_bp.route("/admin/course-tracking/tracks")
+@admin_required
+def admin_course_tracking_tracks():
+    groups, error = _course_tracking_groups()
+    status_code = 500 if error else 200
+    return jsonify({
+        "groups": groups,
+        "count": sum(group.get("track_count", 0) for group in groups),
+        "group_count": len(groups),
+        "error": error,
+    }), status_code
+
+
+@admin_bp.route("/admin/course-tracking/groups/toggle", methods=["POST"])
+@admin_required
+def admin_course_tracking_group_toggle():
+    payload = request.get_json(silent=True) or request.form or {}
+    enabled = str(payload.get("enabled", "")).strip().lower() in {"1", "true", "yes", "on"}
+    term = str(payload.get("term") or "").strip()
+    subject = str(payload.get("subject") or "").strip().upper()
+    catalog = str(payload.get("catalog") or "").strip()
+    crn = str(payload.get("crn") or "").strip()
+    if not term or not subject or not catalog:
+        return jsonify({"error": "Missing course tracking group identifiers."}), 400
+
+    try:
+        tracks = list_rows_all(
+            COLLECTIONS["course_seat_tracks"],
+            [
+                Query.equal("term", [term]),
+                Query.equal("subject", [subject]),
+                Query.equal("catalog", [catalog]),
+                Query.equal("crn", [crn]),
+            ],
+        )
+        updated = [_toggle_track(track, enabled) for track in tracks]
+    except AppwriteException as exc:
+        logger.exception("Failed to update course tracking group")
+        return jsonify({"error": "Unable to update course tracking.", "message": _sanitize_admin_error(exc)}), 500
+
+    _log_admin_action(
+        "toggle_course_tracking",
+        f"group:{term}:{subject}:{catalog}:{crn}",
+        metadata={"enabled": enabled, "updated_count": len(updated), "scope": "group"},
+        color="green" if enabled else "yellow",
+    )
+    groups, _ = _course_tracking_groups()
+    return jsonify({"status": "ok", "updated_count": len(updated), "groups": groups})
+
+
+@admin_bp.route("/admin/course-tracking/tracks/<track_id>/toggle", methods=["POST"])
+@admin_required
+def admin_course_tracking_track_toggle(track_id):
+    payload = request.get_json(silent=True) or request.form or {}
+    enabled = str(payload.get("enabled", "")).strip().lower() in {"1", "true", "yes", "on"}
+    track = get_row_safe(COLLECTIONS["course_seat_tracks"], track_id, allow_missing=True)
+    if not track:
+        abort(404)
+
+    try:
+        updated = _toggle_track(track, enabled)
+    except AppwriteException as exc:
+        logger.exception("Failed to update course tracking row")
+        return jsonify({"error": "Unable to update course tracking.", "message": _sanitize_admin_error(exc)}), 500
+
+    _log_admin_action(
+        "toggle_course_tracking",
+        f"track:{track_id}",
+        metadata={"enabled": enabled, "scope": "track", "track_id": track_id},
+        color="green" if enabled else "yellow",
+    )
+    return jsonify({"status": "ok", "track": _serialize_admin_track(updated)})
+
+
+@admin_bp.route("/admin/course-tracking/test-chem-150", methods=["POST"])
+@admin_required
+def admin_course_tracking_test_chem_150():
+    from services.atlas_client import fetch_live_subject_sections
+
+    try:
+        result = fetch_live_subject_sections("Fall_2026", "CHEM", catalog="150")
+    except Exception as exc:
+        logger.exception("CHEM 150 tracking diagnostic failed")
+        return jsonify({
+            "status": "error",
+            "request": {"term": "Fall_2026", "subject": "CHEM", "catalog": "150"},
+            "error": _sanitize_admin_error(exc),
+        }), 500
+
+    _log_admin_action(
+        "test_chem_150_tracking",
+        "Fall_2026:CHEM:150",
+        metadata={
+            "term": "Fall_2026",
+            "subject": "CHEM",
+            "catalog": "150",
+            "section_count": len(result.get("sections") or []),
+            "has_error": "error" in result,
+        },
+        color="yellow" if "error" in result else "green",
+    )
+    return jsonify({
+        "status": "error" if "error" in result else "ok",
+        "request": {"term": "Fall_2026", "subject": "CHEM", "catalog": "150"},
+        "result": result,
+        "section_count": len(result.get("sections") or []),
+    }), 500 if "error" in result else 200
+
+
 @admin_bp.route("/admin/course-tracking-run-now", methods=["POST"])
 @admin_required
 def admin_course_tracking_run_now():
@@ -984,15 +1121,20 @@ def admin_requests():
     except AppwriteException:
         logger.exception("Failed to load admin requests")
         requests_rows = []
+    tracking_groups, tracking_error = _course_tracking_groups()
     _log_admin_action("view_admin_requests", "admin requests", metadata={"status_filter": status_filter})
     return render_template(
         "admin_requests.html",
         requests=requests_rows,
+        tracking_groups=tracking_groups,
+        tracking_error=tracking_error,
         status_filter=status_filter,
         status=request.args.get("notice"),
         error=request.args.get("error"),
         theme_preference=_theme_preference(),
         pending_request_count=_pending_admin_request_count(),
+        active_admin_page="requests",
+        breadcrumbs=[("Admin", url_for("admin.admin_index")), ("Requests", None)],
     )
 
 
@@ -1125,6 +1267,13 @@ def admin_detail(user_id):
         status=request.args.get("status"),
         error=request.args.get("error"),
         theme_preference=_theme_preference(),
+        pending_request_count=_pending_admin_request_count(),
+        active_admin_page="users",
+        breadcrumbs=[
+            ("Admin", url_for("admin.admin_index")),
+            ("User Directory", url_for("admin.admin_users")),
+            ((_user_summary(user_doc).get("name") or _row_id(user_doc) or "User"), None),
+        ],
     )
 
 
@@ -1381,4 +1530,4 @@ def delete_user(user_id):
     except AppwriteException:
         logger.exception("Failed to delete user row %s", user_id)
 
-    return redirect(url_for("admin.admin_index", status="user-deleted"))
+    return redirect(url_for("admin.admin_users", status="user-deleted"))
