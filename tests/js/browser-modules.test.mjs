@@ -210,15 +210,18 @@ test("courses page keeps Atlas APIs, filtering state, and schedule constants con
 
 test("files page keeps upload limits, modal elements, and share/delete endpoints wired", async () => {
     const source = await sourceFor("static/js/files.js");
+    const utilsSource = await sourceFor("static/js/files/utils.js");
+    const renderersSource = await sourceFor("static/js/files/renderers.js");
+    const combinedSource = `${source}\n${utilsSource}\n${renderersSource}`;
 
     assert.match(source, /const MAX_FILE_SIZE_BYTES = Number\(CONFIG\.maxFileSize\) \|\| \(50 \* 1024 \* 1024\)/);
     assert.match(source, /const MAX_UPLOAD_FILES = Number\(CONFIG\.maxUploadFiles\) \|\| 5/);
     assert.match(source, /allowedExpiryOptions/);
-    assert.match(source, /file-share-upload-modal/);
-    assert.match(source, /file-share-confirm-modal/);
-    assert.match(source, /file-share-share-modal/);
-    assert.match(source, /bulkDelete/);
-    assert.match(source, /copyShareButton/);
+    assert.match(combinedSource, /file-share-upload-modal/);
+    assert.match(combinedSource, /file-share-confirm-modal/);
+    assert.match(combinedSource, /file-share-share-modal/);
+    assert.match(combinedSource, /bulkDelete/);
+    assert.match(combinedSource, /copyShareButton/);
 });
 
 test("settings page keeps account, theme, calendar, and destructive endpoints centralized", async () => {
