@@ -38,7 +38,8 @@
     try {
       const payload = await postJson("/admin/course-tracking/test-chem-150", {});
       console.info("[Admin Course Tracking] CHEM 150 diagnostic completed", payload);
-      setNotice(`CHEM 150 diagnostic complete: ${payload.section_count || 0} section(s). Check the console for details.`);
+      const checked = payload.poll?.atlas_checks_attempted ?? 0;
+      setNotice(`CHEM 150 ping complete: ${checked} Atlas check(s), ${payload.notifications_sent || 0} notification(s). Check the console for details.`);
     } catch (error) {
       console.error("[Admin Course Tracking] CHEM 150 diagnostic failed", error);
       setNotice(error.message || "CHEM 150 diagnostic failed.", true);

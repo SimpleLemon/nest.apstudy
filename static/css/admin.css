@@ -38,21 +38,38 @@ body.admin-page {
 .admin-sidebar-brand {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     padding: 18px 16px;
     border-bottom: 1px solid var(--color-shell-border, var(--admin-border));
 }
 
+.admin-sidebar-back,
 .admin-sidebar-logo {
     display: grid;
     place-items: center;
     width: 34px;
     height: 34px;
     border-radius: 8px;
+    text-decoration: none;
+}
+
+.admin-sidebar-back {
+    background: transparent;
+    border: 1px solid var(--color-shell-border, var(--admin-border));
+    color: var(--color-shell-text-secondary, var(--admin-muted));
+    transition: background 140ms ease, color 140ms ease, border-color 140ms ease;
+}
+
+.admin-sidebar-back:hover {
+    background: var(--color-shell-hover-bg, var(--admin-accent-soft));
+    border-color: color-mix(in srgb, var(--admin-accent) 35%, var(--admin-border));
+    color: var(--admin-accent);
+}
+
+.admin-sidebar-logo {
     background: var(--admin-accent);
     color: var(--color-on-primary, #ffffff);
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 700;
+    font-size: 21px;
 }
 
 .admin-sidebar-name {
@@ -175,7 +192,7 @@ body.admin-page {
     max-width: 520px;
 }
 
-.admin-header-actions {
+.admin-action-row {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
@@ -734,7 +751,7 @@ body.admin-page {
         gap: 18px;
     }
 
-    .admin-header-actions,
+    .admin-action-row,
     .admin-search {
         width: 100%;
         flex-direction: column;

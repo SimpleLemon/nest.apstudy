@@ -24,9 +24,6 @@
                 <h1 class="admin-title">Requests{% if pending_request_count %} ({{ pending_request_count }} pending){% endif %}</h1>
                 <p class="admin-subtitle">Review course tracking diagnostics and university channel approvals.</p>
             </div>
-            <div class="admin-header-actions">
-                <a class="admin-button admin-button--ghost" href="{{ url_for('admin.admin_users') }}">User Directory</a>
-            </div>
         </header>
 
         {% set status_map = {
@@ -78,7 +75,7 @@
                                         <span class="admin-field-label">Status</span>
                                         <span class="admin-field-value">{{ group.last_status or "--" }} / {{ group.last_seats_available if group.last_seats_available is not none else "--" }} seats</span>
                                     </div>
-                                    <div class="admin-header-actions">
+                                    <div class="admin-action-row">
                                         <button class="admin-button admin-button--ghost" type="button" data-group-toggle="true">Resume group</button>
                                         <button class="admin-button admin-button--ghost" type="button" data-group-toggle="false">Pause group</button>
                                     </div>
@@ -166,7 +163,7 @@
                                 <td>{{ item.get('resolved_at') or '--' }}</td>
                                 <td>
                                     {% if item.get('status') == 'pending' %}
-                                        <div class="admin-header-actions">
+                                        <div class="admin-action-row">
                                             <form method="post" action="{{ url_for('admin.approve_admin_request', request_id=request_id) }}">
                                                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                                                 <button class="admin-button" type="submit">Approve</button>

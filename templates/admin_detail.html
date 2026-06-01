@@ -24,13 +24,6 @@
                 <h1 class="admin-title">{{ user.name or "User" }}</h1>
                 <p class="admin-subtitle">Appwrite ID: {{ user.id }}</p>
             </div>
-            <div class="admin-header-actions">
-                <a class="admin-button admin-button--ghost" href="{{ url_for('admin.admin_users') }}">All users</a>
-                <form method="post" action="{{ url_for('admin.admin_detail_export', user_id=user.id) }}">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                    <button class="admin-button" type="submit">Export JSON</button>
-                </form>
-            </div>
         </header>
 
         {% set status_map = {
@@ -311,7 +304,7 @@
                                         <td>{{ file.get('expires_at') or '--' }}</td>
                                         <td>{{ file.get('downloaded_count') or 0 }}</td>
                                         <td>
-                                            <div class="admin-header-actions">
+                                            <div class="admin-action-row">
                                                 <a class="admin-button admin-button--ghost" href="{{ url_for('admin.download_shared_file', user_id=user.id, file_id=file_id) }}">Download</a>
                                                 <form method="post" action="{{ url_for('admin.delete_shared_file', user_id=user.id, file_id=file_id) }}">
                                                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />

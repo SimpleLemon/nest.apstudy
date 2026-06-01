@@ -132,6 +132,43 @@ class CourseTrackingTests(unittest.TestCase):
         self.assertEqual(summary["row_updates"], 2)
         self.assertEqual(summary["email_notifications"], 2)
 
+    def test_manual_filter_only_pings_matching_course_tracks(self):
+        tracks = [
+            self._track("track-1", "user-1"),
+            {**self._track("track-2", "user-2"), "subject": "CHEM", "catalog": "150", "course_code": "CHEM 150"},
+        ]
+        section = {
+            **self._open_section(),
+            "subject": "CHEM",
+            "catalog_number": "150",
+            "course_code": "CHEM 150",
+            "course_title": "Structure and Properties",
+        }
+
+        with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
+                patch.object(course_tracking, "list_rows_all", return_value=tracks), \
+                patch.object(course_tracking, "fetch_live_section_status", return_value={"section": section}) as fetch_status, \
+                patch.object(course_tracking, "_send_open_email"), \
+                patch.object(course_tracking, "update_row_safe", side_effect=lambda table, row_id, data: {"$id": row_id, **data}) as update_row, \
+                patch.object(course_tracking, "emit_course_track_event") as emit_event, \
+                patch.object(course_tracking, "_now_utc", return_value=datetime(2026, 5, 29, tzinfo=timezone.utc)):
+            course_tracking.check_course_seat_tracks(
+                term="Fall_2026",
+                subject="CHEM",
+                catalog="150",
+                poll_source="manual_admin_test",
+            )
+
+        fetch_status.assert_called_once_with("Fall_2026", "CHEM", "150", crn="1234")
+        update_row.assert_called_once()
+        self.assertEqual(update_row.call_args.args[1], "track-2")
+        completed_events = [
+            call for call in emit_event.call_args_list
+            if call.args[0] == "Automated Course Track Poll Completed"
+        ]
+        self.assertEqual(completed_events[0].kwargs["metadata"]["poll_source"], "manual_admin_test")
+        self.assertEqual(completed_events[0].kwargs["metadata"]["track_count"], 1)
+
     def test_duplicate_track_failure_logs_once_and_updates_each_row(self):
         tracks = [self._track("track-1", "user-1"), self._track("track-2", "user-2")]
 

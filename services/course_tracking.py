@@ -154,12 +154,32 @@ def get_last_course_tracking_poll():
     return dict(_last_poll_metadata or {})
 
 
-def check_course_seat_tracks():
+def _track_matches_filter(track, *, term=None, subject=None, catalog=None):
+    if term and str(track.get("term") or "") != str(term):
+        return False
+    if subject and str(track.get("subject") or "").upper() != str(subject).upper():
+        return False
+    if catalog and str(track.get("catalog") or "").upper() != str(catalog).upper():
+        return False
+    return True
+
+
+def check_course_seat_tracks(*, term=None, subject=None, catalog=None, poll_source="automated"):
     """Poll enabled course seat trackers and notify users when seats open."""
     table_id = COLLECTIONS.get("course_seat_tracks")
+    filter_metadata = {
+        key: value
+        for key, value in {
+            "term": term,
+            "subject": str(subject or "").upper() if subject else None,
+            "catalog": str(catalog or "").upper() if catalog else None,
+            "poll_source": poll_source,
+        }.items()
+        if value
+    }
     if not table_id:
         logger.info("Course tracking skipped: collection mapping missing.")
-        metadata = {"reason": "collection_mapping_missing"}
+        metadata = {"reason": "collection_mapping_missing", **filter_metadata}
         emitted = _emit_poll_event(
             "Automated Course Track Poll Skipped",
             metadata=metadata,
@@ -172,7 +192,7 @@ def check_course_seat_tracks():
         tracks = list_rows_all(table_id, [Query.equal("enabled", [True])])
     except AppwriteException as exc:
         logger.exception("Failed to list course seat tracks")
-        metadata = {"error": _sanitize_track_error(exc)}
+        metadata = {"error": _sanitize_track_error(exc), **filter_metadata}
         emitted = _emit_poll_event(
             "Automated Course Track Poll Failed",
             metadata=metadata,
@@ -181,11 +201,17 @@ def check_course_seat_tracks():
         _record_last_poll("Automated Course Track Poll Failed", metadata, discord_emit_returned=emitted)
         return 0
 
+    if term or subject or catalog:
+        tracks = [
+            track for track in tracks
+            if _track_matches_filter(track, term=term, subject=subject, catalog=catalog)
+        ]
+
     now = _now_utc()
     notified_count = 0
     if not tracks:
         logger.info("Course tracking skipped: no enabled course seat tracks.")
-        metadata = {"reason": "no_enabled_tracks", "enabled_track_count": 0, "track_count": 0}
+        metadata = {"reason": "no_enabled_tracks", "enabled_track_count": 0, "track_count": 0, **filter_metadata}
         emitted = _emit_poll_event(
             "Automated Course Track Poll Skipped",
             metadata=metadata,
@@ -199,6 +225,7 @@ def check_course_seat_tracks():
         grouped_tracks.setdefault(_track_group_key(track), []).append(track)
 
     poll_metadata = {
+        **filter_metadata,
         "enabled_track_count": len(tracks),
         "track_count": len(tracks),
         "section_group_count": len(grouped_tracks),

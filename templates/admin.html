@@ -24,12 +24,6 @@
                 <h1 class="admin-title">Home</h1>
                 <p class="admin-subtitle">Monitor Nest health, user totals, storage footprint, and course-tracking activity.</p>
             </div>
-            <div class="admin-header-actions">
-                <a class="admin-button admin-button--ghost" href="{{ url_for('admin.admin_users') }}">User Directory</a>
-                <a class="admin-button {% if pending_request_count %}admin-button--danger{% else %}admin-button--ghost{% endif %}" href="{{ url_for('admin.admin_requests') }}">
-                    Requests{% if pending_request_count %} ({{ pending_request_count }}){% endif %}
-                </a>
-            </div>
         </header>
 
         {% if error %}

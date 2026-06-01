@@ -114,11 +114,12 @@ class AdminSecurityTestCase(unittest.TestCase):
             self._login(client)
             with patch.object(admin, "get_row_safe", return_value=self.user_doc), \
                     patch.object(admin, "first_row", return_value=self.settings_doc), \
-                    patch.object(admin, "_theme_preference", return_value=None):
+                    patch.object(admin, "_theme_preference", return_value=None), \
+                    patch.object(admin, "_pending_admin_request_count", return_value=0):
                 response = client.get("/admin/user-1?section=settings")
 
         html = response.get_data(as_text=True)
-        self.assertGreaterEqual(html.count('name="csrf_token"'), 2)
+        self.assertGreaterEqual(html.count('name="csrf_token"'), 1)
 
     def test_admin_requests_renders_csrf_tokens(self):
         requests_rows = [{
@@ -453,7 +454,6 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertEqual(update_row.call_args.args[2]["enabled"], False)
 
     def test_chem_150_diagnostic_is_non_mutating(self):
-        result = {"term": "Fall_2026", "subject": "CHEM", "sections": [{"course_code": "CHEM 150"}], "count": 1}
         with self.app.test_client() as client:
             self._login(client)
             token = self._get_csrf_token(
@@ -466,15 +466,22 @@ class AdminSecurityTestCase(unittest.TestCase):
                     patch.object(admin, "_pending_admin_request_count", return_value=0),
                 ],
             )
-            with patch("services.atlas_client.fetch_live_subject_sections", return_value=result) as fetch_sections, \
+            with patch("services.course_tracking.check_course_seat_tracks", return_value=0) as check_tracks, \
+                    patch("services.course_tracking.get_last_course_tracking_poll", return_value={"poll_source": "manual_admin_test", "track_count": 1}) as last_poll, \
                     patch.object(admin, "create_row_safe") as create_row, \
                     patch.object(admin, "update_row_safe") as update_row, \
                     patch.object(admin, "_log_admin_action"):
                 response = client.post("/admin/course-tracking/test-chem-150", data={"csrf_token": token})
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.get_json()["section_count"], 1)
-        fetch_sections.assert_called_once_with("Fall_2026", "CHEM", catalog="150")
+        self.assertEqual(response.get_json()["poll"]["track_count"], 1)
+        check_tracks.assert_called_once_with(
+            term="Fall_2026",
+            subject="CHEM",
+            catalog="150",
+            poll_source="manual_admin_test",
+        )
+        last_poll.assert_called_once()
         create_row.assert_not_called()
         update_row.assert_not_called()
 

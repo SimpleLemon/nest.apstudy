@@ -24,11 +24,6 @@
                 <h1 class="admin-title">User Directory</h1>
                 <p class="admin-subtitle">Search by exact Appwrite ID, email, or username. Select a user to view full details.</p>
             </div>
-            <div class="admin-header-actions">
-                <a class="admin-button {% if pending_request_count %}admin-button--danger{% else %}admin-button--ghost{% endif %}" href="{{ url_for('admin.admin_requests') }}">
-                    Requests{% if pending_request_count %} ({{ pending_request_count }}){% endif %}
-                </a>
-            </div>
         </header>
 
         {% set status_map = {"user-deleted": "User deleted."} %}

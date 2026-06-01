@@ -1047,10 +1047,15 @@ def admin_course_tracking_track_toggle(track_id):
 @admin_bp.route("/admin/course-tracking/test-chem-150", methods=["POST"])
 @admin_required
 def admin_course_tracking_test_chem_150():
-    from services.atlas_client import fetch_live_subject_sections
+    from services.course_tracking import check_course_seat_tracks, get_last_course_tracking_poll
 
     try:
-        result = fetch_live_subject_sections("Fall_2026", "CHEM", catalog="150")
+        notified_count = check_course_seat_tracks(
+            term="Fall_2026",
+            subject="CHEM",
+            catalog="150",
+            poll_source="manual_admin_test",
+        )
     except Exception as exc:
         logger.exception("CHEM 150 tracking diagnostic failed")
         return jsonify({
@@ -1059,24 +1064,13 @@ def admin_course_tracking_test_chem_150():
             "error": _sanitize_admin_error(exc),
         }), 500
 
-    _log_admin_action(
-        "test_chem_150_tracking",
-        "Fall_2026:CHEM:150",
-        metadata={
-            "term": "Fall_2026",
-            "subject": "CHEM",
-            "catalog": "150",
-            "section_count": len(result.get("sections") or []),
-            "has_error": "error" in result,
-        },
-        color="yellow" if "error" in result else "green",
-    )
+    poll = get_last_course_tracking_poll()
     return jsonify({
-        "status": "error" if "error" in result else "ok",
+        "status": "ok",
         "request": {"term": "Fall_2026", "subject": "CHEM", "catalog": "150"},
-        "result": result,
-        "section_count": len(result.get("sections") or []),
-    }), 500 if "error" in result else 200
+        "notifications_sent": notified_count,
+        "poll": poll,
+    })
 
 
 @admin_bp.route("/admin/course-tracking-run-now", methods=["POST"])
