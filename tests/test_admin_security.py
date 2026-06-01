@@ -100,6 +100,15 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertEqual(app.config["PREFERRED_URL_SCHEME"], "https")
         self.assertIsInstance(app.wsgi_app, ProxyFix)
 
+    def test_app_factory_initializes_discord_audit_before_scheduler(self):
+        calls = []
+
+        with patch("services.discord_audit.init_discord_audit", side_effect=lambda app: calls.append("discord")), \
+                patch("services.scheduler.init_scheduler", side_effect=lambda app: calls.append("scheduler")):
+            create_app()
+
+        self.assertEqual(calls, ["discord", "scheduler"])
+
     def test_admin_detail_renders_csrf_tokens(self):
         with self.app.test_client() as client:
             self._login(client)
@@ -211,6 +220,79 @@ class AdminSecurityTestCase(unittest.TestCase):
                 response = client.post("/admin/requests/request-1/approve", data={})
 
         self.assertEqual(response.status_code, 400)
+
+    def test_course_tracking_status_reports_secret_safe_diagnostics(self):
+        scheduler_payload = {
+            "scheduler_enabled": True,
+            "scheduler_initialized": True,
+            "scheduler_running": True,
+            "jobs": [{"id": "check_course_seat_tracks", "name": "Check tracked Emory course seats every 5 min"}],
+        }
+        audit_payload = {
+            "audit_enabled": True,
+            "bot_token_present": True,
+            "course_tracks_channel_present": True,
+            "server_logs_channel_present": True,
+            "service_initialized": True,
+            "sender_thread_alive": True,
+            "queue_length": 0,
+            "fallback_path": "/tmp/discord_audit_fallback.jsonl",
+            "fallback_line_count": 0,
+        }
+
+        with self.app.test_client() as client:
+            self._login(client)
+            with patch("services.scheduler.scheduler_status", return_value=scheduler_payload), \
+                    patch.object(admin, "discord_audit_status", return_value=audit_payload), \
+                    patch("services.course_tracking.get_last_course_tracking_poll", return_value={"atlas_checks_attempted": 1}), \
+                    patch.object(admin, "list_rows_all", return_value=[{"$id": "track-1"}]):
+                response = client.get("/admin/course-tracking-status")
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.get_json()
+        self.assertTrue(payload["scheduler_running"])
+        self.assertTrue(payload["course_tracking_job_registered"])
+        self.assertEqual(payload["enabled_track_count"], 1)
+        self.assertTrue(payload["bot_token_present"])
+        self.assertNotIn("DISCORD_BOT_TOKEN", payload)
+        self.assertNotIn("token-secret", response.get_data(as_text=True))
+
+    def test_course_tracking_run_now_calls_tracker_and_returns_diagnostics(self):
+        diagnostics = {
+            "scheduler_enabled": True,
+            "scheduler_running": True,
+            "jobs": [{"id": "check_course_seat_tracks"}],
+            "audit_enabled": True,
+            "bot_token_present": True,
+            "course_tracks_channel_present": True,
+            "enabled_track_count": 2,
+            "last_course_tracking_poll": {"atlas_checks_attempted": 2},
+            "course_tracking_job_registered": True,
+        }
+
+        with self.app.test_client() as client:
+            self._login(client)
+            token = self._get_csrf_token(
+                client,
+                "/admin/user-1?section=settings",
+                [
+                    patch.object(admin, "get_row_safe", return_value=self.user_doc),
+                    patch.object(admin, "first_row", return_value=self.settings_doc),
+                    patch.object(admin, "_theme_preference", return_value=None),
+                ],
+            )
+            with patch("services.course_tracking.check_course_seat_tracks", return_value=3) as run_tracker, \
+                    patch.object(admin, "_course_tracking_diagnostics", return_value=diagnostics), \
+                    patch.object(admin, "_log_admin_action") as log_action:
+                response = client.post("/admin/course-tracking-run-now", data={"csrf_token": token})
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.get_json()
+        self.assertEqual(payload["status"], "ok")
+        self.assertEqual(payload["notifications_sent"], 3)
+        self.assertEqual(payload["diagnostics"]["enabled_track_count"], 2)
+        run_tracker.assert_called_once()
+        log_action.assert_called_once()
 
 
 if __name__ == "__main__":

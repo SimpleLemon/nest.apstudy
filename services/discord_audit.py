@@ -63,6 +63,17 @@ def _bot_token():
     return (os.environ.get("DISCORD_BOT_TOKEN") or "").strip()
 
 
+def _fallback_line_count(path):
+    if not path or not os.path.exists(path):
+        return 0
+    try:
+        with open(path, "r", encoding="utf-8") as handle:
+            return sum(1 for line in handle if line.strip())
+    except OSError:
+        logger.exception("Failed to count Discord audit fallback events")
+        return None
+
+
 def _truncate(value, limit=MAX_FIELD_CHARS):
     text = str(value or "")
     if len(text) <= limit:
@@ -556,6 +567,29 @@ def get_audit_service():
             fallback_path = os.path.join(os.getcwd(), "instance", "discord_audit_fallback.jsonl")
         _service = DiscordAuditService(fallback_path=fallback_path)
     return _service
+
+
+def discord_audit_status():
+    fallback_path = os.environ.get("DISCORD_AUDIT_FALLBACK_PATH")
+    if not fallback_path:
+        fallback_path = (
+            _service.fallback_path
+            if _service and _service.fallback_path
+            else os.path.join(os.getcwd(), "instance", "discord_audit_fallback.jsonl")
+        )
+    thread_alive = bool(_service and _service.thread and _service.thread.is_alive())
+    queue_length = len(_service.queue) if _service else 0
+    return {
+        "audit_enabled": os.environ.get("DISCORD_AUDIT_ENABLED", "1") != "0",
+        "bot_token_present": bool(_bot_token()),
+        "course_tracks_channel_present": bool(_env_channel_id("course_tracks")),
+        "server_logs_channel_present": bool(_env_channel_id("server_logs")),
+        "service_initialized": _service is not None,
+        "sender_thread_alive": thread_alive,
+        "queue_length": queue_length,
+        "fallback_path": fallback_path,
+        "fallback_line_count": _fallback_line_count(fallback_path),
+    }
 
 
 def emit_audit_event(event):

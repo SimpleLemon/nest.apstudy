@@ -2,6 +2,7 @@ import io
 import logging
 import os
 import platform
+import re
 import secrets
 from functools import wraps
 from datetime import datetime, timezone
@@ -28,7 +29,7 @@ from extensions import csrf
 from blueprints.settings import _settings_defaults
 from blueprints.chat_api import create_university_channel, emit_chat_event
 from services.chat_presence import sync_chat_presence_labels_for_school
-from services.discord_audit import emit_admin_event, format_actor, format_user_target
+from services.discord_audit import discord_audit_status, emit_admin_event, format_actor, format_user_target
 
 try:
     import psutil
@@ -39,6 +40,7 @@ except ImportError:  # pragma: no cover - optional dependency for monitoring
 admin_bp = Blueprint("admin", __name__)
 logger = logging.getLogger(__name__)
 admin_actions_logger = logging.getLogger("admin_actions")
+SECRET_TEXT_RE = re.compile(r"((?:[?&]|\b)(?:secret|key|token|password)=)[^&\s]+", re.IGNORECASE)
 
 ALLOWED_SECTIONS = {
     "overview",
@@ -107,6 +109,11 @@ def _system_status():
     return status
 
 
+def _sanitize_admin_error(error):
+    text = SECRET_TEXT_RE.sub(r"\1[redacted]", str(error or ""))
+    return " ".join(text.split())[:500]
+
+
 def _require_admin():
     if not current_user.is_authenticated:
         return redirect(url_for("dashboard.dashboard"))
@@ -153,6 +160,7 @@ def _admin_event_title(action):
         "delete_user": "Admin Deleted User",
         "approve_admin_request": "Admin Approved Request",
         "deny_admin_request": "Admin Denied Request",
+        "manual_course_tracking_run": "Admin Ran Course Tracking Diagnostics",
     }
     return labels.get(action, "Admin Action")
 
@@ -724,6 +732,70 @@ def admin_index():
 @admin_required
 def admin_system_status():
     return jsonify(_system_status())
+
+
+def _enabled_course_track_count():
+    try:
+        return len(list_rows_all(
+            COLLECTIONS["course_seat_tracks"],
+            [Query.equal("enabled", [True])],
+        )), None
+    except AppwriteException as exc:
+        logger.exception("Failed to count enabled course seat tracks")
+        return None, _sanitize_admin_error(exc)
+
+
+def _course_tracking_diagnostics():
+    from services.course_tracking import get_last_course_tracking_poll
+    from services.scheduler import scheduler_status
+
+    enabled_count, enabled_error = _enabled_course_track_count()
+    payload = {
+        **scheduler_status(),
+        **discord_audit_status(),
+        "enabled_track_count": enabled_count,
+        "enabled_track_count_error": enabled_error,
+        "last_course_tracking_poll": get_last_course_tracking_poll(),
+    }
+    payload["course_tracking_job_registered"] = any(
+        job.get("id") == "check_course_seat_tracks"
+        for job in payload.get("jobs", [])
+    )
+    return payload
+
+
+@admin_bp.route("/admin/course-tracking-status")
+@admin_required
+def admin_course_tracking_status():
+    return jsonify(_course_tracking_diagnostics())
+
+
+@admin_bp.route("/admin/course-tracking-run-now", methods=["POST"])
+@admin_required
+def admin_course_tracking_run_now():
+    from services.course_tracking import check_course_seat_tracks
+
+    try:
+        notified_count = check_course_seat_tracks()
+    except Exception as exc:
+        logger.exception("Manual course tracking run failed")
+        return jsonify({
+            "error": "manual_course_tracking_run_failed",
+            "message": _sanitize_admin_error(exc),
+            "diagnostics": _course_tracking_diagnostics(),
+        }), 500
+
+    _log_admin_action(
+        "manual_course_tracking_run",
+        "course_tracking",
+        metadata={"notifications_sent": notified_count},
+        color="yellow",
+    )
+    return jsonify({
+        "status": "ok",
+        "notifications_sent": notified_count,
+        "diagnostics": _course_tracking_diagnostics(),
+    })
 
 
 @admin_bp.route("/admin/requests")

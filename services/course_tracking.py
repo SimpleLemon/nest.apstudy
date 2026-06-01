@@ -17,6 +17,7 @@ from services.discord_audit import emit_course_track_event
 logger = logging.getLogger(__name__)
 NOTIFICATION_COOLDOWN = timedelta(hours=1)
 SECRET_TEXT_RE = re.compile(r"((?:[?&]|\b)(?:secret|key|token|password)=)[^&\s]+", re.IGNORECASE)
+_last_poll_metadata = None
 
 
 def _now_utc():
@@ -126,7 +127,7 @@ def _sanitize_track_error(error):
 
 
 def _emit_poll_event(title, *, metadata, color="gray"):
-    emit_course_track_event(
+    return emit_course_track_event(
         title,
         actor="System",
         target="Course seat tracking poll",
@@ -138,38 +139,59 @@ def _emit_poll_event(title, *, metadata, color="gray"):
     )
 
 
+def _record_last_poll(title, metadata, *, discord_emit_returned=None):
+    global _last_poll_metadata
+    snapshot = dict(metadata or {})
+    if discord_emit_returned is not None:
+        snapshot["discord_emit_returned"] = bool(discord_emit_returned)
+    snapshot["event_title"] = title
+    snapshot["recorded_at"] = format_datetime(_now_utc())
+    _last_poll_metadata = snapshot
+    return snapshot
+
+
+def get_last_course_tracking_poll():
+    return dict(_last_poll_metadata or {})
+
+
 def check_course_seat_tracks():
     """Poll enabled course seat trackers and notify users when seats open."""
     table_id = COLLECTIONS.get("course_seat_tracks")
     if not table_id:
         logger.info("Course tracking skipped: collection mapping missing.")
-        _emit_poll_event(
+        metadata = {"reason": "collection_mapping_missing"}
+        emitted = _emit_poll_event(
             "Automated Course Track Poll Skipped",
-            metadata={"reason": "collection_mapping_missing"},
+            metadata=metadata,
             color="yellow",
         )
+        _record_last_poll("Automated Course Track Poll Skipped", metadata, discord_emit_returned=emitted)
         return 0
 
     try:
         tracks = list_rows_all(table_id, [Query.equal("enabled", [True])])
     except AppwriteException as exc:
         logger.exception("Failed to list course seat tracks")
-        _emit_poll_event(
+        metadata = {"error": _sanitize_track_error(exc)}
+        emitted = _emit_poll_event(
             "Automated Course Track Poll Failed",
-            metadata={"error": _sanitize_track_error(exc)},
+            metadata=metadata,
             color="red",
         )
+        _record_last_poll("Automated Course Track Poll Failed", metadata, discord_emit_returned=emitted)
         return 0
 
     now = _now_utc()
     notified_count = 0
     if not tracks:
         logger.info("Course tracking skipped: no enabled course seat tracks.")
-        _emit_poll_event(
+        metadata = {"reason": "no_enabled_tracks", "enabled_track_count": 0, "track_count": 0}
+        emitted = _emit_poll_event(
             "Automated Course Track Poll Skipped",
-            metadata={"reason": "no_enabled_tracks", "track_count": 0},
+            metadata=metadata,
             color="gray",
         )
+        _record_last_poll("Automated Course Track Poll Skipped", metadata, discord_emit_returned=emitted)
         return 0
 
     grouped_tracks = {}
@@ -177,6 +199,7 @@ def check_course_seat_tracks():
         grouped_tracks.setdefault(_track_group_key(track), []).append(track)
 
     poll_metadata = {
+        "enabled_track_count": len(tracks),
         "track_count": len(tracks),
         "section_group_count": len(grouped_tracks),
         "atlas_checks_attempted": 0,
@@ -290,8 +313,19 @@ def check_course_seat_tracks():
                 logger.exception("Failed to update course track: %s", row_id)
                 continue
 
-    _emit_poll_event(
-        "Automated Course Track Poll Completed",
+    if poll_metadata["enabled_track_count"] and not poll_metadata["atlas_checks_attempted"]:
+        logger.warning("Course tracking found enabled tracks but made no Atlas checks.")
+        emit_course_track_event(
+            "Automated Course Track Poll Diagnostic",
+            actor="System",
+            target="Course seat tracking poll",
+            metadata={**poll_metadata, "reason": "enabled_tracks_without_atlas_checks"},
+            color="yellow",
+        )
+
+    title = "Automated Course Track Poll Completed"
+    emitted = _emit_poll_event(
+        title,
         metadata=poll_metadata,
         color=(
             "yellow"
@@ -301,4 +335,5 @@ def check_course_seat_tracks():
             else "gray"
         ),
     )
+    _record_last_poll(title, poll_metadata, discord_emit_returned=emitted)
     return notified_count

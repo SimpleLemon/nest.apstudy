@@ -100,10 +100,10 @@ def create_app():
 
         cleanup_expired_files()
 
-    from services.scheduler import init_scheduler
-    init_scheduler(app)
     from services.discord_audit import init_discord_audit
     init_discord_audit(app)
+    from services.scheduler import init_scheduler
+    init_scheduler(app)
 
     return app
 

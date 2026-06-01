@@ -233,6 +233,32 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
         self.assertTrue(service.pause_warning_pending)
         self.assertGreater(service.pause_until, discord_audit.time.monotonic())
 
+    def test_discord_audit_status_reports_queue_fallback_and_thread_state(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            fallback_path = os.path.join(temp_dir, "discord_audit_fallback.jsonl")
+            with open(fallback_path, "w", encoding="utf-8") as handle:
+                handle.write(json.dumps({"event": {"title": "Stored"}}))
+                handle.write("\n")
+
+            service = DiscordAuditService(fallback_path=fallback_path, token_getter=lambda: "token")
+            service.queue.append(_QueuedAuditEvent(
+                event=DiscordAuditEvent(channel="admin", title="Queued", actor="A", target="T")
+            ))
+
+            with patch.object(discord_audit, "_service", service), \
+                    patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "token"}, clear=False):
+                status = discord_audit.discord_audit_status()
+
+        self.assertTrue(status["audit_enabled"])
+        self.assertTrue(status["bot_token_present"])
+        self.assertTrue(status["course_tracks_channel_present"])
+        self.assertTrue(status["server_logs_channel_present"])
+        self.assertTrue(status["service_initialized"])
+        self.assertFalse(status["sender_thread_alive"])
+        self.assertEqual(status["queue_length"], 1)
+        self.assertEqual(status["fallback_line_count"], 1)
+        self.assertNotIn("token-secret", json.dumps(status).lower())
+
 
 class GitHubWebhookTestCase(unittest.TestCase):
     def setUp(self):

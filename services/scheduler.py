@@ -39,6 +39,48 @@ logger = logging.getLogger(__name__)
 _scheduler = None
 
 
+def _emit_scheduler_event(title, metadata=None, color="gray"):
+    try:
+        from services.discord_audit import emit_server_log_event
+
+        return emit_server_log_event(
+            title,
+            actor="System",
+            target="Background scheduler",
+            metadata=metadata or {},
+            color=color,
+        )
+    except Exception:
+        logger.exception("Failed to emit scheduler diagnostic event")
+        return False
+
+
+def scheduler_status():
+    jobs = []
+    if _scheduler is not None:
+        try:
+            jobs = [
+                {
+                    "id": getattr(job, "id", ""),
+                    "name": getattr(job, "name", ""),
+                    "next_run_time": (
+                        format_datetime(getattr(job, "next_run_time", None))
+                        if getattr(job, "next_run_time", None)
+                        else None
+                    ),
+                }
+                for job in _scheduler.get_jobs()
+            ]
+        except Exception:
+            logger.exception("Failed to read scheduler jobs")
+    return {
+        "scheduler_enabled": os.environ.get("SCHEDULER_ENABLED") == "1",
+        "scheduler_initialized": _scheduler is not None,
+        "scheduler_running": bool(_scheduler and _scheduler.running),
+        "jobs": jobs,
+    }
+
+
 def _configured_feed_urls(settings):
     """Return all configured calendar URLs from user settings."""
     urls = []
@@ -164,6 +206,11 @@ def _check_course_seat_tracks(app):
             logger.info("Course seat tracking: %s notification(s) sent.", notified_count)
         except Exception:
             logger.exception("Course seat tracking failed")
+            _emit_scheduler_event(
+                "Course Seat Tracking Scheduler Failed",
+                metadata={"job_id": "check_course_seat_tracks"},
+                color="red",
+            )
 
 
 def _sync_discord_chat(app):
@@ -199,6 +246,11 @@ def init_scheduler(app):
         logger.info(
             "Scheduler disabled (SCHEDULER_ENABLED != '1'). "
             "Feed refresh will only run on manual trigger."
+        )
+        _emit_scheduler_event(
+            "Scheduler Disabled",
+            metadata={"scheduler_enabled": False, "SCHEDULER_ENABLED": os.environ.get("SCHEDULER_ENABLED", "")},
+            color="yellow",
         )
         return
 
@@ -245,6 +297,15 @@ def init_scheduler(app):
     _scheduler.start()
     logger.info(
         f"Scheduler started. Feed refresh interval: {default_interval} min."
+    )
+    _emit_scheduler_event(
+        "Scheduler Started",
+        metadata={
+            "scheduler_enabled": True,
+            "feed_refresh_interval_minutes": default_interval,
+            "job_ids": ", ".join(job["id"] for job in scheduler_status()["jobs"]),
+        },
+        color="green",
     )
 
 
