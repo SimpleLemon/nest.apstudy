@@ -176,10 +176,9 @@ class DiscordAuditEvent:
                 {"name": "Actor", "value": _truncate(self.actor), "inline": True},
                 {"name": "Target", "value": _truncate(self.target), "inline": True},
                 {"name": "Metadata", "value": _compact_metadata(self.metadata), "inline": True},
-                {"name": "Event ID", "value": self.event_id, "inline": True},
             ],
             "footer": {
-                "text": f"{self.event_timestamp} | {self.event_id}"
+                "text": self.event_timestamp
             },
         }
 

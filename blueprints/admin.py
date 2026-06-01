@@ -149,6 +149,7 @@ def _admin_request_metadata(action, extra=None):
 def _admin_event_title(action):
     labels = {
         "view_admin_index": "Admin Viewed Dashboard",
+        "view_admin_users": "Admin Viewed User Directory",
         "view_admin_requests": "Admin Viewed Requests",
         "view_admin_detail": "Admin Viewed Profile",
         "export_admin_detail": "Admin Exported User Data",
@@ -161,6 +162,8 @@ def _admin_event_title(action):
         "approve_admin_request": "Admin Approved Request",
         "deny_admin_request": "Admin Denied Request",
         "manual_course_tracking_run": "Admin Ran Course Tracking Diagnostics",
+        "toggle_course_tracking": "Admin Updated Course Tracking",
+        "test_chem_150_tracking": "Admin Tested CHEM 150 Tracking",
     }
     return labels.get(action, "Admin Action")
 
@@ -745,6 +748,73 @@ def _enabled_course_track_count():
         return None, _sanitize_admin_error(exc)
 
 
+def _format_bytes(value):
+    try:
+        size = int(value or 0)
+    except (TypeError, ValueError):
+        size = 0
+    units = ("B", "KB", "MB", "GB", "TB")
+    amount = float(size)
+    unit = units[0]
+    for unit in units:
+        if amount < 1024 or unit == units[-1]:
+            break
+        amount /= 1024
+    if unit == "B":
+        return f"{int(amount)} {unit}"
+    return f"{amount:.1f} {unit}"
+
+
+def _storage_usage_summary():
+    try:
+        files = list_rows_all(COLLECTIONS["shared_files"])
+    except AppwriteException as exc:
+        logger.exception("Failed to load file storage summary")
+        return {
+            "bytes": 0,
+            "formatted": "--",
+            "file_count": 0,
+            "avatar_count": 0,
+            "error": _sanitize_admin_error(exc),
+        }
+
+    total_bytes = 0
+    for file_row in files:
+        try:
+            total_bytes += int(file_row.get("file_size_bytes") or 0)
+        except (TypeError, ValueError):
+            continue
+
+    try:
+        users = list_rows_all(COLLECTIONS["users"])
+        avatar_count = sum(1 for user in users if user.get("avatar_file_id"))
+    except AppwriteException:
+        logger.exception("Failed to count avatar storage rows")
+        avatar_count = 0
+    return {
+        "bytes": total_bytes,
+        "formatted": _format_bytes(total_bytes),
+        "file_count": len(files),
+        "avatar_count": avatar_count,
+        "error": None,
+    }
+
+
+def _admin_home_metrics():
+    active_tracks = _safe_count_rows(COLLECTIONS["course_seat_tracks"], [Query.equal("enabled", [True])])
+    paused_tracks = _safe_count_rows(COLLECTIONS["course_seat_tracks"], [Query.equal("enabled", [False])])
+    return {
+        "total_users": _safe_count_rows(COLLECTIONS["users"], []),
+        "emory_users": _safe_count_rows(COLLECTIONS["users"], [Query.equal("emory_student", [True])]),
+        "non_emory_users": _safe_count_rows(COLLECTIONS["users"], [Query.equal("emory_student", [False])]),
+        "pending_requests": _pending_admin_request_count(),
+        "saved_courses": _safe_count_rows(COLLECTIONS["user_courses"], []),
+        "active_course_tracks": active_tracks,
+        "paused_course_tracks": paused_tracks,
+        "file_storage": _storage_usage_summary(),
+    }
+
+
 def _course_tracking_diagnostics():
     from services.course_tracking import get_last_course_tracking_poll
     from services.scheduler import scheduler_status
@@ -762,6 +832,108 @@ def _course_tracking_diagnostics():
         for job in payload.get("jobs", [])
     )
     return payload
+
+
+def _track_group_key(track):
+    return {
+        "term": track.get("term") or "",
+        "subject": str(track.get("subject") or "").upper(),
+        "catalog": str(track.get("catalog") or ""),
+        "crn": str(track.get("crn") or ""),
+    }
+
+
+def _track_group_id(key):
+    return "|".join([key["term"], key["subject"], key["catalog"], key["crn"]])
+
+
+def _serialize_admin_track(track):
+    return {
+        "id": _row_id(track),
+        "user_id": track.get("user_id"),
+        "term": track.get("term"),
+        "subject": track.get("subject"),
+        "catalog": track.get("catalog"),
+        "crn": track.get("crn"),
+        "section_id": track.get("section_id"),
+        "course_code": track.get("course_code"),
+        "course_title": track.get("course_title"),
+        "enabled": bool(track.get("enabled")),
+        "last_status": track.get("last_status"),
+        "last_seats_available": track.get("last_seats_available"),
+        "last_checked_at": track.get("last_checked_at"),
+        "last_notified_at": track.get("last_notified_at"),
+        "created_at": track.get("created_at"),
+        "updated_at": track.get("updated_at"),
+    }
+
+
+def _course_tracking_groups():
+    try:
+        tracks = list_rows_all(
+            COLLECTIONS["course_seat_tracks"],
+            [Query.order_desc("updated_at")],
+        )
+    except AppwriteException:
+        logger.exception("Failed to load course tracking rows")
+        return [], "Unable to load course tracking."
+
+    grouped = {}
+    for track in tracks:
+        key = _track_group_key(track)
+        group_id = _track_group_id(key)
+        group = grouped.setdefault(group_id, {
+            "id": group_id,
+            **key,
+            "course_code": track.get("course_code") or f"{key['subject']} {key['catalog']}".strip(),
+            "course_title": track.get("course_title") or "",
+            "tracks": [],
+        })
+        if not group.get("course_code") and track.get("course_code"):
+            group["course_code"] = track.get("course_code")
+        if not group.get("course_title") and track.get("course_title"):
+            group["course_title"] = track.get("course_title")
+        group["tracks"].append(_serialize_admin_track(track))
+
+    groups = []
+    for group in grouped.values():
+        tracks = group["tracks"]
+        enabled_tracks = [track for track in tracks if track.get("enabled")]
+        paused_tracks = [track for track in tracks if not track.get("enabled")]
+        users = sorted({track.get("user_id") for track in tracks if track.get("user_id")})
+        last_checked_values = [track.get("last_checked_at") for track in tracks if track.get("last_checked_at")]
+        last_updated_values = [track.get("updated_at") for track in tracks if track.get("updated_at")]
+        representative = tracks[0] if tracks else {}
+        group.update({
+            "track_count": len(tracks),
+            "active_count": len(enabled_tracks),
+            "paused_count": len(paused_tracks),
+            "user_count": len(users),
+            "users": users,
+            "last_checked_at": max(last_checked_values) if last_checked_values else None,
+            "last_updated_at": max(last_updated_values) if last_updated_values else None,
+            "last_status": representative.get("last_status"),
+            "last_seats_available": representative.get("last_seats_available"),
+            "enabled": bool(enabled_tracks),
+        })
+        groups.append(group)
+
+    groups.sort(key=lambda item: (item.get("term") or "", item.get("subject") or "", item.get("catalog") or "", item.get("crn") or ""))
+    return groups, None
+
+
+def _toggle_track(track, enabled):
+    row_id = _row_id(track)
+    if not row_id:
+        raise AppwriteException("Track row is missing an id.")
+    return update_row_safe(
+        COLLECTIONS["course_seat_tracks"],
+        row_id,
+        {
+            "enabled": bool(enabled),
+            "updated_at": format_datetime(datetime.utcnow()),
+        },
+    )
 
 
 @admin_bp.route("/admin/course-tracking-status")

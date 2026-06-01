@@ -50,10 +50,10 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
 
         self.assertEqual(embed["title"], "Admin Viewed Profile")
         self.assertEqual(embed["color"], discord_audit.COLOR_VALUES["gray"])
-        self.assertEqual([field["name"] for field in embed["fields"]], ["Actor", "Target", "Metadata", "Event ID"])
+        self.assertEqual([field["name"] for field in embed["fields"]], ["Actor", "Target", "Metadata"])
         self.assertTrue(all(field["inline"] is True for field in embed["fields"]))
         self.assertIn("2026-05-25T00:00:00Z", embed["footer"]["text"])
-        self.assertIn("event-1", embed["footer"]["text"])
+        self.assertNotIn("event-1", embed["footer"]["text"])
 
     def test_chat_delete_channel_defaults_to_requested_channel(self):
         with patch.dict(os.environ, {}, clear=True):
