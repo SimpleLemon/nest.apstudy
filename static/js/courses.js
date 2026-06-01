@@ -1430,9 +1430,11 @@ function getSection(sectionId) {
 }
 
 function isTrackable(section) {
+  if (section?.is_cancelled) return false;
   const status = String(section?.enrollment_status || "").toLowerCase();
   const seats = Number.parseInt(section?.seats_available, 10);
-  return status === "closed" && seats === 0;
+  if (seats === 0) return true;
+  return status === "closed" && Number.isNaN(seats);
 }
 
 function formatSeats(section) {

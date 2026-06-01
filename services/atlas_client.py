@@ -418,9 +418,13 @@ def _srcdb_for_course(term, subject=None, catalog=None):
 def is_section_trackable(section):
     if not section:
         return False
+    if section.get("is_cancelled"):
+        return False
     status = str(section.get("enrollment_status") or "").strip().lower()
     seats_available = _coerce_int(section.get("seats_available"))
-    return status == "closed" and seats_available == 0
+    if seats_available == 0:
+        return True
+    return status == "closed" and seats_available is None
 
 
 # ── Public API ───────────────────────────────────────────────────────────────

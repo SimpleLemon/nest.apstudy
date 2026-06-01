@@ -197,6 +197,8 @@ test("courses page keeps Atlas APIs, filtering state, and schedule constants con
     assert.match(source, /function layoutConflictGroup\(events\)/);
     assert.match(source, /event\.start >= activeGroup\.end/);
     assert.match(source, /course-card-tracked/);
+    assert.match(source, /if \(section\?\.is_cancelled\) return false/);
+    assert.match(source, /if \(seats === 0\) return true/);
     assert.match(source, /normalizeScheduleDisplay/);
     assert.match(source, /detail: `\$\{formatAtlasTime\(meeting\.start\)\}-\$\{formatAtlasTime\(meeting\.end\)\}`/);
     assert.doesNotMatch(source, /detail: `[^`]*\| Sec/);
