@@ -13,9 +13,11 @@ or Gunicorn's --preload flag with a worker check to ensure only one
 instance runs scheduled jobs [8].
 """
 
+import fcntl
 import os
 import json
 import logging
+import socket
 from datetime import datetime, timezone
 
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -29,7 +31,6 @@ from appwrite_helpers import (
     format_datetime,
     list_rows_all,
     parse_datetime,
-    update_row_safe,
 )
 from services.staleness import is_stale
 
@@ -37,6 +38,68 @@ logger = logging.getLogger(__name__)
 
 # Module-level scheduler instance. Initialized once via init_scheduler().
 _scheduler = None
+_scheduler_lock_file = None
+_scheduler_lock_acquired = False
+_scheduler_lock_path = None
+
+
+def _configured_scheduler_lock_path():
+    return os.environ.get("SCHEDULER_LOCK_PATH") or "/tmp/nest_apstudy_scheduler.lock"
+
+
+def _release_scheduler_lock():
+    global _scheduler_lock_file, _scheduler_lock_acquired, _scheduler_lock_path
+
+    if _scheduler_lock_file is None:
+        _scheduler_lock_acquired = False
+        _scheduler_lock_path = None
+        return
+    try:
+        fcntl.flock(_scheduler_lock_file.fileno(), fcntl.LOCK_UN)
+    except OSError:
+        logger.exception("Failed to release scheduler lock")
+    try:
+        _scheduler_lock_file.close()
+    except OSError:
+        logger.exception("Failed to close scheduler lock file")
+    _scheduler_lock_file = None
+    _scheduler_lock_acquired = False
+    _scheduler_lock_path = None
+
+
+def _acquire_scheduler_lock():
+    global _scheduler_lock_file, _scheduler_lock_acquired, _scheduler_lock_path
+
+    if _scheduler_lock_acquired:
+        return True
+
+    lock_path = _configured_scheduler_lock_path()
+    os.makedirs(os.path.dirname(lock_path) or ".", exist_ok=True)
+    lock_file = open(lock_path, "a+", encoding="utf-8")
+    try:
+        fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        lock_file.close()
+        _scheduler_lock_file = None
+        _scheduler_lock_acquired = False
+        _scheduler_lock_path = lock_path
+        return False
+    except OSError:
+        lock_file.close()
+        _scheduler_lock_file = None
+        _scheduler_lock_acquired = False
+        _scheduler_lock_path = lock_path
+        logger.exception("Failed to acquire scheduler lock: %s", lock_path)
+        return False
+
+    lock_file.seek(0)
+    lock_file.truncate()
+    lock_file.write(f"pid={os.getpid()} host={socket.gethostname()}\n")
+    lock_file.flush()
+    _scheduler_lock_file = lock_file
+    _scheduler_lock_acquired = True
+    _scheduler_lock_path = lock_path
+    return True
 
 
 def _emit_scheduler_event(title, metadata=None, color="gray"):
@@ -77,6 +140,10 @@ def scheduler_status():
         "scheduler_enabled": os.environ.get("SCHEDULER_ENABLED") == "1",
         "scheduler_initialized": _scheduler is not None,
         "scheduler_running": bool(_scheduler and _scheduler.running),
+        "scheduler_lock_acquired": bool(_scheduler_lock_acquired),
+        "scheduler_lock_path": _scheduler_lock_path or _configured_scheduler_lock_path(),
+        "scheduler_process_id": os.getpid(),
+        "scheduler_hostname": socket.gethostname(),
         "jobs": jobs,
     }
 
@@ -172,11 +239,6 @@ def _refresh_all_feeds(app):
                     settings.get("user_id"),
                     _configured_feed_urls(settings),
                 )
-                update_row_safe(
-                    COLLECTIONS["user_settings"],
-                    settings.get("$id"),
-                    {"updated_at": format_datetime(datetime.utcnow())},
-                )
                 logger.info(
                     "  User %s: %s events cached.",
                     settings.get("user_id"),
@@ -258,43 +320,55 @@ def init_scheduler(app):
         logger.warning("Scheduler already initialized. Skipping.")
         return
 
+    if not _acquire_scheduler_lock():
+        logger.warning(
+            "Scheduler lock is held by another process. Skipping scheduler startup: %s",
+            _scheduler_lock_path,
+        )
+        return
+
     default_interval = int(
         os.environ.get("FEED_REFRESH_INTERVAL_MINUTES", "15")
     )
 
-    _scheduler = BackgroundScheduler(daemon=True)
+    try:
+        _scheduler = BackgroundScheduler(daemon=True)
 
-    _scheduler.add_job(
-        func=lambda: _refresh_all_feeds(app),
-        trigger=IntervalTrigger(minutes=default_interval),
-        id="refresh_all_feeds",
-        name=f"Refresh Canvas feeds every {default_interval} min",
-        replace_existing=True,
-        max_instances=1,  # Prevent overlapping runs if a refresh takes longer than the interval
-    )
-
-    _scheduler.add_job(
-        func=lambda: _check_course_seat_tracks(app),
-        trigger=IntervalTrigger(minutes=5),
-        id="check_course_seat_tracks",
-        name="Check tracked Emory course seats every 5 min",
-        replace_existing=True,
-        max_instances=1,
-    )
-
-    discord_sync_seconds = int(os.environ.get("DISCORD_CHAT_SYNC_SECONDS", "5"))
-    if os.environ.get("DISCORD_CHAT_SYNC_ENABLED", "1") != "0" and discord_sync_seconds > 0:
         _scheduler.add_job(
-            func=lambda: _sync_discord_chat(app),
-            trigger=IntervalTrigger(seconds=discord_sync_seconds),
-            id="sync_discord_chat",
-            name=f"Sync Discord chat every {discord_sync_seconds} sec",
+            func=lambda: _refresh_all_feeds(app),
+            trigger=IntervalTrigger(minutes=default_interval),
+            id="refresh_all_feeds",
+            name=f"Refresh Canvas feeds every {default_interval} min",
             replace_existing=True,
-            max_instances=1,
-            coalesce=True,
+            max_instances=1,  # Prevent overlapping runs if a refresh takes longer than the interval
         )
 
-    _scheduler.start()
+        _scheduler.add_job(
+            func=lambda: _check_course_seat_tracks(app),
+            trigger=IntervalTrigger(minutes=5),
+            id="check_course_seat_tracks",
+            name="Check tracked Emory course seats every 5 min",
+            replace_existing=True,
+            max_instances=1,
+        )
+
+        discord_sync_seconds = int(os.environ.get("DISCORD_CHAT_SYNC_SECONDS", "5"))
+        if os.environ.get("DISCORD_CHAT_SYNC_ENABLED", "1") != "0" and discord_sync_seconds > 0:
+            _scheduler.add_job(
+                func=lambda: _sync_discord_chat(app),
+                trigger=IntervalTrigger(seconds=discord_sync_seconds),
+                id="sync_discord_chat",
+                name=f"Sync Discord chat every {discord_sync_seconds} sec",
+                replace_existing=True,
+                max_instances=1,
+                coalesce=True,
+            )
+
+        _scheduler.start()
+    except Exception:
+        _scheduler = None
+        _release_scheduler_lock()
+        raise
     logger.info(
         f"Scheduler started. Feed refresh interval: {default_interval} min."
     )
@@ -302,6 +376,10 @@ def init_scheduler(app):
         "Scheduler Started",
         metadata={
             "scheduler_enabled": True,
+            "scheduler_lock_acquired": True,
+            "scheduler_lock_path": _scheduler_lock_path,
+            "scheduler_process_id": os.getpid(),
+            "scheduler_hostname": socket.gethostname(),
             "feed_refresh_interval_minutes": default_interval,
             "job_ids": ", ".join(job["id"] for job in scheduler_status()["jobs"]),
         },
@@ -318,4 +396,5 @@ def shutdown_scheduler():
     if _scheduler and _scheduler.running:
         _scheduler.shutdown(wait=False)
         logger.info("Scheduler shut down.")
-        _scheduler = None
+    _scheduler = None
+    _release_scheduler_lock()

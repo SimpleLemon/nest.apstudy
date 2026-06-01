@@ -55,6 +55,21 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
         self.assertIn("2026-05-25T00:00:00Z", embed["footer"]["text"])
         self.assertNotIn("event-1", embed["footer"]["text"])
 
+    def test_server_log_embed_fields_are_inline(self):
+        event = DiscordAuditEvent(
+            channel="server_logs",
+            title="Scheduler Started",
+            actor="System",
+            target="Background scheduler",
+            metadata={"job_ids": "refresh_all_feeds, check_course_seat_tracks"},
+            color="green",
+        )
+
+        embed = event.embed()
+
+        self.assertTrue(embed["fields"])
+        self.assertTrue(all(field["inline"] is True for field in embed["fields"]))
+
     def test_chat_delete_channel_defaults_to_requested_channel(self):
         with patch.dict(os.environ, {}, clear=True):
             self.assertEqual(discord_audit._env_channel_id("chat_deletes"), "1508949346639675543")

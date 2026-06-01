@@ -1,7 +1,8 @@
 import os
+import tempfile
 import unittest
 from types import SimpleNamespace
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from flask import Flask
 
@@ -35,7 +36,7 @@ class FakeScheduler:
 
 class SchedulerDiagnosticsTests(unittest.TestCase):
     def tearDown(self):
-        scheduler._scheduler = None
+        scheduler.shutdown_scheduler()
 
     def test_scheduler_disabled_emits_diagnostic_without_starting(self):
         app = Flask(__name__)
@@ -50,16 +51,75 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
 
     def test_scheduler_enabled_registers_course_tracking_job_and_emits_started(self):
         app = Flask(__name__)
-        with patch.dict(os.environ, {"SCHEDULER_ENABLED": "1"}, clear=False), \
+        with tempfile.TemporaryDirectory() as temp_dir, \
+                patch.dict(os.environ, {
+                    "SCHEDULER_ENABLED": "1",
+                    "SCHEDULER_LOCK_PATH": os.path.join(temp_dir, "scheduler.lock"),
+                }, clear=False), \
                 patch.object(scheduler, "BackgroundScheduler", FakeScheduler), \
                 patch("services.discord_audit.emit_server_log_event", return_value=True) as emit_event:
             scheduler.init_scheduler(app)
 
         status = scheduler.scheduler_status()
         self.assertTrue(status["scheduler_running"])
-        self.assertIn("check_course_seat_tracks", {job["id"] for job in status["jobs"]})
+        self.assertTrue(status["scheduler_lock_acquired"])
+        self.assertEqual(
+            {job["id"] for job in status["jobs"]},
+            {"refresh_all_feeds", "check_course_seat_tracks", "sync_discord_chat"},
+        )
         self.assertEqual(emit_event.call_args.args[0], "Scheduler Started")
-        self.assertIn("check_course_seat_tracks", emit_event.call_args.kwargs["metadata"]["job_ids"])
+        metadata = emit_event.call_args.kwargs["metadata"]
+        self.assertTrue(metadata["scheduler_lock_acquired"])
+        self.assertEqual(metadata["scheduler_process_id"], os.getpid())
+        self.assertIn("check_course_seat_tracks", metadata["job_ids"])
+
+    def test_scheduler_lock_contention_skips_startup_and_started_log(self):
+        app = Flask(__name__)
+        scheduler_factory = Mock(side_effect=FakeScheduler)
+        with patch.dict(os.environ, {"SCHEDULER_ENABLED": "1"}, clear=False), \
+                patch.object(scheduler, "_acquire_scheduler_lock", return_value=False), \
+                patch.object(scheduler, "BackgroundScheduler", scheduler_factory), \
+                patch("services.discord_audit.emit_server_log_event", return_value=True) as emit_event:
+            scheduler.init_scheduler(app)
+
+        self.assertIsNone(scheduler._scheduler)
+        scheduler_factory.assert_not_called()
+        emit_event.assert_not_called()
+        self.assertFalse(scheduler.scheduler_status()["scheduler_lock_acquired"])
+
+    def test_scheduler_double_init_starts_once(self):
+        app = Flask(__name__)
+        scheduler_factory = Mock(side_effect=FakeScheduler)
+        with tempfile.TemporaryDirectory() as temp_dir, \
+                patch.dict(os.environ, {
+                    "SCHEDULER_ENABLED": "1",
+                    "SCHEDULER_LOCK_PATH": os.path.join(temp_dir, "scheduler.lock"),
+                }, clear=False), \
+                patch.object(scheduler, "BackgroundScheduler", scheduler_factory), \
+                patch("services.discord_audit.emit_server_log_event", return_value=True) as emit_event:
+            scheduler.init_scheduler(app)
+            scheduler.init_scheduler(app)
+
+        scheduler_factory.assert_called_once()
+        emit_event.assert_called_once()
+        self.assertEqual(emit_event.call_args.args[0], "Scheduler Started")
+
+    def test_shutdown_releases_scheduler_lock(self):
+        app = Flask(__name__)
+        with tempfile.TemporaryDirectory() as temp_dir, \
+                patch.dict(os.environ, {
+                    "SCHEDULER_ENABLED": "1",
+                    "SCHEDULER_LOCK_PATH": os.path.join(temp_dir, "scheduler.lock"),
+                }, clear=False), \
+                patch.object(scheduler, "BackgroundScheduler", FakeScheduler), \
+                patch("services.discord_audit.emit_server_log_event", return_value=True):
+            scheduler.init_scheduler(app)
+            self.assertTrue(scheduler.scheduler_status()["scheduler_lock_acquired"])
+            scheduler.shutdown_scheduler()
+
+        status = scheduler.scheduler_status()
+        self.assertFalse(status["scheduler_running"])
+        self.assertFalse(status["scheduler_lock_acquired"])
 
     def test_course_tracking_wrapper_emits_server_log_on_exception(self):
         app = Flask(__name__)
@@ -70,6 +130,24 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
         emit_event.assert_called_once()
         self.assertEqual(emit_event.call_args.args[0], "Course Seat Tracking Scheduler Failed")
         self.assertEqual(emit_event.call_args.kwargs["metadata"]["job_id"], "check_course_seat_tracks")
+
+    def test_feed_refresh_does_not_write_user_settings_heartbeat(self):
+        app = Flask(__name__)
+        settings = {
+            "$id": "settings-1",
+            "user_id": "user-1",
+            "canvas_ical_url": "https://example.com/feed.ics",
+            "feed_refresh_minutes": "5",
+        }
+        with patch.object(scheduler, "list_rows_all", return_value=[settings]), \
+                patch.object(scheduler, "first_row", return_value=None), \
+                patch.object(scheduler, "is_stale", return_value=True), \
+                patch("services.feed_fetcher.fetch_and_cache_feeds", return_value=0) as fetch_feeds, \
+                patch("services.scheduler.update_row_safe", create=True) as update_row:
+            scheduler._refresh_all_feeds(app)
+
+        fetch_feeds.assert_called_once_with("user-1", ["https://example.com/feed.ics"])
+        update_row.assert_not_called()
 
 
 if __name__ == "__main__":

@@ -1,4 +1,5 @@
 import unittest
+from datetime import datetime, timezone
 from unittest.mock import Mock, patch
 
 from blueprints.calendar_api import (
@@ -20,6 +21,7 @@ from blueprints.calendar_api import (
 from services.feed_fetcher import (
     _feed_url_hash as fetcher_feed_url_hash,
     _normalize_feed_url,
+    _upsert_feed_metadata,
     fetch_and_cache_feeds,
     fetch_and_parse_ical,
 )
@@ -438,6 +440,26 @@ class TestCalendarSources(unittest.TestCase):
         fetch_mock.assert_called_once()
         self.assertIsNone(fetch_mock.call_args.kwargs.get("etag"))
         self.assertIsNone(fetch_mock.call_args.kwargs.get("last_modified"))
+
+    def test_feed_metadata_keeps_last_fetched_throttle_write(self):
+        fetched_at = datetime(2026, 6, 1, 17, 0, tzinfo=timezone.utc)
+        existing = {"$id": "feed-1", "feed_url_hash": "hash-1"}
+        result = {
+            "status_code": 304,
+            "etag": '"etag-1"',
+            "last_modified": "Mon, 01 Jun 2026 17:00:00 GMT",
+            "calendar_name": "Canvas",
+        }
+
+        with patch("services.feed_fetcher._feed_url_hash", return_value="hash-1"), \
+                patch("services.feed_fetcher.first_row", return_value=existing), \
+                patch("services.feed_fetcher.update_row_safe", return_value={}) as update_row:
+            _upsert_feed_metadata("user-1", "https://example.com/feed.ics", result, fetched_at)
+
+        update_row.assert_called_once()
+        payload = update_row.call_args.args[2]
+        self.assertEqual(payload["last_fetched"], "2026-06-01T17:00:00Z")
+        self.assertEqual(payload["updated_at"], "2026-06-01T17:00:00Z")
 
 
 if __name__ == "__main__":
