@@ -125,45 +125,100 @@ def _sanitize_track_error(error):
     return " ".join(text.split())[:500]
 
 
+def _emit_poll_event(title, *, metadata, color="gray"):
+    emit_course_track_event(
+        title,
+        actor="System",
+        target="Course seat tracking poll",
+        metadata={
+            "request_source": "automated",
+            **metadata,
+        },
+        color=color,
+    )
+
+
 def check_course_seat_tracks():
     """Poll enabled course seat trackers and notify users when seats open."""
     table_id = COLLECTIONS.get("course_seat_tracks")
     if not table_id:
         logger.info("Course tracking skipped: collection mapping missing.")
+        _emit_poll_event(
+            "Automated Course Track Poll Skipped",
+            metadata={"reason": "collection_mapping_missing"},
+            color="yellow",
+        )
         return 0
 
     try:
         tracks = list_rows_all(table_id, [Query.equal("enabled", [True])])
-    except AppwriteException:
+    except AppwriteException as exc:
         logger.exception("Failed to list course seat tracks")
+        _emit_poll_event(
+            "Automated Course Track Poll Failed",
+            metadata={"error": _sanitize_track_error(exc)},
+            color="red",
+        )
         return 0
 
     now = _now_utc()
     notified_count = 0
     if not tracks:
         logger.info("Course tracking skipped: no enabled course seat tracks.")
+        _emit_poll_event(
+            "Automated Course Track Poll Skipped",
+            metadata={"reason": "no_enabled_tracks", "track_count": 0},
+            color="gray",
+        )
         return 0
 
     grouped_tracks = {}
     for track in tracks:
         grouped_tracks.setdefault(_track_group_key(track), []).append(track)
 
+    poll_metadata = {
+        "track_count": len(tracks),
+        "section_group_count": len(grouped_tracks),
+        "atlas_checks_attempted": 0,
+        "atlas_checks_succeeded": 0,
+        "atlas_checks_failed": 0,
+        "row_updates": 0,
+        "row_update_failures": 0,
+        "email_notifications": 0,
+        "email_failures": 0,
+    }
+
     for grouped in grouped_tracks.values():
         representative = grouped[0]
 
-        result = fetch_live_section_status(
-            representative.get("term"),
-            representative.get("subject"),
-            representative.get("catalog"),
-            crn=representative.get("crn"),
-        )
+        poll_metadata["atlas_checks_attempted"] += 1
+        try:
+            result = fetch_live_section_status(
+                representative.get("term"),
+                representative.get("subject"),
+                representative.get("catalog"),
+                crn=representative.get("crn"),
+            )
+        except Exception as exc:
+            error = _sanitize_track_error(exc)
+            logger.error(
+                "Course track group %s live check raised an exception: %s",
+                _track_group_key(representative),
+                error,
+            )
+            result = {"error": error}
         updates = {
             "last_checked_at": format_datetime(now),
             "updated_at": format_datetime(now),
         }
 
         if "error" in result:
-            logger.warning("Course track group %s live check failed: %s", _track_group_key(representative), result["error"])
+            poll_metadata["atlas_checks_failed"] += 1
+            logger.warning(
+                "Course track group %s live check failed: %s",
+                _track_group_key(representative),
+                result["error"],
+            )
             emit_course_track_event(
                 "Automated Course Track Check Failed",
                 actor="System",
@@ -177,10 +232,13 @@ def check_course_seat_tracks():
                     continue
                 try:
                     update_row_safe(table_id, row_id, updates)
+                    poll_metadata["row_updates"] += 1
                 except AppwriteException:
+                    poll_metadata["row_update_failures"] += 1
                     logger.exception("Failed to update failed course track check: %s", row_id)
             continue
 
+        poll_metadata["atlas_checks_succeeded"] += 1
         section = result.get("section") or {}
         updates["last_status"] = section.get("enrollment_status")
         updates["last_seats_available"] = section.get("seats_available")
@@ -203,6 +261,7 @@ def check_course_seat_tracks():
                     _send_open_email(track, section)
                     track_updates["last_notified_at"] = format_datetime(now)
                     notified_count += 1
+                    poll_metadata["email_notifications"] += 1
                     emit_course_track_event(
                         "Tracked Course Seat Opened",
                         actor="System",
@@ -220,12 +279,26 @@ def check_course_seat_tracks():
                         color="green",
                     )
                 except Exception:
+                    poll_metadata["email_failures"] += 1
                     logger.exception("Failed to send course opening email for track %s", row_id)
 
             try:
                 update_row_safe(table_id, row_id, track_updates)
+                poll_metadata["row_updates"] += 1
             except AppwriteException:
+                poll_metadata["row_update_failures"] += 1
                 logger.exception("Failed to update course track: %s", row_id)
                 continue
 
+    _emit_poll_event(
+        "Automated Course Track Poll Completed",
+        metadata=poll_metadata,
+        color=(
+            "yellow"
+            if poll_metadata["atlas_checks_failed"]
+            or poll_metadata["row_update_failures"]
+            or poll_metadata["email_failures"]
+            else "gray"
+        ),
+    )
     return notified_count

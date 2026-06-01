@@ -162,10 +162,10 @@ class DiscordAuditEvent:
             "title": _truncate(self.title, 256),
             "color": COLOR_VALUES[color_name],
             "fields": [
-                {"name": "Actor", "value": _truncate(self.actor), "inline": False},
-                {"name": "Target", "value": _truncate(self.target), "inline": False},
-                {"name": "Metadata", "value": _compact_metadata(self.metadata), "inline": False},
-                {"name": "Event ID", "value": self.event_id, "inline": False},
+                {"name": "Actor", "value": _truncate(self.actor), "inline": True},
+                {"name": "Target", "value": _truncate(self.target), "inline": True},
+                {"name": "Metadata", "value": _compact_metadata(self.metadata), "inline": True},
+                {"name": "Event ID", "value": self.event_id, "inline": True},
             ],
             "footer": {
                 "text": f"{self.event_timestamp} | {self.event_id}"
@@ -267,6 +267,10 @@ class DiscordAuditService:
         try:
             queued = event if isinstance(event, _QueuedAuditEvent) else _QueuedAuditEvent(event=event)
             if not self.token_getter():
+                logger.warning(
+                    "Discord audit token missing; persisting %s event to fallback",
+                    queued.event.channel,
+                )
                 self.persist_event(queued)
                 return False
             self._enqueue(queued)
@@ -371,6 +375,10 @@ class DiscordAuditService:
     def _send_queued(self, queued):
         channel_id = queued.event.channel_id()
         if not channel_id:
+            logger.warning(
+                "Discord audit channel ID missing for channel %s; persisting event to fallback",
+                queued.event.channel,
+            )
             self.persist_event(queued)
             return
         try:
@@ -380,12 +388,21 @@ class DiscordAuditService:
                 json={"embeds": [queued.event.embed()], "allowed_mentions": {"parse": []}},
             )
         except Exception:
+            logger.exception(
+                "Discord audit send failed for channel %s; scheduling retry",
+                queued.event.channel,
+            )
             self._retry_or_persist(queued, self._backoff_seconds(queued.attempt + 1))
             return
 
         if 200 <= response.status_code < 300:
             return
 
+        logger.warning(
+            "Discord audit send returned HTTP %s for channel %s; scheduling retry",
+            response.status_code,
+            queued.event.channel,
+        )
         if response.status_code in {401, 403, 429}:
             self._record_invalid_response()
 
