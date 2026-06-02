@@ -38,6 +38,7 @@
         {% set cpu_physical = system_status.get("cpu_physical") %}
         {% set cpu_logical = system_status.get("cpu_logical") %}
         {% set scheduler_jobs = system_status.get("jobs") or [] %}
+        {% set scheduler_enabled = system_status.get("scheduler_enabled") %}
 
         <section class="admin-card admin-system-card" aria-labelledby="system-monitor-title">
             <div class="admin-system-header">
@@ -102,10 +103,41 @@
                     </span>
                 </div>
             </div>
+        </section>
+
+        {% set file_storage = metrics.file_storage if metrics else {} %}
+        <section class="admin-card admin-metrics-card" aria-labelledby="admin-metrics-title">
+            <h2 id="admin-metrics-title" class="admin-title admin-title--small">System Numbers</h2>
+            <div class="admin-metric-grid">
+                <div class="admin-metric"><span>Total Users</span><strong>{{ metrics.total_users if metrics else 0 }}</strong></div>
+                <div class="admin-metric"><span>Emory Users</span><strong>{{ metrics.emory_users if metrics else 0 }}</strong></div>
+                <div class="admin-metric"><span>Non-Emory / Unknown</span><strong>{{ metrics.non_emory_users if metrics else 0 }}</strong></div>
+                <div class="admin-metric"><span>Pending Requests</span><strong>{{ metrics.pending_requests if metrics else 0 }}</strong></div>
+                <div class="admin-metric"><span>Saved Courses</span><strong>{{ metrics.saved_courses if metrics else 0 }}</strong></div>
+                <div class="admin-metric"><span>Active Tracks</span><strong>{{ metrics.active_course_tracks if metrics else 0 }}</strong></div>
+                <div class="admin-metric"><span>Paused Tracks</span><strong>{{ metrics.paused_course_tracks if metrics else 0 }}</strong></div>
+                <div class="admin-metric">
+                    <span>File Storage</span>
+                    <strong>{{ file_storage.formatted or "--" }}</strong>
+                    <small>{{ file_storage.file_count or 0 }} shared files, {{ file_storage.avatar_count or 0 }} avatars tracked</small>
+                </div>
+            </div>
+            {% if file_storage.error %}
+                <p class="admin-inline-error">{{ file_storage.error }}</p>
+            {% endif %}
+        </section>
+
+        <section class="admin-card admin-scheduler-card" aria-labelledby="scheduler-controls-title">
+            <div class="admin-system-header">
+                <div>
+                    <h2 id="scheduler-controls-title" class="admin-title admin-title--small">Scheduler Controls</h2>
+                    <p class="admin-subtitle admin-subtitle--compact">Pause or resume background scheduler commands on the Nest service.</p>
+                </div>
+            </div>
             <div class="admin-system-chips" aria-label="Scheduler status">
                 <div class="admin-status-chip">
                     <span>Scheduler</span>
-                    <strong data-role="scheduler-enabled">{{ "Enabled" if system_status.get("scheduler_enabled") else "Disabled" }}</strong>
+                    <strong data-role="scheduler-enabled">{{ "Enabled" if scheduler_enabled else "Disabled" }}</strong>
                 </div>
                 <div class="admin-status-chip">
                     <span>Runtime</span>
@@ -136,37 +168,15 @@
             </div>
             <div id="admin-system-notice" class="admin-inline-notice admin-system-notice" role="status" hidden></div>
             <div class="admin-system-actions">
-                <button class="admin-button admin-button--danger" type="button" data-scheduler-action="pause">
+                <button class="admin-button admin-button--danger" type="button" data-scheduler-action="pause" {% if not scheduler_enabled %}disabled{% endif %}>
                     <span class="material-symbols-outlined" aria-hidden="true">pause_circle</span>
                     Pause Scheduler
                 </button>
-                <button class="admin-button" type="button" data-scheduler-action="resume">
+                <button class="admin-button" type="button" data-scheduler-action="resume" {% if scheduler_enabled %}disabled{% endif %}>
                     <span class="material-symbols-outlined" aria-hidden="true">play_circle</span>
                     Resume Scheduler
                 </button>
             </div>
-        </section>
-
-        {% set file_storage = metrics.file_storage if metrics else {} %}
-        <section class="admin-card admin-metrics-card" aria-labelledby="admin-metrics-title">
-            <h2 id="admin-metrics-title" class="admin-title admin-title--small">System Numbers</h2>
-            <div class="admin-metric-grid">
-                <div class="admin-metric"><span>Total Users</span><strong>{{ metrics.total_users if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Emory Users</span><strong>{{ metrics.emory_users if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Non-Emory / Unknown</span><strong>{{ metrics.non_emory_users if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Pending Requests</span><strong>{{ metrics.pending_requests if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Saved Courses</span><strong>{{ metrics.saved_courses if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Active Tracks</span><strong>{{ metrics.active_course_tracks if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Paused Tracks</span><strong>{{ metrics.paused_course_tracks if metrics else 0 }}</strong></div>
-                <div class="admin-metric">
-                    <span>File Storage</span>
-                    <strong>{{ file_storage.formatted or "--" }}</strong>
-                    <small>{{ file_storage.file_count or 0 }} shared files, {{ file_storage.avatar_count or 0 }} avatars tracked</small>
-                </div>
-            </div>
-            {% if file_storage.error %}
-                <p class="admin-inline-error">{{ file_storage.error }}</p>
-            {% endif %}
         </section>
     </main>
 
@@ -175,7 +185,10 @@
             const endpoint = "{{ url_for('admin.admin_system_status') }}";
             const csrfToken = document.getElementById("admin-system-csrf-token")?.value || "";
             const notice = document.getElementById("admin-system-notice");
+            const schedulerButtons = Array.from(document.querySelectorAll("[data-scheduler-action]"));
             const refreshMs = 15000;
+            let schedulerRequestPending = false;
+            let currentSchedulerEnabled = {{ "true" if scheduler_enabled else "false" }};
 
             const clampPercent = (value) => Math.max(0, Math.min(100, value));
             const toNumber = (value) => (typeof value === "number" && !Number.isNaN(value) ? value : null);
@@ -205,10 +218,25 @@
                 notice.classList.toggle("is-error", isError);
             };
 
+            const syncSchedulerButtons = (schedulerEnabled) => {
+                schedulerButtons.forEach((button) => {
+                    const action = button.dataset.schedulerAction;
+                    if (schedulerRequestPending) {
+                        button.disabled = true;
+                    } else if (action === "pause") {
+                        button.disabled = !schedulerEnabled;
+                    } else if (action === "resume") {
+                        button.disabled = Boolean(schedulerEnabled);
+                    }
+                });
+            };
+
             const update = (data) => {
                 if (!data) return;
                 const cpu = toNumber(data.cpu_percent);
                 const mem = toNumber(data.mem_percent);
+                const schedulerEnabled = Boolean(data.scheduler_enabled);
+                currentSchedulerEnabled = schedulerEnabled;
                 setText('[data-role="cpu-percent"]', formatPercent(cpu));
                 setText('[data-role="mem-percent"]', formatPercent(mem));
                 setProgress('[data-ring="cpu"]', cpu);
@@ -217,12 +245,13 @@
                 setText('[data-role="cpu-cores"]', data.cpu_physical && data.cpu_logical ? `${data.cpu_physical}C / ${data.cpu_logical}T` : (data.cpu_logical ? `${data.cpu_logical}T` : "--"));
                 setText('[data-role="mem-used"]', formatGB(toNumber(data.mem_used_gb)));
                 setText('[data-role="mem-total"]', formatGB(toNumber(data.mem_total_gb)));
-                setText('[data-role="scheduler-enabled"]', formatBool(data.scheduler_enabled, "Enabled", "Disabled"));
+                setText('[data-role="scheduler-enabled"]', formatBool(schedulerEnabled, "Enabled", "Disabled"));
                 setText('[data-role="scheduler-running"]', formatBool(data.scheduler_running, "Running", "Stopped"));
                 setText('[data-role="scheduler-lock"]', formatBool(data.scheduler_lock_acquired, "Held", "Open"));
                 setText('[data-role="scheduler-hostname"]', data.scheduler_hostname || "--");
                 setText('[data-role="scheduler-process-id"]', data.scheduler_process_id || "--");
                 setText('[data-role="scheduler-jobs"]', formatJobs(data.jobs));
+                syncSchedulerButtons(schedulerEnabled);
             };
 
             const fetchStatus = () => {
@@ -232,11 +261,12 @@
                     .catch(() => {});
             };
 
-            document.querySelectorAll("[data-scheduler-action]").forEach((button) => {
+            schedulerButtons.forEach((button) => {
                 button.addEventListener("click", async () => {
                     const action = button.dataset.schedulerAction;
                     if (!action) return;
-                    button.disabled = true;
+                    schedulerRequestPending = true;
+                    syncSchedulerButtons(null);
                     try {
                         const response = await fetch(`/admin/system-scheduler/${encodeURIComponent(action)}`, {
                             method: "POST",
@@ -251,11 +281,21 @@
                         if (!response.ok) {
                             throw new Error(payload.message || payload.error || "Scheduler command failed.");
                         }
+                        const nextSchedulerEnabled = action === "resume";
+                        currentSchedulerEnabled = nextSchedulerEnabled;
+                        setText('[data-role="scheduler-enabled"]', formatBool(nextSchedulerEnabled, "Enabled", "Disabled"));
+                        setText('[data-role="scheduler-running"]', "Stopped");
+                        syncSchedulerButtons(nextSchedulerEnabled);
                         setNotice(action === "pause" ? "Scheduler pause command sent. Nest is restarting." : "Scheduler resume command sent. Nest is restarting.");
-                        window.setTimeout(fetchStatus, 3000);
+                        window.setTimeout(() => {
+                            schedulerRequestPending = false;
+                            fetchStatus();
+                        }, 3000);
                     } catch (error) {
+                        schedulerRequestPending = false;
                         setNotice(error.message || "Unable to update scheduler.", true);
-                        button.disabled = false;
+                        syncSchedulerButtons(currentSchedulerEnabled);
+                        fetchStatus();
                     }
                 });
             });

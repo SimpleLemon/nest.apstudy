@@ -4,6 +4,7 @@ import os
 import platform
 import re
 import secrets
+import shutil
 import subprocess
 from functools import wraps
 from datetime import datetime, timezone
@@ -53,6 +54,10 @@ SECRET_TEXT_RE = re.compile(r"((?:[?&]|\b)(?:secret|key|token|password)=)[^&\s]+
 SCHEDULER_ENV_PATH = "/var/www/nest.apstudy.org/.env"
 SCHEDULER_SERVICE_NAME = "nest"
 SCHEDULER_COMMAND_TIMEOUT_SECONDS = 20
+SCHEDULER_EXECUTABLE_FALLBACKS = {
+    "sed": ("/usr/bin/sed", "/bin/sed"),
+    "systemctl": ("/usr/bin/systemctl", "/bin/systemctl"),
+}
 
 ALLOWED_SECTIONS = {
     "overview",
@@ -221,6 +226,16 @@ def _sanitize_admin_error(error):
     return " ".join(text.split())[:500]
 
 
+def _resolve_scheduler_executable(name):
+    found = shutil.which(name)
+    if found:
+        return found
+    for candidate in SCHEDULER_EXECUTABLE_FALLBACKS.get(name, ()):
+        if os.path.exists(candidate) and os.access(candidate, os.X_OK):
+            return candidate
+    raise FileNotFoundError(f"Required scheduler command not found: {name}")
+
+
 def _scheduler_command_for_action(action):
     if action == "pause":
         replacement = "s/SCHEDULER_ENABLED=1/SCHEDULER_ENABLED=0/g"
@@ -229,8 +244,8 @@ def _scheduler_command_for_action(action):
     else:
         raise ValueError("Unsupported scheduler action.")
     return [
-        ["sed", "-i", replacement, SCHEDULER_ENV_PATH],
-        ["systemctl", "restart", SCHEDULER_SERVICE_NAME],
+        [_resolve_scheduler_executable("sed"), "-i", replacement, SCHEDULER_ENV_PATH],
+        [_resolve_scheduler_executable("systemctl"), "restart", SCHEDULER_SERVICE_NAME],
     ]
 
 

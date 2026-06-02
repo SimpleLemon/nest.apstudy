@@ -183,14 +183,42 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertIn("System Numbers", html)
         self.assertIn("Total Users", html)
         self.assertIn("1.5 MB", html)
-        self.assertIn("Scheduler", html)
+        self.assertIn("Scheduler Controls", html)
+        self.assertLess(html.index("System Numbers"), html.index("Scheduler Controls"))
         self.assertIn("Running", html)
         self.assertIn("nest-prod", html)
         self.assertIn("check_course_seat_tracks", html)
         self.assertIn('id="admin-system-csrf-token"', html)
         self.assertIn("Pause Scheduler", html)
         self.assertIn("Resume Scheduler", html)
+        self.assertRegex(html, r'data-scheduler-action="pause"[^>]*>')
+        self.assertRegex(html, r'data-scheduler-action="resume"[^>]*disabled')
         self.assertNotIn('action="/admin"', html)
+
+    def test_admin_home_disables_pause_when_scheduler_is_paused(self):
+        metrics = {
+            "total_users": 0,
+            "emory_users": 0,
+            "non_emory_users": 0,
+            "pending_requests": 0,
+            "saved_courses": 0,
+            "active_course_tracks": 0,
+            "paused_course_tracks": 0,
+            "file_storage": {"formatted": "--", "file_count": 0, "avatar_count": 0, "error": None},
+        }
+        system_status = {"scheduler_enabled": False, "jobs": []}
+
+        with self.app.test_client() as client:
+            self._login(client)
+            with patch.object(admin, "_admin_home_metrics", return_value=metrics), \
+                    patch.object(admin, "_system_status", return_value=system_status), \
+                    patch.object(admin, "_theme_preference", return_value=None), \
+                    patch.object(admin, "_pending_admin_request_count", return_value=0):
+                response = client.get("/admin")
+
+        html = response.get_data(as_text=True)
+        self.assertRegex(html, r'data-scheduler-action="pause"[^>]*disabled')
+        self.assertRegex(html, r'data-scheduler-action="resume"[^>]*>')
 
     def test_admin_system_status_includes_scheduler_fields_without_secrets(self):
         scheduler_payload = {
@@ -243,7 +271,8 @@ class AdminSecurityTestCase(unittest.TestCase):
             response = client.post("/admin/system-scheduler/pause", json={})
             self.assertEqual(response.status_code, 400)
             token = self._get_csrf_token(client, "/admin", patches)
-            with patch.object(admin.subprocess, "run") as run_command, \
+            with patch.object(admin, "_resolve_scheduler_executable", side_effect=lambda name: f"/usr/bin/{name}"), \
+                    patch.object(admin.subprocess, "run") as run_command, \
                     patch.object(admin, "_log_admin_action") as log_action:
                 pause_response = client.post(
                     "/admin/system-scheduler/pause",
@@ -258,9 +287,9 @@ class AdminSecurityTestCase(unittest.TestCase):
 
         self.assertEqual(pause_response.status_code, 200)
         self.assertEqual(resume_response.status_code, 200)
-        expected_pause = ["sed", "-i", "s/SCHEDULER_ENABLED=1/SCHEDULER_ENABLED=0/g", admin.SCHEDULER_ENV_PATH]
-        expected_resume = ["sed", "-i", "s/SCHEDULER_ENABLED=0/SCHEDULER_ENABLED=1/g", admin.SCHEDULER_ENV_PATH]
-        expected_restart = ["systemctl", "restart", admin.SCHEDULER_SERVICE_NAME]
+        expected_pause = ["/usr/bin/sed", "-i", "s/SCHEDULER_ENABLED=1/SCHEDULER_ENABLED=0/g", admin.SCHEDULER_ENV_PATH]
+        expected_resume = ["/usr/bin/sed", "-i", "s/SCHEDULER_ENABLED=0/SCHEDULER_ENABLED=1/g", admin.SCHEDULER_ENV_PATH]
+        expected_restart = ["/usr/bin/systemctl", "restart", admin.SCHEDULER_SERVICE_NAME]
         self.assertEqual(run_command.call_args_list[0].args[0], expected_pause)
         self.assertEqual(run_command.call_args_list[1].args[0], expected_restart)
         self.assertEqual(run_command.call_args_list[2].args[0], expected_resume)
@@ -299,7 +328,8 @@ class AdminSecurityTestCase(unittest.TestCase):
         with self.app.test_client() as client:
             self._login(client)
             token = self._get_csrf_token(client, "/admin", patches)
-            with patch.object(admin.subprocess, "run", side_effect=failure), \
+            with patch.object(admin, "_resolve_scheduler_executable", side_effect=lambda name: f"/usr/bin/{name}"), \
+                    patch.object(admin.subprocess, "run", side_effect=failure), \
                     patch.object(admin, "_log_admin_action") as log_action:
                 response = client.post(
                     "/admin/system-scheduler/pause",
@@ -310,6 +340,44 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 500)
         body = response.get_data(as_text=True)
         self.assertIn("Scheduler command failed", body)
+        self.assertNotIn("token-secret", body)
+        log_action.assert_called_once()
+        self.assertEqual(log_action.call_args.args[0], "scheduler_pause")
+        self.assertEqual(log_action.call_args.kwargs["metadata"]["result"], "failed")
+
+    def test_admin_scheduler_control_missing_executable_is_sanitized_and_logged(self):
+        metrics = {
+            "total_users": 0,
+            "emory_users": 0,
+            "non_emory_users": 0,
+            "pending_requests": 0,
+            "saved_courses": 0,
+            "active_course_tracks": 0,
+            "paused_course_tracks": 0,
+            "file_storage": {"formatted": "--", "file_count": 0, "avatar_count": 0, "error": None},
+        }
+        patches = [
+            patch.object(admin, "_admin_home_metrics", return_value=metrics),
+            patch.object(admin, "_system_status", return_value={}),
+            patch.object(admin, "_theme_preference", return_value=None),
+            patch.object(admin, "_pending_admin_request_count", return_value=0),
+        ]
+
+        with self.app.test_client() as client:
+            self._login(client)
+            token = self._get_csrf_token(client, "/admin", patches)
+            with patch.object(admin.shutil, "which", return_value=None), \
+                    patch.object(admin.os.path, "exists", return_value=False), \
+                    patch.object(admin, "_log_admin_action") as log_action:
+                response = client.post(
+                    "/admin/system-scheduler/pause",
+                    json={},
+                    headers={"X-CSRFToken": token},
+                )
+
+        self.assertEqual(response.status_code, 500)
+        body = response.get_data(as_text=True)
+        self.assertIn("Required scheduler command not found: sed", body)
         self.assertNotIn("token-secret", body)
         log_action.assert_called_once()
         self.assertEqual(log_action.call_args.args[0], "scheduler_pause")
