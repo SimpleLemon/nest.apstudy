@@ -699,28 +699,30 @@ body.admin-page {
 
 .admin-system-card {
     display: grid;
-    gap: 16px;
+    gap: 18px;
+    text-align: center;
 }
 
 .admin-system-header {
     display: flex;
     flex-wrap: wrap;
     gap: 18px;
-    justify-content: space-between;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
 }
 
 .admin-system-meta {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 12px;
-    min-width: 260px;
+    width: min(100%, 520px);
 }
 
 .admin-system-rings {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
 }
 
 .admin-ring {
@@ -784,12 +786,14 @@ body.admin-page {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
+    justify-content: center;
 }
 
 .admin-system-stat {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    align-items: center;
 }
 
 .admin-system-stat-label {
@@ -801,6 +805,60 @@ body.admin-page {
 
 .admin-system-stat-value {
     font-weight: 600;
+}
+
+.admin-system-chips {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    width: 100%;
+}
+
+.admin-status-chip {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-height: 72px;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--admin-border);
+    background: var(--admin-surface);
+}
+
+.admin-status-chip span {
+    color: var(--admin-muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.admin-status-chip strong {
+    color: var(--admin-ink);
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.admin-status-chip--wide {
+    grid-column: span 2;
+}
+
+.admin-system-notice {
+    margin: 0;
+}
+
+.admin-system-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.admin-system-actions .admin-button:disabled {
+    cursor: wait;
+    opacity: 0.68;
+    transform: none;
 }
 
 .admin-metrics-card,
@@ -1263,6 +1321,10 @@ body.admin-page {
     .admin-system-meta,
     .admin-metric-grid {
         grid-template-columns: 1fr;
+    }
+
+    .admin-status-chip--wide {
+        grid-column: span 1;
     }
 
     .admin-section-heading,

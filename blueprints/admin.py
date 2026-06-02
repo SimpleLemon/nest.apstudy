@@ -4,6 +4,7 @@ import os
 import platform
 import re
 import secrets
+import subprocess
 from functools import wraps
 from datetime import datetime, timezone
 
@@ -49,6 +50,9 @@ admin_bp = Blueprint("admin", __name__)
 logger = logging.getLogger(__name__)
 admin_actions_logger = logging.getLogger("admin_actions")
 SECRET_TEXT_RE = re.compile(r"((?:[?&]|\b)(?:secret|key|token|password)=)[^&\s]+", re.IGNORECASE)
+SCHEDULER_ENV_PATH = "/var/www/nest.apstudy.org/.env"
+SCHEDULER_SERVICE_NAME = "nest"
+SCHEDULER_COMMAND_TIMEOUT_SECONDS = 20
 
 ALLOWED_SECTIONS = {
     "overview",
@@ -185,6 +189,12 @@ def _system_status():
         "mem_used_gb": None,
         "mem_total_gb": None,
     }
+    try:
+        from services.scheduler import scheduler_status
+
+        status.update(scheduler_status())
+    except Exception:
+        logger.exception("Failed to read scheduler status")
     if psutil is None:
         return status
     try:
@@ -209,6 +219,40 @@ def _system_status():
 def _sanitize_admin_error(error):
     text = SECRET_TEXT_RE.sub(r"\1[redacted]", str(error or ""))
     return " ".join(text.split())[:500]
+
+
+def _scheduler_command_for_action(action):
+    if action == "pause":
+        replacement = "s/SCHEDULER_ENABLED=1/SCHEDULER_ENABLED=0/g"
+    elif action == "resume":
+        replacement = "s/SCHEDULER_ENABLED=0/SCHEDULER_ENABLED=1/g"
+    else:
+        raise ValueError("Unsupported scheduler action.")
+    return [
+        ["sed", "-i", replacement, SCHEDULER_ENV_PATH],
+        ["systemctl", "restart", SCHEDULER_SERVICE_NAME],
+    ]
+
+
+def _run_scheduler_control_action(action):
+    commands = _scheduler_command_for_action(action)
+    completed = []
+    for command in commands:
+        subprocess.run(
+            command,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=SCHEDULER_COMMAND_TIMEOUT_SECONDS,
+        )
+        completed.append(command[0])
+    return completed
+
+
+def _scheduler_command_label(command):
+    if isinstance(command, (list, tuple)):
+        return " ".join(str(part) for part in command)
+    return str(command or "")
 
 
 def _require_admin():
@@ -263,6 +307,8 @@ def _admin_event_title(action):
         "test_chem_150_tracking": "Admin Tested CHEM 150 Tracking",
         "course_tracking_refresh_interval": "Admin Updated Course Tracking Refresh",
         "spring_course_tracking_toggle": "Admin Updated Spring Course Tracking",
+        "scheduler_pause": "Admin Paused Scheduler",
+        "scheduler_resume": "Admin Resumed Scheduler",
     }
     return labels.get(action, "Admin Action")
 
@@ -864,6 +910,58 @@ def admin_users():
 @admin_required
 def admin_system_status():
     return jsonify(_system_status())
+
+
+@admin_bp.route("/admin/system-scheduler/<action>", methods=["POST"])
+@admin_required
+def admin_system_scheduler_control(action):
+    if action not in {"pause", "resume"}:
+        abort(404)
+
+    metadata = {
+        "scheduler_action": action,
+        "command_mode": "fixed",
+        "env_path": SCHEDULER_ENV_PATH,
+        "service": SCHEDULER_SERVICE_NAME,
+    }
+    try:
+        completed = _run_scheduler_control_action(action)
+    except subprocess.CalledProcessError as exc:
+        message = _sanitize_admin_error(exc.stderr or exc.stdout or exc)
+        _log_admin_action(
+            f"scheduler_{action}",
+            "Background scheduler",
+            metadata={**metadata, "result": "failed", "failed_command": _scheduler_command_label(exc.cmd)},
+            color="red",
+        )
+        return jsonify({"error": "Scheduler command failed.", "message": message}), 500
+    except subprocess.TimeoutExpired as exc:
+        message = _sanitize_admin_error(exc)
+        _log_admin_action(
+            f"scheduler_{action}",
+            "Background scheduler",
+            metadata={**metadata, "result": "timeout", "failed_command": _scheduler_command_label(exc.cmd)},
+            color="red",
+        )
+        return jsonify({"error": "Scheduler command timed out.", "message": message}), 500
+    except Exception as exc:
+        logger.exception("Failed to %s scheduler", action)
+        message = _sanitize_admin_error(exc)
+        _log_admin_action(
+            f"scheduler_{action}",
+            "Background scheduler",
+            metadata={**metadata, "result": "failed"},
+            color="red",
+        )
+        return jsonify({"error": "Unable to update scheduler.", "message": message}), 500
+
+    _log_admin_action(
+        f"scheduler_{action}",
+        "Background scheduler",
+        metadata={**metadata, "result": "success", "completed_steps": ", ".join(completed)},
+        color="yellow" if action == "pause" else "green",
+    )
+    return jsonify({"status": "ok", "action": action, "completed_steps": completed})
 
 
 def _enabled_course_track_count():

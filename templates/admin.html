@@ -37,6 +37,7 @@
         {% set mem_total = system_status.get("mem_total_gb") %}
         {% set cpu_physical = system_status.get("cpu_physical") %}
         {% set cpu_logical = system_status.get("cpu_logical") %}
+        {% set scheduler_jobs = system_status.get("jobs") or [] %}
 
         <section class="admin-card admin-system-card" aria-labelledby="system-monitor-title">
             <div class="admin-system-header">
@@ -63,6 +64,7 @@
                     </div>
                 </div>
             </div>
+            <input type="hidden" id="admin-system-csrf-token" name="csrf_token" value="{{ csrf_token() }}" />
             <div class="admin-system-rings">
                 <div class="admin-ring" data-ring="cpu" role="img" aria-label="CPU usage" style="--progress: {{ cpu_percent if cpu_percent is not none else 0 }};">
                     <svg viewBox="0 0 120 120" class="admin-ring-svg" aria-hidden="true">
@@ -100,6 +102,49 @@
                     </span>
                 </div>
             </div>
+            <div class="admin-system-chips" aria-label="Scheduler status">
+                <div class="admin-status-chip">
+                    <span>Scheduler</span>
+                    <strong data-role="scheduler-enabled">{{ "Enabled" if system_status.get("scheduler_enabled") else "Disabled" }}</strong>
+                </div>
+                <div class="admin-status-chip">
+                    <span>Runtime</span>
+                    <strong data-role="scheduler-running">{{ "Running" if system_status.get("scheduler_running") else "Stopped" }}</strong>
+                </div>
+                <div class="admin-status-chip">
+                    <span>Lock</span>
+                    <strong data-role="scheduler-lock">{{ "Held" if system_status.get("scheduler_lock_acquired") else "Open" }}</strong>
+                </div>
+                <div class="admin-status-chip">
+                    <span>Host</span>
+                    <strong data-role="scheduler-hostname">{{ system_status.get("scheduler_hostname") or "--" }}</strong>
+                </div>
+                <div class="admin-status-chip">
+                    <span>PID</span>
+                    <strong data-role="scheduler-process-id">{{ system_status.get("scheduler_process_id") or "--" }}</strong>
+                </div>
+                <div class="admin-status-chip admin-status-chip--wide">
+                    <span>Registered Jobs</span>
+                    <strong data-role="scheduler-jobs">
+                        {% if scheduler_jobs %}
+                            {{ scheduler_jobs|map(attribute="id")|join(", ") }}
+                        {% else %}
+                            None
+                        {% endif %}
+                    </strong>
+                </div>
+            </div>
+            <div id="admin-system-notice" class="admin-inline-notice admin-system-notice" role="status" hidden></div>
+            <div class="admin-system-actions">
+                <button class="admin-button admin-button--danger" type="button" data-scheduler-action="pause">
+                    <span class="material-symbols-outlined" aria-hidden="true">pause_circle</span>
+                    Pause Scheduler
+                </button>
+                <button class="admin-button" type="button" data-scheduler-action="resume">
+                    <span class="material-symbols-outlined" aria-hidden="true">play_circle</span>
+                    Resume Scheduler
+                </button>
+            </div>
         </section>
 
         {% set file_storage = metrics.file_storage if metrics else {} %}
@@ -128,6 +173,8 @@
     <script>
         (() => {
             const endpoint = "{{ url_for('admin.admin_system_status') }}";
+            const csrfToken = document.getElementById("admin-system-csrf-token")?.value || "";
+            const notice = document.getElementById("admin-system-notice");
             const refreshMs = 15000;
 
             const clampPercent = (value) => Math.max(0, Math.min(100, value));
@@ -145,6 +192,19 @@
                 if (el) el.style.setProperty("--progress", clampPercent(value ?? 0));
             };
 
+            const formatBool = (value, yes, no) => (value ? yes : no);
+            const formatJobs = (jobs) => {
+                if (!Array.isArray(jobs) || jobs.length === 0) return "None";
+                return jobs.map((job) => job?.id || job?.name).filter(Boolean).join(", ") || "None";
+            };
+
+            const setNotice = (message, isError = false) => {
+                if (!notice) return;
+                notice.textContent = message;
+                notice.hidden = false;
+                notice.classList.toggle("is-error", isError);
+            };
+
             const update = (data) => {
                 if (!data) return;
                 const cpu = toNumber(data.cpu_percent);
@@ -157,6 +217,12 @@
                 setText('[data-role="cpu-cores"]', data.cpu_physical && data.cpu_logical ? `${data.cpu_physical}C / ${data.cpu_logical}T` : (data.cpu_logical ? `${data.cpu_logical}T` : "--"));
                 setText('[data-role="mem-used"]', formatGB(toNumber(data.mem_used_gb)));
                 setText('[data-role="mem-total"]', formatGB(toNumber(data.mem_total_gb)));
+                setText('[data-role="scheduler-enabled"]', formatBool(data.scheduler_enabled, "Enabled", "Disabled"));
+                setText('[data-role="scheduler-running"]', formatBool(data.scheduler_running, "Running", "Stopped"));
+                setText('[data-role="scheduler-lock"]', formatBool(data.scheduler_lock_acquired, "Held", "Open"));
+                setText('[data-role="scheduler-hostname"]', data.scheduler_hostname || "--");
+                setText('[data-role="scheduler-process-id"]', data.scheduler_process_id || "--");
+                setText('[data-role="scheduler-jobs"]', formatJobs(data.jobs));
             };
 
             const fetchStatus = () => {
@@ -165,6 +231,34 @@
                     .then(update)
                     .catch(() => {});
             };
+
+            document.querySelectorAll("[data-scheduler-action]").forEach((button) => {
+                button.addEventListener("click", async () => {
+                    const action = button.dataset.schedulerAction;
+                    if (!action) return;
+                    button.disabled = true;
+                    try {
+                        const response = await fetch(`/admin/system-scheduler/${encodeURIComponent(action)}`, {
+                            method: "POST",
+                            credentials: "same-origin",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRFToken": csrfToken,
+                            },
+                            body: JSON.stringify({}),
+                        });
+                        const payload = await response.json().catch(() => ({}));
+                        if (!response.ok) {
+                            throw new Error(payload.message || payload.error || "Scheduler command failed.");
+                        }
+                        setNotice(action === "pause" ? "Scheduler pause command sent. Nest is restarting." : "Scheduler resume command sent. Nest is restarting.");
+                        window.setTimeout(fetchStatus, 3000);
+                    } catch (error) {
+                        setNotice(error.message || "Unable to update scheduler.", true);
+                        button.disabled = false;
+                    }
+                });
+            });
 
             fetchStatus();
             setInterval(fetchStatus, refreshMs);

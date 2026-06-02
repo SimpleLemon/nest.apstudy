@@ -1,5 +1,6 @@
 import os
 import re
+import subprocess
 import unittest
 from contextlib import ExitStack
 from unittest.mock import patch
@@ -161,10 +162,18 @@ class AdminSecurityTestCase(unittest.TestCase):
             "paused_course_tracks": 6,
             "file_storage": {"formatted": "1.5 MB", "file_count": 7, "avatar_count": 2, "error": None},
         }
+        system_status = {
+            "scheduler_enabled": True,
+            "scheduler_running": True,
+            "scheduler_lock_acquired": True,
+            "scheduler_hostname": "nest-prod",
+            "scheduler_process_id": 1234,
+            "jobs": [{"id": "check_course_seat_tracks"}],
+        }
         with self.app.test_client() as client:
             self._login(client)
             with patch.object(admin, "_admin_home_metrics", return_value=metrics), \
-                    patch.object(admin, "_system_status", return_value={}), \
+                    patch.object(admin, "_system_status", return_value=system_status), \
                     patch.object(admin, "_theme_preference", return_value=None), \
                     patch.object(admin, "_pending_admin_request_count", return_value=1):
                 response = client.get("/admin")
@@ -174,7 +183,137 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertIn("System Numbers", html)
         self.assertIn("Total Users", html)
         self.assertIn("1.5 MB", html)
+        self.assertIn("Scheduler", html)
+        self.assertIn("Running", html)
+        self.assertIn("nest-prod", html)
+        self.assertIn("check_course_seat_tracks", html)
+        self.assertIn('id="admin-system-csrf-token"', html)
+        self.assertIn("Pause Scheduler", html)
+        self.assertIn("Resume Scheduler", html)
         self.assertNotIn('action="/admin"', html)
+
+    def test_admin_system_status_includes_scheduler_fields_without_secrets(self):
+        scheduler_payload = {
+            "scheduler_enabled": True,
+            "scheduler_initialized": True,
+            "scheduler_running": True,
+            "scheduler_lock_acquired": True,
+            "scheduler_lock_path": "/tmp/nest_apstudy_scheduler.lock",
+            "scheduler_process_id": 1234,
+            "scheduler_hostname": "nest-prod",
+            "jobs": [{"id": "check_course_seat_tracks"}],
+        }
+
+        with self.app.test_client() as client:
+            self._login(client)
+            with patch("services.scheduler.scheduler_status", return_value=scheduler_payload), \
+                    patch.object(admin, "psutil", None):
+                response = client.get("/admin/system-status")
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.get_json()
+        self.assertTrue(payload["scheduler_enabled"])
+        self.assertTrue(payload["scheduler_running"])
+        self.assertEqual(payload["scheduler_hostname"], "nest-prod")
+        self.assertEqual(payload["jobs"][0]["id"], "check_course_seat_tracks")
+        body = response.get_data(as_text=True)
+        self.assertNotIn("SCHEDULER_ENABLED=1", body)
+        self.assertNotIn("token-secret", body)
+
+    def test_admin_scheduler_controls_require_csrf_and_run_fixed_commands(self):
+        metrics = {
+            "total_users": 0,
+            "emory_users": 0,
+            "non_emory_users": 0,
+            "pending_requests": 0,
+            "saved_courses": 0,
+            "active_course_tracks": 0,
+            "paused_course_tracks": 0,
+            "file_storage": {"formatted": "--", "file_count": 0, "avatar_count": 0, "error": None},
+        }
+        patches = [
+            patch.object(admin, "_admin_home_metrics", return_value=metrics),
+            patch.object(admin, "_system_status", return_value={}),
+            patch.object(admin, "_theme_preference", return_value=None),
+            patch.object(admin, "_pending_admin_request_count", return_value=0),
+        ]
+
+        with self.app.test_client() as client:
+            self._login(client)
+            response = client.post("/admin/system-scheduler/pause", json={})
+            self.assertEqual(response.status_code, 400)
+            token = self._get_csrf_token(client, "/admin", patches)
+            with patch.object(admin.subprocess, "run") as run_command, \
+                    patch.object(admin, "_log_admin_action") as log_action:
+                pause_response = client.post(
+                    "/admin/system-scheduler/pause",
+                    json={},
+                    headers={"X-CSRFToken": token},
+                )
+                resume_response = client.post(
+                    "/admin/system-scheduler/resume",
+                    json={},
+                    headers={"X-CSRFToken": token},
+                )
+
+        self.assertEqual(pause_response.status_code, 200)
+        self.assertEqual(resume_response.status_code, 200)
+        expected_pause = ["sed", "-i", "s/SCHEDULER_ENABLED=1/SCHEDULER_ENABLED=0/g", admin.SCHEDULER_ENV_PATH]
+        expected_resume = ["sed", "-i", "s/SCHEDULER_ENABLED=0/SCHEDULER_ENABLED=1/g", admin.SCHEDULER_ENV_PATH]
+        expected_restart = ["systemctl", "restart", admin.SCHEDULER_SERVICE_NAME]
+        self.assertEqual(run_command.call_args_list[0].args[0], expected_pause)
+        self.assertEqual(run_command.call_args_list[1].args[0], expected_restart)
+        self.assertEqual(run_command.call_args_list[2].args[0], expected_resume)
+        self.assertEqual(run_command.call_args_list[3].args[0], expected_restart)
+        for call in run_command.call_args_list:
+            self.assertTrue(call.kwargs["check"])
+            self.assertTrue(call.kwargs["capture_output"])
+            self.assertEqual(call.kwargs["timeout"], admin.SCHEDULER_COMMAND_TIMEOUT_SECONDS)
+        self.assertEqual(log_action.call_count, 2)
+        self.assertEqual(log_action.call_args_list[0].args[0], "scheduler_pause")
+        self.assertEqual(log_action.call_args_list[1].args[0], "scheduler_resume")
+
+    def test_admin_scheduler_control_failure_is_sanitized_and_logged(self):
+        metrics = {
+            "total_users": 0,
+            "emory_users": 0,
+            "non_emory_users": 0,
+            "pending_requests": 0,
+            "saved_courses": 0,
+            "active_course_tracks": 0,
+            "paused_course_tracks": 0,
+            "file_storage": {"formatted": "--", "file_count": 0, "avatar_count": 0, "error": None},
+        }
+        patches = [
+            patch.object(admin, "_admin_home_metrics", return_value=metrics),
+            patch.object(admin, "_system_status", return_value={}),
+            patch.object(admin, "_theme_preference", return_value=None),
+            patch.object(admin, "_pending_admin_request_count", return_value=0),
+        ]
+        failure = subprocess.CalledProcessError(
+            1,
+            ["sed"],
+            stderr="failed secret=token-secret",
+        )
+
+        with self.app.test_client() as client:
+            self._login(client)
+            token = self._get_csrf_token(client, "/admin", patches)
+            with patch.object(admin.subprocess, "run", side_effect=failure), \
+                    patch.object(admin, "_log_admin_action") as log_action:
+                response = client.post(
+                    "/admin/system-scheduler/pause",
+                    json={},
+                    headers={"X-CSRFToken": token},
+                )
+
+        self.assertEqual(response.status_code, 500)
+        body = response.get_data(as_text=True)
+        self.assertIn("Scheduler command failed", body)
+        self.assertNotIn("token-secret", body)
+        log_action.assert_called_once()
+        self.assertEqual(log_action.call_args.args[0], "scheduler_pause")
+        self.assertEqual(log_action.call_args.kwargs["metadata"]["result"], "failed")
 
     def test_admin_users_renders_directory(self):
         with self.app.test_client() as client:
