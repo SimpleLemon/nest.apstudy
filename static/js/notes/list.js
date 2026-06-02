@@ -1,308 +1,541 @@
 (function () {
-    const notesGrid = document.getElementById('notes-grid');
-    const foldersGrid = document.getElementById('folders-grid');
-    const foldersSection = document.getElementById('folders-section');
-    const notesEmptyState = document.getElementById('notes-empty-state');
-    const btnNewNote = document.getElementById('btn-new-note');
-    const btnNewFolder = document.getElementById('btn-new-folder');
-    const notesPage = document.getElementById('notes-page');
-    let cachedFolders = [];
-    let loadingState = false;
+    const els = {
+        page: document.getElementById('notes-page'),
+        notesGrid: document.getElementById('notes-grid'),
+        foldersGrid: document.getElementById('folders-grid'),
+        foldersSection: document.getElementById('folders-section'),
+        notesSection: document.getElementById('notes-section'),
+        notesEmptyState: document.getElementById('notes-empty-state'),
+        notesEmptyNewNote: document.getElementById('notes-empty-new-note'),
+        btnNewNote: document.getElementById('btn-new-note'),
+        btnNewFolder: document.getElementById('btn-new-folder'),
+        alert: document.getElementById('notes-alert'),
+        foldersCount: document.getElementById('folders-count'),
+        notesCount: document.getElementById('notes-count'),
+        folderModal: document.getElementById('notes-folder-modal'),
+        folderForm: document.getElementById('notes-folder-form'),
+        folderTitle: document.getElementById('notes-folder-modal-title'),
+        folderSubtitle: document.getElementById('notes-folder-modal-subtitle'),
+        folderName: document.getElementById('notes-folder-name'),
+        folderError: document.getElementById('notes-folder-error'),
+        folderSave: document.getElementById('notes-folder-save'),
+        moveModal: document.getElementById('notes-move-modal'),
+        moveForm: document.getElementById('notes-move-form'),
+        moveDestination: document.getElementById('notes-move-destination'),
+        moveError: document.getElementById('notes-move-error'),
+        moveSave: document.getElementById('notes-move-save'),
+    };
+
+    const state = {
+        folders: [],
+        notes: [],
+        folderModalMode: 'create',
+        activeFolder: null,
+        moveNote: null,
+        activeModal: null,
+        lastFocusedElement: null,
+        loading: false,
+    };
 
     function escapeHtml(value) {
-        const div = document.createElement('div');
-        div.textContent = value || '';
-        return div.innerHTML;
+        return String(value ?? '')
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll('"', '&quot;')
+            .replaceAll("'", '&#39;');
     }
 
-    function buildLoadingIndicatorHtml(label = 'Loading...', options = {}) {
+    function cssEscape(value) {
+        if (window.CSS?.escape) return window.CSS.escape(value);
+        return String(value).replace(/["\\]/g, '\\$&');
+    }
+
+    function formatCount(count, singular) {
+        return `${count} ${singular}${count === 1 ? '' : 's'}`;
+    }
+
+    function formatDate(value) {
+        const date = new Date(value || Date.now());
+        if (Number.isNaN(date.getTime())) return 'Updated recently';
+        return `Updated ${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+    }
+
+    function notePreview(note) {
+        if (typeof note.content !== 'string' || !note.content.trim()) return 'Blank note';
+        try {
+            const blocks = JSON.parse(note.content);
+            const text = (Array.isArray(blocks) ? blocks : [])
+                .flatMap((block) => Array.isArray(block.content) ? block.content : [])
+                .map((item) => item?.text || '')
+                .join(' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+            return text || 'Blank note';
+        } catch {
+            return 'Blank note';
+        }
+    }
+
+    function setButtonBusy(button, busy) {
+        if (!button) return;
+        button.disabled = busy;
+        button.classList.toggle('is-busy', busy);
+    }
+
+    function showAlert(message, type = 'info') {
+        if (!els.alert) return;
+        els.alert.textContent = message;
+        els.alert.hidden = false;
+        els.alert.classList.toggle('notes-alert-error', type === 'error');
+    }
+
+    function clearAlert() {
+        if (!els.alert) return;
+        els.alert.hidden = true;
+        els.alert.textContent = '';
+        els.alert.classList.remove('notes-alert-error');
+    }
+
+    function showFormError(element, message) {
+        if (!element) return;
+        element.textContent = message;
+        element.hidden = false;
+    }
+
+    function clearFormError(element) {
+        if (!element) return;
+        element.textContent = '';
+        element.hidden = true;
+    }
+
+    function buildLoadingIndicatorHtml(label = 'Loading notes...', options = {}) {
         return window.APStudyLoader.html(label, options);
     }
 
+    async function apiJson(url, options = {}) {
+        const headers = { ...(options.headers || {}) };
+        if (options.body && !headers['Content-Type']) headers['Content-Type'] = 'application/json';
+        const method = String(options.method || 'GET').toUpperCase();
+        const request = fetch(url, { ...options, headers });
+        const response = await (method === 'GET'
+            ? request
+            : window.APStudyPendingMutations?.track(request, 'notes-save') || request);
+        const contentType = response.headers.get('Content-Type') || '';
+        const payload = contentType.includes('application/json') ? await response.json() : null;
+        if (!response.ok) {
+            throw new Error(payload?.error || payload?.message || response.statusText || 'Request failed.');
+        }
+        return payload || {};
+    }
+
     function setLoadingState(isLoading, label = 'Loading notes...') {
-        loadingState = isLoading;
-        if (!notesGrid) return;
+        state.loading = isLoading;
+        els.page?.classList.toggle('is-loading', isLoading);
+        if (!els.notesGrid) return;
         if (isLoading) {
-            notesGrid.innerHTML = `
-                <div class="notes-loading-card rounded-2xl border border-outline-variant/20 bg-surface-container p-10 text-center">
+            els.notesGrid.innerHTML = `
+                <div class="notes-loading-card">
                     ${buildLoadingIndicatorHtml(label, { sizePx: 52, textToneClass: 'text-on-surface' })}
                 </div>
             `;
+            if (els.notesEmptyState) els.notesEmptyState.style.display = 'none';
         }
     }
 
-    function reportNotesActionFailure(message) {
-        console.warn(message);
-    }
-
-    function trackedFetch(url, options = {}) {
-        const method = String(options.method || 'GET').toUpperCase();
-        const request = fetch(url, options);
-        return method === 'GET'
-            ? request
-            : window.APStudyPendingMutations?.track(request, 'notes-save') || request;
-    }
-
-    async function fetchData() {
-        try {
-            const res = await trackedFetch('/api/notes');
-            if (!res.ok) throw new Error('Failed to fetch');
-            return await res.json();
-        } catch {
-            reportNotesActionFailure('Failed to load notes.');
-            return { notes: [], folders: [] };
-        }
-    }
-
-    // Menu handling per spec
     function closeAllMenus() {
-        document.querySelectorAll('.note-card-menu').forEach(menu => {
+        document.querySelectorAll('.note-card-menu, .folder-card-menu').forEach((menu) => {
             menu.classList.add('note-menu-hidden');
+        });
+        document.querySelectorAll('.note-card-menu-btn, .folder-card-menu-btn').forEach((button) => {
+            button.setAttribute('aria-expanded', 'false');
         });
     }
 
-    function handleMenuToggle(event) {
-        event.stopPropagation();
-        const btn = event.currentTarget;
-        const card = btn.closest('.note-card');
-        const menu = card.querySelector('.note-card-menu');
+    function toggleCardMenu(button, menu) {
         const isHidden = menu.classList.contains('note-menu-hidden');
         closeAllMenus();
         if (isHidden) {
             menu.classList.remove('note-menu-hidden');
+            button.setAttribute('aria-expanded', 'true');
+            menu.querySelector('button')?.focus({ preventScroll: true });
         }
     }
 
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.note-card-menu') && !e.target.closest('.note-card-menu-btn')) {
-            closeAllMenus();
-        }
-    });
-
-    async function deleteNote(noteId, menuEl) {
-        if (!noteId) return;
-        if (menuEl) menuEl.classList.add('note-menu-hidden');
-        setLoadingState(true, 'Deleting note...');
-        try {
-            const response = await trackedFetch(`/api/notes/${encodeURIComponent(noteId)}`, {
-                method: 'DELETE',
-            });
-            if (!response.ok) throw new Error('Failed to delete note');
-            await loadAndRender();
-        } catch {
-            reportNotesActionFailure('Failed to delete note.');
-        } finally {
-            if (loadingState) setLoadingState(false);
-        }
+    function openModal(modal, focusTarget = null) {
+        if (!modal) return;
+        state.lastFocusedElement = document.activeElement;
+        modal.hidden = false;
+        state.activeModal = modal;
+        document.body.classList.add('notes-modal-open');
+        requestAnimationFrame(() => {
+            const target = focusTarget || modal.querySelector('input, select, button, [tabindex]:not([tabindex="-1"])');
+            target?.focus({ preventScroll: true });
+        });
     }
 
-    async function deleteFolder(folderId, menuEl) {
-        if (!folderId) return;
-        if (menuEl) menuEl.classList.add('note-menu-hidden');
-        setLoadingState(true, 'Deleting folder...');
-        try {
-            const response = await trackedFetch(`/api/notes/folders/${encodeURIComponent(folderId)}`, {
-                method: 'DELETE',
-            });
-            if (!response.ok) throw new Error('Failed to delete folder');
-            await loadAndRender();
-        } catch {
-            reportNotesActionFailure('Failed to delete folder.');
-        } finally {
-            if (loadingState) setLoadingState(false);
+    function closeModal(modal = state.activeModal) {
+        if (!modal) return;
+        modal.hidden = true;
+        if (state.activeModal === modal) state.activeModal = null;
+        if (!document.querySelector('.notes-modal:not([hidden])')) {
+            document.body.classList.remove('notes-modal-open');
         }
+        state.lastFocusedElement?.focus?.({ preventScroll: true });
     }
 
-    // Render helpers
+    function folderById(folderId) {
+        return state.folders.find((folder) => (folder.$id || folder.id) === folderId) || null;
+    }
+
+    function openFolderModal(mode, folder = null) {
+        state.folderModalMode = mode;
+        state.activeFolder = folder;
+        clearFormError(els.folderError);
+        if (els.folderTitle) els.folderTitle.textContent = mode === 'rename' ? 'Rename folder' : 'New folder';
+        if (els.folderSubtitle) {
+            els.folderSubtitle.textContent = mode === 'rename'
+                ? 'Update this folder name.'
+                : 'Create a folder for related notes.';
+        }
+        if (els.folderName) els.folderName.value = mode === 'rename' ? (folder?.name || '') : 'New Folder';
+        if (els.folderSave) els.folderSave.textContent = mode === 'rename' ? 'Save changes' : 'Create folder';
+        openModal(els.folderModal, els.folderName);
+        els.folderName?.select();
+    }
+
+    function openMoveModal(note) {
+        state.moveNote = note;
+        clearFormError(els.moveError);
+        const currentFolderId = note.folder_id || '';
+        if (els.moveDestination) {
+            els.moveDestination.innerHTML = [
+                '<option value="">No folder</option>',
+                ...state.folders.map((folder) => {
+                    const folderId = folder.$id || folder.id || '';
+                    const selected = folderId === currentFolderId ? ' selected' : '';
+                    return `<option value="${escapeHtml(folderId)}"${selected}>${escapeHtml(folder.name || 'Untitled Folder')}</option>`;
+                }),
+            ].join('');
+        }
+        openModal(els.moveModal, els.moveDestination);
+    }
+
     function createNoteCard(note) {
         const noteId = note.$id || note.id || '';
-        const formattedDate = new Date(note.created_at || note.updated_at || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-
-        const card = document.createElement('div');
+        const title = note.title || 'Untitled';
+        const card = document.createElement('article');
         card.className = 'note-card';
+        card.tabIndex = 0;
         card.dataset.noteId = noteId;
         card.dataset.folderId = note.folder_id || '';
+        card.setAttribute('aria-label', `Open note ${title}`);
 
         card.innerHTML = `
             <div class="note-card-header">
-                <span class="note-card-title">${escapeHtml(note.title || 'Untitled')}</span>
-                <button type="button" class="note-card-menu-btn" aria-label="Note options">
-                    <span class="material-symbols-outlined" aria-hidden="true">more_vert</span>
+                <span class="note-card-title">${escapeHtml(title)}</span>
+                <button type="button" class="note-card-menu-btn" aria-label="Note options for ${escapeHtml(title)}" aria-haspopup="menu" aria-expanded="false">
+                    <span class="material-symbols-outlined" aria-hidden="true">more_horiz</span>
                 </button>
             </div>
-            <div class="note-card-date">${formattedDate}</div>
-            <div class="note-card-menu note-menu-hidden">
-                <button type="button" class="note-menu-item" data-action="open">Open</button>
-                <button type="button" class="note-menu-item" data-action="move">Move to Folder</button>
-                <button type="button" class="note-menu-item" data-action="export-txt">Export TXT</button>
-                <button type="button" class="note-menu-item" data-action="export-pdf">Export PDF</button>
+            <p class="note-card-preview">${escapeHtml(notePreview(note))}</p>
+            <div class="note-card-date">${escapeHtml(formatDate(note.updated_at || note.created_at))}</div>
+            <div class="note-card-menu note-menu-hidden" role="menu">
+                <button type="button" class="note-menu-item" role="menuitem" data-action="open">Open</button>
+                <button type="button" class="note-menu-item" role="menuitem" data-action="move">Move to folder</button>
+                <button type="button" class="note-menu-item" role="menuitem" data-action="export-txt">Export TXT</button>
+                <button type="button" class="note-menu-item" role="menuitem" data-action="export-pdf">Export PDF</button>
                 <hr class="note-menu-divider"/>
-                <button type="button" class="note-menu-item note-menu-item-danger" data-action="delete">Delete</button>
+                <button type="button" class="note-menu-item note-menu-item-danger" role="menuitem" data-action="delete">Delete</button>
             </div>
         `;
 
-        // Wire card clicks
         const menuBtn = card.querySelector('.note-card-menu-btn');
-        menuBtn.addEventListener('click', handleMenuToggle);
-
         const menu = card.querySelector('.note-card-menu');
-        menu.querySelector('[data-action="open"]').addEventListener('click', (e) => {
-            e.stopPropagation();
-            window.location.href = `/notes/editor/${encodeURIComponent(noteId)}`;
+        menuBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            toggleCardMenu(menuBtn, menu);
         });
 
-        menu.querySelector('[data-action="move"]').addEventListener('click', async (e) => {
-            e.stopPropagation();
+        menu.querySelector('[data-action="open"]').addEventListener('click', (event) => {
+            event.stopPropagation();
+            window.location.href = `/notes/editor/${encodeURIComponent(noteId)}`;
+        });
+        menu.querySelector('[data-action="move"]').addEventListener('click', (event) => {
+            event.stopPropagation();
+            closeAllMenus();
+            openMoveModal(note);
+        });
+        menu.querySelector('[data-action="export-txt"]').addEventListener('click', (event) => {
+            event.stopPropagation();
+            closeAllMenus();
+            window.NotesExport?.exportNoteJsonToTxt(note.content || '', title);
+        });
+        menu.querySelector('[data-action="export-pdf"]').addEventListener('click', (event) => {
+            event.stopPropagation();
+            closeAllMenus();
+            window.NotesExport?.exportNoteJsonToPdf(note.content || '', title);
+        });
 
-            const folderOptions = (cachedFolders || []).map((folder) => {
-                const folderId = folder.$id || folder.id;
-                return `${folderId}: ${folder.name || 'Untitled Folder'}`;
-            }).join('\n');
-
-            const currentFolderId = note.folder_id || 'none';
-            const selection = window.prompt(
-                `Move note to folder. Enter a folder ID or type "none" for no folder.\n\n${folderOptions || 'No folders available.'}`,
-                currentFolderId
-            );
-
-            if (selection === null) return;
-
-            const rawValue = selection.trim();
-            const folderId = rawValue.toLowerCase() === 'none' || rawValue === '' ? null : rawValue;
-
-            try {
-                const response = await trackedFetch(`/api/notes/${encodeURIComponent(noteId)}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ folder_id: folderId }),
-                });
-                if (!response.ok) throw new Error('Failed to move note');
-                await loadAndRender();
-            } catch {
-                reportNotesActionFailure('Failed to move note.');
+        const openNote = () => {
+            window.location.href = `/notes/editor/${encodeURIComponent(noteId)}`;
+        };
+        card.addEventListener('click', (event) => {
+            if (event.target.closest('.note-card-menu') || event.target.closest('.note-card-menu-btn')) return;
+            openNote();
+        });
+        card.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' && !event.target.closest('button')) {
+                event.preventDefault();
+                openNote();
             }
-        });
-
-        menu.querySelector('[data-action="export-txt"]').addEventListener('click', (e) => { e.stopPropagation(); if (window.NotesExport) window.NotesExport.exportNoteJsonToTxt(note.content || '', note.title || 'Untitled'); });
-        menu.querySelector('[data-action="export-pdf"]').addEventListener('click', (e) => { e.stopPropagation(); if (window.NotesExport) window.NotesExport.exportNoteJsonToPdf(note.content || '', note.title || 'Untitled'); });
-
-        // Clicking card body opens editor
-        card.addEventListener('click', (e) => {
-            if (e.target.closest('.note-card-menu') || e.target.closest('.note-card-menu-btn')) return;
-            window.location.href = `/notes/editor/${encodeURIComponent(noteId)}`;
         });
 
         return card;
     }
 
-    function createFolderCard(folder, noteCount) {
+    function createFolderCard(folder, notes) {
         const folderId = folder.$id || folder.id || '';
-        const el = document.createElement('div');
+        const folderName = folder.name || 'Untitled Folder';
+        const el = document.createElement('article');
         el.className = 'folder-card';
         el.dataset.folderId = folderId;
 
         el.innerHTML = `
-            <div class="folder-card-inner">
-                <div class="folder-card-icon">
+            <button type="button" class="folder-card-inner" aria-expanded="false">
+                <span class="folder-card-icon">
                     <span class="material-symbols-outlined" aria-hidden="true">folder</span>
-                </div>
-                <div class="folder-card-info">
-                    <span class="folder-card-name">${escapeHtml(folder.name)}</span>
-                    <span class="folder-card-count">${noteCount} note${noteCount !== 1 ? 's' : ''}</span>
-                </div>
-                <button type="button" class="folder-card-menu-btn" aria-label="Folder options">
-                    <span class="material-symbols-outlined" aria-hidden="true">more_vert</span>
-                </button>
+                </span>
+                <span class="folder-card-info">
+                    <span class="folder-card-name">${escapeHtml(folderName)}</span>
+                    <span class="folder-card-count">${formatCount(notes.length, 'note')}</span>
+                </span>
+                <span class="material-symbols-outlined folder-card-chevron" aria-hidden="true">expand_more</span>
+            </button>
+            <button type="button" class="folder-card-menu-btn" aria-label="Folder options for ${escapeHtml(folderName)}" aria-haspopup="menu" aria-expanded="false">
+                <span class="material-symbols-outlined" aria-hidden="true">more_horiz</span>
+            </button>
+            <div class="folder-card-menu note-menu-hidden" role="menu">
+                <button type="button" class="note-menu-item" role="menuitem" data-action="rename">Rename</button>
+                <button type="button" class="note-menu-item note-menu-item-danger" role="menuitem" data-action="delete-folder">Delete</button>
             </div>
-            <div class="folder-card-menu note-menu-hidden">
-                <button type="button" class="note-menu-item" data-action="rename">Rename</button>
-                <button type="button" class="note-menu-item note-menu-item-danger" data-action="delete-folder">Delete</button>
-            </div>
-            <div class="folder-card-notes folder-collapsed" data-folder-notes="${folderId}">
+            <div class="folder-card-notes folder-collapsed" data-folder-notes="${escapeHtml(folderId)}">
                 <div class="folder-card-notes-inner"></div>
             </div>
         `;
 
-        // Expand/collapse on inner click
-        el.querySelector('.folder-card-inner').addEventListener('click', (e) => {
-            const notesSection = el.querySelector('.folder-card-notes');
+        const notesSection = el.querySelector('.folder-card-notes');
+        const inner = el.querySelector('.folder-card-notes-inner');
+        if (notes.length) {
+            notes.forEach((note) => inner.appendChild(createNoteCard(note)));
+        } else {
+            inner.innerHTML = '<p class="folder-empty-note">No notes in this folder yet.</p>';
+        }
+
+        const folderButton = el.querySelector('.folder-card-inner');
+        folderButton.addEventListener('click', () => {
             const isCollapsed = notesSection.classList.contains('folder-collapsed');
             notesSection.classList.toggle('folder-collapsed', !isCollapsed);
             notesSection.classList.toggle('folder-expanded', isCollapsed);
+            folderButton.setAttribute('aria-expanded', String(isCollapsed));
+            el.classList.toggle('is-expanded', isCollapsed);
         });
 
-        // Folder menu actions
         const menuBtn = el.querySelector('.folder-card-menu-btn');
         const menu = el.querySelector('.folder-card-menu');
-        menuBtn.addEventListener('click', (ev) => { ev.stopPropagation(); closeAllMenus(); menu.classList.toggle('note-menu-hidden'); });
-        menu.querySelector('[data-action="rename"]').addEventListener('click', async (e) => {
-            e.stopPropagation();
-            const name = prompt('Rename folder', folder.name || '');
-            if (name === null) return;
-            try {
-                const response = await trackedFetch(`/api/notes/folders/${encodeURIComponent(folderId)}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name }),
-                });
-                if (!response.ok) throw new Error('Failed to rename folder');
-                await loadAndRender();
-            } catch {
-                reportNotesActionFailure('Failed to rename folder.');
-            }
+        menuBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            toggleCardMenu(menuBtn, menu);
         });
+        menu.querySelector('[data-action="rename"]').addEventListener('click', (event) => {
+            event.stopPropagation();
+            closeAllMenus();
+            openFolderModal('rename', folder);
+        });
+
         return el;
     }
 
     function render(data) {
-        const notes = data.notes || [];
-        const folders = data.folders || [];
-        cachedFolders = folders;
-
-        // Map notes by folder
+        state.notes = data.notes || [];
+        state.folders = data.folders || [];
         const notesByFolder = {};
-        notes.forEach(n => {
-            const fid = n.folder_id || 'root';
-            if (!notesByFolder[fid]) notesByFolder[fid] = [];
-            notesByFolder[fid].push(n);
+        state.notes.forEach((note) => {
+            const folderId = note.folder_id || 'root';
+            if (!notesByFolder[folderId]) notesByFolder[folderId] = [];
+            notesByFolder[folderId].push(note);
         });
 
-        // Render folders
-        foldersGrid.innerHTML = '';
-        if (!folders || folders.length === 0) {
-            foldersSection.style.display = 'none';
+        if (els.foldersCount) els.foldersCount.textContent = formatCount(state.folders.length, 'folder');
+        if (els.notesCount) els.notesCount.textContent = formatCount((notesByFolder.root || []).length, 'note');
+
+        if (els.foldersGrid) els.foldersGrid.innerHTML = '';
+        if (!state.folders.length) {
+            if (els.foldersSection) els.foldersSection.hidden = true;
         } else {
-            foldersSection.style.display = '';
-            const sorted = [...folders].sort((a, b) => (a.order || 0) - (b.order || 0));
-            sorted.forEach(f => {
-                const bucket = notesByFolder[f.$id || f.id] || [];
-                const folderEl = createFolderCard(f, bucket.length);
-                // populate inner notes
-                const inner = folderEl.querySelector('.folder-card-notes-inner');
-                bucket.forEach(note => inner.appendChild(createNoteCard(note)));
-                foldersGrid.appendChild(folderEl);
-            });
+            if (els.foldersSection) els.foldersSection.hidden = false;
+            [...state.folders]
+                .sort((a, b) => (a.order || 0) - (b.order || 0))
+                .forEach((folder) => {
+                    const folderId = folder.$id || folder.id;
+                    els.foldersGrid.appendChild(createFolderCard(folder, notesByFolder[folderId] || []));
+                });
         }
 
-        // Render unfiled notes
-        notesGrid.innerHTML = '';
-        const unfiled = notesByFolder['root'] || [];
-        if (!unfiled || unfiled.length === 0) {
-            notesEmptyState.style.display = '';
+        if (els.notesGrid) els.notesGrid.innerHTML = '';
+        const unfiled = notesByFolder.root || [];
+        if (!unfiled.length) {
+            if (els.notesEmptyState) els.notesEmptyState.style.display = '';
         } else {
-            notesEmptyState.style.display = 'none';
-            unfiled.forEach(n => notesGrid.appendChild(createNoteCard(n)));
+            if (els.notesEmptyState) els.notesEmptyState.style.display = 'none';
+            unfiled.forEach((note) => els.notesGrid.appendChild(createNoteCard(note)));
         }
 
         initDragDrop();
     }
 
+    async function loadAndRender(options = {}) {
+        if (options.clearAlert !== false) clearAlert();
+        setLoadingState(true, 'Loading notes...');
+        try {
+            const data = await apiJson('/api/notes');
+            render(data);
+        } catch (error) {
+            render({ notes: [], folders: [] });
+            showAlert(error.message || 'Unable to load notes right now.', 'error');
+        } finally {
+            setLoadingState(false);
+        }
+    }
+
+    async function createNote() {
+        clearAlert();
+        setButtonBusy(els.btnNewNote, true);
+        setButtonBusy(els.notesEmptyNewNote, true);
+        try {
+            const note = await apiJson('/api/notes', {
+                method: 'POST',
+                body: JSON.stringify({ title: '', content: '' }),
+            });
+            const noteId = note.$id || note.id;
+            if (noteId) {
+                window.location.href = `/notes/editor/${encodeURIComponent(noteId)}`;
+                return;
+            }
+            await loadAndRender({ clearAlert: false });
+        } catch (error) {
+            showAlert(error.message || 'Unable to create note.', 'error');
+        } finally {
+            setButtonBusy(els.btnNewNote, false);
+            setButtonBusy(els.notesEmptyNewNote, false);
+        }
+    }
+
+    async function saveFolderModal() {
+        const name = (els.folderName?.value || '').trim();
+        if (!name) {
+            showFormError(els.folderError, 'Enter a folder name.');
+            return;
+        }
+        clearFormError(els.folderError);
+        setButtonBusy(els.folderSave, true);
+        try {
+            if (state.folderModalMode === 'rename') {
+                const folderId = state.activeFolder?.$id || state.activeFolder?.id;
+                await apiJson(`/api/notes/folders/${encodeURIComponent(folderId)}`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({ name }),
+                });
+                showAlert('Folder renamed.');
+            } else {
+                await apiJson('/api/notes/folders', {
+                    method: 'POST',
+                    body: JSON.stringify({ name }),
+                });
+                showAlert('Folder created.');
+            }
+            closeModal(els.folderModal);
+            await loadAndRender({ clearAlert: false });
+        } catch (error) {
+            showFormError(els.folderError, error.message || 'Unable to save folder.');
+        } finally {
+            setButtonBusy(els.folderSave, false);
+        }
+    }
+
+    async function saveMoveModal() {
+        const noteId = state.moveNote?.$id || state.moveNote?.id;
+        if (!noteId) return;
+        const folderId = els.moveDestination?.value || null;
+        clearFormError(els.moveError);
+        setButtonBusy(els.moveSave, true);
+        try {
+            await apiJson(`/api/notes/${encodeURIComponent(noteId)}`, {
+                method: 'PATCH',
+                body: JSON.stringify({ folder_id: folderId }),
+            });
+            closeModal(els.moveModal);
+            showAlert(folderId ? `Moved to ${folderById(folderId)?.name || 'folder'}.` : 'Moved to unfiled notes.');
+            await loadAndRender({ clearAlert: false });
+        } catch (error) {
+            showFormError(els.moveError, error.message || 'Unable to move note.');
+        } finally {
+            setButtonBusy(els.moveSave, false);
+        }
+    }
+
+    async function deleteNote(noteCard, button) {
+        const noteId = noteCard?.dataset.noteId;
+        if (!noteId) return;
+        const note = state.notes.find((item) => (item.$id || item.id) === noteId);
+        const title = note?.title || 'Untitled';
+        const accepted = await (window.APStudyConfirm?.request?.({
+            title: 'Delete note?',
+            message: `"${title}" will be permanently removed.`,
+            acceptLabel: 'Delete note',
+            danger: true,
+        }) ?? Promise.resolve(false));
+        if (!accepted) return;
+        setButtonBusy(button, true);
+        try {
+            await apiJson(`/api/notes/${encodeURIComponent(noteId)}`, { method: 'DELETE' });
+            showAlert('Note deleted.');
+            await loadAndRender({ clearAlert: false });
+        } catch (error) {
+            showAlert(error.message || 'Unable to delete note.', 'error');
+        } finally {
+            setButtonBusy(button, false);
+        }
+    }
+
+    async function deleteFolder(folderCard, button) {
+        const folderId = folderCard?.dataset.folderId;
+        if (!folderId) return;
+        const folder = folderById(folderId);
+        const noteCount = state.notes.filter((note) => note.folder_id === folderId).length;
+        const accepted = await (window.APStudyConfirm?.request?.({
+            title: 'Delete folder?',
+            message: `"${folder?.name || 'This folder'}" and ${formatCount(noteCount, 'note')} inside it will be permanently removed.`,
+            acceptLabel: 'Delete folder',
+            danger: true,
+        }) ?? Promise.resolve(false));
+        if (!accepted) return;
+        setButtonBusy(button, true);
+        try {
+            await apiJson(`/api/notes/folders/${encodeURIComponent(folderId)}`, { method: 'DELETE' });
+            showAlert('Folder deleted.');
+            await loadAndRender({ clearAlert: false });
+        } catch (error) {
+            showAlert(error.message || 'Unable to delete folder.', 'error');
+        } finally {
+            setButtonBusy(button, false);
+        }
+    }
+
     function initDragDrop() {
         if (typeof Sortable === 'undefined') return;
-
-        // root notes grid
-        if (notesGrid) {
-            Sortable.create(notesGrid, {
+        if (els.notesGrid) {
+            Sortable.create(els.notesGrid, {
                 group: { name: 'notes', pull: true, put: true },
                 animation: 150,
                 draggable: '.note-card',
@@ -312,9 +545,7 @@
                 onEnd: handleDragEnd,
             });
         }
-
-        // each folder inner list
-        document.querySelectorAll('.folder-card-notes-inner').forEach(container => {
+        document.querySelectorAll('.folder-card-notes-inner').forEach((container) => {
             Sortable.create(container, {
                 group: { name: 'notes', pull: true, put: true },
                 animation: 150,
@@ -325,12 +556,22 @@
                 onEnd: handleDragEnd,
             });
         });
-
-        // folder card drop target visuals
-        document.querySelectorAll('.folder-card').forEach(folderCard => {
-            folderCard.addEventListener('dragover', (e) => { e.preventDefault(); folderCard.classList.add('folder-drop-target'); });
-            folderCard.addEventListener('dragleave', () => { folderCard.classList.remove('folder-drop-target'); });
-            folderCard.addEventListener('drop', (e) => { e.preventDefault(); folderCard.classList.remove('folder-drop-target'); const notesSection = folderCard.querySelector('.folder-card-notes'); notesSection.classList.remove('folder-collapsed'); notesSection.classList.add('folder-expanded'); });
+        document.querySelectorAll('.folder-card').forEach((folderCard) => {
+            folderCard.addEventListener('dragover', (event) => {
+                event.preventDefault();
+                folderCard.classList.add('folder-drop-target');
+            });
+            folderCard.addEventListener('dragleave', () => folderCard.classList.remove('folder-drop-target'));
+            folderCard.addEventListener('drop', (event) => {
+                event.preventDefault();
+                folderCard.classList.remove('folder-drop-target');
+                const notesSection = folderCard.querySelector('.folder-card-notes');
+                const folderButton = folderCard.querySelector('.folder-card-inner');
+                notesSection.classList.remove('folder-collapsed');
+                notesSection.classList.add('folder-expanded');
+                folderCard.classList.add('is-expanded');
+                folderButton?.setAttribute('aria-expanded', 'true');
+            });
         });
     }
 
@@ -338,92 +579,72 @@
         const item = evt.item;
         if (!item) return;
         const noteId = item.dataset.noteId;
-        const newContainer = evt.to;
-        let newFolderId = null;
-        const folderCard = newContainer.closest('.folder-card');
-        if (folderCard) newFolderId = folderCard.dataset.folderId || null;
-        const newOrder = evt.newIndex;
-
+        const folderCard = evt.to.closest('.folder-card');
+        const newFolderId = folderCard?.dataset.folderId || null;
         try {
-            await trackedFetch(`/api/notes/${encodeURIComponent(noteId)}`, {
+            await apiJson(`/api/notes/${encodeURIComponent(noteId)}`, {
                 method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ folder_id: newFolderId, order: newOrder }),
+                body: JSON.stringify({ folder_id: newFolderId, order: evt.newIndex }),
             });
-        } catch {
-            reportNotesActionFailure('Failed to update note position.');
+            item.dataset.folderId = newFolderId || '';
+        } catch (error) {
+            showAlert(error.message || 'Unable to update note position.', 'error');
+            await loadAndRender();
         }
     }
 
-    async function loadAndRender() {
-        setLoadingState(true, 'Loading notes...');
-        const data = await fetchData();
-        render(data);
-        setLoadingState(false);
+    function bindEvents() {
+        els.btnNewNote?.addEventListener('click', createNote);
+        els.notesEmptyNewNote?.addEventListener('click', createNote);
+        els.btnNewFolder?.addEventListener('click', () => openFolderModal('create'));
+        els.folderForm?.addEventListener('submit', (event) => {
+            event.preventDefault();
+            void saveFolderModal();
+        });
+        els.moveForm?.addEventListener('submit', (event) => {
+            event.preventDefault();
+            void saveMoveModal();
+        });
+        document.querySelectorAll('[data-close-notes-modal]').forEach((button) => {
+            button.addEventListener('click', () => closeModal(button.closest('.notes-modal')));
+        });
+        document.querySelectorAll('.notes-modal').forEach((modal) => {
+            modal.addEventListener('mousedown', (event) => {
+                if (event.target === modal) closeModal(modal);
+            });
+        });
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.note-card-menu, .folder-card-menu, .note-card-menu-btn, .folder-card-menu-btn')) {
+                closeAllMenus();
+            }
+            const deleteNoteButton = event.target.closest('.note-menu-item-danger[data-action="delete"]');
+            if (deleteNoteButton) {
+                event.stopPropagation();
+                closeAllMenus();
+                void deleteNote(deleteNoteButton.closest('.note-card'), deleteNoteButton);
+                return;
+            }
+            const deleteFolderButton = event.target.closest('.note-menu-item-danger[data-action="delete-folder"]');
+            if (deleteFolderButton) {
+                event.stopPropagation();
+                closeAllMenus();
+                void deleteFolder(deleteFolderButton.closest('.folder-card'), deleteFolderButton);
+            }
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key !== 'Escape') return;
+            if (state.activeModal) {
+                closeModal();
+                return;
+            }
+            closeAllMenus();
+        });
+        window.addEventListener('resize', closeAllMenus);
+        window.addEventListener('scroll', closeAllMenus, true);
     }
 
-    // New note / folder
-    btnNewNote?.addEventListener('click', async () => {
-        try {
-            const res = await trackedFetch('/api/notes', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title: '', content: '' }) });
-            if (!res.ok) throw new Error('Failed');
-            const note = await res.json();
-            const nid = note.$id || note.id;
-            if (nid) { window.location.href = `/notes/editor/${encodeURIComponent(nid)}`; return; }
-            await loadAndRender();
-        } catch {
-            reportNotesActionFailure('Failed to create note.');
-        }
+    document.addEventListener('DOMContentLoaded', () => {
+        bindEvents();
+        void loadAndRender();
     });
-
-    btnNewFolder?.addEventListener('click', async () => {
-        const name = prompt('Folder name', 'New Folder');
-        if (name === null) return;
-        try {
-            const response = await trackedFetch('/api/notes/folders', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name }),
-            });
-            if (!response.ok) throw new Error('Failed to create folder');
-            await loadAndRender();
-        } catch {
-            reportNotesActionFailure('Failed to create folder.');
-        }
-    });
-
-    document.addEventListener('click', async (event) => {
-        const deleteNoteButton = event.target.closest('.note-menu-item-danger[data-action="delete"]');
-        if (deleteNoteButton) {
-            const noteCard = deleteNoteButton.closest('.note-card');
-            const noteId = noteCard?.dataset.noteId;
-            const menuEl = deleteNoteButton.closest('.note-card-menu');
-            const accepted = await (window.APStudyConfirm?.request?.({
-                title: 'Delete note?',
-                message: 'This note will be permanently removed.',
-                acceptLabel: 'Delete note',
-                danger: true,
-            }) ?? Promise.resolve(false));
-            if (!accepted) return;
-            await deleteNote(noteId, menuEl);
-            return;
-        }
-
-        const deleteFolderButton = event.target.closest('.note-menu-item-danger[data-action="delete-folder"]');
-        if (deleteFolderButton) {
-            const folderCard = deleteFolderButton.closest('.folder-card');
-            const folderId = folderCard?.dataset.folderId;
-            const menuEl = deleteFolderButton.closest('.folder-card-menu');
-            const accepted = await (window.APStudyConfirm?.request?.({
-                title: 'Delete folder?',
-                message: 'This folder and every note inside it will be permanently removed.',
-                acceptLabel: 'Delete folder',
-                danger: true,
-            }) ?? Promise.resolve(false));
-            if (!accepted) return;
-            await deleteFolder(folderId, menuEl);
-        }
-    });
-
-    document.addEventListener('DOMContentLoaded', loadAndRender);
 })();

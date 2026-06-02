@@ -29,7 +29,7 @@
 <global class="thesidebar" data-user-emory-student="{{ user.emory_student }}" data-sidebar-default="{{ sidebar_default|default('expanded') }}"></global>
 <body class="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-primary/30 selection:text-primary-fixed">
     <main class="flex-1 w-full max-w-[1600px] mx-auto px-6 md:px-8 pt-6 pb-10 flex flex-col gap-12 relative z-10">
-        <div class="notes-page">
+        <div id="notes-page" class="notes-page">
             <div class="notes-page-header">
                 <div>
                     <h1 class="notes-page-title">Notes</h1>
@@ -47,20 +47,78 @@
                 </div>
             </div>
 
+            <div id="notes-alert" class="notes-alert" role="status" hidden></div>
+
             <section id="folders-section" class="notes-section">
-                <h2 class="notes-section-header">FOLDERS</h2>
+                <div class="notes-section-heading">
+                    <h2 class="notes-section-header">Folders</h2>
+                    <span id="folders-count" class="notes-section-count">0 folders</span>
+                </div>
                 <div id="folders-grid" class="folders-grid"></div>
             </section>
 
             <section id="notes-section" class="notes-section">
-                <h2 class="notes-section-header">NOTES</h2>
+                <div class="notes-section-heading">
+                    <h2 class="notes-section-header">Unfiled notes</h2>
+                    <span id="notes-count" class="notes-section-count">0 notes</span>
+                </div>
                 <div id="notes-grid" class="notes-grid"></div>
                 <div id="notes-empty-state" class="empty-state" style="display:none;">
                     <span class="material-symbols-outlined empty-state-icon" aria-hidden="true">article</span>
                     <p class="empty-state-text">No notes yet</p>
-                    <p class="empty-state-subtext">Click "New Note" to get started</p>
+                    <p class="empty-state-subtext">Start a note, then organize it into folders when you are ready.</p>
+                    <button id="notes-empty-new-note" class="btn-primary" type="button">
+                        <span class="material-symbols-outlined" aria-hidden="true">note_add</span>
+                        New Note
+                    </button>
                 </div>
             </section>
+        </div>
+
+        <div id="notes-folder-modal" class="notes-modal" role="dialog" aria-modal="true" aria-labelledby="notes-folder-modal-title" hidden>
+            <form id="notes-folder-form" class="notes-modal-panel notes-small-panel">
+                <header class="notes-modal-header">
+                    <div>
+                        <h2 id="notes-folder-modal-title">New folder</h2>
+                        <p id="notes-folder-modal-subtitle">Create a folder for related notes.</p>
+                    </div>
+                    <button type="button" class="notes-icon-button" data-close-notes-modal aria-label="Close folder dialog">
+                        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                    </button>
+                </header>
+                <label class="notes-field">
+                    <span>Folder name</span>
+                    <input id="notes-folder-name" type="text" maxlength="255" autocomplete="off" required />
+                </label>
+                <div id="notes-folder-error" class="notes-form-error" role="alert" hidden></div>
+                <footer class="notes-modal-actions">
+                    <button type="button" class="btn-secondary" data-close-notes-modal>Cancel</button>
+                    <button id="notes-folder-save" type="submit" class="btn-primary">Create folder</button>
+                </footer>
+            </form>
+        </div>
+
+        <div id="notes-move-modal" class="notes-modal" role="dialog" aria-modal="true" aria-labelledby="notes-move-modal-title" hidden>
+            <form id="notes-move-form" class="notes-modal-panel notes-small-panel">
+                <header class="notes-modal-header">
+                    <div>
+                        <h2 id="notes-move-modal-title">Move note</h2>
+                        <p id="notes-move-modal-subtitle">Choose where this note should live.</p>
+                    </div>
+                    <button type="button" class="notes-icon-button" data-close-notes-modal aria-label="Close move dialog">
+                        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                    </button>
+                </header>
+                <label class="notes-field">
+                    <span>Destination</span>
+                    <select id="notes-move-destination"></select>
+                </label>
+                <div id="notes-move-error" class="notes-form-error" role="alert" hidden></div>
+                <footer class="notes-modal-actions">
+                    <button type="button" class="btn-secondary" data-close-notes-modal>Cancel</button>
+                    <button id="notes-move-save" type="submit" class="btn-primary">Move note</button>
+                </footer>
+            </form>
         </div>
     </main>
     <global class="thefooter"></global>

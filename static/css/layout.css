@@ -605,7 +605,8 @@ body.with-sidebar > footer {
   body.mobile-sidebar-open {
     overflow: hidden;
   }
-  main {
+  main,
+  body.with-sidebar main {
     grid-column: 1;
     grid-row: 2;
     width: 100%;

@@ -1029,10 +1029,13 @@ def notes():
     """Render the notes page."""
     if not current_user.onboarding_complete:
         return redirect(url_for("settings.onboarding"))
+
+    user_settings = _load_user_settings()
     
     return render_template(
         "notes.html",
         user=_user_payload(),
+        theme_preference=_theme_from_settings(user_settings),
     )
 
 

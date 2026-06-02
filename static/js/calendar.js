@@ -490,27 +490,6 @@ async function loadCalendarState(options = {}) {
     await ensureCalendarPreferencesLoaded(Boolean(options.force));
     applyCachedCalendarPreferences(state.preferences.cache);
 }
-/* ── Bootstrap ─────────────────────────────────────────────────────────────── */
-document.addEventListener("DOMContentLoaded", () => {
-    if (!state.public.readOnly) {
-        applyCoursesFiltersFromUrl();
-        initializeCourseSelectionsFromStorage();
-    }
-    wireControls();
-    loadCalendarData();
-});
-window.state = state;
-window.render = render;
-window.loadCalendarData = loadCalendarData;
-window.refreshCalendarFeed = refreshCalendarFeed;
-window.ensureEventsForRange = ensureEventsForRange;
-window.runManualRefresh = runManualRefresh;
-window.getBufferedRangeForView = () => getBufferedRange(getCurrentRenderRange());
-window.getCalendarEventByRef = getCalendarEventByRef;
-window.getCalendarOptionsForEventForm = getCalendarOptionsForEventForm;
-window.getDefaultCalendarIdForEventForm = getDefaultCalendarIdForEventForm;
-window.getCalendarColorForEventForm = (calendarName) => state.calendars[calendarName]?.color || state.calendarColors[4] || "#0ea5e9";
-window.getStandardCalendarColors = () => [...state.calendarColors];
 const calendarCourses = window.APStudyCalendarCourses.createCalendarCourses({
     state,
     constants: {
@@ -536,396 +515,60 @@ const {
     ensureSimulatedCalendarPreference,
     buildSimulatedMeetingEvents,
 } = calendarCourses;
-/* ── Date Parsing ──────────────────────────────────────────────────────────── */
-/**
-* Parse a date string from the API into a JavaScript Date.
-*
-* All-day events arrive as date-only strings like "2026-04-24".
-* Per ECMAScript spec, new Date("2026-04-24") interprets this as
-* UTC midnight, which shifts to the previous day in western timezones.
-* This function detects date-only strings and constructs local midnight
-* instead, so April 24 stays April 24 regardless of timezone.
-*
-* Timed events arrive as "2026-04-24T20:00:00Z" and are parsed normally;
-* the browser converts UTC to local time automatically.
-*/
-function parseEventDate(dateStr, isAllDay) {
-    if (!dateStr) return new Date();
-    if (isAllDay && /^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
-        const parts = dateStr.split("-");
-        return new Date(
-            parseInt(parts[0], 10),
-            parseInt(parts[1], 10) - 1,
-            parseInt(parts[2], 10),
-            0, 0, 0, 0
-        );
-    }
-    return new Date(dateStr);
-}
-function readEventsCache() {
-    const raw = localStorage.getItem(EVENTS_CACHE_KEY);
-    if (!raw) return null;
-    try {
-        return JSON.parse(raw);
-    } catch (err) {
-        console.warn("Ignoring invalid cached calendar events:", err);
-        localStorage.removeItem(EVENTS_CACHE_KEY);
-        return null;
-    }
-}
-function parseCachedRange(range) {
-    if (!range?.start || !range?.end) return null;
-    const start = new Date(range.start);
-    const end = new Date(range.end);
-    if (Number.isNaN(start?.getTime()) || Number.isNaN(end?.getTime())) return null;
-    return { start, end };
-}
-function writeEventsCache(payload, range) {
-    try {
-        localStorage.setItem(EVENTS_CACHE_KEY, JSON.stringify({
-            cached_at: Date.now(),
-            range: range ? { start: range.start.toISOString(), end: range.end.toISOString() } : null,
-            payload,
-        }));
-    } catch (err) {
-        console.warn("Failed to cache calendar events:", err);
-    }
-}
-function normalizeEventsList(events) {
-    return Array.isArray(events)
-        ? events
-                .filter((e) => e.start)
-                .map((e) => {
-                    const isAllDay = Boolean(e.is_all_day);
-                    return {
-                        ...e,
-                        startDate: parseEventDate(e.start, isAllDay),
-                        endDate: e.end ? parseEventDate(e.end, isAllDay) : parseEventDate(e.start, isAllDay),
-                        isAllDay,
-                        isMultiDay: Boolean(e.is_multi_day),
-                        spanDays: e.span_days || 1,
-                    };
-                })
-                .sort((a, b) => a.startDate - b.startDate)
-        : [];
-}
-function eventOverlapsRange(event, rangeStart, rangeEnd) {
-    const start = event.startDate;
-    const end = event.endDate || event.startDate;
-    if (!start || !end) return false;
-    return start < rangeEnd && end > rangeStart;
-}
-function replaceEventsInRange(existingEvents, newEvents, range) {
-    if (!range) return newEvents;
-    const filtered = existingEvents.filter((event) => !eventOverlapsRange(event, range.start, range.end));
-    return filtered.concat(newEvents).sort((a, b) => a.startDate - b.startDate);
-}
-function mergeRanges(a, b) {
-    if (!a) return b;
-    if (!b) return a;
-    return {
-        start: a.start < b.start ? a.start : b.start,
-        end: a.end > b.end ? a.end : b.end,
-    };
-}
-function rangeCovers(a, b) {
-    if (!a || !b) return false;
-    return a.start <= b.start && a.end >= b.end;
-}
-function getBufferedRange(baseRange) {
-    const start = new Date(baseRange.start);
-    const end = new Date(baseRange.end);
-    start.setDate(start.getDate() - CALENDAR_BUFFER_DAYS);
-    end.setDate(end.getDate() + CALENDAR_BUFFER_DAYS);
-    return { start, end };
-}
-function buildEventsUrl(range) {
-    const baseUrl = state.public.readOnly && state.public.shareCode
-        ? `/api/calendar/share/${encodeURIComponent(state.public.shareCode)}/events`
-        : "/api/calendar/events";
-    if (!range) return baseUrl;
-    const params = new URLSearchParams({
-        start: range.start.toISOString(),
-        end: range.end.toISOString(),
-    });
-    return `${baseUrl}?${params.toString()}`;
-}
-function getRangeKey(range) {
-    return `${range.start.toISOString()}|${range.end.toISOString()}`;
-}
-/* ── Data Loading ──────────────────────────────────────────────────────────── */
-async function fetchEventsForRange(range) {
-    const res = await fetch(buildEventsUrl(range));
-    if (!res.ok) throw new Error("Unable to fetch calendar events");
-    return res.json();
-}
-async function applyEventsPayload(payload, options = {}) {
-    const range = options.range || null;
-    state.calendarSources = Array.isArray(payload?.calendar_sources) ? payload.calendar_sources : [];
-    const newEvents = normalizeEventsList(payload?.events);
-    const mergeRange = Boolean(options.mergeRange);
-    state.events = mergeRange
-        ? replaceEventsInRange(state.events, newEvents, range)
-        : newEvents;
-
-    if (payload) {
-        if (typeof payload.feed_configured === "boolean") {
-            state.feedConfigured = payload.feed_configured;
-        }
-        state.eventsMeta = {
-            lastFetched: payload.last_fetched || null,
-            refreshIntervalMinutes: payload.refresh_interval_minutes || null,
-        };
-    }
-
-    if (range) {
-        state.loadedRange = mergeRanges(state.loadedRange, range);
-    }
-
-    initCalendarState();
+const calendarData = window.APStudyCalendarData.createCalendarData({
+    state,
+    constants: {
+        calendarBufferDays: CALENDAR_BUFFER_DAYS,
+        eventsCacheKey: EVENTS_CACHE_KEY,
+        simulatedCalendarName: SIMULATED_CALENDAR_NAME,
+        taskCalendarId: TASK_CALENDAR_ID,
+        taskCalendarName: TASK_CALENDAR_NAME,
+        toggleRefreshDelayMs: TOGGLE_REFRESH_DELAY_MS,
+    },
+    buildSimulatedMeetingEvents,
+    ensureSimulatedCalendarPreference,
+    getEventCalendarKey,
+    getStartOfWeek,
+    hydrateSelectedSimulatedSections,
+    initCalendarState,
+    loadCalendarState,
+    queueCalendarPreferenceSave,
+    render,
+    writeCalendarStateToStorage,
+});
+const {
+    getBufferedRange,
+    getCurrentRenderRange,
+    getEventCalendarColor,
+    getVisibleEvents,
+    loadCalendarData,
+    refreshCalendarFeed,
+    runManualRefresh,
+    setCalendarColor,
+    toggleCalendarVisibility,
+    ensureEventsForRange,
+} = calendarData;
+/* ── Bootstrap ─────────────────────────────────────────────────────────────── */
+document.addEventListener("DOMContentLoaded", () => {
     if (!state.public.readOnly) {
-        await loadCalendarState();
-        ensureSimulatedCalendarPreference();
+        applyCoursesFiltersFromUrl();
+        initializeCourseSelectionsFromStorage();
     }
-    render();
-    if (!state.public.readOnly && options.shouldHydrate) {
-        await hydrateSelectedSimulatedSections();
-    }
-    if (!state.public.readOnly && !options.fromCache) {
-        writeEventsCache(payload, range);
-    }
-}
-function shouldRefreshInBackground(payload) {
-    if (!payload?.feed_configured) return false;
-    const interval = Number(payload.refresh_interval_minutes || 0);
-    if (!interval) return false;
-    if (!payload.last_fetched) return true;
-    const lastFetched = new Date(payload.last_fetched);
-    if (Number.isNaN(lastFetched.getTime())) return false;
-    // Stale-while-revalidate: only refresh when the last fetch exceeded the interval.
-    return Date.now() - lastFetched.getTime() > interval * 60 * 1000;
-}
-async function maybeRefreshIfStale(payload, range) {
-    if (state.public.readOnly) return;
-    if (!shouldRefreshInBackground(payload) || state.refreshInFlight) return;
-    state.refreshInFlight = true;
-    try {
-        await refreshCalendarFeed();
-        const refreshed = await fetchEventsForRange(range);
-        await applyEventsPayload(refreshed, { range, mergeRange: true });
-    } catch (err) {
-        console.error("Background refresh failed:", err);
-    } finally {
-        state.refreshInFlight = false;
-    }
-}
-async function ensureEventsForRange(range) {
-    if (state.loadedRange && rangeCovers(state.loadedRange, range)) return;
-    const key = getRangeKey(range);
-    if (state.pendingRanges.has(key)) return;
-    state.pendingRanges.add(key);
-    try {
-        const payload = await fetchEventsForRange(range);
-        await applyEventsPayload(payload, { range, mergeRange: true });
-    } catch (err) {
-        console.error("Failed to load additional calendar range:", err);
-    } finally {
-        state.pendingRanges.delete(key);
-    }
-}
-async function runManualRefresh(range) {
-    if (state.public.readOnly) return;
-    if (state.refreshInFlight) return;
-    state.refreshInFlight = true;
-    try {
-        await refreshCalendarFeed();
-        const payload = await fetchEventsForRange(range);
-        await applyEventsPayload(payload, { range, mergeRange: true });
-    } catch (err) {
-        console.error("Manual refresh failed:", err);
-    } finally {
-        state.refreshInFlight = false;
-    }
-}
-async function loadCalendarData() {
-    state.loadingDashboard = true;
-    render();
-
-    const cached = state.public.readOnly ? null : readEventsCache();
-    const cachedRange = state.public.readOnly ? null : parseCachedRange(cached?.range);
-    if (!state.public.readOnly && cached?.payload) {
-        state.loadingDashboard = false;
-        await applyEventsPayload(cached.payload, {
-            range: cachedRange,
-            mergeRange: false,
-            fromCache: true,
-            shouldHydrate: false,
-        });
-    }
-
-    const desiredRange = getBufferedRange(getCurrentRenderRange());
-    try {
-        const payload = await fetchEventsForRange(desiredRange);
-        state.loadingDashboard = false;
-        await applyEventsPayload(payload, {
-            range: desiredRange,
-            mergeRange: true,
-            shouldHydrate: true,
-        });
-        void maybeRefreshIfStale(payload, desiredRange);
-    } catch (err) {
-        if (!cached?.payload) {
-            state.feedConfigured = false;
-            state.events = [];
-            initCalendarState();
-            if (!state.public.readOnly) {
-                await loadCalendarState();
-                ensureSimulatedCalendarPreference();
-            }
-            render();
-            if (!state.public.readOnly) {
-                hydrateSelectedSimulatedSections();
-            }
-        }
-        console.error(err);
-    } finally {
-        state.loadingDashboard = false;
-        render();
-    }
-}
-async function refreshCalendarFeed() {
-    try {
-        const res = await fetch("/api/calendar/refresh", { method: "POST" });
-        return res.ok;
-    } catch (err) {
-        console.warn("Calendar feed refresh request failed:", err);
-    }
-    return false;
-}
-/* ── Calendar Filtering ────────────────────────────────────────────────────── */
-function getVisibleEvents() {
-    const baseEvents = state.events.filter((e) => {
-        const cal = getEventCalendarKey(e);
-        return state.calendars[cal]?.visible !== false;
-    });
-    if (state.public.readOnly || state.calendars[SIMULATED_CALENDAR_NAME]?.visible === false || state.courses.selectedSectionIds.size === 0) {
-        return baseEvents;
-    }
-    const renderRange = getCurrentRenderRange();
-    const simulatedEvents = buildSimulatedMeetingEvents(renderRange.start, renderRange.end);
-    return baseEvents.concat(simulatedEvents);
-}
-function getCurrentRenderRange() {
-    if (state.view === "month") {
-        const year = state.anchorDate.getFullYear();
-        const month = state.anchorDate.getMonth();
-        const monthStart = new Date(year, month, 1);
-        const gridStart = new Date(monthStart);
-        gridStart.setDate(monthStart.getDate() - monthStart.getDay());
-        const gridEnd = new Date(gridStart);
-        gridEnd.setDate(gridStart.getDate() + 41);
-        gridEnd.setHours(23, 59, 59, 999);
-        return { start: gridStart, end: gridEnd };
-    }
-    const weekStart = getStartOfWeek(state.anchorDate);
-    const weekEnd = new Date(weekStart);
-    weekEnd.setDate(weekStart.getDate() + 6);
-    weekEnd.setHours(23, 59, 59, 999);
-    return { start: weekStart, end: weekEnd };
-}
-function getEventCalendarColor(event) {
-    if (event?.color) return event.color;
-    const cal = getEventCalendarKey(event);
-    return state.calendars[cal]?.color || "#6366f1";
-}
-function isExternalFeedCalendar(calendarName, calendarData) {
-    if (!calendarData) return false;
-    if (calendarName === SIMULATED_CALENDAR_NAME) return false;
-    if (calendarName === TASK_CALENDAR_ID || calendarName === TASK_CALENDAR_NAME) return false;
-    if (calendarData.kind === "canvas" || calendarData.kind === "external") return true;
-    if (calendarName === CANVAS_SOURCE_ID || String(calendarName).startsWith("feed:")) return true;
-    return false;
-}
-function scheduleCalendarToggleRefresh(delayMs = TOGGLE_REFRESH_DELAY_MS) {
-    if (state.ui.toggleRefreshTimer) {
-        clearTimeout(state.ui.toggleRefreshTimer);
-    }
-    state.ui.toggleRefreshTimer = setTimeout(() => {
-        state.ui.toggleRefreshTimer = null;
-        void runCalendarToggleRefresh();
-    }, delayMs);
-}
-function queueCalendarVisibilityRefresh(calendarName, visible) {
-    if (state.public.readOnly) return;
-    if (!visible) return;
-    const calendar = state.calendars[calendarName];
-    if (!calendar) return;
-    if (isExternalFeedCalendar(calendarName, calendar)) {
-        state.ui.toggleRefreshNeedsFeed = true;
-        state.ui.toggleRefreshNeedsEvents = true;
-    } else {
-        state.ui.toggleRefreshNeedsEvents = true;
-    }
-    scheduleCalendarToggleRefresh();
-}
-async function runCalendarToggleRefresh() {
-    if (state.public.readOnly) return;
-    const needsFeed = state.ui.toggleRefreshNeedsFeed;
-    const needsEvents = state.ui.toggleRefreshNeedsEvents;
-    state.ui.toggleRefreshNeedsFeed = false;
-    state.ui.toggleRefreshNeedsEvents = false;
-
-    if (!needsFeed && !needsEvents) return;
-    if (state.refreshInFlight) {
-        state.ui.toggleRefreshNeedsFeed = state.ui.toggleRefreshNeedsFeed || needsFeed;
-        state.ui.toggleRefreshNeedsEvents = state.ui.toggleRefreshNeedsEvents || needsEvents;
-        scheduleCalendarToggleRefresh();
-        return;
-    }
-
-    const range = getBufferedRange(getCurrentRenderRange());
-    if (!needsFeed && needsEvents && state.loadedRange && rangeCovers(state.loadedRange, range)) {
-        render();
-        return;
-    }
-
-    try {
-        if (needsFeed) {
-            state.refreshInFlight = true;
-            await refreshCalendarFeed();
-        }
-        if (needsEvents) {
-            const payload = await fetchEventsForRange(range);
-            await applyEventsPayload(payload, { range, mergeRange: true });
-        }
-    } catch (err) {
-        console.error("Calendar refresh after toggle failed:", err);
-    } finally {
-        if (needsFeed) {
-            state.refreshInFlight = false;
-        }
-    }
-}
-function toggleCalendarVisibility(calendarName) {
-    const calendar = state.calendars[calendarName];
-    if (!calendar) return;
-    calendar.visible = !calendar.visible;
-    if (!state.public.readOnly) {
-        writeCalendarStateToStorage();
-        queueCalendarPreferenceSave(calendarName);
-    }
-    queueCalendarVisibilityRefresh(calendarName, calendar.visible);
-    render();
-}
-function setCalendarColor(calendarName, color) {
-    if (state.public.readOnly) return;
-    if (state.calendars[calendarName]) {
-        state.calendars[calendarName].color = color;
-        writeCalendarStateToStorage();
-        queueCalendarPreferenceSave(calendarName);
-        render();
-    }
-}
+    wireControls();
+    loadCalendarData();
+});
+window.state = state;
+window.render = render;
+window.loadCalendarData = loadCalendarData;
+window.refreshCalendarFeed = refreshCalendarFeed;
+window.ensureEventsForRange = ensureEventsForRange;
+window.runManualRefresh = runManualRefresh;
+window.getBufferedRangeForView = () => getBufferedRange(getCurrentRenderRange());
+window.getCalendarEventByRef = getCalendarEventByRef;
+window.getCalendarOptionsForEventForm = getCalendarOptionsForEventForm;
+window.getDefaultCalendarIdForEventForm = getDefaultCalendarIdForEventForm;
+window.getCalendarColorForEventForm = (calendarName) => state.calendars[calendarName]?.color || state.calendarColors[4] || "#0ea5e9";
+window.getStandardCalendarColors = () => [...state.calendarColors];
 /* ── Controls ──────────────────────────────────────────────────────────────── */
 function wireControls() {
     let lastCompactCalendar = isCompactCalendarViewport();

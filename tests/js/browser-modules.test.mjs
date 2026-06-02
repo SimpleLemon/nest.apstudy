@@ -49,6 +49,7 @@ test("calendar dashboard keeps cache, public-share, and event-form contracts wir
         await sourceFor("static/js/calendar/utils.js"),
         await sourceFor("static/js/calendar/course-modal.js"),
         await sourceFor("static/js/calendar/courses.js"),
+        await sourceFor("static/js/calendar/data.js"),
     ].join("\n");
 
     assert.match(source, /const WEEKDAYS = \["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"\]/);
@@ -131,7 +132,10 @@ test("mobile shell uses a hamburger drawer without breaking desktop sidebar pers
 
 test("calendar and courses switch dense schedules to compact mobile agenda renderers", async () => {
     const calendarSource = await sourceFor("static/js/calendar.js");
-    const coursesSource = await sourceFor("static/js/courses.js");
+    const coursesSource = [
+        await sourceFor("static/js/courses.js"),
+        await sourceFor("static/js/courses/calendar.js"),
+    ].join("\n");
     const globalStyles = await sourceFor("static/css/global.css");
     const coursesStyles = await sourceFor("static/css/courses.css");
 
@@ -207,35 +211,43 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
 
 test("courses page keeps Atlas APIs, filtering state, and schedule constants connected", async () => {
     const source = await sourceFor("static/js/courses.js");
+    const combinedSource = [
+        source,
+        await sourceFor("static/js/courses/utils.js"),
+        await sourceFor("static/js/courses/filters.js"),
+        await sourceFor("static/js/courses/panel.js"),
+        await sourceFor("static/js/courses/calendar.js"),
+        await sourceFor("static/js/courses/controls.js"),
+    ].join("\n");
     const styles = await sourceFor("static/css/courses.css");
 
     assert.match(source, /const COURSE_DAYS = \[/);
     assert.match(source, /const COURSE_RESULT_LIMIT = 100/);
     assert.match(source, /selectedTerm: window\.APSTUDY_COURSES_DEFAULT_TERM/);
     assert.match(source, /activeCourseView: "search"/);
-    assert.match(source, /button\[data-course-view\]/);
-    assert.match(source, /state\.activeCourseView = nextView/);
+    assert.match(combinedSource, /button\[data-course-view\]/);
+    assert.match(combinedSource, /state\.activeCourseView = nextView/);
     assert.match(source, /fetchJson\("\/api\/atlas\/terms"\)/);
     assert.match(source, /fetchJson\(`\/api\/atlas\/sections\?term=\$\{encodeURIComponent\(term\)\}&include_cancelled=0`\)/);
     assert.match(source, /fetchJson\("\/api\/courses\/saved"\)/);
     assert.match(source, /fetchJson\("\/api\/courses\/tracks"\)/);
     assert.match(source, /buildSectionSearchBlob\(normalized\)/);
-    assert.match(source, /state\.activeCourseView === "selected"/);
-    assert.match(source, /state\.activeCourseView === "tracked"/);
-    assert.match(source, /\.filter\(\(\[, track\]\) => Boolean\(track\?\.enabled\)\)/);
+    assert.match(combinedSource, /state\.activeCourseView === "selected"/);
+    assert.match(combinedSource, /state\.activeCourseView === "tracked"/);
+    assert.match(combinedSource, /\.filter\(\(\[, track\]\) => Boolean\(track\?\.enabled\)\)/);
     assert.match(source, /removedSelectedSections: new Map\(\)/);
     assert.match(source, /state\.removedSelectedSections\.set\(String\(sectionId\), \{ \.\.\.removedSection, id: String\(sectionId\) \}\)/);
-    assert.match(source, /return sections\.sort\(compareCourseSections\)/);
-    assert.match(source, /\.filter\(Boolean\)\s*\.sort\(compareCourseSections\)/);
-    assert.match(source, /function layoutConflictGroup\(events\)/);
-    assert.match(source, /event\.start >= activeGroup\.end/);
-    assert.match(source, /course-card-tracked/);
-    assert.match(source, /if \(section\?\.is_cancelled\) return false/);
-    assert.match(source, /if \(seats === 0\) return true/);
-    assert.match(source, /normalizeScheduleDisplay/);
-    assert.match(source, /detail: `\$\{formatAtlasTime\(meeting\.start\)\}-\$\{formatAtlasTime\(meeting\.end\)\}`/);
+    assert.match(combinedSource, /return sections\.sort\(compareCourseSections\)/);
+    assert.match(combinedSource, /\.filter\(Boolean\)\s*\.sort\(compareCourseSections\)/);
+    assert.match(combinedSource, /function layoutConflictGroup\(events\)/);
+    assert.match(combinedSource, /event\.start >= activeGroup\.end/);
+    assert.match(combinedSource, /course-card-tracked/);
+    assert.match(combinedSource, /if \(section\?\.is_cancelled\) return false/);
+    assert.match(combinedSource, /if \(seats === 0\) return true/);
+    assert.match(combinedSource, /normalizeScheduleDisplay/);
+    assert.match(combinedSource, /detail: `\$\{formatAtlasTime\(meeting\.start\)\}-\$\{formatAtlasTime\(meeting\.end\)\}`/);
     assert.doesNotMatch(source, /detail: `[^`]*\| Sec/);
-    assert.match(source, /No tracked courses match your filters\./);
+    assert.match(combinedSource, /No tracked courses match your filters\./);
     assert.match(styles, /\.courses-view-toggle/);
     assert.match(styles, /\.course-section-inline/);
     assert.match(styles, /\.course-card-tracked/);

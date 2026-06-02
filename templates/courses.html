@@ -26,6 +26,11 @@
     <script src="{{ url_for('static', filename='js/global.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/navbar.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/sidebar.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/courses/utils.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/courses/filters.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/courses/panel.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/courses/calendar.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/courses/controls.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/courses.js') }}" defer></script>
 </head>
 <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>

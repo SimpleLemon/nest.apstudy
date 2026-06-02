@@ -4,17 +4,23 @@ import { createRoot } from 'react-dom/client';
 import {
     useCreateBlockNote,
     FormattingToolbarController,
-    SideMenuController,
+    useEditorContentOrSelectionChange,
 } from '@blocknote/react';
 import { BlockNoteView } from '@blocknote/mantine';
 import {
-    CleanSideMenu,
     ContextualNotesToolbar,
     applyToolbarTooltips,
     notesEditorSchema,
 } from './toolbar.js';
 
-const noteId = window.location.pathname.split('/').pop();
+function noteIdFromPath() {
+    const parts = window.location.pathname.split('/').filter(Boolean);
+    const editorIndex = parts.indexOf('editor');
+    if (editorIndex === -1) return '';
+    return parts[editorIndex + 1] || '';
+}
+
+const noteId = noteIdFromPath();
 const SAVE_DEBOUNCE_MS = 800;
 const SAVED_TIME_REFRESH_MS = 60000;
 
@@ -26,6 +32,10 @@ let noteHasPendingChanges = false;
 
 const titleInput = document.getElementById('note-title-input');
 const saveStatus = document.getElementById('save-status');
+const saveRetry = document.getElementById('save-retry');
+const blocknoteRoot = document.getElementById('blocknote-root');
+const writingToolbar = document.getElementById('notes-writing-toolbar');
+const editorHint = document.getElementById('notes-editor-hint');
 
 function buildLoadingIndicatorHtml(label = 'Loading...', options = {}) {
     return window.APStudyLoader.html(label, options);
@@ -88,6 +98,7 @@ function setLastSavedAt(value) {
 
 function setSaveStatus(status, options = {}) {
     if (!saveStatus) return;
+    if (saveRetry) saveRetry.hidden = true;
 
     saveStatus.classList.remove(
         'save-status-hidden',
@@ -111,8 +122,9 @@ function setSaveStatus(status, options = {}) {
 
     if (status === 'error') {
         clearSavedTimeRefresh();
-        saveStatus.textContent = 'Save failed';
+        saveStatus.textContent = options.message || 'Save failed';
         saveStatus.classList.add('save-status-error');
+        if (saveRetry && options.retry !== false) saveRetry.hidden = false;
     }
 }
 
@@ -149,6 +161,154 @@ async function saveNote() {
         console.error(error);
         setSaveStatus('error');
     }
+}
+
+function focusEditorBody() {
+    if (!editorInstance) return;
+    editorInstance.focus?.();
+}
+
+function blockText(block) {
+    if (!block) return '';
+    const ownText = Array.isArray(block.content)
+        ? block.content.map((item) => item?.text || '').join(' ')
+        : '';
+    const childText = Array.isArray(block.children)
+        ? block.children.map(blockText).join(' ')
+        : '';
+    return `${ownText} ${childText}`.trim();
+}
+
+function documentHasText(documentValue) {
+    return Array.isArray(documentValue)
+        && documentValue.some((block) => blockText(block).trim().length > 0);
+}
+
+function isBlankTitle(title) {
+    const value = String(title || '').trim();
+    return value === '' || value.toLowerCase() === 'untitled';
+}
+
+function selectedBlocks() {
+    if (!editorInstance) return [];
+    return editorInstance.getSelection?.()?.blocks || [editorInstance.getTextCursorPosition?.()?.block].filter(Boolean);
+}
+
+function setSelectedBlocks(type, props = undefined) {
+    if (!editorInstance) return;
+    selectedBlocks().forEach((block) => {
+        if (!block) return;
+        editorInstance.updateBlock(block, {
+            type,
+            props,
+        });
+    });
+    focusEditorBody();
+    updateEditorChrome();
+    triggerDebouncedSave();
+}
+
+function toggleBasicStyle(style) {
+    if (!editorInstance) return;
+    if (typeof editorInstance.toggleStyles === 'function') {
+        editorInstance.toggleStyles({ [style]: true });
+        focusEditorBody();
+        updateEditorChrome();
+        triggerDebouncedSave();
+        return;
+    }
+    focusEditorBody();
+}
+
+function updateToolbarState() {
+    if (!writingToolbar || !editorInstance) return;
+    const block = selectedBlocks()[0];
+    const activeStyles = typeof editorInstance.getActiveStyles === 'function'
+        ? editorInstance.getActiveStyles()
+        : {};
+
+    writingToolbar.querySelectorAll('button[data-editor-action]').forEach((button) => {
+        const action = button.dataset.editorAction;
+        let active = false;
+        if (action === 'paragraph') {
+            active = block?.type === 'paragraph';
+        } else if (action === 'heading') {
+            active = block?.type === 'heading' && Number(block?.props?.level) === Number(button.dataset.level);
+        } else if (['bulletListItem', 'numberedListItem', 'checkListItem'].includes(action)) {
+            active = block?.type === action;
+        } else if (action === 'basic-style') {
+            active = Boolean(activeStyles?.[button.dataset.style]);
+        }
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', String(active));
+    });
+}
+
+function updateEditorHint() {
+    if (!editorHint || !editorInstance) return;
+    editorHint.hidden = documentHasText(editorInstance.document);
+}
+
+function updateEditorChrome() {
+    updateToolbarState();
+    updateEditorHint();
+}
+
+function bindWritingToolbar() {
+    if (!writingToolbar) return;
+    writingToolbar.hidden = false;
+    writingToolbar.querySelectorAll('button[data-editor-action]').forEach((button) => {
+        button.addEventListener('click', () => {
+            const action = button.dataset.editorAction;
+            if (action === 'focus-body') {
+                focusEditorBody();
+                return;
+            }
+            if (action === 'undo' || action === 'redo') {
+                if (typeof editorInstance[action] === 'function') {
+                    editorInstance[action]();
+                }
+                focusEditorBody();
+                updateEditorChrome();
+                return;
+            }
+            if (action === 'basic-style') {
+                toggleBasicStyle(button.dataset.style);
+                return;
+            }
+            if (action === 'heading') {
+                setSelectedBlocks('heading', { level: Number(button.dataset.level) || 1 });
+                return;
+            }
+            setSelectedBlocks(action);
+        });
+    });
+    writingToolbar.addEventListener('toggle', (event) => {
+        if (event.target.matches('.notes-toolbar-more[open]')) {
+            writingToolbar.querySelectorAll('.notes-toolbar-more[open]').forEach((details) => {
+                if (details !== event.target) details.open = false;
+            });
+        }
+    }, true);
+}
+
+function renderMissingNoteState(message = 'This note could not be opened.') {
+    if (titleInput) {
+        titleInput.value = '';
+        titleInput.disabled = true;
+    }
+    if (writingToolbar) writingToolbar.hidden = true;
+    if (blocknoteRoot) {
+        blocknoteRoot.innerHTML = `
+            <div class="notes-editor-empty-state">
+                <span class="material-symbols-outlined" aria-hidden="true">description</span>
+                <h2>Note unavailable</h2>
+                <p>${message}</p>
+                <a href="/notes" class="btn-primary">Back to notes</a>
+            </div>
+        `;
+    }
+    setSaveStatus('error', { message: 'Unable to load', retry: false });
 }
 
 function triggerDebouncedSave() {
@@ -203,28 +363,35 @@ function NoteEditor({ initialContent }) {
         };
     }, []);
 
+    useEditorContentOrSelectionChange(() => {
+        updateEditorChrome();
+    }, editor);
+
     return React.createElement(
         BlockNoteView,
         {
             editor,
             formattingToolbar: false,
             sideMenu: false,
-            theme: 'dark',
+            theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
             onChange: () => {
+                updateEditorChrome();
                 triggerDebouncedSave();
             },
         },
         React.createElement(FormattingToolbarController, {
             formattingToolbar: ContextualNotesToolbar,
-        }),
-        React.createElement(SideMenuController, { sideMenu: CleanSideMenu })
+        })
     );
 }
 
 async function initEditorPage() {
-    if (!noteId || !titleInput) return;
+    if (!noteId || !titleInput) {
+        renderMissingNoteState('Open or create a note from the Notes page first.');
+        return;
+    }
 
-    const rootElement = document.getElementById('blocknote-root');
+    const rootElement = blocknoteRoot;
     if (!rootElement) return;
 
     rootElement.innerHTML = `
@@ -243,6 +410,8 @@ async function initEditorPage() {
         note = await response.json();
     } catch (error) {
         console.error(error);
+        renderMissingNoteState('The note may have been deleted or is unavailable.');
+        return;
     }
 
     const noteTitle = typeof note?.title === 'string' ? note.title : '';
@@ -264,6 +433,7 @@ async function initEditorPage() {
 
     try {
         root.render(React.createElement(NoteEditor, { initialContent: parsedContent }));
+        bindWritingToolbar();
     } catch (error) {
         console.error('Failed to mount note editor', error);
         setSaveStatus('error');
@@ -272,6 +442,25 @@ async function initEditorPage() {
     titleInput.addEventListener('input', () => {
         triggerDebouncedSave();
     });
+    titleInput.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter') return;
+        event.preventDefault();
+        focusEditorBody();
+    });
+    rootElement.addEventListener('click', () => {
+        focusEditorBody();
+    });
+    window.setTimeout(() => {
+        const isNewBlankNote = isBlankTitle(noteTitle) && !documentHasText(parsedContent);
+        updateEditorChrome();
+        if (!isNewBlankNote) return;
+        titleInput.focus({ preventScroll: true });
+        titleInput.select();
+    }, 0);
 }
+
+saveRetry?.addEventListener('click', () => {
+    void saveNote();
+});
 
 initEditorPage();

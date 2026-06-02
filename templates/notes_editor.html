@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-editor-ui-2">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@blocknote/core@0.28.0/fonts/inter.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@blocknote/mantine@0.28.0/style.css">
     <title>Note Editor - APStudy Nest</title>
@@ -42,7 +42,7 @@
     <script src="{{ url_for('static', filename='js/global.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/navbar.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/sidebar.js') }}" defer></script>
-    <script type="module" src="{{ url_for('static', filename='js/notes/editor.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/notes/editor.js') }}?v=notes-editor-ui-2"></script>
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     </style>
@@ -58,7 +58,10 @@
                     <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
                     <span>Notes</span>
                 </a>
-                <div id="save-status" class="save-status save-status-hidden">Saved</div>
+                <div class="editor-save-wrap">
+                    <div id="save-status" class="save-status save-status-hidden">Loading...</div>
+                    <button id="save-retry" class="editor-retry-button" type="button" hidden>Retry</button>
+                </div>
             </div>
 
             <div class="notes-editor-surface">
@@ -71,6 +74,67 @@
                     autocomplete="off"
                     spellcheck="true"
                 />
+
+                <div id="notes-writing-toolbar" class="notes-writing-toolbar" aria-label="Writing tools" hidden>
+                    <div class="notes-toolbar-segment notes-toolbar-history" aria-label="History">
+                        <button type="button" data-editor-action="undo" title="Undo" aria-label="Undo">
+                            <span class="material-symbols-outlined" aria-hidden="true">undo</span>
+                        </button>
+                        <button type="button" data-editor-action="redo" title="Redo" aria-label="Redo">
+                            <span class="material-symbols-outlined" aria-hidden="true">redo</span>
+                        </button>
+                    </div>
+                    <div class="notes-toolbar-segment notes-toolbar-blocks" aria-label="Block style">
+                        <button type="button" data-editor-action="paragraph" title="Paragraph" aria-label="Paragraph">
+                            <span class="material-symbols-outlined" aria-hidden="true">subject</span>
+                            <span class="notes-toolbar-label">Paragraph</span>
+                        </button>
+                        <button type="button" data-editor-action="heading" data-level="1" title="Heading 1" aria-label="Heading 1">
+                            <span aria-hidden="true">H1</span>
+                        </button>
+                        <button type="button" data-editor-action="heading" data-level="2" title="Heading 2" aria-label="Heading 2">
+                            <span aria-hidden="true">H2</span>
+                        </button>
+                    </div>
+                    <div class="notes-toolbar-segment notes-toolbar-inline" aria-label="Text style">
+                        <button type="button" data-editor-action="basic-style" data-style="bold" title="Bold" aria-label="Bold">
+                            <strong aria-hidden="true">B</strong>
+                        </button>
+                        <button type="button" data-editor-action="basic-style" data-style="italic" title="Italic" aria-label="Italic">
+                            <em aria-hidden="true">I</em>
+                        </button>
+                    </div>
+                    <div class="notes-toolbar-segment notes-toolbar-lists" aria-label="Lists">
+                        <button type="button" data-editor-action="bulletListItem" title="Bulleted list" aria-label="Bulleted list">
+                            <span class="material-symbols-outlined" aria-hidden="true">format_list_bulleted</span>
+                        </button>
+                        <button type="button" data-editor-action="numberedListItem" title="Numbered list" aria-label="Numbered list">
+                            <span class="material-symbols-outlined" aria-hidden="true">format_list_numbered</span>
+                        </button>
+                        <button type="button" data-editor-action="checkListItem" title="Checklist" aria-label="Checklist">
+                            <span class="material-symbols-outlined" aria-hidden="true">checklist</span>
+                        </button>
+                    </div>
+                    <div class="notes-toolbar-segment notes-toolbar-insert-desktop" aria-label="Insert">
+                        <button type="button" data-editor-action="focus-body" title="Start writing" aria-label="Start writing">
+                            <span class="material-symbols-outlined" aria-hidden="true">add</span>
+                            <span class="notes-toolbar-label">Add block</span>
+                        </button>
+                    </div>
+                    <details class="notes-toolbar-more">
+                        <summary aria-label="More writing tools">
+                            <span class="material-symbols-outlined" aria-hidden="true">more_horiz</span>
+                            <span>More</span>
+                        </summary>
+                        <div class="notes-toolbar-more-menu">
+                            <button type="button" data-editor-action="focus-body" title="Start writing" aria-label="Start writing">
+                                <span class="material-symbols-outlined" aria-hidden="true">add</span>
+                                <span class="notes-toolbar-label">Add block</span>
+                            </button>
+                        </div>
+                    </details>
+                </div>
+                <p id="notes-editor-hint" class="notes-editor-hint" hidden>Type normally, use <kbd>/</kbd> for blocks, and press Space after Markdown shortcuts.</p>
 
                 <!-- BlockNote editor mounts here via createRoot -->
                 <div id="blocknote-root" class="blocknote-container"></div>
