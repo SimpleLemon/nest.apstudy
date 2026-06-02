@@ -52,8 +52,9 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
         self.assertEqual(embed["color"], discord_audit.COLOR_VALUES["gray"])
         self.assertEqual([field["name"] for field in embed["fields"]], ["Actor", "Target", "Metadata"])
         self.assertTrue(all(field["inline"] is True for field in embed["fields"]))
-        self.assertIn("2026-05-25T00:00:00Z", embed["footer"]["text"])
-        self.assertNotIn("event-1", embed["footer"]["text"])
+        self.assertEqual(embed["timestamp"], "2026-05-25T00:00:00Z")
+        self.assertNotIn("2026-05-25T00:00:00Z", (embed.get("footer") or {}).get("text", ""))
+        self.assertNotIn("event-1", (embed.get("footer") or {}).get("text", ""))
 
     def test_server_log_embed_fields_are_inline(self):
         event = DiscordAuditEvent(
@@ -102,10 +103,11 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
         self.assertTrue(all(field["inline"] is True for field in embed["fields"]))
         self.assertEqual([field["value"] for field in embed["fields"]], ["Open", "4"])
         self.assertEqual(embed["timestamp"], "2026-05-25T00:00:00Z")
-        self.assertEqual(embed["footer"]["text"], "2026-05-25T00:00:00Z")
-        self.assertNotIn("12345", embed["footer"]["text"])
-        self.assertNotIn("automated", embed["footer"]["text"])
-        self.assertNotIn("Fall_2026", embed["footer"]["text"])
+        footer_text = (embed.get("footer") or {}).get("text", "")
+        self.assertNotIn("2026-05-25T00:00:00Z", footer_text)
+        self.assertNotIn("12345", footer_text)
+        self.assertNotIn("automated", footer_text)
+        self.assertNotIn("Fall_2026", footer_text)
 
     def test_course_track_checked_embed_keeps_zero_open_seats(self):
         event = DiscordAuditEvent(
@@ -128,7 +130,7 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
         self.assertEqual(embed["fields"][1]["name"], "Seats Open")
         self.assertEqual(embed["fields"][1]["value"], "0")
 
-    def test_course_track_request_embed_uses_timestamp_footer(self):
+    def test_course_track_request_embed_uses_native_timestamp(self):
         event = DiscordAuditEvent(
             channel="course_tracks",
             title="Course Track Requested",
@@ -141,9 +143,11 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
 
         embed = event.embed()
 
-        self.assertEqual(embed["footer"]["text"], "2026-05-25T00:00:00Z")
-        self.assertNotIn("Spring_2026", embed["footer"]["text"])
-        self.assertNotIn("{", embed["footer"]["text"])
+        self.assertEqual(embed["timestamp"], "2026-05-25T00:00:00Z")
+        footer_text = (embed.get("footer") or {}).get("text", "")
+        self.assertNotIn("2026-05-25T00:00:00Z", footer_text)
+        self.assertNotIn("Spring_2026", footer_text)
+        self.assertNotIn("{", footer_text)
 
     def test_server_logs_channel_defaults_to_requested_channel(self):
         with patch.dict(os.environ, {}, clear=True):

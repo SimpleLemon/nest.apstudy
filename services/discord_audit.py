@@ -189,7 +189,6 @@ class DiscordAuditEvent:
                 {"name": "Seats Open", "value": _truncate(metadata.get("seats_open") if metadata.get("seats_open") is not None else "N/A"), "inline": True},
             ],
             "timestamp": self.event_timestamp,
-            "footer": {"text": self.event_timestamp},
         }
 
     def embed(self):
@@ -204,9 +203,7 @@ class DiscordAuditEvent:
                 {"name": "Target", "value": _truncate(self.target), "inline": True},
                 {"name": "Metadata", "value": _compact_metadata(self.metadata), "inline": True},
             ],
-            "footer": {
-                "text": self.event_timestamp
-            },
+            "timestamp": self.event_timestamp,
         }
 
 
