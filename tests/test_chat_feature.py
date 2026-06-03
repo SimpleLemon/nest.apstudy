@@ -397,7 +397,7 @@ class TestChatFeature(unittest.TestCase):
         self.assertEqual(emit_event.call_args.kwargs["message_id"], "row-1")
         self.assertEqual(emit_event.call_args.kwargs["channel_id"], "nest_chat")
 
-    def test_discord_upsert_does_not_emit_event_for_existing_message(self):
+    def test_discord_upsert_emits_update_event_for_changed_existing_message(self):
         channel = {
             "$id": "nest_chat",
             "kind": "discord",
@@ -418,7 +418,8 @@ class TestChatFeature(unittest.TestCase):
         self.assertFalse(created)
         self.assertEqual(row["$id"], "existing-row")
         update_row.assert_called_once()
-        emit_event.assert_not_called()
+        emit_event.assert_called_once()
+        self.assertEqual(emit_event.call_args.args[:3], ("channel", "nest_chat", "message_updated"))
 
     def test_discord_upsert_skips_update_for_unchanged_existing_message(self):
         channel = {
@@ -480,6 +481,67 @@ class TestChatFeature(unittest.TestCase):
         payload = update_row.call_args.args[2]
         self.assertEqual(set(payload), {"content", "rendered_html", "updated_at"})
         self.assertEqual(payload["content"], "edited discord payload")
+
+    def test_discord_partial_update_does_not_wipe_missing_content(self):
+        channel = {
+            "$id": "nest_chat",
+            "kind": "discord",
+            "discord_channel_id": "discord-channel",
+        }
+        existing = {
+            "$id": "existing-row",
+            "channel_id": "nest_chat",
+            "source": "discord",
+            "external_id": "discord:discord-channel:discord-message-1",
+            "discord_message_id": "discord-message-1",
+            "content": "keep me",
+            "rendered_html": "keep me",
+            "created_at": "2026-05-26T22:00:00Z",
+        }
+        partial = {
+            "id": "discord-message-1",
+            "channel_id": "discord-channel",
+            "edited_timestamp": "2026-05-26T22:02:00Z",
+        }
+
+        with patch.object(chat_api, "first_row", return_value=existing), \
+                patch.object(chat_api, "update_row_safe", return_value={"$id": "existing-row"}) as update_row, \
+                patch.object(chat_api, "emit_chat_event") as emit_event:
+            row, created = chat_api._upsert_discord_message(channel, partial, emit_event=True, partial=True)
+
+        self.assertFalse(created)
+        self.assertEqual(row["$id"], "existing-row")
+        payload = update_row.call_args.args[2]
+        self.assertNotIn("content", payload)
+        self.assertNotIn("rendered_html", payload)
+        emit_event.assert_called_once()
+        self.assertEqual(emit_event.call_args.args[:3], ("channel", "nest_chat", "message_updated"))
+
+    def test_discord_delete_soft_deletes_and_emits_event(self):
+        channel = {
+            "$id": "nest_chat",
+            "kind": "discord",
+            "discord_channel_id": "discord-channel",
+        }
+        row = {
+            "$id": "message-row",
+            "channel_id": "nest_chat",
+            "source": "discord",
+            "external_id": "discord:discord-channel:discord-message-1",
+            "discord_message_id": "discord-message-1",
+        }
+
+        with patch.object(chat_api, "first_row", return_value=row), \
+                patch.object(chat_api, "update_row_safe", return_value=row) as update_row, \
+                patch.object(chat_api, "emit_chat_event") as emit_event:
+            result = chat_api._soft_delete_discord_message(channel, "discord-message-1", emit_event=True)
+
+        self.assertEqual(result["$id"], "message-row")
+        payload = update_row.call_args.args[2]
+        self.assertEqual(payload["deleted_by"], "discord")
+        self.assertIn("deleted_at", payload)
+        emit_event.assert_called_once()
+        self.assertEqual(emit_event.call_args.args[:3], ("channel", "nest_chat", "message_deleted"))
 
     def test_discord_message_payload_normalizes_schema_bounded_values(self):
         channel = {

@@ -23,6 +23,7 @@ from appwrite_helpers import (
 )
 from services.discord_audit import emit_server_log_event
 from services.atlas_client import DEFAULT_TERM
+from services.daily_quote import get_daily_quote_payload
 
 dashboard_bp = Blueprint("dashboard", __name__)
 logger = logging.getLogger(__name__)
@@ -800,6 +801,16 @@ def dashboard_summary():
     if not current_user.onboarding_complete:
         return jsonify({"error": "Onboarding is required."}), 403
     return jsonify(_dashboard_summary_payload())
+
+
+@dashboard_bp.route("/api/dashboard/quote/today")
+@login_required
+def dashboard_quote_today():
+    """Return today's UTC daily quote from Appwrite, falling back server-side."""
+    if not current_user.onboarding_complete:
+        return jsonify({"error": "Onboarding is required."}), 403
+    quote = get_daily_quote_payload()
+    return jsonify({"quote": quote, "dateKey": quote.get("date")})
 
 
 @dashboard_bp.route("/api/dashboard/quote/error", methods=["POST"])

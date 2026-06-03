@@ -26,6 +26,7 @@ test("chat uses realtime event signals instead of message polling", async () => 
   assert.match(source, /\.table\(tableId\)\.row\(\)/);
   assert.match(source, /client\.subscribe/);
   assert.match(source, /handleRealtimePayload/);
+  assert.match(source, /message_updated/);
 });
 
 test("chat uses Appwrite Presences for online and typing state", async () => {
@@ -181,21 +182,39 @@ test("chat styles discord custom emojis as inline lazy images", async () => {
   assert.match(styles, /vertical-align: -0\.32em/);
 });
 
-test("scheduler syncs discord chat rooms and emits realtime events", async () => {
+test("scheduler uses discord gateway with slow reconciliation", async () => {
   const scheduler = await sourceFor("services/scheduler.py");
   const api = await sourceFor("blueprints/chat_api.py");
+  const gateway = await sourceFor("services/discord_gateway.py");
 
-  assert.match(scheduler, /def _sync_discord_chat\(app\):/);
+  assert.match(scheduler, /def _reconcile_discord_chat\(app\):/);
   assert.match(scheduler, /sync_discord_channels\(emit_events=True\)/);
-  assert.match(scheduler, /DISCORD_CHAT_SYNC_SECONDS/);
-  assert.match(scheduler, /id="sync_discord_chat"/);
+  assert.match(scheduler, /DISCORD_CHAT_RECONCILE_SECONDS/);
+  assert.match(scheduler, /id="reconcile_discord_chat"/);
+  assert.match(scheduler, /start_discord_gateway\(app\)/);
+  assert.match(gateway, /discord\.Client\(intents=intents\)/);
+  assert.match(gateway, /on_message/);
+  assert.match(gateway, /on_raw_message_edit/);
+  assert.match(gateway, /on_raw_message_delete/);
   assert.match(api, /def sync_discord_channels\(emit_events=True\):/);
   assert.match(api, /_sync_discord_channel\(channel, emit_events=emit_events\)/);
   assert.match(api, /_upsert_discord_message\(channel, message, emit_event=emit_events\)/);
   assert.match(api, /emit_chat_event\(\s*"channel",\s*channel_id,\s*"message_created"/);
+  assert.match(api, /"message_updated"/);
   assert.match(api, /@chat_api_bp\.route\("\/api\/chat\/discord\/messages", methods=\["POST"\]\)/);
   assert.match(api, /def discord_message_ingest\(\):/);
   assert.match(api, /_valid_discord_ingest_request\(\)/);
+});
+
+test("global sidebar chat badge uses slow summary polling only", async () => {
+  const sidebar = await sourceFor("static/js/sidebar.js");
+
+  assert.match(sidebar, /data-chat-unread-badge/);
+  assert.match(sidebar, /\/api\/chat\/summary/);
+  assert.match(sidebar, /const pollMs = 120000/);
+  assert.match(sidebar, /document\.visibilityState === 'hidden'/);
+  assert.doesNotMatch(sidebar, /client\.subscribe/);
+  assert.doesNotMatch(sidebar, /\/api\/chat\/channels\/.*messages/);
 });
 
 test("chat textarea enter sends and shift enter keeps multiline input", async () => {

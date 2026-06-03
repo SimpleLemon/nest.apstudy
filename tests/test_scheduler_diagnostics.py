@@ -76,28 +76,56 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir, \
                 patch.dict(os.environ, {
                     "SCHEDULER_ENABLED": "1",
+                    "DISCORD_GATEWAY_ENABLED": "1",
+                    "DISCORD_CHAT_RECONCILE_SECONDS": "300",
                     "SCHEDULER_LOCK_PATH": os.path.join(temp_dir, "scheduler.lock"),
                 }, clear=False), \
                 patch.object(scheduler, "BackgroundScheduler", FakeScheduler), \
                 patch.object(scheduler, "get_course_tracking_refresh_minutes", return_value=30), \
+                patch("services.discord_gateway.start_discord_gateway", return_value=True) as start_gateway, \
                 patch("services.discord_audit.emit_server_log_event", return_value=True) as emit_event:
             scheduler.init_scheduler(app)
 
+        start_gateway.assert_called_once_with(app)
         status = scheduler.scheduler_status()
         self.assertTrue(status["scheduler_running"])
         self.assertTrue(status["scheduler_lock_acquired"])
         self.assertEqual(
             {job["id"] for job in status["jobs"]},
-            {"refresh_all_feeds", "check_course_seat_tracks", "sync_discord_chat"},
+            {"refresh_all_feeds", "check_course_seat_tracks", "fetch_daily_quote", "reconcile_discord_chat"},
         )
         course_tracking_job = next(job for job in status["jobs"] if job["id"] == "check_course_seat_tracks")
         self.assertIn("30 min", course_tracking_job["name"])
+        quote_job = scheduler._scheduler.get_job("fetch_daily_quote")
+        self.assertEqual(quote_job.kwargs["trigger"].__class__.__name__, "CronTrigger")
+        self.assertEqual(quote_job.kwargs["max_instances"], 1)
         self.assertEqual(emit_event.call_args.args[0], "Scheduler Started")
         metadata = emit_event.call_args.kwargs["metadata"]
         self.assertTrue(metadata["scheduler_lock_acquired"])
         self.assertEqual(metadata["scheduler_process_id"], os.getpid())
         self.assertEqual(metadata["course_tracking_refresh_interval_minutes"], 30)
+        self.assertTrue(metadata["discord_gateway_enabled"])
+        self.assertEqual(metadata["discord_chat_reconcile_seconds"], 300)
         self.assertIn("check_course_seat_tracks", metadata["job_ids"])
+
+    def test_scheduler_gateway_opt_out_registers_legacy_sync_job(self):
+        app = Flask(__name__)
+        with tempfile.TemporaryDirectory() as temp_dir, \
+                patch.dict(os.environ, {
+                    "SCHEDULER_ENABLED": "1",
+                    "DISCORD_GATEWAY_ENABLED": "0",
+                    "DISCORD_CHAT_SYNC_SECONDS": "5",
+                    "SCHEDULER_LOCK_PATH": os.path.join(temp_dir, "scheduler.lock"),
+                }, clear=False), \
+                patch.object(scheduler, "BackgroundScheduler", FakeScheduler), \
+                patch.object(scheduler, "get_course_tracking_refresh_minutes", return_value=30), \
+                patch("services.discord_gateway.start_discord_gateway", return_value=True) as start_gateway, \
+                patch("services.discord_audit.emit_server_log_event", return_value=True):
+            scheduler.init_scheduler(app)
+
+        start_gateway.assert_not_called()
+        self.assertIn("sync_discord_chat", {job["id"] for job in scheduler.scheduler_status()["jobs"]})
+        self.assertNotIn("reconcile_discord_chat", {job["id"] for job in scheduler.scheduler_status()["jobs"]})
 
     def test_scheduler_lock_contention_skips_startup_and_started_log(self):
         app = Flask(__name__)
@@ -156,6 +184,48 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
         emit_event.assert_called_once()
         self.assertEqual(emit_event.call_args.args[0], "Course Seat Tracking Scheduler Failed")
         self.assertEqual(emit_event.call_args.kwargs["metadata"]["job_id"], "check_course_seat_tracks")
+
+    def test_daily_quote_wrapper_stores_quote_successfully(self):
+        app = Flask(__name__)
+        with patch.object(scheduler, "_current_daily_quote_date", return_value="2026-06-03"), \
+                patch("services.daily_quote.fetch_and_store_daily_quote", return_value={"$id": "quote-1"}) as fetch_quote:
+            row = scheduler._fetch_daily_quote(app, quote_date="2026-06-03")
+
+        self.assertEqual(row, {"$id": "quote-1"})
+        fetch_quote.assert_called_once_with("2026-06-03")
+
+    def test_daily_quote_wrapper_retries_twice_then_gives_up(self):
+        app = Flask(__name__)
+        fake_scheduler = FakeScheduler()
+        fake_scheduler.running = True
+
+        with patch.object(scheduler, "_scheduler", fake_scheduler), \
+                patch.object(scheduler, "_current_daily_quote_date", return_value="2026-06-03"), \
+                patch("services.daily_quote.fetch_and_store_daily_quote", side_effect=RuntimeError("boom")), \
+                patch.object(scheduler, "_emit_scheduler_event", return_value=True) as emit_event:
+            scheduler._fetch_daily_quote(app, quote_date="2026-06-03", attempt=0)
+            self.assertEqual(len(fake_scheduler.jobs), 1)
+            self.assertEqual(fake_scheduler.jobs[-1].id, "fetch_daily_quote_retry_2026-06-03_1")
+
+            fake_scheduler.jobs[-1].kwargs["func"]()
+            self.assertEqual(len(fake_scheduler.jobs), 2)
+            self.assertEqual(fake_scheduler.jobs[-1].id, "fetch_daily_quote_retry_2026-06-03_2")
+
+            fake_scheduler.jobs[-1].kwargs["func"]()
+
+        self.assertEqual(len(fake_scheduler.jobs), 2)
+        self.assertEqual(emit_event.call_count, 3)
+        self.assertTrue(emit_event.call_args.kwargs["metadata"]["gave_up"])
+        self.assertFalse(emit_event.call_args.kwargs["metadata"]["retry_scheduled"])
+
+    def test_daily_quote_wrapper_skips_stale_retry_date(self):
+        app = Flask(__name__)
+        with patch.object(scheduler, "_current_daily_quote_date", return_value="2026-06-04"), \
+                patch("services.daily_quote.fetch_and_store_daily_quote") as fetch_quote:
+            result = scheduler._fetch_daily_quote(app, quote_date="2026-06-03", attempt=1)
+
+        self.assertIsNone(result)
+        fetch_quote.assert_not_called()
 
     def test_update_course_tracking_refresh_interval_reschedules_job(self):
         fake_scheduler = FakeScheduler()

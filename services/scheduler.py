@@ -18,9 +18,11 @@ import os
 import json
 import logging
 import socket
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.cron import CronTrigger
+from apscheduler.triggers.date import DateTrigger
 from apscheduler.triggers.interval import IntervalTrigger
 
 from appwrite.exception import AppwriteException
@@ -39,6 +41,7 @@ from services.app_config import (
 from services.staleness import is_stale
 
 logger = logging.getLogger(__name__)
+DAILY_QUOTE_RETRY_LIMIT = 2
 
 # Module-level scheduler instance. Initialized once via init_scheduler().
 _scheduler = None
@@ -279,6 +282,70 @@ def _check_course_seat_tracks(app):
             )
 
 
+def _schedule_daily_quote_retry(app, quote_date, next_attempt):
+    if _scheduler is None or not _scheduler.running:
+        logger.warning("Daily quote retry skipped because scheduler is not running.")
+        return False
+    if quote_date != _current_daily_quote_date():
+        logger.warning("Daily quote retry skipped for stale quote date: %s", quote_date)
+        return False
+
+    run_at = datetime.now(timezone.utc) + timedelta(hours=1)
+    job_id = f"fetch_daily_quote_retry_{quote_date}_{next_attempt}"
+    _scheduler.add_job(
+        func=lambda: _fetch_daily_quote(app, quote_date=quote_date, attempt=next_attempt),
+        trigger=DateTrigger(run_date=run_at),
+        id=job_id,
+        name=f"Retry daily quote fetch for {quote_date} attempt {next_attempt}",
+        replace_existing=True,
+        max_instances=1,
+    )
+    logger.info("Daily quote retry %s scheduled for %s at %s.", next_attempt, quote_date, run_at.isoformat())
+    return True
+
+
+def _current_daily_quote_date():
+    from services.daily_quote import utc_quote_date
+
+    return utc_quote_date()
+
+
+def _fetch_daily_quote(app, quote_date=None, attempt=0):
+    """Fetch and persist the global daily quote inside the Flask app context."""
+    target_date = quote_date or _current_daily_quote_date()
+    if target_date != _current_daily_quote_date():
+        logger.warning("Skipping daily quote fetch for stale quote date: %s", target_date)
+        return None
+
+    with app.app_context():
+        try:
+            from services.daily_quote import fetch_and_store_daily_quote
+
+            row = fetch_and_store_daily_quote(target_date)
+            logger.info("Daily quote fetched and stored for %s.", target_date)
+            return row
+        except Exception as exc:
+            logger.exception("Daily quote fetch failed for %s on attempt %s", target_date, attempt)
+            next_attempt = attempt + 1
+            retry_scheduled = False
+            if next_attempt <= DAILY_QUOTE_RETRY_LIMIT:
+                retry_scheduled = _schedule_daily_quote_retry(app, target_date, next_attempt)
+            _emit_scheduler_event(
+                "Daily Quote Scheduler Failed",
+                metadata={
+                    "job_id": "fetch_daily_quote",
+                    "quote_date": target_date,
+                    "attempt": attempt,
+                    "next_attempt": next_attempt if retry_scheduled else None,
+                    "retry_scheduled": retry_scheduled,
+                    "gave_up": not retry_scheduled,
+                    "error": str(exc)[:300],
+                },
+                color="red",
+            )
+            return None
+
+
 def update_course_tracking_refresh_interval(minutes):
     """Reschedule the course seat tracking job if the scheduler is active."""
     global _scheduler
@@ -311,17 +378,22 @@ def update_course_tracking_refresh_interval(minutes):
         return False
 
 
-def _sync_discord_chat(app):
-    """Poll Discord-backed chat channels and notify /chat clients via chat events."""
+def _reconcile_discord_chat(app):
+    """Slowly reconcile Discord-backed chat channels as a Gateway safety net."""
     with app.app_context():
         try:
             from blueprints.chat_api import sync_discord_channels
 
             created_count = sync_discord_channels(emit_events=True)
             if created_count:
-                logger.info("Discord chat sync: %s new message(s).", created_count)
+                logger.info("Discord chat reconciliation: %s new message(s).", created_count)
         except Exception:
-            logger.exception("Discord chat sync failed")
+            logger.exception("Discord chat reconciliation failed")
+
+
+def _sync_discord_chat(app):
+    """Legacy fast polling path used only when Discord Gateway is disabled."""
+    _reconcile_discord_chat(app)
 
 
 def init_scheduler(app):
@@ -389,17 +461,47 @@ def init_scheduler(app):
             max_instances=1,
         )
 
-        discord_sync_seconds = int(os.environ.get("DISCORD_CHAT_SYNC_SECONDS", "5"))
-        if os.environ.get("DISCORD_CHAT_SYNC_ENABLED", "1") != "0" and discord_sync_seconds > 0:
+        _scheduler.add_job(
+            func=lambda: _fetch_daily_quote(app),
+            trigger=CronTrigger(hour=0, minute=15, timezone=timezone.utc),
+            id="fetch_daily_quote",
+            name="Fetch ZenQuotes daily quote at 00:15 UTC",
+            replace_existing=True,
+            max_instances=1,
+        )
+
+        discord_gateway_enabled = os.environ.get("DISCORD_GATEWAY_ENABLED", "1") != "0"
+        discord_reconcile_seconds = int(os.environ.get("DISCORD_CHAT_RECONCILE_SECONDS", "300"))
+        if os.environ.get("DISCORD_CHAT_SYNC_ENABLED", "1") != "0" and discord_gateway_enabled and discord_reconcile_seconds > 0:
             _scheduler.add_job(
-                func=lambda: _sync_discord_chat(app),
-                trigger=IntervalTrigger(seconds=discord_sync_seconds),
-                id="sync_discord_chat",
-                name=f"Sync Discord chat every {discord_sync_seconds} sec",
+                func=lambda: _reconcile_discord_chat(app),
+                trigger=IntervalTrigger(seconds=discord_reconcile_seconds),
+                id="reconcile_discord_chat",
+                name=f"Reconcile Discord chat every {discord_reconcile_seconds} sec",
                 replace_existing=True,
                 max_instances=1,
                 coalesce=True,
             )
+        elif os.environ.get("DISCORD_CHAT_SYNC_ENABLED", "1") != "0":
+            discord_sync_seconds = int(os.environ.get("DISCORD_CHAT_SYNC_SECONDS", "5"))
+            if discord_sync_seconds > 0:
+                _scheduler.add_job(
+                    func=lambda: _sync_discord_chat(app),
+                    trigger=IntervalTrigger(seconds=discord_sync_seconds),
+                    id="sync_discord_chat",
+                    name=f"Sync Discord chat every {discord_sync_seconds} sec",
+                    replace_existing=True,
+                    max_instances=1,
+                    coalesce=True,
+                )
+
+        if discord_gateway_enabled:
+            try:
+                from services.discord_gateway import start_discord_gateway
+
+                start_discord_gateway(app)
+            except Exception:
+                logger.exception("Failed to start Discord Gateway listener")
 
         _scheduler.start()
     except Exception:
@@ -419,6 +521,8 @@ def init_scheduler(app):
             "scheduler_hostname": socket.gethostname(),
             "feed_refresh_interval_minutes": default_interval,
             "course_tracking_refresh_interval_minutes": course_tracking_interval,
+            "discord_gateway_enabled": discord_gateway_enabled,
+            "discord_chat_reconcile_seconds": discord_reconcile_seconds,
             "job_ids": ", ".join(job["id"] for job in scheduler_status()["jobs"]),
         },
         color="green",
@@ -435,4 +539,10 @@ def shutdown_scheduler():
         _scheduler.shutdown(wait=False)
         logger.info("Scheduler shut down.")
     _scheduler = None
+    try:
+        from services.discord_gateway import shutdown_discord_gateway
+
+        shutdown_discord_gateway()
+    except Exception:
+        logger.exception("Failed to shut down Discord Gateway listener")
     _release_scheduler_lock()

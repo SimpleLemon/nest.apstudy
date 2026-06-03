@@ -47,9 +47,23 @@ test("calendar dashboard keeps cache, public-share, and event-form contracts wir
     const source = [
         await sourceFor("static/js/calendar.js"),
         await sourceFor("static/js/calendar/utils.js"),
+        await sourceFor("static/js/calendar/state.js"),
+        await sourceFor("static/js/calendar/core.js"),
         await sourceFor("static/js/calendar/course-modal.js"),
         await sourceFor("static/js/calendar/courses.js"),
+        await sourceFor("static/js/calendar/menu.js"),
+        await sourceFor("static/js/calendar/preferences.js"),
         await sourceFor("static/js/calendar/data.js"),
+        await sourceFor("static/js/calendar/event-render.js"),
+        await sourceFor("static/js/calendar/ui-actions.js"),
+        await sourceFor("static/js/calendar/agenda.js"),
+        await sourceFor("static/js/calendar/month-view.js"),
+        await sourceFor("static/js/calendar/week-view.js"),
+        await sourceFor("static/js/calendar/render-shell.js"),
+        await sourceFor("static/js/calendar/sources.js"),
+        await sourceFor("static/js/calendar/share.js"),
+        await sourceFor("static/js/calendar/controls.js"),
+        await sourceFor("static/js/calendar/bootstrap.js"),
     ].join("\n");
 
     assert.match(source, /const WEEKDAYS = \["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"\]/);
@@ -66,14 +80,16 @@ test("calendar dashboard keeps cache, public-share, and event-form contracts wir
     assert.match(source, /function escapeHtml\(value\)/);
 });
 
-test("dashboard daily quote fetches ZenQuotes directly and uses one smooth egg card", async () => {
+test("dashboard daily quote fetches Flask endpoint and uses one smooth egg card", async () => {
     const source = await sourceFor("static/js/dashboard/daily-quote.js");
 
-    assert.match(source, /QUOTE_URL = "https:\/\/zenquotes\.io\/api\/today"/);
+    assert.doesNotMatch(source, /https:\/\/zenquotes\.io\/api\/today/);
+    assert.match(source, /QUOTE_API_URL = "\/api\/dashboard\/quote\/today"/);
     assert.match(source, /ERROR_REPORT_URL = "\/api\/dashboard\/quote\/error"/);
-    assert.doesNotMatch(source, /\/api\/dashboard\/quote\/today/);
-    assert.match(source, /item\?\.q/);
-    assert.match(source, /item\?\.a/);
+    assert.match(source, /fetch\(QUOTE_API_URL, \{ signal \}\)/);
+    assert.match(source, /new Date\(\)\.toISOString\(\)\.slice\(0, 10\)/);
+    assert.doesNotMatch(source, /America\/Chicago/);
+    assert.doesNotMatch(source, /item\?\.(?:q|a)(?![A-Za-z_])/);
     assert.match(source, /function reportQuoteError\(reason, details = \{\}\)/);
     assert.match(source, /fetch\(ERROR_REPORT_URL, \{/);
     assert.match(source, /keepalive: true/);
@@ -131,7 +147,11 @@ test("mobile shell uses a hamburger drawer without breaking desktop sidebar pers
 });
 
 test("calendar and courses switch dense schedules to compact mobile agenda renderers", async () => {
-    const calendarSource = await sourceFor("static/js/calendar.js");
+    const calendarSource = [
+        await sourceFor("static/js/calendar.js"),
+        await sourceFor("static/js/calendar/agenda.js"),
+        await sourceFor("static/js/calendar/render-shell.js"),
+    ].join("\n");
     const coursesSource = [
         await sourceFor("static/js/courses.js"),
         await sourceFor("static/js/courses/calendar.js"),
@@ -170,12 +190,12 @@ test("theme init normalizes theme aliases and persists pending settings safely",
 test("notes list guards destructive actions and supports folder/export workflows", async () => {
     const source = await sourceFor("static/js/notes/list.js");
 
-    assert.match(source, /function trackedFetch\(url, options = \{\}\)/);
+    assert.match(source, /function apiJson\(url, options = \{\}\)/);
     assert.match(source, /APStudyPendingMutations\?\.track\(request, 'notes-save'\)/);
-    assert.match(source, /trackedFetch\(`\/api\/notes\/\$\{encodeURIComponent\(noteId\)\}`/);
-    assert.match(source, /trackedFetch\(`\/api\/notes\/folders\/\$\{encodeURIComponent\(folderId\)\}`/);
-    assert.match(source, /NotesExport\.exportNoteJsonToTxt/);
-    assert.match(source, /NotesExport\.exportNoteJsonToPdf/);
+    assert.match(source, /apiJson\(`\/api\/notes\/\$\{encodeURIComponent\(noteId\)\}`/);
+    assert.match(source, /apiJson\(`\/api\/notes\/folders\/\$\{encodeURIComponent\(folderId\)\}`/);
+    assert.match(source, /NotesExport\?\.exportNoteJsonToTxt/);
+    assert.match(source, /NotesExport\?\.exportNoteJsonToPdf/);
     assert.match(source, /data-action="move"/);
 });
 
@@ -183,6 +203,8 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     const source = await sourceFor("static/js/notes/editor.js");
     const toolbarSource = await sourceFor("static/js/notes/toolbar.js");
     const styles = await sourceFor("static/css/notes.css");
+    const editorTemplate = await sourceFor("templates/notes_editor.html");
+    const notesTemplate = await sourceFor("templates/notes.html");
 
     assert.match(source, /const SAVE_DEBOUNCE_MS = 800/);
     assert.match(source, /const SAVED_TIME_REFRESH_MS = 60000/);
@@ -201,9 +223,22 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(source, /triggerDebouncedSave\(\)/);
     assert.match(source, /applyToolbarTooltips\(rootElement\)/);
     assert.match(source, /React\.createElement\(NoteEditor, \{ initialContent: parsedContent \}\)/);
-    assert.match(styles, /--notes-bg-base: hsl\(220 22% 9%\)/);
-    assert.match(styles, /--notes-bg-toolbar: hsl\(220 16% 20%\)/);
+    assert.match(source, /function addBlockAfterCurrent\(\)/);
+    assert.match(source, /editorInstance\.insertBlocks\?\.\(/);
+    assert.match(source, /editorInstance\.openSuggestionMenu\?\.\('\/'\)/);
+    assert.match(source, /function canRunHistoryAction\(action\)/);
+    assert.match(source, /editorInstance\._tiptapEditor\?\.can\?\.\(\)/);
+    assert.match(source, /button\.disabled = disabled/);
+    assert.match(styles, /--notes-bg-base: var\(--color-surface-container-lowest\)/);
+    assert.match(styles, /--notes-bg-toolbar: var\(--color-surface-container-low\)/);
     assert.match(styles, /max-width: 720px/);
+    assert.ok(styles.includes('content: "\\2022" !important;'));
+    assert.ok(styles.includes('content: attr(data-index) "." !important;'));
+    assert.match(styles, /\.blocknote-container \.bn-block-content\[data-content-type="checkListItem"\] input\[type="checkbox"\]/);
+    assert.match(styles, /\.notes-writing-toolbar button:disabled/);
+    assert.match(editorTemplate, /data-editor-action="add-block"/);
+    assert.doesNotMatch(editorTemplate, /<global class="thefooter"><\/global>/);
+    assert.match(notesTemplate, /<global class="thefooter"><\/global>/);
     assert.doesNotMatch(styles, /STATIC TOOLBAR/);
     assert.doesNotMatch(styles, /padding-top:\s*58px/);
     assert.doesNotMatch(styles, /#4ade80/i);

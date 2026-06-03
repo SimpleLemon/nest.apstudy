@@ -29,6 +29,7 @@ let saveDebounceTimer = null;
 let savedTimeRefreshTimer = null;
 let lastSavedAt = null;
 let noteHasPendingChanges = false;
+let historyBaselineDepths = { undo: 0, redo: 0 };
 
 const titleInput = document.getElementById('note-title-input');
 const saveStatus = document.getElementById('save-status');
@@ -168,6 +169,55 @@ function focusEditorBody() {
     editorInstance.focus?.();
 }
 
+function getCurrentBlock() {
+    if (!editorInstance) return null;
+    return editorInstance.getTextCursorPosition?.()?.block || selectedBlocks()[0] || null;
+}
+
+function blockOwnContentIsEmpty(block) {
+    if (!block || !Array.isArray(block.content)) return false;
+    if (block.content.length === 0) return true;
+
+    return block.content.every((item) => {
+        if (!item) return true;
+        if (typeof item === 'string') return item.trim() === '';
+        if (typeof item.text === 'string') return item.text.trim() === '';
+        return false;
+    });
+}
+
+function openBlockSuggestionMenu(block) {
+    if (!editorInstance || !block) return;
+    editorInstance.setTextCursorPosition?.(block);
+    editorInstance.openSuggestionMenu?.('/');
+    focusEditorBody();
+}
+
+function addBlockAfterCurrent() {
+    if (!editorInstance) return;
+
+    const currentBlock = getCurrentBlock();
+    if (!currentBlock) {
+        focusEditorBody();
+        return;
+    }
+
+    if (blockOwnContentIsEmpty(currentBlock)) {
+        openBlockSuggestionMenu(currentBlock);
+        return;
+    }
+
+    const insertedBlock = editorInstance.insertBlocks?.(
+        [{ type: 'paragraph' }],
+        currentBlock,
+        'after'
+    )?.[0];
+
+    openBlockSuggestionMenu(insertedBlock || currentBlock);
+    updateEditorChrome();
+    triggerDebouncedSave();
+}
+
 function blockText(block) {
     if (!block) return '';
     const ownText = Array.isArray(block.content)
@@ -220,6 +270,55 @@ function toggleBasicStyle(style) {
     focusEditorBody();
 }
 
+function canRunHistoryAction(action) {
+    if (!editorInstance) return false;
+
+    const depth = historyDepth(action);
+    if (typeof depth === 'number') {
+        return depth > (historyBaselineDepths[action] || 0);
+    }
+
+    const commandCan = editorInstance._tiptapEditor?.can?.();
+    const canAction = commandCan?.[action];
+    if (typeof canAction !== 'function') return false;
+
+    try {
+        return Boolean(canAction.call(commandCan));
+    } catch (error) {
+        return false;
+    }
+}
+
+function runHistoryAction(action) {
+    if (!editorInstance || !canRunHistoryAction(action)) return;
+
+    if (typeof editorInstance[action] === 'function') {
+        editorInstance[action]();
+    } else {
+        editorInstance._tiptapEditor?.commands?.[action]?.();
+    }
+
+    focusEditorBody();
+    updateEditorChrome();
+}
+
+function historyDepth(action) {
+    const state = editorInstance?._tiptapEditor?.state;
+    if (!state?.plugins) return null;
+
+    const historyPlugin = state.plugins.find((plugin) => String(plugin.key || '').startsWith('history$'));
+    const historyState = historyPlugin?.getState?.(state);
+    const branch = action === 'redo' ? historyState?.undone : historyState?.done;
+    return typeof branch?.eventCount === 'number' ? branch.eventCount : null;
+}
+
+function captureHistoryBaseline() {
+    historyBaselineDepths = {
+        undo: historyDepth('undo') || 0,
+        redo: historyDepth('redo') || 0,
+    };
+}
+
 function updateToolbarState() {
     if (!writingToolbar || !editorInstance) return;
     const block = selectedBlocks()[0];
@@ -230,6 +329,7 @@ function updateToolbarState() {
     writingToolbar.querySelectorAll('button[data-editor-action]').forEach((button) => {
         const action = button.dataset.editorAction;
         let active = false;
+        let disabled = false;
         if (action === 'paragraph') {
             active = block?.type === 'paragraph';
         } else if (action === 'heading') {
@@ -238,9 +338,13 @@ function updateToolbarState() {
             active = block?.type === action;
         } else if (action === 'basic-style') {
             active = Boolean(activeStyles?.[button.dataset.style]);
+        } else if (action === 'undo' || action === 'redo') {
+            disabled = !canRunHistoryAction(action);
         }
         button.classList.toggle('is-active', active);
         button.setAttribute('aria-pressed', String(active));
+        button.disabled = disabled;
+        button.setAttribute('aria-disabled', String(disabled));
     });
 }
 
@@ -264,12 +368,12 @@ function bindWritingToolbar() {
                 focusEditorBody();
                 return;
             }
+            if (action === 'add-block') {
+                addBlockAfterCurrent();
+                return;
+            }
             if (action === 'undo' || action === 'redo') {
-                if (typeof editorInstance[action] === 'function') {
-                    editorInstance[action]();
-                }
-                focusEditorBody();
-                updateEditorChrome();
+                runHistoryAction(action);
                 return;
             }
             if (action === 'basic-style') {
@@ -340,6 +444,11 @@ function NoteEditor({ initialContent }) {
 
     React.useEffect(() => {
         editorInstance = editor;
+        window.setTimeout(() => {
+            if (editorInstance !== editor) return;
+            captureHistoryBaseline();
+            updateEditorChrome();
+        }, 0);
 
         return () => {
             if (editorInstance === editor) {

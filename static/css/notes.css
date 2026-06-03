@@ -393,6 +393,20 @@ body.notes-modal-open { overflow: hidden; }
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--notes-accent) 38%, transparent);
 }
 
+.notes-writing-toolbar button:disabled,
+.notes-writing-toolbar button[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.notes-writing-toolbar button:disabled:hover,
+.notes-writing-toolbar button:disabled:focus-visible,
+.notes-writing-toolbar button[aria-disabled="true"]:hover,
+.notes-writing-toolbar button[aria-disabled="true"]:focus-visible {
+  background: transparent;
+  color: var(--notes-text-primary);
+}
+
 .notes-writing-toolbar .material-symbols-outlined {
   font-size: 19px;
 }
@@ -795,6 +809,125 @@ body.notes-modal-open { overflow: hidden; }
 .blocknote-container a {
   color: var(--notes-accent) !important;
   text-decoration-color: color-mix(in srgb, var(--notes-accent) 48%, transparent) !important;
+}
+
+.blocknote-container .bn-block-content[data-content-type="bulletListItem"],
+.blocknote-container .bn-block-content[data-content-type="numberedListItem"] {
+  display: flex !important;
+  gap: 0.5em !important;
+}
+
+.blocknote-container .bn-block-content[data-content-type="bulletListItem"]::before,
+.blocknote-container .bn-block-content[data-content-type="numberedListItem"]::before {
+  flex: 0 0 1.35em;
+  min-width: 1.35em;
+  color: var(--notes-text-muted);
+  font-weight: 650;
+  text-align: right;
+}
+
+.blocknote-container .bn-block-outer[data-prev-type="numberedListItem"]:not([data-prev-index="none"])
+  > .bn-block
+  > .bn-block-content::before {
+  content: attr(data-prev-index) "." !important;
+}
+
+.blocknote-container .bn-block-outer:not([data-prev-type])
+  > .bn-block
+  > .bn-block-content[data-content-type="numberedListItem"]::before {
+  content: attr(data-index) "." !important;
+}
+
+.blocknote-container .bn-block-outer[data-prev-type="bulletListItem"]
+  > .bn-block
+  > .bn-block-content::before,
+.blocknote-container .bn-block-outer:not([data-prev-type])
+  > .bn-block
+  > .bn-block-content[data-content-type="bulletListItem"]::before {
+  content: "\2022" !important;
+}
+
+.blocknote-container [data-content-type="bulletListItem"]
+  ~ .bn-block-group
+  > .bn-block-outer[data-prev-type="bulletListItem"]
+  > .bn-block
+  > .bn-block-content::before,
+.blocknote-container [data-content-type="bulletListItem"]
+  ~ .bn-block-group
+  > .bn-block-outer:not([data-prev-type])
+  > .bn-block
+  > .bn-block-content[data-content-type="bulletListItem"]::before {
+  content: "\25E6" !important;
+}
+
+.blocknote-container [data-content-type="bulletListItem"]
+  ~ .bn-block-group
+  [data-content-type="bulletListItem"]
+  ~ .bn-block-group
+  > .bn-block-outer[data-prev-type="bulletListItem"]
+  > .bn-block
+  > .bn-block-content::before,
+.blocknote-container [data-content-type="bulletListItem"]
+  ~ .bn-block-group
+  [data-content-type="bulletListItem"]
+  ~ .bn-block-group
+  > .bn-block-outer:not([data-prev-type])
+  > .bn-block
+  > .bn-block-content[data-content-type="bulletListItem"]::before {
+  content: "\25AA" !important;
+}
+
+.blocknote-container .bn-block-content[data-content-type="checkListItem"] > div {
+  display: flex !important;
+  width: 100% !important;
+}
+
+.blocknote-container .bn-block-content[data-content-type="checkListItem"] input[type="checkbox"] {
+  position: relative;
+  display: inline-grid;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  place-content: center;
+  appearance: none;
+  margin: 0.18em 0.6em 0 0 !important;
+  border: 1.5px solid color-mix(in srgb, var(--notes-text-muted) 62%, transparent);
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--notes-bg-base) 82%, var(--notes-bg-toolbar));
+  cursor: pointer;
+  transition: background 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease;
+}
+
+.blocknote-container .bn-block-content[data-content-type="checkListItem"] input[type="checkbox"]::before {
+  content: "";
+  width: 8px;
+  height: 5px;
+  border: solid var(--notes-bg-base);
+  border-width: 0 0 2px 2px;
+  opacity: 0;
+  transform: translateY(-1px) rotate(-45deg) scale(0.82);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+
+.blocknote-container .bn-block-content[data-content-type="checkListItem"] input[type="checkbox"]:checked {
+  border-color: var(--notes-accent);
+  background: var(--notes-accent);
+}
+
+.blocknote-container .bn-block-content[data-content-type="checkListItem"] input[type="checkbox"]:checked::before {
+  opacity: 1;
+  transform: translateY(-1px) rotate(-45deg) scale(1);
+}
+
+.blocknote-container .bn-block-content[data-content-type="checkListItem"] input[type="checkbox"]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--notes-accent) 24%, transparent);
+}
+
+.blocknote-container .bn-block-content[data-content-type="checkListItem"][data-checked="true"] .bn-inline-content {
+  color: var(--notes-text-muted);
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
 }
 
 /* Ensure the editor area is clickable and takes full height */

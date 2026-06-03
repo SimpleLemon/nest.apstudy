@@ -239,6 +239,49 @@ class TestDashboardPreferenceRoutes(unittest.TestCase):
         self.assertTrue(response.get_json()["hidden"])
         self.assertEqual(update_row.call_args.args[2]["dashboard_checklist_hidden_signature"], "abc123")
 
+    def test_quote_today_returns_daily_quote_payload(self):
+        quote = {
+            "text": "Stored quote.",
+            "author": "Stored Author",
+            "date": "2026-06-03",
+            "fallback": False,
+        }
+
+        with self.app.test_request_context("/api/dashboard/quote/today"):
+            with patch.object(dashboard_bp, "current_user", self.user), \
+                    patch.object(dashboard_bp, "get_daily_quote_payload", return_value=quote) as get_quote:
+                response = dashboard_bp.dashboard_quote_today.__wrapped__()
+
+        get_quote.assert_called_once_with()
+        self.assertEqual(response.get_json(), {"quote": quote, "dateKey": "2026-06-03"})
+
+    def test_quote_today_returns_static_fallback_payload(self):
+        quote = {
+            "text": "Small steps every day become the work you are proud of.",
+            "author": "APStudy Nest",
+            "date": "2026-06-03",
+            "fallback": True,
+        }
+
+        with self.app.test_request_context("/api/dashboard/quote/today"):
+            with patch.object(dashboard_bp, "current_user", self.user), \
+                    patch.object(dashboard_bp, "get_daily_quote_payload", return_value=quote):
+                response = dashboard_bp.dashboard_quote_today.__wrapped__()
+
+        self.assertTrue(response.get_json()["quote"]["fallback"])
+
+    def test_quote_today_rejects_non_onboarded_user(self):
+        self.user.onboarding_complete = False
+
+        with self.app.test_request_context("/api/dashboard/quote/today"):
+            with patch.object(dashboard_bp, "current_user", self.user), \
+                    patch.object(dashboard_bp, "get_daily_quote_payload") as get_quote:
+                response, status = dashboard_bp.dashboard_quote_today.__wrapped__()
+
+        self.assertEqual(status, 403)
+        self.assertEqual(response.get_json(), {"error": "Onboarding is required."})
+        get_quote.assert_not_called()
+
     def test_quote_error_report_logs_and_emits_server_event(self):
         with self.app.test_request_context(
             "/api/dashboard/quote/error",

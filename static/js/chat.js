@@ -539,6 +539,31 @@
     return payload;
   }
 
+  function latestMessageForRead(cache) {
+    const messages = cache?.messages || [];
+    for (let index = messages.length - 1; index >= 0; index -= 1) {
+      const message = messages[index];
+      if (message?.id) return message;
+    }
+    return null;
+  }
+
+  function markActiveRoomRead(cache) {
+    if (!state.activeRoom || document.visibilityState === "hidden") return;
+    const latest = latestMessageForRead(cache);
+    if (!latest) return;
+    void fetchJson("/api/chat/read", {
+      method: "POST",
+      body: JSON.stringify({
+        scope_type: state.activeRoom.type === "channel" ? "channel" : "thread",
+        scope_id: state.activeRoom.id,
+        message_id: latest.id,
+      }),
+    })
+      .then(() => window.dispatchEvent(new CustomEvent("apstudy-chat-read-state-change")))
+      .catch(() => {});
+  }
+
   function setStatus(message, tone = "info") {
     if (!els.status) return;
     if (!message) {
@@ -1277,6 +1302,9 @@
       } else {
         restoreScroll(cache, !preserveScroll);
       }
+      if (!before && (wasNearBottom || !after)) {
+        markActiveRoomRead(cache);
+      }
       schedulePersistentBootstrapSave();
       return messages;
     } catch (error) {
@@ -1565,6 +1593,15 @@
       } else if (eventRoom) {
         markRoomStale(eventRoom);
         playChatSound(event.actor_id);
+      }
+      return;
+    }
+
+    if (event.event_type === "message_updated") {
+      if (eventRoom && active && roomKey(eventRoom) === roomKey(active)) {
+        await loadMessages({ force: true, quiet: true, preserveScroll: true });
+      } else if (eventRoom) {
+        markRoomStale(eventRoom);
       }
       return;
     }

@@ -725,6 +725,27 @@ TABLE_SPECS = [
         ],
     },
     {
+        "id": "daily_quotes",
+        "name": "daily_quotes",
+        "permissions": [],
+        "row_security": True,
+        "columns": [
+            {"key": "quote_date", "type": "string", "size": 10, "xrequired": True},
+            {"key": "quote_text", "type": "text", "xrequired": True},
+            {"key": "author", "type": "string", "size": 255},
+            {"key": "source", "type": "string", "size": 32, "xdefault": "zenquotes"},
+            {"key": "source_url", "type": "string", "size": 2048},
+            {"key": "raw_payload", "type": "text"},
+            {"key": "fetched_at", "type": "datetime"},
+            {"key": "created_at", "type": "datetime", "xrequired": True},
+            {"key": "updated_at", "type": "datetime"},
+        ],
+        "indexes": [
+            {"key": "idx_daily_quotes_date", "type": "unique", "columns": ["quote_date"]},
+            {"key": "idx_daily_quotes_fetched_at", "type": "key", "columns": ["fetched_at"]},
+        ],
+    },
+    {
         "id": "task_lists",
         "name": "task_lists",
         "permissions": [],

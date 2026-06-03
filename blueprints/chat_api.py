@@ -82,6 +82,9 @@ DISCORD_SYNC_COMPARE_FIELDS = (
     "discord_webhook_id",
     "created_at",
 )
+DISCORD_PARTIAL_CREATE_REQUIRED_FIELDS = ("content", "timestamp")
+CHAT_SUMMARY_SCAN_LIMIT = 50
+CHAT_UNREAD_CAP = 99
 
 
 def _now():
@@ -289,7 +292,7 @@ def _settings_payload():
 def _ensure_discord_channel(row_id, name, label, channel_id, read_only):
     now = format_datetime(_now())
     existing = get_row_safe(COLLECTIONS["chat_channels"], row_id, allow_missing=True)
-    payload = {
+    stable_payload = {
         "kind": "discord",
         "name": name,
         "label": label,
@@ -297,14 +300,15 @@ def _ensure_discord_channel(row_id, name, label, channel_id, read_only):
         "discord_channel_id": channel_id,
         "read_only": read_only,
         "approved": True,
-        "updated_at": now,
     }
     if existing:
-        return update_row_safe(COLLECTIONS["chat_channels"], row_id, payload)
+        if all(existing.get(key) == value for key, value in stable_payload.items()):
+            return existing
+        return update_row_safe(COLLECTIONS["chat_channels"], row_id, {**stable_payload, "updated_at": now})
     return create_row_safe(
         COLLECTIONS["chat_channels"],
         row_id=row_id,
-        data={**payload, "created_at": now},
+        data={**stable_payload, "created_at": now, "updated_at": now},
     )
 
 
@@ -603,30 +607,38 @@ def _discord_media_json(previews, images):
     return "[]"
 
 
-def _discord_message_payload(channel, message):
+def _discord_message_payload(channel, message, *, partial=False):
     channel_id = _row_id(channel)
     discord_id = str(message.get("id") or "")
     if not discord_id:
         return None
     external_id = f"discord:{channel.get('discord_channel_id')}:{discord_id}"
     author = message.get("author") or {}
-    content = message.get("content") or ""
-    created_at = message.get("timestamp") or format_datetime(_now())
     payload = {
         "channel_id": channel_id,
         "source": "discord",
         "external_id": external_id,
-        "author_name": author.get("global_name") or author.get("username") or "Discord User",
-        "author_username": author.get("username") or "",
-        "author_avatar_url": _discord_avatar(author),
-        "content": content,
-        "rendered_html": _render_discord_content(content, message),
-        "link_preview_json": _discord_media_json(_discord_previews(message), _discord_images(message)),
         "discord_message_id": discord_id,
-        "discord_webhook_id": message.get("webhook_id"),
-        "created_at": created_at,
         "updated_at": format_datetime(_now()),
     }
+    if author or not partial:
+        payload.update({
+            "author_name": author.get("global_name") or author.get("username") or "Discord User",
+            "author_username": author.get("username") or "",
+            "author_avatar_url": _discord_avatar(author),
+        })
+    if "content" in message or not partial:
+        content = message.get("content") or ""
+        payload.update({
+            "content": content,
+            "rendered_html": _render_discord_content(content, message),
+        })
+    if any(key in message for key in ("embeds", "attachments")) or not partial:
+        payload["link_preview_json"] = _discord_media_json(_discord_previews(message), _discord_images(message))
+    if "webhook_id" in message or not partial:
+        payload["discord_webhook_id"] = message.get("webhook_id")
+    if "timestamp" in message or not partial:
+        payload["created_at"] = format_datetime(message.get("timestamp") or _now())
     return {
         key: _bounded_chat_message_value(key, value)
         for key, value in payload.items()
@@ -636,6 +648,8 @@ def _discord_message_payload(channel, message):
 def _discord_message_changes(existing, payload):
     changes = {}
     for key in DISCORD_SYNC_COMPARE_FIELDS:
+        if key not in payload:
+            continue
         incoming = payload.get(key)
         if existing.get(key) != incoming:
             changes[key] = incoming
@@ -796,8 +810,8 @@ def _list_messages(scope_type, scope_id, before=None, after=None):
     return visible
 
 
-def _upsert_discord_message(channel, message, emit_event=False):
-    payload = _discord_message_payload(channel, message)
+def _upsert_discord_message(channel, message, emit_event=False, *, partial=False):
+    payload = _discord_message_payload(channel, message, partial=partial)
     if not payload:
         return None, False
     channel_id = payload.get("channel_id")
@@ -810,9 +824,23 @@ def _upsert_discord_message(channel, message, emit_event=False):
         if existing:
             row_id = _row_id(existing)
             changes = _discord_message_changes(existing, payload)
+            if partial and not changes and message.get("edited_timestamp"):
+                changes = {"updated_at": payload.get("updated_at")}
             if not changes:
                 return existing, False
-            return update_row_safe(COLLECTIONS["chat_messages"], row_id, changes), False
+            row = update_row_safe(COLLECTIONS["chat_messages"], row_id, changes)
+            if emit_event:
+                emit_chat_event(
+                    "channel",
+                    channel_id,
+                    "message_updated",
+                    message_id=row_id,
+                    channel_id=channel_id,
+                )
+            return row, False
+        if partial and any(key not in payload for key in DISCORD_PARTIAL_CREATE_REQUIRED_FIELDS):
+            logger.info("Skipping partial Discord message update for unknown message %s", discord_id)
+            return None, False
         row = create_row_safe(COLLECTIONS["chat_messages"], row_id=ID.unique(), data=payload)
         if emit_event:
             emit_chat_event(
@@ -824,8 +852,57 @@ def _upsert_discord_message(channel, message, emit_event=False):
             )
         return row, True
     except AppwriteException:
+        if not row_id and external_id:
+            try:
+                existing = first_row(COLLECTIONS["chat_messages"], [Query.equal("external_id", [external_id])])
+                if existing:
+                    return existing, False
+            except AppwriteException:
+                pass
         _log_discord_upsert_failure(row_id, external_id, discord_id, changes)
         return None, False
+
+
+def _soft_delete_discord_message(channel, discord_message_id, *, emit_event=False):
+    if not channel or not discord_message_id:
+        return None
+    channel_id = _row_id(channel)
+    external_id = f"discord:{channel.get('discord_channel_id')}:{discord_message_id}"
+    try:
+        row = first_row(COLLECTIONS["chat_messages"], [Query.equal("external_id", [external_id])])
+        if not row:
+            row = first_row(
+                COLLECTIONS["chat_messages"],
+                [
+                    Query.equal("channel_id", [channel_id]),
+                    Query.equal("discord_message_id", [str(discord_message_id)]),
+                ],
+            )
+        if not row or row.get("deleted_at"):
+            return row
+        deleted_at = format_datetime(_now())
+        update_row_safe(
+            COLLECTIONS["chat_messages"],
+            _row_id(row),
+            {
+                "deleted_at": deleted_at,
+                "deleted_by": "discord",
+                "updated_at": deleted_at,
+            },
+        )
+        if emit_event:
+            emit_chat_event(
+                "channel",
+                channel_id,
+                "message_deleted",
+                message_id=_row_id(row),
+                channel_id=channel_id,
+                actor_id="discord",
+            )
+        return row
+    except AppwriteException:
+        logger.exception("Failed to soft-delete Discord message %s", discord_message_id)
+        return None
 
 
 def _discord_avatar(author):
@@ -896,6 +973,33 @@ def sync_discord_channels(emit_events=True):
             continue
         created_count += _sync_discord_channel(channel, emit_events=emit_events)
     return created_count
+
+
+def ingest_discord_gateway_message(message, *, event_type="create"):
+    channel = _discord_channel_for_discord_id((message or {}).get("channel_id"))
+    if not _can_sync_discord_channel(channel):
+        return None, False
+    partial = event_type == "update"
+    row, created = _upsert_discord_message(channel, message, emit_event=True, partial=partial)
+    if row:
+        _prune_discord_messages(_row_id(channel))
+    return row, created
+
+
+def delete_discord_gateway_message(discord_channel_id, discord_message_id):
+    channel = _discord_channel_for_discord_id(discord_channel_id)
+    if not _can_sync_discord_channel(channel):
+        return None
+    return _soft_delete_discord_message(channel, discord_message_id, emit_event=True)
+
+
+def delete_discord_gateway_messages(discord_channel_id, discord_message_ids):
+    deleted = 0
+    for message_id in discord_message_ids or []:
+        row = delete_discord_gateway_message(discord_channel_id, message_id)
+        if row:
+            deleted += 1
+    return deleted
 
 
 def _can_sync_discord_channel(channel):
@@ -1032,6 +1136,111 @@ def _thread_participant_ids(thread):
     ]
 
 
+def _read_key(user_id, scope_type, scope_id):
+    return f"{user_id}:{scope_type}:{scope_id}"
+
+
+def _read_state_for_scope(user_id, scope_type, scope_id):
+    try:
+        return first_row(
+            COLLECTIONS["chat_read_states"],
+            [Query.equal("read_key", [_read_key(user_id, scope_type, scope_id)])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to load chat read state")
+        return None
+
+
+def _latest_visible_message(scope_type, scope_id):
+    field = "channel_id" if scope_type == "channel" else "thread_id"
+    try:
+        rows = list_rows_safe(
+            COLLECTIONS["chat_messages"],
+            [
+                Query.equal(field, [scope_id]),
+                Query.order_desc("created_at"),
+                Query.limit(10),
+            ],
+        ).get("rows", [])
+    except AppwriteException:
+        logger.exception("Failed to load latest chat message")
+        return None
+    for row in rows:
+        if not row.get("deleted_at"):
+            return row
+    return None
+
+
+def _mark_read(scope_type, scope_id, message_id=None):
+    user_id = _current_user_id()
+    read_key = _read_key(user_id, scope_type, scope_id)
+    latest = None
+    if message_id:
+        try:
+            latest = get_row_safe(COLLECTIONS["chat_messages"], message_id, allow_missing=True)
+        except AppwriteException:
+            latest = None
+        if latest:
+            expected_field = "channel_id" if scope_type == "channel" else "thread_id"
+            if latest.get(expected_field) != scope_id or latest.get("deleted_at"):
+                latest = None
+    if not latest:
+        latest = _latest_visible_message(scope_type, scope_id)
+    now = format_datetime(_now())
+    payload = {
+        "user_id": user_id,
+        "scope_type": scope_type,
+        "scope_id": scope_id,
+        "read_key": read_key,
+        "last_read_message_id": _row_id(latest) if latest else None,
+        "last_read_at": latest.get("created_at") if latest else now,
+    }
+    try:
+        existing = first_row(COLLECTIONS["chat_read_states"], [Query.equal("read_key", [read_key])])
+        if existing:
+            return update_row_safe(COLLECTIONS["chat_read_states"], _row_id(existing), payload)
+        return create_row_safe(COLLECTIONS["chat_read_states"], row_id=ID.unique(), data=payload)
+    except AppwriteException:
+        logger.exception("Failed to mark chat scope read")
+        return None
+
+
+def _existing_visible_channels_for_summary():
+    _default_channels()
+    try:
+        rows = list_rows_all(COLLECTIONS["chat_channels"], [Query.equal("kind", ["discord", "university"])])
+    except AppwriteException:
+        logger.exception("Failed to list chat summary channels")
+        return []
+    return [row for row in rows if _can_access_channel(row)]
+
+
+def _unread_count(scope_type, scope_id, user_id, last_read_at):
+    field = "channel_id" if scope_type == "channel" else "thread_id"
+    queries = [
+        Query.equal(field, [scope_id]),
+        Query.order_desc("created_at"),
+        Query.limit(CHAT_SUMMARY_SCAN_LIMIT),
+    ]
+    if last_read_at:
+        queries.insert(1, Query.greater_than("created_at", last_read_at))
+    try:
+        rows = list_rows_safe(COLLECTIONS["chat_messages"], queries).get("rows", [])
+    except AppwriteException:
+        logger.exception("Failed to count unread chat messages")
+        return 0, False
+    count = 0
+    for row in rows:
+        if row.get("deleted_at"):
+            continue
+        if str(row.get("user_id") or "") == str(user_id):
+            continue
+        count += 1
+        if count >= CHAT_UNREAD_CAP:
+            return CHAT_UNREAD_CAP, True
+    return count, len(rows) >= CHAT_SUMMARY_SCAN_LIMIT
+
+
 @chat_api_bp.route("/api/universities")
 @login_required
 def universities():
@@ -1090,6 +1299,69 @@ def bootstrap():
     })
 
 
+@chat_api_bp.route("/api/chat/summary")
+@login_required
+def chat_summary():
+    user_id = _current_user_id()
+    rooms = []
+    total_unread = 0
+    has_capped_room = False
+
+    for channel in _existing_visible_channels_for_summary():
+        channel_id = _row_id(channel)
+        read_state = _read_state_for_scope(user_id, "channel", channel_id)
+        unread, capped = _unread_count("channel", channel_id, user_id, (read_state or {}).get("last_read_at"))
+        total_unread += unread
+        has_capped_room = has_capped_room or capped
+        rooms.append({
+            "type": "channel",
+            "id": channel_id,
+            "label": channel.get("label") or channel.get("name") or "Chat",
+            "unread_count": min(unread, CHAT_UNREAD_CAP),
+            "has_unread": unread > 0,
+        })
+
+    for thread in _threads_for_current_user():
+        thread_id = _row_id(thread)
+        read_state = _read_state_for_scope(user_id, "thread", thread_id)
+        unread, capped = _unread_count("thread", thread_id, user_id, (read_state or {}).get("last_read_at"))
+        total_unread += unread
+        has_capped_room = has_capped_room or capped
+        rooms.append({
+            "type": "thread",
+            "id": thread_id,
+            "unread_count": min(unread, CHAT_UNREAD_CAP),
+            "has_unread": unread > 0,
+        })
+
+    return jsonify({
+        "total_unread": min(total_unread, CHAT_UNREAD_CAP),
+        "unread_capped": total_unread >= CHAT_UNREAD_CAP or has_capped_room,
+        "has_unread": total_unread > 0,
+        "rooms": rooms,
+    })
+
+
+@chat_api_bp.route("/api/chat/read", methods=["POST"])
+@login_required
+def mark_chat_read():
+    data = request.get_json(silent=True) or {}
+    scope_type = str(data.get("scope_type") or "").strip()
+    scope_id = str(data.get("scope_id") or "").strip()
+    message_id = str(data.get("message_id") or "").strip() or None
+    if scope_type == "channel":
+        channel = get_row_safe(COLLECTIONS["chat_channels"], scope_id, allow_missing=True)
+        if not _can_access_channel(channel):
+            return jsonify({"error": "Channel unavailable."}), 404
+    elif scope_type == "thread":
+        if not _thread_for_user(scope_id):
+            return jsonify({"error": "Thread unavailable."}), 404
+    else:
+        return jsonify({"error": "Unsupported read scope."}), 400
+    row = _mark_read(scope_type, scope_id, message_id=message_id)
+    return jsonify({"status": "ok", "read_state": row or {}})
+
+
 def _threads_for_current_user():
     user_id = _current_user_id()
     try:
@@ -1138,8 +1410,6 @@ def channel_messages(channel_id):
     channel = get_row_safe(COLLECTIONS["chat_channels"], channel_id, allow_missing=True)
     if not _can_access_channel(channel):
         return jsonify({"error": "Channel unavailable."}), 404
-    if channel.get("kind") == "discord" and not request.args.get("before"):
-        _sync_discord_channel(channel, emit_events=True)
     after = request.args.get("after")
     rows = _list_messages("channel", channel_id, request.args.get("before"), after)
     return jsonify({

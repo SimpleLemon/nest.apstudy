@@ -5,12 +5,13 @@
     const STYLE_ID = "dashboard-daily-quote-style";
     const CACHE_KEY = "apstudy.dashboard.eggCrackQuote.v2";
     const VISIBILITY_KEY = "apstudy.dashboard.eggCrackQuote.visible.v1";
-    const QUOTE_URL = "https://zenquotes.io/api/today";
+    const QUOTE_API_URL = "/api/dashboard/quote/today";
     const ERROR_REPORT_URL = "/api/dashboard/quote/error";
     const FETCH_TIMEOUT_MS = 8000;
     const FALLBACK_QUOTE = {
         text: "Small steps every day become the work you are proud of.",
         author: "APStudy Nest",
+        fallback: true,
     };
 
     /*
@@ -71,9 +72,10 @@
         .dashboard-egg-experience.is-complete .dashboard-egg-quote{position:relative;inset:auto;transform:scale3d(0.98,0.98,1)}
         .dashboard-egg-quote.is-visible{opacity:1;pointer-events:auto;transform:scale3d(1,1,1)}
         .dashboard-egg-experience.is-complete .dashboard-egg-quote.is-visible{transform:scale3d(1,1,1)}
+        .dashboard-editing-layout .dashboard-egg-quote{padding-inline:38px}
         .dashboard-egg-quote p{max-width:920px;margin:0 auto;color:var(--color-on-surface);font-size:clamp(16px,2vw,22px);font-weight:760;line-height:1.25;letter-spacing:0}
         .dashboard-egg-quote cite{color:var(--color-on-surface-variant);font-size:13px;font-style:normal;font-weight:720;text-align:center}
-        .dashboard-egg-quote-remove{position:absolute;left:-13px;top:-13px;z-index:4;display:none;width:30px;height:30px;align-items:center;justify-content:center;border:1px solid color-mix(in srgb,var(--color-outline-variant) 84%,transparent);border-radius:999px;background:color-mix(in srgb,#6b7280 34%,var(--color-surface-container-high));color:var(--color-error);box-shadow:0 10px 26px rgba(0,0,0,0.24);cursor:pointer}
+        .dashboard-egg-quote-remove{position:absolute;right:clamp(10px,1.4vw,16px);top:clamp(10px,1.4vw,16px);z-index:4;display:none;width:30px;height:30px;align-items:center;justify-content:center;border:1px solid color-mix(in srgb,var(--color-outline-variant) 84%,transparent);border-radius:999px;background:color-mix(in srgb,#6b7280 34%,var(--color-surface-container-high));color:var(--color-error);box-shadow:0 10px 26px rgba(0,0,0,0.24);cursor:pointer}
         .dashboard-editing-layout .dashboard-egg-quote-remove{display:inline-flex}
         .dashboard-egg-quote-remove:hover,.dashboard-egg-quote-remove:focus-visible{background:color-mix(in srgb,#9ca3af 42%,var(--color-surface-container-high));outline:none}
         .dashboard-egg-quote-remove .material-symbols-outlined{font-size:18px}
@@ -90,7 +92,8 @@
         }
         @media (max-width:640px){.dashboard-egg-experience{min-height:136px}
         .dashboard-egg-experience.is-complete{min-height:100px}
-        .dashboard-egg-quote{min-height:100px;padding-right:18px}
+        .dashboard-egg-quote{min-height:100px}
+        .dashboard-editing-layout .dashboard-egg-quote{padding-inline:34px}
         }
     `;
 
@@ -103,18 +106,7 @@
     }
 
     function getDailyKey() {
-        try {
-            const formatter = new Intl.DateTimeFormat("en-US", {
-                timeZone: "America/Chicago",
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit",
-            });
-            const parts = Object.fromEntries(formatter.formatToParts(new Date()).map((part) => [part.type, part.value]));
-            return `${parts.year}-${parts.month}-${parts.day}`;
-        } catch {
-            return new Date().toISOString().slice(0, 10);
-        }
+        return new Date().toISOString().slice(0, 10);
     }
 
     function errorMessage(error) {
@@ -130,7 +122,7 @@
                 message: String(details.message || "").slice(0, 500),
                 status: details.status,
                 dateKey: details.dateKey,
-                quoteUrl: details.quoteUrl || QUOTE_URL,
+                quoteUrl: details.quoteUrl || QUOTE_API_URL,
                 phase: details.phase,
             };
             fetch(ERROR_REPORT_URL, {
@@ -194,6 +186,7 @@
     }
 
     function writeCache(dateKey, quote) {
+        if (quote?.fallback) return;
         try {
             window.localStorage.setItem(CACHE_KEY, JSON.stringify({
                 dateKey,
@@ -212,12 +205,12 @@
     }
 
     function normalizeQuote(data, context = {}) {
-        const item = data?.quote || (Array.isArray(data) ? data[0] : data);
-        const text = String(item?.text || item?.q || "").trim();
-        const author = String(item?.author || item?.a || "").trim();
+        const item = data?.quote || data;
+        const text = String(item?.text || "").trim();
+        const author = String(item?.author || "").trim();
         if (!text) {
             reportQuoteError("invalid_payload", {
-                message: "ZenQuotes response did not include a quote in q.",
+                message: "Daily quote endpoint response did not include quote text.",
                 dateKey: context.dateKey,
                 phase: context.phase || "normalize",
             });
@@ -227,15 +220,16 @@
             text,
             author: author || FALLBACK_QUOTE.author,
             date: String(item?.date || "").trim(),
+            fallback: Boolean(item?.fallback),
         };
     }
 
     function fetchQuote(signal, context = {}) {
-        return fetch(QUOTE_URL, { signal })
+        return fetch(QUOTE_API_URL, { signal })
             .then((response) => {
                 if (!response.ok) {
                     reportQuoteError("http_error", {
-                        message: `ZenQuotes request failed with status ${response.status}.`,
+                        message: `Daily quote endpoint failed with status ${response.status}.`,
                         status: response.status,
                         dateKey: context.dateKey,
                         phase: context.phase || "fetch",
@@ -276,7 +270,7 @@
                 </div>
                 <figure class="dashboard-egg-quote">
                     <button class="dashboard-egg-quote-remove" type="button" aria-label="Hide daily quote">
-                        <span class="material-symbols-outlined" aria-hidden="true">remove</span>
+                        <span class="material-symbols-outlined" aria-hidden="true">close</span>
                     </button>
                     <p></p>
                     <cite></cite>
@@ -335,7 +329,7 @@
         banner.className = "dashboard-egg-quote";
         banner.innerHTML = `
             <button class="dashboard-egg-quote-remove" type="button" aria-label="Hide daily quote">
-                <span class="material-symbols-outlined" aria-hidden="true">remove</span>
+                <span class="material-symbols-outlined" aria-hidden="true">close</span>
             </button>
             <p></p>
             <cite></cite>

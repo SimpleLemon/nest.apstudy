@@ -98,6 +98,7 @@ function renderSidebar() {
         <button class="sidebar-item ${isActive('/chat') ? 'active' : ''}" data-route="/chat" aria-label="Chat">
           <span class="sidebar-item-icon">${SIDEBAR_ICONS.messageSquare}</span>
           <span class="sidebar-item-label">Chat</span>
+          <span class="sidebar-chat-badge" data-chat-unread-badge hidden></span>
         </button>
       </div>
 
@@ -341,6 +342,65 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
   });
 
   setMobileSidebarOpen(false);
+  setupChatSummaryBadge();
+}
+
+function setupChatSummaryBadge() {
+  const badge = document.querySelector('[data-chat-unread-badge]');
+  if (!badge || window.location.pathname === '/chat') return;
+  const nav = document.querySelector('global.thenav');
+  if (!nav || !nav.hasAttribute('data-user-email')) return;
+  const pollMs = 120000;
+  let timer = null;
+  let inFlight = false;
+
+  function renderBadge(payload = {}) {
+    const count = Number(payload.total_unread || 0);
+    const capped = payload.unread_capped === true;
+    badge.hidden = count <= 0;
+    if (count <= 0) {
+      badge.textContent = '';
+      badge.removeAttribute('aria-label');
+      return;
+    }
+    const label = capped ? '99+' : String(Math.min(count, 99));
+    badge.textContent = label;
+    badge.setAttribute('aria-label', `${label} unread chat message${label === '1' ? '' : 's'}`);
+  }
+
+  function schedule(delay = pollMs) {
+    window.clearTimeout(timer);
+    if (document.visibilityState === 'hidden') return;
+    timer = window.setTimeout(refresh, delay);
+  }
+
+  async function refresh() {
+    if (inFlight || document.visibilityState === 'hidden') return;
+    inFlight = true;
+    try {
+      const response = await fetch('/api/chat/summary', {
+        headers: { Accept: 'application/json' },
+      });
+      if (response.ok) {
+        renderBadge(await response.json());
+      }
+    } catch (_) {
+      // The next visible-tab interval will try again.
+    } finally {
+      inFlight = false;
+      schedule();
+    }
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      schedule(1000);
+    } else {
+      window.clearTimeout(timer);
+    }
+  });
+  window.addEventListener('apstudy-chat-read-state-change', () => schedule(1000));
+  schedule(2500);
 }
 
 // Initialize sidebar when DOM is ready

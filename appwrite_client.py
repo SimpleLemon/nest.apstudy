@@ -230,6 +230,7 @@ COLLECTIONS = {
 	"user_calendar_sources": "user_calendar_sources",
 	"user_event_overrides": "user_event_overrides",
 	"calendar_shares": "calendar_shares",
+	"daily_quotes": "daily_quotes",
 	"task_lists": "task_lists",
 	"tasks": "tasks",
 	"task_completions": "task_completions",

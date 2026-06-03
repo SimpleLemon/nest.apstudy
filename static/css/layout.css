@@ -279,6 +279,22 @@ body {
   max-width: 180px;
   transition: opacity 0.15s ease, visibility 0s linear 0s, max-width 0.15s ease;
 }
+.sidebar-chat-badge {
+  margin-left: auto;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--accent-color);
+  color: var(--color-on-primary, #fff);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+.sidebar-chat-badge[hidden] {
+  display: none;
+}
 .sidebar-container.collapsed .sidebar-item-label {
   opacity: 0;
   visibility: hidden;
@@ -300,6 +316,12 @@ body {
 }
 .sidebar-container.collapsed.collapsed-aligned .sidebar-item-icon {
   margin: 0 auto;
+}
+.sidebar-container.collapsed .sidebar-chat-badge {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  margin-left: 0;
 }
 .sidebar-item.hidden {
   display: none !important;
