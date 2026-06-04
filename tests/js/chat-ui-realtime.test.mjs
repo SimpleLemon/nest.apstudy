@@ -102,9 +102,40 @@ test("chat marks selected cached rooms and sent messages as read", async () => {
   assert.match(script, /function markRoomRead\(room, cache = cacheFor\(room\)\)/);
   assert.match(script, /fetchJson\("\/api\/chat\/read"/);
   assert.match(script, /if \(latest\?\.id\) body\.message_id = latest\.id/);
+  assert.match(script, /clearRoomUnread\(room\)/);
   assert.match(script, /if \(!cache\.stale \|\| latestMessageForRead\(cache\)\) \{\s*markRoomRead\(room, cache\)/);
   assert.match(script, /markRoomRead\(room, cache\);\s*\}\s*refreshViewingPresence/s);
-  assert.match(script, /\.finally\(\(\) => markRoomRead\(room, cache\)\)/);
+  assert.match(script, /\.finally\(\(\) => \{\s*markRoomRead\(room, cache\);\s*void refreshChatSummary\(\);\s*\}\)/);
+});
+
+test("chat keeps and renders per-room unread state", async () => {
+  const script = await sourceFor("static/js/chat.js");
+  const styles = await sourceFor("static/css/chat.css");
+
+  assert.match(script, /roomUnread: new Map\(\)/);
+  assert.match(script, /function unreadKey\(type, id\)/);
+  assert.match(script, /function applyChatSummary\(payload = \{\}\)/);
+  assert.match(script, /state\.roomUnread = nextUnread/);
+  assert.match(script, /window\.dispatchEvent\(new CustomEvent\("apstudy-chat-summary"/);
+  assert.match(script, /function unreadBadgeMarkup\(type, id\)/);
+  assert.match(script, /class="chat-room-unread-badge"/);
+  assert.match(script, /hasUnread \? "has-unread" : ""/);
+  assert.match(styles, /grid-template-columns: 30px minmax\(0, 1fr\) auto/);
+  assert.match(styles, /\.chat-list-button\.has-unread/);
+  assert.match(styles, /\.chat-room-unread-badge/);
+});
+
+test("chat refreshes and updates unread state across realtime and visibility", async () => {
+  const script = await sourceFor("static/js/chat.js");
+
+  assert.match(script, /async function refreshChatSummary\(\)/);
+  assert.match(script, /fetchJson\("\/api\/chat\/summary"/);
+  assert.match(script, /await refreshChatSummary\(\)/);
+  assert.match(script, /incrementRoomUnread\(\{ \.\.\.eventRoom, actor_id: event\.actor_id \}\)/);
+  assert.match(script, /void refreshChatSummary\(\);\s*playChatSound\(event\.actor_id\)/);
+  assert.match(script, /message_deleted"[\s\S]*void refreshChatSummary\(\)/);
+  assert.match(script, /document\.visibilityState === "visible"[\s\S]*void refreshChatSummary\(\)/);
+  assert.match(script, /setRoomUnread\(\{ type: "thread", id: payload\.thread\.id \}, \{ unread_count: 0, has_unread: false \}\)/);
 });
 
 test("chat supports direct channel and thread URL selection", async () => {
@@ -231,13 +262,15 @@ test("scheduler uses discord gateway with slow reconciliation", async () => {
   assert.match(api, /_valid_discord_ingest_request\(\)/);
 });
 
-test("global sidebar chat badge uses slow summary polling only", async () => {
+test("global sidebar chat badge uses summary polling and shared chat summary events", async () => {
   const sidebar = await sourceFor("static/js/sidebar.js");
 
   assert.match(sidebar, /data-chat-unread-badge/);
   assert.match(sidebar, /\/api\/chat\/summary/);
   assert.match(sidebar, /const pollMs = 120000/);
   assert.match(sidebar, /document\.visibilityState === 'hidden'/);
+  assert.match(sidebar, /apstudy-chat-summary/);
+  assert.match(sidebar, /renderBadge\(event\.detail \|\| \{\}\)/);
   assert.doesNotMatch(sidebar, /window\.location\.pathname === '\/chat'/);
   assert.doesNotMatch(sidebar, /client\.subscribe/);
   assert.doesNotMatch(sidebar, /\/api\/chat\/channels\/.*messages/);

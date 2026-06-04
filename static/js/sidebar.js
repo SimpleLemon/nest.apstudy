@@ -400,6 +400,10 @@ function setupChatSummaryBadge() {
     }
   });
   window.addEventListener('apstudy-chat-read-state-change', () => schedule(1000));
+  window.addEventListener('apstudy-chat-summary', (event) => {
+    renderBadge(event.detail || {});
+    schedule();
+  });
   schedule(2500);
 }
 

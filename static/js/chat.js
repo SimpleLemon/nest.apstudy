@@ -27,6 +27,7 @@
     activeRoom: null,
     activeProfile: null,
     roomCache: new Map(),
+    roomUnread: new Map(),
     presenceRefreshTimer: null,
     typingInputTimer: null,
     typingClearTimer: null,
@@ -44,6 +45,7 @@
     realtimeUnsubscribe: null,
     realtimeReady: false,
     realtimeConnecting: false,
+    chatSummaryLoading: false,
     loadingMessages: false,
     closedHistoryBanners: new Set(),
     membersCollapsed: sessionStorage.getItem("apstudy-chat-members-collapsed") === "true",
@@ -187,6 +189,10 @@
   function roomKey(room) {
     if (!room || !room.id || !room.type) return "";
     return `${room.type}:${room.id}`;
+  }
+
+  function unreadKey(type, id) {
+    return roomKey({ type, id });
   }
 
   function requestedRoomFromLocation() {
@@ -536,16 +542,96 @@
     return remaining < 140;
   }
 
-	  async function fetchJson(url, options = {}) {
-	    const response = await fetch(url, {
-	      headers: { "Content-Type": "application/json", ...(options.headers || {}) },
-	      ...options,
-	    });
+  async function fetchJson(url, options = {}) {
+    const response = await fetch(url, {
+      headers: { "Content-Type": "application/json", ...(options.headers || {}) },
+      ...options,
+    });
     const payload = await response.json().catch(() => ({}));
     if (!response.ok) {
       throw new Error(payload.error || "Something went wrong.");
     }
     return payload;
+  }
+
+  function normalizeUnreadRoom(room = {}) {
+    const type = room.type === "channel" ? "channel" : room.type === "thread" ? "thread" : "";
+    const id = String(room.id || "");
+    if (!type || !id) return null;
+    const count = Math.max(0, Number(room.unread_count || 0));
+    return {
+      type,
+      id,
+      unread_count: Math.min(count, 99),
+      has_unread: room.has_unread === true || count > 0,
+    };
+  }
+
+  function applyChatSummary(payload = {}) {
+    const nextUnread = new Map();
+    for (const room of payload.rooms || []) {
+      const unread = normalizeUnreadRoom(room);
+      if (!unread) continue;
+      nextUnread.set(unreadKey(unread.type, unread.id), unread);
+    }
+    state.roomUnread = nextUnread;
+    updateRoomLists();
+    window.dispatchEvent(new CustomEvent("apstudy-chat-summary", { detail: payload }));
+    return payload;
+  }
+
+  async function refreshChatSummary() {
+    if (state.chatSummaryLoading || document.visibilityState === "hidden") return null;
+    state.chatSummaryLoading = true;
+    try {
+      const payload = await fetchJson("/api/chat/summary", {
+        headers: { Accept: "application/json" },
+      });
+      return applyChatSummary(payload);
+    } catch (_) {
+      return null;
+    } finally {
+      state.chatSummaryLoading = false;
+    }
+  }
+
+  function unreadForRoom(type, id) {
+    return state.roomUnread.get(unreadKey(type, id)) || { unread_count: 0, has_unread: false };
+  }
+
+  function setRoomUnread(room, unread = {}) {
+    const key = roomKey(room);
+    if (!key) return;
+    const count = Math.max(0, Number(unread.unread_count || 0));
+    state.roomUnread.set(key, {
+      type: room.type,
+      id: room.id,
+      unread_count: Math.min(count, 99),
+      has_unread: unread.has_unread === true || count > 0,
+    });
+    updateRoomLists();
+  }
+
+  function incrementRoomUnread(room) {
+    if (!room?.type || !room?.id) return;
+    if (String(room.actor_id || "") === currentUserId()) return;
+    const current = unreadForRoom(room.type, room.id);
+    setRoomUnread(room, {
+      unread_count: Math.min(Number(current.unread_count || 0) + 1, 99),
+      has_unread: true,
+    });
+  }
+
+  function clearRoomUnread(room) {
+    const key = roomKey(room);
+    if (!key) return;
+    state.roomUnread.set(key, {
+      type: room.type,
+      id: room.id,
+      unread_count: 0,
+      has_unread: false,
+    });
+    updateRoomLists();
   }
 
   function latestMessageForRead(cache) {
@@ -569,7 +655,10 @@
       method: "POST",
       body: JSON.stringify(body),
     })
-      .then(() => window.dispatchEvent(new CustomEvent("apstudy-chat-read-state-change")))
+      .then(() => {
+        clearRoomUnread(room);
+        window.dispatchEvent(new CustomEvent("apstudy-chat-read-state-change", { detail: { room } }));
+      })
       .catch(() => {});
   }
 
@@ -645,10 +734,21 @@
     return "#";
   }
 
+  function unreadBadgeMarkup(type, id) {
+    const unread = unreadForRoom(type, id);
+    if (!unread.has_unread || Number(unread.unread_count || 0) <= 0) return "";
+    const count = Number(unread.unread_count || 0);
+    const label = count >= 99 ? "99+" : String(count);
+    const ariaLabel = `${label} unread ${label === "1" ? "message" : "messages"}`;
+    return `<span class="chat-room-unread-badge" aria-label="${escapeHtml(ariaLabel)}">${escapeHtml(label)}</span>`;
+  }
+
   function roomButton({ type, id, active, leading, title, meta, className = "" }) {
+    const unread = unreadForRoom(type, id);
+    const hasUnread = unread.has_unread && Number(unread.unread_count || 0) > 0;
     const button = document.createElement("button");
     button.type = "button";
-    button.className = `chat-list-button ${className} ${active ? "is-active" : ""}`.trim();
+    button.className = `chat-list-button ${className} ${active ? "is-active" : ""} ${hasUnread ? "has-unread" : ""}`.trim();
     button.dataset.roomType = type;
     button.dataset.roomId = id;
     button.innerHTML = `
@@ -657,6 +757,7 @@
         <span class="chat-list-title">${escapeHtml(title)}</span>
         ${meta || ""}
       </span>
+      ${unreadBadgeMarkup(type, id)}
     `;
     button.addEventListener("click", () => selectRoom({ type, id }));
     return button;
@@ -1463,6 +1564,7 @@
     void loadInitialPresences();
     setMembersCollapsed(state.membersCollapsed);
     schedulePersistentBootstrapSave();
+    await refreshChatSummary();
 
     const requestedRoom = requestedRoomFromLocation();
     if (requestedRoom) {
@@ -1604,6 +1706,7 @@
 
     if (event.event_type === "message_deleted") {
       removeMessageFromCaches(event.message_id);
+      void refreshChatSummary();
       return;
     }
 
@@ -1616,6 +1719,8 @@
         if (incoming.length) playChatSound(event.actor_id);
       } else if (eventRoom) {
         markRoomStale(eventRoom);
+        incrementRoomUnread({ ...eventRoom, actor_id: event.actor_id });
+        void refreshChatSummary();
         playChatSound(event.actor_id);
       }
       return;
@@ -1901,6 +2006,9 @@
         body: JSON.stringify({ user_id: userId }),
       });
       updateThread(payload.thread);
+      if (payload.thread?.id) {
+        setRoomUnread({ type: "thread", id: payload.thread.id }, { unread_count: 0, has_unread: false });
+      }
       renderThreads();
       els.dmSearch.hidden = true;
       els.dmSearchInput.value = "";
@@ -2033,13 +2141,22 @@
         if (cache?.loaded) {
           if (cache.latestCursor) {
             void loadMessages({ after: cache.latestCursor, quiet: true })
-              .finally(() => markRoomRead(room, cache));
+              .finally(() => {
+                markRoomRead(room, cache);
+                void refreshChatSummary();
+              });
           } else if (cache.stale) {
             void loadMessages({ force: true, quiet: true })
-              .finally(() => markRoomRead(room, cache));
+              .finally(() => {
+                markRoomRead(room, cache);
+                void refreshChatSummary();
+              });
           } else {
             markRoomRead(room, cache);
+            void refreshChatSummary();
           }
+        } else {
+          void refreshChatSummary();
         }
         void loadInitialPresences();
         refreshViewingPresence();

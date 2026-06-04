@@ -111,7 +111,7 @@
 .chat-list-button {
   width: 100%;
   display: grid;
-  grid-template-columns: 30px minmax(0, 1fr);
+  grid-template-columns: 30px minmax(0, 1fr) auto;
   align-items: center;
   gap: 8px;
   min-height: 40px;
@@ -135,6 +135,11 @@
   font-weight: 750;
 }
 
+.chat-list-button.has-unread:not(.is-active) {
+  color: var(--color-on-surface);
+  font-weight: 760;
+}
+
 .chat-list-copy {
   min-width: 0;
   display: flex;
@@ -153,6 +158,26 @@
 .chat-list-button small {
   color: var(--color-on-surface-variant);
   font-size: 11px;
+}
+
+.chat-room-unread-badge {
+  min-width: 22px;
+  max-width: 34px;
+  height: 20px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: clip;
+  white-space: nowrap;
 }
 
 .chat-channel-symbol {
