@@ -655,7 +655,7 @@ def _load_message_rooms(user_id):
             if not _dashboard_can_access_channel(row):
                 continue
             label = row.get("label") or row.get("name") or "Channel"
-            href = url_for("dashboard.chat")
+            href = url_for("dashboard.chat", channel=room_id)
         else:
             row = thread_by_id.get(room_id) or {}
             other_id = row.get("participant_b") if row.get("participant_a") == user_id else row.get("participant_a")
@@ -668,7 +668,7 @@ def _load_message_rooms(user_id):
                 user = None
             if user:
                 label = user.get("name") or user.get("username") or label
-            href = url_for("dashboard.chat")
+            href = url_for("dashboard.chat", thread=room_id)
         rooms.append({
             "id": room_id,
             "type": room_type,

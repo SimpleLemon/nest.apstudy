@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en" data-apstudy-theme-preference="{{ theme_preference or 'system-match' }}">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{{ document.description }}" />
+    <title>{{ document.title }} - APStudy Nest</title>
+    {% if viewer %}
+    <script>
+        window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@25.0.0/dist/iife/sdk.js"></script>
+    <script src="{{ url_for('static', filename='js/appwrite.js') }}"></script>
+    {% endif %}
+    <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
+    <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/themes.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    {% if viewer %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/legal.css') }}">
+    <script src="{{ url_for('static', filename='js/global-chrome.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/global.js') }}" defer></script>
+    {% if viewer %}
+    <script src="{{ url_for('static', filename='js/navbar.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/sidebar.js') }}" defer></script>
+    {% endif %}
+</head>
+<body class="legal-page{% if viewer %} legal-page--authenticated{% endif %}">
+    {% if viewer %}
+    <global class="thenav" data-profile-picture="{{ (viewer.picture or '')|avatar_url(32) }}" data-user-email="{{ viewer.email }}"></global>
+    <global class="thesidebar" data-user-emory-student="{{ viewer.emory_student }}" data-sidebar-default="{{ sidebar_default|default('expanded') }}"></global>
+    {% else %}
+    <nav class="legal-public-nav" aria-label="Legal navigation">
+        <a class="legal-public-brand" href="{{ url_for('auth.login') }}">
+            <img src="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy" width="32" height="32" decoding="async" />
+            <span>Nest.APStudy</span>
+        </a>
+        <div class="legal-public-links">
+            <a class="{{ 'is-active' if document.active_key == 'privacy' else '' }}" href="{{ url_for('legal.privacy_policy') }}">Privacy</a>
+            <a class="{{ 'is-active' if document.active_key == 'terms' else '' }}" href="{{ url_for('legal.terms_of_service') }}">Terms</a>
+            <a href="{{ url_for('auth.login') }}">Sign in</a>
+        </div>
+    </nav>
+    {% endif %}
+
+    <main class="legal-shell" aria-labelledby="legal-title">
+        <header class="legal-hero">
+            <p class="legal-kicker">Nest.APStudy Legal</p>
+            <h1 id="legal-title">{{ document.title }}</h1>
+            <p class="legal-intro">{{ document.intro }}</p>
+            <div class="legal-meta" aria-label="Document metadata">
+                <span>Last Updated: {{ document.last_updated }}</span>
+                <span>Effective for Nest.APStudy users</span>
+            </div>
+        </header>
+
+        <div class="legal-layout">
+            <aside class="legal-toc" aria-labelledby="legal-toc-title">
+                <h2 id="legal-toc-title">Contents</h2>
+                <nav aria-label="{{ document.title }} sections">
+                    {% for section_id, section_title in document.sections %}
+                    <a href="#{{ section_id }}">{{ section_title }}</a>
+                    {% endfor %}
+                </nav>
+            </aside>
+
+            <article class="legal-document">
+                {% if document.active_key == 'privacy' %}
+                <section id="information-we-collect">
+                    <h2>1. Information We Collect</h2>
+                    <h3>1.1 Information You Provide Directly</h3>
+                    <p>When you create an account or use our Service, we may collect:</p>
+                    <ul>
+                        <li><strong>Account Information:</strong> Your name, email address, and authentication credentials, including information provided through Google OAuth or other social login providers.</li>
+                        <li><strong>Academic Data:</strong> Course schedules, study plans, tasks, notes, goals, and other academic content you create or enter into the platform.</li>
+                        <li><strong>Preferences:</strong> Display settings, notification preferences, theme choices, and other customization options you configure.</li>
+                        <li><strong>Communications:</strong> Any messages, feedback, or support requests you send to us.</li>
+                    </ul>
+                    <h3>1.2 Information Collected Automatically</h3>
+                    <p>When you access or use the Service, we automatically collect certain information:</p>
+                    <ul>
+                        <li><strong>Usage Data:</strong> Pages viewed, features used, interactions performed, timestamps, and navigation paths within the application.</li>
+                        <li><strong>Device and Browser Information:</strong> Device type, operating system, browser type and version, screen resolution, and language preferences.</li>
+                        <li><strong>Network Information:</strong> IP address, approximate geographic location at the city or region level, and internet service provider.</li>
+                        <li><strong>Referral Data:</strong> How you arrived at our Service, such as a search engine, direct link, or referral from another site.</li>
+                    </ul>
+                    <h3>1.3 Cookies and Similar Technologies</h3>
+                    <p>We use cookies and similar tracking technologies to operate and improve the Service. Please see our Cookie Policy section below for full details.</p>
+                </section>
+
+                <section id="how-we-use-your-information">
+                    <h2>2. How We Use Your Information</h2>
+                    <p>We use the information we collect for the following purposes:</p>
+                    <ul>
+                        <li><strong>To Provide and Maintain the Service:</strong> Creating and managing your account, storing your schedules, tasks, and academic data, and delivering core functionality.</li>
+                        <li><strong>To Improve the Service:</strong> Understanding how users interact with features, identifying bugs or performance issues, and developing new functionality based on usage patterns.</li>
+                        <li><strong>To Personalize Your Experience:</strong> Remembering your preferences, displaying relevant content, and tailoring the interface to your needs.</li>
+                        <li><strong>To Communicate With You:</strong> Responding to support requests, sending service-related announcements, and notifying you of important changes to the Service or this policy.</li>
+                        <li><strong>To Ensure Security and Prevent Abuse:</strong> Detecting unauthorized access, preventing fraudulent activity, and enforcing our Terms of Service.</li>
+                        <li><strong>To Comply With Legal Obligations:</strong> Meeting applicable legal, regulatory, or contractual requirements.</li>
+                    </ul>
+                </section>
+
+                <section id="data-storage-and-infrastructure">
+                    <h2>3. Data Storage and Infrastructure</h2>
+                    <h3>3.1 Appwrite Backend</h3>
+                    <p>Your account data, schedules, tasks, preferences, and all user-generated content are stored using Appwrite, our backend infrastructure provider. This includes:</p>
+                    <ul>
+                        <li>Authentication records, including account credentials and session tokens.</li>
+                        <li>Database records, including courses, tasks, study plans, notes, and any content you create.</li>
+                        <li>User preferences and application settings.</li>
+                        <li>File storage, if you upload any documents or files.</li>
+                    </ul>
+                    <p>Appwrite stores data on secure servers with encryption at rest and in transit. For more information about Appwrite's security practices, visit <a href="https://appwrite.io/privacy">appwrite.io/privacy</a>.</p>
+                    <h3>3.2 Google Analytics</h3>
+                    <p>We use Google Analytics to understand how the Service is used and to improve it. Google Analytics collects:</p>
+                    <ul>
+                        <li>Pages you visit and how long you spend on them.</li>
+                        <li>Features you interact with and actions you take.</li>
+                        <li>Your device type, browser, operating system, and screen resolution.</li>
+                        <li>Your approximate geographic location derived from IP address, at the city or region level.</li>
+                        <li>How you arrived at the Service and where you navigate within it.</li>
+                    </ul>
+                    <p>Google Analytics uses cookies to distinguish unique users and sessions. The data collected is aggregated and used solely to understand usage trends and improve the Service. We do not use Google Analytics to personally identify individual users.</p>
+                    <p><strong>Google Analytics Opt-Out:</strong> You can opt out of Google Analytics by installing the <a href="https://tools.google.com/dlpage/gaoptout">Google Analytics Opt-Out Browser Add-on</a> or by adjusting your browser's cookie settings.</p>
+                    <p>For more information about how Google collects and processes data, visit <a href="https://policies.google.com/privacy">Google's Privacy & Terms page</a>.</p>
+                </section>
+
+                <section id="cookie-policy">
+                    <h2>4. Cookie Policy</h2>
+                    <h3>4.1 What Are Cookies</h3>
+                    <p>Cookies are small text files stored on your device when you visit a website. They help the site remember information about your visit, which can make your next visit easier and the site more useful to you.</p>
+                    <h3>4.2 Cookies We Use</h3>
+                    <div class="legal-table-wrap" role="region" aria-label="Cookies we use" tabindex="0">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Cookie Type</th>
+                                    <th>Purpose</th>
+                                    <th>Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Essential/Session Cookies</strong></td>
+                                    <td>Required for login, authentication, and maintaining your session. Without these, the Service cannot function properly.</td>
+                                    <td>Expire when you close your browser or after your session ends.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Authentication Cookies</strong></td>
+                                    <td>Remember that you are logged in so you do not have to sign in on every page or visit.</td>
+                                    <td>Persist until you log out or the session expires, typically 30 days.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Preference Cookies</strong></td>
+                                    <td>Store your settings such as theme, layout preferences, and other customization choices.</td>
+                                    <td>Persist until you clear them or change your preferences.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Analytics Cookies (Google Analytics)</strong></td>
+                                    <td>Distinguish unique users, track session information, and record how you interact with the Service.</td>
+                                    <td><code>_ga</code>: 2 years; <code>_ga_*</code>: 2 years; <code>_gid</code>: 24 hours.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h3>4.3 Third-Party Cookies</h3>
+                    <p>Google Analytics sets cookies on your device to collect usage data. These cookies are governed by Google's privacy policy. We do not allow any other third-party advertising or tracking cookies on the Service.</p>
+                    <h3>4.4 Managing Cookies</h3>
+                    <p>You have several options for managing cookies:</p>
+                    <ul>
+                        <li><strong>Browser Settings:</strong> Most browsers allow you to block or delete cookies through their settings. Blocking essential cookies will prevent the Service from functioning properly.</li>
+                        <li><strong>Google Analytics Opt-Out:</strong> Install the <a href="https://tools.google.com/dlpage/gaoptout">Google Analytics Opt-Out Browser Add-on</a>.</li>
+                        <li><strong>Do Not Track:</strong> We respect your browser's "Do Not Track" (DNT) signal. If your browser sends a DNT signal, we will not load analytics cookies.</li>
+                    </ul>
+                    <p>Please be aware that disabling certain cookies may limit your ability to use some features of the Service.</p>
+                </section>
+
+                <section id="data-retention">
+                    <h2>5. Data Retention</h2>
+                    <p>We retain your information for as long as your account is active or as needed to provide the Service to you:</p>
+                    <ul>
+                        <li><strong>Account and User-Generated Data:</strong> Retained for as long as your account exists. When you delete your account, your data is removed as described in Section 7.</li>
+                        <li><strong>Analytics Data:</strong> Google Analytics data is retained for 14 months, after which it is automatically deleted from Google's servers.</li>
+                        <li><strong>Server Logs:</strong> Basic server access logs, which may include IP addresses and timestamps, are retained for up to 90 days for security and debugging purposes.</li>
+                        <li><strong>Backup Data:</strong> Deleted data may persist in encrypted backups for up to 30 days before being permanently purged.</li>
+                    </ul>
+                </section>
+
+                <section id="who-we-share-data-with">
+                    <h2>6. Who We Share Data With</h2>
+                    <p>We do not sell, rent, or trade your personal information to third parties. We share data only in the following limited circumstances:</p>
+                    <ul>
+                        <li><strong>Service Providers:</strong> We use Appwrite and Google Analytics as described above. These providers process data on our behalf and are contractually obligated to protect it.</li>
+                        <li><strong>Legal Requirements:</strong> We may disclose your information if required to do so by law, regulation, legal process, or governmental request.</li>
+                        <li><strong>Safety and Enforcement:</strong> We may share information if we believe in good faith that disclosure is necessary to protect safety, prevent fraud or abuse, or enforce our Terms of Service.</li>
+                        <li><strong>With Your Consent:</strong> We may share information with other parties when you explicitly direct us to do so.</li>
+                    </ul>
+                    <p>We do not share your academic data, schedules, tasks, notes, or other user-generated content with any third party for their own purposes.</p>
+                </section>
+
+                <section id="your-rights-and-choices">
+                    <h2>7. Your Rights and Choices</h2>
+                    <p>You have the following rights regarding your personal data:</p>
+                    <h3>7.1 Access and Export</h3>
+                    <p>You may request a copy of all personal data we hold about you. Contact us at <a href="mailto:derek.chen@emory.edu">derek.chen@emory.edu</a> to request a data export.</p>
+                    <h3>7.2 Correction</h3>
+                    <p>If any information we hold about you is inaccurate or incomplete, you can update it directly in your account settings or contact us for assistance.</p>
+                    <h3>7.3 Deletion</h3>
+                    <p>You may request deletion of your account and associated data at any time. See Section 8 below for full details on how account deletion works.</p>
+                    <h3>7.4 Restriction and Objection</h3>
+                    <p>You may request that we restrict processing of your data or object to certain types of processing. Contact us to discuss your specific needs.</p>
+                    <h3>7.5 Withdraw Consent</h3>
+                    <p>Where processing is based on your consent, such as analytics cookies, you may withdraw consent at any time by adjusting your browser settings or contacting us.</p>
+                </section>
+
+                <section id="data-deletion-and-account-deletion">
+                    <h2>8. Data Deletion and Account Deletion</h2>
+                    <p>We believe you should be able to leave any service and take your data with you or have it deleted.</p>
+                    <h3>8.1 How to Delete Your Account</h3>
+                    <p>You can delete your account by:</p>
+                    <ol>
+                        <li><strong>In-App:</strong> Navigate to your Account Settings and select "Delete Account."</li>
+                        <li><strong>By Email:</strong> Send a request to <a href="mailto:derek.chen@emory.edu">derek.chen@emory.edu</a> with the subject line "Account Deletion Request" from the email address associated with your account.</li>
+                    </ol>
+                    <h3>8.2 What Happens When You Delete Your Account</h3>
+                    <p>Upon account deletion:</p>
+                    <ul>
+                        <li><strong>Immediately Deleted:</strong> Your profile information, schedules, tasks, notes, study plans, preferences, and all other user-generated content are permanently removed from our active databases.</li>
+                        <li><strong>Within 30 Days:</strong> Your data is purged from encrypted backup systems.</li>
+                        <li><strong>Retained Briefly:</strong> Anonymized, aggregated analytics data may remain in Google Analytics. Basic server logs containing your IP address are retained for up to 90 days for security purposes before being automatically purged.</li>
+                    </ul>
+                    <h3>8.3 OAuth and Social Login</h3>
+                    <p>If you signed up using Google OAuth or another social login provider, deleting your Nest.APStudy account does not delete your account with that provider. To revoke Nest.APStudy's access to your Google account, visit your <a href="https://myaccount.google.com/permissions">Google Account Permissions page</a>. We recommend revoking access after deleting your account.</p>
+                    <h3>8.4 Exceptions</h3>
+                    <p>We may retain limited information beyond the periods described above if required by law or if necessary to prevent fraud or abuse.</p>
+                </section>
+
+                <section id="security">
+                    <h2>9. Security</h2>
+                    <p>We take reasonable measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction:</p>
+                    <ul>
+                        <li>All data is transmitted over HTTPS with TLS encryption in transit.</li>
+                        <li>Data at rest is encrypted on our backend infrastructure.</li>
+                        <li>Authentication sessions are managed securely with appropriate expiration policies.</li>
+                        <li>We regularly review and update our security practices.</li>
+                    </ul>
+                    <p>However, no method of transmission over the internet or method of electronic storage is 100% secure. We cannot guarantee absolute security. Please do not upload highly sensitive personal information such as Social Security numbers, financial account numbers, or medical records to the Service.</p>
+                    <p>If you believe your account has been compromised, contact us immediately at <a href="mailto:derek.chen@emory.edu">derek.chen@emory.edu</a>.</p>
+                </section>
+
+                <section id="childrens-privacy">
+                    <h2>10. Children's Privacy</h2>
+                    <p>Nest.APStudy is designed for students and is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us at <a href="mailto:derek.chen@emory.edu">derek.chen@emory.edu</a>, and we will take steps to delete such information.</p>
+                </section>
+
+                <section id="changes-to-this-policy">
+                    <h2>11. Changes to This Policy</h2>
+                    <p>We may update this Privacy Policy from time to time to reflect changes in our practices or for legal, operational, or regulatory reasons. If we make material changes, we will notify you by posting a prominent notice on the Service or by sending you an email. Your continued use of the Service after any changes constitutes your acceptance of the updated policy.</p>
+                </section>
+
+                <section id="contact-us">
+                    <h2>12. Contact Us</h2>
+                    <p>If you have any questions, concerns, or requests regarding this Privacy Policy, your personal data, or our privacy practices, please contact us:</p>
+                    <p><strong>Email:</strong> <a href="mailto:derek.chen@emory.edu">derek.chen@emory.edu</a></p>
+                    <p>We will respond to all privacy-related inquiries within 30 days.</p>
+                </section>
+                {% else %}
+                <section id="about-the-service">
+                    <h2>1. About the Service</h2>
+                    <p>Nest.APStudy is an academic planning and study management tool designed to help students organize their coursework, schedules, tasks, and study materials. The Service is provided as-is for personal, non-commercial, educational use.</p>
+                </section>
+
+                <section id="eligibility">
+                    <h2>2. Eligibility</h2>
+                    <p>You must be at least 13 years of age to use the Service. By using the Service, you represent that you meet this requirement. If you are under 18, you represent that you have your parent's or guardian's permission to use the Service.</p>
+                </section>
+
+                <section id="account-registration-and-responsibility">
+                    <h2>3. Account Registration and Responsibility</h2>
+                    <h3>3.1 Account Creation</h3>
+                    <p>To use certain features of the Service, you must create an account. You may register using an email address and password or through a supported OAuth provider such as Google. You agree to provide accurate, current, and complete information during registration.</p>
+                    <h3>3.2 Account Security</h3>
+                    <p>You are responsible for maintaining the confidentiality of your account credentials and for all activity that occurs under your account. You agree to:</p>
+                    <ul>
+                        <li>Choose a strong, unique password if using email/password authentication.</li>
+                        <li>Not share your account credentials with any other person.</li>
+                        <li>Notify us immediately at <a href="mailto:derek.chen@emory.edu">derek.chen@emory.edu</a> if you believe your account has been compromised.</li>
+                    </ul>
+                    <p>We are not liable for any loss or damage arising from your failure to secure your account.</p>
+                    <h3>3.3 One Account Per User</h3>
+                    <p>Each user should maintain only one account. Creating multiple accounts to circumvent restrictions or abuse the Service is prohibited.</p>
+                </section>
+
+                <section id="acceptable-use">
+                    <h2>4. Acceptable Use</h2>
+                    <p>You agree to use the Service only for lawful purposes and in accordance with these Terms. You agree not to:</p>
+                    <ul>
+                        <li>Use the Service for any illegal, fraudulent, or harmful purpose.</li>
+                        <li>Attempt to gain unauthorized access to the Service, other users' accounts, or our systems and infrastructure.</li>
+                        <li>Interfere with or disrupt the integrity or performance of the Service or its underlying infrastructure.</li>
+                        <li>Upload, transmit, or distribute any viruses, malware, or other harmful code.</li>
+                        <li>Scrape, crawl, or use automated means to access the Service or extract data without our written permission.</li>
+                        <li>Use the Service to harass, abuse, threaten, or intimidate any person.</li>
+                        <li>Impersonate any person or entity or misrepresent your affiliation with any person or entity.</li>
+                        <li>Use the Service to infringe on the intellectual property rights of others.</li>
+                        <li>Reverse engineer, decompile, or disassemble any part of the Service.</li>
+                        <li>Resell, redistribute, or commercially exploit any part of the Service without our written permission.</li>
+                        <li>Circumvent, disable, or interfere with security-related features of the Service.</li>
+                    </ul>
+                </section>
+
+                <section id="user-generated-content">
+                    <h2>5. User-Generated Content</h2>
+                    <h3>5.1 Your Content</h3>
+                    <p>You retain ownership of all content you create, upload, or enter into the Service, including schedules, tasks, notes, study plans, and other academic data. By using the Service, you grant us a limited, non-exclusive license to store, process, and display your content solely for the purpose of providing the Service to you.</p>
+                    <h3>5.2 Responsibility for Content</h3>
+                    <p>You are solely responsible for the content you create or upload. We do not monitor, review, or endorse user-generated content. You represent that you have the right to use any content you enter into the Service and that it does not violate any third party's rights.</p>
+                </section>
+
+                <section id="academic-data-disclaimer">
+                    <h2>6. Academic Data Disclaimer</h2>
+                    <p><strong>Important:</strong> Nest.APStudy is an independent planning tool and is not affiliated with, endorsed by, or officially connected to any school, university, the College Board, or any other educational institution.</p>
+                    <ul>
+                        <li>Course information, exam schedules, curriculum data, and other academic content displayed within the Service may be sourced from publicly available information and community contributions.</li>
+                        <li><strong>This data may be incomplete, outdated, or inaccurate.</strong> We make reasonable efforts to provide helpful information, but we cannot guarantee its accuracy or completeness.</li>
+                        <li><strong>You should always verify official course requirements, exam schedules, deadlines, and academic policies directly with your school, teacher, or the relevant official source, such as the College Board website for AP exam information.</strong></li>
+                        <li>Nest.APStudy is not a substitute for official academic advising, school counseling, or institutional records.</li>
+                        <li>We are not responsible for any academic decisions you make based on information provided by the Service.</li>
+                    </ul>
+                </section>
+
+                <section id="service-availability">
+                    <h2>7. Service Availability</h2>
+                    <h3>7.1 No Uptime Guarantee</h3>
+                    <p>We strive to keep the Service available and reliable, but we do not guarantee uninterrupted or error-free access. The Service may be temporarily unavailable due to:</p>
+                    <ul>
+                        <li>Scheduled or unscheduled maintenance.</li>
+                        <li>Software updates and deployments.</li>
+                        <li>Server outages, infrastructure issues, or force majeure events.</li>
+                        <li>Factors beyond our reasonable control.</li>
+                    </ul>
+                    <h3>7.2 Modifications to the Service</h3>
+                    <p>We reserve the right to modify, suspend, or discontinue any part of the Service at any time, with or without notice. We will make reasonable efforts to notify users in advance of significant changes, but we are not obligated to maintain any particular feature or functionality.</p>
+                    <h3>7.3 Data Loss</h3>
+                    <p>While we implement reasonable backup and recovery procedures, we cannot guarantee that your data will never be lost. We strongly recommend maintaining your own backups of important academic information outside of the Service.</p>
+                </section>
+
+                <section id="suspension-and-termination">
+                    <h2>8. Suspension and Termination</h2>
+                    <h3>8.1 By You</h3>
+                    <p>You may stop using the Service and delete your account at any time, as described in our Privacy Policy.</p>
+                    <h3>8.2 By Us</h3>
+                    <p>We reserve the right to suspend or terminate your account, at our sole discretion, if we reasonably believe that:</p>
+                    <ul>
+                        <li>You have violated these Terms of Service.</li>
+                        <li>Your use of the Service poses a security risk or may cause harm to other users or our infrastructure.</li>
+                        <li>Your account is being used for abusive, fraudulent, or illegal purposes.</li>
+                        <li>Continued provision of the Service to you is no longer commercially viable or legally permissible.</li>
+                    </ul>
+                    <p>Where possible, we will provide notice and an explanation before or at the time of suspension or termination. In cases of severe or ongoing abuse, we may act immediately without prior notice.</p>
+                    <h3>8.3 Effect of Termination</h3>
+                    <p>Upon termination, your right to use the Service ceases immediately. We may delete your account data in accordance with our Privacy Policy. Provisions of these Terms that by their nature should survive termination, including Sections 9, 10, 11, and 12, will survive.</p>
+                </section>
+
+                <section id="intellectual-property">
+                    <h2>9. Intellectual Property</h2>
+                    <h3>9.1 Our Intellectual Property</h3>
+                    <p>The Service, including its design, code, features, branding, logos, and documentation, excluding user-generated content, is owned by Nest.APStudy and its creators and is protected by applicable intellectual property laws. You may not copy, modify, distribute, or create derivative works based on the Service without our explicit written permission.</p>
+                    <h3>9.2 Feedback</h3>
+                    <p>If you provide us with suggestions, feedback, or ideas for improving the Service, you grant us a non-exclusive, royalty-free, perpetual, irrevocable license to use, modify, and incorporate that feedback into the Service without any obligation to you.</p>
+                </section>
+
+                <section id="disclaimer-of-warranties">
+                    <h2>10. Disclaimer of Warranties</h2>
+                    <p><strong>THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, WHETHER EXPRESS, IMPLIED, OR STATUTORY.</strong> To the fullest extent permitted by law, we disclaim all warranties, including but not limited to:</p>
+                    <ul>
+                        <li>Implied warranties of merchantability, fitness for a particular purpose, and non-infringement.</li>
+                        <li>Warranties that the Service will be uninterrupted, error-free, secure, or free of viruses or other harmful components.</li>
+                        <li>Warranties regarding the accuracy, reliability, or completeness of any content or data provided through the Service.</li>
+                    </ul>
+                    <p>Your use of the Service is at your sole risk.</p>
+                </section>
+
+                <section id="limitation-of-liability">
+                    <h2>11. Limitation of Liability</h2>
+                    <p><strong>To the fullest extent permitted by applicable law, in no event shall Nest.APStudy, its creators, contributors, or affiliates be liable for any:</strong></p>
+                    <ul>
+                        <li>Indirect, incidental, special, consequential, or punitive damages.</li>
+                        <li>Loss of profits, data, use, goodwill, or other intangible losses.</li>
+                        <li>Damages resulting from your access to or use of, or inability to access or use, the Service.</li>
+                        <li>Damages resulting from any unauthorized access to or alteration of your data.</li>
+                        <li>Damages resulting from any third-party conduct on the Service.</li>
+                    </ul>
+                    <p><strong>In no event shall our total liability to you for all claims arising from or related to the Service exceed the amount you have paid us in the twelve (12) months preceding the claim, or $0 (zero dollars) if you have not paid us anything.</strong></p>
+                    <p>Some jurisdictions do not allow the exclusion or limitation of certain warranties or liability. In such jurisdictions, our liability shall be limited to the greatest extent permitted by law.</p>
+                </section>
+
+                <section id="indemnification">
+                    <h2>12. Indemnification</h2>
+                    <p>You agree to indemnify, defend, and hold harmless Nest.APStudy, its creators, contributors, and affiliates from and against any claims, damages, losses, liabilities, costs, and expenses, including reasonable attorneys' fees, arising out of or related to:</p>
+                    <ul>
+                        <li>Your use of the Service.</li>
+                        <li>Your violation of these Terms.</li>
+                        <li>Your violation of any third party's rights.</li>
+                        <li>Any content you create or upload to the Service.</li>
+                    </ul>
+                </section>
+
+                <section id="governing-law-and-disputes">
+                    <h2>13. Governing Law and Disputes</h2>
+                    <p>These Terms shall be governed by and construed in accordance with the laws of the State of Georgia, United States, without regard to conflict of law principles. Any disputes arising from or related to these Terms or the Service shall be resolved through good-faith negotiation. If negotiation fails, disputes shall be subject to the exclusive jurisdiction of the courts located in the State of Georgia.</p>
+                </section>
+
+                <section id="data-deletion">
+                    <h2>14. Data Deletion</h2>
+                    <p>You have the right to delete your account and all associated data at any time. Full details on how deletion works, what is deleted immediately, and what may be retained temporarily are provided in our Privacy Policy under the "Data Deletion and Account Deletion" section.</p>
+                    <p>To request account deletion:</p>
+                    <ol>
+                        <li>Use the account deletion feature in your Account Settings, or</li>
+                        <li>Email <a href="mailto:derek.chen@emory.edu">derek.chen@emory.edu</a> with the subject line "Account Deletion Request."</li>
+                    </ol>
+                    <p>We will process all deletion requests within 30 days.</p>
+                </section>
+
+                <section id="changes-to-these-terms">
+                    <h2>15. Changes to These Terms</h2>
+                    <p>We may revise these Terms from time to time. If we make material changes, we will notify you through the Service or by email. Your continued use of the Service after the revised Terms take effect constitutes your acceptance of the updated Terms. If you do not agree to the revised Terms, you must stop using the Service and delete your account.</p>
+                </section>
+
+                <section id="severability">
+                    <h2>16. Severability</h2>
+                    <p>If any provision of these Terms is found to be unenforceable or invalid by a court of competent jurisdiction, that provision shall be limited or eliminated to the minimum extent necessary, and the remaining provisions shall remain in full force and effect.</p>
+                </section>
+
+                <section id="entire-agreement">
+                    <h2>17. Entire Agreement</h2>
+                    <p>These Terms, together with our Privacy Policy, constitute the entire agreement between you and Nest.APStudy regarding your use of the Service and supersede all prior agreements, understandings, or representations.</p>
+                </section>
+
+                <section id="no-waiver">
+                    <h2>18. No Waiver</h2>
+                    <p>Our failure to enforce any provision of these Terms shall not be deemed a waiver of that provision or our right to enforce it in the future.</p>
+                </section>
+
+                <section id="contact">
+                    <h2>19. Contact</h2>
+                    <p>If you have any questions about these Terms of Service, please contact us:</p>
+                    <p><strong>Email:</strong> <a href="mailto:derek.chen@emory.edu">derek.chen@emory.edu</a></p>
+                    <p><em>Thank you for using Nest.APStudy. We built this tool to help students succeed, and we are committed to being transparent about how we operate.</em></p>
+                </section>
+                {% endif %}
+            </article>
+        </div>
+        <global class="thefooter legal-footer">
+            <footer class="legal-fallback-footer" aria-label="Site footer">
+                <span>© 2026 Nest.APStudy.org. Your work, your space, your nest.</span>
+                <nav aria-label="Footer links">
+                    <a href="mailto:derek.chen@emory.edu">Support</a>
+                    <a href="{{ url_for('legal.privacy_policy') }}">Privacy</a>
+                    <a href="{{ url_for('legal.terms_of_service') }}">Terms</a>
+                </nav>
+            </footer>
+        </global>
+    </main>
+</body>
+</html>

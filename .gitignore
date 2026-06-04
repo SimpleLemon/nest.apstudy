@@ -1,5 +1,15 @@
+# Local project runtime / secrets
 .env
+.env.*
+!.env.example
 client_secret.json
+client_secret*.json
+credentials.json
+credentials*.json
+*.pem
+*.key
+*.p12
+*.pfx
 uploads/
 __pycache__/
 *.pyc
@@ -11,6 +21,8 @@ node_modules/
 .aider.model.metadata.json
 .aider.model.settings.yml
 .codex
+.claude/
+.continue/
 .desloppify/
 AGENTS.md
 
@@ -62,5 +74,4 @@ logs/
 .cache/
 *.swp
 
-# Local project runtime / secrets
 instance/

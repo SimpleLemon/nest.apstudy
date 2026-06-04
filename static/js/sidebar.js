@@ -347,7 +347,7 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
 
 function setupChatSummaryBadge() {
   const badge = document.querySelector('[data-chat-unread-badge]');
-  if (!badge || window.location.pathname === '/chat') return;
+  if (!badge) return;
   const nav = document.querySelector('global.thenav');
   if (!nav || !nav.hasAttribute('data-user-email')) return;
   const pollMs = 120000;

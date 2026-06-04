@@ -282,10 +282,10 @@ function initializeGlobalChrome() {
 <footer class="bg-surface w-full py-12 border-t border-outline-variant/30">
     <div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto">
         <span class="font-['Inter'] text-[11px] uppercase tracking-[0.05em] font-normal text-on-surface-variant/50">© 2026 Nest.APStudy.org. Your work, your space, your nest.</span>
-        <div class="flex gap-6 mt-4 md:mt-0">
-            <a class="font-['Inter'] text-[11px] uppercase tracking-[0.05em] font-normal text-on-surface-variant/50 hover:text-primary transition-colors" href="mailto:derekchenusa@gmail.com">Support</a>
-            <a class="font-['Inter'] text-[11px] uppercase tracking-[0.05em] font-normal text-on-surface-variant/50 hover:text-primary transition-colors" href="#">Archive</a>
-            <a class="font-['Inter'] text-[11px] uppercase tracking-[0.05em] font-normal text-on-surface-variant/50 hover:text-primary transition-colors" href="#">Privacy</a>
+        <div class="flex flex-wrap justify-center gap-6 mt-4 md:mt-0">
+            <a class="font-['Inter'] text-[11px] uppercase tracking-[0.05em] font-normal text-on-surface-variant/50 hover:text-primary transition-colors" href="mailto:derek.chen@emory.edu">Support</a>
+            <a class="font-['Inter'] text-[11px] uppercase tracking-[0.05em] font-normal text-on-surface-variant/50 hover:text-primary transition-colors" href="/privacy-policy">Privacy</a>
+            <a class="font-['Inter'] text-[11px] uppercase tracking-[0.05em] font-normal text-on-surface-variant/50 hover:text-primary transition-colors" href="/terms-of-service">Terms</a>
         </div>
     </div>
 </footer>

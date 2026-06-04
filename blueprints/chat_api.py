@@ -1217,28 +1217,40 @@ def _existing_visible_channels_for_summary():
 
 def _unread_count(scope_type, scope_id, user_id, last_read_at):
     field = "channel_id" if scope_type == "channel" else "thread_id"
-    queries = [
-        Query.equal(field, [scope_id]),
-        Query.order_desc("created_at"),
-        Query.limit(CHAT_SUMMARY_SCAN_LIMIT),
-    ]
-    if last_read_at:
-        queries.insert(1, Query.greater_than("created_at", last_read_at))
-    try:
-        rows = list_rows_safe(COLLECTIONS["chat_messages"], queries).get("rows", [])
-    except AppwriteException:
-        logger.exception("Failed to count unread chat messages")
-        return 0, False
+    offset = 0
+    blocked_user_ids = _blocked_user_ids(user_id) if scope_type == "thread" else set()
     count = 0
-    for row in rows:
-        if row.get("deleted_at"):
-            continue
-        if str(row.get("user_id") or "") == str(user_id):
-            continue
-        count += 1
-        if count >= CHAT_UNREAD_CAP:
-            return CHAT_UNREAD_CAP, True
-    return count, len(rows) >= CHAT_SUMMARY_SCAN_LIMIT
+
+    while True:
+        queries = [
+            Query.equal(field, [scope_id]),
+            Query.order_desc("created_at"),
+            Query.limit(CHAT_SUMMARY_SCAN_LIMIT),
+            Query.offset(offset),
+        ]
+        if last_read_at:
+            queries.insert(1, Query.greater_than("created_at", last_read_at))
+        try:
+            rows = list_rows_safe(COLLECTIONS["chat_messages"], queries).get("rows", [])
+        except AppwriteException:
+            logger.exception("Failed to count unread chat messages")
+            return 0, False
+
+        for row in rows:
+            if row.get("deleted_at"):
+                continue
+            message_user_id = str(row.get("user_id") or "")
+            if message_user_id == str(user_id):
+                continue
+            if message_user_id in blocked_user_ids:
+                continue
+            count += 1
+            if count >= CHAT_UNREAD_CAP:
+                return CHAT_UNREAD_CAP, True
+
+        if len(rows) < CHAT_SUMMARY_SCAN_LIMIT:
+            return count, False
+        offset += CHAT_SUMMARY_SCAN_LIMIT
 
 
 @chat_api_bp.route("/api/universities")

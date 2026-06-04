@@ -189,6 +189,15 @@
     return `${room.type}:${room.id}`;
   }
 
+  function requestedRoomFromLocation() {
+    const params = new URLSearchParams(window.location.search || "");
+    const channelId = params.get("channel");
+    if (channelId) return { type: "channel", id: channelId };
+    const threadId = params.get("thread");
+    if (threadId) return { type: "thread", id: threadId };
+    return null;
+  }
+
   function currentUserId() {
     return String(state.user?.id || root.dataset.currentUserId || "");
   }
@@ -548,17 +557,17 @@
     return null;
   }
 
-  function markActiveRoomRead(cache) {
-    if (!state.activeRoom || document.visibilityState === "hidden") return;
+  function markRoomRead(room, cache = cacheFor(room)) {
+    if (!room?.type || !room?.id || document.visibilityState === "hidden") return;
     const latest = latestMessageForRead(cache);
-    if (!latest) return;
+    const body = {
+      scope_type: room.type === "channel" ? "channel" : "thread",
+      scope_id: room.id,
+    };
+    if (latest?.id) body.message_id = latest.id;
     void fetchJson("/api/chat/read", {
       method: "POST",
-      body: JSON.stringify({
-        scope_type: state.activeRoom.type === "channel" ? "channel" : "thread",
-        scope_id: state.activeRoom.id,
-        message_id: latest.id,
-      }),
+      body: JSON.stringify(body),
     })
       .then(() => window.dispatchEvent(new CustomEvent("apstudy-chat-read-state-change")))
       .catch(() => {});
@@ -1303,7 +1312,7 @@
         restoreScroll(cache, !preserveScroll);
       }
       if (!before && (wasNearBottom || !after)) {
-        markActiveRoomRead(cache);
+        markRoomRead(room, cache);
       }
       schedulePersistentBootstrapSave();
       return messages;
@@ -1423,6 +1432,9 @@
       await hydrateRoomFromPersistentCache(room);
     }
     if (renderCachedRoom(room)) {
+      if (!cache.stale || latestMessageForRead(cache)) {
+        markRoomRead(room, cache);
+      }
       if (cache.stale && cache.latestCursor) {
         await loadMessages({ after: cache.latestCursor, quiet: true });
       } else if (cache.stale) {
@@ -1451,6 +1463,18 @@
     void loadInitialPresences();
     setMembersCollapsed(state.membersCollapsed);
     schedulePersistentBootstrapSave();
+
+    const requestedRoom = requestedRoomFromLocation();
+    if (requestedRoom) {
+      const requestedExists = requestedRoom.type === "channel"
+        ? state.channels.some((channel) => channel.id === requestedRoom.id)
+        : state.threads.some((thread) => thread.id === requestedRoom.id);
+      if (requestedExists) {
+        await selectRoom(requestedRoom, { suppressFocus: preserveActive });
+        scheduleRoomPrefetches();
+        return;
+      }
+    }
 
     const activeKey = roomKey(state.activeRoom);
     if (activeKey) {
@@ -1790,6 +1814,7 @@
         renderMessages(cache.messages);
         restoreScroll(cache, true);
         schedulePersistentRoomSave(room);
+        markRoomRead(room, cache);
       }
       refreshViewingPresence();
       schedulePersistentBootstrapSave();
@@ -2003,9 +2028,18 @@
     });
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible") {
-        const cache = cacheFor(state.activeRoom);
-        if (cache?.loaded && cache.latestCursor) {
-          void loadMessages({ after: cache.latestCursor, quiet: true });
+        const room = state.activeRoom;
+        const cache = cacheFor(room);
+        if (cache?.loaded) {
+          if (cache.latestCursor) {
+            void loadMessages({ after: cache.latestCursor, quiet: true })
+              .finally(() => markRoomRead(room, cache));
+          } else if (cache.stale) {
+            void loadMessages({ force: true, quiet: true })
+              .finally(() => markRoomRead(room, cache));
+          } else {
+            markRoomRead(room, cache);
+          }
         }
         void loadInitialPresences();
         refreshViewingPresence();

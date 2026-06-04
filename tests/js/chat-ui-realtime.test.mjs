@@ -96,6 +96,31 @@ test("chat hydrates cached rooms before silent refresh and limits persisted mess
   assert.match(script, /requestIdleCallback/);
 });
 
+test("chat marks selected cached rooms and sent messages as read", async () => {
+  const script = await sourceFor("static/js/chat.js");
+
+  assert.match(script, /function markRoomRead\(room, cache = cacheFor\(room\)\)/);
+  assert.match(script, /fetchJson\("\/api\/chat\/read"/);
+  assert.match(script, /if \(latest\?\.id\) body\.message_id = latest\.id/);
+  assert.match(script, /if \(!cache\.stale \|\| latestMessageForRead\(cache\)\) \{\s*markRoomRead\(room, cache\)/);
+  assert.match(script, /markRoomRead\(room, cache\);\s*\}\s*refreshViewingPresence/s);
+  assert.match(script, /\.finally\(\(\) => markRoomRead\(room, cache\)\)/);
+});
+
+test("chat supports direct channel and thread URL selection", async () => {
+  const script = await sourceFor("static/js/chat.js");
+  const dashboard = await sourceFor("blueprints/dashboard.py");
+
+  assert.match(script, /function requestedRoomFromLocation\(\)/);
+  assert.match(script, /new URLSearchParams\(window\.location\.search \|\| ""\)/);
+  assert.match(script, /params\.get\("channel"\)/);
+  assert.match(script, /params\.get\("thread"\)/);
+  assert.match(script, /const requestedRoom = requestedRoomFromLocation\(\)/);
+  assert.match(script, /await selectRoom\(requestedRoom, \{ suppressFocus: preserveActive \}\)/);
+  assert.match(dashboard, /url_for\("dashboard\.chat", channel=room_id\)/);
+  assert.match(dashboard, /url_for\("dashboard\.chat", thread=room_id\)/);
+});
+
 test("chat uses message-pane loader and profile toggle tooltip polish", async () => {
   const script = await sourceFor("static/js/chat.js");
   const styles = await sourceFor("static/css/chat.css");
@@ -213,6 +238,7 @@ test("global sidebar chat badge uses slow summary polling only", async () => {
   assert.match(sidebar, /\/api\/chat\/summary/);
   assert.match(sidebar, /const pollMs = 120000/);
   assert.match(sidebar, /document\.visibilityState === 'hidden'/);
+  assert.doesNotMatch(sidebar, /window\.location\.pathname === '\/chat'/);
   assert.doesNotMatch(sidebar, /client\.subscribe/);
   assert.doesNotMatch(sidebar, /\/api\/chat\/channels\/.*messages/);
 });

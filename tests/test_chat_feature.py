@@ -234,6 +234,64 @@ class TestChatFeature(unittest.TestCase):
         })
         self.assertEqual(university_payload["presence_read_permissions"], [f'read("label:{label}")'])
 
+    def test_chat_summary_returns_zero_after_matching_read_state(self):
+        channel = {"$id": "nest_chat", "kind": "discord", "label": "Chat"}
+        with self.app.test_request_context("/api/chat/summary"):
+            with patch.object(chat_api, "current_user", self.user), \
+                    patch.object(chat_api, "_existing_visible_channels_for_summary", return_value=[channel]), \
+                    patch.object(chat_api, "_threads_for_current_user", return_value=[]), \
+                    patch.object(chat_api, "_read_state_for_scope", return_value={"last_read_at": "2026-05-26T22:00:00Z"}), \
+                    patch.object(chat_api, "list_rows_safe", return_value={"rows": []}):
+                response = chat_api.chat_summary.__wrapped__()
+
+        payload = response.get_json()
+        self.assertEqual(payload["total_unread"], 0)
+        self.assertFalse(payload["unread_capped"])
+        self.assertFalse(payload["has_unread"])
+        self.assertEqual(payload["rooms"][0]["unread_count"], 0)
+
+    def test_unread_count_full_scan_page_with_fewer_than_cap_is_not_capped(self):
+        first_page = [
+            {"$id": f"own-{index}", "user_id": "user-1", "created_at": f"2026-05-26T22:{index:02d}:00Z"}
+            for index in range(20)
+        ] + [
+            {"$id": f"other-{index}", "user_id": "user-2", "created_at": f"2026-05-26T23:{index:02d}:00Z"}
+            for index in range(30)
+        ]
+        second_page = [
+            {"$id": f"deleted-{index}", "user_id": "user-2", "deleted_at": "2026-05-27T00:00:00Z"}
+            for index in range(10)
+        ]
+        with patch.object(chat_api, "list_rows_safe", side_effect=[{"rows": first_page}, {"rows": second_page}]):
+            unread, capped = chat_api._unread_count("channel", "nest_chat", "user-1", None)
+
+        self.assertEqual(unread, 30)
+        self.assertFalse(capped)
+
+    def test_unread_count_ignores_own_and_deleted_messages(self):
+        rows = [
+            {"$id": "own", "user_id": "user-1"},
+            {"$id": "deleted", "user_id": "user-2", "deleted_at": "2026-05-27T00:00:00Z"},
+            {"$id": "visible", "user_id": "user-2"},
+        ]
+        with patch.object(chat_api, "list_rows_safe", return_value={"rows": rows}):
+            unread, capped = chat_api._unread_count("channel", "nest_chat", "user-1", None)
+
+        self.assertEqual(unread, 1)
+        self.assertFalse(capped)
+
+    def test_unread_count_respects_blocked_dm_senders(self):
+        rows = [
+            {"$id": "blocked", "user_id": "blocked-user"},
+            {"$id": "visible", "user_id": "user-2"},
+        ]
+        with patch.object(chat_api, "_blocked_user_ids", return_value={"blocked-user"}), \
+                patch.object(chat_api, "list_rows_safe", return_value={"rows": rows}):
+            unread, capped = chat_api._unread_count("thread", "thread-1", "user-1", None)
+
+        self.assertEqual(unread, 1)
+        self.assertFalse(capped)
+
     def test_current_appwrite_labels_accepts_dict_response(self):
         users_service = Mock()
         users_service.get.return_value = {"labels": ["student", "chat_uni_old"]}
