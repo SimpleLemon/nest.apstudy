@@ -11,7 +11,7 @@ async function sourceFor(relativePath) {
 }
 
 test("command palette keeps primary navigation, theme actions, and global controls wired", async () => {
-    const source = await sourceFor("static/js/command-palette.js");
+    const source = await sourceFor("static/js/core/command-palette.js");
 
     for (const route of ["/calendar", "/courses", "/notes", "/tasks", "/files", "/chat", "/settings"]) {
         assert.match(source, new RegExp(`route: ['"]${route}['"]`));
@@ -29,7 +29,7 @@ test("command palette keeps primary navigation, theme actions, and global contro
 });
 
 test("calendar event form preserves escaping, API routes, and cache refresh behavior", async () => {
-    const source = await sourceFor("static/js/calendar/event-form.js");
+    const source = await sourceFor("static/js/calendar/events/event-form.js");
 
     for (const replacement of ["&amp;", "&lt;", "&gt;", "&quot;", "&#39;"]) {
         assert.match(source, new RegExp(replacement.replace("&", "&")));
@@ -45,23 +45,23 @@ test("calendar event form preserves escaping, API routes, and cache refresh beha
 
 test("calendar dashboard keeps cache, public-share, and event-form contracts wired", async () => {
     const source = [
-        await sourceFor("static/js/calendar.js"),
+        await sourceFor("static/js/calendar/index.js"),
         await sourceFor("static/js/calendar/utils.js"),
         await sourceFor("static/js/calendar/state.js"),
         await sourceFor("static/js/calendar/core.js"),
-        await sourceFor("static/js/calendar/course-modal.js"),
-        await sourceFor("static/js/calendar/courses.js"),
+        await sourceFor("static/js/calendar/integrations/course-modal.js"),
+        await sourceFor("static/js/calendar/integrations/courses.js"),
         await sourceFor("static/js/calendar/menu.js"),
         await sourceFor("static/js/calendar/preferences.js"),
-        await sourceFor("static/js/calendar/data.js"),
-        await sourceFor("static/js/calendar/event-render.js"),
-        await sourceFor("static/js/calendar/ui-actions.js"),
-        await sourceFor("static/js/calendar/agenda.js"),
-        await sourceFor("static/js/calendar/month-view.js"),
-        await sourceFor("static/js/calendar/week-view.js"),
-        await sourceFor("static/js/calendar/render-shell.js"),
-        await sourceFor("static/js/calendar/sources.js"),
-        await sourceFor("static/js/calendar/share.js"),
+        await sourceFor("static/js/calendar/integrations/data.js"),
+        await sourceFor("static/js/calendar/views/event-render.js"),
+        await sourceFor("static/js/calendar/events/ui-actions.js"),
+        await sourceFor("static/js/calendar/views/agenda.js"),
+        await sourceFor("static/js/calendar/views/month-view.js"),
+        await sourceFor("static/js/calendar/views/week-view.js"),
+        await sourceFor("static/js/calendar/views/render-shell.js"),
+        await sourceFor("static/js/calendar/integrations/sources.js"),
+        await sourceFor("static/js/calendar/integrations/share.js"),
         await sourceFor("static/js/calendar/controls.js"),
         await sourceFor("static/js/calendar/bootstrap.js"),
     ].join("\n");
@@ -81,7 +81,10 @@ test("calendar dashboard keeps cache, public-share, and event-form contracts wir
 });
 
 test("dashboard daily quote fetches Flask endpoint and uses one smooth egg card", async () => {
-    const source = await sourceFor("static/js/dashboard/daily-quote.js");
+    const source = [
+        await sourceFor("static/js/dashboard/daily-quote/data.js"),
+        await sourceFor("static/js/dashboard/daily-quote.js"),
+    ].join("\n");
 
     assert.doesNotMatch(source, /https:\/\/zenquotes\.io\/api\/today/);
     assert.match(source, /QUOTE_API_URL = "\/api\/dashboard\/quote\/today"/);
@@ -111,7 +114,7 @@ test("dashboard daily quote fetches Flask endpoint and uses one smooth egg card"
 });
 
 test("sidebar keeps persisted collapse state, route targets, and preference event bridge", async () => {
-    const source = await sourceFor("static/js/sidebar.js");
+    const source = await sourceFor("static/js/core/sidebar.js");
 
     for (const route of ["/calendar", "/courses", "/files", "/notes", "/tasks", "/chat", "/settings"]) {
         assert.match(source, new RegExp(`data-route="${route}"`));
@@ -125,8 +128,8 @@ test("sidebar keeps persisted collapse state, route targets, and preference even
 });
 
 test("mobile shell uses a hamburger drawer without breaking desktop sidebar persistence", async () => {
-    const navbarSource = await sourceFor("static/js/navbar.js");
-    const sidebarSource = await sourceFor("static/js/sidebar.js");
+    const navbarSource = await sourceFor("static/js/core/navbar.js");
+    const sidebarSource = await sourceFor("static/js/core/sidebar.js");
     const layoutStyles = await sourceFor("static/css/layout.css");
 
     assert.match(navbarSource, /id="navbar-menu-btn"/);
@@ -148,12 +151,12 @@ test("mobile shell uses a hamburger drawer without breaking desktop sidebar pers
 
 test("calendar and courses switch dense schedules to compact mobile agenda renderers", async () => {
     const calendarSource = [
-        await sourceFor("static/js/calendar.js"),
-        await sourceFor("static/js/calendar/agenda.js"),
-        await sourceFor("static/js/calendar/render-shell.js"),
+        await sourceFor("static/js/calendar/index.js"),
+        await sourceFor("static/js/calendar/views/agenda.js"),
+        await sourceFor("static/js/calendar/views/render-shell.js"),
     ].join("\n");
     const coursesSource = [
-        await sourceFor("static/js/courses.js"),
+        await sourceFor("static/js/courses/index.js"),
         await sourceFor("static/js/courses/calendar.js"),
     ].join("\n");
     const globalStyles = await sourceFor("static/css/global.css");
@@ -175,7 +178,7 @@ test("calendar and courses switch dense schedules to compact mobile agenda rende
 });
 
 test("theme init normalizes theme aliases and persists pending settings safely", async () => {
-    const source = await sourceFor("static/js/theme-init.js");
+    const source = await sourceFor("static/js/core/theme-init.js");
 
     assert.match(source, /var DARK_THEMES = \['obsidian-dark', 'nest-dark'\]/);
     assert.match(source, /return 'obsidian-dark'/);
@@ -188,7 +191,11 @@ test("theme init normalizes theme aliases and persists pending settings safely",
 });
 
 test("notes list guards destructive actions and supports folder/export workflows", async () => {
-    const source = await sourceFor("static/js/notes/list.js");
+    const source = [
+        await sourceFor("static/js/notes/list.js"),
+        await sourceFor("static/js/notes/list/utils.js"),
+        await sourceFor("static/js/notes/list/cards.js"),
+    ].join("\n");
 
     assert.match(source, /function apiJson\(url, options = \{\}\)/);
     assert.match(source, /APStudyPendingMutations\?\.track\(request, 'notes-save'\)/);
@@ -245,7 +252,7 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
 });
 
 test("courses page keeps Atlas APIs, filtering state, and schedule constants connected", async () => {
-    const source = await sourceFor("static/js/courses.js");
+    const source = await sourceFor("static/js/courses/index.js");
     const combinedSource = [
         source,
         await sourceFor("static/js/courses/utils.js"),
@@ -292,7 +299,10 @@ test("files page keeps upload limits, modal elements, and share/delete endpoints
     const source = await sourceFor("static/js/files/index.js");
     const utilsSource = await sourceFor("static/js/files/utils.js");
     const renderersSource = await sourceFor("static/js/files/renderers.js");
-    const combinedSource = `${source}\n${utilsSource}\n${renderersSource}`;
+    const modalsSource = await sourceFor("static/js/files/modals.js");
+    const workflowsSource = await sourceFor("static/js/files/workflows.js");
+    const eventsSource = await sourceFor("static/js/files/events.js");
+    const combinedSource = `${source}\n${utilsSource}\n${renderersSource}\n${modalsSource}\n${workflowsSource}\n${eventsSource}`;
 
     assert.match(source, /const MAX_FILE_SIZE_BYTES = Number\(CONFIG\.maxFileSize\) \|\| \(50 \* 1024 \* 1024\)/);
     assert.match(source, /const MAX_UPLOAD_FILES = Number\(CONFIG\.maxUploadFiles\) \|\| 5/);
@@ -305,7 +315,14 @@ test("files page keeps upload limits, modal elements, and share/delete endpoints
 });
 
 test("settings page keeps account, theme, calendar, and destructive endpoints centralized", async () => {
-    const source = await sourceFor("static/js/settings.js");
+    const source = [
+        await sourceFor("static/js/settings/index.js"),
+        await sourceFor("static/js/settings/utils.js"),
+        await sourceFor("static/js/settings/calendar.js"),
+        await sourceFor("static/js/settings/profile.js"),
+        await sourceFor("static/js/settings/preferences.js"),
+        await sourceFor("static/js/settings/account.js"),
+      ].join("\n");
 
     for (const endpoint of [
         "/settings/api/bootstrap",
@@ -351,7 +368,7 @@ test("task app shell keeps data-layer wiring, destructive confirms, and mount co
 });
 
 test("appwrite bootstrap exposes configured SDK clients globally", async () => {
-    const source = await sourceFor("static/js/appwrite.js");
+    const source = await sourceFor("static/js/core/appwrite.js");
 
     assert.match(source, /const APPWRITE_ENDPOINT = "https:\/\/nyc\.cloud\.appwrite\.io\/v1"/);
     assert.match(source, /const APPWRITE_PROJECT_ID = "69f77663000c16abdff2"/);
@@ -367,7 +384,7 @@ test("appwrite bootstrap exposes configured SDK clients globally", async () => {
 });
 
 test("calendar context menu keeps task, event, override, and keyboard flows wired", async () => {
-    const source = await sourceFor("static/js/calendar/context-menu.js");
+    const source = await sourceFor("static/js/calendar/events/context-menu.js");
 
     assert.match(source, /const rootSelector = "#calendar-view-root"/);
     assert.match(source, /role", "menu"/);
@@ -382,8 +399,8 @@ test("calendar context menu keeps task, event, override, and keyboard flows wire
 });
 
 test("global chrome keeps pending mutation, confirmation, loader, date, and auth helpers", async () => {
-    const chromeSource = await sourceFor("static/js/global-chrome.js");
-    const source = await sourceFor("static/js/global.js");
+    const chromeSource = await sourceFor("static/js/core/global-chrome.js");
+    const source = await sourceFor("static/js/core/global.js");
 
     assert.match(chromeSource, /Compatibility shim/);
     assert.match(chromeSource, /global\.js/);
@@ -454,12 +471,12 @@ test("landing page keeps local assets, tabs, analytics, and reduced-motion handl
 });
 
 test("navbar keeps avatar sizing, command palette shortcut, and logout/account flows", async () => {
-    const source = await sourceFor("static/js/navbar.js");
+    const source = await sourceFor("static/js/core/navbar.js");
 
     assert.match(source, /window\.APSTUDY_AVATAR_URL_FOR_SIZE = avatarUrlForSize/);
     assert.match(source, /nearestDiscordAvatarSize\(normalizedSize\)/);
     assert.match(source, /googleAvatarUrlForSize\(rawUrl, normalizedSize\)/);
-    assert.match(source, /import\('\/static\/js\/command-palette\.js'\)/);
+    assert.match(source, /import\('\/static\/js\/core\/command-palette\.js'\)/);
     assert.match(source, /window\.APSTUDY_COMMAND_PALETTE_SHORTCUT_BOUND/);
     assert.match(source, /event\.metaKey && !event\.ctrlKey/);
     assert.match(source, /window\.location\.href = '\/settings#account'/);

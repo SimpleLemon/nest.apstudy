@@ -1,6 +1,6 @@
 /**
  * Add this to EVERY page's <head>, BEFORE stylesheets if possible
- * <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
+ * <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
  */
 (function() {
     var DARK_THEMES = ['obsidian-dark', 'nest-dark'];

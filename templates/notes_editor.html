@@ -8,8 +8,8 @@
         window.APPWRITE_DATABASE_ID = "{{ config.APPWRITE_DATABASE_ID or '' }}";
     </script>
     <script src="https://cdn.jsdelivr.net/npm/appwrite@25.0.0/dist/iife/sdk.js"></script>
-    <script src="{{ url_for('static', filename='js/appwrite.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/core/appwrite.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/themes.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/layout.css') }}">
@@ -38,10 +38,10 @@
         }
         </script>
 
-    <script src="{{ url_for('static', filename='js/global-chrome.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/global.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/navbar.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/sidebar.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/core/global-chrome.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/core/navbar.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/core/sidebar.js') }}" defer></script>
     <script type="module" src="{{ url_for('static', filename='js/notes/editor.js') }}?v=notes-editor-ui-2"></script>
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }

@@ -88,7 +88,7 @@ function ensureCommandPaletteModule() {
   }
 
   if (!commandPaletteModulePromise) {
-    commandPaletteModulePromise = import('/static/js/command-palette.js')
+    commandPaletteModulePromise = import('/static/js/core/command-palette.js')
       .then((module) => module.commandPalette || window.APSTUDY_COMMAND_PALETTE)
       .catch((error) => {
         commandPaletteModulePromise = null;

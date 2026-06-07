@@ -7,15 +7,15 @@ import { fileURLToPath } from "node:url";
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 
 const confirmCallsites = [
-    "static/js/calendar/context-menu.js",
-    "static/js/courses.js",
+    "static/js/calendar/events/context-menu.js",
+    "static/js/courses/index.js",
     "static/js/notes/list.js",
-    "static/js/settings.js",
+    "static/js/settings/account.js",
     "static/js/tasks/task-app-helpers.js",
 ];
 
 test("destructive flows use the shared website confirmation modal", async () => {
-    const globalSource = await readFile(path.join(repoRoot, "static/js/global.js"), "utf8");
+    const globalSource = await readFile(path.join(repoRoot, "static/js/core/global.js"), "utf8");
     assert.match(globalSource, /window\.APStudyConfirm/);
     assert.match(globalSource, /apstudy-confirm/);
 

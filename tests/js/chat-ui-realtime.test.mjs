@@ -31,7 +31,7 @@ test("chat uses realtime event signals instead of message polling", async () => 
 
 test("chat uses Appwrite Presences for online and typing state", async () => {
   const script = await sourceFor("static/js/chat.js");
-  const appwrite = await sourceFor("static/js/appwrite.js");
+  const appwrite = await sourceFor("static/js/core/appwrite.js");
   const template = await sourceFor("templates/chat.html");
 
   assert.match(template, /appwrite@25\.0\.0/);
@@ -69,7 +69,7 @@ test("chat keeps a page lifetime room cache with delta loading", async () => {
 test("chat persists user-scoped IndexedDB cache until logout", async () => {
   const script = await sourceFor("static/js/chat.js");
   const template = await sourceFor("templates/chat.html");
-  const globalScript = await sourceFor("static/js/global.js");
+  const globalScript = await sourceFor("static/js/core/global.js");
 
   assert.match(template, /data-current-user-id="\{\{ user\.id or '' \}\}"/);
   assert.match(script, /const CHAT_CACHE_DB_NAME = "apstudy-chat-cache"/);
@@ -299,7 +299,7 @@ test("scheduler uses discord gateway with slow reconciliation", async () => {
 });
 
 test("global sidebar chat badge uses summary polling and shared chat summary events", async () => {
-  const sidebar = await sourceFor("static/js/sidebar.js");
+  const sidebar = await sourceFor("static/js/core/sidebar.js");
 
   assert.match(sidebar, /data-chat-unread-badge/);
   assert.match(sidebar, /\/api\/chat\/summary/);

@@ -1,24 +1,10 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 
-import {
-    useCreateBlockNote,
-    FormattingToolbarController,
-    useEditorContentOrSelectionChange,
-} from '@blocknote/react';
+import { useCreateBlockNote, FormattingToolbarController, useEditorContentOrSelectionChange } from '@blocknote/react';
 import { BlockNoteView } from '@blocknote/mantine';
-import {
-    ContextualNotesToolbar,
-    applyToolbarTooltips,
-    notesEditorSchema,
-} from './toolbar.js';
-
-function noteIdFromPath() {
-    const parts = window.location.pathname.split('/').filter(Boolean);
-    const editorIndex = parts.indexOf('editor');
-    if (editorIndex === -1) return '';
-    return parts[editorIndex + 1] || '';
-}
+import { ContextualNotesToolbar, applyToolbarTooltips, notesEditorSchema } from './toolbar.js';
+import { blockOwnContentIsEmpty, buildLoadingIndicatorHtml, documentHasText, formatRelativeSavedTime, isBlankTitle, noteIdFromPath, parseSavedDate } from './editor/utils.js';
 
 const noteId = noteIdFromPath();
 const SAVE_DEBOUNCE_MS = 800;
@@ -37,46 +23,6 @@ const saveRetry = document.getElementById('save-retry');
 const blocknoteRoot = document.getElementById('blocknote-root');
 const writingToolbar = document.getElementById('notes-writing-toolbar');
 const editorHint = document.getElementById('notes-editor-hint');
-
-function buildLoadingIndicatorHtml(label = 'Loading...', options = {}) {
-    return window.APStudyLoader.html(label, options);
-}
-
-function parseSavedDate(value) {
-    if (typeof value !== 'string' || value.trim() === '') return null;
-
-    const parsed = new Date(value);
-    return Number.isNaN(parsed.getTime()) ? null : parsed;
-}
-
-function formatRelativeSavedTime(date) {
-    if (!(date instanceof Date) || Number.isNaN(date.getTime())) return '';
-
-    const elapsedSeconds = Math.max(0, Math.floor((Date.now() - date.getTime()) / 1000));
-    if (elapsedSeconds < 10) return 'just now';
-    if (elapsedSeconds < 60) return `${elapsedSeconds} sec ago`;
-
-    const elapsedMinutes = Math.floor(elapsedSeconds / 60);
-    if (elapsedMinutes < 60) {
-        return `${elapsedMinutes} min ago`;
-    }
-
-    const elapsedHours = Math.floor(elapsedMinutes / 60);
-    if (elapsedHours < 24) {
-        return `${elapsedHours} hr ago`;
-    }
-
-    const elapsedDays = Math.floor(elapsedHours / 24);
-    if (elapsedDays < 7) {
-        return `${elapsedDays} day${elapsedDays === 1 ? '' : 's'} ago`;
-    }
-
-    return date.toLocaleDateString(undefined, {
-        month: 'short',
-        day: 'numeric',
-        year: date.getFullYear() === new Date().getFullYear() ? undefined : 'numeric',
-    });
-}
 
 function clearSavedTimeRefresh() {
     if (savedTimeRefreshTimer) {
@@ -174,18 +120,6 @@ function getCurrentBlock() {
     return editorInstance.getTextCursorPosition?.()?.block || selectedBlocks()[0] || null;
 }
 
-function blockOwnContentIsEmpty(block) {
-    if (!block || !Array.isArray(block.content)) return false;
-    if (block.content.length === 0) return true;
-
-    return block.content.every((item) => {
-        if (!item) return true;
-        if (typeof item === 'string') return item.trim() === '';
-        if (typeof item.text === 'string') return item.text.trim() === '';
-        return false;
-    });
-}
-
 function openBlockSuggestionMenu(block) {
     if (!editorInstance || !block) return;
     editorInstance.setTextCursorPosition?.(block);
@@ -216,27 +150,6 @@ function addBlockAfterCurrent() {
     openBlockSuggestionMenu(insertedBlock || currentBlock);
     updateEditorChrome();
     triggerDebouncedSave();
-}
-
-function blockText(block) {
-    if (!block) return '';
-    const ownText = Array.isArray(block.content)
-        ? block.content.map((item) => item?.text || '').join(' ')
-        : '';
-    const childText = Array.isArray(block.children)
-        ? block.children.map(blockText).join(' ')
-        : '';
-    return `${ownText} ${childText}`.trim();
-}
-
-function documentHasText(documentValue) {
-    return Array.isArray(documentValue)
-        && documentValue.some((block) => blockText(block).trim().length > 0);
-}
-
-function isBlankTitle(title) {
-    const value = String(title || '').trim();
-    return value === '' || value.toLowerCase() === 'untitled';
 }
 
 function selectedBlocks() {
