@@ -1171,29 +1171,38 @@ def _latest_visible_message(scope_type, scope_id):
     return None
 
 
-def _mark_read(scope_type, scope_id, message_id=None):
-    user_id = _current_user_id()
+def _message_scope_field(scope_type):
+    return "channel_id" if scope_type == "channel" else "thread_id"
+
+
+def _message_in_scope(row, scope_type, scope_id):
+    return bool(row and row.get(_message_scope_field(scope_type)) == scope_id)
+
+
+def _message_visible_for_user(row, scope_type, blocked_user_ids=None):
+    if not row or row.get("deleted_at"):
+        return False
+    if scope_type == "thread" and str(row.get("user_id") or "") in (blocked_user_ids or set()):
+        return False
+    return True
+
+
+def _message_can_be_unread_target(row, scope_type, user_id, blocked_user_ids=None):
+    if not _message_visible_for_user(row, scope_type, blocked_user_ids):
+        return False
+    return str(row.get("user_id") or "") != str(user_id)
+
+
+def _persist_read_state(user_id, scope_type, scope_id, latest, *, fallback_to_now=True):
     read_key = _read_key(user_id, scope_type, scope_id)
-    latest = None
-    if message_id:
-        try:
-            latest = get_row_safe(COLLECTIONS["chat_messages"], message_id, allow_missing=True)
-        except AppwriteException:
-            latest = None
-        if latest:
-            expected_field = "channel_id" if scope_type == "channel" else "thread_id"
-            if latest.get(expected_field) != scope_id or latest.get("deleted_at"):
-                latest = None
-    if not latest:
-        latest = _latest_visible_message(scope_type, scope_id)
-    now = format_datetime(_now())
+    last_read_at = latest.get("created_at") if latest else (format_datetime(_now()) if fallback_to_now else None)
     payload = {
         "user_id": user_id,
         "scope_type": scope_type,
         "scope_id": scope_id,
         "read_key": read_key,
         "last_read_message_id": _row_id(latest) if latest else None,
-        "last_read_at": latest.get("created_at") if latest else now,
+        "last_read_at": last_read_at,
     }
     try:
         existing = first_row(COLLECTIONS["chat_read_states"], [Query.equal("read_key", [read_key])])
@@ -1201,8 +1210,115 @@ def _mark_read(scope_type, scope_id, message_id=None):
             return update_row_safe(COLLECTIONS["chat_read_states"], _row_id(existing), payload)
         return create_row_safe(COLLECTIONS["chat_read_states"], row_id=ID.unique(), data=payload)
     except AppwriteException:
-        logger.exception("Failed to mark chat scope read")
+        logger.exception("Failed to persist chat read state")
         return None
+
+
+def _mark_read(scope_type, scope_id, message_id=None):
+    user_id = _current_user_id()
+    latest = None
+    if message_id:
+        try:
+            latest = get_row_safe(COLLECTIONS["chat_messages"], message_id, allow_missing=True)
+        except AppwriteException:
+            latest = None
+        if latest:
+            if not _message_in_scope(latest, scope_type, scope_id) or latest.get("deleted_at"):
+                latest = None
+    if not latest:
+        latest = _latest_visible_message(scope_type, scope_id)
+    return _persist_read_state(user_id, scope_type, scope_id, latest)
+
+
+def _latest_unread_target(scope_type, scope_id, user_id, blocked_user_ids):
+    field = _message_scope_field(scope_type)
+    offset = 0
+    while True:
+        try:
+            rows = list_rows_safe(
+                COLLECTIONS["chat_messages"],
+                [
+                    Query.equal(field, [scope_id]),
+                    Query.order_desc("created_at"),
+                    Query.limit(CHAT_SUMMARY_SCAN_LIMIT),
+                    Query.offset(offset),
+                ],
+            ).get("rows", [])
+        except AppwriteException:
+            logger.exception("Failed to load latest unread chat target")
+            return None
+        for row in rows:
+            if _message_can_be_unread_target(row, scope_type, user_id, blocked_user_ids):
+                return row
+        if len(rows) < CHAT_SUMMARY_SCAN_LIMIT:
+            return None
+        offset += CHAT_SUMMARY_SCAN_LIMIT
+
+
+def _previous_visible_message(scope_type, scope_id, target, blocked_user_ids):
+    created_at = target.get("created_at") if target else None
+    if not created_at:
+        return None
+    field = _message_scope_field(scope_type)
+    offset = 0
+    while True:
+        try:
+            rows = list_rows_safe(
+                COLLECTIONS["chat_messages"],
+                [
+                    Query.equal(field, [scope_id]),
+                    Query.less_than("created_at", created_at),
+                    Query.order_desc("created_at"),
+                    Query.limit(CHAT_SUMMARY_SCAN_LIMIT),
+                    Query.offset(offset),
+                ],
+            ).get("rows", [])
+        except AppwriteException:
+            logger.exception("Failed to load previous chat read boundary")
+            return None
+        for row in rows:
+            if _message_visible_for_user(row, scope_type, blocked_user_ids):
+                return row
+        if len(rows) < CHAT_SUMMARY_SCAN_LIMIT:
+            return None
+        offset += CHAT_SUMMARY_SCAN_LIMIT
+
+
+def _clear_read_state(user_id, scope_type, scope_id):
+    read_key = _read_key(user_id, scope_type, scope_id)
+    try:
+        existing = first_row(COLLECTIONS["chat_read_states"], [Query.equal("read_key", [read_key])])
+        if existing:
+            delete_row_safe(COLLECTIONS["chat_read_states"], _row_id(existing))
+    except AppwriteException:
+        logger.exception("Failed to clear chat read state")
+    return None
+
+
+def _mark_unread(scope_type, scope_id, message_id=None):
+    user_id = _current_user_id()
+    blocked_user_ids = _blocked_user_ids(user_id) if scope_type == "thread" else set()
+    target = None
+    if message_id:
+        try:
+            candidate = get_row_safe(COLLECTIONS["chat_messages"], message_id, allow_missing=True)
+        except AppwriteException:
+            candidate = None
+        if (
+            _message_in_scope(candidate, scope_type, scope_id)
+            and _message_can_be_unread_target(candidate, scope_type, user_id, blocked_user_ids)
+        ):
+            target = candidate
+    if not target:
+        target = _latest_unread_target(scope_type, scope_id, user_id, blocked_user_ids)
+    if not target:
+        return _read_state_for_scope(user_id, scope_type, scope_id)
+
+    previous = _previous_visible_message(scope_type, scope_id, target, blocked_user_ids)
+    if previous:
+        return _persist_read_state(user_id, scope_type, scope_id, previous, fallback_to_now=False)
+    _clear_read_state(user_id, scope_type, scope_id)
+    return {}
 
 
 def _existing_visible_channels_for_summary():
@@ -1371,6 +1487,26 @@ def mark_chat_read():
     else:
         return jsonify({"error": "Unsupported read scope."}), 400
     row = _mark_read(scope_type, scope_id, message_id=message_id)
+    return jsonify({"status": "ok", "read_state": row or {}})
+
+
+@chat_api_bp.route("/api/chat/unread", methods=["POST"])
+@login_required
+def mark_chat_unread():
+    data = request.get_json(silent=True) or {}
+    scope_type = str(data.get("scope_type") or "").strip()
+    scope_id = str(data.get("scope_id") or "").strip()
+    message_id = str(data.get("message_id") or "").strip() or None
+    if scope_type == "channel":
+        channel = get_row_safe(COLLECTIONS["chat_channels"], scope_id, allow_missing=True)
+        if not _can_access_channel(channel):
+            return jsonify({"error": "Channel unavailable."}), 404
+    elif scope_type == "thread":
+        if not _thread_for_user(scope_id):
+            return jsonify({"error": "Thread unavailable."}), 404
+    else:
+        return jsonify({"error": "Unsupported unread scope."}), 400
+    row = _mark_unread(scope_type, scope_id, message_id=message_id)
     return jsonify({"status": "ok", "read_state": row or {}})
 
 
@@ -1604,6 +1740,18 @@ def dm_threads():
         readable_user_ids=_thread_participant_ids(thread),
     )
     return jsonify({"thread": _thread_payload(thread)}), 201
+
+
+@chat_api_bp.route("/api/chat/dm/threads/<thread_id>")
+@login_required
+def dm_thread(thread_id):
+    thread = _thread_for_user(thread_id)
+    if not thread:
+        return jsonify({"error": "Thread unavailable."}), 404
+    payload = _thread_payload(thread)
+    if not payload:
+        return jsonify({"error": "Thread unavailable."}), 404
+    return jsonify({"thread": payload})
 
 
 @chat_api_bp.route("/api/chat/dm/threads/<thread_id>/messages", methods=["GET", "POST"])

@@ -11,6 +11,7 @@ from werkzeug.exceptions import NotFound
 import blueprints.auth as auth
 from app import create_app
 from extensions import login_manager
+from models import User
 
 
 class AppwriteOauthRouteTestCase(unittest.TestCase):
@@ -324,6 +325,101 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
             provider_access_token="provider-token",
             page_context="auth/appwrite/callback",
         )
+
+    def test_complete_appwrite_login_stores_provider_avatar_for_new_user(self):
+        created_rows = []
+
+        def create_row(_collection, row_id=None, data=None, **_kwargs):
+            row = {"$id": row_id, **(data or {})}
+            created_rows.append(row)
+            return row
+
+        with self.app.test_request_context("/auth/session", method="POST"):
+            with patch.object(auth, "get_row_safe", return_value=None), \
+                    patch.object(auth, "_find_user_by_email", return_value=None), \
+                    patch.object(auth, "_fetch_provider_profile", return_value={
+                        "name": "Student Name",
+                        "avatar_url": "https://lh3.googleusercontent.com/avatar=s96",
+                    }), \
+                    patch.object(auth, "create_row_safe", side_effect=create_row), \
+                    patch.object(auth, "sync_chat_presence_labels_for_user"), \
+                    patch.object(auth, "login_user"), \
+                    patch.object(auth, "url_for", side_effect=lambda endpoint, **_kwargs: f"/{endpoint}"), \
+                    patch.object(auth, "emit_user_event"):
+                result = auth._complete_appwrite_login(
+                    {"$id": "user-1", "email": "student@example.com", "name": "Remote"},
+                    provider="google",
+                    provider_access_token="provider-token",
+                )
+
+        self.assertEqual(result["user_id"], "user-1")
+        self.assertEqual(created_rows[0]["picture_url"], "https://lh3.googleusercontent.com/avatar=s96")
+        self.assertEqual(created_rows[0]["avatar_source"], "provider")
+
+    def test_complete_appwrite_login_updates_provider_avatar_when_replaceable(self):
+        existing = {
+            "$id": "user-1",
+            "email": "student@example.com",
+            "name": "Student",
+            "picture_url": "old-provider-avatar",
+            "avatar_source": "provider",
+            "onboarding_complete": True,
+        }
+        with self.app.test_request_context("/auth/session", method="POST"):
+            with patch.object(auth, "get_row_safe", return_value=existing), \
+                    patch.object(auth, "_fetch_provider_profile", return_value={
+                        "name": "Student",
+                        "avatar_url": "new-provider-avatar",
+                    }), \
+                    patch.object(auth, "update_row_safe", return_value={**existing, "picture_url": "new-provider-avatar"}) as update_row, \
+                    patch.object(auth, "sync_chat_presence_labels_for_user"), \
+                    patch.object(auth, "login_user"), \
+                    patch.object(auth, "url_for", side_effect=lambda endpoint, **_kwargs: f"/{endpoint}"), \
+                    patch.object(auth, "emit_user_event"):
+                auth._complete_appwrite_login(
+                    {"$id": "user-1", "email": "student@example.com", "name": "Student"},
+                    provider="google",
+                    provider_access_token="provider-token",
+                )
+
+        updates = update_row.call_args.args[2]
+        self.assertEqual(updates["picture_url"], "new-provider-avatar")
+        self.assertEqual(updates["avatar_source"], "provider")
+
+    def test_complete_appwrite_login_preserves_uploaded_avatar(self):
+        existing = {
+            "$id": "user-1",
+            "email": "student@example.com",
+            "name": "Student",
+            "picture_url": "uploaded-avatar",
+            "avatar_source": "upload",
+            "onboarding_complete": True,
+        }
+        with self.app.test_request_context("/auth/session", method="POST"):
+            with patch.object(auth, "get_row_safe", return_value=existing), \
+                    patch.object(auth, "_fetch_provider_profile", return_value={
+                        "name": "Student",
+                        "avatar_url": "provider-avatar",
+                    }), \
+                    patch.object(auth, "update_row_safe", return_value=existing) as update_row, \
+                    patch.object(auth, "sync_chat_presence_labels_for_user"), \
+                    patch.object(auth, "login_user"), \
+                    patch.object(auth, "url_for", side_effect=lambda endpoint, **_kwargs: f"/{endpoint}"), \
+                    patch.object(auth, "emit_user_event"):
+                auth._complete_appwrite_login(
+                    {"$id": "user-1", "email": "student@example.com", "name": "Student"},
+                    provider="google",
+                    provider_access_token="provider-token",
+                )
+
+        updates = update_row.call_args.args[2]
+        self.assertNotIn("picture_url", updates)
+        self.assertNotIn("avatar_source", updates)
+
+    def test_user_picture_alias_uses_picture_url(self):
+        user = User({"$id": "user-1", "picture_url": "https://example.test/avatar.png"})
+
+        self.assertEqual(user.picture, "https://example.test/avatar.png")
 
 
 if __name__ == "__main__":

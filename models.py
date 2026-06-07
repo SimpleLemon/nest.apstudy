@@ -22,6 +22,7 @@ class User(UserMixin):
         self.name = data.get("name")
         self.username = data.get("username")
         self.picture_url = data.get("picture_url")
+        self.picture = self.picture_url
         self.banner_color = data.get("banner_color") or "#fecae1"
         self.avatar_file_id = data.get("avatar_file_id")
         self.avatar_source = data.get("avatar_source")

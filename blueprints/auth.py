@@ -46,6 +46,7 @@ from appwrite_helpers import (
     update_row_safe,
 )
 from models import User, user_from_doc
+from avatar_images import DEFAULT_AVATAR_URL
 from services.chat_presence import sync_chat_presence_labels_for_user
 from services.discord_audit import emit_server_log_event, emit_user_event, format_actor, format_user_target
 
@@ -62,6 +63,19 @@ LOGIN_CSP = "; ".join([
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' https://resources.apstudy.org data:",
     "connect-src 'self' https://nyc.cloud.appwrite.io https://cloudflareinsights.com https://static.cloudflareinsights.com",
+    "form-action 'self'",
+])
+
+LANDING_CSP = "; ".join([
+    "default-src 'self'",
+    "base-uri 'self'",
+    "object-src 'none'",
+    "frame-ancestors 'none'",
+    "script-src 'self' https://www.googletagmanager.com",
+    "style-src 'self' https://fonts.googleapis.com",
+    "font-src 'self' https://fonts.gstatic.com",
+    "img-src 'self' https://resources.apstudy.org https://www.google-analytics.com data:",
+    "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com",
     "form-action 'self'",
 ])
 
@@ -453,6 +467,43 @@ def _fetch_provider_profile(provider, access_token):
     } if identity else {}
 
 
+def _clean_avatar_url(value):
+    text = str(value or "").strip()
+    if not text or text == DEFAULT_AVATAR_URL:
+        return None
+    return text
+
+
+def _provider_avatar_url(provider_profile, remote_user):
+    remote_user = remote_user or {}
+    prefs = remote_user.get("prefs") if isinstance(remote_user.get("prefs"), dict) else {}
+    candidates = (
+        (provider_profile or {}).get("avatar_url"),
+        remote_user.get("photoUrl"),
+        remote_user.get("photo_url"),
+        remote_user.get("picture"),
+        remote_user.get("picture_url"),
+        remote_user.get("avatar"),
+        prefs.get("picture"),
+        prefs.get("picture_url"),
+        prefs.get("avatar"),
+    )
+    for candidate in candidates:
+        url = _clean_avatar_url(candidate)
+        if url:
+            return url
+    return None
+
+
+def _avatar_can_use_provider(user_doc):
+    if not user_doc:
+        return True
+    avatar_source = str(user_doc.get("avatar_source") or "").strip().lower()
+    if avatar_source == "provider":
+        return True
+    return _clean_avatar_url(user_doc.get("picture_url")) is None
+
+
 
 def _find_user_by_email(email):
     if not email:
@@ -547,15 +598,10 @@ def _complete_appwrite_login(
 
     provider_profile = _fetch_provider_profile(provider, provider_access_token)
     provider_name = provider_profile.get("name")
-    provider_avatar_url = provider_profile.get("avatar_url")
+    provider_avatar_url = _provider_avatar_url(provider_profile, remote_user)
 
     name = provider_name or remote_user.get("name") or remote_user.get("displayName")
-    picture_url = (
-        provider_avatar_url
-        or remote_user.get("photoUrl")
-        or remote_user.get("avatar")
-        or remote_user.get("picture_url")
-    )
+    picture_url = provider_avatar_url
 
     if not user_doc:
         created_at = format_datetime(datetime.utcnow())
@@ -607,8 +653,7 @@ def _complete_appwrite_login(
         updates = {"last_login": format_datetime(datetime.utcnow())}
         if name:
             updates["name"] = name
-        existing_avatar_source = user_doc.get("avatar_source")
-        if picture_url and (not user_doc.get("picture_url") or existing_avatar_source == "provider"):
+        if picture_url and _avatar_can_use_provider(user_doc):
             updates["picture_url"] = picture_url
             updates["avatar_source"] = "provider"
         if email:
@@ -672,10 +717,13 @@ def _complete_appwrite_login(
 
 @auth_bp.route("/")
 def index():
-    """Root redirect: dashboard if authenticated, login if not."""
-    if current_user.is_authenticated:
-        return redirect(url_for("dashboard.dashboard"))
-    return redirect(url_for("auth.login"))
+    """Render the public landing page."""
+    response = make_response(render_template(
+        "landing.html",
+        landing_user_authenticated=current_user.is_authenticated,
+    ))
+    response.headers["Content-Security-Policy"] = LANDING_CSP
+    return response
 
 
 @auth_bp.route("/login")

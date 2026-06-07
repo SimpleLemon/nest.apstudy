@@ -46,6 +46,7 @@
     realtimeReady: false,
     realtimeConnecting: false,
     chatSummaryLoading: false,
+    contextMenuRoom: null,
     loadingMessages: false,
     closedHistoryBanners: new Set(),
     membersCollapsed: sessionStorage.getItem("apstudy-chat-members-collapsed") === "true",
@@ -662,6 +663,24 @@
       .catch(() => {});
   }
 
+  async function markRoomUnread(room) {
+    if (!room?.type || !room?.id) return;
+    try {
+      await fetchJson("/api/chat/unread", {
+        method: "POST",
+        body: JSON.stringify({
+          scope_type: room.type === "channel" ? "channel" : "thread",
+          scope_id: room.id,
+        }),
+      });
+      const summary = await refreshChatSummary();
+      if (!summary) setRoomUnread(room, { unread_count: 1, has_unread: true });
+      window.dispatchEvent(new CustomEvent("apstudy-chat-read-state-change", { detail: { room } }));
+    } catch (error) {
+      setStatus(error.message || "Unable to mark room unread.", "error");
+    }
+  }
+
   function setStatus(message, tone = "info") {
     if (!els.status) return;
     if (!message) {
@@ -707,6 +726,10 @@
   function activeThread() {
     if (state.activeRoom?.type !== "thread") return null;
     return state.threads.find((thread) => thread.id === state.activeRoom.id) || null;
+  }
+
+  function threadExists(threadId) {
+    return state.threads.some((thread) => thread.id === threadId);
   }
 
   function channelIsPending(channel) {
@@ -760,7 +783,62 @@
       ${unreadBadgeMarkup(type, id)}
     `;
     button.addEventListener("click", () => selectRoom({ type, id }));
+    button.addEventListener("contextmenu", (event) => openRoomContextMenu({ type, id }, event));
+    button.addEventListener("keydown", (event) => {
+      if (event.key !== "ContextMenu" && !(event.shiftKey && event.key === "F10")) return;
+      openRoomContextMenu({ type, id }, event);
+    });
     return button;
+  }
+
+  function ensureRoomContextMenu() {
+    let menu = document.getElementById("chat-room-context-menu");
+    if (menu) return menu;
+    menu = document.createElement("div");
+    menu.id = "chat-room-context-menu";
+    menu.className = "chat-room-context-menu";
+    menu.hidden = true;
+    menu.setAttribute("role", "menu");
+    menu.innerHTML = `
+      <button type="button" role="menuitem" data-chat-room-action="read">Mark as read</button>
+      <button type="button" role="menuitem" data-chat-room-action="unread">Mark as unread</button>
+    `;
+    document.body.appendChild(menu);
+    menu.addEventListener("click", (event) => {
+      const actionButton = event.target.closest("[data-chat-room-action]");
+      if (!actionButton || !state.contextMenuRoom) return;
+      const room = { ...state.contextMenuRoom };
+      closeRoomContextMenu();
+      if (actionButton.dataset.chatRoomAction === "read") {
+        markRoomRead(room);
+      } else if (actionButton.dataset.chatRoomAction === "unread") {
+        void markRoomUnread(room);
+      }
+    });
+    return menu;
+  }
+
+  function closeRoomContextMenu() {
+    const menu = document.getElementById("chat-room-context-menu");
+    if (menu) menu.hidden = true;
+    state.contextMenuRoom = null;
+  }
+
+  function openRoomContextMenu(room, event) {
+    if (!room?.type || !room?.id) return;
+    event.preventDefault();
+    state.contextMenuRoom = room;
+    const menu = ensureRoomContextMenu();
+    const rect = event.currentTarget?.getBoundingClientRect?.() || { left: 0, bottom: 0 };
+    const x = typeof event.clientX === "number" && event.clientX > 0 ? event.clientX : rect.left + 16;
+    const y = typeof event.clientY === "number" && event.clientY > 0 ? event.clientY : rect.bottom;
+    menu.hidden = false;
+    const menuRect = menu.getBoundingClientRect();
+    const left = Math.min(Math.max(8, x), window.innerWidth - menuRect.width - 8);
+    const top = Math.min(Math.max(8, y), window.innerHeight - menuRect.height - 8);
+    menu.style.left = `${left}px`;
+    menu.style.top = `${top}px`;
+    menu.querySelector("button")?.focus({ preventScroll: true });
   }
 
   function renderChannels() {
@@ -1154,6 +1232,23 @@
       state.threads.unshift(payload);
     }
     state.threads.sort((a, b) => String(b.last_message_at || "").localeCompare(String(a.last_message_at || "")));
+  }
+
+  async function fetchThread(threadId) {
+    if (!threadId) return null;
+    try {
+      const payload = await fetchJson(`/api/chat/dm/threads/${encodeURIComponent(threadId)}`);
+      if (payload.thread) {
+        updateThread(payload.thread);
+        updateRoomLists();
+        renderPresenceDrivenUi();
+        schedulePersistentBootstrapSave();
+        return payload.thread;
+      }
+    } catch (error) {
+      setStatus(error.message || "Unable to load direct message.", "error");
+    }
+    return null;
   }
 
   function normalizePresenceMetadata(metadata) {
@@ -1711,6 +1806,12 @@
     }
 
     if (event.event_type === "message_created") {
+      if (eventRoom?.type === "thread" && !threadExists(eventRoom.id)) {
+        const thread = await fetchThread(eventRoom.id);
+        if (!thread) {
+          await bootstrap({ preserveActive: true });
+        }
+      }
       if (eventRoom && active && roomKey(eventRoom) === roomKey(active)) {
         const cache = cacheFor(active);
         const incoming = cache?.latestCursor
@@ -1737,6 +1838,13 @@
 
     if (["thread_updated", "block_updated", "university_approved", "university_denied"].includes(event.event_type)) {
       if (eventRoom) markRoomStale(eventRoom);
+      if (event.event_type === "thread_updated" && eventRoom?.type === "thread") {
+        const thread = await fetchThread(eventRoom.id);
+        if (thread) {
+          void refreshChatSummary();
+          return;
+        }
+      }
       await bootstrap({ preserveActive: true });
     }
   }
@@ -2105,6 +2213,10 @@
       const button = event.target.closest("[data-start-dm]");
       if (button) void startDm(button.dataset.startDm);
     });
+    document.addEventListener("click", (event) => {
+      const menu = document.getElementById("chat-room-context-menu");
+      if (menu && !menu.hidden && !menu.contains(event.target)) closeRoomContextMenu();
+    });
     els.profileToggle?.addEventListener("click", () => setMembersCollapsed(!state.membersCollapsed));
     document.querySelector("[data-restore-members]")?.addEventListener("click", () => setMembersCollapsed(false));
     const rail = document.getElementById("chat-rail");
@@ -2129,9 +2241,15 @@
     document.querySelector("[data-close-members]")?.addEventListener("click", closeChatDrawers);
     backdrop?.addEventListener("click", closeChatDrawers);
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeChatDrawers();
+      if (event.key === "Escape") {
+        closeRoomContextMenu();
+        closeChatDrawers();
+      }
     });
+    els.channelList?.addEventListener("scroll", closeRoomContextMenu);
+    els.dmList?.addEventListener("scroll", closeRoomContextMenu);
     window.addEventListener("resize", () => {
+      closeRoomContextMenu();
       if (window.innerWidth > 1100) closeChatDrawers();
     });
     document.addEventListener("visibilitychange", () => {

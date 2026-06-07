@@ -125,6 +125,27 @@ test("chat keeps and renders per-room unread state", async () => {
   assert.match(styles, /\.chat-room-unread-badge/);
 });
 
+test("chat room context menu supports mark read and unread", async () => {
+  const script = await sourceFor("static/js/chat.js");
+  const styles = await sourceFor("static/css/chat.css");
+  const api = await sourceFor("blueprints/chat_api.py");
+
+  assert.match(script, /contextMenuRoom: null/);
+  assert.match(script, /function ensureRoomContextMenu\(\)/);
+  assert.match(script, /id = "chat-room-context-menu"/);
+  assert.match(script, /data-chat-room-action="read"/);
+  assert.match(script, /data-chat-room-action="unread"/);
+  assert.match(script, /addEventListener\("contextmenu", \(event\) => openRoomContextMenu/);
+  assert.match(script, /event\.key !== "ContextMenu" && !\(event\.shiftKey && event\.key === "F10"\)/);
+  assert.match(script, /fetchJson\("\/api\/chat\/unread"/);
+  assert.match(script, /await refreshChatSummary\(\)/);
+  assert.match(script, /closeRoomContextMenu\(\)/);
+  assert.match(styles, /\.chat-room-context-menu/);
+  assert.match(styles, /\.chat-room-context-menu\[hidden\]/);
+  assert.match(api, /@chat_api_bp\.route\("\/api\/chat\/unread", methods=\["POST"\]\)/);
+  assert.match(api, /def mark_chat_unread\(\):/);
+});
+
 test("chat refreshes and updates unread state across realtime and visibility", async () => {
   const script = await sourceFor("static/js/chat.js");
 
@@ -136,6 +157,21 @@ test("chat refreshes and updates unread state across realtime and visibility", a
   assert.match(script, /message_deleted"[\s\S]*void refreshChatSummary\(\)/);
   assert.match(script, /document\.visibilityState === "visible"[\s\S]*void refreshChatSummary\(\)/);
   assert.match(script, /setRoomUnread\(\{ type: "thread", id: payload\.thread\.id \}, \{ unread_count: 0, has_unread: false \}\)/);
+});
+
+test("chat fetches new DM threads directly from realtime events", async () => {
+  const script = await sourceFor("static/js/chat.js");
+  const api = await sourceFor("blueprints/chat_api.py");
+
+  assert.match(script, /function threadExists\(threadId\)/);
+  assert.match(script, /async function fetchThread\(threadId\)/);
+  assert.match(script, /fetchJson\(`\/api\/chat\/dm\/threads\/\$\{encodeURIComponent\(threadId\)\}`\)/);
+  assert.match(script, /eventRoom\?\.type === "thread" && !threadExists\(eventRoom\.id\)/);
+  assert.match(script, /event\.event_type === "thread_updated" && eventRoom\?\.type === "thread"/);
+  assert.match(script, /const thread = await fetchThread\(eventRoom\.id\)/);
+  assert.match(api, /@chat_api_bp\.route\("\/api\/chat\/dm\/threads\/<thread_id>"\)/);
+  assert.match(api, /def dm_thread\(thread_id\):/);
+  assert.match(api, /return jsonify\(\{"thread": payload\}\)/);
 });
 
 test("chat supports direct channel and thread URL selection", async () => {

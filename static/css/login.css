@@ -4,13 +4,16 @@
 
 html,
 body {
-    background: #0d1117;
+    background: #07101d;
     color: #c9d1d9;
     font-family: var(--login-font-sans);
 }
 
 body.login-page {
     min-height: 100vh;
+    background:
+        linear-gradient(135deg, rgba(0, 96, 170, 0.22), transparent 38%),
+        linear-gradient(180deg, #07101d 0%, #0d1117 52%, #10141a 100%);
 }
 
 body.login-page,
@@ -30,6 +33,52 @@ body.login-page .font-\[\'Inter\'\] {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    position: relative;
+}
+
+.login-shell::before {
+    background-image:
+        linear-gradient(rgba(162, 201, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(162, 201, 255, 0.06) 1px, transparent 1px);
+    background-size: 42px 42px;
+    content: "";
+    inset: 0;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8), transparent 72%);
+    pointer-events: none;
+    position: absolute;
+}
+
+.login-home-link {
+    align-items: center;
+    border: 1px solid rgba(139, 148, 158, 0.24);
+    border-radius: 12px;
+    color: #f0f6fc;
+    display: inline-flex;
+    font-size: 14px;
+    font-weight: 700;
+    gap: 10px;
+    left: clamp(16px, 4vw, 40px);
+    min-height: 44px;
+    padding: 0 14px;
+    position: absolute;
+    text-decoration: none;
+    top: 22px;
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease;
+    z-index: 1;
+}
+
+.login-home-link .material-symbols-outlined {
+    color: #58a6ff;
+    font-size: 21px;
+}
+
+.login-home-link:hover,
+.login-home-link:focus-visible {
+    background: rgba(88, 166, 255, 0.12);
+    border-color: rgba(88, 166, 255, 0.38);
+    color: #ffffff;
+    outline: none;
+    transform: translateY(-1px);
 }
 
 .login-content {
@@ -38,16 +87,19 @@ body.login-page .font-\[\'Inter\'\] {
     flex: 1;
     justify-content: center;
     padding: 32px 16px 48px;
+    position: relative;
+    z-index: 1;
 }
 
 .login-card {
-    background: #161b22;
-    border: 1px solid #30363d;
+    background: rgba(22, 27, 34, 0.92);
+    border: 1px solid rgba(88, 166, 255, 0.2);
     border-radius: 12px;
-    box-shadow: 0 0 0 1px rgba(48, 54, 61, 0.35), 0 16px 32px rgba(1, 4, 9, 0.3);
+    box-shadow: 0 0 0 1px rgba(48, 54, 61, 0.35), 0 28px 70px rgba(1, 4, 9, 0.42);
     max-width: 380px;
     padding: 32px 24px;
     width: 100%;
+    backdrop-filter: blur(18px);
 }
 
 @media (min-width: 640px) {
@@ -67,8 +119,8 @@ body.login-page .font-\[\'Inter\'\] {
 
 .login-logo {
     align-items: center;
-    background: #21262d;
-    border: 1px solid #30363d;
+    background: rgba(88, 166, 255, 0.12);
+    border: 1px solid rgba(88, 166, 255, 0.25);
     border-radius: 12px;
     color: #58a6ff;
     display: flex;
@@ -89,6 +141,13 @@ body.login-page .font-\[\'Inter\'\] {
     font-weight: 600;
     letter-spacing: 0;
     margin: 0;
+}
+
+.login-subtitle {
+    color: #8b949e;
+    font-size: 13px;
+    line-height: 1.45;
+    margin: -4px 0 0;
 }
 
 .login-error {
@@ -132,6 +191,8 @@ body.login-page .font-\[\'Inter\'\] {
     border-top: 1px solid #30363d;
     color: #8b949e;
     padding: 20px 16px;
+    position: relative;
+    z-index: 1;
 }
 
 .login-footer footer > div {
@@ -156,7 +217,12 @@ body.login-page .font-\[\'Inter\'\] {
 @media (max-width: 640px) {
     .login-content {
         align-items: flex-start;
-        padding: 40px 14px 48px;
+        padding: 96px 14px 48px;
+    }
+
+    .login-home-link {
+        left: 14px;
+        top: 18px;
     }
 
     .login-card {

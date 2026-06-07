@@ -1,8 +1,11 @@
 import unittest
+from types import SimpleNamespace
+from unittest.mock import patch
 
 from flask import Flask
 
-from blueprints.auth import LOGIN_CSP, auth_bp
+import blueprints.auth as auth
+from blueprints.auth import LANDING_CSP, LOGIN_CSP, auth_bp
 from extensions import login_manager
 
 
@@ -16,12 +19,62 @@ def _csp_directives(policy):
 
 
 class LoginCspTestCase(unittest.TestCase):
+    def test_landing_csp_allows_public_assets_and_analytics(self):
+        directives = _csp_directives(LANDING_CSP)
+
+        self.assertIn("'self'", directives["script-src"])
+        self.assertIn("https://www.googletagmanager.com", directives["script-src"])
+        self.assertIn("https://fonts.googleapis.com", directives["style-src"])
+        self.assertIn("https://fonts.gstatic.com", directives["font-src"])
+        self.assertIn("https://resources.apstudy.org", directives["img-src"])
+        self.assertIn("https://www.google-analytics.com", directives["img-src"])
+        self.assertIn("https://www.google-analytics.com", directives["connect-src"])
+        self.assertIn("https://region1.google-analytics.com", directives["connect-src"])
+
+    def test_login_csp_is_not_loosened_for_landing_analytics(self):
+        directives = _csp_directives(LOGIN_CSP)
+
+        self.assertNotIn("https://www.googletagmanager.com", directives["script-src"])
+        self.assertNotIn("https://www.google-analytics.com", directives["connect-src"])
+
     def test_login_csp_allows_cloudflare_web_analytics(self):
         directives = _csp_directives(LOGIN_CSP)
 
         self.assertIn("https://static.cloudflareinsights.com", directives["script-src"])
         self.assertIn("https://cloudflareinsights.com", directives["connect-src"])
         self.assertIn("https://static.cloudflareinsights.com", directives["connect-src"])
+
+    def test_landing_route_renders_with_csp(self):
+        app = Flask(__name__, template_folder="../templates", static_folder="../static")
+        app.secret_key = "test"
+        login_manager.init_app(app)
+        app.register_blueprint(auth_bp)
+
+        response = app.test_client().get("/")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.headers["Content-Security-Policy"], LANDING_CSP)
+        self.assertIn(b"Nest.APStudy", response.data)
+        self.assertIn(b"Log In", response.data)
+        self.assertNotIn(b"Open Nest", response.data)
+        self.assertIn(b"/static/apple-touch-icon.png", response.data)
+        self.assertIn(b"landing-app-demo-dashboard", response.data)
+        self.assertIn(b"static/images/landing/nest-interface-hero.png", response.data)
+
+    def test_landing_route_does_not_redirect_authenticated_users(self):
+        app = Flask(__name__, template_folder="../templates", static_folder="../static")
+        app.secret_key = "test"
+        login_manager.init_app(app)
+        app.register_blueprint(auth_bp)
+
+        with patch.object(auth, "current_user", SimpleNamespace(is_authenticated=True)):
+            response = app.test_client().get("/")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertNotIn("Location", response.headers)
+        self.assertIn(b"Your Academic Command Center", response.data)
+        self.assertIn(b"Open Nest", response.data)
+        self.assertNotIn(b"Log In", response.data)
 
     def test_login_route_renders_with_csp(self):
         app = Flask(__name__, template_folder="../templates", static_folder="../static")

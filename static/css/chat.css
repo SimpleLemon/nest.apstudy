@@ -180,6 +180,41 @@
   white-space: nowrap;
 }
 
+.chat-room-context-menu {
+  position: fixed;
+  z-index: 90;
+  width: 168px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 8px;
+  background: var(--color-surface-container-high);
+  box-shadow: 0 14px 34px color-mix(in srgb, #000 24%, transparent);
+}
+
+.chat-room-context-menu[hidden] {
+  display: none;
+}
+
+.chat-room-context-menu button {
+  width: 100%;
+  min-height: 34px;
+  padding: 0 10px;
+  border-radius: 6px;
+  color: var(--color-on-surface);
+  font-size: 13px;
+  font-weight: 650;
+  text-align: left;
+}
+
+.chat-room-context-menu button:hover,
+.chat-room-context-menu button:focus-visible {
+  background: color-mix(in srgb, var(--color-primary) 13%, transparent);
+  outline: none;
+}
+
 .chat-channel-symbol {
   width: 24px;
   height: 24px;

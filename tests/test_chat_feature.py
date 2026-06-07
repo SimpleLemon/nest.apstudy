@@ -292,6 +292,72 @@ class TestChatFeature(unittest.TestCase):
         self.assertEqual(unread, 1)
         self.assertFalse(capped)
 
+    def test_dm_thread_endpoint_returns_participant_thread_payload(self):
+        thread = {"$id": "thread-1", "participant_a": "user-1", "participant_b": "user-2"}
+        payload = {"id": "thread-1", "other_user": {"id": "user-2", "name": "Ada"}}
+        with self.app.test_request_context("/api/chat/dm/threads/thread-1"):
+            with patch.object(chat_api, "current_user", self.user), \
+                    patch.object(chat_api, "_thread_for_user", return_value=thread), \
+                    patch.object(chat_api, "_thread_payload", return_value=payload):
+                response = chat_api.dm_thread.__wrapped__("thread-1")
+
+        self.assertEqual(response.get_json()["thread"], payload)
+
+    def test_dm_thread_endpoint_rejects_non_participant_thread(self):
+        with self.app.test_request_context("/api/chat/dm/threads/thread-1"):
+            with patch.object(chat_api, "current_user", self.user), \
+                    patch.object(chat_api, "_thread_for_user", return_value=None):
+                response, status = chat_api.dm_thread.__wrapped__("thread-1")
+
+        self.assertEqual(status, 404)
+        self.assertIn("Thread unavailable", response.get_json()["error"])
+
+    def test_mark_unread_uses_previous_visible_message_boundary(self):
+        target = {
+            "$id": "target",
+            "channel_id": "nest_chat",
+            "user_id": "user-2",
+            "created_at": "2026-05-26T22:10:00Z",
+        }
+        previous = {
+            "$id": "previous",
+            "channel_id": "nest_chat",
+            "user_id": "user-1",
+            "created_at": "2026-05-26T22:09:00Z",
+        }
+        existing = {"$id": "read-state-1"}
+        with self.app.test_request_context("/api/chat/unread", method="POST"):
+            with patch.object(chat_api, "current_user", self.user), \
+                    patch.object(chat_api, "list_rows_safe", side_effect=[{"rows": [target]}, {"rows": [previous]}]), \
+                    patch.object(chat_api, "first_row", return_value=existing), \
+                    patch.object(chat_api, "update_row_safe", return_value={"$id": "read-state-1"}) as update_row:
+                row = chat_api._mark_unread("channel", "nest_chat")
+
+        self.assertEqual(row["$id"], "read-state-1")
+        payload = update_row.call_args.args[2]
+        self.assertEqual(payload["last_read_message_id"], "previous")
+        self.assertEqual(payload["last_read_at"], "2026-05-26T22:09:00Z")
+
+    def test_mark_unread_ignores_own_deleted_and_blocked_dm_messages(self):
+        rows = [
+            {"$id": "own", "thread_id": "thread-1", "user_id": "user-1", "created_at": "2026-05-26T22:12:00Z"},
+            {"$id": "deleted", "thread_id": "thread-1", "user_id": "user-2", "deleted_at": "2026-05-26T22:11:00Z", "created_at": "2026-05-26T22:11:00Z"},
+            {"$id": "blocked", "thread_id": "thread-1", "user_id": "blocked-user", "created_at": "2026-05-26T22:10:00Z"},
+            {"$id": "visible", "thread_id": "thread-1", "user_id": "user-2", "created_at": "2026-05-26T22:09:00Z"},
+        ]
+        previous = {"$id": "previous", "thread_id": "thread-1", "user_id": "user-1", "created_at": "2026-05-26T22:08:00Z"}
+        with self.app.test_request_context("/api/chat/unread", method="POST"):
+            with patch.object(chat_api, "current_user", self.user), \
+                    patch.object(chat_api, "_blocked_user_ids", return_value={"blocked-user"}), \
+                    patch.object(chat_api, "list_rows_safe", side_effect=[{"rows": rows}, {"rows": [previous]}]), \
+                    patch.object(chat_api, "first_row", return_value={"$id": "read-state-1"}), \
+                    patch.object(chat_api, "update_row_safe", return_value={"$id": "read-state-1"}) as update_row:
+                chat_api._mark_unread("thread", "thread-1")
+
+        payload = update_row.call_args.args[2]
+        self.assertEqual(payload["last_read_message_id"], "previous")
+        self.assertEqual(payload["last_read_at"], "2026-05-26T22:08:00Z")
+
     def test_current_appwrite_labels_accepts_dict_response(self):
         users_service = Mock()
         users_service.get.return_value = {"labels": ["student", "chat_uni_old"]}

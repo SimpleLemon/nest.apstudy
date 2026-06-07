@@ -415,6 +415,44 @@ test("login template uses server-started Appwrite OAuth links", async () => {
     assert.doesNotMatch(source, /js\/appwrite\.js/);
 });
 
+test("landing page keeps local assets, tabs, analytics, and reduced-motion handling", async () => {
+    const template = await sourceFor("templates/landing.html");
+    const source = await sourceFor("static/js/landing.js");
+    const styles = await sourceFor("static/css/landing.css");
+
+    assert.match(template, /css\/landing\.css/);
+    assert.match(template, /js\/landing\.js/);
+    assert.match(template, /images\/landing\/nest-interface-hero\.png/);
+    assert.match(template, /apple-touch-icon\.png/);
+    assert.match(template, /landing_cta_label = 'Open Nest' if landing_is_authenticated else 'Log In'/);
+    assert.match(template, /landing-app-demo-dashboard/);
+    assert.match(template, /landing-app-demo-calendar/);
+    assert.match(template, /landing-app-demo-courses/);
+    assert.match(template, /landing-app-demo-workspace/);
+    assert.match(template, /course-planner-demo/);
+    assert.doesNotMatch(template, /landing-nav-login/);
+    assert.match(template, /https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-0NT330ZX5L/);
+    assert.doesNotMatch(template, /cdn\.tailwindcss\.com/);
+    assert.doesNotMatch(template, /placehold\.co/);
+    assert.match(styles, /\.landing-app-demo/);
+    assert.match(styles, /\.demo-sidebar/);
+    assert.match(styles, /\.demo-mobile-agenda/);
+    assert.match(styles, /\.course-planner-demo/);
+    assert.match(styles, /@media \(max-width: 1024px\)/);
+    assert.match(styles, /@media \(max-width: 760px\)/);
+    assert.doesNotMatch(styles, /\.landing-final-cta\s*\{[^}]*var\(--color-inverse-surface\)/);
+    assert.match(source, /GA_ID = "G-0NT330ZX5L"/);
+    assert.match(source, /matchMedia\("\(prefers-reduced-motion: reduce\)"\)/);
+    assert.match(source, /IntersectionObserver/);
+    assert.match(source, /querySelector\("\[data-landing-tabs\]"\)/);
+    assert.match(source, /data-landing-tab/);
+    assert.match(source, /aria-selected/);
+    assert.match(source, /panel\.hidden = !selected/);
+    assert.match(source, /event\.key === "ArrowRight"/);
+    assert.match(source, /event\.key === "Home"/);
+    assert.match(source, /event\.key === "End"/);
+});
+
 test("navbar keeps avatar sizing, command palette shortcut, and logout/account flows", async () => {
     const source = await sourceFor("static/js/navbar.js");
 
