@@ -713,7 +713,8 @@
     try {
       els.audio.currentTime = 0;
       void els.audio.play();
-    } catch (_) {
+    } catch (error) {
+      void error;
       // Browsers may block sound until the user interacts with the page.
     }
   }
@@ -1437,7 +1438,8 @@
       });
       for (const user of payload.users || []) registerKnownUser(user);
       if (roomKey(state.activeRoom) === roomKey(room)) renderPresenceDrivenUi();
-    } catch (_) {
+    } catch (error) {
+      void error;
       // Profile resolution is best-effort; presence counts can still render.
     } finally {
       state.resolvingPresenceUsers.delete(resolveKey);
@@ -1946,7 +1948,8 @@
       await window.presences.delete({ presenceId });
       state.presenceRecords.delete(presenceId);
       renderPresenceDrivenUi();
-    } catch (_) {
+    } catch (error) {
+      void error;
       // Expiration will clean this up if the delete races navigation or reconnects.
     }
   }

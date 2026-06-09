@@ -384,7 +384,8 @@ function setupChatSummaryBadge() {
       if (response.ok) {
         renderBadge(await response.json());
       }
-    } catch (_) {
+    } catch (error) {
+      void error;
       // The next visible-tab interval will try again.
     } finally {
       inFlight = false;

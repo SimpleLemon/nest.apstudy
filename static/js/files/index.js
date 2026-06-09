@@ -306,20 +306,20 @@
         }), state);
     }
 
-    function openFolderModal(...args) {
-        return modals.openFolderModal(...args);
+    function openFolderModal(mode, item = null) {
+        return modals.openFolderModal(mode, item);
     }
 
-    async function saveFolderModal(...args) {
-        return modals.saveFolderModal(...args);
+    async function saveFolderModal() {
+        return modals.saveFolderModal();
     }
 
-    function openMoveModal(...args) {
-        return modals.openMoveModal(...args);
+    function openMoveModal(context) {
+        return modals.openMoveModal(context);
     }
 
-    async function saveMoveModal(...args) {
-        return modals.saveMoveModal(...args);
+    async function saveMoveModal() {
+        return modals.saveMoveModal();
     }
 
     function openUploadModal(...args) {
@@ -443,8 +443,8 @@
         return workflows.selectedTotal(...args);
     }
 
-    function openModal(...args) {
-        return modals.openModal(...args);
+    function openModal(modal, focusTarget = null) {
+        return modals.openModal(modal, focusTarget);
     }
 
     function closeModal(...args) {

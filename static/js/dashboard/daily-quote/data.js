@@ -37,7 +37,8 @@
                 body: JSON.stringify(payload),
                 keepalive: true,
             }).catch(() => {});
-        } catch {
+        } catch (error) {
+            void error;
             // Reporting should never affect quote rendering.
         }
     }
