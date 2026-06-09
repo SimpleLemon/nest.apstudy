@@ -2,33 +2,35 @@
 .env
 .env.*
 !.env.example
+.envrc
+.flaskenv
+*.local
 client_secret.json
 client_secret*.json
 credentials.json
 credentials*.json
+token.json
+token*.json
+secrets.json
+secrets*.json
 *.pem
 *.key
 *.p12
 *.pfx
 uploads/
-__pycache__/
-*.pyc
-node_modules/
-.next/
-.aider*
-.aider.chat.history.md
-.aider.input.history
-.aider.model.metadata.json
-.aider.model.settings.yml
-.codex
-.claude/
-.continue/
-.desloppify/
-AGENTS.md
-DEREK.md
-scorecard.png
 
-# Added ignores
+# Flask / local app state
+instance/
+flask_session/
+*.db
+*.sqlite
+*.sqlite3
+
+# Python caches and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
 # Python virtualenvs and packaging
 env/
 venv/
@@ -47,19 +49,64 @@ dist/
 .coverage.*
 coverage.xml
 htmlcov/
+.tox/
+.nox/
+.hypothesis/
 
 # Type checkers / caches
+.ruff_cache/
 .mypy_cache/
 .pyre/
 .pytype/
+.ropeproject/
+.ipynb_checkpoints/
+
+# Node dependencies and build caches
+node_modules/
+.next/
+.vite/
+.turbo/
+.parcel-cache/
+.svelte-kit/
+.npm/
+.pnpm-store/
+pnpm-debug.log*
 
 # IDEs
 .idea/
 .vscode/
+.cursor/
+.windsurf/
+.zed/
+.fleet/
+*.code-workspace
+.history/
+
+# AI assistant / agent local state
+.aider*
+.claude/
+.codex
+.codex/
+.continue/
+.copilot/
+.desloppify/
+.gemini/
+.roo/
+.tabnine/
+.mcp.json
+AGENTS.md
+AGENTS.local.md
+CLAUDE.local.md
+GEMINI.local.md
+DEREK.md
 
 # OS
 .DS_Store
+.AppleDouble
+.LSOverride
 Thumbs.db
+ehthumbs.db
+Desktop.ini
 
 # Node logs
 yarn-error.log*
@@ -69,11 +116,14 @@ yarn-debug.log*
 # Static/build artifacts
 static/dist/
 static/build/
+scorecard.png
 
 # Logs and misc
 *.log
 logs/
 .cache/
 *.swp
-
-instance/
+*.swo
+*.bak
+*.tmp
+*.temp
