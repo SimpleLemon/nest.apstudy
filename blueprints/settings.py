@@ -40,6 +40,7 @@ from appwrite_helpers import (
 from services.atlas_client import DEFAULT_TERM
 from services.chat_presence import sync_chat_presence_labels_for_user
 from services.discord_audit import emit_creation_event, emit_user_event, format_actor
+from services.calendar_store import delete_calendar_rows_by_user
 from services.universities import school_payload
 
 settings_bp = Blueprint("settings", __name__)
@@ -391,16 +392,17 @@ def _delete_user_artifacts(user_id):
     rows_to_delete = [
         COLLECTIONS["user_settings"],
         COLLECTIONS["user_courses"],
-        COLLECTIONS["calendar_cache"],
-        COLLECTIONS["user_calendar_preferences"],
-        COLLECTIONS["user_events"],
-        COLLECTIONS.get("calendar_shares", "calendar_shares"),
         COLLECTIONS["shared_files"],
         COLLECTIONS.get("file_folders", "file_folders"),
         COLLECTIONS.get("chat_messages", "chat_messages"),
         COLLECTIONS.get("chat_presence", "chat_presence"),
         COLLECTIONS.get("chat_read_states", "chat_read_states"),
     ]
+
+    try:
+        delete_calendar_rows_by_user(user_id)
+    except AppwriteException:
+        logger.exception("Failed to delete local calendar rows for user %s", user_id)
 
     for table_id in rows_to_delete:
         try:

@@ -24,6 +24,7 @@ from appwrite_helpers import (
 from services.discord_audit import emit_server_log_event
 from services.atlas_client import DEFAULT_TERM
 from services.daily_quote import get_daily_quote_payload
+from services.calendar_store import list_calendar_rows_all
 
 dashboard_bp = Blueprint("dashboard", __name__)
 logger = logging.getLogger(__name__)
@@ -387,14 +388,14 @@ def _load_calendar_summary(user_id, user_settings):
         )
 
         feed_urls = _configured_feed_urls(user_settings)
-        cache_rows = list_rows_all(
+        cache_rows = list_calendar_rows_all(
             COLLECTIONS["calendar_cache"],
             [
                 Query.equal("user_id", [user_id]),
                 Query.order_asc("event_start"),
             ],
         )
-        event_rows = list_rows_all(
+        event_rows = list_calendar_rows_all(
             COLLECTIONS["user_events"],
             [
                 Query.equal("user_id", [user_id]),
