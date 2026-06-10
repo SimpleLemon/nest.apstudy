@@ -393,6 +393,8 @@ def _clean_payload(table_id, data):
         column = "id" if key == "$id" else key
         if column == "id":
             continue
+        if isinstance(key, str) and key.startswith("$"):
+            continue
         _validate_column(table_id, column)
         cleaned[column] = _normalize_value(table_id, column, value)
     return cleaned
