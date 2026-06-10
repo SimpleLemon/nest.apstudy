@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-editor-ui-2">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-editor-scroll-2">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@blocknote/core@0.28.0/fonts/inter.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@blocknote/mantine@0.28.0/style.css">
     <title>Note Editor - APStudy Nest</title>
@@ -47,9 +47,9 @@
         .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     </style>
 </head>
-<global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
-<global class="thesidebar" data-user-emory-student="{{ user.emory_student }}" data-sidebar-default="{{ sidebar_default|default('expanded') }}"></global>
 <body class="notes-editor-body bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-primary/30 selection:text-primary-fixed">
+    <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
+    <global class="thesidebar" data-user-emory-student="{{ user.emory_student }}" data-sidebar-default="{{ sidebar_default|default('expanded') }}"></global>
     <main class="flex-1 w-full max-w-[1600px] mx-auto px-6 md:px-8 pt-6 pb-10 flex flex-col gap-12 relative z-10">
         <div id="editor-page" class="notes-editor-page">
             <!-- Top bar -->
