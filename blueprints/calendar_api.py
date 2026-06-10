@@ -23,12 +23,9 @@ from appwrite.query import Query
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import (
     create_row_safe,
-    delete_row_safe,
     first_row,
     format_datetime,
     get_row_safe,
-    list_rows_all,
-    list_rows_safe,
     parse_datetime,
     update_row_safe,
 )
@@ -40,6 +37,15 @@ from blueprints.settings import (
     _validate_other_calendar_urls,
 )
 from services.discord_audit import emit_creation_event, format_actor
+from services.calendar_store import (
+    create_calendar_row,
+    delete_calendar_row,
+    first_calendar_row,
+    get_calendar_row,
+    list_calendar_rows_all,
+    list_calendar_rows_safe,
+    update_calendar_row,
+)
 
 calendar_bp = Blueprint("calendar", __name__)
 logger = logging.getLogger(__name__)
@@ -300,7 +306,7 @@ def _resolve_last_fetched(user_id):
     latest_feed = None
     if feed_table:
         try:
-            latest_feed = first_row(
+            latest_feed = first_calendar_row(
                 feed_table,
                 [
                     Query.equal("user_id", [user_id]),
@@ -316,7 +322,7 @@ def _resolve_last_fetched(user_id):
             return parsed.isoformat()
 
     try:
-        latest_event = first_row(
+        latest_event = first_calendar_row(
             COLLECTIONS["calendar_cache"],
             [
                 Query.equal("user_id", [user_id]),
@@ -358,7 +364,7 @@ def _load_calendar_feed_metadata(user_id):
     feed_table = COLLECTIONS.get("calendar_feeds")
     if not feed_table:
         return {}
-    rows = list_rows_all(
+    rows = list_calendar_rows_all(
         feed_table,
         [Query.equal("user_id", [str(user_id)])],
     )
@@ -444,7 +450,7 @@ def _load_local_calendar_sources(user_id):
     table_id = COLLECTIONS.get("user_calendar_sources")
     if not table_id:
         return []
-    return list_rows_all(
+    return list_calendar_rows_all(
         table_id,
         [Query.equal("user_id", [str(user_id)])],
     )
@@ -549,7 +555,7 @@ def _ensure_local_calendar_source(user_id, source_id=DEFAULT_LOCAL_SOURCE_ID, di
     table_id = COLLECTIONS.get("user_calendar_sources")
     if not table_id:
         return None
-    existing = first_row(
+    existing = first_calendar_row(
         table_id,
         [
             Query.equal("user_id", [str(user_id)]),
@@ -559,7 +565,7 @@ def _ensure_local_calendar_source(user_id, source_id=DEFAULT_LOCAL_SOURCE_ID, di
     if existing:
         return existing
     now = format_datetime(datetime.utcnow())
-    return create_row_safe(
+    return create_calendar_row(
         table_id,
         row_id=ID.unique(),
         data={
@@ -577,7 +583,7 @@ def _load_event_overrides(user_id):
     table_id = COLLECTIONS.get("user_event_overrides")
     if not table_id:
         return []
-    return list_rows_all(
+    return list_calendar_rows_all(
         table_id,
         [Query.equal("user_id", [str(user_id)])],
     )
@@ -669,7 +675,7 @@ def _delete_cache_rows_for_feed(user_id, feed_url):
     feed_hashes = {_feed_url_hash(feed_url), _raw_feed_url_hash(feed_url)}
     seen_row_ids = set()
     for feed_hash in feed_hashes:
-        rows = list_rows_all(
+        rows = list_calendar_rows_all(
             COLLECTIONS["calendar_cache"],
             [
                 Query.equal("user_id", [str(user_id)]),
@@ -680,13 +686,13 @@ def _delete_cache_rows_for_feed(user_id, feed_url):
             row_id = row.get("$id") or row.get("id")
             if row_id and row_id not in seen_row_ids:
                 seen_row_ids.add(row_id)
-                delete_row_safe(COLLECTIONS["calendar_cache"], row_id)
+                delete_calendar_row(COLLECTIONS["calendar_cache"], row_id)
 
     feed_table = COLLECTIONS.get("calendar_feeds")
     if feed_table:
         seen_feed_row_ids = set()
         for feed_hash in feed_hashes:
-            feed_rows = list_rows_all(
+            feed_rows = list_calendar_rows_all(
                 feed_table,
                 [
                     Query.equal("user_id", [str(user_id)]),
@@ -697,13 +703,13 @@ def _delete_cache_rows_for_feed(user_id, feed_url):
                 row_id = row.get("$id") or row.get("id")
                 if row_id and row_id not in seen_feed_row_ids:
                     seen_feed_row_ids.add(row_id)
-                    delete_row_safe(feed_table, row_id)
+                    delete_calendar_row(feed_table, row_id)
 
 
 def _update_local_calendar_source_payload(user_id, source_id, display_name):
     source = _ensure_local_calendar_source(user_id, source_id, display_name or DEFAULT_LOCAL_SOURCE_NAME)
     if source and display_name:
-        source = update_row_safe(
+        source = update_calendar_row(
             COLLECTIONS["user_calendar_sources"],
             source.get("$id"),
             {
@@ -728,7 +734,7 @@ def _update_url_calendar_source_payload(user_id, source_id, display_name, next_u
         [Query.equal("user_id", [user_id])],
     )
     update_info = _settings_payload_for_source_update(settings, source_id, next_url)
-    old_source_pref = first_row(
+    old_source_pref = first_calendar_row(
         COLLECTIONS["user_calendar_preferences"],
         [
             Query.equal("user_id", [user_id]),
@@ -760,7 +766,7 @@ def _update_url_calendar_source_payload(user_id, source_id, display_name, next_u
     if refresh_required and old_url:
         _delete_cache_rows_for_feed(user_id, old_url)
 
-    cache_events = list_rows_all(
+    cache_events = list_calendar_rows_all(
         COLLECTIONS["calendar_cache"],
         [
             Query.equal("user_id", [user_id]),
@@ -780,14 +786,14 @@ def _update_url_calendar_source_payload(user_id, source_id, display_name, next_u
 
 
 def _load_calendar_preferences(user_id):
-    return list_rows_all(
+    return list_calendar_rows_all(
         COLLECTIONS["user_calendar_preferences"],
         [Query.equal("user_id", [str(user_id)])],
     )
 
 
 def _upsert_calendar_preference(user_id, calendar_name, updates):
-    pref = first_row(
+    pref = first_calendar_row(
         COLLECTIONS["user_calendar_preferences"],
         [
             Query.equal("user_id", [str(user_id)]),
@@ -797,7 +803,7 @@ def _upsert_calendar_preference(user_id, calendar_name, updates):
     now = format_datetime(datetime.utcnow())
     payload = {"updated_at": now, **updates}
     if not pref:
-        pref = create_row_safe(
+        pref = create_calendar_row(
             COLLECTIONS["user_calendar_preferences"],
             row_id=ID.unique(),
             data={
@@ -810,7 +816,7 @@ def _upsert_calendar_preference(user_id, calendar_name, updates):
             },
         )
     else:
-        pref = update_row_safe(
+        pref = update_calendar_row(
             COLLECTIONS["user_calendar_preferences"],
             pref.get("$id"),
             payload,
@@ -820,7 +826,7 @@ def _upsert_calendar_preference(user_id, calendar_name, updates):
 
 def _upsert_event_override(user_id, event_ref, updates):
     table_id = COLLECTIONS["user_event_overrides"]
-    existing = first_row(
+    existing = first_calendar_row(
         table_id,
         [
             Query.equal("user_id", [str(user_id)]),
@@ -830,7 +836,7 @@ def _upsert_event_override(user_id, event_ref, updates):
     now = format_datetime(datetime.utcnow())
     payload = {"updated_at": now, **updates}
     if not existing:
-        return create_row_safe(
+        return create_calendar_row(
             table_id,
             row_id=ID.unique(),
             data={
@@ -841,7 +847,7 @@ def _upsert_event_override(user_id, event_ref, updates):
                 **payload,
             },
         )
-    return update_row_safe(
+    return update_calendar_row(
         table_id,
         existing.get("$id"),
         payload,
@@ -918,7 +924,7 @@ def _generate_calendar_share_code():
     table_id = _calendar_shares_collection()
     while True:
         code = "".join(secrets.choice(CALENDAR_SHARE_CODE_CHARS) for _ in range(CALENDAR_SHARE_CODE_LENGTH))
-        existing = first_row(table_id, [Query.equal("share_code", [code])])
+        existing = first_calendar_row(table_id, [Query.equal("share_code", [code])])
         if not existing:
             return code
 
@@ -1090,11 +1096,11 @@ def _range_queries(user_id, start_key, end_key, order_key, range_start=None, ran
 
 def _load_serialized_calendar_events(user_id, settings, range_start=None, range_end=None):
     feed_urls = _configured_feed_urls(settings)
-    cache_events = list_rows_all(
+    cache_events = list_calendar_rows_all(
         COLLECTIONS["calendar_cache"],
         _range_queries(user_id, "event_start", "event_end", "event_start", range_start, range_end),
     )
-    created_events = list_rows_all(
+    created_events = list_calendar_rows_all(
         COLLECTIONS["user_events"],
         _range_queries(user_id, "start", "end", "start", range_start, range_end),
     )
@@ -1185,7 +1191,7 @@ def _resolve_calendar_share_by_code(share_code, active_only=True):
     queries = [Query.equal("share_code", [share_code])]
     if active_only:
         queries.append(Query.equal("is_active", [True]))
-    return first_row(_calendar_shares_collection(), queries)
+    return first_calendar_row(_calendar_shares_collection(), queries)
 
 
 def _public_calendar_share_context(share):
@@ -1274,14 +1280,14 @@ def get_events():
             [Query.equal("user_id", [user_id])],
         )
         feed_urls = _configured_feed_urls(settings)
-        cache_events = list_rows_all(
+        cache_events = list_calendar_rows_all(
             COLLECTIONS["calendar_cache"],
             [
                 Query.equal("user_id", [user_id]),
                 Query.order_asc("event_start"),
             ],
         )
-        created_events = list_rows_all(
+        created_events = list_calendar_rows_all(
             COLLECTIONS["user_events"],
             [
                 Query.equal("user_id", [user_id]),
@@ -1302,7 +1308,7 @@ def get_events():
         refreshed, refresh_error = _refresh_initial_feed_cache(user_id, feed_urls, cache_events, feed_metadata)
     if refreshed:
         try:
-            cache_events = list_rows_all(
+            cache_events = list_calendar_rows_all(
                 COLLECTIONS["calendar_cache"],
                 [
                     Query.equal("user_id", [user_id]),
@@ -1380,7 +1386,7 @@ def get_events():
 def list_calendar_shares():
     user_id = str(current_user.id)
     try:
-        shares = list_rows_all(
+        shares = list_calendar_rows_all(
             _calendar_shares_collection(),
             [
                 Query.equal("user_id", [user_id]),
@@ -1405,7 +1411,7 @@ def create_calendar_share():
 
     now = format_datetime(datetime.utcnow())
     try:
-        share = create_row_safe(
+        share = create_calendar_row(
             _calendar_shares_collection(),
             row_id=ID.unique(),
             data={
@@ -1438,7 +1444,7 @@ def create_calendar_share():
 
 
 def _owned_calendar_share_or_none(share_id, user_id):
-    share = get_row_safe(_calendar_shares_collection(), share_id, allow_missing=True)
+    share = get_calendar_row(_calendar_shares_collection(), share_id, allow_missing=True)
     if not share or share.get("user_id") != str(user_id):
         return None
     return share
@@ -1466,7 +1472,7 @@ def update_calendar_share(share_id):
     updates["updated_at"] = format_datetime(datetime.utcnow())
 
     try:
-        updated = update_row_safe(_calendar_shares_collection(), _row_id(share), updates)
+        updated = update_calendar_row(_calendar_shares_collection(), _row_id(share), updates)
     except AppwriteException:
         logger.exception("Failed to update calendar share")
         return jsonify({"error": "Unable to update calendar share."}), 500
@@ -1487,7 +1493,7 @@ def regenerate_calendar_share(share_id):
         return jsonify({"error": "Calendar share not found."}), 404
 
     try:
-        updated = update_row_safe(
+        updated = update_calendar_row(
             _calendar_shares_collection(),
             _row_id(share),
             {
@@ -1516,7 +1522,7 @@ def revoke_calendar_share(share_id):
         return jsonify({"error": "Calendar share not found."}), 404
 
     try:
-        updated = update_row_safe(
+        updated = update_calendar_row(
             _calendar_shares_collection(),
             _row_id(share),
             {
@@ -1617,7 +1623,7 @@ def create_event():
 
     try:
         _ensure_local_calendar_source(user_id=current_user.id, source_id=calendar_id)
-        ev = create_row_safe(
+        ev = create_calendar_row(
             COLLECTIONS["user_events"],
             row_id=ID.unique(),
             data={
@@ -1658,7 +1664,7 @@ def create_event():
 @login_required
 def get_single_event(event_id):
     try:
-        ev = get_row_safe(COLLECTIONS["user_events"], event_id)
+        ev = get_calendar_row(COLLECTIONS["user_events"], event_id)
     except AppwriteException as exc:
         if exc.code == 404:
             return jsonify({"error": "not found"}), 404
@@ -1674,7 +1680,7 @@ def get_single_event(event_id):
 @login_required
 def update_event(event_id):
     try:
-        ev = get_row_safe(COLLECTIONS["user_events"], event_id)
+        ev = get_calendar_row(COLLECTIONS["user_events"], event_id)
     except AppwriteException as exc:
         if exc.code == 404:
             return jsonify({"error": "not found"}), 404
@@ -1718,7 +1724,7 @@ def update_event(event_id):
         updates["calendar_id"] = normalized_calendar_id
 
     try:
-        ev = update_row_safe(
+        ev = update_calendar_row(
             COLLECTIONS["user_events"],
             event_id,
             updates,
@@ -1734,7 +1740,7 @@ def update_event(event_id):
 @login_required
 def delete_event(event_id):
     try:
-        ev = get_row_safe(COLLECTIONS["user_events"], event_id)
+        ev = get_calendar_row(COLLECTIONS["user_events"], event_id)
     except AppwriteException as exc:
         if exc.code == 404:
             return jsonify({"error": "not found"}), 404
@@ -1745,7 +1751,7 @@ def delete_event(event_id):
         return jsonify({"error": "not found"}), 404
 
     try:
-        delete_row_safe(COLLECTIONS["user_events"], event_id)
+        delete_calendar_row(COLLECTIONS["user_events"], event_id)
     except AppwriteException:
         logger.exception("Failed to delete user event")
         return jsonify({"error": "Unable to delete event."}), 500
@@ -1887,7 +1893,7 @@ def feed_status():
         )
         feed_urls = _configured_feed_urls(settings)
 
-        count_response = list_rows_safe(
+        count_response = list_calendar_rows_safe(
             COLLECTIONS["calendar_cache"],
             [Query.equal("user_id", [user_id]), Query.limit(1)],
         )
@@ -1912,7 +1918,7 @@ def get_calendar_preferences():
     """
     user_id = str(current_user.id)
     try:
-        prefs = list_rows_all(
+        prefs = list_calendar_rows_all(
             COLLECTIONS["user_calendar_preferences"],
             [Query.equal("user_id", [user_id])],
         )
@@ -1952,7 +1958,7 @@ def update_calendar_preferences():
         return jsonify({"error": str(exc)}), 400
 
     try:
-        pref = first_row(
+        pref = first_calendar_row(
             COLLECTIONS["user_calendar_preferences"],
             [
                 Query.equal("user_id", [user_id]),
@@ -2019,7 +2025,7 @@ def update_calendar_preferences_batch():
             continue
 
         try:
-            pref = first_row(
+            pref = first_calendar_row(
                 COLLECTIONS["user_calendar_preferences"],
                 [
                     Query.equal("user_id", [user_id]),

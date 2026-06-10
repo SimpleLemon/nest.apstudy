@@ -19,12 +19,14 @@ from appwrite.id import ID
 from appwrite.query import Query
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import (
-    create_row_safe,
-    delete_row_safe,
     format_datetime,
-    first_row,
-    list_rows_all,
-    update_row_safe,
+)
+from services.calendar_store import (
+    create_calendar_row,
+    delete_calendar_row,
+    first_calendar_row,
+    list_calendar_rows_all,
+    update_calendar_row,
 )
 from services.feed_diff import diff_events
 
@@ -353,7 +355,7 @@ def _load_feed_metadata(user_id):
     if not feed_table:
         return {}
     try:
-        rows = list_rows_all(
+        rows = list_calendar_rows_all(
             feed_table,
             [Query.equal("user_id", [str(user_id)])],
         )
@@ -368,7 +370,7 @@ def _upsert_feed_metadata(user_id, feed_url, result, fetched_at):
     if not feed_table:
         return
     feed_hash = _feed_url_hash(feed_url)
-    existing = first_row(
+    existing = first_calendar_row(
         feed_table,
         [
             Query.equal("user_id", [str(user_id)]),
@@ -376,7 +378,7 @@ def _upsert_feed_metadata(user_id, feed_url, result, fetched_at):
         ],
     )
     if not existing:
-        existing = first_row(
+        existing = first_calendar_row(
             feed_table,
             [
                 Query.equal("user_id", [str(user_id)]),
@@ -407,8 +409,8 @@ def _upsert_feed_metadata(user_id, feed_url, result, fetched_at):
     }
     def write_payload(data):
         if existing:
-            return update_row_safe(feed_table, existing.get("$id"), data)
-        return create_row_safe(
+            return update_calendar_row(feed_table, existing.get("$id"), data)
+        return create_calendar_row(
             feed_table,
             row_id=ID.unique(),
             data={
@@ -433,7 +435,7 @@ def _upsert_feed_metadata(user_id, feed_url, result, fetched_at):
 def _apply_feed_diffs(user_id, feed_url, events, fetched_at, existing_rows=None):
     if existing_rows is None:
         feed_hash = _feed_url_hash(feed_url)
-        existing_rows = list_rows_all(
+        existing_rows = list_calendar_rows_all(
             COLLECTIONS["calendar_cache"],
             [
                 Query.equal("user_id", [str(user_id)]),
@@ -445,7 +447,7 @@ def _apply_feed_diffs(user_id, feed_url, events, fetched_at, existing_rows=None)
     diff = diff_events(existing_rows, events, user_id, feed_url, fetched_at)
 
     for payload in diff.to_create:
-        create_row_safe(
+        create_calendar_row(
             COLLECTIONS["calendar_cache"],
             row_id=ID.unique(),
             data=payload,
@@ -454,7 +456,7 @@ def _apply_feed_diffs(user_id, feed_url, events, fetched_at, existing_rows=None)
     for row_id, payload in diff.to_update:
         if not row_id:
             continue
-        update_row_safe(
+        update_calendar_row(
             COLLECTIONS["calendar_cache"],
             row_id,
             payload,
@@ -463,7 +465,7 @@ def _apply_feed_diffs(user_id, feed_url, events, fetched_at, existing_rows=None)
     for row in diff.to_delete:
         row_id = row.get("$id") or row.get("id")
         if row_id:
-            delete_row_safe(COLLECTIONS["calendar_cache"], row_id)
+            delete_calendar_row(COLLECTIONS["calendar_cache"], row_id)
 
     return len(diff.to_create) + len(diff.to_update)
 
@@ -485,7 +487,7 @@ def fetch_and_cache_feeds(user_id, feed_urls):
         seen.add(normalized)
 
     try:
-        existing_rows = list_rows_all(
+        existing_rows = list_calendar_rows_all(
             COLLECTIONS["calendar_cache"],
             [Query.equal("user_id", [str(user_id)])],
         )
@@ -506,12 +508,12 @@ def fetch_and_cache_feeds(user_id, feed_urls):
         for row in orphaned_rows:
             row_id = row.get("$id") or row.get("id")
             if row_id:
-                delete_row_safe(COLLECTIONS["calendar_cache"], row_id)
+                delete_calendar_row(COLLECTIONS["calendar_cache"], row_id)
     for row in rows_to_update:
         row_id = row.get("$id") or row.get("id")
         if not row_id:
             continue
-        update_row_safe(
+        update_calendar_row(
             COLLECTIONS["calendar_cache"],
             row_id,
             {"feed_url_hash": _feed_url_hash(row.get("feed_url"))},

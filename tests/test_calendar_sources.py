@@ -418,7 +418,7 @@ class TestCalendarSources(unittest.TestCase):
         normalized_url = _normalize_feed_url(ICLOUD_NOTCHNOOK_URL)
         feed_hash = fetcher_feed_url_hash(ICLOUD_NOTCHNOOK_URL)
 
-        with patch("services.feed_fetcher.list_rows_all", return_value=[]), \
+        with patch("services.feed_fetcher.list_calendar_rows_all", return_value=[]), \
                 patch("services.feed_fetcher._load_feed_metadata", return_value={
                     feed_hash: {
                         "etag_header": '"old-etag"',
@@ -452,8 +452,8 @@ class TestCalendarSources(unittest.TestCase):
         }
 
         with patch("services.feed_fetcher._feed_url_hash", return_value="hash-1"), \
-                patch("services.feed_fetcher.first_row", return_value=existing), \
-                patch("services.feed_fetcher.update_row_safe", return_value={}) as update_row:
+                patch("services.feed_fetcher.first_calendar_row", return_value=existing), \
+                patch("services.feed_fetcher.update_calendar_row", return_value={}) as update_row:
             _upsert_feed_metadata("user-1", "https://example.com/feed.ics", result, fetched_at)
 
         update_row.assert_called_once()

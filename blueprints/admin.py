@@ -40,6 +40,11 @@ from services.app_config import (
 )
 from services.scheduler import update_course_tracking_refresh_interval
 from services.discord_audit import discord_audit_status, emit_admin_event, format_actor, format_user_target
+from services.calendar_store import (
+    count_calendar_rows,
+    delete_calendar_rows_by_user,
+    list_calendar_rows_all,
+)
 
 try:
     import psutil
@@ -604,12 +609,6 @@ def _delete_user_rows(user_id):
         COLLECTIONS["user_settings"],
         COLLECTIONS["user_courses"],
         COLLECTIONS["course_seat_tracks"],
-        COLLECTIONS["calendar_cache"],
-        COLLECTIONS["calendar_feeds"],
-        COLLECTIONS["user_calendar_preferences"],
-        COLLECTIONS["user_calendar_sources"],
-        COLLECTIONS["user_events"],
-        COLLECTIONS["user_event_overrides"],
         COLLECTIONS["notes"],
         COLLECTIONS["note_folders"],
         COLLECTIONS["shared_files"],
@@ -618,6 +617,11 @@ def _delete_user_rows(user_id):
         COLLECTIONS["chat_presence"],
         COLLECTIONS["chat_read_states"],
     ]
+
+    try:
+        delete_calendar_rows_by_user(user_id)
+    except AppwriteException:
+        logger.exception("Failed to delete local calendar rows for user %s", user_id)
 
     for table_id in table_ids:
         try:
@@ -711,27 +715,27 @@ def _load_section(section, user_id):
 
     if section == "calendars":
         try:
-            cache_rows = list_rows_all(
+            cache_rows = list_calendar_rows_all(
                 COLLECTIONS["calendar_cache"],
                 [Query.equal("user_id", [user_id]), Query.order_desc("event_start")],
             )
-            feeds = list_rows_all(
+            feeds = list_calendar_rows_all(
                 COLLECTIONS["calendar_feeds"],
                 [Query.equal("user_id", [user_id]), Query.order_desc("updated_at")],
             )
-            preferences = list_rows_all(
+            preferences = list_calendar_rows_all(
                 COLLECTIONS["user_calendar_preferences"],
                 [Query.equal("user_id", [user_id]), Query.order_asc("calendar_name")],
             )
-            sources = list_rows_all(
+            sources = list_calendar_rows_all(
                 COLLECTIONS["user_calendar_sources"],
                 [Query.equal("user_id", [user_id]), Query.order_desc("updated_at")],
             )
-            events = list_rows_all(
+            events = list_calendar_rows_all(
                 COLLECTIONS["user_events"],
                 [Query.equal("user_id", [user_id]), Query.order_desc("start")],
             )
-            overrides = list_rows_all(
+            overrides = list_calendar_rows_all(
                 COLLECTIONS["user_event_overrides"],
                 [Query.equal("user_id", [user_id]), Query.order_desc("updated_at")],
             )
@@ -814,27 +818,27 @@ def _export_payload(user_id):
             COLLECTIONS["note_folders"],
             [Query.equal("user_id", [user_id])],
         ),
-        "calendar_cache": list_rows_all(
+        "calendar_cache": list_calendar_rows_all(
             COLLECTIONS["calendar_cache"],
             [Query.equal("user_id", [user_id])],
         ),
-        "calendar_feeds": list_rows_all(
+        "calendar_feeds": list_calendar_rows_all(
             COLLECTIONS["calendar_feeds"],
             [Query.equal("user_id", [user_id])],
         ),
-        "calendar_preferences": list_rows_all(
+        "calendar_preferences": list_calendar_rows_all(
             COLLECTIONS["user_calendar_preferences"],
             [Query.equal("user_id", [user_id])],
         ),
-        "calendar_sources": list_rows_all(
+        "calendar_sources": list_calendar_rows_all(
             COLLECTIONS["user_calendar_sources"],
             [Query.equal("user_id", [user_id])],
         ),
-        "calendar_events": list_rows_all(
+        "calendar_events": list_calendar_rows_all(
             COLLECTIONS["user_events"],
             [Query.equal("user_id", [user_id])],
         ),
-        "calendar_overrides": list_rows_all(
+        "calendar_overrides": list_calendar_rows_all(
             COLLECTIONS["user_event_overrides"],
             [Query.equal("user_id", [user_id])],
         ),
@@ -1504,8 +1508,8 @@ def admin_detail(user_id):
             "files": _safe_count_rows(COLLECTIONS["shared_files"], [Query.equal("user_id", [user_id])]),
             "folders": _safe_count_rows(COLLECTIONS["file_folders"], [Query.equal("user_id", [user_id])]),
             "notes": _safe_count_rows(COLLECTIONS["notes"], [Query.equal("user_id", [user_id])]),
-            "calendar_cache": _safe_count_rows(COLLECTIONS["calendar_cache"], [Query.equal("user_id", [user_id])]),
-            "calendar_feeds": _safe_count_rows(COLLECTIONS["calendar_feeds"], [Query.equal("user_id", [user_id])]),
+            "calendar_cache": count_calendar_rows(COLLECTIONS["calendar_cache"], [Query.equal("user_id", [user_id])]),
+            "calendar_feeds": count_calendar_rows(COLLECTIONS["calendar_feeds"], [Query.equal("user_id", [user_id])]),
             "courses": _safe_count_rows(COLLECTIONS["user_courses"], [Query.equal("user_id", [user_id])]),
             "seat_tracks": _safe_count_rows(COLLECTIONS["course_seat_tracks"], [Query.equal("user_id", [user_id])]),
             **_chat_count_summary(user_id),

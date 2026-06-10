@@ -9,7 +9,8 @@ from flask_login import current_user, login_required
 from appwrite.exception import AppwriteException
 from appwrite.query import Query
 from appwrite_client import COLLECTIONS
-from appwrite_helpers import format_datetime, list_rows_all, update_row_safe
+from appwrite_helpers import format_datetime, update_row_safe
+from services.calendar_store import list_calendar_rows_all
 from blueprints.calendar_api import (
     DEFAULT_CALENDAR_COLOR,
     DEFAULT_LOCAL_SOURCE_NAME,
@@ -156,7 +157,7 @@ def create_url_calendar_source():
         refresh_error = str(exc)
 
     try:
-        cache_events = list_rows_all(
+        cache_events = list_calendar_rows_all(
             COLLECTIONS["calendar_cache"],
             [
                 Query.equal("user_id", [user_id]),

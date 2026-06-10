@@ -27,6 +27,10 @@ def create_app():
     app.jinja_env.filters["avatar_url"] = avatar_url_for_size
     app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-fallback-key")
     app.config["APPWRITE_DATABASE_ID"] = os.environ.get("APPWRITE_DATABASE_ID", "")
+    app.config["CALENDAR_SQLITE_PATH"] = os.environ.get(
+        "CALENDAR_SQLITE_PATH",
+        os.path.join(app.instance_path, "calendar.sqlite3"),
+    )
     app.config["MAX_CONTENT_LENGTH"] = 5 * 50 * 1024 * 1024
     app.config["FILE_SHARE_UPLOAD_DIR"] = os.path.join(app.root_path, "uploads", "file_share")
     allow_insecure_http = (
@@ -39,12 +43,15 @@ def create_app():
     app.config["PREFERRED_URL_SCHEME"] = "http" if allow_insecure_http else "https"
     app.config["WTF_CSRF_CHECK_DEFAULT"] = False
     os.makedirs(app.config["FILE_SHARE_UPLOAD_DIR"], exist_ok=True)
+    os.makedirs(app.instance_path, exist_ok=True)
 
     # Initialize extensions
     from extensions import csrf, login_manager
     csrf.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = "auth.login"
+    from services.calendar_store import init_calendar_store
+    init_calendar_store(app.config["CALENDAR_SQLITE_PATH"])
 
     @login_manager.unauthorized_handler
     def handle_unauthorized():

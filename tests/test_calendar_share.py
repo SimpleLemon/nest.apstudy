@@ -26,7 +26,7 @@ class CalendarShareTestCase(unittest.TestCase):
     def test_generate_calendar_share_code_checks_uniqueness(self):
         choices = iter(("A" * ca.CALENDAR_SHARE_CODE_LENGTH) + ("B" * ca.CALENDAR_SHARE_CODE_LENGTH))
         with patch.object(ca.secrets, "choice", side_effect=lambda _chars: next(choices)), \
-                patch.object(ca, "first_row", side_effect=[{"$id": "taken"}, None]) as first_row:
+                patch.object(ca, "first_calendar_row", side_effect=[{"$id": "taken"}, None]) as first_row:
             code = ca._generate_calendar_share_code()
 
         self.assertEqual(code, "B" * ca.CALENDAR_SHARE_CODE_LENGTH)
@@ -73,7 +73,7 @@ class CalendarShareTestCase(unittest.TestCase):
         with self.app.test_request_context("/api/calendar/shares", method="POST", json={"includeAllCalendars": True}):
             with patch.object(ca, "current_user", self.user), \
                     patch.object(ca, "_generate_calendar_share_code", return_value="ABCDEFGHIJKLMNOP"), \
-                    patch.object(ca, "create_row_safe", return_value=created) as create_row:
+                    patch.object(ca, "create_calendar_row", return_value=created) as create_row:
                 response, status = ca.create_calendar_share.__wrapped__()
 
         self.assertEqual(status, 201)
@@ -83,8 +83,8 @@ class CalendarShareTestCase(unittest.TestCase):
         revoked = {**created, "is_active": False}
         with self.app.test_request_context("/api/calendar/shares/share-1", method="DELETE"):
             with patch.object(ca, "current_user", self.user), \
-                    patch.object(ca, "get_row_safe", return_value=created), \
-                    patch.object(ca, "update_row_safe", return_value=revoked) as update_row:
+                    patch.object(ca, "get_calendar_row", return_value=created), \
+                    patch.object(ca, "update_calendar_row", return_value=revoked) as update_row:
                 response = ca.revoke_calendar_share.__wrapped__("share-1")
 
         self.assertFalse(response.get_json()["share"]["isActive"])
@@ -93,9 +93,9 @@ class CalendarShareTestCase(unittest.TestCase):
         regenerated = {**created, "share_code": "QRSTUVWXYZabcdef"}
         with self.app.test_request_context("/api/calendar/shares/share-1/regenerate", method="POST"):
             with patch.object(ca, "current_user", self.user), \
-                    patch.object(ca, "get_row_safe", return_value=created), \
+                    patch.object(ca, "get_calendar_row", return_value=created), \
                     patch.object(ca, "_generate_calendar_share_code", return_value="QRSTUVWXYZabcdef"), \
-                    patch.object(ca, "update_row_safe", return_value=regenerated):
+                    patch.object(ca, "update_calendar_row", return_value=regenerated):
                 response = ca.regenerate_calendar_share.__wrapped__("share-1")
 
         self.assertEqual(response.get_json()["share"]["shareCode"], "QRSTUVWXYZabcdef")
@@ -182,7 +182,7 @@ class CalendarShareTestCase(unittest.TestCase):
 
         with self.app.test_request_context("/api/calendar/share/ABCDEFGHIJKLMNOP/events"):
             with patch.object(ca, "first_row", return_value=settings), \
-                    patch.object(ca, "list_rows_all", side_effect=list_rows):
+                    patch.object(ca, "list_calendar_rows_all", side_effect=list_rows):
                 payload = ca._public_calendar_events_payload(
                     share,
                     datetime(2026, 5, 20, tzinfo=timezone.utc),
@@ -218,7 +218,7 @@ class CalendarShareTestCase(unittest.TestCase):
 
     def test_public_missing_share_returns_404(self):
         with self.app.test_client() as client:
-            with patch.object(ca, "first_row", return_value=None):
+            with patch.object(ca, "first_calendar_row", return_value=None):
                 response = client.get("/api/calendar/share/NOPE/events")
 
         self.assertEqual(response.status_code, 404)

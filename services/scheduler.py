@@ -29,11 +29,11 @@ from appwrite.exception import AppwriteException
 from appwrite.query import Query
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import (
-    first_row,
     format_datetime,
     list_rows_all,
     parse_datetime,
 )
+from services.calendar_store import first_calendar_row
 from services.app_config import (
     COURSE_TRACKING_REFRESH_INTERVAL_CHOICES,
     get_course_tracking_refresh_minutes,
@@ -217,7 +217,7 @@ def _refresh_all_feeds(app):
             last_fetched = None
             feed_table = COLLECTIONS.get("calendar_feeds")
             if feed_table:
-                latest_feed = first_row(
+                latest_feed = first_calendar_row(
                     feed_table,
                     [
                         Query.equal("user_id", [settings.get("user_id")]),
@@ -228,7 +228,7 @@ def _refresh_all_feeds(app):
                     last_fetched = parse_datetime(latest_feed.get("last_fetched"))
 
             if not last_fetched:
-                latest_event = first_row(
+                latest_event = first_calendar_row(
                     COLLECTIONS["calendar_cache"],
                     [
                         Query.equal("user_id", [settings.get("user_id")]),

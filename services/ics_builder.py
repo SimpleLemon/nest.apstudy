@@ -18,6 +18,7 @@ from appwrite.exception import AppwriteException
 from appwrite.query import Query
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import list_rows_all, parse_datetime
+from services.calendar_store import list_calendar_rows_all
 
 
 def _ics_escape(text):
@@ -73,7 +74,7 @@ def build_ics_for_user(user_id):
 
     # Fetch all cached events for this user
     try:
-        events = list_rows_all(
+        events = list_calendar_rows_all(
             COLLECTIONS["calendar_cache"],
             [
                 Query.equal("user_id", [str(user_id)]),

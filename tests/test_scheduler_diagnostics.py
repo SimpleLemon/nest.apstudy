@@ -253,7 +253,7 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
             "feed_refresh_minutes": "5",
         }
         with patch.object(scheduler, "list_rows_all", return_value=[settings]), \
-                patch.object(scheduler, "first_row", return_value=None), \
+                patch.object(scheduler, "first_calendar_row", return_value=None), \
                 patch.object(scheduler, "is_stale", return_value=True), \
                 patch("services.feed_fetcher.fetch_and_cache_feeds", return_value=0) as fetch_feeds, \
                 patch("services.scheduler.update_row_safe", create=True) as update_row:
