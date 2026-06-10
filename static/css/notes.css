@@ -125,6 +125,24 @@ body.notes-modal-open { overflow: hidden; }
 
 /* ===== EDITOR PAGE LAYOUT ===== */
 
+body.notes-editor-body {
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow-y: hidden;
+}
+
+body.notes-editor-body.with-sidebar {
+  grid-template-rows: var(--navbar-height, 64px) minmax(0, 1fr);
+  align-content: stretch;
+  overflow-y: hidden;
+}
+
+body.notes-editor-body main {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
 .notes-editor-page {
   --notes-bg-base: var(--color-surface-container-lowest);
   --notes-bg-surface: var(--color-surface);
@@ -144,8 +162,12 @@ body.notes-modal-open { overflow: hidden; }
 
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 2rem);
-  overflow: hidden;
+  flex: 1 1 auto;
+  height: 100%;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   border: 1px solid var(--notes-border-subtle);
   border-radius: var(--radius-lg);
   background: var(--notes-bg-base);
@@ -279,7 +301,7 @@ body.notes-modal-open { overflow: hidden; }
 
 .notes-editor-surface {
   flex: 1;
-  min-height: calc(100vh - 190px);
+  min-height: 0;
   padding: 56px clamp(20px, 7vw, 72px) 72px;
   background: var(--notes-bg-surface);
 }
@@ -1065,7 +1087,7 @@ body.notes-modal-open { overflow: hidden; }
     border-right: 0;
     border-left: 0;
     border-radius: 0;
-    min-height: calc(100dvh - var(--navbar-height, 64px));
+    min-height: 0;
   }
 
   .editor-topbar {
@@ -1089,7 +1111,7 @@ body.notes-modal-open { overflow: hidden; }
   }
 
   .notes-editor-surface {
-    min-height: calc(100dvh - 120px);
+    min-height: 0;
     padding: 36px 16px 64px;
   }
 

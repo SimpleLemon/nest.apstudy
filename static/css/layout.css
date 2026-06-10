@@ -180,6 +180,18 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
 }
+
+@media (min-width: 1025px) {
+  .sidebar-scroll {
+    overflow-y: hidden;
+    scrollbar-width: none;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .sidebar-content {
   flex: 1;
   display: flex;
