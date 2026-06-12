@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-editor-scroll-2">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-editor-setup-2">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@blocknote/core@0.28.0/fonts/inter.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@blocknote/mantine@0.28.0/style.css">
     <title>Note Editor - APStudy Nest</title>
@@ -45,7 +45,7 @@
     <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/navbar.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/sidebar.js') }}" defer></script>
-    <script type="module" src="{{ url_for('static', filename='js/notes/editor.js') }}?v=notes-editor-ui-2"></script>
+    <script type="module" src="{{ url_for('static', filename='js/notes/editor.js') }}?v=notes-editor-setup-2"></script>
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     </style>
@@ -79,7 +79,13 @@
                 />
 
                 <div id="notes-writing-toolbar" class="notes-writing-toolbar" aria-label="Writing tools" hidden>
-                    <div class="notes-toolbar-segment notes-toolbar-history" aria-label="History">
+                    <div class="notes-toolbar-main" data-toolbar-main>
+                    <div class="notes-toolbar-segment notes-toolbar-page-setup" data-toolbar-item data-overflow-priority="5" aria-label="Page setup">
+                        <button type="button" data-editor-action="page-setup" title="Page setup" aria-label="Page setup" aria-expanded="false">
+                            <span class="material-symbols-outlined" aria-hidden="true">tune</span>
+                        </button>
+                    </div>
+                    <div class="notes-toolbar-segment notes-toolbar-history" data-toolbar-item data-overflow-priority="10" aria-label="History">
                         <button type="button" data-editor-action="undo" title="Undo" aria-label="Undo">
                             <span class="material-symbols-outlined" aria-hidden="true">undo</span>
                         </button>
@@ -87,56 +93,250 @@
                             <span class="material-symbols-outlined" aria-hidden="true">redo</span>
                         </button>
                     </div>
-                    <div class="notes-toolbar-segment notes-toolbar-blocks" aria-label="Block style">
-                        <button type="button" data-editor-action="paragraph" title="Paragraph" aria-label="Paragraph">
-                            <span class="material-symbols-outlined" aria-hidden="true">subject</span>
-                            <span class="notes-toolbar-label">Paragraph</span>
+                    <div class="notes-toolbar-segment notes-toolbar-zoom" data-toolbar-item data-overflow-priority="20" aria-label="Zoom">
+                        <button type="button" data-editor-action="zoom-out" title="Zoom out" aria-label="Zoom out">
+                            <span class="material-symbols-outlined" aria-hidden="true">zoom_out</span>
                         </button>
-                        <button type="button" data-editor-action="heading" data-level="1" title="Heading 1" aria-label="Heading 1">
-                            <span aria-hidden="true">H1</span>
-                        </button>
-                        <button type="button" data-editor-action="heading" data-level="2" title="Heading 2" aria-label="Heading 2">
-                            <span aria-hidden="true">H2</span>
+                        <span id="notes-zoom-value" class="notes-toolbar-value" aria-live="polite">100%</span>
+                        <button type="button" data-editor-action="zoom-in" title="Zoom in" aria-label="Zoom in">
+                            <span class="material-symbols-outlined" aria-hidden="true">zoom_in</span>
                         </button>
                     </div>
-                    <div class="notes-toolbar-segment notes-toolbar-inline" aria-label="Text style">
+                    <div class="notes-toolbar-segment notes-toolbar-inline" data-toolbar-item data-overflow-priority="30" aria-label="Text style">
                         <button type="button" data-editor-action="basic-style" data-style="bold" title="Bold" aria-label="Bold">
                             <strong aria-hidden="true">B</strong>
                         </button>
                         <button type="button" data-editor-action="basic-style" data-style="italic" title="Italic" aria-label="Italic">
                             <em aria-hidden="true">I</em>
                         </button>
-                    </div>
-                    <div class="notes-toolbar-segment notes-toolbar-lists" aria-label="Lists">
-                        <button type="button" data-editor-action="bulletListItem" title="Bulleted list" aria-label="Bulleted list">
-                            <span class="material-symbols-outlined" aria-hidden="true">format_list_bulleted</span>
+                        <button type="button" data-editor-action="basic-style" data-style="underline" title="Underline" aria-label="Underline">
+                            <span class="notes-toolbar-text-button" aria-hidden="true">U</span>
                         </button>
-                        <button type="button" data-editor-action="numberedListItem" title="Numbered list" aria-label="Numbered list">
-                            <span class="material-symbols-outlined" aria-hidden="true">format_list_numbered</span>
+                        <button type="button" data-editor-action="basic-style" data-style="strike" title="Strikethrough" aria-label="Strikethrough">
+                            <span class="notes-toolbar-text-button notes-toolbar-text-strike" aria-hidden="true">S</span>
                         </button>
-                        <button type="button" data-editor-action="checkListItem" title="Checklist" aria-label="Checklist">
-                            <span class="material-symbols-outlined" aria-hidden="true">checklist</span>
+                        <button type="button" data-editor-action="basic-style" data-style="code" title="Inline code" aria-label="Inline code">
+                            <span class="material-symbols-outlined" aria-hidden="true">code</span>
                         </button>
                     </div>
-                    <div class="notes-toolbar-segment notes-toolbar-insert-desktop" aria-label="Insert">
-                        <button type="button" data-editor-action="add-block" title="Add block" aria-label="Add block">
+                    <div class="notes-toolbar-segment notes-toolbar-blocks" data-toolbar-item data-overflow-priority="40" aria-label="Block style">
+                        <button type="button" class="notes-toolbar-menu-trigger notes-style-trigger" data-toolbar-menu-trigger="block-style" title="Block style" aria-label="Block style" aria-expanded="false">
+                            <span class="material-symbols-outlined notes-toolbar-icon" data-current-block-icon aria-hidden="true">subject</span>
+                            <span class="notes-toolbar-trigger-label" data-current-block-label>Paragraph</span>
+                            <span class="material-symbols-outlined notes-toolbar-chevron" aria-hidden="true">expand_more</span>
+                        </button>
+                    </div>
+                    <div class="notes-toolbar-segment notes-toolbar-align" data-toolbar-item data-overflow-priority="50" aria-label="Alignment">
+                        <button type="button" class="notes-toolbar-menu-trigger notes-align-trigger" data-toolbar-menu-trigger="align" title="Text alignment" aria-label="Text alignment" aria-expanded="false">
+                            <span class="material-symbols-outlined notes-toolbar-icon" data-current-align-icon aria-hidden="true">format_align_left</span>
+                            <span class="material-symbols-outlined notes-toolbar-chevron" aria-hidden="true">expand_more</span>
+                        </button>
+                    </div>
+                    <div class="notes-toolbar-segment notes-toolbar-lists" data-toolbar-item data-overflow-priority="60" aria-label="Lists">
+                        <button type="button" class="notes-toolbar-menu-trigger notes-list-trigger" data-toolbar-menu-trigger="list-style" title="List style" aria-label="List style" aria-expanded="false">
+                            <span class="material-symbols-outlined notes-toolbar-icon" data-current-list-icon aria-hidden="true">format_list_bulleted</span>
+                            <span class="material-symbols-outlined notes-toolbar-chevron" aria-hidden="true">expand_more</span>
+                        </button>
+                        <button type="button" data-editor-action="indent" title="Indent block" aria-label="Indent block">
+                            <span class="material-symbols-outlined" aria-hidden="true">format_indent_increase</span>
+                        </button>
+                        <button type="button" data-editor-action="outdent" title="Outdent block" aria-label="Outdent block">
+                            <span class="material-symbols-outlined" aria-hidden="true">format_indent_decrease</span>
+                        </button>
+                    </div>
+                    <div class="notes-toolbar-segment notes-toolbar-link" data-toolbar-item data-overflow-priority="70" aria-label="Link">
+                        <button type="button" class="notes-toolbar-menu-trigger" data-toolbar-menu-trigger="link" title="Create link" aria-label="Create link" aria-expanded="false">
+                            <span class="material-symbols-outlined" aria-hidden="true">link</span>
+                        </button>
+                    </div>
+                    <div class="notes-toolbar-segment notes-toolbar-insert-desktop" data-toolbar-item data-overflow-priority="80" aria-label="Insert">
+                        <button type="button" class="notes-toolbar-menu-trigger" data-toolbar-menu-trigger="add-block" title="Add block" aria-label="Add block" aria-expanded="false">
                             <span class="material-symbols-outlined" aria-hidden="true">add</span>
                             <span class="notes-toolbar-label">Add block</span>
                         </button>
                     </div>
-                    <details class="notes-toolbar-more">
-                        <summary aria-label="More writing tools">
-                            <span class="material-symbols-outlined" aria-hidden="true">more_horiz</span>
-                            <span>More</span>
-                        </summary>
-                        <div class="notes-toolbar-more-menu">
-                            <button type="button" data-editor-action="add-block" title="Add block" aria-label="Add block">
-                                <span class="material-symbols-outlined" aria-hidden="true">add</span>
-                                <span class="notes-toolbar-label">Add block</span>
+                    <div class="notes-toolbar-more" data-toolbar-more hidden>
+                        <button type="button" data-toolbar-menu-trigger="overflow" title="More writing tools" aria-label="More writing tools" aria-expanded="false">
+                            <span class="material-symbols-outlined" aria-hidden="true">more_vert</span>
+                        </button>
+                        <div class="notes-toolbar-menu notes-toolbar-overflow-menu" data-toolbar-menu="overflow" hidden></div>
+                    </div>
+                    </div>
+                    <div class="notes-toolbar-menu notes-style-menu" data-toolbar-menu="block-style" hidden>
+                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="set-block" data-block-type="paragraph" data-menu-check="paragraph">
+                            <span class="material-symbols-outlined" aria-hidden="true">subject</span>
+                            <span>Paragraph</span>
+                        </button>
+                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="set-block" data-block-type="heading" data-level="1" data-menu-check="heading-1">
+                            <span class="notes-toolbar-text-icon" aria-hidden="true">H1</span>
+                            <span>Heading 1</span>
+                        </button>
+                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="set-block" data-block-type="heading" data-level="2" data-menu-check="heading-2">
+                            <span class="notes-toolbar-text-icon" aria-hidden="true">H2</span>
+                            <span>Heading 2</span>
+                        </button>
+                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="set-block" data-block-type="heading" data-level="3" data-menu-check="heading-3">
+                            <span class="notes-toolbar-text-icon" aria-hidden="true">H3</span>
+                            <span>Heading 3</span>
+                        </button>
+                    </div>
+                    <div class="notes-toolbar-menu notes-align-menu" data-toolbar-menu="align" hidden>
+                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="align" data-align="left" data-menu-check="align-left">
+                            <span class="material-symbols-outlined" aria-hidden="true">format_align_left</span>
+                            <span>Align left</span>
+                        </button>
+                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="align" data-align="center" data-menu-check="align-center">
+                            <span class="material-symbols-outlined" aria-hidden="true">format_align_center</span>
+                            <span>Align center</span>
+                        </button>
+                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="align" data-align="right" data-menu-check="align-right">
+                            <span class="material-symbols-outlined" aria-hidden="true">format_align_right</span>
+                            <span>Align right</span>
+                        </button>
+                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="align" data-align="justify" data-menu-check="align-justify">
+                            <span class="material-symbols-outlined" aria-hidden="true">format_align_justify</span>
+                            <span>Justify</span>
+                        </button>
+                    </div>
+                    <div class="notes-toolbar-menu notes-list-menu" data-toolbar-menu="list-style" hidden>
+                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="set-block" data-block-type="bulletListItem" data-menu-check="bulletListItem">
+                            <span class="material-symbols-outlined" aria-hidden="true">format_list_bulleted</span>
+                            <span>Bulleted list</span>
+                        </button>
+                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="set-block" data-block-type="numberedListItem" data-menu-check="numberedListItem">
+                            <span class="material-symbols-outlined" aria-hidden="true">format_list_numbered</span>
+                            <span>Numbered list</span>
+                        </button>
+                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="set-block" data-block-type="checkListItem" data-menu-check="checkListItem">
+                            <span class="material-symbols-outlined" aria-hidden="true">checklist</span>
+                            <span>Checklist</span>
+                        </button>
+                    </div>
+                    <div class="notes-toolbar-menu notes-add-block-menu" data-toolbar-menu="add-block" hidden>
+                        <label class="notes-add-block-search">
+                            <span class="material-symbols-outlined" aria-hidden="true">search</span>
+                            <input type="search" data-add-block-search placeholder="Search blocks" autocomplete="off" />
+                        </label>
+                        <div class="notes-add-block-group" data-add-block-list>
+                            <button type="button" class="notes-add-block-item" data-editor-action="insert-block" data-block-type="paragraph">
+                                <span class="material-symbols-outlined" aria-hidden="true">subject</span>
+                                <span><strong>Paragraph</strong><small>Start with plain text</small></span>
+                            </button>
+                            <button type="button" class="notes-add-block-item" data-editor-action="insert-block" data-block-type="heading" data-level="1">
+                                <span class="notes-toolbar-text-icon" aria-hidden="true">H1</span>
+                                <span><strong>Heading 1</strong><small>Top-level section title</small></span>
+                            </button>
+                            <button type="button" class="notes-add-block-item" data-editor-action="insert-block" data-block-type="heading" data-level="2">
+                                <span class="notes-toolbar-text-icon" aria-hidden="true">H2</span>
+                                <span><strong>Heading 2</strong><small>Major subsection title</small></span>
+                            </button>
+                            <button type="button" class="notes-add-block-item" data-editor-action="insert-block" data-block-type="heading" data-level="3">
+                                <span class="notes-toolbar-text-icon" aria-hidden="true">H3</span>
+                                <span><strong>Heading 3</strong><small>Small section label</small></span>
+                            </button>
+                            <button type="button" class="notes-add-block-item" data-editor-action="insert-block" data-block-type="bulletListItem">
+                                <span class="material-symbols-outlined" aria-hidden="true">format_list_bulleted</span>
+                                <span><strong>Bulleted list</strong><small>Collect quick points</small></span>
+                            </button>
+                            <button type="button" class="notes-add-block-item" data-editor-action="insert-block" data-block-type="numberedListItem">
+                                <span class="material-symbols-outlined" aria-hidden="true">format_list_numbered</span>
+                                <span><strong>Numbered list</strong><small>Track ordered steps</small></span>
+                            </button>
+                            <button type="button" class="notes-add-block-item" data-editor-action="insert-block" data-block-type="checkListItem">
+                                <span class="material-symbols-outlined" aria-hidden="true">checklist</span>
+                                <span><strong>Checklist</strong><small>Make a quick task list</small></span>
+                            </button>
+                            <button type="button" class="notes-add-block-item" data-editor-action="insert-block" data-block-type="quote">
+                                <span class="material-symbols-outlined" aria-hidden="true">format_quote</span>
+                                <span><strong>Quote</strong><small>Call out an important idea</small></span>
+                            </button>
+                            <button type="button" class="notes-add-block-item" data-editor-action="insert-block" data-block-type="codeBlock">
+                                <span class="material-symbols-outlined" aria-hidden="true">code_blocks</span>
+                                <span><strong>Code block</strong><small>Write code or commands</small></span>
                             </button>
                         </div>
-                    </details>
+                    </div>
+                    <form class="notes-toolbar-menu notes-link-menu" data-toolbar-menu="link" hidden>
+                        <label class="notes-link-field">
+                            <span>Link URL</span>
+                            <input type="url" data-link-url placeholder="https://example.com" autocomplete="off" />
+                        </label>
+                        <div class="notes-link-actions">
+                            <button type="button" class="notes-link-cancel" data-toolbar-menu-close>Cancel</button>
+                            <button type="submit" class="notes-link-apply">Apply</button>
+                        </div>
+                    </form>
                 </div>
+                <section id="notes-page-setup-popover" class="notes-page-setup-popover" aria-labelledby="notes-page-setup-title" hidden>
+                    <header class="notes-page-setup-header">
+                        <h2 id="notes-page-setup-title">Page setup</h2>
+                        <button type="button" class="notes-page-setup-close" data-page-setup-close aria-label="Close page setup">
+                            <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                        </button>
+                    </header>
+                    <div class="notes-page-setup-fields">
+                        <div class="notes-setup-field">
+                            <span>Apply to</span>
+                            <input id="notes-page-setup-scope" type="hidden" value="note" data-page-setup-scope />
+                            <div class="notes-setup-select" data-page-setup-dropdown>
+                                <button type="button" class="notes-setup-select-trigger" data-page-setup-dropdown-trigger aria-haspopup="listbox" aria-expanded="false">
+                                    <span data-page-setup-selected-label>This Note Document</span>
+                                    <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+                                </button>
+                                <div class="notes-setup-select-menu" role="listbox" data-page-setup-options hidden>
+                                    <button type="button" role="option" class="notes-setup-option" data-page-setup-scope-option="note" aria-selected="true">This Note Document</button>
+                                    <button type="button" role="option" class="notes-setup-option" data-page-setup-scope-option="global" aria-selected="false">All Note Documents</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notes-setup-field">
+                            <span>Page color</span>
+                            <input id="notes-page-color" type="hidden" value="default" data-page-setup-input="pageColor" />
+                            <div class="notes-setup-select" data-page-setup-dropdown>
+                                <button type="button" class="notes-setup-select-trigger" data-page-setup-dropdown-trigger aria-haspopup="listbox" aria-expanded="false">
+                                    <span class="notes-setup-selected-value">
+                                        <span class="notes-color-swatch" data-page-setup-selected-swatch style="background: var(--notes-bg-surface);"></span>
+                                        <span data-page-setup-selected-label>Default</span>
+                                    </span>
+                                    <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+                                </button>
+                                <div class="notes-setup-select-menu" role="listbox" data-page-setup-options hidden>
+                                    <button type="button" role="option" class="notes-setup-option" data-page-setup-option="pageColor" data-value="default" data-swatch="var(--notes-bg-surface)" aria-selected="true"><span class="notes-color-swatch" style="background: var(--notes-bg-surface);"></span><span>Default</span></button>
+                                    <button type="button" role="option" class="notes-setup-option" data-page-setup-option="pageColor" data-value="paper" data-swatch="#f8f1df" aria-selected="false"><span class="notes-color-swatch" style="background: #f8f1df;"></span><span>Paper</span></button>
+                                    <button type="button" role="option" class="notes-setup-option" data-page-setup-option="pageColor" data-value="warm" data-swatch="#f6eadf" aria-selected="false"><span class="notes-color-swatch" style="background: #f6eadf;"></span><span>Warm</span></button>
+                                    <button type="button" role="option" class="notes-setup-option" data-page-setup-option="pageColor" data-value="blue" data-swatch="#eaf2fb" aria-selected="false"><span class="notes-color-swatch" style="background: #eaf2fb;"></span><span>Soft blue</span></button>
+                                    <button type="button" role="option" class="notes-setup-option" data-page-setup-option="pageColor" data-value="green" data-swatch="#eaf5ed" aria-selected="false"><span class="notes-color-swatch" style="background: #eaf5ed;"></span><span>Soft green</span></button>
+                                    <button type="button" role="option" class="notes-setup-option" data-page-setup-option="pageColor" data-value="rose" data-swatch="#f8e9ef" aria-selected="false"><span class="notes-color-swatch" style="background: #f8e9ef;"></span><span>Soft rose</span></button>
+                                    <button type="button" role="option" class="notes-setup-option" data-page-setup-option="pageColor" data-value="dark" data-swatch="#141922" aria-selected="false"><span class="notes-color-swatch" style="background: #141922;"></span><span>Deep slate</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notes-setup-field">
+                            <span>Font type</span>
+                            <input id="notes-font-type" type="hidden" value="default" data-page-setup-input="fontType" />
+                            <div class="notes-setup-select" data-page-setup-dropdown>
+                                <button type="button" class="notes-setup-select-trigger" data-page-setup-dropdown-trigger aria-haspopup="listbox" aria-expanded="false">
+                                    <span data-page-setup-selected-label>Default</span>
+                                    <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+                                </button>
+                                <div class="notes-setup-select-menu" role="listbox" data-page-setup-options hidden>
+                                    <button type="button" role="option" class="notes-setup-option notes-font-option" data-page-setup-option="fontType" data-value="default" aria-selected="true"><span>Default</span><small>App writing font</small></button>
+                                    <button type="button" role="option" class="notes-setup-option notes-font-option" data-page-setup-option="fontType" data-value="sans" aria-selected="false"><span>Clean Sans</span><small>Inter style</small></button>
+                                    <button type="button" role="option" class="notes-setup-option notes-font-option" data-page-setup-option="fontType" data-value="display" aria-selected="false"><span>Display</span><small>Space Grotesk</small></button>
+                                    <button type="button" role="option" class="notes-setup-option notes-font-option" data-page-setup-option="fontType" data-value="serif" aria-selected="false"><span>Serif</span><small>Georgia style</small></button>
+                                    <button type="button" role="option" class="notes-setup-option notes-font-option" data-page-setup-option="fontType" data-value="mono" aria-selected="false"><span>Mono</span><small>IBM Plex Mono</small></button>
+                                </div>
+                            </div>
+                        </div>
+                        <label class="notes-setup-field notes-setup-margin-field">
+                            <span>Side margins</span>
+                            <div class="notes-setup-margin-control">
+                                <input id="notes-side-margins" type="range" min="2" max="18" step="1" data-page-setup-input="sideMargins" />
+                                <output id="notes-side-margins-value" for="notes-side-margins">10%</output>
+                            </div>
+                        </label>
+                    </div>
+                </section>
                 <p id="notes-editor-hint" class="notes-editor-hint" hidden>Type normally, use <kbd>/</kbd> for blocks, and press Space after Markdown shortcuts.</p>
 
                 <!-- BlockNote editor mounts here via createRoot -->

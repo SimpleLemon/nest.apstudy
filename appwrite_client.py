@@ -32,6 +32,7 @@ Table: user_settings
 - interface_theme VARCHAR(32) DEFAULT 'system-match' -> string(32) attribute: interface_theme
 - dashboard_layout_json TEXT -> text attribute: dashboard_layout_json
 - dashboard_checklist_hidden_signature VARCHAR(64) -> string(64) attribute: dashboard_checklist_hidden_signature
+- notes_page_setup_json TEXT -> longtext attribute: notes_page_setup_json
 - created_at DATETIME NOT NULL -> datetime attribute: created_at
 - updated_at DATETIME -> datetime attribute: updated_at
 

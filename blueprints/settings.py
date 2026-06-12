@@ -57,6 +57,10 @@ ALLOWED_AVATAR_EXTENSIONS = {"jpg", "jpeg", "png", "gif", "webp"}
 USERNAME_MIN_LENGTH = 3
 USERNAME_MAX_LENGTH = 20
 USERNAME_PATTERN = re.compile(r"^[a-zA-Z0-9_-]+$")
+NOTES_PAGE_SETUP_COLORS = {"default", "paper", "warm", "blue", "green", "rose", "dark"}
+NOTES_PAGE_SETUP_FONT_TYPES = {"default", "sans", "display", "serif", "mono"}
+NOTES_PAGE_SETUP_MARGIN_MIN = 2
+NOTES_PAGE_SETUP_MARGIN_MAX = 18
 USERNAME_RESERVED = {
     "account",
     "admin",
@@ -179,6 +183,47 @@ def _theme_from_interface_theme(value):
     return INTERFACE_THEME_TO_THEME.get(normalized, "dark")
 
 
+def _normalize_notes_page_setup(value):
+    if not isinstance(value, dict):
+        return {}
+
+    normalized = {}
+    page_color = value.get("pageColor")
+    font_type = value.get("fontType")
+    side_margins = value.get("sideMargins")
+
+    if isinstance(page_color, str) and page_color in NOTES_PAGE_SETUP_COLORS:
+        normalized["pageColor"] = page_color
+    if isinstance(font_type, str) and font_type in NOTES_PAGE_SETUP_FONT_TYPES:
+        normalized["fontType"] = font_type
+    if side_margins is not None:
+        try:
+            margin_value = round(float(side_margins), 1)
+        except (TypeError, ValueError):
+            margin_value = None
+        if margin_value is not None:
+            normalized["sideMargins"] = min(
+                NOTES_PAGE_SETUP_MARGIN_MAX,
+                max(NOTES_PAGE_SETUP_MARGIN_MIN, margin_value),
+            )
+
+    return normalized
+
+
+def _parse_notes_page_setup(value):
+    if not value:
+        return {}
+    if isinstance(value, dict):
+        return _normalize_notes_page_setup(value)
+    if not isinstance(value, str):
+        return {}
+    try:
+        parsed = json.loads(value)
+    except (TypeError, ValueError):
+        return {}
+    return _normalize_notes_page_setup(parsed)
+
+
 def _normalize_sidebar_default(value):
     if not isinstance(value, str):
         return None
@@ -282,6 +327,7 @@ def _settings_defaults(user_id):
         "timezone": "",
         "dashboard_layout_json": "[]",
         "dashboard_checklist_hidden_signature": "",
+        "notes_page_setup_json": "{}",
         "created_at": format_datetime(datetime.utcnow()),
     }
 
@@ -304,6 +350,7 @@ def _settings_payload(settings):
             "other_calendar_urls": [],
             "dashboard_layout_json": "[]",
             "dashboard_checklist_hidden_signature": "",
+            "notes_page_setup": {},
         }
     return {
         "theme": _theme_from_interface_theme(settings.get("interface_theme") or settings.get("theme")),
@@ -321,6 +368,7 @@ def _settings_payload(settings):
         "other_calendar_urls": _load_other_calendar_urls(settings),
         "dashboard_layout_json": settings.get("dashboard_layout_json") or "[]",
         "dashboard_checklist_hidden_signature": settings.get("dashboard_checklist_hidden_signature") or "",
+        "notes_page_setup": _parse_notes_page_setup(settings.get("notes_page_setup_json")),
     }
 
 
@@ -1482,6 +1530,67 @@ def update_interface_preferences():
         "chat_sound_enabled": settings.get("chat_sound_enabled", True),
         "language": settings.get("language") or "en",
         "timezone": settings.get("timezone") or "",
+    })
+
+
+@settings_bp.route("/api/notes-page-setup", methods=["POST"])
+@login_required
+def update_notes_page_setup():
+    """Persist default page setup values for all note documents."""
+    data = request.get_json(silent=True) or {}
+    raw_page_setup = data.get("page_setup")
+    if isinstance(raw_page_setup, str):
+        try:
+            raw_page_setup = json.loads(raw_page_setup)
+        except (TypeError, ValueError):
+            return jsonify({"error": "Page setup must be valid JSON."}), 400
+
+    page_setup = _normalize_notes_page_setup(raw_page_setup)
+    user_id = str(current_user.id)
+
+    try:
+        settings = _load_user_settings(user_id)
+    except AppwriteException:
+        logger.exception("Failed to load settings")
+        return jsonify({"error": "Unable to update note page setup."}), 500
+
+    updates = {
+        "notes_page_setup_json": json.dumps(page_setup, separators=(",", ":")),
+        "updated_at": format_datetime(datetime.utcnow()),
+    }
+
+    try:
+        if not settings:
+            settings = create_row_safe(
+                COLLECTIONS["user_settings"],
+                row_id=user_id,
+                data={**_settings_defaults(user_id), **updates},
+            )
+        else:
+            settings = update_row_safe(
+                COLLECTIONS["user_settings"],
+                settings.get("$id"),
+                updates,
+            )
+    except AppwriteException:
+        logger.exception("Failed to update note page setup")
+        return jsonify({"error": "Unable to update note page setup."}), 500
+
+    emit_creation_event(
+        "Notes Page Setup Updated",
+        actor=format_actor(current_user),
+        target=str(current_user.id),
+        metadata={
+            "page_context": "settings/notes-page-setup",
+            "resource_type": "user_settings",
+            "resource_id": settings.get("$id") or settings.get("id"),
+            "updated_keys": ["notes_page_setup_json"],
+        },
+        color="gray",
+    )
+    return jsonify({
+        "status": "ok",
+        "notes_page_setup": _parse_notes_page_setup(settings.get("notes_page_setup_json")),
     })
 
 

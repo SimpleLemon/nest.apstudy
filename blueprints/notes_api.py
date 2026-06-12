@@ -1,4 +1,5 @@
 import logging
+import json
 import uuid
 from datetime import datetime, timezone
 
@@ -11,6 +12,7 @@ from appwrite_helpers import (
     create_row_safe,
     delete_row_safe,
     format_datetime,
+    first_row,
     get_row_safe,
     list_rows_all,
     update_row_safe,
@@ -23,6 +25,11 @@ logger = logging.getLogger(__name__)
 
 NOTES_TABLE_ID = "notes"
 FOLDERS_TABLE_ID = "note_folders"
+USER_SETTINGS_TABLE_ID = "user_settings"
+PAGE_SETUP_COLORS = {"default", "paper", "warm", "blue", "green", "rose", "dark"}
+PAGE_SETUP_FONT_TYPES = {"default", "sans", "display", "serif", "mono"}
+PAGE_SETUP_MARGIN_MIN = 2
+PAGE_SETUP_MARGIN_MAX = 18
 
 
 @notes_api_bp.errorhandler(404)
@@ -39,7 +46,53 @@ def _utcnow_iso():
     return format_datetime(datetime.now(timezone.utc))
 
 
-def _note_to_payload(note):
+def _parse_page_setup(value):
+    if not value:
+        return {}
+    if isinstance(value, dict):
+        data = value
+    elif isinstance(value, str):
+        try:
+            data = json.loads(value)
+        except (TypeError, ValueError):
+            return {}
+    else:
+        return {}
+    if not isinstance(data, dict):
+        return {}
+    return _normalize_page_setup(data)
+
+
+def _normalize_page_setup(value):
+    if not isinstance(value, dict):
+        return {}
+
+    normalized = {}
+    page_color = value.get("pageColor")
+    font_type = value.get("fontType")
+    side_margins = value.get("sideMargins")
+
+    if isinstance(page_color, str) and page_color in PAGE_SETUP_COLORS:
+        normalized["pageColor"] = page_color
+    if isinstance(font_type, str) and font_type in PAGE_SETUP_FONT_TYPES:
+        normalized["fontType"] = font_type
+    if side_margins is not None:
+        try:
+            margin_value = round(float(side_margins), 1)
+        except (TypeError, ValueError):
+            margin_value = None
+        if margin_value is not None:
+            normalized["sideMargins"] = min(PAGE_SETUP_MARGIN_MAX, max(PAGE_SETUP_MARGIN_MIN, margin_value))
+
+    return normalized
+
+
+def _load_global_notes_page_setup(user_id):
+    settings = first_row(USER_SETTINGS_TABLE_ID, queries=[Query.equal("user_id", [str(user_id)])])
+    return _parse_page_setup(settings.get("notes_page_setup_json") if settings else "")
+
+
+def _note_to_payload(note, global_page_setup=None):
     note_id = note.get("$id") or note.get("id")
     return {
         "$id": note_id,
@@ -48,6 +101,8 @@ def _note_to_payload(note):
         "title": note.get("title") or "Untitled",
         "content": note.get("content") or "",
         "order": note.get("order") or 0,
+        "page_setup": _parse_page_setup(note.get("page_setup_json")),
+        "global_page_setup": global_page_setup if global_page_setup is not None else {},
         "created_at": note.get("created_at"),
         "updated_at": note.get("updated_at"),
     }
@@ -174,7 +229,12 @@ def create_note():
 @login_required
 def get_note(note_id):
     note = _note_owner_or_404(note_id)
-    return jsonify(_note_to_payload(note))
+    try:
+        global_page_setup = _load_global_notes_page_setup(current_user.id)
+    except AppwriteException:
+        logger.exception("Failed to load note page setup defaults")
+        global_page_setup = {}
+    return jsonify(_note_to_payload(note, global_page_setup=global_page_setup))
 
 
 @notes_api_bp.route("/api/notes/<note_id>", methods=["PATCH"])
@@ -183,12 +243,20 @@ def update_note(note_id):
     _note_owner_or_404(note_id)
     payload = request.get_json(silent=True) or {}
 
-    allowed = {"title", "content", "folder_id", "order"}
+    allowed = {"title", "content", "folder_id", "order", "page_setup_json"}
     updates = {key: payload[key] for key in allowed if key in payload}
     if "title" in updates:
         updates["title"] = (updates.get("title") or "").strip() or "Untitled"
     if "folder_id" in updates:
         updates["folder_id"] = _normalize_owned_folder_id(updates.get("folder_id"))
+    if "page_setup_json" in updates:
+        page_setup = updates.get("page_setup_json")
+        if isinstance(page_setup, str):
+            try:
+                page_setup = json.loads(page_setup)
+            except (TypeError, ValueError):
+                return jsonify({"error": "Page setup must be valid JSON."}), 400
+        updates["page_setup_json"] = json.dumps(_normalize_page_setup(page_setup), separators=(",", ":"))
 
     if not updates:
         return jsonify({"error": "No updatable fields were provided."}), 400
@@ -201,7 +269,12 @@ def update_note(note_id):
         logger.exception("Failed to update note")
         return jsonify({"error": "Unable to update note."}), 500
 
-    return jsonify(_note_to_payload(updated))
+    try:
+        global_page_setup = _load_global_notes_page_setup(current_user.id)
+    except AppwriteException:
+        logger.exception("Failed to load note page setup defaults")
+        global_page_setup = {}
+    return jsonify(_note_to_payload(updated, global_page_setup=global_page_setup))
 
 
 @notes_api_bp.route("/api/notes/<note_id>", methods=["DELETE"])

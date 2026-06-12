@@ -489,6 +489,7 @@ TABLE_SPECS = [
             {"key": "timezone", "type": "string", "size": 64, "xdefault": ""},
             {"key": "dashboard_layout_json", "type": "text"},
             {"key": "dashboard_checklist_hidden_signature", "type": "string", "size": 64},
+            {"key": "notes_page_setup_json", "type": "longtext"},
             {"key": "created_at", "type": "datetime", "xrequired": True},
             {"key": "updated_at", "type": "datetime"},
         ],
@@ -906,6 +907,7 @@ TABLE_SPECS = [
             # OFF-PAGE: longtext stores only a 20-byte pointer in the row,
             # supporting up to ~1 billion characters for rich note content.
             {"key": "content", "type": "longtext"},
+            {"key": "page_setup_json", "type": "longtext"},
             {"key": "content_type", "type": "string", "size": 16, "xdefault": "markdown"},
             {"key": "is_pinned", "type": "boolean", "xdefault": False},
             {"key": "is_archived", "type": "boolean", "xdefault": False},
