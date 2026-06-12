@@ -83,7 +83,7 @@
                 <section id="courses-modal-panel" class="w-full max-w-[1200px] h-[88vh] rounded-3xl border border-outline-variant/30 bg-surface shadow-2xl shadow-black/30 flex flex-col overflow-hidden transition-all duration-200 ${state.courses.animateOnOpen ? "-translate-y-3 opacity-0" : "translate-y-0 opacity-100"}">
                     <header class="px-5 sm:px-7 pt-5 sm:pt-6 pb-4 border-b border-outline-variant/20 bg-surface-container-low">
                         <div class="flex items-center justify-between gap-3 mb-4">
-                            <h2 class="text-2xl font-headline font-semibold text-on-surface">Courses</h2>
+                            <h2 class="text-2xl font-headline font-bold text-on-surface">Courses</h2>
                             <button id="courses-modal-close" type="button" class="h-9 w-9 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" aria-label="Close courses search">✕</button>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-[1fr_220px] gap-3">

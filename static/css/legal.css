@@ -15,7 +15,16 @@ body.legal-page {
     min-height: 100vh;
     background: var(--color-background, #ffffff);
     color: var(--color-on-surface, #202124);
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: var(--font-body);
+}
+
+.legal-page h1,
+.legal-page h2,
+.legal-page h3,
+.legal-page h4,
+.legal-page h5,
+.legal-page h6 {
+    font-family: var(--font-display);
 }
 
 .legal-public-nav {
@@ -121,7 +130,8 @@ body.legal-page {
     margin: 0;
     color: var(--color-on-surface, #202124);
     font-size: clamp(36px, 5vw, 58px);
-    font-weight: 800;
+    font-weight: 700;
+    letter-spacing: -0.025em;
     line-height: 1.02;
 }
 
@@ -174,7 +184,8 @@ body.legal-page {
     margin: 0 0 12px;
     color: var(--color-on-surface, #202124);
     font-size: 13px;
-    font-weight: 800;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     line-height: 1.2;
     text-transform: uppercase;
 }
@@ -232,7 +243,8 @@ body.legal-page {
     margin: 0 0 16px;
     color: var(--color-on-surface, #202124);
     font-size: 25px;
-    font-weight: 800;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     line-height: 1.2;
 }
 
@@ -240,7 +252,8 @@ body.legal-page {
     margin: 28px 0 10px;
     color: var(--color-on-surface, #202124);
     font-size: 16px;
-    font-weight: 800;
+    font-weight: 600;
+    letter-spacing: -0.015em;
     line-height: 1.35;
 }
 
@@ -291,7 +304,7 @@ body.legal-page {
     border-radius: 6px;
     background: var(--color-surface-container-low, #f7f6f3);
     color: var(--color-on-surface, #202124);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-family: var(--font-mono);
     font-size: 0.92em;
     padding: 1px 5px;
 }

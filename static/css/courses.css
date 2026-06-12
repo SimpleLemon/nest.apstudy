@@ -41,14 +41,15 @@ body.courses-body {
 .courses-calendar-header h2 {
   margin: 0;
   color: var(--color-on-surface);
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  letter-spacing: 0;
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
 }
 
 .courses-panel-header h1 {
   font-size: 28px;
   line-height: 1.15;
   font-weight: 700;
+  letter-spacing: -0.025em;
 }
 
 .courses-panel-header p,
@@ -95,7 +96,7 @@ body.courses-body {
   background: transparent;
   color: var(--color-on-surface-variant);
   cursor: pointer;
-  font: 800 12px/1.15 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font: 500 12px/1.15 var(--font-body);
   text-align: center;
   transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
 }
@@ -487,6 +488,9 @@ body.courses-body {
 .course-card-title strong {
   display: block;
   font-size: 14px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
   line-height: 1.25;
 }
 
@@ -496,7 +500,7 @@ body.courses-body {
   color: var(--color-on-surface);
   font-size: inherit;
   line-height: inherit;
-  font-weight: 800;
+  font-weight: 600;
   overflow: visible;
 }
 
@@ -589,7 +593,9 @@ body.courses-body {
   color: var(--color-on-surface);
   font-size: 28px;
   line-height: 1.2;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .courses-detail-header p {
@@ -711,7 +717,9 @@ body.courses-body {
   margin: 0 0 8px;
   color: var(--color-on-surface);
   font-size: 14px;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
 .courses-description-card p {
@@ -749,7 +757,9 @@ body.courses-body {
   margin: 0;
   color: var(--color-on-surface);
   font-size: 16px;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
 .courses-edit-section-heading span {
@@ -1159,7 +1169,9 @@ body.courses-body {
 
 .courses-event-title {
   font-size: 15px;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
   line-height: 1.2;
 }
 
@@ -1393,7 +1405,9 @@ body.courses-body {
     color: var(--color-on-surface);
     font-size: 15px;
     line-height: 1.25;
-    font-weight: 800;
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.015em;
   }
 
   .courses-mobile-event-copy p {

@@ -15,6 +15,9 @@
 <title>Onboarding - APStudy</title>
     <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy Logo">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
 </head>
@@ -37,7 +40,7 @@
                     <!-- Welcome header -->
                     <div id="onboarding-welcome-header">
                         <p class="text-xs uppercase tracking-[0.2em] text-on-surface-variant">Onboarding</p>
-                        <h1 class="mt-2 text-3xl sm:text-4xl font-headline font-semibold">Welcome, {{ first_name }}!</h1>
+                        <h1 class="mt-2 text-3xl sm:text-4xl font-headline font-bold">Welcome, {{ first_name }}!</h1>
                         <p class="mt-2 text-sm sm:text-base text-on-surface-variant max-w-2xl">Complete a quick setup so Nest.APStudy can personalize your experience and send you straight to the dashboard next time.</p>
                     </div>
                     <div id="wizard-status" class="hidden rounded-2xl border border-error/25 bg-error-container/15 p-4 text-sm text-error"></div>
@@ -48,7 +51,7 @@
                         <section class="wizard-step transition duration-200 ease-out space-y-6" data-step="1">
                             <div class="space-y-3 text-center md:text-left">
                                 <p class="text-xs uppercase tracking-[0.2em] text-on-surface-variant">Step 1: Welcome</p>
-                                <h2 class="text-2xl font-headline font-semibold">Let's create your account.</h2>
+                                <h2 class="text-2xl font-headline font-bold">Let's create your account.</h2>
                                 <p class="text-sm text-on-surface-variant">We pulled this from your sign-in so you do not need to re-enter it.</p>
                                 <div class="hidden sm:flex items-center justify-between self-stretch rounded-2xl bg-surface-container-lowest/80 border border-outline-variant/20 p-3">
                                     <div class="flex items-center gap-3">
@@ -86,7 +89,7 @@
                         <section class="wizard-step transition duration-200 ease-out hidden space-y-6" data-step="2" hidden>
                             <div class="space-y-2">
                                 <p class="text-xs uppercase tracking-[0.2em] text-on-surface-variant">Step 2: Education profile</p>
-                                <h2 class="text-2xl font-headline font-semibold">Tell us about your education.</h2>
+                                <h2 class="text-2xl font-headline font-bold">Tell us about your education.</h2>
                                 <p class="text-sm text-on-surface-variant">Some fields appear only when they apply to your selection.</p>
                             </div>
                             <div class="space-y-5">
@@ -135,7 +138,7 @@
                         <section class="wizard-step transition duration-200 ease-out hidden space-y-6" data-step="3" id="courses-step" hidden>
                             <div class="space-y-2">
                                 <p class="text-xs uppercase tracking-[0.2em] text-on-surface-variant">Step 3: Courses</p>
-                                <h2 class="text-2xl font-headline font-semibold">What courses are you taking/planning on taking at Emory?</h2>
+                                <h2 class="text-2xl font-headline font-bold">What courses are you taking/planning on taking at Emory?</h2>
                                 <p class="text-sm text-on-surface-variant">Search the catalog, then add courses one at a time from the results.</p>
                             </div>
                             <div class="grid gap-4 lg:grid-cols-[1.05fr_0.95fr] items-start">
@@ -203,7 +206,7 @@
                         <section class="wizard-step transition duration-200 ease-out hidden space-y-6" data-step="4" hidden>
                             <div class="space-y-2">
                                 <p class="text-xs uppercase tracking-[0.2em] text-on-surface-variant"><span id="preferences-step-number">Step 4</span>: Preferences</p>
-                                <h2 class="text-2xl font-headline font-semibold">Set your look and calendar links.</h2>
+                                <h2 class="text-2xl font-headline font-bold">Set your look and calendar links.</h2>
                                 <p class="text-sm text-on-surface-variant">These match the settings page so everything stays in sync.</p>
                             </div>
                             <div class="space-y-6">
@@ -217,7 +220,7 @@
                                             <div class="w-10 h-10 rounded-full bg-surface-container-lowest flex items-center justify-center mb-3">
                                                 <span class="material-symbols-outlined text-on-surface" data-icon="dark_mode">dark_mode</span>
                                             </div>
-                                            <h3 class="font-headline font-medium text-on-surface mb-1">Obsidian Dark</h3>
+                                            <h3 class="font-headline font-semibold text-on-surface mb-1">Obsidian Dark</h3>
                                             <p class="text-xs text-on-surface-variant">Optimized for focus.</p>
                                         </div>
                                         <div data-theme-value="parchment-light" aria-selected="false" class="theme-card bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container hover:border-outline-variant/30 aria-selected:!border-primary/30 p-4 rounded-xl relative cursor-pointer group transition-all duration-150">
@@ -227,7 +230,7 @@
                                             <div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center mb-3">
                                                 <span class="material-symbols-outlined text-on-surface-variant" data-icon="light_mode">light_mode</span>
                                             </div>
-                                            <h3 class="font-headline font-medium text-on-surface mb-1">Parchment Light</h3>
+                                            <h3 class="font-headline font-semibold text-on-surface mb-1">Parchment Light</h3>
                                             <p class="text-xs text-on-surface-variant">Classic reading mode.</p>
                                         </div>
                                         <div data-theme-value="system-match" aria-selected="false" class="theme-card bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container hover:border-outline-variant/30 aria-selected:!border-primary/30 p-4 rounded-xl relative cursor-pointer group transition-all duration-150">
@@ -237,7 +240,7 @@
                                             <div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center mb-3">
                                                 <span class="material-symbols-outlined text-on-surface-variant" data-icon="contrast">contrast</span>
                                             </div>
-                                            <h3 class="font-headline font-medium text-on-surface mb-1">System Match</h3>
+                                            <h3 class="font-headline font-semibold text-on-surface mb-1">System Match</h3>
                                             <p class="text-xs text-on-surface-variant">Adapts to device.</p>
                                         </div>
                                         <div data-theme-value="nest-light" aria-selected="false" class="theme-card bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container hover:border-outline-variant/30 aria-selected:!border-primary/30 p-4 rounded-xl relative cursor-pointer group transition-all duration-150">
@@ -247,7 +250,7 @@
                                             <div class="w-10 h-10 rounded-full bg-white border border-[#012169]/20 flex items-center justify-center mb-3">
                                                 <span class="material-symbols-outlined text-[#012169]" data-icon="wb_sunny">wb_sunny</span>
                                             </div>
-                                            <h3 class="font-headline font-medium text-on-surface mb-1">Nest Light</h3>
+                                            <h3 class="font-headline font-semibold text-on-surface mb-1">Nest Light</h3>
                                             <p class="text-xs text-on-surface-variant">University classic style.</p>
                                         </div>
                                         <div data-theme-value="nest-dark" aria-selected="false" class="theme-card bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container hover:border-outline-variant/30 aria-selected:!border-primary/30 p-4 rounded-xl relative cursor-pointer group transition-all duration-150">
@@ -257,7 +260,7 @@
                                             <div class="w-10 h-10 rounded-full bg-[#012169] flex items-center justify-center mb-3">
                                                 <span class="material-symbols-outlined text-[#D4AF37]" data-icon="brightness_2">brightness_2</span>
                                             </div>
-                                            <h3 class="font-headline font-medium text-on-surface mb-1">Nest Dark</h3>
+                                            <h3 class="font-headline font-semibold text-on-surface mb-1">Nest Dark</h3>
                                             <p class="text-xs text-on-surface-variant">Midnight blue and gold.</p>
                                         </div>
                                     </div>
@@ -315,7 +318,7 @@
                         <section class="wizard-step transition duration-200 ease-out hidden space-y-6" data-step="5" hidden>
                             <div class="space-y-2">
                                 <p class="text-xs uppercase tracking-[0.2em] text-on-surface-variant"><span id="confirm-step-number">Step 5</span>: Confirm</p>
-                                <h2 class="text-2xl font-headline font-semibold">Review everything before launch.</h2>
+                                <h2 class="text-2xl font-headline font-bold">Review everything before launch.</h2>
                                 <p class="text-sm text-on-surface-variant">You can update any of this later in Settings.</p>
                             </div>
                             <div class="grid gap-4 lg:grid-cols-3">

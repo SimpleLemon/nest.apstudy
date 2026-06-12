@@ -111,8 +111,9 @@
     color: var(--color-on-surface);
     font-size: clamp(30px, 4vw, 44px);
     line-height: 1.02;
-    font-weight: 780;
-    letter-spacing: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.025em;
 }
 
 .dashboard-header-link,
@@ -167,8 +168,9 @@
     margin: 0;
     font-size: 18px;
     line-height: 1.2;
-    font-weight: 780;
-    letter-spacing: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 .dashboard-checklist p {
@@ -426,8 +428,9 @@
     color: var(--color-on-surface);
     font-size: 17px;
     line-height: 1.2;
-    font-weight: 780;
-    letter-spacing: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 .dashboard-tile-actions {
@@ -626,7 +629,9 @@
     white-space: nowrap;
     color: var(--color-on-surface);
     font-size: 13px;
-    font-weight: 720;
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.015em;
 }
 
 .dashboard-list-meta {
@@ -859,7 +864,9 @@
 .dashboard-popover h3 {
     margin: 0 0 8px;
     font-size: 13px;
-    font-weight: 780;
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.015em;
 }
 
 .dashboard-popover ul {

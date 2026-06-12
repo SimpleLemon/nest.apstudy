@@ -7,6 +7,10 @@ const withOpacity = (cssVariable) => ({ opacityValue, opacityVariable }) => {
     return `var(${cssVariable})`;
 };
 
+const fontDisplay = ['"Space Grotesk"', "system-ui", "sans-serif"];
+const fontBody = ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", '"Segoe UI"', "Roboto", "Arial", "sans-serif"];
+const fontMono = ['"IBM Plex Mono"', '"SFMono-Regular"', "Consolas", '"Liberation Mono"', "monospace"];
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     darkMode: "class",
@@ -89,9 +93,11 @@ module.exports = {
                 full: "9999px",
             },
             fontFamily: {
-                headline: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Arial", "sans-serif"],
-                body: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Arial", "sans-serif"],
-                label: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Arial", "sans-serif"],
+                display: fontDisplay,
+                body: fontBody,
+                mono: fontMono,
+                headline: fontDisplay,
+                label: fontBody,
             },
             keyframes: {
                 "fade-in-up": {

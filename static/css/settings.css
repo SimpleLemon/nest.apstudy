@@ -45,8 +45,10 @@
 
 .settings-title {
   margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
   line-height: 1.05;
-  letter-spacing: 0;
+  letter-spacing: -0.025em;
 }
 
 .settings-subtitle {
@@ -107,8 +109,9 @@
 .settings-section-head h2 {
   margin: 0;
   font-size: 1.25rem;
+  font-family: var(--font-display);
   font-weight: 700;
-  letter-spacing: 0;
+  letter-spacing: -0.02em;
 }
 
 .settings-section-head p {
@@ -140,8 +143,9 @@
 .settings-card-summary h3 {
   margin: 0;
   font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
 .settings-card-summary p {
@@ -254,9 +258,10 @@
 .profile-tile-heading h3 {
   margin: 0;
   font-size: clamp(1.15rem, 7cqw, 2rem);
+  font-family: var(--font-display);
   line-height: 1.05;
-  font-weight: 800;
-  letter-spacing: 0;
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
 .profile-tile-heading p {

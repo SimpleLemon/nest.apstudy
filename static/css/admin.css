@@ -20,7 +20,7 @@ body.admin-page {
         radial-gradient(900px 500px at 92% -5%, color-mix(in srgb, var(--color-tertiary, #f2a900) 20%, transparent), transparent),
         var(--admin-surface);
     color: var(--admin-ink);
-    font-family: "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--font-body);
     line-height: 1.5;
 }
 
@@ -110,7 +110,7 @@ body.admin-page {
 }
 
 .admin-sidebar-name {
-    font-family: "Space Grotesk", "Source Sans 3", sans-serif;
+    font-family: var(--font-display);
     font-weight: 700;
     color: var(--color-shell-text-primary, var(--admin-ink));
 }
@@ -266,7 +266,7 @@ body.admin-page {
 }
 
 .admin-title {
-    font-family: "Space Grotesk", "Source Sans 3", sans-serif;
+    font-family: var(--font-display);
     font-size: 2.375rem;
     line-height: 1.12;
     margin: 0;
@@ -419,7 +419,7 @@ body.admin-page {
 
 .admin-profile-overview .profile-tile-heading h3 {
     margin: 0;
-    font-family: "Space Grotesk", "Source Sans 3", sans-serif;
+    font-family: var(--font-display);
     font-size: 24px;
     line-height: 1.15;
     overflow-wrap: anywhere;
@@ -667,7 +667,7 @@ body.admin-page {
     border-radius: 12px;
     padding: 12px;
     border: 1px dashed var(--admin-border);
-    font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+    font-family: var(--font-mono);
     font-size: 13px;
 }
 
@@ -677,7 +677,7 @@ body.admin-page {
     border-radius: 12px;
     background: var(--admin-surface);
     border: 1px solid var(--admin-border);
-    font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+    font-family: var(--font-mono);
     font-size: 13px;
     max-height: 280px;
     overflow: auto;
@@ -893,7 +893,7 @@ body.admin-page {
 }
 
 .admin-metric strong {
-    font-family: "Space Grotesk", sans-serif;
+    font-family: var(--font-display);
     font-size: 28px;
 }
 
@@ -1012,7 +1012,7 @@ body.admin-page {
 }
 
 .admin-track-summary-main strong {
-    font-family: "Space Grotesk", sans-serif;
+    font-family: var(--font-display);
 }
 
 .admin-track-summary-main span,

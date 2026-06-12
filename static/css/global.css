@@ -1,6 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root {
+	--font-display: "Space Grotesk", system-ui, sans-serif;
+	--font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+	--font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
 *,
 *::before,
 *::after {
@@ -16,6 +22,55 @@ body {
 
 body {
 	margin: 0;
+	font-family: var(--font-body);
+}
+
+button,
+input,
+textarea,
+select {
+	font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-headline,
+.font-display {
+	font-family: var(--font-display);
+}
+
+h1,
+h2 {
+	font-weight: 700;
+	letter-spacing: -0.025em;
+}
+
+h2 {
+	letter-spacing: -0.02em;
+}
+
+h3 {
+	font-weight: 600;
+	letter-spacing: -0.015em;
+}
+
+h4,
+h5,
+h6 {
+	font-weight: 600;
+	letter-spacing: -0.01em;
+}
+
+code,
+kbd,
+samp,
+pre,
+.font-mono {
+	font-family: var(--font-mono);
 }
 
 button,
@@ -95,8 +150,9 @@ body.apstudy-confirm-open {
 	margin: 0;
 	color: var(--color-on-surface, #202124);
 	font-size: 20px;
-	font-weight: 760;
-	letter-spacing: 0;
+	font-family: var(--font-display);
+	font-weight: 700;
+	letter-spacing: -0.02em;
 }
 
 .apstudy-confirm__copy p {
@@ -542,7 +598,9 @@ body.apstudy-confirm-open {
 	overflow: hidden;
 	color: var(--color-on-surface, #202124);
 	font-size: 14px;
-	font-weight: 700;
+	font-family: var(--font-display);
+	font-weight: 600;
+	letter-spacing: -0.015em;
 	line-height: 1.25;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -756,7 +814,9 @@ body.apstudy-confirm-open {
 .calendar-event-hover-title {
 	color: var(--color-on-surface, #202124);
 	font-size: 15px;
-	font-weight: 750;
+	font-family: var(--font-display);
+	font-weight: 600;
+	letter-spacing: -0.015em;
 	line-height: 1.25;
 }
 
@@ -842,7 +902,9 @@ body.apstudy-confirm-open {
 	margin: 0;
 	color: var(--color-on-surface, #202124);
 	font-size: 18px;
-	font-weight: 700;
+	font-family: var(--font-display);
+	font-weight: 600;
+	letter-spacing: -0.015em;
 	line-height: 1.25;
 }
 
@@ -1347,7 +1409,7 @@ body.apstudy-confirm-open {
 	border-radius: 999px;
 	background: rgba(255, 255, 255, 0.06);
 	color: #9ca7b7;
-	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+	font-family: var(--font-mono);
 	font-size: 11px;
 	padding: 3px 7px;
 }
@@ -1492,7 +1554,9 @@ body.apstudy-confirm-open {
 	margin: 0;
 	color: var(--color-on-surface, #202124);
 	font-size: 22px;
-	font-weight: 750;
+	font-family: var(--font-display);
+	font-weight: 600;
+	letter-spacing: -0.015em;
 	line-height: 1.2;
 }
 
@@ -1815,7 +1879,7 @@ body.apstudy-confirm-open {
 	flex-direction: column;
 	background: var(--color-surface-container-high);
 	color: var(--color-on-surface);
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	font-family: var(--font-body);
 }
 
 .apstudy-command-palette-input-row {

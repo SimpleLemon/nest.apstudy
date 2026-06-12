@@ -2,7 +2,17 @@ html,
 body {
     background: var(--color-background, #0d1117);
     color: var(--color-on-surface, #c9d1d9);
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: var(--font-body);
+}
+
+.user-profile-page h1,
+.user-profile-page h2,
+.user-profile-page h3,
+.user-profile-page h4,
+.user-profile-page h5,
+.user-profile-page h6,
+.user-profile-page .navbar-title {
+    font-family: var(--font-display);
 }
 
 body.user-profile-page {
