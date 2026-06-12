@@ -41,7 +41,7 @@
     <header class="landing-nav" data-landing-nav>
         <a class="landing-brand" href="/" aria-label="Nest.APStudy home">
             <span class="landing-brand-mark" aria-hidden="true">
-                <img class="landing-brand-logo" src="{{ url_for('static', filename='apple-touch-icon.png') }}" alt="" width="32" height="32" decoding="async">
+                <img class="landing-brand-logo" src="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="" width="32" height="32" decoding="async">
             </span>
             <span>Nest.APStudy</span>
         </a>
@@ -49,10 +49,12 @@
             <span class="material-symbols-outlined" aria-hidden="true">menu</span>
         </button>
         <nav id="landing-nav-menu" class="landing-nav-menu" aria-label="Landing navigation" data-landing-nav-menu>
-            <a href="#workflow">Workflow</a>
-            <a href="#features">Features</a>
-            <a href="#courses">Courses</a>
-            <a href="#security">Trust</a>
+            <span class="landing-nav-links">
+                <a href="#workflow">Workflow</a>
+                <a href="#features">Features</a>
+                <a href="#courses">Courses</a>
+                <a href="#security">Trust</a>
+            </span>
             <a class="landing-nav-cta" href="{{ landing_cta_href }}">{{ landing_cta_label }}</a>
         </nav>
     </header>
@@ -123,11 +125,11 @@
                 </button>
                 <button id="tab-calendar" class="feature-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-calendar" data-landing-tab="calendar" tabindex="-1">
                     <span class="material-symbols-outlined" aria-hidden="true">calendar_month</span>
-                    Calendar and Tasks
+                    Calendar
                 </button>
-                <button id="tab-courses" class="feature-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-courses" data-landing-tab="courses" tabindex="-1">
-                    <span class="material-symbols-outlined" aria-hidden="true">school</span>
-                    Courses
+                <button id="tab-tasks" class="feature-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-tasks" data-landing-tab="tasks" tabindex="-1">
+                    <span class="material-symbols-outlined" aria-hidden="true">checklist</span>
+                    Tasks
                 </button>
                 <button id="tab-workspace" class="feature-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-workspace" data-landing-tab="workspace" tabindex="-1">
                     <span class="material-symbols-outlined" aria-hidden="true">folder_open</span>
@@ -143,141 +145,196 @@
                         <a href="/dashboard">Open dashboard <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
                     </div>
                     <div class="product-mockup landing-app-demo landing-app-demo-dashboard" aria-hidden="true">
-                        <div class="demo-navbar">
-                            <div class="demo-nav-left">
-                                <span class="material-symbols-outlined demo-mobile-menu">menu</span>
-                                <img src="{{ url_for('static', filename='apple-touch-icon.png') }}" alt="" width="32" height="32" decoding="async">
-                                <strong>Nest.APStudy</strong>
-                            </div>
-                            <div class="demo-nav-right"><span>Cmd K</span><i></i></div>
-                        </div>
-                        <div class="demo-shell">
-                            <aside class="demo-sidebar">
-                                <span class="is-active"><span class="material-symbols-outlined">grid_view</span>Dashboard</span>
-                                <small>My Nest</small>
-                                <span><span class="material-symbols-outlined">calendar_today</span>Calendar</span>
-                                <span><span class="material-symbols-outlined">school</span>Courses</span>
-                                <span><span class="material-symbols-outlined">folder</span>Files</span>
-                                <span><span class="material-symbols-outlined">article</span>Notes</span>
-                                <span><span class="material-symbols-outlined">check_circle</span>Tasks</span>
-                            </aside>
-                            <section class="demo-canvas">
-                                <header class="demo-page-head">
-                                    <h4>Dashboard</h4>
-                                    <button type="button"><span class="material-symbols-outlined">dashboard_customize</span>Edit</button>
+                        <div class="demo-dashboard-tiles">
+                            <article class="demo-dashboard-card">
+                                <header>
+                                    <span class="demo-dashboard-icon material-symbols-outlined" aria-hidden="true">calendar_today</span>
+                                    <strong>Calendar: Week</strong>
                                 </header>
-                                <div class="demo-quote">A lot of people have gone further than they thought they could because someone else thought they could.</div>
-                                <div class="demo-dashboard-tiles">
-                                    <article class="demo-tile demo-tile-wide"><strong>Today</strong><p>Week view, tasks, and recent work in one brief.</p></article>
-                                    <article class="demo-tile"><strong>Calendar</strong><p>3 events</p></article>
-                                    <article class="demo-tile"><strong>Tasks</strong><p>4 open</p></article>
-                                    <article class="demo-tile"><strong>Courses</strong><p>Fall 2026</p></article>
-                                    <article class="demo-tile"><strong>Recent</strong><p>Notes and files</p></article>
+                                <div class="demo-dashboard-week">
+                                    <div class="demo-dashboard-week-days">
+                                        <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+                                    </div>
+                                    <div class="demo-dashboard-week-grid" data-dashboard-week-grid>
+                                        <span data-week-date>7</span><span class="is-current" data-week-date>8</span><span data-week-date>9</span><span data-week-date>10</span><span data-week-date>11</span><span data-week-date>12</span><span data-week-date>13</span>
+                                        <i class="event-blue day-monday"></i>
+                                        <i class="event-orange day-tuesday"></i>
+                                        <i class="event-red day-wednesday"></i>
+                                        <i class="event-blue day-wednesday event-slot-2"></i>
+                                        <i class="event-orange day-wednesday event-slot-3"></i>
+                                        <i class="event-red day-thursday"></i>
+                                        <i class="event-blue day-friday"></i>
+                                        <i class="event-orange day-friday event-slot-2"></i>
+                                    </div>
                                 </div>
-                            </section>
+                            </article>
+                            <article class="demo-dashboard-card">
+                                <header>
+                                    <span class="demo-dashboard-icon material-symbols-outlined" aria-hidden="true">check_circle</span>
+                                    <strong>Upcoming Tasks</strong>
+                                </header>
+                                <div class="demo-dashboard-list">
+                                    <p><span>Review Biology Class Syllabus</span><b>high</b></p>
+                                    <p><span>Complete reading assignments</span></p>
+                                    <p><span>Attend office hours</span></p>
+                                </div>
+                            </article>
+                            <article class="demo-dashboard-card">
+                                <header>
+                                    <span class="demo-dashboard-icon material-symbols-outlined" aria-hidden="true">folder</span>
+                                    <strong>Recent Files</strong>
+                                </header>
+                                <div class="demo-dashboard-list">
+                                    <p><span>LabWorksheet.pdf</span><b>1.8 MB</b></p>
+                                    <p><span>Bio_Review.docx</span><b>5.2 MB</b></p>
+                                </div>
+                            </article>
+                            <article class="demo-dashboard-card">
+                                <header>
+                                    <span class="demo-dashboard-icon material-symbols-outlined" aria-hidden="true">article</span>
+                                    <strong>Recent Notes</strong>
+                                </header>
+                                <div class="demo-dashboard-list">
+                                    <p><span>BIOL 141 notes</span><b>Note</b></p>
+                                    <p><span>Weekly planning</span><b>Note</b></p>
+                                    <p><span>Small steps every day become the work you are proud of.</span><b>Quote</b></p>
+                                </div>
+                            </article>
+                            <article class="demo-dashboard-card">
+                                <header>
+                                    <span class="demo-dashboard-icon material-symbols-outlined" aria-hidden="true">chat_bubble</span>
+                                    <strong>Messages</strong>
+                                </header>
+                                <div class="demo-dashboard-list">
+                                    <p><span>Your University</span><b>Channel</b></p>
+                                    <p><span>Nest Announcements</span><b>Channel</b></p>
+                                </div>
+                            </article>
+                            <article class="demo-dashboard-card">
+                                <header>
+                                    <span class="demo-dashboard-icon material-symbols-outlined" aria-hidden="true">school</span>
+                                    <strong>Courses</strong>
+                                </header>
+                                <div class="demo-dashboard-courses">
+                                    <span><b>BIOL 141</b><small>Foundations of...</small></span>
+                                    <span><b>CHEM 150</b><small>Structure and...</small></span>
+                                    <span><b>HLTH 100</b><small>It's Your Health...</small></span>
+                                    <span><b>BIOL 141L</b><small>Foundations of...</small></span>
+                                    <span><b>CHEM 150L</b><small>Structure and...</small></span>
+                                    <span><b>JPN 101</b><small>Elementary Japanese...</small></span>
+                                </div>
+                            </article>
                         </div>
                     </div>
                 </article>
 
                 <article id="panel-calendar" class="feature-panel" role="tabpanel" aria-labelledby="tab-calendar" data-landing-panel="calendar" hidden>
                     <div class="feature-copy">
-                        <h3>Calendars and tasks share the same mental map.</h3>
-                        <p>Plan recurring work, deadlines, course events, and personal tasks against weekly and monthly calendar views built for fast scanning.</p>
+                        <h3>A weekly calendar that reads like your real week.</h3>
+                        <p>Course events, study blocks, office hours, and personal commitments sit on a time-aware grid built for quick scanning.</p>
                         <a href="/calendar">Open calendar <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
                     </div>
                     <div class="product-mockup landing-app-demo landing-app-demo-calendar" aria-hidden="true">
-                        <div class="demo-navbar">
-                            <div class="demo-nav-left">
-                                <span class="material-symbols-outlined demo-mobile-menu">menu</span>
-                                <img src="{{ url_for('static', filename='apple-touch-icon.png') }}" alt="" width="32" height="32" decoding="async">
-                                <strong>Nest.APStudy</strong>
+                        <header class="demo-page-head demo-calendar-head">
+                            <div><h4 data-landing-calendar-title>Week of Jun 7 - Jun 13</h4><p>Weekly view with course and personal calendars</p></div>
+                            <div class="demo-segment"><b>Weekly</b><span>Monthly</span></div>
+                        </header>
+                        <div class="demo-week-shell demo-calendar-week">
+                            <div class="demo-week-header" data-landing-calendar-days>
+                                <span></span>
+                                <span><b>Sun</b><em>7</em></span>
+                                <span><b>Mon</b><em>8</em></span>
+                                <span><b>Tue</b><em>9</em></span>
+                                <span><b>Wed</b><em>10</em></span>
+                                <span><b>Thu</b><em>11</em></span>
+                                <span><b>Fri</b><em>12</em></span>
+                                <span><b>Sat</b><em>13</em></span>
                             </div>
-                            <div class="demo-nav-right"><span>Cmd K</span><i></i></div>
-                        </div>
-                        <div class="demo-shell">
-                            <aside class="demo-sidebar">
-                                <span><span class="material-symbols-outlined">grid_view</span>Dashboard</span>
-                                <small>My Nest</small>
-                                <span class="is-active"><span class="material-symbols-outlined">calendar_today</span>Calendar</span>
-                                <span><span class="material-symbols-outlined">school</span>Courses</span>
-                                <span><span class="material-symbols-outlined">check_circle</span>Tasks</span>
-                            </aside>
-                            <section class="demo-canvas">
-                                <header class="demo-page-head demo-calendar-head">
-                                    <div><h4>Week of Jun 7 - Jun 13</h4><p>Weekly view with course and task calendars</p></div>
-                                    <div class="demo-segment"><b>Weekly</b><span>Monthly</span></div>
-                                </header>
-                                <div class="demo-calendar-layout">
-                                    <div class="demo-week-grid">
-                                        <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span>
-                                        <b class="demo-event demo-event-blue">Reading</b>
-                                        <b class="demo-event demo-event-gold">Study block</b>
-                                        <b class="demo-event demo-event-green">Lab</b>
-                                        <b class="demo-event-blue demo-event-small">Review</b>
-                                    </div>
-                                    <div class="demo-mobile-agenda">
-                                        <p><strong>Mon</strong><span>Reading, 9:00</span></p>
-                                        <p><strong>Wed</strong><span>Study block, 2:00</span></p>
-                                        <p><strong>Fri</strong><span>Lab review, 11:00</span></p>
-                                    </div>
-                                    <div class="demo-task-board">
-                                        <strong>Upcoming Tasks</strong>
-                                        <p><span></span>Finish lab draft</p>
-                                        <p><span></span>Review chapter outline</p>
-                                        <p><span></span>Post seminar response</p>
-                                    </div>
+                            <div class="demo-week-body">
+                                <div class="demo-time-axis">
+                                    <span>8 AM</span>
+                                    <span>9 AM</span>
+                                    <span>10 AM</span>
+                                    <span>11 AM</span>
+                                    <span>12 PM</span>
+                                    <span>1 PM</span>
+                                    <span>2 PM</span>
+                                    <span>3 PM</span>
+                                    <span>4 PM</span>
+                                    <span>5 PM</span>
                                 </div>
-                            </section>
+                                <div class="demo-week-grid" data-landing-calendar-events>
+                                    <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="demo-mobile-agenda" data-landing-calendar-agenda>
+                            <p><strong>Mon</strong><span>BIOL 141, 2:30-3:45 PM</span></p>
+                            <p><strong>Tue</strong><span>CHEM 150, 11:30 AM-12:45 PM</span></p>
+                            <p><strong>Wed</strong><span>Work, 8:30-10:00 AM</span></p>
+                            <p><strong>Thu</strong><span>CHEM 150L, 4:30-5:00 PM</span></p>
                         </div>
                     </div>
                 </article>
 
-                <article id="panel-courses" class="feature-panel" role="tabpanel" aria-labelledby="tab-courses" data-landing-panel="courses" hidden>
+                <article id="panel-tasks" class="feature-panel" role="tabpanel" aria-labelledby="tab-tasks" data-landing-panel="tasks" hidden>
                     <div class="feature-copy">
-                        <h3>Course planning stays connected to the week.</h3>
-                        <p>Emory students can search Atlas data, compare sections, build a schedule preview, and track seat openings alongside the rest of their Nest workspace.</p>
-                        <a href="/courses">Open courses <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
+                        <h3>Tasks stay organized by list, deadline, and rhythm.</h3>
+                        <p>Build school and personal lists, add deadlines, mark priorities, repeat recurring work, and keep completed items available without crowding the active plan.</p>
+                        <a href="/tasks">Open tasks <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
                     </div>
-                    <div class="product-mockup landing-app-demo landing-app-demo-courses" aria-hidden="true">
-                        <div class="demo-navbar">
-                            <div class="demo-nav-left">
-                                <span class="material-symbols-outlined demo-mobile-menu">menu</span>
-                                <img src="{{ url_for('static', filename='apple-touch-icon.png') }}" alt="" width="32" height="32" decoding="async">
-                                <strong>Nest.APStudy</strong>
-                            </div>
-                            <div class="demo-nav-right"><span>Cmd K</span><i></i></div>
-                        </div>
-                        <div class="demo-shell">
-                            <aside class="demo-sidebar">
-                                <span><span class="material-symbols-outlined">grid_view</span>Dashboard</span>
-                                <small>My Nest</small>
-                                <span class="is-active"><span class="material-symbols-outlined">school</span>Courses</span>
-                                <span><span class="material-symbols-outlined">calendar_today</span>Calendar</span>
-                                <span><span class="material-symbols-outlined">folder</span>Files</span>
+                    <div class="product-mockup landing-app-demo landing-app-demo-tasks" aria-hidden="true">
+                        <div class="demo-task-app">
+                            <aside class="demo-task-rail">
+                                <button type="button">
+                                    <span class="material-symbols-outlined">task_alt</span>
+                                    <b>5</b>
+                                </button>
+                                <button class="is-active" type="button">
+                                    <span class="material-symbols-outlined">school</span>
+                                    <b>2</b>
+                                </button>
+                                <button type="button">
+                                    <span class="material-symbols-outlined">person</span>
+                                    <b>3</b>
+                                </button>
                             </aside>
-                            <section class="demo-course-app">
-                                <div class="demo-course-panel">
-                                    <h4>Courses</h4>
-                                    <p>2,668 sections in Fall 2026</p>
-                                    <div class="demo-course-toggle"><b>Search</b><span>Selected</span><span>Tracked</span></div>
-                                    <div class="demo-search"><span class="material-symbols-outlined">search</span>Search title, code, professor, CRN</div>
-                                    <article><strong>BIOL 141 - Sec 1</strong><button>Add</button><p>MW 10:00-11:15 | Open</p></article>
-                                    <article><strong>CS 171 - Sec 2</strong><button>Track</button><p>TTh 2:30-3:45 | Waitlist</p></article>
-                                </div>
-                                <div class="demo-course-schedule">
-                                    <header><h4>Fall 2026</h4><p>0 credits - Aug 26 - Dec 9</p></header>
-                                    <div class="demo-course-grid">
-                                        <span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span>
-                                        <b class="demo-course-block-a">BIOL</b>
-                                        <b class="demo-course-block-b">CS</b>
-                                        <b class="demo-course-block-c">WRIT</b>
+                            <section class="demo-task-surface">
+                                <header class="demo-task-head">
+                                    <div>
+                                        <h4>School Tasks</h4>
                                     </div>
-                                    <div class="demo-course-mobile-agenda">
-                                        <p><strong>Monday</strong><span>BIOL 141, 10:00</span></p>
-                                        <p><strong>Tuesday</strong><span>CS 171, 2:30</span></p>
-                                        <p><strong>Thursday</strong><span>CS 171, 2:30</span></p>
-                                    </div>
+                                </header>
+                                <div class="demo-task-add">
+                                    <span class="material-symbols-outlined">add</span>
+                                    <strong>Add task to School</strong>
                                 </div>
+                                <div class="demo-task-list-preview">
+                                    <article class="demo-task-row">
+                                        <span class="demo-task-check"></span>
+                                        <div>
+                                            <strong>Finish BIOL 141 lab draft</strong>
+                                            <p><span class="material-symbols-outlined">schedule</span>Tomorrow, 11:59 PM</p>
+                                        </div>
+                                        <b class="is-high"><span class="material-symbols-outlined">flag</span>High</b>
+                                    </article>
+                                    <article class="demo-task-row">
+                                        <span class="demo-task-check"></span>
+                                        <div>
+                                            <strong>Review chapter notes</strong>
+                                            <p><span class="material-symbols-outlined">schedule</span>Friday, 4:00 PM</p>
+                                        </div>
+                                    </article>
+                                </div>
+                                <section class="demo-task-completed">
+                                    <button type="button">
+                                        <span class="material-symbols-outlined">expand_more</span>
+                                        <strong>Completed</strong>
+                                        <b>2</b>
+                                    </button>
+                                    <p><span class="demo-task-check is-checked"><span class="material-symbols-outlined" aria-hidden="true">check</span></span>Upload worksheet scan</p>
+                                    <p><span class="demo-task-check is-checked"><span class="material-symbols-outlined" aria-hidden="true">check</span></span>Email study group</p>
+                                </section>
                             </section>
                         </div>
                     </div>
@@ -290,40 +347,26 @@
                         <a href="/notes">Open notes <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
                     </div>
                     <div class="product-mockup landing-app-demo landing-app-demo-workspace" aria-hidden="true">
-                        <div class="demo-navbar">
-                            <div class="demo-nav-left">
-                                <span class="material-symbols-outlined demo-mobile-menu">menu</span>
-                                <img src="{{ url_for('static', filename='apple-touch-icon.png') }}" alt="" width="32" height="32" decoding="async">
-                                <strong>Nest.APStudy</strong>
-                            </div>
-                            <div class="demo-nav-right"><span>Cmd K</span><i></i></div>
-                        </div>
-                        <div class="demo-shell">
-                            <aside class="demo-sidebar">
-                                <span><span class="material-symbols-outlined">grid_view</span>Dashboard</span>
-                                <small>My Nest</small>
-                                <span class="is-active"><span class="material-symbols-outlined">folder</span>Files</span>
-                                <span><span class="material-symbols-outlined">article</span>Notes</span>
-                                <span><span class="material-symbols-outlined">chat_bubble</span>Chat</span>
-                            </aside>
-                            <section class="demo-workspace-grid">
-                                <article class="demo-notes-surface">
-                                    <header><h4>Notes</h4><button>New Note</button></header>
-                                    <p><strong>Week 6 outline</strong><span>Research methods and review questions</span></p>
-                                    <p><strong>Exam review</strong><span>Updated Jun 3, 2026</span></p>
-                                </article>
-                                <article class="demo-files-surface">
-                                    <header><h4>File manager</h4><button>New</button></header>
-                                    <p><span class="material-symbols-outlined">folder</span><strong>Lab reports</strong></p>
-                                    <p><span class="material-symbols-outlined">picture_as_pdf</span><strong>Study guide.pdf</strong></p>
-                                </article>
-                                <article class="demo-chat-surface">
-                                    <header><h4># Nest Announcements</h4><span>0 active</span></header>
-                                    <p><strong>UrbanPanda</strong><span>Shared a course planning note.</span></p>
-                                    <footer><span>Message #chat</span><span class="material-symbols-outlined">send</span></footer>
-                                </article>
-                            </section>
-                        </div>
+                        <section class="demo-workspace-grid">
+                            <article class="demo-notes-surface">
+                                <header><h4>Notes</h4></header>
+                                <p><strong>BIOL 141 lecture notes</strong><span>Biomolecules, enzymes, and cell structure. So much fun!</span></p>
+                                <p><strong>Exam review folder</strong><span>3 notes updated this week</span></p>
+                            </article>
+                            <article class="demo-files-surface">
+                                <header><h4>File manager</h4></header>
+                                <p><span class="material-symbols-outlined">folder</span><strong>Lab reports</strong><small>4 files</small></p>
+                                <p><span class="material-symbols-outlined">picture_as_pdf</span><strong>Study guide.pdf</strong></p>
+                                <p><span class="material-symbols-outlined">picture_as_pdf</span><strong>Course syllabus.pdf</strong></p>
+                            </article>
+                            <article class="demo-chat-surface">
+                                <header><h4>Chat</h4></header>
+                                <div class="demo-chat-channels">
+                                    <p><span class="demo-channel-symbol">#</span><strong>Nest Chat</strong><small>Chat Directly to Discord</small></p>
+                                    <p><span class="demo-channel-symbol">U</span><strong>Your University</strong><small>University Chat Channel</small></p>
+                                </div>
+                            </article>
+                        </section>
                     </div>
                 </article>
             </div>
@@ -341,34 +384,27 @@
                 </ul>
             </div>
             <div class="course-visual course-planner-demo" data-reveal aria-hidden="true">
-                <aside class="course-planner-panel">
-                    <h3>Courses</h3>
-                    <p>2,668 sections in Fall 2026</p>
-                    <div class="course-planner-toggle"><b>Search</b><span>Selected</span><span>Tracked</span></div>
-                    <div class="course-search-row"><span class="material-symbols-outlined">search</span><b>Search title, code, professor, CRN</b></div>
-                    <article><strong>BIOL 141 - Sec 1</strong><span>Open</span><p>MW 10:00-11:15 | Science Center</p></article>
-                    <article><strong>CS 171 - Sec 2</strong><span>Track</span><p>TTh 2:30-3:45 | Math &amp; Science</p></article>
-                </aside>
-                <div class="course-planner-schedule">
-                    <header>
-                        <div>
-                            <h3>Fall 2026</h3>
-                            <p>Aug 26, 2026 - Dec 9, 2026</p>
-                        </div>
-                        <span>0 credits</span>
-                    </header>
-                    <div class="course-visual-grid">
-                        <span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span>
-                        <b class="course-block course-block-a">BIOL</b>
-                        <b class="course-block course-block-b">CS</b>
-                        <b class="course-block course-block-c">WRIT</b>
+                <section class="course-detail-hero">
+                    <span class="course-detail-kicker">Fall 2026 - BIOL 141</span>
+                    <h3>Foundations of Modern Biol I</h3>
+                    <p class="course-detail-term">Aug 26, 2026 - Dec 9, 2026</p>
+                    <div class="course-detail-chips">
+                        <span>3 credits</span>
+                        <span>7 sections</span>
                     </div>
-                    <div class="course-planner-mobile">
-                        <p><strong>Monday</strong><span>BIOL 141, 10:00</span></p>
-                        <p><strong>Tuesday</strong><span>CS 171, 2:30</span></p>
-                        <p><strong>Friday</strong><span>WRIT 101, 11:30</span></p>
+                    <p class="course-detail-description">Major topics include: biomolecules, cell structure and function, energy metabolism, and cell reproduction. Fulfills biology major and pre-health requirements.</p>
+                    <div class="course-detail-stats">
+                        <span><strong>3</strong> Open</span>
+                        <span><strong>2</strong> Closed</span>
+                        <span><strong>2</strong> Waitlist</span>
                     </div>
-                </div>
+                </section>
+                <section class="course-section-preview" aria-label="BIOL 141 representative sections">
+                    <article><strong>Section 1</strong><span>Open</span><p>CRN 1655 <br> MW 8:30-9:45a <br> Professor A. Stark</p></article>
+                    <article><strong>Section 2</strong><span>Open</span><p>CRN 1656 <br> TTh 10-11:15a <br> Professor S. Rogers</p></article>
+                    <article><strong>Section 3</strong><span>Closed</span><p>CRN 1657 <br> TTh 11:30a-12:45p <br> Professor D. Blake</p></article>
+                    <article><strong>Section 4</strong><span>Open</span><p>CRN 1658 <br> TThF 9-9:50a <br> Professor C. Barton</p></article>
+                </section>
             </div>
         </section>
 
@@ -405,7 +441,7 @@
             <div class="landing-section-heading" data-reveal>
                 <p class="landing-eyebrow">Trust and control</p>
                 <h2 id="trust-title">Private by default, practical by design.</h2>
-                <p>Nest uses authenticated routes for the app, keeps account controls in settings, and surfaces legal and support links in the shared footer.</p>
+                <p>Nest uses authenticated routes for the app, keeps account controls in settings, and protects your data.</p>
             </div>
             <div class="trust-row" data-reveal>
                 <span><span class="material-symbols-outlined" aria-hidden="true">lock</span> Authenticated app access</span>
@@ -416,7 +452,7 @@
 
         <section class="landing-final-cta" aria-labelledby="final-cta-title" data-reveal>
             <p class="landing-eyebrow">Ready when you are</p>
-            <h2 id="final-cta-title">Open the workspace and get your school day in order.</h2>
+            <h2 id="final-cta-title">Start building your workspace today.</h2>
             <a class="landing-primary-action" href="{{ landing_cta_href }}">
                 <span>{{ landing_cta_label }}</span>
                 <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>

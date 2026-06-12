@@ -56,6 +56,28 @@ class CalendarStoreTestCase(unittest.TestCase):
         store.delete_calendar_row("user_events", "event-1")
         self.assertEqual(store.count_calendar_rows("user_events"), 0)
 
+    def test_appwrite_system_metadata_is_ignored(self):
+        created = store.create_calendar_row(
+            "calendar_cache",
+            row_id="cache-1",
+            data={
+                "$id": "cache-1",
+                "$sequence": 42,
+                "$createdAt": "2026-05-18T00:00:00Z",
+                "$updatedAt": "2026-05-18T00:00:00Z",
+                "$permissions": [],
+                "user_id": "user-1",
+                "feed_url": "https://example.test/feed.ics",
+                "feed_url_hash": "hash",
+                "event_uid": "uid-1",
+                "event_title": "Assignment",
+            },
+        )
+
+        self.assertEqual(created["$id"], "cache-1")
+        self.assertNotIn("$sequence", created)
+        self.assertEqual(created["event_title"], "Assignment")
+
     def test_unique_constraints_match_calendar_contracts(self):
         payload = {
             "user_id": "user-1",
