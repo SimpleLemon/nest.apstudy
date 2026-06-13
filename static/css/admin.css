@@ -27,7 +27,6 @@ body.admin-page {
 .admin-sidebar {
     position: fixed;
     inset: 0 auto 0 0;
-    width: 240px;
     background: var(--color-shell-bg, var(--admin-panel));
     border-right: 1px solid var(--color-shell-border, var(--admin-border));
     display: flex;
@@ -759,6 +758,10 @@ body.admin-page {
 
 .admin-ring[data-ring="memory"] .admin-ring-progress {
     stroke: var(--color-tertiary, #f2a900);
+}
+
+.admin-ring[data-ring="storage"] .admin-ring-progress {
+    stroke: var(--color-secondary, #5ca6ff);
 }
 
 .admin-ring-value {

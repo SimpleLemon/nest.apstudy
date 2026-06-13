@@ -60,7 +60,7 @@
                         <th>Onboarding</th>
                         <th>Emory</th>
                         <th>Created</th>
-                        <th>Last Login</th>
+                        <th>Last Opened Website</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -81,7 +81,7 @@
                             </td>
                             <td data-label="Emory">{{ "Yes" if user.emory_student else "No" }}</td>
                             <td data-label="Created">{{ user.created_at or "--" }}</td>
-                            <td data-label="Last Login">{{ user.last_login or "--" }}</td>
+                            <td data-label="Last Opened Website">{{ user.last_login or "--" }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

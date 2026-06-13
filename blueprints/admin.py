@@ -59,6 +59,7 @@ SECRET_TEXT_RE = re.compile(r"((?:[?&]|\b)(?:secret|key|token|password)=)[^&\s]+
 SCHEDULER_ENV_PATH = "/var/www/nest.apstudy.org/.env"
 SCHEDULER_SERVICE_NAME = "nest"
 SCHEDULER_COMMAND_TIMEOUT_SECONDS = 20
+SYSTEM_STORAGE_LIMIT_GB = 150
 SCHEDULER_EXECUTABLE_FALLBACKS = {
     "sed": ("/usr/bin/sed", "/bin/sed"),
     "systemctl": ("/usr/bin/systemctl", "/bin/systemctl"),
@@ -198,6 +199,9 @@ def _system_status():
         "mem_percent": None,
         "mem_used_gb": None,
         "mem_total_gb": None,
+        "storage_percent": None,
+        "storage_used_gb": None,
+        "storage_total_gb": SYSTEM_STORAGE_LIMIT_GB,
     }
     try:
         from services.scheduler import scheduler_status
@@ -221,6 +225,13 @@ def _system_status():
         status["mem_percent"] = round(memory.percent, 1)
         status["mem_used_gb"] = round(memory.used / (1024**3), 1)
         status["mem_total_gb"] = round(memory.total / (1024**3), 1)
+    except Exception:
+        pass
+    try:
+        disk = shutil.disk_usage("/")
+        storage_used_gb = disk.used / (1024**3)
+        status["storage_used_gb"] = round(storage_used_gb, 1)
+        status["storage_percent"] = round((storage_used_gb / SYSTEM_STORAGE_LIMIT_GB) * 100, 1)
     except Exception:
         pass
     return status

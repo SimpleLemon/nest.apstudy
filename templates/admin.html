@@ -37,6 +37,9 @@
         {% set mem_percent = system_status.get("mem_percent") %}
         {% set mem_used = system_status.get("mem_used_gb") %}
         {% set mem_total = system_status.get("mem_total_gb") %}
+        {% set storage_percent = system_status.get("storage_percent") %}
+        {% set storage_used = system_status.get("storage_used_gb") %}
+        {% set storage_total = system_status.get("storage_total_gb") %}
         {% set cpu_physical = system_status.get("cpu_physical") %}
         {% set cpu_logical = system_status.get("cpu_logical") %}
         {% set scheduler_jobs = system_status.get("jobs") or [] %}
@@ -93,6 +96,18 @@
                         <span class="admin-ring-label">Memory</span>
                     </div>
                 </div>
+                <div class="admin-ring" data-ring="storage" role="img" aria-label="Storage usage" style="--progress: {{ storage_percent if storage_percent is not none else 0 }};">
+                    <svg viewBox="0 0 120 120" class="admin-ring-svg" aria-hidden="true">
+                        <circle class="admin-ring-track" cx="60" cy="60" r="54"></circle>
+                        <circle class="admin-ring-progress" cx="60" cy="60" r="54"></circle>
+                    </svg>
+                    <div class="admin-ring-value">
+                        <span class="admin-ring-number" data-role="storage-percent">
+                            {% if storage_percent is not none %}{{ "%.1f"|format(storage_percent) }}%{% else %}--{% endif %}
+                        </span>
+                        <span class="admin-ring-label">Storage</span>
+                    </div>
+                </div>
             </div>
             <div class="admin-system-footer">
                 <div class="admin-system-stat">
@@ -101,6 +116,15 @@
                         <span data-role="mem-used">{% if mem_used is not none %}{{ "%.1f"|format(mem_used) }}{% else %}--{% endif %}</span>
                         /
                         <span data-role="mem-total">{% if mem_total is not none %}{{ "%.1f"|format(mem_total) }}{% else %}--{% endif %}</span>
+                        GB
+                    </span>
+                </div>
+                <div class="admin-system-stat">
+                    <span class="admin-system-stat-label">Storage Used</span>
+                    <span class="admin-system-stat-value">
+                        <span data-role="storage-used">{% if storage_used is not none %}{{ "%.1f"|format(storage_used) }}{% else %}--{% endif %}</span>
+                        /
+                        <span data-role="storage-total">{% if storage_total is not none %}{{ "%.0f"|format(storage_total) }}{% else %}150{% endif %}</span>
                         GB
                     </span>
                 </div>
@@ -190,8 +214,7 @@
             const schedulerButtons = Array.from(document.querySelectorAll("[data-scheduler-action]"));
             const refreshMs = 15000;
             let schedulerRequestPending = false;
-            let currentSchedulerEnabled = {{ "true" if scheduler_enabled else "false" }};
-
+            let currentSchedulerEnabled = "{{ 'true' if scheduler_enabled else 'false' }}" === "true";
             const clampPercent = (value) => Math.max(0, Math.min(100, value));
             const toNumber = (value) => (typeof value === "number" && !Number.isNaN(value) ? value : null);
             const formatPercent = (value) => (value === null ? "--" : `${value.toFixed(1)}%`);
@@ -237,16 +260,21 @@
                 if (!data) return;
                 const cpu = toNumber(data.cpu_percent);
                 const mem = toNumber(data.mem_percent);
+                const storage = toNumber(data.storage_percent);
                 const schedulerEnabled = Boolean(data.scheduler_enabled);
                 currentSchedulerEnabled = schedulerEnabled;
                 setText('[data-role="cpu-percent"]', formatPercent(cpu));
                 setText('[data-role="mem-percent"]', formatPercent(mem));
+                setText('[data-role="storage-percent"]', formatPercent(storage));
                 setProgress('[data-ring="cpu"]', cpu);
                 setProgress('[data-ring="memory"]', mem);
+                setProgress('[data-ring="storage"]', storage);
                 setText('[data-role="os"]', data.os_pretty || "--");
                 setText('[data-role="cpu-cores"]', data.cpu_physical && data.cpu_logical ? `${data.cpu_physical}C / ${data.cpu_logical}T` : (data.cpu_logical ? `${data.cpu_logical}T` : "--"));
                 setText('[data-role="mem-used"]', formatGB(toNumber(data.mem_used_gb)));
                 setText('[data-role="mem-total"]', formatGB(toNumber(data.mem_total_gb)));
+                setText('[data-role="storage-used"]', formatGB(toNumber(data.storage_used_gb)));
+                setText('[data-role="storage-total"]', formatGB(toNumber(data.storage_total_gb)));
                 setText('[data-role="scheduler-enabled"]', formatBool(schedulerEnabled, "Enabled", "Disabled"));
                 setText('[data-role="scheduler-running"]', formatBool(data.scheduler_running, "Running", "Stopped"));
                 setText('[data-role="scheduler-lock"]', formatBool(data.scheduler_lock_acquired, "Held", "Open"));
