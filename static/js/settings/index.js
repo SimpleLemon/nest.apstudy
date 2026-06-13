@@ -1,6 +1,12 @@
 /* settings.js
- * Single-page settings UI with hash navigation and Appwrite-backed saves.
+ * Single-page settings UI with hash navigation and Flask-backed saves.
  */
+
+(function registerSettingsIndex(global) {
+if (global.APStudySettingsIndexLoaded) {
+  return;
+}
+global.APStudySettingsIndexLoaded = true;
 
 const SETTINGS_STATE = {
   account: null,
@@ -43,6 +49,7 @@ const SETTINGS_ENDPOINTS = {
   preferences: '/settings/api/interface-preferences',
   exportData: '/settings/api/export',
   deleteAccount: '/settings/api/account/delete',
+  passwordRecovery: '/settings/api/account/recovery',
   universities: '/api/universities',
 };
 
@@ -320,12 +327,9 @@ function bindUnsavedChangesWarning() {
 
 async function bootstrapSettingsPage() {
   try {
-    const [accountResponse, bootstrapResponse] = await Promise.all([
-      getCurrentAccount(),
-      fetchJson(SETTINGS_ENDPOINTS.bootstrap),
-    ]);
+    const bootstrapResponse = await fetchJson(SETTINGS_ENDPOINTS.bootstrap);
 
-    SETTINGS_STATE.account = accountResponse;
+    SETTINGS_STATE.account = bootstrapResponse.account || bootstrapResponse.profile || null;
     SETTINGS_STATE.profile = bootstrapResponse.profile || null;
     SETTINGS_STATE.settings = bootstrapResponse.settings || null;
     SETTINGS_STATE.storageUsageBytes = Number(bootstrapResponse.storage_usage_bytes || 0);
@@ -347,18 +351,6 @@ async function bootstrapSettingsPage() {
     console.error(error);
     showToast(error.message || 'Unable to load settings right now.', 'error');
     syncHashOnLoad();
-  }
-}
-
-async function getCurrentAccount() {
-  if (!window.account || typeof account.get !== 'function') {
-    return null;
-  }
-  try {
-    return await account.get();
-  } catch (error) {
-    console.error('Failed to load Appwrite account', error);
-    return null;
   }
 }
 
@@ -488,3 +480,4 @@ if (document.readyState === 'loading') {
 } else {
   initializeSettingsPage();
 }
+})(window);

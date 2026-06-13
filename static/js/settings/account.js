@@ -12,19 +12,17 @@
     } = callbacks;
 
     async function handlePasswordReset() {
-      if (!global.account || typeof account.createRecovery !== 'function') {
-        showToast('Password recovery is unavailable in this browser.', 'error');
-        return;
-      }
-
-      const email = (state.account && state.account.email) || elements.email?.value || '';
+      const email = (state.profile && state.profile.email)
+        || (state.account && state.account.email)
+        || elements.email?.value
+        || '';
       if (!email) {
         showToast('Email address is required for password recovery.', 'error');
         return;
       }
 
       try {
-        await account.createRecovery(email, `${global.location.origin}/login`);
+        await fetchJson(endpoints.passwordRecovery, { method: 'POST' });
         showToast('Password reset email sent.', 'success');
       } catch (error) {
         console.error(error);

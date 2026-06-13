@@ -233,6 +233,9 @@ function shouldEnforceAuth() {
 }
 
 async function ensureAppwriteSession() {
+    if (document.body?.dataset?.probeAppwriteSession !== "true") {
+        return;
+    }
     if (!shouldEnforceAuth()) {
         return;
     }

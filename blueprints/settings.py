@@ -24,6 +24,7 @@ from appwrite.input_file import InputFile
 from appwrite.permission import Permission
 from appwrite.query import Query
 from appwrite.role import Role
+from appwrite.services.account import Account
 from appwrite.services.storage import Storage
 from appwrite.services.users import Users
 from appwrite_client import client as appwrite_client
@@ -1611,6 +1612,23 @@ def export_user_data():
         "notes_count": storage_summary.get("notes_count", 0),
     }
     return jsonify(export_payload)
+
+
+@settings_bp.route("/api/account/recovery", methods=["POST"])
+@login_required
+def request_account_recovery():
+    """Send the current user an Appwrite Auth password recovery email."""
+    email = (current_user.email or "").strip()
+    if not email:
+        return jsonify({"error": "Email address is required for password recovery."}), 400
+
+    try:
+        Account(appwrite_client).create_recovery(email, url_for("auth.login", _external=True))
+    except AppwriteException:
+        logger.exception("Failed to start password recovery")
+        return jsonify({"error": "Unable to start password recovery."}), 500
+
+    return jsonify({"status": "ok"})
 
 
 @settings_bp.route("/api/account/delete", methods=["POST"])
