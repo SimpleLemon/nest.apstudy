@@ -7,7 +7,7 @@ if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
 from appwrite_client import COLLECTIONS
-from appwrite_helpers import list_rows_all
+from appwrite_helpers import list_appwrite_rows_all as list_rows_all
 from services.calendar_store import CALENDAR_TABLES, init_calendar_store, upsert_calendar_row
 
 

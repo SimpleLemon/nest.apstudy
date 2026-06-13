@@ -5,6 +5,7 @@ from appwrite.exception import AppwriteException
 from appwrite.query import Query
 
 from appwrite_client import tablesdb, DATABASE_ID
+from services import database as sqlite_database
 
 
 logger = logging.getLogger(__name__)
@@ -149,14 +150,15 @@ class AppwriteRepository:
         )
 
 
-DEFAULT_REPOSITORY = AppwriteRepository(tablesdb, DATABASE_ID)
+APPWRITE_REPOSITORY = AppwriteRepository(tablesdb, DATABASE_ID)
+DEFAULT_REPOSITORY = APPWRITE_REPOSITORY
 
 
 def list_rows_safe(table_id, queries=None):
     try:
-        return DEFAULT_REPOSITORY.list_rows(table_id, queries)
-    except AppwriteException as exc:
-        logger.exception("Appwrite list_rows failed: %s", table_id)
+        return sqlite_database.list_rows(table_id, queries)
+    except AppwriteException:
+        logger.exception("SQLite list_rows failed: %s", table_id)
         raise
 
 
@@ -178,33 +180,33 @@ def list_rows_all(table_id, queries=None, limit=DEFAULT_LIMIT):
 
 def get_row_safe(table_id, row_id, *, allow_missing=False):
     try:
-        return DEFAULT_REPOSITORY.get_row(table_id, row_id, allow_missing=allow_missing)
-    except AppwriteException as exc:
-        logger.exception("Appwrite get_row failed: %s", table_id)
+        return sqlite_database.get_row(table_id, row_id, allow_missing=allow_missing)
+    except AppwriteException:
+        logger.exception("SQLite get_row failed: %s", table_id)
         raise
 
 
 def create_row_safe(table_id, row_id, data, permissions=None):
     try:
-        return DEFAULT_REPOSITORY.create_row(table_id, row_id, data, permissions)
-    except AppwriteException as exc:
-        logger.exception("Appwrite create_row failed: %s", table_id)
+        return sqlite_database.create_row(table_id, row_id=row_id, data=data)
+    except AppwriteException:
+        logger.exception("SQLite create_row failed: %s", table_id)
         raise
 
 
 def update_row_safe(table_id, row_id, data, permissions=None):
     try:
-        return DEFAULT_REPOSITORY.update_row(table_id, row_id, data, permissions)
-    except AppwriteException as exc:
-        logger.exception("Appwrite update_row failed: %s", table_id)
+        return sqlite_database.update_row(table_id, row_id, data=data)
+    except AppwriteException:
+        logger.exception("SQLite update_row failed: %s", table_id)
         raise
 
 
 def delete_row_safe(table_id, row_id):
     try:
-        DEFAULT_REPOSITORY.delete_row(table_id, row_id)
-    except AppwriteException as exc:
-        logger.exception("Appwrite delete_row failed: %s", table_id)
+        sqlite_database.delete_row(table_id, row_id)
+    except AppwriteException:
+        logger.exception("SQLite delete_row failed: %s", table_id)
         raise
 
 
@@ -223,3 +225,27 @@ def first_row(table_id, queries=None):
     response = list_rows_safe(table_id, query_list)
     rows = response.get("rows", [])
     return rows[0] if rows else None
+
+
+def list_appwrite_rows_safe(table_id, queries=None):
+    try:
+        return APPWRITE_REPOSITORY.list_rows(table_id, queries)
+    except AppwriteException:
+        logger.exception("Appwrite list_rows failed: %s", table_id)
+        raise
+
+
+def list_appwrite_rows_all(table_id, queries=None, limit=DEFAULT_LIMIT):
+    rows = []
+    offset = 0
+    while True:
+        query_list = list(queries or [])
+        query_list.append(Query.limit(limit))
+        query_list.append(Query.offset(offset))
+        response = list_appwrite_rows_safe(table_id, query_list)
+        batch = response.get("rows", [])
+        rows.extend(batch)
+        if len(batch) < limit:
+            break
+        offset += limit
+    return rows

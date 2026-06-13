@@ -474,3 +474,85 @@ def delete_calendar_rows_by_user(user_id):
     except sqlite3.Error as exc:
         raise AppwriteException(str(exc)) from exc
     return counts
+
+
+# Shared nest.sqlite3-backed implementations. These override the legacy
+# calendar.sqlite3 helpers above while preserving the public calendar_store API.
+from services import database as _nest_database
+
+
+def calendar_db_path(path=None):
+    if path:
+        return path
+    configured = os.environ.get("DATABASE_PATH") or os.environ.get("NEST_DATABASE_PATH")
+    if configured:
+        return configured
+    try:
+        configured = current_app.config.get("DATABASE_PATH")
+    except RuntimeError:
+        configured = None
+    if configured:
+        return configured
+    legacy = os.environ.get("CALENDAR_SQLITE_PATH") or os.environ.get("CALENDAR_DB_PATH")
+    if legacy:
+        return legacy
+    return _nest_database.database_path()
+
+
+@contextmanager
+def calendar_connection(path=None):
+    with _nest_database.db_connection(calendar_db_path(path)) as conn:
+        yield conn
+
+
+def init_calendar_store(path=None):
+    _nest_database.init_db(path=calendar_db_path(path))
+
+
+def list_calendar_rows_safe(table_id, queries=None):
+    _validate_table(table_id)
+    return _nest_database.list_rows(table_id, queries, path=calendar_db_path())
+
+
+def list_calendar_rows_all(table_id, queries=None, limit=100):
+    _validate_table(table_id)
+    return _nest_database.list_rows_all(table_id, queries, limit=limit, path=calendar_db_path())
+
+
+def first_calendar_row(table_id, queries=None):
+    _validate_table(table_id)
+    return _nest_database.first_row(table_id, queries, path=calendar_db_path())
+
+
+def get_calendar_row(table_id, row_id, *, allow_missing=False):
+    _validate_table(table_id)
+    return _nest_database.get_row(table_id, row_id, allow_missing=allow_missing, path=calendar_db_path())
+
+
+def create_calendar_row(table_id, row_id=None, data=None):
+    _validate_table(table_id)
+    return _nest_database.create_row(table_id, row_id=row_id, data=data, path=calendar_db_path())
+
+
+def upsert_calendar_row(table_id, row_id=None, data=None):
+    _validate_table(table_id)
+    return _nest_database.upsert_row(table_id, row_id=row_id, data=data, path=calendar_db_path())
+
+
+def update_calendar_row(table_id, row_id, data=None):
+    _validate_table(table_id)
+    return _nest_database.update_row(table_id, row_id, data=data, path=calendar_db_path())
+
+
+def delete_calendar_row(table_id, row_id):
+    _validate_table(table_id)
+    return _nest_database.delete_row(table_id, row_id, path=calendar_db_path())
+
+
+def count_calendar_rows(table_id, queries=None):
+    _validate_table(table_id)
+    return _nest_database.count_rows(table_id, queries, path=calendar_db_path())
+
+
+def delete_calendar_rows_by_user(user_id):
+    return _nest_database.delete_rows_by_user(CALENDAR_TABLES, user_id, path=calendar_db_path())
