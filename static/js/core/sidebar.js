@@ -6,6 +6,10 @@
  * - Tooltips on icon hover (collapsed state only)
  */
 
+(() => {
+if (window.APStudySidebarLoaded) return;
+window.APStudySidebarLoaded = true;
+
 // Material Symbols used by dashboard tiles, plus shell controls.
 const SIDEBAR_ICONS = {
   layoutDashboard: materialSymbol("grid_view"),
@@ -275,7 +279,7 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
   }
 
   // Load per-session state first. On a fresh login, localStorage is cleared,
-  // so the server-rendered Appwrite preference becomes the default.
+  // so the server-rendered preference becomes the default.
   const storedCollapsed = localStorage.getItem('sidebar-collapsed');
   const isCollapsed = storedCollapsed === null
     ? normalizeSidebarDefault(sidebarDefault) === 'collapsed'
@@ -414,3 +418,4 @@ if (document.readyState === 'loading') {
 } else {
   renderSidebar();
 }
+})();

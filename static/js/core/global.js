@@ -233,21 +233,9 @@ function shouldEnforceAuth() {
 }
 
 async function ensureAppwriteSession() {
-    if (document.body?.dataset?.probeAppwriteSession !== "true") {
-        return;
-    }
-    if (!shouldEnforceAuth()) {
-        return;
-    }
-    if (!window.account || typeof account.get !== "function") {
-        return;
-    }
-
-    try {
-        await account.get();
-    } catch (error) {
-        console.debug("Appwrite client session is unavailable; continuing with Flask session.");
-    }
+    if (document.body?.dataset?.probeAppwriteSession !== "true" || !shouldEnforceAuth()) return;
+    if (typeof window.APStudyAppwriteSessionProbe !== "function") return;
+    await window.APStudyAppwriteSessionProbe();
 }
 
 async function runLogoutFlow() {

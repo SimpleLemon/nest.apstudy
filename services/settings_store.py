@@ -35,6 +35,7 @@ def default_settings(user_id):
         "timezone": "",
         "dashboard_layout_json": "[]",
         "dashboard_checklist_hidden_signature": "",
+        "notes_page_setup_json": "{}",
         "created_at": now,
         "updated_at": now,
     }

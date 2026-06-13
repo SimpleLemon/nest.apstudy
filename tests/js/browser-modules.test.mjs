@@ -390,6 +390,7 @@ test("files page keeps upload limits, modal elements, and share/delete endpoints
 });
 
 test("settings page keeps account, theme, calendar, and destructive endpoints centralized", async () => {
+    const template = await sourceFor("templates/settings.html");
     const source = [
         await sourceFor("static/js/settings/index.js"),
         await sourceFor("static/js/settings/utils.js"),
@@ -407,10 +408,14 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
         "/settings/api/interface-preferences",
         "/settings/api/export",
         "/settings/api/account/delete",
+        "/settings/api/account/recovery",
     ]) {
         assert.match(source, new RegExp(endpoint.replaceAll("/", "\\/")));
     }
 
+    assert.doesNotMatch(template, /appwrite@|js\/core\/appwrite\.js/);
+    assert.match(template, /settings-sqlite-20260613-1/);
+    assert.match(template, /data-probe-appwrite-session="false"/);
     assert.match(source, /const SETTINGS_SECTION_IDS = \['account', 'data', 'preferences'\]/);
     assert.match(source, /const SETTINGS_INTERFACE_THEMES = \[/);
     assert.match(source, /'nest-light'/);
@@ -489,7 +494,8 @@ test("global chrome keeps pending mutation, confirmation, loader, date, and auth
     assert.match(source, /function clearClientState\(options = \{\}\)/);
     assert.match(source, /function markClientLoggedOut\(\)/);
     assert.match(source, /function shouldEnforceAuth\(\)/);
-    assert.match(source, /Appwrite client session is unavailable; continuing with Flask session/);
+    assert.match(source, /APStudyAppwriteSessionProbe/);
+    assert.doesNotMatch(source, /account\.get\(/);
     assert.doesNotMatch(source, /window\.location\.replace\(`\$\{window\.location\.origin\}\/logout`\)/);
     assert.match(source, /account\.deleteSession\("current"\)/);
     assert.match(source, /clearClientState\(\{ includeCookies: false \}\)/);
