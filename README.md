@@ -17,7 +17,7 @@
 
 ## Overview
 
-Nest.APStudy is a web platform for student course planning and productivity, combining local Emory course data with Appwrite database-backed user accounts, dashboards, calendars, tasks, notes, chat, file sharing, and related admin tools.
+Nest.APStudy is a web platform for student course planning and productivity, combining local Emory course data with user accounts, dashboards, calendars, tasks, notes, chat, file sharing, and related admin tools. User data is stored in VPS-hosted SQLite databases, with Appwrite handling authentication and file storage.
 
 > **Note:** This project is under active development. Some features depend on external Appwrite, OAuth, Discord, or calendar-feed configuration that is intentionally not committed.
 
@@ -38,13 +38,14 @@ Nest.APStudy is a web platform for student course planning and productivity, com
 | `static/css/` and `static/js/` | Frontend assets |
 | `Spring_2026/` and `Fall_2026/` | Local course data |
 | `services/` | Background and integration services |
-| `tests/` | Python and JavaScript tests |
+| `instance/` | SQLite databases (not committed — created on deploy) |
 
 ## Requirements
 
-- Python 3.11 or newer
+- Python 3.11+
 - Node.js and npm (for Tailwind and JavaScript tests)
-- Appwrite credentials (for live auth, storage, and database workflows)
+- Appwrite credentials (for auth and file storage)
+- SQLite 3.45+ (included with Python; CLI installed on VPS for backups)
 
 ## Setup & Deployment
 
@@ -83,6 +84,12 @@ Run the full test suite:
 npm test
 ```
 </details>
+
+## AI Disclosure
+
+This project is planned, designed, and directed by the developer. All architectural designs, features, and project direction were and are human-driven. AI tools acted as implementation agents:
+- GitHub Education Copilot: Used at the start of the project for basic implementation
+- OpenAI Codex: Structured database, created pages, and wrote code according to developer guidance
 
 ## License
 
