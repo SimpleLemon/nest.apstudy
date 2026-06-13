@@ -85,6 +85,7 @@ pnpm-debug.log*
 
 # AI assistant / agent local state
 .aider*
+.agents*
 .claude/
 .codex
 .codex/
@@ -128,3 +129,12 @@ logs/
 *.bak
 *.tmp
 *.temp
+
+# Local-only project files and automation
+.agents/
+.github/
+codex-attention-notifier
+docs/
+migrations/
+.scorecard.png
+setup_appwrite_db.py
