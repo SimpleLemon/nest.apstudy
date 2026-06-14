@@ -46,7 +46,7 @@
           <span class="sr-only">Other calendar link</span>
           <span class="settings-icon-input">
             <span class="material-symbols-outlined" aria-hidden="true">event</span>
-            <input data-other-calendar-url type="url" inputmode="url" autocomplete="off" placeholder="https://calendar.google.com/..." />
+            <input data-other-calendar-url name="other_calendar_url" type="url" inputmode="url" autocomplete="off" placeholder="https://calendar.google.com/..." />
           </span>
         </label>
         <button type="button" class="settings-calendar-remove" aria-label="Remove calendar link">

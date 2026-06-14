@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-{% set settings_assets_version = 'settings-sqlite-20260613-1' %}
+{% set settings_assets_version = 'settings-toast-20260614-1' %}
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -82,7 +82,7 @@
                                         <div class="settings-field settings-field-readonly">
                                             <span class="settings-field-label">User ID</span>
                                             <div class="settings-copy-field">
-                                                <input id="settings-user-id" type="text" readonly />
+                                                <input id="settings-user-id" name="user_id" type="text" readonly />
                                                 <button type="button" class="settings-copy-button" data-copy-target="settings-user-id" aria-label="Copy user ID">
                                                     <span class="material-symbols-outlined">content_copy</span>
                                                 </button>
@@ -91,7 +91,7 @@
                                         <div class="settings-field settings-field-readonly">
                                             <span class="settings-field-label">Username</span>
                                             <div class="settings-copy-field">
-                                                <input id="settings-username" type="text" readonly />
+                                                <input id="settings-username" name="username_display" type="text" readonly />
                                                 <button type="button" class="settings-copy-button" data-copy-target="settings-username" aria-label="Copy username">
                                                     <span class="material-symbols-outlined">content_copy</span>
                                                 </button>
@@ -99,12 +99,12 @@
                                         </div>
                                         <div class="settings-field settings-field-readonly">
                                             <span class="settings-field-label">Account Created</span>
-                                            <input id="settings-account-created-data" type="text" readonly />
+                                            <input id="settings-account-created-data" name="account_created" type="text" readonly />
                                         </div>
                                         <div class="settings-field settings-field-readonly">
                                             <span class="settings-field-label">Email (Private)</span>
                                             <div class="settings-copy-field">
-                                                <input id="settings-email" type="text" readonly />
+                                                <input id="settings-email" name="email_display" type="text" readonly />
                                                 <button type="button" class="settings-copy-button" data-copy-target="settings-email" aria-label="Copy email">
                                                     <span class="material-symbols-outlined">content_copy</span>
                                                 </button>
@@ -125,17 +125,17 @@
                                         <div class="settings-field-grid settings-field-grid-vertical">
                                             <label class="settings-field">
                                                 <span class="settings-field-label">Display Name</span>
-                                                <input id="settings-display-name" type="text" autocomplete="name" placeholder="Your name" />
+                                                <input id="settings-display-name" name="display_name" type="text" autocomplete="name" placeholder="Your name" />
                                             </label>
                                             <label class="settings-field">
                                                 <span class="settings-field-label">Username</span>
-                                                <input id="settings-username-input" type="text" autocomplete="off" placeholder="your-username" />
+                                                <input id="settings-username-input" name="username" type="text" autocomplete="off" placeholder="your-username" />
                                             </label>
                                             <div class="settings-field">
                                                 <span class="settings-field-label">Avatar</span>
                                                 <div class="settings-avatar-upload-control">
                                                     <button id="settings-avatar-upload-button" type="button" class="settings-button settings-button-secondary">Upload</button>
-                                                    <input id="settings-avatar-upload" class="sr-only" type="file" accept="image/png,image/jpeg,image/gif,image/webp" />
+                                                    <input id="settings-avatar-upload" name="avatar" class="sr-only" type="file" accept="image/png,image/jpeg,image/gif,image/webp" />
                                                 </div>
                                                 <span class="settings-help-text" id="settings-avatar-upload-status">JPG, PNG, GIF, or WebP. Max 10 MB.</span>
                                             </div>
@@ -143,21 +143,21 @@
                                                 <span class="settings-field-label">Banner Color</span>
                                                 <div id="settings-banner-swatch" class="settings-color-tile" style="--settings-banner-tile-color: {{ user.banner_color or '#fecae1' }};">
                                                     <span class="material-symbols-outlined" aria-hidden="true">edit</span>
-                                                    <input id="settings-banner-color-picker" type="color" value="{{ user.banner_color or '#fecae1' }}" aria-label="Choose banner color" />
+                                                    <input id="settings-banner-color-picker" name="banner_color" type="color" value="{{ user.banner_color or '#fecae1' }}" aria-label="Choose banner color" />
                                                 </div>
                                             </label>
                                             <label class="settings-field">
                                                 <span class="settings-field-label">School</span>
-                                                <input id="settings-school" type="text" autocomplete="organization" placeholder="Nest University" list="settings-university-options" />
+                                                <input id="settings-school" name="school" type="text" autocomplete="organization" placeholder="Nest University" list="settings-university-options" />
                                                 <datalist id="settings-university-options"></datalist>
                                             </label>
                                             <label class="settings-field">
                                                 <span class="settings-field-label">Graduation Year</span>
-                                                <input id="settings-graduation-year" type="text" inputmode="numeric" maxlength="4" />
+                                                <input id="settings-graduation-year" name="graduation_year" type="text" inputmode="numeric" maxlength="4" />
                                             </label>
                                             <label class="settings-field settings-field-wide">
                                                 <span class="settings-field-label">Major / Intended Major</span>
-                                                <input id="settings-major" type="text" autocomplete="off" placeholder="Computer Science" />
+                                                <input id="settings-major" name="major" type="text" autocomplete="off" placeholder="Computer Science" />
                                             </label>
                                         </div>
                                     </div>
@@ -229,7 +229,7 @@
                                     <span class="settings-help-text">Paste your Canvas ICS calendar feed URL.</span>
                                     <span class="settings-icon-input">
                                         <span class="material-symbols-outlined" aria-hidden="true">link</span>
-                                        <input id="settings-canvas-feed-url" type="url" inputmode="url" autocomplete="off" placeholder="https://canvas.emory.edu/feeds/calendars/..." />
+                                        <input id="settings-canvas-feed-url" name="canvas_ical_url" type="url" inputmode="url" autocomplete="off" placeholder="https://canvas.emory.edu/feeds/calendars/..." />
                                     </span>
                                 </label>
                                 <details class="settings-calendar-guide">
@@ -308,7 +308,7 @@
                                             <button type="button" class="settings-theme-choice theme-nest-light" data-theme="nest-light" data-theme-label="Nest (Light)" title="Nest (Light)" aria-pressed="false"></button>
                                             <button type="button" class="settings-theme-choice theme-system" data-theme="system-match" data-theme-label="System" title="System" aria-pressed="false"></button>
                                         </div>
-                                        <select id="settings-theme" class="sr-only" aria-hidden="true">
+                                        <select id="settings-theme" name="interface_theme" class="sr-only" aria-hidden="true">
                                             <option value="obsidian-dark">Obsidian Dark</option>
                                             <option value="nest-dark">Nest Dark</option>
                                             <option value="parchment-light">Parchment Light</option>
@@ -318,7 +318,7 @@
                                     </label>
                                     <label class="settings-field settings-field-column">
                                         <span class="settings-field-label">Sidebar Default</span>
-                                        <select id="settings-sidebar-default">
+                                        <select id="settings-sidebar-default" name="sidebar_default">
                                             <option value="expanded">Expanded</option>
                                             <option value="collapsed">Collapsed</option>
                                         </select>
@@ -381,7 +381,7 @@
                                 <div class="settings-field-grid settings-field-grid-two">
                                     <label class="settings-field">
                                         <span class="settings-field-label">Language</span>
-                                        <select id="settings-language">
+                                        <select id="settings-language" name="language">
                                             <option value="en">English</option>
                                             <option value="es">Spanish</option>
                                             <option value="fr">French</option>
@@ -391,7 +391,7 @@
                                     <div class="settings-field">
                                         <span class="settings-field-label">Timezone</span>
                                         <div class="settings-inline-field">
-                                            <input id="settings-timezone" type="text" placeholder="America/New_York" />
+                                            <input id="settings-timezone" name="timezone" type="text" placeholder="America/New_York" />
                                             <button id="settings-use-current-timezone" type="button" class="settings-button settings-button-secondary settings-button-inline">Use Current</button>
                                         </div>
                                     </div>
