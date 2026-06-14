@@ -36,9 +36,9 @@
     <script src="{{ url_for('static', filename='js/courses/controls.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/courses/index.js') }}" defer></script>
 </head>
-<global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
-<global class="thesidebar" data-user-emory-student="{{ user.emory_student }}" data-sidebar-default="{{ sidebar_default|default('expanded') }}"></global>
 <body class="courses-body bg-surface text-on-surface font-body min-h-screen antialiased selection:bg-primary/30 selection:text-primary-fixed">
+    <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
+    <global class="thesidebar" data-user-emory-student="{{ user.emory_student }}" data-sidebar-default="{{ sidebar_default|default('expanded') }}"></global>
     <main class="courses-main" aria-label="Emory courses planner">
         <aside class="courses-panel" aria-label="Course search and details">
             <section class="courses-panel-header">

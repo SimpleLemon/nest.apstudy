@@ -645,6 +645,9 @@ body.with-sidebar > footer {
     grid-row: 2;
     width: 100%;
     max-width: 100%;
+    min-width: 0;
+    margin-left: 0;
+    justify-self: stretch;
   }
   body.with-sidebar > global.thefooter,
   body.with-sidebar > footer {
