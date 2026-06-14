@@ -322,6 +322,11 @@ def _schedule_system_restart():
     )
 
 
+def _git_pull_already_up_to_date(completed):
+    output = f"{completed.stdout or ''}\n{completed.stderr or ''}".lower()
+    return "already up to date" in output or "already up-to-date" in output
+
+
 def _scheduler_command_label(command):
     if isinstance(command, (list, tuple)):
         return " ".join(str(part) for part in command)
@@ -1046,7 +1051,7 @@ def admin_system_git_pull():
     }
     try:
         completed = _run_system_git_pull()
-        restart_process = _schedule_system_restart()
+        restart_process = None if _git_pull_already_up_to_date(completed) else _schedule_system_restart()
     except subprocess.CalledProcessError as exc:
         message = _sanitize_admin_error(exc.stderr or exc.stdout or exc)
         _log_admin_action(
@@ -1081,7 +1086,12 @@ def admin_system_git_pull():
     _log_admin_action(
         "system_git_pull",
         "Nest repository",
-        metadata={**metadata, "result": "success", "restart_delay_seconds": SYSTEM_RESTART_DELAY_SECONDS},
+        metadata={
+            **metadata,
+            "result": "success",
+            "restart_scheduled": restart_process is not None,
+            "restart_delay_seconds": SYSTEM_RESTART_DELAY_SECONDS if restart_process else 0,
+        },
         color="green",
     )
     return jsonify({
@@ -1090,9 +1100,9 @@ def admin_system_git_pull():
         "stdout": stdout,
         "stderr": stderr,
         "returncode": completed.returncode,
-        "restart_scheduled": True,
-        "restart_delay_seconds": SYSTEM_RESTART_DELAY_SECONDS,
-        "restart_process_id": restart_process.pid,
+        "restart_scheduled": restart_process is not None,
+        "restart_delay_seconds": SYSTEM_RESTART_DELAY_SECONDS if restart_process else 0,
+        "restart_process_id": restart_process.pid if restart_process else None,
     })
 
 

@@ -325,8 +325,6 @@ class AdminSecurityTestCase(unittest.TestCase):
             stdout="Already up to date.\n",
             stderr="",
         )
-        restart_process = type("RestartProcess", (), {"pid": 4321})()
-
         with self.app.test_client() as client:
             self._login(client)
             response = client.post("/admin/system-git-pull", json={})
@@ -334,7 +332,7 @@ class AdminSecurityTestCase(unittest.TestCase):
             token = self._get_csrf_token(client, "/admin", patches)
             with patch.object(admin, "_resolve_scheduler_executable", side_effect=lambda name: f"/usr/bin/{name}"), \
                     patch.object(admin.subprocess, "run", return_value=git_completed) as run_command, \
-                    patch.object(admin.subprocess, "Popen", return_value=restart_process) as popen_command, \
+                    patch.object(admin.subprocess, "Popen") as popen_command, \
                     patch.object(admin, "_log_admin_action") as log_action:
                 git_response = client.post(
                     "/admin/system-git-pull",
@@ -358,6 +356,53 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertEqual(run_command.call_args.kwargs["env"]["GIT_SSH"], "/usr/bin/ssh")
         self.assertIn("/usr/bin", run_command.call_args.kwargs["env"]["PATH"])
         self.assertEqual(run_command.call_args.kwargs["timeout"], admin.SYSTEM_GIT_COMMAND_TIMEOUT_SECONDS)
+        popen_command.assert_not_called()
+        self.assertEqual(payload["restart_scheduled"], False)
+        self.assertEqual(payload["restart_delay_seconds"], 0)
+        self.assertIsNone(payload["restart_process_id"])
+        log_action.assert_called_once()
+        self.assertEqual(log_action.call_args.args[0], "system_git_pull")
+
+    def test_admin_git_pull_schedules_restart_when_updated(self):
+        metrics = {
+            "total_users": 0,
+            "emory_users": 0,
+            "non_emory_users": 0,
+            "pending_requests": 0,
+            "saved_courses": 0,
+            "active_course_tracks": 0,
+            "paused_course_tracks": 0,
+            "file_storage": {"formatted": "--", "file_count": 0, "avatar_count": 0, "error": None},
+        }
+        patches = [
+            patch.object(admin, "_admin_home_metrics", return_value=metrics),
+            patch.object(admin, "_system_status", return_value={}),
+            patch.object(admin, "_theme_preference", return_value=None),
+            patch.object(admin, "_pending_admin_request_count", return_value=0),
+        ]
+        git_completed = subprocess.CompletedProcess(
+            ["/usr/bin/git", "-C", admin.SYSTEM_GIT_REPO_PATH, "pull"],
+            0,
+            stdout="Updating abc123..def456\nFast-forward\n",
+            stderr="",
+        )
+        restart_process = type("RestartProcess", (), {"pid": 4321})()
+
+        with self.app.test_client() as client:
+            self._login(client)
+            token = self._get_csrf_token(client, "/admin", patches)
+            with patch.object(admin, "_resolve_scheduler_executable", side_effect=lambda name: f"/usr/bin/{name}"), \
+                    patch.object(admin.subprocess, "run", return_value=git_completed), \
+                    patch.object(admin.subprocess, "Popen", return_value=restart_process) as popen_command, \
+                    patch.object(admin, "_log_admin_action"):
+                git_response = client.post(
+                    "/admin/system-git-pull",
+                    json={},
+                    headers={"X-CSRFToken": token},
+                )
+
+        self.assertEqual(git_response.status_code, 200)
+        payload = git_response.get_json()
         self.assertEqual(
             popen_command.call_args.args[0],
             [
@@ -370,8 +415,6 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertEqual(payload["restart_scheduled"], True)
         self.assertEqual(payload["restart_delay_seconds"], admin.SYSTEM_RESTART_DELAY_SECONDS)
         self.assertEqual(payload["restart_process_id"], 4321)
-        log_action.assert_called_once()
-        self.assertEqual(log_action.call_args.args[0], "system_git_pull")
 
     def test_admin_scheduler_control_failure_is_sanitized_and_logged(self):
         metrics = {
