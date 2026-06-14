@@ -255,6 +255,7 @@ test("calendar and courses switch dense schedules to compact mobile agenda rende
 test("theme init normalizes theme aliases and persists pending settings safely", async () => {
     const source = await sourceFor("static/js/core/theme-init.js");
 
+    assert.match(source, /console-discord\.js/);
     assert.match(source, /var DARK_THEMES = \['obsidian-dark', 'nest-dark'\]/);
     assert.match(source, /return 'obsidian-dark'/);
     assert.match(source, /return 'parchment-light'/);
@@ -263,6 +264,16 @@ test("theme init normalizes theme aliases and persists pending settings safely",
     assert.match(source, /new CustomEvent\('apstudy-theme-change'/);
     assert.match(source, /fetch\('\/settings\/api\/interface-preferences'/);
     assert.match(source, /clearPendingTheme\(\)/);
+});
+
+test("console discord batches browser console output for server logs", async () => {
+    const source = await sourceFor("static/js/core/console-discord.js");
+
+    assert.match(source, /\/api\/debug\/console/);
+    assert.match(source, /\["log", "info", "warn", "error", "debug"\]/);
+    assert.match(source, /unhandledrejection/);
+    assert.match(source, /sendBeacon/);
+    assert.match(source, /forwarding/);
 });
 
 test("notes list guards destructive actions and supports folder/export workflows", async () => {

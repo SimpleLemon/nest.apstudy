@@ -35,6 +35,9 @@ COLOR_VALUES = {
 
 MAX_METADATA_CHARS = 950
 MAX_FIELD_CHARS = 1024
+MAX_DISCORD_CONTENT_CHARS = 2000
+MAX_BROWSER_CONSOLE_LINES = 500
+BROWSER_CONSOLE_FLUSH_SECONDS = 1.0
 MAX_RETRY_ATTEMPTS = 15
 MAX_QUEUE_EVENTS = 200
 INVALID_WINDOW_SECONDS = 10 * 60
@@ -85,6 +88,95 @@ def _sanitize_error_text(value, limit=500):
     text = SECRET_TEXT_RE.sub(r"\1[redacted]", str(value or ""))
     text = " ".join(text.split())
     return _truncate(text, limit)
+
+
+def _console_log_enabled():
+    return os.environ.get("DISCORD_CONSOLE_LOG_ENABLED", "1") != "0"
+
+
+def _format_browser_console_content(*, actor, page, lines):
+    header = _truncate(f"**Browser console** · `{page}` · {actor}", 400)
+    body = "\n".join(str(line) for line in lines if str(line).strip())
+    body = SECRET_TEXT_RE.sub(r"\1[redacted]", body)
+    fence_overhead = len("```text\n\n```")
+    max_body_chars = max(0, MAX_DISCORD_CONTENT_CHARS - len(header) - 1 - fence_overhead)
+    if len(body) > max_body_chars:
+        body = f"{body[: max(0, max_body_chars - 18)]}\n… (truncated)"
+    return f"{header}\n```text\n{body}\n```"
+
+
+@dataclass
+class _BrowserConsoleBatch:
+    actor: str
+    page: str
+    lines: list[str] = field(default_factory=list)
+    next_flush: float = 0.0
+
+
+_browser_console_batches: dict[str, _BrowserConsoleBatch] = {}
+_browser_console_lock = threading.RLock()
+
+
+def queue_browser_console_lines(*, actor, page, lines):
+    if not _console_log_enabled():
+        return False
+    if not lines:
+        return False
+
+    service = get_audit_service()
+    if not _bot_token():
+        return False
+
+    key = f"{actor}|{page}"
+    now = time.monotonic()
+    with _browser_console_lock:
+        batch = _browser_console_batches.get(key)
+        if batch is None:
+            batch = _BrowserConsoleBatch(actor=actor, page=page)
+            _browser_console_batches[key] = batch
+        batch.lines.extend(lines)
+        if len(batch.lines) > MAX_BROWSER_CONSOLE_LINES:
+            batch.lines = batch.lines[-MAX_BROWSER_CONSOLE_LINES:]
+        batch.next_flush = now + BROWSER_CONSOLE_FLUSH_SECONDS
+
+    service.wake_event.set()
+    return True
+
+
+def _flush_browser_console_batch(batch_key, service=None):
+    service = service or get_audit_service()
+    with _browser_console_lock:
+        batch = _browser_console_batches.pop(batch_key, None)
+    if not batch or not batch.lines:
+        return False
+
+    content = _format_browser_console_content(
+        actor=batch.actor,
+        page=batch.page,
+        lines=batch.lines,
+    )
+    return service.emit_console_content(content)
+
+
+def flush_due_browser_console_batches():
+    service = get_audit_service()
+    now = time.monotonic()
+    with _browser_console_lock:
+        due_keys = [
+            batch_key
+            for batch_key, batch in _browser_console_batches.items()
+            if batch.next_flush <= now
+        ]
+    for batch_key in due_keys:
+        _flush_browser_console_batch(batch_key, service)
+
+
+def seconds_until_browser_console_flush(now=None):
+    now = time.monotonic() if now is None else now
+    with _browser_console_lock:
+        if not _browser_console_batches:
+            return None
+        return max(0.0, min(batch.next_flush - now for batch in _browser_console_batches.values()))
 
 
 def _compact_metadata(metadata):
@@ -313,6 +405,39 @@ class DiscordAuditService:
             logger.exception("Failed to enqueue Discord audit event")
             return False
 
+    def emit_console_content(self, content):
+        if not _console_log_enabled():
+            return False
+        channel_id = _env_channel_id("server_logs")
+        if not channel_id:
+            logger.warning("Discord server_logs channel is not configured for browser console output")
+            return False
+        if not self.token_getter():
+            logger.warning("Discord bot token missing; skipping browser console output")
+            return False
+        try:
+            self._send_console_content(channel_id, str(content or "")[:MAX_DISCORD_CONTENT_CHARS])
+            return True
+        except Exception:
+            logger.exception("Failed to send browser console output to Discord")
+            return False
+
+    def _send_console_content(self, channel_id, content):
+        response = self._request(
+            "POST",
+            f"/channels/{channel_id}/messages",
+            json={"content": content, "allowed_mentions": {"parse": []}},
+        )
+        if 200 <= response.status_code < 300:
+            return
+        logger.warning(
+            "Discord browser console send returned HTTP %s for channel %s",
+            response.status_code,
+            channel_id,
+        )
+        if response.status_code in {401, 403, 429}:
+            self._record_invalid_response()
+
     def _enqueue(self, queued):
         with self.lock:
             while len(self.queue) >= self.max_queue_events:
@@ -366,7 +491,11 @@ class DiscordAuditService:
                 self.pause_warning_pending = False
                 self.emit_warning_pause_resumed()
 
+            flush_due_browser_console_batches()
             queued, wait_seconds = self._pop_ready(now)
+            console_wait = seconds_until_browser_console_flush(now)
+            if console_wait is not None:
+                wait_seconds = min(wait_seconds, console_wait)
             if queued is None:
                 self.wake_event.wait(max(0.1, min(wait_seconds, 1.0)))
                 self.wake_event.clear()

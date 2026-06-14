@@ -176,6 +176,75 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
         self.assertEqual(event.metadata["error_code"], "AUTH-OAUTH-START-SCOPE")
         self.assertEqual(event.color, "red")
 
+    def test_browser_console_content_batches_into_single_codeblock(self):
+        content = discord_audit._format_browser_console_content(
+            actor="user-1 (student)",
+            page="/dashboard",
+            lines=["[error] boom", "[warn] careful", "[log] hello"],
+        )
+
+        self.assertIn("**Browser console** · `/dashboard` · user-1 (student)", content)
+        self.assertIn("```text", content)
+        self.assertIn("[error] boom", content)
+        self.assertIn("[warn] careful", content)
+        self.assertIn("[log] hello", content)
+        self.assertEqual(content.count("```"), 2)
+        self.assertLessEqual(len(content), discord_audit.MAX_DISCORD_CONTENT_CHARS)
+
+    def test_browser_console_content_truncates_to_discord_limit(self):
+        long_line = "[error] " + ("x" * 5000)
+        content = discord_audit._format_browser_console_content(
+            actor="user-1",
+            page="/task",
+            lines=[long_line],
+        )
+
+        self.assertLessEqual(len(content), discord_audit.MAX_DISCORD_CONTENT_CHARS)
+        self.assertIn("(truncated)", content)
+
+    def test_queue_browser_console_lines_batches_before_flush(self):
+        service = DiscordAuditService(token_getter=lambda: "token")
+        with patch.object(discord_audit, "get_audit_service", return_value=service), \
+                patch.object(service, "emit_console_content", return_value=True) as emit_content, \
+                patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "token"}, clear=False):
+            discord_audit._browser_console_batches.clear()
+            queued = discord_audit.queue_browser_console_lines(
+                actor="user-1",
+                page="/dashboard",
+                lines=["[log] one"],
+            )
+            self.assertTrue(queued)
+            emit_content.assert_not_called()
+            discord_audit._browser_console_batches.clear()
+
+    def test_flush_browser_console_batch_sends_single_message(self):
+        service = DiscordAuditService(token_getter=lambda: "token")
+        with patch.object(service, "emit_console_content", return_value=True) as emit_content:
+            discord_audit._browser_console_batches["user-1|/dashboard"] = discord_audit._BrowserConsoleBatch(
+                actor="user-1",
+                page="/dashboard",
+                lines=["[error] first", "[error] second"],
+                next_flush=0.0,
+            )
+            sent = discord_audit._flush_browser_console_batch("user-1|/dashboard", service)
+
+        self.assertTrue(sent)
+        emit_content.assert_called_once()
+        content = emit_content.call_args.args[0]
+        self.assertIn("[error] first", content)
+        self.assertIn("[error] second", content)
+        self.assertEqual(content.count("```text"), 1)
+
+    def test_emit_console_content_posts_plain_message(self):
+        service = DiscordAuditService(
+            token_getter=lambda: "token",
+            request_func=lambda *args, **kwargs: ResponseStub(200),
+        )
+        with patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "token"}, clear=False):
+            sent = service.emit_console_content("```text\n[error] hello\n```")
+
+        self.assertTrue(sent)
+
     def test_unhandled_request_exception_emits_sanitized_server_log(self):
         app = Flask(__name__)
         with app.test_request_context(
