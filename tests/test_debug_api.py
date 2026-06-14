@@ -10,6 +10,7 @@ import blueprints.debug_api as debug_api
 class DebugApiTestCase(unittest.TestCase):
     def setUp(self):
         self.app = Flask(__name__)
+        self.app.config["LOGIN_DISABLED"] = True
         self.app.register_blueprint(debug_api.debug_api_bp)
         self.client = self.app.test_client()
         self.user = SimpleNamespace(
@@ -25,10 +26,9 @@ class DebugApiTestCase(unittest.TestCase):
             "page": "/dashboard",
             "lines": ["[error] one", "[warn] two"],
         }
-        with self.app.test_request_context("/api/debug/console", method="POST", json=payload), \
-                patch.object(debug_api, "current_user", self.user), \
+        with patch.object(debug_api, "current_user", self.user), \
                 patch.object(debug_api, "queue_browser_console_lines", return_value=True) as queue_lines:
-            response = debug_api.report_browser_console()
+            response = self.client.post("/api/debug/console", json=payload)
 
         self.assertEqual(response.status_code, 202)
         queue_lines.assert_called_once()
@@ -36,10 +36,9 @@ class DebugApiTestCase(unittest.TestCase):
         self.assertEqual(queue_lines.call_args.kwargs["lines"], payload["lines"])
 
     def test_report_browser_console_ignores_empty_payload(self):
-        with self.app.test_request_context("/api/debug/console", method="POST", json={"lines": []}), \
-                patch.object(debug_api, "current_user", self.user), \
+        with patch.object(debug_api, "current_user", self.user), \
                 patch.object(debug_api, "queue_browser_console_lines") as queue_lines:
-            response = debug_api.report_browser_console()
+            response = self.client.post("/api/debug/console", json={"lines": []})
 
         self.assertEqual(response.status_code, 202)
         self.assertEqual(response.get_json()["status"], "ignored")

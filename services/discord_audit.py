@@ -3,10 +3,12 @@ import logging
 import os
 import random
 import re
+import sys
 import threading
 import time
 import uuid
 from collections import deque
+from contextlib import contextmanager
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 
@@ -94,8 +96,12 @@ def _console_log_enabled():
     return os.environ.get("DISCORD_CONSOLE_LOG_ENABLED", "1") != "0"
 
 
-def _format_browser_console_content(*, actor, page, lines):
-    header = _truncate(f"**Browser console** · `{page}` · {actor}", 400)
+def _server_console_log_enabled():
+    return _console_log_enabled() and os.environ.get("DISCORD_SERVER_CONSOLE_LOG_ENABLED", "1") != "0"
+
+
+def _format_console_block(header, lines):
+    header = _truncate(header, 400)
     body = "\n".join(str(line) for line in lines if str(line).strip())
     body = SECRET_TEXT_RE.sub(r"\1[redacted]", body)
     fence_overhead = len("```text\n\n```")
@@ -105,16 +111,23 @@ def _format_browser_console_content(*, actor, page, lines):
     return f"{header}\n```text\n{body}\n```"
 
 
+def _format_browser_console_content(*, actor, page, lines):
+    return _format_console_block(f"**Browser console** · `{page}` · {actor}", lines)
+
+
 @dataclass
 class _BrowserConsoleBatch:
     actor: str
     page: str
     lines: list[str] = field(default_factory=list)
     next_flush: float = 0.0
+    header: str | None = None
 
 
 _browser_console_batches: dict[str, _BrowserConsoleBatch] = {}
 _browser_console_lock = threading.RLock()
+
+SERVER_CONSOLE_BATCH_KEY = "__server_console__"
 
 
 def queue_browser_console_lines(*, actor, page, lines):
@@ -143,6 +156,28 @@ def queue_browser_console_lines(*, actor, page, lines):
     return True
 
 
+def queue_server_console_lines(lines):
+    if not _server_console_log_enabled() or not lines:
+        return False
+    if not _bot_token():
+        return False
+
+    service = get_audit_service()
+    now = time.monotonic()
+    with _browser_console_lock:
+        batch = _browser_console_batches.get(SERVER_CONSOLE_BATCH_KEY)
+        if batch is None:
+            batch = _BrowserConsoleBatch(actor="System", page="server", header="**Server console**")
+            _browser_console_batches[SERVER_CONSOLE_BATCH_KEY] = batch
+        batch.lines.extend(lines)
+        if len(batch.lines) > MAX_BROWSER_CONSOLE_LINES:
+            batch.lines = batch.lines[-MAX_BROWSER_CONSOLE_LINES:]
+        batch.next_flush = now + BROWSER_CONSOLE_FLUSH_SECONDS
+
+    service.wake_event.set()
+    return True
+
+
 def _flush_browser_console_batch(batch_key, service=None):
     service = service or get_audit_service()
     with _browser_console_lock:
@@ -150,12 +185,16 @@ def _flush_browser_console_batch(batch_key, service=None):
     if not batch or not batch.lines:
         return False
 
-    content = _format_browser_console_content(
-        actor=batch.actor,
-        page=batch.page,
-        lines=batch.lines,
-    )
-    return service.emit_console_content(content)
+    if batch.header:
+        content = _format_console_block(batch.header, batch.lines)
+    else:
+        content = _format_browser_console_content(
+            actor=batch.actor,
+            page=batch.page,
+            lines=batch.lines,
+        )
+    with _suppress_console_capture():
+        return service.emit_console_content(content)
 
 
 def flush_due_browser_console_batches():
@@ -177,6 +216,124 @@ def seconds_until_browser_console_flush(now=None):
         if not _browser_console_batches:
             return None
         return max(0.0, min(batch.next_flush - now for batch in _browser_console_batches.values()))
+
+
+_console_capture_state = threading.local()
+
+
+def _console_capture_suppressed():
+    return getattr(_console_capture_state, "suppressed", False)
+
+
+@contextmanager
+def _suppress_console_capture():
+    previous = getattr(_console_capture_state, "suppressed", False)
+    _console_capture_state.suppressed = True
+    try:
+        yield
+    finally:
+        _console_capture_state.suppressed = previous
+
+
+class _ConsoleStreamTee:
+    """Wraps a real stdout/stderr stream and mirrors complete lines to Discord."""
+
+    def __init__(self, stream):
+        self._stream = stream
+        self._buffer = ""
+        self._buffer_lock = threading.Lock()
+
+    @property
+    def wrapped_stream(self):
+        return self._stream
+
+    def write(self, data):
+        result = self._stream.write(data)
+        if not _console_capture_suppressed() and isinstance(data, str) and data:
+            self._ingest(data)
+        return result
+
+    def _ingest(self, data):
+        lines = []
+        with self._buffer_lock:
+            self._buffer += data
+            if "\n" not in self._buffer:
+                if len(self._buffer) > 8000:
+                    lines.append(self._buffer)
+                    self._buffer = ""
+                return
+            parts = self._buffer.split("\n")
+            self._buffer = parts.pop()
+            lines.extend(part for part in parts if part.strip())
+        if not lines:
+            return
+        with _suppress_console_capture():
+            try:
+                queue_server_console_lines(lines)
+            except Exception:
+                pass
+
+    def flush(self):
+        return self._stream.flush()
+
+    def isatty(self):
+        return getattr(self._stream, "isatty", lambda: False)()
+
+    def fileno(self):
+        return self._stream.fileno()
+
+    def writable(self):
+        return True
+
+    def __getattr__(self, name):
+        return getattr(self._stream, name)
+
+
+def init_server_console_forwarding(app):
+    if not _server_console_log_enabled():
+        return False
+    if not _bot_token():
+        return False
+    if getattr(app, "extensions", None) is not None and app.extensions.get("discord_server_console"):
+        return False
+
+    installed = False
+    original_stdout = sys.stdout
+    original_stderr = sys.stderr
+    if not isinstance(sys.stdout, _ConsoleStreamTee):
+        sys.stdout = _ConsoleStreamTee(sys.stdout)
+        installed = True
+    if not isinstance(sys.stderr, _ConsoleStreamTee):
+        sys.stderr = _ConsoleStreamTee(sys.stderr)
+        installed = True
+
+    _repoint_log_handlers({id(original_stdout): sys.stdout, id(original_stderr): sys.stderr})
+
+    if getattr(app, "extensions", None) is not None:
+        app.extensions["discord_server_console"] = True
+    return installed
+
+
+def _repoint_log_handlers(stream_map):
+    """Rebind already-installed StreamHandlers so logging flows through the tee."""
+    seen = set()
+    loggers = [logging.getLogger()] + [
+        logging.getLogger(name)
+        for name in logging.root.manager.loggerDict
+        if isinstance(logging.getLogger(name), logging.Logger)
+    ]
+    for log in loggers:
+        for handler in getattr(log, "handlers", []):
+            if id(handler) in seen:
+                continue
+            seen.add(id(handler))
+            stream = getattr(handler, "stream", None)
+            replacement = stream_map.get(id(stream))
+            if replacement is not None:
+                try:
+                    handler.setStream(replacement)
+                except Exception:
+                    handler.stream = replacement
 
 
 def _compact_metadata(metadata):
@@ -668,6 +825,7 @@ def init_discord_audit(app):
     _service = _service or DiscordAuditService(fallback_path=fallback_path)
     _service.start()
     init_discord_error_reporting(app)
+    init_server_console_forwarding(app)
     return _service
 
 

@@ -1,5 +1,6 @@
 import hashlib
 import hmac
+import io
 import json
 import os
 import tempfile
@@ -244,6 +245,56 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
             sent = service.emit_console_content("```text\n[error] hello\n```")
 
         self.assertTrue(sent)
+
+    def test_queue_server_console_lines_batches_into_server_block(self):
+        service = DiscordAuditService(token_getter=lambda: "token")
+        with patch.object(discord_audit, "get_audit_service", return_value=service), \
+                patch.object(service, "emit_console_content", return_value=True) as emit_content, \
+                patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "token"}, clear=False):
+            discord_audit._browser_console_batches.clear()
+            try:
+                queued = discord_audit.queue_server_console_lines(["Traceback line", "Error: boom"])
+                self.assertTrue(queued)
+                emit_content.assert_not_called()
+                batch = discord_audit._browser_console_batches[discord_audit.SERVER_CONSOLE_BATCH_KEY]
+                self.assertEqual(batch.header, "**Server console**")
+                sent = discord_audit._flush_browser_console_batch(
+                    discord_audit.SERVER_CONSOLE_BATCH_KEY, service
+                )
+            finally:
+                discord_audit._browser_console_batches.clear()
+
+        self.assertTrue(sent)
+        content = emit_content.call_args.args[0]
+        self.assertIn("**Server console**", content)
+        self.assertIn("Traceback line", content)
+        self.assertIn("Error: boom", content)
+        self.assertEqual(content.count("```text"), 1)
+
+    def test_server_console_disabled_skips_queue(self):
+        with patch.dict(os.environ, {"DISCORD_SERVER_CONSOLE_LOG_ENABLED": "0", "DISCORD_BOT_TOKEN": "token"}, clear=False):
+            self.assertFalse(discord_audit.queue_server_console_lines(["anything"]))
+
+    def test_console_stream_tee_forwards_complete_lines_only(self):
+        captured = []
+        original = io.StringIO()
+        tee = discord_audit._ConsoleStreamTee(original)
+        with patch.object(discord_audit, "queue_server_console_lines", side_effect=lambda lines: captured.append(list(lines))):
+            tee.write("partial without newline")
+            self.assertEqual(captured, [])
+            tee.write(" finished\nsecond line\n")
+
+        self.assertEqual(original.getvalue(), "partial without newline finished\nsecond line\n")
+        self.assertEqual(captured, [["partial without newline finished", "second line"]])
+
+    def test_console_stream_tee_does_not_capture_when_suppressed(self):
+        captured = []
+        tee = discord_audit._ConsoleStreamTee(io.StringIO())
+        with patch.object(discord_audit, "queue_server_console_lines", side_effect=lambda lines: captured.append(list(lines))):
+            with discord_audit._suppress_console_capture():
+                tee.write("suppressed line\n")
+
+        self.assertEqual(captured, [])
 
     def test_unhandled_request_exception_emits_sanitized_server_log(self):
         app = Flask(__name__)
