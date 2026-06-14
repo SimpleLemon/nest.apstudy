@@ -183,16 +183,16 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertIn("System Numbers", html)
         self.assertIn("Total Users", html)
         self.assertIn("1.5 MB", html)
-        self.assertIn("Scheduler Controls", html)
-        self.assertLess(html.index("System Numbers"), html.index("Scheduler Controls"))
-        self.assertIn("Running", html)
-        self.assertIn("nest-prod", html)
-        self.assertIn("check_course_seat_tracks", html)
+        self.assertIn("System Controls", html)
+        self.assertLess(html.index("System Numbers"), html.index("System Controls"))
+        self.assertNotIn("Registered Jobs", html)
+        self.assertNotIn("admin-system-chips", html)
         self.assertIn('id="admin-system-csrf-token"', html)
         self.assertIn("Pause Scheduler", html)
         self.assertIn("Resume Scheduler", html)
+        self.assertIn("Git Pull", html)
         self.assertRegex(html, r'data-scheduler-action="pause"[^>]*>')
-        self.assertRegex(html, r'data-scheduler-action="resume"[^>]*disabled')
+        self.assertRegex(html, r'data-scheduler-action="resume"[^>]*hidden')
         self.assertNotIn('action="/admin"', html)
 
     def test_admin_home_disables_pause_when_scheduler_is_paused(self):
@@ -217,7 +217,7 @@ class AdminSecurityTestCase(unittest.TestCase):
                 response = client.get("/admin")
 
         html = response.get_data(as_text=True)
-        self.assertRegex(html, r'data-scheduler-action="pause"[^>]*disabled')
+        self.assertRegex(html, r'data-scheduler-action="pause"[^>]*hidden')
         self.assertRegex(html, r'data-scheduler-action="resume"[^>]*>')
 
     def test_admin_system_status_includes_scheduler_fields_without_secrets(self):
@@ -301,6 +301,58 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertEqual(log_action.call_count, 2)
         self.assertEqual(log_action.call_args_list[0].args[0], "scheduler_pause")
         self.assertEqual(log_action.call_args_list[1].args[0], "scheduler_resume")
+
+    def test_admin_git_pull_requires_csrf_and_runs_fixed_command(self):
+        metrics = {
+            "total_users": 0,
+            "emory_users": 0,
+            "non_emory_users": 0,
+            "pending_requests": 0,
+            "saved_courses": 0,
+            "active_course_tracks": 0,
+            "paused_course_tracks": 0,
+            "file_storage": {"formatted": "--", "file_count": 0, "avatar_count": 0, "error": None},
+        }
+        patches = [
+            patch.object(admin, "_admin_home_metrics", return_value=metrics),
+            patch.object(admin, "_system_status", return_value={}),
+            patch.object(admin, "_theme_preference", return_value=None),
+            patch.object(admin, "_pending_admin_request_count", return_value=0),
+        ]
+        completed = subprocess.CompletedProcess(
+            ["/usr/bin/git", "-C", admin.SYSTEM_GIT_REPO_PATH, "pull"],
+            0,
+            stdout="Already up to date.\n",
+            stderr="",
+        )
+
+        with self.app.test_client() as client:
+            self._login(client)
+            response = client.post("/admin/system-git-pull", json={})
+            self.assertEqual(response.status_code, 400)
+            token = self._get_csrf_token(client, "/admin", patches)
+            with patch.object(admin, "_resolve_scheduler_executable", return_value="/usr/bin/git"), \
+                    patch.object(admin.subprocess, "run", return_value=completed) as run_command, \
+                    patch.object(admin, "_log_admin_action") as log_action:
+                git_response = client.post(
+                    "/admin/system-git-pull",
+                    json={},
+                    headers={"X-CSRFToken": token},
+                )
+
+        self.assertEqual(git_response.status_code, 200)
+        payload = git_response.get_json()
+        self.assertEqual(payload["stdout"], "Already up to date.")
+        self.assertEqual(payload["command"], f"cd {admin.SYSTEM_GIT_REPO_PATH} && git pull")
+        self.assertEqual(
+            run_command.call_args.args[0],
+            ["/usr/bin/git", "-C", admin.SYSTEM_GIT_REPO_PATH, "pull"],
+        )
+        self.assertTrue(run_command.call_args.kwargs["check"])
+        self.assertTrue(run_command.call_args.kwargs["capture_output"])
+        self.assertEqual(run_command.call_args.kwargs["timeout"], admin.SYSTEM_GIT_COMMAND_TIMEOUT_SECONDS)
+        log_action.assert_called_once()
+        self.assertEqual(log_action.call_args.args[0], "system_git_pull")
 
     def test_admin_scheduler_control_failure_is_sanitized_and_logged(self):
         metrics = {

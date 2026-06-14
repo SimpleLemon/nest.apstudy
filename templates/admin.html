@@ -42,31 +42,30 @@
         {% set storage_total = system_status.get("storage_total_gb") %}
         {% set cpu_physical = system_status.get("cpu_physical") %}
         {% set cpu_logical = system_status.get("cpu_logical") %}
-        {% set scheduler_jobs = system_status.get("jobs") or [] %}
         {% set scheduler_enabled = system_status.get("scheduler_enabled") %}
 
         <section class="admin-card admin-system-card" aria-labelledby="system-monitor-title">
             <div class="admin-system-header">
-                <div>
+                <div class="admin-system-heading">
                     <h2 id="system-monitor-title" class="admin-title admin-title--small">System Monitor</h2>
                     <p class="admin-subtitle admin-subtitle--compact">Live server health updates every 15 seconds.</p>
-                </div>
-                <div class="admin-system-meta">
-                    <div class="admin-field">
-                        <span class="admin-field-label">OS</span>
-                        <span class="admin-field-value" data-role="os">{{ system_status.get("os_pretty") or "--" }}</span>
-                    </div>
-                    <div class="admin-field">
-                        <span class="admin-field-label">CPU Cores</span>
-                        <span class="admin-field-value" data-role="cpu-cores">
-                            {% if cpu_physical and cpu_logical %}
-                                {{ cpu_physical }}C / {{ cpu_logical }}T
-                            {% elif cpu_logical %}
-                                {{ cpu_logical }}T
-                            {% else %}
-                                --
-                            {% endif %}
-                        </span>
+                    <div class="admin-system-meta">
+                        <div class="admin-field">
+                            <span class="admin-field-label">OS</span>
+                            <span class="admin-field-value" data-role="os">{{ system_status.get("os_pretty") or "--" }}</span>
+                        </div>
+                        <div class="admin-field">
+                            <span class="admin-field-label">CPU Cores</span>
+                            <span class="admin-field-value" data-role="cpu-cores">
+                                {% if cpu_physical and cpu_logical %}
+                                    {{ cpu_physical }}C / {{ cpu_logical }}T
+                                {% elif cpu_logical %}
+                                    {{ cpu_logical }}T
+                                {% else %}
+                                    --
+                                {% endif %}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -155,52 +154,24 @@
 
         <section class="admin-card admin-scheduler-card" aria-labelledby="scheduler-controls-title">
             <div class="admin-system-header">
-                <div>
-                    <h2 id="scheduler-controls-title" class="admin-title admin-title--small">Scheduler Controls</h2>
-                    <p class="admin-subtitle admin-subtitle--compact">Pause or resume background scheduler commands on the Nest service.</p>
-                </div>
-            </div>
-            <div class="admin-system-chips" aria-label="Scheduler status">
-                <div class="admin-status-chip">
-                    <span>Scheduler</span>
-                    <strong data-role="scheduler-enabled">{{ "Enabled" if scheduler_enabled else "Disabled" }}</strong>
-                </div>
-                <div class="admin-status-chip">
-                    <span>Runtime</span>
-                    <strong data-role="scheduler-running">{{ "Running" if system_status.get("scheduler_running") else "Stopped" }}</strong>
-                </div>
-                <div class="admin-status-chip">
-                    <span>Lock</span>
-                    <strong data-role="scheduler-lock">{{ "Held" if system_status.get("scheduler_lock_acquired") else "Open" }}</strong>
-                </div>
-                <div class="admin-status-chip">
-                    <span>Host</span>
-                    <strong data-role="scheduler-hostname">{{ system_status.get("scheduler_hostname") or "--" }}</strong>
-                </div>
-                <div class="admin-status-chip">
-                    <span>PID</span>
-                    <strong data-role="scheduler-process-id">{{ system_status.get("scheduler_process_id") or "--" }}</strong>
-                </div>
-                <div class="admin-status-chip admin-status-chip--wide">
-                    <span>Registered Jobs</span>
-                    <strong data-role="scheduler-jobs">
-                        {% if scheduler_jobs %}
-                            {{ scheduler_jobs|map(attribute="id")|join(", ") }}
-                        {% else %}
-                            None
-                        {% endif %}
-                    </strong>
+                <div class="admin-system-heading">
+                    <h2 id="scheduler-controls-title" class="admin-title admin-title--small">System Controls</h2>
+                    <p class="admin-subtitle admin-subtitle--compact">Pause or resume the scheduler, or pull the latest Nest repository changes.</p>
                 </div>
             </div>
             <div id="admin-system-notice" class="admin-inline-notice admin-system-notice" role="status" hidden></div>
             <div class="admin-system-actions">
-                <button class="admin-button admin-button--danger" type="button" data-scheduler-action="pause" {% if not scheduler_enabled %}disabled{% endif %}>
+                <button class="admin-button admin-button--danger" type="button" data-scheduler-action="pause" {% if not scheduler_enabled %}hidden{% endif %}>
                     <span class="material-symbols-outlined" aria-hidden="true">pause_circle</span>
                     Pause Scheduler
                 </button>
-                <button class="admin-button" type="button" data-scheduler-action="resume" {% if scheduler_enabled %}disabled{% endif %}>
+                <button class="admin-button" type="button" data-scheduler-action="resume" {% if scheduler_enabled %}hidden{% endif %}>
                     <span class="material-symbols-outlined" aria-hidden="true">play_circle</span>
                     Resume Scheduler
+                </button>
+                <button class="admin-button admin-button--ghost" type="button" data-system-action="git-pull">
+                    <span class="material-symbols-outlined" aria-hidden="true">download</span>
+                    Git Pull
                 </button>
             </div>
         </section>
@@ -212,8 +183,11 @@
             const csrfToken = document.getElementById("admin-system-csrf-token")?.value || "";
             const notice = document.getElementById("admin-system-notice");
             const schedulerButtons = Array.from(document.querySelectorAll("[data-scheduler-action]"));
+            const gitPullButton = document.querySelector('[data-system-action="git-pull"]');
             const refreshMs = 15000;
+            const controlDelayMs = 2000;
             let schedulerRequestPending = false;
+            let gitPullRequestPending = false;
             let currentSchedulerEnabled = "{{ 'true' if scheduler_enabled else 'false' }}" === "true";
             const clampPercent = (value) => Math.max(0, Math.min(100, value));
             const toNumber = (value) => (typeof value === "number" && !Number.isNaN(value) ? value : null);
@@ -230,12 +204,6 @@
                 if (el) el.style.setProperty("--progress", clampPercent(value ?? 0));
             };
 
-            const formatBool = (value, yes, no) => (value ? yes : no);
-            const formatJobs = (jobs) => {
-                if (!Array.isArray(jobs) || jobs.length === 0) return "None";
-                return jobs.map((job) => job?.id || job?.name).filter(Boolean).join(", ") || "None";
-            };
-
             const setNotice = (message, isError = false) => {
                 if (!notice) return;
                 notice.textContent = message;
@@ -244,16 +212,22 @@
             };
 
             const syncSchedulerButtons = (schedulerEnabled) => {
+                const enabled = Boolean(schedulerEnabled);
                 schedulerButtons.forEach((button) => {
                     const action = button.dataset.schedulerAction;
+                    button.hidden = action === "pause" ? !enabled : enabled;
                     if (schedulerRequestPending) {
                         button.disabled = true;
-                    } else if (action === "pause") {
-                        button.disabled = !schedulerEnabled;
-                    } else if (action === "resume") {
-                        button.disabled = Boolean(schedulerEnabled);
+                    } else {
+                        button.disabled = false;
                     }
                 });
+            };
+
+            const syncGitPullButton = () => {
+                if (gitPullButton) {
+                    gitPullButton.disabled = gitPullRequestPending;
+                }
             };
 
             const update = (data) => {
@@ -275,12 +249,6 @@
                 setText('[data-role="mem-total"]', formatGB(toNumber(data.mem_total_gb)));
                 setText('[data-role="storage-used"]', formatGB(toNumber(data.storage_used_gb)));
                 setText('[data-role="storage-total"]', formatGB(toNumber(data.storage_total_gb)));
-                setText('[data-role="scheduler-enabled"]', formatBool(schedulerEnabled, "Enabled", "Disabled"));
-                setText('[data-role="scheduler-running"]', formatBool(data.scheduler_running, "Running", "Stopped"));
-                setText('[data-role="scheduler-lock"]', formatBool(data.scheduler_lock_acquired, "Held", "Open"));
-                setText('[data-role="scheduler-hostname"]', data.scheduler_hostname || "--");
-                setText('[data-role="scheduler-process-id"]', data.scheduler_process_id || "--");
-                setText('[data-role="scheduler-jobs"]', formatJobs(data.jobs));
                 syncSchedulerButtons(schedulerEnabled);
             };
 
@@ -313,14 +281,12 @@
                         }
                         const nextSchedulerEnabled = action === "resume";
                         currentSchedulerEnabled = nextSchedulerEnabled;
-                        setText('[data-role="scheduler-enabled"]', formatBool(nextSchedulerEnabled, "Enabled", "Disabled"));
-                        setText('[data-role="scheduler-running"]', "Stopped");
                         syncSchedulerButtons(nextSchedulerEnabled);
                         setNotice(action === "pause" ? "Scheduler pause command sent. Nest is restarting." : "Scheduler resume command sent. Nest is restarting.");
                         window.setTimeout(() => {
                             schedulerRequestPending = false;
                             fetchStatus();
-                        }, 3000);
+                        }, controlDelayMs);
                     } catch (error) {
                         schedulerRequestPending = false;
                         setNotice(error.message || "Unable to update scheduler.", true);
@@ -330,7 +296,42 @@
                 });
             });
 
+            gitPullButton?.addEventListener("click", async () => {
+                gitPullRequestPending = true;
+                syncGitPullButton();
+                try {
+                    const response = await fetch("/admin/system-git-pull", {
+                        method: "POST",
+                        credentials: "same-origin",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRFToken": csrfToken,
+                        },
+                        body: JSON.stringify({}),
+                    });
+                    const payload = await response.json().catch(() => ({}));
+                    if (!response.ok) {
+                        throw new Error(payload.message || payload.error || "Git pull failed.");
+                    }
+                    console.group("Admin Git Pull");
+                    console.log(payload.command || "cd /var/www/nest.apstudy.org && git pull");
+                    if (payload.stdout) console.log(payload.stdout);
+                    if (payload.stderr) console.warn(payload.stderr);
+                    console.groupEnd();
+                    setNotice("Git pull completed. Output was written to the browser console.");
+                } catch (error) {
+                    console.error("Admin Git Pull failed", error);
+                    setNotice(error.message || "Unable to run git pull.", true);
+                } finally {
+                    window.setTimeout(() => {
+                        gitPullRequestPending = false;
+                        syncGitPullButton();
+                    }, controlDelayMs);
+                }
+            });
+
             fetchStatus();
+            syncGitPullButton();
             setInterval(fetchStatus, refreshMs);
         })();
     </script>

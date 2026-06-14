@@ -708,13 +708,28 @@ body.admin-page {
     gap: 18px;
     justify-content: center;
     align-items: center;
+    text-align: center;
+}
+
+.admin-system-heading {
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    width: 100%;
 }
 
 .admin-system-meta {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 12px;
     width: min(100%, 520px);
+}
+
+.admin-system-meta .admin-field {
+    align-items: center;
+    min-width: 180px;
+    text-align: center;
 }
 
 .admin-system-rings {
@@ -870,6 +885,10 @@ body.admin-page {
     margin-top: 18px;
 }
 
+.admin-metrics-card {
+    text-align: center;
+}
+
 .admin-metric-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -883,6 +902,9 @@ body.admin-page {
     gap: 4px;
     min-height: 104px;
     padding: 14px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     border-radius: 8px;
     border: 1px solid var(--admin-border);
     background: var(--admin-surface);

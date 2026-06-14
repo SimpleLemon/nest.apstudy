@@ -59,8 +59,11 @@ SECRET_TEXT_RE = re.compile(r"((?:[?&]|\b)(?:secret|key|token|password)=)[^&\s]+
 SCHEDULER_ENV_PATH = "/var/www/nest.apstudy.org/.env"
 SCHEDULER_SERVICE_NAME = "nest"
 SCHEDULER_COMMAND_TIMEOUT_SECONDS = 20
+SYSTEM_GIT_REPO_PATH = "/var/www/nest.apstudy.org"
+SYSTEM_GIT_COMMAND_TIMEOUT_SECONDS = 60
 SYSTEM_STORAGE_LIMIT_GB = 150
 SCHEDULER_EXECUTABLE_FALLBACKS = {
+    "git": ("/usr/bin/git", "/bin/git"),
     "sed": ("/usr/bin/sed", "/bin/sed"),
     "systemctl": ("/usr/bin/systemctl", "/bin/systemctl"),
 }
@@ -280,6 +283,17 @@ def _run_scheduler_control_action(action):
     return completed
 
 
+def _run_system_git_pull():
+    command = [_resolve_scheduler_executable("git"), "-C", SYSTEM_GIT_REPO_PATH, "pull"]
+    return subprocess.run(
+        command,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=SYSTEM_GIT_COMMAND_TIMEOUT_SECONDS,
+    )
+
+
 def _scheduler_command_label(command):
     if isinstance(command, (list, tuple)):
         return " ".join(str(part) for part in command)
@@ -340,6 +354,7 @@ def _admin_event_title(action):
         "spring_course_tracking_toggle": "Admin Updated Spring Course Tracking",
         "scheduler_pause": "Admin Paused Scheduler",
         "scheduler_resume": "Admin Resumed Scheduler",
+        "system_git_pull": "Admin Ran Git Pull",
     }
     return labels.get(action, "Admin Action")
 
@@ -992,6 +1007,61 @@ def admin_system_scheduler_control(action):
         color="yellow" if action == "pause" else "green",
     )
     return jsonify({"status": "ok", "action": action, "completed_steps": completed})
+
+
+@admin_bp.route("/admin/system-git-pull", methods=["POST"])
+@admin_required
+def admin_system_git_pull():
+    metadata = {
+        "command_mode": "fixed",
+        "repo_path": SYSTEM_GIT_REPO_PATH,
+    }
+    try:
+        completed = _run_system_git_pull()
+    except subprocess.CalledProcessError as exc:
+        message = _sanitize_admin_error(exc.stderr or exc.stdout or exc)
+        _log_admin_action(
+            "system_git_pull",
+            "Nest repository",
+            metadata={**metadata, "result": "failed", "failed_command": _scheduler_command_label(exc.cmd)},
+            color="red",
+        )
+        return jsonify({"error": "Git pull failed.", "message": message}), 500
+    except subprocess.TimeoutExpired as exc:
+        message = _sanitize_admin_error(exc)
+        _log_admin_action(
+            "system_git_pull",
+            "Nest repository",
+            metadata={**metadata, "result": "timeout", "failed_command": _scheduler_command_label(exc.cmd)},
+            color="red",
+        )
+        return jsonify({"error": "Git pull timed out.", "message": message}), 500
+    except Exception as exc:
+        logger.exception("Failed to run git pull")
+        message = _sanitize_admin_error(exc)
+        _log_admin_action(
+            "system_git_pull",
+            "Nest repository",
+            metadata={**metadata, "result": "failed"},
+            color="red",
+        )
+        return jsonify({"error": "Unable to run git pull.", "message": message}), 500
+
+    stdout = _sanitize_admin_error(completed.stdout)
+    stderr = _sanitize_admin_error(completed.stderr)
+    _log_admin_action(
+        "system_git_pull",
+        "Nest repository",
+        metadata={**metadata, "result": "success", "returncode": completed.returncode},
+        color="green",
+    )
+    return jsonify({
+        "status": "ok",
+        "command": f"cd {SYSTEM_GIT_REPO_PATH} && git pull",
+        "stdout": stdout,
+        "stderr": stderr,
+        "returncode": completed.returncode,
+    })
 
 
 def _enabled_course_track_count():
