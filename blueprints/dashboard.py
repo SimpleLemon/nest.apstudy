@@ -25,6 +25,7 @@ from services.discord_audit import emit_server_log_event
 from services.atlas_client import DEFAULT_TERM
 from services.daily_quote import get_daily_quote_payload
 from services.calendar_store import list_calendar_rows_all
+from services.toasts import pop_toasts
 
 dashboard_bp = Blueprint("dashboard", __name__)
 logger = logging.getLogger(__name__)
@@ -844,6 +845,16 @@ def dashboard():
         preferred_calendar_view=preferred_calendar_view,
         theme_preference=_theme_from_settings(user_settings),
     )
+
+
+@dashboard_bp.route("/api/toasts")
+def drain_toasts():
+    """Return and clear any server-queued toasts for the current session.
+
+    Drained once per page load by window.APStudyToast in global.js. Available to
+    anonymous sessions too (e.g. post-logout messages).
+    """
+    return jsonify(pop_toasts())
 
 
 @dashboard_bp.route("/api/dashboard/summary")

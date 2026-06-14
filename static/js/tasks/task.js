@@ -54,6 +54,12 @@ function TaskApp({ completeSound, uncompleteSound }) {
     const [printListId, setPrintListId] = React.useState("");
     const highlightTaskId = new URLSearchParams(window.location.search).get("task") || "";
     const [playComplete] = useSound(completeSound, { volume: soundEnabled ? 0.55 : 0, interrupt: true });
+
+    React.useEffect(() => {
+        if (error && window.APStudyToast) {
+            window.APStudyToast.error(error);
+        }
+    }, [error]);
     const [playUncomplete] = useSound(uncompleteSound, { volume: soundEnabled ? 0.35 : 0, playbackRate: 0.86, interrupt: true });
     const listsRef = React.useRef(lists);
     const listMutationVersionsRef = React.useRef(new Map());
@@ -355,7 +361,6 @@ function TaskApp({ completeSound, uncompleteSound }) {
                     h("p", { className: "task-subtitle" }, "Lists, deadlines, repeat schedules, and calendar-synced work.")
                 )
             ),
-            error ? h("div", { className: "task-error", role: "alert" }, error) : null,
             lists.length === 0
                 ? h(EmptyStarter, { onCreate: openListDialog })
                 : h("div", { className: "task-layout" },

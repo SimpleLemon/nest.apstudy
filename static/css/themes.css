@@ -28,6 +28,12 @@
     --color-shell-dropdown-border: var(--color-outline-variant);
     --color-sidebar-bg: var(--color-shell-bg);
     --color-sidebar-border: var(--color-shell-border);
+    /* Semantic state colors for toasts/notifications.
+       Light defaults here; dark themes override below. Error reuses --color-error. */
+    --color-success: #1f7a4d;
+    --color-warning: #b26a00;
+    --color-info: #0060aa;
+    --toast-shadow: 0 18px 48px rgba(0, 0, 0, 0.18);
 }
 /* ============================
    OBSIDIAN DARK (default dark)
@@ -71,6 +77,10 @@
     --color-sidebar-bg: #181c22;
     --color-sidebar-border: #1c2026;
     --color-calendar-rule: #232830;
+    --color-success: #6cd08f;
+    --color-warning: #ffba42;
+    --color-info: #7cb3ff;
+    --toast-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
 }
 /* ============================
    PARCHMENT LIGHT
@@ -202,6 +212,10 @@
         --color-sidebar-bg: #181c22;
         --color-sidebar-border: #1c2026;
         --color-calendar-rule: #232830;
+        --color-success: #6cd08f;
+        --color-warning: #ffba42;
+        --color-info: #7cb3ff;
+        --toast-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
     }
 }
 /* ============================
@@ -293,4 +307,8 @@
     --color-sidebar-bg: #0d1328;
     --color-sidebar-border: #101730;
     --color-calendar-rule: #171e38;
+    --color-success: #6cd08f;
+    --color-warning: #ffba42;
+    --color-info: #7cb3ff;
+    --toast-shadow: 0 18px 48px rgba(0, 0, 0, 0.5);
 }

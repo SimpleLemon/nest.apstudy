@@ -1207,27 +1207,6 @@ body.courses-body {
   transform: scale(1);
 }
 
-.courses-toast {
-  position: fixed;
-  top: 82px;
-  right: 20px;
-  z-index: 100;
-  max-width: min(360px, calc(100vw - 32px));
-  border-radius: 8px;
-  border: 1px solid color-mix(in srgb, var(--color-outline-variant) 45%, transparent);
-  background: var(--color-surface-container-high);
-  color: var(--color-on-surface);
-  padding: 12px 14px;
-  font-size: 13px;
-  line-height: 1.4;
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
-}
-
-.courses-toast.is-error {
-  background: var(--color-error-container);
-  color: var(--color-on-error-container);
-}
-
 @media (max-width: 1024px) {
   body.courses-body {
     overflow: auto;

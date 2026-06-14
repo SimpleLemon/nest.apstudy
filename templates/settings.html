@@ -58,7 +58,6 @@
 <body class="settings-body bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-primary/30 selection:text-primary-fixed" data-settings-page="true" data-probe-appwrite-session="false">
     <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
     <global class="thesidebar" data-user-emory-student="{{ user.emory_student }}" data-sidebar-default="{{ sidebar_default|default('expanded') }}"></global>
-    <div id="settings-notifications" class="settings-toast-host fixed top-4 left-1/2 -translate-x-1/2 z-[10020] max-w-[92vw] pointer-events-none flex flex-col items-center gap-2"></div>
     <main class="settings-page-main flex-1 w-full px-4 sm:px-6 md:px-10 lg:px-16 xl:px-0 py-8 md:py-10 flex flex-col">
         <div class="settings-page-shell mx-auto w-full max-w-5xl xl:max-w-6xl flex flex-col flex-1">
             <header class="settings-hero mb-8 md:mb-10">

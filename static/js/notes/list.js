@@ -68,10 +68,10 @@
     }
 
     function showAlert(message, type = 'info') {
-        if (!els.alert) return;
-        els.alert.textContent = message;
-        els.alert.hidden = false;
-        els.alert.classList.toggle('notes-alert-error', type === 'error');
+        if (!window.APStudyToast) return;
+        const toastType =
+            type === 'error' ? 'error' : type === 'warning' ? 'warning' : type === 'success' ? 'success' : 'info';
+        window.APStudyToast.show({ message, type: toastType });
     }
 
     function clearAlert() {

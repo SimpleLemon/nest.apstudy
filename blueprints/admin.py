@@ -32,6 +32,7 @@ from extensions import csrf
 from blueprints.settings import _settings_defaults
 from blueprints.chat_api import create_university_channel, emit_chat_event
 from services.chat_presence import sync_chat_presence_labels_for_school
+from services.toasts import push_toast
 from services.app_config import (
     get_course_tracking_refresh_minutes,
     set_course_tracking_refresh_minutes,
@@ -915,13 +916,45 @@ def _export_payload(user_id):
     }
 
 
-def _redirect_detail(user_id, section, status=None, error=None):
-    args = {"user_id": user_id, "section": section}
-    if status:
-        args["status"] = status
+ADMIN_STATUS_MESSAGES = {
+    "onboarding-updated": "Onboarding updated.",
+    "token-reset": "ICS token reset.",
+    "file-deleted": "File deleted.",
+    "folder-deleted": "Folder deleted.",
+    "request-approved": "Request approved.",
+    "request-denied": "Request denied.",
+    "user-deleted": "User deleted.",
+}
+
+
+def _status_message(status):
+    if not status:
+        return None
+    if status in ADMIN_STATUS_MESSAGES:
+        return ADMIN_STATUS_MESSAGES[status]
+    if status.startswith("disabled-"):
+        return f"Disabled {status.split('-', 1)[1]} seat track(s)."
+    return status.replace("-", " ").strip()
+
+
+def _flash_admin_result(status=None, error=None):
+    """Queue a toast for the post-redirect page load."""
     if error:
-        args["error"] = error
-    return redirect(url_for("admin.admin_detail", **args))
+        push_toast(error, type="error")
+    elif status:
+        message = _status_message(status)
+        if message:
+            push_toast(message, type="success")
+
+
+def _redirect_detail(user_id, section, status=None, error=None):
+    _flash_admin_result(status=status, error=error)
+    return redirect(url_for("admin.admin_detail", user_id=user_id, section=section))
+
+
+def _redirect_requests(notice=None, error=None):
+    _flash_admin_result(status=notice, error=error)
+    return redirect(url_for("admin.admin_requests"))
 
 
 @admin_bp.route("/admin")
@@ -1536,11 +1569,11 @@ def approve_admin_request(request_id):
     if not request_row:
         abort(404)
     if request_row.get("request_type") != "uni_channel_approval":
-        return redirect(url_for("admin.admin_requests", error="Unsupported request type."))
+        return _redirect_requests(error="Unsupported request type.")
     school_key = request_row.get("school_key")
     school_name = request_row.get("school_name")
     if not school_key or not school_name:
-        return redirect(url_for("admin.admin_requests", error="Request is missing school data."))
+        return _redirect_requests(error="Request is missing school data.")
     now = format_datetime(datetime.now(timezone.utc))
     try:
         channel = create_university_channel(school_key, school_name)
@@ -1564,14 +1597,14 @@ def approve_admin_request(request_id):
         sync_chat_presence_labels_for_school(school_key)
     except AppwriteException:
         logger.exception("Failed to approve admin request")
-        return redirect(url_for("admin.admin_requests", error="Unable to approve request."))
+        return _redirect_requests(error="Unable to approve request.")
     _log_admin_action(
         "approve_admin_request",
         f"request:{request_id}",
         metadata={"request_type": request_row.get("request_type"), "school_name": school_name},
         color="green",
     )
-    return redirect(url_for("admin.admin_requests", notice="request-approved"))
+    return _redirect_requests(notice="request-approved")
 
 
 @admin_bp.route("/admin/requests/<request_id>/deny", methods=["POST"])
@@ -1602,14 +1635,14 @@ def deny_admin_request(request_id):
             sync_chat_presence_labels_for_school(request_row.get("school_key"))
     except AppwriteException:
         logger.exception("Failed to deny admin request")
-        return redirect(url_for("admin.admin_requests", error="Unable to deny request."))
+        return _redirect_requests(error="Unable to deny request.")
     _log_admin_action(
         "deny_admin_request",
         f"request:{request_id}",
         metadata={"request_type": request_row.get("request_type"), "school_name": request_row.get("school_name")},
         color="yellow",
     )
-    return redirect(url_for("admin.admin_requests", notice="request-denied"))
+    return _redirect_requests(notice="request-denied")
 
 
 @admin_bp.route("/admin/<user_id>")
@@ -1922,4 +1955,5 @@ def delete_user(user_id):
     except AppwriteException:
         logger.exception("Failed to delete user row %s", user_id)
 
-    return redirect(url_for("admin.admin_users", status="user-deleted"))
+    push_toast("User deleted.", type="success")
+    return redirect(url_for("admin.admin_users"))

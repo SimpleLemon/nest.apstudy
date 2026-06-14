@@ -220,25 +220,9 @@
     }
 
     function showToast(message, type) {
-      if (!elements.toastHost) {
-        return;
+      if (window.APStudyToast) {
+        window.APStudyToast.show({ message, type: type === 'error' ? 'error' : 'success' });
       }
-
-      const toast = document.createElement('div');
-      toast.className = `settings-toast ${type === 'error' ? 'is-error' : 'is-success'}`;
-      toast.innerHTML = `
-        <div class="settings-toast-message">${escapeHtml(message)}</div>
-        <button type="button" class="settings-toast-close" aria-label="Dismiss">&times;</button>
-      `;
-
-      const closeButton = toast.querySelector('button');
-      const dismiss = () => {
-        toast.remove();
-      };
-      closeButton?.addEventListener('click', dismiss);
-
-      elements.toastHost.prepend(toast);
-      window.setTimeout(dismiss, 3000);
     }
 
     function downloadJson(filename, data) {

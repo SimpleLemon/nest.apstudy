@@ -58,9 +58,24 @@
                 method: "POST",
                 body: JSON.stringify({ hidden: true }),
             });
+            showToast("Checklist hidden.", "info", {
+                action: { label: "Undo", onClick: () => { void unhideChecklist(); } },
+            });
         } catch (error) {
             showToast(error.message || "Unable to hide checklist.");
             if (els.checklist) els.checklist.hidden = false;
+        }
+    }
+    async function unhideChecklist() {
+        if (els.checklist) els.checklist.hidden = false;
+        try {
+            await fetchJson("/api/dashboard/checklist/hidden", {
+                method: "POST",
+                body: JSON.stringify({ hidden: false }),
+            });
+        } catch (error) {
+            showToast(error.message || "Unable to restore checklist.");
+            if (els.checklist) els.checklist.hidden = true;
         }
     }
     function renderTiles(summary) {
@@ -459,14 +474,10 @@
         const popover = document.getElementById("dashboard-popover");
         if (popover) popover.hidden = true;
     }
-    function showToast(message) {
-        const existing = document.querySelector(".dashboard-toast");
-        existing?.remove();
-        const toast = document.createElement("div");
-        toast.className = "dashboard-toast";
-        toast.textContent = message;
-        document.body.appendChild(toast);
-        window.setTimeout(() => toast.remove(), 3200);
+    function showToast(message, type = "error", options = {}) {
+        if (window.APStudyToast) {
+            window.APStudyToast.show({ message, type, action: options.action });
+        }
     }
     async function loadDashboard() {
         try {

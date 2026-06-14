@@ -955,21 +955,6 @@
     color: var(--color-on-surface-variant);
 }
 
-.dashboard-toast {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 10030;
-    border: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent);
-    border-radius: 8px;
-    background: var(--color-surface-container-high);
-    color: var(--color-on-surface);
-    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.20);
-    font-size: 13px;
-    font-weight: 700;
-    padding: 10px 12px;
-}
-
 @media (max-width: 1180px) {
     .dashboard-checklist-items,
     .dashboard-courses-list {

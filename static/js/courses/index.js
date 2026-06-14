@@ -434,7 +434,9 @@ async function removeCourse(courseId, sectionId) {
     if (state.editingSectionId === sectionId) {
       state.editingSectionId = null;
     }
-    showToast("Class removed.");
+    showToast("Class removed.", false, {
+      action: sectionId ? { label: "Undo", onClick: () => addCourse(sectionId) } : undefined,
+    });
   } catch (error) {
     console.error(error);
     showToast(error.message || "Unable to remove class.", true);
@@ -488,12 +490,11 @@ function scrollPanelContentToTop() {
   });
 }
 
-function showToast(message, isError = false) {
-  const existing = document.querySelector(".courses-toast");
-  if (existing) existing.remove();
-  const toast = document.createElement("div");
-  toast.className = `courses-toast ${isError ? "is-error" : ""}`;
-  toast.textContent = message;
-  document.body.appendChild(toast);
-  window.setTimeout(() => toast.remove(), 2600);
+function showToast(message, isError = false, options = {}) {
+  if (!window.APStudyToast) return null;
+  return window.APStudyToast.show({
+    message,
+    type: isError ? "error" : "success",
+    action: options.action,
+  });
 }

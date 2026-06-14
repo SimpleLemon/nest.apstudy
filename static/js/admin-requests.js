@@ -9,10 +9,9 @@
   let currentRefreshMinutes = null;
 
   function setNotice(message, isError = false) {
-    if (!alertEl) return;
-    alertEl.textContent = message;
-    alertEl.hidden = false;
-    alertEl.classList.toggle("is-error", isError);
+    if (window.APStudyToast) {
+      window.APStudyToast.show({ message, type: isError ? "error" : "success" });
+    }
   }
 
   async function postJson(url, body) {

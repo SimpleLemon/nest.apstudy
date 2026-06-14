@@ -968,48 +968,6 @@
   transform: translateX(1.2rem);
 }
 
-.settings-toast-host {
-  pointer-events: none;
-}
-
-.settings-toast {
-  pointer-events: auto;
-  min-width: min(30rem, 92vw);
-  max-width: min(40rem, 92vw);
-  border-radius: 1rem;
-  border: 1px solid color-mix(in srgb, var(--color-outline-variant) 64%, transparent);
-  background: color-mix(in srgb, var(--color-surface-container) 82%, transparent);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(18px);
-  padding: 0.9rem 1rem;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-}
-
-.settings-toast.is-success {
-  border-color: color-mix(in srgb, var(--color-primary) 34%, transparent);
-}
-
-.settings-toast.is-error {
-  border-color: color-mix(in srgb, var(--color-error) 40%, transparent);
-}
-
-.settings-toast-message {
-  flex: 1 1 auto;
-  font-size: 0.94rem;
-  line-height: 1.5;
-}
-
-.settings-toast-close {
-  flex: 0 0 auto;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 999px;
-  background: transparent;
-  color: var(--color-on-surface-variant);
-}
-
 @media (max-width: 960px) {
   .settings-account-layout {
     grid-template-columns: 1fr;

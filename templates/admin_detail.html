@@ -28,19 +28,6 @@
             </div>
         </header>
 
-        {% set status_map = {
-            "onboarding-updated": "Onboarding updated.",
-            "token-reset": "ICS token reset.",
-            "file-deleted": "File deleted.",
-            "folder-deleted": "Folder deleted.",
-        } %}
-        {% if status %}
-            <div class="admin-alert admin-alert--success">{{ status_map.get(status, status|replace('-', ' ')) }}</div>
-        {% endif %}
-        {% if error %}
-            <div class="admin-alert admin-alert--error">{{ error }}</div>
-        {% endif %}
-
         <section class="admin-profile-overview" aria-label="User profile overview">
             <div class="admin-profile-preview">
                 <div class="profile-tile" style="--profile-banner-color: {{ profile.banner_color or '#fecae1' }};">
@@ -889,6 +876,7 @@
             </section>
         {% endif %}
     </main>
+    <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/admin-nav.js') }}" defer></script>
 </body>
 </html>

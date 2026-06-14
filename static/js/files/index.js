@@ -452,10 +452,10 @@
     }
 
     function showAlert(message, type = "info") {
-        if (!els.alert) return;
-        els.alert.textContent = message;
-        els.alert.hidden = false;
-        els.alert.classList.toggle("files-alert-error", type === "error");
+        if (!window.APStudyToast) return;
+        const toastType =
+            type === "error" ? "error" : type === "warning" ? "warning" : type === "info" ? "info" : "success";
+        window.APStudyToast.show({ message, type: toastType });
     }
 
     function clearAlert() {
