@@ -10,6 +10,7 @@ from werkzeug.exceptions import NotFound
 
 import blueprints.auth as auth
 from app import create_app
+from avatar_images import avatar_url_for_size
 from extensions import login_manager
 from models import User
 
@@ -39,6 +40,31 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
             self.assertIn(f"Error code: {error_code}", body)
             with client.session_transaction() as client_session:
                 self.assertNotIn(auth.AUTH_ERROR_SESSION_KEY, client_session)
+
+    def complete_new_user_login(self, remote_user, provider, provider_profile=None):
+        created_rows = []
+
+        def create_row(_collection, row_id=None, data=None, **_kwargs):
+            row = {"$id": row_id, **(data or {})}
+            created_rows.append(row)
+            return row
+
+        with self.app.test_request_context("/auth/session", method="POST"):
+            with patch.object(auth, "get_row_safe", return_value=None), \
+                    patch.object(auth, "_find_user_by_email", return_value=None), \
+                    patch.object(auth, "_fetch_provider_profile", return_value=provider_profile or {}), \
+                    patch.object(auth, "create_row_safe", side_effect=create_row), \
+                    patch.object(auth, "sync_chat_presence_labels_for_user"), \
+                    patch.object(auth, "login_user"), \
+                    patch.object(auth, "url_for", side_effect=lambda endpoint, **_kwargs: f"/{endpoint}"), \
+                    patch.object(auth, "emit_user_event"):
+                result = auth._complete_appwrite_login(
+                    remote_user,
+                    provider=provider,
+                    provider_access_token="provider-token",
+                )
+
+        return result, created_rows
 
     def test_login_renders_and_consumes_session_error_code(self):
         self.assert_login_error_is_rendered_and_consumed(auth.AUTH_ERROR_OAUTH_CALLBACK)
@@ -356,6 +382,54 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         self.assertEqual(created_rows[0]["picture_url"], "https://lh3.googleusercontent.com/avatar=s96")
         self.assertEqual(created_rows[0]["avatar_source"], "provider")
 
+    def test_complete_appwrite_login_uses_remote_user_avatar_when_provider_profile_is_empty(self):
+        result, created_rows = self.complete_new_user_login(
+            {
+                "$id": "user-1",
+                "email": "student@example.com",
+                "name": "Student",
+                "prefs": {
+                    "picture_url": "https://lh3.googleusercontent.com/remote-avatar=s96-c",
+                },
+            },
+            provider="google",
+        )
+
+        self.assertEqual(result["user_id"], "user-1")
+        self.assertEqual(created_rows[0]["picture_url"], "https://lh3.googleusercontent.com/remote-avatar=s96-c")
+        self.assertEqual(created_rows[0]["avatar_source"], "provider")
+
+    def test_complete_appwrite_login_accepts_github_avatar_url_from_remote_user(self):
+        _result, created_rows = self.complete_new_user_login(
+            {
+                "$id": "user-1",
+                "email": "student@example.com",
+                "name": "Student",
+                "avatar_url": "https://avatars.githubusercontent.com/u/12345?v=4",
+            },
+            provider="github",
+        )
+
+        self.assertEqual(created_rows[0]["picture_url"], "https://avatars.githubusercontent.com/u/12345?v=4")
+        self.assertEqual(created_rows[0]["avatar_source"], "provider")
+
+    def test_complete_appwrite_login_builds_discord_cdn_avatar_from_remote_user(self):
+        _result, created_rows = self.complete_new_user_login(
+            {
+                "$id": "user-1",
+                "email": "student@example.com",
+                "name": "Student",
+                "avatar": "a_discordhash",
+            },
+            provider="discord",
+        )
+
+        self.assertEqual(
+            created_rows[0]["picture_url"],
+            "https://cdn.discordapp.com/avatars/user-1/a_discordhash.gif?size=256",
+        )
+        self.assertEqual(created_rows[0]["avatar_source"], "provider")
+
     def test_complete_appwrite_login_updates_provider_avatar_when_replaceable(self):
         existing = {
             "$id": "user-1",
@@ -420,6 +494,12 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         user = User({"$id": "user-1", "picture_url": "https://example.test/avatar.png"})
 
         self.assertEqual(user.picture, "https://example.test/avatar.png")
+
+    def test_google_avatar_url_for_size_preserves_crop_suffix(self):
+        self.assertEqual(
+            avatar_url_for_size("https://lh3.googleusercontent.com/a/avatar=s96-c", 56),
+            "https://lh3.googleusercontent.com/a/avatar=s56-c",
+        )
 
 
 if __name__ == "__main__":

@@ -55,7 +55,7 @@
                                 <p class="text-sm text-on-surface-variant">We pulled this from your sign-in so you do not need to re-enter it.</p>
                                 <div class="hidden sm:flex items-center justify-between self-stretch rounded-2xl bg-surface-container-lowest/80 border border-outline-variant/20 p-3">
                                     <div class="flex items-center gap-3">
-                                        <img alt="Profile" class="w-14 h-14 rounded-2xl object-cover border border-outline-variant/30" src="{{ (user.picture or 'https://i.sstatic.net/34AD2.jpg')|avatar_url(56) }}" srcset="{{ (user.picture or 'https://i.sstatic.net/34AD2.jpg')|avatar_url(56) }} 1x, {{ (user.picture or 'https://i.sstatic.net/34AD2.jpg')|avatar_url(112) }} 2x" sizes="56px" width="56" height="56" loading="lazy" decoding="async">
+                                        <img alt="Profile" class="w-14 h-14 rounded-2xl object-cover border border-outline-variant/30" src="{{ (user.picture or '')|avatar_url(56) }}" srcset="{{ (user.picture or '')|avatar_url(56) }} 1x, {{ (user.picture or '')|avatar_url(112) }} 2x" sizes="56px" width="56" height="56" loading="lazy" decoding="async">
                                         <div class="min-w-0">
                                             <p class="text-xs uppercase tracking-[0.16em] text-on-surface-variant">Signed in as {{ user.name }}</p>
                                             <p class="text-[clamp(0.7rem,0.9vw,0.9rem)] font-medium leading-tight break-all">{{ user.email }}</p>

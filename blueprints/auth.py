@@ -266,7 +266,7 @@ def _account_from_user_id(user_id):
 
 
 def _discord_avatar_url(profile):
-    user_id = profile.get("id")
+    user_id = profile.get("id") or profile.get("$id")
     avatar_hash = profile.get("avatar")
     if not user_id or not avatar_hash:
         return None
@@ -474,19 +474,29 @@ def _clean_avatar_url(value):
     return text
 
 
-def _provider_avatar_url(provider_profile, remote_user):
+def _provider_avatar_url(provider_profile, remote_user, provider=None):
     remote_user = remote_user or {}
+    provider_key = str(provider or "").strip().lower()
     prefs = remote_user.get("prefs") if isinstance(remote_user.get("prefs"), dict) else {}
+    if provider_key == "discord":
+        url = _clean_avatar_url(_discord_avatar_url(remote_user))
+        if url:
+            return url
+
     candidates = (
         (provider_profile or {}).get("avatar_url"),
+        remote_user.get("avatar_url"),
         remote_user.get("photoUrl"),
         remote_user.get("photo_url"),
         remote_user.get("picture"),
         remote_user.get("picture_url"),
-        remote_user.get("avatar"),
+        None if provider_key == "discord" else remote_user.get("avatar"),
+        prefs.get("avatar_url"),
+        prefs.get("photoUrl"),
+        prefs.get("photo_url"),
         prefs.get("picture"),
         prefs.get("picture_url"),
-        prefs.get("avatar"),
+        None if provider_key == "discord" else prefs.get("avatar"),
     )
     for candidate in candidates:
         url = _clean_avatar_url(candidate)
@@ -598,7 +608,7 @@ def _complete_appwrite_login(
 
     provider_profile = _fetch_provider_profile(provider, provider_access_token)
     provider_name = provider_profile.get("name")
-    provider_avatar_url = _provider_avatar_url(provider_profile, remote_user)
+    provider_avatar_url = _provider_avatar_url(provider_profile, remote_user, provider=provider)
 
     name = provider_name or remote_user.get("name") or remote_user.get("displayName")
     picture_url = provider_avatar_url
