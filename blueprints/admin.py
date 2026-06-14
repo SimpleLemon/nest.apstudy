@@ -66,6 +66,7 @@ SCHEDULER_EXECUTABLE_FALLBACKS = {
     "git": ("/usr/bin/git", "/bin/git"),
     "sed": ("/usr/bin/sed", "/bin/sed"),
     "ssh": ("/usr/bin/ssh", "/bin/ssh"),
+    "sudo": ("/usr/bin/sudo", "/bin/sudo"),
     "systemctl": ("/usr/bin/systemctl", "/bin/systemctl"),
 }
 
@@ -288,15 +289,21 @@ def _run_system_git_pull():
     git_env = os.environ.copy()
     git_env["PATH"] = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     git_env["GIT_SSH"] = _resolve_scheduler_executable("ssh")
-    command = [_resolve_scheduler_executable("git"), "-C", SYSTEM_GIT_REPO_PATH, "pull"]
-    return subprocess.run(
-        command,
-        check=True,
-        capture_output=True,
-        text=True,
-        env=git_env,
-        timeout=SYSTEM_GIT_COMMAND_TIMEOUT_SECONDS,
-    )
+    commands = [
+        [_resolve_scheduler_executable("git"), "-C", SYSTEM_GIT_REPO_PATH, "pull"],
+        [_resolve_scheduler_executable("sudo"), _resolve_scheduler_executable("systemctl"), "restart", SCHEDULER_SERVICE_NAME],
+    ]
+    completed = []
+    for command in commands:
+        completed.append(subprocess.run(
+            command,
+            check=True,
+            capture_output=True,
+            text=True,
+            env=git_env,
+            timeout=SYSTEM_GIT_COMMAND_TIMEOUT_SECONDS,
+        ))
+    return completed
 
 
 def _scheduler_command_label(command):
@@ -1022,7 +1029,7 @@ def admin_system_git_pull():
         "repo_path": SYSTEM_GIT_REPO_PATH,
     }
     try:
-        completed = _run_system_git_pull()
+        completed_steps = _run_system_git_pull()
     except subprocess.CalledProcessError as exc:
         message = _sanitize_admin_error(exc.stderr or exc.stdout or exc)
         _log_admin_action(
@@ -1052,20 +1059,20 @@ def admin_system_git_pull():
         )
         return jsonify({"error": "Unable to run git pull.", "message": message}), 500
 
-    stdout = _sanitize_admin_error(completed.stdout)
-    stderr = _sanitize_admin_error(completed.stderr)
+    stdout = _sanitize_admin_error("\n".join(step.stdout for step in completed_steps if step.stdout))
+    stderr = _sanitize_admin_error("\n".join(step.stderr for step in completed_steps if step.stderr))
     _log_admin_action(
         "system_git_pull",
         "Nest repository",
-        metadata={**metadata, "result": "success", "returncode": completed.returncode},
+        metadata={**metadata, "result": "success", "completed_steps": len(completed_steps)},
         color="green",
     )
     return jsonify({
         "status": "ok",
-        "command": f"cd {SYSTEM_GIT_REPO_PATH} && git pull",
+        "command": f"cd {SYSTEM_GIT_REPO_PATH} && git pull && sudo systemctl restart {SCHEDULER_SERVICE_NAME}",
         "stdout": stdout,
         "stderr": stderr,
-        "returncode": completed.returncode,
+        "returncode": completed_steps[-1].returncode if completed_steps else 0,
     })
 
 

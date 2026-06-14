@@ -319,10 +319,16 @@ class AdminSecurityTestCase(unittest.TestCase):
             patch.object(admin, "_theme_preference", return_value=None),
             patch.object(admin, "_pending_admin_request_count", return_value=0),
         ]
-        completed = subprocess.CompletedProcess(
+        git_completed = subprocess.CompletedProcess(
             ["/usr/bin/git", "-C", admin.SYSTEM_GIT_REPO_PATH, "pull"],
             0,
             stdout="Already up to date.\n",
+            stderr="",
+        )
+        restart_completed = subprocess.CompletedProcess(
+            ["/usr/bin/sudo", "/usr/bin/systemctl", "restart", admin.SCHEDULER_SERVICE_NAME],
+            0,
+            stdout="",
             stderr="",
         )
 
@@ -332,7 +338,7 @@ class AdminSecurityTestCase(unittest.TestCase):
             self.assertEqual(response.status_code, 400)
             token = self._get_csrf_token(client, "/admin", patches)
             with patch.object(admin, "_resolve_scheduler_executable", side_effect=lambda name: f"/usr/bin/{name}"), \
-                    patch.object(admin.subprocess, "run", return_value=completed) as run_command, \
+                    patch.object(admin.subprocess, "run", side_effect=[git_completed, restart_completed]) as run_command, \
                     patch.object(admin, "_log_admin_action") as log_action:
                 git_response = client.post(
                     "/admin/system-git-pull",
@@ -343,16 +349,24 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertEqual(git_response.status_code, 200)
         payload = git_response.get_json()
         self.assertEqual(payload["stdout"], "Already up to date.")
-        self.assertEqual(payload["command"], f"cd {admin.SYSTEM_GIT_REPO_PATH} && git pull")
         self.assertEqual(
-            run_command.call_args.args[0],
+            payload["command"],
+            f"cd {admin.SYSTEM_GIT_REPO_PATH} && git pull && sudo systemctl restart {admin.SCHEDULER_SERVICE_NAME}",
+        )
+        self.assertEqual(
+            run_command.call_args_list[0].args[0],
             ["/usr/bin/git", "-C", admin.SYSTEM_GIT_REPO_PATH, "pull"],
         )
-        self.assertTrue(run_command.call_args.kwargs["check"])
-        self.assertTrue(run_command.call_args.kwargs["capture_output"])
-        self.assertEqual(run_command.call_args.kwargs["env"]["GIT_SSH"], "/usr/bin/ssh")
-        self.assertIn("/usr/bin", run_command.call_args.kwargs["env"]["PATH"])
-        self.assertEqual(run_command.call_args.kwargs["timeout"], admin.SYSTEM_GIT_COMMAND_TIMEOUT_SECONDS)
+        self.assertEqual(
+            run_command.call_args_list[1].args[0],
+            ["/usr/bin/sudo", "/usr/bin/systemctl", "restart", admin.SCHEDULER_SERVICE_NAME],
+        )
+        for call in run_command.call_args_list:
+            self.assertTrue(call.kwargs["check"])
+            self.assertTrue(call.kwargs["capture_output"])
+            self.assertEqual(call.kwargs["env"]["GIT_SSH"], "/usr/bin/ssh")
+            self.assertIn("/usr/bin", call.kwargs["env"]["PATH"])
+            self.assertEqual(call.kwargs["timeout"], admin.SYSTEM_GIT_COMMAND_TIMEOUT_SECONDS)
         log_action.assert_called_once()
         self.assertEqual(log_action.call_args.args[0], "system_git_pull")
 
