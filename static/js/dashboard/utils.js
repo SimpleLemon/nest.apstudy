@@ -159,12 +159,38 @@
         return CALENDAR_VIEW_RULES.includes(normalized) ? normalized : DEFAULT_CALENDAR_VIEW;
     }
 
-    function tilePayload(tileId, size, view) {
+    function normalizeTaskListIds(listIds, availableListIds = null) {
+        if (!Array.isArray(listIds)) return [];
+        const available = Array.isArray(availableListIds) ? new Set(availableListIds.map((item) => String(item))) : null;
+        const normalized = [];
+        for (const item of listIds) {
+            const listId = String(item || "").trim();
+            if (!listId || normalized.includes(listId)) continue;
+            if (available && !available.has(listId)) continue;
+            normalized.push(listId);
+        }
+        return normalized;
+    }
+
+    function parseTaskListIds(value) {
+        if (!value) return [];
+        try {
+            return normalizeTaskListIds(JSON.parse(value));
+        } catch {
+            return [];
+        }
+    }
+
+    function tilePayload(tileId, size, view, taskListIds = null) {
         const payload = {
             id: tileId,
             size: normalizeTileSize(tileId, size),
         };
         if (tileId === "calendar") payload.view = normalizeCalendarView(tileId, view);
+        if (tileId === "tasks") {
+            const listIds = normalizeTaskListIds(taskListIds);
+            if (listIds.length) payload.task_list_ids = listIds;
+        }
         return payload;
     }
 
@@ -196,7 +222,12 @@
         for (const item of source) {
             const tileId = typeof item === "string" ? item : item?.id;
             if (!available.includes(tileId) || layout.some((tile) => tile.id === tileId)) continue;
-            layout.push(tilePayload(tileId, typeof item === "string" ? null : item?.size, typeof item === "string" ? null : item?.view));
+            layout.push(tilePayload(
+                tileId,
+                typeof item === "string" ? null : item?.size,
+                typeof item === "string" ? null : item?.view,
+                typeof item === "string" ? null : item?.task_list_ids,
+            ));
         }
         if (!isVersionThree) {
             for (const tileId of Object.keys(TILE_META)) {
@@ -280,6 +311,8 @@
         normalizeTileLayout,
         normalizeTileSize,
         normalizeCalendarView,
+        normalizeTaskListIds,
+        parseTaskListIds,
         tilePayload,
         tileTitle,
         eventDateKey,

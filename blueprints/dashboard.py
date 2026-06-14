@@ -53,6 +53,7 @@ DASHBOARD_DEFAULT_CALENDAR_VIEW = "month"
 DASHBOARD_CALENDAR_UPCOMING_LIMIT = 6
 DASHBOARD_LIST_LIMIT = 4
 DASHBOARD_TASK_LIMIT = 5
+DASHBOARD_TASK_FILTER_SOURCE_LIMIT = 50
 DASHBOARD_TASK_PRIORITY_RANK = {
     "high": 0,
     "medium": 1,
@@ -201,10 +202,29 @@ def _normalize_calendar_view(view):
     return normalized if normalized in DASHBOARD_CALENDAR_VIEWS else DASHBOARD_DEFAULT_CALENDAR_VIEW
 
 
-def _layout_tile_payload(tile_id, size=None, view=None):
+def _normalize_task_list_ids(raw_list_ids, available_list_ids=None):
+    if not isinstance(raw_list_ids, list):
+        return []
+    available = set(str(item) for item in available_list_ids) if available_list_ids is not None else None
+    normalized = []
+    for item in raw_list_ids:
+        list_id = str(item or "").strip()
+        if not list_id or list_id in normalized:
+            continue
+        if available is not None and list_id not in available:
+            continue
+        normalized.append(list_id)
+    return normalized
+
+
+def _layout_tile_payload(tile_id, size=None, view=None, task_list_ids=None):
     payload = {"id": tile_id, "size": _normalize_tile_size(tile_id, size)}
     if tile_id == "calendar":
         payload["view"] = _normalize_calendar_view(view)
+    if tile_id == "tasks":
+        list_ids = _normalize_task_list_ids(task_list_ids)
+        if list_ids:
+            payload["task_list_ids"] = list_ids
     return payload
 
 
@@ -231,13 +251,15 @@ def _coerce_layout(raw_value):
             tile_id = str(item.get("id") or "").strip()
             size = item.get("size")
             view = item.get("view")
+            task_list_ids = item.get("task_list_ids")
         else:
             tile_id = str(item or "").strip()
             size = None
             view = None
+            task_list_ids = None
         if tile_id not in DASHBOARD_TILE_IDS or tile_id in seen:
             continue
-        tiles.append(_layout_tile_payload(tile_id, size, view))
+        tiles.append(_layout_tile_payload(tile_id, size, view, task_list_ids))
         seen.add(tile_id)
     return {"version": version, "tiles": tiles}
 
@@ -256,7 +278,7 @@ def _ordered_tile_layout(saved_layout, available_tile_ids):
         tile_id = str(item.get("id") or "").strip() if isinstance(item, dict) else ""
         if tile_id not in available or tile_id in seen:
             continue
-        ordered.append(_layout_tile_payload(tile_id, item.get("size"), item.get("view")))
+        ordered.append(_layout_tile_payload(tile_id, item.get("size"), item.get("view"), item.get("task_list_ids")))
         seen.add(tile_id)
     if version >= DASHBOARD_LAYOUT_VERSION:
         return ordered
@@ -500,10 +522,21 @@ def _task_payload(row, now):
     return {
         "id": _row_id(row),
         "title": row.get("title") or "Untitled task",
+        "list_id": row.get("list_id") or "",
         "priority": row.get("priority") or "none",
         "deadline_at": format_datetime(deadline) if deadline else None,
         "overdue": overdue,
         "starred": bool(row.get("starred")),
+    }
+
+
+def _task_list_payload(row):
+    list_id = _row_id(row)
+    return {
+        "id": list_id,
+        "name": row.get("name") or "Untitled List",
+        "order": row.get("order") or 0,
+        "hidden": bool(row.get("hidden", False)),
     }
 
 
@@ -523,11 +556,18 @@ def _dashboard_task_bucket(row, now, seven_day_end, thirty_day_end):
     return None
 
 
-def _load_tasks_summary(user_id):
+def _load_tasks_summary(user_id, selected_list_ids=None):
     now = datetime.now(timezone.utc)
     seven_day_end = now + timedelta(days=7)
     thirty_day_end = now + timedelta(days=30)
     try:
+        list_rows = list_rows_all(
+            COLLECTIONS.get("task_lists", "task_lists"),
+            [
+                Query.equal("user_id", [user_id]),
+                Query.order_asc("order"),
+            ],
+        )
         rows = list_rows_all(
             COLLECTIONS["tasks"],
             [
@@ -537,10 +577,16 @@ def _load_tasks_summary(user_id):
         )
     except AppwriteException:
         logger.exception("Failed to build dashboard task summary")
-        return {"items": [], "total_count": 0, "setup_complete": False, "error": "Unable to load tasks."}
+        return {"items": [], "lists": [], "selected_list_ids": [], "total_count": 0, "setup_complete": False, "error": "Unable to load tasks."}
 
+    lists = [_task_list_payload(row) for row in sorted(list_rows, key=lambda item: item.get("order") or 0)]
+    available_list_ids = [item["id"] for item in lists if item.get("id")]
+    selected_ids = _normalize_task_list_ids(selected_list_ids, available_list_ids)
+    selected_set = set(selected_ids)
     candidates = []
     for row in rows:
+        if selected_set and str(row.get("list_id") or "") not in selected_set:
+            continue
         if _task_is_complete(row):
             continue
         bucket = _dashboard_task_bucket(row, now, seven_day_end, thirty_day_end)
@@ -554,8 +600,12 @@ def _load_tasks_summary(user_id):
         item[1].get("title") or "",
     ))
     upcoming = [row for _, row in candidates]
+    source_items = [_task_payload(row, now) for row in upcoming[:DASHBOARD_TASK_FILTER_SOURCE_LIMIT]]
     return {
-        "items": [_task_payload(row, now) for row in upcoming[:DASHBOARD_TASK_LIMIT]],
+        "items": source_items[:DASHBOARD_TASK_LIMIT],
+        "all_items": source_items,
+        "lists": lists,
+        "selected_list_ids": selected_ids,
         "total_count": len(upcoming),
         "setup_complete": bool(rows),
         "error": None,
@@ -731,9 +781,10 @@ def _dashboard_summary_payload():
     user_id = str(current_user.id)
     user_settings = _load_user_settings()
     saved_layout = _coerce_layout(user_settings.get("dashboard_layout_json") if user_settings else "[]")
+    saved_task_tile = next((tile for tile in saved_layout.get("tiles", []) if tile.get("id") == "tasks"), {})
 
     calendar_summary = _load_calendar_summary(user_id, user_settings)
-    tasks_summary = _load_tasks_summary(user_id)
+    tasks_summary = _load_tasks_summary(user_id, saved_task_tile.get("task_list_ids"))
     files_summary = _load_recent_files(user_id)
     notes_summary = _load_recent_notes(user_id)
     messages_summary = _load_message_rooms(user_id)
@@ -862,6 +913,8 @@ def update_dashboard_layout():
     if not isinstance(raw_tiles, list):
         return jsonify({"error": "tile_layout tiles must be a list."}), 400
 
+    user_id = str(current_user.id)
+    owned_task_list_ids = None
     normalized_tiles = []
     seen = set()
     for item in raw_tiles:
@@ -869,10 +922,12 @@ def update_dashboard_layout():
             tile_id = str(item.get("id") or "").strip()
             raw_size = item.get("size")
             raw_view = item.get("view")
+            raw_task_list_ids = item.get("task_list_ids")
         else:
             tile_id = str(item or "").strip()
             raw_size = None
             raw_view = None
+            raw_task_list_ids = None
         if tile_id not in DASHBOARD_TILE_IDS:
             return jsonify({"error": f"Unknown dashboard tile: {tile_id or 'blank'}."}), 400
         if tile_id in seen:
@@ -886,12 +941,33 @@ def update_dashboard_layout():
             if view is None:
                 return jsonify({"error": f"Invalid calendar view '{raw_view or 'blank'}'."}), 400
             tile_payload["view"] = view
+        if tile_id == "tasks" and raw_task_list_ids is not None:
+            if not isinstance(raw_task_list_ids, list):
+                return jsonify({"error": "Task list filters must be a list."}), 400
+            if raw_task_list_ids:
+                if owned_task_list_ids is None:
+                    try:
+                        owned_task_list_ids = {
+                            _row_id(row)
+                            for row in list_rows_all(
+                                COLLECTIONS.get("task_lists", "task_lists"),
+                                [Query.equal("user_id", [user_id])],
+                            )
+                        }
+                    except AppwriteException:
+                        logger.exception("Failed to validate dashboard task list filters")
+                        return jsonify({"error": "Unable to validate task list filters."}), 500
+                task_list_ids = _normalize_task_list_ids(raw_task_list_ids, owned_task_list_ids)
+                if len(task_list_ids) != len({str(item or "").strip() for item in raw_task_list_ids if str(item or "").strip()}):
+                    return jsonify({"error": "Task list filters must belong to your account."}), 400
+                if not task_list_ids:
+                    return jsonify({"error": "Select at least one task list or choose All."}), 400
+                tile_payload["task_list_ids"] = task_list_ids
         normalized_tiles.append(tile_payload)
         seen.add(tile_id)
 
     normalized = {"version": DASHBOARD_LAYOUT_VERSION, "tiles": normalized_tiles}
 
-    user_id = str(current_user.id)
     try:
         settings = _ensure_user_settings(user_id)
         settings = update_row_safe(

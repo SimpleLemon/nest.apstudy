@@ -122,6 +122,20 @@ class TestDashboardSummary(unittest.TestCase):
             {"id": "calendar", "size": "tall", "view": "week"},
         ])
 
+    def test_summary_preserves_task_list_filters(self):
+        settings = {
+            "dashboard_layout_json": json.dumps({
+                "version": 3,
+                "tiles": [{"id": "tasks", "size": "wide", "task_list_ids": ["list-1", "list-2"]}],
+            }),
+        }
+
+        summary = self._summary_with_patches(settings=settings)
+
+        self.assertEqual(summary["tile_layout"], [
+            {"id": "tasks", "size": "wide", "task_list_ids": ["list-1", "list-2"]},
+        ])
+
     def test_hidden_checklist_requires_matching_signature(self):
         with self.app.test_request_context("/dashboard"):
             with patch.object(dashboard_bp, "current_user", self.user):
@@ -191,9 +205,34 @@ class TestDashboardPreferenceRoutes(unittest.TestCase):
         self.assertEqual(status, 400)
         self.assertIn("Duplicate dashboard tile", response.get_json()["error"])
 
+    def test_layout_rejects_non_list_task_filters(self):
+        with self.app.test_request_context(
+            "/api/dashboard/layout",
+            method="PATCH",
+            json={"tile_layout": {"version": 3, "tiles": [{"id": "tasks", "task_list_ids": "list-1"}]}},
+        ):
+            with patch.object(dashboard_bp, "current_user", self.user):
+                response, status = dashboard_bp.update_dashboard_layout.__wrapped__()
+
+        self.assertEqual(status, 400)
+        self.assertIn("Task list filters must be a list", response.get_json()["error"])
+
+    def test_layout_rejects_unowned_task_filters(self):
+        with self.app.test_request_context(
+            "/api/dashboard/layout",
+            method="PATCH",
+            json={"tile_layout": {"version": 3, "tiles": [{"id": "tasks", "task_list_ids": ["list-2"]}]}},
+        ):
+            with patch.object(dashboard_bp, "current_user", self.user), \
+                    patch.object(dashboard_bp, "list_rows_all", return_value=[{"$id": "list-1"}]):
+                response, status = dashboard_bp.update_dashboard_layout.__wrapped__()
+
+        self.assertEqual(status, 400)
+        self.assertIn("Task list filters must belong", response.get_json()["error"])
+
     def test_layout_saves_unique_valid_layout(self):
         existing = {"$id": "settings-1", "user_id": "user-1"}
-        saved_json = '{"version":3,"tiles":[{"id":"tasks","size":"standard"},{"id":"calendar","size":"wide","view":"upcoming"}]}'
+        saved_json = '{"version":3,"tiles":[{"id":"tasks","size":"standard","task_list_ids":["list-1"]},{"id":"calendar","size":"wide","view":"upcoming"}]}'
         updated = {**existing, "dashboard_layout_json": saved_json}
 
         with self.app.test_request_context(
@@ -203,7 +242,7 @@ class TestDashboardPreferenceRoutes(unittest.TestCase):
                 "tile_layout": {
                     "version": 2,
                     "tiles": [
-                        {"id": "tasks", "size": "compact"},
+                        {"id": "tasks", "size": "compact", "task_list_ids": ["list-1"]},
                         {"id": "calendar", "size": "wide", "view": "upcoming"},
                     ],
                 },
@@ -211,12 +250,13 @@ class TestDashboardPreferenceRoutes(unittest.TestCase):
         ):
             with patch.object(dashboard_bp, "current_user", self.user), \
                     patch.object(dashboard_bp, "_ensure_user_settings", return_value=existing), \
+                    patch.object(dashboard_bp, "list_rows_all", return_value=[{"$id": "list-1"}]), \
                     patch.object(dashboard_bp, "update_row_safe", return_value=updated) as update_row:
                 response = dashboard_bp.update_dashboard_layout.__wrapped__()
 
         self.assertEqual(response.get_json()["tile_order"], ["tasks", "calendar"])
         self.assertEqual(response.get_json()["tile_layout"], [
-            {"id": "tasks", "size": "standard"},
+            {"id": "tasks", "size": "standard", "task_list_ids": ["list-1"]},
             {"id": "calendar", "size": "wide", "view": "upcoming"},
         ])
         self.assertEqual(update_row.call_args.args[2]["dashboard_layout_json"], saved_json)

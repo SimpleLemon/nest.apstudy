@@ -12,15 +12,22 @@
         formatBytes,
         normalizeTileSize,
         normalizeCalendarView,
+        normalizeTaskListIds,
         tileTitle,
         groupEventsByDate,
         localDateKey,
     } = window.APStudyDashboardUtils;
 
-    function tileShell(tileId, size, view, bodyHtml) {
+    function tileShell(tileId, size, layoutItem, bodyHtml, data = {}) {
         const meta = TILE_META[tileId];
+        const view = layoutItem?.view;
         const safeSize = normalizeTileSize(tileId, size);
         const safeView = normalizeCalendarView(tileId, view);
+        const taskLists = Array.isArray(data.lists) ? data.lists : [];
+        const selectedTaskListIds = normalizeTaskListIds(layoutItem?.task_list_ids, taskLists.map((list) => list.id));
+        const taskListFilterAttr = tileId === "tasks" && selectedTaskListIds.length
+            ? `data-task-list-ids="${escapeAttr(JSON.stringify(selectedTaskListIds))}"`
+            : "";
         const title = tileTitle(tileId, safeView);
         const sizeOptions = (TILE_SIZE_RULES[tileId] || []).map((option) => `
             <button class="dashboard-config-option ${option === safeSize ? "is-active" : ""}" type="button" data-config-kind="size" data-value="${escapeHtml(option)}" role="menuitemradio" aria-checked="${option === safeSize ? "true" : "false"}">
@@ -37,8 +44,26 @@
                 `).join("")}
             </div>
         ` : "";
+        const taskListOptions = tileId === "tasks" && taskLists.length ? `
+            <div class="dashboard-config-group dashboard-config-list-group" aria-label="Task lists">
+                <span class="dashboard-config-label">Lists</span>
+                <div class="dashboard-config-list-grid">
+                    <button class="dashboard-config-option dashboard-config-list-option ${selectedTaskListIds.length ? "" : "is-active"}" type="button" data-config-kind="task-list" data-value="__all" role="menuitemcheckbox" aria-checked="${selectedTaskListIds.length ? "false" : "true"}">
+                        All
+                    </button>
+                    ${taskLists.map((list) => {
+                        const active = selectedTaskListIds.includes(list.id);
+                        return `
+                            <button class="dashboard-config-option dashboard-config-list-option ${active ? "is-active" : ""}" type="button" data-config-kind="task-list" data-value="${escapeAttr(list.id)}" role="menuitemcheckbox" aria-checked="${active ? "true" : "false"}">
+                                ${escapeHtml(list.name || "Untitled List")}
+                            </button>
+                        `;
+                    }).join("")}
+                </div>
+            </div>
+        ` : "";
         return `
-            <article class="dashboard-tile" data-tile-id="${escapeHtml(tileId)}" data-tile-size="${escapeHtml(safeSize)}" ${tileId === "calendar" ? `data-calendar-view="${escapeHtml(safeView)}"` : ""} tabindex="0">
+            <article class="dashboard-tile" data-tile-id="${escapeHtml(tileId)}" data-tile-size="${escapeHtml(safeSize)}" ${tileId === "calendar" ? `data-calendar-view="${escapeHtml(safeView)}"` : ""} ${taskListFilterAttr} tabindex="0">
                 <div class="dashboard-tile-edit-controls" aria-label="${escapeHtml(title)} edit controls">
                     <button class="dashboard-tile-remove" type="button" aria-label="Remove ${escapeHtml(title)} tile">
                         <span class="material-symbols-outlined" aria-hidden="true">remove</span>
@@ -53,6 +78,7 @@
                         ${sizeOptions}
                     </div>
                     ${viewOptions}
+                    ${taskListOptions}
                 </div>
                 <div class="dashboard-tile-inner">
                     <header class="dashboard-tile-head">
@@ -120,12 +146,12 @@
     }
 
     function renderTile(tileId, size, data, layoutItem = {}) {
-        if (tileId === "calendar") return tileShell(tileId, size, layoutItem.view, renderCalendar(data, layoutItem.view));
-        if (tileId === "tasks") return tileShell(tileId, size, "", renderTasks(data));
-        if (tileId === "files") return tileShell(tileId, size, "", renderFiles(data));
-        if (tileId === "notes") return tileShell(tileId, size, "", renderNotes(data));
-        if (tileId === "messages") return tileShell(tileId, size, "", renderMessages(data));
-        if (tileId === "courses") return tileShell(tileId, size, "", renderCourses(data));
+        if (tileId === "calendar") return tileShell(tileId, size, layoutItem, renderCalendar(data, layoutItem.view), data);
+        if (tileId === "tasks") return tileShell(tileId, size, layoutItem, renderTasks(data, layoutItem), data);
+        if (tileId === "files") return tileShell(tileId, size, layoutItem, renderFiles(data), data);
+        if (tileId === "notes") return tileShell(tileId, size, layoutItem, renderNotes(data), data);
+        if (tileId === "messages") return tileShell(tileId, size, layoutItem, renderMessages(data), data);
+        if (tileId === "courses") return tileShell(tileId, size, layoutItem, renderCourses(data), data);
         return "";
     }
 
@@ -203,8 +229,14 @@
         return date.toLocaleDateString(undefined, { month: "short", day: "numeric" });
     }
 
-    function renderTasks(data) {
-        const items = Array.isArray(data.items) ? data.items : [];
+    function renderTasks(data, layoutItem = {}) {
+        const taskLists = Array.isArray(data.lists) ? data.lists : [];
+        const selectedTaskListIds = normalizeTaskListIds(layoutItem.task_list_ids, taskLists.map((list) => list.id));
+        const sourceItems = Array.isArray(data.all_items) ? data.all_items : (Array.isArray(data.items) ? data.items : []);
+        const items = (selectedTaskListIds.length
+            ? sourceItems.filter((task) => selectedTaskListIds.includes(task.list_id))
+            : sourceItems
+        ).slice(0, 5);
         if (!items.length) return emptyState("tasks");
         return `
             <div class="dashboard-list">

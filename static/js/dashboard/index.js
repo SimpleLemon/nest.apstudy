@@ -8,6 +8,8 @@
         normalizeTileLayout,
         normalizeTileSize,
         normalizeCalendarView,
+        normalizeTaskListIds,
+        parseTaskListIds,
         tilePayload,
         eventDateKey,
         groupEventsByDate,
@@ -37,7 +39,7 @@
     }
     function tileLayoutFromDom() {
         return Array.from(els.tiles?.querySelectorAll(".dashboard-tile[data-tile-id]") || [])
-            .map((tile) => tilePayload(tile.dataset.tileId, tile.dataset.tileSize, tile.dataset.calendarView))
+            .map((tile) => tilePayload(tile.dataset.tileId, tile.dataset.tileSize, tile.dataset.calendarView, parseTaskListIds(tile.dataset.taskListIds)))
             .filter((tile) => tile.id && TILE_META[tile.id]);
     }
     function renderChecklist(checklist) {
@@ -156,16 +158,50 @@
         if (!tile || tile.dataset.tileId !== "calendar") return;
         tile.dataset.calendarView = normalizeCalendarView("calendar", view);
     }
+    function setTaskListFilter(tile, value) {
+        if (!tile || tile.dataset.tileId !== "tasks") return false;
+        if (value === "__all") {
+            delete tile.dataset.taskListIds;
+            return true;
+        }
+        const availableIds = Array.from(tile.querySelectorAll('.dashboard-config-list-option[data-value]:not([data-value="__all"])'))
+            .map((button) => button.dataset.value)
+            .filter(Boolean);
+        const current = normalizeTaskListIds(parseTaskListIds(tile.dataset.taskListIds), availableIds);
+        const listId = String(value || "").trim();
+        if (!listId || !availableIds.includes(listId)) return false;
+        let next = current.length ? current.slice() : availableIds.slice();
+        if (next.includes(listId)) {
+            if (next.length <= 1) return false;
+            next = next.filter((id) => id !== listId);
+        } else {
+            next.push(listId);
+        }
+        const normalized = normalizeTaskListIds(next, availableIds);
+        if (!normalized.length || normalized.length === availableIds.length) {
+            delete tile.dataset.taskListIds;
+        } else {
+            tile.dataset.taskListIds = JSON.stringify(normalized);
+        }
+        return true;
+    }
     function applyTileOption(tile, kind, value) {
         if (!tile) return;
+        let changed = true;
         if (kind === "size") {
             setTileSize(tile, value);
         } else if (kind === "view") {
             setCalendarView(tile, value);
+        } else if (kind === "task-list") {
+            changed = setTaskListFilter(tile, value);
         }
+        if (!changed) return;
         syncSummaryLayoutFromDom();
         renderTiles(state.summary);
-        void persistLayout();
+        void persistLayout().then(() => {
+            if (kind === "task-list") return loadDashboard();
+            return null;
+        });
     }
     function startResize(event) {
         const tile = event.currentTarget?.closest(".dashboard-tile");

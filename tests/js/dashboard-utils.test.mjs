@@ -100,11 +100,12 @@ test("dashboard utility normalizes v1 and v2 tile layouts", async () => {
 
     assert.deepEqual(
         plain(utils.normalizeTileLayout(
-            { version: 3, tiles: [{ id: "calendar", size: "tall", view: "week" }] },
+            { version: 3, tiles: [{ id: "calendar", size: "tall", view: "week" }, { id: "tasks", size: "wide", task_list_ids: ["list-1", "list-1", "list-2"] }] },
             ["calendar", "tasks"],
         )),
         [
             { id: "calendar", size: "tall", view: "week" },
+            { id: "tasks", size: "wide", task_list_ids: ["list-1", "list-2"] },
         ],
     );
 });
@@ -120,6 +121,7 @@ test("dashboard utility applies new size and calendar view rules", async () => {
     assert.equal(utils.nearestTileSize("tasks", 0, 140, "standard"), "tall");
     assert.equal(utils.nearestTileSize("tasks", 140, 140, "standard"), "wide");
     assert.equal(utils.nearestTileSize("courses", 0, 140, "standard"), "wide");
+    assert.deepEqual(plain(utils.normalizeTaskListIds(["list-1", "", "list-1", "list-2"], ["list-1"])), ["list-1"]);
 });
 
 test("dashboard calendar helpers label views and derive event dates", async () => {
