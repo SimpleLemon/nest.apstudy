@@ -53,6 +53,7 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
             with patch.object(auth, "get_row_safe", return_value=None), \
                     patch.object(auth, "_find_user_by_email", return_value=None), \
                     patch.object(auth, "_fetch_provider_profile", return_value=provider_profile or {}), \
+                    patch.object(auth, "store_avatar_from_url", return_value=None), \
                     patch.object(auth, "create_row_safe", side_effect=create_row), \
                     patch.object(auth, "sync_chat_presence_labels_for_user"), \
                     patch.object(auth, "login_user"), \
@@ -360,6 +361,7 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
             created_rows.append(row)
             return row
 
+        bucket_view_url = "https://nyc.cloud.appwrite.io/v1/storage/buckets/profile_avatars/files/file-1/view?project=test"
         with self.app.test_request_context("/auth/session", method="POST"):
             with patch.object(auth, "get_row_safe", return_value=None), \
                     patch.object(auth, "_find_user_by_email", return_value=None), \
@@ -367,6 +369,10 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
                         "name": "Student Name",
                         "avatar_url": "https://lh3.googleusercontent.com/avatar=s96",
                     }), \
+                    patch.object(auth, "store_avatar_from_url", return_value={
+                        "file_id": "file-1",
+                        "view_url": bucket_view_url,
+                    }) as store_avatar, \
                     patch.object(auth, "create_row_safe", side_effect=create_row), \
                     patch.object(auth, "sync_chat_presence_labels_for_user"), \
                     patch.object(auth, "login_user"), \
@@ -379,7 +385,40 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
                 )
 
         self.assertEqual(result["user_id"], "user-1")
+        store_avatar.assert_called_once_with("user-1", "https://lh3.googleusercontent.com/avatar=s96")
+        self.assertEqual(created_rows[0]["picture_url"], bucket_view_url)
+        self.assertEqual(created_rows[0]["avatar_file_id"], "file-1")
+        self.assertEqual(created_rows[0]["avatar_source"], "provider")
+
+    def test_complete_appwrite_login_falls_back_to_provider_url_when_storage_fails(self):
+        created_rows = []
+
+        def create_row(_collection, row_id=None, data=None, **_kwargs):
+            row = {"$id": row_id, **(data or {})}
+            created_rows.append(row)
+            return row
+
+        with self.app.test_request_context("/auth/session", method="POST"):
+            with patch.object(auth, "get_row_safe", return_value=None), \
+                    patch.object(auth, "_find_user_by_email", return_value=None), \
+                    patch.object(auth, "_fetch_provider_profile", return_value={
+                        "name": "Student Name",
+                        "avatar_url": "https://lh3.googleusercontent.com/avatar=s96",
+                    }), \
+                    patch.object(auth, "store_avatar_from_url", return_value=None), \
+                    patch.object(auth, "create_row_safe", side_effect=create_row), \
+                    patch.object(auth, "sync_chat_presence_labels_for_user"), \
+                    patch.object(auth, "login_user"), \
+                    patch.object(auth, "url_for", side_effect=lambda endpoint, **_kwargs: f"/{endpoint}"), \
+                    patch.object(auth, "emit_user_event"):
+                auth._complete_appwrite_login(
+                    {"$id": "user-1", "email": "student@example.com", "name": "Remote"},
+                    provider="google",
+                    provider_access_token="provider-token",
+                )
+
         self.assertEqual(created_rows[0]["picture_url"], "https://lh3.googleusercontent.com/avatar=s96")
+        self.assertIsNone(created_rows[0]["avatar_file_id"])
         self.assertEqual(created_rows[0]["avatar_source"], "provider")
 
     def test_complete_appwrite_login_uses_remote_user_avatar_when_provider_profile_is_empty(self):
@@ -437,15 +476,22 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
             "name": "Student",
             "picture_url": "old-provider-avatar",
             "avatar_source": "provider",
+            "avatar_file_id": "old-file",
             "onboarding_complete": True,
         }
+        bucket_view_url = "https://nyc.cloud.appwrite.io/v1/storage/buckets/profile_avatars/files/file-2/view?project=test"
         with self.app.test_request_context("/auth/session", method="POST"):
             with patch.object(auth, "get_row_safe", return_value=existing), \
                     patch.object(auth, "_fetch_provider_profile", return_value={
                         "name": "Student",
-                        "avatar_url": "new-provider-avatar",
+                        "avatar_url": "https://lh3.googleusercontent.com/new=s96",
                     }), \
-                    patch.object(auth, "update_row_safe", return_value={**existing, "picture_url": "new-provider-avatar"}) as update_row, \
+                    patch.object(auth, "store_avatar_from_url", return_value={
+                        "file_id": "file-2",
+                        "view_url": bucket_view_url,
+                    }), \
+                    patch.object(auth, "delete_avatar_file") as delete_avatar, \
+                    patch.object(auth, "update_row_safe", return_value={**existing, "picture_url": bucket_view_url}) as update_row, \
                     patch.object(auth, "sync_chat_presence_labels_for_user"), \
                     patch.object(auth, "login_user"), \
                     patch.object(auth, "url_for", side_effect=lambda endpoint, **_kwargs: f"/{endpoint}"), \
@@ -457,8 +503,10 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
                 )
 
         updates = update_row.call_args.args[2]
-        self.assertEqual(updates["picture_url"], "new-provider-avatar")
+        self.assertEqual(updates["picture_url"], bucket_view_url)
+        self.assertEqual(updates["avatar_file_id"], "file-2")
         self.assertEqual(updates["avatar_source"], "provider")
+        delete_avatar.assert_called_once_with("old-file")
 
     def test_complete_appwrite_login_preserves_uploaded_avatar(self):
         existing = {
@@ -500,6 +548,91 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
             avatar_url_for_size("https://lh3.googleusercontent.com/a/avatar=s96-c", 56),
             "https://lh3.googleusercontent.com/a/avatar=s56-c",
         )
+
+
+class AvatarStorageServiceTestCase(unittest.TestCase):
+    def _fake_response(self, *, status_code=200, content_type="image/png", body=b"imgbytes", content_length=None):
+        headers = {"Content-Type": content_type}
+        if content_length is not None:
+            headers["Content-Length"] = str(content_length)
+
+        class _Resp:
+            def __init__(self):
+                self.status_code = status_code
+                self.headers = headers
+                self.closed = False
+
+            def iter_content(self, chunk_size=0):
+                yield body
+
+            def close(self):
+                self.closed = True
+
+        return _Resp()
+
+    def test_store_avatar_from_url_uploads_and_returns_view_url(self):
+        from services import avatar_storage
+
+        created = {}
+
+        class _Storage:
+            def __init__(self, _client):
+                pass
+
+            def create_file(self, bucket_id, file_id, input_file, permissions=None):
+                created["bucket_id"] = bucket_id
+                created["file_id"] = file_id
+                created["permissions"] = permissions
+                return {"$id": file_id}
+
+        with patch.object(avatar_storage.http_requests, "get", return_value=self._fake_response()), \
+                patch.object(avatar_storage, "Storage", _Storage), \
+                patch.object(avatar_storage, "build_avatar_view_url", side_effect=lambda fid: f"https://appwrite.test/view/{fid}"):
+            result = avatar_storage.store_avatar_from_url("user-1", "https://provider.test/avatar.png")
+
+        self.assertIsNotNone(result)
+        self.assertEqual(result["file_id"], created["file_id"])
+        self.assertEqual(result["view_url"], f"https://appwrite.test/view/{created['file_id']}")
+
+    def test_store_avatar_from_url_rejects_unsupported_content_type(self):
+        from services import avatar_storage
+
+        with patch.object(avatar_storage.http_requests, "get", return_value=self._fake_response(content_type="text/html")), \
+                patch.object(avatar_storage, "Storage") as storage_class:
+            result = avatar_storage.store_avatar_from_url("user-1", "https://provider.test/avatar.png")
+
+        self.assertIsNone(result)
+        storage_class.assert_not_called()
+
+    def test_store_avatar_from_url_returns_none_on_download_error(self):
+        from services import avatar_storage
+
+        with patch.object(avatar_storage.http_requests, "get", side_effect=RuntimeError("network down")), \
+                patch.object(avatar_storage, "Storage") as storage_class:
+            result = avatar_storage.store_avatar_from_url("user-1", "https://provider.test/avatar.png")
+
+        self.assertIsNone(result)
+        storage_class.assert_not_called()
+
+    def test_store_avatar_from_url_enforces_size_limit(self):
+        from services import avatar_storage
+
+        with patch.object(
+            avatar_storage.http_requests,
+            "get",
+            return_value=self._fake_response(content_length=avatar_storage.MAX_AVATAR_BYTES + 1),
+        ), patch.object(avatar_storage, "Storage") as storage_class:
+            result = avatar_storage.store_avatar_from_url("user-1", "https://provider.test/avatar.png")
+
+        self.assertIsNone(result)
+        storage_class.assert_not_called()
+
+    def test_store_avatar_from_url_ignores_empty_source(self):
+        from services import avatar_storage
+
+        with patch.object(avatar_storage.http_requests, "get") as http_get:
+            self.assertIsNone(avatar_storage.store_avatar_from_url("user-1", ""))
+        http_get.assert_not_called()
 
 
 if __name__ == "__main__":

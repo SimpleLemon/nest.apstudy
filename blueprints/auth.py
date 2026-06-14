@@ -47,6 +47,7 @@ from appwrite_helpers import (
 )
 from models import User, user_from_doc
 from avatar_images import DEFAULT_AVATAR_URL
+from services.avatar_storage import delete_avatar_file, store_avatar_from_url
 from services.chat_presence import sync_chat_presence_labels_for_user
 from services.discord_audit import emit_server_log_event, emit_user_event, format_actor, format_user_target
 
@@ -615,11 +616,18 @@ def _complete_appwrite_login(
 
     if not user_doc:
         created_at = format_datetime(datetime.utcnow())
+        avatar_file_id = None
+        if picture_url:
+            stored_avatar = store_avatar_from_url(appwrite_user_id, picture_url)
+            if stored_avatar:
+                picture_url = stored_avatar["view_url"]
+                avatar_file_id = stored_avatar["file_id"]
         row_data = {
             "google_id": appwrite_user_id,
             "email": email,
             "name": name or remote_user.get("name"),
             "picture_url": picture_url,
+            "avatar_file_id": avatar_file_id,
             "banner_color": "#fecae1",
             "avatar_source": "provider" if picture_url else None,
             "school": None,
@@ -664,8 +672,17 @@ def _complete_appwrite_login(
         if name:
             updates["name"] = name
         if picture_url and _avatar_can_use_provider(user_doc):
-            updates["picture_url"] = picture_url
-            updates["avatar_source"] = "provider"
+            stored_avatar = store_avatar_from_url(appwrite_user_id, picture_url)
+            if stored_avatar:
+                previous_file_id = user_doc.get("avatar_file_id")
+                updates["picture_url"] = stored_avatar["view_url"]
+                updates["avatar_file_id"] = stored_avatar["file_id"]
+                updates["avatar_source"] = "provider"
+                if previous_file_id and previous_file_id != stored_avatar["file_id"]:
+                    delete_avatar_file(previous_file_id)
+            else:
+                updates["picture_url"] = picture_url
+                updates["avatar_source"] = "provider"
         if email:
             updates["email"] = email
         if provider and provider != "appwrite":

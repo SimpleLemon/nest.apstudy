@@ -28,7 +28,7 @@ from appwrite.services.account import Account
 from appwrite.services.storage import Storage
 from appwrite.services.users import Users
 from appwrite_client import client as appwrite_client
-from appwrite_client import COLLECTIONS, ENDPOINT, FILE_SHARE_BUCKET_ID, PROFILE_AVATAR_BUCKET_ID, PROJECT_ID
+from appwrite_client import COLLECTIONS, FILE_SHARE_BUCKET_ID, PROFILE_AVATAR_BUCKET_ID
 from appwrite_helpers import (
     create_row_safe,
     delete_row_safe,
@@ -39,6 +39,7 @@ from appwrite_helpers import (
     update_row_safe,
 )
 from services.atlas_client import DEFAULT_TERM
+from services.avatar_storage import build_avatar_view_url, delete_avatar_file
 from services.chat_presence import sync_chat_presence_labels_for_user
 from services.discord_audit import emit_creation_event, emit_user_event, format_actor
 from services.calendar_store import delete_calendar_rows_by_user
@@ -133,20 +134,11 @@ def _normalize_avatar_source(value, picture_url=None):
 
 
 def _avatar_view_url(file_id):
-    endpoint = (ENDPOINT or os.environ.get("APPWRITE_ENDPOINT") or "").rstrip("/")
-    project_id = PROJECT_ID or os.environ.get("APPWRITE_PROJECT_ID") or ""
-    if not endpoint or not project_id or not file_id:
-        return None
-    return f"{endpoint}/storage/buckets/{PROFILE_AVATAR_BUCKET_ID}/files/{file_id}/view?project={project_id}"
+    return build_avatar_view_url(file_id)
 
 
 def _delete_avatar_file(file_id):
-    if not file_id:
-        return
-    try:
-        Storage(appwrite_client).delete_file(PROFILE_AVATAR_BUCKET_ID, file_id)
-    except AppwriteException:
-        logger.exception("Failed to delete old avatar file")
+    delete_avatar_file(file_id)
 
 
 def _delete_file_share_storage_file(file_row):
