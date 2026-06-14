@@ -61,10 +61,12 @@ SCHEDULER_SERVICE_NAME = "nest"
 SCHEDULER_COMMAND_TIMEOUT_SECONDS = 20
 SYSTEM_GIT_REPO_PATH = "/var/www/nest.apstudy.org"
 SYSTEM_GIT_COMMAND_TIMEOUT_SECONDS = 60
+SYSTEM_RESTART_DELAY_SECONDS = 2
 SYSTEM_STORAGE_LIMIT_GB = 150
 SCHEDULER_EXECUTABLE_FALLBACKS = {
     "git": ("/usr/bin/git", "/bin/git"),
     "sed": ("/usr/bin/sed", "/bin/sed"),
+    "sh": ("/bin/sh", "/usr/bin/sh"),
     "ssh": ("/usr/bin/ssh", "/bin/ssh"),
     "sudo": ("/usr/bin/sudo", "/bin/sudo"),
     "systemctl": ("/usr/bin/systemctl", "/bin/systemctl"),
@@ -289,21 +291,35 @@ def _run_system_git_pull():
     git_env = os.environ.copy()
     git_env["PATH"] = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     git_env["GIT_SSH"] = _resolve_scheduler_executable("ssh")
-    commands = [
-        [_resolve_scheduler_executable("git"), "-C", SYSTEM_GIT_REPO_PATH, "pull"],
-        [_resolve_scheduler_executable("sudo"), _resolve_scheduler_executable("systemctl"), "restart", SCHEDULER_SERVICE_NAME],
+    command = [_resolve_scheduler_executable("git"), "-C", SYSTEM_GIT_REPO_PATH, "pull"]
+    return subprocess.run(
+        command,
+        check=True,
+        capture_output=True,
+        text=True,
+        env=git_env,
+        timeout=SYSTEM_GIT_COMMAND_TIMEOUT_SECONDS,
+    )
+
+
+def _schedule_system_restart():
+    restart_env = os.environ.copy()
+    restart_env["PATH"] = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+    sudo_path = _resolve_scheduler_executable("sudo")
+    systemctl_path = _resolve_scheduler_executable("systemctl")
+    command = [
+        _resolve_scheduler_executable("sh"),
+        "-c",
+        f"sleep {SYSTEM_RESTART_DELAY_SECONDS}; exec {sudo_path} {systemctl_path} restart {SCHEDULER_SERVICE_NAME}",
     ]
-    completed = []
-    for command in commands:
-        completed.append(subprocess.run(
-            command,
-            check=True,
-            capture_output=True,
-            text=True,
-            env=git_env,
-            timeout=SYSTEM_GIT_COMMAND_TIMEOUT_SECONDS,
-        ))
-    return completed
+    return subprocess.Popen(
+        command,
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        env=restart_env,
+        start_new_session=True,
+    )
 
 
 def _scheduler_command_label(command):
@@ -1029,7 +1045,8 @@ def admin_system_git_pull():
         "repo_path": SYSTEM_GIT_REPO_PATH,
     }
     try:
-        completed_steps = _run_system_git_pull()
+        completed = _run_system_git_pull()
+        restart_process = _schedule_system_restart()
     except subprocess.CalledProcessError as exc:
         message = _sanitize_admin_error(exc.stderr or exc.stdout or exc)
         _log_admin_action(
@@ -1049,7 +1066,7 @@ def admin_system_git_pull():
         )
         return jsonify({"error": "Git pull timed out.", "message": message}), 500
     except Exception as exc:
-        logger.exception("Failed to run git pull")
+        logger.exception("Failed to run git pull or schedule restart")
         message = _sanitize_admin_error(exc)
         _log_admin_action(
             "system_git_pull",
@@ -1057,14 +1074,14 @@ def admin_system_git_pull():
             metadata={**metadata, "result": "failed"},
             color="red",
         )
-        return jsonify({"error": "Unable to run git pull.", "message": message}), 500
+        return jsonify({"error": "Unable to run git pull or schedule restart.", "message": message}), 500
 
-    stdout = _sanitize_admin_error("\n".join(step.stdout for step in completed_steps if step.stdout))
-    stderr = _sanitize_admin_error("\n".join(step.stderr for step in completed_steps if step.stderr))
+    stdout = _sanitize_admin_error(completed.stdout)
+    stderr = _sanitize_admin_error(completed.stderr)
     _log_admin_action(
         "system_git_pull",
         "Nest repository",
-        metadata={**metadata, "result": "success", "completed_steps": len(completed_steps)},
+        metadata={**metadata, "result": "success", "restart_delay_seconds": SYSTEM_RESTART_DELAY_SECONDS},
         color="green",
     )
     return jsonify({
@@ -1072,7 +1089,10 @@ def admin_system_git_pull():
         "command": f"cd {SYSTEM_GIT_REPO_PATH} && git pull && sudo systemctl restart {SCHEDULER_SERVICE_NAME}",
         "stdout": stdout,
         "stderr": stderr,
-        "returncode": completed_steps[-1].returncode if completed_steps else 0,
+        "returncode": completed.returncode,
+        "restart_scheduled": True,
+        "restart_delay_seconds": SYSTEM_RESTART_DELAY_SECONDS,
+        "restart_process_id": restart_process.pid,
     })
 
 

@@ -325,12 +325,7 @@ class AdminSecurityTestCase(unittest.TestCase):
             stdout="Already up to date.\n",
             stderr="",
         )
-        restart_completed = subprocess.CompletedProcess(
-            ["/usr/bin/sudo", "/usr/bin/systemctl", "restart", admin.SCHEDULER_SERVICE_NAME],
-            0,
-            stdout="",
-            stderr="",
-        )
+        restart_process = type("RestartProcess", (), {"pid": 4321})()
 
         with self.app.test_client() as client:
             self._login(client)
@@ -338,7 +333,8 @@ class AdminSecurityTestCase(unittest.TestCase):
             self.assertEqual(response.status_code, 400)
             token = self._get_csrf_token(client, "/admin", patches)
             with patch.object(admin, "_resolve_scheduler_executable", side_effect=lambda name: f"/usr/bin/{name}"), \
-                    patch.object(admin.subprocess, "run", side_effect=[git_completed, restart_completed]) as run_command, \
+                    patch.object(admin.subprocess, "run", return_value=git_completed) as run_command, \
+                    patch.object(admin.subprocess, "Popen", return_value=restart_process) as popen_command, \
                     patch.object(admin, "_log_admin_action") as log_action:
                 git_response = client.post(
                     "/admin/system-git-pull",
@@ -357,16 +353,23 @@ class AdminSecurityTestCase(unittest.TestCase):
             run_command.call_args_list[0].args[0],
             ["/usr/bin/git", "-C", admin.SYSTEM_GIT_REPO_PATH, "pull"],
         )
+        self.assertTrue(run_command.call_args.kwargs["check"])
+        self.assertTrue(run_command.call_args.kwargs["capture_output"])
+        self.assertEqual(run_command.call_args.kwargs["env"]["GIT_SSH"], "/usr/bin/ssh")
+        self.assertIn("/usr/bin", run_command.call_args.kwargs["env"]["PATH"])
+        self.assertEqual(run_command.call_args.kwargs["timeout"], admin.SYSTEM_GIT_COMMAND_TIMEOUT_SECONDS)
         self.assertEqual(
-            run_command.call_args_list[1].args[0],
-            ["/usr/bin/sudo", "/usr/bin/systemctl", "restart", admin.SCHEDULER_SERVICE_NAME],
+            popen_command.call_args.args[0],
+            [
+                "/usr/bin/sh",
+                "-c",
+                f"sleep {admin.SYSTEM_RESTART_DELAY_SECONDS}; exec /usr/bin/sudo /usr/bin/systemctl restart {admin.SCHEDULER_SERVICE_NAME}",
+            ],
         )
-        for call in run_command.call_args_list:
-            self.assertTrue(call.kwargs["check"])
-            self.assertTrue(call.kwargs["capture_output"])
-            self.assertEqual(call.kwargs["env"]["GIT_SSH"], "/usr/bin/ssh")
-            self.assertIn("/usr/bin", call.kwargs["env"]["PATH"])
-            self.assertEqual(call.kwargs["timeout"], admin.SYSTEM_GIT_COMMAND_TIMEOUT_SECONDS)
+        self.assertTrue(popen_command.call_args.kwargs["start_new_session"])
+        self.assertEqual(payload["restart_scheduled"], True)
+        self.assertEqual(payload["restart_delay_seconds"], admin.SYSTEM_RESTART_DELAY_SECONDS)
+        self.assertEqual(payload["restart_process_id"], 4321)
         log_action.assert_called_once()
         self.assertEqual(log_action.call_args.args[0], "system_git_pull")
 
