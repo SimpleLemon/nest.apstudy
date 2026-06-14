@@ -2,7 +2,7 @@
   const root = document.querySelector(".chat-app");
   if (!root) return;
 
-  const DEFAULT_AVATAR = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='24' fill='%23e5e7eb'/%3E%3Ccircle cx='48' cy='35' r='17' fill='%239ca3af'/%3E%3Cpath d='M20 82c4-18 17-28 28-28s24 10 28 28' fill='%239ca3af'/%3E%3C/svg%3E";
+  const DEFAULT_AVATAR = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2096%2096'%3E%3Crect%20width='96'%20height='96'%20rx='24'%20fill='%23e5e7eb'/%3E%3Ccircle%20cx='48'%20cy='35'%20r='17'%20fill='%239ca3af'/%3E%3Cpath%20d='M20%2082c4-18%2017-28%2028-28s24%2010%2028%2028'%20fill='%239ca3af'/%3E%3C/svg%3E";
   const PRESENCE_APP_ID = "nest-chat";
   const VIEWING_PRESENCE_REFRESH_MS = 45000;
   const VIEWING_PRESENCE_TTL_MS = 90000;
@@ -46,6 +46,7 @@
     realtimeReady: false,
     realtimeConnecting: false,
     chatSummaryLoading: false,
+    localReadSeq: 0,
     contextMenuRoom: null,
     loadingMessages: false,
     closedHistoryBanners: new Set(),
@@ -104,7 +105,13 @@
   }
 
   function avatarAttrs(url, size = 64, sizes = `${size}px`) {
-    const src = escapeHtml(avatarUrl(url, size));
+    const resolved = avatarUrl(url, size);
+    const src = escapeHtml(resolved);
+    // Data URLs are resolution-independent and may contain spaces that break
+    // srcset tokenization, so emit them with src only.
+    if (/^data:/i.test(resolved)) {
+      return `src="${src}" sizes="${escapeHtml(sizes)}" loading="lazy" decoding="async"`;
+    }
     const src2x = escapeHtml(avatarUrl(url, size * 2));
     return `src="${src}" srcset="${src} 1x, ${src2x} 2x" sizes="${escapeHtml(sizes)}" loading="lazy" decoding="async"`;
   }
@@ -584,10 +591,16 @@
   async function refreshChatSummary() {
     if (state.chatSummaryLoading || document.visibilityState === "hidden") return null;
     state.chatSummaryLoading = true;
+    const startReadSeq = state.localReadSeq;
     try {
       const payload = await fetchJson("/api/chat/summary", {
         headers: { Accept: "application/json" },
       });
+      if (state.localReadSeq !== startReadSeq) {
+        // A local read-state change (e.g. opening a room) happened while this
+        // summary was in flight; discard it so it cannot resurrect a cleared badge.
+        return null;
+      }
       return applyChatSummary(payload);
     } catch (_) {
       return null;
@@ -626,6 +639,7 @@
   function clearRoomUnread(room) {
     const key = roomKey(room);
     if (!key) return;
+    state.localReadSeq += 1;
     state.roomUnread.set(key, {
       type: room.type,
       id: room.id,
@@ -659,6 +673,7 @@
       .then(() => {
         clearRoomUnread(room);
         window.dispatchEvent(new CustomEvent("apstudy-chat-read-state-change", { detail: { room } }));
+        void refreshChatSummary();
       })
       .catch(() => {});
   }
@@ -1635,11 +1650,14 @@
       }
       if (cache.stale && cache.latestCursor) {
         await loadMessages({ after: cache.latestCursor, quiet: true });
+        markRoomRead(room);
       } else if (cache.stale) {
         await loadMessages({ force: true, quiet: true });
+        markRoomRead(room);
       }
     } else {
       await loadMessages({ force: true });
+      markRoomRead(room);
     }
     renderPresenceDrivenUi();
     schedulePersistentBootstrapSave();

@@ -69,6 +69,26 @@ function googleAvatarUrlForSize(url, size) {
 
 window.APSTUDY_AVATAR_URL_FOR_SIZE = avatarUrlForSize;
 
+function escapeHtmlAttr(value) {
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function avatarImageAttrs(image, image2x) {
+  const src = escapeHtmlAttr(image);
+  // Data URLs are resolution-independent and may contain spaces that break
+  // srcset tokenization, so emit them with src only.
+  if (/^data:/i.test(String(image || ''))) {
+    return `src="${src}"`;
+  }
+  const src2x = escapeHtmlAttr(image2x);
+  return `src="${src}" srcset="${src} 1x, ${src2x} 2x"`;
+}
+
 function getCommandPaletteShortcutLabel() {
   const platform = (
     navigator.userAgentData?.platform ||
@@ -129,10 +149,11 @@ function renderNavbar() {
 
   const rawProfileImage = navPlaceholder.dataset.profilePicture ||
     document.body?.dataset?.profilePicture ||
-    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"%3E%3Crect width="32" height="32" fill="%23ccc"/%3E%3C/svg%3E';
+    'data:image/svg+xml,%3Csvg%20xmlns="http://www.w3.org/2000/svg"%20viewBox="0%200%2032%2032"%3E%3Crect%20width="32"%20height="32"%20fill="%23ccc"/%3E%3C/svg%3E';
   const profileImage = avatarUrlForSize(rawProfileImage, 48);
   const profileImage2x = avatarUrlForSize(rawProfileImage, 96);
-  
+  const profileImageAttrs = avatarImageAttrs(profileImage, profileImage2x);
+
   const userEmail = navPlaceholder.dataset.userEmail || 'user@example.com';
   const commandShortcut = getCommandPaletteShortcutLabel();
 
@@ -154,7 +175,7 @@ function renderNavbar() {
     
     <div class="navbar-avatar-wrapper">
       <button type="button" class="navbar-avatar" id="navbar-avatar-btn" aria-label="Profile menu">
-        <img src="${profileImage}" srcset="${profileImage} 1x, ${profileImage2x} 2x" sizes="48px" alt="Profile" width="48" height="48" decoding="async" />
+        <img ${profileImageAttrs} sizes="48px" alt="Profile" width="48" height="48" decoding="async" />
       </button>
       
       <div id="profile-dropdown" class="profile-dropdown">

@@ -2,10 +2,10 @@ from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 
 DEFAULT_AVATAR_URL = (
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E"
-    "%3Crect width='96' height='96' rx='24' fill='%23e5e7eb'/%3E"
-    "%3Ccircle cx='48' cy='35' r='17' fill='%239ca3af'/%3E"
-    "%3Cpath d='M20 82c4-18 17-28 28-28s24 10 28 28' fill='%239ca3af'/%3E"
+    "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2096%2096'%3E"
+    "%3Crect%20width='96'%20height='96'%20rx='24'%20fill='%23e5e7eb'/%3E"
+    "%3Ccircle%20cx='48'%20cy='35'%20r='17'%20fill='%239ca3af'/%3E"
+    "%3Cpath%20d='M20%2082c4-18%2017-28%2028-28s24%2010%2028%2028'%20fill='%239ca3af'/%3E"
     "%3C/svg%3E"
 )
 APSTUDY_LOGO_URL = "https://resources.apstudy.org/images/AP-Resources-Logo.png"
