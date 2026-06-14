@@ -331,7 +331,7 @@ class AdminSecurityTestCase(unittest.TestCase):
             response = client.post("/admin/system-git-pull", json={})
             self.assertEqual(response.status_code, 400)
             token = self._get_csrf_token(client, "/admin", patches)
-            with patch.object(admin, "_resolve_scheduler_executable", return_value="/usr/bin/git"), \
+            with patch.object(admin, "_resolve_scheduler_executable", side_effect=lambda name: f"/usr/bin/{name}"), \
                     patch.object(admin.subprocess, "run", return_value=completed) as run_command, \
                     patch.object(admin, "_log_admin_action") as log_action:
                 git_response = client.post(
@@ -350,6 +350,8 @@ class AdminSecurityTestCase(unittest.TestCase):
         )
         self.assertTrue(run_command.call_args.kwargs["check"])
         self.assertTrue(run_command.call_args.kwargs["capture_output"])
+        self.assertEqual(run_command.call_args.kwargs["env"]["GIT_SSH"], "/usr/bin/ssh")
+        self.assertIn("/usr/bin", run_command.call_args.kwargs["env"]["PATH"])
         self.assertEqual(run_command.call_args.kwargs["timeout"], admin.SYSTEM_GIT_COMMAND_TIMEOUT_SECONDS)
         log_action.assert_called_once()
         self.assertEqual(log_action.call_args.args[0], "system_git_pull")

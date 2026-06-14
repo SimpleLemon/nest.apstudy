@@ -65,6 +65,7 @@ SYSTEM_STORAGE_LIMIT_GB = 150
 SCHEDULER_EXECUTABLE_FALLBACKS = {
     "git": ("/usr/bin/git", "/bin/git"),
     "sed": ("/usr/bin/sed", "/bin/sed"),
+    "ssh": ("/usr/bin/ssh", "/bin/ssh"),
     "systemctl": ("/usr/bin/systemctl", "/bin/systemctl"),
 }
 
@@ -284,12 +285,16 @@ def _run_scheduler_control_action(action):
 
 
 def _run_system_git_pull():
+    git_env = os.environ.copy()
+    git_env["PATH"] = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+    git_env["GIT_SSH"] = _resolve_scheduler_executable("ssh")
     command = [_resolve_scheduler_executable("git"), "-C", SYSTEM_GIT_REPO_PATH, "pull"]
     return subprocess.run(
         command,
         check=True,
         capture_output=True,
         text=True,
+        env=git_env,
         timeout=SYSTEM_GIT_COMMAND_TIMEOUT_SECONDS,
     )
 

@@ -24,6 +24,10 @@ body.admin-page {
     line-height: 1.5;
 }
 
+body.admin-page [hidden] {
+    display: none !important;
+}
+
 .admin-sidebar {
     position: fixed;
     inset: 0 auto 0 0;
