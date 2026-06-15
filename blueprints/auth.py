@@ -268,6 +268,91 @@ def _account_from_user_id(user_id):
     return _account_to_dict(Users(appwrite_client).get(str(user_id)))
 
 
+def _identities_for_appwrite_user(appwrite_user_id):
+    """Return OAuth identities linked to an Appwrite auth user."""
+    appwrite_user_id = str(appwrite_user_id or "").strip()
+    if not appwrite_user_id:
+        return []
+    try:
+        response = Users(appwrite_client).list_identities(
+            [Query.equal("userId", [appwrite_user_id])],
+        )
+        payload = _account_to_dict(response)
+        identities = payload.get("identities") or []
+        return [_account_to_dict(identity) for identity in identities]
+    except Exception:
+        logger.exception("Failed to list Appwrite identities for user %s", appwrite_user_id)
+        return []
+
+
+def _discord_identity_from_appwrite(*appwrite_user_ids):
+    """Resolve Discord providerUid/access token from Appwrite user identities."""
+    seen = set()
+    for raw_user_id in appwrite_user_ids:
+        appwrite_user_id = str(raw_user_id or "").strip()
+        if not appwrite_user_id or appwrite_user_id in seen:
+            continue
+        seen.add(appwrite_user_id)
+        for identity in _identities_for_appwrite_user(appwrite_user_id):
+            provider = str(identity.get("provider") or "").strip().lower()
+            if provider != "discord":
+                continue
+            provider_uid = str(
+                identity.get("providerUid")
+                or identity.get("provideruid")
+                or ""
+            ).strip()
+            if not provider_uid:
+                continue
+            return {
+                "id": provider_uid,
+                "username": identity.get("providerEmail") or identity.get("provideremail"),
+                "access_token": (
+                    identity.get("providerAccessToken")
+                    or identity.get("provideraccesstoken")
+                ),
+            }
+    return {}
+
+
+def _resolve_discord_link_identity(
+    *,
+    provider_uid=None,
+    provider_access_token=None,
+    appwrite_user_ids=(),
+):
+    """Best-effort Discord identity resolution for link/login flows."""
+    provider_uid = str(provider_uid or "").strip()
+    profile = (
+        _fetch_provider_profile("discord", provider_access_token)
+        if provider_access_token
+        else {}
+    )
+    appwrite_identity = _discord_identity_from_appwrite(*appwrite_user_ids)
+
+    access_token = provider_access_token or appwrite_identity.get("access_token")
+    if access_token and not profile.get("id"):
+        profile = _fetch_provider_profile("discord", access_token) or profile
+
+    discord_id = (
+        provider_uid
+        or str(profile.get("id") or "").strip()
+        or str(appwrite_identity.get("id") or "").strip()
+    )
+    username = (
+        profile.get("username")
+        or profile.get("name")
+        or appwrite_identity.get("username")
+    )
+    return {
+        "id": discord_id or None,
+        "username": username,
+        "has_provider_uid": bool(provider_uid),
+        "has_access_token": bool(provider_access_token),
+        "has_appwrite_identity": bool(appwrite_identity.get("id")),
+    }
+
+
 def _discord_avatar_url(profile):
     user_id = profile.get("id") or profile.get("$id")
     avatar_hash = profile.get("avatar")
@@ -621,14 +706,13 @@ def _complete_appwrite_login(
     discord_id_value = None
     discord_username_value = None
     if provider == "discord":
-        # Prefer the Discord snowflake from the Appwrite session (providerUid);
-        # fall back to the value parsed from the provider profile API call.
-        discord_id_value = (
-            str(provider_uid or "").strip()
-            or str(provider_profile.get("id") or "").strip()
-            or None
+        discord_identity = _resolve_discord_link_identity(
+            provider_uid=provider_uid,
+            provider_access_token=provider_access_token,
+            appwrite_user_ids=[appwrite_user_id],
         )
-        discord_username_value = provider_profile.get("username") or provider_profile.get("name")
+        discord_id_value = discord_identity.get("id")
+        discord_username_value = discord_identity.get("username")
 
     name = provider_name or remote_user.get("name") or remote_user.get("displayName")
     picture_url = provider_avatar_url
@@ -964,21 +1048,22 @@ def appwrite_discord_link_callback(state):
     linked = False
     try:
         appwrite_session = _account_to_dict(Account(appwrite_client).create_session(user_id, secret))
-        provider_access_token = appwrite_session.get("providerAccessToken")
-        provider_uid = str(appwrite_session.get("providerUid") or "").strip()
-
-        # The Appwrite session's providerUid is the Discord snowflake and does
-        # not require a follow-up Discord API call. The profile fetch is only
-        # used to enrich the stored username when an access token is available.
-        identity = _fetch_provider_profile("discord", provider_access_token) if provider_access_token else {}
-        discord_id_value = provider_uid or str(identity.get("id") or "").strip()
-        discord_username_value = identity.get("username") or identity.get("name")
+        discord_identity = _resolve_discord_link_identity(
+            provider_uid=appwrite_session.get("providerUid"),
+            provider_access_token=appwrite_session.get("providerAccessToken"),
+            appwrite_user_ids=[user_id, str(current_user.id)],
+        )
+        discord_id_value = discord_identity.get("id")
+        discord_username_value = discord_identity.get("username")
 
         if not discord_id_value:
             logger.warning(
-                "Discord link failed to resolve a Discord ID: has_provider_uid=%s has_access_token=%s",
-                bool(provider_uid),
-                bool(provider_access_token),
+                "Discord link failed to resolve a Discord ID: has_provider_uid=%s has_access_token=%s has_appwrite_identity=%s callback_user_id=%s current_user_id=%s",
+                discord_identity.get("has_provider_uid"),
+                discord_identity.get("has_access_token"),
+                discord_identity.get("has_appwrite_identity"),
+                user_id,
+                current_user.id,
             )
         else:
             if not discord_username_value:

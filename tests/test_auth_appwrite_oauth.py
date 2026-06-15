@@ -354,6 +354,24 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
             page_context="auth/appwrite/callback",
         )
 
+    def test_resolve_discord_link_identity_uses_appwrite_identities(self):
+        with patch.object(
+            auth,
+            "_identities_for_appwrite_user",
+            return_value=[{
+                "provider": "discord",
+                "providerUid": "123456789012345678",
+            }],
+        ), patch.object(auth, "_fetch_provider_profile", return_value={}):
+            identity = auth._resolve_discord_link_identity(
+                appwrite_user_ids=["callback-user"],
+            )
+
+        self.assertEqual(identity["id"], "123456789012345678")
+        self.assertTrue(identity["has_appwrite_identity"])
+        self.assertFalse(identity["has_provider_uid"])
+        self.assertFalse(identity["has_access_token"])
+
     def test_complete_appwrite_login_stores_provider_avatar_for_new_user(self):
         created_rows = []
 
