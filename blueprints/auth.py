@@ -882,6 +882,15 @@ def login():
     return response
 
 
+@auth_bp.route("/join")
+@auth_bp.route("/sign-up")
+@auth_bp.route("/welcome")
+@auth_bp.route("/access")
+def auth_entry_redirect():
+    """Legacy entry URLs redirect to the sign-in page."""
+    return redirect(url_for("auth.login"))
+
+
 @auth_bp.route("/auth/appwrite/<provider>")
 def appwrite_oauth_start(provider):
     """Start an Appwrite OAuth token flow from the server."""
