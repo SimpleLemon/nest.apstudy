@@ -564,6 +564,137 @@ body.admin-page [hidden] {
     background: color-mix(in srgb, var(--admin-accent) 8%, transparent);
 }
 
+.admin-table--directory {
+    table-layout: fixed;
+    overflow: visible;
+}
+
+.admin-table--directory th,
+.admin-table--directory td {
+    overflow-wrap: normal;
+}
+
+.admin-table--directory .admin-table__trunc {
+    display: block;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.admin-table--directory .admin-table__trunc .admin-link {
+    display: block;
+    min-height: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-table--directory .admin-table__name--emory {
+    color: #ffe600;
+    font-weight: 700;
+}
+
+.admin-oauth-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    color: var(--admin-ink);
+}
+
+.admin-oauth-icon svg {
+    display: block;
+}
+
+@media (min-width: 721px) {
+    .admin-table--directory tbody tr {
+        position: relative;
+    }
+
+    .admin-table--directory tbody tr:hover {
+        z-index: 2;
+    }
+
+    .admin-table--directory th,
+    .admin-table--directory td {
+        vertical-align: middle;
+        white-space: nowrap;
+        overflow: visible;
+    }
+
+    .admin-table--directory .admin-table__trunc {
+        position: relative;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .admin-table--directory .admin-table__trunc.is-truncated:hover {
+        z-index: 30;
+    }
+
+    .admin-table--directory .admin-table__trunc.is-truncated:hover::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        left: 0;
+        bottom: calc(100% + 6px);
+        z-index: 40;
+        min-width: max(100%, 12rem);
+        max-width: min(24rem, 70vw);
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: 1px solid var(--admin-border);
+        background: var(--admin-panel-strong);
+        color: var(--admin-ink);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+        font-size: 13px;
+        line-height: 1.4;
+        white-space: normal;
+        word-break: break-word;
+        pointer-events: none;
+    }
+
+    .admin-table--directory th:nth-child(1),
+    .admin-table--directory td:nth-child(1) {
+        width: 12%;
+    }
+
+    .admin-table--directory th:nth-child(2),
+    .admin-table--directory td:nth-child(2) {
+        width: 14%;
+    }
+
+    .admin-table--directory th:nth-child(3),
+    .admin-table--directory td:nth-child(3) {
+        width: 18%;
+    }
+
+    .admin-table--directory th:nth-child(4),
+    .admin-table--directory td:nth-child(4) {
+        width: 12%;
+    }
+
+    .admin-table--directory th:nth-child(5),
+    .admin-table--directory td:nth-child(5) {
+        width: 11%;
+    }
+
+    .admin-table--directory th:nth-child(6),
+    .admin-table--directory td:nth-child(6) {
+        width: 5%;
+    }
+
+    .admin-table--directory th:nth-child(7),
+    .admin-table--directory td:nth-child(7) {
+        width: 12%;
+    }
+
+    .admin-table--directory th:nth-child(8),
+    .admin-table--directory td:nth-child(8) {
+        width: 16%;
+    }
+}
+
 .admin-link {
     display: inline-flex;
     align-items: center;

@@ -454,6 +454,15 @@ def _fetch_account(user_id):
     return _account_to_dict(account)
 
 
+def _normalize_oauth_provider(user_doc):
+    provider = str((user_doc or {}).get("provider") or "").strip().lower()
+    if provider in {"google", "discord", "github"}:
+        return provider
+    if (user_doc or {}).get("google_id"):
+        return "google"
+    return "other"
+
+
 def _user_summary(user_doc):
     return {
         "id": _row_id(user_doc),
@@ -465,6 +474,7 @@ def _user_summary(user_doc):
         "onboarding_complete": bool(user_doc.get("onboarding_complete")),
         "onboarding_step": user_doc.get("onboarding_step") or 1,
         "discord_linked": bool(user_doc.get("discord_id")),
+        "oauth_provider": _normalize_oauth_provider(user_doc),
         "emory_student": bool(user_doc.get("emory_student")),
         "school": user_doc.get("school"),
         "major": user_doc.get("major"),

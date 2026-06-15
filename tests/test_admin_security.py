@@ -61,6 +61,8 @@ class AdminSecurityTestCase(unittest.TestCase):
             "onboarding_complete": False,
             "onboarding_step": 2,
             "emory_student": True,
+            "provider": "google",
+            "google_id": "user-1",
         }
         self.settings_doc = {"user_id": "user-1", "ics_secret_token": "secret-token"}
 
@@ -497,6 +499,13 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertEqual(log_action.call_args.args[0], "scheduler_pause")
         self.assertEqual(log_action.call_args.kwargs["metadata"]["result"], "failed")
 
+    def test_normalize_oauth_provider(self):
+        self.assertEqual(admin._normalize_oauth_provider({"provider": "Google"}), "google")
+        self.assertEqual(admin._normalize_oauth_provider({"provider": "discord"}), "discord")
+        self.assertEqual(admin._normalize_oauth_provider({"provider": "github"}), "github")
+        self.assertEqual(admin._normalize_oauth_provider({"google_id": "legacy"}), "google")
+        self.assertEqual(admin._normalize_oauth_provider({}), "other")
+
     def test_admin_users_renders_directory(self):
         with self.app.test_client() as client:
             self._login(client)
@@ -512,6 +521,9 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertIn("user@example.com", html)
         self.assertIn("May 25, 2026", html)
         self.assertIn("May 25, 2026 1:00 AM", html)
+        self.assertIn(">OAuth<", html)
+        self.assertIn("admin-table__name--emory", html)
+        self.assertNotIn(">Emory<", html)
 
     def test_admin_requests_places_course_tracking_before_university_requests(self):
         requests_rows = [{
