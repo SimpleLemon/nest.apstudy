@@ -350,6 +350,7 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
             remote_user,
             provider="google",
             provider_access_token="provider-token",
+            provider_uid=None,
             page_context="auth/appwrite/callback",
         )
 

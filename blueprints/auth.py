@@ -597,6 +597,7 @@ def _complete_appwrite_login(
     provider="appwrite",
     email=None,
     provider_access_token=None,
+    provider_uid=None,
     page_context="auth/session",
 ):
     remote_user = remote_user or {}
@@ -620,7 +621,13 @@ def _complete_appwrite_login(
     discord_id_value = None
     discord_username_value = None
     if provider == "discord":
-        discord_id_value = str(provider_profile.get("id") or "").strip() or None
+        # Prefer the Discord snowflake from the Appwrite session (providerUid);
+        # fall back to the value parsed from the provider profile API call.
+        discord_id_value = (
+            str(provider_uid or "").strip()
+            or str(provider_profile.get("id") or "").strip()
+            or None
+        )
         discord_username_value = provider_profile.get("username") or provider_profile.get("name")
 
     name = provider_name or remote_user.get("name") or remote_user.get("displayName")
@@ -834,16 +841,21 @@ def appwrite_oauth_failure(state):
     """Handle Appwrite/provider OAuth failure redirects without exposing query flags."""
     expected_state = session.get(APPWRITE_OAUTH_STATE_KEY)
     provider = session.get(APPWRITE_OAUTH_PROVIDER_KEY) or "appwrite"
+    link_mode = bool(session.get(APPWRITE_OAUTH_LINK_MODE_KEY))
     if not expected_state or state != expected_state:
         logger.warning("Rejected Appwrite OAuth failure redirect with invalid state")
         _clear_appwrite_oauth_state()
+        if link_mode:
+            return redirect(url_for("settings.settings_page") + "?discord=error#account")
         return _login_error_redirect(AUTH_ERROR_OAUTH_STATE, {
             "provider": provider,
             "failure_phase": "provider_failure_redirect",
         })
 
-    logger.warning("Appwrite OAuth provider flow failed: provider=%s", provider)
+    logger.warning("Appwrite OAuth provider flow failed: provider=%s link_mode=%s", provider, link_mode)
     _clear_appwrite_oauth_state()
+    if link_mode:
+        return redirect(url_for("settings.settings_page") + "?discord=error#account")
     return _login_error_redirect(AUTH_ERROR_OAUTH_PROVIDER, {
         "provider": provider,
         "failure_phase": "provider_failure_redirect",
@@ -879,11 +891,13 @@ def appwrite_oauth_callback(state):
         appwrite_session = _account_to_dict(Account(appwrite_client).create_session(user_id, secret))
         provider = appwrite_session.get("provider") or provider
         provider_access_token = appwrite_session.get("providerAccessToken")
+        provider_uid = appwrite_session.get("providerUid")
         remote_user = _account_from_user_id(user_id)
         result = _complete_appwrite_login(
             remote_user,
             provider=provider,
             provider_access_token=provider_access_token,
+            provider_uid=provider_uid,
             page_context="auth/appwrite/callback",
         )
     except Exception as exc:
@@ -951,15 +965,39 @@ def appwrite_discord_link_callback(state):
     try:
         appwrite_session = _account_to_dict(Account(appwrite_client).create_session(user_id, secret))
         provider_access_token = appwrite_session.get("providerAccessToken")
-        identity = _fetch_provider_profile("discord", provider_access_token)
-        discord_id_value = str(identity.get("id") or "").strip()
-        if discord_id_value:
+        provider_uid = str(appwrite_session.get("providerUid") or "").strip()
+
+        # The Appwrite session's providerUid is the Discord snowflake and does
+        # not require a follow-up Discord API call. The profile fetch is only
+        # used to enrich the stored username when an access token is available.
+        identity = _fetch_provider_profile("discord", provider_access_token) if provider_access_token else {}
+        discord_id_value = provider_uid or str(identity.get("id") or "").strip()
+        discord_username_value = identity.get("username") or identity.get("name")
+
+        if not discord_id_value:
+            logger.warning(
+                "Discord link failed to resolve a Discord ID: has_provider_uid=%s has_access_token=%s",
+                bool(provider_uid),
+                bool(provider_access_token),
+            )
+        else:
+            if not discord_username_value:
+                # No username from the OAuth profile (e.g. providerUid-only):
+                # resolve it through the bot so the UI can show a real handle.
+                try:
+                    discord_user = discord_bridge.fetch_discord_user(discord_id_value)
+                    if discord_user:
+                        discord_username_value = (
+                            discord_user.get("username") or discord_user.get("global_name")
+                        )
+                except Exception:
+                    logger.exception("Failed to resolve Discord username for %s", discord_id_value)
             update_row_safe(
                 COLLECTIONS["users"],
                 str(current_user.id),
                 {
                     "discord_id": discord_id_value,
-                    "discord_username": identity.get("username") or identity.get("name"),
+                    "discord_username": discord_username_value,
                     "discord_linked_at": format_datetime(datetime.utcnow()),
                 },
             )
