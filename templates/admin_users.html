@@ -70,7 +70,7 @@
                             <td data-label="Username">{{ user.username or "--" }}</td>
                             <td data-label="Onboarding">
                                 {% if user.onboarding_complete %}
-                                    <span class="admin-badge">Complete</span>
+                                    <span class="admin-badge{% if user.discord_linked %} admin-badge--discord{% endif %}">Complete</span>
                                 {% else %}
                                     <span class="admin-badge admin-badge--muted">Step {{ user.onboarding_step }}</span>
                                 {% endif %}

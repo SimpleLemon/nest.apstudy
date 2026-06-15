@@ -593,6 +593,12 @@ body.admin-page [hidden] {
     color: var(--admin-muted);
 }
 
+/* Golden-yellow badge for onboarded users who have linked their Discord. */
+.admin-badge--discord {
+    background: color-mix(in srgb, #f5c518 22%, transparent);
+    color: #b8860b;
+}
+
 .admin-tabs {
     display: flex;
     gap: 10px;

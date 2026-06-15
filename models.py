@@ -38,6 +38,9 @@ class User(UserMixin):
         self.graduation_year = data.get("graduation_year")
         self.emory_student = data.get("emory_student")
         self.emory_email = data.get("emory_email")
+        self.discord_id = data.get("discord_id")
+        self.discord_username = data.get("discord_username")
+        self.discord_linked_at = data.get("discord_linked_at")
         self.created_at = parse_datetime(data.get("created_at"))
         self.last_login = parse_datetime(data.get("last_login"))
 

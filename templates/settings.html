@@ -76,6 +76,9 @@
                                 <div class="settings-card-summary">
                                     <h3>Account Details</h3>
                                     <p>Your account identifiers and information.</p>
+                                    <div class="settings-discord-link">
+                                        <button type="button" id="settings-discord-button" class="settings-button settings-button-discord" data-link-url="{{ url_for('auth.appwrite_discord_link_start') }}" hidden></button>
+                                    </div>
                                 </div>
                                 <div class="settings-card-content">
                                     <div class="settings-field-grid settings-field-grid-two">
@@ -407,5 +410,17 @@
             <global class="thefooter"></global>
         </div>
     </main>
+    <div id="settings-discord-modal" class="settings-discord-modal" role="dialog" aria-modal="true" aria-labelledby="settings-discord-modal-title" hidden>
+        <div class="settings-discord-modal-backdrop" data-discord-modal-close></div>
+        <div class="settings-discord-modal-panel" role="document">
+            <h2 id="settings-discord-modal-title" class="settings-discord-modal-title">Discord account</h2>
+            <p class="settings-discord-modal-subtitle">Manage the Discord account linked to your profile.</p>
+            <div class="settings-discord-modal-actions">
+                <button type="button" id="settings-discord-unlink" class="settings-button settings-button-danger settings-discord-modal-button"></button>
+                <button type="button" id="settings-discord-relink" class="settings-button settings-button-secondary settings-discord-modal-button">Link a Different Account</button>
+            </div>
+            <button type="button" class="settings-discord-modal-cancel" data-discord-modal-close>Cancel</button>
+        </div>
+    </div>
 </body>
 </html>

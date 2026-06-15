@@ -19,6 +19,9 @@ Table: users
 - class_year VARCHAR(64) -> string(64) attribute: class_year
 - emory_student BOOLEAN -> boolean attribute: emory_student
 - emory_email VARCHAR(255) -> email attribute: emory_email
+- discord_id VARCHAR(64) -> string(64) attribute: discord_id
+- discord_username VARCHAR(255) -> string(255) attribute: discord_username
+- discord_linked_at DATETIME -> datetime attribute: discord_linked_at
 - created_at DATETIME NOT NULL -> datetime attribute: created_at
 - last_login DATETIME -> datetime attribute: last_login
 

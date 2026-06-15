@@ -464,6 +464,7 @@ def _user_summary(user_doc):
         "last_login": _format_admin_datetime(user_doc.get("last_login")),
         "onboarding_complete": bool(user_doc.get("onboarding_complete")),
         "onboarding_step": user_doc.get("onboarding_step") or 1,
+        "discord_linked": bool(user_doc.get("discord_id")),
         "emory_student": bool(user_doc.get("emory_student")),
         "school": user_doc.get("school"),
         "major": user_doc.get("major"),

@@ -42,6 +42,7 @@ from services.atlas_client import DEFAULT_TERM
 from services.avatar_storage import build_avatar_view_url, delete_avatar_file
 from services.chat_presence import sync_chat_presence_labels_for_user
 from services.discord_audit import emit_creation_event, emit_user_event, format_actor
+from services import discord_bridge
 from services.calendar_store import delete_calendar_rows_by_user
 from services.universities import school_payload
 
@@ -1045,10 +1046,45 @@ def bootstrap_settings():
         "connected_services": [],
         "other_calendar_urls": _load_other_calendar_urls(user_settings),
         "member_since": _format_member_since(current_user.created_at),
+        "discord": {
+            "linked": bool(getattr(current_user, "discord_id", None)),
+            "username": getattr(current_user, "discord_username", None),
+        },
     })
 
 
 # ── API routes (called by settings page JavaScript) ──────────────────────────
+
+@settings_bp.route("/api/discord/unlink", methods=["POST"])
+@login_required
+def unlink_discord():
+    """Unlink the current user's Discord account and revoke the guild role."""
+    discord_id = getattr(current_user, "discord_id", None)
+    if discord_id:
+        try:
+            discord_bridge.remove_guild_member_role(discord_id)
+        except Exception:
+            logger.exception("Failed to remove Discord role during unlink for %s", discord_id)
+
+    try:
+        update_row_safe(
+            COLLECTIONS["users"],
+            str(current_user.id),
+            {
+                "discord_id": None,
+                "discord_username": None,
+                "discord_linked_at": None,
+            },
+        )
+    except AppwriteException:
+        logger.exception("Failed to clear Discord link fields")
+        return jsonify({"error": "Unable to unlink Discord account."}), 500
+
+    current_user.discord_id = None
+    current_user.discord_username = None
+    current_user.discord_linked_at = None
+    return jsonify({"status": "ok"})
+
 
 @settings_bp.route("/api/profile", methods=["POST"])
 @login_required

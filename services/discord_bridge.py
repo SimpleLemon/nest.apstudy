@@ -17,6 +17,9 @@ logger = logging.getLogger(__name__)
 DISCORD_API_BASE = "https://discord.com/api/v10"
 WEBHOOK_CONFIG_KEY = "nest_chat_webhook"
 DEFAULT_GUILD_ID = "867928393558151228"
+# Guild/role used for the Discord account-linking membership reward.
+LINK_GUILD_ID = os.environ.get("DISCORD_LINK_GUILD_ID", "859910344393883710")
+LINK_ROLE_ID = os.environ.get("DISCORD_LINK_ROLE_ID", "1338596013371555953")
 GUILD_ROLES_CACHE_SECONDS = 10 * 60
 _guild_roles_cache = {}
 _user_cache = {}
@@ -99,6 +102,116 @@ def fetch_discord_user(user_id):
         return cached["user"] if cached else None
     _user_cache[user_id] = {"loaded_at": now, "user": user}
     return user
+
+
+def _link_guild_id(guild_id=None):
+    return str(guild_id or LINK_GUILD_ID or "").strip()
+
+
+def _link_role_id(role_id=None):
+    return str(role_id or LINK_ROLE_ID or "").strip()
+
+
+def add_guild_member_role(discord_user_id, guild_id=None, role_id=None):
+    """Grant the membership role to a linked Discord user.
+
+    Returns True on success. Returns False (and logs) on failure so callers can
+    treat role granting as best-effort without breaking the link workflow.
+    """
+    discord_user_id = str(discord_user_id or "").strip()
+    guild_id = _link_guild_id(guild_id)
+    role_id = _link_role_id(role_id)
+    if not discord_user_id or not guild_id or not role_id or not _bot_token():
+        return False
+    try:
+        response = requests.put(
+            f"{DISCORD_API_BASE}/guilds/{guild_id}/members/{discord_user_id}/roles/{role_id}",
+            headers=_headers(),
+            timeout=8,
+        )
+    except (requests.RequestException, DiscordBridgeError):
+        logger.exception("Failed to grant Discord role to %s", discord_user_id)
+        return False
+    # 201 = role added, 204 = already had role.
+    if response.status_code in {201, 204}:
+        return True
+    logger.warning(
+        "Discord role grant returned %s for user %s: %s",
+        response.status_code,
+        discord_user_id,
+        response.text[:200],
+    )
+    return False
+
+
+def remove_guild_member_role(discord_user_id, guild_id=None, role_id=None):
+    """Remove the membership role from a Discord user.
+
+    Treats a missing member/role (404) as success so database unlinking can
+    proceed even when the user already left the guild. Returns True when the
+    role is gone after the call, False on hard failures.
+    """
+    discord_user_id = str(discord_user_id or "").strip()
+    guild_id = _link_guild_id(guild_id)
+    role_id = _link_role_id(role_id)
+    if not discord_user_id or not guild_id or not role_id or not _bot_token():
+        return False
+    try:
+        response = requests.delete(
+            f"{DISCORD_API_BASE}/guilds/{guild_id}/members/{discord_user_id}/roles/{role_id}",
+            headers=_headers(),
+            timeout=8,
+        )
+    except (requests.RequestException, DiscordBridgeError):
+        logger.exception("Failed to remove Discord role from %s", discord_user_id)
+        return False
+    # 204 = removed, 404 = user no longer in guild / role missing (treat as done).
+    if response.status_code in {204, 404}:
+        return True
+    logger.warning(
+        "Discord role removal returned %s for user %s: %s",
+        response.status_code,
+        discord_user_id,
+        response.text[:200],
+    )
+    return False
+
+
+def member_has_role(discord_user_id, guild_id=None, role_id=None):
+    """Return whether a guild member currently has the membership role.
+
+    Returns None when the user is not a guild member or membership could not be
+    determined, otherwise a bool.
+    """
+    discord_user_id = str(discord_user_id or "").strip()
+    guild_id = _link_guild_id(guild_id)
+    role_id = _link_role_id(role_id)
+    if not discord_user_id or not guild_id or not role_id or not _bot_token():
+        return None
+    try:
+        response = requests.get(
+            f"{DISCORD_API_BASE}/guilds/{guild_id}/members/{discord_user_id}",
+            headers=_headers(),
+            timeout=8,
+        )
+    except (requests.RequestException, DiscordBridgeError):
+        logger.exception("Failed to fetch Discord member %s", discord_user_id)
+        return None
+    if response.status_code == 404:
+        return None
+    if response.status_code >= 400:
+        logger.warning(
+            "Discord member lookup returned %s for user %s: %s",
+            response.status_code,
+            discord_user_id,
+            response.text[:200],
+        )
+        return None
+    try:
+        member = response.json()
+    except ValueError:
+        return None
+    return role_id in (member.get("roles") or [])
 
 
 def _get_bridge_config():

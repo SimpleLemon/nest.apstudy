@@ -310,6 +310,49 @@ def _current_daily_quote_date():
     return utc_quote_date()
 
 
+def _sync_discord_roles(app):
+    """Ensure every user with a linked Discord account still holds the role.
+
+    Tracks members who joined (or rejoined) the guild after linking: if a linked
+    user is in the guild but missing the membership role, it is granted. Runs
+    inside the Flask app context for database access.
+    """
+    with app.app_context():
+        try:
+            from services import discord_bridge
+        except Exception:
+            logger.exception("Failed to import discord_bridge for role sync")
+            return
+
+        if not discord_bridge._bot_token():
+            return
+
+        try:
+            linked_users = list_rows_all(
+                COLLECTIONS["users"],
+                [Query.is_not_null("discord_id")],
+            )
+        except AppwriteException:
+            logger.exception("Failed to list users for Discord role sync")
+            return
+
+        granted = 0
+        for user in linked_users:
+            discord_id = str(user.get("discord_id") or "").strip()
+            if not discord_id:
+                continue
+            try:
+                has_role = discord_bridge.member_has_role(discord_id)
+                # None => not a guild member (cannot grant); only act when False.
+                if has_role is False:
+                    if discord_bridge.add_guild_member_role(discord_id):
+                        granted += 1
+            except Exception:
+                logger.exception("Discord role sync failed for %s", discord_id)
+        if granted:
+            logger.info("Discord role sync: granted role to %s user(s).", granted)
+
+
 def _fetch_daily_quote(app, quote_date=None, attempt=0):
     """Fetch and persist the global daily quote inside the Flask app context."""
     target_date = quote_date or _current_daily_quote_date()
@@ -469,6 +512,18 @@ def init_scheduler(app):
             replace_existing=True,
             max_instances=1,
         )
+
+        discord_role_sync_minutes = int(os.environ.get("DISCORD_ROLE_SYNC_MINUTES", "30"))
+        if discord_role_sync_minutes > 0:
+            _scheduler.add_job(
+                func=lambda: _sync_discord_roles(app),
+                trigger=IntervalTrigger(minutes=discord_role_sync_minutes),
+                id="sync_discord_roles",
+                name=f"Sync linked Discord member roles every {discord_role_sync_minutes} min",
+                replace_existing=True,
+                max_instances=1,
+                coalesce=True,
+            )
 
         discord_gateway_enabled = os.environ.get("DISCORD_GATEWAY_ENABLED", "1") != "0"
         discord_reconcile_seconds = int(os.environ.get("DISCORD_CHAT_RECONCILE_SECONDS", "300"))

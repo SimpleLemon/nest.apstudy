@@ -26,7 +26,7 @@ from flask import (
     Blueprint, Response, abort, redirect, url_for, session, render_template, request, jsonify, make_response,
     current_app
 )
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 
 from appwrite.client import Client
 from appwrite.exception import AppwriteException
@@ -50,6 +50,7 @@ from avatar_images import DEFAULT_AVATAR_URL
 from services.avatar_storage import delete_avatar_file, store_avatar_from_url
 from services.chat_presence import sync_chat_presence_labels_for_user
 from services.discord_audit import emit_server_log_event, emit_user_event, format_actor, format_user_target
+from services import discord_bridge
 
 auth_bp = Blueprint("auth", __name__)
 logger = logging.getLogger(__name__)
@@ -109,6 +110,7 @@ APPWRITE_OAUTH_PROVIDERS = {
 }
 APPWRITE_OAUTH_STATE_KEY = "appwrite_oauth_state"
 APPWRITE_OAUTH_PROVIDER_KEY = "appwrite_oauth_provider"
+APPWRITE_OAUTH_LINK_MODE_KEY = "appwrite_oauth_link_mode"
 APPWRITE_OAUTH_REQUIRED_SCOPES = ("sessions.write",)
 AUTH_ERROR_SESSION_KEY = "auth_error_code"
 AUTH_ERROR_OAUTH_START_SCOPE = "AUTH-OAUTH-START-SCOPE"
@@ -359,6 +361,7 @@ def _fetch_provider_identity(provider, access_token):
                     "id": data.get("id"),
                     "email": data.get("email"),
                     "name": data.get("global_name") or data.get("username"),
+                    "username": data.get("username") or data.get("global_name"),
                     "avatar_url": _discord_avatar_url(data),
                 }
             logger.warning("Discord identity fetch failed: %s", response.status_code)
@@ -463,7 +466,9 @@ def _public_profile_payload(user_doc):
 def _fetch_provider_profile(provider, access_token):
     identity = _fetch_provider_identity(provider, access_token)
     return {
+        "id": identity.get("id"),
         "name": identity.get("name"),
+        "username": identity.get("username"),
         "avatar_url": identity.get("avatar_url"),
     } if identity else {}
 
@@ -578,6 +583,7 @@ def _login_error_text(error_code):
 def _clear_appwrite_oauth_state():
     session.pop(APPWRITE_OAUTH_STATE_KEY, None)
     session.pop(APPWRITE_OAUTH_PROVIDER_KEY, None)
+    session.pop(APPWRITE_OAUTH_LINK_MODE_KEY, None)
 
 
 def _redirect_for_user_doc(user_doc):
@@ -611,6 +617,12 @@ def _complete_appwrite_login(
     provider_name = provider_profile.get("name")
     provider_avatar_url = _provider_avatar_url(provider_profile, remote_user, provider=provider)
 
+    discord_id_value = None
+    discord_username_value = None
+    if provider == "discord":
+        discord_id_value = str(provider_profile.get("id") or "").strip() or None
+        discord_username_value = provider_profile.get("username") or provider_profile.get("name")
+
     name = provider_name or remote_user.get("name") or remote_user.get("displayName")
     picture_url = provider_avatar_url
 
@@ -640,6 +652,10 @@ def _complete_appwrite_login(
         }
         if provider and provider != "appwrite":
             row_data["provider"] = provider
+        if discord_id_value:
+            row_data["discord_id"] = discord_id_value
+            row_data["discord_username"] = discord_username_value
+            row_data["discord_linked_at"] = created_at
         user_doc = create_row_safe(
             COLLECTIONS["users"],
             row_id=appwrite_user_id,
@@ -687,6 +703,11 @@ def _complete_appwrite_login(
             updates["email"] = email
         if provider and provider != "appwrite":
             updates["provider"] = provider
+        if discord_id_value:
+            updates["discord_id"] = discord_id_value
+            updates["discord_username"] = discord_username_value
+            if not user_doc.get("discord_id"):
+                updates["discord_linked_at"] = format_datetime(datetime.utcnow())
 
         row_id = user_doc.get("$id") or user_doc.get("id")
         if not row_id:
@@ -702,6 +723,12 @@ def _complete_appwrite_login(
     session["user_id"] = user_doc.get("$id") or user_doc.get("id")
     session["email"] = email or remote_email
     _set_oauth_session(provider, appwrite_user_id, email, name=name, picture_url=picture_url)
+
+    if discord_id_value:
+        try:
+            discord_bridge.add_guild_member_role(discord_id_value)
+        except Exception:
+            logger.exception("Failed to grant Discord role on login for %s", discord_id_value)
 
     if created_user:
         emit_user_event(
@@ -874,6 +901,80 @@ def appwrite_oauth_callback(state):
 
     _clear_appwrite_oauth_state()
     return redirect(result["redirect"])
+
+
+@auth_bp.route("/auth/appwrite/discord/link")
+@login_required
+def appwrite_discord_link_start():
+    """Start a Discord OAuth flow to link an account while staying logged in."""
+    state = secrets.token_urlsafe(32)
+    session[APPWRITE_OAUTH_STATE_KEY] = state
+    session[APPWRITE_OAUTH_PROVIDER_KEY] = "discord"
+    session[APPWRITE_OAUTH_LINK_MODE_KEY] = True
+    success_url = url_for("auth.appwrite_discord_link_callback", state=state, _external=True)
+    failure_url = _appwrite_oauth_failure_url(state)
+
+    try:
+        redirect_url = _appwrite_oauth_redirect_url("discord", success_url, failure_url)
+    except Exception as exc:
+        _log_oauth_exception(
+            "Failed to start Discord link flow: success_scheme=%s",
+            exc,
+            request.scheme,
+        )
+        _clear_appwrite_oauth_state()
+        return redirect(url_for("settings.settings_page") + "?discord=error#account")
+
+    return redirect(redirect_url)
+
+
+@auth_bp.route("/auth/appwrite/discord/link/callback/<state>")
+@login_required
+def appwrite_discord_link_callback(state):
+    """Complete a Discord link flow and attach the identity to the current user."""
+    settings_redirect = url_for("settings.settings_page") + "#account"
+    expected_state = session.get(APPWRITE_OAUTH_STATE_KEY)
+    link_mode = session.get(APPWRITE_OAUTH_LINK_MODE_KEY)
+    if not expected_state or state != expected_state or not link_mode:
+        logger.warning("Rejected Discord link callback with invalid state")
+        _clear_appwrite_oauth_state()
+        return redirect(url_for("settings.settings_page") + "?discord=error#account")
+
+    user_id = request.args.get("userId") or request.args.get("user_id")
+    secret = request.args.get("secret")
+    if not user_id or not secret:
+        logger.warning("Rejected Discord link callback with missing credentials")
+        _clear_appwrite_oauth_state()
+        return redirect(url_for("settings.settings_page") + "?discord=error#account")
+
+    linked = False
+    try:
+        appwrite_session = _account_to_dict(Account(appwrite_client).create_session(user_id, secret))
+        provider_access_token = appwrite_session.get("providerAccessToken")
+        identity = _fetch_provider_profile("discord", provider_access_token)
+        discord_id_value = str(identity.get("id") or "").strip()
+        if discord_id_value:
+            update_row_safe(
+                COLLECTIONS["users"],
+                str(current_user.id),
+                {
+                    "discord_id": discord_id_value,
+                    "discord_username": identity.get("username") or identity.get("name"),
+                    "discord_linked_at": format_datetime(datetime.utcnow()),
+                },
+            )
+            linked = True
+            try:
+                discord_bridge.add_guild_member_role(discord_id_value)
+            except Exception:
+                logger.exception("Failed to grant Discord role for %s", discord_id_value)
+    except Exception as exc:
+        _log_oauth_exception("Failed to complete Discord link callback", exc)
+
+    _clear_appwrite_oauth_state()
+    if not linked:
+        return redirect(url_for("settings.settings_page") + "?discord=error#account")
+    return redirect(settings_redirect)
 
 
 @auth_bp.route("/user/<user_id>")

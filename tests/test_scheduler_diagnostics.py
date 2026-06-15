@@ -92,7 +92,13 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
         self.assertTrue(status["scheduler_lock_acquired"])
         self.assertEqual(
             {job["id"] for job in status["jobs"]},
-            {"refresh_all_feeds", "check_course_seat_tracks", "fetch_daily_quote", "reconcile_discord_chat"},
+            {
+                "refresh_all_feeds",
+                "check_course_seat_tracks",
+                "fetch_daily_quote",
+                "reconcile_discord_chat",
+                "sync_discord_roles",
+            },
         )
         course_tracking_job = next(job for job in status["jobs"] if job["id"] == "check_course_seat_tracks")
         self.assertIn("30 min", course_tracking_job["name"])
