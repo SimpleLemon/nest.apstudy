@@ -308,6 +308,10 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(source, /FormattingToolbarController/);
     assert.match(toolbarSource, /function ContextualNotesToolbar\(\)/);
     assert.match(source, /formattingToolbar: false/);
+    assert.match(source, /function handleNotesPaste\(\{ defaultPasteHandler \}\)/);
+    assert.match(source, /pasteHandler: handleNotesPaste/);
+    assert.match(source, /prioritizeMarkdownOverHTML: true/);
+    assert.match(source, /plainTextAsMarkdown: true/);
     assert.doesNotMatch(source, /slashMenu:\s*false/);
     assert.doesNotMatch(source, /function FontSizeControl/);
     assert.doesNotMatch(source, /TextColorDropdown/);
@@ -328,6 +332,11 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.ok(styles.includes('content: "\\2022" !important;'));
     assert.ok(styles.includes('content: attr(data-index) "." !important;'));
     assert.match(styles, /\.blocknote-container \.bn-block-content\[data-content-type="checkListItem"\] input\[type="checkbox"\]/);
+    assert.match(styles, /\.blocknote-container \[data-content-type="table"\] table/);
+    assert.match(styles, /\.blocknote-container \.bn-block-content\[data-content-type="quote"\]/);
+    assert.match(styles, /\.blocknote-container \.bn-block-content\[data-content-type="codeBlock"\]/);
+    assert.match(styles, /\.blocknote-container \[data-content-type="horizontalRule"\]/);
+    assert.match(styles, /\.blocknote-container \.bn-block-group \.bn-block-group/);
     assert.match(styles, /\.notes-writing-toolbar button:disabled/);
     assert.match(editorTemplate, /data-editor-action="add-block"/);
     assert.doesNotMatch(editorTemplate, /<global class="thefooter"><\/global>/);

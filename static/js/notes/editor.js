@@ -1127,10 +1127,18 @@ window.addEventListener('beforeunload', (event) => {
     event.returnValue = '';
 });
 
+function handleNotesPaste({ defaultPasteHandler }) {
+    return defaultPasteHandler({
+        prioritizeMarkdownOverHTML: true,
+        plainTextAsMarkdown: true,
+    });
+}
+
 function NoteEditor({ initialContent }) {
     const editor = useCreateBlockNote({
         initialContent,
         schema: notesEditorSchema,
+        pasteHandler: handleNotesPaste,
         placeholders: {
             default: undefined,
             emptyDocument: "Enter text or type '/' for commands",
