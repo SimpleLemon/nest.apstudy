@@ -216,7 +216,6 @@ body.landing-page a {
     .landing-nav-menu .landing-nav-cta {
         grid-column: 3;
         justify-self: end;
-        min-width: 104px;
     }
 }
 

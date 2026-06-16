@@ -10,19 +10,9 @@
 if (window.APStudySidebarLoaded) return;
 window.APStudySidebarLoaded = true;
 
-// Material Symbols used by dashboard tiles, plus shell controls.
 const SIDEBAR_ICONS = {
-  layoutDashboard: materialSymbol("grid_view"),
-  calendarDays: materialSymbol("calendar_today"),
-  graduationCap: materialSymbol("school"),
-  folderOpen: materialSymbol("folder"),
-  notebookPen: materialSymbol("article"),
-  checklist: materialSymbol("check_circle"),
-  messageSquare: materialSymbol("chat_bubble"),
   chevronsLeft: materialSymbol("keyboard_double_arrow_left"),
   chevronsRight: materialSymbol("keyboard_double_arrow_right"),
-  settings: materialSymbol("settings"),
-  search: materialSymbol("search"),
 };
 
 function materialSymbol(name) {
@@ -38,118 +28,13 @@ function ensureMaterialSymbolsFont() {
   document.head.appendChild(link);
 }
 
-function renderSidebar() {
-  const sidebarPlaceholder = document.querySelector('global.thesidebar');
-  if (!sidebarPlaceholder) return;
+function initSidebar() {
+  const sidebar = document.querySelector('.sidebar-container');
+  if (!sidebar) return;
   ensureMaterialSymbolsFont();
 
-  const userDataEl = document.querySelector('[data-user-emory-student]');
-  const isEmoryStudent = userDataEl?.dataset?.userEmoryStudent === 'true' || userDataEl?.dataset?.userEmoryStudent === 'True';
-  const sidebarDefault = normalizeSidebarDefault(sidebarPlaceholder?.dataset?.sidebarDefault);
-  const currentPath = window.location.pathname;
-
-  const isActive = (routePath) => {
-    if (routePath === '/dashboard') return currentPath === '/' || currentPath === '/dashboard';
-    return currentPath === routePath;
-  };
-
-  const sidebarHTML = `
-<div class="sidebar-container" id="sidebar-root" role="navigation" aria-label="Primary navigation">
-  <div class="sidebar-scroll">
-    <div class="sidebar-content">
-      <!-- Dashboard Section -->
-      <div class="sidebar-section">
-        <button class="sidebar-item ${isActive('/dashboard') ? 'active' : ''}" data-route="/dashboard" aria-label="Dashboard">
-          <span class="sidebar-item-icon">${SIDEBAR_ICONS.layoutDashboard}</span>
-          <span class="sidebar-item-label">Dashboard</span>
-        </button>
-      </div>
-
-      <!-- My Nest Section -->
-      <div class="sidebar-section">
-        <div class="sidebar-section-label">My Nest</div>
-        
-        <button class="sidebar-item ${isActive('/calendar') ? 'active' : ''}" data-route="/calendar" aria-label="Calendar">
-          <span class="sidebar-item-icon">${SIDEBAR_ICONS.calendarDays}</span>
-          <span class="sidebar-item-label">Calendar</span>
-        </button>
-
-        ${isEmoryStudent ? `
-        <button class="sidebar-item ${isActive('/courses') ? 'active' : ''}" data-route="/courses" aria-label="Courses">
-          <span class="sidebar-item-icon">${SIDEBAR_ICONS.graduationCap}</span>
-          <span class="sidebar-item-label">Courses</span>
-        </button>` : ''}
-
-        <button class="sidebar-item ${isActive('/files') ? 'active' : ''}" data-route="/files" aria-label="Files">
-          <span class="sidebar-item-icon">${SIDEBAR_ICONS.folderOpen}</span>
-          <span class="sidebar-item-label">Files</span>
-        </button>
-
-        <button class="sidebar-item ${isActive('/notes') ? 'active' : ''}" data-route="/notes" aria-label="Notes">
-          <span class="sidebar-item-icon">${SIDEBAR_ICONS.notebookPen}</span>
-          <span class="sidebar-item-label">Notes</span>
-        </button>
-
-        <button class="sidebar-item ${isActive('/tasks') ? 'active' : ''}" data-route="/tasks" aria-label="Tasks">
-          <span class="sidebar-item-icon">${SIDEBAR_ICONS.checklist}</span>
-          <span class="sidebar-item-label">Tasks</span>
-        </button>
-      </div>
-
-      <!-- Other Section -->
-      <div class="sidebar-section">
-        <div class="sidebar-section-label">Other</div>
-        <button class="sidebar-item ${isActive('/chat') ? 'active' : ''}" data-route="/chat" aria-label="Chat">
-          <span class="sidebar-item-icon">${SIDEBAR_ICONS.messageSquare}</span>
-          <span class="sidebar-item-label">Chat</span>
-          <span class="sidebar-chat-badge" data-chat-unread-badge hidden></span>
-        </button>
-      </div>
-
-      <!-- Spacer -->
-      <div class="sidebar-spacer"></div>
-    </div>
-
-    <!-- Settings (pinned to bottom) -->
-    <div class="sidebar-settings">
-      <button class="sidebar-item ${isActive('/settings') ? 'active' : ''}" data-route="/settings" aria-label="Settings">
-        <span class="sidebar-item-icon">${SIDEBAR_ICONS.settings}</span>
-        <span class="sidebar-item-label">Settings</span>
-      </button>
-    </div>
-  </div>
-
-  <button class="sidebar-toggle-handle" id="sidebar-toggle-handle" type="button" aria-label="Toggle sidebar" aria-expanded="true">
-    <span class="sidebar-toggle-line" aria-hidden="true"></span>
-    <span class="sidebar-toggle-icon" aria-hidden="true"></span>
-    <span class="sidebar-toggle-tooltip">Collapse</span>
-  </button>
-</div>
-
-<!-- Tooltip for collapsed state -->
-<div class="sidebar-tooltip" id="sidebar-tooltip"></div>
-<div class="sidebar-mobile-backdrop" id="sidebar-mobile-backdrop" hidden></div>
-  `;
-
-  const temp = document.createElement('div');
-  temp.innerHTML = sidebarHTML;
-  
-  const sidebarWrapper = temp.querySelector('.sidebar-container');
-  if (sidebarWrapper && !document.querySelector('.sidebar-container')) {
-    document.body.insertAdjacentElement('afterbegin', sidebarWrapper);
-    document.body.classList.add('with-sidebar');
-  }
-
-  const tooltip = temp.querySelector('.sidebar-tooltip');
-  if (tooltip && !document.querySelector('.sidebar-tooltip')) {
-    document.body.appendChild(tooltip);
-  }
-
-  const backdrop = temp.querySelector('.sidebar-mobile-backdrop');
-  if (backdrop && !document.querySelector('.sidebar-mobile-backdrop')) {
-    document.body.appendChild(backdrop);
-  }
-
+  document.body.classList.add('with-sidebar');
+  const sidebarDefault = normalizeSidebarDefault(sidebar?.dataset?.sidebarDefault);
   setupSidebarInteractions(sidebarDefault);
 }
 
@@ -310,10 +195,10 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
   // Navigation items
   items.forEach((item) => {
     item.addEventListener('click', (e) => {
-      e.preventDefault();
       const route = item.dataset.route;
+      setMobileSidebarOpen(false);
       if (route) {
-        setMobileSidebarOpen(false);
+        e.preventDefault();
         window.location.href = route;
       }
     });
@@ -414,8 +299,8 @@ function setupChatSummaryBadge() {
 
 // Initialize sidebar when DOM is ready
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', renderSidebar);
+  document.addEventListener('DOMContentLoaded', initSidebar);
 } else {
-  renderSidebar();
+  initSidebar();
 }
 })();

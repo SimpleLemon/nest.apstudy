@@ -37,7 +37,8 @@
 <body class="legal-page{% if viewer %} legal-page--authenticated{% endif %}">
     {% if viewer %}
     <global class="thenav" data-profile-picture="{{ (viewer.picture or '')|avatar_url(32) }}" data-user-email="{{ viewer.email }}"></global>
-    <global class="thesidebar" data-user-emory-student="{{ viewer.emory_student }}" data-sidebar-default="{{ sidebar_default|default('expanded') }}"></global>
+    {% set sidebar_user_emory_student = viewer.emory_student %}
+    {% include "_sidebar.html" %}
     {% else %}
     <nav class="legal-public-nav" aria-label="Legal navigation">
         <a class="legal-public-brand" href="{{ url_for('auth.login') }}">

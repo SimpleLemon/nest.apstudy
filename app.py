@@ -108,7 +108,7 @@ def create_app():
         from flask_login import current_user
 
         if not current_user.is_authenticated:
-            return {"sidebar_default": "expanded", "avatar_src": avatar_url_for_size}
+            return {"sidebar_default": "expanded", "avatar_src": avatar_url_for_size, "can_access_admin": False}
 
         try:
             from appwrite.query import Query
@@ -127,7 +127,14 @@ def create_app():
         sidebar_default = str(raw_sidebar_default or "").strip().lower()
         if sidebar_default not in {"expanded", "collapsed"}:
             sidebar_default = "expanded"
-        return {"sidebar_default": sidebar_default, "avatar_src": avatar_url_for_size}
+        user_id = str(getattr(current_user, "id", "") or "")
+        from services.admin_access import user_can_access_admin
+
+        return {
+            "sidebar_default": sidebar_default,
+            "avatar_src": avatar_url_for_size,
+            "can_access_admin": user_can_access_admin(user_id),
+        }
 
     # Register all blueprints
     from blueprints import register_blueprints

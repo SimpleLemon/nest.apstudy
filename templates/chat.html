@@ -28,7 +28,8 @@
 </head>
 <body class="chat-body bg-surface text-on-surface font-body antialiased selection:bg-primary/30 selection:text-primary-fixed">
     <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
-    <global class="thesidebar" data-user-emory-student="{{ user.emory_student }}" data-sidebar-default="{{ sidebar_default|default('expanded') }}"></global>
+    {% set sidebar_user_emory_student = user.emory_student %}
+    {% include "_sidebar.html" %}
     <main class="chat-app"
           data-current-user-id="{{ user.id or '' }}"
           data-discord-invite-url="{{ discord_invite_url or '' }}"

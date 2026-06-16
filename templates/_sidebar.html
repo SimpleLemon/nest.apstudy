@@ -1,0 +1,96 @@
+{% set sidebar_path = request.path %}
+{% set sidebar_is_dashboard = sidebar_path == '/' or sidebar_path == '/dashboard' %}
+{% set sidebar_is_emory_student = sidebar_user_emory_student|default(false) %}
+<nav class="sidebar-container" id="sidebar-root" aria-label="Primary navigation" data-sidebar-default="{{ sidebar_default|default('expanded') }}">
+  <div class="sidebar-scroll">
+    <div class="sidebar-content">
+      <div class="sidebar-section">
+        <a class="sidebar-item {% if sidebar_is_dashboard %}active{% endif %}" href="{{ url_for('dashboard.dashboard') }}" aria-label="Dashboard">
+          <span class="sidebar-item-icon">
+            <span class="material-symbols-outlined sidebar-material-icon" aria-hidden="true">grid_view</span>
+          </span>
+          <span class="sidebar-item-label">Dashboard</span>
+        </a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">My Nest</div>
+
+        <a class="sidebar-item {% if sidebar_path == '/calendar' %}active{% endif %}" href="{{ url_for('dashboard.calendar') }}" aria-label="Calendar">
+          <span class="sidebar-item-icon">
+            <span class="material-symbols-outlined sidebar-material-icon" aria-hidden="true">calendar_today</span>
+          </span>
+          <span class="sidebar-item-label">Calendar</span>
+        </a>
+
+        {% if sidebar_is_emory_student %}
+          <a class="sidebar-item {% if sidebar_path == '/courses' %}active{% endif %}" href="{{ url_for('dashboard.courses') }}" aria-label="Courses">
+            <span class="sidebar-item-icon">
+              <span class="material-symbols-outlined sidebar-material-icon" aria-hidden="true">school</span>
+            </span>
+            <span class="sidebar-item-label">Courses</span>
+          </a>
+        {% endif %}
+
+        <a class="sidebar-item {% if sidebar_path == '/files' %}active{% endif %}" href="{{ url_for('file_share.file_share_page') }}" aria-label="Files">
+          <span class="sidebar-item-icon">
+            <span class="material-symbols-outlined sidebar-material-icon" aria-hidden="true">folder</span>
+          </span>
+          <span class="sidebar-item-label">Files</span>
+        </a>
+
+        <a class="sidebar-item {% if sidebar_path == '/notes' or sidebar_path.startswith('/notes/') %}active{% endif %}" href="{{ url_for('dashboard.notes') }}" aria-label="Notes">
+          <span class="sidebar-item-icon">
+            <span class="material-symbols-outlined sidebar-material-icon" aria-hidden="true">article</span>
+          </span>
+          <span class="sidebar-item-label">Notes</span>
+        </a>
+
+        <a class="sidebar-item {% if sidebar_path == '/tasks' or sidebar_path == '/task' %}active{% endif %}" href="{{ url_for('dashboard.tasks') }}" aria-label="Tasks">
+          <span class="sidebar-item-icon">
+            <span class="material-symbols-outlined sidebar-material-icon" aria-hidden="true">check_circle</span>
+          </span>
+          <span class="sidebar-item-label">Tasks</span>
+        </a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Other</div>
+        <a class="sidebar-item {% if sidebar_path == '/chat' %}active{% endif %}" href="{{ url_for('dashboard.chat') }}" aria-label="Chat">
+          <span class="sidebar-item-icon">
+            <span class="material-symbols-outlined sidebar-material-icon" aria-hidden="true">chat_bubble</span>
+          </span>
+          <span class="sidebar-item-label">Chat</span>
+          <span class="sidebar-chat-badge" data-chat-unread-badge hidden></span>
+        </a>
+        {% if can_access_admin %}
+          <a class="sidebar-item {% if sidebar_path == '/admin' or sidebar_path.startswith('/admin/') %}active{% endif %}" href="{{ url_for('admin.admin_index') }}" aria-label="Admin">
+            <span class="sidebar-item-icon">
+              <span class="admin-sidebar-logo material-symbols-outlined sidebar-material-icon" aria-hidden="true">admin_panel_settings</span>
+            </span>
+            <span class="sidebar-item-label">Admin</span>
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="sidebar-spacer"></div>
+    </div>
+
+    <div class="sidebar-settings">
+      <a class="sidebar-item {% if sidebar_path == '/settings' or sidebar_path.startswith('/settings/') %}active{% endif %}" href="{{ url_for('settings.settings_page') }}" aria-label="Settings">
+        <span class="sidebar-item-icon">
+          <span class="material-symbols-outlined sidebar-material-icon" aria-hidden="true">settings</span>
+        </span>
+        <span class="sidebar-item-label">Settings</span>
+      </a>
+    </div>
+  </div>
+
+  <button class="sidebar-toggle-handle" id="sidebar-toggle-handle" type="button" aria-label="Toggle sidebar" aria-expanded="true">
+    <span class="sidebar-toggle-line" aria-hidden="true"></span>
+    <span class="sidebar-toggle-icon" aria-hidden="true"></span>
+    <span class="sidebar-toggle-tooltip">Collapse</span>
+  </button>
+</nav>
+<div class="sidebar-tooltip" id="sidebar-tooltip"></div>
+<div class="sidebar-mobile-backdrop" id="sidebar-mobile-backdrop" hidden></div>

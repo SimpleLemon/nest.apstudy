@@ -39,6 +39,7 @@ from services.app_config import (
     set_spring_course_tracking_open,
     spring_course_tracking_open,
 )
+from services.admin_access import admin_user_ids
 from services.scheduler import update_course_tracking_refresh_interval
 from services.discord_audit import discord_audit_status, emit_admin_event, format_actor, format_user_target
 from services.calendar_store import (
@@ -179,8 +180,7 @@ def _admin_template_context():
 
 
 def _admin_ids():
-    raw = os.environ.get("ADMIN_USER_IDS") or os.environ.get("ADMIN_USER_ID") or ""
-    return {item.strip() for item in raw.split(",") if item.strip()}
+    return admin_user_ids()
 
 
 def _read_os_pretty():
