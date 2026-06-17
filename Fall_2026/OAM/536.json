@@ -7,6 +7,9 @@
   "srcdb": "5269",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -54,6 +61,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -80,6 +91,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -106,6 +121,130 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3757",
+      "section_number": "2168",
+      "schedule_type": "LEC",
+      "instructor": "Goebel/Martin",
+      "instructors": [
+        {
+          "name": "Goebel/Martin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3758",
+      "section_number": "3268",
+      "schedule_type": "LEC",
+      "instructor": "Goebel/Martin",
+      "instructors": [
+        {
+          "name": "Goebel/Martin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5428",
+      "section_number": "4168",
+      "schedule_type": "LEC",
+      "instructor": "Goebel/Martin",
+      "instructors": [
+        {
+          "name": "Goebel/Martin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5429",
+      "section_number": "4268",
+      "schedule_type": "LEC",
+      "instructor": "Goebel/Martin",
+      "instructors": [
+        {
+          "name": "Goebel/Martin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -122,17 +261,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 8,
+    "lectures": 8,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 8,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "Goebel/Martin"
   ],
-  "scraped_at": "2026-05-13T00:41:12.478Z"
+  "scraped_at": "2026-06-17T23:12:33.353Z"
 }

@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -48,6 +55,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -68,6 +79,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -88,6 +103,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -108,6 +127,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -128,6 +151,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -148,6 +175,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -168,6 +199,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -188,6 +223,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -208,6 +247,250 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5876",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "D. Borthwick",
+      "instructors": [
+        {
+          "name": "D. Borthwick",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6085",
+      "section_number": "4",
+      "schedule_type": "SUP",
+      "instructor": "J. Chung",
+      "instructors": [
+        {
+          "name": "J. Chung",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5747",
+      "section_number": "10",
+      "schedule_type": "SUP",
+      "instructor": "T. Mayo",
+      "instructors": [
+        {
+          "name": "T. Mayo",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5875",
+      "section_number": "13",
+      "schedule_type": "SUP",
+      "instructor": "C. Pohoata",
+      "instructors": [
+        {
+          "name": "C. Pohoata",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6072",
+      "section_number": "15",
+      "schedule_type": "SUP",
+      "instructor": "P. Raman",
+      "instructors": [
+        {
+          "name": "P. Raman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6086",
+      "section_number": "17",
+      "schedule_type": "SUP",
+      "instructor": "V. Rodl",
+      "instructors": [
+        {
+          "name": "V. Rodl",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6204",
+      "section_number": "19",
+      "schedule_type": "SUP",
+      "instructor": "L. Ruthotto",
+      "instructors": [
+        {
+          "name": "L. Ruthotto",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5628",
+      "section_number": "24",
+      "schedule_type": "SUP",
+      "instructor": "A. Veneziani",
+      "instructors": [
+        {
+          "name": "A. Veneziani",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5872",
+      "section_number": "27",
+      "schedule_type": "SUP",
+      "instructor": "Y. Xi",
+      "instructors": [
+        {
+          "name": "Y. Xi",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5895",
+      "section_number": "30",
+      "schedule_type": "SUP",
+      "instructor": "L. Yepremyan",
+      "instructors": [
+        {
+          "name": "L. Yepremyan",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "10",
       "is_cancelled": false,
@@ -218,12 +501,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 10,
+    "total_sections": 20,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 10,
-    "open": 10,
+    "other": 20,
+    "open": 20,
     "closed": 0,
     "waitlisted": 0
   },
@@ -239,5 +522,5 @@
     "V. Rodl",
     "Y. Xi"
   ],
-  "scraped_at": "2026-05-13T00:37:47.221Z"
+  "scraped_at": "2026-06-17T23:03:54.293Z"
 }

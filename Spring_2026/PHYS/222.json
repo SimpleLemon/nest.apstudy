@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "NS",
+  "requirements": [
+    "NS"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course builds on thebasics of the introductory science courses, including the basics of quantum mechanics in PHYS 253 Modern Physics (or its equivalent Physical Chemistry course), to understand the fundamental principles of how various engineering applications and devices work.",
   "course_notes": "(PHYS 142 or PHYS_OX 142 or PHYS 152 or PHYS_OX 152) and (MATH 112 or MATH_OX 112 or MATH 112Z or MATH 116) and (CHEM 205 or CHEM_OX 205 or CHEM 331 or PHYS 253 or PHYS_OX 253) or equivalent transfer credit as prerequisite.",
   "requisites": "(PHYS 142 or PHYS_OX 142 or PHYS 152 or PHYS_OX 152) and (MATH 112 or MATH_OX 112 or MATH 112Z or MATH 116) and (CHEM 205 or CHEM_OX 205 or CHEM 331 or PHYS 253 or PHYS_OX 253) or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2013",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "J. Brody",
+      "instructors": [
+        {
+          "name": "J. Brody",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "J. Brody"
   ],
-  "scraped_at": "2026-05-13T00:38:55.132Z"
+  "scraped_at": "2026-06-17T23:06:11.162Z"
 }

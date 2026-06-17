@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "4",
   "requirement_designation": "IC",
+  "requirements": [
+    "IC"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course focuses on elementary communication skills through a systematic introduction to the basic grammatical patterns and vocabulary of the Italian language. The goal is to widen the fundamental skills of listening comprehension, speaking, reading and writing within a cultural context.",
   "course_notes": null,
   "requisites": null,
@@ -28,8 +33,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "6",
+      "enrollment_count": "7",
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a; F 10-10:50a",
@@ -64,8 +73,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "6",
+      "enrollment_count": "7",
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p; F 1-1:50p",
@@ -100,8 +113,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
-      "enrollment_count": "6",
+      "enrollment_count": "7",
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a; F 9-9:50a",
@@ -136,8 +153,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
-      "enrollment_count": "6",
+      "enrollment_count": "7",
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p; F 2-2:50p",
@@ -172,8 +193,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
-      "enrollment_count": "6",
+      "enrollment_count": "7",
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p; F 1-1:50p",
@@ -208,8 +233,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
-      "enrollment_count": "6",
+      "enrollment_count": "7",
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p; F 2-2:50p",
@@ -231,17 +260,295 @@
           }
         ]
       }
+    },
+    {
+      "crn": "6774",
+      "section_number": "9000",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "2508",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "A. Di Pietro",
+      "instructors": [
+        {
+          "name": "A. Di Pietro",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a; F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2509",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "A. Di Pietro",
+      "instructors": [
+        {
+          "name": "A. Di Pietro",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p; F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2510",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "A. Porcarelli",
+      "instructors": [
+        {
+          "name": "A. Porcarelli",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a; F 9-9:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2511",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "S. Maranzana",
+      "instructors": [
+        {
+          "name": "S. Maranzana",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p; F 2-2:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Fri",
+            "start": "1400",
+            "end": "1450"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2512",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "S. Maranzana",
+      "instructors": [
+        {
+          "name": "S. Maranzana",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p; F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2513",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "S. Muratore",
+      "instructors": [
+        {
+          "name": "S. Muratore",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p; F 2-2:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Fri",
+            "start": "1400",
+            "end": "1450"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6774",
+      "section_number": "9000",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 14,
+    "lectures": 14,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 0,
-    "waitlisted": 4
+    "open": 4,
+    "closed": 2,
+    "waitlisted": 8
   },
   "instructors_unique": [
     "A. Di Pietro",
@@ -249,5 +556,5 @@
     "S. Maranzana",
     "S. Muratore"
   ],
-  "scraped_at": "2026-05-13T00:37:35.930Z"
+  "scraped_at": "2026-06-17T23:03:31.572Z"
 }

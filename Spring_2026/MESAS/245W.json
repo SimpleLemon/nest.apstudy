@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "4",
   "requirement_designation": "HAW",
+  "requirements": [
+    "HAW"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course is an introduction to the major historical decipherments of ancient writing systems, including Egyptian hieroglyphics, Babylonian cuneiform, Linear B, and Maya hieroglyphs. It includes the examination of scripts that have yet to be deciphered.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2612",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "D. Stewart",
+      "instructors": [
+        {
+          "name": "D. Stewart",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "D. Stewart"
   ],
-  "scraped_at": "2026-05-13T00:37:48.827Z"
+  "scraped_at": "2026-06-17T23:03:57.663Z"
 }

@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "2",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Introduction to basic laboratory techniques in microbiology. Experiments dealing with the physiology, biochemistry, genetics, and molecular biology of microbes will be included. (This course meets the upper-level laboratory requirement and will count as elective credit for the Biology major.)",
   "course_notes": "[(BIOL 142 and BIOL 142L) or BIOL_OX142 or BIOL 152] and BIOL 370 or equivalent transfer credit as a prerequisite.",
   "requisites": "[(BIOL 142 and BIOL 142L) or BIOL_OX142 or BIOL 152] and BIOL 370 or equivalent transfer credit as a prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -54,6 +63,70 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 1-4p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1600"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1681",
+      "section_number": "1",
+      "schedule_type": "LAB",
+      "instructor": "E. Battaglioli",
+      "instructors": [
+        {
+          "name": "E. Battaglioli",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 1-4p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1600"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1682",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "E. Battaglioli",
+      "instructors": [
+        {
+          "name": "E. Battaglioli",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -70,17 +143,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 4,
     "lectures": 0,
-    "labs": 2,
+    "labs": 4,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 4
   },
   "instructors_unique": [
     "E. Battaglioli"
   ],
-  "scraped_at": "2026-05-13T00:39:38.941Z"
+  "scraped_at": "2026-06-17T23:09:24.580Z"
 }

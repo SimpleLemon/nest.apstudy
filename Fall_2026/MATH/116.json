@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "4",
   "requirement_designation": "QR",
+  "requirements": [
+    "QR"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Integration, differential equations, multivariable calculus, and discrete probability and statistics, with an emphasis on applications to biology.",
   "course_notes": "MATH 111 or MATH 111L or equivalent transfer credit as prerequisite.",
   "requisites": "MATH 111 or MATH 111L or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -59,6 +68,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -85,6 +98,105 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2758",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "J. Mayfield",
+      "instructors": [
+        {
+          "name": "J. Mayfield",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3225",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Mayfield/Bu",
+      "instructors": [
+        {
+          "name": "Mayfield/Bu",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3429",
+      "section_number": "4",
+      "schedule_type": "LAB",
+      "instructor": "Mayfield/Bu",
+      "instructors": [
+        {
+          "name": "Mayfield/Bu",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -101,18 +213,18 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 1,
-    "labs": 2,
+    "total_sections": 6,
+    "lectures": 2,
+    "labs": 4,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 1,
-    "waitlisted": 2
+    "closed": 2,
+    "waitlisted": 4
   },
   "instructors_unique": [
     "J. Mayfield",
     "Mayfield/Bu"
   ],
-  "scraped_at": "2026-05-13T00:40:54.683Z"
+  "scraped_at": "2026-06-17T23:11:57.551Z"
 }

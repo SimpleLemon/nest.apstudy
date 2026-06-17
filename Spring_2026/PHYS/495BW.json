@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 8",
   "requirement_designation": "CW",
+  "requirements": [
+    "CW"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Prerequisite: consent of the undergraduate physics adviser. Independent research for students invited to participate in the physics department Honors Program.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -48,6 +57,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -68,6 +81,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -88,6 +105,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -108,6 +129,130 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "2015",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "A. Bans",
+      "instructors": [
+        {
+          "name": "A. Bans",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5685",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "K. Davis",
+      "instructors": [
+        {
+          "name": "K. Davis",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6404",
+      "section_number": "3",
+      "schedule_type": "SUP",
+      "instructor": "I. Nemenman",
+      "instructors": [
+        {
+          "name": "I. Nemenman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6405",
+      "section_number": "4",
+      "schedule_type": "SUP",
+      "instructor": "J. Burton",
+      "instructors": [
+        {
+          "name": "J. Burton",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6613",
+      "section_number": "5",
+      "schedule_type": "SUP",
+      "instructor": "J. Rieser",
+      "instructors": [
+        {
+          "name": "J. Rieser",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -118,13 +263,13 @@
     }
   ],
   "section_summary": {
-    "total_sections": 5,
+    "total_sections": 10,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 5,
-    "open": 4,
-    "closed": 1,
+    "other": 10,
+    "open": 8,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -134,5 +279,5 @@
     "J. Rieser",
     "K. Davis"
   ],
-  "scraped_at": "2026-05-13T00:38:55.136Z"
+  "scraped_at": "2026-06-17T23:06:11.167Z"
 }

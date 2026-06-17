@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "4",
   "requirement_designation": "CW",
+  "requirements": [
+    "CW"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course provides a descriptive and critical overview of the linguistic practices of different Spanish-speaking communities in the United States, as well as a methodology for the study of these practices. Special attention is given to the relationship between language and society.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3863",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "J. Boigues-Lopez",
+      "instructors": [
+        {
+          "name": "J. Boigues-Lopez",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
-    "open": 1,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "J. Boigues-Lopez"
   ],
-  "scraped_at": "2026-05-13T00:39:14.503Z"
+  "scraped_at": "2026-06-17T23:06:50.322Z"
 }

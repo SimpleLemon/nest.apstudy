@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "4",
   "requirement_designation": "IC",
+  "requirements": [
+    "IC"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course is designed for those who have taken KRN 101 or have some knowledge of Korean. Basic communication skills, vocabulary,and grammar patterns will be covered.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -59,6 +68,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -90,6 +103,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -121,6 +138,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -152,6 +173,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -188,6 +213,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -224,6 +253,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -260,6 +293,310 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a; F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2867",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "S. Huh",
+      "instructors": [
+        {
+          "name": "S. Huh",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2868",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Huh/Sohn",
+      "instructors": [
+        {
+          "name": "Huh/Sohn",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2869",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Huh/Sohn",
+      "instructors": [
+        {
+          "name": "Huh/Sohn",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2873",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "J. Sohn",
+      "instructors": [
+        {
+          "name": "J. Sohn",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2874",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "E. Jo",
+      "instructors": [
+        {
+          "name": "E. Jo",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a; F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2876",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "H. Jin",
+      "instructors": [
+        {
+          "name": "H. Jin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p; F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2890",
+      "section_number": "7",
+      "schedule_type": "LEC",
+      "instructor": "H. Jin",
+      "instructors": [
+        {
+          "name": "H. Jin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p; F 2:30-3:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1520"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2891",
+      "section_number": "8",
+      "schedule_type": "LEC",
+      "instructor": "J. Hong",
+      "instructors": [
+        {
+          "name": "J. Hong",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -286,13 +623,13 @@
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 8,
+    "total_sections": 16,
+    "lectures": 16,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 3,
-    "closed": 5,
+    "open": 6,
+    "closed": 10,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -303,5 +640,5 @@
     "J. Sohn",
     "S. Huh"
   ],
-  "scraped_at": "2026-05-13T00:37:40.753Z"
+  "scraped_at": "2026-06-17T23:03:41.307Z"
 }

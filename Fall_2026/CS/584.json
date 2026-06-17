@@ -7,6 +7,9 @@
   "srcdb": "5269",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -23,6 +26,10 @@
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -43,37 +50,6 @@
       }
     },
     {
-      "crn": "3126",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "Y. Rankin",
-      "instructors": [
-        {
-          "name": "Y. Rankin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 5:30-6:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1730",
-            "end": "1845"
-          },
-          {
-            "day": "Thu",
-            "start": "1730",
-            "end": "1845"
-          }
-        ]
-      }
-    },
-    {
       "crn": "3151",
       "section_number": "3",
       "schedule_type": "LEC",
@@ -85,6 +61,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -116,6 +96,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -147,6 +131,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -178,6 +166,175 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 4-6:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1845"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3122",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3151",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "D. Turakhia",
+      "instructors": [
+        {
+          "name": "D. Turakhia",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3158",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Y. Kwon",
+      "instructors": [
+        {
+          "name": "Y. Kwon",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3159",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "Y. Bromberg",
+      "instructors": [
+        {
+          "name": "Y. Bromberg",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5817",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "Wall/Qin",
+      "instructors": [
+        {
+          "name": "Wall/Qin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -194,21 +351,20 @@
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 10,
+    "lectures": 10,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 5,
+    "open": 8,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 2
   },
   "instructors_unique": [
     "D. Turakhia",
     "Wall/Qin",
     "Y. Bromberg",
-    "Y. Kwon",
-    "Y. Rankin"
+    "Y. Kwon"
   ],
-  "scraped_at": "2026-05-13T00:39:55.058Z"
+  "scraped_at": "2026-06-17T23:09:57.098Z"
 }

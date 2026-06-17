@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "1",
   "requirement_designation": "PE",
+  "requirements": [
+    "PE"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Course is open to students with little or no experience as well as to students with experience in training with free weights and/or machines. Free weights, Cybex systems machines and free-standing equipment are used for the development of muscle strength, muscle fitness, and/or muscle endurance.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -59,6 +68,80 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3408",
+      "section_number": "1",
+      "schedule_type": "PE",
+      "instructor": "E. Noell",
+      "instructors": [
+        {
+          "name": "E. Noell",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4496",
+      "section_number": "2",
+      "schedule_type": "PE",
+      "instructor": "E. Noell",
+      "instructors": [
+        {
+          "name": "E. Noell",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -80,17 +163,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 4,
     "open": 0,
-    "closed": 2,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
     "E. Noell"
   ],
-  "scraped_at": "2026-05-13T00:41:55.782Z"
+  "scraped_at": "2026-06-17T23:14:01.032Z"
 }

@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "1",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course provides a framework for students to articulate how to leverage a liberal arts education as they launch their post-graduation pursuits. Through assignments focused on self-assessment and exploration, students will identify and translate skills that transfer from college to career.",
   "course_notes": null,
   "requisites": null,
@@ -20,14 +25,48 @@
       "crn": "2891",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "R. Rego",
+      "instructor": "Rego/Griffin",
       "instructors": [
         {
-          "name": "R. Rego",
+          "name": "Rego/Griffin",
           "email": null
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11-11:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2891",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Rego/Griffin",
+      "instructors": [
+        {
+          "name": "Rego/Griffin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -44,17 +83,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Rego"
+    "Rego/Griffin"
   ],
-  "scraped_at": "2026-05-13T00:40:01.509Z"
+  "scraped_at": "2026-06-17T23:10:10.222Z"
 }

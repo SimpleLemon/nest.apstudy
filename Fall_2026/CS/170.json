@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "4",
   "requirement_designation": "QR",
+  "requirements": [
+    "QR"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "An introduction to Computer Science for students expecting to utilize serious computing in coursework, research, or employment. Emphasis is on computing concepts, programming principles, algorithm development and basic data structures, using the Java programming language and Unix operating system.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -64,6 +73,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -100,6 +113,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -136,6 +153,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -172,6 +193,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -208,6 +233,250 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a; F 4-4:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3175",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "S. Das",
+      "instructors": [
+        {
+          "name": "S. Das",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; F 8-8:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "800",
+            "end": "850"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3176",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "S. Das",
+      "instructors": [
+        {
+          "name": "S. Das",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; F 9-9:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3177",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "S. Das",
+      "instructors": [
+        {
+          "name": "S. Das",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3180",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "A. Julian",
+      "instructors": [
+        {
+          "name": "A. Julian",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a; F 11-11:50a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3181",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "A. Julian",
+      "instructors": [
+        {
+          "name": "A. Julian",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a; F 3-3:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1500",
+            "end": "1550"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3182",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "A. Julian",
+      "instructors": [
+        {
+          "name": "A. Julian",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -234,18 +503,18 @@
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 12,
+    "lectures": 12,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 3,
-    "closed": 3,
+    "open": 6,
+    "closed": 6,
     "waitlisted": 0
   },
   "instructors_unique": [
     "A. Julian",
     "S. Das"
   ],
-  "scraped_at": "2026-05-13T00:39:55.052Z"
+  "scraped_at": "2026-06-17T23:09:57.085Z"
 }

@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Economics of money, credit, and banking with emphasis on factors influencing the quantity of money and effects on employment, output, and prices. Economic analysis of financial markets, financial institutions, monetary policy, and inflation.",
   "course_notes": "(ECON 201 or ECON_OX 201) and (ECON 212 or ECON_OX 212) or equivalent transfer credit as a prerequisite.",
   "requisites": "(ECON 201 or ECON_OX 201) and (ECON 212 or ECON_OX 212) or equivalent transfer credit as a prerequisite.",
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2983",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Y. Wang",
+      "instructors": [
+        {
+          "name": "Y. Wang",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "Y. Wang"
   ],
-  "scraped_at": "2026-05-13T00:39:59.885Z"
+  "scraped_at": "2026-06-17T23:10:06.964Z"
 }

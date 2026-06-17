@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "2",
   "requirement_designation": "XA",
+  "requirements": [
+    "XA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Music majors may apply to perform a full-recital. Prerequisite: permission of instructor.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -48,6 +57,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -68,6 +81,82 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "4925",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "P. Bhasin",
+      "instructors": [
+        {
+          "name": "P. Bhasin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "4926",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "P. Bhasin",
+      "instructors": [
+        {
+          "name": "P. Bhasin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "4927",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "P. Bhasin",
+      "instructors": [
+        {
+          "name": "P. Bhasin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -78,17 +167,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 3,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 3,
+    "open": 6,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "P. Bhasin"
   ],
-  "scraped_at": "2026-05-13T00:41:04.366Z"
+  "scraped_at": "2026-06-17T23:12:17.057Z"
 }

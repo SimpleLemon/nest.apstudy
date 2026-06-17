@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "4",
   "requirement_designation": "CW",
+  "requirements": [
+    "CW"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "All history majors except those who complete the Honors Program must take two colloquia (HIST 487, 488 or 489). Each colloquium treats a special theme by reading, discussion, and writing of papers. Enrollment in each is limited to twelve; non-majors are welcome within space limitations.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -54,6 +63,70 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 1-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3865",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "M. Montalvo",
+      "instructors": [
+        {
+          "name": "M. Montalvo",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 1-3:45p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3866",
+      "section_number": "3",
+      "schedule_type": "SEM",
+      "instructor": "C. Suddler",
+      "instructors": [
+        {
+          "name": "C. Suddler",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -70,12 +143,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 4,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
@@ -83,5 +156,5 @@
     "C. Suddler",
     "M. Montalvo"
   ],
-  "scraped_at": "2026-05-13T00:37:23.033Z"
+  "scraped_at": "2026-06-17T23:03:05.503Z"
 }

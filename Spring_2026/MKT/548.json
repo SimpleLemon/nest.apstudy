@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -54,6 +61,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -80,6 +91,100 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3441",
+      "section_number": "2172",
+      "schedule_type": "LEC",
+      "instructor": "R. Kelly",
+      "instructors": [
+        {
+          "name": "R. Kelly",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3442",
+      "section_number": "3272",
+      "schedule_type": "LEC",
+      "instructor": "R. Kelly",
+      "instructors": [
+        {
+          "name": "R. Kelly",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6245",
+      "section_number": "6172",
+      "schedule_type": "LEC",
+      "instructor": "R. Kelly",
+      "instructors": [
+        {
+          "name": "R. Kelly",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -96,17 +201,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 3,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
-    "closed": 1,
-    "waitlisted": 1
+    "open": 2,
+    "closed": 2,
+    "waitlisted": 2
   },
   "instructors_unique": [
     "R. Kelly"
   ],
-  "scraped_at": "2026-05-13T00:37:50.442Z"
+  "scraped_at": "2026-06-17T23:04:00.909Z"
 }

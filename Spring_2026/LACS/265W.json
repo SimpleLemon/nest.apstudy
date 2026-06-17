@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "4",
   "requirement_designation": "HSWE",
+  "requirements": [
+    "HSWE"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course will bring together existing research to examine tourism as at one time an economic enterprise and also as a deeply significant cultural experience that has played an under-recognized part in shaping the cultural mores and lifestyles of both the island destinations and the home countries.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -59,6 +68,80 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2532",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "R. Goddard",
+      "instructors": [
+        {
+          "name": "R. Goddard",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5224",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "R. Goddard",
+      "instructors": [
+        {
+          "name": "R. Goddard",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -80,17 +163,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 4
   },
   "instructors_unique": [
     "R. Goddard"
   ],
-  "scraped_at": "2026-05-13T00:37:42.367Z"
+  "scraped_at": "2026-06-17T23:03:44.590Z"
 }

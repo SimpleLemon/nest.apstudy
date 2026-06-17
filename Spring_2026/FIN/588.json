@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -79,6 +86,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -130,6 +141,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -181,6 +196,230 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MTThF 6:30-9:30p; Sa 9a-12p; Sa 1-5p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1830",
+            "end": "2130"
+          },
+          {
+            "day": "Tue",
+            "start": "1830",
+            "end": "2130"
+          },
+          {
+            "day": "Thu",
+            "start": "1830",
+            "end": "2130"
+          },
+          {
+            "day": "Fri",
+            "start": "1830",
+            "end": "2130"
+          },
+          {
+            "day": "Sat",
+            "start": "900",
+            "end": "1200"
+          },
+          {
+            "day": "Sat",
+            "start": "1300",
+            "end": "1700"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3507",
+      "section_number": "2195",
+      "schedule_type": "LEC",
+      "instructor": "T. Smith",
+      "instructors": [
+        {
+          "name": "T. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MTThF 6:30-9:30p; Sa 9a-12p; Sa 1-5p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1830",
+            "end": "2130"
+          },
+          {
+            "day": "Tue",
+            "start": "1830",
+            "end": "2130"
+          },
+          {
+            "day": "Thu",
+            "start": "1830",
+            "end": "2130"
+          },
+          {
+            "day": "Fri",
+            "start": "1830",
+            "end": "2130"
+          },
+          {
+            "day": "Sat",
+            "start": "900",
+            "end": "1200"
+          },
+          {
+            "day": "Sat",
+            "start": "1300",
+            "end": "1700"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3508",
+      "section_number": "2295",
+      "schedule_type": "LEC",
+      "instructor": "T. Smith",
+      "instructors": [
+        {
+          "name": "T. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MTThF 6:30-9:30p; Sa 9a-12p; Sa 1-5p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1830",
+            "end": "2130"
+          },
+          {
+            "day": "Tue",
+            "start": "1830",
+            "end": "2130"
+          },
+          {
+            "day": "Thu",
+            "start": "1830",
+            "end": "2130"
+          },
+          {
+            "day": "Fri",
+            "start": "1830",
+            "end": "2130"
+          },
+          {
+            "day": "Sat",
+            "start": "900",
+            "end": "1200"
+          },
+          {
+            "day": "Sat",
+            "start": "1300",
+            "end": "1700"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3509",
+      "section_number": "3295",
+      "schedule_type": "LEC",
+      "instructor": "T. Smith",
+      "instructors": [
+        {
+          "name": "T. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MTThF 6:30-9:30p; Sa 9a-12p; Sa 1-5p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1830",
+            "end": "2130"
+          },
+          {
+            "day": "Tue",
+            "start": "1830",
+            "end": "2130"
+          },
+          {
+            "day": "Thu",
+            "start": "1830",
+            "end": "2130"
+          },
+          {
+            "day": "Fri",
+            "start": "1830",
+            "end": "2130"
+          },
+          {
+            "day": "Sat",
+            "start": "900",
+            "end": "1200"
+          },
+          {
+            "day": "Sat",
+            "start": "1300",
+            "end": "1700"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6203",
+      "section_number": "4295",
+      "schedule_type": "LEC",
+      "instructor": "T. Smith",
+      "instructors": [
+        {
+          "name": "T. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -222,17 +461,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 8,
+    "lectures": 8,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
-    "waitlisted": 3
+    "waitlisted": 6
   },
   "instructors_unique": [
     "T. Smith"
   ],
-  "scraped_at": "2026-05-13T00:37:08.501Z"
+  "scraped_at": "2026-06-17T23:02:36.313Z"
 }

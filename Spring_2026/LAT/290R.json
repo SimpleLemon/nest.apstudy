@@ -1,0 +1,75 @@
+{
+  "course_code": "LAT 290R",
+  "course_title": "Supervised Reading",
+  "subject": "LAT",
+  "catalog_number": "290R",
+  "term": "Spring_2026",
+  "srcdb": "5261",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
+  "course_description": "Study in Latin under the direct supervision of a faculty member for students who have completed elementary-level coursework in Latin.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-01-13",
+    "end": "2026-04-27"
+  },
+  "sections": [
+    {
+      "crn": "6810",
+      "section_number": "9000",
+      "schedule_type": "SUP",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6810",
+      "section_number": "9000",
+      "schedule_type": "SUP",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 0,
+    "closed": 2,
+    "waitlisted": 0
+  },
+  "instructors_unique": [],
+  "scraped_at": "2026-06-17T23:03:47.815Z"
+}

@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "4",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Human Anatomy & Physiology I with Lab examines the interrelationship and integration of the structure and function of the human body on the molecular, cellular, tissue and organ system levels. Topics include body organization, homeostasis, cytology, histology, and the integumentary, skeletal, muscular, and nervous systems.",
   "course_notes": "(BIOL 142 or BIOL_OX 142) and BIOL 142L or equivalent transfer credit as prerequisites.",
   "requisites": "(BIOL 142 or BIOL_OX 142) and BIOL 142L or equivalent transfer credit as prerequisites.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -64,6 +73,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -90,6 +103,110 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 11:30a-1:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1330"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1665",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "J. Bou Dagher",
+      "instructors": [
+        {
+          "name": "J. Bou Dagher",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a; T 11:30a-12:30p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1230"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1667",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "J. Bou Dagher",
+      "instructors": [
+        {
+          "name": "J. Bou Dagher",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 10a-12p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1200"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3098",
+      "section_number": "4",
+      "schedule_type": "LAB",
+      "instructor": "J. Bou Dagher",
+      "instructors": [
+        {
+          "name": "J. Bou Dagher",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -106,17 +223,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 1,
-    "labs": 2,
+    "total_sections": 6,
+    "lectures": 2,
+    "labs": 4,
     "discussions": 0,
     "other": 0,
-    "open": 3,
+    "open": 6,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "J. Bou Dagher"
   ],
-  "scraped_at": "2026-05-13T00:39:38.938Z"
+  "scraped_at": "2026-06-17T23:09:24.568Z"
 }

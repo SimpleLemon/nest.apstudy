@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "HA",
+  "requirements": [
+    "HA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This reading-intensive class introduces students to some of the major authors, works, and genres of the classical canon, stretching from the 8th century BC epics of Homer to the works of Imperial Rome. We will wrestle with the major themes and concerns of a variety of ancient poetic and prose texts.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1977",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "J. Master",
+      "instructors": [
+        {
+          "name": "J. Master",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "J. Master"
   ],
-  "scraped_at": "2026-05-13T00:39:50.216Z"
+  "scraped_at": "2026-06-17T23:09:47.402Z"
 }

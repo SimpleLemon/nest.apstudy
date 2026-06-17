@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "FS",
+  "requirements": [
+    "FS"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "The freshman seminar in linguistics introduces students to basic aspects in linguistics by focusing on specific themes and topics which vary according to the instructor.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -59,6 +68,80 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1625",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "S. Tamasi",
+      "instructors": [
+        {
+          "name": "S. Tamasi",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3992",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "R. Franzosi",
+      "instructors": [
+        {
+          "name": "R. Franzosi",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -80,18 +163,18 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 4,
     "open": 0,
-    "closed": 2,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
     "R. Franzosi",
     "S. Tamasi"
   ],
-  "scraped_at": "2026-05-13T00:40:53.066Z"
+  "scraped_at": "2026-06-17T23:11:54.318Z"
 }

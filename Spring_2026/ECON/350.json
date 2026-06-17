@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "ETHN",
+  "requirements": [
+    "ETHN"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Investigate the limitations behind traditional approaches to racial discrimination in economics; explore the history of anti-Black racism in the US and its economic consequences, and consider how understanding of systemic racism could lead to pragmatic policy solutions to racial inequities.",
   "course_notes": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as prerequisite.",
   "requisites": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3961",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "D. McMillon",
+      "instructors": [
+        {
+          "name": "D. McMillon",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "D. McMillon"
   ],
-  "scraped_at": "2026-05-13T00:36:52.243Z"
+  "scraped_at": "2026-06-17T23:02:03.797Z"
 }

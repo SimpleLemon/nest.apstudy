@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "SNT",
+  "requirements": [
+    "SNT"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "An integrated approach to the synthesis, structure, and function of macromolecular biomolecules, including proteins, carbohydrates, DNA, and RNA.",
   "course_notes": "[(BIOL 142 and BIOL 142L) or (BIOL_OX 142)] and (CHEM 203 or CHEM 203Z or CHEM_OX 203 or CHEM 221 or CHEM_OX 221 or CHEM 221Z) or equivalent transfer credit as prerequisite.",
   "requisites": "[(BIOL 142 and BIOL 142L) or (BIOL_OX 142)] and (CHEM 203 or CHEM 203Z or CHEM_OX 203 or CHEM 221 or CHEM_OX 221 or CHEM 221Z) or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -59,6 +68,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -90,6 +103,115 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1660",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "A. Escobar",
+      "instructors": [
+        {
+          "name": "A. Escobar",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1661",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "E. Abreu",
+      "instructors": [
+        {
+          "name": "E. Abreu",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5925",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "A. Escobar",
+      "instructors": [
+        {
+          "name": "A. Escobar",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -111,12 +233,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 3,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 3,
+    "open": 6,
     "closed": 0,
     "waitlisted": 0
   },
@@ -124,5 +246,5 @@
     "A. Escobar",
     "E. Abreu"
   ],
-  "scraped_at": "2026-05-13T00:36:31.263Z"
+  "scraped_at": "2026-06-17T23:01:21.202Z"
 }

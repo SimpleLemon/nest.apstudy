@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "MQR",
+  "requirements": [
+    "MQR"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course explores the formal underpinnings of computational complexity, and studies how to mathematically characterize the efficiency and running times of different computer algorithms.",
   "course_notes": "(CS 170 or CS_OX 170) and (CS 171 or CS_OX 171) and (CS 224 or CS_OX 224) and CS 253, or equivalent transfer credit as prerequisite.",
   "requisites": "(CS 170 or CS_OX 170) and (CS 171 or CS_OX 171) and (CS 224 or CS_OX 224) and CS 253, or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -59,6 +68,80 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3890",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "M. Grigni",
+      "instructors": [
+        {
+          "name": "M. Grigni",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3891",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "A. Julian",
+      "instructors": [
+        {
+          "name": "A. Julian",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -80,18 +163,18 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 2
   },
   "instructors_unique": [
     "A. Julian",
     "M. Grigni"
   ],
-  "scraped_at": "2026-05-13T00:36:47.406Z"
+  "scraped_at": "2026-06-17T23:01:53.990Z"
 }

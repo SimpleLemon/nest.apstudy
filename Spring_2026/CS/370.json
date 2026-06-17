@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course introduces basic concepts and techniques of software engineering, and applies these in the context of a semester-long group programming project.",
   "course_notes": "CS 253 or equivalent transfer credit as prerequisite.",
   "requisites": "CS 253 or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -59,6 +68,80 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 5:30-6:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1730",
+            "end": "1845"
+          },
+          {
+            "day": "Thu",
+            "start": "1730",
+            "end": "1845"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3667",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "D. Fossati",
+      "instructors": [
+        {
+          "name": "D. Fossati",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3669",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "D. Fossati",
+      "instructors": [
+        {
+          "name": "D. Fossati",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -80,17 +163,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "D. Fossati"
   ],
-  "scraped_at": "2026-05-13T00:36:47.407Z"
+  "scraped_at": "2026-06-17T23:01:53.992Z"
 }

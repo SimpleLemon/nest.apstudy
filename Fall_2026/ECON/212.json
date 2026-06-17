@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "SS",
+  "requirements": [
+    "SS"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Determination of national income, employment, and the price level; business fluctuations; and international monetary issues.",
   "course_notes": "(ECON 101 or ECON_OX 101 or FIN 201) and (ECON 112 or ECON_OX 112) and (MATH 111 or MATH_OX 111 or MATH 116) or equivalent transfer credit as prerequisites.",
   "requisites": "(ECON 101 or ECON_OX 101 or FIN 201) and (ECON 112 or ECON_OX 112) and (MATH 111 or MATH_OX 111 or MATH 116) or equivalent transfer credit as prerequisites.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -59,6 +68,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -90,7 +103,116 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2913",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "F. Mandelman",
+      "instructors": [
+        {
+          "name": "F. Mandelman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 7-8:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1900",
+            "end": "2015"
+          },
+          {
+            "day": "Wed",
+            "start": "1900",
+            "end": "2015"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2914",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "K. Chen",
+      "instructors": [
+        {
+          "name": "K. Chen",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2915",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "V. Yue",
+      "instructors": [
+        {
+          "name": "V. Yue",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
       "schedule": {
@@ -111,12 +233,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 3,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 4,
     "closed": 0,
     "waitlisted": 2
   },
@@ -125,5 +247,5 @@
     "K. Chen",
     "V. Yue"
   ],
-  "scraped_at": "2026-05-13T00:39:59.882Z"
+  "scraped_at": "2026-06-17T23:10:06.958Z"
 }

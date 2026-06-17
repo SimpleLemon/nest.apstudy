@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -54,6 +61,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -74,6 +85,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -100,6 +115,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -126,6 +145,154 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3414",
+      "section_number": "2177",
+      "schedule_type": "LEC",
+      "instructor": "C. Goetz",
+      "instructors": [
+        {
+          "name": "C. Goetz",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3415",
+      "section_number": "2201",
+      "schedule_type": "LEC",
+      "instructor": "C. Goetz",
+      "instructors": [
+        {
+          "name": "C. Goetz",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "3416",
+      "section_number": "2677",
+      "schedule_type": "LEC",
+      "instructor": "C. Goetz",
+      "instructors": [
+        {
+          "name": "C. Goetz",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3417",
+      "section_number": "3277",
+      "schedule_type": "LEC",
+      "instructor": "C. Goetz",
+      "instructors": [
+        {
+          "name": "C. Goetz",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3418",
+      "section_number": "4577",
+      "schedule_type": "LEC",
+      "instructor": "C. Goetz",
+      "instructors": [
+        {
+          "name": "C. Goetz",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -142,17 +309,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 5,
-    "lectures": 5,
+    "total_sections": 10,
+    "lectures": 10,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 5,
+    "open": 10,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "C. Goetz"
   ],
-  "scraped_at": "2026-05-13T00:38:05.291Z"
+  "scraped_at": "2026-06-17T23:04:30.314Z"
 }

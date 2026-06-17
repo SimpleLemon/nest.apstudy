@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "4",
   "requirement_designation": "IC",
+  "requirements": [
+    "IC"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Every semester. This beginning-level French language course provides students with new perspectives on French and francophone cultures while building writing, reading, speaking and listening skills.",
   "course_notes": null,
   "requisites": null,
@@ -28,8 +33,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
+      "enrollment_count": "3",
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a; F 10-10:50a",
@@ -64,8 +73,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
+      "enrollment_count": "3",
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p; F 11-11:50a",
@@ -87,20 +100,138 @@
           }
         ]
       }
+    },
+    {
+      "crn": "6758",
+      "section_number": "9000",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "1897",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "S. Descourtis",
+      "instructors": [
+        {
+          "name": "S. Descourtis",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1672",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "S. Descourtis",
+      "instructors": [
+        {
+          "name": "S. Descourtis",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p; F 11-11:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6758",
+      "section_number": "9000",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 0,
-    "waitlisted": 2
+    "closed": 2,
+    "waitlisted": 4
   },
   "instructors_unique": [
     "S. Descourtis"
   ],
-  "scraped_at": "2026-05-13T00:37:10.121Z"
+  "scraped_at": "2026-06-17T23:02:39.575Z"
 }

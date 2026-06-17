@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "4",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Explores the study and design of maps and geographic information systems (GIS) as a problem-solving tool for geographic analysis with focus on applications of GIS, data collection and processing, cartographic design, and trends in geospatial technology.",
   "course_notes": "QTM 100 or QTM_OX 100 or BUS 350 or BUS_OX 350 or equivalent transfer credit as prerequisite.",
   "requisites": "QTM 100 or QTM_OX 100 or BUS 350 or BUS_OX 350 or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -59,6 +68,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -85,6 +98,105 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 1-3:45p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2534",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "M. Page",
+      "instructors": [
+        {
+          "name": "M. Page",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2535",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Page/Wu",
+      "instructors": [
+        {
+          "name": "Page/Wu",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 1-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2536",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "Page/Jia",
+      "instructors": [
+        {
+          "name": "Page/Jia",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -101,12 +213,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 1,
-    "labs": 2,
+    "total_sections": 6,
+    "lectures": 2,
+    "labs": 4,
     "discussions": 0,
     "other": 0,
-    "open": 3,
+    "open": 6,
     "closed": 0,
     "waitlisted": 0
   },
@@ -115,5 +227,5 @@
     "Page/Jia",
     "Page/Wu"
   ],
-  "scraped_at": "2026-05-13T00:37:03.649Z"
+  "scraped_at": "2026-06-17T23:02:26.542Z"
 }

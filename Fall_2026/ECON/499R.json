@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3 - 4",
   "requirement_designation": "XA",
+  "requirements": [
+    "XA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Students will learn the craft of research in economics. Coursework will consist of synthesis of literature; collection, collation, cleaning of data; data analysis, contributing to manuscript preparation, and/or other work related to the sustaining of an academic research project.",
   "course_notes": "(ECON 201 or ECON_OX 201 or ECON 212 or ECON_OX 212) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisites.",
   "requisites": "(ECON 201 or ECON_OX 201 or ECON 212 or ECON_OX 212) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisites.",
@@ -28,6 +33,40 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 2-4:30p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1400",
+            "end": "1630"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3178",
+      "section_number": "2",
+      "schedule_type": "RSC",
+      "instructor": "Fohlin/Cherribi",
+      "instructors": [
+        {
+          "name": "Fohlin/Cherribi",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -44,17 +83,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
-    "open": 1,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "Fohlin/Cherribi"
   ],
-  "scraped_at": "2026-05-13T00:39:59.887Z"
+  "scraped_at": "2026-06-17T23:10:06.966Z"
 }

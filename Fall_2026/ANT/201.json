@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "4",
   "requirement_designation": "NS",
+  "requirements": [
+    "NS"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Biological and cultural evolution and adaptation of the human species, fossil populations, human variation, and primate behavior. Methods in biological anthropology, survey of the prehistoric evolution of cultures, contemporary issues in paleoanthropology. Weekly lab in biological anthro methods.",
   "course_notes": null,
   "requisites": null,
@@ -23,6 +28,10 @@
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -44,6 +53,10 @@
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -65,6 +78,10 @@
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -86,6 +103,10 @@
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -112,6 +133,145 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3451",
+      "section_number": "L1",
+      "schedule_type": "LAB",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 9-11a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "1100"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3452",
+      "section_number": "L2",
+      "schedule_type": "LAB",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11a-1p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1300"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3454",
+      "section_number": "L3",
+      "schedule_type": "LAB",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-3p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1500"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3457",
+      "section_number": "L4",
+      "schedule_type": "LAB",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 3-5p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1500",
+            "end": "1700"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3093",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "C. Hadley",
+      "instructors": [
+        {
+          "name": "C. Hadley",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -133,17 +293,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 5,
-    "lectures": 1,
-    "labs": 4,
+    "total_sections": 10,
+    "lectures": 2,
+    "labs": 8,
     "discussions": 0,
     "other": 0,
-    "open": 5,
+    "open": 10,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "C. Hadley"
   ],
-  "scraped_at": "2026-05-13T00:39:30.839Z"
+  "scraped_at": "2026-06-17T23:09:08.311Z"
 }

@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 4",
   "requirement_designation": "HSC",
+  "requirements": [
+    "HSC"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course studies relations between language and society, relations between language and sociocultural context. Topics may include: language variation; multilingualism; verbal interaction; discourse analysis; ethnography of communication; sociolinguistics of Spanish.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2708",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "E. Britt",
+      "instructors": [
+        {
+          "name": "E. Britt",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
-    "open": 1,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "E. Britt"
   ],
-  "scraped_at": "2026-05-13T00:37:45.582Z"
+  "scraped_at": "2026-06-17T23:03:51.047Z"
 }

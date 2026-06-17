@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Major topics include the biology of animals and plants, physiology, evolution, and ecology.",
   "course_notes": "This course requires BIOL 141 and BIOL 141L, or BIOL 151or BIOL_OX141 or equivalent transfer credit as a prerequisite.",
   "requisites": "This course requires BIOL 141 and BIOL 141L, or BIOL 151or BIOL_OX141 or equivalent transfer credit as a prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -59,6 +68,80 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1665",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "C. Beck",
+      "instructors": [
+        {
+          "name": "C. Beck",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5920",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "K. O'Toole",
+      "instructors": [
+        {
+          "name": "K. O'Toole",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -80,12 +163,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
@@ -93,5 +176,5 @@
     "C. Beck",
     "K. O'Toole"
   ],
-  "scraped_at": "2026-05-13T00:36:31.262Z"
+  "scraped_at": "2026-06-17T23:01:21.198Z"
 }

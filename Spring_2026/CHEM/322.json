@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "SNT",
+  "requirements": [
+    "SNT"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "A course that furthers a deeper understanding of organic chemistry, building on the foundational principles from earlier chemistry courses: molecular orbital theory, organic reaction mechanisms, stereochemistry, and the relationship between structure and reactivity.",
   "course_notes": "(CHEM 204 or CHEM_X 204) and (CHEM 204L or CHEM_OX 204L) or equivalent transfer credit as prerequisite.CHEM 204 & CHEM 204 prereq.",
   "requisites": "(CHEM 204 or CHEM_X 204) and (CHEM 204L or CHEM_OX 204L) or equivalent transfer credit as prerequisite.CHEM 204 & CHEM 204 prereq.",
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2962",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "M. Weinschenk",
+      "instructors": [
+        {
+          "name": "M. Weinschenk",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "M. Weinschenk"
   ],
-  "scraped_at": "2026-05-13T00:36:39.345Z"
+  "scraped_at": "2026-06-17T23:01:37.680Z"
 }

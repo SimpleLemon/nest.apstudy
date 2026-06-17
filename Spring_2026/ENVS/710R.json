@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -48,6 +55,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -68,6 +79,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -88,6 +103,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -108,6 +127,130 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5246",
+      "section_number": "1",
+      "schedule_type": "THE",
+      "instructor": "X. Huang",
+      "instructors": [
+        {
+          "name": "X. Huang",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5247",
+      "section_number": "2",
+      "schedule_type": "THE",
+      "instructor": "J. Ajibade",
+      "instructors": [
+        {
+          "name": "J. Ajibade",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5248",
+      "section_number": "3",
+      "schedule_type": "THE",
+      "instructor": "M. Mucioki",
+      "instructors": [
+        {
+          "name": "M. Mucioki",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5249",
+      "section_number": "4",
+      "schedule_type": "THE",
+      "instructor": "S. Robinson",
+      "instructors": [
+        {
+          "name": "S. Robinson",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6529",
+      "section_number": "5",
+      "schedule_type": "THE",
+      "instructor": "X. Huang",
+      "instructors": [
+        {
+          "name": "X. Huang",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -118,13 +261,13 @@
     }
   ],
   "section_summary": {
-    "total_sections": 5,
+    "total_sections": 10,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 5,
-    "open": 1,
-    "closed": 4,
+    "other": 10,
+    "open": 2,
+    "closed": 8,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -133,5 +276,5 @@
     "S. Robinson",
     "X. Huang"
   ],
-  "scraped_at": "2026-05-13T00:37:03.661Z"
+  "scraped_at": "2026-06-17T23:02:26.546Z"
 }

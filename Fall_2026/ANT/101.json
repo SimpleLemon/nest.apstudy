@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "SS",
+  "requirements": [
+    "SS"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Survey of the study of the human species: its evolution, prehistory, language, and comparative social and cultural systems.",
   "course_notes": null,
   "requisites": null,
@@ -23,6 +28,40 @@
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3088",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -44,15 +83,15 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [],
-  "scraped_at": "2026-05-13T00:39:30.838Z"
+  "scraped_at": "2026-06-17T23:09:08.307Z"
 }

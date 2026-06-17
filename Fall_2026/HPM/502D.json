@@ -1,0 +1,85 @@
+{
+  "course_code": "HPM 502D",
+  "course_title": "Introduction to Health Care Management",
+  "subject": "HPM",
+  "catalog_number": "502D",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "crn": "5892",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "J. Hike",
+      "instructors": [
+        {
+          "name": "J. Hike",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5892",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "J. Hike",
+      "instructors": [
+        {
+          "name": "J. Hike",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "J. Hike"
+  ],
+  "scraped_at": "2026-06-17T23:11:15.216Z"
+}

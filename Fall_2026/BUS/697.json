@@ -1,0 +1,182 @@
+{
+  "course_code": "BUS 697",
+  "course_title": "Directed Study: NAIOP Case Competition",
+  "subject": "BUS",
+  "catalog_number": "697",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": null,
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
+  "course_description": null,
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "crn": "5914",
+      "section_number": "2101",
+      "schedule_type": "SUP",
+      "instructor": "S. Garate",
+      "instructors": [
+        {
+          "name": "S. Garate",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5906",
+      "section_number": "2185",
+      "schedule_type": "SUP",
+      "instructor": "Rosensweig/Sullivan",
+      "instructors": [
+        {
+          "name": "Rosensweig/Sullivan",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5907",
+      "section_number": "2285",
+      "schedule_type": "SUP",
+      "instructor": "Rosensweig/Sullivan",
+      "instructors": [
+        {
+          "name": "Rosensweig/Sullivan",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5914",
+      "section_number": "2101",
+      "schedule_type": "SUP",
+      "instructor": "S. Garate",
+      "instructors": [
+        {
+          "name": "S. Garate",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5906",
+      "section_number": "2185",
+      "schedule_type": "SUP",
+      "instructor": "Rosensweig/Sullivan",
+      "instructors": [
+        {
+          "name": "Rosensweig/Sullivan",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5907",
+      "section_number": "2285",
+      "schedule_type": "SUP",
+      "instructor": "Rosensweig/Sullivan",
+      "instructors": [
+        {
+          "name": "Rosensweig/Sullivan",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 6,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 6,
+    "open": 4,
+    "closed": 2,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Rosensweig/Sullivan",
+    "S. Garate"
+  ],
+  "scraped_at": "2026-06-17T23:09:37.594Z"
+}

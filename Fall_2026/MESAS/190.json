@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "FS",
+  "requirements": [
+    "FS"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Exclusively for first-year students. Seminar provides introduction to various historical, religious, cultural, and linguistic aspects of the Middle East and South Asia. Topics vary.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -59,6 +68,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -90,6 +103,115 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2755",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "C. Freer",
+      "instructors": [
+        {
+          "name": "C. Freer",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2895",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "B. Samarth",
+      "instructors": [
+        {
+          "name": "B. Samarth",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2905",
+      "section_number": "3",
+      "schedule_type": "SEM",
+      "instructor": "H. Samei",
+      "instructors": [
+        {
+          "name": "H. Samei",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -111,13 +233,13 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
+    "total_sections": 6,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 3,
+    "other": 6,
     "open": 0,
-    "closed": 3,
+    "closed": 6,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -125,5 +247,5 @@
     "C. Freer",
     "H. Samei"
   ],
-  "scraped_at": "2026-05-13T00:40:56.307Z"
+  "scraped_at": "2026-06-17T23:12:00.782Z"
 }

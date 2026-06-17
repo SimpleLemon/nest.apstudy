@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,6 +55,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -74,6 +85,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -100,6 +115,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -126,6 +145,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -152,6 +175,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -178,6 +205,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -204,6 +235,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -230,6 +265,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -250,6 +289,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -276,6 +319,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -302,6 +349,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -333,6 +384,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -364,6 +419,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -395,6 +454,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -421,6 +484,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -452,6 +519,522 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5483",
+      "section_number": "1101",
+      "schedule_type": "SEM",
+      "instructor": "Hershatter/Timpone",
+      "instructors": [
+        {
+          "name": "Hershatter/Timpone",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6129",
+      "section_number": "1102",
+      "schedule_type": "SEM",
+      "instructor": "Hershatter/Brown",
+      "instructors": [
+        {
+          "name": "Hershatter/Brown",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 5:30-7:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1730",
+            "end": "1930"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6130",
+      "section_number": "1103",
+      "schedule_type": "SEM",
+      "instructor": "A. Hershatter",
+      "instructors": [
+        {
+          "name": "A. Hershatter",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6-8p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1800",
+            "end": "2000"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6131",
+      "section_number": "1104",
+      "schedule_type": "SEM",
+      "instructor": "A. Hershatter",
+      "instructors": [
+        {
+          "name": "A. Hershatter",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 5:30-8p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1730",
+            "end": "2000"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6132",
+      "section_number": "1105",
+      "schedule_type": "SEM",
+      "instructor": "Hershatter/Samarth",
+      "instructors": [
+        {
+          "name": "Hershatter/Samarth",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 5:30-7:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1730",
+            "end": "1930"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6133",
+      "section_number": "1106",
+      "schedule_type": "SEM",
+      "instructor": "A. Hershatter",
+      "instructors": [
+        {
+          "name": "A. Hershatter",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6-8p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1800",
+            "end": "2000"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6134",
+      "section_number": "1107",
+      "schedule_type": "SEM",
+      "instructor": "A. Hershatter",
+      "instructors": [
+        {
+          "name": "A. Hershatter",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6-8p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1800",
+            "end": "2000"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6135",
+      "section_number": "1108",
+      "schedule_type": "SEM",
+      "instructor": "A. Hershatter",
+      "instructors": [
+        {
+          "name": "A. Hershatter",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 5:30-7:30p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1730",
+            "end": "1930"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6730",
+      "section_number": "1109",
+      "schedule_type": "SEM",
+      "instructor": "D. Clear",
+      "instructors": [
+        {
+          "name": "D. Clear",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6136",
+      "section_number": "1110",
+      "schedule_type": "SEM",
+      "instructor": "A. Hershatter",
+      "instructors": [
+        {
+          "name": "A. Hershatter",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 6-8p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1800",
+            "end": "2000"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6137",
+      "section_number": "1111",
+      "schedule_type": "SEM",
+      "instructor": "A. Hershatter",
+      "instructors": [
+        {
+          "name": "A. Hershatter",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 6-8p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1800",
+            "end": "2000"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6138",
+      "section_number": "1112",
+      "schedule_type": "SEM",
+      "instructor": "A. Hershatter",
+      "instructors": [
+        {
+          "name": "A. Hershatter",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 5:30-8p; F 10a-12:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1730",
+            "end": "2000"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1230"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6139",
+      "section_number": "1113",
+      "schedule_type": "SEM",
+      "instructor": "Hershatter/Garate",
+      "instructors": [
+        {
+          "name": "Hershatter/Garate",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4:30-8:30p; F 8:30a-4:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1630",
+            "end": "2030"
+          },
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "1630"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6140",
+      "section_number": "1114",
+      "schedule_type": "SEM",
+      "instructor": "A. Hershatter",
+      "instructors": [
+        {
+          "name": "A. Hershatter",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 5:30-8:30p; F 9a-4p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1730",
+            "end": "2030"
+          },
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "1600"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6141",
+      "section_number": "1115",
+      "schedule_type": "SEM",
+      "instructor": "A. Hershatter",
+      "instructors": [
+        {
+          "name": "A. Hershatter",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Su 1-3p",
+        "meetings": [
+          {
+            "day": "Sun",
+            "start": "1300",
+            "end": "1500"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6192",
+      "section_number": "1116",
+      "schedule_type": "SEM",
+      "instructor": "A. Hershatter",
+      "instructors": [
+        {
+          "name": "A. Hershatter",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 5:30-8:30p; F 9a-5p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1730",
+            "end": "2030"
+          },
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "1700"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6708",
+      "section_number": "1117",
+      "schedule_type": "SEM",
+      "instructor": "B. Goebel",
+      "instructors": [
+        {
+          "name": "B. Goebel",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -462,14 +1045,14 @@
     }
   ],
   "section_summary": {
-    "total_sections": 17,
+    "total_sections": 34,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 17,
-    "open": 10,
-    "closed": 3,
-    "waitlisted": 4
+    "other": 34,
+    "open": 20,
+    "closed": 6,
+    "waitlisted": 8
   },
   "instructors_unique": [
     "A. Hershatter",
@@ -480,5 +1063,5 @@
     "Hershatter/Samarth",
     "Hershatter/Timpone"
   ],
-  "scraped_at": "2026-05-13T00:36:37.719Z"
+  "scraped_at": "2026-06-17T23:01:34.277Z"
 }

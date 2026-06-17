@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 4",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Seminar or lecture series of topics in music. May be repeated for credit when topic varies.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -59,6 +68,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -90,6 +103,115 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2925",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "S. Crist",
+      "instructors": [
+        {
+          "name": "S. Crist",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2927",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "D. Castro Pantoja",
+      "instructors": [
+        {
+          "name": "D. Castro Pantoja",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2929",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "K. Young",
+      "instructors": [
+        {
+          "name": "K. Young",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -111,19 +233,19 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 3,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 4,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 2
   },
   "instructors_unique": [
     "D. Castro Pantoja",
     "K. Young",
     "S. Crist"
   ],
-  "scraped_at": "2026-05-13T00:37:56.869Z"
+  "scraped_at": "2026-06-17T23:04:14.006Z"
 }

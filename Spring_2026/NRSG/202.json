@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -48,6 +55,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -68,6 +79,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -99,6 +114,128 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4569",
+      "section_number": "LAB1",
+      "schedule_type": "LAB",
+      "instructor": "J. Clark",
+      "instructors": [
+        {
+          "name": "J. Clark",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "4571",
+      "section_number": "LAB2",
+      "schedule_type": "LAB",
+      "instructor": "D. Lewis",
+      "instructors": [
+        {
+          "name": "D. Lewis",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "4568",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "J. Clark",
+      "instructors": [
+        {
+          "name": "J. Clark",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4570",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "D. Lewis",
+      "instructors": [
+        {
+          "name": "D. Lewis",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -120,12 +257,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 2,
-    "labs": 2,
+    "total_sections": 8,
+    "lectures": 4,
+    "labs": 4,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 8,
     "closed": 0,
     "waitlisted": 0
   },
@@ -133,5 +270,5 @@
     "D. Lewis",
     "J. Clark"
   ],
-  "scraped_at": "2026-05-13T00:38:01.851Z"
+  "scraped_at": "2026-06-17T23:04:23.786Z"
 }

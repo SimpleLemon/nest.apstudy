@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 4",
   "requirement_designation": "IC",
+  "requirements": [
+    "IC"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course combines advanced writing instruction with the study of diverse Hispanic cultural topics.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -59,6 +68,80 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3873",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "W. Hurst",
+      "instructors": [
+        {
+          "name": "W. Hurst",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3875",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "L. Torres-Rodriguez",
+      "instructors": [
+        {
+          "name": "L. Torres-Rodriguez",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -80,18 +163,18 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 2
   },
   "instructors_unique": [
     "L. Torres-Rodriguez",
     "W. Hurst"
   ],
-  "scraped_at": "2026-05-13T00:39:14.502Z"
+  "scraped_at": "2026-06-17T23:06:50.320Z"
 }

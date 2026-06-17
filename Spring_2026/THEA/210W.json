@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "4",
   "requirement_designation": "HAW",
+  "requirements": [
+    "HAW"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "The close reading of plays with a view to production. Exercises and projects explore how a text emerges in performance from the combined perspectives of actors, directors, designers, and audience.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -59,6 +68,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -90,6 +103,115 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2486",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "J. Lee",
+      "instructors": [
+        {
+          "name": "J. Lee",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2487",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "J. Lee",
+      "instructors": [
+        {
+          "name": "J. Lee",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2488",
+      "section_number": "3",
+      "schedule_type": "SEM",
+      "instructor": "N. Montez",
+      "instructors": [
+        {
+          "name": "N. Montez",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -111,12 +233,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
+    "total_sections": 6,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 3,
-    "open": 3,
+    "other": 6,
+    "open": 6,
     "closed": 0,
     "waitlisted": 0
   },
@@ -124,5 +246,5 @@
     "J. Lee",
     "N. Montez"
   ],
-  "scraped_at": "2026-05-13T00:39:17.717Z"
+  "scraped_at": "2026-06-17T23:06:56.782Z"
 }

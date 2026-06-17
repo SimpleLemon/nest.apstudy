@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "2",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This is a project-design based lab course. It will bring together materials from previous lab courses, as well as covering new techniques/methods.",
   "course_notes": "(CHEM 204L or CHEM_OX 204L) and (CHEM 205L or CHEM_OX 205L) or equivalent transfer credit as prerequisite or co-requisite.",
   "requisites": "(CHEM 204L or CHEM_OX 204L) and (CHEM 205L or CHEM_OX 205L) or equivalent transfer credit as prerequisite or co-requisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -59,6 +68,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -90,6 +103,115 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 4-5:15p; F 1-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3753",
+      "section_number": "1",
+      "schedule_type": "LAB",
+      "instructor": "R. Himes",
+      "instructors": [
+        {
+          "name": "R. Himes",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 4-5:15p; W 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3754",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "R. Himes",
+      "instructors": [
+        {
+          "name": "R. Himes",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 4-5:15p; Th 10a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3755",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "R. Himes",
+      "instructors": [
+        {
+          "name": "R. Himes",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -111,17 +233,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
+    "total_sections": 6,
     "lectures": 0,
-    "labs": 3,
+    "labs": 6,
     "discussions": 0,
     "other": 0,
-    "open": 3,
+    "open": 6,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "R. Himes"
   ],
-  "scraped_at": "2026-05-13T00:36:39.344Z"
+  "scraped_at": "2026-06-17T23:01:37.680Z"
 }

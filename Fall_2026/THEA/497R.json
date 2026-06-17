@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "1 - 4",
   "requirement_designation": "XA",
+  "requirements": [
+    "XA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Special projects, research, and readings under the direction of a faculty member.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -48,6 +57,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -68,6 +81,82 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "2619",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "N. Montez",
+      "instructors": [
+        {
+          "name": "N. Montez",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "2622",
+      "section_number": "2",
+      "schedule_type": "RSC",
+      "instructor": "N. Montez",
+      "instructors": [
+        {
+          "name": "N. Montez",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5511",
+      "section_number": "3",
+      "schedule_type": "RSC",
+      "instructor": "S. Culpepper",
+      "instructors": [
+        {
+          "name": "S. Culpepper",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -78,18 +167,18 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
+    "total_sections": 6,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 3,
-    "open": 2,
-    "closed": 1,
+    "other": 6,
+    "open": 4,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "N. Montez",
     "S. Culpepper"
   ],
-  "scraped_at": "2026-05-13T00:42:25.027Z"
+  "scraped_at": "2026-06-17T23:14:59.599Z"
 }

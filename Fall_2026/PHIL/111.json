@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "HA",
+  "requirements": [
+    "HA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "What is Existentialism? We will look at the history of existentialism and see how it challenged the traditional philosophical approaches to questions of human subjectivity and the nature of the good life. In particular, we will explore the works of Jean Paul Sartre and Albert Camus.",
   "course_notes": null,
   "requisites": null,
@@ -20,14 +25,18 @@
       "crn": "3381",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "K. Brigham",
+      "instructor": "B. Brigham",
       "instructors": [
         {
-          "name": "K. Brigham",
+          "name": "B. Brigham",
           "email": null
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -64,6 +73,90 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MWF 4-4:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1650"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          },
+          {
+            "day": "Fri",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3381",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "B. Brigham",
+      "instructors": [
+        {
+          "name": "B. Brigham",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TThF 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "920"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "920"
+          },
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5757",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "S. Iradukunda",
+      "instructors": [
+        {
+          "name": "S. Iradukunda",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -90,18 +183,18 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Brigham",
+    "B. Brigham",
     "S. Iradukunda"
   ],
-  "scraped_at": "2026-05-13T00:42:00.729Z"
+  "scraped_at": "2026-06-17T23:14:10.740Z"
 }

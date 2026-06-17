@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "FS",
+  "requirements": [
+    "FS"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Every semester. Freshmen only. Through readings on variable topics, frequent writing assignments, and in-class discussions, the seminar emphasizes reasoned discourse and intellectual community. Does not satisfy first-year writing requirement.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -59,6 +68,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -90,6 +103,115 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1858",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "P. Kelleher",
+      "instructors": [
+        {
+          "name": "P. Kelleher",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1859",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "M. Wright",
+      "instructors": [
+        {
+          "name": "M. Wright",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1860",
+      "section_number": "3",
+      "schedule_type": "SEM",
+      "instructor": "J. Morey",
+      "instructors": [
+        {
+          "name": "J. Morey",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -111,13 +233,13 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
+    "total_sections": 6,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 3,
+    "other": 6,
     "open": 0,
-    "closed": 3,
+    "closed": 6,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -125,5 +247,5 @@
     "M. Wright",
     "P. Kelleher"
   ],
-  "scraped_at": "2026-05-13T00:40:07.980Z"
+  "scraped_at": "2026-06-17T23:10:23.243Z"
 }

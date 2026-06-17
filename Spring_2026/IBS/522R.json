@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -20,14 +23,18 @@
       "crn": "5187",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Corbett",
+      "instructor": "Corbett/Benian",
       "instructors": [
         {
-          "name": "A. Corbett",
+          "name": "Corbett/Benian",
           "email": null
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -54,6 +61,70 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 1-3p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1500"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5187",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Corbett/Benian",
+      "instructors": [
+        {
+          "name": "Corbett/Benian",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-11:45a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1145"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5442",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -70,18 +141,18 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Corbett",
+    "Corbett/Benian",
     "Team"
   ],
-  "scraped_at": "2026-05-13T00:37:27.875Z"
+  "scraped_at": "2026-06-17T23:03:15.333Z"
 }

@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "HA",
+  "requirements": [
+    "HA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Focused survey of modern art in Europe with an emphasis on aesthetic, social, and historical dimensions of modernist practices. Movements include Fauvism, Expressionism, Cubism, Futurism, Dada, Constructivism, and Surrealism. Writings by artists and critics will be considered in relation to the art.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1750",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Cronan/Weichlein",
+      "instructors": [
+        {
+          "name": "Cronan/Weichlein",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "Cronan/Weichlein"
   ],
-  "scraped_at": "2026-05-13T00:39:34.118Z"
+  "scraped_at": "2026-06-17T23:09:14.905Z"
 }

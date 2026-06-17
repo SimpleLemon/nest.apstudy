@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "1 - 2",
   "requirement_designation": "PE",
+  "requirements": [
+    "PE"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Emory Dance Company is a professionally oriented performance company that exposes students to the diverse choreographic approaches of faculty, student and guest artist work, as well as historical reconstructions. Course admission is by audition. Students gain performance techniques, collaborative skills, and often contribute to the making of original choreography as they prepare for a fully produced dance concert. Simultaneous enrollment in a dance technique class is required. In addition, students gain experience in some of the technical aspects of dance concert production. Credit hours are assigned in accordance with the number of works in which a student participates. Evaluation procedures announced in class.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -48,6 +57,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -68,6 +81,82 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "2403",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "G. Staib",
+      "instructors": [
+        {
+          "name": "G. Staib",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "2404",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "J. Medina",
+      "instructors": [
+        {
+          "name": "J. Medina",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "2405",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "L. Teague",
+      "instructors": [
+        {
+          "name": "L. Teague",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -78,12 +167,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 3,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 3,
+    "open": 6,
     "closed": 0,
     "waitlisted": 0
   },
@@ -92,5 +181,5 @@
     "J. Medina",
     "L. Teague"
   ],
-  "scraped_at": "2026-05-13T00:39:56.663Z"
+  "scraped_at": "2026-06-17T23:10:00.473Z"
 }

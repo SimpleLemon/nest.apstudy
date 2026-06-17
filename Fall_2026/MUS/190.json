@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "FS",
+  "requirements": [
+    "FS"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Fulfills the freshman seminar requirement of the General Education Requirements. A variety of courses covering a wide range of topics in music. Refer to the Music Department website for a listing of classes currently offered.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -59,6 +68,80 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2422",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "D. Castro Pantoja",
+      "instructors": [
+        {
+          "name": "D. Castro Pantoja",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2424",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "D. Andrews",
+      "instructors": [
+        {
+          "name": "D. Andrews",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -80,18 +163,18 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 4,
     "open": 0,
-    "closed": 2,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
     "D. Andrews",
     "D. Castro Pantoja"
   ],
-  "scraped_at": "2026-05-13T00:41:04.342Z"
+  "scraped_at": "2026-06-17T23:12:17.044Z"
 }

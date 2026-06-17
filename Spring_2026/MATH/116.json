@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "4",
   "requirement_designation": "QR",
+  "requirements": [
+    "QR"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Integration, differential equations, multivariable calculus, and discrete probability and statistics, with an emphasis on applications to biology.",
   "course_notes": "MATH 111 or MATH 111L or equivalent transfer credit as prerequisite.",
   "requisites": "MATH 111 or MATH 111L or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -59,6 +68,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -85,6 +98,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -111,6 +128,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -142,6 +163,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -168,6 +193,200 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2713",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "A. Lyons",
+      "instructors": [
+        {
+          "name": "A. Lyons",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2720",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Lyons/Beougher",
+      "instructors": [
+        {
+          "name": "Lyons/Beougher",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2721",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "Lyons/Beougher",
+      "instructors": [
+        {
+          "name": "Lyons/Beougher",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2722",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "A. Lyons",
+      "instructors": [
+        {
+          "name": "A. Lyons",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2723",
+      "section_number": "5",
+      "schedule_type": "LAB",
+      "instructor": "Lyons/Vescovo",
+      "instructors": [
+        {
+          "name": "Lyons/Vescovo",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2724",
+      "section_number": "6",
+      "schedule_type": "LAB",
+      "instructor": "Lyons/Vescovo",
+      "instructors": [
+        {
+          "name": "Lyons/Vescovo",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -184,19 +403,19 @@
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 2,
-    "labs": 4,
+    "total_sections": 12,
+    "lectures": 4,
+    "labs": 8,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 4,
     "closed": 0,
-    "waitlisted": 4
+    "waitlisted": 8
   },
   "instructors_unique": [
     "A. Lyons",
     "Lyons/Beougher",
     "Lyons/Vescovo"
   ],
-  "scraped_at": "2026-05-13T00:37:47.208Z"
+  "scraped_at": "2026-06-17T23:03:54.278Z"
 }

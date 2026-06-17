@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Machine learning techniques and their use in solving problems from multiple real-world domains. Topics covered include data analytics, regression, classification, clustering, decision trees, and neural networks using Python libraries. Focuses on applications and use rather than algorithms or theory.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 5:30-6:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1730",
+            "end": "1845"
+          },
+          {
+            "day": "Wed",
+            "start": "1730",
+            "end": "1845"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3643",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "A. Pouriyeh",
+      "instructors": [
+        {
+          "name": "A. Pouriyeh",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "A. Pouriyeh"
   ],
-  "scraped_at": "2026-05-13T00:36:47.405Z"
+  "scraped_at": "2026-06-17T23:01:53.989Z"
 }

@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "1 - 5",
   "requirement_designation": "HAPW",
+  "requirements": [
+    "HAPW"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course is designed to give advanced students the opportunity to investigate intensively an area of special interest. A reading knowledge of one foreign language is prerequisite. Topics may vary, but the goal of the course remains unchanged: the courses focuses on contemporary literary theory.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5478",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "A. Mitchell",
+      "instructors": [
+        {
+          "name": "A. Mitchell",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 2
   },
   "instructors_unique": [
     "A. Mitchell"
   ],
-  "scraped_at": "2026-05-13T00:39:53.440Z"
+  "scraped_at": "2026-06-17T23:09:53.856Z"
 }

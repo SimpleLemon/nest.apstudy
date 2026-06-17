@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3 - 5",
   "requirement_designation": "XAW",
+  "requirements": [
+    "XAW"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Students will learn the craft of research in economics. Coursework will consist of synthesis of literature; collection, collation, cleaning of data; data analysis, contributing to manuscript preparation, and/or other work related to the sustaining of an academic research project.",
   "course_notes": "(ECON 201 or ECON_OX 201 or ECON 212 or ECON_OX 212) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisites.",
   "requisites": "(ECON 201 or ECON_OX 201 or ECON 212 or ECON_OX 212) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisites.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -48,6 +57,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -68,6 +81,82 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5632",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "M. Arbatskaya",
+      "instructors": [
+        {
+          "name": "M. Arbatskaya",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6169",
+      "section_number": "2",
+      "schedule_type": "RSC",
+      "instructor": "S. O'Connell",
+      "instructors": [
+        {
+          "name": "S. O'Connell",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6553",
+      "section_number": "3",
+      "schedule_type": "RSC",
+      "instructor": "M. Ayar",
+      "instructors": [
+        {
+          "name": "M. Ayar",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -78,12 +167,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
+    "total_sections": 6,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 3,
-    "open": 3,
+    "other": 6,
+    "open": 6,
     "closed": 0,
     "waitlisted": 0
   },
@@ -92,5 +181,5 @@
     "M. Ayar",
     "S. O'Connell"
   ],
-  "scraped_at": "2026-05-13T00:36:52.253Z"
+  "scraped_at": "2026-06-17T23:02:03.803Z"
 }

@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "HAP",
+  "requirements": [
+    "HAP"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Reading of Vergil's Aeneid and Dante's Divine Comedy in English translation.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,50 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MWF 1-1:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1350"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1350"
+          },
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2922",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "N. Slater",
+      "instructors": [
+        {
+          "name": "N. Slater",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -54,17 +103,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
-    "open": 1,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "N. Slater"
   ],
-  "scraped_at": "2026-05-13T00:36:42.572Z"
+  "scraped_at": "2026-06-17T23:01:44.126Z"
 }

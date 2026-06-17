@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Understanding ethical and societal concerns introduced by computing and AI into human life, including privacy, online influence and disinformation, information ownership and responsibility, fairness and bias in computer and AI technologies such as facial recognition and robotic systems.",
   "course_notes": "CS 211 or CS 323 or CS 325 or CS 334 or CS 470 or equivalent transfer credit as prerequisite.",
   "requisites": "CS 211 or CS 323 or CS 325 or CS 334 or CS 470 or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3651",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "A. Emami",
+      "instructors": [
+        {
+          "name": "A. Emami",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 2
   },
   "instructors_unique": [
     "A. Emami"
   ],
-  "scraped_at": "2026-05-13T00:36:47.405Z"
+  "scraped_at": "2026-06-17T23:01:53.988Z"
 }

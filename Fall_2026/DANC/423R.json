@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "2",
   "requirement_designation": "PE",
+  "requirements": [
+    "PE"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Designed for advance dance students who can demonstrate a consistent repertoire of technical skill absent of fundamental body issues. Class material challenges the student's technical and performance range and develops a sophisticated understanding of movement concepts.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2419",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "K. O'Neal",
+      "instructors": [
+        {
+          "name": "K. O'Neal",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "K. O'Neal"
   ],
-  "scraped_at": "2026-05-13T00:39:56.667Z"
+  "scraped_at": "2026-06-17T23:10:00.483Z"
 }

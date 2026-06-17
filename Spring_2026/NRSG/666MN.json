@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -48,6 +55,58 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "4255",
+      "section_number": "301",
+      "schedule_type": "CLN",
+      "instructor": "L. Wands",
+      "instructors": [
+        {
+          "name": "L. Wands",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "4256",
+      "section_number": "302",
+      "schedule_type": "CLN",
+      "instructor": "L. Wands",
+      "instructors": [
+        {
+          "name": "L. Wands",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -58,17 +117,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 4,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "L. Wands"
   ],
-  "scraped_at": "2026-05-13T00:38:01.995Z"
+  "scraped_at": "2026-06-17T23:04:23.814Z"
 }

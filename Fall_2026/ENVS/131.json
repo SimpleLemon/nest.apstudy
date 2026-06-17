@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "2",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Applies and integrates theories and concepts of environmental science through field study. Introduction to Piedmont geology, water, land and forest use, management and policy. Introduction to ENVS research and community engaged learning. This course is required for ENVS majors.",
   "course_notes": "ENVS 120 or ENVS 130 or ENVS 140 as prerequisite or co-requisite, or equivalent transfer credit",
   "requisites": "ENVS 120 or ENVS 130 or ENVS 140 as prerequisite or co-requisite, or equivalent transfer credit",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -48,6 +57,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -74,6 +87,94 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 8:30-11:15a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2084",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Keogh/Deere",
+      "instructors": [
+        {
+          "name": "Keogh/Deere",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "2085",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "J. Deere",
+      "instructors": [
+        {
+          "name": "J. Deere",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 8:30-11:15a",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2086",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "C. Keogh",
+      "instructors": [
+        {
+          "name": "C. Keogh",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -90,12 +191,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 1,
-    "labs": 2,
+    "total_sections": 6,
+    "lectures": 2,
+    "labs": 4,
     "discussions": 0,
     "other": 0,
-    "open": 3,
+    "open": 6,
     "closed": 0,
     "waitlisted": 0
   },
@@ -104,5 +205,5 @@
     "J. Deere",
     "Keogh/Deere"
   ],
-  "scraped_at": "2026-05-13T00:40:11.206Z"
+  "scraped_at": "2026-06-17T23:10:29.833Z"
 }

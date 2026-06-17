@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course combines the theoretical and practical elements of cinematography and lighting. Historical and contemporary trends and styles are examined. Video formats, exposure, camera placement,composition, movement and continuity will be covered.",
   "course_notes": "FILM 107 or ARTVIS 107 or FILM_OX 107 or FILM_OX 107E or equivalent transfer credit as prerequisite.",
   "requisites": "FILM 107 or ARTVIS 107 or FILM_OX 107 or FILM_OX 107E or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,40 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1:15-5:15p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1315",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3890",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "T. Ozdemir",
+      "instructors": [
+        {
+          "name": "T. Ozdemir",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -44,17 +83,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
+    "other": 2,
     "open": 0,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 2
   },
   "instructors_unique": [
     "T. Ozdemir"
   ],
-  "scraped_at": "2026-05-13T00:40:14.426Z"
+  "scraped_at": "2026-06-17T23:10:36.293Z"
 }

@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -54,6 +61,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -80,6 +91,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -106,6 +121,130 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 1-2:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1450"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1561",
+      "section_number": "L1",
+      "schedule_type": "LAB",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 9-9:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1562",
+      "section_number": "L2",
+      "schedule_type": "LAB",
+      "instructor": "Stein/Pambo",
+      "instructors": [
+        {
+          "name": "Stein/Pambo",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1563",
+      "section_number": "L3",
+      "schedule_type": "LAB",
+      "instructor": "Stein/Khanna",
+      "instructors": [
+        {
+          "name": "Stein/Khanna",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 2-2:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1400",
+            "end": "1450"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1532",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "A. Stein",
+      "instructors": [
+        {
+          "name": "A. Stein",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -122,12 +261,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 1,
-    "labs": 3,
+    "total_sections": 8,
+    "lectures": 2,
+    "labs": 6,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 8,
     "closed": 0,
     "waitlisted": 0
   },
@@ -137,5 +276,5 @@
     "Stein/Pambo",
     "Team"
   ],
-  "scraped_at": "2026-05-13T00:37:13.366Z"
+  "scraped_at": "2026-06-17T23:02:46.028Z"
 }

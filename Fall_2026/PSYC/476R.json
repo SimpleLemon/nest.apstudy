@@ -1,0 +1,87 @@
+{
+  "course_code": "PSYC 476R",
+  "course_title": "Biological Foundations of Behavior: Appld Anim Beh & Welf in Zoos",
+  "subject": "PSYC",
+  "catalog_number": "476R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
+  "course_description": "Selected issues in physiological and comparative psychology.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "crn": "5842",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 9a-12p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "900",
+            "end": "1200"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5842",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 9a-12p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "900",
+            "end": "1200"
+          }
+        ]
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [],
+  "scraped_at": "2026-06-17T23:14:27.056Z"
+}

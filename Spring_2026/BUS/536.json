@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -48,6 +55,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -68,6 +79,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -88,6 +103,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -108,6 +127,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -128,6 +151,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -148,6 +175,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -168,6 +199,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -188,6 +223,226 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5412",
+      "section_number": "2101",
+      "schedule_type": "LEC",
+      "instructor": "Lord/Conner",
+      "instructors": [
+        {
+          "name": "Lord/Conner",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5413",
+      "section_number": "2102",
+      "schedule_type": "LEC",
+      "instructor": "Lord/Conner",
+      "instructors": [
+        {
+          "name": "Lord/Conner",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5759",
+      "section_number": "2103",
+      "schedule_type": "LEC",
+      "instructor": "Lord/Conner",
+      "instructors": [
+        {
+          "name": "Lord/Conner",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "3386",
+      "section_number": "2201",
+      "schedule_type": "LEC",
+      "instructor": "Lord/Conner",
+      "instructors": [
+        {
+          "name": "Lord/Conner",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "3387",
+      "section_number": "2202",
+      "schedule_type": "LEC",
+      "instructor": "Lord/Conner",
+      "instructors": [
+        {
+          "name": "Lord/Conner",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "4397",
+      "section_number": "2203",
+      "schedule_type": "LEC",
+      "instructor": "Lord/Conner",
+      "instructors": [
+        {
+          "name": "Lord/Conner",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5884",
+      "section_number": "3201",
+      "schedule_type": "LEC",
+      "instructor": "Lord/Ruskin",
+      "instructors": [
+        {
+          "name": "Lord/Ruskin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5885",
+      "section_number": "3202",
+      "schedule_type": "LEC",
+      "instructor": "Lord/Ruskin",
+      "instructors": [
+        {
+          "name": "Lord/Ruskin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5886",
+      "section_number": "3203",
+      "schedule_type": "LEC",
+      "instructor": "Lord/Ruskin",
+      "instructors": [
+        {
+          "name": "Lord/Ruskin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -198,12 +453,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 9,
-    "lectures": 9,
+    "total_sections": 18,
+    "lectures": 18,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 9,
+    "open": 18,
     "closed": 0,
     "waitlisted": 0
   },
@@ -211,5 +466,5 @@
     "Lord/Conner",
     "Lord/Ruskin"
   ],
-  "scraped_at": "2026-05-13T00:36:37.721Z"
+  "scraped_at": "2026-06-17T23:01:34.286Z"
 }

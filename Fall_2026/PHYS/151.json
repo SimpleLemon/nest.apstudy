@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "4",
   "requirement_designation": "NS",
+  "requirements": [
+    "NS"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Introductory classical mechanics and thermodynamics. Physics 151 and 152 are primarily for students who are strongly motivated in science and mathematics.",
   "course_notes": "(MATH 111 or MATH_OX 111) as prerequisites and (MATH 112 or MATH_OX 112 or MATH 112Z or MATH 210 or MATH_OX 210) as co-requisites, or equivalent transfer credit.",
   "requisites": "(MATH 111 or MATH_OX 111) as prerequisites and (MATH 112 or MATH_OX 112 or MATH 112Z or MATH 210 or MATH_OX 210) as co-requisites, or equivalent transfer credit.",
@@ -28,7 +33,11 @@
         }
       ],
       "location": null,
-      "enrollment_status": "Open",
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
       "enrollment_count": "9",
       "is_cancelled": false,
       "schedule": {
@@ -54,6 +63,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -80,6 +93,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -106,6 +123,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -132,7 +153,11 @@
         }
       ],
       "location": null,
-      "enrollment_status": "Open",
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
       "enrollment_count": "9",
       "is_cancelled": false,
       "schedule": {
@@ -158,7 +183,11 @@
         }
       ],
       "location": null,
-      "enrollment_status": "Open",
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
       "enrollment_count": "9",
       "is_cancelled": false,
       "schedule": {
@@ -184,6 +213,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -210,6 +243,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -236,6 +273,285 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2366",
+      "section_number": "LAB1",
+      "schedule_type": "LAB",
+      "instructor": "Donofrio/Bing",
+      "instructors": [
+        {
+          "name": "Donofrio/Bing",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6-8:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1800",
+            "end": "2045"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2367",
+      "section_number": "LAB2",
+      "schedule_type": "LAB",
+      "instructor": "Donofrio/Bing",
+      "instructors": [
+        {
+          "name": "Donofrio/Bing",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2368",
+      "section_number": "LAB3",
+      "schedule_type": "LAB",
+      "instructor": "Donofrio/Bing",
+      "instructors": [
+        {
+          "name": "Donofrio/Bing",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 6-8:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1800",
+            "end": "2045"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2369",
+      "section_number": "LAB4",
+      "schedule_type": "LAB",
+      "instructor": "Donofrio/Bing",
+      "instructors": [
+        {
+          "name": "Donofrio/Bing",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2370",
+      "section_number": "LAB5",
+      "schedule_type": "LAB",
+      "instructor": "Donofrio/Bing",
+      "instructors": [
+        {
+          "name": "Donofrio/Bing",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 6-8:45p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1800",
+            "end": "2045"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2371",
+      "section_number": "LAB6",
+      "schedule_type": "LAB",
+      "instructor": "Donofrio/Bing",
+      "instructors": [
+        {
+          "name": "Donofrio/Bing",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2372",
+      "section_number": "LAB7",
+      "schedule_type": "LAB",
+      "instructor": "Donofrio/Bing",
+      "instructors": [
+        {
+          "name": "Donofrio/Bing",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 6-8:45p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1800",
+            "end": "2045"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2374",
+      "section_number": "LAB8",
+      "schedule_type": "LAB",
+      "instructor": "Donofrio/Bing",
+      "instructors": [
+        {
+          "name": "Donofrio/Bing",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1390",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "J. Lin",
+      "instructors": [
+        {
+          "name": "J. Lin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -257,18 +573,18 @@
     }
   ],
   "section_summary": {
-    "total_sections": 9,
-    "lectures": 1,
-    "labs": 8,
+    "total_sections": 18,
+    "lectures": 2,
+    "labs": 16,
     "discussions": 0,
     "other": 0,
-    "open": 5,
-    "closed": 4,
+    "open": 4,
+    "closed": 14,
     "waitlisted": 0
   },
   "instructors_unique": [
     "Donofrio/Bing",
     "J. Lin"
   ],
-  "scraped_at": "2026-05-13T00:42:02.386Z"
+  "scraped_at": "2026-06-17T23:14:13.991Z"
 }

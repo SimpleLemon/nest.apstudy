@@ -1,12 +1,15 @@
 {
   "course_code": "CHEM 729R",
-  "course_title": "Special Topics in Chemistry: Systems Chemistry",
+  "course_title": "Special Topics in Chemistry: Biocatalysis",
   "subject": "CHEM",
   "catalog_number": "729R",
   "term": "Fall_2026",
   "srcdb": "5269",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -16,37 +19,6 @@
     "end": "2026-12-09"
   },
   "sections": [
-    {
-      "crn": "2592",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Lynn",
-      "instructors": [
-        {
-          "name": "D. Lynn",
-          "email": null
-        }
-      ],
-      "location": null,
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
     {
       "crn": "2599",
       "section_number": "2",
@@ -59,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -90,6 +66,80 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2599",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "K. Biegasiewicz",
+      "instructors": [
+        {
+          "name": "K. Biegasiewicz",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4500",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "C. Dunham",
+      "instructors": [
+        {
+          "name": "C. Dunham",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -111,19 +161,18 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 3,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 3,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "C. Dunham",
-    "D. Lynn",
     "K. Biegasiewicz"
   ],
-  "scraped_at": "2026-05-13T00:39:47.003Z"
+  "scraped_at": "2026-06-17T23:09:40.831Z"
 }

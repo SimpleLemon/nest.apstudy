@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "SNT",
+  "requirements": [
+    "SNT"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "The relationship between sequence, structure, and function of macromolecules. The course will progress from exploring these themes in the context of synthesis, characterization, and utility of simple organic polymers to understanding the properties of complex,chemically diverse biomolecules.",
   "course_notes": "CHEM 203 or CHEM_OX 203 or CHEM 222 or CHEM_OX 222 or CHEM 222Z or CHEM 203Z or equivalent transfer credit as prerequisite.",
   "requisites": "CHEM 203 or CHEM_OX 203 or CHEM 222 or CHEM_OX 222 or CHEM 222Z or CHEM 203Z or equivalent transfer credit as prerequisite.",
@@ -20,14 +25,53 @@
       "crn": "2786",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "K. McKnelly",
+      "instructor": "K. McWhorter",
       "instructors": [
         {
-          "name": "K. McKnelly",
+          "name": "K. McWhorter",
           "email": null
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2786",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "K. McWhorter",
+      "instructors": [
+        {
+          "name": "K. McWhorter",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 2
   },
   "instructors_unique": [
-    "K. McKnelly"
+    "K. McWhorter"
   ],
-  "scraped_at": "2026-05-13T00:39:46.995Z"
+  "scraped_at": "2026-06-17T23:09:40.820Z"
 }

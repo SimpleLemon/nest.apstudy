@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 4",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Students study, read, and write on a topic under the direction or supervision of a faculty member. Permission of the department and a supervising faculty member is required.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -54,6 +63,64 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5188",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "M. Pak",
+      "instructors": [
+        {
+          "name": "M. Pak",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-2:15p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6614",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "H. Maxim",
+      "instructors": [
+        {
+          "name": "H. Maxim",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -64,12 +131,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 4,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
@@ -77,5 +144,5 @@
     "H. Maxim",
     "M. Pak"
   ],
-  "scraped_at": "2026-05-13T00:37:45.588Z"
+  "scraped_at": "2026-06-17T23:03:51.052Z"
 }

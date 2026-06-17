@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "1 - 8",
   "requirement_designation": "XA",
+  "requirements": [
+    "XA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Permission of Honors Coordinator required. Restricted to students who are accepted into the departmental Honors program. Fulfills ENVS Independent Study requirement (4 credit hours).",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -48,6 +57,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -68,6 +81,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -88,6 +105,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -108,6 +129,130 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5365",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "J. Ajibade",
+      "instructors": [
+        {
+          "name": "J. Ajibade",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5371",
+      "section_number": "2",
+      "schedule_type": "RSC",
+      "instructor": "T. Gillespie",
+      "instructors": [
+        {
+          "name": "T. Gillespie",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5422",
+      "section_number": "3",
+      "schedule_type": "RSC",
+      "instructor": "G. Vazquez Prokopec",
+      "instructors": [
+        {
+          "name": "G. Vazquez Prokopec",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5513",
+      "section_number": "4",
+      "schedule_type": "RSC",
+      "instructor": "A. Avramov",
+      "instructors": [
+        {
+          "name": "A. Avramov",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5669",
+      "section_number": "5",
+      "schedule_type": "RSC",
+      "instructor": "E. Saikawa",
+      "instructors": [
+        {
+          "name": "E. Saikawa",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -118,13 +263,13 @@
     }
   ],
   "section_summary": {
-    "total_sections": 5,
+    "total_sections": 10,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 5,
-    "open": 2,
-    "closed": 3,
+    "other": 10,
+    "open": 4,
+    "closed": 6,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -134,5 +279,5 @@
     "J. Ajibade",
     "T. Gillespie"
   ],
-  "scraped_at": "2026-05-13T00:40:11.212Z"
+  "scraped_at": "2026-06-17T23:10:29.848Z"
 }

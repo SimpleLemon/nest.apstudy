@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "XA",
+  "requirements": [
+    "XA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course offers independent research study credit. Participating students are matched with a member of the Emory faculty (or advanced graduate student) and conduct independent research under the faculty member's supervision.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,34 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "3031",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "M. Baker",
+      "instructors": [
+        {
+          "name": "M. Baker",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -38,17 +71,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
+    "other": 2,
     "open": 0,
-    "closed": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "M. Baker"
   ],
-  "scraped_at": "2026-05-13T00:38:58.370Z"
+  "scraped_at": "2026-06-17T23:06:17.746Z"
 }

@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,8 +31,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "10",
+      "enrollment_count": "9",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -48,8 +55,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "10",
+      "enrollment_count": "9",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -68,28 +79,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6054",
-      "section_number": "4",
-      "schedule_type": "SUP",
-      "instructor": "Phillips/Sterk",
-      "instructors": [
-        {
-          "name": "Phillips/Sterk",
-          "email": null
-        }
-      ],
-      "location": null,
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
+      "enrollment_count": "9",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -108,8 +103,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "10",
+      "enrollment_count": "9",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -128,8 +127,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "10",
+      "enrollment_count": "9",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -148,8 +151,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "10",
+      "enrollment_count": "9",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -168,8 +175,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "10",
+      "enrollment_count": "9",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -188,8 +199,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "10",
+      "enrollment_count": "9",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -208,8 +223,228 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "10",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6051",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Ozawa-de Silva/Phillips",
+      "instructors": [
+        {
+          "name": "Ozawa-de Silva/Phillips",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6052",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "M. Benitez",
+      "instructors": [
+        {
+          "name": "M. Benitez",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6053",
+      "section_number": "3",
+      "schedule_type": "SUP",
+      "instructor": "Lonsdorf/Benitez",
+      "instructors": [
+        {
+          "name": "Lonsdorf/Benitez",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6055",
+      "section_number": "5",
+      "schedule_type": "SUP",
+      "instructor": "M. Peletz",
+      "instructors": [
+        {
+          "name": "M. Peletz",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6056",
+      "section_number": "6",
+      "schedule_type": "SUP",
+      "instructor": "Nugent/Holsey",
+      "instructors": [
+        {
+          "name": "Nugent/Holsey",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6057",
+      "section_number": "7",
+      "schedule_type": "SUP",
+      "instructor": "Knauft/Mulla",
+      "instructors": [
+        {
+          "name": "Knauft/Mulla",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6058",
+      "section_number": "8",
+      "schedule_type": "SUP",
+      "instructor": "Phillips/Hall-Clifford",
+      "instructors": [
+        {
+          "name": "Phillips/Hall-Clifford",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6059",
+      "section_number": "9",
+      "schedule_type": "SUP",
+      "instructor": "B. Knauft",
+      "instructors": [
+        {
+          "name": "B. Knauft",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6060",
+      "section_number": "10",
+      "schedule_type": "SUP",
+      "instructor": "A. Grimshaw",
+      "instructors": [
+        {
+          "name": "A. Grimshaw",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -218,12 +453,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 10,
+    "total_sections": 18,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 10,
-    "open": 10,
+    "other": 18,
+    "open": 18,
     "closed": 0,
     "waitlisted": 0
   },
@@ -236,8 +471,7 @@
     "M. Peletz",
     "Nugent/Holsey",
     "Ozawa-de Silva/Phillips",
-    "Phillips/Hall-Clifford",
-    "Phillips/Sterk"
+    "Phillips/Hall-Clifford"
   ],
-  "scraped_at": "2026-05-13T00:36:23.202Z"
+  "scraped_at": "2026-06-17T23:01:04.715Z"
 }

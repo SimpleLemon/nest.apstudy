@@ -1,0 +1,75 @@
+{
+  "course_code": "JPN 101",
+  "course_title": "Elementary Japanese I",
+  "subject": "JPN",
+  "catalog_number": "101",
+  "term": "Spring_2026",
+  "srcdb": "5261",
+  "credit_hours": "4",
+  "requirement_designation": "IC",
+  "requirements": [
+    "IC"
+  ],
+  "campus": null,
+  "campus_description": null,
+  "course_description": "This course is designed to introduce students to the everyday language of Japan. Lessons will be organized around natural conversational topics, leading students from fundamental aspects of grammar to readings in simple texts.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-01-13",
+    "end": "2026-04-27"
+  },
+  "sections": [
+    {
+      "crn": "6842",
+      "section_number": "9000",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6842",
+      "section_number": "9000",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 2,
+    "waitlisted": 0
+  },
+  "instructors_unique": [],
+  "scraped_at": "2026-06-17T23:03:34.793Z"
+}

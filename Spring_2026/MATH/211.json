@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "QR",
+  "requirements": [
+    "QR"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Vectors; multivariable functions; partial derivatives; multiple integrals; vector and scalar fields; Green's and Stokes' theorems; divergence theorem.",
   "course_notes": "MATH 112 or MATH 112Z or MATH_OX 112 or MATH_OX 112Z or equivalent transfer credit as prerequisite.",
   "requisites": "MATH 112 or MATH 112Z or MATH_OX 112 or MATH_OX 112Z or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -59,6 +68,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -90,6 +103,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -121,6 +138,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -152,6 +173,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -183,6 +208,220 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2763",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "A. Lyons",
+      "instructors": [
+        {
+          "name": "A. Lyons",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2785",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "J. Mayfield",
+      "instructors": [
+        {
+          "name": "J. Mayfield",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2794",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "J. Mayfield",
+      "instructors": [
+        {
+          "name": "J. Mayfield",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5176",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "L. Ruthotto",
+      "instructors": [
+        {
+          "name": "L. Ruthotto",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5177",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "L. Ruthotto",
+      "instructors": [
+        {
+          "name": "L. Ruthotto",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5233",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "F. Brarda",
+      "instructors": [
+        {
+          "name": "F. Brarda",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -204,14 +443,14 @@
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 12,
+    "lectures": 12,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 3,
+    "open": 6,
     "closed": 0,
-    "waitlisted": 3
+    "waitlisted": 6
   },
   "instructors_unique": [
     "A. Lyons",
@@ -219,5 +458,5 @@
     "J. Mayfield",
     "L. Ruthotto"
   ],
-  "scraped_at": "2026-05-13T00:37:47.208Z"
+  "scraped_at": "2026-06-17T23:03:54.281Z"
 }

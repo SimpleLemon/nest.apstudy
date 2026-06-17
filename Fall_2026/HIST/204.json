@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "SS",
+  "requirements": [
+    "SS"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Examines history of Central Eurasia as nexus commercial, cultural and political exchange in Eurasia from the Bronze Age to the rise of European Imperialism. Topics include: nomadic empires, oasis merchants, barbarians and empires, Buddhism, Islam, European adventurers, pre-modern globalization.",
   "course_notes": null,
   "requisites": null,
@@ -28,7 +33,51 @@
         }
       ],
       "location": null,
-      "enrollment_status": "Open",
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TThF 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1220"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1220"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2524",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Payne/Munai",
+      "instructors": [
+        {
+          "name": "Payne/Munai",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -54,17 +103,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 0,
     "closed": 0,
-    "waitlisted": 0
+    "waitlisted": 2
   },
   "instructors_unique": [
     "Payne/Munai"
   ],
-  "scraped_at": "2026-05-13T00:40:30.507Z"
+  "scraped_at": "2026-06-17T23:11:08.774Z"
 }

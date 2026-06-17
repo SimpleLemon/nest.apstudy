@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "1 - 8",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Variable credit. Permission required. Intended for students who have had some prior introduction to research, either in ENVS 299 or in another class or field. In this individual research course, research skills are developed and refined under supervision of an ENVS faculty member.",
   "course_notes": null,
   "requisites": null,
@@ -28,8 +33,84 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
-      "enrollment_count": "1",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5834",
+      "section_number": "2",
+      "schedule_type": "RSC",
+      "instructor": "J. Ajibade",
+      "instructors": [
+        {
+          "name": "J. Ajibade",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5664",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "S. Donaher",
+      "instructors": [
+        {
+          "name": "S. Donaher",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5834",
+      "section_number": "2",
+      "schedule_type": "RSC",
+      "instructor": "J. Ajibade",
+      "instructors": [
+        {
+          "name": "J. Ajibade",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -38,17 +119,18 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
-    "open": 0,
-    "closed": 1,
+    "other": 4,
+    "open": 2,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
+    "J. Ajibade",
     "S. Donaher"
   ],
-  "scraped_at": "2026-05-13T00:40:11.210Z"
+  "scraped_at": "2026-06-17T23:10:29.847Z"
 }

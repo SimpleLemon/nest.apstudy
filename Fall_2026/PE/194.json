@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "1",
   "requirement_designation": "PE",
+  "requirements": [
+    "PE"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course is designed to equip the student with both the physical skills and mental strategies necessary to achieve greater flexibility and deeper states of relaxation. Topics include time management, meditation, coping with academic and peer pressure, depression, anger, and phobias, among others.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -59,6 +68,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -90,6 +103,110 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4464",
+      "section_number": "1",
+      "schedule_type": "PE",
+      "instructor": "M. Delcroix",
+      "instructors": [
+        {
+          "name": "M. Delcroix",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4465",
+      "section_number": "2",
+      "schedule_type": "PE",
+      "instructor": "S. Lafley",
+      "instructors": [
+        {
+          "name": "S. Lafley",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5651",
+      "section_number": "3",
+      "schedule_type": "PE",
+      "instructor": "L. Shepard",
+      "instructors": [
+        {
+          "name": "L. Shepard",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -106,13 +223,13 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
+    "total_sections": 6,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 3,
-    "open": 1,
-    "closed": 2,
+    "other": 6,
+    "open": 2,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -120,5 +237,5 @@
     "M. Delcroix",
     "S. Lafley"
   ],
-  "scraped_at": "2026-05-13T00:41:55.782Z"
+  "scraped_at": "2026-06-17T23:14:01.032Z"
 }

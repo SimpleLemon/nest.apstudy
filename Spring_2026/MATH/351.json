@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "MQR",
+  "requirements": [
+    "MQR"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "PDEs and their origin, classification of PDEs, analytical methods for the solution of PDEs, qualitative properties of the solutions, eigenvalue problems and introduction to numerical methods.",
   "course_notes": "(MATH 211 or MATH_OX 211 or MATH 276) and (MATH 212 or MATH_OX 212) and (MATH 221 or MATH_OX 221 or MATH 275 or MATH 321) or equivalent transfer credit as prerequisite.",
   "requisites": "(MATH 211 or MATH_OX 211 or MATH 276) and (MATH 212 or MATH_OX 212) and (MATH 221 or MATH_OX 221 or MATH 275 or MATH 321) or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5179",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "M. Tezzele",
+      "instructors": [
+        {
+          "name": "M. Tezzele",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "M. Tezzele"
   ],
-  "scraped_at": "2026-05-13T00:37:47.212Z"
+  "scraped_at": "2026-06-17T23:03:54.286Z"
 }

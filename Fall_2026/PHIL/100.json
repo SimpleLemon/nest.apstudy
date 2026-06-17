@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "HA",
+  "requirements": [
+    "HA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course surveys basic problems in philosophy, such as questions concerning truth, knowledge, justice, beauty, and the good.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -59,6 +68,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -95,6 +108,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -126,6 +143,160 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MWF 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "920"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "920"
+          },
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1686",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "J. Bell",
+      "instructors": [
+        {
+          "name": "J. Bell",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2442",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "M. Wang",
+      "instructors": [
+        {
+          "name": "M. Wang",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TThF 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "920"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "920"
+          },
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2446",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "G. Yancy",
+      "instructors": [
+        {
+          "name": "G. Yancy",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3399",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "D. Estrada",
+      "instructors": [
+        {
+          "name": "D. Estrada",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -152,13 +323,13 @@
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 8,
+    "lectures": 8,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 2,
+    "open": 4,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -167,5 +338,5 @@
     "J. Bell",
     "M. Wang"
   ],
-  "scraped_at": "2026-05-13T00:42:00.728Z"
+  "scraped_at": "2026-06-17T23:14:10.736Z"
 }

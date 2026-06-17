@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "HSCE",
+  "requirements": [
+    "HSCE"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "On the eve of the Holocaust, a majority of world Jewry lived in Eastern Europe (esp.Poland, USSR).This course explores the origins, dynamic growth, and near destruction of East European Jewry from the Middle Ages to the Holocaust and the challenges to Jewish life in this region in the post-WWII era.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4441",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "E. Schainker",
+      "instructors": [
+        {
+          "name": "E. Schainker",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "E. Schainker"
   ],
-  "scraped_at": "2026-05-13T00:37:39.145Z"
+  "scraped_at": "2026-06-17T23:03:38.017Z"
 }

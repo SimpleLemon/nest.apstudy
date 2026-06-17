@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 4",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "A course on topics of special biological interest, designed for Biology majors elective credit. This course is repeatable when the topic varies.",
   "course_notes": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
   "requisites": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -59,6 +68,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -85,6 +98,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -111,6 +128,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -124,16 +145,179 @@
           }
         ]
       }
+    },
+    {
+      "crn": "6791",
+      "section_number": "9000",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "1667",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "M. Reyes",
+      "instructors": [
+        {
+          "name": "M. Reyes",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5504",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "van Holstein/Katiyar",
+      "instructors": [
+        {
+          "name": "van Holstein/Katiyar",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5610",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "J. Saers",
+      "instructors": [
+        {
+          "name": "J. Saers",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5614",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "J. Saers",
+      "instructors": [
+        {
+          "name": "J. Saers",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 4-6:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1845"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6791",
+      "section_number": "9000",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 10,
+    "lectures": 10,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 3,
-    "closed": 1,
+    "open": 6,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -141,5 +325,5 @@
     "M. Reyes",
     "van Holstein/Katiyar"
   ],
-  "scraped_at": "2026-05-13T00:36:31.265Z"
+  "scraped_at": "2026-06-17T23:01:21.205Z"
 }

@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 4",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Consultation with faculty prior to registration required.",
   "course_notes": null,
   "requisites": null,
@@ -17,13 +22,36 @@
   },
   "sections": [
     {
-      "crn": "6202",
-      "section_number": "1",
+      "crn": "6759",
+      "section_number": "9000",
       "schedule_type": "SUP",
       "instructor": "Staff",
       "instructors": [],
       "location": null,
-      "enrollment_status": "Open",
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6759",
+      "section_number": "9000",
+      "schedule_type": "SUP",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -33,15 +61,15 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
-    "open": 1,
-    "closed": 0,
+    "other": 2,
+    "open": 0,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [],
-  "scraped_at": "2026-05-13T00:36:23.182Z"
+  "scraped_at": "2026-06-17T23:01:04.711Z"
 }

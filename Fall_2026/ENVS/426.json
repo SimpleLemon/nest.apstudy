@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "2",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This class is offered to students selected to participate in a one-week fieldwork trip to the U.N. Climate Change Negotiation as a part of Emory's delegation. The course explores interdisciplinary climate change issues from science, policy, and business perspectives.",
   "course_notes": "ENVS 326 or equivalent transfer credit as prerequisite.",
   "requisites": "ENVS 326 or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,34 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "2219",
+      "section_number": "1",
+      "schedule_type": "PRA",
+      "instructor": "E. Saikawa",
+      "instructors": [
+        {
+          "name": "E. Saikawa",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -38,17 +71,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
-    "open": 1,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "E. Saikawa"
   ],
-  "scraped_at": "2026-05-13T00:40:11.210Z"
+  "scraped_at": "2026-06-17T23:10:29.847Z"
 }

@@ -1,0 +1,99 @@
+{
+  "course_code": "SPAN 185",
+  "course_title": "Topics: Introduction to Hispanic Studies: Casa Émory:Lang.,Cult.,Comm.",
+  "subject": "SPAN",
+  "catalog_number": "185",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1 - 3",
+  "requirement_designation": "HAP",
+  "requirements": [
+    "HAP"
+  ],
+  "campus": null,
+  "campus_description": null,
+  "course_description": "Introduces students to the language, discourse, literature, and/or culture of the Spanish-speaking world. May be taught in English or Spanish. Students may take multiple SPAN 185 courses provided that they focus on different topics.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "crn": "5844",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "M. Ribeiro",
+      "instructors": [
+        {
+          "name": "M. Ribeiro",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 5:30-6:20p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1730",
+            "end": "1820"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5844",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "M. Ribeiro",
+      "instructors": [
+        {
+          "name": "M. Ribeiro",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 5:30-6:20p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1730",
+            "end": "1820"
+          }
+        ]
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "M. Ribeiro"
+  ],
+  "scraped_at": "2026-06-17T23:14:53.053Z"
+}

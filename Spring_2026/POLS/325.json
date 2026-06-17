@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "HSC",
+  "requirements": [
+    "HSC"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Suggested prerequisite: Political Science 110 or 120. An introduction to the politics and governments of Eastern Europe from World War I to the present.",
   "course_notes": null,
   "requisites": null,
@@ -28,8 +33,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "1",
+      "enrollment_count": "2",
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -46,20 +55,93 @@
           }
         ]
       }
+    },
+    {
+      "crn": "6814",
+      "section_number": "9000",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "3182",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "H. Tworzecki",
+      "instructors": [
+        {
+          "name": "H. Tworzecki",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6814",
+      "section_number": "9000",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
-    "closed": 0,
+    "open": 2,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "H. Tworzecki"
   ],
-  "scraped_at": "2026-05-13T00:38:58.361Z"
+  "scraped_at": "2026-06-17T23:06:17.737Z"
 }

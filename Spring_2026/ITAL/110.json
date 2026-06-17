@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "8",
   "requirement_designation": "IC",
+  "requirements": [
+    "IC"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Innovative eBook Italian Virtual Class: engaging approach to language learning, full immersion in Italian culture, literature and art with authentic materials; development of analytical, critical skills, cross-cultural competency and higher than norm linguistic fluency.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,60 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MTWTh 11:30a-12:45p; F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2595",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Ristaino/Di Pietro",
+      "instructors": [
+        {
+          "name": "Ristaino/Di Pietro",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -64,17 +123,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "Ristaino/Di Pietro"
   ],
-  "scraped_at": "2026-05-13T00:37:35.930Z"
+  "scraped_at": "2026-06-17T23:03:31.573Z"
 }

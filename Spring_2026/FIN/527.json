@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -54,6 +61,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -80,6 +91,100 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3384",
+      "section_number": "2147",
+      "schedule_type": "LEC",
+      "instructor": "N. Valerio III",
+      "instructors": [
+        {
+          "name": "N. Valerio III",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3385",
+      "section_number": "3247",
+      "schedule_type": "LEC",
+      "instructor": "N. Valerio III",
+      "instructors": [
+        {
+          "name": "N. Valerio III",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6372",
+      "section_number": "6247",
+      "schedule_type": "LEC",
+      "instructor": "N. Valerio III",
+      "instructors": [
+        {
+          "name": "N. Valerio III",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -96,17 +201,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 3,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 1,
+    "open": 4,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "N. Valerio III"
   ],
-  "scraped_at": "2026-05-13T00:37:08.501Z"
+  "scraped_at": "2026-06-17T23:02:36.311Z"
 }

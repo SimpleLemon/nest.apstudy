@@ -7,6 +7,9 @@
   "srcdb": "5269",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -20,10 +23,49 @@
       "crn": "4563",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "R. Chicas",
+      "instructors": [
+        {
+          "name": "R. Chicas",
+          "email": null
+        }
+      ],
       "location": null,
-      "enrollment_status": "Open",
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 3:30-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1530",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4563",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "R. Chicas",
+      "instructors": [
+        {
+          "name": "R. Chicas",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -39,15 +81,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
-    "open": 1,
-    "closed": 0,
+    "other": 2,
+    "open": 0,
+    "closed": 2,
     "waitlisted": 0
   },
-  "instructors_unique": [],
-  "scraped_at": "2026-05-13T00:41:09.197Z"
+  "instructors_unique": [
+    "R. Chicas"
+  ],
+  "scraped_at": "2026-06-17T23:12:26.872Z"
 }

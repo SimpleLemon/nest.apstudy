@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "SNT",
+  "requirements": [
+    "SNT"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Students will design and conduct their own fMRI study. Students will learn and apply the basic physics underlying MRI, the biological principles of fMRI, the principles of experimental design, the processing steps associated with data analysis, and the use of available software packages.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,40 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-6:30p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1830"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2054",
+      "section_number": "1",
+      "schedule_type": "PRA",
+      "instructor": "G. Berns",
+      "instructors": [
+        {
+          "name": "G. Berns",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -44,17 +83,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
-    "open": 1,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "G. Berns"
   ],
-  "scraped_at": "2026-05-13T00:39:01.603Z"
+  "scraped_at": "2026-06-17T23:06:24.220Z"
 }

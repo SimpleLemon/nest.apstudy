@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -48,6 +55,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -68,6 +79,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -88,6 +103,106 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "3898",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "S. Mulla",
+      "instructors": [
+        {
+          "name": "S. Mulla",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "3975",
+      "section_number": "2",
+      "schedule_type": "RSC",
+      "instructor": "A. Finch",
+      "instructors": [
+        {
+          "name": "A. Finch",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "3976",
+      "section_number": "3",
+      "schedule_type": "RSC",
+      "instructor": "K. Amin",
+      "instructors": [
+        {
+          "name": "K. Amin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5714",
+      "section_number": "4",
+      "schedule_type": "RSC",
+      "instructor": "F. Sheth",
+      "instructors": [
+        {
+          "name": "F. Sheth",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -98,13 +213,13 @@
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 8,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
+    "other": 8,
     "open": 0,
-    "closed": 4,
+    "closed": 8,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -113,5 +228,5 @@
     "K. Amin",
     "S. Mulla"
   ],
-  "scraped_at": "2026-05-13T00:39:20.943Z"
+  "scraped_at": "2026-06-17T23:07:03.467Z"
 }

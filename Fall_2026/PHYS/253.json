@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "4",
   "requirement_designation": "NS",
+  "requirements": [
+    "NS"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Special theory of relativity, wave and particle properties of electromagnetic radiation and matter, introduction to quantum mechanics, Schrodinger equation, atomic models, and simple molecules.",
   "course_notes": "This course requires PHYS 142 OR PHYS_OX142 OR PHYS 152 OR PHYS_OX152 AND MATH 112, MATH 112Z, OR MATH_OX112 or equivalent transfer credit as a prerequisite.",
   "requisites": "This course requires PHYS 142 OR PHYS_OX142 OR PHYS 152 OR PHYS_OX152 AND MATH 112, MATH 112Z, OR MATH_OX112 or equivalent transfer credit as a prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -54,6 +63,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -80,6 +93,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -106,6 +123,135 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2214",
+      "section_number": "LAB1",
+      "schedule_type": "LAB",
+      "instructor": "Donofrio/Shekhar",
+      "instructors": [
+        {
+          "name": "Donofrio/Shekhar",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2215",
+      "section_number": "LAB2",
+      "schedule_type": "LAB",
+      "instructor": "Donofrio/Shekhar",
+      "instructors": [
+        {
+          "name": "Donofrio/Shekhar",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-6:45p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1845"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2217",
+      "section_number": "LAB3",
+      "schedule_type": "LAB",
+      "instructor": "Donofrio/Shekhar",
+      "instructors": [
+        {
+          "name": "Donofrio/Shekhar",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-2:15p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1394",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "S. Shekhar",
+      "instructors": [
+        {
+          "name": "S. Shekhar",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -127,18 +273,18 @@
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 1,
-    "labs": 3,
+    "total_sections": 8,
+    "lectures": 2,
+    "labs": 6,
     "discussions": 0,
     "other": 0,
-    "open": 3,
-    "closed": 1,
+    "open": 6,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "Donofrio/Shekhar",
     "S. Shekhar"
   ],
-  "scraped_at": "2026-05-13T00:42:02.386Z"
+  "scraped_at": "2026-06-17T23:14:14.002Z"
 }

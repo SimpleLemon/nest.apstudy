@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "2",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "The course covers the US health care system, including the factors responsible for increasing health care spending, the purpose of regulation in the individual insurance market, the role of Medicare and Medicaid, and pros and cons of horizontal and vertical integration among providers and hospitals.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-10:50a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1050"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3159",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "D. Howard",
+      "instructors": [
+        {
+          "name": "D. Howard",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 2
   },
   "instructors_unique": [
     "D. Howard"
   ],
-  "scraped_at": "2026-05-13T00:37:24.652Z"
+  "scraped_at": "2026-06-17T23:03:08.807Z"
 }

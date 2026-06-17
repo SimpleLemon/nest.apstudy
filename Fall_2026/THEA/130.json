@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "HA",
+  "requirements": [
+    "HA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "A theoretical and practical introduction to technical theater.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -48,6 +57,69 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4387",
+      "section_number": "LAB",
+      "schedule_type": "LAB",
+      "instructor": "B. Glenn",
+      "instructors": [
+        {
+          "name": "B. Glenn",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "2556",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "B. Glenn",
+      "instructors": [
+        {
+          "name": "B. Glenn",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -69,17 +141,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 1,
-    "labs": 1,
+    "total_sections": 4,
+    "lectures": 2,
+    "labs": 2,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
     "B. Glenn"
   ],
-  "scraped_at": "2026-05-13T00:42:25.021Z"
+  "scraped_at": "2026-06-17T23:14:59.592Z"
 }

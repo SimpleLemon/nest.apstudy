@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "1 - 4",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Seminar or lecture in various topics on human health. May be repeated for credit (up to 9 hours) when topic varies.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,40 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-3p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1500"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2639",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -44,17 +83,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "Team"
   ],
-  "scraped_at": "2026-05-13T00:40:32.148Z"
+  "scraped_at": "2026-06-17T23:11:12.000Z"
 }

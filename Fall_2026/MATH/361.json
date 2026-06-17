@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "MQR",
+  "requirements": [
+    "MQR"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Finite and continuous probability theory, distribution models (binomial, geometric, uniform, normal, Poisson, and exponential), the Chebyshev inequality, expectation and variance, moment generating functions, the central limit theorem, and applications.",
   "course_notes": "MATH 210 or MATH_OX 210 or MATH 211 or PHYS 211 or MATH_OX 211 or MATH 276 or equivalent transfer credit as prerequisite.",
   "requisites": "MATH 210 or MATH_OX 210 or MATH 211 or PHYS 211 or MATH_OX 211 or MATH 276 or equivalent transfer credit as prerequisite.",
@@ -28,7 +33,11 @@
         }
       ],
       "location": null,
-      "enrollment_status": "Waitlist",
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
       "schedule": {
@@ -59,6 +68,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -90,6 +103,115 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3137",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "B. Ettinger",
+      "instructors": [
+        {
+          "name": "B. Ettinger",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3138",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "B. Ettinger",
+      "instructors": [
+        {
+          "name": "B. Ettinger",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5740",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "J. Mayfield",
+      "instructors": [
+        {
+          "name": "J. Mayfield",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -111,12 +233,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 3,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 4,
     "closed": 0,
     "waitlisted": 2
   },
@@ -124,5 +246,5 @@
     "B. Ettinger",
     "J. Mayfield"
   ],
-  "scraped_at": "2026-05-13T00:40:54.688Z"
+  "scraped_at": "2026-06-17T23:11:57.560Z"
 }

@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -54,6 +61,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -80,6 +91,94 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "1545",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Hennink/Javaid",
+      "instructors": [
+        {
+          "name": "Hennink/Javaid",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 1-3:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1550"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1546",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 9-11:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "900",
+            "end": "1150"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1547",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "B. Caruso",
+      "instructors": [
+        {
+          "name": "B. Caruso",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -90,13 +189,13 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 3,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 1,
+    "open": 4,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -104,5 +203,5 @@
     "Hennink/Javaid",
     "Team"
   ],
-  "scraped_at": "2026-05-13T00:37:13.366Z"
+  "scraped_at": "2026-06-17T23:02:46.028Z"
 }

@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "HA",
+  "requirements": [
+    "HA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Introduction to fundamental concepts of art history through 100 representative works of art and architecture produced in Egypt, Europe, Asia, the Americas, and the Islamic world before 1800. Focus on the formal structure and historical contexts in which the works were made and understood.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -54,6 +63,10 @@
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -75,6 +88,10 @@
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -96,6 +113,10 @@
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -117,6 +138,145 @@
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1500",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "L. Merrill",
+      "instructors": [
+        {
+          "name": "L. Merrill",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1220"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1971",
+      "section_number": "2",
+      "schedule_type": "DIS",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-3:20p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1520"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1972",
+      "section_number": "3",
+      "schedule_type": "DIS",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1973",
+      "section_number": "4",
+      "schedule_type": "DIS",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 1-1:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1974",
+      "section_number": "5",
+      "schedule_type": "DIS",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -133,17 +293,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 5,
-    "lectures": 1,
+    "total_sections": 10,
+    "lectures": 2,
     "labs": 0,
-    "discussions": 4,
+    "discussions": 8,
     "other": 0,
-    "open": 5,
+    "open": 10,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "L. Merrill"
   ],
-  "scraped_at": "2026-05-13T00:39:34.117Z"
+  "scraped_at": "2026-06-17T23:09:14.896Z"
 }

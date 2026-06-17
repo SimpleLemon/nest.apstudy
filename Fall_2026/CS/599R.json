@@ -7,6 +7,9 @@
   "srcdb": "5269",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,8 +31,564 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "1",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5895",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "C. Yang",
+      "instructors": [
+        {
+          "name": "C. Yang",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5917",
+      "section_number": "3",
+      "schedule_type": "SUP",
+      "instructor": "H. Kwon",
+      "instructors": [
+        {
+          "name": "H. Kwon",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5927",
+      "section_number": "5",
+      "schedule_type": "SUP",
+      "instructor": "A. Emami",
+      "instructors": [
+        {
+          "name": "A. Emami",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5928",
+      "section_number": "6",
+      "schedule_type": "SUP",
+      "instructor": "J. Choi",
+      "instructors": [
+        {
+          "name": "J. Choi",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5929",
+      "section_number": "7",
+      "schedule_type": "SUP",
+      "instructor": "E. Agichtein",
+      "instructors": [
+        {
+          "name": "E. Agichtein",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5973",
+      "section_number": "8",
+      "schedule_type": "SUP",
+      "instructor": "D. Arnold",
+      "instructors": [
+        {
+          "name": "D. Arnold",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5974",
+      "section_number": "9",
+      "schedule_type": "SUP",
+      "instructor": "W. Jin",
+      "instructors": [
+        {
+          "name": "W. Jin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5975",
+      "section_number": "10",
+      "schedule_type": "SUP",
+      "instructor": "L. Zhao",
+      "instructors": [
+        {
+          "name": "L. Zhao",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5977",
+      "section_number": "11",
+      "schedule_type": "SUP",
+      "instructor": "Z. Qin",
+      "instructors": [
+        {
+          "name": "Z. Qin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5978",
+      "section_number": "12",
+      "schedule_type": "SUP",
+      "instructor": "M. Bhasin",
+      "instructors": [
+        {
+          "name": "M. Bhasin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5984",
+      "section_number": "13",
+      "schedule_type": "SUP",
+      "instructor": "A. Zufle",
+      "instructors": [
+        {
+          "name": "A. Zufle",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5369",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "A. Sarker",
+      "instructors": [
+        {
+          "name": "A. Sarker",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5895",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "C. Yang",
+      "instructors": [
+        {
+          "name": "C. Yang",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5917",
+      "section_number": "3",
+      "schedule_type": "SUP",
+      "instructor": "H. Kwon",
+      "instructors": [
+        {
+          "name": "H. Kwon",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5927",
+      "section_number": "5",
+      "schedule_type": "SUP",
+      "instructor": "A. Emami",
+      "instructors": [
+        {
+          "name": "A. Emami",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5928",
+      "section_number": "6",
+      "schedule_type": "SUP",
+      "instructor": "J. Choi",
+      "instructors": [
+        {
+          "name": "J. Choi",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5929",
+      "section_number": "7",
+      "schedule_type": "SUP",
+      "instructor": "E. Agichtein",
+      "instructors": [
+        {
+          "name": "E. Agichtein",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5973",
+      "section_number": "8",
+      "schedule_type": "SUP",
+      "instructor": "D. Arnold",
+      "instructors": [
+        {
+          "name": "D. Arnold",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5974",
+      "section_number": "9",
+      "schedule_type": "SUP",
+      "instructor": "W. Jin",
+      "instructors": [
+        {
+          "name": "W. Jin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5975",
+      "section_number": "10",
+      "schedule_type": "SUP",
+      "instructor": "L. Zhao",
+      "instructors": [
+        {
+          "name": "L. Zhao",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5977",
+      "section_number": "11",
+      "schedule_type": "SUP",
+      "instructor": "Z. Qin",
+      "instructors": [
+        {
+          "name": "Z. Qin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5978",
+      "section_number": "12",
+      "schedule_type": "SUP",
+      "instructor": "M. Bhasin",
+      "instructors": [
+        {
+          "name": "M. Bhasin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5984",
+      "section_number": "13",
+      "schedule_type": "SUP",
+      "instructor": "A. Zufle",
+      "instructors": [
+        {
+          "name": "A. Zufle",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "12",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -38,17 +597,28 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 24,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
-    "open": 1,
+    "other": 24,
+    "open": 24,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Sarker"
+    "A. Emami",
+    "A. Sarker",
+    "A. Zufle",
+    "C. Yang",
+    "D. Arnold",
+    "E. Agichtein",
+    "H. Kwon",
+    "J. Choi",
+    "L. Zhao",
+    "M. Bhasin",
+    "W. Jin",
+    "Z. Qin"
   ],
-  "scraped_at": "2026-05-13T00:39:55.058Z"
+  "scraped_at": "2026-06-17T23:09:57.099Z"
 }

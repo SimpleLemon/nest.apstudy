@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 12",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Credit, one to twelve hours. Prerequisite: consent of instructor. Independent reading and research under the direction of a faculty member. May be repeated for credit.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,40 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3039",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "J. Owen",
+      "instructors": [
+        {
+          "name": "J. Owen",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -44,17 +83,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
-    "open": 1,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "J. Owen"
   ],
-  "scraped_at": "2026-05-13T00:38:58.378Z"
+  "scraped_at": "2026-06-17T23:06:17.749Z"
 }

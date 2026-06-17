@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "4",
   "requirement_designation": "HAPW",
+  "requirements": [
+    "HAPW"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Intensive reading of literary and theoretical texts that raise critical issues in the field of Comparative Literature and related disciplines. Note: This course is non-repeatable.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2331",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "R. Mendoza-De Jesus",
+      "instructors": [
+        {
+          "name": "R. Mendoza-De Jesus",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
-    "open": 1,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "R. Mendoza-De Jesus"
   ],
-  "scraped_at": "2026-05-13T00:39:53.440Z"
+  "scraped_at": "2026-06-17T23:09:53.856Z"
 }

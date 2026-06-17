@@ -7,6 +7,9 @@
   "srcdb": "5269",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,8 +31,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "9",
+      "enrollment_count": "8",
       "is_cancelled": false,
       "schedule": {
         "display": "T 3-4:50p",
@@ -46,16 +53,20 @@
       "crn": "3490",
       "section_number": "2",
       "schedule_type": "LAB",
-      "instructor": "C. Robichaux",
+      "instructor": "A. Nizam",
       "instructors": [
         {
-          "name": "C. Robichaux",
+          "name": "A. Nizam",
           "email": null
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "9",
+      "enrollment_count": "8",
       "is_cancelled": false,
       "schedule": {
         "display": "T 8-9:50a",
@@ -80,8 +91,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "9",
+      "enrollment_count": "8",
       "is_cancelled": false,
       "schedule": {
         "display": "W 5-6:50p",
@@ -98,11 +113,20 @@
       "crn": "3492",
       "section_number": "4",
       "schedule_type": "LAB",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "C. Robichaux",
+      "instructors": [
+        {
+          "name": "C. Robichaux",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "9",
+      "enrollment_count": "8",
       "is_cancelled": false,
       "schedule": {
         "display": "T 5-6:50p",
@@ -119,11 +143,20 @@
       "crn": "3493",
       "section_number": "5",
       "schedule_type": "LAB",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "C. Robichaux",
+      "instructors": [
+        {
+          "name": "C. Robichaux",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "9",
+      "enrollment_count": "8",
       "is_cancelled": false,
       "schedule": {
         "display": "W 8-9:50a",
@@ -140,11 +173,20 @@
       "crn": "3494",
       "section_number": "6",
       "schedule_type": "LAB",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "C. Robichaux",
+      "instructors": [
+        {
+          "name": "C. Robichaux",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "9",
+      "enrollment_count": "8",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 5-6:50p",
@@ -164,8 +206,12 @@
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "9",
+      "enrollment_count": "8",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 5-6:50p",
@@ -182,11 +228,20 @@
       "crn": "3496",
       "section_number": "8",
       "schedule_type": "LAB",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "A. Taurone",
+      "instructors": [
+        {
+          "name": "A. Taurone",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "9",
+      "enrollment_count": "8",
       "is_cancelled": false,
       "schedule": {
         "display": "Th 5-6:50p",
@@ -200,34 +255,255 @@
       }
     },
     {
-      "crn": "3497",
-      "section_number": "9",
+      "crn": "3489",
+      "section_number": "1",
+      "schedule_type": "LAB",
+      "instructor": "A. Nizam",
+      "instructors": [
+        {
+          "name": "A. Nizam",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 3-4:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1500",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3490",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "A. Nizam",
+      "instructors": [
+        {
+          "name": "A. Nizam",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 8-9:50a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "800",
+            "end": "950"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3491",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "A. Nizam",
+      "instructors": [
+        {
+          "name": "A. Nizam",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 5-6:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1700",
+            "end": "1850"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3492",
+      "section_number": "4",
+      "schedule_type": "LAB",
+      "instructor": "C. Robichaux",
+      "instructors": [
+        {
+          "name": "C. Robichaux",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 5-6:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1700",
+            "end": "1850"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3493",
+      "section_number": "5",
+      "schedule_type": "LAB",
+      "instructor": "C. Robichaux",
+      "instructors": [
+        {
+          "name": "C. Robichaux",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 8-9:50a",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "800",
+            "end": "950"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3494",
+      "section_number": "6",
+      "schedule_type": "LAB",
+      "instructor": "C. Robichaux",
+      "instructors": [
+        {
+          "name": "C. Robichaux",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 5-6:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1700",
+            "end": "1850"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3495",
+      "section_number": "7",
       "schedule_type": "LAB",
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "9",
+      "enrollment_count": "8",
       "is_cancelled": false,
       "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+        "display": "Th 5-6:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1700",
+            "end": "1850"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3496",
+      "section_number": "8",
+      "schedule_type": "LAB",
+      "instructor": "A. Taurone",
+      "instructors": [
+        {
+          "name": "A. Taurone",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 5-6:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1700",
+            "end": "1850"
+          }
+        ]
       }
     }
   ],
   "section_summary": {
-    "total_sections": 9,
+    "total_sections": 16,
     "lectures": 0,
-    "labs": 9,
+    "labs": 16,
     "discussions": 0,
     "other": 0,
-    "open": 9,
+    "open": 16,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "A. Nizam",
+    "A. Taurone",
     "C. Robichaux"
   ],
-  "scraped_at": "2026-05-13T00:39:40.552Z"
+  "scraped_at": "2026-06-17T23:09:27.866Z"
 }

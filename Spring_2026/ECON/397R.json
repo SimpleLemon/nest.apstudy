@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 3",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Up to three semester hours credit. For approval, a topic must be selected that is not included in a course to be offered before the student would normally graduate; a faculty adviser from among the full-time faculty must agree to supervise the study program, and a written description of the program must be submitted to and approved by the director of undergraduate studies in the semester preceding the one in which the student intends to participate.",
   "course_notes": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as a prerequisite.",
   "requisites": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as a prerequisite.",
@@ -28,8 +33,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "12",
+      "enrollment_count": "13",
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
@@ -48,8 +57,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "12",
+      "enrollment_count": "13",
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
@@ -68,8 +81,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "12",
+      "enrollment_count": "13",
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
@@ -88,8 +105,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "12",
+      "enrollment_count": "13",
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
@@ -108,8 +129,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "12",
+      "enrollment_count": "13",
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
@@ -128,8 +153,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "12",
+      "enrollment_count": "13",
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
@@ -148,8 +177,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "12",
+      "enrollment_count": "13",
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
@@ -168,8 +201,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "12",
+      "enrollment_count": "13",
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
@@ -188,8 +225,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "12",
+      "enrollment_count": "13",
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
@@ -208,8 +249,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "12",
+      "enrollment_count": "13",
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
@@ -228,8 +273,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "12",
+      "enrollment_count": "13",
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
@@ -248,23 +297,353 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
-      "enrollment_count": "12",
+      "enrollment_count": "13",
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
       }
+    },
+    {
+      "crn": "6827",
+      "section_number": "9000",
+      "schedule_type": "SUP",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "13",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6159",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Y. Wang",
+      "instructors": [
+        {
+          "name": "Y. Wang",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "13",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6193",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "F. Mandelman",
+      "instructors": [
+        {
+          "name": "F. Mandelman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "13",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6197",
+      "section_number": "3",
+      "schedule_type": "SUP",
+      "instructor": "J. Kim",
+      "instructors": [
+        {
+          "name": "J. Kim",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "13",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6284",
+      "section_number": "4",
+      "schedule_type": "SUP",
+      "instructor": "T. Zha",
+      "instructors": [
+        {
+          "name": "T. Zha",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "13",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6293",
+      "section_number": "5",
+      "schedule_type": "SUP",
+      "instructor": "S. Banerjee",
+      "instructors": [
+        {
+          "name": "S. Banerjee",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "13",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6344",
+      "section_number": "6",
+      "schedule_type": "SUP",
+      "instructor": "S. Wunderly",
+      "instructors": [
+        {
+          "name": "S. Wunderly",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "13",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6385",
+      "section_number": "7",
+      "schedule_type": "SUP",
+      "instructor": "L. Xu",
+      "instructors": [
+        {
+          "name": "L. Xu",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "13",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6541",
+      "section_number": "8",
+      "schedule_type": "SUP",
+      "instructor": "M. Ayar",
+      "instructors": [
+        {
+          "name": "M. Ayar",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "13",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6542",
+      "section_number": "9",
+      "schedule_type": "SUP",
+      "instructor": "E. Antoniadou",
+      "instructors": [
+        {
+          "name": "E. Antoniadou",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "13",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6620",
+      "section_number": "10",
+      "schedule_type": "SUP",
+      "instructor": "K. Robinson",
+      "instructors": [
+        {
+          "name": "K. Robinson",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "13",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6631",
+      "section_number": "11",
+      "schedule_type": "SUP",
+      "instructor": "K. Lanier",
+      "instructors": [
+        {
+          "name": "K. Lanier",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "13",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6709",
+      "section_number": "12",
+      "schedule_type": "SUP",
+      "instructor": "C. Fohlin",
+      "instructors": [
+        {
+          "name": "C. Fohlin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "13",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6827",
+      "section_number": "9000",
+      "schedule_type": "SUP",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "13",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
+    "total_sections": 26,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 12,
-    "open": 11,
-    "closed": 1,
+    "other": 26,
+    "open": 22,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -281,5 +660,5 @@
     "T. Zha",
     "Y. Wang"
   ],
-  "scraped_at": "2026-05-13T00:36:52.244Z"
+  "scraped_at": "2026-06-17T23:02:03.799Z"
 }

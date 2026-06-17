@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 8",
   "requirement_designation": "CW",
+  "requirements": [
+    "CW"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "For honors students in history. Addresses historiographical and methodological issues, and offers practical guidance in thesis design and research, with details and emphases at discretion of instructor.",
   "course_notes": null,
   "requisites": null,
@@ -28,8 +33,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
-      "enrollment_count": "7",
+      "enrollment_count": "6",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -48,8 +57,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
-      "enrollment_count": "7",
+      "enrollment_count": "6",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -68,8 +81,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
-      "enrollment_count": "7",
+      "enrollment_count": "6",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -88,8 +105,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
-      "enrollment_count": "7",
+      "enrollment_count": "6",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -108,28 +129,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6214",
-      "section_number": "6",
-      "schedule_type": "SUP",
-      "instructor": "C. Suddler",
-      "instructors": [
-        {
-          "name": "C. Suddler",
-          "email": null
-        }
-      ],
-      "location": null,
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
+      "enrollment_count": "6",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -148,8 +153,156 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
-      "enrollment_count": "7",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "3853",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "J. Crespino",
+      "instructors": [
+        {
+          "name": "J. Crespino",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6210",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "J. Lesser",
+      "instructors": [
+        {
+          "name": "J. Lesser",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6211",
+      "section_number": "3",
+      "schedule_type": "SUP",
+      "instructor": "M. Payne",
+      "instructors": [
+        {
+          "name": "M. Payne",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6212",
+      "section_number": "4",
+      "schedule_type": "SUP",
+      "instructor": "J. Prude",
+      "instructors": [
+        {
+          "name": "J. Prude",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6213",
+      "section_number": "5",
+      "schedule_type": "SUP",
+      "instructor": "I. Rodriguez",
+      "instructors": [
+        {
+          "name": "I. Rodriguez",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6215",
+      "section_number": "7",
+      "schedule_type": "SUP",
+      "instructor": "C. Suh",
+      "instructors": [
+        {
+          "name": "C. Suh",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -158,17 +311,16 @@
     }
   ],
   "section_summary": {
-    "total_sections": 7,
+    "total_sections": 12,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 7,
-    "open": 1,
-    "closed": 6,
+    "other": 12,
+    "open": 0,
+    "closed": 12,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Suddler",
     "C. Suh",
     "I. Rodriguez",
     "J. Crespino",
@@ -176,5 +328,5 @@
     "J. Prude",
     "M. Payne"
   ],
-  "scraped_at": "2026-05-13T00:37:23.033Z"
+  "scraped_at": "2026-06-17T23:03:05.503Z"
 }

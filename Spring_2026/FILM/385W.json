@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 5",
   "requirement_designation": "HAPW",
+  "requirements": [
+    "HAPW"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Rotating topics in film and media. May be repeated for credit when the topic varies.",
   "course_notes": "FILM 102 and (FILM 201 or FILM 202 or FILM 203 or FILM 204 or FILM_OX 204 or FILM 205) or equivalent transfer credit as prerequisites.",
   "requisites": "FILM 102 and (FILM 201 or FILM 202 or FILM 203 or FILM 204 or FILM_OX 204 or FILM 205) or equivalent transfer credit as prerequisites.",
@@ -28,6 +33,40 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4423",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "C. Kras",
+      "instructors": [
+        {
+          "name": "C. Kras",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -44,17 +83,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "C. Kras"
   ],
-  "scraped_at": "2026-05-13T00:37:06.888Z"
+  "scraped_at": "2026-06-17T23:02:32.987Z"
 }

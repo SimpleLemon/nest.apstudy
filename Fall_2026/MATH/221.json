@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "4",
   "requirement_designation": "QR",
+  "requirements": [
+    "QR"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Systems of linear equations, matrices, determinants, linear transformations, eigenvalues and eigenvectors, least-squares.",
   "course_notes": "MATH 111 or MATH_OX 111 or MATH 112 or MATH_OX 112 or MATH 112Z or equivalent transfer credit as prerequisite.",
   "requisites": "MATH 111 or MATH_OX 111 or MATH 112 or MATH_OX 112 or MATH 112Z or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -64,6 +73,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -100,6 +113,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -136,6 +153,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -172,6 +193,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -208,6 +233,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -244,6 +273,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -280,6 +313,330 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p; F 2:30-3:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1520"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3103",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "/Chen",
+      "instructors": [
+        {
+          "name": "/Chen",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3424",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "/Chen",
+      "instructors": [
+        {
+          "name": "/Chen",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3425",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Villeta-García/Grigoryan",
+      "instructors": [
+        {
+          "name": "Villeta-García/Grigoryan",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p; F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3426",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Villeta-García/Grigoryan",
+      "instructors": [
+        {
+          "name": "Villeta-García/Grigoryan",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p; F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3427",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "Villeta-García/Wang",
+      "instructors": [
+        {
+          "name": "Villeta-García/Wang",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p; F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3428",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "Villeta-García/Wang",
+      "instructors": [
+        {
+          "name": "Villeta-García/Wang",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p; F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3436",
+      "section_number": "7",
+      "schedule_type": "LEC",
+      "instructor": "/Armstrong",
+      "instructors": [
+        {
+          "name": "/Armstrong",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p; F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3438",
+      "section_number": "8",
+      "schedule_type": "LEC",
+      "instructor": "/Armstrong",
+      "instructors": [
+        {
+          "name": "/Armstrong",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -306,14 +663,14 @@
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 8,
+    "total_sections": 16,
+    "lectures": 16,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 5,
+    "open": 10,
     "closed": 0,
-    "waitlisted": 3
+    "waitlisted": 6
   },
   "instructors_unique": [
     "/Armstrong",
@@ -321,5 +678,5 @@
     "Villeta-García/Grigoryan",
     "Villeta-García/Wang"
   ],
-  "scraped_at": "2026-05-13T00:40:54.685Z"
+  "scraped_at": "2026-06-17T23:11:57.555Z"
 }

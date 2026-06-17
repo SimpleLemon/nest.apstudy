@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 4",
   "requirement_designation": "HSC",
+  "requirements": [
+    "HSC"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Seminar or lecture series of topics of anthropological concern. May be repeated for credit when topic varies.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -59,6 +68,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -85,6 +98,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -116,6 +133,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -142,6 +163,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -173,6 +198,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -199,6 +228,235 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 4-6:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1845"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1856",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "D. Nugent",
+      "instructors": [
+        {
+          "name": "D. Nugent",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 5:30-6:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1730",
+            "end": "1845"
+          },
+          {
+            "day": "Thu",
+            "start": "1730",
+            "end": "1845"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1858",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "J. Saers",
+      "instructors": [
+        {
+          "name": "J. Saers",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2743",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Jones/Buckmaster",
+      "instructors": [
+        {
+          "name": "Jones/Buckmaster",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2872",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "J. Glass",
+      "instructors": [
+        {
+          "name": "J. Glass",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4395",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "B. Holsey",
+      "instructors": [
+        {
+          "name": "B. Holsey",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4537",
+      "section_number": "7",
+      "schedule_type": "LEC",
+      "instructor": "D. Seeman",
+      "instructors": [
+        {
+          "name": "D. Seeman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 6-8:45p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1800",
+            "end": "2045"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5613",
+      "section_number": "9",
+      "schedule_type": "LEC",
+      "instructor": "J. Saers",
+      "instructors": [
+        {
+          "name": "J. Saers",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -215,14 +473,14 @@
     }
   ],
   "section_summary": {
-    "total_sections": 7,
-    "lectures": 7,
+    "total_sections": 14,
+    "lectures": 14,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 12,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 2
   },
   "instructors_unique": [
     "B. Holsey",
@@ -232,5 +490,5 @@
     "J. Saers",
     "Jones/Buckmaster"
   ],
-  "scraped_at": "2026-05-13T00:36:23.181Z"
+  "scraped_at": "2026-06-17T23:01:04.709Z"
 }

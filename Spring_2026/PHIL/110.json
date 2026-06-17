@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "QR",
+  "requirements": [
+    "QR"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Study of correct reasoning, including the recognition, analysis, and criticism of arguments; relevant topics include informal fallacies, syllogistic reasoning, and systems of deduction.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -64,6 +73,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -100,6 +113,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -136,6 +153,170 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MWF 2:30-3:20p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1520"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1520"
+          },
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1520"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1707",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "D. Westbrook",
+      "instructors": [
+        {
+          "name": "D. Westbrook",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MWF 1-1:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1350"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1350"
+          },
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1991",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "J. Wahman",
+      "instructors": [
+        {
+          "name": "J. Wahman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MWF 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1220"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1220"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5143",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "J. Wahman",
+      "instructors": [
+        {
+          "name": "J. Wahman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MWF 10-10:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1050"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1050"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6414",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "S. Dutton",
+      "instructors": [
+        {
+          "name": "S. Dutton",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -162,19 +343,19 @@
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 8,
+    "lectures": 8,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
-    "waitlisted": 3
+    "waitlisted": 6
   },
   "instructors_unique": [
     "D. Westbrook",
     "J. Wahman",
     "S. Dutton"
   ],
-  "scraped_at": "2026-05-13T00:38:53.511Z"
+  "scraped_at": "2026-06-17T23:06:07.912Z"
 }

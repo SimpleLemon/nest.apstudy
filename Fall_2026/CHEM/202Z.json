@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "NS",
+  "requirements": [
+    "NS"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "CHEM 202Z will provide students with a basic understanding of covalent bonding models, the energetics of reactions, and the kinetics and thermodynamics associated with reactions. The course will emphasize how reactivity is related to molecular structure and how reactivity can be controlled.",
   "course_notes": "(CHEM 150 and CHEM 150L) or AP score of 4 or higher or IB score of 5 or higher required.",
   "requisites": "(CHEM 150 and CHEM 150L) or AP score of 4 or higher or IB score of 5 or higher required.",
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2777",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "M. Weinschenk",
+      "instructors": [
+        {
+          "name": "M. Weinschenk",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "M. Weinschenk"
   ],
-  "scraped_at": "2026-05-13T00:39:46.994Z"
+  "scraped_at": "2026-06-17T23:09:40.817Z"
 }

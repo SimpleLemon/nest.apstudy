@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "QR",
+  "requirements": [
+    "QR"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This class is for freshmen who have earned a 4 or 5 on the AP AB exam, or a 5 on the IB HL exam. Topics include: techniques of integration, exponential and logarithm functions, sequences and series, and polar coordinates.",
   "course_notes": "This class is for freshmen who have earned a 4 or 5 on the AP AB exam, or a 5 on the IB HL exam. Topics include: techniques of integration, exponential and logarithm functions, sequences and series, and polar coordinates.",
   "requisites": "This class is for freshmen who have earned a 4 or 5 on the AP AB exam, or a 5 on the IB HL exam. Topics include: techniques of integration, exponential and logarithm functions, sequences and series, and polar coordinates.",
@@ -28,8 +33,12 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "2",
+      "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a",
@@ -48,27 +57,36 @@
       }
     },
     {
-      "crn": "2725",
-      "section_number": "2",
+      "crn": "2723",
+      "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "M. Taskovic",
+      "instructors": [
+        {
+          "name": "M. Taskovic",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "2",
+      "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
-        "display": "MW 11:30a-12:45p",
+        "display": "MW 8:30-9:45a",
         "meetings": [
           {
             "day": "Mon",
-            "start": "1130",
-            "end": "1245"
+            "start": "830",
+            "end": "945"
           },
           {
             "day": "Wed",
-            "start": "1130",
-            "end": "1245"
+            "start": "830",
+            "end": "945"
           }
         ]
       }
@@ -87,5 +105,5 @@
   "instructors_unique": [
     "M. Taskovic"
   ],
-  "scraped_at": "2026-05-13T00:40:54.683Z"
+  "scraped_at": "2026-06-17T23:11:57.550Z"
 }

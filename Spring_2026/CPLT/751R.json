@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -54,6 +61,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -80,6 +91,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -106,6 +121,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -132,6 +151,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -158,6 +181,190 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 1-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2897",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "S. Meighoo",
+      "instructors": [
+        {
+          "name": "S. Meighoo",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 1-4p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1600"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2900",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "I. Goh",
+      "instructors": [
+        {
+          "name": "I. Goh",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 3-6p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1500",
+            "end": "1800"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5286",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "L. Park",
+      "instructors": [
+        {
+          "name": "L. Park",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 4-6:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1845"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5289",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "F. Sheth",
+      "instructors": [
+        {
+          "name": "F. Sheth",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 10a-1p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1300"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5634",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "A. Castaldo",
+      "instructors": [
+        {
+          "name": "A. Castaldo",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 1-4p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1600"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5898",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "E. Keme",
+      "instructors": [
+        {
+          "name": "E. Keme",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -174,12 +381,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 12,
+    "lectures": 12,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 12,
     "closed": 0,
     "waitlisted": 0
   },
@@ -191,5 +398,5 @@
     "L. Park",
     "S. Meighoo"
   ],
-  "scraped_at": "2026-05-13T00:36:45.789Z"
+  "scraped_at": "2026-06-17T23:01:50.687Z"
 }

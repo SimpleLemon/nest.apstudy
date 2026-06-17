@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "FS",
+  "requirements": [
+    "FS"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Limited to freshmen and introductory in nature, these seminars may feature discussion, readings, museum visits, and presentations.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -54,6 +63,75 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2539",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Gagliardi/Suh",
+      "instructors": [
+        {
+          "name": "Gagliardi/Suh",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 4-6:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1845"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4473",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "R. Margariti",
+      "instructors": [
+        {
+          "name": "R. Margariti",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -75,18 +153,18 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 4,
     "open": 0,
-    "closed": 1,
-    "waitlisted": 1
+    "closed": 2,
+    "waitlisted": 2
   },
   "instructors_unique": [
     "Gagliardi/Suh",
     "R. Margariti"
   ],
-  "scraped_at": "2026-05-13T00:36:26.425Z"
+  "scraped_at": "2026-06-17T23:01:11.255Z"
 }

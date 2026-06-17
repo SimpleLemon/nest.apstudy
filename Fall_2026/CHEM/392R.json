@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "1 - 2",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course is for students selected by the Department of Chemistry to train and serve as peer learning leaders (Learning Assistants or Teaching Assistants) in core courses. The course is by permission only. Note that this course does not satisfy elective credit for the chemistry major.",
   "course_notes": "(CHEM 141 or CHEM_OX 141 or CHEM 150 or CHEM_OX 150) and (CHEM 142 or CHEM_OX 142 or CHEM 202 or CHEM_OX 202) or equivalent transfer credit as prerequisite.",
   "requisites": "(CHEM 141 or CHEM_OX 141 or CHEM 150 or CHEM_OX 150) and (CHEM 142 or CHEM_OX 142 or CHEM 202 or CHEM_OX 202) or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -54,6 +63,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -80,6 +93,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -95,6 +112,10 @@
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -115,6 +136,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -135,6 +160,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -150,6 +179,180 @@
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "3257",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "T. McGill",
+      "instructors": [
+        {
+          "name": "T. McGill",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3258",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "M. Weinschenk",
+      "instructors": [
+        {
+          "name": "M. Weinschenk",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3259",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "J. Smith",
+      "instructors": [
+        {
+          "name": "J. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "3260",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "3261",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "D. Mulford",
+      "instructors": [
+        {
+          "name": "D. Mulford",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "3262",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "J. Smith",
+      "instructors": [
+        {
+          "name": "J. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "3263",
+      "section_number": "7",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -160,12 +363,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 7,
-    "lectures": 7,
+    "total_sections": 14,
+    "lectures": 14,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 7,
+    "open": 14,
     "closed": 0,
     "waitlisted": 0
   },
@@ -175,5 +378,5 @@
     "M. Weinschenk",
     "T. McGill"
   ],
-  "scraped_at": "2026-05-13T00:39:46.998Z"
+  "scraped_at": "2026-06-17T23:09:40.827Z"
 }

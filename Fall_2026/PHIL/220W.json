@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "4",
   "requirement_designation": "HAW",
+  "requirements": [
+    "HAW"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Surveys key texts in political philosophy, including ancient, early modern, 19th and 20th century sources. Key issues include the nature of the just state and the rights and responsibilities of citizens.",
   "course_notes": "One PHIL course or equivalent transfer credit as prerequisite.",
   "requisites": "One PHIL course or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -59,7 +68,81 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1694",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Marriott/Tyler",
+      "instructors": [
+        {
+          "name": "Marriott/Tyler",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2453",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "B. Brewer",
+      "instructors": [
+        {
+          "name": "B. Brewer",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
       "schedule": {
@@ -80,12 +163,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 2,
     "closed": 0,
     "waitlisted": 2
   },
@@ -93,5 +176,5 @@
     "B. Brewer",
     "Marriott/Tyler"
   ],
-  "scraped_at": "2026-05-13T00:42:00.730Z"
+  "scraped_at": "2026-06-17T23:14:10.749Z"
 }

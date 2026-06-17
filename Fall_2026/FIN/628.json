@@ -7,6 +7,9 @@
   "srcdb": "5269",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,14 +31,18 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
       "schedule": {
-        "display": "T 6:30-9:30p",
+        "display": "Th 6:30-9:30p",
         "meetings": [
           {
-            "day": "Tue",
+            "day": "Thu",
             "start": "1830",
             "end": "2130"
           }
@@ -54,14 +61,18 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
       "schedule": {
-        "display": "T 6:30-9:30p",
+        "display": "Th 6:30-9:30p",
         "meetings": [
           {
-            "day": "Tue",
+            "day": "Thu",
             "start": "1830",
             "end": "2130"
           }
@@ -80,14 +91,108 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "3",
       "is_cancelled": false,
       "schedule": {
-        "display": "T 6:30-9:30p",
+        "display": "Th 6:30-9:30p",
         "meetings": [
           {
-            "day": "Tue",
+            "day": "Thu",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3688",
+      "section_number": "2135",
+      "schedule_type": "LEC",
+      "instructor": "K. Crowley",
+      "instructors": [
+        {
+          "name": "K. Crowley",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3689",
+      "section_number": "2635",
+      "schedule_type": "LEC",
+      "instructor": "K. Crowley",
+      "instructors": [
+        {
+          "name": "K. Crowley",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3690",
+      "section_number": "3235",
+      "schedule_type": "LEC",
+      "instructor": "K. Crowley",
+      "instructors": [
+        {
+          "name": "K. Crowley",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Thu",
             "start": "1830",
             "end": "2130"
           }
@@ -96,17 +201,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 3,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 3,
+    "open": 6,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "K. Crowley"
   ],
-  "scraped_at": "2026-05-13T00:40:16.047Z"
+  "scraped_at": "2026-06-17T23:10:39.539Z"
 }

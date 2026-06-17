@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "4",
   "requirement_designation": "MQR",
+  "requirements": [
+    "MQR"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Introduction to construction and testing of econometric models; analysis and critique of general linear regression model; simultaneous equations models; computer program for regression analysis; applications.",
   "course_notes": "(ECON 101 or ECON_OX 101 or BUS 201) and (ECON 112 or ECON_OX 112) and (ECON 220 or MATH 207 or MATH_OX 207 or MATH 361 or MATH 362) or equivalent transfer credit as a prerequisite.",
   "requisites": "(ECON 101 or ECON_OX 101 or BUS 201) and (ECON 112 or ECON_OX 112) and (ECON 220 or MATH 207 or MATH_OX 207 or MATH 361 or MATH 362) or equivalent transfer credit as a prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -54,6 +63,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -80,6 +93,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -106,6 +123,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -137,6 +158,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -168,6 +193,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -199,6 +228,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -230,6 +263,270 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4284",
+      "section_number": "LAB2",
+      "schedule_type": "LAB",
+      "instructor": "H. Pitzer",
+      "instructors": [
+        {
+          "name": "H. Pitzer",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3949",
+      "section_number": "LAB3",
+      "schedule_type": "LAB",
+      "instructor": "J. Zhang",
+      "instructors": [
+        {
+          "name": "J. Zhang",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3950",
+      "section_number": "LAB4",
+      "schedule_type": "LAB",
+      "instructor": "J. Zhang",
+      "instructors": [
+        {
+          "name": "J. Zhang",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 2:30-3:20p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1520"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3941",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "E. Maasoumi",
+      "instructors": [
+        {
+          "name": "E. Maasoumi",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4042",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "P. Lopez de mesa Moyano",
+      "instructors": [
+        {
+          "name": "P. Lopez de mesa Moyano",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3944",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "S. Hoderlein",
+      "instructors": [
+        {
+          "name": "S. Hoderlein",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3945",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "P. Sant'Anna",
+      "instructors": [
+        {
+          "name": "P. Sant'Anna",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "8",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3946",
+      "section_number": "5",
+      "schedule_type": "LAB",
+      "instructor": "H. Pitzer",
+      "instructors": [
+        {
+          "name": "H. Pitzer",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "8",
       "is_cancelled": false,
@@ -246,14 +543,14 @@
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 4,
-    "labs": 4,
+    "total_sections": 16,
+    "lectures": 8,
+    "labs": 8,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 8,
     "closed": 0,
-    "waitlisted": 4
+    "waitlisted": 8
   },
   "instructors_unique": [
     "E. Maasoumi",
@@ -263,5 +560,5 @@
     "P. Sant'Anna",
     "S. Hoderlein"
   ],
-  "scraped_at": "2026-05-13T00:36:52.243Z"
+  "scraped_at": "2026-06-17T23:02:03.797Z"
 }

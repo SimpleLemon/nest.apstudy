@@ -7,6 +7,9 @@
   "srcdb": "5269",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -23,6 +26,10 @@
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -35,9 +42,18 @@
       "crn": "4557",
       "section_number": "LAB2",
       "schedule_type": "LAB",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "D. Lewis",
+      "instructors": [
+        {
+          "name": "D. Lewis",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -53,6 +69,10 @@
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -76,9 +96,126 @@
       "crn": "4555",
       "section_number": "2",
       "schedule_type": "LEC",
+      "instructor": "D. Lewis",
+      "instructors": [
+        {
+          "name": "D. Lewis",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4556",
+      "section_number": "LAB1",
+      "schedule_type": "LAB",
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "4557",
+      "section_number": "LAB2",
+      "schedule_type": "LAB",
+      "instructor": "D. Lewis",
+      "instructors": [
+        {
+          "name": "D. Lewis",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "4554",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "WF 10-11:15a",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4555",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "D. Lewis",
+      "instructors": [
+        {
+          "name": "D. Lewis",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -100,15 +237,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 2,
-    "labs": 2,
+    "total_sections": 8,
+    "lectures": 4,
+    "labs": 4,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 8,
     "closed": 0,
     "waitlisted": 0
   },
-  "instructors_unique": [],
-  "scraped_at": "2026-05-13T00:41:09.195Z"
+  "instructors_unique": [
+    "D. Lewis"
+  ],
+  "scraped_at": "2026-06-17T23:12:26.863Z"
 }

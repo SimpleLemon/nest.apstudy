@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "QR",
+  "requirements": [
+    "QR"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Study of correct reasoning, including the recognition, analysis, and criticism of arguments; relevant topics include informal fallacies, syllogistic reasoning, and systems of deduction.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -64,6 +73,90 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MWF 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1220"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1220"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1687",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "J. Wahman",
+      "instructors": [
+        {
+          "name": "J. Wahman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MWF 10-10:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1050"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1050"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2440",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "J. Wahman",
+      "instructors": [
+        {
+          "name": "J. Wahman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -90,17 +183,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
     "J. Wahman"
   ],
-  "scraped_at": "2026-05-13T00:42:00.728Z"
+  "scraped_at": "2026-06-17T23:14:10.739Z"
 }

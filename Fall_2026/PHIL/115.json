@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "HA",
+  "requirements": [
+    "HA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Introductory examination of fundamental moral questions, such as the best way of life for a human being, the relationship between happiness and moral excellence, and the nature of ethical reasoning, as treated by major philosophers in the history of philosophy.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -59,6 +68,85 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TThF 4-4:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1650"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1650"
+          },
+          {
+            "day": "Fri",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1688",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Lysaker/Pandita",
+      "instructors": [
+        {
+          "name": "Lysaker/Pandita",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3384",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "K. Schoina",
+      "instructors": [
+        {
+          "name": "K. Schoina",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -85,18 +173,18 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
     "K. Schoina",
     "Lysaker/Pandita"
   ],
-  "scraped_at": "2026-05-13T00:42:00.729Z"
+  "scraped_at": "2026-06-17T23:14:10.741Z"
 }

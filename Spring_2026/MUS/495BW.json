@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 8",
   "requirement_designation": "CW",
+  "requirements": [
+    "CW"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Credit, eight hours for sequence. Open by invitation to candidates for honors in the senior year. Must be taken in addition to the major requirements.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,34 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6539",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "P. Bhasin",
+      "instructors": [
+        {
+          "name": "P. Bhasin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -38,17 +71,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "P. Bhasin"
   ],
-  "scraped_at": "2026-05-13T00:37:56.874Z"
+  "scraped_at": "2026-06-17T23:04:14.014Z"
 }

@@ -1,0 +1,99 @@
+{
+  "course_code": "HIST 496W",
+  "course_title": "Special Topics: Cross-listed: Atl's New Deal Housing",
+  "subject": "HIST",
+  "catalog_number": "496W",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1 - 4",
+  "requirement_designation": "HSCW",
+  "requirements": [
+    "HSCW"
+  ],
+  "campus": null,
+  "campus_description": null,
+  "course_description": "Selected topics in history for students in non-history originating (cross-listed) courses. May be repeated for credit when topic varies.",
+  "course_notes": null,
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "crn": "5839",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "C. Crawford",
+      "instructors": [
+        {
+          "name": "C. Crawford",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5839",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "C. Crawford",
+      "instructors": [
+        {
+          "name": "C. Crawford",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "C. Crawford"
+  ],
+  "scraped_at": "2026-06-17T23:11:08.777Z"
+}

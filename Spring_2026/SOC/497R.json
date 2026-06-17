@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 12",
   "requirement_designation": "XA",
+  "requirements": [
+    "XA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Supervised work on a faculty member's research project, normally for students who have demonstrated superior performance in sociology.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -48,6 +57,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -68,6 +81,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -88,6 +105,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -108,6 +129,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -128,6 +153,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -148,6 +177,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -168,6 +201,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -188,6 +225,226 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "3112",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "R. Franzosi",
+      "instructors": [
+        {
+          "name": "R. Franzosi",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6392",
+      "section_number": "2",
+      "schedule_type": "RSC",
+      "instructor": "K. Brown",
+      "instructors": [
+        {
+          "name": "K. Brown",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6481",
+      "section_number": "3",
+      "schedule_type": "RSC",
+      "instructor": "R. Hall-Clifford",
+      "instructors": [
+        {
+          "name": "R. Hall-Clifford",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6482",
+      "section_number": "4",
+      "schedule_type": "RSC",
+      "instructor": "N. Hoffmann",
+      "instructors": [
+        {
+          "name": "N. Hoffmann",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6531",
+      "section_number": "5",
+      "schedule_type": "RSC",
+      "instructor": "C. Puckett",
+      "instructors": [
+        {
+          "name": "C. Puckett",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6555",
+      "section_number": "6",
+      "schedule_type": "RSC",
+      "instructor": "B. Xu",
+      "instructors": [
+        {
+          "name": "B. Xu",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6556",
+      "section_number": "7",
+      "schedule_type": "RSC",
+      "instructor": "E. Idler",
+      "instructors": [
+        {
+          "name": "E. Idler",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6585",
+      "section_number": "8",
+      "schedule_type": "RSC",
+      "instructor": "A. Sewell",
+      "instructors": [
+        {
+          "name": "A. Sewell",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "9",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6625",
+      "section_number": "9",
+      "schedule_type": "RSC",
+      "instructor": "J. Mullis",
+      "instructors": [
+        {
+          "name": "J. Mullis",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "9",
       "is_cancelled": false,
@@ -198,14 +455,14 @@
     }
   ],
   "section_summary": {
-    "total_sections": 9,
+    "total_sections": 18,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 9,
-    "open": 8,
+    "other": 18,
+    "open": 16,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 2
   },
   "instructors_unique": [
     "A. Sewell",
@@ -218,5 +475,5 @@
     "R. Franzosi",
     "R. Hall-Clifford"
   ],
-  "scraped_at": "2026-05-13T00:39:12.886Z"
+  "scraped_at": "2026-06-17T23:06:47.073Z"
 }

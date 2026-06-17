@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "4",
   "requirement_designation": "HSCW",
+  "requirements": [
+    "HSCW"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course is an introduction to gender, sex, and power in the contemporary world.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -54,6 +63,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -80,6 +93,100 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2337",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "K. Amin",
+      "instructors": [
+        {
+          "name": "K. Amin",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2338",
+      "section_number": "2",
+      "schedule_type": "DIS",
+      "instructor": "N. Dams",
+      "instructors": [
+        {
+          "name": "N. Dams",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-11:15a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2339",
+      "section_number": "3",
+      "schedule_type": "DIS",
+      "instructor": "S. Kwon",
+      "instructors": [
+        {
+          "name": "S. Kwon",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -96,19 +203,19 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 1,
+    "total_sections": 6,
+    "lectures": 2,
     "labs": 0,
-    "discussions": 2,
+    "discussions": 4,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 3
+    "waitlisted": 6
   },
   "instructors_unique": [
     "K. Amin",
     "N. Dams",
     "S. Kwon"
   ],
-  "scraped_at": "2026-05-13T00:42:28.244Z"
+  "scraped_at": "2026-06-17T23:15:06.176Z"
 }

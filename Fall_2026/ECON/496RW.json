@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "1 - 4",
   "requirement_designation": "CW",
+  "requirements": [
+    "CW"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Directed, intensive study using intermediate theory on a topic not covered in a course to be offered before a student would normally graduate. Students must receive departmental permission from the director of undergraduate studies in the semester preceding the one in which the student intends to participate.",
   "course_notes": "(ECON 201 or ECON_OX 201) and (ECON 212 or ECON_OX 212) or equivalent transfer credit as a prerequisite.",
   "requisites": "(ECON 201 or ECON_OX 201) and (ECON 212 or ECON_OX 212) or equivalent transfer credit as a prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -54,6 +63,64 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5666",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "S. O'Connell",
+      "instructors": [
+        {
+          "name": "S. O'Connell",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10a-1p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1300"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5673",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "K. Lanier",
+      "instructors": [
+        {
+          "name": "K. Lanier",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -64,12 +131,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 4,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
@@ -77,5 +144,5 @@
     "K. Lanier",
     "S. O'Connell"
   ],
-  "scraped_at": "2026-05-13T00:39:59.887Z"
+  "scraped_at": "2026-06-17T23:10:06.965Z"
 }

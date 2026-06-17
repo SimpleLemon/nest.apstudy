@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "NS",
+  "requirements": [
+    "NS"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course examines the subjective experience and neural substrates of music perception and performance.Each week the class participates in a dialog between musicians and neuroscientists that examines both the experiential and mechanistic approach to music by asking questions such as \"What makes something musical\" and \"how are the complex sounds of music processed by the brain?\". The relationships of music to language, emotion and memory will be examined in detail. Theories of motor learning will be discussed and applied to musical performance. The course explores the development of the musical mind from infancy to adulthood and asks the question, \"How are the brains of composers, conductors, and performers different?\" Evidence of the efficacy of music therapy and the impact of music on mental health are evaluated. Finally, the evolution of musicality in animals and humans explained.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1915",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Roeser/Wyttenbach",
+      "instructors": [
+        {
+          "name": "Roeser/Wyttenbach",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "Roeser/Wyttenbach"
   ],
-  "scraped_at": "2026-05-13T00:37:58.482Z"
+  "scraped_at": "2026-06-17T23:04:17.233Z"
 }

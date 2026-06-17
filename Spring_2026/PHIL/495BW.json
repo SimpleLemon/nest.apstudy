@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 4",
   "requirement_designation": "CW",
+  "requirements": [
+    "CW"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Open to students approved by the department to write an honors thesis.",
   "course_notes": "Two PHIL courses or equivalent transfer credit as prerequisite.",
   "requisites": "Two PHIL courses or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -48,6 +57,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -68,6 +81,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -88,6 +105,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -108,6 +129,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -128,6 +153,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -148,6 +177,178 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6268",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "L. Huffer",
+      "instructors": [
+        {
+          "name": "L. Huffer",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6269",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "D. Marriott",
+      "instructors": [
+        {
+          "name": "D. Marriott",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6270",
+      "section_number": "3",
+      "schedule_type": "SUP",
+      "instructor": "J. Stuhr",
+      "instructors": [
+        {
+          "name": "J. Stuhr",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6271",
+      "section_number": "4",
+      "schedule_type": "SUP",
+      "instructor": "M. Schwarz",
+      "instructors": [
+        {
+          "name": "M. Schwarz",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6272",
+      "section_number": "5",
+      "schedule_type": "SUP",
+      "instructor": "J. Lysaker",
+      "instructors": [
+        {
+          "name": "J. Lysaker",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6273",
+      "section_number": "6",
+      "schedule_type": "SUP",
+      "instructor": "E. Blanes-Martinez",
+      "instructors": [
+        {
+          "name": "E. Blanes-Martinez",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6274",
+      "section_number": "7",
+      "schedule_type": "SUP",
+      "instructor": "N. McAfee",
+      "instructors": [
+        {
+          "name": "N. McAfee",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -158,12 +359,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 7,
+    "total_sections": 14,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 7,
-    "open": 7,
+    "other": 14,
+    "open": 14,
     "closed": 0,
     "waitlisted": 0
   },
@@ -176,5 +377,5 @@
     "M. Schwarz",
     "N. McAfee"
   ],
-  "scraped_at": "2026-05-13T00:38:53.520Z"
+  "scraped_at": "2026-06-17T23:06:07.920Z"
 }

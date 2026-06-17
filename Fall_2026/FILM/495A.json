@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "1 - 4",
   "requirement_designation": "XA",
+  "requirements": [
+    "XA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Prerequisite: Admission to the Honors Program and approval of adviser. Open to students writing honors theses. This course fulfills the postfreshman year writing requirement.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,50 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a; T 8-10p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Tue",
+            "start": "2000",
+            "end": "2200"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3885",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "G. Zinman",
+      "instructors": [
+        {
+          "name": "G. Zinman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -54,17 +103,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
-    "open": 1,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "G. Zinman"
   ],
-  "scraped_at": "2026-05-13T00:40:14.429Z"
+  "scraped_at": "2026-06-17T23:10:36.299Z"
 }

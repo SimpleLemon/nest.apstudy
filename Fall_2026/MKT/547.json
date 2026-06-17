@@ -7,6 +7,9 @@
   "srcdb": "5269",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -54,6 +61,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -80,6 +91,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -111,6 +126,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -137,6 +156,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -163,6 +186,195 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3664",
+      "section_number": "2149",
+      "schedule_type": "LEC",
+      "instructor": "D. Bowman",
+      "instructors": [
+        {
+          "name": "D. Bowman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3665",
+      "section_number": "2649",
+      "schedule_type": "LEC",
+      "instructor": "D. Bowman",
+      "instructors": [
+        {
+          "name": "D. Bowman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3666",
+      "section_number": "3201",
+      "schedule_type": "LEC",
+      "instructor": "D. Bowman",
+      "instructors": [
+        {
+          "name": "D. Bowman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3667",
+      "section_number": "3249",
+      "schedule_type": "LEC",
+      "instructor": "D. Bowman",
+      "instructors": [
+        {
+          "name": "D. Bowman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5434",
+      "section_number": "4149",
+      "schedule_type": "LEC",
+      "instructor": "D. Bowman",
+      "instructors": [
+        {
+          "name": "D. Bowman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "6",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5435",
+      "section_number": "4249",
+      "schedule_type": "LEC",
+      "instructor": "D. Bowman",
+      "instructors": [
+        {
+          "name": "D. Bowman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "6",
       "is_cancelled": false,
@@ -179,17 +391,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 12,
+    "lectures": 12,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 5,
+    "open": 10,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 2
   },
   "instructors_unique": [
     "D. Bowman"
   ],
-  "scraped_at": "2026-05-13T00:40:57.916Z"
+  "scraped_at": "2026-06-17T23:12:04.120Z"
 }

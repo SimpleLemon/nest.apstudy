@@ -52,7 +52,6 @@ if (false) {
     await import("../../static/js/dashboard/daily-quote/data.js");
     await import("../../static/js/dashboard/index.js");
     await import("../../static/js/dashboard/renderers.js");
-    await import("../../static/js/dashboard/theme.js");
     await import("../../static/js/dashboard/utils.js");
     await import("../../static/js/files/events.js");
     await import("../../static/js/files/index.js");
@@ -267,16 +266,11 @@ test("theme init normalizes theme aliases and persists pending settings safely",
     assert.match(source, /clearPendingTheme\(\)/);
 });
 
-test("dashboard theme maps dark appearance to nest-dark and light to parchment-light", async () => {
-    const source = await sourceFor("static/js/dashboard/theme.js");
+test("dashboard uses the shared theme preference without page-specific remapping", async () => {
     const template = await sourceFor("templates/dashboard.html");
 
-    assert.match(source, /var DASHBOARD_DARK_THEME = "nest-dark"/);
-    assert.match(source, /var DASHBOARD_LIGHT_THEME = "parchment-light"/);
-    assert.match(source, /window\.APSTUDY_APPLY_DASHBOARD_THEME = applyDashboardTheme/);
-    assert.match(source, /apstudy-theme-change/);
-    assert.match(source, /prefers-color-scheme: dark/);
-    assert.match(template, /js\/dashboard\/theme\.js/);
+    assert.match(template, /js\/core\/theme-init\.js/);
+    assert.doesNotMatch(template, /js\/dashboard\/theme\.js/);
 });
 
 test("console discord batches browser console output for server logs", async () => {

@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "4",
   "requirement_designation": "HAP",
+  "requirements": [
+    "HAP"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Advanced seminars dealing with various specialized problems in the history of art from antiquity to modern times, such as individual artists, genres (e.g. portraiture, landscape); themes (e.g. theory, iconography); artistic movements and museum studies. May be repeated for credit when topic varies.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -54,6 +63,75 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2558",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Lee/Haugaard",
+      "instructors": [
+        {
+          "name": "Lee/Haugaard",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 1-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2559",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "Mundy/Burr",
+      "instructors": [
+        {
+          "name": "Mundy/Burr",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -75,12 +153,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 4,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
@@ -88,5 +166,5 @@
     "Lee/Haugaard",
     "Mundy/Burr"
   ],
-  "scraped_at": "2026-05-13T00:36:26.434Z"
+  "scraped_at": "2026-06-17T23:01:11.277Z"
 }

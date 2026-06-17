@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "SS",
+  "requirements": [
+    "SS"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "An introduction to the systematic study of human language, surveying the fields of phonetics, phonology, morphology, syntax, semantics, pragmatics, sociolinguistics, child language acquisition, and historical linguistics.",
   "course_notes": null,
   "requisites": null,
@@ -20,14 +25,53 @@
       "crn": "3920",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "E. Britt",
+      "instructor": "D. Tuten",
       "instructors": [
         {
-          "name": "E. Britt",
+          "name": "D. Tuten",
           "email": null
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3920",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "D. Tuten",
+      "instructors": [
+        {
+          "name": "D. Tuten",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 2
   },
   "instructors_unique": [
-    "E. Britt"
+    "D. Tuten"
   ],
-  "scraped_at": "2026-05-13T00:39:30.847Z"
+  "scraped_at": "2026-06-17T23:09:08.313Z"
 }

@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Research on selected topics and problems in political science. Class will fulfill the \"research\" requirement for the political science major. May be repeated for credit when the topic varies.",
   "course_notes": "POLS 208 or POLS_OX 208 or equivalent transfer credit as prerequisite.",
   "requisites": "POLS 208 or POLS_OX 208 or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,40 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 4-6:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1845"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2872",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "H. Semetko",
+      "instructors": [
+        {
+          "name": "H. Semetko",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -44,17 +83,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 2
   },
   "instructors_unique": [
     "H. Semetko"
   ],
-  "scraped_at": "2026-05-13T00:42:05.639Z"
+  "scraped_at": "2026-06-17T23:14:20.602Z"
 }

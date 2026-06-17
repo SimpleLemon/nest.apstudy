@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -54,6 +61,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -80,6 +91,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -100,6 +115,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -126,6 +145,148 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "1496",
+      "section_number": "L1",
+      "schedule_type": "LAB",
+      "instructor": "Phillips/Chen",
+      "instructors": [
+        {
+          "name": "Phillips/Chen",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 3-3:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1500",
+            "end": "1550"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1497",
+      "section_number": "L2",
+      "schedule_type": "LAB",
+      "instructor": "Phillips/Chen",
+      "instructors": [
+        {
+          "name": "Phillips/Chen",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2579",
+      "section_number": "L3",
+      "schedule_type": "LAB",
+      "instructor": "Phillips/Chen",
+      "instructors": [
+        {
+          "name": "Phillips/Chen",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "1495",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 9-11:50a",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "900",
+            "end": "1150"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2577",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Team",
+      "instructors": [
+        {
+          "name": "Team",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -136,12 +297,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 5,
-    "lectures": 2,
-    "labs": 3,
+    "total_sections": 10,
+    "lectures": 4,
+    "labs": 6,
     "discussions": 0,
     "other": 0,
-    "open": 5,
+    "open": 10,
     "closed": 0,
     "waitlisted": 0
   },
@@ -149,5 +310,5 @@
     "Phillips/Chen",
     "Team"
   ],
-  "scraped_at": "2026-05-13T00:37:26.261Z"
+  "scraped_at": "2026-06-17T23:03:12.090Z"
 }

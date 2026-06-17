@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 8",
   "requirement_designation": "CW",
+  "requirements": [
+    "CW"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Honors research in Classics under the direct supervision of a faculty member. Open by invitation only. One semester of honors research can be used toward the College's Continuing Writing requirement.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -48,6 +57,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -68,6 +81,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -88,6 +105,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -108,6 +129,130 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "2928",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "N. Slater",
+      "instructors": [
+        {
+          "name": "N. Slater",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5623",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "C. Campbell",
+      "instructors": [
+        {
+          "name": "C. Campbell",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5627",
+      "section_number": "3",
+      "schedule_type": "SUP",
+      "instructor": "S. Blakely",
+      "instructors": [
+        {
+          "name": "S. Blakely",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6247",
+      "section_number": "4",
+      "schedule_type": "SUP",
+      "instructor": "E. Master",
+      "instructors": [
+        {
+          "name": "E. Master",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6523",
+      "section_number": "5",
+      "schedule_type": "SUP",
+      "instructor": "S. Blakely",
+      "instructors": [
+        {
+          "name": "S. Blakely",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -118,12 +263,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 5,
+    "total_sections": 10,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 5,
-    "open": 5,
+    "other": 10,
+    "open": 10,
     "closed": 0,
     "waitlisted": 0
   },
@@ -133,5 +278,5 @@
     "N. Slater",
     "S. Blakely"
   ],
-  "scraped_at": "2026-05-13T00:36:42.574Z"
+  "scraped_at": "2026-06-17T23:01:44.131Z"
 }

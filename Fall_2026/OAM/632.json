@@ -7,6 +7,9 @@
   "srcdb": "5269",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -54,6 +61,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -85,6 +96,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -111,6 +126,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -137,7 +156,166 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3693",
+      "section_number": "2169",
+      "schedule_type": "LEC",
+      "instructor": "M. Sacks",
+      "instructors": [
+        {
+          "name": "M. Sacks",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3694",
+      "section_number": "3201",
+      "schedule_type": "LEC",
+      "instructor": "M. Sacks",
+      "instructors": [
+        {
+          "name": "M. Sacks",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3695",
+      "section_number": "3269",
+      "schedule_type": "LEC",
+      "instructor": "M. Sacks",
+      "instructors": [
+        {
+          "name": "M. Sacks",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5430",
+      "section_number": "4169",
+      "schedule_type": "LEC",
+      "instructor": "M. Sacks",
+      "instructors": [
+        {
+          "name": "M. Sacks",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5431",
+      "section_number": "4269",
+      "schedule_type": "LEC",
+      "instructor": "M. Sacks",
+      "instructors": [
+        {
+          "name": "M. Sacks",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
       "enrollment_count": "5",
       "is_cancelled": false,
       "schedule": {
@@ -153,17 +331,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 5,
-    "lectures": 5,
+    "total_sections": 10,
+    "lectures": 10,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 6,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 4
   },
   "instructors_unique": [
     "M. Sacks"
   ],
-  "scraped_at": "2026-05-13T00:41:12.479Z"
+  "scraped_at": "2026-06-17T23:12:33.354Z"
 }

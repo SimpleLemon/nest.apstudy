@@ -7,6 +7,9 @@
   "srcdb": "5269",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -54,6 +61,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -80,7 +91,11 @@
         }
       ],
       "location": null,
-      "enrollment_status": "Open",
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
       "schedule": {
@@ -106,6 +121,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -132,6 +151,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -158,7 +181,11 @@
         }
       ],
       "location": null,
-      "enrollment_status": "Open",
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
       "schedule": {
@@ -184,7 +211,221 @@
         }
       ],
       "location": null,
-      "enrollment_status": "Open",
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5082",
+      "section_number": "1101",
+      "schedule_type": "SEM",
+      "instructor": "Smith/Leist",
+      "instructors": [
+        {
+          "name": "Smith/Leist",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-11:15a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5083",
+      "section_number": "1102",
+      "schedule_type": "SEM",
+      "instructor": "Smith/Leist",
+      "instructors": [
+        {
+          "name": "Smith/Leist",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5084",
+      "section_number": "1103",
+      "schedule_type": "SEM",
+      "instructor": "Timpone/Leist",
+      "instructors": [
+        {
+          "name": "Timpone/Leist",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-11:15a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5085",
+      "section_number": "1104",
+      "schedule_type": "SEM",
+      "instructor": "Timpone/Leist",
+      "instructors": [
+        {
+          "name": "Timpone/Leist",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5086",
+      "section_number": "1105",
+      "schedule_type": "SEM",
+      "instructor": "Morales/Leist",
+      "instructors": [
+        {
+          "name": "Morales/Leist",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-11:15a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5087",
+      "section_number": "1106",
+      "schedule_type": "SEM",
+      "instructor": "Morales/Leist",
+      "instructors": [
+        {
+          "name": "Morales/Leist",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5088",
+      "section_number": "1107",
+      "schedule_type": "SEM",
+      "instructor": "S. Leist",
+      "instructors": [
+        {
+          "name": "S. Leist",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
       "schedule": {
@@ -200,13 +441,13 @@
     }
   ],
   "section_summary": {
-    "total_sections": 7,
+    "total_sections": 14,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 7,
-    "open": 3,
-    "closed": 4,
+    "other": 14,
+    "open": 0,
+    "closed": 14,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -215,5 +456,5 @@
     "Smith/Leist",
     "Timpone/Leist"
   ],
-  "scraped_at": "2026-05-13T00:39:45.387Z"
+  "scraped_at": "2026-06-17T23:09:37.583Z"
 }

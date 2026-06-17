@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1",
   "requirement_designation": "PE",
+  "requirements": [
+    "PE"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Play Emory is an opportunity for students to receive credit through a structured yet flexible active lifestyle program. Students receive instruction in the topic and engage in a variety of fitness and health activities. Students have 15 weeks (one semester) to complete 30 hours of physical activity.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -48,6 +57,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -68,6 +81,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -88,6 +105,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -108,6 +129,130 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "3064",
+      "section_number": "1",
+      "schedule_type": "PE",
+      "instructor": "E. Noell",
+      "instructors": [
+        {
+          "name": "E. Noell",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "4009",
+      "section_number": "2",
+      "schedule_type": "PE",
+      "instructor": "A. Murphy",
+      "instructors": [
+        {
+          "name": "A. Murphy",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "4012",
+      "section_number": "3",
+      "schedule_type": "PE",
+      "instructor": "A. Murphy",
+      "instructors": [
+        {
+          "name": "A. Murphy",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "4015",
+      "section_number": "4",
+      "schedule_type": "PE",
+      "instructor": "L. Shepard",
+      "instructors": [
+        {
+          "name": "L. Shepard",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "4016",
+      "section_number": "5",
+      "schedule_type": "PE",
+      "instructor": "L. Shepard",
+      "instructors": [
+        {
+          "name": "L. Shepard",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -118,13 +263,13 @@
     }
   ],
   "section_summary": {
-    "total_sections": 5,
+    "total_sections": 10,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 5,
+    "other": 10,
     "open": 0,
-    "closed": 5,
+    "closed": 10,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -132,5 +277,5 @@
     "E. Noell",
     "L. Shepard"
   ],
-  "scraped_at": "2026-05-13T00:38:48.678Z"
+  "scraped_at": "2026-06-17T23:05:57.978Z"
 }

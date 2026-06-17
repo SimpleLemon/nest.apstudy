@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "4",
   "requirement_designation": "HAPW",
+  "requirements": [
+    "HAPW"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "A writing-intensive course in the construction and formatting of screenplays for upper-level undergraduates, which also broaches various aspects of pre-production planning. Weekly screenings required.",
   "course_notes": "ENGCW 270/270W or ENGCW_OX 270 or ENGCW 271/271W or ENGCW_OX 271 or ENGCW 272/272W or FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
   "requisites": "ENGCW 270/270W or ENGCW_OX 270 or ENGCW 271/271W or ENGCW_OX 271 or ENGCW 272/272W or FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -59,6 +68,75 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3696",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "J. Conway",
+      "instructors": [
+        {
+          "name": "J. Conway",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4:15-5:30p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1615",
+            "end": "1730"
+          },
+          {
+            "day": "Thu",
+            "start": "1615",
+            "end": "1730"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4417",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "C. Kras",
+      "instructors": [
+        {
+          "name": "C. Kras",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -75,12 +153,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 4,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
@@ -88,5 +166,5 @@
     "C. Kras",
     "J. Conway"
   ],
-  "scraped_at": "2026-05-13T00:37:06.887Z"
+  "scraped_at": "2026-06-17T23:02:32.986Z"
 }

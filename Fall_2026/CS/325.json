@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "MQR",
+  "requirements": [
+    "MQR"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Foundations and problems of machine intelligence, application areas, representation of knowledge, constraint processing, AI programming languages, expert systems, design of an intelligent system.",
   "course_notes": "(CS 224 or CS_OX 224) and CS 253 or equivalent transfer credit as prerequisite.",
   "requisites": "(CS 224 or CS_OX 224) and CS 253 or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3015",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "E. Agichtein",
+      "instructors": [
+        {
+          "name": "E. Agichtein",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 2
   },
   "instructors_unique": [
     "E. Agichtein"
   ],
-  "scraped_at": "2026-05-13T00:39:55.053Z"
+  "scraped_at": "2026-06-17T23:09:57.091Z"
 }

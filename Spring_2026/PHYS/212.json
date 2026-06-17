@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "4",
   "requirement_designation": "NS",
+  "requirements": [
+    "NS"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Computation is one of the pillars of modern science, in addition to experiment and theory. In this course, various computational modeling methods will be introduced to study specific examples derived from physical, biological, chemical and social systems.",
   "course_notes": "(PHYS 151 or PHYS_OX 151) or [(PHYS 141 or PHYS_OX 141) and (MATH 112 or MATH 112Z or MATH_OX 112 or MATH_OX 112Z0] or [(PHYS 141 or PHYS_OX 141) and MATH 116)] or equivalent transfer credit as prerequisite.",
   "requisites": "(PHYS 151 or PHYS_OX 151) or [(PHYS 141 or PHYS_OX 141) and (MATH 112 or MATH 112Z or MATH_OX 112 or MATH_OX 112Z0] or [(PHYS 141 or PHYS_OX 141) and MATH 116)] or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -54,6 +63,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -80,6 +93,105 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3994",
+      "section_number": "LAB1",
+      "schedule_type": "LAB",
+      "instructor": "D. Sussman",
+      "instructors": [
+        {
+          "name": "D. Sussman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 10a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3996",
+      "section_number": "LAB2",
+      "schedule_type": "LAB",
+      "instructor": "D. Sussman",
+      "instructors": [
+        {
+          "name": "D. Sussman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1827",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "D. Sussman",
+      "instructors": [
+        {
+          "name": "D. Sussman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "3",
       "is_cancelled": false,
@@ -101,17 +213,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 1,
-    "labs": 2,
+    "total_sections": 6,
+    "lectures": 2,
+    "labs": 4,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 3,
+    "closed": 6,
     "waitlisted": 0
   },
   "instructors_unique": [
     "D. Sussman"
   ],
-  "scraped_at": "2026-05-13T00:38:55.132Z"
+  "scraped_at": "2026-06-17T23:06:11.161Z"
 }

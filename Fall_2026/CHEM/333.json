@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "SNT",
+  "requirements": [
+    "SNT"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course offers a rigorous treatment of the fundamental principles of thermodynamics and kinetics to show how they underlie complex biological processes: protein folding, membrane selfassembly, neuronal function, and enzyme catalysis. Examples are drawn from biomolecular research and medicine.",
   "course_notes": "(CHEM 204 or CHEM_OX 204) and (CHEM 204L or CHEM_OX 204L) and (CHEM 205 or CHEM_OX 205) and (CHEM 205L or CHEM_OX 205L) or equivalent transfer credit as prerequisite.",
   "requisites": "(CHEM 204 or CHEM_OX 204) and (CHEM 204L or CHEM_OX 204L) and (CHEM 205 or CHEM_OX 205) and (CHEM 205L or CHEM_OX 205L) or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2793",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "J. Kindt",
+      "instructors": [
+        {
+          "name": "J. Kindt",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "J. Kindt"
   ],
-  "scraped_at": "2026-05-13T00:39:46.997Z"
+  "scraped_at": "2026-06-17T23:09:40.825Z"
 }

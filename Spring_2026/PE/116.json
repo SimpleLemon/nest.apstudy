@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1",
   "requirement_designation": "PE",
+  "requirements": [
+    "PE"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course will incorporate indoor cycling (spinning) for both the novice and the experienced cyclist. Instruction provided in proper biomechanics and cycling techniques as well as safety. Interval training on the bike and body weight resistance exercises are utilized. Fulfills the PPF requirement.",
   "course_notes": "Pre-req: Limit PPF",
   "requisites": "Pre-req: Limit PPF",
@@ -28,6 +33,50 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Waitlist",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TThF 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1220"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1220"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3888",
+      "section_number": "1",
+      "schedule_type": "PE",
+      "instructor": "E. Noell",
+      "instructors": [
+        {
+          "name": "E. Noell",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -54,17 +103,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
+    "other": 2,
     "open": 0,
     "closed": 0,
-    "waitlisted": 1
+    "waitlisted": 2
   },
   "instructors_unique": [
     "E. Noell"
   ],
-  "scraped_at": "2026-05-13T00:38:48.677Z"
+  "scraped_at": "2026-06-17T23:05:57.977Z"
 }

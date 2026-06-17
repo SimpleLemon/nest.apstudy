@@ -7,6 +7,9 @@
   "srcdb": "5269",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -20,9 +23,18 @@
       "crn": "5081",
       "section_number": "1101",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "U. Rackliffe",
+      "instructors": [
+        {
+          "name": "U. Rackliffe",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -41,9 +53,18 @@
       "crn": "5095",
       "section_number": "1102",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "M. Schmees",
+      "instructors": [
+        {
+          "name": "M. Schmees",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -62,9 +83,18 @@
       "crn": "5096",
       "section_number": "1104",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "A. Gibbons",
+      "instructors": [
+        {
+          "name": "A. Gibbons",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -83,9 +113,18 @@
       "crn": "5097",
       "section_number": "1105",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "C. Frederick",
+      "instructors": [
+        {
+          "name": "C. Frederick",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -104,9 +143,18 @@
       "crn": "5098",
       "section_number": "1106",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "J. Billetdeaux",
+      "instructors": [
+        {
+          "name": "J. Billetdeaux",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -125,9 +173,18 @@
       "crn": "5101",
       "section_number": "1107",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "B. Baker",
+      "instructors": [
+        {
+          "name": "B. Baker",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -146,9 +203,18 @@
       "crn": "5106",
       "section_number": "1108",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "R. Bobowski",
+      "instructors": [
+        {
+          "name": "R. Bobowski",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -175,6 +241,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -187,9 +257,18 @@
       "crn": "5108",
       "section_number": "1110",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "J. Jo",
+      "instructors": [
+        {
+          "name": "J. Jo",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -208,9 +287,18 @@
       "crn": "5245",
       "section_number": "1111",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "N. Smith",
+      "instructors": [
+        {
+          "name": "N. Smith",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -229,9 +317,18 @@
       "crn": "5246",
       "section_number": "1112",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "A. Errore",
+      "instructors": [
+        {
+          "name": "A. Errore",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -250,9 +347,18 @@
       "crn": "5247",
       "section_number": "1113",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "J. Ross",
+      "instructors": [
+        {
+          "name": "J. Ross",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -271,9 +377,18 @@
       "crn": "5248",
       "section_number": "1114",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "W. Gu",
+      "instructors": [
+        {
+          "name": "W. Gu",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -292,9 +407,18 @@
       "crn": "5249",
       "section_number": "1115",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "M. Foronda",
+      "instructors": [
+        {
+          "name": "M. Foronda",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -313,9 +437,18 @@
       "crn": "5109",
       "section_number": "1117",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "K. Timpone",
+      "instructors": [
+        {
+          "name": "K. Timpone",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -334,9 +467,18 @@
       "crn": "5250",
       "section_number": "1118",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "S. Savage",
+      "instructors": [
+        {
+          "name": "S. Savage",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -355,9 +497,18 @@
       "crn": "5251",
       "section_number": "1119",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "A. Kays",
+      "instructors": [
+        {
+          "name": "A. Kays",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -376,9 +527,18 @@
       "crn": "5252",
       "section_number": "1120",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "E. Bianchi",
+      "instructors": [
+        {
+          "name": "E. Bianchi",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -397,9 +557,18 @@
       "crn": "5253",
       "section_number": "1121",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "S. Cruz",
+      "instructors": [
+        {
+          "name": "S. Cruz",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -418,9 +587,18 @@
       "crn": "5111",
       "section_number": "1122",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "J. Lowy",
+      "instructors": [
+        {
+          "name": "J. Lowy",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -439,10 +617,19 @@
       "crn": "5254",
       "section_number": "1123",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "R. Bobowski",
+      "instructors": [
+        {
+          "name": "R. Bobowski",
+          "email": null
+        }
+      ],
       "location": null,
-      "enrollment_status": "Open",
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
       "enrollment_count": "23",
       "is_cancelled": false,
       "schedule": {
@@ -460,9 +647,18 @@
       "crn": "5255",
       "section_number": "1124",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "D. Clear",
+      "instructors": [
+        {
+          "name": "D. Clear",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -481,9 +677,702 @@
       "crn": "5256",
       "section_number": "1125",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "S. Leist",
+      "instructors": [
+        {
+          "name": "S. Leist",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-4:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5081",
+      "section_number": "1101",
+      "schedule_type": "LEC",
+      "instructor": "U. Rackliffe",
+      "instructors": [
+        {
+          "name": "U. Rackliffe",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 9-9:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5095",
+      "section_number": "1102",
+      "schedule_type": "LEC",
+      "instructor": "M. Schmees",
+      "instructors": [
+        {
+          "name": "M. Schmees",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 9-9:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5096",
+      "section_number": "1104",
+      "schedule_type": "LEC",
+      "instructor": "A. Gibbons",
+      "instructors": [
+        {
+          "name": "A. Gibbons",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 4-4:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5097",
+      "section_number": "1105",
+      "schedule_type": "LEC",
+      "instructor": "C. Frederick",
+      "instructors": [
+        {
+          "name": "C. Frederick",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 4-4:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5098",
+      "section_number": "1106",
+      "schedule_type": "LEC",
+      "instructor": "J. Billetdeaux",
+      "instructors": [
+        {
+          "name": "J. Billetdeaux",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 4-4:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5101",
+      "section_number": "1107",
+      "schedule_type": "LEC",
+      "instructor": "B. Baker",
+      "instructors": [
+        {
+          "name": "B. Baker",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 9-9:50a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5106",
+      "section_number": "1108",
+      "schedule_type": "LEC",
+      "instructor": "R. Bobowski",
+      "instructors": [
+        {
+          "name": "R. Bobowski",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 9-9:50a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5107",
+      "section_number": "1109",
+      "schedule_type": "LEC",
+      "instructor": "D. Clear",
+      "instructors": [
+        {
+          "name": "D. Clear",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5108",
+      "section_number": "1110",
+      "schedule_type": "LEC",
+      "instructor": "J. Jo",
+      "instructors": [
+        {
+          "name": "J. Jo",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 9-9:50a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5245",
+      "section_number": "1111",
+      "schedule_type": "LEC",
+      "instructor": "N. Smith",
+      "instructors": [
+        {
+          "name": "N. Smith",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 4-4:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5246",
+      "section_number": "1112",
+      "schedule_type": "LEC",
+      "instructor": "A. Errore",
+      "instructors": [
+        {
+          "name": "A. Errore",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 4-4:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5247",
+      "section_number": "1113",
+      "schedule_type": "LEC",
+      "instructor": "J. Ross",
+      "instructors": [
+        {
+          "name": "J. Ross",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 4-4:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5248",
+      "section_number": "1114",
+      "schedule_type": "LEC",
+      "instructor": "W. Gu",
+      "instructors": [
+        {
+          "name": "W. Gu",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 9-9:50a",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5249",
+      "section_number": "1115",
+      "schedule_type": "LEC",
+      "instructor": "M. Foronda",
+      "instructors": [
+        {
+          "name": "M. Foronda",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 9-9:50a",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5109",
+      "section_number": "1117",
+      "schedule_type": "LEC",
+      "instructor": "K. Timpone",
+      "instructors": [
+        {
+          "name": "K. Timpone",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5250",
+      "section_number": "1118",
+      "schedule_type": "LEC",
+      "instructor": "S. Savage",
+      "instructors": [
+        {
+          "name": "S. Savage",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5251",
+      "section_number": "1119",
+      "schedule_type": "LEC",
+      "instructor": "A. Kays",
+      "instructors": [
+        {
+          "name": "A. Kays",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5252",
+      "section_number": "1120",
+      "schedule_type": "LEC",
+      "instructor": "E. Bianchi",
+      "instructors": [
+        {
+          "name": "E. Bianchi",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 9-9:50a",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5253",
+      "section_number": "1121",
+      "schedule_type": "LEC",
+      "instructor": "S. Cruz",
+      "instructors": [
+        {
+          "name": "S. Cruz",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 9-9:50a",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5111",
+      "section_number": "1122",
+      "schedule_type": "LEC",
+      "instructor": "J. Lowy",
+      "instructors": [
+        {
+          "name": "J. Lowy",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 9-9:50a",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5254",
+      "section_number": "1123",
+      "schedule_type": "LEC",
+      "instructor": "R. Bobowski",
+      "instructors": [
+        {
+          "name": "R. Bobowski",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-4:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5255",
+      "section_number": "1124",
+      "schedule_type": "LEC",
+      "instructor": "D. Clear",
+      "instructors": [
+        {
+          "name": "D. Clear",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "23",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-4:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5256",
+      "section_number": "1125",
+      "schedule_type": "LEC",
+      "instructor": "S. Leist",
+      "instructors": [
+        {
+          "name": "S. Leist",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "23",
       "is_cancelled": false,
@@ -500,17 +1389,37 @@
     }
   ],
   "section_summary": {
-    "total_sections": 23,
-    "lectures": 23,
+    "total_sections": 46,
+    "lectures": 46,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 19,
-    "closed": 4,
+    "open": 36,
+    "closed": 10,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Clear"
+    "A. Errore",
+    "A. Gibbons",
+    "A. Kays",
+    "B. Baker",
+    "C. Frederick",
+    "D. Clear",
+    "E. Bianchi",
+    "J. Billetdeaux",
+    "J. Jo",
+    "J. Lowy",
+    "J. Ross",
+    "K. Timpone",
+    "M. Foronda",
+    "M. Schmees",
+    "N. Smith",
+    "R. Bobowski",
+    "S. Cruz",
+    "S. Leist",
+    "S. Savage",
+    "U. Rackliffe",
+    "W. Gu"
   ],
-  "scraped_at": "2026-05-13T00:39:45.386Z"
+  "scraped_at": "2026-06-17T23:09:37.579Z"
 }

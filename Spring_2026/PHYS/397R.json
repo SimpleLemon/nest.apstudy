@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 12",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Credit, two to four hours. Prerequisite: consent of instructor. Adapted to particular needs of individual student with instructor acting as adviser.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -48,6 +57,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -68,6 +81,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -88,6 +105,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -108,6 +129,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -128,6 +153,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -148,6 +177,178 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "1923",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "A. Bans",
+      "instructors": [
+        {
+          "name": "A. Bans",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6178",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "L. Santos",
+      "instructors": [
+        {
+          "name": "L. Santos",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6334",
+      "section_number": "3",
+      "schedule_type": "SUP",
+      "instructor": "T. Bing",
+      "instructors": [
+        {
+          "name": "T. Bing",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6517",
+      "section_number": "4",
+      "schedule_type": "SUP",
+      "instructor": "S. Boettcher",
+      "instructors": [
+        {
+          "name": "S. Boettcher",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6548",
+      "section_number": "5",
+      "schedule_type": "SUP",
+      "instructor": "Batiste/Bans",
+      "instructors": [
+        {
+          "name": "Batiste/Bans",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6612",
+      "section_number": "6",
+      "schedule_type": "SUP",
+      "instructor": "E. Bonning",
+      "instructors": [
+        {
+          "name": "E. Bonning",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6615",
+      "section_number": "7",
+      "schedule_type": "SUP",
+      "instructor": "T. Can",
+      "instructors": [
+        {
+          "name": "T. Can",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "7",
       "is_cancelled": false,
@@ -158,13 +359,13 @@
     }
   ],
   "section_summary": {
-    "total_sections": 7,
+    "total_sections": 14,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 7,
-    "open": 6,
-    "closed": 1,
+    "other": 14,
+    "open": 12,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -176,5 +377,5 @@
     "T. Bing",
     "T. Can"
   ],
-  "scraped_at": "2026-05-13T00:38:55.134Z"
+  "scraped_at": "2026-06-17T23:06:11.164Z"
 }

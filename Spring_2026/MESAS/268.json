@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3",
   "requirement_designation": "HAE",
+  "requirements": [
+    "HAE"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Covers the history of the Israeli-Palestinian conflict from the 1880s to today. It will introduce students to early Zionist debates and the late Ottoman context before discussing the British Mandate period, the State of Israel, and the Palestinian cause on the world stage after the 1967 war.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4785",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "DeBoard/Schrenzel",
+      "instructors": [
+        {
+          "name": "DeBoard/Schrenzel",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "DeBoard/Schrenzel"
   ],
-  "scraped_at": "2026-05-13T00:37:48.828Z"
+  "scraped_at": "2026-06-17T23:03:57.664Z"
 }

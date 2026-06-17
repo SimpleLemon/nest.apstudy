@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 4",
   "requirement_designation": "XA",
+  "requirements": [
+    "XA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Supervised participation in museum, gallery, or other art-related activity. Requires approval by the ARTHIST Internship Coordinator. May be repeated, with permission, for up to 12 credit hours. Credit ranges from one (for 50 hrs., or 4 hrs./week) to four (200 hrs., or 14 hrs./week).",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,34 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6298",
+      "section_number": "1",
+      "schedule_type": "DIS",
+      "instructor": "G. Lovisetto",
+      "instructors": [
+        {
+          "name": "G. Lovisetto",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -38,17 +71,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
-    "discussions": 1,
+    "discussions": 2,
     "other": 0,
-    "open": 1,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "G. Lovisetto"
   ],
-  "scraped_at": "2026-05-13T00:36:26.435Z"
+  "scraped_at": "2026-06-17T23:01:11.277Z"
 }

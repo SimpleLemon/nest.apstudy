@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "XA",
+  "requirements": [
+    "XA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "An introduction to the theory and practice of scene design. Includes historical research, script analysis from a visual perspective, and exercises to develop basic design skills.",
   "course_notes": null,
   "requisites": null,
@@ -28,7 +33,46 @@
         }
       ],
       "location": null,
-      "enrollment_status": "Open",
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2720",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "S. Culpepper",
+      "instructors": [
+        {
+          "name": "S. Culpepper",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
-    "lectures": 1,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
-    "closed": 0,
+    "open": 0,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "S. Culpepper"
   ],
-  "scraped_at": "2026-05-13T00:42:25.023Z"
+  "scraped_at": "2026-06-17T23:14:59.597Z"
 }

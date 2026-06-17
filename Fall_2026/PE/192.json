@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "1",
   "requirement_designation": "PE",
+  "requirements": [
+    "PE"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This course introduces the student to the Olympic sport of foil fencing. Beginning level offensive and defensive techniques will be taught as well as the rules of competition. Emphasis will be placed on the proper execution of the basic skills and physical conditioning. \"",
   "course_notes": "Students completing PE 212 or PE 250 or equivalent cannot enroll for PE 150. For concerns, please contact the Physical Education department.",
   "requisites": "Students completing PE 212 or PE 250 or equivalent cannot enroll for PE 150. For concerns, please contact the Physical Education department.",
@@ -28,6 +33,45 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3357",
+      "section_number": "1",
+      "schedule_type": "PE",
+      "instructor": "T. Lasker",
+      "instructors": [
+        {
+          "name": "T. Lasker",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -49,17 +93,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
+    "other": 2,
     "open": 0,
-    "closed": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "T. Lasker"
   ],
-  "scraped_at": "2026-05-13T00:41:55.782Z"
+  "scraped_at": "2026-06-17T23:14:01.031Z"
 }

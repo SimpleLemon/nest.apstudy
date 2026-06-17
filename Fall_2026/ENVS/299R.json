@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "1 - 8",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Variable credit. Permission of faculty supervisor required prior to enrollment. Designed primarily for sophomores, this course provides ENVS students with foundational skills for research under the supervision of a faculty member. A stepping stone to more advanced research work.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -48,6 +57,58 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5674",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "X. Huang",
+      "instructors": [
+        {
+          "name": "X. Huang",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5812",
+      "section_number": "2",
+      "schedule_type": "RSC",
+      "instructor": "G. Vazquez Prokopec",
+      "instructors": [
+        {
+          "name": "G. Vazquez Prokopec",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -58,12 +119,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 4,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
@@ -71,5 +132,5 @@
     "G. Vazquez Prokopec",
     "X. Huang"
   ],
-  "scraped_at": "2026-05-13T00:40:11.208Z"
+  "scraped_at": "2026-06-17T23:10:29.843Z"
 }

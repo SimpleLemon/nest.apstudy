@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 4",
   "requirement_designation": "XA",
+  "requirements": [
+    "XA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Provides students with an opportunity to explore individually designed internship projects under faculty supervision. May be repeated for credit when project varies.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,34 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6312",
+      "section_number": "1",
+      "schedule_type": "DIS",
+      "instructor": "G. Staib",
+      "instructors": [
+        {
+          "name": "G. Staib",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -38,17 +71,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
-    "discussions": 1,
+    "discussions": 2,
     "other": 0,
     "open": 0,
-    "closed": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "G. Staib"
   ],
-  "scraped_at": "2026-05-13T00:36:49.026Z"
+  "scraped_at": "2026-06-17T23:01:57.219Z"
 }

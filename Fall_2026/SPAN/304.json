@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "3",
   "requirement_designation": "IC",
+  "requirements": [
+    "IC"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Foundational course for the major and the minor that introduces students to the field of Hispanic linguistics, including phonetics, phonology, morphology, pragmatics, and linguistic variation in the Spanish-speaking world.",
   "course_notes": null,
   "requisites": null,
@@ -28,7 +33,11 @@
         }
       ],
       "location": null,
-      "enrollment_status": "Closed",
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
       "schedule": {
@@ -59,7 +68,81 @@
         }
       ],
       "location": null,
-      "enrollment_status": "Closed",
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1570",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "J. Boigues-Lopez",
+      "instructors": [
+        {
+          "name": "J. Boigues-Lopez",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1642",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "J. Boigues-Lopez",
+      "instructors": [
+        {
+          "name": "J. Boigues-Lopez",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
       "schedule": {
@@ -80,17 +163,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 2,
+    "open": 4,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "J. Boigues-Lopez"
   ],
-  "scraped_at": "2026-05-13T00:42:21.802Z"
+  "scraped_at": "2026-06-17T23:14:53.054Z"
 }

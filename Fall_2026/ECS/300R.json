@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "2",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "This is a 2-credit course intended for new student members of the Emory College Honor Council. It introduces students to academic integrity as a field of research and inquiry, the historical context of college honor systems, and new research and trends concerning academic dishonesty.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,40 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 5:30-7:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1730",
+            "end": "1915"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "1801",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Wilson/Shoemake",
+      "instructors": [
+        {
+          "name": "Wilson/Shoemake",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -44,17 +83,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
+    "other": 2,
     "open": 0,
-    "closed": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "Wilson/Shoemake"
   ],
-  "scraped_at": "2026-05-13T00:40:01.509Z"
+  "scraped_at": "2026-06-17T23:10:10.222Z"
 }

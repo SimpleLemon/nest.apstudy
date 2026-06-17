@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "1 - 12",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Under faculty mentorship, students propose a focused research question and design a reading plan to explore the available evidence in depth through independent study. Students will write a semester paper which describes our current understanding of the topic and critiques the available evidence.",
   "course_notes": "HLTH 210 or equivalent transfer credit as prerequisite.",
   "requisites": "HLTH 210 or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,34 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "2646",
+      "section_number": "1",
+      "schedule_type": "IND",
+      "instructor": "R. Hall-Clifford",
+      "instructors": [
+        {
+          "name": "R. Hall-Clifford",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -38,17 +71,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 1,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 1,
-    "open": 1,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "R. Hall-Clifford"
   ],
-  "scraped_at": "2026-05-13T00:40:32.148Z"
+  "scraped_at": "2026-06-17T23:11:12.000Z"
 }

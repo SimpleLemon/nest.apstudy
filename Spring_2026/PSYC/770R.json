@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -54,6 +61,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -80,6 +91,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -106,6 +121,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -132,6 +151,154 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "2450",
+      "section_number": "3",
+      "schedule_type": "SEM",
+      "instructor": "D. Maney",
+      "instructors": [
+        {
+          "name": "D. Maney",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 1-2:15p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2451",
+      "section_number": "4",
+      "schedule_type": "SEM",
+      "instructor": "Z. Delawalla",
+      "instructors": [
+        {
+          "name": "Z. Delawalla",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 12:30-2p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1230",
+            "end": "1400"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "2452",
+      "section_number": "5",
+      "schedule_type": "SEM",
+      "instructor": "H. Trotman",
+      "instructors": [
+        {
+          "name": "H. Trotman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 10a-12:30p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1230"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3096",
+      "section_number": "6",
+      "schedule_type": "SEM",
+      "instructor": "H. Rodman",
+      "instructors": [
+        {
+          "name": "H. Rodman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 9-11:30a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "1130"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5267",
+      "section_number": "7",
+      "schedule_type": "SEM",
+      "instructor": "M. Treadway",
+      "instructors": [
+        {
+          "name": "M. Treadway",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -142,12 +309,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 5,
+    "total_sections": 10,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 5,
-    "open": 5,
+    "other": 10,
+    "open": 10,
     "closed": 0,
     "waitlisted": 0
   },
@@ -158,5 +325,5 @@
     "M. Treadway",
     "Z. Delawalla"
   ],
-  "scraped_at": "2026-05-13T00:39:01.613Z"
+  "scraped_at": "2026-06-17T23:06:24.226Z"
 }

@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 4",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Rotating topics in film and media across disciplines and crosslisted with other departments. May be repeated for credit when the topic varies.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -54,6 +63,70 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 6-9p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1800",
+            "end": "2100"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5125",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "L. Fort",
+      "instructors": [
+        {
+          "name": "L. Fort",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5282",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Z. Budenkova",
+      "instructors": [
+        {
+          "name": "Z. Budenkova",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -70,12 +143,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
@@ -83,5 +156,5 @@
     "L. Fort",
     "Z. Budenkova"
   ],
-  "scraped_at": "2026-05-13T00:37:06.886Z"
+  "scraped_at": "2026-06-17T23:02:32.984Z"
 }

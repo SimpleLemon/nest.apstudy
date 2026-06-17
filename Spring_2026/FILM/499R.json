@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 5",
   "requirement_designation": "HAP",
+  "requirements": [
+    "HAP"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "A supervised project in an area of study to be determined by the instructor and student in the semester preceding the independent study. Requires faculty approval prior to registration. Only four credit hours can be applied toward fulfillment of the requirement of the major.",
   "course_notes": null,
   "requisites": null,
@@ -23,6 +28,10 @@
       "instructor": "Staff",
       "instructors": [],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -49,6 +58,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -75,6 +88,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -95,6 +112,113 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "3700",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 6-11p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1800",
+            "end": "2300"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5236",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "Porst/Barba",
+      "instructors": [
+        {
+          "name": "Porst/Barba",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-6p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1800"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6398",
+      "section_number": "3",
+      "schedule_type": "SUP",
+      "instructor": "D. Barba",
+      "instructors": [
+        {
+          "name": "D. Barba",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "4",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "6562",
+      "section_number": "4",
+      "schedule_type": "SUP",
+      "instructor": "S. Garner",
+      "instructors": [
+        {
+          "name": "S. Garner",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "4",
       "is_cancelled": false,
@@ -105,13 +229,13 @@
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 8,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 1,
-    "closed": 3,
+    "other": 8,
+    "open": 2,
+    "closed": 6,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -119,5 +243,5 @@
     "Porst/Barba",
     "S. Garner"
   ],
-  "scraped_at": "2026-05-13T00:37:06.889Z"
+  "scraped_at": "2026-06-17T23:02:32.989Z"
 }

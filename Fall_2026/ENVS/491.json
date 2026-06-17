@@ -7,6 +7,11 @@
   "srcdb": "5269",
   "credit_hours": "4",
   "requirement_designation": "XA",
+  "requirements": [
+    "XA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Student teams work on an environmental project for an external stakeholder, using problem identification, research and analysis, report and policy drafting, and public presentation skills. Project and stakeholders vary by semester. Fulfills an ENVS Independent Study.",
   "course_notes": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or equivalent transfer credit as prerequisite.",
   "requisites": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or equivalent transfer credit as prerequisite.",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -54,6 +63,64 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      }
+    },
+    {
+      "crn": "5750",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "C. Keogh",
+      "instructors": [
+        {
+          "name": "C. Keogh",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 1-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1545"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5751",
+      "section_number": "2",
+      "schedule_type": "DIS",
+      "instructor": "C. Keogh",
+      "instructors": [
+        {
+          "name": "C. Keogh",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "2",
       "is_cancelled": false,
@@ -64,17 +131,17 @@
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 1,
+    "total_sections": 4,
+    "lectures": 2,
     "labs": 0,
-    "discussions": 1,
+    "discussions": 2,
     "other": 0,
-    "open": 2,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "C. Keogh"
   ],
-  "scraped_at": "2026-05-13T00:40:11.211Z"
+  "scraped_at": "2026-06-17T23:10:29.848Z"
 }

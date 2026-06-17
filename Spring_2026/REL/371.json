@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "3 - 4",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Through variables such as arts, politics, freedom, race, nd coloniality, this repeatable special topics course will explore various ways in which religion and law intersect and pose questions in political life, social justice struggles, community conversations and spaces, and cultural consciousness.",
   "course_notes": "REL 250 as prerequiisite",
   "requisites": "REL 250 as prerequiisite",
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -54,6 +63,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -85,6 +98,110 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 3:30-4:55p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1530",
+            "end": "1655"
+          },
+          {
+            "day": "Thu",
+            "start": "1530",
+            "end": "1655"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5669",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "S. Allard",
+      "instructors": [
+        {
+          "name": "S. Allard",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2-4:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1400",
+            "end": "1630"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5670",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "W. Barth",
+      "instructors": [
+        {
+          "name": "W. Barth",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10:35a-12p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1035",
+            "end": "1200"
+          },
+          {
+            "day": "Wed",
+            "start": "1035",
+            "end": "1200"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5671",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "D. Waters Jr.",
+      "instructors": [
+        {
+          "name": "D. Waters Jr.",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -106,13 +223,13 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 3,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
-    "closed": 2,
+    "open": 2,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -120,5 +237,5 @@
     "S. Allard",
     "W. Barth"
   ],
-  "scraped_at": "2026-05-13T00:39:06.445Z"
+  "scraped_at": "2026-06-17T23:06:34.026Z"
 }

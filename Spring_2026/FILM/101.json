@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "4",
   "requirement_designation": "HA",
+  "requirements": [
+    "HA"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "Serves as an intro to analyzing film and media. Examines style, form, technology, industry and cultural meaning. Spans 19th to the 21st centuries, national contexts, genres and modes of production. Introduces ways of \"reading\" film and other visual media, to be a more informed and critical viewer.",
   "course_notes": null,
   "requisites": null,
@@ -28,6 +33,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -64,6 +73,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -100,6 +113,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -136,6 +153,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -172,6 +193,210 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p; M 6-8p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Mon",
+            "start": "1800",
+            "end": "2000"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3687",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "M. Schreiber",
+      "instructors": [
+        {
+          "name": "M. Schreiber",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; M 4-6p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1800"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3709",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "C. Michael",
+      "instructors": [
+        {
+          "name": "C. Michael",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a; T 4-6p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1800"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3711",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "G. Zinman",
+      "instructors": [
+        {
+          "name": "G. Zinman",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p; T 6-8p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Tue",
+            "start": "1800",
+            "end": "2000"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3877",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "B. Smith-Shomade",
+      "instructors": [
+        {
+          "name": "B. Smith-Shomade",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p; M 4-6p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1800"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "6171",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "J. Wang",
+      "instructors": [
+        {
+          "name": "J. Wang",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "5",
       "is_cancelled": false,
@@ -198,12 +423,12 @@
     }
   ],
   "section_summary": {
-    "total_sections": 5,
-    "lectures": 5,
+    "total_sections": 10,
+    "lectures": 10,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 5,
+    "open": 10,
     "closed": 0,
     "waitlisted": 0
   },
@@ -214,5 +439,5 @@
     "J. Wang",
     "M. Schreiber"
   ],
-  "scraped_at": "2026-05-13T00:37:06.882Z"
+  "scraped_at": "2026-06-17T23:02:32.976Z"
 }

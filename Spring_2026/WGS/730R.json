@@ -7,6 +7,9 @@
   "srcdb": "5261",
   "credit_hours": null,
   "requirement_designation": null,
+  "requirements": [],
+  "campus": null,
+  "campus_description": null,
   "course_description": null,
   "course_notes": null,
   "requisites": null,
@@ -28,6 +31,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -54,6 +61,10 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -80,6 +91,100 @@
         }
       ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 3-6p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1500",
+            "end": "1800"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "3103",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "L. Park",
+      "instructors": [
+        {
+          "name": "L. Park",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 4-6:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1845"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "4406",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "K. Wallace-Sanders",
+      "instructors": [
+        {
+          "name": "K. Wallace-Sanders",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 9a-12p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "900",
+            "end": "1200"
+          }
+        ]
+      }
+    },
+    {
+      "crn": "5460",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "I. Goh",
+      "instructors": [
+        {
+          "name": "I. Goh",
+          "email": null
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Closed",
       "enrollment_count": "1",
       "is_cancelled": false,
@@ -96,13 +201,13 @@
     }
   ],
   "section_summary": {
-    "total_sections": 3,
-    "lectures": 3,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 1,
-    "closed": 2,
+    "open": 2,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -110,5 +215,5 @@
     "K. Wallace-Sanders",
     "L. Park"
   ],
-  "scraped_at": "2026-05-13T00:39:20.943Z"
+  "scraped_at": "2026-06-17T23:07:03.466Z"
 }

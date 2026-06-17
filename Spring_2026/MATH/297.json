@@ -7,6 +7,11 @@
   "srcdb": "5261",
   "credit_hours": "1 - 4",
   "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": null,
+  "campus_description": null,
   "course_description": "May be repeated for credit, total credit not to exceed six hours. Cannot be used to meet course requirements for a Math major or minor. Topics vary by instructor.",
   "course_notes": null,
   "requisites": null,
@@ -17,14 +22,23 @@
   },
   "sections": [
     {
-      "crn": "5165",
-      "section_number": "1",
+      "crn": "6638",
+      "section_number": "2",
       "schedule_type": "SUP",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "N. Gupta",
+      "instructors": [
+        {
+          "name": "N. Gupta",
+          "email": null
+        }
+      ],
       "location": null,
+      "campus": null,
+      "campus_description": null,
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "2",
+      "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -43,8 +57,12 @@
         }
       ],
       "location": null,
+      "campus": "Oxford",
+      "campus_description": "Oxford",
+      "requirement_designation": null,
+      "requirements": [],
       "enrollment_status": "Open",
-      "enrollment_count": "2",
+      "enrollment_count": "1",
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
@@ -65,5 +83,5 @@
   "instructors_unique": [
     "N. Gupta"
   ],
-  "scraped_at": "2026-05-13T00:37:47.210Z"
+  "scraped_at": "2026-06-17T23:03:54.284Z"
 }
