@@ -11,12 +11,16 @@ if (window.APStudySidebarLoaded) return;
 window.APStudySidebarLoaded = true;
 
 const SIDEBAR_ICONS = {
-  collapse: materialSymbol("keyboard_arrow_left"),
-  expand: materialSymbol("keyboard_arrow_right"),
+  collapse: sidebarSvgIcon("M12.707 5.293a1 1 0 0 1 0 1.414L9.415 10l3.292 3.293a1 1 0 0 1-1.414 1.414l-4-4a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 0"),
+  expand: sidebarSvgIcon("M7.293 14.707a1 1 0 0 1 0-1.414L10.586 10 7.293 6.707a1 1 0 1 1 1.414-1.414l4 4a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0"),
 };
 
 function materialSymbol(name) {
   return `<span class="material-symbols-outlined sidebar-material-icon" aria-hidden="true">${name}</span>`;
+}
+
+function sidebarSvgIcon(path) {
+  return `<svg class="sidebar-toggle-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentcolor" fill-rule="evenodd" d="${path}" clip-rule="evenodd"></path></svg>`;
 }
 
 function ensureMaterialSymbolsFont() {

@@ -484,6 +484,11 @@ from services import database as _nest_database
 def calendar_db_path(path=None):
     if path:
         return path
+    if (
+        os.environ.get(_nest_database.LOCAL_INSTANCE_ONLY) == "1"
+        and os.environ.get("FLASK_ENV") != "production"
+    ):
+        return _nest_database.database_path()
     configured = os.environ.get("DATABASE_PATH") or os.environ.get("NEST_DATABASE_PATH")
     if configured:
         return configured

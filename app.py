@@ -15,6 +15,7 @@ if os.environ.get("APSTUDY_ALLOW_INSECURE_OAUTH") == "1" or os.environ.get("FLAS
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PRODUCTION_DATABASE_PATH = "/var/www/nest.apstudy.org/instance/nest.sqlite3"
+LOCAL_INSTANCE_ONLY = "APSTUDY_FORCE_LOCAL_INSTANCE_DB"
 
 
 def create_app():
@@ -32,12 +33,16 @@ def create_app():
     app.jinja_env.filters["avatar_url"] = avatar_url_for_size
     app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-fallback-key")
     app.config["APPWRITE_DATABASE_ID"] = os.environ.get("APPWRITE_DATABASE_ID", "")
-    app.config["DATABASE_PATH"] = os.environ.get(
-        "DATABASE_PATH",
-        PRODUCTION_DATABASE_PATH
-        if os.environ.get("FLASK_ENV") == "production"
-        else os.path.join(app.instance_path, "nest.sqlite3"),
-    )
+    if os.environ.get(LOCAL_INSTANCE_ONLY) == "1" and os.environ.get("FLASK_ENV") != "production":
+        database_path = os.path.join(app.instance_path, "nest.sqlite3")
+    else:
+        database_path = os.environ.get(
+            "DATABASE_PATH",
+            PRODUCTION_DATABASE_PATH
+            if os.environ.get("FLASK_ENV") == "production"
+            else os.path.join(app.instance_path, "nest.sqlite3"),
+        )
+    app.config["DATABASE_PATH"] = database_path
     app.config["CALENDAR_SQLITE_PATH"] = app.config["DATABASE_PATH"]
     app.config["MAX_CONTENT_LENGTH"] = 5 * 50 * 1024 * 1024
     app.config["FILE_SHARE_UPLOAD_DIR"] = os.path.join(app.root_path, "uploads", "file_share")

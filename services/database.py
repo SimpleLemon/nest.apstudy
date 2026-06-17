@@ -12,6 +12,7 @@ from flask import current_app, g, has_app_context
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PRODUCTION_DATABASE_PATH = "/var/www/nest.apstudy.org/instance/nest.sqlite3"
+LOCAL_INSTANCE_ONLY = "APSTUDY_FORCE_LOCAL_INSTANCE_DB"
 DEFAULT_LIMIT = 100
 UNIQUE_SENTINELS = {"unique()"}
 IDENTIFIER_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
@@ -46,6 +47,11 @@ def utcnow_iso():
 def database_path(path=None):
     if path:
         return path
+
+    if os.environ.get(LOCAL_INSTANCE_ONLY) == "1" and os.environ.get("FLASK_ENV") != "production":
+        if has_app_context():
+            return os.path.join(current_app.instance_path, "nest.sqlite3")
+        return os.path.join(BASE_DIR, "instance", "nest.sqlite3")
 
     configured = os.environ.get("DATABASE_PATH") or os.environ.get("NEST_DATABASE_PATH")
     if configured:
