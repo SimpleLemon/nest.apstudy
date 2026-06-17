@@ -2,6 +2,7 @@
   const ATLAS_BASE_URL = "https://atlas.emory.edu/api/";
   const CACHE_TTL_MS = 2 * 60 * 1000;
   const memoryCache = new Map();
+  let browserDirectBlocked = window.APSTUDY_ATLAS_BROWSER_DIRECT_ENABLED !== true;
   const dayMap = {
     "0": "Mon",
     "1": "Tue",
@@ -44,6 +45,9 @@
   }
 
   async function fetchSubjectSections(term, subject, options = {}) {
+    if (browserDirectBlocked) {
+      throw new Error("Atlas blocks browser live requests from this site. Showing local data.");
+    }
     const srcdb = window.APSTUDY_ATLAS_SRCDB?.[term];
     const normalizedSubject = String(subject || "").trim().toUpperCase();
     const campus = normalizeCampusFilter(options.campus);
@@ -61,20 +65,26 @@
     const criteria = [{ field: "subject", value: normalizedSubject }];
     if (campus) criteria.push({ field: "campus", value: campus });
 
-    const response = await fetch(url.toString(), {
-      method: "POST",
-      mode: "cors",
-      credentials: "omit",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json, text/javascript, */*; q=0.01",
-        "X-Requested-With": "XMLHttpRequest",
-      },
-      body: JSON.stringify({
-        other: { srcdb },
-        criteria,
-      }),
-    });
+    let response;
+    try {
+      response = await fetch(url.toString(), {
+        method: "POST",
+        mode: "cors",
+        credentials: "omit",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json, text/javascript, */*; q=0.01",
+          "X-Requested-With": "XMLHttpRequest",
+        },
+        body: JSON.stringify({
+          other: { srcdb },
+          criteria,
+        }),
+      });
+    } catch (error) {
+      browserDirectBlocked = true;
+      throw new Error("Atlas blocks browser live requests from this site. Showing local data.");
+    }
     if (!response.ok) throw new Error(`Atlas live request failed (${response.status}).`);
 
     const payload = await response.json();
@@ -108,6 +118,7 @@
     const crn = String(raw?.crn || "").trim();
     const sectionNumber = String(raw?.no || raw?.section_number || "").trim();
     const status = normalizeEnrollmentStatus(raw?.enrl_stat || raw?.enrollment_status);
+    const requirements = normalizeRequirements(raw);
     return {
       id: [term, subject, catalog, crn || "na", sectionNumber || "na"].join("|"),
       term,
@@ -136,7 +147,8 @@
         end: raw?.end_date || raw?.endDate || null,
       },
       credit_hours: firstPresent(raw, ["credit_hours", "credits", "hours"]),
-      requirement_designation: firstPresent(raw, ["requirement_designation", "requirement", "ger", "attributes"]),
+      requirement_designation: requirements[0] || null,
+      requirements,
       course_description: firstPresent(raw, ["course_description", "description", "catalog_description", "desc"]),
       course_notes: raw?.course_notes || raw?.notes || "",
       live: true,
@@ -237,6 +249,38 @@
     if (lowered.includes("atlanta") || lowered.includes("main") || lowered === "emory") return "Atlanta";
     if (String(subject || "").toUpperCase().startsWith("OX")) return "Oxford";
     return raw || null;
+  }
+
+  function normalizeRequirements(raw) {
+    const values = [];
+    [
+      "requirement_designation",
+      "requirements",
+      "requirement",
+      "requirement_description",
+      "requirement_descriptions",
+      "ger",
+      "ge_req",
+      "geReq",
+      "rqmt",
+      "rqmt_descr",
+      "attributes",
+    ].forEach((key) => pushRequirement(values, raw?.[key]));
+    return values;
+  }
+
+  function pushRequirement(values, value) {
+    if (value === null || typeof value === "undefined" || value === "") return;
+    if (Array.isArray(value)) {
+      value.forEach((item) => pushRequirement(values, item));
+      return;
+    }
+    if (typeof value === "object") {
+      ["name", "label", "description", "value", "text"].forEach((key) => pushRequirement(values, value[key]));
+      return;
+    }
+    const text = String(value).trim();
+    if (text && !values.includes(text)) values.push(text);
   }
 
   window.APStudyAtlasLive = {

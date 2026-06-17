@@ -4,7 +4,7 @@ const path = require('node:path');
 const test = require('node:test');
 const vm = require('node:vm');
 
-function loadAdapter(fetchImpl, storage = new Map()) {
+function loadAdapter(fetchImpl, storage = new Map(), browserDirectEnabled = true) {
   const source = fs.readFileSync(path.join(__dirname, '../../static/js/courses/atlas-live.js'), 'utf8');
   const context = {
     console,
@@ -17,6 +17,7 @@ function loadAdapter(fetchImpl, storage = new Map()) {
     },
     window: {
       APSTUDY_ATLAS_SRCDB: { Fall_2026: '5269' },
+      APSTUDY_ATLAS_BROWSER_DIRECT_ENABLED: browserDirectEnabled,
     },
   };
   context.window.console = console;
@@ -42,6 +43,7 @@ test('browser Atlas adapter posts FOSE subject search and normalizes rows', asyn
           enrl_stat: 'C',
           total: 30,
           campus: 'Oxford College',
+          requirements: ['First Year Writing(*)'],
           meetingTimes: JSON.stringify([{ meet_day: '0', start_time: 900, end_time: 950 }]),
         }],
       }),
@@ -67,6 +69,7 @@ test('browser Atlas adapter posts FOSE subject search and normalizes rows', asyn
   ]);
   assert.equal(section.id, 'Fall_2026|CHEM|150|12345|1');
   assert.equal(section.campus, 'Oxford');
+  assert.deepEqual(JSON.parse(JSON.stringify(section.requirements)), ['First Year Writing(*)']);
   assert.equal(section.enrollment_status, 'Closed');
   assert.equal(section.seats_available, 0);
   assert.deepEqual(JSON.parse(JSON.stringify(section.meetings)), [{ day: 'Mon', start: '900', end: '950' }]);
@@ -95,6 +98,20 @@ test('browser Atlas adapter propagates CORS or network failures without fallback
 
   await assert.rejects(
     adapter.fetchSubjectSections('Fall_2026', 'CS'),
-    /CORS blocked/
+    /Atlas blocks browser live requests/
   );
+});
+
+test('browser Atlas adapter is disabled by default to avoid production CORS errors', async () => {
+  let count = 0;
+  const adapter = loadAdapter(async () => {
+    count += 1;
+    return { ok: true, json: async () => ({ results: [] }) };
+  }, new Map(), false);
+
+  await assert.rejects(
+    adapter.fetchSubjectSections('Fall_2026', 'CS'),
+    /Atlas blocks browser live requests/
+  );
+  assert.equal(count, 0);
 });

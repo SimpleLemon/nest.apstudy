@@ -10,6 +10,8 @@
         window.APSTUDY_COURSES_DEFAULT_TERM = "{{ default_term or '' }}";
         window.APSTUDY_COURSES_DEFAULT_CAMPUS = "{{ default_campus or 'atlanta' }}";
         window.APSTUDY_ATLAS_SRCDB = {{ atlas_srcdb | tojson }};
+        window.APSTUDY_ATLAS_BROWSER_DIRECT_ENABLED = false;
+        window.APSTUDY_COURSES_GENERAL_ED_REQUIREMENTS = {{ (general_ed_requirements or []) | tojson }};
     </script>
     <script src="https://cdn.jsdelivr.net/npm/appwrite@25.0.0/dist/iife/sdk.js"></script>
     <script src="{{ url_for('static', filename='js/core/appwrite.js') }}"></script>
@@ -96,7 +98,9 @@
                             <span>General Ed</span>
                             <select id="courses-requirement-filter">
                                 <option value="all">All</option>
-                                <option value="starred">Starred only (*)</option>
+                                {% for requirement in general_ed_requirements or [] %}
+                                    <option value="{{ requirement }}">{{ requirement }}</option>
+                                {% endfor %}
                             </select>
                         </label>
                     </div>

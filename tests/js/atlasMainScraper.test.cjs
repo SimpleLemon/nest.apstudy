@@ -8,6 +8,7 @@ const {
   parseEnvList,
   firstPresent,
   normalizeCampus,
+  normalizeRequirements,
   parseInstructors,
   decodeHtmlEntities,
   parseMeetingTimes,
@@ -46,6 +47,10 @@ test('normalizes enrollment, course codes, tags, and instructors', () => {
   assert.equal(firstPresent({ empty: '', fallback: 'room 101' }, ['missing', 'empty', 'fallback']), 'room 101');
   assert.equal(normalizeCampus('Oxford College', 'OXBI'), 'Oxford');
   assert.equal(normalizeCampus('Main Campus', 'CS'), 'Atlanta');
+  assert.deepEqual(normalizeRequirements({ ger: 'First Year Writing(*)' }, { requirements: ['Race and Ethnicity(*)'] }), [
+    'First Year Writing(*)',
+    'Race and Ethnicity(*)',
+  ]);
   assert.deepEqual(parseInstructors({ instructors: [{ name: 'Ada', email: 'ada@example.test' }, 'Grace Hopper'] }), [
     { name: 'Ada', email: 'ada@example.test' },
     { name: 'Grace Hopper', email: null },
@@ -64,6 +69,7 @@ test('extracts catalog card metadata used for course enrichment', () => {
       course_title: 'Data Structures',
       credit_hours: '4',
       requirement_designation: null,
+      requirements: [],
       course_description: 'Algorithms & structures.',
       course_notes: 'CS 170',
       requisites: 'CS 170',
@@ -83,6 +89,7 @@ test('builds enriched course objects from Atlas sections', () => {
     enrl_stat: 'O',
     total: 25,
     campus: 'Oxford College',
+    requirement_designation: 'First Year Seminar(*)',
     meetingTimes: JSON.stringify([{ meet_day: '0', start_time: 1000, end_time: 1050 }]),
     instructors: [{ name: 'Ada Lovelace' }],
     start_date: '2026-08-26',
@@ -96,6 +103,7 @@ test('builds enriched course objects from Atlas sections', () => {
   assert.equal(course.course_title, 'Atlas title');
   assert.equal(course.course_description, 'Catalog description');
   assert.equal(course.credit_hours, '4');
+  assert.deepEqual(course.requirements, ['First Year Seminar(*)']);
   assert.equal(course.requisites, 'CS 170');
   assert.deepEqual(course.instructors_unique, ['Ada Lovelace']);
   assert.equal(course.sections[0].enrollment_status, 'Open');

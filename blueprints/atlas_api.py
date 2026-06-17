@@ -12,6 +12,7 @@ from services.atlas_client import (
     get_terms,
     get_sections_index,
     get_sections_by_ids,
+    get_starred_general_ed_requirements,
 )
 
 
@@ -55,6 +56,14 @@ def list_subjects():
     if "error" in result:
         return jsonify(result), 400 if "Invalid" in result["error"] else 404
     return jsonify(result)
+
+
+@atlas_bp.route("/general-ed-requirements")
+def list_general_ed_requirements():
+    return jsonify({
+        "requirements": get_starred_general_ed_requirements(),
+        "count": len(get_starred_general_ed_requirements()),
+    })
 
 
 @atlas_bp.route("/search")

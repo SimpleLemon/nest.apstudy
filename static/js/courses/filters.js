@@ -77,12 +77,18 @@
       if (!requirement || requirement === "all") return true;
       const values = [
         section.requirement_designation,
+        section.requirements,
         section.requirement,
         section.ger,
         section.attributes,
-      ].map((value) => String(value || "").toLowerCase());
+      ].flatMap((value) => Array.isArray(value) ? value : [value]).map((value) => String(value || "").toLowerCase());
       if (requirement === "starred") return values.some((value) => value.includes("*"));
-      return values.some((value) => value.includes(requirement));
+      const normalizedRequirement = normalizeRequirement(requirement);
+      return values.some((value) => normalizeRequirement(value) === normalizedRequirement || normalizeRequirement(value).includes(normalizedRequirement));
+    }
+
+    function normalizeRequirement(value) {
+      return String(value || "").toLowerCase().replace(/[^a-z0-9*]+/g, "");
     }
 
     function sectionMatchesTime(section) {

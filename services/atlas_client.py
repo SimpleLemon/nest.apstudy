@@ -80,7 +80,52 @@ COURSE_DESCRIPTION_KEYS = (
     "catalog_description",
     "desc",
 )
-REQUIREMENT_KEYS = ("requirement_designation", "requirement", "ger", "attributes")
+STARRED_GENERAL_ED_REQUIREMENTS = (
+    "Cont.Comm.& Writing w. ETHN(*)",
+    "Continuing Comm.& Writing(*)",
+    "Exp.& Application w. CW(*)",
+    "Experience and Application(*)",
+    "First Year Seminar w. ETHN(*)",
+    "First Year Seminar(*)",
+    "First Year Writing w.ETHN(*)",
+    "First Year Writing(*)",
+    "Health(*)",
+    "Humanities & Arts w.ETHN(*)",
+    "Humanities & Arts with CW(*)",
+    "Humanities and Arts(*)",
+    "Humanities&Arts w. CW/ETHN(*)",
+    "Intercult.Comm. w. CW(*)",
+    "Intercult.Comm. w. CW/ETHN(*)",
+    "Intercult.Comm.with ETHN(*)",
+    "Intercultural Communication(*)",
+    "Natural Sciences w. CW/ETHN(*)",
+    "Natural Sciences with CW(*)",
+    "Natural Sciences with ETHN(*)",
+    "Natural Sciences(*)",
+    "Physical Education(*)",
+    "Quantit.Reasoning w.CW/ETHN(*)",
+    "Quantitat.Reasoning w.CW(*)",
+    "Quantitat.Reasoning w.ETHN(*)",
+    "Quantitative Reasoning(*)",
+    "Race and Ethnicity(*)",
+    "Soc.Sciences w. CW/ETHN(*)",
+    "Social Sciences with CW(*)",
+    "Social Sciences with ETHN(*)",
+    "Social Sciences(*)",
+)
+REQUIREMENT_KEYS = (
+    "requirement_designation",
+    "requirements",
+    "requirement",
+    "requirement_description",
+    "requirement_descriptions",
+    "ger",
+    "ge_req",
+    "geReq",
+    "rqmt",
+    "rqmt_descr",
+    "attributes",
+)
 CAMPUS_KEYS = (
     "campus",
     "campus_description",
@@ -265,6 +310,46 @@ def _first_value(mapping, keys):
     return None
 
 
+def get_starred_general_ed_requirements():
+    return list(STARRED_GENERAL_ED_REQUIREMENTS)
+
+
+def _normalize_requirement_token(value):
+    return re.sub(r"[^a-z0-9*]+", "", str(value or "").lower())
+
+
+STARRED_GENERAL_ED_REQUIREMENT_TOKENS = {
+    _normalize_requirement_token(option): option
+    for option in STARRED_GENERAL_ED_REQUIREMENTS
+}
+
+
+def _append_requirement_value(values, value):
+    if value in (None, "", []):
+        return
+    if isinstance(value, list):
+        for item in value:
+            _append_requirement_value(values, item)
+        return
+    if isinstance(value, dict):
+        for key in ("name", "label", "description", "value", "text"):
+            _append_requirement_value(values, value.get(key))
+        return
+    text = str(value).strip()
+    if text and text not in values:
+        values.append(text)
+
+
+def _requirement_values(*sources):
+    values = []
+    for source in sources:
+        if not isinstance(source, dict):
+            continue
+        for key in REQUIREMENT_KEYS:
+            _append_requirement_value(values, source.get(key))
+    return values
+
+
 def _normalize_campus_value(value, subject=None):
     raw = str(value or "").strip()
     lowered = raw.lower()
@@ -298,12 +383,7 @@ def _campus_matches(section, campus):
 
 
 def _has_starred_requirement(section):
-    values = [
-        section.get("requirement_designation"),
-        section.get("requirement"),
-        section.get("ger"),
-        section.get("attributes"),
-    ]
+    values = _requirement_values(section)
     return any("*" in str(value or "") for value in values)
 
 
@@ -313,13 +393,18 @@ def _requirement_matches(section, requirement):
         return True
     if normalized in {"starred", "starred-ger", "ger_starred"}:
         return _has_starred_requirement(section)
-    values = [
-        section.get("requirement_designation"),
-        section.get("requirement"),
-        section.get("ger"),
-        section.get("attributes"),
-    ]
-    return any(normalized in str(value or "").lower() for value in values)
+    requirement_token = _normalize_requirement_token(requirement)
+    canonical_requirement = STARRED_GENERAL_ED_REQUIREMENT_TOKENS.get(requirement_token)
+    values = _requirement_values(section)
+    for value in values:
+        value_token = _normalize_requirement_token(value)
+        if canonical_requirement:
+            if value_token == _normalize_requirement_token(canonical_requirement):
+                return True
+            continue
+        if requirement_token and requirement_token in value_token:
+            return True
+    return False
 
 
 def _normalize_enrollment_status(value):
@@ -419,6 +504,7 @@ def _section_row_from_course_data(term_name, subject_name, catalog_number, cours
     unique_id = build_section_id(course_term, subject_name, catalog_number, crn, section_number)
     instructors = _normalize_instructors(section.get("instructors") or section.get("instructor"))
     campus_value = _first_value(section, CAMPUS_KEYS) or _first_value(course_data, CAMPUS_KEYS)
+    requirement_values = _requirement_values(section, course_data)
     return {
         "id": unique_id,
         "term": course_term,
@@ -441,7 +527,8 @@ def _section_row_from_course_data(term_name, subject_name, catalog_number, cours
         "meetings": schedule.get("meetings") or [],
         "date_range": section.get("date_range") or course_date_range,
         "credit_hours": course_data.get("credit_hours"),
-        "requirement_designation": _first_value(course_data, REQUIREMENT_KEYS),
+        "requirement_designation": requirement_values[0] if requirement_values else None,
+        "requirements": requirement_values,
         "campus": _normalize_campus_value(campus_value, subject=subject_name),
         "campus_description": campus_value,
         "course_description": _first_value(course_data, COURSE_DESCRIPTION_KEYS),
@@ -475,6 +562,7 @@ def _live_row_from_raw(term, raw):
         "end": raw.get("end_date") or raw.get("endDate"),
     }
     campus_value = _first_value(raw, CAMPUS_KEYS)
+    requirement_values = _requirement_values(raw)
     return {
         "id": build_section_id(term, subject, catalog, crn, section_number),
         "term": term,
@@ -497,7 +585,8 @@ def _live_row_from_raw(term, raw):
         "meetings": _parse_meeting_times(raw.get("meetingTimes") or raw.get("meetings")),
         "date_range": date_range,
         "credit_hours": _first_value(raw, ("credit_hours", "credits", "hours")),
-        "requirement_designation": _first_value(raw, REQUIREMENT_KEYS),
+        "requirement_designation": requirement_values[0] if requirement_values else None,
+        "requirements": requirement_values,
         "campus": _normalize_campus_value(campus_value, subject=subject),
         "campus_description": campus_value,
         "course_description": _first_value(raw, COURSE_DESCRIPTION_KEYS),
@@ -517,6 +606,7 @@ def _section_search_blob(section):
         section.get("instructor"),
         section.get("credit_hours"),
         section.get("requirement_designation"),
+        section.get("requirements"),
         section.get("campus"),
         section.get("campus_description"),
         section.get("course_description"),

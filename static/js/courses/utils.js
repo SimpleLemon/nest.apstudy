@@ -32,6 +32,7 @@
       section.crn,
       section.section_number,
       section.requirement_designation,
+      section.requirements,
       section.requirement,
       section.ger,
       section.campus,

@@ -10,6 +10,7 @@
     renderCalendar,
     renderPanel,
     resetWeekScroll,
+    refreshSectionStatus,
     saveEditedCourse,
     setTrack,
     startEditingCourse,
@@ -216,6 +217,14 @@
           } else {
             void addCourse(sectionId);
           }
+          return;
+        }
+
+        const refreshButton = event.target.closest("[data-refresh-section-id]");
+        if (refreshButton) {
+          event.preventDefault();
+          event.stopPropagation();
+          void refreshSectionStatus(refreshButton.dataset.refreshSectionId);
           return;
         }
 

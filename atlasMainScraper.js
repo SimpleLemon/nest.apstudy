@@ -25,6 +25,7 @@ const {
   decodeHtmlEntities,
   firstPresent,
   normalizeCampus,
+  normalizeRequirements,
   parseCatalogCourseCards,
   parseEnrollmentStatus,
   parseEnvList,
@@ -143,6 +144,48 @@ const SELECTED_CAMPUSES = parseEnvList(process.env.ATLAS_CAMPUSES).length
   ? parseEnvList(process.env.ATLAS_CAMPUSES).map(campus => campus === 'all' ? '' : campus)
   : ['', 'Oxford'];
 
+const STARRED_GENERAL_ED_REQUIREMENTS = [
+  'Cont.Comm.& Writing w. ETHN(*)',
+  'Continuing Comm.& Writing(*)',
+  'Exp.& Application w. CW(*)',
+  'Experience and Application(*)',
+  'First Year Seminar w. ETHN(*)',
+  'First Year Seminar(*)',
+  'First Year Writing w.ETHN(*)',
+  'First Year Writing(*)',
+  'Health(*)',
+  'Humanities & Arts w.ETHN(*)',
+  'Humanities & Arts with CW(*)',
+  'Humanities and Arts(*)',
+  'Humanities&Arts w. CW/ETHN(*)',
+  'Intercult.Comm. w. CW(*)',
+  'Intercult.Comm. w. CW/ETHN(*)',
+  'Intercult.Comm.with ETHN(*)',
+  'Intercultural Communication(*)',
+  'Natural Sciences w. CW/ETHN(*)',
+  'Natural Sciences with CW(*)',
+  'Natural Sciences with ETHN(*)',
+  'Natural Sciences(*)',
+  'Physical Education(*)',
+  'Quantit.Reasoning w.CW/ETHN(*)',
+  'Quantitat.Reasoning w.CW(*)',
+  'Quantitat.Reasoning w.ETHN(*)',
+  'Quantitative Reasoning(*)',
+  'Race and Ethnicity(*)',
+  'Soc.Sciences w. CW/ETHN(*)',
+  'Social Sciences with CW(*)',
+  'Social Sciences with ETHN(*)',
+  'Social Sciences(*)',
+];
+
+const SELECTED_REQUIREMENTS = process.env.ATLAS_REQUIREMENTS === 'off'
+  ? []
+  : (parseEnvList(process.env.ATLAS_REQUIREMENTS).length
+      ? parseEnvList(process.env.ATLAS_REQUIREMENTS)
+      : STARRED_GENERAL_ED_REQUIREMENTS);
+const REQUIREMENT_FIELD = process.env.ATLAS_REQUIREMENT_FIELD || 'requirement';
+const REQUIREMENT_MAX_RESULTS = Number.parseInt(process.env.ATLAS_REQUIREMENT_MAX_RESULTS || '2500', 10);
+
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
 function sleep(ms) {
@@ -250,6 +293,91 @@ async function fetchSubject(subject, srcdb, campus = '') {
   }
 }
 
+function sectionTagKey(section) {
+  const code = section?.code ?? section?.course_code;
+  const sectionNumber = section?.no ?? section?.section_number;
+  return [
+    code,
+    section?.crn,
+    sectionNumber,
+  ].map(value => String(value ?? '').trim()).join('|');
+}
+
+function addRequirementTag(tagMap, section, requirement) {
+  const key = sectionTagKey(section);
+  if (!key.replace(/\|/g, '')) return;
+  if (!tagMap.has(key)) tagMap.set(key, new Set());
+  tagMap.get(key).add(requirement);
+}
+
+function applyRequirementTags(section, tagMap) {
+  const key = sectionTagKey(section);
+  const tagged = tagMap.get(key);
+  if (!tagged || !tagged.size) return section;
+  const requirements = normalizeRequirements(section, { requirements: [...tagged] });
+  return {
+    ...section,
+    requirement_designation: section.requirement_designation ?? requirements[0] ?? null,
+    requirements,
+  };
+}
+
+async function fetchRequirementSections(requirement, srcdb, campus = '') {
+  try {
+    const criteria = [{ field: REQUIREMENT_FIELD, value: requirement }];
+    if (campus) criteria.push({ field: 'campus', value: campus });
+    const data = await postJson(
+      ATLAS_BASE,
+      { page: 'fose', route: 'search' },
+      {
+        other: { srcdb },
+        criteria,
+      },
+      REQUIRED_HEADERS,
+      15000
+    );
+
+    if (!data || data === '' || data.fatal) {
+      const message = data?.fatal ? `: ${data.fatal}` : '';
+      console.warn(`  [WARN] Requirement enrichment skipped for ${requirement}${campus ? ` (${campus})` : ''}${message}`);
+      return [];
+    }
+
+    const results = data.results ?? [];
+    if (Number.isFinite(REQUIREMENT_MAX_RESULTS) && results.length > REQUIREMENT_MAX_RESULTS) {
+      console.warn(`  [WARN] Requirement enrichment for ${requirement} returned ${results.length} rows; skipped to avoid an ignored Atlas filter.`);
+      return [];
+    }
+    return results.map(row => ({
+      ...row,
+      campus: row.campus ?? (campus || row.campus),
+      requirement_designation: row.requirement_designation ?? requirement,
+      requirements: normalizeRequirements(row, { requirements: [requirement] }),
+    }));
+  } catch (err) {
+    console.error(`  [ERROR] Requirement ${requirement}${campus ? ` (${campus})` : ''} in ${srcdb}: ${err.message}`);
+    return [];
+  }
+}
+
+async function fetchRequirementTagsForTerm(srcdb, termMeta) {
+  const tagMap = new Map();
+  if (!SELECTED_REQUIREMENTS.length) return tagMap;
+
+  console.log(`  Loading General Ed enrichment (${SELECTED_REQUIREMENTS.length} starred options, field: ${REQUIREMENT_FIELD})...`);
+  for (const requirement of SELECTED_REQUIREMENTS) {
+    for (const campus of SELECTED_CAMPUSES) {
+      const sections = await fetchRequirementSections(requirement, srcdb, campus);
+      sections.forEach(section => addRequirementTag(tagMap, section, requirement));
+      termMeta.requirement_enrichment_requests++;
+      termMeta.requirement_enrichment_rows += sections.length;
+      await sleep(REQUEST_DELAY_MS);
+    }
+  }
+  console.log(`  General Ed tags matched ${tagMap.size} unique sections.`);
+  return tagMap;
+}
+
 // ── File writing ─────────────────────────────────────────────────────────────
 
 /**
@@ -297,8 +425,12 @@ async function runScrape() {
       subjects_with_data: 0,
       courses_written: 0,
       total_sections: 0,
+      requirement_enrichment_requests: 0,
+      requirement_enrichment_rows: 0,
       errors: [],
     };
+
+    const requirementTags = await fetchRequirementTagsForTerm(srcdb, termMeta);
 
     for (let i = 0; i < SELECTED_SUBJECT_CODES.length; i++) {
       const subject = SELECTED_SUBJECT_CODES[i];
@@ -323,7 +455,7 @@ async function runScrape() {
             ].map(value => String(value ?? '')).join('|');
             if (seenSections.has(dedupeKey)) continue;
             seenSections.add(dedupeKey);
-            mergedResults.push(section);
+            mergedResults.push(applyRequirementTags(section, requirementTags));
           }
         }
         await sleep(REQUEST_DELAY_MS);
@@ -381,6 +513,8 @@ async function runScrape() {
     console.log(`    Subjects with data: ${tm.subjects_with_data}/${tm.subjects_attempted}`);
     console.log(`    Courses written:    ${tm.courses_written}`);
     console.log(`    Total sections:     ${tm.total_sections}`);
+    console.log(`    GE enrich requests: ${tm.requirement_enrichment_requests}`);
+    console.log(`    GE enrich rows:     ${tm.requirement_enrichment_rows}`);
     if (tm.errors.length > 0) {
       console.log(`    Errors:             ${tm.errors.join(', ')}`);
     }
@@ -402,6 +536,7 @@ module.exports = {
   decodeHtmlEntities,
   firstPresent,
   normalizeCampus,
+  normalizeRequirements,
   parseCatalogCourseCards,
   parseEnrollmentStatus,
   parseEnvList,

@@ -1,6 +1,12 @@
 import unittest
 
-from services.atlas_client import _filter_sections_result, get_sections_index, is_section_trackable, search_courses
+from services.atlas_client import (
+    _filter_sections_result,
+    get_sections_index,
+    get_starred_general_ed_requirements,
+    is_section_trackable,
+    search_courses,
+)
 
 
 class AtlasClientTests(unittest.TestCase):
@@ -94,6 +100,24 @@ class AtlasClientTests(unittest.TestCase):
 
         self.assertEqual(oxford["total"], 1)
         self.assertEqual(oxford["sections"][0]["course_code"], "OXBI 141")
+
+    def test_exact_starred_general_ed_requirement_filter(self):
+        requirement = "First Year Writing(*)"
+        self.assertIn(requirement, get_starred_general_ed_requirements())
+        result = {
+            "term": "Fall_2026",
+            "terms": ["Fall_2026"],
+            "sections": [
+                {"course_code": "ENG 101", "subject": "ENG", "catalog_number": "101", "section_number": "1", "crn": "1", "requirements": [requirement]},
+                {"course_code": "ENG 181", "subject": "ENG", "catalog_number": "181", "section_number": "1", "crn": "2", "requirements": ["First Year Seminar(*)"]},
+            ],
+            "count": 2,
+        }
+
+        filtered = _filter_sections_result(result, requirement=requirement)
+
+        self.assertEqual(filtered["total"], 1)
+        self.assertEqual(filtered["sections"][0]["course_code"], "ENG 101")
 
 
 if __name__ == "__main__":

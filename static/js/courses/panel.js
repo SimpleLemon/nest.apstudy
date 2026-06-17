@@ -192,7 +192,7 @@
           ? `Atlas live refresh unavailable. Showing saved catalog data.`
           : section.live_updated_at
             ? `Updated ${formatDateTime(section.live_updated_at)}`
-            : "Waiting for Atlas refresh...";
+            : "Showing local catalog data.";
       const description = section.course_description || section.description || "Description unavailable.";
 
       return `
@@ -221,6 +221,10 @@
             </section>
           ` : ""}
           <div class="courses-detail-actions">
+            <button type="button" class="courses-secondary-action" data-refresh-section-id="${escapeHtml(sectionId)}" ${state.detailLoading ? "disabled" : ""}>
+              <span class="material-symbols-outlined" aria-hidden="true">sync</span>
+              <span>${state.detailLoading ? "Refreshing" : "Refresh"}</span>
+            </button>
             ${addedCourse
               ? `
                 <button type="button" class="courses-secondary-action" data-open-edit-section-id="${escapeHtml(sectionId)}" ${saving ? "disabled" : ""}>
@@ -414,7 +418,7 @@
     }
 
     function formatRequirement(section) {
-      const value = section?.requirement_designation || section?.requirement || section?.ger;
+      const value = section?.requirements || section?.requirement_designation || section?.requirement || section?.ger;
       if (Array.isArray(value)) return value.filter(Boolean).join(", ") || "N/A";
       return value || "N/A";
     }

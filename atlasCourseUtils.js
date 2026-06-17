@@ -83,6 +83,42 @@ function normalizeCampus(value, subject) {
   return raw || null;
 }
 
+function pushUniqueRequirement(values, value) {
+  if (value === undefined || value === null || value === '') return;
+  if (Array.isArray(value)) {
+    value.forEach(item => pushUniqueRequirement(values, item));
+    return;
+  }
+  if (typeof value === 'object') {
+    ['name', 'label', 'description', 'value', 'text'].forEach(key => pushUniqueRequirement(values, value[key]));
+    return;
+  }
+  const text = String(value).trim();
+  if (text && !values.includes(text)) values.push(text);
+}
+
+function normalizeRequirements(...sources) {
+  const values = [];
+  const keys = [
+    'requirement_designation',
+    'requirements',
+    'requirement',
+    'requirement_description',
+    'requirement_descriptions',
+    'ger',
+    'ge_req',
+    'geReq',
+    'rqmt',
+    'rqmt_descr',
+    'attributes',
+  ];
+  for (const source of sources) {
+    if (!source || typeof source !== 'object') continue;
+    for (const key of keys) pushUniqueRequirement(values, source[key]);
+  }
+  return values;
+}
+
 function parseInstructors(raw) {
   const source = firstPresent(raw, ['instructors', 'instr', 'instructor']);
   if (Array.isArray(source)) {
@@ -137,6 +173,9 @@ function parseCatalogCourseCards(html) {
       course_title: title,
       credit_hours: normalizedFields['credit hours'] ?? null,
       requirement_designation: normalizedFields.ger ?? normalizedFields.requirements ?? null,
+      requirements: normalizeRequirements({
+        requirement_designation: normalizedFields.ger ?? normalizedFields.requirements ?? null,
+      }),
       course_description: descriptionMatch ? stripTags(descriptionMatch[1]) : null,
       course_notes: firstPresent(normalizedFields, ['course notes', 'notes']) ?? requisites,
       requisites,
@@ -161,6 +200,8 @@ function buildCourseObject(courseCode, sections, termLabel, srcdb, catalogCourse
     location: firstPresent(s, ['location', 'loc', 'room', 'building', 'bldg_room', 'bldgRoom']),
     campus: normalizeCampus(firstPresent(s, ['campus', 'campus_description', 'campusDescription', 'campus_descr', 'campusDescr']), subject),
     campus_description: firstPresent(s, ['campus', 'campus_description', 'campusDescription', 'campus_descr', 'campusDescr']),
+    requirement_designation: normalizeRequirements(s)[0] ?? null,
+    requirements: normalizeRequirements(s),
     enrollment_status: parseEnrollmentStatus(s.enrl_stat),
     enrollment_count: s.total ?? null,
     is_cancelled: !!(s.isCancelled && s.isCancelled !== ''),
@@ -203,7 +244,8 @@ function buildCourseObject(courseCode, sections, termLabel, srcdb, catalogCourse
     term: termLabel,
     srcdb,
     credit_hours: catalogInfo.credit_hours ?? firstPresent(sections[0], ['credit_hours', 'credits', 'hours']),
-    requirement_designation: catalogInfo.requirement_designation ?? firstPresent(sections[0], ['requirement_designation', 'ger', 'attributes']),
+    requirement_designation: normalizeRequirements(catalogInfo, ...sections)[0] ?? null,
+    requirements: normalizeRequirements(catalogInfo, ...sections),
     campus: normalizeCampus(firstPresent(sections[0], ['campus', 'campus_description', 'campusDescription', 'campus_descr', 'campusDescr']), subject),
     campus_description: firstPresent(sections[0], ['campus', 'campus_description', 'campusDescription', 'campus_descr', 'campusDescr']),
     course_description: catalogInfo.course_description ?? firstPresent(sections[0], ['course_description', 'description', 'desc']),
@@ -229,6 +271,7 @@ module.exports = {
   decodeHtmlEntities,
   firstPresent,
   normalizeCampus,
+  normalizeRequirements,
   parseCatalogCourseCards,
   parseEnrollmentStatus,
   parseEnvList,

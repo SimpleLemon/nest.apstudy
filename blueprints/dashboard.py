@@ -22,7 +22,7 @@ from appwrite_helpers import (
     update_row_safe,
 )
 from services.discord_audit import emit_server_log_event
-from services.atlas_client import DEFAULT_TERM, get_atlas_term_srcdb
+from services.atlas_client import DEFAULT_TERM, get_atlas_term_srcdb, get_starred_general_ed_requirements
 from services.daily_quote import get_daily_quote_payload
 from services.calendar_store import list_calendar_rows_all
 from services.toasts import pop_toasts
@@ -1148,6 +1148,7 @@ def courses():
         default_term=DEFAULT_TERM,
         default_campus=_default_courses_campus(),
         atlas_srcdb=get_atlas_term_srcdb(),
+        general_ed_requirements=get_starred_general_ed_requirements(),
     )
 
 

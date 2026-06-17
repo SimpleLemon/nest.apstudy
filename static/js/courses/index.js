@@ -111,6 +111,7 @@ const { wireControls } = window.APStudyCoursesControls.create({
   renderCalendar,
   renderPanel,
   resetWeekScroll,
+  refreshSectionStatus,
   saveEditedCourse,
   setTrack,
   startEditingCourse,
@@ -273,6 +274,7 @@ function getDisplayCourse(sectionId) {
     "location",
     "credit_hours",
     "requirement_designation",
+    "requirements",
     "campus",
     "campus_description",
     "course_description",
@@ -398,7 +400,6 @@ function openDetail(sectionId) {
   state.filtersOpen = false;
   renderPanel();
   scrollPanelContentToTop();
-  void refreshSectionStatus(sectionId);
 }
 
 async function refreshSectionStatus(sectionId) {
@@ -411,7 +412,7 @@ async function refreshSectionStatus(sectionId) {
     try {
       liveSection = await window.APStudyAtlasLive.fetchSectionStatus(section);
     } catch (error) {
-      console.warn("Browser Atlas live refresh failed:", error);
+      console.info("Browser Atlas live refresh unavailable:", error);
       liveError = error.message || "Live Atlas status unavailable from this browser.";
     }
   } else {
@@ -512,7 +513,7 @@ async function setTrack(sectionId, enabled) {
       liveSection = await window.APStudyAtlasLive.fetchSectionStatus(section);
       rememberSection(liveSection);
     } catch (error) {
-      console.warn("Browser Atlas live refresh failed:", error);
+      console.info("Browser Atlas live refresh unavailable:", error);
       liveError = error.message || "Live Atlas status unavailable from this browser.";
     }
   }
