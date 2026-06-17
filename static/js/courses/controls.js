@@ -16,6 +16,18 @@
     syncFilterControls,
   }) {
     function wireControls() {
+      let searchTimer = null;
+      const scheduleSectionReload = () => {
+        if (state.activeCourseView !== "search") {
+          renderPanel();
+          return;
+        }
+        window.clearTimeout(searchTimer);
+        searchTimer = window.setTimeout(() => {
+          void loadSectionsForTerm(state.selectedTerm);
+        }, 250);
+      };
+
       let lastCompactCourses = isCompactCoursesViewport();
       window.addEventListener("resize", () => {
         const nextCompactCourses = isCompactCoursesViewport();
@@ -51,7 +63,7 @@
         state.searchQuery = event.target.value || "";
         state.detailSectionId = null;
         state.editingSectionId = null;
-        renderPanel();
+        scheduleSectionReload();
       });
 
       document.getElementById("courses-term-select")?.addEventListener("change", (event) => {
@@ -76,7 +88,7 @@
         }
         state.detailSectionId = null;
         state.editingSectionId = null;
-        renderPanel();
+        scheduleSectionReload();
       });
 
       document.getElementById("courses-time-enabled")?.addEventListener("change", (event) => {
@@ -85,17 +97,31 @@
         document.getElementById("courses-time-end").disabled = !state.timeEnabled;
         state.detailSectionId = null;
         state.editingSectionId = null;
-        renderPanel();
+        scheduleSectionReload();
       });
 
       document.getElementById("courses-time-start")?.addEventListener("change", (event) => {
         state.timeStart = event.target.value || "06:00";
-        renderPanel();
+        scheduleSectionReload();
       });
 
       document.getElementById("courses-time-end")?.addEventListener("change", (event) => {
         state.timeEnd = event.target.value || "23:59";
-        renderPanel();
+        scheduleSectionReload();
+      });
+
+      document.getElementById("courses-campus-filter")?.addEventListener("change", (event) => {
+        state.campusFilter = event.target.value || "all";
+        state.detailSectionId = null;
+        state.editingSectionId = null;
+        scheduleSectionReload();
+      });
+
+      document.getElementById("courses-requirement-filter")?.addEventListener("change", (event) => {
+        state.requirementFilter = event.target.value || "all";
+        state.detailSectionId = null;
+        state.editingSectionId = null;
+        scheduleSectionReload();
       });
 
       document.getElementById("courses-prev-term")?.addEventListener("click", () => {

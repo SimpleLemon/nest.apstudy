@@ -30,12 +30,15 @@ const state = {
   selectedTerm: window.APSTUDY_COURSES_DEFAULT_TERM || "",
   sections: [],
   sectionsById: {},
+  currentSectionsRequest: 0,
   savedCoursesBySection: new Map(),
   tracksBySection: new Map(),
   removedSelectedSections: new Map(),
   activeCourseView: "search",
   searchQuery: "",
   dayFilters: new Set(),
+  campusFilter: window.APSTUDY_COURSES_DEFAULT_CAMPUS || "atlanta",
+  requirementFilter: "all",
   filtersOpen: false,
   timeEnabled: false,
   timeStart: "06:00",
@@ -161,18 +164,49 @@ async function loadTerms() {
 
 async function loadSectionsForTerm(term) {
   if (!term) return;
+  const requestId = state.currentSectionsRequest + 1;
+  state.currentSectionsRequest = requestId;
   state.sectionsLoading = true;
   state.error = "";
   render();
   try {
-    const payload = await fetchJson(`/api/atlas/sections?term=${encodeURIComponent(term)}&include_cancelled=0`);
-    state.sectionsById = {};
+    const params = new URLSearchParams({
+      term,
+      include_cancelled: "0",
+    });
+    const query = state.searchQuery.trim();
+    if (query) {
+      params.set("q", query);
+      params.set("limit", "500");
+    }
+    if (state.dayFilters.size) {
+      params.set("days", Array.from(state.dayFilters).join(","));
+    }
+    if (state.timeEnabled) {
+      params.set("time_start", timeInputToAtlasToken(state.timeStart) || "0600");
+      params.set("time_end", timeInputToAtlasToken(state.timeEnd) || "2359");
+    }
+    if (state.campusFilter && state.campusFilter !== "all") {
+      params.set("campus", state.campusFilter);
+    }
+    if (state.requirementFilter && state.requirementFilter !== "all") {
+      params.set("requirement", state.requirementFilter);
+    }
+    const payload = await fetchJson(`/api/atlas/sections?${params.toString()}`);
+    if (requestId !== state.currentSectionsRequest) return;
+    state.sectionsById = Object.fromEntries(
+      Object.entries(state.sectionsById).filter(([id]) => (
+        state.savedCoursesBySection.has(id) || state.tracksBySection.has(id)
+      ))
+    );
     const rawSections = Array.isArray(payload.sections) ? payload.sections : [];
     state.sections = rawSections.map((section) => rememberSection(section)).filter(Boolean);
   } catch (error) {
+    if (requestId !== state.currentSectionsRequest) return;
     console.error(error);
     state.error = error.message || "Unable to load course sections.";
   } finally {
+    if (requestId !== state.currentSectionsRequest) return;
     state.sectionsLoading = false;
     render();
   }
@@ -239,6 +273,8 @@ function getDisplayCourse(sectionId) {
     "location",
     "credit_hours",
     "requirement_designation",
+    "campus",
+    "campus_description",
     "course_description",
     "description",
     "enrollment_status",
@@ -333,6 +369,7 @@ function collectEditOverrides(form) {
     location: valueFor("location"),
     credit_hours: valueFor("credit_hours"),
     requirement_designation: valueFor("requirement_designation"),
+    campus: valueFor("campus"),
     course_description: valueFor("course_description"),
     course_notes: valueFor("course_notes"),
     meetings: [],
@@ -367,10 +404,27 @@ function openDetail(sectionId) {
 async function refreshSectionStatus(sectionId) {
   state.detailLoading = true;
   renderPanel();
+  const section = getSection(sectionId);
+  let liveSection = null;
+  let liveError = "";
+  if (section && window.APStudyAtlasLive?.fetchSectionStatus) {
+    try {
+      liveSection = await window.APStudyAtlasLive.fetchSectionStatus(section);
+    } catch (error) {
+      console.warn("Browser Atlas live refresh failed:", error);
+      liveError = error.message || "Live Atlas status unavailable from this browser.";
+    }
+  } else {
+    liveError = "Live Atlas status unavailable from this browser.";
+  }
   try {
     const payload = await fetchJson("/api/courses/section-status", {
       method: "POST",
-      body: JSON.stringify({ section_id: sectionId }),
+      body: JSON.stringify({
+        section_id: sectionId,
+        live_section: liveSection,
+        live_error: liveError,
+      }),
     });
     if (payload.section) {
       payload.section.live_updated_at = payload.last_updated_at || new Date().toISOString();
@@ -450,10 +504,27 @@ async function setTrack(sectionId, enabled) {
   if (!sectionId) return;
   state.trackingIds.add(sectionId);
   renderPanel();
+  const section = getSection(sectionId);
+  let liveSection = null;
+  let liveError = "";
+  if (enabled && section && window.APStudyAtlasLive?.fetchSectionStatus) {
+    try {
+      liveSection = await window.APStudyAtlasLive.fetchSectionStatus(section);
+      rememberSection(liveSection);
+    } catch (error) {
+      console.warn("Browser Atlas live refresh failed:", error);
+      liveError = error.message || "Live Atlas status unavailable from this browser.";
+    }
+  }
   try {
     const payload = await fetchJson("/api/courses/tracks", {
       method: "POST",
-      body: JSON.stringify({ section_id: sectionId, enabled }),
+      body: JSON.stringify({
+        section_id: sectionId,
+        enabled,
+        live_section: liveSection,
+        live_error: liveError,
+      }),
     });
     if (payload.section) rememberSection(payload.section);
     if (payload.track?.section_id) {

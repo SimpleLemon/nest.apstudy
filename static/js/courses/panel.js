@@ -111,7 +111,12 @@
       const timeEnabled = document.getElementById("courses-time-enabled");
       const timeStart = document.getElementById("courses-time-start");
       const timeEnd = document.getElementById("courses-time-end");
-      const activeFilterCount = state.dayFilters.size + (state.timeEnabled ? 1 : 0);
+      const campusFilter = document.getElementById("courses-campus-filter");
+      const requirementFilter = document.getElementById("courses-requirement-filter");
+      const activeFilterCount = state.dayFilters.size
+        + (state.timeEnabled ? 1 : 0)
+        + (state.campusFilter && state.campusFilter !== "all" ? 1 : 0)
+        + (state.requirementFilter && state.requirementFilter !== "all" ? 1 : 0);
       if (filterButton) {
         filterButton.setAttribute("aria-expanded", state.filtersOpen ? "true" : "false");
         filterButton.classList.toggle("is-active", state.filtersOpen || activeFilterCount > 0);
@@ -130,6 +135,8 @@
         timeEnd.value = state.timeEnd;
         timeEnd.disabled = !state.timeEnabled;
       }
+      if (campusFilter) campusFilter.value = state.campusFilter || "all";
+      if (requirementFilter) requirementFilter.value = state.requirementFilter || "all";
       document.querySelectorAll("#courses-day-toggle button[data-day]").forEach((button) => {
         button.classList.toggle("is-active", state.dayFilters.has(button.dataset.day));
       });
@@ -161,6 +168,7 @@
             <span class="course-chip ${statusClass}">${escapeHtml(status)}</span>
             <span class="course-chip">${escapeHtml(seats)}</span>
             <span class="course-chip">${escapeHtml(section.schedule_type || "Type")}</span>
+            <span class="course-chip">${escapeHtml(formatCampus(section))}</span>
           </div>
           ${isAdded && isTracked ? `<div class="course-card-tracked">Tracked</div>` : ""}
         </article>
@@ -230,6 +238,7 @@
             ${detailRow("CRN", section.crn || "N/A")}
             ${detailRow("Type", section.schedule_type || "N/A")}
             ${detailRow("Location", section.location || "TBA")}
+            ${detailRow("Campus", formatCampus(section))}
             ${detailRow("Seats", formatSeats(section))}
             ${detailRow("Credits", section.credit_hours || "N/A")}
             ${detailRow("Requirement", formatRequirement(section))}
@@ -299,6 +308,7 @@
               ${editField("schedule_type", "Type", section.schedule_type || "")}
               ${editField("credit_hours", "Credits", section.credit_hours || "")}
               ${editField("location", "Location", section.location || "")}
+              ${editField("campus", "Campus", formatCampus(section))}
               ${editField("requirement_designation", "Requirement", formatRequirement(section) === "N/A" ? "" : formatRequirement(section))}
               ${editField("schedule_display", "Schedule Text", section.schedule_display || "", "wide")}
             </div>
@@ -407,6 +417,10 @@
       const value = section?.requirement_designation || section?.requirement || section?.ger;
       if (Array.isArray(value)) return value.filter(Boolean).join(", ") || "N/A";
       return value || "N/A";
+    }
+
+    function formatCampus(section) {
+      return section?.campus || section?.campus_description || "Atlanta";
     }
 
     return {

@@ -24,6 +24,7 @@ const {
   buildCourseObject,
   decodeHtmlEntities,
   firstPresent,
+  normalizeCampus,
   parseCatalogCourseCards,
   parseEnrollmentStatus,
   parseEnvList,
@@ -138,6 +139,10 @@ const SELECTED_SUBJECT_CODES = parseEnvList(process.env.ATLAS_SUBJECTS).length
   ? SUBJECT_CODES.filter(subject => parseEnvList(process.env.ATLAS_SUBJECTS).includes(subject))
   : SUBJECT_CODES;
 
+const SELECTED_CAMPUSES = parseEnvList(process.env.ATLAS_CAMPUSES).length
+  ? parseEnvList(process.env.ATLAS_CAMPUSES).map(campus => campus === 'all' ? '' : campus)
+  : ['', 'Oxford'];
+
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
 function sleep(ms) {
@@ -214,31 +219,33 @@ async function fetchCatalogCourseMap() {
  * Search Atlas for all sections under a given subject code.
  * Returns raw result array or null if the term/subject is invalid.
  */
-async function fetchSubject(subject, srcdb) {
+async function fetchSubject(subject, srcdb, campus = '') {
   try {
+    const criteria = [{ field: 'subject', value: subject }];
+    if (campus) criteria.push({ field: 'campus', value: campus });
     const data = await postJson(
       ATLAS_BASE,
       { page: 'fose', route: 'search' },
       {
         other: { srcdb },
-        criteria: [{ field: 'subject', value: subject }],
+        criteria,
       },
       REQUIRED_HEADERS,
       15000
     );
 
     if (!data || data === '') {
-      console.warn(`  [WARN] Empty response for ${subject} in ${srcdb}`);
+      console.warn(`  [WARN] Empty response for ${subject}${campus ? ` (${campus})` : ''} in ${srcdb}`);
       return null;
     }
     if (data.fatal) {
-      console.warn(`  [WARN] Fatal from Atlas for ${subject}: ${data.fatal}`);
+      console.warn(`  [WARN] Fatal from Atlas for ${subject}${campus ? ` (${campus})` : ''}: ${data.fatal}`);
       return null;
     }
 
-    return data.results ?? [];
+    return (data.results ?? []).map(row => ({ ...row, campus: row.campus ?? (campus || row.campus) }));
   } catch (err) {
-    console.error(`  [ERROR] ${subject} in ${srcdb}: ${err.message}`);
+    console.error(`  [ERROR] ${subject}${campus ? ` (${campus})` : ''} in ${srcdb}: ${err.message}`);
     return null;
   }
 }
@@ -264,6 +271,7 @@ async function runScrape() {
   console.log('=== Emory Atlas Bulk Scraper ===');
   console.log(`Subjects to scan: ${SELECTED_SUBJECT_CODES.length}`);
   console.log(`Terms: ${Object.keys(SELECTED_TERMS).join(', ')}`);
+  console.log(`Campus passes: ${SELECTED_CAMPUSES.map(campus => campus || 'all').join(', ')}`);
   console.log(`Output: ${OUTPUT_DIR}`);
   if (DRY_RUN) console.log('Dry run: files will not be written.');
   console.log('');
@@ -298,12 +306,34 @@ async function runScrape() {
 
       termMeta.subjects_attempted++;
 
-      const results = await fetchSubject(subject, srcdb);
+      const mergedResults = [];
+      const seenSections = new Set();
+      let hadNullResponse = false;
+      for (const campus of SELECTED_CAMPUSES) {
+        const campusResults = await fetchSubject(subject, srcdb, campus);
+        if (campusResults === null) {
+          hadNullResponse = true;
+        } else {
+          for (const section of campusResults) {
+            const dedupeKey = [
+              section.code,
+              section.crn,
+              section.no,
+              section.campus,
+            ].map(value => String(value ?? '')).join('|');
+            if (seenSections.has(dedupeKey)) continue;
+            seenSections.add(dedupeKey);
+            mergedResults.push(section);
+          }
+        }
+        await sleep(REQUEST_DELAY_MS);
+      }
+
+      const results = mergedResults;
 
       if (!results || results.length === 0) {
         console.log(`  ${progress} ${subject}: no results`);
-        if (results === null) termMeta.errors.push(subject);
-        await sleep(REQUEST_DELAY_MS);
+        if (hadNullResponse) termMeta.errors.push(subject);
         continue;
       }
 
@@ -331,8 +361,6 @@ async function runScrape() {
         writeCourseFile(termLabel, courseObj);
         termMeta.courses_written++;
       }
-
-      await sleep(REQUEST_DELAY_MS);
     }
 
     meta.terms[termLabel] = termMeta;
@@ -373,6 +401,7 @@ module.exports = {
   buildCourseObject,
   decodeHtmlEntities,
   firstPresent,
+  normalizeCampus,
   parseCatalogCourseCards,
   parseEnrollmentStatus,
   parseEnvList,

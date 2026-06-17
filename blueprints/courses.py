@@ -22,7 +22,6 @@ from appwrite_helpers import (
 )
 from services.atlas_client import (
     build_section_id,
-    fetch_live_section_status,
     get_sections_by_ids,
     get_sections_index,
     is_section_trackable,
@@ -51,6 +50,8 @@ COURSE_OVERRIDE_STRING_FIELDS = {
     "schedule_type": 64,
     "schedule_display": 255,
     "location": 255,
+    "campus": 64,
+    "campus_description": 255,
     "credit_hours": 64,
     "requirement_designation": 255,
     "course_description": 4000,
@@ -58,14 +59,53 @@ COURSE_OVERRIDE_STRING_FIELDS = {
 }
 COURSE_OVERRIDE_FIELDS = set(COURSE_OVERRIDE_STRING_FIELDS) | {"meetings"}
 COURSE_DAY_KEYS = {"Mon", "Tue", "Wed", "Thu", "Fri"}
+CLIENT_LIVE_SECTION_FIELDS = {
+    "enrollment_status",
+    "enrollment_count",
+    "seats_available",
+    "enrollment_capacity",
+    "is_cancelled",
+    "schedule_display",
+    "meetings",
+    "date_range",
+    "location",
+    "instructor",
+    "instructors",
+    "schedule_type",
+    "credit_hours",
+    "requirement_designation",
+    "course_description",
+    "course_notes",
+    "campus",
+    "campus_description",
+}
 
 
 def _current_user_id():
     return str(current_user.id)
 
 
+def _is_emory_or_oxford_user():
+    school = str(getattr(current_user, "school", "") or "").strip().lower()
+    school_key = str(getattr(current_user, "school_key", "") or "").strip().lower()
+    return bool(getattr(current_user, "emory_student", False)) or school in {
+        "emory",
+        "emory university",
+        "emory university-oxford",
+        "emory university oxford",
+        "oxford college",
+        "oxford college of emory university",
+    } or school_key in {
+        "emory",
+        "emory-university",
+        "emory-university-oxford",
+        "oxford-college",
+        "oxford-college-of-emory-university",
+    }
+
+
 def _require_emory_student():
-    if not bool(getattr(current_user, "emory_student", False)):
+    if not _is_emory_or_oxford_user():
         return jsonify({"error": "Courses are only available to Emory students."}), 403
     return None
 
@@ -335,31 +375,55 @@ def _spring_tracking_closed_for_section(section):
     return term.startswith("Spring_") and not spring_course_tracking_open()
 
 
-def _merge_live_section(section):
+def _merge_catalog_section(section):
     timestamp = format_datetime(datetime.utcnow())
     catalog_info = get_course_catalog_metadata(section.get("subject"), section.get("catalog_number"))
     enriched_section = dict(section)
     for key, value in catalog_info.items():
         if value not in (None, "", []) and enriched_section.get(key) in (None, "", []):
             enriched_section[key] = value
+    return enriched_section, timestamp
 
-    result = fetch_live_section_status(
-        enriched_section.get("term"),
-        enriched_section.get("subject"),
-        enriched_section.get("catalog_number"),
-        crn=enriched_section.get("crn"),
-        section_number=enriched_section.get("section_number"),
+
+def _client_live_matches(section, live_section):
+    if not isinstance(live_section, dict):
+        return False
+    live_id = live_section.get("id") or live_section.get("section_id")
+    if live_id and live_id != section.get("id"):
+        return False
+
+    return (
+        str(live_section.get("term") or "") == str(section.get("term") or "")
+        and str(live_section.get("subject") or "").upper() == str(section.get("subject") or "").upper()
+        and str(live_section.get("catalog_number") or live_section.get("catalog") or "") == str(section.get("catalog_number") or "")
+        and str(live_section.get("crn") or "") == str(section.get("crn") or "")
+        and str(live_section.get("section_number") or "") == str(section.get("section_number") or "")
     )
-    if "error" in result:
+
+
+def _merge_client_live_section(section, live_section):
+    enriched_section, timestamp = _merge_catalog_section(section)
+    if not _client_live_matches(enriched_section, live_section):
         enriched_section["live_updated_at"] = timestamp
-        return enriched_section, result["error"], timestamp
-    live_section = result.get("section") or {}
+        return enriched_section, "Atlas live response did not match this section.", timestamp
+
     merged = dict(enriched_section)
-    for key, value in live_section.items():
+    for key in CLIENT_LIVE_SECTION_FIELDS:
+        value = live_section.get(key)
         if value not in (None, "", []):
             merged[key] = value
     merged["live_updated_at"] = timestamp
     return merged, None, timestamp
+
+
+def _merge_live_section(section, payload=None):
+    payload = payload or {}
+    live_section = payload.get("live_section")
+    if live_section:
+        return _merge_client_live_section(section, live_section)
+    enriched_section, timestamp = _merge_catalog_section(section)
+    enriched_section["live_updated_at"] = timestamp
+    return enriched_section, payload.get("live_error") or "Live Atlas status was not refreshed from this browser.", timestamp
 
 
 @courses_bp.route("/saved", methods=["GET"])
@@ -602,7 +666,7 @@ def upsert_track():
     live_error = None
     last_updated_at = None
     if enabled:
-        section, live_error, last_updated_at = _merge_live_section(section)
+        section, live_error, last_updated_at = _merge_live_section(section, payload)
         if not is_section_trackable(section):
             return jsonify({
                 "error": "This section is not closed/full right now.",
@@ -686,7 +750,7 @@ def section_status():
     if not section:
         return jsonify({"error": "Course section not found."}), 404
 
-    section, live_error, last_updated_at = _merge_live_section(section)
+    section, live_error, last_updated_at = _merge_live_section(section, payload)
     return jsonify({
         "section": section,
         "trackable": is_section_trackable(section),

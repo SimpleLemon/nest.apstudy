@@ -81,6 +81,18 @@ COURSE_DESCRIPTION_KEYS = (
     "desc",
 )
 REQUIREMENT_KEYS = ("requirement_designation", "requirement", "ger", "attributes")
+CAMPUS_KEYS = (
+    "campus",
+    "campus_description",
+    "campusDescription",
+    "campus_descr",
+    "campusDescr",
+)
+CAMPUS_FILTER_ALIASES = {
+    "atlanta": {"atlanta", "main", "emory", "emory university", "atlanta campus", "main campus"},
+    "oxford": {"oxford", "emory oxford", "emory university-oxford", "oxford college"},
+}
+OXFORD_SUBJECT_PREFIXES = ("OX",)
 
 # ── In-memory cache ──────────────────────────────────────────────────────────
 # Directory listings change only on re-scrape, so caching them avoids
@@ -219,6 +231,30 @@ def _first_int(mapping, keys):
     return None
 
 
+def _normalize_query_text(value):
+    return re.sub(r"\s+", " ", str(value or "").strip().lower())
+
+
+def _compact_query_text(value):
+    return re.sub(r"[^a-z0-9]+", "", str(value or "").lower())
+
+
+def _safe_limit(value, default=100, maximum=500):
+    try:
+        parsed = int(value)
+    except (TypeError, ValueError):
+        return default
+    return max(1, min(parsed, maximum))
+
+
+def _safe_offset(value):
+    try:
+        parsed = int(value)
+    except (TypeError, ValueError):
+        return 0
+    return max(0, parsed)
+
+
 def _first_value(mapping, keys):
     if not isinstance(mapping, dict):
         return None
@@ -227,6 +263,63 @@ def _first_value(mapping, keys):
         if value not in (None, "", []):
             return value
     return None
+
+
+def _normalize_campus_value(value, subject=None):
+    raw = str(value or "").strip()
+    lowered = raw.lower()
+    if "oxford" in lowered:
+        return "Oxford"
+    if lowered in CAMPUS_FILTER_ALIASES["atlanta"] or "atlanta" in lowered or "main" in lowered:
+        return "Atlanta"
+    if str(subject or "").upper().startswith(OXFORD_SUBJECT_PREFIXES):
+        return "Oxford"
+    return raw or None
+
+
+def _campus_matches(section, campus):
+    normalized = str(campus or "").strip().lower()
+    if not normalized or normalized == "all":
+        return True
+    canonical = "oxford" if "oxford" in normalized else "atlanta" if normalized in CAMPUS_FILTER_ALIASES["atlanta"] else normalized
+    section_campus = _normalize_campus_value(
+        section.get("campus") or section.get("campus_description"),
+        subject=section.get("subject"),
+    )
+    if not section_campus:
+        # Existing local scrapes predate campus capture and contain Atlanta sections only.
+        return canonical == "atlanta"
+    section_lower = section_campus.lower()
+    if canonical == "oxford":
+        return "oxford" in section_lower
+    if canonical == "atlanta":
+        return section_lower in CAMPUS_FILTER_ALIASES["atlanta"] or "atlanta" in section_lower or "main" in section_lower
+    return canonical in section_lower
+
+
+def _has_starred_requirement(section):
+    values = [
+        section.get("requirement_designation"),
+        section.get("requirement"),
+        section.get("ger"),
+        section.get("attributes"),
+    ]
+    return any("*" in str(value or "") for value in values)
+
+
+def _requirement_matches(section, requirement):
+    normalized = str(requirement or "").strip().lower()
+    if not normalized or normalized == "all":
+        return True
+    if normalized in {"starred", "starred-ger", "ger_starred"}:
+        return _has_starred_requirement(section)
+    values = [
+        section.get("requirement_designation"),
+        section.get("requirement"),
+        section.get("ger"),
+        section.get("attributes"),
+    ]
+    return any(normalized in str(value or "").lower() for value in values)
 
 
 def _normalize_enrollment_status(value):
@@ -325,6 +418,7 @@ def _section_row_from_course_data(term_name, subject_name, catalog_number, cours
     seats_available = _infer_seats_available(status, section)
     unique_id = build_section_id(course_term, subject_name, catalog_number, crn, section_number)
     instructors = _normalize_instructors(section.get("instructors") or section.get("instructor"))
+    campus_value = _first_value(section, CAMPUS_KEYS) or _first_value(course_data, CAMPUS_KEYS)
     return {
         "id": unique_id,
         "term": course_term,
@@ -348,6 +442,8 @@ def _section_row_from_course_data(term_name, subject_name, catalog_number, cours
         "date_range": section.get("date_range") or course_date_range,
         "credit_hours": course_data.get("credit_hours"),
         "requirement_designation": _first_value(course_data, REQUIREMENT_KEYS),
+        "campus": _normalize_campus_value(campus_value, subject=subject_name),
+        "campus_description": campus_value,
         "course_description": _first_value(course_data, COURSE_DESCRIPTION_KEYS),
         "course_notes": course_data.get("course_notes"),
         "section_summary": section_summary,
@@ -378,6 +474,7 @@ def _live_row_from_raw(term, raw):
         "start": raw.get("start_date") or raw.get("startDate"),
         "end": raw.get("end_date") or raw.get("endDate"),
     }
+    campus_value = _first_value(raw, CAMPUS_KEYS)
     return {
         "id": build_section_id(term, subject, catalog, crn, section_number),
         "term": term,
@@ -401,10 +498,104 @@ def _live_row_from_raw(term, raw):
         "date_range": date_range,
         "credit_hours": _first_value(raw, ("credit_hours", "credits", "hours")),
         "requirement_designation": _first_value(raw, REQUIREMENT_KEYS),
+        "campus": _normalize_campus_value(campus_value, subject=subject),
+        "campus_description": campus_value,
         "course_description": _first_value(raw, COURSE_DESCRIPTION_KEYS),
         "course_notes": raw.get("course_notes") or raw.get("notes"),
         "live": True,
     }
+
+
+def _section_search_blob(section):
+    parts = [
+        section.get("course_title"),
+        section.get("course_code"),
+        section.get("subject"),
+        section.get("catalog_number"),
+        section.get("crn"),
+        section.get("section_number"),
+        section.get("instructor"),
+        section.get("credit_hours"),
+        section.get("requirement_designation"),
+        section.get("campus"),
+        section.get("campus_description"),
+        section.get("course_description"),
+        section.get("course_notes"),
+    ]
+    for instructor in section.get("instructors") or []:
+        if isinstance(instructor, dict):
+            parts.extend([instructor.get("name"), instructor.get("email")])
+        else:
+            parts.append(instructor)
+    for name in section.get("instructors_unique") or []:
+        parts.append(name)
+    return _normalize_query_text(" ".join(str(part) for part in parts if part not in (None, "")))
+
+
+def _section_matches_time(section, days=None, time_start=None, time_end=None):
+    day_set = {str(day).strip() for day in (days or []) if str(day).strip()}
+    start_minutes = _coerce_int(time_start)
+    end_minutes = _coerce_int(time_end)
+
+    if not day_set and start_minutes is None and end_minutes is None:
+        return True
+
+    for meeting in section.get("meetings") or []:
+        if day_set and meeting.get("day") not in day_set:
+            continue
+        if start_minutes is None and end_minutes is None:
+            return True
+        meeting_start = _coerce_int(meeting.get("start"))
+        meeting_end = _coerce_int(meeting.get("end"))
+        if meeting_start is None or meeting_end is None:
+            continue
+        range_start = start_minutes if start_minutes is not None else 0
+        range_end = end_minutes if end_minutes is not None else 2400
+        if meeting_start < range_end and meeting_end > range_start:
+            return True
+
+    return False
+
+
+def _section_rank(section, query):
+    normalized = _normalize_query_text(query)
+    compact = _compact_query_text(query)
+    if not normalized:
+        return 100
+
+    subject = str(section.get("subject") or "").lower()
+    catalog = str(section.get("catalog_number") or "").lower()
+    course_code = str(section.get("course_code") or f"{subject} {catalog}").lower()
+    course_compact = _compact_query_text(course_code)
+    crn = str(section.get("crn") or "").lower()
+    section_number = str(section.get("section_number") or "").lower()
+    title = str(section.get("course_title") or "").lower()
+    instructor = str(section.get("instructor") or "").lower()
+    blob = section.get("_search_blob") or _section_search_blob(section)
+
+    if normalized == crn:
+        return 0
+    if compact and compact == course_compact:
+        return 1
+    if normalized == course_code:
+        return 1
+    if compact and compact == f"{subject}{catalog}":
+        return 1
+    if normalized == subject:
+        return 2
+    if catalog.startswith(normalized):
+        return 3
+    if course_code.startswith(normalized) or (compact and course_compact.startswith(compact)):
+        return 4
+    if title.startswith(normalized):
+        return 5
+    if instructor.startswith(normalized):
+        return 6
+    if normalized == section_number:
+        return 7
+    if normalized in blob or (compact and compact in _compact_query_text(blob)):
+        return 8
+    return None
 
 
 def _srcdb_for_course(term, subject=None, catalog=None):
@@ -413,6 +604,16 @@ def _srcdb_for_course(term, subject=None, catalog=None):
         if "error" not in course and course.get("srcdb"):
             return str(course.get("srcdb"))
     return ATLAS_TERM_SRCDB.get(term)
+
+
+def get_atlas_term_srcdb():
+    """Return Atlas FOSE srcdb values for terms known to this app."""
+    valid_terms = set(_discover_terms())
+    return {
+        term: srcdb
+        for term, srcdb in ATLAS_TERM_SRCDB.items()
+        if term in valid_terms
+    }
 
 
 def is_section_trackable(section):
@@ -562,58 +763,47 @@ def search_courses(query, term=None):
     if not query:
         return {"error": "Missing query"}
 
-    parts = query.upper().split()
+    sections_result = get_sections_index(
+        term=term,
+        include_cancelled=False,
+        query=query,
+        limit=60,
+    )
+    if "error" in sections_result:
+        return sections_result
 
-    # Exact match attempt: "CHEM 150"
-    if len(parts) >= 2:
-        subject = parts[0]
-        catalog = parts[1]
-        result = get_course(subject, catalog, term)
-        if "error" not in result:
-            return result
-        return {"error": f"Course {subject} {catalog} not found in {term}"}
-
-    # Single-term search: match against subject codes and catalog numbers
-    term_dir = _term_path(term)
-    if not os.path.isdir(term_dir):
-        return {"error": f"No data for term {term}"}
-
-    search_term = parts[0]
+    seen_courses = set()
     results = []
-
-    for subject_name in sorted(os.listdir(term_dir)):
-        subject_path = os.path.join(term_dir, subject_name)
-        if not os.path.isdir(subject_path) or subject_name.startswith("."):
+    for section in sections_result.get("sections") or []:
+        key = (
+            section.get("term"),
+            section.get("subject"),
+            section.get("catalog_number"),
+        )
+        if key in seen_courses:
             continue
-
-        # Match subject code itself (e.g., query "CHEM" matches all CHEM courses)
-        if subject_name == search_term:
-            for fname in sorted(os.listdir(subject_path)):
-                if fname.endswith(".json"):
-                    catalog_num = os.path.splitext(fname)[0]
-                    results.append({
-                        "subject": subject_name,
-                        "catalog": catalog_num,
-                        "course_code": f"{subject_name} {catalog_num}",
-                    })
-            continue
-
-        # Match catalog number within each subject
-        for fname in sorted(os.listdir(subject_path)):
-            if fname.endswith(".json"):
-                catalog_num = os.path.splitext(fname)[0]
-                if catalog_num == search_term or catalog_num.startswith(search_term):
-                    results.append({
-                        "subject": subject_name,
-                        "catalog": catalog_num,
-                        "course_code": f"{subject_name} {catalog_num}",
-                    })
+        seen_courses.add(key)
+        results.append({
+            "term": section.get("term"),
+            "subject": section.get("subject"),
+            "catalog": section.get("catalog_number"),
+            "catalog_number": section.get("catalog_number"),
+            "course_code": section.get("course_code"),
+            "course_title": section.get("course_title"),
+            "course_name": section.get("course_title"),
+            "section_number": section.get("section_number"),
+            "crn": section.get("crn"),
+            "instructor": section.get("instructor"),
+            "schedule_display": section.get("schedule_display"),
+            "sections": [section],
+        })
 
     return {
         "term": term,
         "query": query,
         "results": results,
         "count": len(results),
+        "total": sections_result.get("total", len(results)),
     }
 
 
@@ -640,13 +830,27 @@ def _section_number_sort_key(section_number):
     return (1, float("inf"), section_str)
 
 
-def get_sections_index(term=None, include_cancelled=True):
+def get_sections_index(
+    term=None,
+    include_cancelled=True,
+    query=None,
+    limit=None,
+    offset=0,
+    days=None,
+    time_start=None,
+    time_end=None,
+    campus=None,
+    requirement=None,
+):
     """
     Return flattened section rows for client-side course searching.
 
     Args:
         term: Term name like "Fall_2026", or None for all terms.
         include_cancelled: Whether cancelled sections should be included.
+        query: Optional local search query. Atlas is not called.
+        limit: Optional max results for query-backed searches.
+        offset: Optional zero-based offset for paged query results.
 
     Returns:
         dict with keys: term, terms, sections (list), count (int)
@@ -667,7 +871,17 @@ def get_sections_index(term=None, include_cancelled=True):
     cache_key = f"sections-index:{term or 'ALL'}:{int(bool(include_cancelled))}"
     cached = _cache_get(cache_key)
     if cached:
-        return cached
+        return _filter_sections_result(
+            cached,
+            query=query,
+            limit=limit,
+            offset=offset,
+            days=days,
+            time_start=time_start,
+            time_end=time_end,
+            campus=campus,
+            requirement=requirement,
+        )
 
     sections = []
 
@@ -722,7 +936,73 @@ def get_sections_index(term=None, include_cancelled=True):
         "count": len(sections),
     }
     _cache_set(cache_key, result)
-    return result
+    return _filter_sections_result(
+        result,
+        query=query,
+        limit=limit,
+        offset=offset,
+        days=days,
+        time_start=time_start,
+        time_end=time_end,
+        campus=campus,
+        requirement=requirement,
+    )
+
+
+def _filter_sections_result(
+    result,
+    query=None,
+    limit=None,
+    offset=0,
+    days=None,
+    time_start=None,
+    time_end=None,
+    campus=None,
+    requirement=None,
+):
+    query = str(query or "").strip()
+    has_schedule_filter = bool(days) or time_start not in (None, "") or time_end not in (None, "")
+    has_campus_filter = str(campus or "").strip().lower() not in {"", "all"}
+    has_requirement_filter = str(requirement or "").strip().lower() not in {"", "all"}
+    if not query and not has_schedule_filter and not has_campus_filter and not has_requirement_filter and limit is None and not offset:
+        return result
+
+    ranked_sections = []
+    for index, section in enumerate(result.get("sections") or []):
+        if not _section_matches_time(section, days=days, time_start=time_start, time_end=time_end):
+            continue
+        if not _campus_matches(section, campus):
+            continue
+        if not _requirement_matches(section, requirement):
+            continue
+        rank = _section_rank(section, query) if query else 100
+        if rank is None:
+            continue
+        ranked_sections.append((rank, index, section))
+
+    ranked_sections.sort(
+        key=lambda item: (
+            item[0],
+            item[2].get("course_code", ""),
+            _section_number_sort_key(item[2].get("section_number")),
+            item[2].get("crn", ""),
+            item[1],
+        )
+    )
+
+    total = len(ranked_sections)
+    safe_offset = _safe_offset(offset)
+    safe_limit = _safe_limit(limit) if limit is not None else total
+    page = [section for _, _, section in ranked_sections[safe_offset:safe_offset + safe_limit]]
+    return {
+        **result,
+        "query": query,
+        "offset": safe_offset,
+        "limit": safe_limit,
+        "total": total,
+        "sections": page,
+        "count": len(page),
+    }
 
 
 def get_sections_by_ids(section_ids, include_cancelled=True):

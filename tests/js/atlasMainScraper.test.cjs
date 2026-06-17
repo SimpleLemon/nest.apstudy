@@ -7,6 +7,7 @@ const {
   parseEnrollmentStatus,
   parseEnvList,
   firstPresent,
+  normalizeCampus,
   parseInstructors,
   decodeHtmlEntities,
   parseMeetingTimes,
@@ -43,6 +44,8 @@ test('normalizes enrollment, course codes, tags, and instructors', () => {
   assert.equal(stripTags('<p>Data &amp; Society&nbsp;</p>'), 'Data & Society');
   assert.equal(decodeHtmlEntities('MATH &#65; &lt;CS&gt;'), 'MATH A <CS>');
   assert.equal(firstPresent({ empty: '', fallback: 'room 101' }, ['missing', 'empty', 'fallback']), 'room 101');
+  assert.equal(normalizeCampus('Oxford College', 'OXBI'), 'Oxford');
+  assert.equal(normalizeCampus('Main Campus', 'CS'), 'Atlanta');
   assert.deepEqual(parseInstructors({ instructors: [{ name: 'Ada', email: 'ada@example.test' }, 'Grace Hopper'] }), [
     { name: 'Ada', email: 'ada@example.test' },
     { name: 'Grace Hopper', email: null },
@@ -79,6 +82,7 @@ test('builds enriched course objects from Atlas sections', () => {
     instr: 'Ada Lovelace',
     enrl_stat: 'O',
     total: 25,
+    campus: 'Oxford College',
     meetingTimes: JSON.stringify([{ meet_day: '0', start_time: 1000, end_time: 1050 }]),
     instructors: [{ name: 'Ada Lovelace' }],
     start_date: '2026-08-26',
@@ -95,5 +99,6 @@ test('builds enriched course objects from Atlas sections', () => {
   assert.equal(course.requisites, 'CS 170');
   assert.deepEqual(course.instructors_unique, ['Ada Lovelace']);
   assert.equal(course.sections[0].enrollment_status, 'Open');
+  assert.equal(course.sections[0].campus, 'Oxford');
   assert.deepEqual(course.sections[0].schedule.meetings, [{ day: 'Mon', start: '1000', end: '1050' }]);
 });

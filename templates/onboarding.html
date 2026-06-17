@@ -1071,15 +1071,7 @@
                         break;
                     }
                     const label = result.course_code || `${result.subject} ${result.catalog}`;
-                    let details = result;
-                    if (!details.sections) {
-                        try {
-                            details = await fetchJson(`{{ url_for('atlas.search') }}?query=${encodeURIComponent(label)}&term=${encodeURIComponent(onboardingState.term)}`,
-                                { method: 'GET', headers: { 'Content-Type': 'application/json' } });
-                        } catch (error) {
-                            details = result;
-                        }
-                    }
+                    const details = result;
                     const courseTitle = details.course_title || details.course_name || result.course_title || result.title || 'Course title not available';
                     const sections = Array.isArray(details.sections) ? details.sections : [];
                     const sectionItems = sections.length ? sections.slice(0, 2) : [null];
@@ -1089,7 +1081,7 @@
                         }
                         const sectionNumberValue = section?.section_number || '';
                         const instructorValue = section?.instructor || 'Instructor TBA';
-                        const timeValue = section?.schedule?.display || 'Time TBA';
+                        const timeValue = section?.schedule_display || section?.schedule?.display || 'Time TBA';
                         const subtitleParts = [
                             sectionNumberValue ? `Section ${sectionNumberValue}` : '',
                             instructorValue,

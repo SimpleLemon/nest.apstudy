@@ -22,7 +22,7 @@ from appwrite_helpers import (
     update_row_safe,
 )
 from services.discord_audit import emit_server_log_event
-from services.atlas_client import DEFAULT_TERM
+from services.atlas_client import DEFAULT_TERM, get_atlas_term_srcdb
 from services.daily_quote import get_daily_quote_payload
 from services.calendar_store import list_calendar_rows_all
 from services.toasts import pop_toasts
@@ -60,6 +60,33 @@ DASHBOARD_TASK_PRIORITY_RANK = {
     "medium": 1,
     "low": 2,
 }
+
+
+def _is_emory_or_oxford_user():
+    school = str(getattr(current_user, "school", "") or "").strip().lower()
+    school_key = str(getattr(current_user, "school_key", "") or "").strip().lower()
+    return bool(getattr(current_user, "emory_student", False)) or school in {
+        "emory",
+        "emory university",
+        "emory university-oxford",
+        "emory university oxford",
+        "oxford college",
+        "oxford college of emory university",
+    } or school_key in {
+        "emory",
+        "emory-university",
+        "emory-university-oxford",
+        "oxford-college",
+        "oxford-college-of-emory-university",
+    }
+
+
+def _default_courses_campus():
+    school = " ".join([
+        str(getattr(current_user, "school", "") or ""),
+        str(getattr(current_user, "school_key", "") or ""),
+    ]).lower()
+    return "oxford" if "oxford" in school else "atlanta"
 
 DASHBOARD_QUOTE_ERROR_REASONS = {
     "fetch_failed",
@@ -104,7 +131,7 @@ def _user_payload():
         "username": current_user.username,
         "email": current_user.email,
         "picture": current_user.picture_url,
-        "emory_student": current_user.emory_student,
+        "emory_student": _is_emory_or_oxford_user(),
         "school": current_user.school,
         "school_key": getattr(current_user, "school_key", None),
     }
@@ -744,7 +771,7 @@ def _dashboard_can_access_channel(channel):
 
 
 def _load_courses_summary(user_id):
-    if not bool(getattr(current_user, "emory_student", False)):
+    if not _is_emory_or_oxford_user():
         return {"items": [], "total_count": 0, "available": False, "error": None}
     try:
         rows = list_rows_all(
@@ -1110,7 +1137,7 @@ def courses():
     """Render the Emory-only course planning page."""
     if not current_user.onboarding_complete:
         return redirect(url_for("settings.onboarding"))
-    if not current_user.emory_student:
+    if not _is_emory_or_oxford_user():
         return redirect(url_for("dashboard.dashboard"))
 
     user_settings = _load_user_settings()
@@ -1119,6 +1146,8 @@ def courses():
         user=_user_payload(),
         theme_preference=_theme_from_settings(user_settings),
         default_term=DEFAULT_TERM,
+        default_campus=_default_courses_campus(),
+        atlas_srcdb=get_atlas_term_srcdb(),
     )
 
 

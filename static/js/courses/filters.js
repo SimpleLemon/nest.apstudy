@@ -20,6 +20,8 @@
         if (section.term && section.term !== state.selectedTerm) return false;
         const searchBlob = section.searchBlob || buildSectionSearchBlob(section);
         if (query && !searchBlob.includes(query)) return false;
+        if (!sectionMatchesCampus(section)) return false;
+        if (!sectionMatchesRequirement(section)) return false;
         if (!sectionMatchesDay(section)) return false;
         if (!sectionMatchesTime(section)) return false;
         return true;
@@ -58,6 +60,29 @@
     function sectionMatchesDay(section) {
       if (!state.dayFilters.size) return true;
       return (section.meetings || []).some((meeting) => state.dayFilters.has(meeting.day));
+    }
+
+    function sectionMatchesCampus(section) {
+      const campus = String(state.campusFilter || "all").toLowerCase();
+      if (!campus || campus === "all") return true;
+      const value = String(section.campus || section.campus_description || "").toLowerCase();
+      if (!value) return campus === "atlanta";
+      if (campus === "oxford") return value.includes("oxford");
+      if (campus === "atlanta") return value.includes("atlanta") || value.includes("main") || value === "emory";
+      return value.includes(campus);
+    }
+
+    function sectionMatchesRequirement(section) {
+      const requirement = String(state.requirementFilter || "all").toLowerCase();
+      if (!requirement || requirement === "all") return true;
+      const values = [
+        section.requirement_designation,
+        section.requirement,
+        section.ger,
+        section.attributes,
+      ].map((value) => String(value || "").toLowerCase());
+      if (requirement === "starred") return values.some((value) => value.includes("*"));
+      return values.some((value) => value.includes(requirement));
     }
 
     function sectionMatchesTime(section) {

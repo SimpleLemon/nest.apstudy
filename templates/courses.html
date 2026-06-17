@@ -8,6 +8,8 @@
     <script>
         window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";
         window.APSTUDY_COURSES_DEFAULT_TERM = "{{ default_term or '' }}";
+        window.APSTUDY_COURSES_DEFAULT_CAMPUS = "{{ default_campus or 'atlanta' }}";
+        window.APSTUDY_ATLAS_SRCDB = {{ atlas_srcdb | tojson }};
     </script>
     <script src="https://cdn.jsdelivr.net/npm/appwrite@25.0.0/dist/iife/sdk.js"></script>
     <script src="{{ url_for('static', filename='js/core/appwrite.js') }}"></script>
@@ -30,6 +32,7 @@
     <script src="{{ url_for('static', filename='js/core/navbar.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/sidebar.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/courses/utils.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/courses/atlas-live.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/courses/filters.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/courses/panel.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/courses/calendar.js') }}" defer></script>
@@ -80,6 +83,23 @@
                     </label>
                 </div>
                 <div id="courses-filter-popover" class="courses-filter-popover" hidden>
+                    <div class="courses-filter-grid">
+                        <label>
+                            <span>Campus</span>
+                            <select id="courses-campus-filter">
+                                <option value="all">All</option>
+                                <option value="atlanta">Atlanta (Main)</option>
+                                <option value="oxford">Oxford</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span>General Ed</span>
+                            <select id="courses-requirement-filter">
+                                <option value="all">All</option>
+                                <option value="starred">Starred only (*)</option>
+                            </select>
+                        </label>
+                    </div>
                     <div class="courses-filter-popover-section">
                         <span class="courses-filter-label">Days</span>
                         <div class="courses-day-toggle" id="courses-day-toggle" role="group" aria-label="Days of week">

@@ -34,6 +34,8 @@
       section.requirement_designation,
       section.requirement,
       section.ger,
+      section.campus,
+      section.campus_description,
       section.credit_hours,
       section.course_description,
       section.description,

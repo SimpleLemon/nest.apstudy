@@ -141,6 +141,7 @@ body.courses-body {
 
 .courses-search-field input,
 .courses-filter-row select,
+.courses-filter-grid select,
 .courses-time-filter input[type="time"] {
   width: 100%;
   height: 42px;
@@ -158,18 +159,21 @@ body.courses-body {
 }
 
 .courses-filter-row select,
+.courses-filter-grid select,
 .courses-time-filter input[type="time"] {
   padding: 0 10px;
 }
 
 .courses-search-field input:focus,
 .courses-filter-row select:focus,
+.courses-filter-grid select:focus,
 .courses-time-filter input[type="time"]:focus {
   border-color: color-mix(in srgb, var(--color-primary) 70%, var(--color-outline-variant));
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent);
 }
 
 .courses-filter-row label,
+.courses-filter-grid label,
 .courses-time-filter label {
   display: grid;
   gap: 6px;
@@ -271,6 +275,12 @@ body.courses-body {
 .courses-filter-popover-section {
   display: grid;
   gap: 8px;
+}
+
+.courses-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .courses-filter-label {
@@ -1259,6 +1269,7 @@ body.courses-body {
 
   .courses-search-field input,
   .courses-filter-row select,
+  .courses-filter-grid select,
   .courses-time-filter input[type="time"],
   .courses-view-toggle button,
   .courses-filter-button,
@@ -1285,6 +1296,10 @@ body.courses-body {
   }
 
   .courses-day-toggle {
+    grid-template-columns: 1fr;
+  }
+
+  .courses-filter-grid {
     grid-template-columns: 1fr;
   }
 

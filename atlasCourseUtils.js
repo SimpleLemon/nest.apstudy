@@ -74,6 +74,15 @@ function firstPresent(source, keys) {
   return null;
 }
 
+function normalizeCampus(value, subject) {
+  const raw = String(value ?? '').trim();
+  const lowered = raw.toLowerCase();
+  if (lowered.includes('oxford')) return 'Oxford';
+  if (lowered.includes('atlanta') || lowered.includes('main') || lowered === 'emory') return 'Atlanta';
+  if (String(subject ?? '').toUpperCase().startsWith('OX')) return 'Oxford';
+  return raw || null;
+}
+
 function parseInstructors(raw) {
   const source = firstPresent(raw, ['instructors', 'instr', 'instructor']);
   if (Array.isArray(source)) {
@@ -150,6 +159,8 @@ function buildCourseObject(courseCode, sections, termLabel, srcdb, catalogCourse
     instructor: s.instr ?? null,
     instructors: parseInstructors(s),
     location: firstPresent(s, ['location', 'loc', 'room', 'building', 'bldg_room', 'bldgRoom']),
+    campus: normalizeCampus(firstPresent(s, ['campus', 'campus_description', 'campusDescription', 'campus_descr', 'campusDescr']), subject),
+    campus_description: firstPresent(s, ['campus', 'campus_description', 'campusDescription', 'campus_descr', 'campusDescr']),
     enrollment_status: parseEnrollmentStatus(s.enrl_stat),
     enrollment_count: s.total ?? null,
     is_cancelled: !!(s.isCancelled && s.isCancelled !== ''),
@@ -193,6 +204,8 @@ function buildCourseObject(courseCode, sections, termLabel, srcdb, catalogCourse
     srcdb,
     credit_hours: catalogInfo.credit_hours ?? firstPresent(sections[0], ['credit_hours', 'credits', 'hours']),
     requirement_designation: catalogInfo.requirement_designation ?? firstPresent(sections[0], ['requirement_designation', 'ger', 'attributes']),
+    campus: normalizeCampus(firstPresent(sections[0], ['campus', 'campus_description', 'campusDescription', 'campus_descr', 'campusDescr']), subject),
+    campus_description: firstPresent(sections[0], ['campus', 'campus_description', 'campusDescription', 'campus_descr', 'campusDescr']),
     course_description: catalogInfo.course_description ?? firstPresent(sections[0], ['course_description', 'description', 'desc']),
     course_notes: catalogInfo.course_notes ?? firstPresent(sections[0], ['course_notes', 'notes']),
     requisites: catalogInfo.requisites ?? null,
@@ -215,6 +228,7 @@ module.exports = {
   buildCourseObject,
   decodeHtmlEntities,
   firstPresent,
+  normalizeCampus,
   parseCatalogCourseCards,
   parseEnrollmentStatus,
   parseEnvList,

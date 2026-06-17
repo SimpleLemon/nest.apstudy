@@ -24,6 +24,24 @@ def _as_bool(value, default=True):
     return str(value).strip().lower() not in {"0", "false", "no", "off"}
 
 
+def _split_days(value):
+    return [
+        item.strip()
+        for item in str(value or "").split(",")
+        if item.strip()
+    ]
+
+
+def _int_arg(name, default=None):
+    value = request.args.get(name)
+    if value in (None, ""):
+        return default
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
 @atlas_bp.route("/terms")
 def list_terms():
     result = get_terms()
@@ -52,8 +70,20 @@ def search():
 @atlas_bp.route("/sections")
 def list_sections():
     term = request.args.get("term")
+    query = request.args.get("q") or request.args.get("query")
     include_cancelled = _as_bool(request.args.get("include_cancelled"), default=True)
-    result = get_sections_index(term=term, include_cancelled=include_cancelled)
+    result = get_sections_index(
+        term=term,
+        include_cancelled=include_cancelled,
+        query=query,
+        limit=_int_arg("limit"),
+        offset=_int_arg("offset", 0),
+        days=_split_days(request.args.get("days")),
+        time_start=request.args.get("time_start"),
+        time_end=request.args.get("time_end"),
+        campus=request.args.get("campus"),
+        requirement=request.args.get("requirement") or request.args.get("ger"),
+    )
     if "error" in result:
         return jsonify(result), 400 if "Invalid" in result["error"] else 404
     return jsonify(result)
