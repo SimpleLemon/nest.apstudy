@@ -479,7 +479,7 @@
     justify-content: center;
     border: 1px solid color-mix(in srgb, var(--color-outline-variant) 84%, transparent);
     border-radius: 999px;
-    background: color-mix(in srgb, #6b7280 34%, var(--color-surface-container-high));
+    background: color-mix(in srgb, var(--color-on-surface-variant) 34%, var(--color-surface-container-high));
     color: var(--color-on-surface-variant);
     box-shadow: 0 10px 26px rgba(0, 0, 0, 0.24);
     cursor: pointer;
@@ -498,7 +498,7 @@
 .dashboard-tile-config-toggle:hover,
 .dashboard-tile-remove:focus-visible,
 .dashboard-tile-config-toggle:focus-visible {
-    background: color-mix(in srgb, #9ca3af 42%, var(--color-surface-container-high));
+    background: color-mix(in srgb, var(--color-on-surface-variant) 42%, var(--color-surface-container-high));
     outline: none;
 }
 

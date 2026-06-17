@@ -43,6 +43,7 @@
     window.addEventListener("scroll", syncNav, { passive: true });
 
     const revealItems = document.querySelectorAll("[data-reveal]");
+    const sketchItems = document.querySelectorAll("[data-sketch]");
     if (!reducedMotion && "IntersectionObserver" in window) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
@@ -52,8 +53,18 @@
             });
         }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
         revealItems.forEach((item) => observer.observe(item));
+
+        const sketchObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add("is-drawn");
+                sketchObserver.unobserve(entry.target);
+            });
+        }, { threshold: 0.36, rootMargin: "0px 0px -10% 0px" });
+        sketchItems.forEach((item) => sketchObserver.observe(item));
     } else {
         revealItems.forEach((item) => item.classList.add("is-visible"));
+        sketchItems.forEach((item) => item.classList.add("is-drawn"));
     }
 })();
 

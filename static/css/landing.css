@@ -3,6 +3,10 @@
     --landing-max-width: 1180px;
     --landing-radius: 8px;
     --landing-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+    --landing-spring: cubic-bezier(0.2, 0.9, 0.22, 1.18);
+    --landing-spring-soft: cubic-bezier(0.16, 1, 0.3, 1);
+    --landing-motion-fast: 180ms;
+    --landing-motion-medium: 360ms;
 }
 
 html {
@@ -44,7 +48,7 @@ body.landing-page a {
     font-weight: 700;
     padding: 10px 14px;
     text-decoration: none;
-    transition: transform 160ms ease;
+    transition: transform var(--landing-motion-fast) var(--landing-spring-soft);
 }
 
 .landing-skip-link:focus {
@@ -62,7 +66,7 @@ body.landing-page a {
     right: 0;
     top: 0;
     z-index: 1000;
-    transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    transition: background-color var(--landing-motion-fast) ease, border-color var(--landing-motion-fast) ease, box-shadow var(--landing-motion-fast) ease;
 }
 
 .landing-nav.is-scrolled,
@@ -126,6 +130,19 @@ body.landing-page a {
     height: 44px;
     justify-content: center;
     width: 44px;
+    transition: background-color var(--landing-motion-fast) ease, border-color var(--landing-motion-fast) ease, color var(--landing-motion-fast) ease, transform var(--landing-motion-medium) var(--landing-spring), box-shadow var(--landing-motion-fast) ease;
+}
+
+.landing-nav-toggle:hover,
+.landing-nav-toggle:focus-visible {
+    background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface));
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+    outline: none;
+    transform: translateY(-2px);
+}
+
+.landing-nav-toggle:active {
+    transform: translateY(1px) scale(0.98);
 }
 
 .landing-nav-menu {
@@ -148,7 +165,7 @@ body.landing-page a {
     font-weight: 700;
     min-height: 44px;
     padding: 0 14px;
-    transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+    transition: background-color var(--landing-motion-fast) ease, color var(--landing-motion-fast) ease, transform var(--landing-motion-medium) var(--landing-spring), box-shadow var(--landing-motion-fast) ease;
 }
 
 .landing-nav-menu a:hover,
@@ -157,6 +174,10 @@ body.landing-page a {
     color: var(--color-primary);
     outline: none;
     transform: translateY(-1px);
+}
+
+.landing-nav-menu a:active {
+    transform: translateY(1px) scale(0.98);
 }
 
 .landing-nav-menu .landing-nav-login {
@@ -256,6 +277,7 @@ body.landing-page a {
     color: #ffffff;
     max-width: min(660px, 100%);
     padding-bottom: clamp(84px, 12vh, 150px);
+    position: relative;
 }
 
 .landing-eyebrow {
@@ -283,6 +305,40 @@ body.landing-page a {
     max-width: 620px;
 }
 
+.landing-sketch {
+    color: color-mix(in srgb, var(--color-primary) 76%, var(--color-tertiary) 24%);
+    display: block;
+    fill: none;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.landing-sketch path {
+    stroke: currentColor;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke-dashoffset 920ms var(--landing-spring-soft);
+}
+
+.landing-sketch.is-drawn path {
+    stroke-dashoffset: 0;
+}
+
+.landing-sketch-section {
+    color: color-mix(in srgb, var(--color-primary) 70%, var(--color-secondary) 30%);
+    margin: 12px auto 0;
+    max-width: min(240px, 54vw);
+    opacity: 0.72;
+    width: 36%;
+}
+
+.landing-sketch-section path {
+    stroke-width: 4;
+    transition-duration: 780ms;
+}
+
 .landing-hero-actions,
 .landing-final-cta {
     align-items: center;
@@ -308,7 +364,7 @@ body.landing-page a {
     min-height: 48px;
     padding: 0 18px;
     text-decoration: none;
-    transition: background-color 160ms ease, color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+    transition: background-color var(--landing-motion-fast) ease, color var(--landing-motion-fast) ease, transform var(--landing-motion-medium) var(--landing-spring), box-shadow var(--landing-motion-medium) var(--landing-spring-soft);
 }
 
 .landing-primary-action {
@@ -329,6 +385,11 @@ body.landing-page a {
 .landing-secondary-action:focus-visible {
     outline: none;
     transform: translateY(-2px);
+}
+
+.landing-primary-action:active,
+.landing-secondary-action:active {
+    transform: translateY(1px) scale(0.985);
 }
 
 .landing-hero-peek {
@@ -424,7 +485,7 @@ body.landing-page a {
     border-radius: var(--landing-radius);
     min-height: 230px;
     padding: 22px;
-    transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+    transition: border-color var(--landing-motion-fast) ease, transform var(--landing-motion-medium) var(--landing-spring), box-shadow var(--landing-motion-medium) var(--landing-spring-soft);
 }
 
 .workflow-step:hover,
@@ -432,6 +493,11 @@ body.landing-page a {
     border-color: color-mix(in srgb, var(--color-primary) 42%, var(--color-outline-variant));
     box-shadow: 0 18px 42px rgba(0, 0, 0, 0.12);
     transform: translateY(-3px);
+}
+
+.workflow-step:active,
+.capability-grid article:active {
+    transform: translateY(1px) scale(0.992);
 }
 
 .workflow-step .material-symbols-outlined,
@@ -488,7 +554,11 @@ body.landing-page a {
     justify-content: center;
     min-height: 48px;
     padding: 0 12px;
-    transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+    transition: background-color var(--landing-motion-fast) ease, color var(--landing-motion-fast) ease, box-shadow var(--landing-motion-medium) var(--landing-spring-soft), transform var(--landing-motion-medium) var(--landing-spring);
+}
+
+.feature-tab:hover {
+    transform: translateY(-2px);
 }
 
 .feature-tab.is-active {
@@ -500,6 +570,11 @@ body.landing-page a {
 .feature-tab:focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
+    transform: translateY(-2px);
+}
+
+.feature-tab:active {
+    transform: translateY(1px) scale(0.985);
 }
 
 .feature-panels {
@@ -523,6 +598,10 @@ body.landing-page a {
     display: none;
 }
 
+.feature-panel.is-active {
+    animation: landingPanelIn 360ms var(--landing-spring-soft) both;
+}
+
 .feature-copy {
     align-self: center;
 }
@@ -541,6 +620,18 @@ body.landing-page a {
     margin-top: 12px;
     min-height: 44px;
     text-decoration: none;
+    transition: color var(--landing-motion-fast) ease, transform var(--landing-motion-medium) var(--landing-spring);
+}
+
+.feature-copy a:hover,
+.feature-copy a:focus-visible {
+    color: color-mix(in srgb, var(--color-primary) 84%, var(--color-on-surface) 16%);
+    outline: none;
+    transform: translateY(-2px);
+}
+
+.feature-copy a:active {
+    transform: translateY(1px) scale(0.985);
 }
 
 .product-mockup {
@@ -2937,6 +3028,35 @@ body.landing-page a {
     transform: translateY(0);
 }
 
+@keyframes landingPanelIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.992);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes landingMenuSpring {
+    0% {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.985);
+    }
+
+    70% {
+        opacity: 1;
+        transform: translateY(2px) scale(1.004);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
 @media (max-width: 980px) {
     .workflow-track,
     .capability-grid {
@@ -2988,9 +3108,11 @@ body.landing-page a {
         position: absolute;
         right: 16px;
         top: calc(var(--landing-nav-height) - 8px);
+        transform-origin: top center;
     }
 
     .landing-nav-menu.is-open {
+        animation: landingMenuSpring 260ms var(--landing-spring-soft) both;
         display: flex;
     }
 
@@ -3144,6 +3266,10 @@ body.landing-page a {
         font-size: 17px;
     }
 
+    .landing-sketch-section {
+        width: min(190px, 48vw);
+    }
+
     .landing-hero-actions,
     .landing-final-cta {
         align-items: stretch;
@@ -3260,5 +3386,9 @@ body.landing-page a {
 
     .landing-hero-image {
         transform: none;
+    }
+
+    .landing-sketch path {
+        stroke-dashoffset: 0;
     }
 }
