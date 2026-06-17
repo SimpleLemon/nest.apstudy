@@ -3,6 +3,14 @@
 {% set sidebar_is_emory_student = sidebar_user_emory_student|default(false) %}
 <nav class="sidebar-container" id="sidebar-root" aria-label="Primary navigation" data-sidebar-default="{{ sidebar_default|default('expanded') }}">
   <div class="sidebar-scroll">
+    <div class="sidebar-toggle-row">
+      <button class="sidebar-toggle-handle" id="sidebar-toggle-handle" type="button" aria-label="Toggle sidebar" aria-expanded="true">
+        <span class="sidebar-toggle-line" aria-hidden="true"></span>
+        <span class="sidebar-toggle-icon" aria-hidden="true"></span>
+        <span class="sidebar-toggle-tooltip">Collapse</span>
+      </button>
+    </div>
+
     <div class="sidebar-content">
       <div class="sidebar-section">
         <a class="sidebar-item {% if sidebar_is_dashboard %}active{% endif %}" href="{{ url_for('dashboard.dashboard') }}" aria-label="Dashboard">
@@ -86,11 +94,6 @@
     </div>
   </div>
 
-  <button class="sidebar-toggle-handle" id="sidebar-toggle-handle" type="button" aria-label="Toggle sidebar" aria-expanded="true">
-    <span class="sidebar-toggle-line" aria-hidden="true"></span>
-    <span class="sidebar-toggle-icon" aria-hidden="true"></span>
-    <span class="sidebar-toggle-tooltip">Collapse</span>
-  </button>
 </nav>
 <div class="sidebar-tooltip" id="sidebar-tooltip"></div>
 <div class="sidebar-mobile-backdrop" id="sidebar-mobile-backdrop" hidden></div>

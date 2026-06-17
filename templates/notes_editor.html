@@ -45,7 +45,7 @@
     <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/navbar.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/sidebar.js') }}" defer></script>
-    <script type="module" src="{{ url_for('static', filename='js/notes/editor.js') }}?v=notes-editor-setup-2"></script>
+    <script type="module" src="{{ url_for('static', filename='js/notes/editor.js') }}?v=notes-editor-markdown-repair-1"></script>
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     </style>
@@ -179,6 +179,10 @@
                         <button type="button" class="notes-toolbar-menu-item" data-editor-action="set-block" data-block-type="heading" data-level="3" data-menu-check="heading-3">
                             <span class="notes-toolbar-text-icon" aria-hidden="true">H3</span>
                             <span>Heading 3</span>
+                        </button>
+                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="set-block" data-block-type="quote" data-menu-check="quote">
+                            <span class="material-symbols-outlined" aria-hidden="true">format_quote</span>
+                            <span>Quote</span>
                         </button>
                     </div>
                     <div class="notes-toolbar-menu notes-align-menu" data-toolbar-menu="align" hidden>

@@ -1212,6 +1212,12 @@ body.notes-editor-body main {
   color: var(--notes-text-muted) !important;
 }
 
+.blocknote-container .bn-block-content[data-content-type="quote"] blockquote {
+  margin: 0 !important;
+  border-left: 0 !important;
+  padding: 0 !important;
+}
+
 .blocknote-container .bn-block-content[data-content-type="quote"] .bn-inline-content {
   color: inherit !important;
   font-style: italic;
@@ -1283,6 +1289,13 @@ body.notes-editor-body main {
 .blocknote-container [data-content-type="divider"] hr,
 .blocknote-container [data-content-type="horizontalRule"] hr {
   border: 0 !important;
+  border-top: 1px solid var(--notes-border-subtle) !important;
+}
+
+.blocknote-container [data-content-type="pageBreak"] .bn-page-break {
+  width: 100% !important;
+  height: 0 !important;
+  margin: 0.4em 0 !important;
   border-top: 1px solid var(--notes-border-subtle) !important;
 }
 

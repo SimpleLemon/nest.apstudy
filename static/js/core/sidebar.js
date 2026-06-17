@@ -11,8 +11,8 @@ if (window.APStudySidebarLoaded) return;
 window.APStudySidebarLoaded = true;
 
 const SIDEBAR_ICONS = {
-  chevronsLeft: materialSymbol("keyboard_double_arrow_left"),
-  chevronsRight: materialSymbol("keyboard_double_arrow_right"),
+  collapse: materialSymbol("keyboard_arrow_left"),
+  expand: materialSymbol("keyboard_arrow_right"),
 };
 
 function materialSymbol(name) {
@@ -52,7 +52,6 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
   const toggleTooltip = toggleHandle?.querySelector('.sidebar-toggle-tooltip');
   const items = document.querySelectorAll('.sidebar-item');
   const mobileQuery = window.matchMedia('(max-width: 1024px)');
-  let collapseAnimationPending = false;
 
   function isMobileShell() {
     return mobileQuery.matches;
@@ -120,7 +119,7 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
     const isCollapsed = sidebar.classList.contains('collapsed');
     const toggleIcon = toggleHandle.querySelector('.sidebar-toggle-icon');
     if (toggleIcon) {
-      toggleIcon.innerHTML = isCollapsed ? SIDEBAR_ICONS.chevronsRight : SIDEBAR_ICONS.chevronsLeft;
+      toggleIcon.innerHTML = isCollapsed ? SIDEBAR_ICONS.expand : SIDEBAR_ICONS.collapse;
     }
     toggleHandle.setAttribute('aria-expanded', String(!isCollapsed));
     toggleHandle.setAttribute('aria-label', isCollapsed ? 'Expand sidebar' : 'Collapse sidebar');
@@ -129,35 +128,8 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
     }
   }
 
-  function setCenteredCollapsedItems(shouldCenter) {
-    sidebar.classList.toggle('collapsed-aligned', shouldCenter);
-  }
-
-  sidebar.addEventListener('transitionend', (event) => {
-    if (event.propertyName !== 'width') return;
-    if (!sidebar.classList.contains('collapsed')) {
-      setCenteredCollapsedItems(false);
-      collapseAnimationPending = false;
-      return;
-    }
-
-    if (collapseAnimationPending) {
-      setCenteredCollapsedItems(true);
-      collapseAnimationPending = false;
-    }
-  });
-
   function applySidebarCollapsedState(shouldCollapse) {
-    if (shouldCollapse) {
-      sidebar.classList.add('collapsed');
-      setCenteredCollapsedItems(false);
-      collapseAnimationPending = true;
-    } else {
-      sidebar.classList.remove('collapsed');
-      setCenteredCollapsedItems(false);
-      collapseAnimationPending = false;
-    }
-
+    sidebar.classList.toggle('collapsed', shouldCollapse);
     document.body.classList.toggle('sidebar-collapsed', shouldCollapse);
     localStorage.setItem('sidebar-collapsed', String(shouldCollapse));
     updateToggleHandleState();
@@ -172,7 +144,6 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
   document.body.classList.toggle('sidebar-collapsed', isCollapsed);
   if (isCollapsed) {
     sidebar.classList.add('collapsed');
-    setCenteredCollapsedItems(true);
   }
   localStorage.setItem('sidebar-collapsed', String(isCollapsed));
   updateToggleHandleState();

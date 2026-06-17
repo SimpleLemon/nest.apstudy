@@ -5,6 +5,7 @@ import { useCreateBlockNote, useEditorContentOrSelectionChange } from '@blocknot
 import { checkBlockHasDefaultProp, checkBlockTypeHasDefaultProp, mapTableCell } from '@blocknote/core';
 import { BlockNoteView } from '@blocknote/mantine';
 import { notesEditorSchema } from './toolbar.js';
+import { clipboardTextLooksStructured, normalizeImportedMarkdownBlocks } from './editor/markdown-repair.js';
 import { blockOwnContentIsEmpty, buildLoadingIndicatorHtml, documentHasText, formatRelativeSavedTime, isBlankTitle, noteIdFromPath, parseSavedDate } from './editor/utils.js';
 
 const noteId = noteIdFromPath();
@@ -44,6 +45,7 @@ const TEXT_BLOCK_OPTIONS = [
     { label: 'Heading 1', type: 'heading', props: { level: 1 }, icon: 'H1', key: 'heading-1' },
     { label: 'Heading 2', type: 'heading', props: { level: 2 }, icon: 'H2', key: 'heading-2' },
     { label: 'Heading 3', type: 'heading', props: { level: 3 }, icon: 'H3', key: 'heading-3' },
+    { label: 'Quote', type: 'quote', icon: 'format_quote', key: 'quote' },
 ];
 const LIST_STYLE_OPTIONS = [
     { label: 'Bulleted list', type: 'bulletListItem', icon: 'format_list_bulleted', key: 'bulletListItem' },
@@ -71,6 +73,7 @@ let pageSetupScope = 'note';
 let pageSetupSaveTimer = null;
 let addBlockActiveIndex = 0;
 let defaultSideMarginPercent = null;
+let normalizingEditorDocument = false;
 
 const titleInput = document.getElementById('note-title-input');
 const saveStatus = document.getElementById('save-status');
@@ -1127,14 +1130,62 @@ window.addEventListener('beforeunload', (event) => {
     event.returnValue = '';
 });
 
-function handleNotesPaste({ defaultPasteHandler }) {
-    return defaultPasteHandler({
+function clipboardTextHasMarkdownSyntax(text) {
+    if (typeof text !== 'string') return false;
+    return text.split(/\r?\n/).some((line) => (
+        /^#{1,6}\s+\S/.test(line)
+        || /^>\s+\S/.test(line)
+        || /^[-*+]\s+\S/.test(line)
+        || /^\d+[.)]\s+\S/.test(line)
+        || /^-{3,}\s*$/.test(line)
+    ));
+}
+
+function normalizeEditorDocument({ save = true } = {}) {
+    if (!editorInstance || normalizingEditorDocument) return false;
+
+    const result = normalizeImportedMarkdownBlocks(editorInstance.document);
+    if (!result.changed) return false;
+
+    normalizingEditorDocument = true;
+    try {
+        editorInstance.replaceBlocks(editorInstance.document, result.blocks);
+    } finally {
+        normalizingEditorDocument = false;
+    }
+
+    updateEditorChrome();
+    if (save) triggerDebouncedSave();
+    return true;
+}
+
+function schedulePastedContentNormalization() {
+    window.setTimeout(() => {
+        normalizeEditorDocument();
+    }, 0);
+}
+
+function handleNotesPaste({ event, editor, defaultPasteHandler }) {
+    const plainText = event.clipboardData?.getData('text/plain') || '';
+    if (clipboardTextHasMarkdownSyntax(plainText)) {
+        editor.pasteMarkdown?.(plainText);
+        schedulePastedContentNormalization();
+        return true;
+    }
+
+    const handled = defaultPasteHandler({
         prioritizeMarkdownOverHTML: true,
         plainTextAsMarkdown: true,
     });
+
+    if (clipboardTextLooksStructured(plainText)) {
+        schedulePastedContentNormalization();
+    }
+
+    return handled;
 }
 
-function NoteEditor({ initialContent }) {
+function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
     const editor = useCreateBlockNote({
         initialContent,
         schema: notesEditorSchema,
@@ -1151,6 +1202,9 @@ function NoteEditor({ initialContent }) {
             if (editorInstance !== editor) return;
             captureHistoryBaseline();
             updateEditorChrome();
+            if (initialContentWasNormalized) {
+                triggerDebouncedSave();
+            }
         }, 0);
 
         return () => {
@@ -1173,6 +1227,11 @@ function NoteEditor({ initialContent }) {
             sideMenu: false,
             theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
             onChange: () => {
+                if (normalizingEditorDocument) {
+                    updateEditorChrome();
+                    return;
+                }
+                if (normalizeEditorDocument()) return;
                 updateEditorChrome();
                 triggerDebouncedSave();
             },
@@ -1220,6 +1279,7 @@ async function initEditorPage() {
     }
 
     let parsedContent = undefined;
+    let parsedContentWasNormalized = false;
     if (typeof note?.content === 'string' && note.content.trim() !== '') {
         try {
             parsedContent = JSON.parse(note.content);
@@ -1228,10 +1288,19 @@ async function initEditorPage() {
         }
     }
 
+    if (Array.isArray(parsedContent)) {
+        const normalized = normalizeImportedMarkdownBlocks(parsedContent);
+        parsedContent = normalized.blocks;
+        parsedContentWasNormalized = normalized.changed;
+    }
+
     const root = createRoot(rootElement);
 
     try {
-        root.render(React.createElement(NoteEditor, { initialContent: parsedContent }));
+        root.render(React.createElement(NoteEditor, {
+            initialContent: parsedContent,
+            initialContentWasNormalized: parsedContentWasNormalized,
+        }));
         bindWritingToolbar();
     } catch (error) {
         console.error('Failed to mount note editor', error);
