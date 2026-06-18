@@ -2,7 +2,7 @@
    Layout Architecture - Navbar + Sidebar
    ============================================ */
 :root {
-  --navbar-height: 64px;
+  --navbar-height: 50px;
   --sidebar-expanded: 208px;
   --sidebar-collapsed: 60px;
   --bg-navbar: var(--color-shell-bg);

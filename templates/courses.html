@@ -61,30 +61,28 @@
                     </button>
                     <button type="button" data-course-view="selected" aria-pressed="false">
                         <span class="material-symbols-outlined" aria-hidden="true">playlist_add_check</span>
-                        <span>Selected Courses</span>
+                        <span>Selected</span>
                     </button>
                     <button type="button" data-course-view="tracked" aria-pressed="false">
                         <span class="material-symbols-outlined" aria-hidden="true">visibility</span>
-                        <span>Tracked Courses</span>
+                        <span>Tracked</span>
                     </button>
                 </div>
                 <div class="courses-search-row">
                     <label class="courses-search-field">
                         <span class="material-symbols-outlined" aria-hidden="true">search</span>
-                        <input id="courses-search-input" type="search" autocomplete="off" placeholder="Search title, code, professor, CRN" />
+                        <input id="courses-search-input" type="search" autocomplete="off" placeholder="Search classes" />
                     </label>
                     <button id="courses-filter-button" class="courses-filter-button" type="button" aria-label="Filter courses" aria-expanded="false" aria-controls="courses-filter-popover">
                         <span class="material-symbols-outlined" aria-hidden="true">tune</span>
                         <span id="courses-filter-count" class="courses-filter-count" hidden>0</span>
                     </button>
                 </div>
-                <div class="courses-filter-row">
-                    <label>
+                <div id="courses-filter-popover" class="courses-filter-popover" hidden>
+                    <label class="courses-filter-popover-term">
                         <span>Term</span>
                         <select id="courses-term-select"></select>
                     </label>
-                </div>
-                <div id="courses-filter-popover" class="courses-filter-popover" hidden>
                     <div class="courses-filter-grid">
                         <label>
                             <span>Campus</span>

@@ -28,6 +28,11 @@
       select.innerHTML = state.terms
         .map((term) => `<option value="${escapeHtml(term)}" ${term === state.selectedTerm ? "selected" : ""}>${escapeHtml(formatTermLabel(term))}</option>`)
         .join("");
+      const searchInput = document.getElementById("courses-search-input");
+      if (searchInput) {
+        const termLabel = formatTermLabel(state.selectedTerm);
+        searchInput.placeholder = termLabel ? `Search ${termLabel} classes` : "Search classes";
+      }
     }
 
     function renderPanel() {
