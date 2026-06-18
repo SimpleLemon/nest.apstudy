@@ -16,7 +16,7 @@ from services.course_tracking_email import (
     build_open_seat_html,
     build_open_seat_subject,
 )
-from services.discord_audit import emit_course_track_event
+from services.discord_audit import emit_course_track_event, update_course_tracks_channel_topic
 
 
 logger = logging.getLogger(__name__)
@@ -228,6 +228,7 @@ def check_course_seat_tracks(*, term=None, subject=None, catalog=None, poll_sour
             metadata=metadata,
             color="gray",
         )
+        update_course_tracks_channel_topic(0)
         _record_last_poll("Automated Course Track Poll Skipped", metadata, discord_emit_returned=emitted)
         return 0
 
@@ -364,16 +365,6 @@ def check_course_seat_tracks(*, term=None, subject=None, catalog=None, poll_sour
         )
 
     title = "Automated Course Track Poll Completed"
-    emitted = _emit_poll_event(
-        title,
-        metadata=poll_metadata,
-        color=(
-            "yellow"
-            if poll_metadata["atlas_checks_failed"]
-            or poll_metadata["row_update_failures"]
-            or poll_metadata["email_failures"]
-            else "gray"
-        ),
-    )
-    _record_last_poll(title, poll_metadata, discord_emit_returned=emitted)
+    update_course_tracks_channel_topic(poll_metadata["section_group_count"])
+    _record_last_poll(title, poll_metadata)
     return notified_count

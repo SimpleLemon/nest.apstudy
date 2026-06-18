@@ -932,6 +932,41 @@ def emit_course_track_event(title, *, actor, target, metadata=None, color="gray"
     )
 
 
+def format_course_tracks_channel_topic(course_count):
+    return f"Tracking {int(course_count)} courses"
+
+
+def update_course_tracks_channel_topic(course_count):
+    channel_id = _env_channel_id("course_tracks")
+    if not channel_id:
+        logger.warning("Discord course_tracks channel is not configured for topic updates")
+        return False
+    if not _bot_token():
+        logger.warning("Discord bot token missing; skipping course tracks channel topic update")
+        return False
+
+    topic = format_course_tracks_channel_topic(course_count)
+    try:
+        response = get_audit_service()._request(
+            "PATCH",
+            f"/channels/{channel_id}",
+            json={"topic": topic},
+        )
+    except Exception:
+        logger.exception("Failed to update course tracks Discord channel topic")
+        return False
+
+    if 200 <= response.status_code < 300:
+        return True
+
+    logger.warning(
+        "Discord course tracks topic update returned HTTP %s for channel %s",
+        response.status_code,
+        channel_id,
+    )
+    return False
+
+
 def emit_creation_event(title, *, actor, target, metadata=None, color="green"):
     return emit_audit_event(
         DiscordAuditEvent(

@@ -177,6 +177,28 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
         self.assertEqual(event.metadata["error_code"], "AUTH-OAUTH-START-SCOPE")
         self.assertEqual(event.color, "red")
 
+    def test_format_course_tracks_channel_topic(self):
+        self.assertEqual(
+            discord_audit.format_course_tracks_channel_topic(7),
+            "Tracking 7 courses",
+        )
+
+    def test_update_course_tracks_channel_topic_patches_discord_channel(self):
+        service = DiscordAuditService(token_getter=lambda: "bot-token")
+        response = ResponseStub(200)
+
+        with patch.object(discord_audit, "get_audit_service", return_value=service), \
+                patch.object(service, "_request", return_value=response) as request, \
+                patch.dict(os.environ, {}, clear=True):
+            sent = discord_audit.update_course_tracks_channel_topic(3)
+
+        self.assertTrue(sent)
+        request.assert_called_once_with(
+            "PATCH",
+            f"/channels/{discord_audit.DEFAULT_CHANNEL_IDS['course_tracks']}",
+            json={"topic": "Tracking 3 courses"},
+        )
+
     def test_browser_console_content_batches_into_single_codeblock(self):
         content = discord_audit._format_browser_console_content(
             actor="user-1 (student)",

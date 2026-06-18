@@ -60,7 +60,8 @@ class CourseTrackingTests(unittest.TestCase):
         with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
                 patch.object(course_tracking, "list_rows_all", return_value=[]), \
                 patch.object(course_tracking, "fetch_live_section_status") as fetch_status, \
-                patch.object(course_tracking, "emit_course_track_event") as emit_event:
+                patch.object(course_tracking, "emit_course_track_event") as emit_event, \
+                patch.object(course_tracking, "update_course_tracks_channel_topic") as update_topic:
             notified = course_tracking.check_course_seat_tracks()
 
         self.assertEqual(notified, 0)
@@ -70,6 +71,7 @@ class CourseTrackingTests(unittest.TestCase):
         metadata = emit_event.call_args.kwargs["metadata"]
         self.assertEqual(metadata["reason"], "no_enabled_tracks")
         self.assertEqual(metadata["track_count"], 0)
+        update_topic.assert_called_once_with(0)
 
     def test_missing_collection_mapping_emits_skipped_poll_log(self):
         with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": ""}, clear=False), \
@@ -106,6 +108,7 @@ class CourseTrackingTests(unittest.TestCase):
                 patch.object(course_tracking, "_send_open_email") as send_email, \
                 patch.object(course_tracking, "update_row_safe", side_effect=lambda table, row_id, data: {"$id": row_id, **data}) as update_row, \
                 patch.object(course_tracking, "emit_course_track_event") as emit_event, \
+                patch.object(course_tracking, "update_course_tracks_channel_topic") as update_topic, \
                 patch.object(course_tracking, "_now_utc", return_value=datetime(2026, 5, 29, tzinfo=timezone.utc)):
             notified = course_tracking.check_course_seat_tracks()
 
@@ -129,8 +132,9 @@ class CourseTrackingTests(unittest.TestCase):
             call for call in emit_event.call_args_list
             if call.args[0] == "Automated Course Track Poll Completed"
         ]
-        self.assertEqual(len(completed_events), 1)
-        summary = completed_events[0].kwargs["metadata"]
+        self.assertEqual(len(completed_events), 0)
+        summary = course_tracking.get_last_course_tracking_poll()
+        self.assertEqual(summary["event_title"], "Automated Course Track Poll Completed")
         self.assertEqual(summary["track_count"], 2)
         self.assertEqual(summary["section_group_count"], 1)
         self.assertEqual(summary["atlas_checks_attempted"], 1)
@@ -141,6 +145,7 @@ class CourseTrackingTests(unittest.TestCase):
         self.assertEqual(summary["changed_rows_written"], 2)
         self.assertEqual(summary["unchanged_rows_skipped"], 0)
         self.assertEqual(summary["notifications_sent"], 2)
+        update_topic.assert_called_once_with(1)
 
     def test_unchanged_closed_result_skips_appwrite_writes(self):
         tracks = [self._track("track-1", "user-1"), self._track("track-2", "user-2")]
@@ -164,7 +169,8 @@ class CourseTrackingTests(unittest.TestCase):
             call for call in emit_event.call_args_list
             if call.args[0] == "Automated Course Track Poll Completed"
         ]
-        summary = completed_events[0].kwargs["metadata"]
+        self.assertEqual(len(completed_events), 0)
+        summary = course_tracking.get_last_course_tracking_poll()
         self.assertEqual(summary["row_updates"], 0)
         self.assertEqual(summary["changed_rows_written"], 0)
         self.assertEqual(summary["unchanged_rows_skipped"], 2)
@@ -194,7 +200,8 @@ class CourseTrackingTests(unittest.TestCase):
             call for call in emit_event.call_args_list
             if call.args[0] == "Automated Course Track Poll Completed"
         ]
-        summary = completed_events[0].kwargs["metadata"]
+        self.assertEqual(len(completed_events), 0)
+        summary = course_tracking.get_last_course_tracking_poll()
         self.assertEqual(summary["unchanged_rows_skipped"], 1)
         self.assertEqual(summary["notifications_sent"], 0)
 
@@ -223,7 +230,8 @@ class CourseTrackingTests(unittest.TestCase):
             call for call in emit_event.call_args_list
             if call.args[0] == "Automated Course Track Poll Completed"
         ]
-        summary = completed_events[0].kwargs["metadata"]
+        self.assertEqual(len(completed_events), 0)
+        summary = course_tracking.get_last_course_tracking_poll()
         self.assertEqual(summary["changed_rows_written"], 1)
         self.assertEqual(summary["notifications_sent"], 0)
 
@@ -247,7 +255,8 @@ class CourseTrackingTests(unittest.TestCase):
             call for call in emit_event.call_args_list
             if call.args[0] == "Automated Course Track Poll Completed"
         ]
-        summary = completed_events[0].kwargs["metadata"]
+        self.assertEqual(len(completed_events), 0)
+        summary = course_tracking.get_last_course_tracking_poll()
         self.assertEqual(summary["email_failures"], 1)
         self.assertEqual(summary["changed_rows_written"], 0)
         self.assertEqual(summary["notifications_sent"], 0)
@@ -286,8 +295,10 @@ class CourseTrackingTests(unittest.TestCase):
             call for call in emit_event.call_args_list
             if call.args[0] == "Automated Course Track Poll Completed"
         ]
-        self.assertEqual(completed_events[0].kwargs["metadata"]["poll_source"], "manual_admin_test")
-        self.assertEqual(completed_events[0].kwargs["metadata"]["track_count"], 1)
+        self.assertEqual(len(completed_events), 0)
+        summary = course_tracking.get_last_course_tracking_poll()
+        self.assertEqual(summary["poll_source"], "manual_admin_test")
+        self.assertEqual(summary["track_count"], 1)
 
     def test_duplicate_track_failure_logs_once_and_updates_each_row(self):
         tracks = [self._track("track-1", "user-1"), self._track("track-2", "user-2")]
@@ -318,8 +329,8 @@ class CourseTrackingTests(unittest.TestCase):
             call for call in emit_event.call_args_list
             if call.args[0] == "Automated Course Track Poll Completed"
         ]
-        self.assertEqual(len(completed_events), 1)
-        summary = completed_events[0].kwargs["metadata"]
+        self.assertEqual(len(completed_events), 0)
+        summary = course_tracking.get_last_course_tracking_poll()
         self.assertEqual(summary["track_count"], 2)
         self.assertEqual(summary["section_group_count"], 1)
         self.assertEqual(summary["atlas_checks_attempted"], 1)
@@ -354,8 +365,9 @@ class CourseTrackingTests(unittest.TestCase):
             call for call in emit_event.call_args_list
             if call.args[0] == "Automated Course Track Poll Completed"
         ]
-        self.assertEqual(len(completed_events), 1)
-        self.assertEqual(completed_events[0].kwargs["metadata"]["atlas_checks_failed"], 1)
+        self.assertEqual(len(completed_events), 0)
+        summary = course_tracking.get_last_course_tracking_poll()
+        self.assertEqual(summary["atlas_checks_failed"], 1)
 
 
 class CourseTrackingEmailTests(unittest.TestCase):
