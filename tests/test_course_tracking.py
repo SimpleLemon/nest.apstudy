@@ -358,5 +358,80 @@ class CourseTrackingTests(unittest.TestCase):
         self.assertEqual(completed_events[0].kwargs["metadata"]["atlas_checks_failed"], 1)
 
 
+class CourseTrackingEmailTests(unittest.TestCase):
+    def _sample_section(self):
+        return {
+            "id": "Spring_2026|JPN|101|1234|1",
+            "term": "Spring_2026",
+            "subject": "JPN",
+            "catalog_number": "101",
+            "course_code": "JPN 101",
+            "course_title": "Elementary Japanese I",
+            "section_number": "1",
+            "crn": "1234",
+            "instructor": "T. Sensei",
+            "schedule_display": "MWF 10-10:50a",
+            "location": "White Hall 200",
+            "campus": "Atlanta",
+            "enrollment_status": "Open",
+            "seats_available": 2,
+            "credit_hours": "4",
+        }
+
+    def test_build_open_seat_subject_pluralizes_seats(self):
+        from services.course_tracking_email import build_open_seat_subject
+
+        self.assertEqual(build_open_seat_subject("JPN 101", 1), "🎉 JPN 101 has 1 Open Seat")
+        self.assertEqual(build_open_seat_subject("JPN 101", 2), "🎉 JPN 101 has 2 Open Seats")
+        self.assertEqual(build_open_seat_subject("JPN 101", None), "🎉 JPN 101 has Open Seats")
+
+    def test_build_nest_courses_detail_url_encodes_section_id(self):
+        from services.course_tracking_email import build_nest_courses_detail_url
+
+        section_id = "Spring_2026|JPN|101|1234|1"
+        url = build_nest_courses_detail_url("https://nest.apstudy.org", section_id)
+        self.assertIn("section=Spring_2026%7CJPN%7C101%7C1234%7C1", url)
+        self.assertIn("#section=Spring_2026%7CJPN%7C101%7C1234%7C1", url)
+
+    def test_build_open_seat_html_includes_logo_buttons_and_table(self):
+        from services.course_tracking_email import build_open_seat_html
+
+        section = self._sample_section()
+        section["course_title"] = "Intro <script>alert(1)</script>"
+        html = build_open_seat_html(
+            section,
+            base_url="https://nest.apstudy.org",
+            nest_details_url="https://nest.apstudy.org/courses?section=test#section=test",
+        )
+
+        self.assertIn("https://resources.apstudy.org/images/AP-Resources-Logo.png", html)
+        self.assertIn("https://atlas.emory.edu", html)
+        self.assertIn("Nest Course Details", html)
+        self.assertIn("Emory Atlas", html)
+        self.assertIn("Intro &lt;script&gt;alert(1)&lt;/script&gt;", html)
+        self.assertIn("Seats available", html)
+        self.assertIn("Spring 2026", html)
+
+    def test_send_open_email_uses_branded_template(self):
+        track = {
+            "user_id": "user-1",
+            "course_code": "JPN 101",
+            "section_id": "Spring_2026|JPN|101|1234|1",
+        }
+        section = self._sample_section()
+        mock_messaging = unittest.mock.MagicMock()
+
+        with patch("services.course_tracking.Messaging", return_value=mock_messaging), \
+                patch.dict(os.environ, {"APP_BASE_URL": "https://nest.apstudy.org"}, clear=False):
+            course_tracking._send_open_email(track, section)
+
+        mock_messaging.create_email.assert_called_once()
+        kwargs = mock_messaging.create_email.call_args.kwargs
+        self.assertTrue(kwargs["html"])
+        self.assertIn("🎉 JPN 101 has 2 Open Seats", kwargs["subject"])
+        self.assertIn("AP-Resources-Logo.png", kwargs["content"])
+        self.assertIn("#section=Spring_2026%7CJPN%7C101%7C1234%7C1", kwargs["content"])
+
+
 if __name__ == "__main__":
     unittest.main()

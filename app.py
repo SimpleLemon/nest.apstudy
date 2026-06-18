@@ -63,12 +63,17 @@ def create_app():
     csrf.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = "auth.login"
+    from blueprints.auth import LOGIN_NEXT_SESSION_KEY, _is_safe_login_next_url
     from services.database import close_db, init_db
     init_db(app)
     app.teardown_appcontext(close_db)
 
     @login_manager.unauthorized_handler
     def handle_unauthorized():
+        next_url = request.full_path
+        if _is_safe_login_next_url(next_url):
+            session[LOGIN_NEXT_SESSION_KEY] = next_url
+            return redirect(url_for("auth.login", next=next_url))
         return redirect(url_for("auth.login"))
 
     @app.before_request

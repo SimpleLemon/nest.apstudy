@@ -113,6 +113,7 @@ APPWRITE_OAUTH_PROVIDER_KEY = "appwrite_oauth_provider"
 APPWRITE_OAUTH_LINK_MODE_KEY = "appwrite_oauth_link_mode"
 APPWRITE_OAUTH_REQUIRED_SCOPES = ("sessions.write",)
 AUTH_ERROR_SESSION_KEY = "auth_error_code"
+LOGIN_NEXT_SESSION_KEY = "login_next_url"
 AUTH_ERROR_OAUTH_START_SCOPE = "AUTH-OAUTH-START-SCOPE"
 AUTH_ERROR_OAUTH_START = "AUTH-OAUTH-START"
 AUTH_ERROR_OAUTH_STATE = "AUTH-OAUTH-STATE"
@@ -671,10 +672,32 @@ def _clear_appwrite_oauth_state():
     session.pop(APPWRITE_OAUTH_LINK_MODE_KEY, None)
 
 
-def _redirect_for_user_doc(user_doc):
+def _is_safe_login_next_url(next_url):
+    if not next_url or not isinstance(next_url, str):
+        return False
+    if not next_url.startswith("/"):
+        return False
+    if next_url.startswith("//"):
+        return False
+    return True
+
+
+def _store_login_next_url(next_url):
+    if _is_safe_login_next_url(next_url):
+        session[LOGIN_NEXT_SESSION_KEY] = next_url
+
+
+def _redirect_after_login(user_doc):
+    next_url = session.pop(LOGIN_NEXT_SESSION_KEY, None)
     if user_doc.get("onboarding_complete"):
+        if _is_safe_login_next_url(next_url):
+            return next_url
         return url_for("dashboard.dashboard")
     return url_for("settings.onboarding")
+
+
+def _redirect_for_user_doc(user_doc):
+    return _redirect_after_login(user_doc)
 
 
 def _complete_appwrite_login(
@@ -876,6 +899,9 @@ def login():
     """Render the sign-in page."""
     if current_user.is_authenticated:
         return redirect(url_for("dashboard.dashboard"))
+    next_url = request.args.get("next")
+    if next_url:
+        _store_login_next_url(next_url)
     error = _login_error_text(session.pop(AUTH_ERROR_SESSION_KEY, None))
     response = make_response(render_template("login.html", error=error))
     response.headers["Content-Security-Policy"] = LOGIN_CSP
@@ -1432,7 +1458,7 @@ def oauth2callback():
     if not user_doc.get("onboarding_complete"):
         return redirect(url_for("settings.onboarding"))
 
-    return redirect(url_for("dashboard.dashboard"))
+    return redirect(_redirect_after_login(user_doc))
 
 
 @auth_bp.route("/logout")

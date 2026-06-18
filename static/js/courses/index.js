@@ -19,6 +19,7 @@ const {
   buildSectionSearchBlob,
   cssEscape,
   parseAtlasTimeToken,
+  parseCoursesSectionDeepLink,
 } = window.APStudyCoursesUtils;
 
 const state = {
@@ -129,12 +130,47 @@ async function bootstrap() {
     if (state.selectedTerm) {
       await loadSectionsForTerm(state.selectedTerm);
     }
+    await applyCoursesDeepLink();
   } catch (error) {
     console.error(error);
     state.error = error.message || "Unable to load courses.";
   } finally {
     state.loading = false;
     render();
+  }
+}
+
+async function applyCoursesDeepLink() {
+  const sectionId = parseCoursesSectionDeepLink(window.location);
+  if (!sectionId) return;
+
+  try {
+    const payload = await fetchJson("/api/atlas/sections/by-id", {
+      method: "POST",
+      body: JSON.stringify({
+        section_ids: [sectionId],
+        include_cancelled: true,
+      }),
+    });
+    const sections = Array.isArray(payload.sections) ? payload.sections : [];
+    const section = sections.find((row) => String(row.id || "") === sectionId) || sections[0];
+    if (!section) {
+      showToast("Course section not found.", true);
+      return;
+    }
+
+    rememberSection(section);
+    const sectionTerm = section.term || state.selectedTerm;
+    if (sectionTerm && state.terms.includes(sectionTerm)) {
+      state.selectedTerm = sectionTerm;
+      await loadSectionsForTerm(sectionTerm);
+      rememberSection(section);
+    }
+    openDetail(String(section.id || sectionId));
+    window.history.replaceState({}, "", window.location.pathname);
+  } catch (error) {
+    console.error(error);
+    showToast(error.message || "Course section not found.", true);
   }
 }
 

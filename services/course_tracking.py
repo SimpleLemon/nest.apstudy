@@ -11,6 +11,11 @@ from appwrite.services.messaging import Messaging
 from appwrite_client import COLLECTIONS, client as appwrite_client
 from appwrite_helpers import format_datetime, list_rows_all, update_row_safe
 from services.atlas_client import fetch_live_section_status
+from services.course_tracking_email import (
+    build_nest_courses_detail_url,
+    build_open_seat_html,
+    build_open_seat_subject,
+)
 from services.discord_audit import emit_course_track_event
 
 
@@ -68,20 +73,12 @@ def _send_open_email(track, section):
     messaging = Messaging(appwrite_client)
     base_url = os.environ.get("APP_BASE_URL", "https://nest.apstudy.org").rstrip("/")
     course_code = section.get("course_code") or track.get("course_code") or "Tracked class"
-    course_title = section.get("course_title") or track.get("course_title") or ""
-    status = section.get("enrollment_status") or "Open"
-    seats_available = section.get("seats_available")
-    seats_text = "unknown"
-    if seats_available is not None:
-        seats_text = str(seats_available)
-    subject = f"{course_code} has an open seat"
-    content = (
-        f"<p>{course_code} {course_title} appears to have an available seat.</p>"
-        f"<p>Status: <strong>{status}</strong><br>"
-        f"Seats available: <strong>{seats_text}</strong><br>"
-        f"Section: {section.get('section_number') or track.get('section_id') or 'N/A'}<br>"
-        f"CRN: {section.get('crn') or track.get('crn') or 'N/A'}</p>"
-        f'<p><a href="{base_url}/courses">Open APStudy Courses</a></p>'
+    section_id = section.get("id") or track.get("section_id") or ""
+    subject = build_open_seat_subject(course_code, section.get("seats_available"))
+    content = build_open_seat_html(
+        section,
+        base_url=base_url,
+        nest_details_url=build_nest_courses_detail_url(base_url, section_id),
     )
     messaging.create_email(
         message_id=ID.unique(),

@@ -167,6 +167,17 @@
     return String(value).replace(/["\\]/g, "\\$&");
   }
 
+  function parseCoursesSectionDeepLink(locationLike = window.location) {
+    const hash = String(locationLike.hash || "").replace(/^#/, "");
+    if (hash.startsWith("section=")) {
+      const sectionId = decodeURIComponent(hash.slice("section=".length)).trim();
+      if (sectionId) return sectionId;
+    }
+    const params = new URLSearchParams(locationLike.search || "");
+    const querySection = String(params.get("section") || "").trim();
+    return querySection || null;
+  }
+
   window.APStudyCoursesUtils = {
     buildSectionSearchBlob,
     compareCourseSections,
@@ -181,6 +192,7 @@
     formatTermLabel,
     normalizeScheduleDisplay,
     parseAtlasTimeToken,
+    parseCoursesSectionDeepLink,
     parseTimeInput,
   };
 })();
