@@ -1,4 +1,18 @@
 (() => {
+    const resolveLandingTheme = () => (
+        window.matchMedia("(prefers-color-scheme: dark)").matches ? "nest-dark" : "parchment-light"
+    );
+
+    const applyLandingTheme = () => {
+        if (typeof window.APSTUDY_SET_THEME_PREFERENCE !== "function") return;
+        window.APSTUDY_SET_THEME_PREFERENCE(resolveLandingTheme(), { persist: false, silent: true });
+    };
+
+    applyLandingTheme();
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyLandingTheme);
+})();
+
+(() => {
     const GA_ID = "G-0NT330ZX5L";
     window.dataLayer = window.dataLayer || [];
     function gtag() {

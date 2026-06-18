@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" data-apstudy-theme-preference="system-match" data-apstudy-theme-locked="true">
+<html lang="en" data-apstudy-theme-locked="true">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Nest.APStudy brings your academic calendar, tasks, courses, notes, files, and chat into one command center." />
     <title>Nest.APStudy - Academic Command Center</title>
+    <script>
+        (function () {
+            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            window.APSTUDY_THEME_LOCKED = true;
+            window.APSTUDY_THEME_PREFERENCE = prefersDark ? 'nest-dark' : 'parchment-light';
+        })();
+    </script>
     <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
     <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
