@@ -5,40 +5,60 @@
   "catalog_number": "170",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "HSC",
   "requirements": [
     "HSC"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Special topics in Middle Eastern and South Asian Studies, at the 100 level; may be repeated when content varies.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Course based on selected topics in dance or movement studies. May be repeated for credit when topic varies.",
+  "course_notes": "(Same as ECON 385 1)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3078",
       "crn": "4522",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Nagar",
+      "instructor": "Kelli Lanier",
       "instructors": [
         {
-          "name": "D. Nagar",
-          "email": null
+          "name": "Kelli Lanier",
+          "email": "klanier@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Lori Teague",
+          "email": "lteague@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rich Building 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -54,56 +74,26 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "4522",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Nagar",
-      "instructors": [
-        {
-          "name": "D. Nagar",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Nagar"
+    "Kelli Lanier",
+    "Lori Teague"
   ],
-  "scraped_at": "2026-06-17T23:03:57.659Z"
+  "scraped_at": "2026-06-18T02:30:25.517Z"
 }

@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HAW",
   "requirements": [
-    "HAW"
+    "HAW",
+    "Humanities and Arts with Cont.Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Surveys key texts in political philosophy, including ancient, early modern, 19th and 20th century sources. Key issues include the nature of the just state and the rights and responsibilities of citizens.",
-  "course_notes": "One PHIL course or equivalent transfer credit as prerequisite.",
+  "course_notes": "During registration, this course is restricted to PPL majors. After registration, the restriction will be removed for the Add/Drop/Swap periods.",
   "requisites": "One PHIL course or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,45 @@
   },
   "sections": [
     {
+      "atlas_key": "3584",
       "crn": "1694",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Marriott/Tyler",
+      "instructor": "David Marriott",
       "instructors": [
         {
-          "name": "Marriott/Tyler",
-          "email": null
+          "name": "David Marriott",
+          "email": "david.marriott@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shannon Tyler",
+          "email": "shannon.tyler@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Candler Library 124",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "2",
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,26 +77,47 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3585",
       "crn": "2453",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "B. Brewer",
+      "instructor": "Benjamin Brewer",
       "instructors": [
         {
-          "name": "B. Brewer",
-          "email": null
+          "name": "Benjamin Brewer",
+          "email": "benjamin.brewer@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 18,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -89,92 +133,27 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "1694",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Marriott/Tyler",
-      "instructors": [
-        {
-          "name": "Marriott/Tyler",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2453",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "B. Brewer",
-      "instructors": [
-        {
-          "name": "B. Brewer",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "B. Brewer",
-    "Marriott/Tyler"
+    "Benjamin Brewer",
+    "David Marriott",
+    "Shannon Tyler"
   ],
-  "scraped_at": "2026-06-17T23:14:10.749Z"
+  "scraped_at": "2026-06-18T03:13:19.829Z"
 }

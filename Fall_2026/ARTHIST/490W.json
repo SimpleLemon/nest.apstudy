@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "XAW",
   "requirements": [
-    "XAW"
+    "XAW",
+    "Experience and Application with Cont.Comm(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Topics. Focuses on research methods using primary sources. Examines original objects in archives, libraries, and museums. Supports original research and communication in various genres. Emphasizes first-hand experience of art, exhibitions, and archives through local field trips and domestic travel.",
-  "course_notes": null,
+  "course_notes": "(Same as POLS 490RW 1, HIST 496W 1, SOC 489W 1) Mining the Archive: Atlanta's New Deal Public Housing Atlanta was the site of both the first so-called \"slum clearance\" project in the United States, in 1934, and of America's first completed - racially segregated - federally-funded public housing: Techwood Homes (1936-1996, for white families), and University Homes (1937-2009, for Black families). These projects, composed of low-slung brick apartment buildings set in footpath-crossed open spaces, became models for subsequent housing projects built throughout the U.S. and will be the focus of this archivally-based seminar. Students will gain facility working in the archival environment through theoretical and historical readings and discussions, workshops with archival and library representatives, and, critically, through hands-on experience working in an Atlanta-area archive. Student research + writing of a self-framed, public-oriented narrative about the projects will be featured in the digital humanities site Atlanta Housing Interplay, developed by the professor with Emory Center for Digital Scholarship (ECDS). This is an upper-level, writing-intensive seminar designed for students who have some experience with art history, typically having taken courses at the 200 or 300 level. Please contact the professor if you have any questions about your suitability for the course. Art History major/minor: Division III Architectural Studies minor: elective",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "4103",
       "crn": "4446",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "C. Crawford",
+      "instructor": "Christina Crawford",
       "instructors": [
         {
-          "name": "C. Crawford",
-          "email": null
+          "name": "Christina Crawford",
+          "email": "christina.crawford@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Atwood Chemistry Bldg. 280",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application with Cont.Comm(*)",
+      "requirements": [
+        "Experience and Application with Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-5:15p",
@@ -49,51 +67,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "4446",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "C. Crawford",
-      "instructors": [
-        {
-          "name": "C. Crawford",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Crawford"
+    "Christina Crawford"
   ],
-  "scraped_at": "2026-06-17T23:09:14.911Z"
+  "scraped_at": "2026-06-18T02:47:16.214Z"
 }

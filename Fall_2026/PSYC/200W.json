@@ -8,12 +8,13 @@
   "credit_hours": "5",
   "requirement_designation": "SSW",
   "requirements": [
-    "SSW"
+    "SSW",
+    "Social Sciences with Continuing Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Introduction to basic methods and design of psychological research in the areas of learning, memory, sensation, perception, personality, and social processes. Laboratory exercises and fundamentals of scientific writing are emphasized.",
-  "course_notes": "(PSYC 110 or PSYC_OX 110 or PSYC 111 or PSYC_OX 111) and (PSYC 230 or QTM 100 or QTM_OX 100) or equivalent transfer credit as prerequisite.",
+  "course_notes": "(\"Introduction to research design and scientific thought in psychology, including observational, survey, and experimental approaches. Lectures and laboratory exercises provide students with a basis for (a) understanding and evaluating published research; (b) planning, executing, and reporting the results of research studies, and (c) communicating research findings clearly and concisely with APA style.\" The class lectures meet on Tuesdays and Thursdays. Students must also sign up for a 75-minute lab on Mondays. Course requirements include collaboration on an original empirical research project, written assignments in the service of a full-length APA-style research paper, and participation in a research poster session. A required course for psychology majors, PSYC200W should be taken during the sophomore or junior year. OF NOTE: Freshmen and seniors CANNOT take this course.\") If the lecture section is full, please send Lorenza Houser (lhouser@emory.edu) the following information to be added on to the in-house waitlist: student ID, semester/year completed QTM 100, expected graduation, planning to study abroad (Y/N)-if Yes, semester/year, rank ALL lab sections according to priority (1st - last). NOTE: The department will decide on the waitlist a week or at the beginning of the spring semester.)",
   "requisites": "(PSYC 110 or PSYC_OX 110 or PSYC 111 or PSYC_OX 111) and (PSYC 230 or QTM 100 or QTM_OX 100) or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,38 @@
   },
   "sections": [
     {
+      "atlas_key": "1103",
       "crn": "2153",
       "section_number": "LAB1",
       "schedule_type": "LAB",
-      "instructor": "N. Li",
+      "instructor": "Ning Li",
       "instructors": [
         {
-          "name": "N. Li",
-          "email": null
+          "name": "Ning Li",
+          "email": "ning.li@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 316",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 1-2:15p",
@@ -49,26 +65,45 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1104",
       "crn": "2154",
       "section_number": "LAB2",
       "schedule_type": "LAB",
-      "instructor": "R. Hennessy",
+      "instructor": "Rebecca Hennessy",
       "instructors": [
         {
-          "name": "R. Hennessy",
-          "email": null
+          "name": "Rebecca Hennessy",
+          "email": "rebecca.hennessy@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 235",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "5",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 20,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-3:45p",
@@ -79,26 +114,45 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1105",
       "crn": "2170",
       "section_number": "LAB3",
       "schedule_type": "LAB",
-      "instructor": "A. Wong",
+      "instructor": "Anson Wong",
       "instructors": [
         {
-          "name": "A. Wong",
-          "email": null
+          "name": "Anson Wong",
+          "email": "anson.wong@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 250",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-5:15p",
@@ -109,26 +163,45 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1106",
       "crn": "2171",
       "section_number": "LAB4",
       "schedule_type": "LAB",
-      "instructor": "P. Lashley",
+      "instructor": "Piper Lashley",
       "instructors": [
         {
-          "name": "P. Lashley",
-          "email": null
+          "name": "Piper Lashley",
+          "email": "plashle@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 225",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 20,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 5:30-6:45p",
@@ -139,26 +212,45 @@
             "end": "1845"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1107",
       "crn": "2172",
       "section_number": "LAB5",
       "schedule_type": "LAB",
-      "instructor": "A. Parker",
+      "instructor": "Amira Parker",
       "instructors": [
         {
-          "name": "A. Parker",
-          "email": null
+          "name": "Amira Parker",
+          "email": "amira.parker@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 225",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 20,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 7-8:15p",
@@ -169,26 +261,47 @@
             "end": "2015"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1102",
       "crn": "2124",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "T. Medina",
+      "instructor": "Tamara Nicol Medina",
       "instructors": [
         {
-          "name": "T. Medina",
-          "email": null
+          "name": "Tamara Nicol Medina",
+          "email": "tamara.n.medina@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "5",
+      "requirement_designation": "Social Sciences with Continuing Communication(*)",
+      "requirements": [
+        "Social Sciences with Continuing Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 90,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -204,211 +317,30 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2153",
-      "section_number": "LAB1",
-      "schedule_type": "LAB",
-      "instructor": "N. Li",
-      "instructors": [
-        {
-          "name": "N. Li",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2154",
-      "section_number": "LAB2",
-      "schedule_type": "LAB",
-      "instructor": "R. Hennessy",
-      "instructors": [
-        {
-          "name": "R. Hennessy",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2170",
-      "section_number": "LAB3",
-      "schedule_type": "LAB",
-      "instructor": "A. Wong",
-      "instructors": [
-        {
-          "name": "A. Wong",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2171",
-      "section_number": "LAB4",
-      "schedule_type": "LAB",
-      "instructor": "P. Lashley",
-      "instructors": [
-        {
-          "name": "P. Lashley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 5:30-6:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1730",
-            "end": "1845"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2172",
-      "section_number": "LAB5",
-      "schedule_type": "LAB",
-      "instructor": "A. Parker",
-      "instructors": [
-        {
-          "name": "A. Parker",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 7-8:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1900",
-            "end": "2015"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2124",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "T. Medina",
-      "instructors": [
-        {
-          "name": "T. Medina",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
-    "lectures": 2,
-    "labs": 10,
+    "total_sections": 6,
+    "lectures": 1,
+    "labs": 5,
     "discussions": 0,
     "other": 0,
-    "open": 6,
-    "closed": 6,
+    "open": 4,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Parker",
-    "A. Wong",
-    "N. Li",
-    "P. Lashley",
-    "R. Hennessy",
-    "T. Medina"
+    "Amira Parker",
+    "Anson Wong",
+    "Ning Li",
+    "Piper Lashley",
+    "Rebecca Hennessy",
+    "Tamara Nicol Medina"
   ],
-  "scraped_at": "2026-06-17T23:14:27.052Z"
+  "scraped_at": "2026-06-18T03:17:10.141Z"
 }

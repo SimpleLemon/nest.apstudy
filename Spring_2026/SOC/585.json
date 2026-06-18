@@ -5,38 +5,51 @@
   "catalog_number": "585",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is a survey of the basics of evidence law, focusing on the Federal Rules of Evidence.",
+  "course_notes": "Final Assessment: Scheduled Exam Mid-term Assessment: Paper/Project",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "2689",
       "crn": "3250",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "K. Brown",
+      "instructor": "Douglas Waters Jr.",
       "instructors": [
         {
-          "name": "K. Brown",
-          "email": null
+          "name": "Douglas Waters Jr.",
+          "email": "douglas.l.waters.jr@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 92,
+      "seats_available": 0,
+      "waitlist_total": 7,
+      "waitlist_capacity": 10,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6-8:45p",
@@ -47,26 +60,43 @@
             "end": "2045"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "2690",
       "crn": "4454",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "D. LaChance",
+      "instructor": "Kyle Skinner",
       "instructors": [
         {
-          "name": "D. LaChance",
-          "email": null
+          "name": "Kyle Skinner",
+          "email": "kyle.skinner@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 110,
+      "seats_available": 14,
+      "waitlist_total": 0,
+      "waitlist_capacity": 10,
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-5:30p",
@@ -77,26 +107,43 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "2691",
       "crn": "5279",
       "section_number": "3",
       "schedule_type": "SEM",
-      "instructor": "J. Easley",
+      "instructor": "Andrew Reisman",
       "instructors": [
         {
-          "name": "J. Easley",
-          "email": null
+          "name": "Andrew Reisman",
+          "email": "andrew.louis.reisman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 92,
+      "seats_available": 0,
+      "waitlist_total": 8,
+      "waitlist_capacity": 10,
       "is_cancelled": false,
       "schedule": {
         "display": "W 9a-12p",
@@ -107,113 +154,27 @@
             "end": "1200"
           }
         ]
-      }
-    },
-    {
-      "crn": "3250",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "K. Brown",
-      "instructors": [
-        {
-          "name": "K. Brown",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6-8:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1800",
-            "end": "2045"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4454",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "D. LaChance",
-      "instructors": [
-        {
-          "name": "D. LaChance",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5279",
-      "section_number": "3",
-      "schedule_type": "SEM",
-      "instructor": "J. Easley",
-      "instructors": [
-        {
-          "name": "J. Easley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 9a-12p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "900",
-            "end": "1200"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
+    "total_sections": 3,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 6,
-    "open": 6,
+    "other": 3,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. LaChance",
-    "J. Easley",
-    "K. Brown"
+    "Andrew Reisman",
+    "Douglas Waters Jr.",
+    "Kyle Skinner"
   ],
-  "scraped_at": "2026-06-17T23:06:47.074Z"
+  "scraped_at": "2026-06-18T02:44:07.428Z"
 }

@@ -5,23 +5,24 @@
   "catalog_number": "370L",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Open only to students admitted as fellows in the program in Community Building and Social Change.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "CORE",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": "POLS 370L ENVS 370L CBSC 370L",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3342",
       "crn": "4514",
       "section_number": "1",
       "schedule_type": "LAB",
@@ -29,16 +30,28 @@
       "instructors": [
         {
           "name": "D. Thurman",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,56 +67,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "4514",
-      "section_number": "1",
-      "schedule_type": "LAB",
-      "instructor": "D. Thurman",
-      "instructors": [
-        {
-          "name": "D. Thurman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
-    "labs": 2,
+    "labs": 1,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "D. Thurman"
   ],
-  "scraped_at": "2026-06-17T23:06:47.070Z"
+  "scraped_at": "2026-06-18T02:44:07.420Z"
 }

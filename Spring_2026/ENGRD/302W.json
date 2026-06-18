@@ -5,75 +5,55 @@
   "catalog_number": "302W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "CW",
   "requirements": [
     "CW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This writing-intensive course provides students with practice developing rhetorically effective and ethically sensitive communication in genres that characterize professional activity across and outside the university. No prior technical knowledge required.",
-  "course_notes": null,
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Theory of linear programming, duality, optimal flows in networks, and mathematical programming.",
+  "course_notes": "See Dr. Chih to waive the CS170 requirement if you have previous coding experience.",
   "requisites": null,
   "cross_listed": "QTM 302W",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4092",
       "crn": "4298",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Dutta/McDermott",
+      "instructor": "Tien Chih",
       "instructors": [
         {
-          "name": "Dutta/McDermott",
-          "email": null
+          "name": "Tien Chih",
+          "email": "tien.chih@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4298",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Dutta/McDermott",
-      "instructors": [
-        {
-          "name": "Dutta/McDermott",
-          "email": null
-        }
-      ],
-      "location": null,
+      "location": "Pierce Hall 237",
       "campus": "Oxford",
-      "campus_description": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 17,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -89,21 +69,25 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "Dutta/McDermott"
+    "Tien Chih"
   ],
-  "scraped_at": "2026-06-17T23:02:23.322Z"
+  "scraped_at": "2026-06-18T02:19:56.737Z"
 }

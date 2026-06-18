@@ -10,35 +10,50 @@
   "requirements": [
     "HAP"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Considers common roots of spirituals, blues, and jazz, and surveys historical, cultural, social, and denominational factors that have shaped our perspective on the spiritual capacity of jazz. Focus is on the sacred works, biographies, and implicit theological positions of specific jazz masters.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Open only to undergraduate students by permission of the instructor. Additionally, this course is required for all students seeking to apply for the fellowship in Community Building and Social Change.",
+  "course_notes": "(Same as POLS 370A 1, ENVS 370A 1, CBSC 370A 1)",
   "requisites": null,
   "cross_listed": "AAS 305 REL 335",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1088",
       "crn": "2944",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Andrews",
+      "instructor": "Michael Rich",
       "instructors": [
         {
-          "name": "D. Andrews",
-          "email": null
+          "name": "Michael Rich",
+          "email": "mrich@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - N304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,56 +69,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "2944",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Andrews",
-      "instructors": [
-        {
-          "name": "D. Andrews",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Andrews"
+    "Michael Rich"
   ],
-  "scraped_at": "2026-06-17T23:04:14.011Z"
+  "scraped_at": "2026-06-18T02:32:04.595Z"
 }

@@ -5,13 +5,13 @@
   "catalog_number": "769",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Advanced seminar on 19th century art and/or architecture with emphasis on critical texts, methods, and techniques of art historical investigation. Permission from instructor required.",
+  "course_notes": "Virigina Woolf famously said that \"on or about December 1910 human character changed.\" What was the change that came over \"human character\"? What was character before this moment and have things changed again after the modern period? This course aims to understand the arguments made for modern art by looking at major criticism from around 1910 to 1960. Some of the authors we will read are Roger Fry, T. S. Eliot, Paul Valéry, Georg Lukacs, Walter Benjamin, Siegfried Kracauer, T. W. Adorno, Clement Greenberg, T. J. Clark, Roland Barthes, and Paul de Man. Some of the questions we will bring to these texts are: What about this tradition is sustainable? What has never gone away? What needs to be left behind? And \"above all\" where are we going now?",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,38 @@
   },
   "sections": [
     {
+      "atlas_key": "1477",
       "crn": "1763",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "T. Cronan",
+      "instructor": "Todd S Cronan",
       "instructors": [
         {
-          "name": "T. Cronan",
-          "email": null
+          "name": "Todd S Cronan",
+          "email": "todd.cronan@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Carlos Hall Conference",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 5:30-8:15p",
@@ -47,51 +62,25 @@
             "end": "2015"
           }
         ]
-      }
-    },
-    {
-      "crn": "1763",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "T. Cronan",
-      "instructors": [
-        {
-          "name": "T. Cronan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 5:30-8:15p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1730",
-            "end": "2015"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "T. Cronan"
+    "Todd S Cronan"
   ],
-  "scraped_at": "2026-06-17T23:09:14.913Z"
+  "scraped_at": "2026-06-18T02:47:16.215Z"
 }

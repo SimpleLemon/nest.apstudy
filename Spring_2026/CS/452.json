@@ -5,23 +5,25 @@
   "catalog_number": "452",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "MQR",
   "requirements": [
-    "MQR"
+    "MQR",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "The structure and organization of computer operating systems. Process, memory, and I/O management; device drivers, exception handling, and interprocess communication. Students write an operating system as a course-long project.",
-  "course_notes": "CS 350 or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Emphasis on oral and written communication skills. Assignments include a thorough review of the fine points of French grammar, cultural and literary readings, French films, and frequent compositions.",
+  "course_notes": "FREN 203 Intermediate French II (Staff / TTh 10:00-11:15am; F 10:00-10:50am online synchronous). Content: In French 203, students develop interpretive strategies and review and practice grammatical forms in the context of authentic literary and cultural texts. Class activities are designed to improve students' abilities in the communicative and presentational modes. There will be frequent written reactions to authentic materials. Viewing of French films will provide the opportunity for extended oral analysis and discussion. French 203 counts towards the minor in French but not the major. Assessment: Grading will be based on written unit tests, compositions, oral presentations, class participation. Required Textbooks, Articles, and Resources: Required: Dãfi Francophone 2: 6 month My French H (ISBN 9788419072733); Optional: Dãfi Francophone 2: Student Bundle 12 month (ISBN 9788419072764. Course Requisites FREN 201 as prerequisite, or by placement exam.",
   "requisites": "CS 350 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "632",
       "crn": "3674",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +31,32 @@
       "instructors": [
         {
           "name": "K. Mandelberg",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway C101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,56 +72,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3674",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "K. Mandelberg",
-      "instructors": [
-        {
-          "name": "K. Mandelberg",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "K. Mandelberg"
   ],
-  "scraped_at": "2026-06-17T23:01:53.993Z"
+  "scraped_at": "2026-06-18T02:16:08.228Z"
 }

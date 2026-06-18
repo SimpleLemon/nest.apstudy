@@ -5,40 +5,58 @@
   "catalog_number": "476R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "First-Year Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Selected issues in physiological and comparative psychology.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Instruction in rhetorical composition, critical reading, reflection, and writing as recursive process. Across themed sections, students engage with diverse genres. Courses share some common assignments including research writing and final student-curated portfolio with reflection project.",
+  "course_notes": "(Topic: Dreaming in Jewish) (What, exactly, is a dream? A meaningless nighttime fantasy? A secret portal to the soul? A personal revelation? A political expression? In this course, we will examine all of these possibilities-and more-through the careful analysis of Jewish dream narratives and literature. (This course is opened to ALL students, and no familiarity with Judaism or Jewish literature is necessary.) (This course will have three primary units. First, we will examine various theories of dream interpretation: we still start with Sigmund Freud's magisterial The Interpretation of Dreams, before moving beyond him to see how later thinkers utilized his theory for piercing political and cultural analyses. We then will move to a unit covering dream narratives from the Bible to the dawn of modernity. This section's authors explicitly reflect on their Jewishness, relating their dreams to their historico-cultural situation. (Texts for this unit may include selections from the Bible, the Talmud, rabbinic sources, kabbalistic/mystical sources, and diaries.) In the final unit, which will take us through the modern era, we will examine dream narratives by writers who happen to be Jewish; whether their Jewishness manifests in their works will be the topic of discussion. (Authors for this section may include Ben Yehuda, Benjamin, Bergson, Beradt, Bialik, Brenner, Cixous, Derrida, Freud, Herzl, Kafka, Klepfisz, Lempel, Lispector, Nahman of Bratslav, Paley, Pappenheim, Roth, and Svevo.) (Ultimately, this course will pose-and attempt to answer-the following questions: What is a Jewish dream? Is there such a thing as a Jewish dream? What distinguishes a Jewish dream from a non-Jewish dream? Can a non-Jew dream a Jewish dream? And fundamentally: What are the stakes of analyzing a dream as a text-a text which we all have within us?) Texts: Beradt, Charlotte. The Third Reich of Dreams: The Nightmares of a Nation. Translated by Damion Searls. Princeton, NJ: Princeton University Press, 2025. ISBN: 9780691243511 Boyarin, Daniel. Unheroic Conduct: The Rise of Heterosexuality and the Invention of the Jewish Man. Berkeley, CA: University of California Press, 1997. ISBN: 9780520210509",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3806",
       "crn": "2059",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "R. Hampton",
+      "instructor": "Benjamin Schrenzel",
       "instructors": [
         {
-          "name": "R. Hampton",
-          "email": null
+          "name": "Benjamin Schrenzel",
+          "email": "benjamin.schrenzel@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "First-Year Writing(*)",
+      "requirements": [
+        "First-Year Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2059",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "R. Hampton",
-      "instructors": [
-        {
-          "name": "R. Hampton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Hampton"
+    "Benjamin Schrenzel"
   ],
-  "scraped_at": "2026-06-17T23:06:24.222Z"
+  "scraped_at": "2026-06-18T02:42:27.314Z"
 }

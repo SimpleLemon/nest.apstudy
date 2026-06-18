@@ -5,328 +5,309 @@
   "catalog_number": "399R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 8",
+  "credit_hours": "1,2,3,4,5,6,7,8",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Variable credit. Permission required. Intended for students who have had some prior introduction to research, either in ENVS 299 or in another class or field. In this individual research course, research skills are developed and refined under supervision of an ENVS faculty member.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Credit, eight hours for sequence. Open by invitation to candidates for honors in the senior year. Must be taken in addition to the major requirements.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3033",
       "crn": "6332",
       "section_number": "1",
       "schedule_type": "RSC",
-      "instructor": "G. Vazquez Prokopec",
+      "instructor": "Heidi Senungetuk",
       "instructors": [
         {
-          "name": "G. Vazquez Prokopec",
-          "email": null
+          "name": "Heidi Senungetuk",
+          "email": "heidi.aklaseaq.senungetuk@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3034",
       "crn": "6395",
       "section_number": "2",
       "schedule_type": "RSC",
-      "instructor": "E. Saikawa",
+      "instructor": "Alissa Bans",
       "instructors": [
         {
-          "name": "E. Saikawa",
-          "email": null
+          "name": "Alissa Bans",
+          "email": "alissa.sue.bans@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3035",
       "crn": "6516",
       "section_number": "3",
       "schedule_type": "RSC",
-      "instructor": "T. Gillespie",
+      "instructor": "Kurt Warncke",
       "instructors": [
         {
-          "name": "T. Gillespie",
-          "email": null
+          "name": "Kurt Warncke",
+          "email": "kwarnck@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3036",
       "crn": "6526",
       "section_number": "4",
       "schedule_type": "RSC",
-      "instructor": "Martin/Page",
+      "instructor": "Devaka Premawardhana",
       "instructors": [
         {
-          "name": "Martin/Page",
-          "email": null
+          "name": "Devaka Premawardhana",
+          "email": "devaka.premawardhana@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3037",
       "crn": "6580",
       "section_number": "5",
       "schedule_type": "RSC",
-      "instructor": "D. Civitello",
+      "instructor": "James Hoesterey",
       "instructors": [
         {
-          "name": "D. Civitello",
-          "email": null
+          "name": "James Hoesterey",
+          "email": "jbhoesterey@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3038",
       "crn": "6622",
       "section_number": "6",
       "schedule_type": "RSC",
-      "instructor": "X. Huang",
+      "instructor": "William K Gilders",
       "instructors": [
         {
-          "name": "X. Huang",
-          "email": null
+          "name": "William K Gilders",
+          "email": "wgilder@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6332",
-      "section_number": "1",
-      "schedule_type": "RSC",
-      "instructor": "G. Vazquez Prokopec",
-      "instructors": [
-        {
-          "name": "G. Vazquez Prokopec",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6395",
-      "section_number": "2",
-      "schedule_type": "RSC",
-      "instructor": "E. Saikawa",
-      "instructors": [
-        {
-          "name": "E. Saikawa",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6516",
-      "section_number": "3",
-      "schedule_type": "RSC",
-      "instructor": "T. Gillespie",
-      "instructors": [
-        {
-          "name": "T. Gillespie",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6526",
-      "section_number": "4",
-      "schedule_type": "RSC",
-      "instructor": "Martin/Page",
-      "instructors": [
-        {
-          "name": "Martin/Page",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6580",
-      "section_number": "5",
-      "schedule_type": "RSC",
-      "instructor": "D. Civitello",
-      "instructors": [
-        {
-          "name": "D. Civitello",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6622",
-      "section_number": "6",
-      "schedule_type": "RSC",
-      "instructor": "X. Huang",
-      "instructors": [
-        {
-          "name": "X. Huang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
+    "total_sections": 6,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 12,
-    "open": 6,
-    "closed": 6,
+    "other": 6,
+    "open": 4,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Civitello",
-    "E. Saikawa",
-    "G. Vazquez Prokopec",
-    "Martin/Page",
-    "T. Gillespie",
-    "X. Huang"
+    "Alissa Bans",
+    "Devaka Premawardhana",
+    "Heidi Senungetuk",
+    "James Hoesterey",
+    "Kurt Warncke",
+    "William K Gilders"
   ],
-  "scraped_at": "2026-06-17T23:02:26.545Z"
+  "scraped_at": "2026-06-18T02:20:39.954Z"
 }

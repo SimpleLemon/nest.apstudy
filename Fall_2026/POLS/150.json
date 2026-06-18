@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "SS",
   "requirements": [
-    "SS"
+    "SS",
+    "Social Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Discussion based course on the foundational ideas that underlie American democracy and other major American political debates from the revolutionary era to the present. Readings drawn from classic texts and original documents, speeches and writings of leading American political figures.This course is part of Emory's Voluntary Core Curriculum program.",
-  "course_notes": null,
+  "course_notes": "The course is part of Emory College's Voluntary Core Curriculum Program.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "2868",
       "crn": "3140",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "E. Gee",
+      "instructor": "Evan Gee",
       "instructors": [
         {
-          "name": "E. Gee",
-          "email": null
+          "name": "Evan Gee",
+          "email": "evan.cree.gee@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Tarbutton Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "3140",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Gee",
-      "instructors": [
-        {
-          "name": "E. Gee",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 2,
+    "open": 1,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Gee"
+    "Evan Gee"
   ],
-  "scraped_at": "2026-06-17T23:14:20.594Z"
+  "scraped_at": "2026-06-18T03:15:33.871Z"
 }

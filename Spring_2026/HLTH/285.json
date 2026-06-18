@@ -5,40 +5,63 @@
   "catalog_number": "285",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "1",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Special Topics course.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Emory Essentials introduces Emory College first-year students to university resources, opportunities, and policies. Through class discussions, small-group activities, and homework assignments, students will reflect, explore, and begin designing their unique Emory experience.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3846",
       "crn": "2885",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "T. Armidie",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "T. Armidie",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Mindy Filien",
+          "email": "mfilien@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W307C",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,26 +77,53 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3847",
       "crn": "4529",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "J. Ashe",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "J. Ashe",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Vernon Smith",
+          "email": "vernon.smith@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -89,92 +139,28 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2885",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "T. Armidie",
-      "instructors": [
-        {
-          "name": "T. Armidie",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4529",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "J. Ashe",
-      "instructors": [
-        {
-          "name": "J. Ashe",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 0,
+    "open": 0,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Ashe",
-    "T. Armidie"
+    "Emily Morran",
+    "Mindy Filien",
+    "Shari Obrentz",
+    "Vernon Smith"
   ],
-  "scraped_at": "2026-06-17T23:03:08.803Z"
+  "scraped_at": "2026-06-18T02:25:23.372Z"
 }

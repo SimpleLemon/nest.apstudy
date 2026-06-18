@@ -5,40 +5,58 @@
   "catalog_number": "190",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "FS",
   "requirements": [
-    "FS"
+    "FS",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "The topics for freshman seminars are variable and change every semester. Past offerings include Climate Change, Global Earth Systems, Interpreting Behavior That You Can't See, Ecological Economics, Plants, People and Places and Ecological Restoration.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Continuation of Japanese 102. This course aims to further develop language skills and increase familiarity with Japanese society. The emphasis is on accurate communication in Japanese, both spoken and written, that is appropriate to the given context.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "763",
       "crn": "2528",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "X. Huang",
+      "instructor": "Ren Tan",
       "instructors": [
         {
-          "name": "X. Huang",
-          "email": null
+          "name": "Ren Tan",
+          "email": "ren.tan@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Callaway S102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,56 +72,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2528",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "X. Huang",
-      "instructors": [
-        {
-          "name": "X. Huang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 0,
-    "closed": 2,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "X. Huang"
+    "Ren Tan"
   ],
-  "scraped_at": "2026-06-17T23:02:26.541Z"
+  "scraped_at": "2026-06-18T02:20:39.940Z"
 }

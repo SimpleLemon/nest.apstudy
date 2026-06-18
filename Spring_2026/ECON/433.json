@@ -10,35 +10,48 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course provides an in-depth, technical study of financial markets and investments. We study measures of risk, capital allocation to risky portfolios, optimal portfolios, the capital asset pricing model, indicators of market efficiency, and valuation of various financial instruments.",
-  "course_notes": "(ECON 112 or ECON_OX 112) and (ECON 201 or ECON_OX 201) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course focuses on the development of Augustine's thought across his life and career, with attention to contemporary issues of the church and theology.",
+  "course_notes": "(Same as HC 623 1) (ON CAMPUS)",
   "requisites": "(ECON 112 or ECON_OX 112) and (ECON 201 or ECON_OX 201) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4121",
       "crn": "3983",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Toda/Pulavarti",
+      "instructor": "Anthony Briggman",
       "instructors": [
         {
-          "name": "Toda/Pulavarti",
-          "email": null
+          "name": "Anthony Briggman",
+          "email": "anthony.a.briggman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rita Anne Rollins Building_447",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 6,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,56 +67,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "3983",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Toda/Pulavarti",
-      "instructors": [
-        {
-          "name": "Toda/Pulavarti",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Toda/Pulavarti"
+    "Anthony Briggman"
   ],
-  "scraped_at": "2026-06-17T23:02:03.801Z"
+  "scraped_at": "2026-06-18T02:17:46.581Z"
 }

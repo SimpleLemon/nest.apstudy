@@ -10,8 +10,8 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Explores the study and design of maps and geographic information systems (GIS) as a problem-solving tool for geographic analysis with focus on applications of GIS, data collection and processing, cartographic design, and trends in geospatial technology.",
   "course_notes": "QTM 100 or QTM_OX 100 or BUS 350 or BUS_OX 350 or equivalent transfer credit as prerequisite.",
   "requisites": "QTM 100 or QTM_OX 100 or BUS 350 or BUS_OX 350 or equivalent transfer credit as prerequisite.",
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "2378",
       "crn": "1803",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Clennon",
+      "instructor": "Julie Clennon",
       "instructors": [
         {
-          "name": "J. Clennon",
-          "email": null
+          "name": "Julie Clennon",
+          "email": "jclenno@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W502",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 18,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,26 +69,45 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2379",
       "crn": "1804",
       "section_number": "2",
       "schedule_type": "LAB",
-      "instructor": "J. Clennon",
+      "instructor": "Julie Clennon",
       "instructors": [
         {
-          "name": "J. Clennon",
-          "email": null
+          "name": "Julie Clennon",
+          "email": "jclenno@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W502",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 18,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 8:30-11:15a",
@@ -84,86 +118,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "1803",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Clennon",
-      "instructors": [
-        {
-          "name": "J. Clennon",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1804",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "J. Clennon",
-      "instructors": [
-        {
-          "name": "J. Clennon",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 8:30-11:15a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "830",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 2,
-    "labs": 2,
+    "total_sections": 2,
+    "lectures": 1,
+    "labs": 1,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Clennon"
+    "Julie Clennon"
   ],
-  "scraped_at": "2026-06-17T23:10:29.840Z"
+  "scraped_at": "2026-06-18T02:57:02.093Z"
 }

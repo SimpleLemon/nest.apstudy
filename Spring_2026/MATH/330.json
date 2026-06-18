@@ -5,40 +5,55 @@
   "catalog_number": "330",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
   "requirement_designation": "MQR",
   "requirements": [
     "MQR"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Combinations and permutations, counting techniques, recurrence relations, and generating functions. Block designs, finite planes, and coding theory. Introduction to graph theory.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Credit, two to four hours. Prerequisite: consent of instructor. Adapted to particular needs of individual student with instructor acting as adviser.",
   "course_notes": "(MATH 221 or MATH_OX 221 or MATH 275 or MATH 321) and (MATH 250 or MATH_OX 250 or MATH 276) or equivalent transfer credit as prerequisite.",
   "requisites": "(MATH 221 or MATH_OX 221 or MATH 275 or MATH 321) and (MATH 250 or MATH_OX 250 or MATH 276) or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1037",
       "crn": "2764",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "C. Pohoata",
+      "instructor": "Thomas Bing",
       "instructors": [
         {
-          "name": "C. Pohoata",
-          "email": null
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -54,56 +69,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2764",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "C. Pohoata",
-      "instructors": [
-        {
-          "name": "C. Pohoata",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Pohoata"
+    "Thomas Bing"
   ],
-  "scraped_at": "2026-06-17T23:03:54.285Z"
+  "scraped_at": "2026-06-18T02:30:04.508Z"
 }

@@ -5,40 +5,60 @@
   "catalog_number": "212",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "QR",
   "requirements": [
     "QR"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This is a standard first semester Differential Equations course which covers first and second-order differential equations and systems of differential equations, with an emphasis placed on developing techniques for solving differential equations.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introductory classical mechanics and thermodynamics. Physics 151 and 152 are primarily for students who are strongly motivated in science and mathematics.",
   "course_notes": "MATH 112 or MATH 112S or MATH 112Z or equivalent transfer credit as prerequisite.",
   "requisites": "MATH 112 or MATH 112S or MATH 112Z or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1018",
       "crn": "3117",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Manetta/Lyu",
+      "instructor": "Thomas Bing",
       "instructors": [
         {
-          "name": "Manetta/Lyu",
-          "email": null
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,26 +74,50 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1019",
       "crn": "3129",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "Manetta/Lyu",
+      "instructor": "Thomas Bing",
       "instructors": [
         {
-          "name": "Manetta/Lyu",
-          "email": null
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -89,91 +133,26 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "3117",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Manetta/Lyu",
-      "instructors": [
-        {
-          "name": "Manetta/Lyu",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3129",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "Manetta/Lyu",
-      "instructors": [
-        {
-          "name": "Manetta/Lyu",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 0,
+    "open": 0,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Manetta/Lyu"
+    "Cordell Donofrio",
+    "Thomas Bing"
   ],
-  "scraped_at": "2026-06-17T23:03:54.281Z"
+  "scraped_at": "2026-06-18T02:30:04.502Z"
 }

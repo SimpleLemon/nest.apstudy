@@ -5,40 +5,63 @@
   "catalog_number": "190",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "FS",
   "requirements": [
-    "FS"
+    "FS",
+    "Quantitative Reasoning(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Seminar on various anthropological topics. Satisfies general education Freshman Seminar.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An introduction to Computer Science for students expecting to utilize serious computing in coursework, research, or employment. Emphasis is on computing concepts, programming principles, algorithm development and basic data structures, using the Java programming language and Unix operating system.",
+  "course_notes": "Enrollment is tiered for this course. Waitlists will be added for the incoming first year preregistration.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "510",
       "crn": "1850",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "E. Lonsdorf",
+      "instructor": "Abbey Julian",
       "instructors": [
         {
-          "name": "E. Lonsdorf",
-          "email": null
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "White Hall 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 11,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,56 +77,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "1850",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "E. Lonsdorf",
-      "instructors": [
-        {
-          "name": "E. Lonsdorf",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 0,
-    "closed": 2,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Lonsdorf"
+    "Abbey Julian"
   ],
-  "scraped_at": "2026-06-17T23:01:04.696Z"
+  "scraped_at": "2026-06-18T02:07:32.562Z"
 }

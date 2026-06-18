@@ -5,40 +5,53 @@
   "catalog_number": "219",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "An introduction to the Rhetoric, Writing, and Information Design minor, in which students begin to create the writing portfolio that will be developed in more advanced courses across the minor.",
-  "course_notes": null,
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Online Asynchronous. This course provides a foundation in designing and conducting health promotion research. Students will learn about various types of research at multiple levels of the social ecological model. The goals of the course include achieving competence in designing studies based on scientifically sound research methodologies and gaining the ability to critically evaluate health promotion research.",
+  "course_notes": "BSHES students only. This is an asynchronous online course.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4509",
       "crn": "4086",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "G. Palermo",
+      "instructor": "Whitney Rice",
       "instructors": [
         {
-          "name": "G. Palermo",
-          "email": null
+          "name": "Whitney Rice",
+          "email": "whitney.s.rice@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 24,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-2:15p",
@@ -49,51 +62,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "4086",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "G. Palermo",
-      "instructors": [
-        {
-          "name": "G. Palermo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-2:15p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Palermo"
+    "Whitney Rice"
   ],
-  "scraped_at": "2026-06-17T23:02:23.318Z"
+  "scraped_at": "2026-06-18T02:19:56.734Z"
 }

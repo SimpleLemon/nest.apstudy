@@ -5,177 +5,158 @@
   "catalog_number": "699",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "1",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course bridges the gap between the AP/IB Chemistry curricula and Chemistry 202, and is targeted at students who have applied AP/IB credit to exempt Chem 150. The content focuses on the structure of organic compounds, stereochemistry and isomerism, and conformational fluxionality. Some review of critical content covered in both AP/IB Chemistry and Chemistry 150 is also provided, including electron configurations, orbitals, Lewis structures, VSEPR Theory, hybridization, and resonance.",
+  "course_notes": "This course is open first to students who are also enrolled in CHEM_OX 202 for Fall 2026. It is not intended for students who have previously completed CHEM_OX 202. If spots remain open, those planning to take CHEM_OX 202 the following semester may enroll.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4200",
       "crn": "3510",
       "section_number": "2201",
       "schedule_type": "ABR",
-      "instructor": "C. Goetz",
+      "instructor": "Annette Neuman",
       "instructors": [
         {
-          "name": "C. Goetz",
-          "email": null
+          "name": "Annette Neuman",
+          "email": "annette.neuman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Oxford Science Bldg. 415",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 24,
+      "seats_available": 23,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4201",
       "crn": "3511",
       "section_number": "2444",
       "schedule_type": "ABR",
-      "instructor": "C. Goetz",
+      "instructor": "Jan Barton",
       "instructors": [
         {
-          "name": "C. Goetz",
-          "email": null
+          "name": "Jan Barton",
+          "email": "jbarton@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 400",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 8,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4202",
       "crn": "3512",
       "section_number": "2544",
       "schedule_type": "ABR",
-      "instructor": "C. Goetz",
+      "instructor": "Suhas Sridharan",
       "instructors": [
         {
-          "name": "C. Goetz",
-          "email": null
+          "name": "Suhas Sridharan",
+          "email": "sridharan@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 334",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "3",
+      "enrollment_capacity": 21,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3510",
-      "section_number": "2201",
-      "schedule_type": "ABR",
-      "instructor": "C. Goetz",
-      "instructors": [
-        {
-          "name": "C. Goetz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3511",
-      "section_number": "2444",
-      "schedule_type": "ABR",
-      "instructor": "C. Goetz",
-      "instructors": [
-        {
-          "name": "C. Goetz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3512",
-      "section_number": "2544",
-      "schedule_type": "ABR",
-      "instructor": "C. Goetz",
-      "instructors": [
-        {
-          "name": "C. Goetz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
+    "total_sections": 3,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 6,
-    "open": 6,
+    "other": 3,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Goetz"
+    "Annette Neuman",
+    "Jan Barton",
+    "Suhas Sridharan"
   ],
-  "scraped_at": "2026-06-17T23:01:34.304Z"
+  "scraped_at": "2026-06-18T02:12:20.938Z"
 }

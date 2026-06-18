@@ -5,62 +5,102 @@
   "catalog_number": "620",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "3",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Major topics include: biomolecules, cell structure and function, energy metabolism, and cell reproduction. Fulfills biology major and pre-health requirements. Note: students receiving credit for Biol 141 must still take Biol 141L.",
+  "course_notes": "This is the first semester of a two-semester introductory biology course that is required for all Biology majors. This courses will provide a topic-driven overview of evolution, molecular and cellular biology, biochemistry, genetics, and ecology. The topics covered in LECTURE will address major issues in human biology, medicine, evolution, and ecology, with an emphasis on the basic principles and critical thinking involved in modern biological discovery. Students must also register for a BIOLOGY 141 Laboratory (BIOL 141L). In LAB, students will design and perform experiments using several important model systems. These courses include classical and molecular genetics and meet the biology premedical requirements. Some exams may be administered in the evening. AP Biology scores of 4 or 5 count for the Biology 141 LECTURE ONLY. Students with AP credit for the lecture are required to take the Lab (BIOL 141L). Co-requisite: Biology 141L.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "423",
       "crn": "3401",
       "section_number": "2201",
       "schedule_type": "LEC",
-      "instructor": "S. Mian",
+      "instructor": "Levi Morran",
       "instructors": [
         {
-          "name": "S. Mian",
-          "email": null
+          "name": "Levi Morran",
+          "email": "levi.morran@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "1462 Clifton Rd 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 40,
+      "seats_available": 23,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "424",
       "crn": "3402",
       "section_number": "3249",
       "schedule_type": "LEC",
-      "instructor": "G. Maturana",
+      "instructor": "Eladio Abreu",
       "instructors": [
         {
-          "name": "G. Maturana",
-          "email": null
+          "name": "Eladio Abreu",
+          "email": "eladio.b.abreu@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "White Hall 101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 40,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -76,26 +116,47 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "425",
       "crn": "3403",
       "section_number": "4249",
       "schedule_type": "LEC",
-      "instructor": "G. Maturana",
+      "instructor": "Edward Nam",
       "instructors": [
         {
-          "name": "G. Maturana",
-          "email": null
+          "name": "Edward Nam",
+          "email": "eanam@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "1462 Clifton Rd 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 40,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -111,116 +172,27 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3401",
-      "section_number": "2201",
-      "schedule_type": "LEC",
-      "instructor": "S. Mian",
-      "instructors": [
-        {
-          "name": "S. Mian",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3402",
-      "section_number": "3249",
-      "schedule_type": "LEC",
-      "instructor": "G. Maturana",
-      "instructors": [
-        {
-          "name": "G. Maturana",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3403",
-      "section_number": "4249",
-      "schedule_type": "LEC",
-      "instructor": "G. Maturana",
-      "instructors": [
-        {
-          "name": "G. Maturana",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
-    "closed": 0,
+    "open": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Maturana",
-    "S. Mian"
+    "Edward Nam",
+    "Eladio Abreu",
+    "Levi Morran"
   ],
-  "scraped_at": "2026-06-17T23:02:36.315Z"
+  "scraped_at": "2026-06-18T02:22:28.138Z"
 }

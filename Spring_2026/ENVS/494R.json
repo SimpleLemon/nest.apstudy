@@ -5,83 +5,88 @@
   "catalog_number": "494R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 8",
+  "credit_hours": "1",
   "requirement_designation": "XA",
   "requirements": [
     "XA"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Student research projects developed with the guidance of ENVS faculty. Permission required. Previous research experience is not required. Fulfills the ENVS independent study requirement (4 credit hrs).",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Emory Essentials introduces Emory College first-year students to university resources, opportunities, and policies. Through class discussions, small-group activities, and homework assignments, students will reflect, explore, and begin designing their unique Emory experience.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3845",
       "crn": "6487",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "J. Pynne",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "J. Pynne",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Laura Calvert",
+          "email": "laura.calvert@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6487",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "J. Pynne",
-      "instructors": [
-        {
-          "name": "J. Pynne",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Pynne"
+    "Emily Morran",
+    "Laura Calvert",
+    "Shari Obrentz"
   ],
-  "scraped_at": "2026-06-17T23:02:26.545Z"
+  "scraped_at": "2026-06-18T02:20:39.957Z"
 }

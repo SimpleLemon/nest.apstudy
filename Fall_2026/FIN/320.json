@@ -5,13 +5,13 @@
   "catalog_number": "320",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides an introduction to finance. It addresses the theory and practice of financial management and the generation and allocation of financial resources. It has three major objectives: 1. To provide you with a foundation in the basic concepts of finance, including the time value of money, the role of financial markets, asset valuation, portfolio theory, asset pricing, and the risk-return tradeoff. 2. To develop your skills in financial analysis, planning, and decision-making. 3. To expand your awareness of institutions and practices in business and finance.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "211",
       "crn": "3561",
       "section_number": "1129",
       "schedule_type": "LEC",
-      "instructor": "S. Ramachandran",
+      "instructor": "Shankar Ramachandran",
       "instructors": [
         {
-          "name": "S. Ramachandran",
-          "email": null
+          "name": "Shankar Ramachandran",
+          "email": "rlshankar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "12",
+      "enrollment_capacity": 52,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -52,26 +65,43 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "212",
       "crn": "3562",
       "section_number": "1130",
       "schedule_type": "LEC",
-      "instructor": "B. Lee",
+      "instructor": "Brian Jonghwan Lee",
       "instructors": [
         {
-          "name": "B. Lee",
-          "email": null
+          "name": "Brian Jonghwan Lee",
+          "email": "brian.jonghwan.lee@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "12",
+      "enrollment_capacity": 52,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -87,26 +117,43 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "213",
       "crn": "3563",
       "section_number": "1131",
       "schedule_type": "LEC",
-      "instructor": "B. Lee",
+      "instructor": "Brian Jonghwan Lee",
       "instructors": [
         {
-          "name": "B. Lee",
-          "email": null
+          "name": "Brian Jonghwan Lee",
+          "email": "brian.jonghwan.lee@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "12",
+      "enrollment_capacity": 52,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -122,26 +169,43 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "214",
       "crn": "3564",
       "section_number": "1132",
       "schedule_type": "LEC",
-      "instructor": "T. Chordia",
+      "instructor": "Tarun Chordia",
       "instructors": [
         {
-          "name": "T. Chordia",
-          "email": null
+          "name": "Tarun Chordia",
+          "email": "tarun.chordia@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 331",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "12",
+      "enrollment_capacity": 56,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -157,26 +221,43 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "215",
       "crn": "3565",
       "section_number": "1133",
       "schedule_type": "LEC",
-      "instructor": "T. Chordia",
+      "instructor": "Tarun Chordia",
       "instructors": [
         {
-          "name": "T. Chordia",
-          "email": null
+          "name": "Tarun Chordia",
+          "email": "tarun.chordia@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 331",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "12",
+      "enrollment_capacity": 59,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -192,26 +273,43 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "216",
       "crn": "3566",
       "section_number": "1134",
       "schedule_type": "LEC",
-      "instructor": "S. Ramachandran",
+      "instructor": "Shankar Ramachandran",
       "instructors": [
         {
-          "name": "S. Ramachandran",
-          "email": null
+          "name": "Shankar Ramachandran",
+          "email": "rlshankar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "12",
+      "enrollment_capacity": 52,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -227,26 +325,43 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "217",
       "crn": "3567",
       "section_number": "1429",
       "schedule_type": "LEC",
-      "instructor": "S. Ramachandran",
+      "instructor": "Shankar Ramachandran",
       "instructors": [
         {
-          "name": "S. Ramachandran",
-          "email": null
+          "name": "Shankar Ramachandran",
+          "email": "rlshankar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "12",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -262,26 +377,43 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "218",
       "crn": "3568",
       "section_number": "1430",
       "schedule_type": "LEC",
-      "instructor": "B. Lee",
+      "instructor": "Brian Jonghwan Lee",
       "instructors": [
         {
-          "name": "B. Lee",
-          "email": null
+          "name": "Brian Jonghwan Lee",
+          "email": "brian.jonghwan.lee@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "12",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -297,26 +429,43 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "219",
       "crn": "3569",
       "section_number": "1431",
       "schedule_type": "LEC",
-      "instructor": "B. Lee",
+      "instructor": "Brian Jonghwan Lee",
       "instructors": [
         {
-          "name": "B. Lee",
-          "email": null
+          "name": "Brian Jonghwan Lee",
+          "email": "brian.jonghwan.lee@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "12",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -332,26 +481,43 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "220",
       "crn": "3570",
       "section_number": "1432",
       "schedule_type": "LEC",
-      "instructor": "T. Chordia",
+      "instructor": "Tarun Chordia",
       "instructors": [
         {
-          "name": "T. Chordia",
-          "email": null
+          "name": "Tarun Chordia",
+          "email": "tarun.chordia@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 331",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "12",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -367,26 +533,43 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "221",
       "crn": "3571",
       "section_number": "1433",
       "schedule_type": "LEC",
-      "instructor": "T. Chordia",
+      "instructor": "Tarun Chordia",
       "instructors": [
         {
-          "name": "T. Chordia",
-          "email": null
+          "name": "Tarun Chordia",
+          "email": "tarun.chordia@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 331",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "12",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -402,26 +585,43 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "222",
       "crn": "3572",
       "section_number": "1434",
       "schedule_type": "LEC",
-      "instructor": "S. Ramachandran",
+      "instructor": "Shankar Ramachandran",
       "instructors": [
         {
-          "name": "S. Ramachandran",
-          "email": null
+          "name": "Shankar Ramachandran",
+          "email": "rlshankar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "12",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -437,443 +637,27 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "3561",
-      "section_number": "1129",
-      "schedule_type": "LEC",
-      "instructor": "S. Ramachandran",
-      "instructors": [
-        {
-          "name": "S. Ramachandran",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "12",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3562",
-      "section_number": "1130",
-      "schedule_type": "LEC",
-      "instructor": "B. Lee",
-      "instructors": [
-        {
-          "name": "B. Lee",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "12",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3563",
-      "section_number": "1131",
-      "schedule_type": "LEC",
-      "instructor": "B. Lee",
-      "instructors": [
-        {
-          "name": "B. Lee",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "12",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3564",
-      "section_number": "1132",
-      "schedule_type": "LEC",
-      "instructor": "T. Chordia",
-      "instructors": [
-        {
-          "name": "T. Chordia",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "12",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3565",
-      "section_number": "1133",
-      "schedule_type": "LEC",
-      "instructor": "T. Chordia",
-      "instructors": [
-        {
-          "name": "T. Chordia",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "12",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3566",
-      "section_number": "1134",
-      "schedule_type": "LEC",
-      "instructor": "S. Ramachandran",
-      "instructors": [
-        {
-          "name": "S. Ramachandran",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "12",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3567",
-      "section_number": "1429",
-      "schedule_type": "LEC",
-      "instructor": "S. Ramachandran",
-      "instructors": [
-        {
-          "name": "S. Ramachandran",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "12",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3568",
-      "section_number": "1430",
-      "schedule_type": "LEC",
-      "instructor": "B. Lee",
-      "instructors": [
-        {
-          "name": "B. Lee",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "12",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3569",
-      "section_number": "1431",
-      "schedule_type": "LEC",
-      "instructor": "B. Lee",
-      "instructors": [
-        {
-          "name": "B. Lee",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "12",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3570",
-      "section_number": "1432",
-      "schedule_type": "LEC",
-      "instructor": "T. Chordia",
-      "instructors": [
-        {
-          "name": "T. Chordia",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "12",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3571",
-      "section_number": "1433",
-      "schedule_type": "LEC",
-      "instructor": "T. Chordia",
-      "instructors": [
-        {
-          "name": "T. Chordia",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "12",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3572",
-      "section_number": "1434",
-      "schedule_type": "LEC",
-      "instructor": "S. Ramachandran",
-      "instructors": [
-        {
-          "name": "S. Ramachandran",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "12",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 24,
-    "lectures": 24,
+    "total_sections": 12,
+    "lectures": 12,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 12,
-    "waitlisted": 8
+    "open": 2,
+    "closed": 6,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "B. Lee",
-    "S. Ramachandran",
-    "T. Chordia"
+    "Brian Jonghwan Lee",
+    "Shankar Ramachandran",
+    "Tarun Chordia"
   ],
-  "scraped_at": "2026-06-17T23:10:39.536Z"
+  "scraped_at": "2026-06-18T02:58:24.243Z"
 }

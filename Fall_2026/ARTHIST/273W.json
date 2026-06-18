@@ -5,13 +5,15 @@
   "catalog_number": "273W",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+  "requirements": [
+    "Humanities and Arts with Cont.Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A survey of U.S. painting and its context from the colonial period to within two decades of the present. Artists considered include Copley, Peale, Church, Eakins, Whistler, Ryder, O'Keeffe, Hopper, Pollock, Rauschenberg, Rothko, and others.",
+  "course_notes": "(Topic - \"Picturing America: Survey of American Painting, 1660-1940\") (What can we discover by reading between the lines of American paintings? How does the history of American art relate to our country's political and social history? Does a nation's art shape, or reflect, its values? These are among the questions we'll consider in Picturing America, which marks the American Semi-quincentennial, or 250th anniversary, and encompasses the history of American art from the colonial period through the Great Depression. We'll focus on oil paintings-two-dimensional objects in the \"fine art\" tradition-as expressions of national ambition and ambivalence, examining them in terms of their formal qualities while framing them within the cultural and historical context that may illuminate their function and meaning. Through lectures, class discussion, readings, presentations, and written assignments, we'll assess the role that paintings play in establishing national identity, the way they may negotiate issues of race and gender, and the opportunities they present for both representing and influencing culture. More generally, Picturing America introduces the methods art historians use to analyze and interpret works of art, skills that apply to all kinds of imagery and permit an informed response to the visual culture of our own time.) Art History major/minor: Division III Art History Museums Conc: elective",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +22,40 @@
   },
   "sections": [
     {
+      "atlas_key": "4444",
       "crn": "1751",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "L. Merrill",
+      "instructor": "Linda Merrill",
       "instructors": [
         {
-          "name": "L. Merrill",
-          "email": null
+          "name": "Linda Merrill",
+          "email": "lmerri2@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Carlos Hall 212",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -52,56 +71,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "1751",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "L. Merrill",
-      "instructors": [
-        {
-          "name": "L. Merrill",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Merrill"
+    "Linda Merrill"
   ],
-  "scraped_at": "2026-06-17T23:09:14.906Z"
+  "scraped_at": "2026-06-18T02:47:16.211Z"
 }

@@ -8,20 +8,22 @@
   "credit_hours": "4",
   "requirement_designation": "HA",
   "requirements": [
-    "HA"
+    "HA",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Great buildings stand as icons to their cultures: the pyramids, Parthenon, St. Peter's, Center Pompidou. In this course, we explore these and other monuments asking why and how they have driven the development of western architecture from antiquity to contemporary America.",
-  "course_notes": null,
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course is designed for students who already possess basic speaking skills of Mandarin Chinese but are not literate in Mandarin Chinese. It will focus on improving students' reading and writing skills.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3839",
       "crn": "1625",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +31,32 @@
       "instructors": [
         {
           "name": "McPhee/Pastan",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Seney Hall 209",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 20,
+      "seats_available": 15,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,26 +72,43 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3840",
       "crn": "3948",
       "section_number": "2",
       "schedule_type": "DIS",
-      "instructor": "McPhee/Pastan",
+      "instructor": "Rameshbabu Manyam",
       "instructors": [
         {
-          "name": "McPhee/Pastan",
-          "email": null
+          "name": "Rameshbabu Manyam",
+          "email": "ramesh.manyam@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 35,
+      "seats_available": 31,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-10:50a",
@@ -84,86 +119,26 @@
             "end": "1050"
           }
         ]
-      }
-    },
-    {
-      "crn": "1625",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "McPhee/Pastan",
-      "instructors": [
-        {
-          "name": "McPhee/Pastan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3948",
-      "section_number": "2",
-      "schedule_type": "DIS",
-      "instructor": "McPhee/Pastan",
-      "instructors": [
-        {
-          "name": "McPhee/Pastan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 2,
+    "total_sections": 2,
+    "lectures": 1,
     "labs": 0,
-    "discussions": 2,
+    "discussions": 1,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "McPhee/Pastan"
+    "McPhee/Pastan",
+    "Rameshbabu Manyam"
   ],
-  "scraped_at": "2026-06-17T23:01:11.254Z"
+  "scraped_at": "2026-06-18T02:08:18.936Z"
 }

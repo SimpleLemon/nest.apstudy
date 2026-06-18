@@ -5,81 +5,74 @@
   "catalog_number": "599R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "2,3,4,5,6,7,8,9",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Standard research course for all post-candidacy graduate students.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1611",
       "crn": "5382",
       "section_number": "2",
       "schedule_type": "THE",
-      "instructor": "E. Maasoumi",
+      "instructor": "Hayk Harutyunyan",
       "instructors": [
         {
-          "name": "E. Maasoumi",
-          "email": null
+          "name": "Hayk Harutyunyan",
+          "email": "hayk.harutyunyan@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 996,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5382",
-      "section_number": "2",
-      "schedule_type": "THE",
-      "instructor": "E. Maasoumi",
-      "instructors": [
-        {
-          "name": "E. Maasoumi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Maasoumi"
+    "Hayk Harutyunyan"
   ],
-  "scraped_at": "2026-06-17T23:02:03.804Z"
+  "scraped_at": "2026-06-18T02:17:46.585Z"
 }

@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HAPW",
   "requirements": [
-    "HAPW"
+    "HAPW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "The development of the modern English novel with representative works by authors such as Joyce, Forster, Woolf, Lawrence, Waugh, and Naipaul.",
-  "course_notes": null,
+  "course_notes": "(In this survey of twentieth-century British novelists, we will explore a wide range of literary styles and strategies, charting the novel's development through a period of rapid social and political change in which the idea of what Britain represented-as a nation, an empire, an identity-was under constant revision. Our focus will be on how this sense of change is reflected and created by the new artistic and narrative forms of the modernist era. While the authors on our syllabus often addressed large-scale subjects, they most often did so through a particular focus on the individual, demonstrating the subjectivity and specificity of personal experience. Topics of discussion will include experimental representations of consciousness and the passage of time; shifting conceptions of gender, sexuality, race, and class; the impact of war and the writing of memory; the figures of the artist, the adventurer, and the lover; and the relationships among city, country, and the world at large.) Texts will include some of the following: Joseph Conrad, The Secret Agent; Ford Madox Ford, The Good Soldier; Virginia Woolf, To the Lighthouse; E. M. Forster, A Passage to India; Samuel Selvon, The Lonely Londoners; Christopher Isherwood, Goodbye to Berlin; Muriel Spark, The Prime of Miss Jean Brodie; Jeanette Winterson, Oranges are Not the Only Fruit; Hanif Kureishi, The Buddha of Suburbia. Participation in discussions, three 5-6 page analytical essays, and a take-home reflection assignment.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "599",
       "crn": "2476",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "E. Rosinberg",
+      "instructor": "Erwin Rosinberg",
       "instructors": [
         {
-          "name": "E. Rosinberg",
-          "email": null
+          "name": "Erwin Rosinberg",
+          "email": "erosinb@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Callaway S105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,56 +72,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "2476",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Rosinberg",
-      "instructors": [
-        {
-          "name": "E. Rosinberg",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Rosinberg"
+    "Erwin Rosinberg"
   ],
-  "scraped_at": "2026-06-17T23:10:23.256Z"
+  "scraped_at": "2026-06-18T02:55:51.551Z"
 }

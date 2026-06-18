@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "SS",
   "requirements": [
-    "SS"
+    "SS",
+    "Social Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Organization, functions, and present status of the family, primarily in the United States. Problems of partner selection and marital adjustment treated on the basis of recent and current research in the field.",
-  "course_notes": null,
+  "course_notes": "This course is designed to challenge you to think about family in new ways by exposing you to sociological approaches to understanding the family as a social institution. Over the course of the semester, you will learn about how the family intersects with other social structures and inequalities such as those by social class, gender, sexuality, and race. In addition, you will learn about patterns of family change over time and the diversity of family forms and practices found around the world. The objectives of this course are to: 1. Develop an understanding of how family life intersects with other social structures and identities 2. Read and critically assess sociological research on the family 3. Learn and be able to discuss the broad trends and patterns in family life within the US and globally.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "1183",
       "crn": "2979",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Reed",
+      "instructor": "Megan Reed",
       "instructors": [
         {
-          "name": "M. Reed",
-          "email": null
+          "name": "Megan Reed",
+          "email": "megan.nicole.reed@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 60,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,56 +72,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "2979",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Reed",
-      "instructors": [
-        {
-          "name": "M. Reed",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Reed"
+    "Megan Reed"
   ],
-  "scraped_at": "2026-06-17T23:14:49.780Z"
+  "scraped_at": "2026-06-18T03:18:24.351Z"
 }

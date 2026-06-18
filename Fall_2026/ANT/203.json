@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "SS",
   "requirements": [
-    "SS"
+    "SS",
+    "Social Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "An introduction to the systematic study of human language, surveying the fields of phonetics, phonology, morphology, syntax, semantics, pragmatics, sociolinguistics, child language acquisition, and historical linguistics.",
-  "course_notes": null,
+  "course_notes": "(Same as LING 201 1) (What do you know when you know a language? How did you come to learn this information so quickly? How do the world's languages differ? How do linguists study language? This course explores the complex nature of human language and introduces students to the scientific study of human language. As we unpack our knowledge of language, we will explore speech sounds (phonetics), sound systems of language (phonology), word and sentence formation (morphology and syntax), how language expresses meaning (semantics), and how context influences the interpretation of meaning (pragmatics). We will also study language in a broader human context, investigating the role of language in defining human society. Additional topics include historical linguistics, language typology, sociolinguistics, and language acquisition.)",
   "requisites": null,
   "cross_listed": "LING 201",
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "785",
       "crn": "3920",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Tuten",
+      "instructor": "Donald Tuten",
       "instructors": [
         {
-          "name": "D. Tuten",
-          "email": null
+          "name": "Donald Tuten",
+          "email": "dtuten@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "White Hall 102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -54,56 +72,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3920",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Tuten",
-      "instructors": [
-        {
-          "name": "D. Tuten",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Tuten"
+    "Donald Tuten"
   ],
-  "scraped_at": "2026-06-17T23:09:08.313Z"
+  "scraped_at": "2026-06-18T02:46:36.825Z"
 }

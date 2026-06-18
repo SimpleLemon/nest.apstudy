@@ -5,40 +5,53 @@
   "catalog_number": "247",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "SSE",
   "requirements": [
     "SSE"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Relations between and within groups, and conflict and cooperation in light of a number of models of social interaction. Application of principles to racial, religious, and ethnic minorities.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisite/concurrent: BIOS 500 . Emphasizes the concepts and premises of the science of epidemiology. Methods of hypothesis formulation and evaluation are stressed. Techniques for quantifying the amount of disease (or other health indicator) in populations are introduced, followed by discussion of epidemiologic study designs useful for identifying etiologic factors and other relevant correlates of disease. Students gain facility with the calculation of basic epidemiologic measures of frequency, association, and impact. The concepts of random variability, bias, and effect modification are examined in detail. The use of stratified analysis, including Mantel-Haenszel techniques, is explored. Inferences from study results are discussed. Students are required to analyze and critique studies from the current medical and scientific literature.",
+  "course_notes": "This lab is for students enrolling in the Section 1 Lecture only. All RSPH students except for EPI, GLEPI, EH-EPI, BIOS, and PhD students may enroll in this section. Students outside of RSPH interested in registering, contact EPI ADAPs at sphepidept@emory.edu.",
   "requisites": null,
   "cross_listed": "AAS 247",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1395",
       "crn": "3019",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Sewell",
+      "instructor": "Sharia Ahmed",
       "instructors": [
         {
-          "name": "A. Sewell",
-          "email": null
+          "name": "Sharia Ahmed",
+          "email": "sharia.m.ahmed@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 25,
+      "seats_available": 24,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,26 +67,43 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1396",
       "crn": "4374",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "J. Easley",
+      "instructor": "Jodie L. Guest",
       "instructors": [
         {
-          "name": "J. Easley",
-          "email": null
+          "name": "Jodie L. Guest",
+          "email": "jodie.guest@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 25,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -89,92 +119,26 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3019",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Sewell",
-      "instructors": [
-        {
-          "name": "A. Sewell",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4374",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "J. Easley",
-      "instructors": [
-        {
-          "name": "J. Easley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 2,
     "closed": 0,
-    "waitlisted": 4
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Sewell",
-    "J. Easley"
+    "Jodie L. Guest",
+    "Sharia Ahmed"
   ],
-  "scraped_at": "2026-06-17T23:06:47.069Z"
+  "scraped_at": "2026-06-18T02:44:07.416Z"
 }

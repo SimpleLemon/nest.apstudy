@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "What constitutes a nutritious diet? How do we know? Lectures and activities will explore daily needs, sources, functions, and metabolism of nutrients and other dietary components. Learners will apply evidence-based dietary recommendations through personal nutrition assessment and scenario analysis.",
-  "course_notes": "BIOL 141 or BIOL_OX 141 or CHEM 141 or CHEM_OX 141 or CHEM 150 or CHEM_OX 150 or equivalent transfer credit as prerequisite.",
+  "course_notes": "This course will introduce students to the field of nutrition science, with emphases on recommended intakes and food sources of essential nutrients and other dietary compounds, and the functions and interactions of dietary components and how they affect human physiology. We will also discuss dietary patterns that promote health, including the nature of evidence that underlies dietary recommendations for the public. This will be explored through lectures, discussion, and activities.",
   "requisites": "BIOL 141 or BIOL_OX 141 or CHEM 141 or CHEM_OX 141 or CHEM 150 or CHEM_OX 150 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "2869",
       "crn": "2580",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Woodworth-Hobbs",
+      "instructor": "Myra Woodworth-Hobbs",
       "instructors": [
         {
-          "name": "M. Woodworth-Hobbs",
-          "email": null
+          "name": "Myra Woodworth-Hobbs",
+          "email": "mewoodw@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 100C",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 35,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +69,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2580",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Woodworth-Hobbs",
-      "instructors": [
-        {
-          "name": "M. Woodworth-Hobbs",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Woodworth-Hobbs"
+    "Myra Woodworth-Hobbs"
   ],
-  "scraped_at": "2026-06-17T23:11:11.997Z"
+  "scraped_at": "2026-06-18T03:01:54.411Z"
 }

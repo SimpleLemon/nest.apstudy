@@ -5,81 +5,74 @@
   "catalog_number": "599R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides an introduction to patent law and policy in the United States. We will explore the purposes and requirements for patent protection, ways to gain and lose patent rights, and the scope and enforcement of patent rights through litigation. Along the way we will discuss several current policy issues pertaining to patents. Those issues include the question of the kinds of subject matter that should be eligible for patent protection; the degree to which the patent system should differentiate among fields of technology (and the ways in which it currently does so); differences between design, utility, and plant patent protection; and special considerations involved in the patenting of new technologies. Key international patent agreements will also be introduced. No technical background is required, only a willingness to read about science and technology.",
+  "course_notes": "Final Assessment: Scheduled Exam May be used towards partial fulfillment of the requirements for the Health Law concentration.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "1881",
       "crn": "6097",
       "section_number": "1",
       "schedule_type": "THE",
-      "instructor": "D. Huseyinzadegan",
+      "instructor": "Margo Bagley",
       "instructors": [
         {
-          "name": "D. Huseyinzadegan",
-          "email": null
+          "name": "Margo Bagley",
+          "email": "margo.a.bagley@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 50,
+      "seats_available": 39,
+      "waitlist_total": 0,
+      "waitlist_capacity": 5,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6097",
-      "section_number": "1",
-      "schedule_type": "THE",
-      "instructor": "D. Huseyinzadegan",
-      "instructors": [
-        {
-          "name": "D. Huseyinzadegan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Huseyinzadegan"
+    "Margo Bagley"
   ],
-  "scraped_at": "2026-06-17T23:06:07.921Z"
+  "scraped_at": "2026-06-18T02:38:17.523Z"
 }

@@ -5,132 +5,127 @@
   "catalog_number": "497R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "2,3,4",
   "requirement_designation": "XA",
   "requirements": [
-    "XA"
+    "XA",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Students conduct directed or supervised research in support of a faculty member's research project or agenda. Permission of the department and a supervising faculty member is required.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisite: consent of instructor. For students who wish to participate in physics research with the instructor acting as research director.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1054",
       "crn": "6426",
       "section_number": "27",
       "schedule_type": "RSC",
-      "instructor": "Y. Xi",
+      "instructor": "Jiang-Xiazi Lin",
       "instructors": [
         {
-          "name": "Y. Xi",
-          "email": null
+          "name": "Jiang-Xiazi Lin",
+          "email": "jiangxiazi.lin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2,3,4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1055",
       "crn": "6540",
       "section_number": "28",
       "schedule_type": "RSC",
-      "instructor": "Veneziani/De Cecco, MD/PhD",
+      "instructor": "Tankut Can",
       "instructors": [
         {
-          "name": "Veneziani/De Cecco, MD/PhD",
-          "email": null
+          "name": "Tankut Can",
+          "email": "tankut.uzay.can@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2,3,4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6426",
-      "section_number": "27",
-      "schedule_type": "RSC",
-      "instructor": "Y. Xi",
-      "instructors": [
-        {
-          "name": "Y. Xi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6540",
-      "section_number": "28",
-      "schedule_type": "RSC",
-      "instructor": "Veneziani/De Cecco, MD/PhD",
-      "instructors": [
-        {
-          "name": "Veneziani/De Cecco, MD/PhD",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 4,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Veneziani/De Cecco, MD/PhD",
-    "Y. Xi"
+    "Jiang-Xiazi Lin",
+    "Tankut Can"
   ],
-  "scraped_at": "2026-06-17T23:03:54.288Z"
+  "scraped_at": "2026-06-18T02:30:04.510Z"
 }

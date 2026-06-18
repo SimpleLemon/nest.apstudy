@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course is designed to introduce students to the everyday language of Japan. Lessons will be organized around natural conversational topics, leading students from fundamental aspects of grammar to readings in simple texts.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,45 @@
   },
   "sections": [
     {
+      "atlas_key": "757",
       "crn": "2004",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "H. Matsuzaki",
+      "instructor": "Hiroko Matsuzaki",
       "instructors": [
         {
-          "name": "H. Matsuzaki",
-          "email": null
+          "name": "Hiroko Matsuzaki",
+          "email": "hiroko.matsuzaki@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Hiroko Matsuzaki",
+          "email": "hiroko.matsuzaki@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Modern Language 330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 7,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a; F 8:30-9:20a",
@@ -59,26 +82,52 @@
             "end": "920"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "758",
       "crn": "2005",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "M. Mazzotta",
+      "instructor": "Mizuki Mazzotta",
       "instructors": [
         {
-          "name": "M. Mazzotta",
-          "email": null
+          "name": "Mizuki Mazzotta",
+          "email": "mizuki.mazzotta@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Mizuki Mazzotta",
+          "email": "mizuki.mazzotta@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Modern Language 127",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 7,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a; F 8:30-9:20a",
@@ -99,26 +148,52 @@
             "end": "920"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "759",
       "crn": "2006",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "M. Mazzotta",
+      "instructor": "Mizuki Mazzotta",
       "instructors": [
         {
-          "name": "M. Mazzotta",
-          "email": null
+          "name": "Mizuki Mazzotta",
+          "email": "mizuki.mazzotta@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Mizuki Mazzotta",
+          "email": "mizuki.mazzotta@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Modern Language 127",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 7,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a; F 10-10:50a",
@@ -139,26 +214,52 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "760",
       "crn": "2007",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "H. Matsuzaki",
+      "instructor": "Hiroko Matsuzaki",
       "instructors": [
         {
-          "name": "H. Matsuzaki",
-          "email": null
+          "name": "Hiroko Matsuzaki",
+          "email": "hiroko.matsuzaki@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Hiroko Matsuzaki",
+          "email": "hiroko.matsuzaki@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Modern Language 127",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 7,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p; F 11:30a-12:20p",
@@ -179,26 +280,52 @@
             "end": "1220"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "761",
       "crn": "2008",
       "section_number": "5",
       "schedule_type": "LEC",
-      "instructor": "K. Kawata",
+      "instructor": "Keeko Kawata",
       "instructors": [
         {
-          "name": "K. Kawata",
-          "email": null
+          "name": "Keeko Kawata",
+          "email": "keeko.kawata@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Keeko Kawata",
+          "email": "keeko.kawata@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Modern Language 127",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 7,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p; F 4-4:50p",
@@ -219,26 +346,52 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "762",
       "crn": "2009",
       "section_number": "6",
       "schedule_type": "LEC",
-      "instructor": "K. Kawata",
+      "instructor": "Keeko Kawata",
       "instructors": [
         {
-          "name": "K. Kawata",
-          "email": null
+          "name": "Keeko Kawata",
+          "email": "keeko.kawata@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Keeko Kawata",
+          "email": "keeko.kawata@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Modern Language 127",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 7,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 5:30-6:45p; F 5:30-6:20p",
@@ -259,263 +412,27 @@
             "end": "1820"
           }
         ]
-      }
-    },
-    {
-      "crn": "2004",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "H. Matsuzaki",
-      "instructors": [
-        {
-          "name": "H. Matsuzaki",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a; F 8:30-9:20a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Fri",
-            "start": "830",
-            "end": "920"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2005",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "M. Mazzotta",
-      "instructors": [
-        {
-          "name": "M. Mazzotta",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a; F 8:30-9:20a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Fri",
-            "start": "830",
-            "end": "920"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2006",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "M. Mazzotta",
-      "instructors": [
-        {
-          "name": "M. Mazzotta",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a; F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2007",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "H. Matsuzaki",
-      "instructors": [
-        {
-          "name": "H. Matsuzaki",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p; F 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2008",
-      "section_number": "5",
-      "schedule_type": "LEC",
-      "instructor": "K. Kawata",
-      "instructors": [
-        {
-          "name": "K. Kawata",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p; F 4-4:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Fri",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2009",
-      "section_number": "6",
-      "schedule_type": "LEC",
-      "instructor": "K. Kawata",
-      "instructors": [
-        {
-          "name": "K. Kawata",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 5:30-6:45p; F 5:30-6:20p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1730",
-            "end": "1845"
-          },
-          {
-            "day": "Wed",
-            "start": "1730",
-            "end": "1845"
-          },
-          {
-            "day": "Fri",
-            "start": "1730",
-            "end": "1820"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
-    "lectures": 12,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 12,
+    "open": 1,
+    "closed": 5,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "H. Matsuzaki",
-    "K. Kawata",
-    "M. Mazzotta"
+    "Hiroko Matsuzaki",
+    "Keeko Kawata",
+    "Mizuki Mazzotta"
   ],
-  "scraped_at": "2026-06-17T23:11:38.065Z"
+  "scraped_at": "2026-06-18T03:03:50.981Z"
 }

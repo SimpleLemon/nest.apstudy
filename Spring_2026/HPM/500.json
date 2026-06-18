@@ -5,62 +5,102 @@
   "catalog_number": "500",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "Prerequisites: GEH, GH, and GLEPI students only. The goal of the course is to equip students with critical perspectives to address current and future global health challenges and opportunities as public health professionals and global citizens in this increasingly interdependent world. The course explores historical milestones, actors, assumptions, context and theories driving selected global health priorities in policy, programs and research. To do this, the course will enhance the skills of critical thinking, assessment of evidence from multiple perspectives and application of evidence in formulation of policies, programs and research priorities. A recurring theme throughout the course is that there are common global drivers influencing the health of populations and that cross-cutting issues of equity and systems transcend settings.",
+  "course_notes": "GH, GEH, GLEPI students only. Scheduled Meeting Time: Asynchronous with three required sessions on: 9/23/26 5:30-6:50 p.m., 10/28/26 5:30-6:50 p.m, and 12/2/26 5:30-6:50 p.m.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "160",
       "crn": "1494",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Juan Leon",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Juan Leon",
+          "email": "juan.leon@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Juan Leon",
+          "email": "juan.leon@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Juan Leon",
+          "email": "juan.leon@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 45,
+      "seats_available": 23,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "161",
       "crn": "1504",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Joanne McGriff",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Joanne McGriff",
+          "email": "joanne.henderson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 40,
+      "seats_available": 24,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 5:30-7:20p",
@@ -71,26 +111,43 @@
             "end": "1920"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "162",
       "crn": "2576",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Dirk Schroeder",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Dirk Schroeder",
+          "email": "dschr02@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 24,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 8-9:50a",
@@ -101,105 +158,27 @@
             "end": "950"
           }
         ]
-      }
-    },
-    {
-      "crn": "1494",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1504",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 5:30-7:20p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1730",
-            "end": "1920"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2576",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 8-9:50a",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "800",
-            "end": "950"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 6,
+    "open": 3,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Team"
+    "Dirk Schroeder",
+    "Joanne McGriff",
+    "Juan Leon"
   ],
-  "scraped_at": "2026-06-17T23:03:12.087Z"
+  "scraped_at": "2026-06-18T02:25:48.087Z"
 }

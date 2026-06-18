@@ -5,40 +5,53 @@
   "catalog_number": "471R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "1,2,3,4",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Selected contemporary problems in memory, language, learning, and thinking. May be repeated when the topic changes.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Different topics in Chemistry.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1318",
       "crn": "2056",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "S. Hamann",
+      "instructor": "Kyle Biegasiewicz",
       "instructors": [
         {
-          "name": "S. Hamann",
-          "email": null
+          "name": "Kyle Biegasiewicz",
+          "email": "kyle.francis.biegasiewicz@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 316",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 24,
+      "seats_available": 19,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 9-11:30a",
@@ -49,26 +62,43 @@
             "end": "1130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1319",
       "crn": "2057",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "T. Medina",
+      "instructor": "Christine Dunham",
       "instructors": [
         {
-          "name": "T. Medina",
-          "email": null
+          "name": "Christine Dunham",
+          "email": "cmdunha@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Emerson Chemistry Bldg. E363",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 24,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 1-3:45p",
@@ -79,26 +109,43 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1320",
       "crn": "5266",
       "section_number": "3",
       "schedule_type": "SEM",
-      "instructor": "A. Cohen",
+      "instructor": "Khalid Salaita",
       "instructors": [
         {
-          "name": "A. Cohen",
-          "email": null
+          "name": "Khalid Salaita",
+          "email": "k.salaita@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 100,
+      "seats_available": 88,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-3:45p",
@@ -109,26 +156,45 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1321",
       "crn": "5403",
       "section_number": "4",
       "schedule_type": "SEM",
-      "instructor": "B. Yamasaki",
+      "instructor": "Geoffrey Bennington",
       "instructors": [
         {
-          "name": "B. Yamasaki",
-          "email": null
+          "name": "Geoffrey Bennington",
+          "email": "geoffrey.bennington@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 4,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 1-3:45p",
@@ -139,144 +205,28 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2056",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "S. Hamann",
-      "instructors": [
-        {
-          "name": "S. Hamann",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 9-11:30a",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "900",
-            "end": "1130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2057",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "T. Medina",
-      "instructors": [
-        {
-          "name": "T. Medina",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 1-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5266",
-      "section_number": "3",
-      "schedule_type": "SEM",
-      "instructor": "A. Cohen",
-      "instructors": [
-        {
-          "name": "A. Cohen",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-3:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5403",
-      "section_number": "4",
-      "schedule_type": "SEM",
-      "instructor": "B. Yamasaki",
-      "instructors": [
-        {
-          "name": "B. Yamasaki",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 1-3:45p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 8,
-    "open": 4,
-    "closed": 4,
+    "other": 4,
+    "open": 3,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Cohen",
-    "B. Yamasaki",
-    "S. Hamann",
-    "T. Medina"
+    "Christine Dunham",
+    "Geoffrey Bennington",
+    "Khalid Salaita",
+    "Kyle Biegasiewicz"
   ],
-  "scraped_at": "2026-06-17T23:06:24.221Z"
+  "scraped_at": "2026-06-18T02:42:27.313Z"
 }

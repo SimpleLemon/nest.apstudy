@@ -10,35 +10,48 @@
   "requirements": [
     "FS"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Small class experience on topics of current psychological interest that fosters a highly interactive and mutually collaborative learning environment involving freshmen and faculty members. Topics include clinical, neuroscience, animal behavior, social, development and cognition.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Provides an introduction to applied biostatistical data analysis. Topics covered include numerical and graphical descriptive statistics, one-and two-sample inferences for means and proportions, simple and multiple linear and logistic regression, and one- and two-way analysis of variance. After completing the course, students are expected to be able to independently and rigorously implement the covered methods and to interpret results for standard analyses.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1296",
       "crn": "2033",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "S. Hamann",
+      "instructor": "Azhar Nizam",
       "instructors": [
         {
-          "name": "S. Hamann",
-          "email": null
+          "name": "Azhar Nizam",
+          "email": "anizam@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 29,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-3:45p",
@@ -49,26 +62,43 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1297",
       "crn": "2034",
       "section_number": "3",
       "schedule_type": "SEM",
-      "instructor": "A. Kazama",
+      "instructor": "Jeffrey Switchenko",
       "instructors": [
         {
-          "name": "A. Kazama",
-          "email": null
+          "name": "Jeffrey Switchenko",
+          "email": "jeffrey.switchenko@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -84,87 +114,26 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "2033",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "S. Hamann",
-      "instructors": [
-        {
-          "name": "S. Hamann",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-3:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2034",
-      "section_number": "3",
-      "schedule_type": "SEM",
-      "instructor": "A. Kazama",
-      "instructors": [
-        {
-          "name": "A. Kazama",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 0,
-    "closed": 4,
+    "other": 2,
+    "open": 2,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Kazama",
-    "S. Hamann"
+    "Azhar Nizam",
+    "Jeffrey Switchenko"
   ],
-  "scraped_at": "2026-06-17T23:06:24.209Z"
+  "scraped_at": "2026-06-18T02:42:27.305Z"
 }

@@ -5,13 +5,15 @@
   "catalog_number": "300W",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Critical exploration of philosophical, theological, ethical, and social science theories of religions and methods for the interpretation of religious phenomena.",
+  "course_notes": "Permission required for enrollment. To request permission to register, contact Prof. Eric Reinders - ereinde@emory.edu What counts as religion? Who gets to decide, and why does it matter? What do we say when someone says their religion isn't a religion? What happens at the margins of the category? Is stretching on a yoga mat \"religious\"? Is atheism a religion? If I go to a temple and ask the Buddha's help to get rich, or to kill someone, what do we call that? The first half of the course will deal with the category of religion, its history, boundaries, inclusions and exclusions. Also, \"world religions,\" \"real religion,\" and \"religious experience.\" We want to understand \"religion\" as an analytical concept that has been subject to multiple definitional debates and has played a key role in the development of the social sciences and humanities. In the second half of this class, we ask about the limits of a \"scientific\" understanding of religion; about the relation of religion and violence and \"cults\"; and about cultural appropriation and conversion. Lastly, as Religion majors, you should have some sense of religious studies as a profession and an institution.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +22,40 @@
   },
   "sections": [
     {
+      "atlas_key": "4434",
       "crn": "2375",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "E. Reinders",
+      "instructor": "Eric Reinders",
       "instructors": [
         {
-          "name": "E. Reinders",
-          "email": null
+          "name": "Eric Reinders",
+          "email": "ereinde@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S109",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -52,56 +71,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2375",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Reinders",
-      "instructors": [
-        {
-          "name": "E. Reinders",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Reinders"
+    "Eric Reinders"
   ],
-  "scraped_at": "2026-06-17T23:14:36.845Z"
+  "scraped_at": "2026-06-18T03:17:38.887Z"
 }

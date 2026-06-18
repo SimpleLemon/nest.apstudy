@@ -5,40 +5,58 @@
   "catalog_number": "221RW",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "HAW",
   "requirements": [
-    "HAW"
+    "HAW",
+    "Social Sciences with Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Prerequisites: English 101 or 181 and written permission of instructor. Practical introductions to various kinds of media and professional writing. May be repeated for credit when topic varies.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Traces the gradual incorporation of Africa into an expanding world economy and examines the impact of this incorporation on the development of African societies and modern nation states.",
+  "course_notes": "(Same as HIST 221 1)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "711",
       "crn": "4088",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "V. Kannan",
+      "instructor": "Gerardo Manrique de Lara Ruiz",
       "instructors": [
         {
-          "name": "V. Kannan",
-          "email": null
+          "name": "Gerardo Manrique de Lara Ruiz",
+          "email": "gerardo.manrique.de.lara.ruiz@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Rich Building 211",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences with Race & Ethnicity(*)",
+      "requirements": [
+        "Social Sciences with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,56 +72,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "4088",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "V. Kannan",
-      "instructors": [
-        {
-          "name": "V. Kannan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "V. Kannan"
+    "Gerardo Manrique de Lara Ruiz"
   ],
-  "scraped_at": "2026-06-17T23:02:23.319Z"
+  "scraped_at": "2026-06-18T02:19:56.735Z"
 }

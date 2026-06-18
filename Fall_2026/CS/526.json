@@ -5,13 +5,13 @@
   "catalog_number": "526",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is a graduate level introduction to the design and analysis of algorithms. Although we will review some undergraduate level material, we will instead emphasize reading and experimentation at a level appropriate for the initiation of research. This course will have both theoretical and practical content. As course highlights, students will be expected to implement and analyze the performance of a fundamental data structure, starting with a close reading of the original research paper.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,38 @@
   },
   "sections": [
     {
+      "atlas_key": "2172",
       "crn": "3064",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Grigni",
+      "instructor": "Michelangelo Grigni",
       "instructors": [
         {
-          "name": "M. Grigni",
-          "email": null
+          "name": "Michelangelo Grigni",
+          "email": "mgrigni@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - N304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -52,56 +67,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3064",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Grigni",
-      "instructors": [
-        {
-          "name": "M. Grigni",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Grigni"
+    "Michelangelo Grigni"
   ],
-  "scraped_at": "2026-06-17T23:09:57.097Z"
+  "scraped_at": "2026-06-18T02:52:25.460Z"
 }

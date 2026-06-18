@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "SS",
   "requirements": [
-    "SS"
+    "SS",
+    "Social Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Antisocial behavior in relation to cultural, social biological, and psychological factors.",
-  "course_notes": null,
+  "course_notes": "This course addresses major themes and questions in the sociological study of criminology. We will examine some of the most influential explanations for criminal behavior, including strain theory and social control theory among others. The course will focus on the ways in which social context shapes beliefs about crime. What are the causes of crime? How can crime be reduced? In what ways is criminal justice decision-making influenced by race, class, and gender biases? To develop a thorough understanding of the nature of crime, we will examine a range of empirical work and substantive issues but will focus on issues around mass incarceration, prison systems, and white collar crime.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "1194",
       "crn": "3057",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Nalkur",
+      "instructor": "Sonal Nalkur",
       "instructors": [
         {
-          "name": "S. Nalkur",
-          "email": null
+          "name": "Sonal Nalkur",
+          "email": "snalkur@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "White Hall 110",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 50,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,56 +72,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3057",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Nalkur",
-      "instructors": [
-        {
-          "name": "S. Nalkur",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Nalkur"
+    "Sonal Nalkur"
   ],
-  "scraped_at": "2026-06-17T23:14:49.781Z"
+  "scraped_at": "2026-06-18T03:18:24.352Z"
 }

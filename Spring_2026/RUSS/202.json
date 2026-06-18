@@ -5,40 +5,53 @@
   "catalog_number": "202",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "2",
   "requirement_designation": "IC",
   "requirements": [
     "IC"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Prerequisite: RUSS 201 or consent of instructor. Continuation of 201 - Focus on more advanced grammatical and syntactical constructions both in written and spoken Russian. Supplemented by multimedia exercises and materials.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisite: EPI 504 or EPI 530 and BIOS 500 . This course presents issues in women of being female but not pathologies of reproduction. These include cardiovascular disease, osteoporosis, and breast and cervical cancer. In addition, health problems related to the physiological and psychological aspects of being female are addressed. These include depression, premenstrual syndrome, addictive behavior, and violence perpetrated by and against women.",
+  "course_notes": "Pre-requisite Note: EPI, GLEPI, EH-EPI, and EPI PHD only through April 1st.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1385",
       "crn": "2837",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Z. Budenkova",
+      "instructor": "Terry Hartman",
       "instructors": [
         {
-          "name": "Z. Budenkova",
-          "email": null
+          "name": "Terry Hartman",
+          "email": "terryl.johnson.hartman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 35,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p; F 11:30a-12:20p",
@@ -59,61 +72,25 @@
             "end": "1220"
           }
         ]
-      }
-    },
-    {
-      "crn": "2837",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Z. Budenkova",
-      "instructors": [
-        {
-          "name": "Z. Budenkova",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p; F 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Z. Budenkova"
+    "Terry Hartman"
   ],
-  "scraped_at": "2026-06-17T23:06:40.469Z"
+  "scraped_at": "2026-06-18T02:43:10.618Z"
 }

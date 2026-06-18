@@ -8,37 +8,57 @@
   "credit_hours": "3",
   "requirement_designation": "QR",
   "requirements": [
-    "QR"
+    "QR",
+    "First Year Seminar",
+    "Humanities and Arts with Cont.Communication(*)",
+    "Humanities and Arts(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Study of correct reasoning, including the recognition, analysis, and criticism of arguments; relevant topics include informal fallacies, syllogistic reasoning, and systems of deduction.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Dynamics of inquiry on a focused research topic. Will include discussion, debate, oral and written presentations. Topic varies.",
+  "course_notes": "This course satisfies the Religion major requirement:- Theme. We will discuss Dracula by Bram Stoker (1897), as related to issues of gender, sexuality, race, nationalism, technology, mental illness, blood, colonialism, the British Empire, Freud, science, narrative, genre, horror, souls, magic, and religion. Featuring a cast of stiff-upper-lip Brits, a weird old Catholic from Holland, a married woman who parades around like a sex worker, hypnosis, evil aristocrats, ruined abbeys, decapitation, gender inversions, experiments in a mental asylum, and a happy ending. Students should have already read the novel at the start of the course.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1161",
       "crn": "1707",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Westbrook",
+      "instructor": "Eric Reinders",
       "instructors": [
         {
-          "name": "D. Westbrook",
-          "email": null
+          "name": "Eric Reinders",
+          "email": "ereinde@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Candler Library 124",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MWF 1-1:50p",
@@ -59,26 +79,47 @@
             "end": "1350"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1162",
       "crn": "1991",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "J. Wahman",
+      "instructor": "Wei Wu",
       "instructors": [
         {
-          "name": "J. Wahman",
-          "email": null
+          "name": "Wei Wu",
+          "email": "wei.wu@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Callaway S103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MWF 11:30a-12:20p",
@@ -99,26 +140,47 @@
             "end": "1220"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1163",
       "crn": "5143",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "J. Wahman",
+      "instructor": "Scott A Kugle",
       "instructors": [
         {
-          "name": "J. Wahman",
-          "email": null
+          "name": "Scott A Kugle",
+          "email": "skugle@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Callaway C101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 15,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MWF 10-10:50a",
@@ -139,26 +201,47 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1164",
       "crn": "6414",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "S. Dutton",
+      "instructor": "Scott A Kugle",
       "instructors": [
         {
-          "name": "S. Dutton",
-          "email": null
+          "name": "Scott A Kugle",
+          "email": "skugle@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway C101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 15,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MWF 2:30-3:20p",
@@ -179,183 +262,27 @@
             "end": "1520"
           }
         ]
-      }
-    },
-    {
-      "crn": "1707",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Westbrook",
-      "instructors": [
-        {
-          "name": "D. Westbrook",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MWF 1-1:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1350"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1350"
-          },
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1991",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "J. Wahman",
-      "instructors": [
-        {
-          "name": "J. Wahman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MWF 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1220"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1220"
-          },
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5143",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "J. Wahman",
-      "instructors": [
-        {
-          "name": "J. Wahman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MWF 10-10:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1050"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1050"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "6414",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "S. Dutton",
-      "instructors": [
-        {
-          "name": "S. Dutton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MWF 2:30-3:20p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1520"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1520"
-          },
-          {
-            "day": "Fri",
-            "start": "1430",
-            "end": "1520"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 8,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 2,
-    "closed": 0,
-    "waitlisted": 6
+    "closed": 2,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Westbrook",
-    "J. Wahman",
-    "S. Dutton"
+    "Eric Reinders",
+    "Scott A Kugle",
+    "Wei Wu"
   ],
-  "scraped_at": "2026-06-17T23:06:07.912Z"
+  "scraped_at": "2026-06-18T02:38:17.500Z"
 }

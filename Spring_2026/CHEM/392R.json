@@ -5,40 +5,53 @@
   "catalog_number": "392R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 2",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course is for students selected by the Department of Chemistry to train and serve as peer learning leaders (Learning Assistants or Teaching Assistants) in core courses. The course is by permission only. Note that this course does not satisfy elective credit for the chemistry major.",
-  "course_notes": "(CHEM 141 or CHEM_OX 141 or CHEM 150 or CHEM_OX 150) and (CHEM 142 or CHEM_OX 142 or CHEM 202 or CHEM_OX 202) or equivalent transfer credit as prerequisite.",
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "For Hybrid Contextual Education 1, first-year MDiv students choose a social service setting within their own area in conversation with the Office of Contextual Education. Four hours of weekly engagement at these sites during the entire academic year give students the opportunity to experience various ministries, contexts, and pastoral relationships. In the first semester, students meet weekly in their 90-minute Contextual Education I site Reflection Group led by their site supervisor. In the second semester, students continue working four hours per week at the same Contextual Education I site. Students meet with a faculty member (usually their academic adviser) and their site supervisor for a weekly, two-hour Integrative Seminar. An evaluation is made at the end of each semester and an in progress (IP) grade is assigned at the end of the first semester if the student is performing satisfactorily. To receive credit, the student must satisfactorily complete two consecutive semesters.",
+  "course_notes": "(ONLINE REFLECTION GROUP) (In person sites to be identified by students in their local communities; permission to enroll provided by Office of Contextual Education upon approval of site contract for site which fits group theme)(Concurrent enrollment in PC 501 or CHP 501 strongly recommended) (All students in Con Ed I will be required to attend monthly plenaries on Thursday evenings 6-8pm (available online for students in hybrid cohorts) and complete related learning during the course of the semester)",
   "requisites": "(CHEM 141 or CHEM_OX 141 or CHEM 150 or CHEM_OX 150) and (CHEM 142 or CHEM_OX 142 or CHEM 202 or CHEM_OX 202) or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4108",
       "crn": "3727",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "T. McGill",
+      "instructor": "Letitia Campbell",
       "instructors": [
         {
-          "name": "T. McGill",
-          "email": null
+          "name": "Letitia Campbell",
+          "email": "letitia.campbell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 6,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1-1:50p",
@@ -49,26 +62,43 @@
             "end": "1350"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4109",
       "crn": "3729",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "M. Weinschenk",
+      "instructor": "Letitia Campbell",
       "instructors": [
         {
-          "name": "M. Weinschenk",
-          "email": null
+          "name": "Letitia Campbell",
+          "email": "letitia.campbell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 6,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1-1:50p",
@@ -79,376 +109,274 @@
             "end": "1350"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4110",
       "crn": "3730",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "M. McCormick",
+      "instructor": "Letitia Campbell",
       "instructors": [
         {
-          "name": "M. McCormick",
-          "email": null
+          "name": "Letitia Campbell",
+          "email": "letitia.campbell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 6,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4111",
       "crn": "3732",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "D. Liotta",
+      "instructor": "Letitia Campbell",
       "instructors": [
         {
-          "name": "D. Liotta",
-          "email": null
+          "name": "Letitia Campbell",
+          "email": "letitia.campbell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 6,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4112",
       "crn": "3733",
       "section_number": "5",
       "schedule_type": "LEC",
-      "instructor": "J. Smith",
+      "instructor": "Eric McDonnell",
       "instructors": [
         {
-          "name": "J. Smith",
-          "email": null
+          "name": "Eric McDonnell",
+          "email": "eric.mcdonnell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Closed",
       "enrollment_count": "8",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4113",
       "crn": "3736",
       "section_number": "6",
       "schedule_type": "LEC",
-      "instructor": "R. Ribeiro",
+      "instructor": "Anthony Briggman",
       "instructors": [
         {
-          "name": "R. Ribeiro",
-          "email": null
+          "name": "Anthony Briggman",
+          "email": "anthony.a.briggman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rita Anne Rollins Building_447",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 12,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4114",
       "crn": "3746",
       "section_number": "7",
       "schedule_type": "LEC",
-      "instructor": "R. Himes",
+      "instructor": "Kim Boykin",
       "instructors": [
         {
-          "name": "R. Himes",
-          "email": null
+          "name": "Kim Boykin",
+          "email": "kimberly.ann.boykin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "8",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4115",
       "crn": "6437",
       "section_number": "8",
       "schedule_type": "LEC",
-      "instructor": "J. Soria",
+      "instructor": "Kim Boykin",
       "instructors": [
         {
-          "name": "J. Soria",
-          "email": null
+          "name": "Kim Boykin",
+          "email": "kimberly.ann.boykin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Closed",
       "enrollment_count": "8",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3727",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "T. McGill",
-      "instructors": [
-        {
-          "name": "T. McGill",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3729",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "M. Weinschenk",
-      "instructors": [
-        {
-          "name": "M. Weinschenk",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3730",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "M. McCormick",
-      "instructors": [
-        {
-          "name": "M. McCormick",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3732",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "D. Liotta",
-      "instructors": [
-        {
-          "name": "D. Liotta",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3733",
-      "section_number": "5",
-      "schedule_type": "LEC",
-      "instructor": "J. Smith",
-      "instructors": [
-        {
-          "name": "J. Smith",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3736",
-      "section_number": "6",
-      "schedule_type": "LEC",
-      "instructor": "R. Ribeiro",
-      "instructors": [
-        {
-          "name": "R. Ribeiro",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3746",
-      "section_number": "7",
-      "schedule_type": "LEC",
-      "instructor": "R. Himes",
-      "instructors": [
-        {
-          "name": "R. Himes",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6437",
-      "section_number": "8",
-      "schedule_type": "LEC",
-      "instructor": "J. Soria",
-      "instructors": [
-        {
-          "name": "J. Soria",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 16,
-    "lectures": 16,
+    "total_sections": 8,
+    "lectures": 8,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 16,
-    "closed": 0,
+    "open": 5,
+    "closed": 3,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Liotta",
-    "J. Smith",
-    "J. Soria",
-    "M. McCormick",
-    "M. Weinschenk",
-    "R. Himes",
-    "R. Ribeiro",
-    "T. McGill"
+    "Anthony Briggman",
+    "Eric McDonnell",
+    "Kim Boykin",
+    "Letitia Campbell"
   ],
-  "scraped_at": "2026-06-17T23:01:37.684Z"
+  "scraped_at": "2026-06-18T02:13:14.114Z"
 }

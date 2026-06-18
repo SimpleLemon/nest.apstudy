@@ -5,13 +5,13 @@
   "catalog_number": "751R",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course focuses on a specific body of literary texts, critical approach, or theoretical problem in the area of Comparative Literature. Students may repeat this course for credit if the subject matter varies.",
+  "course_notes": "(Same as ENG 789 4, WGS 730 1, FREN 780 1, RLR 700, PHIL 789 2) The course will be based on readings of some of Derrida's earlier work (broadly speaking up to 1972), and attempt to come to as clear an understanding as possible of some basic Derridean terms and concepts (trace, writing, différance, deconstruction, iterability, metaphoricity, signature, quasi-transcendental...). We will also look in some detail at Derrida's polemical exchanges with Foucault, Lacan, and Searle.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,38 @@
   },
   "sections": [
     {
+      "atlas_key": "1321",
       "crn": "2333",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "G. Bennington",
+      "instructor": "Geoffrey Bennington",
       "instructors": [
         {
-          "name": "G. Bennington",
-          "email": null
+          "name": "Geoffrey Bennington",
+          "email": "geoffrey.bennington@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 4,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 1-4p",
@@ -47,26 +62,45 @@
             "end": "1600"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1322",
       "crn": "2334",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "E. Marder",
+      "instructor": "Elissa Marder",
       "instructors": [
         {
-          "name": "E. Marder",
-          "email": null
+          "name": "Elissa Marder",
+          "email": "emarder@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Few Bldg 131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-4p",
@@ -77,26 +111,50 @@
             "end": "1600"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1323",
       "crn": "5389",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "Mitchell/Mendoza-De Jesus",
+      "instructor": "Ronald Mendoza-De Jesus",
       "instructors": [
         {
-          "name": "Mitchell/Mendoza-De Jesus",
-          "email": null
+          "name": "Ronald Mendoza-De Jesus",
+          "email": "ronald.mendoza-de.jesus@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Andrew J Mitchell",
+          "email": "amitch5@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Bowden Hall 216",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 4,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 1-3:45p",
@@ -107,26 +165,45 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1324",
       "crn": "5831",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "L. Park",
+      "instructor": "Linette Park",
       "instructors": [
         {
-          "name": "L. Park",
-          "email": null
+          "name": "Linette Park",
+          "email": "linette.park@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Candler Library 125",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 2,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-6:45p",
@@ -137,144 +214,29 @@
             "end": "1845"
           }
         ]
-      }
-    },
-    {
-      "crn": "2333",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "G. Bennington",
-      "instructors": [
-        {
-          "name": "G. Bennington",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 1-4p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1600"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2334",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "E. Marder",
-      "instructors": [
-        {
-          "name": "E. Marder",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-4p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1600"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5389",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "Mitchell/Mendoza-De Jesus",
-      "instructors": [
-        {
-          "name": "Mitchell/Mendoza-De Jesus",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 1-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5831",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "L. Park",
-      "instructors": [
-        {
-          "name": "L. Park",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-6:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1845"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 8,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
-    "closed": 2,
+    "open": 3,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Marder",
-    "G. Bennington",
-    "L. Park",
-    "Mitchell/Mendoza-De Jesus"
+    "Andrew J Mitchell",
+    "Elissa Marder",
+    "Geoffrey Bennington",
+    "Linette Park",
+    "Ronald Mendoza-De Jesus"
   ],
-  "scraped_at": "2026-06-17T23:09:53.857Z"
+  "scraped_at": "2026-06-18T02:51:35.565Z"
 }

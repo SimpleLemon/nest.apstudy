@@ -5,132 +5,120 @@
   "catalog_number": "495BW",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 8",
+  "credit_hours": "3",
   "requirement_designation": "CW",
   "requirements": [
     "CW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Independent research for senior major and joint-major students selected to participate in the department's Honors Program.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Various topics, such as theoretical, generic, or cultural studies of literature.",
+  "course_notes": "(Same as ARTHIST 789R 1) Where is the human in the humanities? Kathleen Fitzpatrick argues that humanities in universities have prioritized the individual and their acclaim over shared understandings developed through compassionate listening, careful reflection, and thoughtful exchange. Suzanne Hudson asserts that the discipline of art history has encouraged \"experts\" to disavow their own humanity while making claims about the intentions and thus the personhood of the artists they study. In this seminar, we will consider whether and how art history and the humanities more broadly can embrace the human in their practices. We will experiment with ways to recognize and honor our individual and shared humanity. We will also focus attention on the human in our objects of study, reflecting on the personhood of each author and that of the people who create or otherwise contribute to the works that humanists study. Assigned materials will offer us opportunities to engage with an array of scholars and other professionals. Students will also have a chance to recommend readings later in the semester. At the end of the semester, we will reflect on how and why arts, humanities, and the human may be as important as ever in the age of social media and artificial intelligence. For the final project, students will create hand-rendered field guides to a topic within the humanities of their own choice with the aim of bringing rigorous research to curious but uninformed audiences in thoughtful, fun, and engaging ways.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1379",
       "crn": "5908",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "W. Gilders",
+      "instructor": "Susan Elizabeth Gagliardi",
       "instructors": [
         {
-          "name": "W. Gilders",
-          "email": null
+          "name": "Susan Elizabeth Gagliardi",
+          "email": "susan.e.gagliardi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Carlos Hall Conference",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1380",
       "crn": "5909",
       "section_number": "2",
       "schedule_type": "SUP",
-      "instructor": "H. Kim",
+      "instructor": "Vani Kannan",
       "instructors": [
         {
-          "name": "H. Kim",
-          "email": null
+          "name": "Vani Kannan",
+          "email": "ariane.vani.kannan@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 8,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5908",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "W. Gilders",
-      "instructors": [
-        {
-          "name": "W. Gilders",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5909",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "H. Kim",
-      "instructors": [
-        {
-          "name": "H. Kim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 0,
-    "closed": 4,
+    "other": 2,
+    "open": 2,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "H. Kim",
-    "W. Gilders"
+    "Susan Elizabeth Gagliardi",
+    "Vani Kannan"
   ],
-  "scraped_at": "2026-06-17T23:06:34.027Z"
+  "scraped_at": "2026-06-18T02:42:57.905Z"
 }

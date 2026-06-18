@@ -5,38 +5,53 @@
   "catalog_number": "751R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Course will cover fundamental parts of numerical linear algebra including matrix factorizations, solution of linear systems and least-squares problems, the calculation of eigenvalues and eigenvectors, and basic notions on iterative methods for large-scale matrix problems. Issues pertaining to conditioning and numerical stability will be thoroughly analyzed. We will also point out and use links to other mathematical and computer science disciplines such as mathematical modelling, computer architectures and parallel computing.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1542",
       "crn": "2897",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Meighoo",
+      "instructor": "Marco Tezzele",
       "instructors": [
         {
-          "name": "S. Meighoo",
-          "email": null
+          "name": "Marco Tezzele",
+          "email": "marco.tezzele@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - E408",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-4p",
@@ -47,26 +62,45 @@
             "end": "1600"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1543",
       "crn": "2900",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "I. Goh",
+      "instructor": "Suresh Venapally",
       "instructors": [
         {
-          "name": "I. Goh",
-          "email": null
+          "name": "Suresh Venapally",
+          "email": "suresh.venapally@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - E408",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 3-6p",
@@ -77,26 +111,45 @@
             "end": "1800"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1544",
       "crn": "5286",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "L. Park",
+      "instructor": "Liana Yepremyan",
       "instructors": [
         {
-          "name": "L. Park",
-          "email": null
+          "name": "Liana Yepremyan",
+          "email": "liana.yepremyan@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - E406",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-6:45p",
@@ -107,26 +160,45 @@
             "end": "1845"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1545",
       "crn": "5289",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "F. Sheth",
+      "instructor": "Montie Avery",
       "instructors": [
         {
-          "name": "F. Sheth",
-          "email": null
+          "name": "Montie Avery",
+          "email": "montie.stuart.avery@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - E408",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 10a-1p",
@@ -137,9 +209,14 @@
             "end": "1300"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1546",
       "crn": "5634",
       "section_number": "5",
       "schedule_type": "LEC",
@@ -147,16 +224,30 @@
       "instructors": [
         {
           "name": "A. Castaldo",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 35,
+      "seats_available": 35,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 1-4p",
@@ -167,9 +258,14 @@
             "end": "1600"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1547",
       "crn": "5898",
       "section_number": "6",
       "schedule_type": "LEC",
@@ -177,16 +273,30 @@
       "instructors": [
         {
           "name": "E. Keme",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 110",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 35,
+      "seats_available": 35,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 1-3:45p",
@@ -197,206 +307,30 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2897",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Meighoo",
-      "instructors": [
-        {
-          "name": "S. Meighoo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-4p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1600"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2900",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "I. Goh",
-      "instructors": [
-        {
-          "name": "I. Goh",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 3-6p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1500",
-            "end": "1800"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5286",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "L. Park",
-      "instructors": [
-        {
-          "name": "L. Park",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-6:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1845"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5289",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "F. Sheth",
-      "instructors": [
-        {
-          "name": "F. Sheth",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 10a-1p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1300"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5634",
-      "section_number": "5",
-      "schedule_type": "LEC",
-      "instructor": "A. Castaldo",
-      "instructors": [
-        {
-          "name": "A. Castaldo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 1-4p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1600"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5898",
-      "section_number": "6",
-      "schedule_type": "LEC",
-      "instructor": "E. Keme",
-      "instructors": [
-        {
-          "name": "E. Keme",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 1-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
-    "lectures": 12,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 12,
+    "open": 6,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "A. Castaldo",
     "E. Keme",
-    "F. Sheth",
-    "I. Goh",
-    "L. Park",
-    "S. Meighoo"
+    "Liana Yepremyan",
+    "Marco Tezzele",
+    "Montie Avery",
+    "Suresh Venapally"
   ],
-  "scraped_at": "2026-06-17T23:01:50.687Z"
+  "scraped_at": "2026-06-18T02:13:53.402Z"
 }

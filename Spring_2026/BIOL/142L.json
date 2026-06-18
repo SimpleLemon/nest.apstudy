@@ -5,40 +5,68 @@
   "catalog_number": "142L",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "2",
+  "credit_hours": "1",
   "requirement_designation": "SNTL",
   "requirements": [
     "SNTL"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Students experience scientific inquiry in the laboratory. Students design, implement, analyze and present authentic research projects.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Emory Essentials introduces Emory College first-year students to university resources, opportunities, and policies. Through class discussions, small-group activities, and homework assignments, students will reflect, explore, and begin designing their unique Emory experience.",
   "course_notes": "BIOL 142 as a corequisite.",
   "requisites": "BIOL 142 as a corequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3868",
       "crn": "1668",
       "section_number": "1",
       "schedule_type": "LAB",
-      "instructor": "Cole/Schneider",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Schneider",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Nikki Laird",
+          "email": "nikki.laird@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Savvy McLeod",
+          "email": "savvy.mcleod@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-5:30p",
@@ -49,26 +77,53 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3869",
       "crn": "5202",
       "section_number": "2",
       "schedule_type": "LAB",
-      "instructor": "Cole/Hailstock",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Hailstock",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Maddie Herlong",
+          "email": "mhend25@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rich Building 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-5:30p",
@@ -79,26 +134,58 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3870",
       "crn": "5213",
       "section_number": "3",
       "schedule_type": "LAB",
-      "instructor": "Cole/Sanchez",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Sanchez",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Natalie Cruz",
+          "email": "natalie.cruz@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Jordan Postal",
+          "email": "jpostal@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-5:30p",
@@ -109,26 +196,53 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3871",
       "crn": "5215",
       "section_number": "4",
       "schedule_type": "LAB",
-      "instructor": "Cole/Gutierrez",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Gutierrez",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Anna Gibbons",
+          "email": "anna.hobby@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rich Building 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-5:30p",
@@ -139,26 +253,53 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3872",
       "crn": "5216",
       "section_number": "5",
       "schedule_type": "LAB",
-      "instructor": "Cole/Wu",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Wu",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kash Chapman",
+          "email": "kamalik@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 220",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-5:30p",
@@ -169,26 +310,58 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3873",
       "crn": "5217",
       "section_number": "6",
       "schedule_type": "LAB",
-      "instructor": "Cole/Zhao",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Zhao",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Faith Derricott",
+          "email": "faith.yvette.derricott@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Celia Diller",
+          "email": "celia.diller@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W307C",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6-9p",
@@ -199,26 +372,53 @@
             "end": "2100"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3874",
       "crn": "5218",
       "section_number": "7",
       "schedule_type": "LAB",
-      "instructor": "Cole/Hailstock",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Hailstock",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kellyn Ward",
+          "email": "kellyn.hewitt@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 225",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6-9p",
@@ -229,26 +429,58 @@
             "end": "2100"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3875",
       "crn": "5219",
       "section_number": "8",
       "schedule_type": "LAB",
-      "instructor": "Cole/McKenna III",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/McKenna III",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Carolyn McCarthy",
+          "email": "carolyn.mccarthy@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Jennifer Sharpe",
+          "email": "jennifer.sharpe@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6-9p",
@@ -259,26 +491,58 @@
             "end": "2100"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3876",
       "crn": "5220",
       "section_number": "9",
       "schedule_type": "LAB",
-      "instructor": "Cole/Wells",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Wells",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Maggie Beker",
+          "email": "margaret.elizabeth.beker@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Adam Dobucki",
+          "email": "adam.dobucki@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "COX 230B",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6-9p",
@@ -289,26 +553,53 @@
             "end": "2100"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3877",
       "crn": "5192",
       "section_number": "10",
       "schedule_type": "LAB",
-      "instructor": "Cole/Reed",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Reed",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Lex Hackney",
+          "email": "lex.hackney@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rich Building 104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6-9p",
@@ -319,26 +610,53 @@
             "end": "2100"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3878",
       "crn": "5193",
       "section_number": "11",
       "schedule_type": "LAB",
-      "instructor": "Cole/Paredes Diaz",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Paredes Diaz",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Whitney Miller",
+          "email": "whitneymiller@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 8-11a",
@@ -349,26 +667,53 @@
             "end": "1100"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3879",
       "crn": "5194",
       "section_number": "12",
       "schedule_type": "LAB",
-      "instructor": "Cole/Ciavatta",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Ciavatta",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sandra Aguilera",
+          "email": "sandra.e.aguilera@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Modern Language 330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 8-11a",
@@ -379,26 +724,53 @@
             "end": "1100"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3880",
       "crn": "5195",
       "section_number": "13",
       "schedule_type": "LAB",
-      "instructor": "Cole/Hamilton",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Hamilton",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Ben Pearce",
+          "email": "benjamin.f.pearce@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 338",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-5:30p",
@@ -409,26 +781,58 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3881",
       "crn": "5196",
       "section_number": "14",
       "schedule_type": "LAB",
-      "instructor": "Cole/Fatima",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Fatima",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Bailey Rundle",
+          "email": "bailey.li@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Cecilia Vu",
+          "email": "cecilia.vu@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 218",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-5:30p",
@@ -439,26 +843,53 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3882",
       "crn": "5197",
       "section_number": "15",
       "schedule_type": "LAB",
-      "instructor": "Cole/Pyne",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Pyne",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Brittain Lawrence",
+          "email": "brittain.lawrence@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 316",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-5:20p",
@@ -469,26 +900,53 @@
             "end": "1720"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3883",
       "crn": "5198",
       "section_number": "16",
       "schedule_type": "LAB",
-      "instructor": "Cole/Kim",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Kim",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Bria Taylor",
+          "email": "b.taylor@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S109",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-5:30p",
@@ -499,26 +957,58 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3884",
       "crn": "5199",
       "section_number": "17",
       "schedule_type": "LAB",
-      "instructor": "Cole/Philpot",
+      "instructor": "Luz Caraballo",
       "instructors": [
         {
-          "name": "Cole/Philpot",
-          "email": null
+          "name": "Luz Caraballo",
+          "email": "luz.caraballo@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Benjamin Kasavan",
+          "email": "bkasava@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "COX 230A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-5:30p",
@@ -529,26 +1019,53 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3885",
       "crn": "5200",
       "section_number": "18",
       "schedule_type": "LAB",
-      "instructor": "Cole/Merino",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Merino",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kristina Storey",
+          "email": "kristina.storey@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Few Bldg 131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6-9p",
@@ -559,26 +1076,53 @@
             "end": "2100"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3886",
       "crn": "5201",
       "section_number": "19",
       "schedule_type": "LAB",
-      "instructor": "Cole/Kiessling",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Kiessling",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Janet Gonzales",
+          "email": "janet.gonzales@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6-9p",
@@ -589,26 +1133,53 @@
             "end": "2100"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3887",
       "crn": "5203",
       "section_number": "20",
       "schedule_type": "LAB",
-      "instructor": "Cole/Wells",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Wells",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Ashley McKelvy",
+          "email": "ashley.mckelvy@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Bowden Hall 118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6-9p",
@@ -619,26 +1190,58 @@
             "end": "2100"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3888",
       "crn": "5204",
       "section_number": "21",
       "schedule_type": "LAB",
-      "instructor": "Cole/Sherman",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Sherman",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jessica King",
+          "email": "jessica.king@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Tanner Senter",
+          "email": "tanner.senter@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 218",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6-9p",
@@ -649,26 +1252,53 @@
             "end": "2100"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3889",
       "crn": "5205",
       "section_number": "22",
       "schedule_type": "LAB",
-      "instructor": "Cole/Alam",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Alam",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Frank Gaertner",
+          "email": "fgaertn@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6-9p",
@@ -679,26 +1309,53 @@
             "end": "2100"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3890",
       "crn": "5206",
       "section_number": "23",
       "schedule_type": "LAB",
-      "instructor": "Cole/Harper",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Harper",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jolayna Palm",
+          "email": "jolayna.palm@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-5:30p",
@@ -709,26 +1366,53 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3891",
       "crn": "5207",
       "section_number": "24",
       "schedule_type": "LAB",
-      "instructor": "Cole/Banks",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Banks",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Susan D Cook",
+          "email": "scook01@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 218",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-5:30p",
@@ -739,26 +1423,53 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3892",
       "crn": "5208",
       "section_number": "25",
       "schedule_type": "LAB",
-      "instructor": "Cole/Simpson",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Simpson",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Zachary Issenberg",
+          "email": "zachary.nicholas.issenberg@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-5:30p",
@@ -769,26 +1480,53 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3893",
       "crn": "5209",
       "section_number": "26",
       "schedule_type": "LAB",
-      "instructor": "Cole/Kilic",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Kilic",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Donald Cornwell",
+          "email": "dcornwe@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-5:30p",
@@ -799,26 +1537,53 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3894",
       "crn": "5210",
       "section_number": "27",
       "schedule_type": "LAB",
-      "instructor": "Cole/Fontenla-Iglesias",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Fontenla-Iglesias",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Susan Pak",
+          "email": "susan.pak@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 250",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:30p",
@@ -829,26 +1594,53 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3895",
       "crn": "5211",
       "section_number": "28",
       "schedule_type": "LAB",
-      "instructor": "Cole/Schneider",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Schneider",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Holli Bice",
+          "email": "hbice@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S109",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:30p",
@@ -859,26 +1651,53 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3896",
       "crn": "5212",
       "section_number": "29",
       "schedule_type": "LAB",
-      "instructor": "Cole/Pelia",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Pelia",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Morgan Connor",
+          "email": "morgan.juliette.connor@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:30p",
@@ -889,26 +1708,53 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3897",
       "crn": "5214",
       "section_number": "30",
       "schedule_type": "LAB",
-      "instructor": "Cole/Gleason",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Gleason",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Rachael Wagner",
+          "email": "rachael.wagner@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rich Building 104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:30p",
@@ -919,26 +1765,53 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3898",
       "crn": "6300",
       "section_number": "31",
       "schedule_type": "LAB",
-      "instructor": "Cole/Simpson",
+      "instructor": "Emily Morran",
       "instructors": [
         {
-          "name": "Cole/Simpson",
-          "email": null
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Alan Pogue",
+          "email": "alan.pogue@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "31",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6-9p",
@@ -949,977 +1822,65 @@
             "end": "2100"
           }
         ]
-      }
-    },
-    {
-      "crn": "1668",
-      "section_number": "1",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Schneider",
-      "instructors": [
-        {
-          "name": "Cole/Schneider",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5202",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Hailstock",
-      "instructors": [
-        {
-          "name": "Cole/Hailstock",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5213",
-      "section_number": "3",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Sanchez",
-      "instructors": [
-        {
-          "name": "Cole/Sanchez",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5215",
-      "section_number": "4",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Gutierrez",
-      "instructors": [
-        {
-          "name": "Cole/Gutierrez",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5216",
-      "section_number": "5",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Wu",
-      "instructors": [
-        {
-          "name": "Cole/Wu",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5217",
-      "section_number": "6",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Zhao",
-      "instructors": [
-        {
-          "name": "Cole/Zhao",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6-9p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1800",
-            "end": "2100"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5218",
-      "section_number": "7",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Hailstock",
-      "instructors": [
-        {
-          "name": "Cole/Hailstock",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6-9p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1800",
-            "end": "2100"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5219",
-      "section_number": "8",
-      "schedule_type": "LAB",
-      "instructor": "Cole/McKenna III",
-      "instructors": [
-        {
-          "name": "Cole/McKenna III",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6-9p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1800",
-            "end": "2100"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5220",
-      "section_number": "9",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Wells",
-      "instructors": [
-        {
-          "name": "Cole/Wells",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6-9p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1800",
-            "end": "2100"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5192",
-      "section_number": "10",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Reed",
-      "instructors": [
-        {
-          "name": "Cole/Reed",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6-9p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1800",
-            "end": "2100"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5193",
-      "section_number": "11",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Paredes Diaz",
-      "instructors": [
-        {
-          "name": "Cole/Paredes Diaz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 8-11a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "800",
-            "end": "1100"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5194",
-      "section_number": "12",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Ciavatta",
-      "instructors": [
-        {
-          "name": "Cole/Ciavatta",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 8-11a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "800",
-            "end": "1100"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5195",
-      "section_number": "13",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Hamilton",
-      "instructors": [
-        {
-          "name": "Cole/Hamilton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5196",
-      "section_number": "14",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Fatima",
-      "instructors": [
-        {
-          "name": "Cole/Fatima",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5197",
-      "section_number": "15",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Pyne",
-      "instructors": [
-        {
-          "name": "Cole/Pyne",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-5:20p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1720"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5198",
-      "section_number": "16",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Kim",
-      "instructors": [
-        {
-          "name": "Cole/Kim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5199",
-      "section_number": "17",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Philpot",
-      "instructors": [
-        {
-          "name": "Cole/Philpot",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5200",
-      "section_number": "18",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Merino",
-      "instructors": [
-        {
-          "name": "Cole/Merino",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6-9p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1800",
-            "end": "2100"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5201",
-      "section_number": "19",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Kiessling",
-      "instructors": [
-        {
-          "name": "Cole/Kiessling",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6-9p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1800",
-            "end": "2100"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5203",
-      "section_number": "20",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Wells",
-      "instructors": [
-        {
-          "name": "Cole/Wells",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6-9p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1800",
-            "end": "2100"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5204",
-      "section_number": "21",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Sherman",
-      "instructors": [
-        {
-          "name": "Cole/Sherman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6-9p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1800",
-            "end": "2100"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5205",
-      "section_number": "22",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Alam",
-      "instructors": [
-        {
-          "name": "Cole/Alam",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6-9p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1800",
-            "end": "2100"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5206",
-      "section_number": "23",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Harper",
-      "instructors": [
-        {
-          "name": "Cole/Harper",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5207",
-      "section_number": "24",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Banks",
-      "instructors": [
-        {
-          "name": "Cole/Banks",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5208",
-      "section_number": "25",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Simpson",
-      "instructors": [
-        {
-          "name": "Cole/Simpson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5209",
-      "section_number": "26",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Kilic",
-      "instructors": [
-        {
-          "name": "Cole/Kilic",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5210",
-      "section_number": "27",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Fontenla-Iglesias",
-      "instructors": [
-        {
-          "name": "Cole/Fontenla-Iglesias",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5211",
-      "section_number": "28",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Schneider",
-      "instructors": [
-        {
-          "name": "Cole/Schneider",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5212",
-      "section_number": "29",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Pelia",
-      "instructors": [
-        {
-          "name": "Cole/Pelia",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5214",
-      "section_number": "30",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Gleason",
-      "instructors": [
-        {
-          "name": "Cole/Gleason",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "6300",
-      "section_number": "31",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Simpson",
-      "instructors": [
-        {
-          "name": "Cole/Simpson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "31",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6-9p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1800",
-            "end": "2100"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 62,
+    "total_sections": 31,
     "lectures": 0,
-    "labs": 62,
+    "labs": 31,
     "discussions": 0,
     "other": 0,
-    "open": 10,
-    "closed": 0,
-    "waitlisted": 52
+    "open": 0,
+    "closed": 31,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "Cole/Alam",
-    "Cole/Banks",
-    "Cole/Ciavatta",
-    "Cole/Fatima",
-    "Cole/Fontenla-Iglesias",
-    "Cole/Gleason",
-    "Cole/Gutierrez",
-    "Cole/Hailstock",
-    "Cole/Hamilton",
-    "Cole/Harper",
-    "Cole/Kiessling",
-    "Cole/Kilic",
-    "Cole/Kim",
-    "Cole/McKenna III",
-    "Cole/Merino",
-    "Cole/Paredes Diaz",
-    "Cole/Pelia",
-    "Cole/Philpot",
-    "Cole/Pyne",
-    "Cole/Reed",
-    "Cole/Sanchez",
-    "Cole/Schneider",
-    "Cole/Sherman",
-    "Cole/Simpson",
-    "Cole/Wells",
-    "Cole/Wu",
-    "Cole/Zhao"
+    "Adam Dobucki",
+    "Alan Pogue",
+    "Anna Gibbons",
+    "Ashley McKelvy",
+    "Bailey Rundle",
+    "Ben Pearce",
+    "Benjamin Kasavan",
+    "Bria Taylor",
+    "Brittain Lawrence",
+    "Carolyn McCarthy",
+    "Cecilia Vu",
+    "Celia Diller",
+    "Donald Cornwell",
+    "Emily Morran",
+    "Faith Derricott",
+    "Frank Gaertner",
+    "Holli Bice",
+    "Janet Gonzales",
+    "Jennifer Sharpe",
+    "Jessica King",
+    "Jolayna Palm",
+    "Jordan Postal",
+    "Kash Chapman",
+    "Kellyn Ward",
+    "Kristina Storey",
+    "Lex Hackney",
+    "Luz Caraballo",
+    "Maddie Herlong",
+    "Maggie Beker",
+    "Morgan Connor",
+    "Natalie Cruz",
+    "Nikki Laird",
+    "Rachael Wagner",
+    "Sandra Aguilera",
+    "Savvy McLeod",
+    "Shari Obrentz",
+    "Susan D Cook",
+    "Susan Pak",
+    "Tanner Senter",
+    "Whitney Miller",
+    "Zachary Issenberg"
   ],
-  "scraped_at": "2026-06-17T23:01:21.184Z"
+  "scraped_at": "2026-06-18T02:09:43.782Z"
 }

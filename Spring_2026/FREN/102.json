@@ -5,23 +5,26 @@
   "catalog_number": "102",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "1,2,3,4",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Social Sciences(*)",
+    "First Year Seminar"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course is open to students who have had some French (FREN 101 or two years in high school). It is designed to help students build proficiency in French reading, writing, speaking and listening in the context of cultural exploration.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Advanced supervised study in Latin literature.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "780",
       "crn": "1673",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +32,30 @@
       "instructors": [
         {
           "name": "J. Lopez Cochachi",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a; F 10-10:50a",
@@ -59,26 +76,47 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "781",
       "crn": "1674",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "C. Tenkorang",
+      "instructor": "Robyn Clarke",
       "instructors": [
         {
-          "name": "C. Tenkorang",
-          "email": null
+          "name": "Robyn Clarke",
+          "email": "hrclark@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Candler Library 114",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 35,
+      "seats_available": 17,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p; F 11:30a-12:20p",
@@ -99,26 +137,47 @@
             "end": "1220"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "782",
       "crn": "1675",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "B. Ben Asker",
+      "instructor": "Susan Tamasi",
       "instructors": [
         {
-          "name": "B. Ben Asker",
-          "email": null
+          "name": "Susan Tamasi",
+          "email": "stamasi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "5",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a; F 9-9:50a",
@@ -139,26 +198,47 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "783",
       "crn": "1676",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "S. Descourtis",
+      "instructor": "Roberto Franzosi",
       "instructors": [
         {
-          "name": "S. Descourtis",
-          "email": null
+          "name": "Roberto Franzosi",
+          "email": "rfranzo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Tarbutton Hall 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "5",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p; F 12-12:50p",
@@ -179,222 +259,74 @@
             "end": "1250"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "784",
       "crn": "6769",
       "section_number": "9000",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "instructor": "Donald Tuten",
+      "instructors": [
+        {
+          "name": "Donald Tuten",
+          "email": "dtuten@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "White Hall 102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "5",
+      "enrollment_capacity": 36,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "1673",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Lopez Cochachi",
-      "instructors": [
-        {
-          "name": "J. Lopez Cochachi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a; F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1674",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "C. Tenkorang",
-      "instructors": [
-        {
-          "name": "C. Tenkorang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p; F 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1675",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "B. Ben Asker",
-      "instructors": [
-        {
-          "name": "B. Ben Asker",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a; F 9-9:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Fri",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1676",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "S. Descourtis",
-      "instructors": [
-        {
-          "name": "S. Descourtis",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p; F 12-12:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Fri",
-            "start": "1200",
-            "end": "1250"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "6769",
-      "section_number": "9000",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
-    "lectures": 10,
+    "total_sections": 5,
+    "lectures": 5,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 2,
     "closed": 2,
-    "waitlisted": 6
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "B. Ben Asker",
-    "C. Tenkorang",
+    "Donald Tuten",
     "J. Lopez Cochachi",
-    "S. Descourtis"
+    "Roberto Franzosi",
+    "Robyn Clarke",
+    "Susan Tamasi"
   ],
-  "scraped_at": "2026-06-17T23:02:39.577Z"
+  "scraped_at": "2026-06-18T02:22:47.200Z"
 }

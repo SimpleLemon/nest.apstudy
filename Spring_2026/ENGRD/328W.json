@@ -5,40 +5,53 @@
   "catalog_number": "328W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "2",
   "requirement_designation": "CWE",
   "requirements": [
     "CWE"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Students will learn about media studies and cultural studies frameworks to analyze popular media throughout the century. Students write in class daily, blog to larger audiences weekly, draft and revise multiple multimodal projects, and respond meaningfully to peers' work in structured workshops.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The course will teach students the practical aspects of discovery in civil litigation through experiential efforts such as drafting discovery requests and responses, preparing for and taking depositions, and identifying the documents and information that need to be collected to lead to a good result in the case. Students will use a basic tort litigation fact pattern to develop and execute a discovery strategy, including working with the client and resolving discovery disputes.",
+  "course_notes": "Final Assessment: Paper/Project May be used towards partial fulfillment of the requirements for the JD Civil Litigation and Dispute Resolution concentration.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "4094",
       "crn": "4291",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Salter",
+      "instructor": "Michael Weiss",
       "instructors": [
         {
-          "name": "S. Salter",
-          "email": null
+          "name": "Michael Weiss",
+          "email": "michael.l.weiss@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": 3,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -54,26 +67,45 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "4095",
       "crn": "4307",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "S. Dutta",
+      "instructor": "Wladimir Benalcazar",
       "instructors": [
         {
-          "name": "S. Dutta",
-          "email": null
+          "name": "Wladimir Benalcazar",
+          "email": "benalcazar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Emerson Chemistry Bldg. E102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 20,
+      "seats_available": 19,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -89,92 +121,26 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "4291",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Salter",
-      "instructors": [
-        {
-          "name": "S. Salter",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4307",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "S. Dutta",
-      "instructors": [
-        {
-          "name": "S. Dutta",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 0,
-    "waitlisted": 4
+    "open": 1,
+    "closed": 1,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Dutta",
-    "S. Salter"
+    "Michael Weiss",
+    "Wladimir Benalcazar"
   ],
-  "scraped_at": "2026-06-17T23:02:23.325Z"
+  "scraped_at": "2026-06-18T02:19:56.737Z"
 }

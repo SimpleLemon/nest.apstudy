@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HAW",
   "requirements": [
-    "HAW"
+    "HAW",
+    "Humanities and Arts with Cont.Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course draws on classical, modern, and contemporary texts to introduce skills required for reading comparatively across national traditions and academic disciplines with an emphasis on close reading, critical interpretation, and the multiplicity of linguistic traditions around the world. *Note: This course is non-repeatable.",
-  "course_notes": null,
+  "course_notes": "(Topic: Death, Art, and Immortality) Great artists boast that their work will outlast the \"devouring tooth\" of time, that they might overcome death through art. This course explores such claims and attitudes through a close consideration of literature that thematizes the quest for immortality. This will challenge us to consider deeply our own relation to death, but our attitude will not be bleak. By engaging art, literature, and philosophy, we'll discover the resources within us to face life's impending end bravely, beautifully, and creatively. We begin by surveying the psychology of the artist's immortality drive through Freud, Becker, and Rank; descend into the Orpheus myth with Ovid and Blanchot; and encounter some religious and philosophical traditions on immortality - the Upanishads, Christianity, and Plato. From there we will devote our time short stories and novels that tackle the theme from many exhilarating angles, moving from the positive case in Proust through a sustained reckoning with what preservation technologies - aesthetic, technological, institutional - can actually hold. We'll explore questions like: what is death with and without art? How does confronting our mortality inspire art? What does the artistic vocation cost? What does art really preserve of who we are? What fills the gap where art fails? This class will especially appeal to anyone who has an artistic vocation, values the creative word, and/or just loves great literature. Class discussions will be lively and intense. Assignments to include weekly reflections, book presentations, an exam, and a final essay or creative project. Required Texts: Leo Tolstoy, The Death of Ivan Ilyich Adolfo Bioy Casares, The Invention of Morel Kazuo Ishiguro, Never Let Me Go Bohumil Herbal, Too Loud a Solitude Philip K. Dick, Ubik Franz Kafka, Complete Stories Recommended: Maurice Blanchot, The Space of Literature",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "788",
       "crn": "2318",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "T. Lavenz",
+      "instructor": "Timothy Lavenz",
       "instructors": [
         {
-          "name": "T. Lavenz",
-          "email": null
+          "name": "Timothy Lavenz",
+          "email": "timothy.lavenz@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Tarbutton Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,56 +72,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "2318",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "T. Lavenz",
-      "instructors": [
-        {
-          "name": "T. Lavenz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "T. Lavenz"
+    "Timothy Lavenz"
   ],
-  "scraped_at": "2026-06-17T23:09:53.852Z"
+  "scraped_at": "2026-06-18T02:51:35.558Z"
 }

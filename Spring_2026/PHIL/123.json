@@ -10,35 +10,50 @@
   "requirements": [
     "HA"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course is an introduction to the central issues in feminist philosophy.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An introductory course on the nature and methods of history. May be repeated for credit when topic varies.",
+  "course_notes": "(Same as AMST 285 3) This course examines the length and depth of Muscogee (Creek) relationships to place, governance, and society from deep time to the present, situating Muscogee history within the broader landscape of North American Indigenous nations while emphasizing the distinctiveness of Indigenous cultures, regions, and political traditions. Through immersive engagement with treaties, origin narratives, legal cases, speeches, oral histories, and material culture, students analyze how histories are constructed, where silences emerge, and why certain stories remain marginalized. The course moves beyond a narrative of loss to focus on what we know: enduring systems of kinship, land-based epistemologies, sovereignty, adaptation, and cultural continuity. Students critically examine complex historical moments, including removal, internal political divisions, enslavement, Civil War allegiances, allotment, and contemporary jurisdictional debates, while practicing nuanced, evidence-based interpretation. Drawing on Indigenous thinkers such as Vine Deloria Jr. and Daniel Wildcat, the course fosters a rigorous understanding of Indigenous perspectives and cultivates a sustained, place-based intellectual engagement with Indigenous pasts, presents, and futures.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3086",
       "crn": "1730",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Karera/Wang",
+      "instructor": "Malinda Lowery",
       "instructors": [
         {
-          "name": "Karera/Wang",
-          "email": null
+          "name": "Malinda Lowery",
+          "email": "malinda.maynor.lowery@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 14,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -54,56 +69,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "1730",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Karera/Wang",
-      "instructors": [
-        {
-          "name": "Karera/Wang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Karera/Wang"
+    "Malinda Lowery"
   ],
-  "scraped_at": "2026-06-17T23:06:07.915Z"
+  "scraped_at": "2026-06-18T02:38:17.508Z"
 }

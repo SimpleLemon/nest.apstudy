@@ -5,38 +5,53 @@
   "catalog_number": "789",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "All enrollment by permission only and must go through the Political Science Department.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1637",
       "crn": "2774",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "E. Keme",
+      "instructor": "Elizabeth Penn",
       "instructors": [
         {
-          "name": "E. Keme",
-          "email": null
+          "name": "Elizabeth Penn",
+          "email": "elizabeth.maggie.penn@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 120A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 1-3:45p",
@@ -47,26 +62,45 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1638",
       "crn": "2776",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "P. Kelleher",
+      "instructor": "Dan Reiter",
       "instructors": [
         {
-          "name": "P. Kelleher",
-          "email": null
+          "name": "Dan Reiter",
+          "email": "dreiter@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 120A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-3:45p",
@@ -77,26 +111,45 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1639",
       "crn": "5458",
       "section_number": "4",
       "schedule_type": "SEM",
-      "instructor": "I. Goh",
+      "instructor": "Zachary Peskowitz",
       "instructors": [
         {
-          "name": "I. Goh",
-          "email": null
+          "name": "Zachary Peskowitz",
+          "email": "zachary.f.peskowitz@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 120A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 3-6p",
@@ -107,26 +160,43 @@
             "end": "1800"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1640",
       "crn": "5482",
       "section_number": "5",
       "schedule_type": "SEM",
-      "instructor": "G. Ramirez",
+      "instructor": "Zirui Yang",
       "instructors": [
         {
-          "name": "G. Ramirez",
-          "email": null
+          "name": "Zirui Yang",
+          "email": "zirui.yang@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 120A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 1-3:45p",
@@ -137,144 +207,28 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2774",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "E. Keme",
-      "instructors": [
-        {
-          "name": "E. Keme",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 1-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2776",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "P. Kelleher",
-      "instructors": [
-        {
-          "name": "P. Kelleher",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-3:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5458",
-      "section_number": "4",
-      "schedule_type": "SEM",
-      "instructor": "I. Goh",
-      "instructors": [
-        {
-          "name": "I. Goh",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 3-6p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1500",
-            "end": "1800"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5482",
-      "section_number": "5",
-      "schedule_type": "SEM",
-      "instructor": "G. Ramirez",
-      "instructors": [
-        {
-          "name": "G. Ramirez",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 1-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 8,
-    "open": 8,
+    "other": 4,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Keme",
-    "G. Ramirez",
-    "I. Goh",
-    "P. Kelleher"
+    "Dan Reiter",
+    "Elizabeth Penn",
+    "Zachary Peskowitz",
+    "Zirui Yang"
   ],
-  "scraped_at": "2026-06-17T23:02:20.067Z"
+  "scraped_at": "2026-06-18T02:19:11.751Z"
 }

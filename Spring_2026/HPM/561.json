@@ -5,38 +5,51 @@
   "catalog_number": "561",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "4",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "All students in the HDGH must complete a thesis project in order to fulfill the requirements of the MPH degree. This project is a rigorous academic requirement; as the culmination of the MPH experience, it is an independent, theory-based inquiry in which the student applies knowledge and skills acquired during the MPH program to the scholarly study of a public health problem. In HDGH, the thesis project may take the form of either a Special Studies Project (e.g. a deliverable for an organization) or a Research Project (e.g. systematic review, analysis of primary or secondary data) using quantitative, qualitative or other methodologies and presented in a traditional style or manuscript style. .",
+  "course_notes": "This course section is for GH MPH students only and the default credit value is 4 credit hours.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "173",
       "crn": "1515",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Ghada Farhat",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Ghada Farhat",
+          "email": "ghada.n.farhat@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 5-6:50p",
@@ -47,51 +60,25 @@
             "end": "1850"
           }
         ]
-      }
-    },
-    {
-      "crn": "1515",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 5-6:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1700",
-            "end": "1850"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Team"
+    "Ghada Farhat"
   ],
-  "scraped_at": "2026-06-17T23:03:12.094Z"
+  "scraped_at": "2026-06-18T02:25:48.093Z"
 }

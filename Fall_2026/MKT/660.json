@@ -5,38 +5,56 @@
   "catalog_number": "660",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "Driving Growth with AI examines the burgeoning role of AI in marketing decisions and actions. The course will adopt the customer equity framework, which links the value of the customer to the organization to the following components: customer acquisition, customer retention, and relationship development. The course will be built around these components, examining the application of marketing technology and AI to support growth through each component. We will use the customer journey to tie these components together. The graduate-level version of this course includes an additional learning objective and project requirement beyond what is expected in the undergraduate course.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-08-15",
-    "end": "2026-08-22"
+    "start": "2026-08-10",
+    "end": "2026-08-25"
   },
   "sections": [
     {
+      "atlas_key": "4447",
       "crn": "5568",
       "section_number": "2195",
       "schedule_type": "LEC",
-      "instructor": "D. Schweidel",
+      "instructor": "David Schweidel",
       "instructors": [
         {
-          "name": "D. Schweidel",
-          "email": null
+          "name": "David Schweidel",
+          "email": "dschweidel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "David Schweidel",
+          "email": "dschweidel@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "SaSu 9a-12p; SaSu 2-5p",
@@ -62,26 +80,48 @@
             "end": "1700"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-25"
       }
     },
     {
+      "atlas_key": "4448",
       "crn": "5569",
       "section_number": "2295",
       "schedule_type": "LEC",
-      "instructor": "D. Schweidel",
+      "instructor": "David Schweidel",
       "instructors": [
         {
-          "name": "D. Schweidel",
-          "email": null
+          "name": "David Schweidel",
+          "email": "dschweidel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "David Schweidel",
+          "email": "dschweidel@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 13,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "SaSu 9a-12p; SaSu 2-5p",
@@ -107,26 +147,48 @@
             "end": "1700"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-25"
       }
     },
     {
+      "atlas_key": "4449",
       "crn": "5570",
       "section_number": "3295",
       "schedule_type": "LEC",
-      "instructor": "D. Schweidel",
+      "instructor": "David Schweidel",
       "instructors": [
         {
-          "name": "D. Schweidel",
-          "email": null
+          "name": "David Schweidel",
+          "email": "dschweidel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "David Schweidel",
+          "email": "dschweidel@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 13,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "SaSu 9a-12p; SaSu 2-5p",
@@ -152,156 +214,25 @@
             "end": "1700"
           }
         ]
-      }
-    },
-    {
-      "crn": "5568",
-      "section_number": "2195",
-      "schedule_type": "LEC",
-      "instructor": "D. Schweidel",
-      "instructors": [
-        {
-          "name": "D. Schweidel",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "SaSu 9a-12p; SaSu 2-5p",
-        "meetings": [
-          {
-            "day": "Sat",
-            "start": "900",
-            "end": "1200"
-          },
-          {
-            "day": "Sun",
-            "start": "900",
-            "end": "1200"
-          },
-          {
-            "day": "Sat",
-            "start": "1400",
-            "end": "1700"
-          },
-          {
-            "day": "Sun",
-            "start": "1400",
-            "end": "1700"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5569",
-      "section_number": "2295",
-      "schedule_type": "LEC",
-      "instructor": "D. Schweidel",
-      "instructors": [
-        {
-          "name": "D. Schweidel",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "SaSu 9a-12p; SaSu 2-5p",
-        "meetings": [
-          {
-            "day": "Sat",
-            "start": "900",
-            "end": "1200"
-          },
-          {
-            "day": "Sun",
-            "start": "900",
-            "end": "1200"
-          },
-          {
-            "day": "Sat",
-            "start": "1400",
-            "end": "1700"
-          },
-          {
-            "day": "Sun",
-            "start": "1400",
-            "end": "1700"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5570",
-      "section_number": "3295",
-      "schedule_type": "LEC",
-      "instructor": "D. Schweidel",
-      "instructors": [
-        {
-          "name": "D. Schweidel",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "SaSu 9a-12p; SaSu 2-5p",
-        "meetings": [
-          {
-            "day": "Sat",
-            "start": "900",
-            "end": "1200"
-          },
-          {
-            "day": "Sun",
-            "start": "900",
-            "end": "1200"
-          },
-          {
-            "day": "Sat",
-            "start": "1400",
-            "end": "1700"
-          },
-          {
-            "day": "Sun",
-            "start": "1400",
-            "end": "1700"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-25"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Schweidel"
+    "David Schweidel"
   ],
-  "scraped_at": "2026-06-17T23:12:04.121Z"
+  "scraped_at": "2026-06-18T03:06:42.630Z"
 }

@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HAPW",
   "requirements": [
-    "HAPW"
+    "HAPW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Selected works of sixteenth-century literature, including authors such as More, Wyatt, Sidney, Spenser, Marlowe, and Shakespeare.",
-  "course_notes": null,
+  "course_notes": "This class will introduce students to the literature of the Tudor period in England, extending from Henry VII's accession to the throne in 1485 to the death of Elizabeth I in 1603. The course is genre-comprehensive, including major works of poetry, drama, and prose. We will adopt a broadly historicist approach, considering texts within the political, economic, and social contexts in which they were produced. This approach, however, will not exclude attention to the formal and thematic qualities of individual works or the relevance of Renaissance texts to the present day. Topics to be discussed include Renaissance humanism, the Protestant Reformation, the political power of women, travel and colonialism, love and sexuality, and Elizabethan theater.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "597",
       "crn": "4922",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "R. Knecht",
+      "instructor": "Ross Knecht",
       "instructors": [
         {
-          "name": "R. Knecht",
-          "email": null
+          "name": "Ross Knecht",
+          "email": "ross.knecht@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Tarbutton Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -54,56 +72,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "4922",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "R. Knecht",
-      "instructors": [
-        {
-          "name": "R. Knecht",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Knecht"
+    "Ross Knecht"
   ],
-  "scraped_at": "2026-06-17T23:10:23.255Z"
+  "scraped_at": "2026-06-18T02:55:51.551Z"
 }

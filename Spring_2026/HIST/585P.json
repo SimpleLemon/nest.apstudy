@@ -5,45 +5,63 @@
   "catalog_number": "585P",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The nature of a teaching assistantship varies from department to department. The defining characteristic of this position across all departments and programs is a controlled, carefully monitored initial teaching opportunity. A teaching assistant may be responsible for 10 to 12 hours per week of discussion or laboratory supervision.",
+  "course_notes": "(S/U Only) (Permission Required Prior to Enrollment)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1783",
       "crn": "5900",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "L. Nenzi",
+      "instructor": "James Lavery",
       "instructors": [
         {
-          "name": "L. Nenzi",
-          "email": null
+          "name": "James Lavery",
+          "email": "james.v.lavery@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 5,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1784",
       "crn": "5913",
       "section_number": "2",
       "schedule_type": "SUP",
@@ -51,84 +69,52 @@
       "instructors": [
         {
           "name": "C. Suddler",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 6,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5900",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "L. Nenzi",
-      "instructors": [
-        {
-          "name": "L. Nenzi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5913",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "C. Suddler",
-      "instructors": [
-        {
-          "name": "C. Suddler",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 0,
-    "closed": 4,
+    "other": 2,
+    "open": 2,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "C. Suddler",
-    "L. Nenzi"
+    "James Lavery"
   ],
-  "scraped_at": "2026-06-17T23:03:05.504Z"
+  "scraped_at": "2026-06-18T02:24:48.791Z"
 }

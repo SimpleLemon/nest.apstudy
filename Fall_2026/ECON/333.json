@@ -10,8 +10,8 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "We introduce the workings of financial markets and institutions. We examine several types of financial instruments, their markets, and the roles of investment banks, security brokers, hedge funds, and venture capital firms. We will learn about financial cycles and regulation of financial markets.",
   "course_notes": "(ECON 112 or ECON_OX 112) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisite.",
   "requisites": "(ECON 112 or ECON_OX 112) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisite.",
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "3426",
       "crn": "2959",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "I. Mitra",
+      "instructor": "Indrajit Mitra",
       "instructors": [
         {
-          "name": "I. Mitra",
-          "email": null
+          "name": "Indrajit Mitra",
+          "email": "indrajit.mitra@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rich Building 211",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 5:30-6:45p",
@@ -54,56 +69,25 @@
             "end": "1845"
           }
         ]
-      }
-    },
-    {
-      "crn": "2959",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "I. Mitra",
-      "instructors": [
-        {
-          "name": "I. Mitra",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 5:30-6:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1730",
-            "end": "1845"
-          },
-          {
-            "day": "Wed",
-            "start": "1730",
-            "end": "1845"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "I. Mitra"
+    "Indrajit Mitra"
   ],
-  "scraped_at": "2026-06-17T23:10:06.960Z"
+  "scraped_at": "2026-06-18T02:53:56.613Z"
 }

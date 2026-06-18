@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Introduction to the study of the Spanish language and cultures in an academic context specifically designed for Spanish heritage speakers.",
-  "course_notes": null,
+  "course_notes": "DESCRIPTION: This course is designed specifically for heritage speakers: students who already speak Spanish and come from a Spanish-speaking family (typically their parents or grandparents speak this language); they have however never been schooled in Spanish or have received limited education in Spanish. The course introduces students to the study of the Spanish language and cultures in an academic context, and it is divided in three parts: 1) a sociohistorical background on the presence of the Spanish language in the United States, 2) a study on language variation and language ideologies, with a specific focus on the dialectal characteristics of US Spanish and how they differ and connect to other Spanish dialects, 3) a methodology for the critical analysis of cultural production in Spanish, such as films, literary works, music, etc. EVALUATION: Evaluation will be based on class participation, daily assignments, one exam, one oral presentation and three essays. PRE-REQUISITES: Heritage speakers of Spanish who have an official placement for foundational courses, or have completed Span 212, or with permission from instructor.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "1229",
       "crn": "1639",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Boigues-Lopez",
+      "instructor": "Jose Luis Boigues-Lopez",
       "instructors": [
         {
-          "name": "J. Boigues-Lopez",
-          "email": null
+          "name": "Jose Luis Boigues-Lopez",
+          "email": "jboigue@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Few Bldg 129",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -54,56 +72,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "1639",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Boigues-Lopez",
-      "instructors": [
-        {
-          "name": "J. Boigues-Lopez",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Boigues-Lopez"
+    "Jose Luis Boigues-Lopez"
   ],
-  "scraped_at": "2026-06-17T23:14:53.054Z"
+  "scraped_at": "2026-06-18T03:18:50.186Z"
 }

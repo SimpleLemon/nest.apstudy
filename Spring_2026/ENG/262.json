@@ -5,40 +5,58 @@
   "catalog_number": "262",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "2",
   "requirement_designation": "HAE",
   "requirements": [
     "HAE"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "An overview of African-American literature since 1900. Students will read and examine writings by major contributors to each period in the genres of fiction (short story and novel) essay, poetry, and narratives of enslavement. Students will write and revise four five-page critical essays.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course occurs over two semesters, one credit hour in the fall (745A) and 2 credits in the spring (745B). Students are introduced to the basic elements of a medical genetics evaluation including dysmorphology, physical assessment, and differential diagnosis. The clinical features, natural history, counseling issues and management strategies for major pediatric and adult genetic diagnoses/syndromes are reviewed.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": "AAS 262",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-10",
+    "end": "2026-12-11"
   },
   "sections": [
     {
+      "atlas_key": "3571",
       "crn": "4376",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Gordon",
+      "instructor": "Paige Black",
       "instructors": [
         {
-          "name": "M. Gordon",
-          "email": null
+          "name": "Paige Black",
+          "email": "paige.black@emoryhealthcare.org",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kristen Murphey",
+          "email": "kristen.elizabeth.ferriero@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,56 +72,26 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "4376",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Gordon",
-      "instructors": [
-        {
-          "name": "M. Gordon",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-12-11"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Gordon"
+    "Kristen Murphey",
+    "Paige Black"
   ],
-  "scraped_at": "2026-06-17T23:02:20.048Z"
+  "scraped_at": "2026-06-18T02:19:11.738Z"
 }

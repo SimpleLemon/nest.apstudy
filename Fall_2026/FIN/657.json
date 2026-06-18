@@ -5,38 +5,51 @@
   "catalog_number": "657",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "1.5",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides statistical tools for modeling and forecasting financial data. Topics include: Evidence on the predictability of stock and bond indexes. Forecasting equity returns with dividend yields and other standard variables. Factor models for the cross-section of equity returns, and factor selection techniques. Simulating and estimating affine models of the term structure. Time series analysis with applications to volatility modeling.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-10-19",
-    "end": "2026-12-09"
+    "start": "2026-10-14",
+    "end": "2026-12-19"
   },
   "sections": [
     {
+      "atlas_key": "3953",
       "crn": "3809",
       "section_number": "4201",
       "schedule_type": "LEC",
-      "instructor": "W. Mann",
+      "instructor": "William Mann",
       "instructors": [
         {
-          "name": "W. Mann",
-          "email": null
+          "name": "William Mann",
+          "email": "william.mann@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 400",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -52,56 +65,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3809",
-      "section_number": "4201",
-      "schedule_type": "LEC",
-      "instructor": "W. Mann",
-      "instructors": [
-        {
-          "name": "W. Mann",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-10-14",
+        "end": "2026-12-19"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "W. Mann"
+    "William Mann"
   ],
-  "scraped_at": "2026-06-17T23:10:39.540Z"
+  "scraped_at": "2026-06-18T02:58:24.253Z"
 }

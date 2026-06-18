@@ -5,38 +5,51 @@
   "catalog_number": "300",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides an introduction to finance. It addresses the theory and practice of financial management and the generation and allocation of financial resources. It has three major objectives: 1. To provide you with a foundation in the basic concepts of finance, including the time value of money, the role of financial markets, asset valuation, portfolio theory, asset pricing, and the risk-return tradeoff. 2. To develop your skills in financial analysis, planning, and decision-making. 3. To expand your awareness of institutions and practices in business and finance.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-26",
-    "end": "2026-03-23"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "219",
       "crn": "4585",
       "section_number": "1101",
       "schedule_type": "LEC",
-      "instructor": "U. Rackliffe",
+      "instructor": "Brian Jonghwan Lee",
       "instructors": [
         {
-          "name": "U. Rackliffe",
-          "email": null
+          "name": "Brian Jonghwan Lee",
+          "email": "brian.jonghwan.lee@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "34",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 9-9:50a",
@@ -47,26 +60,43 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "220",
       "crn": "4586",
       "section_number": "1102",
       "schedule_type": "LEC",
-      "instructor": "M. Schmees",
+      "instructor": "Tarun Chordia",
       "instructors": [
         {
-          "name": "M. Schmees",
-          "email": null
+          "name": "Tarun Chordia",
+          "email": "tarun.chordia@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 331",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "34",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 9-9:50a",
@@ -77,26 +107,43 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "221",
       "crn": "4587",
       "section_number": "1103",
       "schedule_type": "LEC",
-      "instructor": "S. Cruz",
+      "instructor": "Tarun Chordia",
       "instructors": [
         {
-          "name": "S. Cruz",
-          "email": null
+          "name": "Tarun Chordia",
+          "email": "tarun.chordia@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 331",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "34",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 9-9:50a",
@@ -107,26 +154,43 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "222",
       "crn": "4584",
       "section_number": "1104",
       "schedule_type": "LEC",
-      "instructor": "J. Ross",
+      "instructor": "Shankar Ramachandran",
       "instructors": [
         {
-          "name": "J. Ross",
-          "email": null
+          "name": "Shankar Ramachandran",
+          "email": "rlshankar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "34",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 9-9:50a",
@@ -137,26 +201,43 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "223",
       "crn": "4588",
       "section_number": "1105",
       "schedule_type": "LEC",
-      "instructor": "A. Gibbons",
+      "instructor": "Jake Jo",
       "instructors": [
         {
-          "name": "A. Gibbons",
-          "email": null
+          "name": "Jake Jo",
+          "email": "jake.jo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "34",
+      "enrollment_capacity": 53,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-4:50p",
@@ -167,26 +248,43 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "224",
       "crn": "4589",
       "section_number": "1106",
       "schedule_type": "LEC",
-      "instructor": "C. Frederick",
+      "instructor": "Jake Jo",
       "instructors": [
         {
-          "name": "C. Frederick",
-          "email": null
+          "name": "Jake Jo",
+          "email": "jake.jo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "34",
+      "enrollment_capacity": 53,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-4:50p",
@@ -197,26 +295,43 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "225",
       "crn": "4590",
       "section_number": "1107",
       "schedule_type": "LEC",
-      "instructor": "J. Billetdeaux",
+      "instructor": "Laura Wallace",
       "instructors": [
         {
-          "name": "J. Billetdeaux",
-          "email": null
+          "name": "Laura Wallace",
+          "email": "laura.emily.wallace@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "34",
+      "enrollment_capacity": 58,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-4:50p",
@@ -227,26 +342,43 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "226",
       "crn": "4591",
       "section_number": "1108",
       "schedule_type": "LEC",
-      "instructor": "C. Frederick",
+      "instructor": "Laura Wallace",
       "instructors": [
         {
-          "name": "C. Frederick",
-          "email": null
+          "name": "Laura Wallace",
+          "email": "laura.emily.wallace@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "34",
+      "enrollment_capacity": 53,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-4:50p",
@@ -257,50 +389,84 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "227",
       "crn": "4592",
       "section_number": "1109",
       "schedule_type": "LEC",
-      "instructor": "D. Clear",
+      "instructor": "Laura Wallace",
       "instructors": [
         {
-          "name": "D. Clear",
-          "email": null
+          "name": "Laura Wallace",
+          "email": "laura.emily.wallace@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "34",
+      "enrollment_capacity": 53,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "228",
       "crn": "4593",
       "section_number": "1110",
       "schedule_type": "LEC",
-      "instructor": "B. Baker",
+      "instructor": "Jake Jo",
       "instructors": [
         {
-          "name": "B. Baker",
-          "email": null
+          "name": "Jake Jo",
+          "email": "jake.jo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "34",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 9-9:50a",
@@ -311,26 +477,43 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "229",
       "crn": "4594",
       "section_number": "1111",
       "schedule_type": "LEC",
-      "instructor": "R. Bobowski",
+      "instructor": "Jake Jo",
       "instructors": [
         {
-          "name": "R. Bobowski",
-          "email": null
+          "name": "Jake Jo",
+          "email": "jake.jo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "34",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 9-9:50a",
@@ -341,26 +524,43 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "230",
       "crn": "4595",
       "section_number": "1112",
       "schedule_type": "LEC",
-      "instructor": "D. Clear",
+      "instructor": "Laura Wallace",
       "instructors": [
         {
-          "name": "D. Clear",
-          "email": null
+          "name": "Laura Wallace",
+          "email": "laura.emily.wallace@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "34",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 9-9:50a",
@@ -371,26 +571,43 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "231",
       "crn": "4596",
       "section_number": "1113",
       "schedule_type": "LEC",
-      "instructor": "N. Smith",
+      "instructor": "Laura Wallace",
       "instructors": [
         {
-          "name": "N. Smith",
-          "email": null
+          "name": "Laura Wallace",
+          "email": "laura.emily.wallace@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "34",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-4:50p",
@@ -401,26 +618,43 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "232",
       "crn": "4597",
       "section_number": "1114",
       "schedule_type": "LEC",
-      "instructor": "N. Smith",
+      "instructor": "Laura Wallace",
       "instructors": [
         {
-          "name": "N. Smith",
-          "email": null
+          "name": "Laura Wallace",
+          "email": "laura.emily.wallace@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "34",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-4:50p",
@@ -431,26 +665,43 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "233",
       "crn": "4598",
       "section_number": "1115",
       "schedule_type": "LEC",
-      "instructor": "A. Gibbons",
+      "instructor": "John Kim",
       "instructors": [
         {
-          "name": "A. Gibbons",
-          "email": null
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "34",
+      "enrollment_capacity": 59,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-4:50p",
@@ -461,26 +712,43 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "234",
       "crn": "4599",
       "section_number": "1116",
       "schedule_type": "LEC",
-      "instructor": "A. Errore",
+      "instructor": "John Kim",
       "instructors": [
         {
-          "name": "A. Errore",
-          "email": null
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "34",
+      "enrollment_capacity": 58,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-4:50p",
@@ -491,26 +759,43 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "235",
       "crn": "4600",
       "section_number": "1117",
       "schedule_type": "LEC",
-      "instructor": "J. Lowy",
+      "instructor": "John Kim",
       "instructors": [
         {
-          "name": "J. Lowy",
-          "email": null
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "34",
+      "enrollment_capacity": 57,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 9-9:50a",
@@ -521,26 +806,43 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "236",
       "crn": "4604",
       "section_number": "1118",
       "schedule_type": "LEC",
-      "instructor": "D. Clear",
+      "instructor": "John Kim",
       "instructors": [
         {
-          "name": "D. Clear",
-          "email": null
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "34",
+      "enrollment_capacity": 54,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 9-9:50a",
@@ -551,9 +853,14 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "237",
       "crn": "4605",
       "section_number": "1119",
       "schedule_type": "LEC",
@@ -561,16 +868,28 @@
       "instructors": [
         {
           "name": "W. Gu",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "34",
+      "enrollment_capacity": 59,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 9-9:50a",
@@ -581,9 +900,14 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "238",
       "crn": "4606",
       "section_number": "1120",
       "schedule_type": "LEC",
@@ -591,16 +915,28 @@
       "instructors": [
         {
           "name": "C. Morales",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "34",
+      "enrollment_capacity": 59,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 9-9:50a",
@@ -611,26 +947,43 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "239",
       "crn": "4607",
       "section_number": "1121",
       "schedule_type": "LEC",
-      "instructor": "K. Timpone",
+      "instructor": "John Kim",
       "instructors": [
         {
-          "name": "K. Timpone",
-          "email": null
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "34",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-4:50p",
@@ -641,26 +994,43 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "240",
       "crn": "4608",
       "section_number": "1122",
       "schedule_type": "LEC",
-      "instructor": "M. Foronda",
+      "instructor": "John Kim",
       "instructors": [
         {
-          "name": "M. Foronda",
-          "email": null
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "34",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-4:50p",
@@ -671,26 +1041,43 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "241",
       "crn": "4609",
       "section_number": "1123",
       "schedule_type": "LEC",
-      "instructor": "K. Timpone",
+      "instructor": "John Kim",
       "instructors": [
         {
-          "name": "K. Timpone",
-          "email": null
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "34",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-4:50p",
@@ -701,26 +1088,43 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "242",
       "crn": "4610",
       "section_number": "1124",
       "schedule_type": "LEC",
-      "instructor": "A. Kays",
+      "instructor": "John Kim",
       "instructors": [
         {
-          "name": "A. Kays",
-          "email": null
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "34",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-4:50p",
@@ -731,9 +1135,14 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "243",
       "crn": "4611",
       "section_number": "1125",
       "schedule_type": "LEC",
@@ -741,16 +1150,28 @@
       "instructors": [
         {
           "name": "R. Bobowski",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "34",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9-9:50a",
@@ -761,9 +1182,14 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "244",
       "crn": "4612",
       "section_number": "1126",
       "schedule_type": "LEC",
@@ -771,16 +1197,28 @@
       "instructors": [
         {
           "name": "J. Lowy",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "34",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9-9:50a",
@@ -791,26 +1229,43 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "245",
       "crn": "4613",
       "section_number": "1127",
       "schedule_type": "LEC",
-      "instructor": "J. Lowy",
+      "instructor": "Wesley Longhofer",
       "instructors": [
         {
-          "name": "J. Lowy",
-          "email": null
+          "name": "Wesley Longhofer",
+          "email": "wlongho@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "34",
+      "enrollment_capacity": 66,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9-9:50a",
@@ -821,26 +1276,43 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "246",
       "crn": "4614",
       "section_number": "1128",
       "schedule_type": "LEC",
-      "instructor": "E. Bianchi",
+      "instructor": "Dionne Nickerson",
       "instructors": [
         {
-          "name": "E. Bianchi",
-          "email": null
+          "name": "Dionne Nickerson",
+          "email": "dionne.nickerson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 231",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "34",
+      "enrollment_capacity": 53,
+      "seats_available": 26,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9-9:50a",
@@ -851,26 +1323,43 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "247",
       "crn": "4615",
       "section_number": "1129",
       "schedule_type": "LEC",
-      "instructor": "S. Leist",
+      "instructor": "Dionne Nickerson",
       "instructors": [
         {
-          "name": "S. Leist",
-          "email": null
+          "name": "Dionne Nickerson",
+          "email": "dionne.nickerson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 231",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "34",
+      "enrollment_capacity": 59,
+      "seats_available": 43,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4-4:50p",
@@ -881,26 +1370,43 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "248",
       "crn": "4616",
       "section_number": "1130",
       "schedule_type": "LEC",
-      "instructor": "S. Leist",
+      "instructor": "Dionne Nickerson",
       "instructors": [
         {
-          "name": "S. Leist",
-          "email": null
+          "name": "Dionne Nickerson",
+          "email": "dionne.nickerson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 231",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "34",
+      "enrollment_capacity": 61,
+      "seats_available": 53,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4-4:50p",
@@ -911,26 +1417,43 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "249",
       "crn": "4617",
       "section_number": "1131",
       "schedule_type": "LEC",
-      "instructor": "D. Clear",
+      "instructor": "Reshma Shah",
       "instructors": [
         {
-          "name": "D. Clear",
-          "email": null
+          "name": "Reshma Shah",
+          "email": "reshma.shah@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "34",
+      "enrollment_capacity": 53,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4-4:50p",
@@ -941,26 +1464,43 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "250",
       "crn": "4601",
       "section_number": "1132",
       "schedule_type": "LEC",
-      "instructor": "R. Bobowski",
+      "instructor": "Reshma Shah",
       "instructors": [
         {
-          "name": "R. Bobowski",
-          "email": null
+          "name": "Reshma Shah",
+          "email": "reshma.shah@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "34",
+      "enrollment_capacity": 53,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4-4:50p",
@@ -971,26 +1511,43 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "251",
       "crn": "4602",
       "section_number": "1133",
       "schedule_type": "LEC",
-      "instructor": "S. Cruz",
+      "instructor": "Dionne Nickerson",
       "instructors": [
         {
-          "name": "S. Cruz",
-          "email": null
+          "name": "Dionne Nickerson",
+          "email": "dionne.nickerson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 231",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "34",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 9-9:50a",
@@ -1001,26 +1558,43 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "252",
       "crn": "4603",
       "section_number": "1136",
       "schedule_type": "LEC",
-      "instructor": "S. Savage",
+      "instructor": "Dionne Nickerson",
       "instructors": [
         {
-          "name": "S. Savage",
-          "email": null
+          "name": "Dionne Nickerson",
+          "email": "dionne.nickerson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 231",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "34",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-4:50p",
@@ -1031,1055 +1605,37 @@
             "end": "1650"
           }
         ]
-      }
-    },
-    {
-      "crn": "4585",
-      "section_number": "1101",
-      "schedule_type": "LEC",
-      "instructor": "U. Rackliffe",
-      "instructors": [
-        {
-          "name": "U. Rackliffe",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 9-9:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4586",
-      "section_number": "1102",
-      "schedule_type": "LEC",
-      "instructor": "M. Schmees",
-      "instructors": [
-        {
-          "name": "M. Schmees",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 9-9:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4587",
-      "section_number": "1103",
-      "schedule_type": "LEC",
-      "instructor": "S. Cruz",
-      "instructors": [
-        {
-          "name": "S. Cruz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 9-9:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4584",
-      "section_number": "1104",
-      "schedule_type": "LEC",
-      "instructor": "J. Ross",
-      "instructors": [
-        {
-          "name": "J. Ross",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 9-9:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4588",
-      "section_number": "1105",
-      "schedule_type": "LEC",
-      "instructor": "A. Gibbons",
-      "instructors": [
-        {
-          "name": "A. Gibbons",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-4:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4589",
-      "section_number": "1106",
-      "schedule_type": "LEC",
-      "instructor": "C. Frederick",
-      "instructors": [
-        {
-          "name": "C. Frederick",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-4:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4590",
-      "section_number": "1107",
-      "schedule_type": "LEC",
-      "instructor": "J. Billetdeaux",
-      "instructors": [
-        {
-          "name": "J. Billetdeaux",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-4:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4591",
-      "section_number": "1108",
-      "schedule_type": "LEC",
-      "instructor": "C. Frederick",
-      "instructors": [
-        {
-          "name": "C. Frederick",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-4:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4592",
-      "section_number": "1109",
-      "schedule_type": "LEC",
-      "instructor": "D. Clear",
-      "instructors": [
-        {
-          "name": "D. Clear",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "4593",
-      "section_number": "1110",
-      "schedule_type": "LEC",
-      "instructor": "B. Baker",
-      "instructors": [
-        {
-          "name": "B. Baker",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 9-9:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4594",
-      "section_number": "1111",
-      "schedule_type": "LEC",
-      "instructor": "R. Bobowski",
-      "instructors": [
-        {
-          "name": "R. Bobowski",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 9-9:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4595",
-      "section_number": "1112",
-      "schedule_type": "LEC",
-      "instructor": "D. Clear",
-      "instructors": [
-        {
-          "name": "D. Clear",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 9-9:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4596",
-      "section_number": "1113",
-      "schedule_type": "LEC",
-      "instructor": "N. Smith",
-      "instructors": [
-        {
-          "name": "N. Smith",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-4:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4597",
-      "section_number": "1114",
-      "schedule_type": "LEC",
-      "instructor": "N. Smith",
-      "instructors": [
-        {
-          "name": "N. Smith",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-4:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4598",
-      "section_number": "1115",
-      "schedule_type": "LEC",
-      "instructor": "A. Gibbons",
-      "instructors": [
-        {
-          "name": "A. Gibbons",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-4:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4599",
-      "section_number": "1116",
-      "schedule_type": "LEC",
-      "instructor": "A. Errore",
-      "instructors": [
-        {
-          "name": "A. Errore",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-4:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4600",
-      "section_number": "1117",
-      "schedule_type": "LEC",
-      "instructor": "J. Lowy",
-      "instructors": [
-        {
-          "name": "J. Lowy",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 9-9:50a",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4604",
-      "section_number": "1118",
-      "schedule_type": "LEC",
-      "instructor": "D. Clear",
-      "instructors": [
-        {
-          "name": "D. Clear",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 9-9:50a",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4605",
-      "section_number": "1119",
-      "schedule_type": "LEC",
-      "instructor": "W. Gu",
-      "instructors": [
-        {
-          "name": "W. Gu",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 9-9:50a",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4606",
-      "section_number": "1120",
-      "schedule_type": "LEC",
-      "instructor": "C. Morales",
-      "instructors": [
-        {
-          "name": "C. Morales",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 9-9:50a",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4607",
-      "section_number": "1121",
-      "schedule_type": "LEC",
-      "instructor": "K. Timpone",
-      "instructors": [
-        {
-          "name": "K. Timpone",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 4-4:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4608",
-      "section_number": "1122",
-      "schedule_type": "LEC",
-      "instructor": "M. Foronda",
-      "instructors": [
-        {
-          "name": "M. Foronda",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 4-4:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4609",
-      "section_number": "1123",
-      "schedule_type": "LEC",
-      "instructor": "K. Timpone",
-      "instructors": [
-        {
-          "name": "K. Timpone",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 4-4:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4610",
-      "section_number": "1124",
-      "schedule_type": "LEC",
-      "instructor": "A. Kays",
-      "instructors": [
-        {
-          "name": "A. Kays",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 4-4:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4611",
-      "section_number": "1125",
-      "schedule_type": "LEC",
-      "instructor": "R. Bobowski",
-      "instructors": [
-        {
-          "name": "R. Bobowski",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 9-9:50a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4612",
-      "section_number": "1126",
-      "schedule_type": "LEC",
-      "instructor": "J. Lowy",
-      "instructors": [
-        {
-          "name": "J. Lowy",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 9-9:50a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4613",
-      "section_number": "1127",
-      "schedule_type": "LEC",
-      "instructor": "J. Lowy",
-      "instructors": [
-        {
-          "name": "J. Lowy",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 9-9:50a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4614",
-      "section_number": "1128",
-      "schedule_type": "LEC",
-      "instructor": "E. Bianchi",
-      "instructors": [
-        {
-          "name": "E. Bianchi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 9-9:50a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4615",
-      "section_number": "1129",
-      "schedule_type": "LEC",
-      "instructor": "S. Leist",
-      "instructors": [
-        {
-          "name": "S. Leist",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 4-4:50p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4616",
-      "section_number": "1130",
-      "schedule_type": "LEC",
-      "instructor": "S. Leist",
-      "instructors": [
-        {
-          "name": "S. Leist",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 4-4:50p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4617",
-      "section_number": "1131",
-      "schedule_type": "LEC",
-      "instructor": "D. Clear",
-      "instructors": [
-        {
-          "name": "D. Clear",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 4-4:50p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4601",
-      "section_number": "1132",
-      "schedule_type": "LEC",
-      "instructor": "R. Bobowski",
-      "instructors": [
-        {
-          "name": "R. Bobowski",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 4-4:50p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4602",
-      "section_number": "1133",
-      "schedule_type": "LEC",
-      "instructor": "S. Cruz",
-      "instructors": [
-        {
-          "name": "S. Cruz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 9-9:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4603",
-      "section_number": "1136",
-      "schedule_type": "LEC",
-      "instructor": "S. Savage",
-      "instructors": [
-        {
-          "name": "S. Savage",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "34",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 4-4:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 68,
-    "lectures": 68,
+    "total_sections": 34,
+    "lectures": 34,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 50,
-    "closed": 18,
+    "open": 4,
+    "closed": 17,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Errore",
-    "A. Gibbons",
-    "A. Kays",
-    "B. Baker",
-    "C. Frederick",
+    "Brian Jonghwan Lee",
     "C. Morales",
-    "D. Clear",
-    "E. Bianchi",
-    "J. Billetdeaux",
+    "Dionne Nickerson",
     "J. Lowy",
-    "J. Ross",
-    "K. Timpone",
-    "M. Foronda",
-    "M. Schmees",
-    "N. Smith",
+    "Jake Jo",
+    "John Kim",
+    "Laura Wallace",
     "R. Bobowski",
-    "S. Cruz",
-    "S. Leist",
-    "S. Savage",
-    "U. Rackliffe",
-    "W. Gu"
+    "Reshma Shah",
+    "Shankar Ramachandran",
+    "Tarun Chordia",
+    "W. Gu",
+    "Wesley Longhofer"
   ],
-  "scraped_at": "2026-06-17T23:01:34.261Z"
+  "scraped_at": "2026-06-18T02:12:20.917Z"
 }

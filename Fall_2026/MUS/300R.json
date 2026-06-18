@@ -8,12 +8,13 @@
   "credit_hours": "1",
   "requirement_designation": "XA",
   "requirements": [
-    "XA"
+    "XA",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Group instruction in instrumental and/or vocal music and the performance of selected repertoire. Ensemble enrollment requires instructor approval. Interested students may participate in more than one ensemble; may be repeated for credit. For additional information, see music.emory.edu.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "877",
       "crn": "3038",
       "section_number": "1",
       "schedule_type": "MUS",
-      "instructor": "P. Bhasin",
+      "instructor": "Paul Bhasin",
       "instructors": [
         {
-          "name": "P. Bhasin",
-          "email": null
+          "name": "Paul Bhasin",
+          "email": "paul.bhasin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Schwartz Center 202",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 90,
+      "seats_available": 90,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4:30-6:30p",
@@ -54,26 +72,47 @@
             "end": "1830"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "878",
       "crn": "3040",
       "section_number": "2",
       "schedule_type": "MUS",
-      "instructor": "C. O'Hara",
+      "instructor": "Colm O'Hara",
       "instructors": [
         {
-          "name": "C. O'Hara",
-          "email": null
+          "name": "Colm O'Hara",
+          "email": "colm.ohara@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Schwartz Center 202",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4:30-6:30p",
@@ -89,26 +128,47 @@
             "end": "1830"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "879",
       "crn": "3042",
       "section_number": "3",
       "schedule_type": "MUS",
-      "instructor": "G. Motley",
+      "instructor": "Gary Motley",
       "instructors": [
         {
-          "name": "G. Motley",
-          "email": null
+          "name": "Gary Motley",
+          "email": "gmotley@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "BRB Performing Arts Studio",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 8-10p",
@@ -119,26 +179,47 @@
             "end": "2200"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "880",
       "crn": "3044",
       "section_number": "4",
       "schedule_type": "MUS",
-      "instructor": "G. Motley",
+      "instructor": "Gary Motley",
       "instructors": [
         {
-          "name": "G. Motley",
-          "email": null
+          "name": "Gary Motley",
+          "email": "gmotley@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Burlington Rd Bldg. 114",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 5:30-7:30p",
@@ -149,26 +230,47 @@
             "end": "1930"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "881",
       "crn": "3047",
       "section_number": "5",
       "schedule_type": "MUS",
-      "instructor": "E. Nelson",
+      "instructor": "Eric Nelson",
       "instructors": [
         {
-          "name": "E. Nelson",
-          "email": null
+          "name": "Eric Nelson",
+          "email": "benelso@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Schwartz Center 245",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 50,
+      "seats_available": 50,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 7:30-9:30p",
@@ -179,26 +281,47 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "882",
       "crn": "3052",
       "section_number": "6",
       "schedule_type": "MUS",
-      "instructor": "E. Nelson",
+      "instructor": "Eric Nelson",
       "instructors": [
         {
-          "name": "E. Nelson",
-          "email": null
+          "name": "Eric Nelson",
+          "email": "benelso@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Schwartz Center 245",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-6p",
@@ -214,26 +337,47 @@
             "end": "1800"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "883",
       "crn": "3059",
       "section_number": "7",
       "schedule_type": "MUS",
-      "instructor": "P. Bhasin",
+      "instructor": "Paul Bhasin",
       "instructors": [
         {
-          "name": "P. Bhasin",
-          "email": null
+          "name": "Paul Bhasin",
+          "email": "paul.bhasin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "BRB Performing Arts Studio",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-5:30p",
@@ -244,26 +388,47 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "884",
       "crn": "3062",
       "section_number": "8",
       "schedule_type": "MUS",
-      "instructor": "E. Cholakova",
+      "instructor": "Elena Cholakova",
       "instructors": [
         {
-          "name": "E. Cholakova",
-          "email": null
+          "name": "Elena Cholakova",
+          "email": "elena.cholakova@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "BRB Performing Arts Studio",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-11:15a",
@@ -274,26 +439,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "885",
       "crn": "3390",
       "section_number": "9",
       "schedule_type": "MUS",
-      "instructor": "L. Andonovska",
+      "instructor": "Liljana Andonovska",
       "instructors": [
         {
-          "name": "L. Andonovska",
-          "email": null
+          "name": "Liljana Andonovska",
+          "email": "liljana.andonovska@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Schwartz Center 332",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4:30-6:30p",
@@ -309,74 +495,137 @@
             "end": "1830"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "886",
       "crn": "3391",
       "section_number": "10",
       "schedule_type": "MUS",
-      "instructor": "E. Cholakova",
+      "instructor": "Elena Cholakova",
       "instructors": [
         {
-          "name": "E. Cholakova",
-          "email": null
+          "name": "Elena Cholakova",
+          "email": "elena.cholakova@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "887",
       "crn": "3392",
       "section_number": "11",
       "schedule_type": "MUS",
-      "instructor": "L. Andonovska",
+      "instructor": "Liljana Andonovska",
       "instructors": [
         {
-          "name": "L. Andonovska",
-          "email": null
+          "name": "Liljana Andonovska",
+          "email": "liljana.andonovska@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "888",
       "crn": "3393",
       "section_number": "12",
       "schedule_type": "MUS",
-      "instructor": "F. Darsono",
+      "instructor": "FNU Darsono",
       "instructors": [
         {
-          "name": "F. Darsono",
-          "email": null
+          "name": "FNU Darsono",
+          "email": "darsono@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Burlington Road Building 109",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 6:30-8:30p",
@@ -387,21 +636,41 @@
             "end": "2030"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "889",
       "crn": "3394",
       "section_number": "13",
       "schedule_type": "MUS",
       "instructor": "Staff",
       "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Burlington Road Building 109",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6:30-8:30p",
@@ -412,26 +681,47 @@
             "end": "2030"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "890",
       "crn": "5996",
       "section_number": "14",
       "schedule_type": "MUS",
-      "instructor": "E. Cholakova",
+      "instructor": "Elena Cholakova",
       "instructors": [
         {
-          "name": "E. Cholakova",
-          "email": null
+          "name": "Elena Cholakova",
+          "email": "elena.cholakova@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "BRB Performing Arts Studio",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 11:30a-12:45p",
@@ -442,450 +732,31 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "3038",
-      "section_number": "1",
-      "schedule_type": "MUS",
-      "instructor": "P. Bhasin",
-      "instructors": [
-        {
-          "name": "P. Bhasin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4:30-6:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1630",
-            "end": "1830"
-          },
-          {
-            "day": "Thu",
-            "start": "1630",
-            "end": "1830"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3040",
-      "section_number": "2",
-      "schedule_type": "MUS",
-      "instructor": "C. O'Hara",
-      "instructors": [
-        {
-          "name": "C. O'Hara",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4:30-6:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1630",
-            "end": "1830"
-          },
-          {
-            "day": "Wed",
-            "start": "1630",
-            "end": "1830"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3042",
-      "section_number": "3",
-      "schedule_type": "MUS",
-      "instructor": "G. Motley",
-      "instructors": [
-        {
-          "name": "G. Motley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 8-10p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "2000",
-            "end": "2200"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3044",
-      "section_number": "4",
-      "schedule_type": "MUS",
-      "instructor": "G. Motley",
-      "instructors": [
-        {
-          "name": "G. Motley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 5:30-7:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1730",
-            "end": "1930"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3047",
-      "section_number": "5",
-      "schedule_type": "MUS",
-      "instructor": "E. Nelson",
-      "instructors": [
-        {
-          "name": "E. Nelson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 7:30-9:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1930",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3052",
-      "section_number": "6",
-      "schedule_type": "MUS",
-      "instructor": "E. Nelson",
-      "instructors": [
-        {
-          "name": "E. Nelson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-6p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1800"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1800"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3059",
-      "section_number": "7",
-      "schedule_type": "MUS",
-      "instructor": "P. Bhasin",
-      "instructors": [
-        {
-          "name": "P. Bhasin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-5:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3062",
-      "section_number": "8",
-      "schedule_type": "MUS",
-      "instructor": "E. Cholakova",
-      "instructors": [
-        {
-          "name": "E. Cholakova",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-11:15a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3390",
-      "section_number": "9",
-      "schedule_type": "MUS",
-      "instructor": "L. Andonovska",
-      "instructors": [
-        {
-          "name": "L. Andonovska",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4:30-6:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1630",
-            "end": "1830"
-          },
-          {
-            "day": "Wed",
-            "start": "1630",
-            "end": "1830"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3391",
-      "section_number": "10",
-      "schedule_type": "MUS",
-      "instructor": "E. Cholakova",
-      "instructors": [
-        {
-          "name": "E. Cholakova",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3392",
-      "section_number": "11",
-      "schedule_type": "MUS",
-      "instructor": "L. Andonovska",
-      "instructors": [
-        {
-          "name": "L. Andonovska",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3393",
-      "section_number": "12",
-      "schedule_type": "MUS",
-      "instructor": "F. Darsono",
-      "instructors": [
-        {
-          "name": "F. Darsono",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 6:30-8:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1830",
-            "end": "2030"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3394",
-      "section_number": "13",
-      "schedule_type": "MUS",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6:30-8:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2030"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5996",
-      "section_number": "14",
-      "schedule_type": "MUS",
-      "instructor": "E. Cholakova",
-      "instructors": [
-        {
-          "name": "E. Cholakova",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 28,
+    "total_sections": 14,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 28,
-    "open": 28,
+    "other": 14,
+    "open": 14,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. O'Hara",
-    "E. Cholakova",
-    "E. Nelson",
-    "F. Darsono",
-    "G. Motley",
-    "L. Andonovska",
-    "P. Bhasin"
+    "Colm O'Hara",
+    "Elena Cholakova",
+    "Eric Nelson",
+    "FNU Darsono",
+    "Gary Motley",
+    "Liljana Andonovska",
+    "Paul Bhasin"
   ],
-  "scraped_at": "2026-06-17T23:12:17.052Z"
+  "scraped_at": "2026-06-18T03:07:37.822Z"
 }

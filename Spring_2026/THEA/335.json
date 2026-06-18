@@ -5,40 +5,53 @@
   "catalog_number": "335",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "1,2,3,4,5,6,7,8,9",
   "requirement_designation": "HAP",
   "requirements": [
     "HAP"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Basic techniques of scenic painting in theater and film in step-by-step projects. The role of the scenic artist. How to communicate with a scenic designer. How to comment constructively on your own work and that of class mates.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "For GHD students in candidacy.",
+  "course_notes": "(S/U Only) Students who are in candidacy should register for GHD 799R to fill to 9 credits.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3831",
       "crn": "2495",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Culpepper",
+      "instructor": "Lavanya Vasudevan",
       "instructors": [
         {
-          "name": "S. Culpepper",
-          "email": null
+          "name": "Lavanya Vasudevan",
+          "email": "lavanya.vasudevan@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 1-3:45p",
@@ -49,51 +62,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2495",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Culpepper",
-      "instructors": [
-        {
-          "name": "S. Culpepper",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 1-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Culpepper"
+    "Lavanya Vasudevan"
   ],
-  "scraped_at": "2026-06-17T23:06:56.786Z"
+  "scraped_at": "2026-06-18T02:44:56.661Z"
 }

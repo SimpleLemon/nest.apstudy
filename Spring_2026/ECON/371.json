@@ -5,40 +5,60 @@
   "catalog_number": "371",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "1",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "An introduction to the application of the theories and principles of microeconomics to issues in health care. Increase understanding of microeconomic theory and the basic structure of health care delivery and health care financing in the United States and other countries.",
-  "course_notes": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Topics to be announced each semester. Course is offered in English. Course content will vary, including topics of literature, history, culture, art history, political thought, current trends, and more. May be repeated for credit when syllabus changes.",
+  "course_notes": "ITAL 376 sec 1: Sustainable Food Fair Instructors: Dr. Muratore & Cyrus Bhedwar (Office of Sustainability Initiative) Course Description 1 credit (HAP, Sustainability minor, Italian major/Minor) M& W 2:30-3:45pm (The course ends October 7, 2026) This is a one-credit course that provides students an opportunity to lead and promote a deeper understanding of the Slow Food Movement, focusing on sustainable food systems and ecological justice among the members of the Atlanta Community at large. This course enables students to learn about the history of the Movement that originated in Italy and engage with individuals within the Atlanta food and beverage industry, local farmers and other specialists committed to slow food values and production practices. Tasking the students with the execution of the annual Sustainable Food Fair will allow them to further their leadership skills, demonstrate their commitment to sustainability, and enable them to become agents of social change. The Sustainable Food Fair is supported by the Emory Office of Sustainability Initiatives and Emory Dining. This class is suitable for First Year students. This course culminates in the Sustainable Food Fair, which will be held together with the Emory Farmer's Market",
   "requisites": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "2964",
       "crn": "3964",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Markowitz",
+      "instructor": "Simona Muratore",
       "instructors": [
         {
-          "name": "S. Markowitz",
-          "email": null
+          "name": "Simona Muratore",
+          "email": "smurato@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Cyrus Bhedwar",
+          "email": "cyrus.bhedwar@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Candler Library 114",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +74,26 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "3964",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Markowitz",
-      "instructors": [
-        {
-          "name": "S. Markowitz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Markowitz"
+    "Cyrus Bhedwar",
+    "Simona Muratore"
   ],
-  "scraped_at": "2026-06-17T23:02:03.798Z"
+  "scraped_at": "2026-06-18T02:17:46.579Z"
 }

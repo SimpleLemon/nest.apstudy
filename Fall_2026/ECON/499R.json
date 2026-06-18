@@ -5,15 +5,16 @@
   "catalog_number": "499R",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "3 - 4",
+  "credit_hours": "3",
   "requirement_designation": "XA",
   "requirements": [
-    "XA"
+    "XA",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Students will learn the craft of research in economics. Coursework will consist of synthesis of literature; collection, collation, cleaning of data; data analysis, contributing to manuscript preparation, and/or other work related to the sustaining of an academic research project.",
-  "course_notes": "(ECON 201 or ECON_OX 201 or ECON 212 or ECON_OX 212) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisites.",
+  "course_notes": "ATL Economics Atlanta is one of the world's most dynamic metropolitan economies and the historic Black Mecca of America. Through data analysis, institutional case studies, and applied policy projects, the course assesses Atlanta's past transformations, present challenges, and future pathways. For enrollment in this course, please complete this application- https://forms.cloud.microsoft/pages/responsepage.aspx?id=nPsE4KSwT0K80DImBtXfOLdGfmARPMhDh1Bj43PROZ1UQ0ZKSEtVT1MxWjFNRTE0SlA2VTJNSDRSTS4u&route=shorturl",
   "requisites": "(ECON 201 or ECON_OX 201 or ECON 212 or ECON_OX 212) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisites.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,45 @@
   },
   "sections": [
     {
+      "atlas_key": "3773",
       "crn": "3178",
       "section_number": "2",
       "schedule_type": "RSC",
-      "instructor": "Fohlin/Cherribi",
+      "instructor": "Sam Cherribi",
       "instructors": [
         {
-          "name": "Fohlin/Cherribi",
-          "email": null
+          "name": "Sam Cherribi",
+          "email": "scherri@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Caroline Fohlin",
+          "email": "caroline.fohlin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Rich Building 104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 2-4:30p",
@@ -49,51 +72,26 @@
             "end": "1630"
           }
         ]
-      }
-    },
-    {
-      "crn": "3178",
-      "section_number": "2",
-      "schedule_type": "RSC",
-      "instructor": "Fohlin/Cherribi",
-      "instructors": [
-        {
-          "name": "Fohlin/Cherribi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 2-4:30p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1400",
-            "end": "1630"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Fohlin/Cherribi"
+    "Caroline Fohlin",
+    "Sam Cherribi"
   ],
-  "scraped_at": "2026-06-17T23:10:06.966Z"
+  "scraped_at": "2026-06-18T02:53:56.618Z"
 }

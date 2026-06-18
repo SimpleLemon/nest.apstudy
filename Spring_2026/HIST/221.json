@@ -5,40 +5,58 @@
   "catalog_number": "221",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "1",
   "requirement_designation": "SSE",
   "requirements": [
-    "SSE"
+    "SSE",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Traces the gradual incorporation of Africa into an expanding world economy and examines the impact of this incorporation on the development of African societies and modern nation states.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Group instruction in instrumental and/or vocal music and the performance of selected repertoire. Ensemble enrollment requires instructor approval. Interested students may participate in more than one ensemble; may be repeated for credit. For additional information, see music.emory.edu.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": "AFS 221",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "888",
       "crn": "3783",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "B. Val-Addo",
+      "instructor": "FNU Darsono",
       "instructors": [
         {
-          "name": "B. Val-Addo",
-          "email": null
+          "name": "FNU Darsono",
+          "email": "darsono@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Burlington Road Building 109",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,56 +72,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3783",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "B. Val-Addo",
-      "instructors": [
-        {
-          "name": "B. Val-Addo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "B. Val-Addo"
+    "FNU Darsono"
   ],
-  "scraped_at": "2026-06-17T23:03:05.487Z"
+  "scraped_at": "2026-06-18T02:24:48.781Z"
 }

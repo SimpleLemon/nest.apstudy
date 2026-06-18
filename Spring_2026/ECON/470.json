@@ -5,40 +5,58 @@
   "catalog_number": "470",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Intercultural Communication with Writing/R&E(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This is a capstone course that combines health economics and human health content with data science. You will complete an empirical research project using raw data and employ econometric methods to analyze a research question relevant to contemporary health care issues and/or health.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course explores the cultural, political, and social complexities of the South Asian (Indian) diaspora through the lens of cinema. Students will analyze themes such as gender, queer identity, interracial dynamics, aging, culture, and religion within diaspora contexts.",
   "course_notes": "ECON 320 and (ECON 371 or ECON 372 or ECON 372W or HLTH 370) or equivalent transfer credit as prerequisite.",
   "requisites": "ECON 320 and (ECON 371 or ECON 372 or ECON 372W or HLTH 370) or equivalent transfer credit as prerequisite.",
   "cross_listed": "HLTH 470",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4410",
       "crn": "3991",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "I. McCarthy",
+      "instructor": "Brajesh Samarth",
       "instructors": [
         {
-          "name": "I. McCarthy",
-          "email": null
+          "name": "Brajesh Samarth",
+          "email": "brajesh.samarth@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Psychology Bldg 235",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication with Writing/R&E(*)",
+      "requirements": [
+        "Intercultural Communication with Writing/R&E(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -54,56 +72,25 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "3991",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "I. McCarthy",
-      "instructors": [
-        {
-          "name": "I. McCarthy",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "I. McCarthy"
+    "Brajesh Samarth"
   ],
-  "scraped_at": "2026-06-17T23:02:03.802Z"
+  "scraped_at": "2026-06-18T02:17:46.582Z"
 }

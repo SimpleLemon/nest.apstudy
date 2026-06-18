@@ -10,8 +10,8 @@
   "requirements": [
     "MQR"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Introduction to construction and testing of econometric models; analysis and critique of general linear regression model; simultaneous equations models; computer program for regression analysis; applications.",
   "course_notes": "(ECON 101 or ECON_OX 101 or BUS 201) and (ECON 112 or ECON_OX 112) and (ECON 220 or MATH 207 or MATH_OX 207 or MATH 361 or MATH 362) or equivalent transfer credit as a prerequisite.",
   "requisites": "(ECON 101 or ECON_OX 101 or BUS 201) and (ECON 112 or ECON_OX 112) and (ECON 220 or MATH 207 or MATH_OX 207 or MATH 361 or MATH 362) or equivalent transfer credit as a prerequisite.",
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "570",
       "crn": "2951",
       "section_number": "LAB1",
       "schedule_type": "LAB",
-      "instructor": "S. Smyly",
+      "instructor": "Sarah Smyly",
       "instructors": [
         {
-          "name": "S. Smyly",
-          "email": null
+          "name": "Sarah Smyly",
+          "email": "sarah.smyly@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway C101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 40,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-10:50a",
@@ -49,26 +64,45 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "571",
       "crn": "2953",
       "section_number": "LAB2",
       "schedule_type": "LAB",
-      "instructor": "S. Smyly",
+      "instructor": "Sarah Smyly",
       "instructors": [
         {
-          "name": "S. Smyly",
-          "email": null
+          "name": "Sarah Smyly",
+          "email": "sarah.smyly@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway C101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "8",
+      "enrollment_capacity": 40,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 11:30a-12:20p",
@@ -79,26 +113,45 @@
             "end": "1220"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "572",
       "crn": "2955",
       "section_number": "LAB3",
       "schedule_type": "LAB",
-      "instructor": "J. Cassa",
+      "instructor": "Johar Cassa",
       "instructors": [
         {
-          "name": "J. Cassa",
-          "email": null
+          "name": "Johar Cassa",
+          "email": "johar.cassa@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Candler Library 114",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 40,
+      "seats_available": 28,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 8:30-9:20a",
@@ -109,26 +162,45 @@
             "end": "920"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "573",
       "crn": "2956",
       "section_number": "LAB4",
       "schedule_type": "LAB",
-      "instructor": "J. Cassa",
+      "instructor": "Johar Cassa",
       "instructors": [
         {
-          "name": "J. Cassa",
-          "email": null
+          "name": "Johar Cassa",
+          "email": "johar.cassa@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Candler Library 114",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "8",
+      "enrollment_capacity": 40,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-10:50a",
@@ -139,26 +211,45 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "566",
       "crn": "2939",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "E. Maasoumi",
+      "instructor": "Esfandiar Maasoumi",
       "instructors": [
         {
-          "name": "E. Maasoumi",
-          "email": null
+          "name": "Esfandiar Maasoumi",
+          "email": "esfandiar.maasoumi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 40,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -174,26 +265,45 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "567",
       "crn": "2941",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "S. O'Connell",
+      "instructor": "Stephen O'Connell",
       "instructors": [
         {
-          "name": "S. O'Connell",
-          "email": null
+          "name": "Stephen O'Connell",
+          "email": "soconnell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "8",
+      "enrollment_capacity": 40,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -209,26 +319,45 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "568",
       "crn": "2943",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "S. Hoderlein",
+      "instructor": "Stefan Hoderlein",
       "instructors": [
         {
-          "name": "S. Hoderlein",
-          "email": null
+          "name": "Stefan Hoderlein",
+          "email": "stefan.hoderlein@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 40,
+      "seats_available": 28,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a",
@@ -244,26 +373,45 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "569",
       "crn": "2945",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "P. Lopez de mesa Moyano",
+      "instructor": "Paloma Lopez de mesa Moyano",
       "instructors": [
         {
-          "name": "P. Lopez de mesa Moyano",
-          "email": null
+          "name": "Paloma Lopez de mesa Moyano",
+          "email": "paloma.moyano@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "8",
+      "enrollment_capacity": 40,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -279,286 +427,30 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "2951",
-      "section_number": "LAB1",
-      "schedule_type": "LAB",
-      "instructor": "S. Smyly",
-      "instructors": [
-        {
-          "name": "S. Smyly",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2953",
-      "section_number": "LAB2",
-      "schedule_type": "LAB",
-      "instructor": "S. Smyly",
-      "instructors": [
-        {
-          "name": "S. Smyly",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2955",
-      "section_number": "LAB3",
-      "schedule_type": "LAB",
-      "instructor": "J. Cassa",
-      "instructors": [
-        {
-          "name": "J. Cassa",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 8:30-9:20a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "830",
-            "end": "920"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2956",
-      "section_number": "LAB4",
-      "schedule_type": "LAB",
-      "instructor": "J. Cassa",
-      "instructors": [
-        {
-          "name": "J. Cassa",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2939",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Maasoumi",
-      "instructors": [
-        {
-          "name": "E. Maasoumi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2941",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "S. O'Connell",
-      "instructors": [
-        {
-          "name": "S. O'Connell",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2943",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "S. Hoderlein",
-      "instructors": [
-        {
-          "name": "S. Hoderlein",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2945",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "P. Lopez de mesa Moyano",
-      "instructors": [
-        {
-          "name": "P. Lopez de mesa Moyano",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 16,
-    "lectures": 8,
-    "labs": 8,
+    "total_sections": 8,
+    "lectures": 4,
+    "labs": 4,
     "discussions": 0,
     "other": 0,
-    "open": 8,
+    "open": 4,
     "closed": 0,
-    "waitlisted": 8
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Maasoumi",
-    "J. Cassa",
-    "P. Lopez de mesa Moyano",
-    "S. Hoderlein",
-    "S. O'Connell",
-    "S. Smyly"
+    "Esfandiar Maasoumi",
+    "Johar Cassa",
+    "Paloma Lopez de mesa Moyano",
+    "Sarah Smyly",
+    "Stefan Hoderlein",
+    "Stephen O'Connell"
   ],
-  "scraped_at": "2026-06-17T23:10:06.960Z"
+  "scraped_at": "2026-06-18T02:53:56.612Z"
 }

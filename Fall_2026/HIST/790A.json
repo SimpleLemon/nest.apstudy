@@ -5,13 +5,13 @@
   "catalog_number": "790A",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "1",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "",
+  "course_notes": "(Permission Required Prior to Enrollment) This one-credit section (the first half of the HIST 790 Professionalization Seminars sequence) introduces advanced graduate students to the academic job market though bimonthly virtual class sessions. Through assigned readings, in-class discussions, and peer-review workshops, the goal of the seminar will be to develop skills and strategies for the professional job search. The course is designed to supplement rather than replace the advice and support of graduate advisors and mentors.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "3282",
       "crn": "2627",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "L. Nenzi",
+      "instructor": "Laura Nenzi",
       "instructors": [
         {
-          "name": "L. Nenzi",
-          "email": null
+          "name": "Laura Nenzi",
+          "email": "laura.nenzi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9a-12p",
@@ -47,51 +60,25 @@
             "end": "1200"
           }
         ]
-      }
-    },
-    {
-      "crn": "2627",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "L. Nenzi",
-      "instructors": [
-        {
-          "name": "L. Nenzi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 9a-12p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "900",
-            "end": "1200"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Nenzi"
+    "Laura Nenzi"
   ],
-  "scraped_at": "2026-06-17T23:11:08.778Z"
+  "scraped_at": "2026-06-18T03:00:28.245Z"
 }

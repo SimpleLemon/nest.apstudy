@@ -10,10 +10,10 @@
   "requirements": [
     "HAP"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course introduces students to Judeo-Arabic, the language of the Jews in Arab lands, through the study of Judeo-Arabic texts from various periods and places.",
-  "course_notes": null,
+  "course_notes": "(Same as MESAS 420R 1)",
   "requisites": null,
   "cross_listed": "MESAS 420R",
   "date_range": {
@@ -22,66 +22,61 @@
   },
   "sections": [
     {
+      "atlas_key": "2229",
       "crn": "3960",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "C. Perry",
+      "instructor": "Craig Perry",
       "instructors": [
         {
-          "name": "C. Perry",
-          "email": null
+          "name": "Craig Perry",
+          "email": "craig.allen.perry@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 6,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3960",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "C. Perry",
-      "instructors": [
-        {
-          "name": "C. Perry",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Perry"
+    "Craig Perry"
   ],
-  "scraped_at": "2026-06-17T23:11:41.298Z"
+  "scraped_at": "2026-06-18T03:04:05.636Z"
 }

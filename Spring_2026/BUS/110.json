@@ -5,38 +5,63 @@
   "catalog_number": "110",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides students the opportunity to become involved in a personalized approach to health and well-being by sharing with peers strategic approaches for the implementation of a healthy lifestyle. Offered Yearly. Repeatable for up to Twelve Semester Hours.",
+  "course_notes": "Permission required prior to enrollment. Meets synchronously on Thursday; Students will also be enrolled in an accompanying discussion section. This course provides students the opportunity to become involved in a personalized approach to health and well-being by sharing with peers strategic approaches for the implementation of a healthy lifestyle. Peer Health Partners will enroll in one section of HLTH 300R and will facilitate one section of HLTH 100 during fall semester. (Prerequisite: HLTH 200)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "2804",
       "crn": "6416",
       "section_number": "1101",
       "schedule_type": "LEC",
-      "instructor": "W. Longhofer",
+      "instructor": "Madison Campbell",
       "instructors": [
         {
-          "name": "W. Longhofer",
-          "email": null
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4-5:15p",
@@ -47,51 +72,27 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "6416",
-      "section_number": "1101",
-      "schedule_type": "LEC",
-      "instructor": "W. Longhofer",
-      "instructors": [
-        {
-          "name": "W. Longhofer",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 4-5:15p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "W. Longhofer"
+    "Logan Edwards",
+    "Madison Campbell",
+    "Noni Keyton"
   ],
-  "scraped_at": "2026-06-17T23:01:34.257Z"
+  "scraped_at": "2026-06-18T02:12:20.912Z"
 }

@@ -5,40 +5,53 @@
   "catalog_number": "280",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "",
-  "course_notes": null,
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Online Asynchronous. PRE-REQ: DrPH IES Track Only. Despite the availability of evidence-based programs and interventions, it remains challenging to move research to practice at a scale that impacts population health. Many of the challenges of moving evidence-based programs/interventions to practice include inability to identify appropriate evidence-based intervention (EBIs), lack of fit of EBIs to the delivery context or population, and factors hindering the delivery context from adopting and implementing the EBI. This course explores approaches for selecting EBIs, adapting EBIs to add contexts, and selecting strategies to maximize the delivery of EBIs in add settings to optimize their reach and public health impact. This course will provide students with foundational knowledge as well as prepare them to select, adapt, and implement evidence-based public health interventions.",
+  "course_notes": "DrPH Implementation and Evaluation Science Track students only.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4364",
       "crn": "4437",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Ngoc Cam Escoffery",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Ngoc Cam Escoffery",
+          "email": "cescoff@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 35,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,56 +67,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "4437",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Team"
+    "Ngoc Cam Escoffery"
   ],
-  "scraped_at": "2026-06-17T23:03:38.016Z"
+  "scraped_at": "2026-06-18T02:27:53.375Z"
 }

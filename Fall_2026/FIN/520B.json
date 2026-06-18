@@ -5,13 +5,13 @@
   "catalog_number": "520B",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is an introduction to the theory and practice of finance. Specifically, it covers topics such as the time value of money, net present value (NPV), internal rate of return (IRR), valuation, analysis of risk and return, capital markets, and a firm's capital structure. The goal is to gain an understanding of finance and the financial instruments and models typically utilized for both individual and corporate decision making. Among the tools used in the learning process will be the required textbook, articles, problems/cases, and, of course, classroom lecture/discussion.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,66 +20,59 @@
   },
   "sections": [
     {
+      "atlas_key": "3752",
       "crn": "3797",
       "section_number": "4401",
       "schedule_type": "LEC",
-      "instructor": "J. Kurish",
+      "instructor": "JB Kurish",
       "instructors": [
         {
-          "name": "J. Kurish",
-          "email": null
+          "name": "JB Kurish",
+          "email": "jkurish@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3797",
-      "section_number": "4401",
-      "schedule_type": "LEC",
-      "instructor": "J. Kurish",
-      "instructors": [
-        {
-          "name": "J. Kurish",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Kurish"
+    "JB Kurish"
   ],
-  "scraped_at": "2026-06-17T23:10:39.538Z"
+  "scraped_at": "2026-06-18T02:58:24.249Z"
 }

@@ -5,40 +5,58 @@
   "catalog_number": "202",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course is designed for those who have taken KRN 201 or have an equivalent level of proficiency. The course focuses on expanding conversational skills with an emphasis on Korean culture and society.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Open only to students selected to participate in the department's Honors Program. Basic social science research methods and preparation of an honors thesis on some previously uninvestigated or insufficiently investigated area of political science. This course is required for completion of the Honors Program in political science.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "2922",
       "crn": "2895",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Hong",
+      "instructor": "David Davis III",
       "instructors": [
         {
-          "name": "J. Hong",
-          "email": null
+          "name": "David Davis III",
+          "email": "poldd@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Tarbutton Hall 313",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 8,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a; F 8:30-9:20a",
@@ -59,106 +77,45 @@
             "end": "920"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2923",
       "crn": "2896",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "J. Hong",
+      "instructor": "Judd Owen",
       "instructors": [
         {
-          "name": "J. Hong",
-          "email": null
+          "name": "Judd Owen",
+          "email": "jjowen@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 235",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p; F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2895",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Hong",
-      "instructors": [
-        {
-          "name": "J. Hong",
-          "email": null
-        }
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a; F 8:30-9:20a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Fri",
-            "start": "830",
-            "end": "920"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2896",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "J. Hong",
-      "instructors": [
-        {
-          "name": "J. Hong",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p; F 1-1:50p",
@@ -179,21 +136,26 @@
             "end": "1350"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 2,
+    "open": 1,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Hong"
+    "David Davis III",
+    "Judd Owen"
   ],
-  "scraped_at": "2026-06-17T23:03:41.309Z"
+  "scraped_at": "2026-06-18T02:28:07.316Z"
 }

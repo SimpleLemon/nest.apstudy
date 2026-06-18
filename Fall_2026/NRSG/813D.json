@@ -5,13 +5,13 @@
   "catalog_number": "813D",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course synthesizes the ENP role as leader, mentor, educator and/or policy developer to advocate for and ensure the delivery of safe and equitable emergency care.",
+  "course_notes": "Do you know the summer 2025 matriculation date? Last year we used March 15th, I believe.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,54 +20,51 @@
   },
   "sections": [
     {
+      "atlas_key": "4011",
       "crn": "4582",
       "section_number": "1",
       "schedule_type": "SEM",
       "instructor": "Staff",
       "instructors": [],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "4582",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [],
-  "scraped_at": "2026-06-17T23:12:26.894Z"
+  "scraped_at": "2026-06-18T03:09:48.911Z"
 }

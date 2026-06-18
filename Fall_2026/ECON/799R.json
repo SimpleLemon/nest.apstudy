@@ -5,13 +5,13 @@
   "catalog_number": "799R",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "1,2,3,4,5,6,7,8,9",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "Research and writing of a Ph.D. dissertation on a topic previously approved by the Department faculty, under the supervision of a committee appointed with the advice and consent of the faculty. Students may register for this course on an S/U basis only.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,801 +20,689 @@
   },
   "sections": [
     {
+      "atlas_key": "1359",
       "crn": "5552",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "D. Jacho-Chavez",
+      "instructor": "David Jacho-Chavez",
       "instructors": [
         {
-          "name": "D. Jacho-Chavez",
-          "email": null
+          "name": "David Jacho-Chavez",
+          "email": "djachocha@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "16",
+      "enrollment_capacity": 999,
+      "seats_available": 997,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1360",
       "crn": "5553",
       "section_number": "2",
       "schedule_type": "SUP",
-      "instructor": "A. Blanco",
+      "instructor": "Andres Blanco",
       "instructors": [
         {
-          "name": "A. Blanco",
-          "email": null
+          "name": "Andres Blanco",
+          "email": "julio.andres.blanco@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "16",
+      "enrollment_capacity": 999,
+      "seats_available": 997,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1361",
       "crn": "5554",
       "section_number": "3",
       "schedule_type": "SUP",
-      "instructor": "I. McCarthy",
+      "instructor": "Ian McCarthy",
       "instructors": [
         {
-          "name": "I. McCarthy",
-          "email": null
+          "name": "Ian McCarthy",
+          "email": "ian.mccarthy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "16",
+      "enrollment_capacity": 999,
+      "seats_available": 996,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1362",
       "crn": "5555",
       "section_number": "4",
       "schedule_type": "SUP",
-      "instructor": "S. Markowitz",
+      "instructor": "Sara Markowitz",
       "instructors": [
         {
-          "name": "S. Markowitz",
-          "email": null
+          "name": "Sara Markowitz",
+          "email": "smarko2@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "16",
+      "enrollment_capacity": 999,
+      "seats_available": 996,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1363",
       "crn": "5556",
       "section_number": "5",
       "schedule_type": "SUP",
-      "instructor": "P. Sant'Anna",
+      "instructor": "Pedro Sant'Anna",
       "instructors": [
         {
-          "name": "P. Sant'Anna",
-          "email": null
+          "name": "Pedro Sant'Anna",
+          "email": "pedro.santanna@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "16",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1364",
       "crn": "5557",
       "section_number": "6",
       "schedule_type": "SUP",
-      "instructor": "N. Lind",
+      "instructor": "Nelson Lind",
       "instructors": [
         {
-          "name": "N. Lind",
-          "email": null
+          "name": "Nelson Lind",
+          "email": "nelson.rolland.lind@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "16",
+      "enrollment_capacity": 999,
+      "seats_available": 996,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1365",
       "crn": "5558",
       "section_number": "7",
       "schedule_type": "SUP",
-      "instructor": "S. O'Connell",
+      "instructor": "Stephen O'Connell",
       "instructors": [
         {
-          "name": "S. O'Connell",
-          "email": null
+          "name": "Stephen O'Connell",
+          "email": "soconnell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "16",
+      "enrollment_capacity": 999,
+      "seats_available": 997,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1366",
       "crn": "5559",
       "section_number": "8",
       "schedule_type": "SUP",
-      "instructor": "C. Hansman",
+      "instructor": "Chris Hansman",
       "instructors": [
         {
-          "name": "C. Hansman",
-          "email": null
+          "name": "Chris Hansman",
+          "email": "chris.hansman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "16",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1367",
       "crn": "5560",
       "section_number": "9",
       "schedule_type": "SUP",
-      "instructor": "K. Chen",
+      "instructor": "Kaiji Chen",
       "instructors": [
         {
-          "name": "K. Chen",
-          "email": null
+          "name": "Kaiji Chen",
+          "email": "kaiji.chen@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "16",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1368",
       "crn": "5561",
       "section_number": "10",
       "schedule_type": "SUP",
-      "instructor": "K. Kopecky",
+      "instructor": "Karen Kopecky",
       "instructors": [
         {
-          "name": "K. Kopecky",
-          "email": null
+          "name": "Karen Kopecky",
+          "email": "karen.april.kopecky@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "16",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1369",
       "crn": "5562",
       "section_number": "11",
       "schedule_type": "SUP",
-      "instructor": "Z. Fang",
+      "instructor": "Zheng Fang",
       "instructors": [
         {
-          "name": "Z. Fang",
-          "email": null
+          "name": "Zheng Fang",
+          "email": "zheng.fang@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "16",
+      "enrollment_capacity": 999,
+      "seats_available": 997,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1370",
       "crn": "5563",
       "section_number": "12",
       "schedule_type": "SUP",
-      "instructor": "J. Rubio Ramirez",
+      "instructor": "Juan Rubio Ramirez",
       "instructors": [
         {
-          "name": "J. Rubio Ramirez",
-          "email": null
+          "name": "Juan Rubio Ramirez",
+          "email": "juan.rubio-ramirez@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "16",
+      "enrollment_capacity": 999,
+      "seats_available": 997,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1371",
       "crn": "5564",
       "section_number": "13",
       "schedule_type": "SUP",
-      "instructor": "M. Grennan",
+      "instructor": "Matt Grennan",
       "instructors": [
         {
-          "name": "M. Grennan",
-          "email": null
+          "name": "Matt Grennan",
+          "email": "matthew.grennan@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "16",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1372",
       "crn": "5565",
       "section_number": "14",
       "schedule_type": "SUP",
-      "instructor": "T. Kim",
+      "instructor": "Teddy Kim",
       "instructors": [
         {
-          "name": "T. Kim",
-          "email": null
+          "name": "Teddy Kim",
+          "email": "kyungmin.kim@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "16",
+      "enrollment_capacity": 999,
+      "seats_available": 997,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1373",
       "crn": "5566",
       "section_number": "15",
       "schedule_type": "SUP",
-      "instructor": "E. Pesavento",
+      "instructor": "Elena Pesavento",
       "instructors": [
         {
-          "name": "E. Pesavento",
-          "email": null
+          "name": "Elena Pesavento",
+          "email": "epesave@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "16",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1374",
       "crn": "5567",
       "section_number": "16",
       "schedule_type": "SUP",
-      "instructor": "K. Karbownik",
+      "instructor": "Krzysztof Karbownik",
       "instructors": [
         {
-          "name": "K. Karbownik",
-          "email": null
+          "name": "Krzysztof Karbownik",
+          "email": "krzysztof.karbownik@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "16",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5552",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "D. Jacho-Chavez",
-      "instructors": [
-        {
-          "name": "D. Jacho-Chavez",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "16",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5553",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "A. Blanco",
-      "instructors": [
-        {
-          "name": "A. Blanco",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "16",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5554",
-      "section_number": "3",
-      "schedule_type": "SUP",
-      "instructor": "I. McCarthy",
-      "instructors": [
-        {
-          "name": "I. McCarthy",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "16",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5555",
-      "section_number": "4",
-      "schedule_type": "SUP",
-      "instructor": "S. Markowitz",
-      "instructors": [
-        {
-          "name": "S. Markowitz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "16",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5556",
-      "section_number": "5",
-      "schedule_type": "SUP",
-      "instructor": "P. Sant'Anna",
-      "instructors": [
-        {
-          "name": "P. Sant'Anna",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "16",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5557",
-      "section_number": "6",
-      "schedule_type": "SUP",
-      "instructor": "N. Lind",
-      "instructors": [
-        {
-          "name": "N. Lind",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "16",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5558",
-      "section_number": "7",
-      "schedule_type": "SUP",
-      "instructor": "S. O'Connell",
-      "instructors": [
-        {
-          "name": "S. O'Connell",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "16",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5559",
-      "section_number": "8",
-      "schedule_type": "SUP",
-      "instructor": "C. Hansman",
-      "instructors": [
-        {
-          "name": "C. Hansman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "16",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5560",
-      "section_number": "9",
-      "schedule_type": "SUP",
-      "instructor": "K. Chen",
-      "instructors": [
-        {
-          "name": "K. Chen",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "16",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5561",
-      "section_number": "10",
-      "schedule_type": "SUP",
-      "instructor": "K. Kopecky",
-      "instructors": [
-        {
-          "name": "K. Kopecky",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "16",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5562",
-      "section_number": "11",
-      "schedule_type": "SUP",
-      "instructor": "Z. Fang",
-      "instructors": [
-        {
-          "name": "Z. Fang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "16",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5563",
-      "section_number": "12",
-      "schedule_type": "SUP",
-      "instructor": "J. Rubio Ramirez",
-      "instructors": [
-        {
-          "name": "J. Rubio Ramirez",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "16",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5564",
-      "section_number": "13",
-      "schedule_type": "SUP",
-      "instructor": "M. Grennan",
-      "instructors": [
-        {
-          "name": "M. Grennan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "16",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5565",
-      "section_number": "14",
-      "schedule_type": "SUP",
-      "instructor": "T. Kim",
-      "instructors": [
-        {
-          "name": "T. Kim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "16",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5566",
-      "section_number": "15",
-      "schedule_type": "SUP",
-      "instructor": "E. Pesavento",
-      "instructors": [
-        {
-          "name": "E. Pesavento",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "16",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5567",
-      "section_number": "16",
-      "schedule_type": "SUP",
-      "instructor": "K. Karbownik",
-      "instructors": [
-        {
-          "name": "K. Karbownik",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "16",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 32,
+    "total_sections": 16,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 32,
-    "open": 32,
+    "other": 16,
+    "open": 16,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Blanco",
-    "C. Hansman",
-    "D. Jacho-Chavez",
-    "E. Pesavento",
-    "I. McCarthy",
-    "J. Rubio Ramirez",
-    "K. Chen",
-    "K. Karbownik",
-    "K. Kopecky",
-    "M. Grennan",
-    "N. Lind",
-    "P. Sant'Anna",
-    "S. Markowitz",
-    "S. O'Connell",
-    "T. Kim",
-    "Z. Fang"
+    "Andres Blanco",
+    "Chris Hansman",
+    "David Jacho-Chavez",
+    "Elena Pesavento",
+    "Ian McCarthy",
+    "Juan Rubio Ramirez",
+    "Kaiji Chen",
+    "Karen Kopecky",
+    "Krzysztof Karbownik",
+    "Matt Grennan",
+    "Nelson Lind",
+    "Pedro Sant'Anna",
+    "Sara Markowitz",
+    "Stephen O'Connell",
+    "Teddy Kim",
+    "Zheng Fang"
   ],
-  "scraped_at": "2026-06-17T23:10:06.973Z"
+  "scraped_at": "2026-06-18T02:53:56.630Z"
 }

@@ -96,8 +96,50 @@
     return sections;
   }
 
+  async function fetchSectionDetails(term, atlasKey) {
+    const srcdb = window.APSTUDY_ATLAS_SRCDB?.[term];
+    if (!srcdb || !atlasKey) return null;
+    const url = new URL(ATLAS_BASE_URL);
+    url.searchParams.set("page", "fose");
+    url.searchParams.set("route", "details");
+    const response = await fetch(url.toString(), {
+      method: "POST",
+      mode: "cors",
+      credentials: "omit",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json, text/javascript, */*; q=0.01",
+        "X-Requested-With": "XMLHttpRequest",
+      },
+      body: JSON.stringify({ other: { srcdb }, group: `key:${atlasKey}` }),
+    });
+    if (!response.ok) return null;
+    const payload = await response.json();
+    if (!payload || payload.fatal) return null;
+    return payload;
+  }
+
   async function fetchSectionStatus(section) {
     const local = section || {};
+    const atlasKey = String(local.atlas_key || local.key || "").trim();
+    if (atlasKey && !browserDirectBlocked) {
+      try {
+        const details = await fetchSectionDetails(local.term, atlasKey);
+        if (details) {
+          const searchRow = {
+            code: local.course_code,
+            crn: local.crn,
+            no: local.section_number,
+            enrl_stat: local.enrollment_status,
+            meetingTimes: local.meetings,
+            meets: local.schedule_display,
+          };
+          return normalizeRawSection(local.term, applyDetailsToRow(searchRow, details));
+        }
+      } catch (error) {
+        // Fall back to subject search below.
+      }
+    }
     const sections = await fetchSubjectSections(local.term, local.subject, { campus: local.campus || local.campus_description });
     const catalog = String(local.catalog_number || local.catalog || "").toUpperCase();
     const crn = String(local.crn || "");
@@ -112,6 +154,83 @@
     return matched;
   }
 
+  function stripTags(html) {
+    return String(html ?? "")
+      .replace(/<br\s*\/?>/gi, " ")
+      .replace(/<\/p>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/&nbsp;/g, " ")
+      .replace(/&amp;/g, "&")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function parseSeatsHtml(html) {
+    const text = stripTags(html);
+    const capacityMatch = /Maximum Enrollment\D*(\d+)/i.exec(text);
+    const availableMatch = /Seats Avail\D*(\d+)/i.exec(text);
+    const waitlistMatch = /Waitlist Total\D*(\d+)\s+of\s+(\d+)/i.exec(text);
+    return {
+      enrollment_capacity: capacityMatch ? Number.parseInt(capacityMatch[1], 10) : null,
+      seats_available: availableMatch ? Number.parseInt(availableMatch[1], 10) : null,
+      waitlist_total: waitlistMatch ? Number.parseInt(waitlistMatch[1], 10) : null,
+      waitlist_capacity: waitlistMatch ? Number.parseInt(waitlistMatch[2], 10) : null,
+    };
+  }
+
+  function cellValue(html) {
+    return stripTags(html).replace(/^[^:]+:\s*/, "").trim();
+  }
+
+  function parseCampusFromAllSections(html, crn, sectionNumber) {
+    const source = String(html ?? "");
+    const rows = source.match(/<a[^>]*class="course-section"[^>]*>([\s\S]*?)<\/a>/gi) || [];
+    for (const rowHtml of rows) {
+      const rowCrn = cellValue((/course-section-crn[^>]*>([\s\S]*?)<\/div>/i.exec(rowHtml) || [])[1] || "");
+      const rowSection = cellValue((/course-section-section[^>]*>([\s\S]*?)<\/div>/i.exec(rowHtml) || [])[1] || "");
+      if (crn && rowCrn !== String(crn)) continue;
+      if (!crn && sectionNumber && rowSection !== String(sectionNumber)) continue;
+      return cellValue((/course-section-camp[^>]*>([\s\S]*?)<\/div>/i.exec(rowHtml) || [])[1] || "") || null;
+    }
+    return null;
+  }
+
+  function applyDetailsToRow(searchRow, details) {
+    const crn = String(details.crn || searchRow.crn || "").trim();
+    const sectionNumber = String(details.section || searchRow.no || "").trim();
+    const seats = parseSeatsHtml(details.seats);
+    const campusDescription = parseCampusFromAllSections(details.all_sections, crn, sectionNumber);
+    const requirementDesignation = stripTags(details.clss_assoc_rqmnt_designt_html) || null;
+    const locationMatch = /\bin\s+<a[^>]*>([^<]+)<\/a>/i.exec(String(details.meeting_html || ""))
+      || /\bin\s+([^<]+?)(?:<\/span>|$)/i.exec(String(details.meeting_html || ""));
+    return {
+      ...searchRow,
+      key: details.key || searchRow.key,
+      atlas_key: details.key || searchRow.key,
+      code: details.code || searchRow.code,
+      title: details.title || searchRow.title,
+      crn,
+      no: sectionNumber,
+      credit_hours: details.credit_hours_options || stripTags(details.hours_html),
+      enrollment_capacity: seats.enrollment_capacity,
+      seats_available: seats.seats_available,
+      waitlist_total: seats.waitlist_total,
+      waitlist_capacity: seats.waitlist_capacity,
+      grading_mode: details.grademode_code || null,
+      grading_mode_options: String(details.gmods || "").split(",").map((item) => item.trim()).filter(Boolean),
+      instruction_method: details.inst_method_code || null,
+      enrl_stat: stripTags(details.enrl_stat_html) || searchRow.enrl_stat,
+      requirement_designation: requirementDesignation,
+      requirements: requirementDesignation ? [requirementDesignation] : [],
+      campus_description: campusDescription,
+      location: locationMatch ? stripTags(locationMatch[1]) : null,
+      course_description: stripTags(details.description) || null,
+      course_notes: stripTags(details.clssnotes) || null,
+      meeting_html: details.meeting_html,
+      meets: stripTags(details.meeting_html) || searchRow.meets,
+    };
+  }
+
   function normalizeRawSection(term, raw) {
     const courseCode = String(raw?.code || raw?.course_code || "").trim();
     const { subject, catalog } = splitCourseCode(courseCode);
@@ -119,6 +238,7 @@
     const sectionNumber = String(raw?.no || raw?.section_number || "").trim();
     const status = normalizeEnrollmentStatus(raw?.enrl_stat || raw?.enrollment_status);
     const requirements = normalizeRequirements(raw);
+    const campusDescription = firstPresent(raw, ["campus_description", "campus", "campusDescription", "campus_descr", "campusDescr"]);
     return {
       id: [term, subject, catalog, crn || "na", sectionNumber || "na"].join("|"),
       term,
@@ -129,16 +249,22 @@
       course_title: raw?.title || raw?.course_title || "",
       crn,
       section_number: sectionNumber,
+      atlas_key: raw?.atlas_key || raw?.key || null,
       schedule_type: raw?.schd || raw?.schedule_type || "",
       instructor: raw?.instr || raw?.instructor || "TBA",
       instructors: normalizeInstructors(raw?.instructors || raw?.instr || raw?.instructor),
       location: firstPresent(raw, ["location", "loc", "room", "building", "bldg_room", "bldgRoom"]),
-      campus: normalizeCampusValue(firstPresent(raw, ["campus", "campus_description", "campusDescription", "campus_descr", "campusDescr"]), subject),
-      campus_description: firstPresent(raw, ["campus", "campus_description", "campusDescription", "campus_descr", "campusDescr"]),
-      enrollment_status: status,
+      campus: normalizeCampusValue(campusDescription, subject),
+      campus_description: campusDescription,
+      enrollment_status: normalizeEnrollmentStatus(raw?.enrl_stat || raw?.enrollment_status),
       enrollment_count: String(raw?.total || raw?.enrollment_count || ""),
-      seats_available: inferSeatsAvailable(status, raw),
-      enrollment_capacity: firstInt(raw, ["capacity", "max_enrl", "maxEnrollment", "seats_capacity", "seatsCapacity"]),
+      seats_available: firstInt(raw, ["seats_available", "seatsAvailable", "available_seats", "availableSeats", "seats_avail", "seatsAvail", "avail", "open_seats", "openSeats"]) ?? inferSeatsAvailable(status, raw),
+      enrollment_capacity: firstInt(raw, ["enrollment_capacity", "capacity", "max_enrl", "maxEnrollment", "seats_capacity", "seatsCapacity"]),
+      waitlist_total: firstInt(raw, ["waitlist_total"]),
+      waitlist_capacity: firstInt(raw, ["waitlist_capacity"]),
+      grading_mode: raw?.grading_mode || raw?.grademode_code || null,
+      grading_mode_options: raw?.grading_mode_options || String(raw?.gmods || "").split(",").map((item) => item.trim()).filter(Boolean),
+      instruction_method: raw?.instruction_method || raw?.inst_method_code || null,
       is_cancelled: Boolean(raw?.isCancelled || raw?.is_cancelled),
       schedule_display: raw?.meets || raw?.schedule_display || "TBA",
       meetings: parseMeetingTimes(raw?.meetingTimes || raw?.meetings),
@@ -146,7 +272,7 @@
         start: raw?.start_date || raw?.startDate || null,
         end: raw?.end_date || raw?.endDate || null,
       },
-      credit_hours: firstPresent(raw, ["credit_hours", "credits", "hours"]),
+      credit_hours: firstPresent(raw, ["credit_hours", "credits", "hours", "credit_hours_options"]),
       requirement_designation: requirements[0] || null,
       requirements,
       course_description: firstPresent(raw, ["course_description", "description", "catalog_description", "desc"]),
@@ -245,9 +371,12 @@
   function normalizeCampusValue(value, subject) {
     const raw = String(value || "").trim();
     const lowered = raw.toLowerCase();
-    if (lowered.includes("oxford")) return "Oxford";
-    if (lowered.includes("atlanta") || lowered.includes("main") || lowered === "emory") return "Atlanta";
-    if (String(subject || "").toUpperCase().startsWith("OX")) return "Oxford";
+    if (lowered.includes("oxford") || lowered.startsWith("oxf@")) return "Oxford";
+    if (lowered.includes("atlanta") || lowered.includes("main") || lowered === "emory" || lowered.startsWith("atl@")) {
+      return "Atlanta";
+    }
+    const upperSubject = String(subject || "").toUpperCase();
+    if (upperSubject.startsWith("OX") || upperSubject.endsWith("_OX")) return "Oxford";
     return raw || null;
   }
 

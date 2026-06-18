@@ -5,181 +5,166 @@
   "catalog_number": "498R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 12",
+  "credit_hours": "2",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Prerequisite: permission of faculty member required and consent of the director of undergraduate studies. Supervised reading, normally for students majoring in sociology.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Various topics by Epi faculty. Check OPUS/Atlas for current topics and descriptions.",
+  "course_notes": "Course Description: Structural interventions, broadly defined as interventions to change the political, social, economic, or physical environment, can substantially affect population health. This course will provide students with a conceptual overview of structural determinants of health, including an understanding of how structural factors contribute to health inequalities. Through domestic and international case studies of structural interventions in resource-poor settings, students will learn about study designs and analytic methods to assess the impact of structural interventions on health. Students should expect to gain knowledge about how structural factors affect many aspects of health and methodological skills in assessing the effectiveness of structural interventions. Prerequisites: EPI 530; BIOS 591P or BIOS 501 (or other equivalent coursework in programming in SAS or R); and EPI 533 or EPI 534.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1414",
       "crn": "3113",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "H. Sohn",
+      "instructor": "Robin Richardson",
       "instructors": [
         {
-          "name": "H. Sohn",
-          "email": null
+          "name": "Robin Richardson",
+          "email": "robin.richardson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 25,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1415",
       "crn": "6281",
       "section_number": "2",
       "schedule_type": "SUP",
-      "instructor": "R. Franzosi",
+      "instructor": "Vijaya Kancherla",
       "instructors": [
         {
-          "name": "R. Franzosi",
-          "email": null
+          "name": "Vijaya Kancherla",
+          "email": "vijaya.kancherla@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 25,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1416",
       "crn": "6655",
       "section_number": "3",
       "schedule_type": "SUP",
-      "instructor": "J. Mullis",
+      "instructor": "A. Danielle Iuliano",
       "instructors": [
         {
-          "name": "J. Mullis",
-          "email": null
+          "name": "A. Danielle Iuliano",
+          "email": "a.danielle.iuliano@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Carrie Reed",
+          "email": "carrie.reed@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 25,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3113",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "H. Sohn",
-      "instructors": [
-        {
-          "name": "H. Sohn",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6281",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "R. Franzosi",
-      "instructors": [
-        {
-          "name": "R. Franzosi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6655",
-      "section_number": "3",
-      "schedule_type": "SUP",
-      "instructor": "J. Mullis",
-      "instructors": [
-        {
-          "name": "J. Mullis",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-10-20"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
+    "total_sections": 3,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 6,
-    "open": 6,
+    "other": 3,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "H. Sohn",
-    "J. Mullis",
-    "R. Franzosi"
+    "A. Danielle Iuliano",
+    "Carrie Reed",
+    "Robin Richardson",
+    "Vijaya Kancherla"
   ],
-  "scraped_at": "2026-06-17T23:06:47.073Z"
+  "scraped_at": "2026-06-18T02:44:07.425Z"
 }

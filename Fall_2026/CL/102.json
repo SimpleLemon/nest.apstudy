@@ -5,15 +5,16 @@
   "catalog_number": "102",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "3 - 4",
+  "credit_hours": "3",
   "requirement_designation": "HA",
   "requirements": [
-    "HA"
+    "HA",
+    "Humanities and Arts(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "An introduction to Greek and Roman myths and the variety of approaches available for their study.",
-  "course_notes": null,
+  "course_notes": "(Same as ANT 185 1)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "497",
       "crn": "1975",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Blakely",
+      "instructor": "Sandra Blakely",
       "instructors": [
         {
-          "name": "S. Blakely",
-          "email": null
+          "name": "Sandra Blakely",
+          "email": "sblakel@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 205",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 53,
+      "seats_available": 33,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "1975",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Blakely",
-      "instructors": [
-        {
-          "name": "S. Blakely",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Blakely"
+    "Sandra Blakely"
   ],
-  "scraped_at": "2026-06-17T23:09:47.401Z"
+  "scraped_at": "2026-06-18T02:51:15.021Z"
 }

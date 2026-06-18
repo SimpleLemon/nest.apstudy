@@ -5,177 +5,172 @@
   "catalog_number": "520",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)",
+    "Continuing Comm.& Writing with Race & Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed to provide students the opportunity to explore issues in economic development viewed from the perspective of sub-Saharan Africa from the impact of slavery and colonialism to the modern era of globalization.",
+  "course_notes": "(Same as ECON 366W 1)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "392",
       "crn": "3380",
       "section_number": "2201",
       "schedule_type": "LEC",
-      "instructor": "S. Mian",
+      "instructor": "Melvin D Ayogu",
       "instructors": [
         {
-          "name": "S. Mian",
-          "email": null
+          "name": "Melvin D Ayogu",
+          "email": "melvin.ayogu@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 200",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 10,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "393",
       "crn": "3381",
       "section_number": "2446",
       "schedule_type": "LEC",
-      "instructor": "S. Mian",
+      "instructor": "Melvin D Ayogu",
       "instructors": [
         {
-          "name": "S. Mian",
-          "email": null
+          "name": "Melvin D Ayogu",
+          "email": "melvin.ayogu@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 200",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 15,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "394",
       "crn": "3382",
       "section_number": "2546",
       "schedule_type": "LEC",
-      "instructor": "S. Mian",
+      "instructor": "Bayo Holsey",
       "instructors": [
         {
-          "name": "S. Mian",
-          "email": null
+          "name": "Bayo Holsey",
+          "email": "bayo.holsey@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Bowden Hall 118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
+      "requirements": [
+        "Continuing Comm.& Writing with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 3,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3380",
-      "section_number": "2201",
-      "schedule_type": "LEC",
-      "instructor": "S. Mian",
-      "instructors": [
-        {
-          "name": "S. Mian",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3381",
-      "section_number": "2446",
-      "schedule_type": "LEC",
-      "instructor": "S. Mian",
-      "instructors": [
-        {
-          "name": "S. Mian",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3382",
-      "section_number": "2546",
-      "schedule_type": "LEC",
-      "instructor": "S. Mian",
-      "instructors": [
-        {
-          "name": "S. Mian",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Mian"
+    "Bayo Holsey",
+    "Melvin D Ayogu"
   ],
-  "scraped_at": "2026-06-17T23:02:36.311Z"
+  "scraped_at": "2026-06-18T02:22:28.134Z"
 }

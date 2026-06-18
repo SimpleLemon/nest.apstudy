@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HA",
   "requirements": [
-    "HA"
+    "HA",
+    "Humanities and Arts(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course introduces students to basic technical digital video film making skills (camera operation, lighting, sound recording, non-linear editing) and to interview techniques through weekly exercises and study of major, creative documentaries. Weekly studio lab sessions required.",
-  "course_notes": "FILM 107 or FILM_OX 107 or equivalent transfer credit as prerequisite.",
+  "course_notes": "This semester, Film208 is a LINC (Learning Through Inclusive Collaboration) course with Hlth385: Embodiment of Health and will have a focus on health and healthcare. The purpose of LINC courses is to highlight connections among ways of knowing and doing across disciplines and to create inclusive intellectual learning communities. This course will involve joint activities with Hlth385. LINC'd courses are designed to help faculty and students who are engaged in thematically related courses across different disciplines to create points of intersection, or links, between the two courses. This class will be held in the Department of Film and Media's brand new production facility located at Emory Point. Address: 1568 Avenue Pl Ste 140 Atlanta, GA 30329 This class has an Equipment Fee of $125 which grants students access to equipment provided by the department.",
   "requisites": "FILM 107 or FILM_OX 107 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "3210",
       "crn": "3888",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Barba",
+      "instructor": "David Barba",
       "instructors": [
         {
-          "name": "D. Barba",
-          "email": null
+          "name": "David Barba",
+          "email": "dbarba@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "EP_118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4-6:45p",
@@ -49,51 +67,25 @@
             "end": "1845"
           }
         ]
-      }
-    },
-    {
-      "crn": "3888",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Barba",
-      "instructors": [
-        {
-          "name": "D. Barba",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 4-6:45p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1845"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Barba"
+    "David Barba"
   ],
-  "scraped_at": "2026-06-17T23:10:36.289Z"
+  "scraped_at": "2026-06-18T02:57:30.664Z"
 }

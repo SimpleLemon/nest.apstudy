@@ -5,83 +5,78 @@
   "catalog_number": "495BW",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 8",
+  "credit_hours": "3",
   "requirement_designation": "CW",
   "requirements": [
     "CW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Independent research for students eligible and selected to participate in the Women's, Gender and Sexuality Studies Honors Program. (Fulfills postfreshman writing requirement after completion of the honors thesis.)",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Advanced seminar on 19th century art and/or architecture with emphasis on critical texts, methods, and techniques of art historical investigation. Permission from instructor required.",
+  "course_notes": "Virigina Woolf famously said that \"on or about December 1910 human character changed.\" What was the change that came over \"human character\"? What was character before this moment and have things changed again after the modern period? This course aims to understand the arguments made for modern art by looking at major criticism from around 1910 to 1960. Some of the authors we will read are Roger Fry, T. S. Eliot, Paul Valéry, Georg Lukacs, Walter Benjamin, Siegfried Kracauer, T. W. Adorno, Clement Greenberg, T. J. Clark, Roland Barthes, and Paul de Man. Some of the questions we will bring to these texts are: What about this tradition is sustainable? What has never gone away? What needs to be left behind? And \"above all\" where are we going now?",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1477",
       "crn": "3262",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "S. Mulla",
+      "instructor": "Todd S Cronan",
       "instructors": [
         {
-          "name": "S. Mulla",
-          "email": null
+          "name": "Todd S Cronan",
+          "email": "todd.cronan@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Carlos Hall Conference",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3262",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "S. Mulla",
-      "instructors": [
-        {
-          "name": "S. Mulla",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Mulla"
+    "Todd S Cronan"
   ],
-  "scraped_at": "2026-06-17T23:07:03.464Z"
+  "scraped_at": "2026-06-18T02:45:32.680Z"
 }

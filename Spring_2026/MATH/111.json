@@ -5,40 +5,60 @@
   "catalog_number": "111",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "QR",
   "requirements": [
-    "QR"
+    "QR",
+    "Continuing Communication and Writing(*)",
+    "Experience and Application(*)",
+    "Natural Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Limits, continuity, derivatives, antiderivatives, the definite integral.",
-  "course_notes": "Students completing MATH 119 or equivalent cannot enroll for MATH 111. For concerns, please contact the Mathematics department.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Intensive study and analysis of the thought of one major philosopher. May be repeated for credit when the subject varies.",
+  "course_notes": "(Same as CPLT 489W 1) TOPIC: Heidegger's Being and Time",
   "requisites": "Students completing MATH 119 or equivalent cannot enroll for MATH 111. For concerns, please contact the Mathematics department.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "985",
       "crn": "1906",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Hisatsuga",
+      "instructor": "Andrew J Mitchell",
       "instructors": [
         {
-          "name": "A. Hisatsuga",
-          "email": null
+          "name": "Andrew J Mitchell",
+          "email": "amitch5@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Bowden Hall 116",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "10",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a",
@@ -54,26 +74,47 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "986",
       "crn": "2712",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "N. Milnes",
+      "instructor": "Michael Schwarz",
       "instructors": [
         {
-          "name": "N. Milnes",
-          "email": null
+          "name": "Michael Schwarz",
+          "email": "msschwarz@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 18,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a",
@@ -89,26 +130,47 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "987",
       "crn": "2719",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "D. Dobak",
+      "instructor": "David Marriott",
       "instructors": [
         {
-          "name": "D. Dobak",
-          "email": null
+          "name": "David Marriott",
+          "email": "david.marriott@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 5,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -124,26 +186,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "988",
       "crn": "2756",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "Y. Andoni",
+      "instructor": "Lynne R Huffer",
       "instructors": [
         {
-          "name": "Y. Andoni",
-          "email": null
+          "name": "Lynne R Huffer",
+          "email": "lhuffer@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 5,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a",
@@ -159,26 +242,47 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "989",
       "crn": "2758",
       "section_number": "5",
       "schedule_type": "LEC",
-      "instructor": "A. Bentley",
+      "instructor": "Ernesto Blanes-Martinez",
       "instructors": [
         {
-          "name": "A. Bentley",
-          "email": null
+          "name": "Ernesto Blanes-Martinez",
+          "email": "ernesto.rafael.blanes-martinez@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 5,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a",
@@ -194,26 +298,47 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "990",
       "crn": "2760",
       "section_number": "6",
       "schedule_type": "LEC",
-      "instructor": "J. Solomon",
+      "instructor": "John J Stuhr",
       "instructors": [
         {
-          "name": "J. Solomon",
-          "email": null
+          "name": "John J Stuhr",
+          "email": "jstuhr@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 5,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -229,26 +354,47 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "991",
       "crn": "2767",
       "section_number": "7",
       "schedule_type": "LEC",
-      "instructor": "N. Gupta",
+      "instructor": "Andrew J Mitchell",
       "instructors": [
         {
-          "name": "N. Gupta",
-          "email": null
+          "name": "Andrew J Mitchell",
+          "email": "amitch5@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 5,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -264,26 +410,47 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "992",
       "crn": "2768",
       "section_number": "8",
       "schedule_type": "LEC",
-      "instructor": "H. Rosso",
+      "instructor": "Aminah Hasan-Birdwell",
       "instructors": [
         {
-          "name": "H. Rosso",
-          "email": null
+          "name": "Aminah Hasan-Birdwell",
+          "email": "aminah.hasan-birdwell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -299,26 +466,45 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "993",
       "crn": "2769",
       "section_number": "9",
       "schedule_type": "LEC",
-      "instructor": "E. Mulrenin",
+      "instructor": "Andrew J Mitchell",
       "instructors": [
         {
-          "name": "E. Mulrenin",
-          "email": null
+          "name": "Andrew J Mitchell",
+          "email": "amitch5@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 18,
+      "seats_available": 17,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -334,26 +520,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "994",
       "crn": "2779",
       "section_number": "10",
       "schedule_type": "LEC",
-      "instructor": "J. Woods",
+      "instructor": "Erin Wells Bonning",
       "instructors": [
         {
-          "name": "J. Woods",
-          "email": null
+          "name": "Erin Wells Bonning",
+          "email": "erin.bonning@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Math & Science Center - E300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 36,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -369,380 +576,32 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "1906",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Hisatsuga",
-      "instructors": [
-        {
-          "name": "A. Hisatsuga",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2712",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "N. Milnes",
-      "instructors": [
-        {
-          "name": "N. Milnes",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2719",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "D. Dobak",
-      "instructors": [
-        {
-          "name": "D. Dobak",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2756",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "Y. Andoni",
-      "instructors": [
-        {
-          "name": "Y. Andoni",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2758",
-      "section_number": "5",
-      "schedule_type": "LEC",
-      "instructor": "A. Bentley",
-      "instructors": [
-        {
-          "name": "A. Bentley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2760",
-      "section_number": "6",
-      "schedule_type": "LEC",
-      "instructor": "J. Solomon",
-      "instructors": [
-        {
-          "name": "J. Solomon",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2767",
-      "section_number": "7",
-      "schedule_type": "LEC",
-      "instructor": "N. Gupta",
-      "instructors": [
-        {
-          "name": "N. Gupta",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2768",
-      "section_number": "8",
-      "schedule_type": "LEC",
-      "instructor": "H. Rosso",
-      "instructors": [
-        {
-          "name": "H. Rosso",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2769",
-      "section_number": "9",
-      "schedule_type": "LEC",
-      "instructor": "E. Mulrenin",
-      "instructors": [
-        {
-          "name": "E. Mulrenin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2779",
-      "section_number": "10",
-      "schedule_type": "LEC",
-      "instructor": "J. Woods",
-      "instructors": [
-        {
-          "name": "J. Woods",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 20,
-    "lectures": 20,
+    "total_sections": 10,
+    "lectures": 10,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 18,
+    "open": 9,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Bentley",
-    "A. Hisatsuga",
-    "D. Dobak",
-    "E. Mulrenin",
-    "H. Rosso",
-    "J. Solomon",
-    "J. Woods",
-    "N. Gupta",
-    "N. Milnes",
-    "Y. Andoni"
+    "Aminah Hasan-Birdwell",
+    "Andrew J Mitchell",
+    "David Marriott",
+    "Erin Wells Bonning",
+    "Ernesto Blanes-Martinez",
+    "John J Stuhr",
+    "Lynne R Huffer",
+    "Michael Schwarz"
   ],
-  "scraped_at": "2026-06-17T23:03:54.276Z"
+  "scraped_at": "2026-06-18T02:30:04.490Z"
 }

@@ -5,40 +5,56 @@
   "catalog_number": "491",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "1,2,3,4",
   "requirement_designation": "XA",
   "requirements": [
-    "XA"
+    "XA",
+    "Race and Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Student teams work on an environmental project for an external stakeholder, using problem identification, research and analysis, report and policy drafting, and public presentation skills. Project and stakeholders vary by semester. Fulfills an ENVS Independent Study.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisite: consent of instructor. Specific readings for each student are decided upon in consultation with a member of the faculty.",
   "course_notes": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or equivalent transfer credit as prerequisite.",
   "requisites": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "772",
       "crn": "2585",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "E. Lonsdorf",
+      "instructor": "Ofra Yeglin",
       "instructors": [
         {
-          "name": "E. Lonsdorf",
-          "email": null
+          "name": "Ofra Yeglin",
+          "email": "oyeglin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,26 +70,47 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "773",
       "crn": "2586",
       "section_number": "2",
       "schedule_type": "DIS",
-      "instructor": "E. Lonsdorf",
+      "instructor": "Robert Goddard",
       "instructors": [
         {
-          "name": "E. Lonsdorf",
-          "email": null
+          "name": "Robert Goddard",
+          "email": "robert.goddard@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Candler Library 121",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "2",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-5:15p",
@@ -84,86 +121,26 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "2585",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Lonsdorf",
-      "instructors": [
-        {
-          "name": "E. Lonsdorf",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2586",
-      "section_number": "2",
-      "schedule_type": "DIS",
-      "instructor": "E. Lonsdorf",
-      "instructors": [
-        {
-          "name": "E. Lonsdorf",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 2,
+    "total_sections": 2,
+    "lectures": 1,
     "labs": 0,
-    "discussions": 2,
+    "discussions": 1,
     "other": 0,
-    "open": 4,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Lonsdorf"
+    "Ofra Yeglin",
+    "Robert Goddard"
   ],
-  "scraped_at": "2026-06-17T23:02:26.545Z"
+  "scraped_at": "2026-06-18T02:20:39.957Z"
 }

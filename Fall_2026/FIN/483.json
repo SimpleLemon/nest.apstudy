@@ -5,13 +5,13 @@
   "catalog_number": "483",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course uses academic studies, practitioner-oriented readings, articles from the popular press, and a term project to cover both conventional wisdom and state-of-the-art methods used in managing a stock portfolio. Enrolled students comprise the Goizueta Business School Student Investment Fund, LLC, responsible for managing a portfolio of real assets. The entire investment portfolio consists of student stock picks. As a term project, students develop and present to the class their own quantitative model. Course topics include active stock selection emphasizing quantitative selection methods, trading, databases, software, performance evaluation, risk management, brokerage accounts, and the money management industry.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "2147",
       "crn": "3726",
       "section_number": "1101",
       "schedule_type": "LEC",
-      "instructor": "J. Busse",
+      "instructor": "Jeffrey Busse",
       "instructors": [
         {
-          "name": "J. Busse",
-          "email": null
+          "name": "Jeffrey Busse",
+          "email": "jeff.busse@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 130",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 120,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -52,56 +65,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3726",
-      "section_number": "1101",
-      "schedule_type": "LEC",
-      "instructor": "J. Busse",
-      "instructors": [
-        {
-          "name": "J. Busse",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Busse"
+    "Jeffrey Busse"
   ],
-  "scraped_at": "2026-06-17T23:10:39.537Z"
+  "scraped_at": "2026-06-18T02:58:24.248Z"
 }

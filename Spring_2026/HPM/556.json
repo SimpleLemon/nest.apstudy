@@ -5,38 +5,53 @@
   "catalog_number": "556",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Special topics in Middle Eastern and South Asian Studies, at the 100 level; may be repeated when content varies.",
+  "course_notes": "(Same as REL 170 2) This course satisfies the Religion major requirement:- Region, Theme. This course will survey the terrain of mental and physical culture in the South Asian traditions of Hinduism, Buddhism and Jainism. We will read from primary sources, root texts and commentaries as well as modern scholarship on the vast diversity of practices that self-characterize as `yoga,' irrespective (as well as cognizant of) their religious and sectarian differences. We will study the chronological development of the concept and practices associated of yoga, its distinct uses and applications in the three religious traditions in play, as well as its transformation and applications in the modern global marketplace of self-culture. We will also work with basic principles of breath-work, somatic movement and practice. The course will foreground lenses of gender, race, caste and colonialism to evaluate how their interplay has determined the reception, definition and practice of yoga in modernity. It will also emphasize both the theory and practice of yoga as intertwined and mutually informative.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "2448",
       "crn": "4368",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "E. Becker",
+      "instructor": "Dhruv Nagar",
       "instructors": [
         {
-          "name": "E. Becker",
-          "email": null
+          "name": "Dhruv Nagar",
+          "email": "dhruv.raj.nagar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 250",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 9-11:50a",
@@ -47,51 +62,25 @@
             "end": "1150"
           }
         ]
-      }
-    },
-    {
-      "crn": "4368",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Becker",
-      "instructors": [
-        {
-          "name": "E. Becker",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 9-11:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "900",
-            "end": "1150"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Becker"
+    "Dhruv Nagar"
   ],
-  "scraped_at": "2026-06-17T23:03:12.093Z"
+  "scraped_at": "2026-06-18T02:25:48.092Z"
 }

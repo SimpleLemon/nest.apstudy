@@ -5,38 +5,76 @@
   "catalog_number": "780R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-03-02"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1517",
       "crn": "3187",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "M. Lau",
+      "instructor": "Anita Corbett",
       "instructors": [
         {
-          "name": "M. Lau",
-          "email": null
+          "name": "Anita Corbett",
+          "email": "acorbe2@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Victor Faundez",
+          "email": "vfaunde@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Amanda Marie James",
+          "email": "amandamariejames@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Alejandro Lopez",
+          "email": "alejandro.lopez@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shakira Suglia",
+          "email": "shakira.suglia@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kristen Walden",
+          "email": "kristen.alexandria.walden@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 35,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1-2:50p",
@@ -47,51 +85,30 @@
             "end": "1450"
           }
         ]
-      }
-    },
-    {
-      "crn": "3187",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "M. Lau",
-      "instructors": [
-        {
-          "name": "M. Lau",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-2:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1450"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Lau"
+    "Alejandro Lopez",
+    "Amanda Marie James",
+    "Anita Corbett",
+    "Kristen Walden",
+    "Shakira Suglia",
+    "Victor Faundez"
   ],
-  "scraped_at": "2026-06-17T23:01:24.588Z"
+  "scraped_at": "2026-06-18T02:10:09.772Z"
 }

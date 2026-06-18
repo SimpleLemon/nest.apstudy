@@ -8,12 +8,13 @@
   "credit_hours": "1",
   "requirement_designation": "PE",
   "requirements": [
-    "PE"
+    "PE",
+    "Physical Education(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course is designed to equip the student with both the physical skills and mental strategies necessary to achieve greater flexibility and deeper states of relaxation. Topics include time management, meditation, coping with academic and peer pressure, depression, anger, and phobias, among others.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "954",
       "crn": "4464",
       "section_number": "1",
       "schedule_type": "PE",
-      "instructor": "M. Delcroix",
+      "instructor": "Martine Delcroix",
       "instructors": [
         {
-          "name": "M. Delcroix",
-          "email": null
+          "name": "Martine Delcroix",
+          "email": "martine.delcroix@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff PE Center Mult",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,26 +72,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "955",
       "crn": "4465",
       "section_number": "2",
       "schedule_type": "PE",
-      "instructor": "S. Lafley",
+      "instructor": "Stacy Lafley",
       "instructors": [
         {
-          "name": "S. Lafley",
-          "email": null
+          "name": "Stacy Lafley",
+          "email": "stacy.lauren.lafley@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff PE Center Mult",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -89,26 +128,47 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "956",
       "crn": "5651",
       "section_number": "3",
       "schedule_type": "PE",
-      "instructor": "L. Shepard",
+      "instructor": "Laurie Shepard",
       "instructors": [
         {
-          "name": "L. Shepard",
-          "email": null
+          "name": "Laurie Shepard",
+          "email": "laurie.jean.shepard@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff PE Center 306",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 30,
+      "seats_available": 24,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-3:45p",
@@ -119,123 +179,27 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "4464",
-      "section_number": "1",
-      "schedule_type": "PE",
-      "instructor": "M. Delcroix",
-      "instructors": [
-        {
-          "name": "M. Delcroix",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4465",
-      "section_number": "2",
-      "schedule_type": "PE",
-      "instructor": "S. Lafley",
-      "instructors": [
-        {
-          "name": "S. Lafley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5651",
-      "section_number": "3",
-      "schedule_type": "PE",
-      "instructor": "L. Shepard",
-      "instructors": [
-        {
-          "name": "L. Shepard",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
+    "total_sections": 3,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 6,
-    "open": 2,
-    "closed": 4,
+    "other": 3,
+    "open": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Shepard",
-    "M. Delcroix",
-    "S. Lafley"
+    "Laurie Shepard",
+    "Martine Delcroix",
+    "Stacy Lafley"
   ],
-  "scraped_at": "2026-06-17T23:14:01.032Z"
+  "scraped_at": "2026-06-18T03:12:33.747Z"
 }

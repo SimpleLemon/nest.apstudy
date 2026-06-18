@@ -13,7 +13,7 @@
   "campus": null,
   "campus_description": null,
   "course_description": "The course introduces Python for Scientific Computing for students who will likely use it in upper-level courses. Students will know how to algorithmically formulate a mathematical problem, solve simple scientific computing problems, visualize data, and consider different programming paradigms.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,6 +22,7 @@
   },
   "sections": [
     {
+      "atlas_key": "4900",
       "crn": "2772",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +30,25 @@
       "instructors": [
         {
           "name": "T. Xu",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -54,9 +64,14 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     },
     {
+      "atlas_key": "4901",
       "crn": "5175",
       "section_number": "3",
       "schedule_type": "LAB",
@@ -64,16 +79,25 @@
       "instructors": [
         {
           "name": "T. Xu",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1-1:50p",
@@ -84,86 +108,25 @@
             "end": "1350"
           }
         ]
-      }
-    },
-    {
-      "crn": "2772",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "T. Xu",
-      "instructors": [
-        {
-          "name": "T. Xu",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5175",
-      "section_number": "3",
-      "schedule_type": "LAB",
-      "instructor": "T. Xu",
-      "instructors": [
-        {
-          "name": "T. Xu",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 2,
-    "labs": 2,
+    "total_sections": 2,
+    "lectures": 1,
+    "labs": 1,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "T. Xu"
   ],
-  "scraped_at": "2026-06-17T23:03:54.279Z"
+  "scraped_at": "2026-06-18T02:30:04.498Z"
 }

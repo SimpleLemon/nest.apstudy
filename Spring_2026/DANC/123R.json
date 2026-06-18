@@ -5,40 +5,58 @@
   "catalog_number": "123R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1",
+  "credit_hours": "4",
   "requirement_designation": "PE",
   "requirements": [
-    "PE"
+    "PE",
+    "Intercultural Communication w.Cont.Comm(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course is designed for students with no or minimal dance experience. It introduces dance technique and contemporary modern dance vocabulary. Emphasis will be placed on dynamic alignment, sensing and activating weight, developing coordination, and discovering body connections. Movement explorations take place on the floor, standing, and in sequences locomoting through space. Creative expression and musicality are integrated into class content. May be taken up to three times for credit. Students are required to take this course three times before progressing to the next level and should secure the permission of the instructor before doing so.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Courses will include the study of a variety of subjects in French and/or francophone literature and culture. May be repeated for credit.",
+  "course_notes": "FREN 488 La \"belle époque\"Prof. C. Nouvet / MW 2:30-3:45pm Content: We will explore various facets of the \"belle époque,\" a term coined to designate the period from 1871 (end of the Franco-Prussian war) to 1914 (beginning of WWI). Marked by socio-cultural changes, technological and artistic innovations, this period seemed retrospectively, after WWI, to have been \"beautiful,\" lively, exuberant even. We will focus on the various conceptions of \"modernity\" that it developed in multiple media: literature, dance (Les ballets russes, Nijinsky, Loie Fuller), painting (Impressionism, Cubism) and music (Debussy, Ravel). We will analyze the emergence of a new and, at the time provocative, feminine voice in the writings of Colette. We will also address the question of sexuality as it is explored in the medical community's interest for female \"hysteria\" (Charcot) as well as in the marginal culture of the cabaret and of its dancers whose performances were often deemed \"hysterical.\" Special attention will be paid to the painter Toulouse-Lautrec who advertised in his posters (which he turned into an art form) the culture of the cabarets. Texts may include o Colette: Les vrilles de la vigne o Cendrars: La prose du transsibérien o Apollinaire: Alcools [selections]; Calligrammes [selections] o Mallarmé: \"Autre étude de danse: Les fonds dans le ballet\"o Nijinsk y: Diary [selections] o Loie Fuller: Fifteen years of a dancer's life [selections] Serpentine dance [movie]",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "638",
       "crn": "3037",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "G. Catellier",
+      "instructor": "Claire Nouvet",
       "instructors": [
         {
-          "name": "G. Catellier",
-          "email": null
+          "name": "Claire Nouvet",
+          "email": "cnouvet@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway N118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,56 +72,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3037",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "G. Catellier",
-      "instructors": [
-        {
-          "name": "G. Catellier",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Catellier"
+    "Claire Nouvet"
   ],
-  "scraped_at": "2026-06-17T23:01:57.217Z"
+  "scraped_at": "2026-06-18T02:16:29.853Z"
 }

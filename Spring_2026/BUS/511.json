@@ -10,8 +10,8 @@
   "requirements": [],
   "campus": null,
   "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "course_description": "",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,6 +20,7 @@
   },
   "sections": [
     {
+      "atlas_key": "5107",
       "crn": "3622",
       "section_number": "3201",
       "schedule_type": "LEC",
@@ -27,16 +28,25 @@
       "instructors": [
         {
           "name": "S. Savage",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -52,9 +62,14 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-03-05"
       }
     },
     {
+      "atlas_key": "5108",
       "crn": "3623",
       "section_number": "3202",
       "schedule_type": "LEC",
@@ -62,16 +77,25 @@
       "instructors": [
         {
           "name": "S. Savage",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -87,91 +111,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3622",
-      "section_number": "3201",
-      "schedule_type": "LEC",
-      "instructor": "S. Savage",
-      "instructors": [
-        {
-          "name": "S. Savage",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3623",
-      "section_number": "3202",
-      "schedule_type": "LEC",
-      "instructor": "S. Savage",
-      "instructors": [
-        {
-          "name": "S. Savage",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-03-05"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 4,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "S. Savage"
   ],
-  "scraped_at": "2026-06-17T23:01:34.285Z"
+  "scraped_at": "2026-06-18T02:12:20.933Z"
 }

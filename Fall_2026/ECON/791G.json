@@ -5,13 +5,13 @@
   "catalog_number": "791G",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "1,2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The Dissertation Workshop meets weekly in the fall and spring semesters. Students and faculty read, hear, and discuss critically work in progress prepared by themselves and visiting scholars.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "1356",
       "crn": "3085",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "F. Gunsilius",
+      "instructor": "Florian Gunsilius",
       "instructors": [
         {
-          "name": "F. Gunsilius",
-          "email": null
+          "name": "Florian Gunsilius",
+          "email": "florian.felix.gunsilius@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 20,
+      "seats_available": 17,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MWF 4-5:15p",
@@ -57,26 +70,43 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1357",
       "crn": "3087",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "F. Gunsilius",
+      "instructor": "Florian Gunsilius",
       "instructors": [
         {
-          "name": "F. Gunsilius",
-          "email": null
+          "name": "Florian Gunsilius",
+          "email": "florian.felix.gunsilius@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rich Building 103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 20,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -92,96 +122,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3085",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "F. Gunsilius",
-      "instructors": [
-        {
-          "name": "F. Gunsilius",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MWF 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Fri",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3087",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "F. Gunsilius",
-      "instructors": [
-        {
-          "name": "F. Gunsilius",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "F. Gunsilius"
+    "Florian Gunsilius"
   ],
-  "scraped_at": "2026-06-17T23:10:06.972Z"
+  "scraped_at": "2026-06-18T02:53:56.626Z"
 }

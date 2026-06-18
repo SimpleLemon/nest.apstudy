@@ -5,15 +5,16 @@
   "catalog_number": "285",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Race and Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "A course designed for second year students on topics of interest in environmental sciences. This course may count as elective credit for the ENVS major and minor; relevant topics may count towards the ENVS Sustainability Sciences or Earth and Atmospheric Sciences minors. See current course atlas.",
-  "course_notes": null,
+  "course_notes": "In this course we consider how environments are shaped by social and cultural practices for the integrated health and wellbeing of both human and ecological communities. We consider topics like place-based knowledge systems, management, stewardship, conservation practices, food sovereignty, relational health, climate change, and co-management or Indigenous led policy. Biocultural landscapes are closely tied to and stewarded by Indigenous Peoples. In this course we present Indigenous perspectives and ontologies grounded in Indigenous studies and pedagogies to understand how biocultural environments are Indigenous environments with place based peoples and practices that have shaped these lands for generations. In this vein, we will explore several regional case studies. Students will be introduced to concepts of Indigenous knowledge systems, sovereignty, stewardship practices, and colonization. In entirety the course encourages students to explore how their view and perspective of environments and land shift when they are viewed as biocultural spaces and how interdisciplinary and cross-ontological work can support Indigenous stewardship and revitalization of these spaces.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,38 @@
   },
   "sections": [
     {
+      "atlas_key": "3443",
       "crn": "2303",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Mucioki",
+      "instructor": "Megan Mucioki",
       "instructors": [
         {
-          "name": "M. Mucioki",
-          "email": null
+          "name": "Megan Mucioki",
+          "email": "megan.mucioki@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W502",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,26 +70,45 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3444",
       "crn": "4455",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "A. Avramov",
+      "instructor": "Alexander Avramov",
       "instructors": [
         {
-          "name": "A. Avramov",
-          "email": null
+          "name": "Alexander Avramov",
+          "email": "alexander.avramov@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W502",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -89,26 +124,52 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3445",
       "crn": "4525",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "Cato/Holsey",
+      "instructor": "Adrian Cato",
       "instructors": [
         {
-          "name": "Cato/Holsey",
-          "email": null
+          "name": "Adrian Cato",
+          "email": "adrian.cato@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Bayo Holsey",
+          "email": "bayo.holsey@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Callaway S103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 3,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -124,128 +185,28 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "2303",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Mucioki",
-      "instructors": [
-        {
-          "name": "M. Mucioki",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4455",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "A. Avramov",
-      "instructors": [
-        {
-          "name": "A. Avramov",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4525",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "Cato/Holsey",
-      "instructors": [
-        {
-          "name": "Cato/Holsey",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Avramov",
-    "Cato/Holsey",
-    "M. Mucioki"
+    "Adrian Cato",
+    "Alexander Avramov",
+    "Bayo Holsey",
+    "Megan Mucioki"
   ],
-  "scraped_at": "2026-06-17T23:10:29.842Z"
+  "scraped_at": "2026-06-18T02:57:02.093Z"
 }

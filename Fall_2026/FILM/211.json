@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Hands-on introduction to video post-production with an emphasis on narrative film editing. Learn the aesthetics, concepts and techniques behind film editing. Topics such as rhythm and pacing, narrative structure, continuity, scene design and dramatic progression will be covered.",
-  "course_notes": "FILM 107 or ARTVIS 107 or FILM_OX 107 or equivalent transfer credit as prerequisite.",
+  "course_notes": "This class will be held in the Department of Film and Media's brand new production facility located at Emory Point. Address: 1568 Avenue Pl Ste 140 Atlanta, GA 30329 This class has an Equipment Fee of $125 which grants students access to equipment provided by the department.",
   "requisites": "FILM 107 or ARTVIS 107 or FILM_OX 107 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "4380",
       "crn": "3896",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "A. Llosa",
+      "instructor": "Alonso Llosa",
       "instructors": [
         {
-          "name": "A. Llosa",
-          "email": null
+          "name": "Alonso Llosa",
+          "email": "alonso.llosa@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "EP_116",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 9:45a-12:30p",
@@ -49,51 +64,25 @@
             "end": "1230"
           }
         ]
-      }
-    },
-    {
-      "crn": "3896",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "A. Llosa",
-      "instructors": [
-        {
-          "name": "A. Llosa",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 9:45a-12:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "945",
-            "end": "1230"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Llosa"
+    "Alonso Llosa"
   ],
-  "scraped_at": "2026-06-17T23:10:36.290Z"
+  "scraped_at": "2026-06-18T02:57:30.664Z"
 }

@@ -5,177 +5,187 @@
   "catalog_number": "550",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "First in a series of courses that develop reading, speaking, listening, writing, and cultural skills in Arabic. Course includes video materials and stresses communication in formal and spoken Arabic.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "413",
       "crn": "3393",
       "section_number": "2201",
       "schedule_type": "LEC",
-      "instructor": "J. Rummel",
+      "instructor": "Rkia E Cornell",
       "instructors": [
         {
-          "name": "J. Rummel",
-          "email": null
+          "name": "Rkia E Cornell",
+          "email": "recorne@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Rkia E Cornell",
+          "email": "recorne@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Candler Library 114",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Wait List",
       "enrollment_count": "3",
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "414",
       "crn": "3394",
       "section_number": "2459",
       "schedule_type": "LEC",
-      "instructor": "J. Rummel",
+      "instructor": "Gehane Shehata",
       "instructors": [
         {
-          "name": "J. Rummel",
-          "email": null
+          "name": "Gehane Shehata",
+          "email": "gshehat@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Gehane Shehata",
+          "email": "gshehat@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 18,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "415",
       "crn": "3395",
       "section_number": "2559",
       "schedule_type": "LEC",
-      "instructor": "J. Rummel",
+      "instructor": "Devin Stewart",
       "instructors": [
         {
-          "name": "J. Rummel",
-          "email": null
+          "name": "Devin Stewart",
+          "email": "dstewar@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Devin Stewart",
+          "email": "dstewar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Anthropology Bldg 107",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 18,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3393",
-      "section_number": "2201",
-      "schedule_type": "LEC",
-      "instructor": "J. Rummel",
-      "instructors": [
-        {
-          "name": "J. Rummel",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3394",
-      "section_number": "2459",
-      "schedule_type": "LEC",
-      "instructor": "J. Rummel",
-      "instructors": [
-        {
-          "name": "J. Rummel",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3395",
-      "section_number": "2559",
-      "schedule_type": "LEC",
-      "instructor": "J. Rummel",
-      "instructors": [
-        {
-          "name": "J. Rummel",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Rummel"
+    "Devin Stewart",
+    "Gehane Shehata",
+    "Rkia E Cornell"
   ],
-  "scraped_at": "2026-06-17T23:03:28.350Z"
+  "scraped_at": "2026-06-18T02:27:13.161Z"
 }

@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "NS",
   "requirements": [
-    "NS"
+    "NS",
+    "Natural Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "CHEM 202 provides a basic understanding of the kinetics and thermodynamics associated with reactions, how these are related to the structures of reactants and products and the pathways between them, and how reactivity can be controlled through choices of reacting molecules and conditions.",
-  "course_notes": "CHEM 141 or CHEM_OX 141 or CHEM 150 or CHEM_OX 150 or equivalent transfer credit as prerequisite.",
+  "course_notes": "This course is typically offered in the spring and summer semesters. An off-sequence section may be offered in the fall but is not guaranteed.",
   "requisites": "CHEM 141 or CHEM_OX 141 or CHEM 150 or CHEM_OX 150 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "3463",
       "crn": "2776",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Kindt",
+      "instructor": "James Kindt",
       "instructors": [
         {
-          "name": "J. Kindt",
-          "email": null
+          "name": "James Kindt",
+          "email": "jkindt@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Atwood Chemistry Bldg. 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 72,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -54,56 +72,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "2776",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Kindt",
-      "instructors": [
-        {
-          "name": "J. Kindt",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Kindt"
+    "James Kindt"
   ],
-  "scraped_at": "2026-06-17T23:09:40.815Z"
+  "scraped_at": "2026-06-18T02:50:59.310Z"
 }

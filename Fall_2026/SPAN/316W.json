@@ -5,13 +5,15 @@
   "catalog_number": "316W",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+  "requirements": [
+    "Intercultural Communication w.Cont.Comm(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Foundational course for the major and the minor that examines a range of texts from the Spanish-speaking world with a thematic focus on health and medicine, paying particular attention to the ways notions of health, well-being, illness, disease, and treatment are culturally constructed and situated.",
+  "course_notes": "(Same as HLTH 385W 2)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,18 +22,34 @@
   },
   "sections": [
     {
+      "atlas_key": "4466",
       "crn": "3437",
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Staff",
       "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Anthropology Bldg 107",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -47,49 +65,23 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3437",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [],
-  "scraped_at": "2026-06-17T23:14:53.055Z"
+  "scraped_at": "2026-06-18T03:18:50.187Z"
 }

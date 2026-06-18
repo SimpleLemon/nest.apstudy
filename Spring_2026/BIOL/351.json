@@ -8,37 +8,55 @@
   "credit_hours": "4",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Social Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "The basic principles of immunology, the causes of pathogenesis during the course of infection with microparasites, and the limitations to the understanding of infectious diseases (such as HIV/AIDS, tuberculosis, and malaria) caused by viruses, bacteria, and unicellular eukaryotes.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Theories of the household and of the business firm and their implications for the demand and supply of final products and productive factors and for the distribution of income.",
   "course_notes": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
   "requisites": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "550",
       "crn": "1650",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "R. Antia",
+      "instructor": "Daniel Fershtman",
       "instructors": [
         {
-          "name": "R. Antia",
-          "email": null
+          "name": "Daniel Fershtman",
+          "email": "daniel.fershtman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "White Hall 110",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "2",
+      "enrollment_capacity": 55,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "WF 1-2:15p",
@@ -54,26 +72,47 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "551",
       "crn": "1651",
       "section_number": "2",
       "schedule_type": "DIS",
-      "instructor": "R. Antia",
+      "instructor": "Teddy Kim",
       "instructors": [
         {
-          "name": "R. Antia",
-          "email": null
+          "name": "Teddy Kim",
+          "email": "kyungmin.kim@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 110",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 50,
+      "seats_available": 26,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 2:20-3:10p",
@@ -84,86 +123,26 @@
             "end": "1510"
           }
         ]
-      }
-    },
-    {
-      "crn": "1650",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "R. Antia",
-      "instructors": [
-        {
-          "name": "R. Antia",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "WF 1-2:15p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1651",
-      "section_number": "2",
-      "schedule_type": "DIS",
-      "instructor": "R. Antia",
-      "instructors": [
-        {
-          "name": "R. Antia",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 2:20-3:10p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1420",
-            "end": "1510"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 2,
+    "total_sections": 2,
+    "lectures": 1,
     "labs": 0,
-    "discussions": 2,
+    "discussions": 1,
     "other": 0,
-    "open": 4,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Antia"
+    "Daniel Fershtman",
+    "Teddy Kim"
   ],
-  "scraped_at": "2026-06-17T23:01:21.203Z"
+  "scraped_at": "2026-06-18T02:09:43.793Z"
 }

@@ -8,37 +8,56 @@
   "credit_hours": "3",
   "requirement_designation": "FS",
   "requirements": [
-    "FS"
+    "FS",
+    "First Year Seminar",
+    "Natural Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Variable topics using interdisciplinary approaches from the humanities and social sciences. Topics represent current interests of the instructor.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Variable topics of special interest in the field of Neuroscience and Behavioral Biology. Any of these NBB 190 courses will satisfy the new General Education freshman seminar requirement but will not count as an NBB elective.",
+  "course_notes": "(Same as ENVS 190 1) (Freshmen Seminar - Limited to First Year Students Only)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "920",
       "crn": "4471",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "R. Lal",
+      "instructor": "Anthony Martin",
       "instructors": [
         {
-          "name": "R. Lal",
-          "email": null
+          "name": "Anthony Martin",
+          "email": "geoam@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Callaway N118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -54,26 +73,52 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "921",
       "crn": "5291",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "A. Kazama",
+      "instructor": "Marcela Benitez",
       "instructors": [
         {
-          "name": "A. Kazama",
-          "email": null
+          "name": "Marcela Benitez",
+          "email": "marcela.benitez@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Evan Cunningham",
+          "email": "elizabeth.cunningham@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 175,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -89,92 +134,27 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "4471",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "R. Lal",
-      "instructors": [
-        {
-          "name": "R. Lal",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5291",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "A. Kazama",
-      "instructors": [
-        {
-          "name": "A. Kazama",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 2,
+    "other": 2,
+    "open": 0,
     "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Kazama",
-    "R. Lal"
+    "Anthony Martin",
+    "Evan Cunningham",
+    "Marcela Benitez"
   ],
-  "scraped_at": "2026-06-17T23:03:18.566Z"
+  "scraped_at": "2026-06-18T02:26:24.110Z"
 }

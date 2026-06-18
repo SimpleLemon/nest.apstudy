@@ -8,37 +8,62 @@
   "credit_hours": "4",
   "requirement_designation": "MQR",
   "requirements": [
-    "MQR"
+    "MQR",
+    "Intercultural Communication(*)",
+    "Experience and Application(*)",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Introduction to construction and testing of econometric models; analysis and critique of general linear regression model; simultaneous equations models; computer program for regression analysis; applications.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "First in a series of courses designed to teach speaking, writing, reading, and comprehension of modern Hebrew. No previous knowledge of Hebrew required.",
   "course_notes": "(ECON 101 or ECON_OX 101 or BUS 201) and (ECON 112 or ECON_OX 112) and (ECON 220 or MATH 207 or MATH_OX 207 or MATH 361 or MATH 362) or equivalent transfer credit as a prerequisite.",
   "requisites": "(ECON 101 or ECON_OX 101 or BUS 201) and (ECON 112 or ECON_OX 112) and (ECON 220 or MATH 207 or MATH_OX 207 or MATH 361 or MATH 362) or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "698",
       "crn": "4284",
       "section_number": "LAB2",
       "schedule_type": "LAB",
-      "instructor": "H. Pitzer",
+      "instructor": "Sagit Shaked",
       "instructors": [
         {
-          "name": "H. Pitzer",
-          "email": null
+          "name": "Sagit Shaked",
+          "email": "sagit.shaked@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sagit Shaked",
+          "email": "sagit.shaked@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Candler Library 124",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 15,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 11:30a-12:20p",
@@ -49,26 +74,52 @@
             "end": "1220"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "699",
       "crn": "3949",
       "section_number": "LAB3",
       "schedule_type": "LAB",
-      "instructor": "J. Zhang",
+      "instructor": "Idit Ben-Simon",
       "instructors": [
         {
-          "name": "J. Zhang",
-          "email": null
+          "name": "Idit Ben-Simon",
+          "email": "idit.ben-simon@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Idit Ben-Simon",
+          "email": "idit.ben-simon@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 12,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1-1:50p",
@@ -79,26 +130,52 @@
             "end": "1350"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "700",
       "crn": "3950",
       "section_number": "LAB4",
       "schedule_type": "LAB",
-      "instructor": "J. Zhang",
+      "instructor": "Sagit Shaked",
       "instructors": [
         {
-          "name": "J. Zhang",
-          "email": null
+          "name": "Sagit Shaked",
+          "email": "sagit.shaked@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sagit Shaked",
+          "email": "sagit.shaked@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Candler Library 124",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 12,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 2:30-3:20p",
@@ -109,9 +186,14 @@
             "end": "1520"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "693",
       "crn": "3941",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -119,16 +201,32 @@
       "instructors": [
         {
           "name": "E. Maasoumi",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 3,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -144,26 +242,47 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "694",
       "crn": "4042",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "P. Lopez de mesa Moyano",
+      "instructor": "Giovanni Lovisetto",
       "instructors": [
         {
-          "name": "P. Lopez de mesa Moyano",
-          "email": null
+          "name": "Giovanni Lovisetto",
+          "email": "giovanni.lovisetto@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Carlos Hall Conference",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 9,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -179,26 +298,52 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "695",
       "crn": "3944",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "S. Hoderlein",
+      "instructor": "Idit Ben-Simon",
       "instructors": [
         {
-          "name": "S. Hoderlein",
-          "email": null
+          "name": "Idit Ben-Simon",
+          "email": "idit.ben-simon@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Idit Ben-Simon",
+          "email": "idit.ben-simon@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 15,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -214,26 +359,52 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "696",
       "crn": "3945",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "P. Sant'Anna",
+      "instructor": "Pazit Kahlon",
       "instructors": [
         {
-          "name": "P. Sant'Anna",
-          "email": null
+          "name": "Pazit Kahlon",
+          "email": "pazit.kahlon@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Pazit Kahlon",
+          "email": "pazit.kahlon@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Callaway S102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 15,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -249,26 +420,52 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "697",
       "crn": "3946",
       "section_number": "5",
       "schedule_type": "LAB",
-      "instructor": "H. Pitzer",
+      "instructor": "Sagit Shaked",
       "instructors": [
         {
-          "name": "H. Pitzer",
-          "email": null
+          "name": "Sagit Shaked",
+          "email": "sagit.shaked@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sagit Shaked",
+          "email": "sagit.shaked@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 15,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-10:50a",
@@ -279,286 +476,29 @@
             "end": "1050"
           }
         ]
-      }
-    },
-    {
-      "crn": "4284",
-      "section_number": "LAB2",
-      "schedule_type": "LAB",
-      "instructor": "H. Pitzer",
-      "instructors": [
-        {
-          "name": "H. Pitzer",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3949",
-      "section_number": "LAB3",
-      "schedule_type": "LAB",
-      "instructor": "J. Zhang",
-      "instructors": [
-        {
-          "name": "J. Zhang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3950",
-      "section_number": "LAB4",
-      "schedule_type": "LAB",
-      "instructor": "J. Zhang",
-      "instructors": [
-        {
-          "name": "J. Zhang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 2:30-3:20p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1430",
-            "end": "1520"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3941",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Maasoumi",
-      "instructors": [
-        {
-          "name": "E. Maasoumi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4042",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "P. Lopez de mesa Moyano",
-      "instructors": [
-        {
-          "name": "P. Lopez de mesa Moyano",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3944",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "S. Hoderlein",
-      "instructors": [
-        {
-          "name": "S. Hoderlein",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3945",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "P. Sant'Anna",
-      "instructors": [
-        {
-          "name": "P. Sant'Anna",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3946",
-      "section_number": "5",
-      "schedule_type": "LAB",
-      "instructor": "H. Pitzer",
-      "instructors": [
-        {
-          "name": "H. Pitzer",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 16,
-    "lectures": 8,
-    "labs": 8,
+    "total_sections": 8,
+    "lectures": 4,
+    "labs": 4,
     "discussions": 0,
     "other": 0,
     "open": 8,
     "closed": 0,
-    "waitlisted": 8
+    "waitlisted": 0
   },
   "instructors_unique": [
     "E. Maasoumi",
-    "H. Pitzer",
-    "J. Zhang",
-    "P. Lopez de mesa Moyano",
-    "P. Sant'Anna",
-    "S. Hoderlein"
+    "Giovanni Lovisetto",
+    "Idit Ben-Simon",
+    "Pazit Kahlon",
+    "Sagit Shaked"
   ],
-  "scraped_at": "2026-06-17T23:02:03.797Z"
+  "scraped_at": "2026-06-18T02:17:46.577Z"
 }

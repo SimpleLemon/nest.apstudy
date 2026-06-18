@@ -5,13 +5,13 @@
   "catalog_number": "680",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed for MBAs and BBAs interested in investing in the emerging, illiquid segments of the alternative investment space. This course will cover illiquidity and modern portfolio theory, asset correlations, trends, and valuation techniques through the lens of four illiquid asset classes: cryptocurrency, reinsurance, ESG infrastructure, and art. Course elements include guest lectures by industry leaders and practical applications for investing in the next frontier of alternative assets. More information at www.emoryprof.com.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "2342",
       "crn": "3736",
       "section_number": "3238",
       "schedule_type": "LEC",
-      "instructor": "K. Baks",
+      "instructor": "Klaas Baks",
       "instructors": [
         {
-          "name": "K. Baks",
-          "email": null
+          "name": "Klaas Baks",
+          "email": "klaas.baks@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 234",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 23,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6:30-9:30p",
@@ -47,26 +60,43 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2343",
       "crn": "5441",
       "section_number": "4138",
       "schedule_type": "LEC",
-      "instructor": "K. Baks",
+      "instructor": "Klaas Baks",
       "instructors": [
         {
-          "name": "K. Baks",
-          "email": null
+          "name": "Klaas Baks",
+          "email": "klaas.baks@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 234",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Masters Non-MBA",
+      "grading_mode_options": [
+        "MTR",
+        "Non-MBA Masters Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6:30-9:30p",
@@ -77,26 +107,43 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2344",
       "crn": "5442",
       "section_number": "4238",
       "schedule_type": "LEC",
-      "instructor": "K. Baks",
+      "instructor": "Klaas Baks",
       "instructors": [
         {
-          "name": "K. Baks",
-          "email": null
+          "name": "Klaas Baks",
+          "email": "klaas.baks@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 234",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "3",
+      "enrollment_capacity": 9,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6:30-9:30p",
@@ -107,111 +154,25 @@
             "end": "2130"
           }
         ]
-      }
-    },
-    {
-      "crn": "3736",
-      "section_number": "3238",
-      "schedule_type": "LEC",
-      "instructor": "K. Baks",
-      "instructors": [
-        {
-          "name": "K. Baks",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5441",
-      "section_number": "4138",
-      "schedule_type": "LEC",
-      "instructor": "K. Baks",
-      "instructors": [
-        {
-          "name": "K. Baks",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5442",
-      "section_number": "4238",
-      "schedule_type": "LEC",
-      "instructor": "K. Baks",
-      "instructors": [
-        {
-          "name": "K. Baks",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Baks"
+    "Klaas Baks"
   ],
-  "scraped_at": "2026-06-17T23:10:39.541Z"
+  "scraped_at": "2026-06-18T02:58:24.254Z"
 }

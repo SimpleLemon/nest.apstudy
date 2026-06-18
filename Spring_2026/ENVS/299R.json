@@ -5,23 +5,25 @@
   "catalog_number": "299R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 8",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Variable credit. Permission of faculty supervisor required prior to enrollment. Designed primarily for sophomores, this course provides ENVS students with foundational skills for research under the supervision of a faculty member. A stepping stone to more advanced research work.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Independent research for senior major students selected to participate in the department's Honors Program.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3029",
       "crn": "5841",
       "section_number": "1",
       "schedule_type": "RSC",
@@ -29,23 +31,44 @@
       "instructors": [
         {
           "name": "X. Huang",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3030",
       "crn": "5880",
       "section_number": "2",
       "schedule_type": "RSC",
@@ -53,47 +76,89 @@
       "instructors": [
         {
           "name": "J. Ajibade",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3031",
       "crn": "6488",
       "section_number": "3",
       "schedule_type": "RSC",
-      "instructor": "T. Gillespie",
+      "instructor": "Celia Campbell",
       "instructors": [
         {
-          "name": "T. Gillespie",
-          "email": null
+          "name": "Celia Campbell",
+          "email": "celia.m.campbell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 10,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3032",
       "crn": "6493",
       "section_number": "4",
       "schedule_type": "RSC",
@@ -101,134 +166,58 @@
       "instructors": [
         {
           "name": "E. Saikawa",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "4",
+      "enrollment_capacity": 5,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5841",
-      "section_number": "1",
-      "schedule_type": "RSC",
-      "instructor": "X. Huang",
-      "instructors": [
-        {
-          "name": "X. Huang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5880",
-      "section_number": "2",
-      "schedule_type": "RSC",
-      "instructor": "J. Ajibade",
-      "instructors": [
-        {
-          "name": "J. Ajibade",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6488",
-      "section_number": "3",
-      "schedule_type": "RSC",
-      "instructor": "T. Gillespie",
-      "instructors": [
-        {
-          "name": "T. Gillespie",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6493",
-      "section_number": "4",
-      "schedule_type": "RSC",
-      "instructor": "E. Saikawa",
-      "instructors": [
-        {
-          "name": "E. Saikawa",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 8,
-    "open": 6,
-    "closed": 2,
+    "other": 4,
+    "open": 3,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
+    "Celia Campbell",
     "E. Saikawa",
     "J. Ajibade",
-    "T. Gillespie",
     "X. Huang"
   ],
-  "scraped_at": "2026-06-17T23:02:26.543Z"
+  "scraped_at": "2026-06-18T02:20:39.951Z"
 }

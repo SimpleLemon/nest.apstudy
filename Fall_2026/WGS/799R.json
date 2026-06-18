@@ -5,13 +5,13 @@
   "catalog_number": "799R",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "1,2,3,4,5,6,7,8,9",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,262 +20,227 @@
   },
   "sections": [
     {
+      "atlas_key": "1814",
       "crn": "3150",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "S. Mulla",
+      "instructor": "Sameena Mulla",
       "instructors": [
         {
-          "name": "S. Mulla",
-          "email": null
+          "name": "Sameena Mulla",
+          "email": "sameena.mulla@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "5",
+      "enrollment_capacity": 3,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1815",
       "crn": "3152",
       "section_number": "2",
       "schedule_type": "SUP",
-      "instructor": "A. Finch",
+      "instructor": "Aisha Finch",
       "instructors": [
         {
-          "name": "A. Finch",
-          "email": null
+          "name": "Aisha Finch",
+          "email": "aisha.finch@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 2,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1816",
       "crn": "3153",
       "section_number": "3",
       "schedule_type": "SUP",
-      "instructor": "F. Sheth",
+      "instructor": "Falguni Sheth",
       "instructors": [
         {
-          "name": "F. Sheth",
-          "email": null
+          "name": "Falguni Sheth",
+          "email": "falguni.sheth@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "5",
+      "enrollment_capacity": 3,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1817",
       "crn": "3154",
       "section_number": "4",
       "schedule_type": "SUP",
-      "instructor": "K. Amin",
+      "instructor": "Kadji Amin",
       "instructors": [
         {
-          "name": "K. Amin",
-          "email": null
+          "name": "Kadji Amin",
+          "email": "kadji.amin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "5",
+      "enrollment_capacity": 2,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1818",
       "crn": "3155",
       "section_number": "5",
       "schedule_type": "SUP",
-      "instructor": "E. Wilson",
+      "instructor": "Elizabeth Wilson",
       "instructors": [
         {
-          "name": "E. Wilson",
-          "email": null
+          "name": "Elizabeth Wilson",
+          "email": "e.a.wilson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "5",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3150",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "S. Mulla",
-      "instructors": [
-        {
-          "name": "S. Mulla",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3152",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "A. Finch",
-      "instructors": [
-        {
-          "name": "A. Finch",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3153",
-      "section_number": "3",
-      "schedule_type": "SUP",
-      "instructor": "F. Sheth",
-      "instructors": [
-        {
-          "name": "F. Sheth",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3154",
-      "section_number": "4",
-      "schedule_type": "SUP",
-      "instructor": "K. Amin",
-      "instructors": [
-        {
-          "name": "K. Amin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3155",
-      "section_number": "5",
-      "schedule_type": "SUP",
-      "instructor": "E. Wilson",
-      "instructors": [
-        {
-          "name": "E. Wilson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
+    "total_sections": 5,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 10,
-    "open": 2,
-    "closed": 8,
+    "other": 5,
+    "open": 1,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Finch",
-    "E. Wilson",
-    "F. Sheth",
-    "K. Amin",
-    "S. Mulla"
+    "Aisha Finch",
+    "Elizabeth Wilson",
+    "Falguni Sheth",
+    "Kadji Amin",
+    "Sameena Mulla"
   ],
-  "scraped_at": "2026-06-17T23:15:06.180Z"
+  "scraped_at": "2026-06-18T03:19:51.009Z"
 }

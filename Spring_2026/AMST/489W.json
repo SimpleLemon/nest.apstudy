@@ -5,40 +5,58 @@
   "catalog_number": "489W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 5",
+  "credit_hours": "3",
   "requirement_designation": "CW",
   "requirements": [
-    "CW"
+    "CW",
+    "Natural Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "An advanced interdisciplinary treatment of American culture issues, historical events or eras, or literature. The ILA and AMST programs support interdisciplinary inquiry of the Americas across Emory College of Arts and Sciences; this course will be frequently cross-listed with other departments.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "CHEM 202 provides a basic understanding of the kinetics and thermodynamics associated with reactions, how these are related to the structures of reactants and products and the pathways between them, and how reactivity can be controlled through choices of reacting molecules and conditions.",
+  "course_notes": "This course is typically offered in the spring and summer semesters. An off-sequence section may be offered in the fall but is not guaranteed.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3463",
       "crn": "4452",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "M. Montalvo",
+      "instructor": "James Kindt",
       "instructors": [
         {
-          "name": "M. Montalvo",
-          "email": null
+          "name": "James Kindt",
+          "email": "jkindt@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Atwood Chemistry Bldg. 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 72,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-3:45p",
@@ -49,51 +67,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "4452",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "M. Montalvo",
-      "instructors": [
-        {
-          "name": "M. Montalvo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-3:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Montalvo"
+    "James Kindt"
   ],
-  "scraped_at": "2026-06-17T23:01:00.977Z"
+  "scraped_at": "2026-06-18T02:06:43.306Z"
 }

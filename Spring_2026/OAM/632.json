@@ -5,38 +5,53 @@
   "catalog_number": "632",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "4",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A study of the factors that cause genetic change and of the evolutionary consequences of such changes. Topics include population genetics, adaptation and natural selection, evolution of genes, proteins and genomes, sexual selection, kin selection, speciation, and diversification of taxa.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "434",
       "crn": "3409",
       "section_number": "2129",
       "schedule_type": "LEC",
-      "instructor": "M. Sacks",
+      "instructor": "Katharina Koelle",
       "instructors": [
         {
-          "name": "M. Sacks",
-          "email": null
+          "name": "Katharina Koelle",
+          "email": "katia.koelle@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 100A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 20,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6:30-9:30p",
@@ -47,26 +62,45 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "435",
       "crn": "3410",
       "section_number": "3201",
       "schedule_type": "LEC",
-      "instructor": "M. Sacks",
+      "instructor": "Katharina Koelle",
       "instructors": [
         {
-          "name": "M. Sacks",
-          "email": null
+          "name": "Katharina Koelle",
+          "email": "katia.koelle@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 100A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 20,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -82,26 +116,45 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "436",
       "crn": "3411",
       "section_number": "3202",
       "schedule_type": "LEC",
-      "instructor": "M. Sacks",
+      "instructor": "Katharina Koelle",
       "instructors": [
         {
-          "name": "M. Sacks",
-          "email": null
+          "name": "Katharina Koelle",
+          "email": "katia.koelle@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 100A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 20,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -117,26 +170,45 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "437",
       "crn": "3412",
       "section_number": "3229",
       "schedule_type": "LEC",
-      "instructor": "M. Sacks",
+      "instructor": "Katharina Koelle",
       "instructors": [
         {
-          "name": "M. Sacks",
-          "email": null
+          "name": "Katharina Koelle",
+          "email": "katia.koelle@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 100A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 20,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6:30-9:30p",
@@ -147,151 +219,25 @@
             "end": "2130"
           }
         ]
-      }
-    },
-    {
-      "crn": "3409",
-      "section_number": "2129",
-      "schedule_type": "LEC",
-      "instructor": "M. Sacks",
-      "instructors": [
-        {
-          "name": "M. Sacks",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3410",
-      "section_number": "3201",
-      "schedule_type": "LEC",
-      "instructor": "M. Sacks",
-      "instructors": [
-        {
-          "name": "M. Sacks",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3411",
-      "section_number": "3202",
-      "schedule_type": "LEC",
-      "instructor": "M. Sacks",
-      "instructors": [
-        {
-          "name": "M. Sacks",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3412",
-      "section_number": "3229",
-      "schedule_type": "LEC",
-      "instructor": "M. Sacks",
-      "instructors": [
-        {
-          "name": "M. Sacks",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 8,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 4,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Sacks"
+    "Katharina Koelle"
   ],
-  "scraped_at": "2026-06-17T23:04:30.314Z"
+  "scraped_at": "2026-06-18T02:35:28.943Z"
 }

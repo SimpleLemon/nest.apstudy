@@ -8,37 +8,56 @@
   "credit_hours": "3",
   "requirement_designation": "QR",
   "requirements": [
-    "QR"
+    "QR",
+    "First Year Seminar",
+    "Natural Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "An introduction to theoretical mathematics. Logic and proofs, operations on sets, induction, relations, functions.",
-  "course_notes": "This course requires MATH 111 as prerequisite AND MATH 112 or MATH_OX112 or MATH 112Z or MATH_OX112Z or equivalent transfer credit.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Freshman seminar, for first year students only. Variable topics.",
+  "course_notes": "(Freshmen Seminar - Limited to First Year Students Only)",
   "requisites": "This course requires MATH 111 as prerequisite AND MATH 112 or MATH_OX112 or MATH 112Z or MATH_OX112Z or equivalent transfer credit.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1026",
       "crn": "2725",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Carr",
+      "instructor": "Keith Berland",
       "instructors": [
         {
-          "name": "M. Carr",
-          "email": null
+          "name": "Keith Berland",
+          "email": "kberlan@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Math & Science Center - N301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "5",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,26 +73,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1027",
       "crn": "2749",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "N. Gupta",
+      "instructor": "Jed Brody",
       "instructors": [
         {
-          "name": "N. Gupta",
-          "email": null
+          "name": "Jed Brody",
+          "email": "jbrody@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Emerson Chemistry Bldg. E363",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "5",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -89,26 +129,47 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1028",
       "crn": "3130",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "J. Villeta-García",
+      "instructor": "Keith Berland",
       "instructors": [
         {
-          "name": "J. Villeta-García",
-          "email": null
+          "name": "Keith Berland",
+          "email": "kberlan@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Atwood Chemistry Bldg. 316",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 40,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -124,26 +185,47 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1029",
       "crn": "5153",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "M. Taskovic",
+      "instructor": "Jed Brody",
       "instructors": [
         {
-          "name": "M. Taskovic",
-          "email": null
+          "name": "Jed Brody",
+          "email": "jbrody@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Math & Science Center - N303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "5",
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -159,26 +241,45 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1030",
       "crn": "5457",
       "section_number": "5",
       "schedule_type": "LEC",
-      "instructor": "M. Avery",
+      "instructor": "Daniel Sussman",
       "instructors": [
         {
-          "name": "M. Avery",
-          "email": null
+          "name": "Daniel Sussman",
+          "email": "daniel.m.sussman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - N306",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 35,
+      "seats_available": 34,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -194,200 +295,27 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2725",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Carr",
-      "instructors": [
-        {
-          "name": "M. Carr",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2749",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "N. Gupta",
-      "instructors": [
-        {
-          "name": "N. Gupta",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3130",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "J. Villeta-García",
-      "instructors": [
-        {
-          "name": "J. Villeta-García",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5153",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "M. Taskovic",
-      "instructors": [
-        {
-          "name": "M. Taskovic",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5457",
-      "section_number": "5",
-      "schedule_type": "LEC",
-      "instructor": "M. Avery",
-      "instructors": [
-        {
-          "name": "M. Avery",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
-    "lectures": 10,
+    "total_sections": 5,
+    "lectures": 5,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 10,
-    "closed": 0,
+    "open": 2,
+    "closed": 3,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Villeta-García",
-    "M. Avery",
-    "M. Carr",
-    "M. Taskovic",
-    "N. Gupta"
+    "Daniel Sussman",
+    "Jed Brody",
+    "Keith Berland"
   ],
-  "scraped_at": "2026-06-17T23:03:54.283Z"
+  "scraped_at": "2026-06-18T02:30:04.505Z"
 }

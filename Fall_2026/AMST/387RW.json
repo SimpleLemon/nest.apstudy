@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HSCW",
   "requirements": [
-    "HSCW"
+    "HSCW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Intermediate level workshop in writing and researching Southern Georgia's Civil Rights history.",
-  "course_notes": null,
+  "course_notes": "(Same as ENGCW 385RW 1, AAS 387RW 1, HIST 387RW 1) (Permission Required Prior to Enrollment) Application required. Not open to first-year students. You must attend the first class to be enrolled in this workshop. Class description and application form are available on the Creative Writing Program website: https://creativewriting.emory.edu/academics/applications.html Please email nora.lewis@emory.edu if you have any questions. In the years between 1945 and 1968, untold numbers of American citizens were targeted for death because of their race, beliefs, or civil rights work - and in some cases merely because of what they drove, how they spoke, or the ever-shifting lines of racial etiquette they crossed. In many cases, their murders were inadequately investigated or prosecuted, their stories left untold, and the crimes against their humanity never punished. The Georgia Civil Rights Cold Cases Project at Emory University is both a class and an ongoing historical and journalistic exploration of the Jim Crow South through the prism of unsolved or unpunished civil rights-era murders in Georgia. Using primary evidence including FBI records, NAACP files, old newspaper clippings, court transcripts, and personal archives students come to see and understand history from the inside out. Student essays, grounded in secondary readings that provide broader context, will be aimed at the project website, coldcases.emory.edu. Students also may become engaged in helping research a new season of the podcast, Buried Truths, based on a case we'll be examining in class. Students should budget for photocopying.",
   "requisites": null,
   "cross_listed": "ENGCW 385RW AAS 387RW HIST 387RW",
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "3389",
       "crn": "4052",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "H. Klibanoff",
+      "instructor": "Hank Klibanoff",
       "instructors": [
         {
-          "name": "H. Klibanoff",
-          "email": null
+          "name": "Hank Klibanoff",
+          "email": "hklibanoff@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff Library 773",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 4,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-5:15p",
@@ -49,51 +67,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "4052",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "H. Klibanoff",
-      "instructors": [
-        {
-          "name": "H. Klibanoff",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "H. Klibanoff"
+    "Hank Klibanoff"
   ],
-  "scraped_at": "2026-06-17T23:09:05.085Z"
+  "scraped_at": "2026-06-18T02:45:53.724Z"
 }

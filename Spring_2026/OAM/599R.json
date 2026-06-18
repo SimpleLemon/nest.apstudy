@@ -5,38 +5,51 @@
   "catalog_number": "599R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The content will provide a basic knowledge of x-ray imaging circuits and generators, the x-ray tube, fluoroscopy, Automatic Exposure Control devices and mobile Radiography units. This course will also introduce knowledge in computing and information processing. Computer applications in the Radiologic sciences related to image capture, display, storage and distribution are presented. Topics included are: intro to computer science & computer literacy, computed and digital Radiography systems, PACS and special imaging modalities. This content will also provide a fundamental knowledge of quality control.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4296",
       "crn": "3535",
       "section_number": "3201",
       "schedule_type": "LEC",
-      "instructor": "L. Segall",
+      "instructor": "Shaun Taylor",
       "instructors": [
         {
-          "name": "L. Segall",
-          "email": null
+          "name": "Shaun Taylor",
+          "email": "shaun.taylor@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 24,
+      "seats_available": 24,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -52,96 +65,43 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4297",
       "crn": "3536",
       "section_number": "3283",
       "schedule_type": "LEC",
-      "instructor": "A. Swaminathan",
+      "instructor": "Shaun Taylor",
       "instructors": [
         {
-          "name": "A. Swaminathan",
-          "email": null
+          "name": "Shaun Taylor",
+          "email": "shaun.taylor@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3535",
-      "section_number": "3201",
-      "schedule_type": "LEC",
-      "instructor": "L. Segall",
-      "instructors": [
-        {
-          "name": "L. Segall",
-          "email": null
-        }
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3536",
-      "section_number": "3283",
-      "schedule_type": "LEC",
-      "instructor": "A. Swaminathan",
-      "instructors": [
-        {
-          "name": "A. Swaminathan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
+      "enrollment_capacity": 24,
+      "seats_available": 24,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -157,22 +117,25 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 2,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Swaminathan",
-    "L. Segall"
+    "Shaun Taylor"
   ],
-  "scraped_at": "2026-06-17T23:04:30.313Z"
+  "scraped_at": "2026-06-18T02:35:28.943Z"
 }

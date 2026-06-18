@@ -5,13 +5,14 @@
   "catalog_number": "496RW",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 4",
+  "credit_hours": "4",
   "requirement_designation": "CW",
   "requirements": [
-    "CW"
+    "CW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Directed, intensive study using intermediate theory on a topic not covered in a course to be offered before a student would normally graduate. Students must receive departmental permission from the director of undergraduate studies in the semester preceding the one in which the student intends to participate.",
   "course_notes": "(ECON 201 or ECON_OX 201) and (ECON 212 or ECON_OX 212) or equivalent transfer credit as a prerequisite.",
   "requisites": "(ECON 201 or ECON_OX 201) and (ECON 212 or ECON_OX 212) or equivalent transfer credit as a prerequisite.",
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "578",
       "crn": "5666",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "S. O'Connell",
+      "instructor": "Stephen O'Connell",
       "instructors": [
         {
-          "name": "S. O'Connell",
-          "email": null
+          "name": "Stephen O'Connell",
+          "email": "soconnell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff Library 773",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 5,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10a-1p",
@@ -49,100 +67,71 @@
             "end": "1300"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "579",
       "crn": "5673",
       "section_number": "2",
       "schedule_type": "SUP",
-      "instructor": "K. Lanier",
+      "instructor": "Kelli Lanier",
       "instructors": [
         {
-          "name": "K. Lanier",
-          "email": null
+          "name": "Kelli Lanier",
+          "email": "klanier@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 5,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5666",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "S. O'Connell",
-      "instructors": [
-        {
-          "name": "S. O'Connell",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10a-1p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1300"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5673",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "K. Lanier",
-      "instructors": [
-        {
-          "name": "K. Lanier",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 4,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Lanier",
-    "S. O'Connell"
+    "Kelli Lanier",
+    "Stephen O'Connell"
   ],
-  "scraped_at": "2026-06-17T23:10:06.965Z"
+  "scraped_at": "2026-06-18T02:53:56.618Z"
 }

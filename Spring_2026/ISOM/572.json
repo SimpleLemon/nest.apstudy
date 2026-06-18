@@ -5,38 +5,51 @@
   "catalog_number": "572",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "0",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides students with academic tools to facilitate success in law school.",
+  "course_notes": "CLASS MEETS ON ALTERNATING WEEKS FROM LAW 599B.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "4251",
       "crn": "3523",
       "section_number": "3201",
       "schedule_type": "LEC",
-      "instructor": "J. Rummel",
+      "instructor": "Kamina Pinder",
       "instructors": [
         {
-          "name": "J. Rummel",
-          "email": null
+          "name": "Kamina Pinder",
+          "email": "kamina.aliya.pinder@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -52,56 +65,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "3523",
-      "section_number": "3201",
-      "schedule_type": "LEC",
-      "instructor": "J. Rummel",
-      "instructors": [
-        {
-          "name": "J. Rummel",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Rummel"
+    "Kamina Pinder"
   ],
-  "scraped_at": "2026-06-17T23:03:28.351Z"
+  "scraped_at": "2026-06-18T02:27:13.163Z"
 }

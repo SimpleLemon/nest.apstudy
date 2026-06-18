@@ -5,40 +5,58 @@
   "catalog_number": "351",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Humanities and Arts with Cont.Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course presents topics in French and Francophone studies through diverse media and genres in order to foster critical thinking through specific analysis. The course puts the emphasis on interpretative strategies that take medical forms and properties into consideration.",
-  "course_notes": "FREN 310 or FREN_OX 310 and FREN 314 or FREN_OX 314 or equivalent transfer credit as prerequisite. Used for: FREN-331, 341, 351, 385, 391",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course introduces students to the way translation between different literatures, literary genres, and new media impacts our comparative reading of texts. *Note: This course is non-repeatable.",
+  "course_notes": "(Topic: What Is Sex?) (This course is an exploration of sex. In its social, material, historical, psychoanalytic, affective, experiential, measured and immeasurable dimensions, sex is a rich site for the investigation of experience, both what can be known and what must remain unknown. In investigating sex, we will encounter Freud's infantile sexuality in his `Three Essays on the Theory of Sexuality- alongside news articles on trans athletes, alongside canonical and controversial texts from the disciplines of gender and sexuality studies. Judith Butler's \"Gender Trouble\" will meet Lacan's famous expression that \"woman does not exist,\" duking it out together in a boxing ring lined by tradwife TikTokers and Victorian etiquette guides.) (Students need not have any prior experience with studies of gender and sexuality, psychoanalysis, or media analysis. Employing sex as a theoretical question in itself, we will read for the terrifying and exhilarating ways in which sex both constructs and threatens our sense of self and subjectivity.)",
   "requisites": "FREN 310 or FREN_OX 310 and FREN 314 or FREN_OX 314 or equivalent transfer credit as prerequisite. Used for: FREN-331, 341, 351, 385, 391",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "792",
       "crn": "1689",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "N. Giguere",
+      "instructor": "Sofia Di Gironimo",
       "instructors": [
         {
-          "name": "N. Giguere",
-          "email": null
+          "name": "Sofia Di Gironimo",
+          "email": "sofia.di.gironimo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway N111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "1689",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "N. Giguere",
-      "instructors": [
-        {
-          "name": "N. Giguere",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "N. Giguere"
+    "Sofia Di Gironimo"
   ],
-  "scraped_at": "2026-06-17T23:02:39.580Z"
+  "scraped_at": "2026-06-18T02:22:47.203Z"
 }

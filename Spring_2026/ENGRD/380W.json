@@ -5,40 +5,53 @@
   "catalog_number": "380W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "2,3,4,5,6,7,8,9",
   "requirement_designation": "HAPW",
   "requirements": [
     "HAPW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Course topics will vary but always will be focused on writing, rhetorical composition and analysis, or literacy skills. Topics possible include a variety of options such as journalistic writing, non-fiction, debate, argumentation, persuasion, digital writing, among others.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Standard research course for all post-candidacy graduate students.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1630",
       "crn": "4311",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Abitz",
+      "instructor": "Gordon Berman",
       "instructors": [
         {
-          "name": "D. Abitz",
-          "email": null
+          "name": "Gordon Berman",
+          "email": "gordon.berman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -54,26 +67,43 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1631",
       "crn": "4313",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "D. Morgen",
+      "instructor": "Jiang-Xiazi Lin",
       "instructors": [
         {
-          "name": "D. Morgen",
-          "email": null
+          "name": "Jiang-Xiazi Lin",
+          "email": "jiangxiazi.lin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -89,92 +119,26 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "4311",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Abitz",
-      "instructors": [
-        {
-          "name": "D. Abitz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4313",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "D. Morgen",
-      "instructors": [
-        {
-          "name": "D. Morgen",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Abitz",
-    "D. Morgen"
+    "Gordon Berman",
+    "Jiang-Xiazi Lin"
   ],
-  "scraped_at": "2026-06-17T23:02:23.326Z"
+  "scraped_at": "2026-06-18T02:19:56.738Z"
 }

@@ -8,37 +8,55 @@
   "credit_hours": "3",
   "requirement_designation": "NS",
   "requirements": [
-    "NS"
+    "NS",
+    "Race and Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course examines the subjective experience and neural substrates of music perception and performance.Each week the class participates in a dialog between musicians and neuroscientists that examines both the experiential and mechanistic approach to music by asking questions such as \"What makes something musical\" and \"how are the complex sounds of music processed by the brain?\". The relationships of music to language, emotion and memory will be examined in detail. Theories of motor learning will be discussed and applied to musical performance. The course explores the development of the musical mind from infancy to adulthood and asks the question, \"How are the brains of composers, conductors, and performers different?\" Evidence of the efficacy of music therapy and the impact of music on mental health are evaluated. Finally, the evolution of musicality in animals and humans explained.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course explores one of a wide range of topics pertaining to the African American experience in the fields of human and civil rights, social and literary texts, and the social sciences.",
+  "course_notes": "Topic Title: Imagining Democracy Lab This class is the first part of a two-course sequence associated with the Imagining Democracy Lab, a Mellon Foundation-funded initiative to link imagination, knowledge, and action to advance civic and political engagement. In this class, we will engage with academic perspectives from the humanities and social sciences on the concept of democracy, then examine how these perspectives have (or have not) manifested in the experience of communities in the Atlanta area specifically and American democracy more broadly. To this end, we will learn from leaders of nationally renowned civic and political engagement organizations in Georgia in addition to faculty from Emory and other institutions. We will explore course material through a mix of lectures, discussion sessions, group presentations, and an individual final research paper that entails deep study of themes from the course. An application is required to be filled out and approved before enrollment in AAS 385 for Fall 2026 is granted. The application is available via the link below and due April 15th: https://form.jotform.com/260564560180151 NO FRESHMAN",
   "requisites": null,
   "cross_listed": "NBB 220",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3046",
       "crn": "4503",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Roeser/Wyttenbach",
+      "instructor": "Carol Anderson",
       "instructors": [
         {
-          "name": "Roeser/Wyttenbach",
-          "email": null
+          "name": "Carol Anderson",
+          "email": "carol.anderson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Modern Language 219",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,56 +72,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "4503",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Roeser/Wyttenbach",
-      "instructors": [
-        {
-          "name": "Roeser/Wyttenbach",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Roeser/Wyttenbach"
+    "Carol Anderson"
   ],
-  "scraped_at": "2026-06-17T23:04:14.001Z"
+  "scraped_at": "2026-06-18T02:32:04.588Z"
 }

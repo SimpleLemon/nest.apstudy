@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "HA",
   "requirements": [
-    "HA"
+    "HA",
+    "Humanities and Arts(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "General history of the world theater and its literature from its origins to the seventeenth century CE through a selection of representative dramatic works. Focuses on historical forces and the influence of actor, staging, and audience",
-  "course_notes": null,
+  "course_notes": "(Same as THEA 215 1)",
   "requisites": null,
   "cross_listed": "THEA 215",
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "1248",
       "crn": "3997",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Evenden",
+      "instructor": "Michael Evenden",
       "instructors": [
         {
-          "name": "M. Evenden",
-          "email": null
+          "name": "Michael Evenden",
+          "email": "mevende@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Rich Building 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 4,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MWF 11:30a-12:20p",
@@ -59,61 +77,25 @@
             "end": "1220"
           }
         ]
-      }
-    },
-    {
-      "crn": "3997",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Evenden",
-      "instructors": [
-        {
-          "name": "M. Evenden",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MWF 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1220"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1220"
-          },
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Evenden"
+    "Michael Evenden"
   ],
-  "scraped_at": "2026-06-17T23:10:23.249Z"
+  "scraped_at": "2026-06-18T02:55:51.549Z"
 }

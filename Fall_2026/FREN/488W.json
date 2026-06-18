@@ -5,15 +5,16 @@
   "catalog_number": "488W",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 5",
+  "credit_hours": "4",
   "requirement_designation": "ICW",
   "requirements": [
-    "ICW"
+    "ICW",
+    "Intercultural Communication w.Cont.Comm(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Courses will include the study of a variety of subjects in French and/or francophone literature and culture. May be repeated for credit.",
-  "course_notes": "FREN 310, FREN 314 and two 300 level FREN courses, or equivalent transfer credit as prerequisite.",
+  "course_notes": "FREN 488 La \"belle époque\"Prof. C. Nouvet / MW 2:30-3:45pm Content: We will explore various facets of the \"belle époque,\" a term coined to designate the period from 1871 (end of the Franco-Prussian war) to 1914 (beginning of WWI). Marked by socio-cultural changes, technological and artistic innovations, this period seemed retrospectively, after WWI, to have been \"beautiful,\" lively, exuberant even. We will focus on the various conceptions of \"modernity\" that it developed in multiple media: literature, dance (Les ballets russes, Nijinsky, Loie Fuller), painting (Impressionism, Cubism) and music (Debussy, Ravel). We will analyze the emergence of a new and, at the time provocative, feminine voice in the writings of Colette. We will also address the question of sexuality as it is explored in the medical community's interest for female \"hysteria\" (Charcot) as well as in the marginal culture of the cabaret and of its dancers whose performances were often deemed \"hysterical.\" Special attention will be paid to the painter Toulouse-Lautrec who advertised in his posters (which he turned into an art form) the culture of the cabarets. Texts may include o Colette: Les vrilles de la vigne o Cendrars: La prose du transsibérien o Apollinaire: Alcools [selections]; Calligrammes [selections] o Mallarmé: \"Autre étude de danse: Les fonds dans le ballet\"o Nijinsk y: Diary [selections] o Loie Fuller: Fifteen years of a dancer's life [selections] Serpentine dance [movie]",
   "requisites": "FREN 310, FREN 314 and two 300 level FREN courses, or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "638",
       "crn": "1925",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "C. Nouvet",
+      "instructor": "Claire Nouvet",
       "instructors": [
         {
-          "name": "C. Nouvet",
-          "email": null
+          "name": "Claire Nouvet",
+          "email": "cnouvet@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway N118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -54,56 +72,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "1925",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "C. Nouvet",
-      "instructors": [
-        {
-          "name": "C. Nouvet",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Nouvet"
+    "Claire Nouvet"
   ],
-  "scraped_at": "2026-06-17T23:10:42.830Z"
+  "scraped_at": "2026-06-18T02:58:43.329Z"
 }

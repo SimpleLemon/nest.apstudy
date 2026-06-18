@@ -5,38 +5,57 @@
   "catalog_number": "586",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "1",
+  "requirement_designation": "Physical Education(*)",
+  "requirements": [
+    "Physical Education(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This class is designed for students with little or no climbing experience and moderate fitness. Students will learn to climb, belay, and rappel safely in the gym. The cross-training portion encompasses a variety of cardio, strength, and flexibility group exercise sessions.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "2693",
       "crn": "3038",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "P. Chehal",
+      "instructor": "Wil Donohue",
       "instructors": [
         {
-          "name": "P. Chehal",
-          "email": null
+          "name": "Wil Donohue",
+          "email": "wil.donohue@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff PE Center- Atrium",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9-11:50a",
@@ -47,51 +66,25 @@
             "end": "1150"
           }
         ]
-      }
-    },
-    {
-      "crn": "3038",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "P. Chehal",
-      "instructors": [
-        {
-          "name": "P. Chehal",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 9-11:50a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "900",
-            "end": "1150"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "P. Chehal"
+    "Wil Donohue"
   ],
-  "scraped_at": "2026-06-17T23:03:12.097Z"
+  "scraped_at": "2026-06-18T02:25:48.094Z"
 }

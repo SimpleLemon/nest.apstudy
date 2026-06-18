@@ -5,13 +5,13 @@
   "catalog_number": "572MN",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "1",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course builds upon the foundation for the clinical judgment process applied in all nursing courses. Students will focus on analyzing clinical problems, demonstrating prioritization, and evaluation of care based on clinical judgment for individuals in ambulatory care settings.",
+  "course_notes": "This section is for MN+MSN pathway semester 2 students only. Clinical may be scheduled any day not in lecture, including weekends for 12 hours; onsite simulation may be scheduled any day not in lecture except Sundays.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,114 +20,100 @@
   },
   "sections": [
     {
+      "atlas_key": "4261",
       "crn": "4657",
       "section_number": "401",
       "schedule_type": "CLN",
-      "instructor": "S. Spence",
+      "instructor": "Sandra Spence",
       "instructors": [
         {
-          "name": "S. Spence",
-          "email": null
+          "name": "Sandra Spence",
+          "email": "sjspenc@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 80,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-10-14"
       }
     },
     {
+      "atlas_key": "4262",
       "crn": "4658",
       "section_number": "402",
       "schedule_type": "CLN",
-      "instructor": "S. Spence",
+      "instructor": "Sandra Spence",
       "instructors": [
         {
-          "name": "S. Spence",
-          "email": null
+          "name": "Sandra Spence",
+          "email": "sjspenc@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 80,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "4657",
-      "section_number": "401",
-      "schedule_type": "CLN",
-      "instructor": "S. Spence",
-      "instructors": [
-        {
-          "name": "S. Spence",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "4658",
-      "section_number": "402",
-      "schedule_type": "CLN",
-      "instructor": "S. Spence",
-      "instructors": [
-        {
-          "name": "S. Spence",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-10-19",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 4,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Spence"
+    "Sandra Spence"
   ],
-  "scraped_at": "2026-06-17T23:12:26.884Z"
+  "scraped_at": "2026-06-18T03:09:48.900Z"
 }

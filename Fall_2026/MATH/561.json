@@ -5,13 +5,13 @@
   "catalog_number": "561",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Main topics: Eigenvalues and eigenvectors of matrices, invariant subspaces, Schur triangular form, diagonalizable matrices, minimal polynomial, characteristic polynomial, Hamilton-Cayley Theorem, localization of eigenvalues, Gerschgorin's Theorem. Unitary, Hermitian and skew-Hermitian matrices. Normal matrices and the Spectral Theorem. Orthogonalization. Householder matrices and the QR factorization. Moore-Penrose pseudoinverse. Applications to the solution of under- and over-determined systems of linear equations. Other generalized inverses. Applications to data fitting (least-squares approximation). The Singular Value Decomposition. Matrix norms: spectral norm and Frobenius norm. Solution to matrix nearness problems. Applications to signal processing and information retrieval. Jordan canonical form. An algorithmic proof. Powers of matrices. Matrix functions. Applications to systems of differential equations. Bilinear and quadratic forms. Hermitian forms. Congruence. Sylvester's Law of Inertia. Rayleigh's principle. Courant-Fischer Theorem. Positive definite and semidefinite matrices. Applications to statistics (covariance matrices) and numerical analysis (PDE's). Additional topics: Nonnegative matrices. The spectral radius. Positive matrices. Directed graphs. Nonnegative irreducible matrices. Perron-Frobenius Theorem. M-matrices. Applications to probability theory (Markov chains), economics (Leontiev's input-output model), and numerical analysis (iterative methods for linear systems). Structured matrices: circulant, Toeplitz, Hankel, Cauchy, Vandermonde, others. Block generalizations. Applications in signal processing, image processing, and numerical analysis (PDE's, interpolation).",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,38 @@
   },
   "sections": [
     {
+      "atlas_key": "2099",
       "crn": "4493",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Chung",
+      "instructor": "Julianne Chung",
       "instructors": [
         {
-          "name": "J. Chung",
-          "email": null
+          "name": "Julianne Chung",
+          "email": "julianne.mei-lynn.chung@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - E408",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -52,56 +67,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "4493",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Chung",
-      "instructors": [
-        {
-          "name": "J. Chung",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Chung"
+    "Julianne Chung"
   ],
-  "scraped_at": "2026-06-17T23:11:57.563Z"
+  "scraped_at": "2026-06-18T03:05:52.818Z"
 }

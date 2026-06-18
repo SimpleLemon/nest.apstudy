@@ -5,40 +5,53 @@
   "catalog_number": "102",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "IC",
   "requirements": [
     "IC"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course is designed for those who have taken KRN 101 or have some knowledge of Korean. Basic communication skills, vocabulary,and grammar patterns will be covered.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-10",
+    "end": "2026-12-11"
   },
   "sections": [
     {
+      "atlas_key": "2913",
       "crn": "2867",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Huh",
+      "instructor": "Lauren Lichten",
       "instructors": [
         {
-          "name": "S. Huh",
-          "email": null
+          "name": "Lauren Lichten",
+          "email": "lauren.lichten@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 20,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,26 +67,43 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-12-11"
       }
     },
     {
+      "atlas_key": "2914",
       "crn": "2868",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "Huh/Sohn",
+      "instructor": "Kara Suvada",
       "instructors": [
         {
-          "name": "Huh/Sohn",
-          "email": null
+          "name": "Kara Suvada",
+          "email": "kara.suvada@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 20,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -89,26 +119,43 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-12-11"
       }
     },
     {
+      "atlas_key": "2915",
       "crn": "2869",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "Huh/Sohn",
+      "instructor": "Stacy M Higgins",
       "instructors": [
         {
-          "name": "Huh/Sohn",
-          "email": null
+          "name": "Stacy M Higgins",
+          "email": "smhiggi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 999,
+      "seats_available": 992,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -124,26 +171,43 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2916",
       "crn": "2873",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "J. Sohn",
+      "instructor": "Stacy M Higgins",
       "instructors": [
         {
-          "name": "J. Sohn",
-          "email": null
+          "name": "Stacy M Higgins",
+          "email": "smhiggi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -159,26 +223,43 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2917",
       "crn": "2874",
       "section_number": "5",
       "schedule_type": "LEC",
-      "instructor": "E. Jo",
+      "instructor": "Stacy M Higgins",
       "instructors": [
         {
-          "name": "E. Jo",
-          "email": null
+          "name": "Stacy M Higgins",
+          "email": "smhiggi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 999,
+      "seats_available": 849,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a; F 8:30-9:20a",
@@ -199,26 +280,43 @@
             "end": "920"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2918",
       "crn": "2876",
       "section_number": "6",
       "schedule_type": "LEC",
-      "instructor": "H. Jin",
+      "instructor": "Stacy M Higgins",
       "instructors": [
         {
-          "name": "H. Jin",
-          "email": null
+          "name": "Stacy M Higgins",
+          "email": "smhiggi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p; F 11:30a-12:20p",
@@ -239,26 +337,68 @@
             "end": "1220"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2919",
       "crn": "2890",
       "section_number": "7",
       "schedule_type": "LEC",
-      "instructor": "H. Jin",
+      "instructor": "Vince Carter",
       "instructors": [
         {
-          "name": "H. Jin",
-          "email": null
+          "name": "Vince Carter",
+          "email": "vcarter@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Beth Davis",
+          "email": "bethpdavis@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "George Fulk",
+          "email": "george.david.fulk@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kathleen Geist",
+          "email": "kgeist@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Anjanette Nunez",
+          "email": "anjanette.nunez@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Jocelyn Monique Smith",
+          "email": "jocelyn.mayes@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 100,
+      "seats_available": 100,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p; F 2:30-3:20p",
@@ -279,26 +419,45 @@
             "end": "1520"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-12-11"
       }
     },
     {
+      "atlas_key": "2920",
       "crn": "2891",
       "section_number": "8",
       "schedule_type": "LEC",
-      "instructor": "J. Hong",
+      "instructor": "Hubert Tworzecki",
       "instructors": [
         {
-          "name": "J. Hong",
-          "email": null
+          "name": "Hubert Tworzecki",
+          "email": "htworze@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 85,
+      "seats_available": 85,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a; F 10-10:50a",
@@ -319,326 +478,34 @@
             "end": "1050"
           }
         ]
-      }
-    },
-    {
-      "crn": "2867",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Huh",
-      "instructors": [
-        {
-          "name": "S. Huh",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2868",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "Huh/Sohn",
-      "instructors": [
-        {
-          "name": "Huh/Sohn",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2869",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "Huh/Sohn",
-      "instructors": [
-        {
-          "name": "Huh/Sohn",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2873",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "J. Sohn",
-      "instructors": [
-        {
-          "name": "J. Sohn",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2874",
-      "section_number": "5",
-      "schedule_type": "LEC",
-      "instructor": "E. Jo",
-      "instructors": [
-        {
-          "name": "E. Jo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a; F 8:30-9:20a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Fri",
-            "start": "830",
-            "end": "920"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2876",
-      "section_number": "6",
-      "schedule_type": "LEC",
-      "instructor": "H. Jin",
-      "instructors": [
-        {
-          "name": "H. Jin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p; F 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2890",
-      "section_number": "7",
-      "schedule_type": "LEC",
-      "instructor": "H. Jin",
-      "instructors": [
-        {
-          "name": "H. Jin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p; F 2:30-3:20p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Fri",
-            "start": "1430",
-            "end": "1520"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2891",
-      "section_number": "8",
-      "schedule_type": "LEC",
-      "instructor": "J. Hong",
-      "instructors": [
-        {
-          "name": "J. Hong",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a; F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 16,
-    "lectures": 16,
+    "total_sections": 8,
+    "lectures": 8,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
-    "closed": 10,
+    "open": 8,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Jo",
-    "H. Jin",
-    "Huh/Sohn",
-    "J. Hong",
-    "J. Sohn",
-    "S. Huh"
+    "Anjanette Nunez",
+    "Beth Davis",
+    "George Fulk",
+    "Hubert Tworzecki",
+    "Jocelyn Monique Smith",
+    "Kara Suvada",
+    "Kathleen Geist",
+    "Lauren Lichten",
+    "Stacy M Higgins",
+    "Vince Carter"
   ],
-  "scraped_at": "2026-06-17T23:03:41.307Z"
+  "scraped_at": "2026-06-18T02:28:07.314Z"
 }

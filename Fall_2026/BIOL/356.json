@@ -5,13 +5,13 @@
   "catalog_number": "356",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course uses mathematical models to describe and study how evolutionary forces like selection, drift, mutation, and gene flow shape populations' genotypic and phenotypic diversity.",
+  "course_notes": "(Same as DATASCI 356 1)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,38 @@
   },
   "sections": [
     {
+      "atlas_key": "445",
       "crn": "3989",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Arbilly",
+      "instructor": "Michal Arbilly",
       "instructors": [
         {
-          "name": "M. Arbilly",
-          "email": null
+          "name": "Michal Arbilly",
+          "email": "michal.arbilly@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W307C",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -52,56 +67,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3989",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Arbilly",
-      "instructors": [
-        {
-          "name": "M. Arbilly",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Arbilly"
+    "Michal Arbilly"
   ],
-  "scraped_at": "2026-06-17T23:09:24.579Z"
+  "scraped_at": "2026-06-18T02:48:31.758Z"
 }

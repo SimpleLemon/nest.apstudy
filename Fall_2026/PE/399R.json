@@ -8,12 +8,13 @@
   "credit_hours": "1",
   "requirement_designation": "PE",
   "requirements": [
-    "PE"
+    "PE",
+    "Physical Education(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
   "course_description": "This course is designed for students who are currently registered with the Office of Disability Services. Options for physical education credit may include: attending physical therapy as prescribed by the student's physician, modified physical activity, attending PPF lectures, and labs and quizzes.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,66 +23,63 @@
   },
   "sections": [
     {
+      "atlas_key": "961",
       "crn": "2928",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "C. Jones",
+      "instructor": "Corey Jones",
       "instructors": [
         {
-          "name": "C. Jones",
-          "email": null
+          "name": "Corey Jones",
+          "email": "corey.ellis.jones@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "2928",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "C. Jones",
-      "instructors": [
-        {
-          "name": "C. Jones",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Jones"
+    "Corey Jones"
   ],
-  "scraped_at": "2026-06-17T23:14:01.034Z"
+  "scraped_at": "2026-06-18T03:12:33.749Z"
 }

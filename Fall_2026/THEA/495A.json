@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "XA",
   "requirements": [
-    "XA"
+    "XA",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course captures candidates for Honors in Theater Studies's completion of independent honors research.",
-  "course_notes": null,
+  "course_notes": "Email instructor & CC Theater Studies Program Coordinator, Ashley Alves (ashley.alves@emory.edu) for permission",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,66 +23,63 @@
   },
   "sections": [
     {
+      "atlas_key": "3041",
       "crn": "2614",
       "section_number": "1",
       "schedule_type": "RSC",
-      "instructor": "M. Evenden",
+      "instructor": "Michael Evenden",
       "instructors": [
         {
-          "name": "M. Evenden",
-          "email": null
+          "name": "Michael Evenden",
+          "email": "mevende@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "2614",
-      "section_number": "1",
-      "schedule_type": "RSC",
-      "instructor": "M. Evenden",
-      "instructors": [
-        {
-          "name": "M. Evenden",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Evenden"
+    "Michael Evenden"
   ],
-  "scraped_at": "2026-06-17T23:14:59.598Z"
+  "scraped_at": "2026-06-18T03:19:16.939Z"
 }

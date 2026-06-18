@@ -5,21 +5,24 @@
   "catalog_number": "797R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The first half of a yearlong introductory course designed to train students to understand, speak, read, and write Portuguese.",
+  "course_notes": "This course helps students develop a basic ability to communicate in Portuguese. Class time is dedicated to interactive activities that allow students to acquire skills in speaking, listening, reading and writing. Through music, videos, and readings of authentic materials, students are also introduced to many aspects of Brazilian culture as well as that of other countries where Portuguese is spoken. Class meets three times per week and is conducted in Portuguese to maximize exposure to the language. Students who are Spanish speakers or/and have placed above Span 212 in the Spanish Placement Test are not allowed to take Port 101. They should register for Port 110. PARTICULARS: Evaluation is based on daily and active participation, homework, quizzes, writing activities, exams, final presentation, and Portuguese program activities.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "2009",
       "crn": "1796",
       "section_number": "1",
       "schedule_type": "SUP",
@@ -27,47 +30,89 @@
       "instructors": [
         {
           "name": "P. Brennan",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Few Bldg 129",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "10",
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2010",
       "crn": "1798",
       "section_number": "2",
       "schedule_type": "SUP",
-      "instructor": "A. Cohen",
+      "instructor": "Marilia Ribeiro",
       "instructors": [
         {
-          "name": "A. Cohen",
-          "email": null
+          "name": "Marilia Ribeiro",
+          "email": "marilia.ribeiro@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway C203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2011",
       "crn": "1800",
       "section_number": "3",
       "schedule_type": "SUP",
@@ -75,452 +120,356 @@
       "instructors": [
         {
           "name": "R. Hampton",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2012",
       "crn": "1885",
       "section_number": "4",
       "schedule_type": "SUP",
-      "instructor": "A. Kelly",
+      "instructor": "Ana Catarina Teixeira",
       "instructors": [
         {
-          "name": "A. Kelly",
-          "email": null
+          "name": "Ana Catarina Teixeira",
+          "email": "ana.teixeira@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 18,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2013",
       "crn": "1802",
       "section_number": "5",
       "schedule_type": "SUP",
-      "instructor": "P. Kragel",
+      "instructor": "Ana Catarina Teixeira",
       "instructors": [
         {
-          "name": "P. Kragel",
-          "email": null
+          "name": "Ana Catarina Teixeira",
+          "email": "ana.teixeira@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 18,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2014",
       "crn": "1886",
       "section_number": "6",
       "schedule_type": "SUP",
-      "instructor": "S. Lourenco",
+      "instructor": "Kim Timpone",
       "instructors": [
         {
-          "name": "S. Lourenco",
-          "email": null
+          "name": "Kim Timpone",
+          "email": "kimberly.timpone@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Closed",
       "enrollment_count": "10",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2015",
       "crn": "1804",
       "section_number": "7",
       "schedule_type": "SUP",
-      "instructor": "P. Palmer",
+      "instructor": "Jessica Hike",
       "instructors": [
         {
-          "name": "P. Palmer",
-          "email": null
+          "name": "Jessica Hike",
+          "email": "jessica.hike@emoryhealthcare.org",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2016",
       "crn": "1887",
       "section_number": "8",
       "schedule_type": "SUP",
-      "instructor": "J. Medina",
+      "instructor": "George Easton",
       "instructors": [
         {
-          "name": "J. Medina",
-          "email": null
+          "name": "George Easton",
+          "email": "geaston@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 33,
+      "seats_available": 33,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2017",
       "crn": "5824",
       "section_number": "9",
       "schedule_type": "SUP",
-      "instructor": "D. Dilks",
+      "instructor": "George Easton",
       "instructors": [
         {
-          "name": "D. Dilks",
-          "email": null
+          "name": "George Easton",
+          "email": "geaston@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 33,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2018",
       "crn": "5823",
       "section_number": "10",
       "schedule_type": "SUP",
-      "instructor": "M. Treadway",
+      "instructor": "George Easton",
       "instructors": [
         {
-          "name": "M. Treadway",
-          "email": null
+          "name": "George Easton",
+          "email": "geaston@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 23,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "1796",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "P. Brennan",
-      "instructors": [
-        {
-          "name": "P. Brennan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1798",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "A. Cohen",
-      "instructors": [
-        {
-          "name": "A. Cohen",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1800",
-      "section_number": "3",
-      "schedule_type": "SUP",
-      "instructor": "R. Hampton",
-      "instructors": [
-        {
-          "name": "R. Hampton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1885",
-      "section_number": "4",
-      "schedule_type": "SUP",
-      "instructor": "A. Kelly",
-      "instructors": [
-        {
-          "name": "A. Kelly",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1802",
-      "section_number": "5",
-      "schedule_type": "SUP",
-      "instructor": "P. Kragel",
-      "instructors": [
-        {
-          "name": "P. Kragel",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1886",
-      "section_number": "6",
-      "schedule_type": "SUP",
-      "instructor": "S. Lourenco",
-      "instructors": [
-        {
-          "name": "S. Lourenco",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1804",
-      "section_number": "7",
-      "schedule_type": "SUP",
-      "instructor": "P. Palmer",
-      "instructors": [
-        {
-          "name": "P. Palmer",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1887",
-      "section_number": "8",
-      "schedule_type": "SUP",
-      "instructor": "J. Medina",
-      "instructors": [
-        {
-          "name": "J. Medina",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5824",
-      "section_number": "9",
-      "schedule_type": "SUP",
-      "instructor": "D. Dilks",
-      "instructors": [
-        {
-          "name": "D. Dilks",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5823",
-      "section_number": "10",
-      "schedule_type": "SUP",
-      "instructor": "M. Treadway",
-      "instructors": [
-        {
-          "name": "M. Treadway",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 20,
+    "total_sections": 10,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 20,
-    "open": 20,
-    "closed": 0,
+    "other": 10,
+    "open": 8,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Cohen",
-    "A. Kelly",
-    "D. Dilks",
-    "J. Medina",
-    "M. Treadway",
+    "Ana Catarina Teixeira",
+    "George Easton",
+    "Jessica Hike",
+    "Kim Timpone",
+    "Marilia Ribeiro",
     "P. Brennan",
-    "P. Kragel",
-    "P. Palmer",
-    "R. Hampton",
-    "S. Lourenco"
+    "R. Hampton"
   ],
-  "scraped_at": "2026-06-17T23:06:24.226Z"
+  "scraped_at": "2026-06-18T02:42:27.318Z"
 }

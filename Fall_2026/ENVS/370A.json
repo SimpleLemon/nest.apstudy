@@ -10,10 +10,10 @@
   "requirements": [
     "HSC"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Open only to undergraduate students by permission of the instructor. Additionally, this course is required for all students seeking to apply for the fellowship in Community Building and Social Change.",
-  "course_notes": null,
+  "course_notes": "(Same as POLS 370A 1, SOC 370A 1, CBSC 370A 1)",
   "requisites": null,
   "cross_listed": "POLS 370A CBSC 370A SOC 370A",
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "1089",
       "crn": "4036",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Rich",
+      "instructor": "Michael Rich",
       "instructors": [
         {
-          "name": "M. Rich",
-          "email": null
+          "name": "Michael Rich",
+          "email": "mrich@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - N304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,56 +69,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "4036",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Rich",
-      "instructors": [
-        {
-          "name": "M. Rich",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Rich"
+    "Michael Rich"
   ],
-  "scraped_at": "2026-06-17T23:10:29.845Z"
+  "scraped_at": "2026-06-18T02:57:02.095Z"
 }

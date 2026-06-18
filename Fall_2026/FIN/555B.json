@@ -5,81 +5,74 @@
   "catalog_number": "555B",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "0",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "In this course, students will use excel, R, R Studio, and other technology to identify the statistical elements of data. Students will learn how to load data and perform summary statistics and general statistical analysis on the data. Student will learn the coding for mean, median, modes, and variance and will learn how to create frequency distributions, density plots, correlation coefficients, and other commonly used statistical measures.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-08-17",
+    "start": "2026-08-10",
     "end": "2026-08-25"
   },
   "sections": [
     {
+      "atlas_key": "4172",
       "crn": "3837",
       "section_number": "4201",
       "schedule_type": "LEC",
-      "instructor": "T. Smith",
+      "instructor": "Tom Smith",
       "instructors": [
         {
-          "name": "T. Smith",
-          "email": null
+          "name": "Tom Smith",
+          "email": "tom.smith@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3837",
-      "section_number": "4201",
-      "schedule_type": "LEC",
-      "instructor": "T. Smith",
-      "instructors": [
-        {
-          "name": "T. Smith",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-25"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "T. Smith"
+    "Tom Smith"
   ],
-  "scraped_at": "2026-06-17T23:10:39.539Z"
+  "scraped_at": "2026-06-18T02:58:24.250Z"
 }

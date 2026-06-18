@@ -5,40 +5,59 @@
   "catalog_number": "190",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "FS",
   "requirements": [
-    "FS"
+    "FS",
+    "Continuing Communication and Writing(*)",
+    "Race and Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Study and analysis of the thought of one major philosopher or the study of a special problem or set of related problems in philosophy.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Analysis of methods and/or texts pertaining to ethical decision-making for individual and social problems such as race, sex/marriage, justice, war, biomedical technology, and environmental pollution. May be repeated for credit when topic varies.",
+  "course_notes": "(Same as PHIL 385W 1) This course satisfies the Religion major requirement: - Tradition-Buddhism, Theme. This continuing communication and writing (CW) seminar takes a broadly philosophical approach to the study of Buddhist understandings of goodness and how it can be recognized and cultivated. Materials for the course will range from Buddhist scriptures, to philosophical treatises, to narratives, to meditation manuals. The intention of the course is to engage seriously with Buddhist understandings of the human condition as infused with suffering, and how humans can nevertheless develop goodness and resilience within this unstable world. A primary focus will be on Buddhist ethical theories of right speech, with a major goal being to facilitate students capacities for skillful oral and written communication across a variety of genres. Focus will also be placed on increasing facilities for close reading and deep listening skills necessary for an ethical life according to Buddhist thought. Topics include the proper objects of loving-kindness and compassion, the moral consequences of truths and falsehoods, and the role of contemplative practices in cultivating ethical behavior. Assignments will emphasize engagement with the course materials.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1170",
       "crn": "1993",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "A. Hasan-Birdwell",
+      "instructor": "Sara L McClintock",
       "instructors": [
         {
-          "name": "A. Hasan-Birdwell",
-          "email": null
+          "name": "Sara L McClintock",
+          "email": "slmccli@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Callaway S101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,26 +73,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1171",
       "crn": "1715",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "D. Huseyinzadegan",
+      "instructor": "Roger Nam",
       "instructors": [
         {
-          "name": "D. Huseyinzadegan",
-          "email": null
+          "name": "Roger Nam",
+          "email": "rnam@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Woodruff Library 874",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "2",
+      "enrollment_capacity": 5,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -89,26 +129,45 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1172",
       "crn": "4523",
       "section_number": "3",
       "schedule_type": "SEM",
-      "instructor": "J. Hoesterey",
+      "instructor": "Devaka Premawardhana",
       "instructors": [
         {
-          "name": "J. Hoesterey",
-          "email": null
+          "name": "Devaka Premawardhana",
+          "email": "devaka.premawardhana@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S107",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -124,128 +183,27 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "1993",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "A. Hasan-Birdwell",
-      "instructors": [
-        {
-          "name": "A. Hasan-Birdwell",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1715",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "D. Huseyinzadegan",
-      "instructors": [
-        {
-          "name": "D. Huseyinzadegan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4523",
-      "section_number": "3",
-      "schedule_type": "SEM",
-      "instructor": "J. Hoesterey",
-      "instructors": [
-        {
-          "name": "J. Hoesterey",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
+    "total_sections": 3,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 6,
-    "open": 2,
-    "closed": 2,
-    "waitlisted": 2
+    "other": 3,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Hasan-Birdwell",
-    "D. Huseyinzadegan",
-    "J. Hoesterey"
+    "Devaka Premawardhana",
+    "Roger Nam",
+    "Sara L McClintock"
   ],
-  "scraped_at": "2026-06-17T23:06:07.917Z"
+  "scraped_at": "2026-06-18T02:38:17.517Z"
 }

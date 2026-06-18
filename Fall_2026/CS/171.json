@@ -8,10 +8,11 @@
   "credit_hours": "3",
   "requirement_designation": "QR",
   "requirements": [
-    "QR"
+    "QR",
+    "Quantitative Reasoning(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "A second course in Computer Science, focusing on intermediate programming. Emphasis is on proficiency in the use and implementation of data structures, algorithms for classical programming paradigms, and object oriented design and programming with Java.",
   "course_notes": "This course requires MUS 221 or equivalent transfer credit as a prerequisite.",
   "requisites": "This course requires MUS 221 or equivalent transfer credit as a prerequisite.",
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "2118",
       "crn": "3211",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "N. El-Sayed",
+      "instructor": "Nosayba El-Sayed",
       "instructors": [
         {
-          "name": "N. El-Sayed",
-          "email": null
+          "name": "Nosayba El-Sayed",
+          "email": "nosayba.ae@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Math & Science Center - N302",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 30,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,26 +72,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2119",
       "crn": "3054",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "E. Wall",
+      "instructor": "Emily Wall",
       "instructors": [
         {
-          "name": "E. Wall",
-          "email": null
+          "name": "Emily Wall",
+          "email": "emily.wall@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Math & Science Center - W301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 30,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -89,92 +128,26 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "3211",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "N. El-Sayed",
-      "instructors": [
-        {
-          "name": "N. El-Sayed",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3054",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "E. Wall",
-      "instructors": [
-        {
-          "name": "E. Wall",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Wall",
-    "N. El-Sayed"
+    "Emily Wall",
+    "Nosayba El-Sayed"
   ],
-  "scraped_at": "2026-06-17T23:09:57.086Z"
+  "scraped_at": "2026-06-18T02:52:25.446Z"
 }

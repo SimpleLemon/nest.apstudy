@@ -5,107 +5,120 @@
   "catalog_number": "299R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A course on topics of special biological interest, designed for Biology majors elective credit. This course is repeatable when the topic varies.",
+  "course_notes": "(Same as CS 485 5) PLEASE READ THE INFORMATION FOR THIS COURSE before contacting Dr. Bromberg (yana.bromberg@emory.edu) for permission. Prereqs: Biol 142 + 142L and Biol 264. This course is also taught as CS 485 and CS 584 (but is not cross listed). This class has a large coding in Python component. You will NOT do well without knowing the basics of coding in Python. To test your readiness, take a look at the list of problems at the following URL: https://rosalind.info/problems/list-view/. If you are able to answer these without significant ChatGPT help, your request to register should contain the following sentence: I have tested myself with Rosalind.info problems and have sufficient Python coding abilities to address them. High school biology and experience in medical or clinical settings are not sufficient for this class. The simplest question to test your bio knowledge is: Without using the internet, do you know how evolution is related to vertical descent? If yes, your request to register should have an answer to this question. If registering for the graduate version of the class (CS 584), please be aware that there is an expectation of a journal club participation--once a week, for an hour. The timing will be scheduled once classes start. However, you should expect to have the journal club on Tuesdays at 3 p.m. If you are requesting registration for the graduate version of this course, your email should also include the acknowledgement of the journal club requirement.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3072",
       "crn": "6816",
       "section_number": "9000",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "instructor": "Yana Bromberg",
+      "instructors": [
+        {
+          "name": "Yana Bromberg",
+          "email": "yana.bromberg@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "1462 Clifton Rd 126",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 15,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3073",
       "crn": "6834",
       "section_number": "9001",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "instructor": "Dennis C Liotta",
+      "instructors": [
+        {
+          "name": "Dennis C Liotta",
+          "email": "dliotta@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 316",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 35,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6816",
-      "section_number": "9000",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6834",
-      "section_number": "9001",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 4,
+    "open": 2,
+    "closed": 0,
     "waitlisted": 0
   },
-  "instructors_unique": [],
-  "scraped_at": "2026-06-17T23:01:34.260Z"
+  "instructors_unique": [
+    "Dennis C Liotta",
+    "Yana Bromberg"
+  ],
+  "scraped_at": "2026-06-18T02:12:20.915Z"
 }

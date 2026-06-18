@@ -5,40 +5,53 @@
   "catalog_number": "371",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "HSC",
   "requirements": [
     "HSC"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course will focus on a specific period or dimension of Jewish history with an emphasis on the use of documents and other primary sources. Topics will vary.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course examines the development of American Methodism, from its origins during the life of John Wesley as an 18th century movement to its growth in the U.S. as multiple denominations. Attention is also given to the expansion of the Methodist Episcopal Church and Methodist Episcopal Church, South beyond the U.S. in the second half of the 19th century. Building on Wesley's thought, it addresses developments and modifications by his 19th and 20th century theological heirs and successors, especially in North America; and on contemporary discussions of doctrine and theology in the UMC.",
+  "course_notes": "(Same as DS 501 2) (ON CAMPUS)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3747",
       "crn": "4445",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Geordan Hammond",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Geordan Hammond",
+          "email": "g.hammond@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rita Anne Rollins Building_401",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 9,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,26 +67,43 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3748",
       "crn": "4633",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "R. DeBoard",
+      "instructor": "Geordan Hammond",
       "instructors": [
         {
-          "name": "R. DeBoard",
-          "email": null
+          "name": "Geordan Hammond",
+          "email": "g.hammond@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -89,92 +119,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "4445",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4633",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "R. DeBoard",
-      "instructors": [
-        {
-          "name": "R. DeBoard",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 0,
+    "open": 1,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. DeBoard",
-    "Team"
+    "Geordan Hammond"
   ],
-  "scraped_at": "2026-06-17T23:03:38.019Z"
+  "scraped_at": "2026-06-18T02:27:53.378Z"
 }

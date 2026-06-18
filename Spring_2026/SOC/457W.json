@@ -5,40 +5,53 @@
   "catalog_number": "457W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "2",
   "requirement_designation": "CW",
   "requirements": [
     "CW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Prerequisite: one sociology course or consent of instructor. Analysis of development of sociological theory as tradition of inquiry into organization and change of groups and societies. Covers classical and major contemporary contributions.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Provides an introduction to concepts in data management and analysis using SAS statistical software on personal computers. Topics covered include importing data, in-stream data entry, variable manipulation, subsetting, concatenating and merging data sets. The course is coordinated with MSCR 500 , and SAS procedures used to implement the statistical methods from that course are also presented. After completing the course, students are expected to be able to independently manage small or moderately large data sets and to analyze the data using SAS.",
   "course_notes": "Any SOC or SOC_OX or equivalent transfer credit as prerequisite.",
   "requisites": "Any SOC or SOC_OX or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1402",
       "crn": "4329",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "B. Xu",
+      "instructor": "Azhar Nizam",
       "instructors": [
         {
-          "name": "B. Xu",
-          "email": null
+          "name": "Azhar Nizam",
+          "email": "anizam@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 29,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -54,56 +67,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "4329",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "B. Xu",
-      "instructors": [
-        {
-          "name": "B. Xu",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "B. Xu"
+    "Azhar Nizam"
   ],
-  "scraped_at": "2026-06-17T23:06:47.073Z"
+  "scraped_at": "2026-06-18T02:44:07.421Z"
 }

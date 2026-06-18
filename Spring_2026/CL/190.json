@@ -5,40 +5,58 @@
   "catalog_number": "190",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "FS",
   "requirements": [
-    "FS"
+    "FS",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Limited to freshmen. Topic changes to reflect changing interests of faculty and students.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Every year. Intermediate level workshop in writing plays.",
+  "course_notes": "(Same as THEA 372RW 1) (Permission Required Prior to Enrollment) Application required. If accepted, YOU MUST ATTEND THE FIRST CLASS session to remain enrolled. Class description and application form are available on the Creative Writing Program website: https://creativewriting.emory.edu/academics/applications.html Please email nora.lewis@emory.edu if you have any questions. In Intermediate Playwriting, we will be learning various elements of the craft, voyaging over a century worth of American playwrights to learn different tools and techniques, but more importantly for you to access what excites you and what themes you'd like your work to be in conversation with. In breaking down literary texts and exploring theatrical history, I often pose the central questions: What makes a play a play? What is theatricality? By investigating the foundations of story and identifying the elements that make a text theatrical, students develop a deeper understanding of both the craft and the medium. We will do this over a series of multiple exercises, and you will write a one-act play.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "604",
       "crn": "2915",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "D. van Schoor",
+      "instructor": "Phanesia Pharel",
       "instructors": [
         {
-          "name": "D. van Schoor",
-          "email": null
+          "name": "Phanesia Pharel",
+          "email": "phanesia.pharel@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Rich Building 207",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2915",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "D. van Schoor",
-      "instructors": [
-        {
-          "name": "D. van Schoor",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 0,
-    "closed": 2,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. van Schoor"
+    "Phanesia Pharel"
   ],
-  "scraped_at": "2026-06-17T23:01:44.125Z"
+  "scraped_at": "2026-06-18T02:13:32.881Z"
 }

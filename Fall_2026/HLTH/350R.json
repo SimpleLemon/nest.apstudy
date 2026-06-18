@@ -10,10 +10,10 @@
   "requirements": [
     "HSC"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course emphasizes core issues in global health, explores the identification of global health priorities, the nature of global health organizations and the challenges to finding and implementing solutions. The focus changes with the instructor",
-  "course_notes": "HLTH 250 or HLTH_OX 250 or ANT 205 or ANTH_OX 205 or SOC 250 or equivalent transfer credit as prerequisite.",
+  "course_notes": "This course will provide an overview of climate change science and the public health impacts, with an emphasis on the cultural and social dimension of impacts, vulnerability and adaptation. We will begin with a review of the evidence on climate change and variability and explore a number of topics related to climate change of interest to the anthropological and global health community, such as: Disparate Impacts: The Global North vs the Global South; Food security: Climate change impacts on food quality and quantity; Climate change and biodiversity loss; Environmental Justice as a policy frame; Arctic and Circumpolar health issues; Indigenous perceptions of climate change; Impacts on oceans; Climate Refugees: Migration and population displacement. (Prerequisite: HLTH 250)",
   "requisites": "HLTH 250 or HLTH_OX 250 or ANT 205 or ANTH_OX 205 or SOC 250 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "2946",
       "crn": "2324",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "G. Luber",
+      "instructor": "George Luber",
       "instructors": [
         {
-          "name": "G. Luber",
-          "email": null
+          "name": "George Luber",
+          "email": "george.e.luber@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Emerson Chemistry Bldg. E363",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 22,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -54,56 +69,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "2324",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "G. Luber",
-      "instructors": [
-        {
-          "name": "G. Luber",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Luber"
+    "George Luber"
   ],
-  "scraped_at": "2026-06-17T23:11:11.999Z"
+  "scraped_at": "2026-06-18T03:01:54.415Z"
 }

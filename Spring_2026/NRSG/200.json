@@ -5,38 +5,51 @@
   "catalog_number": "200",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "1.5",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course takes place in the Finance Lab, where students experience bridge finance practice and theory through a simulated rotation into the analyst program of a major bank. The action-based workstream explores how our global financial system arises from the need to exchange assets and manage risks. Students analyze real-world news and global events, including those affecting global supply chains, foreign exchange and interest rate markets, and monetary and trading policies, and report distilled findings based on fundamental economic principles. Deliverables include running weekly bank-style ¿market update calls¿, creating research reports and dashboards, and pitching ideas.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-12",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-10-20"
   },
   "sections": [
     {
+      "atlas_key": "3951",
       "crn": "4564",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Lewis",
+      "instructor": "Tucker Balch",
       "instructors": [
         {
-          "name": "D. Lewis",
-          "email": null
+          "name": "Tucker Balch",
+          "email": "tucker.balch@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 400",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 8:30-11:20a",
@@ -47,51 +60,25 @@
             "end": "1120"
           }
         ]
-      }
-    },
-    {
-      "crn": "4564",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Lewis",
-      "instructors": [
-        {
-          "name": "D. Lewis",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 8:30-11:20a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "1120"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-10-20"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Lewis"
+    "Tucker Balch"
   ],
-  "scraped_at": "2026-06-17T23:04:23.782Z"
+  "scraped_at": "2026-06-18T02:34:22.331Z"
 }

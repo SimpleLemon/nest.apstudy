@@ -5,21 +5,25 @@
   "catalog_number": "770R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+  "requirement_designation": "Requirement Designation to be Evaluated",
+  "requirements": [
+    "Requirement Designation to be Evaluated",
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A placeholder course for students taking courses on an approved Emory study abroad program.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "2004",
       "crn": "2450",
       "section_number": "3",
       "schedule_type": "SEM",
@@ -27,16 +31,32 @@
       "instructors": [
         {
           "name": "D. Maney",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": "Requirement Designation to be Evaluated",
+      "requirements": [
+        "Requirement Designation to be Evaluated"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-2:15p",
@@ -47,26 +67,47 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2005",
       "crn": "2451",
       "section_number": "4",
       "schedule_type": "SEM",
-      "instructor": "Z. Delawalla",
+      "instructor": "Carolyn Kras",
       "instructors": [
         {
-          "name": "Z. Delawalla",
-          "email": null
+          "name": "Carolyn Kras",
+          "email": "carolyn.kras@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Emerson Chemistry Bldg. E103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 12:30-2p",
@@ -77,26 +118,47 @@
             "end": "1400"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2006",
       "crn": "2452",
       "section_number": "5",
       "schedule_type": "SEM",
-      "instructor": "H. Trotman",
+      "instructor": "Joe Conway",
       "instructors": [
         {
-          "name": "H. Trotman",
-          "email": null
+          "name": "Joe Conway",
+          "email": "joe.conway@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Atwood Chemistry Bldg. 270",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 10a-12:30p",
@@ -107,26 +169,47 @@
             "end": "1230"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2007",
       "crn": "3096",
       "section_number": "6",
       "schedule_type": "SEM",
-      "instructor": "H. Rodman",
+      "instructor": "Carolyn Kras",
       "instructors": [
         {
-          "name": "H. Rodman",
-          "email": null
+          "name": "Carolyn Kras",
+          "email": "carolyn.kras@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Emerson Chemistry Bldg. E103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 7,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 9-11:30a",
@@ -137,193 +220,71 @@
             "end": "1130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2008",
       "crn": "5267",
       "section_number": "7",
       "schedule_type": "SEM",
-      "instructor": "M. Treadway",
+      "instructor": "Linchuan Zhang",
       "instructors": [
         {
-          "name": "M. Treadway",
-          "email": null
+          "name": "Linchuan Zhang",
+          "email": "linchuan.zhang@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 240",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "2450",
-      "section_number": "3",
-      "schedule_type": "SEM",
-      "instructor": "D. Maney",
-      "instructors": [
-        {
-          "name": "D. Maney",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-2:15p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2451",
-      "section_number": "4",
-      "schedule_type": "SEM",
-      "instructor": "Z. Delawalla",
-      "instructors": [
-        {
-          "name": "Z. Delawalla",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 12:30-2p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1230",
-            "end": "1400"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2452",
-      "section_number": "5",
-      "schedule_type": "SEM",
-      "instructor": "H. Trotman",
-      "instructors": [
-        {
-          "name": "H. Trotman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 10a-12:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1230"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3096",
-      "section_number": "6",
-      "schedule_type": "SEM",
-      "instructor": "H. Rodman",
-      "instructors": [
-        {
-          "name": "H. Rodman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 9-11:30a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "900",
-            "end": "1130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5267",
-      "section_number": "7",
-      "schedule_type": "SEM",
-      "instructor": "M. Treadway",
-      "instructors": [
-        {
-          "name": "M. Treadway",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
+    "total_sections": 5,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 10,
-    "open": 10,
-    "closed": 0,
+    "other": 5,
+    "open": 4,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
+    "Carolyn Kras",
     "D. Maney",
-    "H. Rodman",
-    "H. Trotman",
-    "M. Treadway",
-    "Z. Delawalla"
+    "Joe Conway",
+    "Linchuan Zhang"
   ],
-  "scraped_at": "2026-06-17T23:06:24.226Z"
+  "scraped_at": "2026-06-18T02:42:27.318Z"
 }

@@ -5,38 +5,57 @@
   "catalog_number": "527",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "4",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Biological and cultural evolution and adaptation of the human species, fossil populations, human variation, and primate behavior. Methods in biological anthropology, survey of the prehistoric evolution of cultures, contemporary issues in paleoanthropology. Weekly lab in biological anthro methods.",
+  "course_notes": "The overall goal of this course is to build an understanding of (1) the processes that led to modern human biocultural variation and (2) how we know what we know. Like other anthropological fields, we will attempt to answer the question: what does it mean to be human? Our focus is on biological and evolutionary processes, but that includes behavior and culture because these are impacted by, and have impacts on, our biology. This class begins with an overview of genetics and evolutionary theory, providing a foundation for the rest of the course. Then we use this knowledge to explore examples of adaptation and microevolution among modern humans and to address misconceptions about human variation. Next, we will turn to macroevolution of our species, Homo sapiens, using comparative and paleoanthropological approaches. With the comparative approach, we focus on anatomy and behavior of living non-human primates to identify traits we share with them and traits that are uniquely human. Paleoanthropology combines our knowledge of living primates with observations from the fossil record to trace the evolution of primates and hominins (humans and their ancestors) over millions of years. Therefore, we will gain insight into our own evolutionary past and attempt to identify where, when, why, and how our biological and cultural traits emerged. Permission request form: https://forms.office.com/r/hehCBknHK0",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "396",
       "crn": "3384",
       "section_number": "2147",
       "schedule_type": "LEC",
-      "instructor": "N. Valerio III",
+      "instructor": "Craig Hadley",
       "instructors": [
         {
-          "name": "N. Valerio III",
-          "email": null
+          "name": "Craig Hadley",
+          "email": "chadley@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Anthropology Bldg 303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 100,
+      "seats_available": 60,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6:30-9:30p",
@@ -47,9 +66,14 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "397",
       "crn": "3385",
       "section_number": "3247",
       "schedule_type": "LEC",
@@ -57,16 +81,30 @@
       "instructors": [
         {
           "name": "N. Valerio III",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Anthropology Bldg 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 25,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6:30-9:30p",
@@ -77,9 +115,14 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "398",
       "crn": "6372",
       "section_number": "6247",
       "schedule_type": "LEC",
@@ -87,46 +130,30 @@
       "instructors": [
         {
           "name": "N. Valerio III",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Anthropology Bldg 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3384",
-      "section_number": "2147",
-      "schedule_type": "LEC",
-      "instructor": "N. Valerio III",
-      "instructors": [
-        {
-          "name": "N. Valerio III",
-          "email": null
-        }
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 25,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6:30-9:30p",
@@ -137,81 +164,26 @@
             "end": "2130"
           }
         ]
-      }
-    },
-    {
-      "crn": "3385",
-      "section_number": "3247",
-      "schedule_type": "LEC",
-      "instructor": "N. Valerio III",
-      "instructors": [
-        {
-          "name": "N. Valerio III",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "6372",
-      "section_number": "6247",
-      "schedule_type": "LEC",
-      "instructor": "N. Valerio III",
-      "instructors": [
-        {
-          "name": "N. Valerio III",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 2,
+    "open": 3,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
+    "Craig Hadley",
     "N. Valerio III"
   ],
-  "scraped_at": "2026-06-17T23:02:36.311Z"
+  "scraped_at": "2026-06-18T02:22:28.135Z"
 }

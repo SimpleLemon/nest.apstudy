@@ -5,13 +5,13 @@
   "catalog_number": "485",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed for students interested in better understanding (i) how the private equity industry works, (ii) how to structure the acquisition of a business and (iii) how to make money by leveraging key value drivers in a business. Unlike traditional courses, this course takes a unique approach by bringing in leading experts and practitioners to provide industry perspectives for almost every class. More information at www.emoryprof.com.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "2078",
       "crn": "3717",
       "section_number": "1140",
       "schedule_type": "LEC",
-      "instructor": "K. Baks",
+      "instructor": "Klaas Baks",
       "instructors": [
         {
-          "name": "K. Baks",
-          "email": null
+          "name": "Klaas Baks",
+          "email": "klaas.baks@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 76,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 5:15-7:45p",
@@ -47,51 +60,25 @@
             "end": "1945"
           }
         ]
-      }
-    },
-    {
-      "crn": "3717",
-      "section_number": "1140",
-      "schedule_type": "LEC",
-      "instructor": "K. Baks",
-      "instructors": [
-        {
-          "name": "K. Baks",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 5:15-7:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1715",
-            "end": "1945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Baks"
+    "Klaas Baks"
   ],
-  "scraped_at": "2026-06-17T23:10:39.537Z"
+  "scraped_at": "2026-06-18T02:58:24.248Z"
 }

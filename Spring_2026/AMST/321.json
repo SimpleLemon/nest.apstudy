@@ -5,40 +5,53 @@
   "catalog_number": "321",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "HAPE",
   "requirements": [
     "HAPE"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Explores the variety of traditional musical cultures in the United States, their historical and geographical influences on each other, and their influences on contemporary popular music.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Innovations in clinical care are increasingly impacted by the development and implementation of machine learning (ML) and artificial intelligence (AI). As future clinicians, medical students should be informed and prepared for technological changes that will affect how they provide care for their patients. The goals of this senior elective are to demystify AI and ML in healthcare, enabling students to have informed conversations about these technologies and participate in their clinical advancement.",
+  "course_notes": "(Permission Required Prior to Enrollment)(School of Medicine Students Only)",
   "requisites": null,
   "cross_listed": "HIST 359",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-06-29",
+    "end": "2026-12-19"
   },
   "sections": [
     {
+      "atlas_key": "2583",
       "crn": "4443",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Tullos",
+      "instructor": "Stacy M Higgins",
       "instructors": [
         {
-          "name": "A. Tullos",
-          "email": null
+          "name": "Stacy M Higgins",
+          "email": "smhiggi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -54,56 +67,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "4443",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Tullos",
-      "instructors": [
-        {
-          "name": "A. Tullos",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Tullos"
+    "Stacy M Higgins"
   ],
-  "scraped_at": "2026-06-17T23:01:00.976Z"
+  "scraped_at": "2026-06-18T02:06:43.302Z"
 }

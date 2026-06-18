@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Further development of students' communicative skills, with particular emphasis on reading, writing and critical thinking, through discussion of readings and films from Hispanic cultures. May be appropriate for heritage speakers pending Official Spanish Placement.",
-  "course_notes": null,
+  "course_notes": "CONTENT: This course focuses on developing both cultural understanding and linguistic skills. It explores cultural issues in the Hispanic world, such as diversity, gender roles and power structures through writing about and discussion of written texts and films. These texts also serve as the basis for practicing Spanish vocabulary and grammar in context, as well as honing listening, speaking, and particularly, reading and writing skills. By the end of the course, students should be able to use critical thinking skills in Spanish to interpret and discuss literature and film in Spanish, gain advanced proficiency in reading and writing the language, and gain knowledge of significant historical events. REQUIRED TEXT: Coutard, James, Evelyn, Katryn, Gaspar, Martin. Intrigas, 3rd ed. VHL, 2021. PARTICULARS: Movie screenings will be required outside of class. EVALUATION: Class participation, chapter quizzes, weekly homework, presentations, unit lesson essays. PREREQUISITE: SPAN 202 or Official Spanish Placement for SPAN 212. Take the online Spanish Placement Exam at https://spanport.emory.edu/undergraduate/placement/index.html SPAN 212 may be combined with a Spanish Foundational Course (300-318) or PORT 110 to satisfy both the HAL or Intercultural Communication requirement and major/minor requirements or electives. See https://spanport.emory.edu for details.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,18 +23,34 @@
   },
   "sections": [
     {
+      "atlas_key": "1219",
       "crn": "1553",
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Staff",
       "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Candler Library 123",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 9,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a",
@@ -49,21 +66,41 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1220",
       "crn": "1635",
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "Staff",
       "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "1462 Clifton Rd 100C",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 9,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -79,26 +116,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1221",
       "crn": "1555",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "C. Sierra",
+      "instructor": "Cesar Sierra",
       "instructors": [
         {
-          "name": "C. Sierra",
-          "email": null
+          "name": "Cesar Sierra",
+          "email": "csierra@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 9,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -114,21 +172,41 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1222",
       "crn": "1636",
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "Staff",
       "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 9,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -144,26 +222,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1223",
       "crn": "1557",
       "section_number": "5",
       "schedule_type": "LEC",
-      "instructor": "M. Gonzalez",
+      "instructor": "Maria Gonzalez",
       "instructors": [
         {
-          "name": "M. Gonzalez",
-          "email": null
+          "name": "Maria Gonzalez",
+          "email": "egonza3@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway C203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 9,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -179,21 +278,41 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1224",
       "crn": "1559",
       "section_number": "6",
       "schedule_type": "LEC",
       "instructor": "Staff",
       "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 9,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -209,26 +328,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1225",
       "crn": "1647",
       "section_number": "7",
       "schedule_type": "LEC",
-      "instructor": "R. Clarke",
+      "instructor": "Robyn Clarke",
       "instructors": [
         {
-          "name": "R. Clarke",
-          "email": null
+          "name": "Robyn Clarke",
+          "email": "hrclark@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway C203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 9,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 5:30-6:45p",
@@ -244,248 +384,27 @@
             "end": "1845"
           }
         ]
-      }
-    },
-    {
-      "crn": "1553",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1635",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1555",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "C. Sierra",
-      "instructors": [
-        {
-          "name": "C. Sierra",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1636",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1557",
-      "section_number": "5",
-      "schedule_type": "LEC",
-      "instructor": "M. Gonzalez",
-      "instructors": [
-        {
-          "name": "M. Gonzalez",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1559",
-      "section_number": "6",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1647",
-      "section_number": "7",
-      "schedule_type": "LEC",
-      "instructor": "R. Clarke",
-      "instructors": [
-        {
-          "name": "R. Clarke",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 5:30-6:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1730",
-            "end": "1845"
-          },
-          {
-            "day": "Thu",
-            "start": "1730",
-            "end": "1845"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 14,
-    "lectures": 14,
+    "total_sections": 7,
+    "lectures": 7,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 10,
+    "open": 1,
+    "closed": 6,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Sierra",
-    "M. Gonzalez",
-    "R. Clarke"
+    "Cesar Sierra",
+    "Maria Gonzalez",
+    "Robyn Clarke"
   ],
-  "scraped_at": "2026-06-17T23:14:53.053Z"
+  "scraped_at": "2026-06-18T03:18:50.184Z"
 }

@@ -5,13 +5,13 @@
   "catalog_number": "625",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course equips students with the mathematical techniques and understanding needed prior to taking the core Ph.D. sequence in microeconomic theory, macroeconomics, and econometrics. Topics include linear algebra, topology, advanced calculus, and optimization theory.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,41 @@
   },
   "sections": [
     {
+      "atlas_key": "4480",
       "crn": "4399",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Levy",
+      "instructor": "Daniel Levy",
       "instructors": [
         {
-          "name": "D. Levy",
-          "email": null
+          "name": "Daniel Levy",
+          "email": "daniel.levy@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Daniel Levy",
+          "email": "daniel.levy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rich Building 211",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MTWThF 9a-1p; MTWThF 2-4p",
@@ -92,96 +110,25 @@
             "end": "1600"
           }
         ]
-      }
-    },
-    {
-      "crn": "4399",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Levy",
-      "instructors": [
-        {
-          "name": "D. Levy",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MTWThF 9a-1p; MTWThF 2-4p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "900",
-            "end": "1300"
-          },
-          {
-            "day": "Tue",
-            "start": "900",
-            "end": "1300"
-          },
-          {
-            "day": "Wed",
-            "start": "900",
-            "end": "1300"
-          },
-          {
-            "day": "Thu",
-            "start": "900",
-            "end": "1300"
-          },
-          {
-            "day": "Fri",
-            "start": "900",
-            "end": "1300"
-          },
-          {
-            "day": "Mon",
-            "start": "1400",
-            "end": "1600"
-          },
-          {
-            "day": "Tue",
-            "start": "1400",
-            "end": "1600"
-          },
-          {
-            "day": "Wed",
-            "start": "1400",
-            "end": "1600"
-          },
-          {
-            "day": "Thu",
-            "start": "1400",
-            "end": "1600"
-          },
-          {
-            "day": "Fri",
-            "start": "1400",
-            "end": "1600"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-25"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Levy"
+    "Daniel Levy"
   ],
-  "scraped_at": "2026-06-17T23:10:06.970Z"
+  "scraped_at": "2026-06-18T02:53:56.623Z"
 }

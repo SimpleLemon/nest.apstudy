@@ -5,15 +5,16 @@
   "catalog_number": "207R",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 2",
+  "credit_hours": "1,2",
   "requirement_designation": "PE",
   "requirements": [
-    "PE"
+    "PE",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Emory Dance Company is a professionally oriented performance company that exposes students to the diverse choreographic approaches of faculty, student and guest artist work, as well as historical reconstructions. Course admission is by audition. Students gain performance techniques, collaborative skills, and often contribute to the making of original choreography as they prepare for a fully produced dance concert. Simultaneous enrollment in a dance technique class is required. In addition, students gain experience in some of the technical aspects of dance concert production. Credit hours are assigned in accordance with the number of works in which a student participates. Evaluation procedures announced in class.",
-  "course_notes": null,
+  "course_notes": "(Permission Required Prior to Enrollment) Entrance by audition only at the beginning of the semester. Check www.dance.emory.edu for audition details or email dance@emory.edu.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,164 +23,155 @@
   },
   "sections": [
     {
+      "atlas_key": "528",
       "crn": "2403",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "G. Staib",
+      "instructor": "George Staib",
       "instructors": [
         {
-          "name": "G. Staib",
-          "email": null
+          "name": "George Staib",
+          "email": "gstaib@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "529",
       "crn": "2404",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "J. Medina",
+      "instructor": "Julio Medina",
       "instructors": [
         {
-          "name": "J. Medina",
-          "email": null
+          "name": "Julio Medina",
+          "email": "julio.ulises.medina@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "530",
       "crn": "2405",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "L. Teague",
+      "instructor": "Lori Teague",
       "instructors": [
         {
-          "name": "L. Teague",
-          "email": null
+          "name": "Lori Teague",
+          "email": "lteague@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "2403",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "G. Staib",
-      "instructors": [
-        {
-          "name": "G. Staib",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "2404",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "J. Medina",
-      "instructors": [
-        {
-          "name": "J. Medina",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "2405",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "L. Teague",
-      "instructors": [
-        {
-          "name": "L. Teague",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Staib",
-    "J. Medina",
-    "L. Teague"
+    "George Staib",
+    "Julio Medina",
+    "Lori Teague"
   ],
-  "scraped_at": "2026-06-17T23:10:00.473Z"
+  "scraped_at": "2026-06-18T02:52:45.205Z"
 }

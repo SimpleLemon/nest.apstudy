@@ -5,13 +5,13 @@
   "catalog_number": "599R",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "1,2,3,4,5,6,7,8,9",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,311 +20,303 @@
   },
   "sections": [
     {
+      "atlas_key": "1499",
       "crn": "5518",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "Andrade/Nenzi",
+      "instructor": "Tonio Andrade",
       "instructors": [
         {
-          "name": "Andrade/Nenzi",
-          "email": null
+          "name": "Tonio Andrade",
+          "email": "tandrad@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Laura Nenzi",
+          "email": "laura.nenzi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 2,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1500",
       "crn": "5519",
       "section_number": "2",
       "schedule_type": "SUP",
-      "instructor": "Team",
+      "instructor": "Mariana Candido",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Mariana Candido",
+          "email": "mariana.pinho.candido@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Adriana Chira",
+          "email": "adriana.chira@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Clifton C Crais",
+          "email": "ccrais@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1501",
       "crn": "5520",
       "section_number": "3",
       "schedule_type": "SUP",
-      "instructor": "Chira/Yannakakis",
+      "instructor": "Adriana Chira",
       "instructors": [
         {
-          "name": "Chira/Yannakakis",
-          "email": null
+          "name": "Adriana Chira",
+          "email": "adriana.chira@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Yanna Yannakakis",
+          "email": "yanna.yannakakis@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1502",
       "crn": "5521",
       "section_number": "4",
       "schedule_type": "SUP",
-      "instructor": "Lesser/Rogers",
+      "instructor": "Jeffrey Lesser",
       "instructors": [
         {
-          "name": "Lesser/Rogers",
-          "email": null
+          "name": "Jeffrey Lesser",
+          "email": "jlesser@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Thomas Rogers",
+          "email": "tomrogers@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1503",
       "crn": "5522",
       "section_number": "5",
       "schedule_type": "SUP",
-      "instructor": "Suddler/Ward",
+      "instructor": "Carl Suddler",
       "instructors": [
         {
-          "name": "Suddler/Ward",
-          "email": null
+          "name": "Carl Suddler",
+          "email": "carl.suddler@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jason Ward",
+          "email": "jason.morgan.ward@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1504",
       "crn": "5807",
       "section_number": "6",
       "schedule_type": "SUP",
-      "instructor": "L. Nenzi",
+      "instructor": "Laura Nenzi",
       "instructors": [
         {
-          "name": "L. Nenzi",
-          "email": null
+          "name": "Laura Nenzi",
+          "email": "laura.nenzi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5518",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "Andrade/Nenzi",
-      "instructors": [
-        {
-          "name": "Andrade/Nenzi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5519",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5520",
-      "section_number": "3",
-      "schedule_type": "SUP",
-      "instructor": "Chira/Yannakakis",
-      "instructors": [
-        {
-          "name": "Chira/Yannakakis",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5521",
-      "section_number": "4",
-      "schedule_type": "SUP",
-      "instructor": "Lesser/Rogers",
-      "instructors": [
-        {
-          "name": "Lesser/Rogers",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5522",
-      "section_number": "5",
-      "schedule_type": "SUP",
-      "instructor": "Suddler/Ward",
-      "instructors": [
-        {
-          "name": "Suddler/Ward",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5807",
-      "section_number": "6",
-      "schedule_type": "SUP",
-      "instructor": "L. Nenzi",
-      "instructors": [
-        {
-          "name": "L. Nenzi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
+    "total_sections": 6,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 12,
-    "open": 10,
-    "closed": 2,
+    "other": 6,
+    "open": 5,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Andrade/Nenzi",
-    "Chira/Yannakakis",
-    "L. Nenzi",
-    "Lesser/Rogers",
-    "Suddler/Ward",
-    "Team"
+    "Adriana Chira",
+    "Carl Suddler",
+    "Clifton C Crais",
+    "Jason Ward",
+    "Jeffrey Lesser",
+    "Laura Nenzi",
+    "Mariana Candido",
+    "Thomas Rogers",
+    "Tonio Andrade",
+    "Yanna Yannakakis"
   ],
-  "scraped_at": "2026-06-17T23:11:08.778Z"
+  "scraped_at": "2026-06-18T03:00:28.244Z"
 }

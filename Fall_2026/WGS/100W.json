@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HSCW",
   "requirements": [
-    "HSCW"
+    "HSCW",
+    "Humanities and Arts with Cont.Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course is an introduction to gender, sex, and power in the contemporary world.",
-  "course_notes": null,
+  "course_notes": "(In the contemporary moment, gender, \"gender ideology,\" and the right to change sex are under attack in the US, Europe, and Latin America. Gender is clearly troubling, and, as a result, gender is in trouble. Why has gender become such a hot-button issue? This interdisciplinary course will draw from feminist, sexuality studies, and transgender studies scholarship to introduce students from any field to the theories, the history, the science, and the politics of gender and bodily sex. We will weigh competing feminist theories asserting that gender roles developed from a capitalist political economy versus from the sexual desires of men. We will consider the politics of transgressing gender norms and those of demanding the right to change sex. We will analyze the cultural specificity of gender systems and the practical science of bodily sex. Throughout, we will demystify the fictions on which contemporary debates about gender and bodily sex are based.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "3317",
       "crn": "2337",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "K. Amin",
+      "instructor": "Kadji Amin",
       "instructors": [
         {
-          "name": "K. Amin",
-          "email": null
+          "name": "Kadji Amin",
+          "email": "kadji.amin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "White Hall 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "3",
+      "enrollment_capacity": 36,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-3:45p",
@@ -49,26 +67,47 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3318",
       "crn": "2338",
       "section_number": "2",
       "schedule_type": "DIS",
-      "instructor": "N. Dams",
+      "instructor": "Naima Dams",
       "instructors": [
         {
-          "name": "N. Dams",
-          "email": null
+          "name": "Naima Dams",
+          "email": "naima.dams@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Tarbutton Hall 120A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "3",
+      "enrollment_capacity": 18,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-11:15a",
@@ -79,26 +118,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3319",
       "crn": "2339",
       "section_number": "3",
       "schedule_type": "DIS",
-      "instructor": "S. Kwon",
+      "instructor": "Sujung Kwon",
       "instructors": [
         {
-          "name": "S. Kwon",
-          "email": null
+          "name": "Sujung Kwon",
+          "email": "sujung.kwon@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Candler Library 121",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "3",
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 11:30a-12:45p",
@@ -109,113 +169,27 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2337",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "K. Amin",
-      "instructors": [
-        {
-          "name": "K. Amin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2338",
-      "section_number": "2",
-      "schedule_type": "DIS",
-      "instructor": "N. Dams",
-      "instructors": [
-        {
-          "name": "N. Dams",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-11:15a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2339",
-      "section_number": "3",
-      "schedule_type": "DIS",
-      "instructor": "S. Kwon",
-      "instructors": [
-        {
-          "name": "S. Kwon",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 2,
+    "total_sections": 3,
+    "lectures": 1,
     "labs": 0,
-    "discussions": 4,
+    "discussions": 2,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 6
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Amin",
-    "N. Dams",
-    "S. Kwon"
+    "Kadji Amin",
+    "Naima Dams",
+    "Sujung Kwon"
   ],
-  "scraped_at": "2026-06-17T23:15:06.176Z"
+  "scraped_at": "2026-06-18T03:19:50.990Z"
 }

@@ -5,15 +5,15 @@
   "catalog_number": "392R",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 2",
+  "credit_hours": "1,2",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course is for students selected by the Department of Chemistry to train and serve as peer learning leaders (Learning Assistants or Teaching Assistants) in core courses. The course is by permission only. Note that this course does not satisfy elective credit for the chemistry major.",
-  "course_notes": "(CHEM 141 or CHEM_OX 141 or CHEM 150 or CHEM_OX 150) and (CHEM 142 or CHEM_OX 142 or CHEM 202 or CHEM_OX 202) or equivalent transfer credit as prerequisite.",
+  "course_notes": "Learning Assistants for CHEM 150",
   "requisites": "(CHEM 141 or CHEM_OX 141 or CHEM 150 or CHEM_OX 150) and (CHEM 142 or CHEM_OX 142 or CHEM 202 or CHEM_OX 202) or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "3408",
       "crn": "3257",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "T. McGill",
+      "instructor": "Tracy McGill",
       "instructors": [
         {
-          "name": "T. McGill",
-          "email": null
+          "name": "Tracy McGill",
+          "email": "tmorkin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1-1:50p",
@@ -49,26 +64,45 @@
             "end": "1350"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3409",
       "crn": "3258",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "M. Weinschenk",
+      "instructor": "Matthew Weinschenk",
       "instructors": [
         {
-          "name": "M. Weinschenk",
-          "email": null
+          "name": "Matthew Weinschenk",
+          "email": "mweinsc@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 316",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1-1:50p",
@@ -79,304 +113,231 @@
             "end": "1350"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3410",
       "crn": "3259",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "J. Smith",
+      "instructor": "Julia Smith",
       "instructors": [
         {
-          "name": "J. Smith",
-          "email": null
+          "name": "Julia Smith",
+          "email": "julia.smith@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3411",
       "crn": "3260",
       "section_number": "4",
       "schedule_type": "LEC",
       "instructor": "Staff",
       "instructors": [],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3412",
       "crn": "3261",
       "section_number": "5",
       "schedule_type": "LEC",
-      "instructor": "D. Mulford",
+      "instructor": "Douglas Mulford",
       "instructors": [
         {
-          "name": "D. Mulford",
-          "email": null
+          "name": "Douglas Mulford",
+          "email": "dmulfor@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3413",
       "crn": "3262",
       "section_number": "6",
       "schedule_type": "LEC",
-      "instructor": "J. Smith",
+      "instructor": "Julia Smith",
       "instructors": [
         {
-          "name": "J. Smith",
-          "email": null
+          "name": "Julia Smith",
+          "email": "julia.smith@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3414",
       "crn": "3263",
       "section_number": "7",
       "schedule_type": "LEC",
       "instructor": "Staff",
       "instructors": [],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3257",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "T. McGill",
-      "instructors": [
-        {
-          "name": "T. McGill",
-          "email": null
-        }
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3258",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "M. Weinschenk",
-      "instructors": [
-        {
-          "name": "M. Weinschenk",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3259",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "J. Smith",
-      "instructors": [
-        {
-          "name": "J. Smith",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3260",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3261",
-      "section_number": "5",
-      "schedule_type": "LEC",
-      "instructor": "D. Mulford",
-      "instructors": [
-        {
-          "name": "D. Mulford",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3262",
-      "section_number": "6",
-      "schedule_type": "LEC",
-      "instructor": "J. Smith",
-      "instructors": [
-        {
-          "name": "J. Smith",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3263",
-      "section_number": "7",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 14,
-    "lectures": 14,
+    "total_sections": 7,
+    "lectures": 7,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 14,
+    "open": 7,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Mulford",
-    "J. Smith",
-    "M. Weinschenk",
-    "T. McGill"
+    "Douglas Mulford",
+    "Julia Smith",
+    "Matthew Weinschenk",
+    "Tracy McGill"
   ],
-  "scraped_at": "2026-06-17T23:09:40.827Z"
+  "scraped_at": "2026-06-18T02:50:59.316Z"
 }

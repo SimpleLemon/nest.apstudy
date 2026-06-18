@@ -5,38 +5,56 @@
   "catalog_number": "380",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Professional Development is composed of a series of sessions and assignments intended to help you prepare for your career and position you for success at Goizueta and beyond. Professional Development incorporates career education and exploration with tools you'll use to successfully navigate your internship search. You will learn about different industries and functions, you will explore how your personal interests align with potential careers, you will develop and refine your personal brand, and you will sharpen your interview skills. After you complete this course, you will have a list of target companies, you will have started to build your professional network, and you will have laid the foundation for a successful internship and full-time search at Goizueta. You will have a better understanding of yourself and your interests, and you'll be able to articulate your experiences through your personal brand materials, networking, and interviews.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-09-04",
-    "end": "2026-10-30"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "2123",
       "crn": "5082",
       "section_number": "1101",
       "schedule_type": "SEM",
-      "instructor": "Smith/Leist",
+      "instructor": "Sarah Leist",
       "instructors": [
         {
-          "name": "Smith/Leist",
-          "email": null
+          "name": "Sarah Leist",
+          "email": "sarah.leist@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Nikki Smith",
+          "email": "nikki.smith@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 65,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-11:15a",
@@ -47,26 +65,48 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2124",
       "crn": "5083",
       "section_number": "1102",
       "schedule_type": "SEM",
-      "instructor": "Smith/Leist",
+      "instructor": "Sarah Leist",
       "instructors": [
         {
-          "name": "Smith/Leist",
-          "email": null
+          "name": "Sarah Leist",
+          "email": "sarah.leist@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Nikki Smith",
+          "email": "nikki.smith@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 65,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 11:30a-12:45p",
@@ -77,26 +117,48 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2125",
       "crn": "5084",
       "section_number": "1103",
       "schedule_type": "SEM",
-      "instructor": "Timpone/Leist",
+      "instructor": "Sarah Leist",
       "instructors": [
         {
-          "name": "Timpone/Leist",
-          "email": null
+          "name": "Sarah Leist",
+          "email": "sarah.leist@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kim Timpone",
+          "email": "kimberly.timpone@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 65,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-11:15a",
@@ -107,26 +169,48 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2126",
       "crn": "5085",
       "section_number": "1104",
       "schedule_type": "SEM",
-      "instructor": "Timpone/Leist",
+      "instructor": "Sarah Leist",
       "instructors": [
         {
-          "name": "Timpone/Leist",
-          "email": null
+          "name": "Sarah Leist",
+          "email": "sarah.leist@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kim Timpone",
+          "email": "kimberly.timpone@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 65,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 11:30a-12:45p",
@@ -137,26 +221,48 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2127",
       "crn": "5086",
       "section_number": "1105",
       "schedule_type": "SEM",
-      "instructor": "Morales/Leist",
+      "instructor": "Sarah Leist",
       "instructors": [
         {
-          "name": "Morales/Leist",
-          "email": null
+          "name": "Sarah Leist",
+          "email": "sarah.leist@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Carla Morales",
+          "email": "carlamorales@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 331",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 65,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-11:15a",
@@ -167,26 +273,48 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2128",
       "crn": "5087",
       "section_number": "1106",
       "schedule_type": "SEM",
-      "instructor": "Morales/Leist",
+      "instructor": "Sarah Leist",
       "instructors": [
         {
-          "name": "Morales/Leist",
-          "email": null
+          "name": "Sarah Leist",
+          "email": "sarah.leist@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Carla Morales",
+          "email": "carlamorales@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 331",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 65,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 11:30a-12:45p",
@@ -197,26 +325,43 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2129",
       "crn": "5088",
       "section_number": "1107",
       "schedule_type": "SEM",
-      "instructor": "S. Leist",
+      "instructor": "Sarah Leist",
       "instructors": [
         {
-          "name": "S. Leist",
-          "email": null
+          "name": "Sarah Leist",
+          "email": "sarah.leist@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 65,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 8:30-9:45a",
@@ -227,234 +372,28 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "5082",
-      "section_number": "1101",
-      "schedule_type": "SEM",
-      "instructor": "Smith/Leist",
-      "instructors": [
-        {
-          "name": "Smith/Leist",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-11:15a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5083",
-      "section_number": "1102",
-      "schedule_type": "SEM",
-      "instructor": "Smith/Leist",
-      "instructors": [
-        {
-          "name": "Smith/Leist",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5084",
-      "section_number": "1103",
-      "schedule_type": "SEM",
-      "instructor": "Timpone/Leist",
-      "instructors": [
-        {
-          "name": "Timpone/Leist",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-11:15a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5085",
-      "section_number": "1104",
-      "schedule_type": "SEM",
-      "instructor": "Timpone/Leist",
-      "instructors": [
-        {
-          "name": "Timpone/Leist",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5086",
-      "section_number": "1105",
-      "schedule_type": "SEM",
-      "instructor": "Morales/Leist",
-      "instructors": [
-        {
-          "name": "Morales/Leist",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-11:15a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5087",
-      "section_number": "1106",
-      "schedule_type": "SEM",
-      "instructor": "Morales/Leist",
-      "instructors": [
-        {
-          "name": "Morales/Leist",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5088",
-      "section_number": "1107",
-      "schedule_type": "SEM",
-      "instructor": "S. Leist",
-      "instructors": [
-        {
-          "name": "S. Leist",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 14,
+    "total_sections": 7,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 14,
+    "other": 7,
     "open": 0,
-    "closed": 14,
+    "closed": 7,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Morales/Leist",
-    "S. Leist",
-    "Smith/Leist",
-    "Timpone/Leist"
+    "Carla Morales",
+    "Kim Timpone",
+    "Nikki Smith",
+    "Sarah Leist"
   ],
-  "scraped_at": "2026-06-17T23:09:37.583Z"
+  "scraped_at": "2026-06-18T02:50:08.972Z"
 }

@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "CW",
   "requirements": [
-    "CW"
+    "CW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "A seminar reserved for senior PPL majors. It integrates each of the majors areas: the politics, law, and some subfield of philosophy such as ethics, epistemology, metaphysics, etc. The course is writing intensive and culminates in a final paper.",
-  "course_notes": "Two PHIL courses or equivalent transfer credit as prerequisite.",
+  "course_notes": "Course restricted to PPL majors.",
   "requisites": "Two PHIL courses or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "3663",
       "crn": "2435",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "C. Willett",
+      "instructor": "Cynthia Willett",
       "instructors": [
         {
-          "name": "C. Willett",
-          "email": null
+          "name": "Cynthia Willett",
+          "email": "cwillet@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Bowden Hall 118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 18,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,26 +72,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3664",
       "crn": "2451",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "J. Stuhr",
+      "instructor": "John J Stuhr",
       "instructors": [
         {
-          "name": "J. Stuhr",
-          "email": null
+          "name": "John J Stuhr",
+          "email": "jstuhr@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Psychology Bldg 250",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 18,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -89,92 +128,26 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2435",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "C. Willett",
-      "instructors": [
-        {
-          "name": "C. Willett",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2451",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "J. Stuhr",
-      "instructors": [
-        {
-          "name": "J. Stuhr",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 4,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Willett",
-    "J. Stuhr"
+    "Cynthia Willett",
+    "John J Stuhr"
   ],
-  "scraped_at": "2026-06-17T23:14:10.753Z"
+  "scraped_at": "2026-06-18T03:13:19.838Z"
 }

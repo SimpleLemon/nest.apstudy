@@ -5,13 +5,13 @@
   "catalog_number": "741",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Understanding biological responses to external perturbations, their health outcomes, & risks requires a systems biology approach. Such an approach is necessary to make sense of biological pathways comprising genes, RNAs, proteins, & metabolites, & to understand how they are organized to carry out integrated, systems-level functions & respond to biological, pharmaceutical, & environmental perturbations. This interdisciplinary course introduces the basic concepts in systems biology & numerical simulation techniques for mechanically understand & predict biological responses. EHS 730 crosslisted w IBS 741.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,38 @@
   },
   "sections": [
     {
+      "atlas_key": "3655",
       "crn": "5322",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Q. Zhang",
+      "instructor": "Qiang Zhang",
       "instructors": [
         {
-          "name": "Q. Zhang",
-          "email": null
+          "name": "Qiang Zhang",
+          "email": "qiang.zhang@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 3-4:50p",
@@ -47,51 +62,25 @@
             "end": "1650"
           }
         ]
-      }
-    },
-    {
-      "crn": "5322",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Q. Zhang",
-      "instructors": [
-        {
-          "name": "Q. Zhang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 3-4:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1500",
-            "end": "1650"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Q. Zhang"
+    "Qiang Zhang"
   ],
-  "scraped_at": "2026-06-17T23:11:18.601Z"
+  "scraped_at": "2026-06-18T03:02:29.093Z"
 }

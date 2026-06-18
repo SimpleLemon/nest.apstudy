@@ -5,15 +5,16 @@
   "catalog_number": "397R",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 12",
+  "credit_hours": "3",
   "requirement_designation": "XA",
   "requirements": [
-    "XA"
+    "XA",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Variable credit. Prerequisite: permission of department. Special projects, research, and readings under the direction of a faculty member.",
-  "course_notes": null,
+  "course_notes": "This is a permission only course",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,164 +23,155 @@
   },
   "sections": [
     {
+      "atlas_key": "1251",
       "crn": "5510",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "S. Culpepper",
+      "instructor": "Sara Culpepper",
       "instructors": [
         {
-          "name": "S. Culpepper",
-          "email": null
+          "name": "Sara Culpepper",
+          "email": "sward6@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1252",
       "crn": "5677",
       "section_number": "2",
       "schedule_type": "SUP",
-      "instructor": "B. Glenn",
+      "instructor": "Brent Glenn",
       "instructors": [
         {
-          "name": "B. Glenn",
-          "email": null
+          "name": "Brent Glenn",
+          "email": "brent.glenn@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1253",
       "crn": "5857",
       "section_number": "3",
       "schedule_type": "SUP",
-      "instructor": "L. Fort",
+      "instructor": "Lydia Fort",
       "instructors": [
         {
-          "name": "L. Fort",
-          "email": null
+          "name": "Lydia Fort",
+          "email": "lydia.fort@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5510",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "S. Culpepper",
-      "instructors": [
-        {
-          "name": "S. Culpepper",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5677",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "B. Glenn",
-      "instructors": [
-        {
-          "name": "B. Glenn",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5857",
-      "section_number": "3",
-      "schedule_type": "SUP",
-      "instructor": "L. Fort",
-      "instructors": [
-        {
-          "name": "L. Fort",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
+    "total_sections": 3,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 6,
+    "other": 3,
     "open": 0,
-    "closed": 6,
+    "closed": 3,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "B. Glenn",
-    "L. Fort",
-    "S. Culpepper"
+    "Brent Glenn",
+    "Lydia Fort",
+    "Sara Culpepper"
   ],
-  "scraped_at": "2026-06-17T23:14:59.598Z"
+  "scraped_at": "2026-06-18T03:19:16.938Z"
 }

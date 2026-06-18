@@ -5,13 +5,13 @@
   "catalog_number": "552",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "We live in a noisy world -- the average person encounters 6,000-10,000 ads in a single day and our attention spans have perfected the art of tuning out. Becoming a compelling storyteller is your best chance to break through. The Content Marketing course is useful for anyone that needs to present to a stakeholder: brand to consumers, consultant to client or entrepreneur to investors. We will examine key social and digital platforms and how each monetizes. To dig into creating content, we explore sticky ideas, storytelling through screenplays and brand archetype.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "4099",
       "crn": "3828",
       "section_number": "3201",
       "schedule_type": "LEC",
-      "instructor": "M. Cooley",
+      "instructor": "Marina Cooley",
       "instructors": [
         {
-          "name": "M. Cooley",
-          "email": null
+          "name": "Marina Cooley",
+          "email": "marinacooley@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 66,
+      "seats_available": 45,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -52,56 +65,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "3828",
-      "section_number": "3201",
-      "schedule_type": "LEC",
-      "instructor": "M. Cooley",
-      "instructors": [
-        {
-          "name": "M. Cooley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Cooley"
+    "Marina Cooley"
   ],
-  "scraped_at": "2026-06-17T23:12:04.120Z"
+  "scraped_at": "2026-06-18T03:06:42.626Z"
 }

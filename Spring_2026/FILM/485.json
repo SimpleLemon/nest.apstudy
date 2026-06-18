@@ -5,23 +5,24 @@
   "catalog_number": "485",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3 - 4",
+  "credit_hours": "3",
   "requirement_designation": "HAP",
   "requirements": [
     "HAP"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course is designed to give advanced students the opportunity to investigate intensively a specialized topic in film and media studies. May be repeated for credit when topic varies.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will take a systems/lifespan approach, integrating anatomy, physiology, and pathophysiology related to anesthesiology. Foci include the effects of general and regional anesthesia in patients with renal, hepatic, endocrine, neuromuscular, congenital heart, and genetic based disorders.",
   "course_notes": "FILM 301 or FILM 301W or FILM 302 or equivalent transfer credit as prerequisite.",
   "requisites": "FILM 301 or FILM 301W or FILM 302 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4029",
       "crn": "3703",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +30,28 @@
       "instructors": [
         {
           "name": "G. Zinman",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Nursing Learning Ctr, Rm 325",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a; T 4-6p",
@@ -59,9 +72,14 @@
             "end": "1800"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4030",
       "crn": "5245",
       "section_number": "2",
       "schedule_type": "LEC",
@@ -69,91 +87,28 @@
       "instructors": [
         {
           "name": "J. Kim",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Nursing Learning Ctr, Rm 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3703",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "G. Zinman",
-      "instructors": [
-        {
-          "name": "G. Zinman",
-          "email": null
-        }
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a; T 4-6p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1800"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5245",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "J. Kim",
-      "instructors": [
-        {
-          "name": "J. Kim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
+      "enrollment_capacity": 17,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -169,22 +124,26 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 0,
-    "waitlisted": 2
+    "open": 1,
+    "closed": 1,
+    "waitlisted": 0
   },
   "instructors_unique": [
     "G. Zinman",
     "J. Kim"
   ],
-  "scraped_at": "2026-06-17T23:02:32.988Z"
+  "scraped_at": "2026-06-18T02:21:20.320Z"
 }

@@ -5,15 +5,15 @@
   "catalog_number": "386",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 4",
+  "credit_hours": "4",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Study of particular subjects pertaining to biology with laboratory or field experiences. May be repeated for credit when topic varies.",
-  "course_notes": null,
+  "course_notes": "Topic: Microbiology of Phages-Genes Functions LAB. This course is an extension of the two-semester SEA-PHAGES laboratory course sequence (Phage Discovery and Phage Genomics) and follows the Howard Hughes Medical Institute (HHMI) SEA-GENES curriculum. In this laboratory, students will investigate the function of bacteriophage genes using a variety of molecular biology and genetic techniques including cloning, expression of genes, and characterization of gene function using phenotypic and/or Protein-Protein Interaction (PPI) assays. This course is designed to be discovery driven authentic laboratory research. Student data and materials will be prepared for submission and archiving and students that complete the course will be included as authors on peer reviewed publications stemming from their shared experimental results. This course will satisfy an elective requirement, upper-level laboratory requirement, and is considered a microbiology laboratory course for pre-professional school requirements. Prerequisites: Biology 142 + 142L AND Biology 285-Phage Genomics + Biology 369LW Microbiology Research Lab OR pre/co-requisite Biology 370 OR instructor signature/permission. Contact Professor Eric Battaglioli (eric.john.battaglioli@emory.edu) with questions and for permission to enroll in the course",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "3558",
       "crn": "1822",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "E. Battaglioli",
+      "instructor": "Eric Battaglioli",
       "instructors": [
         {
-          "name": "E. Battaglioli",
-          "email": null
+          "name": "Eric Battaglioli",
+          "email": "eric.john.battaglioli@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 117",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 9:30a-12:30p",
@@ -49,26 +64,45 @@
             "end": "1230"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3559",
       "crn": "5696",
       "section_number": "3",
       "schedule_type": "LAB",
-      "instructor": "E. Battaglioli",
+      "instructor": "Eric Battaglioli",
       "instructors": [
         {
-          "name": "E. Battaglioli",
-          "email": null
+          "name": "Eric Battaglioli",
+          "email": "eric.john.battaglioli@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 117",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9:30a-12:30p",
@@ -79,81 +113,25 @@
             "end": "1230"
           }
         ]
-      }
-    },
-    {
-      "crn": "1822",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Battaglioli",
-      "instructors": [
-        {
-          "name": "E. Battaglioli",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 9:30a-12:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "930",
-            "end": "1230"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5696",
-      "section_number": "3",
-      "schedule_type": "LAB",
-      "instructor": "E. Battaglioli",
-      "instructors": [
-        {
-          "name": "E. Battaglioli",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 9:30a-12:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "930",
-            "end": "1230"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 2,
-    "labs": 2,
+    "total_sections": 2,
+    "lectures": 1,
+    "labs": 1,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Battaglioli"
+    "Eric Battaglioli"
   ],
-  "scraped_at": "2026-06-17T23:09:24.580Z"
+  "scraped_at": "2026-06-18T02:48:31.759Z"
 }

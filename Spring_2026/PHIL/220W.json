@@ -5,23 +5,25 @@
   "catalog_number": "220W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "1",
   "requirement_designation": "HAW",
   "requirements": [
-    "HAW"
+    "HAW",
+    "Social Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Surveys key texts in political philosophy, including ancient, early modern, 19th and 20th century sources. Key issues include the nature of the just state and the rights and responsibilities of citizens.",
-  "course_notes": "One PHIL course or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "PORT 250 is a one-credit course in which students follow and discuss current events via critical analysis and discussion of Lusophone media. The focus will be on newspapers and magazines published in the Portuguese-speaking world. Pre-req: PORT 201 or equivalent.",
+  "course_notes": "(Same as AFS 270 3)",
   "requisites": "One PHIL course or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4246",
       "crn": "2008",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +31,30 @@
       "instructors": [
         {
           "name": "Marriott/Jafari Khaneh",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 225",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 12,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,26 +70,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4247",
       "crn": "2009",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "B. Brewer",
+      "instructor": "Jenny Burgman",
       "instructors": [
         {
-          "name": "B. Brewer",
-          "email": null
+          "name": "Jenny Burgman",
+          "email": "jenny.burgman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Oxford Science Bldg. 223",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 24,
+      "seats_available": 8,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -89,92 +126,26 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "2008",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Marriott/Jafari Khaneh",
-      "instructors": [
-        {
-          "name": "Marriott/Jafari Khaneh",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2009",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "B. Brewer",
-      "instructors": [
-        {
-          "name": "B. Brewer",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "B. Brewer",
+    "Jenny Burgman",
     "Marriott/Jafari Khaneh"
   ],
-  "scraped_at": "2026-06-17T23:06:07.918Z"
+  "scraped_at": "2026-06-18T02:38:17.519Z"
 }

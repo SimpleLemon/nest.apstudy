@@ -8,37 +8,51 @@
   "credit_hours": "3",
   "requirement_designation": "MQR",
   "requirements": [
-    "MQR"
+    "MQR",
+    "Humanities & Arts with C.Comm/Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course will cover the underpinnings, algorithms, and practices that enable a computer to learn. Emphasis will be on fundamental theory and algorithms in statistical machine learning, and approaches to applying machine learning in a variety of domains.",
-  "course_notes": "(CS224 or CS_OX 224) and (CS 253 or CS_OX 253) and (MATH 221 or MATH_OX 221 or MATH 275 or MATH 321) or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Students will examine and apply the science of nursing in acute care settings with the adult/older adult population facing alterations in health.",
+  "course_notes": "This section is for BSN traditional semester 3 students only.",
   "requisites": "(CS224 or CS_OX 224) and (CS 253 or CS_OX 253) and (MATH 221 or MATH_OX 221 or MATH 275 or MATH 321) or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4372",
       "crn": "3665",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Tang",
+      "instructor": "Rowena Elliott",
       "instructors": [
         {
-          "name": "S. Tang",
-          "email": null
+          "name": "Rowena Elliott",
+          "email": "rowena.wade.elliott@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Nursing School - P01",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 170,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,26 +68,47 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4373",
       "crn": "3666",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "W. Jin",
+      "instructor": "Craig Perry",
       "instructors": [
         {
-          "name": "W. Jin",
-          "email": null
+          "name": "Craig Perry",
+          "email": "craig.allen.perry@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Modern Language 128",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities & Arts with C.Comm/Race & Ethnicity(*)",
+      "requirements": [
+        "Humanities & Arts with C.Comm/Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "2",
+      "enrollment_capacity": 6,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -89,92 +124,26 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "3665",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Tang",
-      "instructors": [
-        {
-          "name": "S. Tang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3666",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "W. Jin",
-      "instructors": [
-        {
-          "name": "W. Jin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Tang",
-    "W. Jin"
+    "Craig Perry",
+    "Rowena Elliott"
   ],
-  "scraped_at": "2026-06-17T23:01:53.991Z"
+  "scraped_at": "2026-06-18T02:16:08.225Z"
 }

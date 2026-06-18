@@ -5,38 +5,51 @@
   "catalog_number": "585",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The nature of a teaching assistantship varies from department to department. The defining characteristic of this position across all departments and programs is a controlled, carefully monitored initial teaching opportunity. A teaching assistant may be responsible for 10 to 12 hours per week of discussion or laboratory supervision.",
+  "course_notes": "(S/U Only) (Permission Required Prior to Enrollment)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1776",
       "crn": "3869",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "T. Andrade",
+      "instructor": "James K Rilling",
       "instructors": [
         {
-          "name": "T. Andrade",
-          "email": null
+          "name": "James K Rilling",
+          "email": "jrillin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 2,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-7p",
@@ -47,26 +60,43 @@
             "end": "1900"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1777",
       "crn": "3870",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "D. LaChance",
+      "instructor": "Elaine Johnson",
       "instructors": [
         {
-          "name": "D. LaChance",
-          "email": null
+          "name": "Elaine Johnson",
+          "email": "elaine.joyce.johnson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 2,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-5:30p",
@@ -77,26 +107,43 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1778",
       "crn": "3871",
       "section_number": "3",
       "schedule_type": "SEM",
-      "instructor": "G. Pandey",
+      "instructor": "Joseph Manns",
       "instructors": [
         {
-          "name": "G. Pandey",
-          "email": null
+          "name": "Joseph Manns",
+          "email": "jmanns@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 2,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:30p",
@@ -107,26 +154,43 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1779",
       "crn": "4401",
       "section_number": "4",
       "schedule_type": "SEM",
-      "instructor": "E. Dunbar",
+      "instructor": "Irwin Waldman",
       "instructors": [
         {
-          "name": "E. Dunbar",
-          "email": null
+          "name": "Irwin Waldman",
+          "email": "psyiw@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 2,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-5:30p",
@@ -137,26 +201,43 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1780",
       "crn": "4404",
       "section_number": "5",
       "schedule_type": "SEM",
-      "instructor": "K. Gross",
+      "instructor": "Lesenia Fish",
       "instructors": [
         {
-          "name": "K. Gross",
-          "email": null
+          "name": "Lesenia Fish",
+          "email": "lesenia.fish@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 2,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 10a-1p",
@@ -167,9 +248,14 @@
             "end": "1300"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1781",
       "crn": "5263",
       "section_number": "6",
       "schedule_type": "SEM",
@@ -177,16 +263,28 @@
       "instructors": [
         {
           "name": "M. Chin",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 99,
+      "seats_available": 97,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4-6:45p",
@@ -197,236 +295,43 @@
             "end": "1845"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1782",
       "crn": "5899",
       "section_number": "7",
       "schedule_type": "SEM",
-      "instructor": "E. Keme",
+      "instructor": "Kadji Amin",
       "instructors": [
         {
-          "name": "E. Keme",
-          "email": null
+          "name": "Kadji Amin",
+          "email": "kadji.amin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 1-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3869",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "T. Andrade",
-      "instructors": [
-        {
-          "name": "T. Andrade",
-          "email": null
-        }
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-7p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1900"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3870",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "D. LaChance",
-      "instructors": [
-        {
-          "name": "D. LaChance",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3871",
-      "section_number": "3",
-      "schedule_type": "SEM",
-      "instructor": "G. Pandey",
-      "instructors": [
-        {
-          "name": "G. Pandey",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4401",
-      "section_number": "4",
-      "schedule_type": "SEM",
-      "instructor": "E. Dunbar",
-      "instructors": [
-        {
-          "name": "E. Dunbar",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4404",
-      "section_number": "5",
-      "schedule_type": "SEM",
-      "instructor": "K. Gross",
-      "instructors": [
-        {
-          "name": "K. Gross",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 10a-1p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1300"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5263",
-      "section_number": "6",
-      "schedule_type": "SEM",
-      "instructor": "M. Chin",
-      "instructors": [
-        {
-          "name": "M. Chin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 4-6:45p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1845"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5899",
-      "section_number": "7",
-      "schedule_type": "SEM",
-      "instructor": "E. Keme",
-      "instructors": [
-        {
-          "name": "E. Keme",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
+      "enrollment_capacity": 2,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 1-3:45p",
@@ -437,27 +342,31 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 14,
+    "total_sections": 7,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 14,
-    "open": 12,
-    "closed": 2,
+    "other": 7,
+    "open": 6,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. LaChance",
-    "E. Dunbar",
-    "E. Keme",
-    "G. Pandey",
-    "K. Gross",
-    "M. Chin",
-    "T. Andrade"
+    "Elaine Johnson",
+    "Irwin Waldman",
+    "James K Rilling",
+    "Joseph Manns",
+    "Kadji Amin",
+    "Lesenia Fish",
+    "M. Chin"
   ],
-  "scraped_at": "2026-06-17T23:03:05.504Z"
+  "scraped_at": "2026-06-18T02:24:48.790Z"
 }

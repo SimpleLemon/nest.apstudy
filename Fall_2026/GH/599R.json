@@ -5,13 +5,13 @@
   "catalog_number": "599R",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "4",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "All students in the HDGH must complete a thesis project in order to fulfill the requirements of the MPH degree. This project is a rigorous academic requirement; as the culmination of the MPH experience, it is an independent, theory-based inquiry in which the student applies knowledge and skills acquired during the MPH program to the scholarly study of a public health problem. In HDGH, the thesis project may take the form of either a Special Studies Project (e.g. a deliverable for an organization) or a Research Project (e.g. systematic review, analysis of primary or secondary data) using quantitative, qualitative or other methodologies and presented in a traditional style or manuscript style. .",
+  "course_notes": "This course section is for GH MPH students only and the default credit value is 4 credit hours.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,115 +20,106 @@
   },
   "sections": [
     {
+      "atlas_key": "173",
       "crn": "2258",
       "section_number": "1",
       "schedule_type": "THE",
-      "instructor": "G. Farhat",
+      "instructor": "Ghada Farhat",
       "instructors": [
         {
-          "name": "G. Farhat",
-          "email": null
+          "name": "Ghada Farhat",
+          "email": "ghada.n.farhat@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "174",
       "crn": "2259",
       "section_number": "2",
       "schedule_type": "THE",
-      "instructor": "Farhat/Jones",
+      "instructor": "Ghada Farhat",
       "instructors": [
         {
-          "name": "Farhat/Jones",
-          "email": null
+          "name": "Ghada Farhat",
+          "email": "ghada.n.farhat@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jeb Jones",
+          "email": "jeb.jones@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "2258",
-      "section_number": "1",
-      "schedule_type": "THE",
-      "instructor": "G. Farhat",
-      "instructors": [
-        {
-          "name": "G. Farhat",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "2259",
-      "section_number": "2",
-      "schedule_type": "THE",
-      "instructor": "Farhat/Jones",
-      "instructors": [
-        {
-          "name": "Farhat/Jones",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 4,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Farhat/Jones",
-    "G. Farhat"
+    "Ghada Farhat",
+    "Jeb Jones"
   ],
-  "scraped_at": "2026-06-17T23:10:49.344Z"
+  "scraped_at": "2026-06-18T02:59:07.916Z"
 }

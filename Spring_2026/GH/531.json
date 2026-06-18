@@ -5,38 +5,61 @@
   "catalog_number": "531",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "0.5",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Board Rooms build community, engagement, and cohesion while connecting students to each other and to resources at Goizueta. Each student will stay in the same Room for their tenure in the program. Cohorts will meet monthly, with 1-2 additional community events offered each semester. Each Room will have one lead faculty/staff member. At each meeting, specific content around a provided subject will be developed and led by the student members. Individual sessions will feature program announcements, a student-led discussion of a contemporary problem, networking, and celebration of achievements.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "187",
       "crn": "1561",
       "section_number": "L1",
       "schedule_type": "LAB",
-      "instructor": "Team",
+      "instructor": "Usha Rackliffe",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Usha Rackliffe",
+          "email": "usha.rackliffe@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Usha Rackliffe",
+          "email": "usha.rackliffe@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Usha Rackliffe",
+          "email": "usha.rackliffe@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 60,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 9-9:50a",
@@ -47,26 +70,53 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "188",
       "crn": "1562",
       "section_number": "L2",
       "schedule_type": "LAB",
-      "instructor": "Stein/Pambo",
+      "instructor": "Madeline Schmees",
       "instructors": [
         {
-          "name": "Stein/Pambo",
-          "email": null
+          "name": "Madeline Schmees",
+          "email": "madeline.schmees@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Madeline Schmees",
+          "email": "madeline.schmees@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Madeline Schmees",
+          "email": "madeline.schmees@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 60,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-10:50a",
@@ -77,26 +127,53 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "189",
       "crn": "1563",
       "section_number": "L3",
       "schedule_type": "LAB",
-      "instructor": "Stein/Khanna",
+      "instructor": "Anna Gibbons",
       "instructors": [
         {
-          "name": "Stein/Khanna",
-          "email": null
+          "name": "Anna Gibbons",
+          "email": "anna.hobby@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Anna Gibbons",
+          "email": "anna.hobby@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Anna Gibbons",
+          "email": "anna.hobby@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0.5",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": 60,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 2-2:50p",
@@ -107,26 +184,43 @@
             "end": "1450"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "186",
       "crn": "1532",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Stein",
+      "instructor": "Tom Smith",
       "instructors": [
         {
-          "name": "A. Stein",
-          "email": null
+          "name": "Tom Smith",
+          "email": "tom.smith@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 66,
+      "seats_available": 60,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-2:50p",
@@ -137,144 +231,28 @@
             "end": "1450"
           }
         ]
-      }
-    },
-    {
-      "crn": "1561",
-      "section_number": "L1",
-      "schedule_type": "LAB",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 9-9:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1562",
-      "section_number": "L2",
-      "schedule_type": "LAB",
-      "instructor": "Stein/Pambo",
-      "instructors": [
-        {
-          "name": "Stein/Pambo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1563",
-      "section_number": "L3",
-      "schedule_type": "LAB",
-      "instructor": "Stein/Khanna",
-      "instructors": [
-        {
-          "name": "Stein/Khanna",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 2-2:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1400",
-            "end": "1450"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1532",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Stein",
-      "instructors": [
-        {
-          "name": "A. Stein",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-2:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1450"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 2,
-    "labs": 6,
+    "total_sections": 4,
+    "lectures": 1,
+    "labs": 3,
     "discussions": 0,
     "other": 0,
-    "open": 8,
-    "closed": 0,
+    "open": 3,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Stein",
-    "Stein/Khanna",
-    "Stein/Pambo",
-    "Team"
+    "Anna Gibbons",
+    "Madeline Schmees",
+    "Tom Smith",
+    "Usha Rackliffe"
   ],
-  "scraped_at": "2026-06-17T23:02:46.028Z"
+  "scraped_at": "2026-06-18T02:23:19.053Z"
 }

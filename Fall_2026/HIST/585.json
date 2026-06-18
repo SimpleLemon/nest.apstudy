@@ -5,13 +5,13 @@
   "catalog_number": "585",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "This course introduces students to the historical study of borders and border regions in Central and Eastern European history from the 17th to the 21st century. The focus allows for reflection on concepts such as sovereignty, territoriality, and the rise of modern (nation) states. Readings address examples such as Central and Eastern European (Germany, Poland, western borderlands of Russian Empire and USSR, today's Ukraine) as well as Central Asian (Kazakhstan). Wars, revolutions, shattered empires and new border regimes (such as the EU) have frequently redrawn European borders, making this world region an apt location for the subject. Students will be able to adapt their final projects in this class to geographic regions of their choice.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,41 @@
   },
   "sections": [
     {
+      "atlas_key": "1491",
       "crn": "2601",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "Eckert/Payne",
+      "instructor": "Astrid M. Eckert",
       "instructors": [
         {
-          "name": "Eckert/Payne",
-          "email": null
+          "name": "Astrid M. Eckert",
+          "email": "aeckert@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Matthew Payne",
+          "email": "mpayn01@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Bowden Hall 323",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 14,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-5:30p",
@@ -47,26 +65,43 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1492",
       "crn": "2604",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "L. Nenzi",
+      "instructor": "Laura Nenzi",
       "instructors": [
         {
-          "name": "L. Nenzi",
-          "email": null
+          "name": "Laura Nenzi",
+          "email": "laura.nenzi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Bowden Hall 323",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 9a-12p",
@@ -77,26 +112,43 @@
             "end": "1200"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1493",
       "crn": "2608",
       "section_number": "3",
       "schedule_type": "SEM",
-      "instructor": "C. Suh",
+      "instructor": "Chris Suh",
       "instructors": [
         {
-          "name": "C. Suh",
-          "email": null
+          "name": "Chris Suh",
+          "email": "chris.suh@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Bowden Hall 323",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:30p",
@@ -107,26 +159,43 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1494",
       "crn": "2610",
       "section_number": "4",
       "schedule_type": "SEM",
-      "instructor": "J. Ward",
+      "instructor": "Jason Ward",
       "instructors": [
         {
-          "name": "J. Ward",
-          "email": null
+          "name": "Jason Ward",
+          "email": "jason.morgan.ward@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Few Bldg 129",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 9a-12p",
@@ -137,26 +206,43 @@
             "end": "1200"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1495",
       "crn": "4477",
       "section_number": "5",
       "schedule_type": "SEM",
-      "instructor": "W. Rucker",
+      "instructor": "Walter Rucker",
       "instructors": [
         {
-          "name": "W. Rucker",
-          "email": null
+          "name": "Walter Rucker",
+          "email": "wrucker@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Candler Library 212",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 4,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 9a-12p",
@@ -167,175 +253,30 @@
             "end": "1200"
           }
         ]
-      }
-    },
-    {
-      "crn": "2601",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "Eckert/Payne",
-      "instructors": [
-        {
-          "name": "Eckert/Payne",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2604",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "L. Nenzi",
-      "instructors": [
-        {
-          "name": "L. Nenzi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 9a-12p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "900",
-            "end": "1200"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2608",
-      "section_number": "3",
-      "schedule_type": "SEM",
-      "instructor": "C. Suh",
-      "instructors": [
-        {
-          "name": "C. Suh",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2610",
-      "section_number": "4",
-      "schedule_type": "SEM",
-      "instructor": "J. Ward",
-      "instructors": [
-        {
-          "name": "J. Ward",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 9a-12p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "900",
-            "end": "1200"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4477",
-      "section_number": "5",
-      "schedule_type": "SEM",
-      "instructor": "W. Rucker",
-      "instructors": [
-        {
-          "name": "W. Rucker",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 9a-12p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "900",
-            "end": "1200"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
+    "total_sections": 5,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 10,
-    "open": 10,
+    "other": 5,
+    "open": 5,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Suh",
-    "Eckert/Payne",
-    "J. Ward",
-    "L. Nenzi",
-    "W. Rucker"
+    "Astrid M. Eckert",
+    "Chris Suh",
+    "Jason Ward",
+    "Laura Nenzi",
+    "Matthew Payne",
+    "Walter Rucker"
   ],
-  "scraped_at": "2026-06-17T23:11:08.778Z"
+  "scraped_at": "2026-06-18T03:00:28.244Z"
 }

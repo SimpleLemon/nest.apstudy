@@ -5,38 +5,62 @@
   "catalog_number": "622",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "3",
+  "requirement_designation": "Race and Ethnicity(*)",
+  "requirements": [
+    "Race and Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Variety of subjects pertaining to religion. Content will vary in successive offerings. May be repeated for credit when topic varies.",
+  "course_notes": "(Same as AAS 285 4, AFS 270 4) Complete Topic Title: Our Gods Never Left: Introduction to African & African Diaspora Studies This course examines African religions such as Nigerian Ifá-Òrìsà tradition, Congolese religions, indigenized Christianity and Islam as well as African Diaspora religions of Haitian Vodou, Cuban Lucumí and Palo, Jamaican Rastafari, and Black American Hoodoo and Conjure traditions. Employing a comparative religion approach, we explore Black Atlantic religious themes such as: God(s), spirit, and ancestor veneration, divination and sacred space, initiation and sacred arts, healing and the environment, gender and power, the impact of slavery on conversion/continuity, migration and diaspora. Ultimately, this introductory course encourages students to reevaluate their understanding of Africana religions as they gain familiarity with diverse cultural philosophies and ritual knowledge systems of these valuable ancestral traditions.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3114",
       "crn": "3480",
       "section_number": "2150",
       "schedule_type": "LEC",
-      "instructor": "K. Crowley",
+      "instructor": "Kyrah Malika Daniels",
       "instructors": [
         {
-          "name": "K. Crowley",
-          "email": null
+          "name": "Kyrah Malika Daniels",
+          "email": "kyrah.malika.daniels@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Ralycia Andrews",
+          "email": "ralycia.andrews@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "3",
+      "enrollment_capacity": 5,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6:30-9:30p",
@@ -47,26 +71,45 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3115",
       "crn": "3481",
       "section_number": "3250",
       "schedule_type": "LEC",
-      "instructor": "K. Crowley",
+      "instructor": "Javier Villa-Flores",
       "instructors": [
         {
-          "name": "K. Crowley",
-          "email": null
+          "name": "Javier Villa-Flores",
+          "email": "javier.villa-flores@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S107",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "3",
+      "enrollment_capacity": 4,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6:30-9:30p",
@@ -77,26 +120,45 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3116",
       "crn": "6194",
       "section_number": "4250",
       "schedule_type": "LEC",
-      "instructor": "K. Crowley",
+      "instructor": "Alejandro Herrero-Olaizola",
       "instructors": [
         {
-          "name": "K. Crowley",
-          "email": null
+          "name": "Alejandro Herrero-Olaizola",
+          "email": "alejandro@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "3",
+      "enrollment_capacity": 13,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6:30-9:30p",
@@ -107,111 +169,28 @@
             "end": "2130"
           }
         ]
-      }
-    },
-    {
-      "crn": "3480",
-      "section_number": "2150",
-      "schedule_type": "LEC",
-      "instructor": "K. Crowley",
-      "instructors": [
-        {
-          "name": "K. Crowley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3481",
-      "section_number": "3250",
-      "schedule_type": "LEC",
-      "instructor": "K. Crowley",
-      "instructors": [
-        {
-          "name": "K. Crowley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "6194",
-      "section_number": "4250",
-      "schedule_type": "LEC",
-      "instructor": "K. Crowley",
-      "instructors": [
-        {
-          "name": "K. Crowley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Crowley"
+    "Alejandro Herrero-Olaizola",
+    "Javier Villa-Flores",
+    "Kyrah Malika Daniels",
+    "Ralycia Andrews"
   ],
-  "scraped_at": "2026-06-17T23:02:36.315Z"
+  "scraped_at": "2026-06-18T02:22:28.138Z"
 }

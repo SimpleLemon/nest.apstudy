@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "The second half of a yearlong review, with emphasis on continued development of the four basic linguistic skills (speaking, listening, reading, and writing) and knowledge of Lusophone cultures and societies.",
-  "course_notes": null,
+  "course_notes": "CONTENT: This course aims to further develop communication skills in Portuguese and expand knowledge of Lusophone cultural traditions. We will review and refine our Portuguese grammar and vocabulary while engaging creatively and critically with short stories, films, songs, and other materials from Brazil, Angola, Mozambique, and Portugal. REQUIRED TEXTBOOK: Contextos: Curso Intermediário de Português, print or electronic edition. PARTICULARS: Evaluation is based on daily and active participation, homework, written and oral compositions, quizzes, exams, and Portuguese program activities. PREREQUISITES: Port 201 or equivalent.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,18 +23,34 @@
   },
   "sections": [
     {
+      "atlas_key": "2011",
       "crn": "2698",
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Staff",
       "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -49,49 +66,23 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2698",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [],
-  "scraped_at": "2026-06-17T23:14:23.824Z"
+  "scraped_at": "2026-06-18T03:15:42.084Z"
 }

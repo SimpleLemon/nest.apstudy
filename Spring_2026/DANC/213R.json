@@ -5,40 +5,53 @@
   "catalog_number": "213R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1",
+  "credit_hours": "4",
   "requirement_designation": "PE",
   "requirements": [
     "PE"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course will introduce a variety of African Dance styles and movement forms from the West and Central African countries. Students will understand the relationship of culture and tradition in these regions, and study the technical components of each dance form.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisites: Data Science students only or by permission of the instructor. In this course, students learn the fundamentals of statistical data science using both traditional statistical methods and programming/simulation-based learning. The topics include study designs, descriptive statistics and data visualizations, applications of conditional and joint probability in data science, simulating random variable distributions, confidence interval estimation and hypothesis testing for means and proportions using a variety of basic inferential one- and two-sample parametric and non-parametric methods. Students successfully completing this course will be able to choose appropriate basic inferential statistical analyses for public health questions, consider ethical implications of data analysis, perform exploratory data analyses and use computational tools to visualize data, produce meaningful reports of statistical analyses in R and provide sound interpretations of analysis results.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4495",
       "crn": "3068",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "T. Howard",
+      "instructor": "Aparajita Sur",
       "instructors": [
         {
-          "name": "T. Howard",
-          "email": null
+          "name": "Aparajita Sur",
+          "email": "aparajita.sur@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 35,
+      "seats_available": 32,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,56 +67,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "3068",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "T. Howard",
-      "instructors": [
-        {
-          "name": "T. Howard",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "T. Howard"
+    "Aparajita Sur"
   ],
-  "scraped_at": "2026-06-17T23:01:57.217Z"
+  "scraped_at": "2026-06-18T02:16:29.857Z"
 }

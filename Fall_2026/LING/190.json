@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "FS",
   "requirements": [
-    "FS"
+    "FS",
+    "First Year Seminar"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "The freshman seminar in linguistics introduces students to basic aspects in linguistics by focusing on specific themes and topics which vary according to the instructor.",
-  "course_notes": null,
+  "course_notes": "(Freshmen Seminar - Limited to First Year Students Only) In this course, we will examine and analyze SLANG as a specific subset of language. Using theories and methods from structural linguistics, sociolinguistics, corpus linguistics, and the history of English, students will not only be immersed in previous research but will create their own projects and collect and analyze their own data. Students who decide to take this course agree to have civil, objective, and (mostly) mature discussions about a range of topics. Please note that, due to the nature of this course's topic, a lot of the language that we will be discussing is considered taboo by some. If you are easily offended by so-called coarse language or topics such as sex, bodily functions, or body parts, this may not be the course for you.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "782",
       "crn": "1625",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "S. Tamasi",
+      "instructor": "Susan Tamasi",
       "instructors": [
         {
-          "name": "S. Tamasi",
-          "email": null
+          "name": "Susan Tamasi",
+          "email": "stamasi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -54,26 +72,47 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "783",
       "crn": "3992",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "R. Franzosi",
+      "instructor": "Roberto Franzosi",
       "instructors": [
         {
-          "name": "R. Franzosi",
-          "email": null
+          "name": "Roberto Franzosi",
+          "email": "rfranzo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Tarbutton Hall 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -89,92 +128,26 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "1625",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "S. Tamasi",
-      "instructors": [
-        {
-          "name": "S. Tamasi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3992",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "R. Franzosi",
-      "instructors": [
-        {
-          "name": "R. Franzosi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
+    "other": 2,
     "open": 0,
-    "closed": 4,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Franzosi",
-    "S. Tamasi"
+    "Roberto Franzosi",
+    "Susan Tamasi"
   ],
-  "scraped_at": "2026-06-17T23:11:54.318Z"
+  "scraped_at": "2026-06-18T03:04:55.504Z"
 }

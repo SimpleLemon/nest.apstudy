@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "An introduction to drafting, modeling, rendering and animation in which students explore the potential of the computer as an active analytical and design instrument. We take a hands-on approach, focusing on two projects selected according to students' own disciplinary interests.",
-  "course_notes": null,
+  "course_notes": "\"Architecture Visualization and Modeling Lab\"Creating architecture within the digital world has given the designer the power to showcase their ideas in new and unimaginable ways. The creator is no longer limited by their physical capabilities and can explore ideas in 2-D, 3-D, and simple motion. This class serves as an introduction to software mediums in which you can tell the story of architecture. This class is open to all students with a variety of backgrounds. Architectural Studies minor: core requirement Art History major / minor: maters & materials",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "3138",
       "crn": "1748",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "C. Newton",
+      "instructor": "Chloe Newton",
       "instructors": [
         {
-          "name": "C. Newton",
-          "email": null
+          "name": "Chloe Newton",
+          "email": "chloe.olivia.newton@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - E301A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6-9p",
@@ -49,51 +64,25 @@
             "end": "2100"
           }
         ]
-      }
-    },
-    {
-      "crn": "1748",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "C. Newton",
-      "instructors": [
-        {
-          "name": "C. Newton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6-9p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1800",
-            "end": "2100"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Newton"
+    "Chloe Newton"
   ],
-  "scraped_at": "2026-06-17T23:09:14.900Z"
+  "scraped_at": "2026-06-18T02:47:16.208Z"
 }

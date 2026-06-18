@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Introduction to the fundamental principles of classical Latin. Students will attain as rapidly as possible the ability to read and understand literary works.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "774",
       "crn": "1984",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "E. Master",
+      "instructor": "Emily Master",
       "instructors": [
         {
-          "name": "E. Master",
-          "email": null
+          "name": "Emily Master",
+          "email": "emily.laura.master@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Candler Library 124",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TThF 10-11:15a",
@@ -59,26 +77,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "775",
       "crn": "1985",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "C. Schroer",
+      "instructor": "Clayton Schroer",
       "instructors": [
         {
-          "name": "C. Schroer",
-          "email": null
+          "name": "Clayton Schroer",
+          "email": "clayton.schroer@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Candler Library 121",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MWF 10-11:15a",
@@ -99,146 +138,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "776",
       "crn": "1986",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "C. Schroer",
+      "instructor": "Clayton Schroer",
       "instructors": [
         {
-          "name": "C. Schroer",
-          "email": null
+          "name": "Clayton Schroer",
+          "email": "clayton.schroer@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MWF 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1984",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "E. Master",
-      "instructors": [
-        {
-          "name": "E. Master",
-          "email": null
-        }
+      "location": "Psychology Bldg 225",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TThF 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1985",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "C. Schroer",
-      "instructors": [
-        {
-          "name": "C. Schroer",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MWF 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1986",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "C. Schroer",
-      "instructors": [
-        {
-          "name": "C. Schroer",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
+      "enrollment_capacity": 12,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MWF 1-2:15p",
@@ -259,22 +199,26 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 4,
+    "open": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Schroer",
-    "E. Master"
+    "Clayton Schroer",
+    "Emily Master"
   ],
-  "scraped_at": "2026-06-17T23:11:51.087Z"
+  "scraped_at": "2026-06-18T03:04:39.409Z"
 }

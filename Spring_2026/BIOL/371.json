@@ -5,40 +5,55 @@
   "catalog_number": "371",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "2",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Explores the diverse biomes of the tropics. Focus will be on tropical forests and grasslands, with an emphasis on ecological processes, biodiversity, human impact in the tropics, indigenous peoples, and ethnobotany.",
-  "course_notes": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or (BIOL 142 and BIOL 142L) or BIOL_OX 142 or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to Jewish populations and cultures within the framework of four fields of general anthropology: biological, archaeological, cultural, and linguistic.",
+  "course_notes": "(Same as ANT 258 1 and REL 258 1) (This is a fascinating time to be-or just learn about-Judaism and Jewishness. We are less than a century out from the genocidal devastation of the Holocaust, the birth of the State of Israel as the first independent Jewish commonwealth in almost two millennia, unprecedented freedom for Jews in many (but not all) parts of the world, and vast migrations by almost every historical Jewish community to a different part of the world than it lived in a century ago. Surely, these are features of the modern Jewish condition we will need to discuss anthropologically.) We also live in an age of unprecedented technology and shifts in worldview. Can a genetic profile \"prove\" Jewishness? In what special ways are some women using assisted reproductive technology or \"reproductive tourism\" to fulfill Jewish kinship or social and religious expectations? Some of the most interesting anthropological research on Jewish communities today centers on these issues. This class takes place at a moment of increasing political polarization, including confrontations with legacies of (and contested definitions of) race, gender, and antisemitism. Do the new discussions of race and gender, as well as the politics of \"diversity, equity and inclusion\" make it harder or easier to identify and respond to key elements of the modern Jewish condition, individually or collectively? Has it grown easier or harder to answer the old question whether \"Jewishness\" is primarily a religious, ethnic, racial or national designation [spoiler: these are not the only options]? Does it matter? To whom? What is actually at stake in these conversations?",
   "requisites": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or (BIOL 142 and BIOL 142L) or BIOL_OX 142 or equivalent transfer credit as prerequisite.",
   "cross_listed": "ENVS 371",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "769",
       "crn": "1663",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "L. Wilson",
+      "instructor": "Don Seeman",
       "instructors": [
         {
-          "name": "L. Wilson",
-          "email": null
+          "name": "Don Seeman",
+          "email": "dseeman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 200",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-4:30p",
@@ -49,51 +64,25 @@
             "end": "1630"
           }
         ]
-      }
-    },
-    {
-      "crn": "1663",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "L. Wilson",
-      "instructors": [
-        {
-          "name": "L. Wilson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-4:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1630"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Wilson"
+    "Don Seeman"
   ],
-  "scraped_at": "2026-06-17T23:01:21.205Z"
+  "scraped_at": "2026-06-18T02:09:43.796Z"
 }

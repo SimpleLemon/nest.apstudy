@@ -5,13 +5,13 @@
   "catalog_number": "541",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "(Permission Required Prior to Enrollment)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,38 @@
   },
   "sections": [
     {
+      "atlas_key": "1648",
       "crn": "2383",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "M. Treadway",
+      "instructor": "Michael Treadway",
       "instructors": [
         {
-          "name": "M. Treadway",
-          "email": null
+          "name": "Michael Treadway",
+          "email": "mtreadway@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 393",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 10a-12:30p",
@@ -47,51 +62,25 @@
             "end": "1230"
           }
         ]
-      }
-    },
-    {
-      "crn": "2383",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "M. Treadway",
-      "instructors": [
-        {
-          "name": "M. Treadway",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 10a-12:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1230"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Treadway"
+    "Michael Treadway"
   ],
-  "scraped_at": "2026-06-17T23:14:27.058Z"
+  "scraped_at": "2026-06-18T03:17:10.156Z"
 }

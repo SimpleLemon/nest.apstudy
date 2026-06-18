@@ -5,40 +5,58 @@
   "catalog_number": "199",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1",
+  "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
   "requirement_designation": "PE",
   "requirements": [
-    "PE"
+    "PE",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course is an introduction to golf fundamentals. All aspects of the rules and golf swing techniques are covered. Driving range, classroom and course time are part of this class.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Credit variable. Psychology majors only, registration by permission of faculty supervisor.",
+  "course_notes": "Permission Required Prior to Enrollment) Psychology majors only. Credit is variable, 1.00 - 12.00 (For 3.00 hrs/week = 1.00 credit). Students must have consent of faculty member (inside or outside of the department) and agreement on a research, expectations and responsibilities in the lab. Students are required to complete a PSYC 498R/499R Contract with a faculty member or principal investigator detailing their research. Contract is available through Lorenza Houser (lhouser@emory.edu). Please e-mail Ms. Houser to obtain a copy of the contract to complete and sign along with your faculty supervisor and/or principal investigator inside or outside the department before returning it to her. Enrollment in PSYC 499R are done administratively; Ms. Houser will enroll you in directed research herself. For students conducting research outside of the Department of Psychology, the contract must be approved by Dr. Andrew Kazama (akazama@emory.edu) as the department's director of undergraduate research before submitting it to Ms. Houser.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1139",
       "crn": "4005",
       "section_number": "1",
       "schedule_type": "PE",
-      "instructor": "S. Butler",
+      "instructor": "Aubrey Kelly",
       "instructors": [
         {
-          "name": "S. Butler",
-          "email": null
+          "name": "Aubrey Kelly",
+          "email": "aubrey.kelly@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 10-11:15a",
@@ -49,26 +67,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1140",
       "crn": "4023",
       "section_number": "2",
       "schedule_type": "PE",
-      "instructor": "J. Sjoberg",
+      "instructor": "Elizabeth Kim",
       "instructors": [
         {
-          "name": "J. Sjoberg",
-          "email": null
+          "name": "Elizabeth Kim",
+          "email": "elizabeth.kim@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 10-11:15a",
@@ -79,82 +118,26 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "4005",
-      "section_number": "1",
-      "schedule_type": "PE",
-      "instructor": "S. Butler",
-      "instructors": [
-        {
-          "name": "S. Butler",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4023",
-      "section_number": "2",
-      "schedule_type": "PE",
-      "instructor": "J. Sjoberg",
-      "instructors": [
-        {
-          "name": "J. Sjoberg",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 10-11:15a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
+    "other": 2,
     "open": 2,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Sjoberg",
-    "S. Butler"
+    "Aubrey Kelly",
+    "Elizabeth Kim"
   ],
-  "scraped_at": "2026-06-17T23:05:57.995Z"
+  "scraped_at": "2026-06-18T02:37:22.879Z"
 }

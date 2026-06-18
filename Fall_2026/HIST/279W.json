@@ -5,13 +5,15 @@
   "catalog_number": "279W",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "4",
+  "requirement_designation": "Social Sciences with Continuing Communication(*)",
+  "requirements": [
+    "Social Sciences with Continuing Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course explores China's Communist era under Chairman Mao (1949-76) and the period of rapid economic growth that followed. Topics to be covered include the Great Leap Forward, the Cultural Revolution, the 1989 Tiananmen Movement, urban-rural inequality, the environment, and the One-Child Policy.",
+  "course_notes": "(Same as CHN 279W 1)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +22,40 @@
   },
   "sections": [
     {
+      "atlas_key": "3438",
       "crn": "3967",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Rodriguez",
+      "instructor": "Sarah M. Rodriguez",
       "instructors": [
         {
-          "name": "S. Rodriguez",
-          "email": null
+          "name": "Sarah M. Rodriguez",
+          "email": "sarah.rodriguez@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Social Sciences with Continuing Communication(*)",
+      "requirements": [
+        "Social Sciences with Continuing Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 6,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -52,56 +71,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3967",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Rodriguez",
-      "instructors": [
-        {
-          "name": "S. Rodriguez",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Rodriguez"
+    "Sarah M. Rodriguez"
   ],
-  "scraped_at": "2026-06-17T23:11:08.775Z"
+  "scraped_at": "2026-06-18T03:00:28.235Z"
 }

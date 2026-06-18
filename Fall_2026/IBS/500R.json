@@ -5,13 +5,13 @@
   "catalog_number": "500R",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,46 @@
   },
   "sections": [
     {
+      "atlas_key": "1516",
       "crn": "5359",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Anita Corbett",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Anita Corbett",
+          "email": "acorbe2@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shakira Suglia",
+          "email": "shakira.suglia@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kristen Walden",
+          "email": "kristen.alexandria.walden@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 123",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 25,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 5:30-6:30p",
@@ -47,26 +70,68 @@
             "end": "1830"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1517",
       "crn": "5360",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Anita Corbett",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Anita Corbett",
+          "email": "acorbe2@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Victor Faundez",
+          "email": "vfaunde@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Amanda Marie James",
+          "email": "amandamariejames@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Alejandro Lopez",
+          "email": "alejandro.lopez@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shakira Suglia",
+          "email": "shakira.suglia@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kristen Walden",
+          "email": "kristen.alexandria.walden@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 35,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4-5p",
@@ -77,81 +142,30 @@
             "end": "1700"
           }
         ]
-      }
-    },
-    {
-      "crn": "5359",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 5:30-6:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1730",
-            "end": "1830"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5360",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 4-5p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1700"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Team"
+    "Alejandro Lopez",
+    "Amanda Marie James",
+    "Anita Corbett",
+    "Kristen Walden",
+    "Shakira Suglia",
+    "Victor Faundez"
   ],
-  "scraped_at": "2026-06-17T23:11:18.587Z"
+  "scraped_at": "2026-06-18T03:02:29.082Z"
 }

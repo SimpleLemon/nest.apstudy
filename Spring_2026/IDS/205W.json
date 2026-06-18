@@ -5,40 +5,55 @@
   "catalog_number": "205W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "NSW",
   "requirements": [
     "NSW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "IDS205 addresses: What is the nature of scientific evidence? How does it compare to other types of evidence? What counts as evidence in science? In other disciplines? What are the histories of the answers to these questions? How do they affect our everyday lives?",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "May be repeated for credit when topic varies. Pre/co-requisites vary with topic.",
+  "course_notes": "(Same as BIOL 485 1) PLEASE READ THE INFORMATION FOR THIS COURSE before contacting Dr. Bromberg (yana.bromberg@emory.edu) for permission. Prereqs: Biol 142 + 142L and Biol 264. This course is also taught as CS 485 and CS 584 (but is not cross listed). This class has a large coding in Python component. You will NOT do well without knowing the basics of coding in Python. To test your readiness, take a look at the list of problems at the following URL: https://rosalind.info/problems/list-view/. If you are able to answer these without significant ChatGPT help, your request to register should contain the following sentence: I have tested myself with Rosalind.info problems and have sufficient Python coding abilities to address them. High school biology and experience in medical or clinical settings are not sufficient for this class. The simplest question to test your bio knowledge is: Without using the internet, do you know how evolution is related to vertical descent? If yes, your request to register should have an answer to this question. If registering for the graduate version of the class (CS 584), please be aware that there is an expectation of a journal club participation--once a week, for an hour. The timing will be scheduled once classes start. However, you should expect to have the journal club on Tuesdays at 3 p.m. If you are requesting registration for the graduate version of this course, your email should also include the acknowledgement of the journal club requirement.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3077",
       "crn": "2500",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "R. Bahl",
+      "instructor": "Yana Bromberg",
       "instructors": [
         {
-          "name": "R. Bahl",
-          "email": null
+          "name": "Yana Bromberg",
+          "email": "yana.bromberg@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 126",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,56 +69,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2500",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "R. Bahl",
-      "instructors": [
-        {
-          "name": "R. Bahl",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Bahl"
+    "Yana Bromberg"
   ],
-  "scraped_at": "2026-06-17T23:03:18.568Z"
+  "scraped_at": "2026-06-18T02:26:24.112Z"
 }

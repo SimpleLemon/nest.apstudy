@@ -5,40 +5,58 @@
   "catalog_number": "289",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Natural Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "A seminar or lecture series on topics of special sociological concern.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will introduce students to the basic science of climate change, possibly the greatest challenge of our time, and discuss the climate history of the Earth and the role of energy in our modern society and economy. No prerequisites are necessary.",
+  "course_notes": "(Same as PHYS 125 1)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3789",
       "crn": "4383",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Stewart",
+      "instructor": "Justin C Burton",
       "instructors": [
         {
-          "name": "J. Stewart",
-          "email": null
+          "name": "Justin C Burton",
+          "email": "justin.c.burton@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Atwood Chemistry Bldg. 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -54,26 +72,73 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3790",
       "crn": "4440",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Vince Carter",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Vince Carter",
+          "email": "vcarter@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sarah Caston",
+          "email": "sarah.caston@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "George Fulk",
+          "email": "george.david.fulk@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kathleen Geist",
+          "email": "kgeist@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jennifer Sharp",
+          "email": "jennifer.j.sharp@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Anjanette Nunez",
+          "email": "anjanette.nunez@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Jocelyn Monique Smith",
+          "email": "jocelyn.mayes@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 100,
+      "seats_available": 100,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -89,26 +154,43 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-12-11"
       }
     },
     {
+      "atlas_key": "3791",
       "crn": "4534",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "J. Villa-Flores",
+      "instructor": "Joel Kemp",
       "instructors": [
         {
-          "name": "J. Villa-Flores",
-          "email": null
+          "name": "Joel Kemp",
+          "email": "joel.bernard.kemp@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rita Anne Rollins Building_501",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-5:15p",
@@ -119,161 +201,74 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3792",
       "crn": "6795",
       "section_number": "9000",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "instructor": "Joel Kemp",
+      "instructors": [
+        {
+          "name": "Joel Kemp",
+          "email": "joel.bernard.kemp@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "4383",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Stewart",
-      "instructors": [
-        {
-          "name": "J. Stewart",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4440",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4534",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "J. Villa-Flores",
-      "instructors": [
-        {
-          "name": "J. Villa-Flores",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "6795",
-      "section_number": "9000",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 8,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 2,
-    "waitlisted": 2
+    "open": 1,
+    "closed": 3,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Stewart",
-    "J. Villa-Flores",
-    "Team"
+    "Anjanette Nunez",
+    "George Fulk",
+    "Jennifer Sharp",
+    "Jocelyn Monique Smith",
+    "Joel Kemp",
+    "Justin C Burton",
+    "Kathleen Geist",
+    "Sarah Caston",
+    "Vince Carter"
   ],
-  "scraped_at": "2026-06-17T23:06:47.070Z"
+  "scraped_at": "2026-06-18T02:44:07.418Z"
 }

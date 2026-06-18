@@ -5,230 +5,202 @@
   "catalog_number": "495BW",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 8",
+  "credit_hours": "4",
   "requirement_designation": "CW",
   "requirements": [
     "CW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Permission of Honors Coordinator required. Restricted to students who are accepted into the departmental Honors program. Fulfills ENVS Independent Study requirement (4 credit hours). May also be used to fulfill a continued writing requirement.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Innovations in clinical care are increasingly impacted by the development and implementation of machine learning (ML) and artificial intelligence (AI). As future clinicians, medical students should be informed and prepared for technological changes that will affect how they provide care for their patients. The goals of this senior elective are to demystify AI and ML in healthcare, enabling students to have informed conversations about these technologies and participate in their clinical advancement.",
+  "course_notes": "(Permission Required Prior to Enrollment)(School of Medicine Students Only)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-06-29",
+    "end": "2026-12-19"
   },
   "sections": [
     {
+      "atlas_key": "2565",
       "crn": "5150",
       "section_number": "1",
       "schedule_type": "RSC",
-      "instructor": "E. Saikawa",
+      "instructor": "J Pittman",
       "instructors": [
         {
-          "name": "E. Saikawa",
-          "email": null
+          "name": "J Pittman",
+          "email": "jrpittm@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2566",
       "crn": "5152",
       "section_number": "2",
       "schedule_type": "RSC",
-      "instructor": "M. Mucioki",
+      "instructor": "Joanne Kuntz",
       "instructors": [
         {
-          "name": "M. Mucioki",
-          "email": null
+          "name": "Joanne Kuntz",
+          "email": "joanne.kuntz@emoryhealthcare.org",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5171",
-      "section_number": "3",
-      "schedule_type": "RSC",
-      "instructor": "J. Ajibade",
-      "instructors": [
-        {
-          "name": "J. Ajibade",
-          "email": null
-        }
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5154",
-      "section_number": "4",
-      "schedule_type": "RSC",
-      "instructor": "D. Civitello",
-      "instructors": [
-        {
-          "name": "D. Civitello",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5150",
-      "section_number": "1",
-      "schedule_type": "RSC",
-      "instructor": "E. Saikawa",
-      "instructors": [
-        {
-          "name": "E. Saikawa",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
-      "crn": "5152",
-      "section_number": "2",
-      "schedule_type": "RSC",
-      "instructor": "M. Mucioki",
-      "instructors": [
-        {
-          "name": "M. Mucioki",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
+      "atlas_key": "2567",
       "crn": "5171",
       "section_number": "3",
       "schedule_type": "RSC",
-      "instructor": "J. Ajibade",
+      "instructor": "Namita Khanna",
       "instructors": [
         {
-          "name": "J. Ajibade",
-          "email": null
+          "name": "Namita Khanna",
+          "email": "namita.khanna@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2568",
       "crn": "5154",
       "section_number": "4",
       "schedule_type": "RSC",
-      "instructor": "D. Civitello",
+      "instructor": "Michael Lindsay",
       "instructors": [
         {
-          "name": "D. Civitello",
-          "email": null
+          "name": "Michael Lindsay",
+          "email": "mlindsa@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 8,
-    "open": 2,
-    "closed": 6,
+    "other": 4,
+    "open": 4,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Civitello",
-    "E. Saikawa",
-    "J. Ajibade",
-    "M. Mucioki"
+    "J Pittman",
+    "Joanne Kuntz",
+    "Michael Lindsay",
+    "Namita Khanna"
   ],
-  "scraped_at": "2026-06-17T23:02:26.545Z"
+  "scraped_at": "2026-06-18T02:20:39.957Z"
 }

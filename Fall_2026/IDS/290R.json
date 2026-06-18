@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "A side-car course brings together a subset of students from two courses that overlap in methodologies, topics, etc., to create a short interdisciplinary course that runs simultaneously with its two sponsoring courses. One credit, S/U only. Schedule and format arranged by sponsoring professors.",
-  "course_notes": null,
+  "course_notes": "Awkwardness is usually treated as something to avoid, so then why do humans even feel awkward? Is it a powerful tool for connection, growth, and creativity? In this course, we will reframe awkwardness as a social signal, learning mechanism, and bridge between strangers. Students will think more deeply about societal norms, embodiment, and relational dynamics, reflecting on their own experiences of discomfort, belonging, and self-expression. Additionally, through live interactions, real-world challenges, and interdisciplinary conversations, students will explore the meanings and mechanisms hidden in moments of human discomfort.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,51 @@
   },
   "sections": [
     {
+      "atlas_key": "3427",
       "crn": "5346",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "Team",
+      "instructor": "Brendan Ozawa-de Silva",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Brendan Ozawa-de Silva",
+          "email": "bozawad@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Lori Teague",
+          "email": "lteague@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Claire Dokko",
+          "email": "claire.dokko@emory.edu",
+          "role": "Teaching Assistant"
+        },
+        {
+          "name": "Kalp Soni",
+          "email": "kalp.soni@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Bowden Hall 116",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-5:15p",
@@ -49,26 +77,58 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3428",
       "crn": "5698",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "Team",
+      "instructor": "Megan O'Neil",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Megan O'Neil",
+          "email": "megan.eileen.oneil@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Eric Reinders",
+          "email": "ereinde@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Eden Myers",
+          "email": "eden.myers@emory.edu",
+          "role": "Teaching Assistant"
+        },
+        {
+          "name": "Ginna Nebrig",
+          "email": "ginna.nebrig@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 109",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-3:45p",
@@ -79,81 +139,32 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "5346",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5698",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 2,
+    "other": 2,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "Team"
+    "Brendan Ozawa-de Silva",
+    "Claire Dokko",
+    "Eden Myers",
+    "Eric Reinders",
+    "Ginna Nebrig",
+    "Kalp Soni",
+    "Lori Teague",
+    "Megan O'Neil"
   ],
-  "scraped_at": "2026-06-17T23:11:21.835Z"
+  "scraped_at": "2026-06-18T03:02:41.817Z"
 }

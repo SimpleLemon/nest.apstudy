@@ -5,81 +5,74 @@
   "catalog_number": "409",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "This course focuses on the history of Christianity in the Middle East, giving special attention to the eighteenth century to present. It places this modern history within a longer historical context stretching back to the early church councils and Christological divisions that shaped unique forms of Christianity in the Middle East which still exist today but are often unfamiliar to Protestants and Catholics. It also places Middle Eastern Christianity within the context of World Christianity. Themes of discussion will include: ethnic, linguistic, and theological diversity; Christian-Muslim and Christian-Jewish relations; religious and political violence; colonialism; gender; encounters with western missions; and global migration of Middle Eastern Christians.",
+  "course_notes": "(THIS COURSE IS FULL; email candlerregistrar@emory.edu to be be placed on the waiting list) (ONLINE: synchronous live sessions Wednesdays and Fridays 9:30-10:50am)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4330",
       "crn": "6682",
       "section_number": "1109",
       "schedule_type": "ABR",
-      "instructor": "D. Clear",
+      "instructor": "Deanna Ferree Womack",
       "instructors": [
         {
-          "name": "D. Clear",
-          "email": null
+          "name": "Deanna Ferree Womack",
+          "email": "deanna.f.womack@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6682",
-      "section_number": "1109",
-      "schedule_type": "ABR",
-      "instructor": "D. Clear",
-      "instructors": [
-        {
-          "name": "D. Clear",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
-    "closed": 0,
+    "other": 1,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Clear"
+    "Deanna Ferree Womack"
   ],
-  "scraped_at": "2026-06-17T23:04:00.903Z"
+  "scraped_at": "2026-06-18T02:31:06.816Z"
 }

@@ -5,38 +5,51 @@
   "catalog_number": "447",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "This course deals with the valuation and use of fixed income securities. It begins with the concept of the time-value-of-money and interest rates applied to bond pricing, and progresses through an examination of complex structured products and fixed income derivatives.Initially the focus is on the markets for fixed income securities, and the tools of pricing through the discounting of cash flows. Next, we study primary fixed income securities: Treasury bonds, corporate bonds, and municipal bonds. From there we move into the structured products of fixed income: mortgage-backed securities and CMOs. We conclude the course with coverage of fixed income derivatives, both over-the-counter (OTC) and exchange-traded (listed) products. Throughout, the course maintains a dual objective: to educate you in the principles of fixed income securities and structured finance, while at the same time giving you an understanding of how Wall Street is involved with the financial markets and the economy. Although at various points the material may appear to become advanced and mathematically technical, this course has been intentionally designed for students with no prior background in fixed income, and with a grasp of mathematics only at the level of high school algebra.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "357",
       "crn": "3366",
       "section_number": "1101",
       "schedule_type": "LEC",
-      "instructor": "M. Lewis",
+      "instructor": "Nicholas Valerio III",
       "instructors": [
         {
-          "name": "M. Lewis",
-          "email": null
+          "name": "Nicholas Valerio III",
+          "email": "nicholas.valerio@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 33,
+      "seats_available": 33,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -52,26 +65,43 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "358",
       "crn": "3367",
       "section_number": "1102",
       "schedule_type": "LEC",
-      "instructor": "M. Lewis",
+      "instructor": "Nicholas Valerio III",
       "instructors": [
         {
-          "name": "M. Lewis",
-          "email": null
+          "name": "Nicholas Valerio III",
+          "email": "nicholas.valerio@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 33,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -87,140 +117,67 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "359",
       "crn": "6685",
       "section_number": "1109",
       "schedule_type": "LEC",
-      "instructor": "D. Clear",
+      "instructor": "Michael Sacks",
       "instructors": [
         {
-          "name": "D. Clear",
-          "email": null
+          "name": "Michael Sacks",
+          "email": "michael.sacks@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 39,
+      "seats_available": 39,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3366",
-      "section_number": "1101",
-      "schedule_type": "LEC",
-      "instructor": "M. Lewis",
-      "instructors": [
-        {
-          "name": "M. Lewis",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3367",
-      "section_number": "1102",
-      "schedule_type": "LEC",
-      "instructor": "M. Lewis",
-      "instructors": [
-        {
-          "name": "M. Lewis",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "6685",
-      "section_number": "1109",
-      "schedule_type": "LEC",
-      "instructor": "D. Clear",
-      "instructors": [
-        {
-          "name": "D. Clear",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 3,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Clear",
-    "M. Lewis"
+    "Michael Sacks",
+    "Nicholas Valerio III"
   ],
-  "scraped_at": "2026-06-17T23:04:00.905Z"
+  "scraped_at": "2026-06-18T02:31:06.818Z"
 }

@@ -79,11 +79,17 @@ class AtlasClientTests(unittest.TestCase):
         self.assertEqual(result["results"][0]["course_code"], "CHEM 150")
 
     def test_campus_filter_treats_existing_unknown_corpus_as_atlanta(self):
-        atlanta = get_sections_index(term="Fall_2026", include_cancelled=False, query="CHEM 150", campus="atlanta", limit=10)
-        oxford = get_sections_index(term="Fall_2026", include_cancelled=False, query="CHEM 150", campus="oxford", limit=10)
+        from services.atlas_client import invalidate_cache
+        invalidate_cache()
+        atlanta = get_sections_index(term="Fall_2026", include_cancelled=False, query="CHEM 150", campus="atlanta", limit=20)
+        oxford = get_sections_index(term="Fall_2026", include_cancelled=False, query="CHEM 150", campus="oxford", limit=20)
 
-        self.assertGreater(atlanta["total"], 0)
-        self.assertEqual(oxford["total"], 0)
+        chem_atlanta = [section for section in atlanta["sections"] if section["course_code"] == "CHEM 150"]
+        chem_oxford = [section for section in oxford["sections"] if section["course_code"] == "CHEM 150"]
+
+        self.assertGreater(len(chem_atlanta), 0)
+        self.assertEqual(len(chem_oxford), 0)
+        self.assertTrue(all(section.get("campus") == "Atlanta" for section in chem_atlanta))
 
     def test_synthetic_oxford_and_starred_requirement_filters(self):
         result = {
@@ -118,6 +124,60 @@ class AtlasClientTests(unittest.TestCase):
 
         self.assertEqual(filtered["total"], 1)
         self.assertEqual(filtered["sections"][0]["course_code"], "ENG 101")
+
+    def test_synthetic_eng_ox_oxford_and_starred_filters(self):
+        result = {
+            "term": "Fall_2026",
+            "terms": ["Fall_2026"],
+            "sections": [
+                {
+                    "course_code": "CHEM 150",
+                    "subject": "CHEM",
+                    "catalog_number": "150",
+                    "section_number": "1",
+                    "crn": "2760",
+                    "campus": "Atlanta",
+                    "campus_description": "ATL@ATLANTA",
+                    "requirement_designation": "Natural Sciences(*)",
+                    "seats_available": 34,
+                    "enrollment_capacity": 36,
+                },
+                {
+                    "course_code": "ENG_OX 185",
+                    "subject": "ENG_OX",
+                    "catalog_number": "185",
+                    "section_number": "1",
+                    "crn": "4196",
+                    "campus": "Oxford",
+                    "campus_description": "OXF@OXFORD",
+                    "requirement_designation": "First-Year Writing(*)",
+                    "seats_available": 16,
+                    "enrollment_capacity": 16,
+                },
+            ],
+            "count": 2,
+        }
+
+        oxford = _filter_sections_result(result, campus="oxford", requirement="starred")
+        self.assertEqual(oxford["total"], 1)
+        self.assertEqual(oxford["sections"][0]["course_code"], "ENG_OX 185")
+
+        atlanta = _filter_sections_result(result, campus="atlanta", query="CHEM 150")
+        self.assertEqual(atlanta["total"], 1)
+        self.assertEqual(atlanta["sections"][0]["seats_available"], 34)
+
+    def test_enriched_chem_150_corpus_when_present(self):
+        chem = get_sections_index(term="Fall_2026", include_cancelled=False, query="2760", limit=1)
+        if not chem.get("sections"):
+            self.skipTest("CHEM 150 corpus not enriched yet")
+        section = chem["sections"][0]
+        if section.get("seats_available") is None:
+            self.skipTest("CHEM 150 corpus missing seat enrichment")
+        self.assertEqual(section["crn"], "2760")
+        self.assertEqual(section.get("campus"), "Atlanta")
+        self.assertEqual(section.get("enrollment_capacity"), 36)
+        self.assertEqual(section.get("grading_mode"), "Student Option")
+        self.assertEqual(section.get("instruction_method"), "In Person")
 
 
 if __name__ == "__main__":

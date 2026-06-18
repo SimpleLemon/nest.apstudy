@@ -5,40 +5,53 @@
   "catalog_number": "190",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "1,2,3,4,5,6,7,8,9",
   "requirement_designation": "FS",
   "requirements": [
     "FS"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Dynamics of inquiry on a focused research topic. Will include discussion, debate, oral and written presentations. Topic varies.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "Research and writing of a Ph.D. dissertation on a topic previously approved by the Department faculty, under the supervision of a committee appointed with the advice and consent of the faculty. Students may register for this course on an S/U basis only.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1366",
       "crn": "3138",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "J. Hoesterey",
+      "instructor": "Chris Hansman",
       "instructors": [
         {
-          "name": "J. Hoesterey",
-          "email": null
+          "name": "Chris Hansman",
+          "email": "chris.hansman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -54,26 +67,43 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1367",
       "crn": "3139",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "S. Subramaniam",
+      "instructor": "Kaiji Chen",
       "instructors": [
         {
-          "name": "S. Subramaniam",
-          "email": null
+          "name": "Kaiji Chen",
+          "email": "kaiji.chen@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -89,26 +119,43 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1368",
       "crn": "3140",
       "section_number": "3",
       "schedule_type": "SEM",
-      "instructor": "E. Reinders",
+      "instructor": "Karen Kopecky",
       "instructors": [
         {
-          "name": "E. Reinders",
-          "email": null
+          "name": "Karen Kopecky",
+          "email": "karen.april.kopecky@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -124,128 +171,27 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "3138",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "J. Hoesterey",
-      "instructors": [
-        {
-          "name": "J. Hoesterey",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3139",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "S. Subramaniam",
-      "instructors": [
-        {
-          "name": "S. Subramaniam",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3140",
-      "section_number": "3",
-      "schedule_type": "SEM",
-      "instructor": "E. Reinders",
-      "instructors": [
-        {
-          "name": "E. Reinders",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
+    "total_sections": 3,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 6,
-    "open": 2,
+    "other": 3,
+    "open": 3,
     "closed": 0,
-    "waitlisted": 4
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Reinders",
-    "J. Hoesterey",
-    "S. Subramaniam"
+    "Chris Hansman",
+    "Kaiji Chen",
+    "Karen Kopecky"
   ],
-  "scraped_at": "2026-06-17T23:06:34.016Z"
+  "scraped_at": "2026-06-18T02:42:57.899Z"
 }

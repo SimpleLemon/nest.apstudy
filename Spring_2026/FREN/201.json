@@ -5,40 +5,59 @@
   "catalog_number": "201",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Social Sciences(*)",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Every semester. Emphasis on oral and written communication skills. Assignments include a thorough review of French grammar, short readings, a French movie, and frequent short compositions. Prerequisites: French 102 or by placement.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An introduction to the systematic study of human language, surveying the fields of phonetics, phonology, morphology, syntax, semantics, pragmatics, sociolinguistics, child language acquisition, and historical linguistics.",
+  "course_notes": "(Same as LING 201 1) (What do you know when you know a language? How did you come to learn this information so quickly? How do the world's languages differ? How do linguists study language? This course explores the complex nature of human language and introduces students to the scientific study of human language. As we unpack our knowledge of language, we will explore speech sounds (phonetics), sound systems of language (phonology), word and sentence formation (morphology and syntax), how language expresses meaning (semantics), and how context influences the interpretation of meaning (pragmatics). We will also study language in a broader human context, investigating the role of language in defining human society. Additional topics include historical linguistics, language typology, sociolinguistics, and language acquisition.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "785",
       "crn": "1678",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "V. Bornert",
+      "instructor": "Donald Tuten",
       "instructors": [
         {
-          "name": "V. Bornert",
-          "email": null
+          "name": "Donald Tuten",
+          "email": "dtuten@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "White Hall 102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "2",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a; F 10-10:50a",
@@ -59,26 +78,47 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "786",
       "crn": "1679",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "V. Bornert",
+      "instructor": "Jack Hardy",
       "instructors": [
         {
-          "name": "V. Bornert",
-          "email": null
+          "name": "Jack Hardy",
+          "email": "jack.hardy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 4,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p; F 11:30a-12:20p",
@@ -99,101 +139,26 @@
             "end": "1220"
           }
         ]
-      }
-    },
-    {
-      "crn": "1678",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "V. Bornert",
-      "instructors": [
-        {
-          "name": "V. Bornert",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a; F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1679",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "V. Bornert",
-      "instructors": [
-        {
-          "name": "V. Bornert",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p; F 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "V. Bornert"
+    "Donald Tuten",
+    "Jack Hardy"
   ],
-  "scraped_at": "2026-06-17T23:02:39.578Z"
+  "scraped_at": "2026-06-18T02:22:47.200Z"
 }

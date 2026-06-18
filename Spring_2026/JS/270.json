@@ -5,40 +5,58 @@
   "catalog_number": "270",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "1",
   "requirement_designation": "SSE",
   "requirements": [
-    "SSE"
+    "SSE",
+    "Physical Education(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course offers a general overview of the history of Jews and Judaism, beginning with the Biblical period and ending with modern times.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Course is open to students with little or no experience as well as to students with experience in training with free weights and/or machines. Free weights, Cybex systems machines and free-standing equipment are used for the development of muscle strength, muscle fitness, and/or muscle endurance.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": "HIST 270 MESAS 275",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "957",
       "crn": "4629",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "C. Perry",
+      "instructor": "Elizabeth Noell",
       "instructors": [
         {
-          "name": "C. Perry",
-          "email": null
+          "name": "Elizabeth Noell",
+          "email": "enoell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Woodruff PE Center Cybex Area",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -54,56 +72,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "4629",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "C. Perry",
-      "instructors": [
-        {
-          "name": "C. Perry",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Perry"
+    "Elizabeth Noell"
   ],
-  "scraped_at": "2026-06-17T23:03:38.016Z"
+  "scraped_at": "2026-06-18T02:27:53.374Z"
 }

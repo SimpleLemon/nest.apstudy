@@ -5,40 +5,59 @@
   "catalog_number": "241",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "1",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Physical Education(*)",
+    "Social Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "A study of the factors that cause genetic change and of the evolutionary consequences of such changes. Topics include population genetics, adaptation and natural selection, evolution of genes, proteins and genomes, sexual selection, kin selection, speciation, and diversification of taxa.",
-  "course_notes": "BIOL 142 and BIOL 142L, or BIOL_OX 142 or BIOL_OX 142X, or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course continues to reinforce and build upon the skills learned in Dance 321R. More emphasis is placed on style and execution. Combinations increase in intricacy and a larger dance movement vocabulary is introduced. Course work may include pointe work and variations. At least two semesters in Ballet III and consultation with the instructor are required before enrolling in this course. May be taken up to nine times for credit.",
+  "course_notes": "(Permission Required Prior to Enrollment) Please email mara.p.mandradjieff@emory.edu for a permission number.",
   "requisites": "BIOL 142 and BIOL 142L, or BIOL_OX 142 or BIOL_OX 142X, or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "539",
       "crn": "1640",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Arbilly",
+      "instructor": "Mara Mandradjieff",
       "instructors": [
         {
-          "name": "M. Arbilly",
-          "email": null
+          "name": "Mara Mandradjieff",
+          "email": "mara.p.mandradjieff@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Schwartz Center 255",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 12,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,26 +73,47 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "540",
       "crn": "1641",
       "section_number": "2",
       "schedule_type": "DIS",
-      "instructor": "M. Arbilly",
+      "instructor": "Kristin O'Neal",
       "instructors": [
         {
-          "name": "M. Arbilly",
-          "email": null
+          "name": "Kristin O'Neal",
+          "email": "kristin.o",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Woodruff PE - Dance",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "8",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 9-9:50a",
@@ -84,26 +124,47 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "541",
       "crn": "1642",
       "section_number": "3",
       "schedule_type": "DIS",
-      "instructor": "M. Arbilly",
+      "instructor": "Shomu Banerjee",
       "instructors": [
         {
-          "name": "M. Arbilly",
-          "email": null
+          "name": "Shomu Banerjee",
+          "email": "sbaner3@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Anthropology Bldg 303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 150,
+      "seats_available": 133,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 10-10:50a",
@@ -114,26 +175,47 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "542",
       "crn": "1643",
       "section_number": "4",
       "schedule_type": "DIS",
-      "instructor": "M. Arbilly",
+      "instructor": "Hugo M Mialon",
       "instructors": [
         {
-          "name": "M. Arbilly",
-          "email": null
+          "name": "Hugo M Mialon",
+          "email": "hmialon@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Anthropology Bldg 303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 185,
+      "seats_available": 138,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 11-11:50a",
@@ -144,26 +226,47 @@
             "end": "1150"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "543",
       "crn": "1644",
       "section_number": "5",
       "schedule_type": "LEC",
-      "instructor": "M. Arbilly",
+      "instructor": "Sam Wunderly",
       "instructors": [
         {
-          "name": "M. Arbilly",
-          "email": null
+          "name": "Sam Wunderly",
+          "email": "sam.wunderly@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 205",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 70,
+      "seats_available": 63,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -179,26 +282,47 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "544",
       "crn": "1645",
       "section_number": "6",
       "schedule_type": "DIS",
-      "instructor": "M. Arbilly",
+      "instructor": "Niall Peat",
       "instructors": [
         {
-          "name": "M. Arbilly",
-          "email": null
+          "name": "Niall Peat",
+          "email": "niall.peat@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 200",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 25,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 1-1:50p",
@@ -209,26 +333,47 @@
             "end": "1350"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "545",
       "crn": "1646",
       "section_number": "7",
       "schedule_type": "DIS",
-      "instructor": "M. Arbilly",
+      "instructor": "Musa Ayar",
       "instructors": [
         {
-          "name": "M. Arbilly",
-          "email": null
+          "name": "Musa Ayar",
+          "email": "musa.ayar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "White Hall 205",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "8",
+      "enrollment_capacity": 60,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 2-2:50p",
@@ -239,26 +384,47 @@
             "end": "1450"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "546",
       "crn": "1647",
       "section_number": "8",
       "schedule_type": "DIS",
-      "instructor": "M. Arbilly",
+      "instructor": "Alessia Scudiero",
       "instructors": [
         {
-          "name": "M. Arbilly",
-          "email": null
+          "name": "Alessia Scudiero",
+          "email": "alessia.scudiero@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "White Hall 200",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 30,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 3-3:50p",
@@ -269,271 +435,32 @@
             "end": "1550"
           }
         ]
-      }
-    },
-    {
-      "crn": "1640",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Arbilly",
-      "instructors": [
-        {
-          "name": "M. Arbilly",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1641",
-      "section_number": "2",
-      "schedule_type": "DIS",
-      "instructor": "M. Arbilly",
-      "instructors": [
-        {
-          "name": "M. Arbilly",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 9-9:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1642",
-      "section_number": "3",
-      "schedule_type": "DIS",
-      "instructor": "M. Arbilly",
-      "instructors": [
-        {
-          "name": "M. Arbilly",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 10-10:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1643",
-      "section_number": "4",
-      "schedule_type": "DIS",
-      "instructor": "M. Arbilly",
-      "instructors": [
-        {
-          "name": "M. Arbilly",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 11-11:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1100",
-            "end": "1150"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1644",
-      "section_number": "5",
-      "schedule_type": "LEC",
-      "instructor": "M. Arbilly",
-      "instructors": [
-        {
-          "name": "M. Arbilly",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1645",
-      "section_number": "6",
-      "schedule_type": "DIS",
-      "instructor": "M. Arbilly",
-      "instructors": [
-        {
-          "name": "M. Arbilly",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 1-1:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1646",
-      "section_number": "7",
-      "schedule_type": "DIS",
-      "instructor": "M. Arbilly",
-      "instructors": [
-        {
-          "name": "M. Arbilly",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 2-2:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1400",
-            "end": "1450"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1647",
-      "section_number": "8",
-      "schedule_type": "DIS",
-      "instructor": "M. Arbilly",
-      "instructors": [
-        {
-          "name": "M. Arbilly",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 3-3:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1500",
-            "end": "1550"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 16,
-    "lectures": 4,
+    "total_sections": 8,
+    "lectures": 2,
     "labs": 0,
-    "discussions": 12,
+    "discussions": 6,
     "other": 0,
     "open": 6,
-    "closed": 0,
-    "waitlisted": 10
+    "closed": 1,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Arbilly"
+    "Alessia Scudiero",
+    "Hugo M Mialon",
+    "Kristin O'Neal",
+    "Mara Mandradjieff",
+    "Musa Ayar",
+    "Niall Peat",
+    "Sam Wunderly",
+    "Shomu Banerjee"
   ],
-  "scraped_at": "2026-06-17T23:01:21.199Z"
+  "scraped_at": "2026-06-18T02:09:43.787Z"
 }

@@ -5,23 +5,24 @@
   "catalog_number": "202L",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "2",
+  "credit_hours": "3.5",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Students will learn several methods for separating and identifying small molecule organic reactants and products. They will make qualitative determinations based on quantitative data and equilibria and acid base properties. Students who withdraw from the laboratory course should withdraw from the co-requisite lecture course.",
-  "course_notes": "CHEM 141 or CHEM_OX 141 or CHEM 150L or CHEM_OX 150L as a prerequisite and CHEM 202 or CHEM_OX 202 as a corequisite.",
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "This course is designed to develop assessment and clinical reasoning skills along with application and analysis of evidenced-based theory to deliver care to patients across the lifespan, promoting optimal health.",
+  "course_notes": "Online asynchronous with synchronous sessions; On-campus intensive dates.",
   "requisites": "CHEM 141 or CHEM_OX 141 or CHEM 150L or CHEM_OX 150L as a prerequisite and CHEM 202 or CHEM_OX 202 as a corequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4150",
       "crn": "3688",
       "section_number": "1",
       "schedule_type": "LAB",
@@ -29,16 +30,28 @@
       "instructors": [
         {
           "name": "M. McCormick",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 100,
+      "seats_available": 32,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 10-11:15a; W 11:15a-1:20p",
@@ -54,9 +67,14 @@
             "end": "1320"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4151",
       "crn": "3690",
       "section_number": "2",
       "schedule_type": "LAB",
@@ -64,16 +82,28 @@
       "instructors": [
         {
           "name": "M. McCormick",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-3:45p; W 3:45-5:50p",
@@ -89,9 +119,14 @@
             "end": "1750"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4152",
       "crn": "3693",
       "section_number": "3",
       "schedule_type": "LAB",
@@ -99,16 +134,28 @@
       "instructors": [
         {
           "name": "M. McCormick",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3.5",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 30,
+      "seats_available": 24,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 1-2:15p; Th 2:15-4:20p",
@@ -124,9 +171,14 @@
             "end": "1620"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4153",
       "crn": "3701",
       "section_number": "4",
       "schedule_type": "LAB",
@@ -134,16 +186,28 @@
       "instructors": [
         {
           "name": "M. McCormick",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 100,
+      "seats_available": 96,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4:30-5:45p; Th 5:45-7:50p",
@@ -159,9 +223,14 @@
             "end": "1950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4154",
       "crn": "3702",
       "section_number": "5",
       "schedule_type": "LAB",
@@ -169,16 +238,28 @@
       "instructors": [
         {
           "name": "M. McCormick",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "6",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 100,
+      "seats_available": 96,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-11:15a; F 11:15a-1:20p",
@@ -194,9 +275,14 @@
             "end": "1320"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4155",
       "crn": "3704",
       "section_number": "6",
       "schedule_type": "LAB",
@@ -204,16 +290,28 @@
       "instructors": [
         {
           "name": "M. McCormick",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 30,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1:30-2:45p; F 2:45-4:50p",
@@ -229,231 +327,25 @@
             "end": "1650"
           }
         ]
-      }
-    },
-    {
-      "crn": "3688",
-      "section_number": "1",
-      "schedule_type": "LAB",
-      "instructor": "M. McCormick",
-      "instructors": [
-        {
-          "name": "M. McCormick",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 10-11:15a; W 11:15a-1:20p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1115",
-            "end": "1320"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3690",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "M. McCormick",
-      "instructors": [
-        {
-          "name": "M. McCormick",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 2:30-3:45p; W 3:45-5:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1545",
-            "end": "1750"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3693",
-      "section_number": "3",
-      "schedule_type": "LAB",
-      "instructor": "M. McCormick",
-      "instructors": [
-        {
-          "name": "M. McCormick",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 1-2:15p; Th 2:15-4:20p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1415",
-            "end": "1620"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3701",
-      "section_number": "4",
-      "schedule_type": "LAB",
-      "instructor": "M. McCormick",
-      "instructors": [
-        {
-          "name": "M. McCormick",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 4:30-5:45p; Th 5:45-7:50p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1630",
-            "end": "1745"
-          },
-          {
-            "day": "Thu",
-            "start": "1745",
-            "end": "1950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3702",
-      "section_number": "5",
-      "schedule_type": "LAB",
-      "instructor": "M. McCormick",
-      "instructors": [
-        {
-          "name": "M. McCormick",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-11:15a; F 11:15a-1:20p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Fri",
-            "start": "1115",
-            "end": "1320"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3704",
-      "section_number": "6",
-      "schedule_type": "LAB",
-      "instructor": "M. McCormick",
-      "instructors": [
-        {
-          "name": "M. McCormick",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1:30-2:45p; F 2:45-4:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1330",
-            "end": "1445"
-          },
-          {
-            "day": "Fri",
-            "start": "1445",
-            "end": "1650"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
+    "total_sections": 6,
     "lectures": 0,
-    "labs": 12,
+    "labs": 6,
     "discussions": 0,
     "other": 0,
     "open": 6,
     "closed": 0,
-    "waitlisted": 6
+    "waitlisted": 0
   },
   "instructors_unique": [
     "M. McCormick"
   ],
-  "scraped_at": "2026-06-17T23:01:37.676Z"
+  "scraped_at": "2026-06-18T02:13:14.105Z"
 }

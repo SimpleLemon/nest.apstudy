@@ -8,10 +8,11 @@
   "credit_hours": "3",
   "requirement_designation": "MQR",
   "requirements": [
-    "MQR"
+    "MQR",
+    "Mathematics and Quantitative Reasoning"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course studies forecasting macroeconomic variables using modern machine-learning models. The course considers numerous macroeconomic variables. A variety of machine-learning models are analyzed, and model interpretation tools are covered.",
   "course_notes": "ECON 320 or equivalent transfer credit as prerequisite.",
   "requisites": "ECON 320 or equivalent transfer credit as prerequisite.",
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "2941",
       "crn": "5375",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Lee",
+      "instructor": "Jieun Lee",
       "instructors": [
         {
-          "name": "J. Lee",
-          "email": null
+          "name": "Jieun Lee",
+          "email": "jieun.lee@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Carlos Hall 211",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Mathematics and Quantitative Reasoning",
+      "requirements": [
+        "Mathematics and Quantitative Reasoning"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,56 +72,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "5375",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Lee",
-      "instructors": [
-        {
-          "name": "J. Lee",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Lee"
+    "Jieun Lee"
   ],
-  "scraped_at": "2026-06-17T23:10:06.964Z"
+  "scraped_at": "2026-06-18T02:53:56.617Z"
 }

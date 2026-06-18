@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
   "course_description": "Epidemiology is the study of disease patterns, and determinants, within a population and the application of this information to mitigate public health problems. Students will learn to apply basic principles of epidemiology and biostatistics to identification and analysis of public health problems.",
-  "course_notes": null,
+  "course_notes": "Epidemiology is the study of disease patterns, and determinants, within a population and the application of this information to mitigate public health problems. We will learn to apply the basic principles of epidemiology and biostatistics to identification and analysis of public health issues. We will discuss the applications, strengths, and limitations of epidemiological studies. Topics will include study design, measure of disease frequency and association, sampling, causation, bias, confounding, and how to critique epidemiologic literature. This course is central for human health majors, required for global health minors and fundamental for students interested in predictive health or nutrition. The content for this 3-credit course will be delivered during the live sessions as well as through pre-recorded content. Students can expect to spend an average of 2.5 hours each week learning the course content. Please Note: This course is NOT recommended for first-year students.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "3361",
       "crn": "2636",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "K. Wall",
+      "instructor": "Kristin Wall",
       "instructors": [
         {
-          "name": "K. Wall",
-          "email": null
+          "name": "Kristin Wall",
+          "email": "kmwall@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 50,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 1-3:45p",
@@ -49,51 +64,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2636",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "K. Wall",
-      "instructors": [
-        {
-          "name": "K. Wall",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 1-3:45p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Wall"
+    "Kristin Wall"
   ],
-  "scraped_at": "2026-06-17T23:11:11.997Z"
+  "scraped_at": "2026-06-18T03:01:54.410Z"
 }

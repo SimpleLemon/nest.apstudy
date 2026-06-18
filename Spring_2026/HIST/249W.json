@@ -5,40 +5,63 @@
   "catalog_number": "249W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "HAWE",
   "requirements": [
-    "HAWE"
+    "HAWE",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course examines European encounters with indigenous peoples of the tropical regions, and the uses to which the resultant travel accounts and images were put back in Europe in disputes surrounding notions of race, the nature of humankind, and the practice of politics.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Students will perform experiments spanning areas of physical chemistry including kinetics, thermodynamics, and spectroscopy; analyze results and solve problems using data and visualization tools common in the chemical sciences; and build skills of effective written and oral scientific communication.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4378",
       "crn": "3809",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Vick/Kang",
+      "instructor": "Antonio Brathwaite",
       "instructors": [
         {
-          "name": "Vick/Kang",
-          "email": null
+          "name": "Antonio Brathwaite",
+          "email": "antonio.brathwaite@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Antonio Brathwaite",
+          "email": "antonio.brathwaite@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Atwood Chemistry Bldg. 316",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +77,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "3809",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Vick/Kang",
-      "instructors": [
-        {
-          "name": "Vick/Kang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Vick/Kang"
+    "Antonio Brathwaite"
   ],
-  "scraped_at": "2026-06-17T23:03:05.490Z"
+  "scraped_at": "2026-06-18T02:24:48.781Z"
 }

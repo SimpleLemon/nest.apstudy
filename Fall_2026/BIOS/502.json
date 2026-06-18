@@ -5,13 +5,13 @@
   "catalog_number": "502",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisites: BIOS 500 & BIOS 501 or permission of instructor.We start with data analytic methods not covered in BIOS 500 & BIOS 501 (Statistical Methods I & II). We then focus on multilevel modeling of intra- and inter-individual change. Other hierarchical models will also be examined to analyze other types of clustered data. As in the prerequisite courses, we will learn how to specify an appropriate model so that specific research questions of interest can be addressed in a methodologically sound way. Students will use SAS to perform the statistical analyses.",
+  "course_notes": "Pre-requisites: BIOS 500 & 501, or permission of the instructor.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "2855",
       "crn": "3499",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Binongo",
+      "instructor": "Jose Binongo",
       "instructors": [
         {
-          "name": "J. Binongo",
-          "email": null
+          "name": "Jose Binongo",
+          "email": "jose.n.binongo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 17,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 5:30-6:50p",
@@ -52,56 +65,25 @@
             "end": "1850"
           }
         ]
-      }
-    },
-    {
-      "crn": "3499",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Binongo",
-      "instructors": [
-        {
-          "name": "J. Binongo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 5:30-6:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1730",
-            "end": "1850"
-          },
-          {
-            "day": "Thu",
-            "start": "1730",
-            "end": "1850"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Binongo"
+    "Jose Binongo"
   ],
-  "scraped_at": "2026-06-17T23:09:27.867Z"
+  "scraped_at": "2026-06-18T02:49:02.133Z"
 }

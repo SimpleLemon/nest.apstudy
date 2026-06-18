@@ -5,13 +5,13 @@
   "catalog_number": "505",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "1",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "Prerequisite: Second-year global health students or permission of instructor. GH 505 provides an introduction to the relatively new, but fast-growing use a business approaches to address social problems; micro financing, made famous by Mahammad Yunus, is an example of social entrepreneurship. The course will examine how social entrepreneurs who produce mission-driven products or services can reduce their dependence on government funds and charitable donations. Students will be exposed to case studies from experienced social entrepreneurs, including the lead instructor, and will also develop their own social enterprise plan. Knowledge and skills acquired through the course include: organizational leadership, market opportunity assessment, product/service development, and budgeting.",
+  "course_notes": "This course will meet over Zoom throughout the semester. However, on the following dates, students will have the option to attend in person or via Zoom: 10/21, 10/28, 11/4, 11/11, 11/18, and 12/9.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "162",
       "crn": "2246",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Schroeder",
+      "instructor": "Dirk Schroeder",
       "instructors": [
         {
-          "name": "D. Schroeder",
-          "email": null
+          "name": "Dirk Schroeder",
+          "email": "dschr02@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 24,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 5-5:50p",
@@ -47,51 +60,25 @@
             "end": "1750"
           }
         ]
-      }
-    },
-    {
-      "crn": "2246",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Schroeder",
-      "instructors": [
-        {
-          "name": "D. Schroeder",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 5-5:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1700",
-            "end": "1750"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Schroeder"
+    "Dirk Schroeder"
   ],
-  "scraped_at": "2026-06-17T23:10:49.330Z"
+  "scraped_at": "2026-06-18T02:59:07.911Z"
 }

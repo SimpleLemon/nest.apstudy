@@ -5,13 +5,15 @@
   "catalog_number": "262",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course explores who worked and what work meant across the Americas in the 19th and 20th centuries. It centers the concept of class, weighing it alongside race, ethnicity, and gender. It focuses on case studies in the US, Brazil, Mexico, and Colombia to build a comparative historical framework.",
+  "course_notes": "(This course traces a history of working people around the Americas. A sprawling approach like this demands boundaries, both temporal and geographic. For the former, we will work with a period that could be described as \"modern,\" stretching from the 19th century transition away from slavery into the 21st century. In terms of geography, we will allow places of inquiry to be determined largely by historical connections. Slavery was a multinational enterprise, capitalism spread promiscuously, trade linked place to place, and ideologies swept across national boundaries. Many connections bound, and binds, the hemisphere together.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +22,40 @@
   },
   "sections": [
     {
+      "atlas_key": "4476",
       "crn": "3352",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "T. Rogers",
+      "instructor": "Thomas Rogers",
       "instructors": [
         {
-          "name": "T. Rogers",
-          "email": null
+          "name": "Thomas Rogers",
+          "email": "tomrogers@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Rich Building 104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 35,
+      "seats_available": 32,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -52,56 +71,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "3352",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "T. Rogers",
-      "instructors": [
-        {
-          "name": "T. Rogers",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "T. Rogers"
+    "Thomas Rogers"
   ],
-  "scraped_at": "2026-06-17T23:11:08.775Z"
+  "scraped_at": "2026-06-18T03:00:28.234Z"
 }

@@ -5,81 +5,74 @@
   "catalog_number": "400",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduces the content of the Old Testament in its historical & social contexts a p with a primary focus on poetic material. Students will trace the contours of the major poetic genres of the Hebrew Bible & distinguish the essential literary characteristics of Hebrew poetry. Students will explore the theological and ethical implications of reading these texts as scripture in light of the rich & diffuse reception history of this material. Course prepares students to approach OT texts through the methods of literary criticism, form criticism, & reception history. Students will learn the constituent elements of Hebrew poetry & the various forms in which it appears. For the historiographic corpora in the Hebrew Bible, the course highlights how interposed poetry interacts with surrounding narrative material. The course will also highlight the poetic elements of legal material and its relationship to the Torah Psalms.",
+  "course_notes": "(THIS COURSE IS CANCELLED)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4228",
       "crn": "6689",
       "section_number": "1109",
       "schedule_type": "ABR",
-      "instructor": "D. Clear",
+      "instructor": "Joel LeMon",
       "instructors": [
         {
-          "name": "D. Clear",
-          "email": null
+          "name": "Joel LeMon",
+          "email": "jmlemon@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rita Anne Rollins Building_252",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6689",
-      "section_number": "1109",
-      "schedule_type": "ABR",
-      "instructor": "D. Clear",
-      "instructors": [
-        {
-          "name": "D. Clear",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
-    "closed": 0,
+    "other": 1,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Clear"
+    "Joel LeMon"
   ],
-  "scraped_at": "2026-06-17T23:04:30.297Z"
+  "scraped_at": "2026-06-18T02:35:28.939Z"
 }

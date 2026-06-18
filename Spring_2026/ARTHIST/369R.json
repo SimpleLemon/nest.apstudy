@@ -10,66 +10,73 @@
   "requirements": [
     "HAP"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Possible topics include Post-Impressionism and its consequences; Matisse &amp; Picasso; Art and Politics between the Wars; Dada and Surrealism; the Avant-Garde; Abstract Art; What is Art?; Theories of Modernism. May be repeated for credit when topic changes, up to a maximum of twelve hours.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Selected topics in history for students in non-history originating (cross-listed) courses. May be repeated for credit when topic varies.",
+  "course_notes": "(Same as ARTHIST 289 1, ANT 285 5 ,MESAS 270 1, CL 285 1) The Art and Architecture of Ancient Mesopotamia This course surveys the art and architecture of Mesopotamia from the rise of the first cities, the invention of writing, and the emergence of monumental art and architecture in the fourth millennium BCE through the Parthian period (third century CE). Within this broad historical framework, the course focuses on the revolutionary innovations in ancient visual culture, including the development of narrative representation, the appearance of historical public monuments, and the formation of sacred architectural spaces. Particular attention is given to the making, use, and reception of images and monuments: rituals of animating statues, building and foundation rituals, the treatment of images in warfare, and the performative dimensions of visual culture. Alongside large-scale monuments and state-sponsored art, the course also considers small-scale and personal objects, situating them within practices of private ownership, daily life, and embodied experience. Art History major/minor: Division I or IV",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3588",
       "crn": "6803",
       "section_number": "9000",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "instructor": "Giovanni Lovisetto",
+      "instructors": [
+        {
+          "name": "Giovanni Lovisetto",
+          "email": "giovanni.lovisetto@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "Callaway C101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6803",
-      "section_number": "9000",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 2,
+    "open": 1,
+    "closed": 0,
     "waitlisted": 0
   },
-  "instructors_unique": [],
-  "scraped_at": "2026-06-17T23:01:11.275Z"
+  "instructors_unique": [
+    "Giovanni Lovisetto"
+  ],
+  "scraped_at": "2026-06-18T02:08:18.947Z"
 }

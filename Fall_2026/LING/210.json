@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course focuses on the related areas of phonetics (the study of physical properties, both articulatory and acoustic, of the sounds of human language) and phonology (the study of the sound patterns of human languages and the nature of the knowledge that speakers have about the sound patterns of particular languages).",
-  "course_notes": null,
+  "course_notes": "This course is an introduction to phonetics and phonology. Phonetics studies the physical properties, both articulatory and acoustic, of all the sounds that comprise language. Phonology studies the sound patterns found in human language and refers to the knowledge that speakers have about the sound patterns in their particular language. Areas of focus in this course include articulatory phonetics, segmental and non-linear phonology, phonetics/phonology interface, and experimental approaches to sound analysis. Both theoretical and methodological issues will be discussed. The format of the course will be primarily lecture and discussion.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "2248",
       "crn": "1627",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Y. Kim",
+      "instructor": "Yun Kim",
       "instructors": [
         {
-          "name": "Y. Kim",
-          "email": null
+          "name": "Yun Kim",
+          "email": "yun.kim@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Modern Language 330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,56 +69,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "1627",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Y. Kim",
-      "instructors": [
-        {
-          "name": "Y. Kim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "Y. Kim"
+    "Yun Kim"
   ],
-  "scraped_at": "2026-06-17T23:11:54.319Z"
+  "scraped_at": "2026-06-18T03:04:55.505Z"
 }

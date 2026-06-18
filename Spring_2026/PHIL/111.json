@@ -5,40 +5,58 @@
   "catalog_number": "111",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "HA",
   "requirements": [
-    "HA"
+    "HA",
+    "Humanities and Arts with Cont.Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "What is Existentialism? We will look at the history of existentialism and see how it challenged the traditional philosophical approaches to questions of human subjectivity and the nature of the good life. In particular, we will explore the works of Jean Paul Sartre and Albert Camus.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is an introduction to gender, sex, and power in the contemporary world.",
+  "course_notes": "(In the contemporary moment, gender, \"gender ideology,\" and the right to change sex are under attack in the US, Europe, and Latin America. Gender is clearly troubling, and, as a result, gender is in trouble. Why has gender become such a hot-button issue? This interdisciplinary course will draw from feminist, sexuality studies, and transgender studies scholarship to introduce students from any field to the theories, the history, the science, and the politics of gender and bodily sex. We will weigh competing feminist theories asserting that gender roles developed from a capitalist political economy versus from the sexual desires of men. We will consider the politics of transgressing gender norms and those of demanding the right to change sex. We will analyze the cultural specificity of gender systems and the practical science of bodily sex. Throughout, we will demystify the fictions on which contemporary debates about gender and bodily sex are based.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3317",
       "crn": "1933",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Cayarga",
+      "instructor": "Kadji Amin",
       "instructors": [
         {
-          "name": "M. Cayarga",
-          "email": null
+          "name": "Kadji Amin",
+          "email": "kadji.amin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "White Hall 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 36,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -54,56 +72,25 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "1933",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Cayarga",
-      "instructors": [
-        {
-          "name": "M. Cayarga",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Cayarga"
+    "Kadji Amin"
   ],
-  "scraped_at": "2026-06-17T23:06:07.912Z"
+  "scraped_at": "2026-06-18T02:38:17.501Z"
 }

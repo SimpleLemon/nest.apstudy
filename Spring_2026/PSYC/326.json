@@ -5,40 +5,53 @@
   "catalog_number": "326",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "0",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course examines key developmental changes between infancy and adolescence in various social domains, including self understanding, moral, & emotional development. Through lecture, in-class assignments, and lively discussions, we will contemplate how social interactions shape human psychology.",
-  "course_notes": "PSYC 111 or PSYC_OX 111 or equivalent transfer credit as prerequisite.",
+  "course_notes": "This section is for Biostatistics students.",
   "requisites": "PSYC 111 or PSYC_OX 111 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1974",
       "crn": "2048",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Botto",
+      "instructor": "Raphiel Murden",
       "instructors": [
         {
-          "name": "S. Botto",
-          "email": null
+          "name": "Raphiel Murden",
+          "email": "r.j.murden@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +67,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2048",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Botto",
-      "instructors": [
-        {
-          "name": "S. Botto",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Botto"
+    "Raphiel Murden"
   ],
-  "scraped_at": "2026-06-17T23:06:24.217Z"
+  "scraped_at": "2026-06-18T02:42:27.310Z"
 }

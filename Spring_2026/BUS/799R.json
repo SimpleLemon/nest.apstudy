@@ -5,424 +5,461 @@
   "catalog_number": "799R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "4",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "(School of Medicine Students Only)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-06-29",
+    "end": "2026-12-19"
   },
   "sections": [
     {
+      "atlas_key": "2542",
       "crn": "5656",
       "section_number": "5101",
       "schedule_type": "SUP",
-      "instructor": "D. Schweidel",
+      "instructor": "Camille Elise Beecher",
       "instructors": [
         {
-          "name": "D. Schweidel",
-          "email": null
+          "name": "Camille Elise Beecher",
+          "email": "camllle.beecher@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Nkele Davis",
+          "email": "nkele.alpha.davis@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Naomi Newton",
+          "email": "naomi.newton@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Nanette Rushing",
+          "email": "nlrushi@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2543",
       "crn": "5657",
       "section_number": "5102",
       "schedule_type": "SUP",
-      "instructor": "K. Kadous",
+      "instructor": "Camille Elise Beecher",
       "instructors": [
         {
-          "name": "K. Kadous",
-          "email": null
+          "name": "Camille Elise Beecher",
+          "email": "camllle.beecher@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Nkele Davis",
+          "email": "nkele.alpha.davis@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Naomi Newton",
+          "email": "naomi.newton@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Nanette Rushing",
+          "email": "nlrushi@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2544",
       "crn": "5658",
       "section_number": "5103",
       "schedule_type": "SUP",
-      "instructor": "D. McCarthy",
+      "instructor": "Camille Elise Beecher",
       "instructors": [
         {
-          "name": "D. McCarthy",
-          "email": null
+          "name": "Camille Elise Beecher",
+          "email": "camllle.beecher@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Nkele Davis",
+          "email": "nkele.alpha.davis@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Naomi Newton",
+          "email": "naomi.newton@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Nanette Rushing",
+          "email": "nlrushi@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2545",
       "crn": "5659",
       "section_number": "5104",
       "schedule_type": "SUP",
-      "instructor": "M. Lewis",
+      "instructor": "Camille Elise Beecher",
       "instructors": [
         {
-          "name": "M. Lewis",
-          "email": null
+          "name": "Camille Elise Beecher",
+          "email": "camllle.beecher@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Nkele Davis",
+          "email": "nkele.alpha.davis@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Naomi Newton",
+          "email": "naomi.newton@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Nanette Rushing",
+          "email": "nlrushi@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2546",
       "crn": "5660",
       "section_number": "5105",
       "schedule_type": "SUP",
-      "instructor": "N. Jegadeesh",
+      "instructor": "Camille Elise Beecher",
       "instructors": [
         {
-          "name": "N. Jegadeesh",
-          "email": null
+          "name": "Camille Elise Beecher",
+          "email": "camllle.beecher@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Nkele Davis",
+          "email": "nkele.alpha.davis@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Naomi Newton",
+          "email": "naomi.newton@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Nanette Rushing",
+          "email": "nlrushi@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2547",
       "crn": "5661",
       "section_number": "5106",
       "schedule_type": "SUP",
-      "instructor": "J. Perry-Smith",
+      "instructor": "Camille Elise Beecher",
       "instructors": [
         {
-          "name": "J. Perry-Smith",
-          "email": null
+          "name": "Camille Elise Beecher",
+          "email": "camllle.beecher@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Nkele Davis",
+          "email": "nkele.alpha.davis@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Naomi Newton",
+          "email": "naomi.newton@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Nanette Rushing",
+          "email": "nlrushi@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2548",
       "crn": "5662",
       "section_number": "5107",
       "schedule_type": "SUP",
-      "instructor": "W. Longhofer",
+      "instructor": "Joanna Schindler",
       "instructors": [
         {
-          "name": "W. Longhofer",
-          "email": null
+          "name": "Joanna Schindler",
+          "email": "jlavi@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Dan Viox",
+          "email": "dan.viox@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2549",
       "crn": "5663",
       "section_number": "5108",
       "schedule_type": "SUP",
-      "instructor": "G. Maturana",
+      "instructor": "Joanna Schindler",
       "instructors": [
         {
-          "name": "G. Maturana",
-          "email": null
+          "name": "Joanna Schindler",
+          "email": "jlavi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5656",
-      "section_number": "5101",
-      "schedule_type": "SUP",
-      "instructor": "D. Schweidel",
-      "instructors": [
-        {
-          "name": "D. Schweidel",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5657",
-      "section_number": "5102",
-      "schedule_type": "SUP",
-      "instructor": "K. Kadous",
-      "instructors": [
-        {
-          "name": "K. Kadous",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5658",
-      "section_number": "5103",
-      "schedule_type": "SUP",
-      "instructor": "D. McCarthy",
-      "instructors": [
-        {
-          "name": "D. McCarthy",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5659",
-      "section_number": "5104",
-      "schedule_type": "SUP",
-      "instructor": "M. Lewis",
-      "instructors": [
-        {
-          "name": "M. Lewis",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5660",
-      "section_number": "5105",
-      "schedule_type": "SUP",
-      "instructor": "N. Jegadeesh",
-      "instructors": [
-        {
-          "name": "N. Jegadeesh",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5661",
-      "section_number": "5106",
-      "schedule_type": "SUP",
-      "instructor": "J. Perry-Smith",
-      "instructors": [
-        {
-          "name": "J. Perry-Smith",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5662",
-      "section_number": "5107",
-      "schedule_type": "SUP",
-      "instructor": "W. Longhofer",
-      "instructors": [
-        {
-          "name": "W. Longhofer",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5663",
-      "section_number": "5108",
-      "schedule_type": "SUP",
-      "instructor": "G. Maturana",
-      "instructors": [
-        {
-          "name": "G. Maturana",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 16,
+    "total_sections": 8,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 16,
-    "open": 16,
+    "other": 8,
+    "open": 8,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. McCarthy",
-    "D. Schweidel",
-    "G. Maturana",
-    "J. Perry-Smith",
-    "K. Kadous",
-    "M. Lewis",
-    "N. Jegadeesh",
-    "W. Longhofer"
+    "Camille Elise Beecher",
+    "Dan Viox",
+    "Joanna Schindler",
+    "Nanette Rushing",
+    "Naomi Newton",
+    "Nkele Davis"
   ],
-  "scraped_at": "2026-06-17T23:01:34.305Z"
+  "scraped_at": "2026-06-18T02:12:20.939Z"
 }

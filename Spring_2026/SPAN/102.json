@@ -5,40 +5,53 @@
   "catalog_number": "102",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "1",
   "requirement_designation": "IC",
   "requirements": [
     "IC"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "The second half of a yearlong introductory course designed to train students to understand, speak, read, and write Spanish.",
-  "course_notes": "SPAN 101 or SPAN_OX 101 or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Various topics by Epi faculty. Check OPUS/Atlas for current topics and descriptions.",
+  "course_notes": "R Bootcamp: Pre-requisite: EPI 534, BIOS 544, or similar R course. This course introduces best practices for conducting reproducible epidemiologic analyses in R. Topics include the R project and package management system, reproducible tables and statistical output, writing reports or manuscripts in quarto, developing a workflow using the targets package, and version control using Git/GitHub. This fast-paced course will intersperse short lectures with activities in R, building up to a full-blown reproducible project. This is a pre-term class that will meet August 17th and 18th, 8am-5pm.",
   "requisites": "SPAN 101 or SPAN_OX 101 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-08-18"
   },
   "sections": [
     {
+      "atlas_key": "1418",
       "crn": "3127",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "L. Dillman",
+      "instructor": "Louisa Smith",
       "instructors": [
         {
-          "name": "L. Dillman",
-          "email": null
+          "name": "Louisa Smith",
+          "email": "louisa.hills.smith@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 35,
+      "seats_available": 19,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a; F 8:30-9:20a",
@@ -59,26 +72,43 @@
             "end": "920"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-08-18"
       }
     },
     {
+      "atlas_key": "1419",
       "crn": "3128",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "L. Dillman",
+      "instructor": "Terry Hartman",
       "instructors": [
         {
-          "name": "L. Dillman",
-          "email": null
+          "name": "Terry Hartman",
+          "email": "terryl.johnson.hartman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 24,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a; F 10-10:50a",
@@ -99,26 +129,43 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1420",
       "crn": "4046",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "J. Feldman",
+      "instructor": "Brad Pearce",
       "instructors": [
         {
-          "name": "J. Feldman",
-          "email": null
+          "name": "Brad Pearce",
+          "email": "bpearce@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 10,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p; F 1-1:50p",
@@ -139,26 +186,45 @@
             "end": "1350"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1421",
       "crn": "4048",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "J. Feldman",
+      "instructor": "Jeb Jones",
       "instructors": [
         {
-          "name": "J. Feldman",
-          "email": null
+          "name": "Jeb Jones",
+          "email": "jeb.jones@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p; F 2:30-3:20p",
@@ -179,26 +245,43 @@
             "end": "1520"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1422",
       "crn": "5849",
       "section_number": "5",
       "schedule_type": "LEC",
-      "instructor": "C. Kelley",
+      "instructor": "Jeb Jones",
       "instructors": [
         {
-          "name": "C. Kelley",
-          "email": null
+          "name": "Jeb Jones",
+          "email": "jeb.jones@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 10,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p; F 2:30-3:20p",
@@ -219,223 +302,28 @@
             "end": "1520"
           }
         ]
-      }
-    },
-    {
-      "crn": "3127",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "L. Dillman",
-      "instructors": [
-        {
-          "name": "L. Dillman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a; F 8:30-9:20a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Fri",
-            "start": "830",
-            "end": "920"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3128",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "L. Dillman",
-      "instructors": [
-        {
-          "name": "L. Dillman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a; F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4046",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "J. Feldman",
-      "instructors": [
-        {
-          "name": "J. Feldman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p; F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4048",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "J. Feldman",
-      "instructors": [
-        {
-          "name": "J. Feldman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p; F 2:30-3:20p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Fri",
-            "start": "1430",
-            "end": "1520"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5849",
-      "section_number": "5",
-      "schedule_type": "LEC",
-      "instructor": "C. Kelley",
-      "instructors": [
-        {
-          "name": "C. Kelley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p; F 2:30-3:20p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Fri",
-            "start": "1430",
-            "end": "1520"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
-    "lectures": 10,
+    "total_sections": 5,
+    "lectures": 5,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 5,
     "closed": 0,
-    "waitlisted": 4
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Kelley",
-    "J. Feldman",
-    "L. Dillman"
+    "Brad Pearce",
+    "Jeb Jones",
+    "Louisa Smith",
+    "Terry Hartman"
   ],
-  "scraped_at": "2026-06-17T23:06:50.316Z"
+  "scraped_at": "2026-06-18T02:44:34.188Z"
 }

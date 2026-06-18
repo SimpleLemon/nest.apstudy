@@ -5,40 +5,53 @@
   "catalog_number": "102",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "0",
   "requirement_designation": "HA",
   "requirements": [
     "HA"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Introduction to the aesthetic principles, narrative strategies, and cultural significance of television and digital media including Internet video, social media, and video games.",
-  "course_notes": "FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Students who are required to enroll in third year Teaching Parish to fulfill denominational requirements while serving as student pastors, but who do not wish to claim academic credit hours for the third year (and beyond), may take this course for zero credit following completion of CE600TPa/b, CE600TPHa/b, or any other CE 600 -Level Contextual Education II course and with permission of the director of Teaching Parish. Students enrolled in CE 654TPHR participate fully in the third year (and beyond) Teaching Parish curriculum in an online group. Upon satisfactory completion students receive a grade of S at the end of each semester of the course.",
+  "course_notes": "(Repeatable) (Prerequisite: Required Con Ed 500-Level and 600-Level courses) (for student pastors required to be in Teaching Parish by their judicatory authority but who have completed CE 500 and 600 level requirements and do not wish to claim elective academic credit for 3rd year (and beyond) Teaching Parish) (Students must be available Monday at group meeting time; meeting times vary by group)",
   "requisites": "FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4437",
       "crn": "3698",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "B. Smith-Shomade",
+      "instructor": "Thomas Elliott",
       "instructors": [
         {
-          "name": "B. Smith-Shomade",
-          "email": null
+          "name": "Thomas Elliott",
+          "email": "thomas.elliott@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "0",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,9 +67,14 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4438",
       "crn": "3699",
       "section_number": "2",
       "schedule_type": "LEC",
@@ -64,16 +82,28 @@
       "instructors": [
         {
           "name": "T. Allison",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -89,26 +119,43 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4439",
       "crn": "3718",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "E. Walters",
+      "instructor": "Nicole Carlson",
       "instructors": [
         {
-          "name": "E. Walters",
-          "email": null
+          "name": "Nicole Carlson",
+          "email": "nicole.carlson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Nursing School - 124",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 15,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -124,128 +171,27 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3698",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "B. Smith-Shomade",
-      "instructors": [
-        {
-          "name": "B. Smith-Shomade",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3699",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "T. Allison",
-      "instructors": [
-        {
-          "name": "T. Allison",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3718",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "E. Walters",
-      "instructors": [
-        {
-          "name": "E. Walters",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "B. Smith-Shomade",
-    "E. Walters",
-    "T. Allison"
+    "Nicole Carlson",
+    "T. Allison",
+    "Thomas Elliott"
   ],
-  "scraped_at": "2026-06-17T23:02:32.978Z"
+  "scraped_at": "2026-06-18T02:21:20.306Z"
 }

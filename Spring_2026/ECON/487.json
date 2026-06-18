@@ -10,35 +10,50 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course develops a conceptual framework for understanding games played in business and in life. The ultimate goal of this course is to enhance the students?? ability to think strategically in interactive situations.",
-  "course_notes": "This course requires ECON 201 OR ECON_OX201 or equivalent transfer credit as a prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Seminar or lecture series on topics of anthropological interest at an intermediate level. Maybe repeated for credit when topic varies.",
+  "course_notes": "(Same as LING 242 1) (Students in this course will be exposed to a diverse range of the world's languages, and will acquire the tools and vocabulary to analyze them. We will study language classification and historical relationships, typology and universals, sound and structural features, and writing systems, covering the major geographic regions of the world. Students will find out about such non-English phenomena as vowel harmony, click consonants, noun incorporation, and ergative-absolutive case. There will also be readings and discussions on related issues, including the theory of universal grammar, the relationship between language and culture, and the notion of creole exceptionalism.)",
   "requisites": "This course requires ECON 201 OR ECON_OX201 or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3060",
       "crn": "3995",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Mialon",
+      "instructor": "Marjorie Pak",
       "instructors": [
         {
-          "name": "S. Mialon",
-          "email": null
+          "name": "Marjorie Pak",
+          "email": "mgpak@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 218",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -54,56 +69,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3995",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Mialon",
-      "instructors": [
-        {
-          "name": "S. Mialon",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Mialon"
+    "Marjorie Pak"
   ],
-  "scraped_at": "2026-06-17T23:02:03.802Z"
+  "scraped_at": "2026-06-18T02:17:46.583Z"
 }

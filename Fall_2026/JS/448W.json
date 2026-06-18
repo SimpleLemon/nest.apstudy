@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "CW",
   "requirements": [
-    "CW"
+    "CW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Provides an overview of Israeli foreign policy and Palestinian attempts at global outreach before the course moves on to explore the politics of the Israeli-Palestinian conflict in various regions of the world. Student will then lead a class session on their subject of interest/final paper topic.",
-  "course_notes": "Any JS or MESAS course or equivalent transfer credit as prerequisite.",
+  "course_notes": "(Same as HIST 448W 1, MESAS 448W 1, and POLS 448W 1) (Ever since the emergence of the Zionist movement in the late nineteenth century, the political future of the land known as both Israel and Palestine has been the subject of fierce international debate. This seminar will examine how, exactly, this land has been discussed in international forums and in various countries, as well as how leaders of both Israelis and Palestinians have worked to chart a foreign policy for their respective peoples. Students will be given an overview of Israeli foreign policy and Palestinian attempts at global outreach since 1948 before the course moves on to explore the politics of the Israeli-Palestinian conflict in various regions of the world. Course requirements include regular preparation and participation, facilitating/co-leading classroom discussions, ten brief response essays, and a final original research paper. Most research papers will focus on Palestinian or Israeli foreign relations with another country, or the role of the Israeli-Palestinian conflict in another country or region's politics, either historically or today. While there is no fixed prerequisite for the course, students should either have some background in the politics and history of Israel or the Middle East or have previous studied another country or region that they plan to examine in their research.)",
   "requisites": "Any JS or MESAS course or equivalent transfer credit as prerequisite.",
   "cross_listed": "HIST 448W MESAS 448W POLS 448W",
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "4383",
       "crn": "1512",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "G. Levin",
+      "instructor": "Geoffrey Levin",
       "instructors": [
         {
-          "name": "G. Levin",
-          "email": null
+          "name": "Geoffrey Levin",
+          "email": "geoffrey.phillip.levin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Callaway N204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 4,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "1512",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "G. Levin",
-      "instructors": [
-        {
-          "name": "G. Levin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Levin"
+    "Geoffrey Levin"
   ],
-  "scraped_at": "2026-06-17T23:11:41.300Z"
+  "scraped_at": "2026-06-18T03:04:05.639Z"
 }

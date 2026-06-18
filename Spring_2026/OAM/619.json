@@ -10,8 +10,8 @@
   "requirements": [],
   "campus": null,
   "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "course_description": "",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,6 +20,7 @@
   },
   "sections": [
     {
+      "atlas_key": "4863",
       "crn": "6236",
       "section_number": "3220",
       "schedule_type": "LEC",
@@ -27,16 +28,25 @@
       "instructors": [
         {
           "name": "S. Gaddis",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -52,56 +62,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "6236",
-      "section_number": "3220",
-      "schedule_type": "LEC",
-      "instructor": "S. Gaddis",
-      "instructors": [
-        {
-          "name": "S. Gaddis",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 1
   },
   "instructors_unique": [
     "S. Gaddis"
   ],
-  "scraped_at": "2026-06-17T23:04:30.313Z"
+  "scraped_at": "2026-06-18T02:35:28.943Z"
 }

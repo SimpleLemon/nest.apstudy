@@ -5,40 +5,63 @@
   "catalog_number": "348W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "CWE",
   "requirements": [
-    "CWE"
+    "CWE",
+    "Race and Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course will explore the literatures of identity and belonging in the context of the Arab-Israeli conflict. It will cover Modern Hebrew literature authored by Jewish-Israeli writers and literature produced by Arab Palestinians in Israel, the Occupied Territories and the Palestinian Diaspora.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A course designed for second year students on topics of interest in environmental sciences. This course may count as elective credit for the ENVS major and minor; relevant topics may count towards the ENVS Sustainability Sciences or Earth and Atmospheric Sciences minors. See current course atlas.",
+  "course_notes": "(Same as AAS 285 3, WGS 285 ) NO FRESHMAN Topic Title: Race, Gender and the Environment This course is an interdisciplinary look into the role of race and gender in shaping experiences with the natural world. Looking across literature, anthropology, cultural geography, and science studies among other disciplines, this course will speak towards diverse perspectives on the environment. Our course will center ecological worldviews from the African Diaspora, Indigenous cultures of the Americas, immigrant communities, and among diverse gender experiences. While most environmental thought centers the perspectives of the Eurocentric ideals of environmentalism and conservation, we will ask how environmental studies shifts when we center race and gender within our analyses. Some areas of study we will cover are Black feminist ecology, Indigenous environmental sciences, and environmental justice organizing.",
   "requisites": null,
   "cross_listed": "JS 348W",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3445",
       "crn": "6256",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "O. Yeglin",
+      "instructor": "Adrian Cato",
       "instructors": [
         {
-          "name": "O. Yeglin",
-          "email": null
+          "name": "Adrian Cato",
+          "email": "adrian.cato@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Bayo Holsey",
+          "email": "bayo.holsey@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Callaway S103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 3,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -54,56 +77,26 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "6256",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "O. Yeglin",
-      "instructors": [
-        {
-          "name": "O. Yeglin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "O. Yeglin"
+    "Adrian Cato",
+    "Bayo Holsey"
   ],
-  "scraped_at": "2026-06-17T23:03:57.665Z"
+  "scraped_at": "2026-06-18T02:30:25.532Z"
 }

@@ -5,13 +5,13 @@
   "catalog_number": "508",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "4",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisites: Multivariate Calculus (Calculus III) and Linear Algebra. This course provides a mathematically sophisticated introduction to the concepts and methods of biostatistical data analysis. It aims to provide the students the skills to collaborate with investigators and statistical colleagues in the analysis of data from biomedical and public health studies and to communicate the results of statistical analyses to a broad audience. The topics include descriptive statistics; probability; detailed development of the binomial, Poisson and normal distributions and simulation of random variables from these distributions; sampling distributions; point and confidence interval estimation; simulation studies; hypothesis testing; power analysis and sample size calculations; a variety of one- and two-sample parametric and non-parametric methods for analyzing continuous or discrete data and resampling statistics. The course will also equip students with computer skills for implementing these statistical methods using standard statistical software SAS or R.",
+  "course_notes": "**Permission of Instructor or BIOS ADAP required**",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "2260",
       "crn": "3498",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "R. Krafty",
+      "instructor": "Robert Krafty",
       "instructors": [
         {
-          "name": "R. Krafty",
-          "email": null
+          "name": "Robert Krafty",
+          "email": "robert.t.krafty@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 37,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:50p",
@@ -52,56 +65,25 @@
             "end": "1450"
           }
         ]
-      }
-    },
-    {
-      "crn": "3498",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "R. Krafty",
-      "instructors": [
-        {
-          "name": "R. Krafty",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1450"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1450"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Krafty"
+    "Robert Krafty"
   ],
-  "scraped_at": "2026-06-17T23:09:27.867Z"
+  "scraped_at": "2026-06-18T02:49:02.133Z"
 }

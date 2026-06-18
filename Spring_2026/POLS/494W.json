@@ -5,23 +5,24 @@
   "catalog_number": "494W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "6",
   "requirement_designation": "HSCW",
   "requirements": [
     "HSCW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Research Seminar on selected topics and problems in political science. Class will fulfill the \"research\" requirement for the political science major. May be repeated for credit when the topic varies.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Students will synthesize knowledge and skills to deliver ethical, evidence-based, person-centered care from puberty through the adult lifespan. Guided by preceptors and faculty, they manage complex health issues, preparing for leadership and independent practice.",
   "course_notes": "POLS 208 or POLS_OX 208 or equivalent transfer credit as prerequisite.",
   "requisites": "POLS 208 or POLS_OX 208 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4015",
       "crn": "3199",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +30,28 @@
       "instructors": [
         {
           "name": "E. Reinhardt",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "6",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -54,56 +67,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3199",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Reinhardt",
-      "instructors": [
-        {
-          "name": "E. Reinhardt",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
     "E. Reinhardt"
   ],
-  "scraped_at": "2026-06-17T23:06:17.749Z"
+  "scraped_at": "2026-06-18T02:40:43.654Z"
 }

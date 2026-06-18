@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "FS",
   "requirements": [
-    "FS"
+    "FS",
+    "First Year Seminar with Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Explores various topics in Film and Media.",
-  "course_notes": null,
+  "course_notes": "(Freshmen Seminar - Limited to First Year Students Only)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "2446",
       "crn": "3882",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "B. Smith-Shomade",
+      "instructor": "Beretta Smith-Shomade",
       "instructors": [
         {
-          "name": "B. Smith-Shomade",
-          "email": null
+          "name": "Beretta Smith-Shomade",
+          "email": "doctorbess@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Rich Building 104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar with Race & Ethnicity(*)",
+      "requirements": [
+        "First Year Seminar with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,56 +72,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3882",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "B. Smith-Shomade",
-      "instructors": [
-        {
-          "name": "B. Smith-Shomade",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "B. Smith-Shomade"
+    "Beretta Smith-Shomade"
   ],
-  "scraped_at": "2026-06-17T23:10:36.285Z"
+  "scraped_at": "2026-06-18T02:57:30.663Z"
 }

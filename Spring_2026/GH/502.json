@@ -5,38 +5,51 @@
   "catalog_number": "502",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course in Business Economics will provide the fundamental tools in understanding the workings of markets and those participating in markets. Topics from microeconomics include the following: demand functions, production and supply functions, elasticity, market equilibrium, the theory of consumer choice, market efficiency, externalities, price controls and tax, market structure, and profitability. Topics from macroeconomics include: macroeconomic statistics, models of aggregates, the workings of the Federal Reserve Bank, monetary policy, fiscal policy, labor markets, and trade. We will also cover an introduction to finance.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "183",
       "crn": "1529",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Tom Smith",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Tom Smith",
+          "email": "tom.smith@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 66,
+      "seats_available": 64,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:20p",
@@ -52,26 +65,43 @@
             "end": "1420"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "184",
       "crn": "1530",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Tom Smith",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Tom Smith",
+          "email": "tom.smith@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 66,
+      "seats_available": 57,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 3-4:20p",
@@ -87,139 +117,66 @@
             "end": "1620"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "185",
       "crn": "1531",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Tom Smith",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Tom Smith",
+          "email": "tom.smith@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 66,
+      "seats_available": 52,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "1529",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:20p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1420"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1420"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1530",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 3-4:20p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1500",
-            "end": "1620"
-          },
-          {
-            "day": "Thu",
-            "start": "1500",
-            "end": "1620"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1531",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Team"
+    "Tom Smith"
   ],
-  "scraped_at": "2026-06-17T23:02:46.024Z"
+  "scraped_at": "2026-06-18T02:23:19.049Z"
 }

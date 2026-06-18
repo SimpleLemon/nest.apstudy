@@ -5,40 +5,68 @@
   "catalog_number": "250",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "1",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Explores the study and design of maps and geographic information systems (GIS) as a problem-solving tool for geographic analysis with focus on applications of GIS, data collection and processing, cartographic design, and trends in geospatial technology.",
-  "course_notes": "QTM 100 or QTM_OX 100 or BUS 350 or BUS_OX 350 or equivalent transfer credit as prerequisite.",
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "A side-car course brings together a subset of students from two courses that overlap in methodologies, topics, etc., to create a short interdisciplinary course that runs simultaneously with its two sponsoring courses. One credit, S/U only. Schedule and format arranged by sponsoring professors.",
+  "course_notes": "Title: Gut Check: Science Communication, Literacy, and the Microbes of Cancer We plan to spotlight diverse groups of scientists and explore their current research including excerpts of primary literature. We intend to tie this into the purpose and perception of science communication at different levels (from primary article to news and social media). Our teaching team expertise spans the fields of Cancer Biology (Dr. Silva) Microbiology (Dr. Essler), and Science, Writing & Communication (Dr. Reid). This class will meet on the following dates: 8/28, 9/4, 9/18, 10/2, 10/16, 10/30, 11/13.",
   "requisites": "QTM 100 or QTM_OX 100 or BUS 350 or BUS_OX 350 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3005",
       "crn": "2534",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Page",
+      "instructor": "Lauren Essler",
       "instructors": [
         {
-          "name": "M. Page",
-          "email": null
+          "name": "Lauren Essler",
+          "email": "lauren.essler@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Gwendolynne Reid",
+          "email": "gwendolynne.reid@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jordan Silva",
+          "email": "jordan.silva@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Chase Young",
+          "email": "chase.young@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Oxford Science Bldg. 101",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "3",
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": 3,
+      "waitlist_capacity": 6,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,26 +82,68 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3006",
       "crn": "2535",
       "section_number": "2",
       "schedule_type": "LAB",
-      "instructor": "Page/Wu",
+      "instructor": "Melissa Baudo",
       "instructors": [
         {
-          "name": "Page/Wu",
-          "email": null
+          "name": "Melissa Baudo",
+          "email": "mbaudo@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Vince Carter",
+          "email": "vcarter@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "George Fulk",
+          "email": "george.david.fulk@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kathleen Geist",
+          "email": "kgeist@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Anjanette Nunez",
+          "email": "anjanette.nunez@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Jocelyn Monique Smith",
+          "email": "jocelyn.mayes@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 1-3:45p",
@@ -84,26 +154,53 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-12-11"
       }
     },
     {
+      "atlas_key": "3007",
       "crn": "2536",
       "section_number": "3",
       "schedule_type": "LAB",
-      "instructor": "Page/Jia",
+      "instructor": "Taylor Hayes",
       "instructors": [
         {
-          "name": "Page/Jia",
-          "email": null
+          "name": "Taylor Hayes",
+          "email": "taylor.hayes@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Alexander Kendall",
+          "email": "alexander.v.kendall@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Veketa Smith",
+          "email": "veketa.smith@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "15",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 100,
+      "seats_available": 52,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-3:45p",
@@ -114,118 +211,37 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2534",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Page",
-      "instructors": [
-        {
-          "name": "M. Page",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2535",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "Page/Wu",
-      "instructors": [
-        {
-          "name": "Page/Wu",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 1-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2536",
-      "section_number": "3",
-      "schedule_type": "LAB",
-      "instructor": "Page/Jia",
-      "instructors": [
-        {
-          "name": "Page/Jia",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-3:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-12-11"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 2,
-    "labs": 4,
+    "total_sections": 3,
+    "lectures": 1,
+    "labs": 2,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Page",
-    "Page/Jia",
-    "Page/Wu"
+    "Alexander Kendall",
+    "Anjanette Nunez",
+    "Chase Young",
+    "George Fulk",
+    "Gwendolynne Reid",
+    "Jocelyn Monique Smith",
+    "Jordan Silva",
+    "Kathleen Geist",
+    "Lauren Essler",
+    "Melissa Baudo",
+    "Taylor Hayes",
+    "Veketa Smith",
+    "Vince Carter"
   ],
-  "scraped_at": "2026-06-17T23:02:26.542Z"
+  "scraped_at": "2026-06-18T02:20:39.949Z"
 }

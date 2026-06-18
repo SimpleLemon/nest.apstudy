@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "XA",
   "requirements": [
-    "XA"
+    "XA",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "For biology majors only. Permission required (see biology.emory.edu/research-opportunities). Must be taken for 4 credits/semester. Fulfills 4 elective credits (maximum) and upper-level lab requirement for Biology major only upon completion of two semesters.",
-  "course_notes": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
+  "course_notes": "A two-semester research experience for Biology majors. Students will need to find a research mentor to oversee their research project. Once a mentor is confirmed, students will need to apply for the course. (See the Biology Department website for additional information.) Approved students will receive a permission number from Dr. Gerardo. Prerequisites: Biology 142 + 142L and a declared Biology major. Successful completion of two semesters will provide students with four (4) hours of elective credit (the second semester) and the upper-level lab requirement for the Biology major. All eight (8) hours will count toward a student's cumulative hours/GPA.",
   "requisites": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
@@ -22,66 +23,63 @@
   },
   "sections": [
     {
+      "atlas_key": "1292",
       "crn": "1709",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "N. Gerardo",
+      "instructor": "Nicole Marie Gerardo",
       "instructors": [
         {
-          "name": "N. Gerardo",
-          "email": null
+          "name": "Nicole Marie Gerardo",
+          "email": "ngerard@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 925,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "1709",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "N. Gerardo",
-      "instructors": [
-        {
-          "name": "N. Gerardo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "N. Gerardo"
+    "Nicole Marie Gerardo"
   ],
-  "scraped_at": "2026-06-17T23:09:24.581Z"
+  "scraped_at": "2026-06-18T02:48:31.761Z"
 }

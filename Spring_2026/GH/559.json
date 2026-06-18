@@ -5,38 +5,65 @@
   "catalog_number": "559",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "1",
+  "requirement_designation": "Health(*)",
+  "requirements": [
+    "Health(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "It is increasingly evident that individual involvement in personal health has profound benefits. This course provides students the opportunity to become involved in a personalized approach to health and well-being with strategic approaches for the implementation of a healthy lifestyle.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "2796",
       "crn": "1550",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "K. Yount",
+      "instructor": "Madison Campbell",
       "instructors": [
         {
-          "name": "K. Yount",
-          "email": null
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Callaway N118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Health(*)",
+      "requirements": [
+        "Health(*)"
+      ],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-5:50p",
@@ -47,51 +74,27 @@
             "end": "1750"
           }
         ]
-      }
-    },
-    {
-      "crn": "1550",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "K. Yount",
-      "instructors": [
-        {
-          "name": "K. Yount",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-5:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1750"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Yount"
+    "Logan Edwards",
+    "Madison Campbell",
+    "Noni Keyton"
   ],
-  "scraped_at": "2026-06-17T23:02:46.035Z"
+  "scraped_at": "2026-06-18T02:23:19.056Z"
 }

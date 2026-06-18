@@ -5,71 +5,81 @@
   "catalog_number": "151",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "First-Year Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course allows students to receive credit for study of a second language not taught at Emory while engaged in study or research abroad. Petitions for credit must be addressed to the Director of the Emory College Language Center. Repeatable for different languages and levels.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Instruction in rhetorical composition, critical reading, reflection, and writing as recursive process. Across themed sections, students engage with diverse genres. Courses share some common assignments including research writing and final student-curated portfolio with reflection project.",
+  "course_notes": "(Freshmen Only) (Native American Voices - In this interdisciplinary writing course, we will read the 2019 non-fiction book An Indigenous Peoples' History of the United States for Young People and engage several short written, audio, and visual texts by Indigenous creators. In addition to readings, class activities, regular short writing assignments, and the portfolio/cover letter required in all first-year writing classes, students will complete three major projects: a paper analyzing a Native news media text, a multimodal presentation on a contemporary Indigenous leader, and a narrative nonfiction essay reflecting on personal experiences learning about Indigenous peoples.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3819",
       "crn": "6807",
       "section_number": "9000",
       "schedule_type": "SEM",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "instructor": "Mandy Suhr-Sytsma",
+      "instructors": [
+        {
+          "name": "Mandy Suhr-Sytsma",
+          "email": "mandy.sue.suhr-sytsma@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "Callaway N203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First-Year Writing(*)",
+      "requirements": [
+        "First-Year Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6807",
-      "section_number": "9000",
-      "schedule_type": "SEM",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
-  "instructors_unique": [],
-  "scraped_at": "2026-06-17T23:03:51.042Z"
+  "instructors_unique": [
+    "Mandy Suhr-Sytsma"
+  ],
+  "scraped_at": "2026-06-18T02:28:50.744Z"
 }

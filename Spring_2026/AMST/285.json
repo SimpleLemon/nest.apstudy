@@ -5,40 +5,53 @@
   "catalog_number": "285",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Seminars arranged around current issues and controversies in American culture. May be repeated as topic changes. .",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Seminar on various Law and Religion Topics",
+  "course_notes": "(THE CANDLER SECTION OF THIS CLASS IS FULL; email candlerregistrar@emory.edu to be placed on the waiting list) (Concurrent listing from Emory Law) (ON CAMPUS) (BEGINS THE WEEK OF AUGUST 17)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "3800",
       "crn": "4434",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "P. Allitt",
+      "instructor": "Whittney Barth",
       "instructors": [
         {
-          "name": "P. Allitt",
-          "email": null
+          "name": "Whittney Barth",
+          "email": "whittney.barth@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,26 +67,63 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "3801",
       "crn": "4439",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "LaChance/Prude",
+      "instructor": "Vince Carter",
       "instructors": [
         {
-          "name": "LaChance/Prude",
-          "email": null
+          "name": "Vince Carter",
+          "email": "vcarter@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "George Fulk",
+          "email": "george.david.fulk@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kathleen Geist",
+          "email": "kgeist@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Anjanette Nunez",
+          "email": "anjanette.nunez@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Jocelyn Monique Smith",
+          "email": "jocelyn.mayes@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -89,26 +139,68 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-12-11"
       }
     },
     {
+      "atlas_key": "3802",
       "crn": "5428",
       "section_number": "3",
       "schedule_type": "SEM",
-      "instructor": "I. Goh",
+      "instructor": "Vince Carter",
       "instructors": [
         {
-          "name": "I. Goh",
-          "email": null
+          "name": "Vince Carter",
+          "email": "vcarter@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "George Fulk",
+          "email": "george.david.fulk@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kathleen Geist",
+          "email": "kgeist@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Peter Sprague",
+          "email": "peter.sprague@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Anjanette Nunez",
+          "email": "anjanette.nunez@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Jocelyn Monique Smith",
+          "email": "jocelyn.mayes@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -124,128 +216,31 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "4434",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "P. Allitt",
-      "instructors": [
-        {
-          "name": "P. Allitt",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4439",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "LaChance/Prude",
-      "instructors": [
-        {
-          "name": "LaChance/Prude",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5428",
-      "section_number": "3",
-      "schedule_type": "SEM",
-      "instructor": "I. Goh",
-      "instructors": [
-        {
-          "name": "I. Goh",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-12-11"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
+    "total_sections": 3,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 6,
-    "open": 4,
-    "closed": 0,
-    "waitlisted": 2
+    "other": 3,
+    "open": 1,
+    "closed": 2,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "I. Goh",
-    "LaChance/Prude",
-    "P. Allitt"
+    "Anjanette Nunez",
+    "George Fulk",
+    "Jocelyn Monique Smith",
+    "Kathleen Geist",
+    "Peter Sprague",
+    "Vince Carter",
+    "Whittney Barth"
   ],
-  "scraped_at": "2026-06-17T23:01:00.975Z"
+  "scraped_at": "2026-06-18T02:06:43.301Z"
 }

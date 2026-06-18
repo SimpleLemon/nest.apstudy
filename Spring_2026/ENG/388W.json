@@ -5,40 +5,58 @@
   "catalog_number": "388W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "5",
   "requirement_designation": "HAPW",
   "requirements": [
-    "HAPW"
+    "HAPW",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "A study of literary works of various genres and other imaginative writing about the relation of humans to the non-human world. Approaches may focus on particular genres, periods, or themes (e.g., ecofiction, ecopoetry, literature of climate change, multispecies writing, animal ethics, etc.).",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "First in a series of courses that seek to develop listening, reading, speaking, writing, and cultural skills in Hindi. Primarly for students with no previous knowledge of Hindi.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": "ENGRD 388W",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "737",
       "crn": "2759",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Sahni",
+      "instructor": "Kashika Singh",
       "instructors": [
         {
-          "name": "A. Sahni",
-          "email": null
+          "name": "Kashika Singh",
+          "email": "kashika.singh@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Few Bldg 131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "5",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 24,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 5:30-6:45p",
@@ -54,26 +72,52 @@
             "end": "1845"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "738",
       "crn": "2761",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "M. Magloire",
+      "instructor": "Brajesh Samarth",
       "instructors": [
         {
-          "name": "M. Magloire",
-          "email": null
+          "name": "Brajesh Samarth",
+          "email": "brajesh.samarth@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Brajesh Samarth",
+          "email": "brajesh.samarth@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Psychology Bldg 235",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-5:15p",
@@ -84,87 +128,26 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "2759",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Sahni",
-      "instructors": [
-        {
-          "name": "A. Sahni",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 5:30-6:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1730",
-            "end": "1845"
-          },
-          {
-            "day": "Wed",
-            "start": "1730",
-            "end": "1845"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2761",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "M. Magloire",
-      "instructors": [
-        {
-          "name": "M. Magloire",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Sahni",
-    "M. Magloire"
+    "Brajesh Samarth",
+    "Kashika Singh"
   ],
-  "scraped_at": "2026-06-17T23:02:20.063Z"
+  "scraped_at": "2026-06-18T02:19:11.748Z"
 }

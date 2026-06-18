@@ -10,10 +10,10 @@
   "requirements": [
     "SNT"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "An integrated approach to the synthesis, structure, and function of macromolecular biomolecules, including proteins, carbohydrates, DNA, and RNA.",
-  "course_notes": "[(BIOL 142 and BIOL 142L) or (BIOL_OX 142)] and (CHEM 203 or CHEM 203Z or CHEM_OX 203 or CHEM 221 or CHEM_OX 221 or CHEM 221Z) or equivalent transfer credit as prerequisite.",
+  "course_notes": "The cell is an amazing network of self-organizing machinery that drives life in all its forms. This course begins by defining the molecular wheels and cogs of the cell's machines and how their capabilities are defined by their chemistries. The chemistries of each component are then explored to understand how they contribute to the operation and control of the cellular machinery. We will further explore how all of the cellular components are governed, by kinetic and non-kinetic controls, to produce a coherent and responsive metabolism that efficiently creates and utilizes the energy stored in chemical compounds, such as glucose and fats. Human metabolic disorders such as diabetes will provide models of how metabolism is controlled at the systematic level in complex organisms using biochemical signaling pathways to coordinate metabolic pathways in different tissues. This course will fulfill elective credit for the Biology major and should provide students with a firm foundation in Biochemistry.",
   "requisites": "[(BIOL 142 and BIOL 142L) or (BIOL_OX 142)] and (CHEM 203 or CHEM 203Z or CHEM_OX 203 or CHEM 221 or CHEM_OX 221 or CHEM 221Z) or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "461",
       "crn": "2954",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Escobar",
+      "instructor": "Alexander Escobar",
       "instructors": [
         {
-          "name": "A. Escobar",
-          "email": null
+          "name": "Alexander Escobar",
+          "email": "alexander.escobar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 206",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "3",
+      "enrollment_capacity": 100,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,26 +69,45 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "462",
       "crn": "2957",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "A. Escobar",
+      "instructor": "Alexander Escobar",
       "instructors": [
         {
-          "name": "A. Escobar",
-          "email": null
+          "name": "Alexander Escobar",
+          "email": "alexander.escobar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 206",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 100,
+      "seats_available": 34,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -89,26 +123,45 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "463",
       "crn": "2960",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "E. Abreu",
+      "instructor": "Eladio Abreu",
       "instructors": [
         {
-          "name": "E. Abreu",
-          "email": null
+          "name": "Eladio Abreu",
+          "email": "eladio.b.abreu@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "3",
+      "enrollment_capacity": 100,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -124,127 +177,26 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2954",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Escobar",
-      "instructors": [
-        {
-          "name": "A. Escobar",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2957",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "A. Escobar",
-      "instructors": [
-        {
-          "name": "A. Escobar",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2960",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "E. Abreu",
-      "instructors": [
-        {
-          "name": "E. Abreu",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 4
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Escobar",
-    "E. Abreu"
+    "Alexander Escobar",
+    "Eladio Abreu"
   ],
-  "scraped_at": "2026-06-17T23:09:24.578Z"
+  "scraped_at": "2026-06-18T02:48:31.757Z"
 }

@@ -5,13 +5,13 @@
   "catalog_number": "201",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "4",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "This course is an introduction to the structure and function of the human body. Topics covered include cell structure, function and biochemistry; characteristics of tissues; control systems and homeostasis; and skeletal, muscle, and nervous system function. Laboratory experiences.",
+  "course_notes": "Online asynchronous",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,61 +20,106 @@
   },
   "sections": [
     {
+      "atlas_key": "3277",
       "crn": "4556",
       "section_number": "LAB1",
       "schedule_type": "LAB",
       "instructor": "Staff",
       "instructors": [],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 50,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3278",
       "crn": "4557",
       "section_number": "LAB2",
       "schedule_type": "LAB",
-      "instructor": "D. Lewis",
+      "instructor": "Dominique Lewis",
       "instructors": [
         {
-          "name": "D. Lewis",
-          "email": null
+          "name": "Dominique Lewis",
+          "email": "dominique.n.lewis@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 50,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3275",
       "crn": "4554",
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Staff",
       "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Nursing School - 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 50,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "WF 10-11:15a",
@@ -90,26 +135,43 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3276",
       "crn": "4555",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "D. Lewis",
+      "instructor": "Dominique Lewis",
       "instructors": [
         {
-          "name": "D. Lewis",
-          "email": null
+          "name": "Dominique Lewis",
+          "email": "dominique.n.lewis@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Nursing School - 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 50,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -125,129 +187,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "4556",
-      "section_number": "LAB1",
-      "schedule_type": "LAB",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "4557",
-      "section_number": "LAB2",
-      "schedule_type": "LAB",
-      "instructor": "D. Lewis",
-      "instructors": [
-        {
-          "name": "D. Lewis",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "4554",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "WF 10-11:15a",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4555",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "D. Lewis",
-      "instructors": [
-        {
-          "name": "D. Lewis",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 4,
-    "labs": 4,
+    "total_sections": 4,
+    "lectures": 2,
+    "labs": 2,
     "discussions": 0,
     "other": 0,
-    "open": 8,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Lewis"
+    "Dominique Lewis"
   ],
-  "scraped_at": "2026-06-17T23:12:26.863Z"
+  "scraped_at": "2026-06-18T03:09:48.886Z"
 }

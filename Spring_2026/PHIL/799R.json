@@ -5,81 +5,74 @@
   "catalog_number": "799R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "AI and Legal Writing will invite students to try new genres of legal writing and explore the production of legal writing in various practice areas. Students will experiment with prompting, evaluating responses, and integrating AI output into their work. Students will broaden their perspectives through engaging with speaker panels and/or individually interviewing practitioners. These approaches will be integrated with discussion of relevant ethical rules such as competence and confidentiality, as well as access-to-justice critiques of the legal profession. An unfortunately necessary skill in AI and Legal Writing is responding to hallucinated legal authorities, a problematic trend among pro se parties and some licensed attorneys. This course will invite students to develop an informed opinion on AI's role in their intellectual and professional development as legal writers and practicing lawyers.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "1893",
       "crn": "6070",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "D. Huseyinzadegan",
+      "instructor": "Jennifer W Mathews",
       "instructors": [
         {
-          "name": "D. Huseyinzadegan",
-          "email": null
+          "name": "Jennifer W Mathews",
+          "email": "jennifer.mathews@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": 2,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6070",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "D. Huseyinzadegan",
-      "instructors": [
-        {
-          "name": "D. Huseyinzadegan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
-    "closed": 2,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Huseyinzadegan"
+    "Jennifer W Mathews"
   ],
-  "scraped_at": "2026-06-17T23:06:07.922Z"
+  "scraped_at": "2026-06-18T02:38:17.523Z"
 }

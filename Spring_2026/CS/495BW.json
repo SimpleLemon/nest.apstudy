@@ -5,426 +5,370 @@
   "catalog_number": "495BW",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 8",
+  "credit_hours": "4",
   "requirement_designation": "CW",
   "requirements": [
     "CW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Enrollment limited to departmental majors invited to participate in the Honors Program.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Innovations in clinical care are increasingly impacted by the development and implementation of machine learning (ML) and artificial intelligence (AI). As future clinicians, medical students should be informed and prepared for technological changes that will affect how they provide care for their patients. The goals of this senior elective are to demystify AI and ML in healthcare, enabling students to have informed conversations about these technologies and participate in their clinical advancement.",
+  "course_notes": "(Permission Required Prior to Enrollment)(School of Medicine Students Only)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-06-29",
+    "end": "2026-12-19"
   },
   "sections": [
     {
+      "atlas_key": "2616",
       "crn": "6362",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "J. Choi",
+      "instructor": "Diana Fridlyand",
       "instructors": [
         {
-          "name": "J. Choi",
-          "email": null
+          "name": "Diana Fridlyand",
+          "email": "diana.fridlyand@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2617",
       "crn": "6363",
       "section_number": "2",
       "schedule_type": "SUP",
-      "instructor": "L. Xiong",
+      "instructor": "Tom Fox",
       "instructors": [
         {
-          "name": "L. Xiong",
-          "email": null
+          "name": "Tom Fox",
+          "email": "thomas.gordon.fox@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2618",
       "crn": "6364",
       "section_number": "3",
       "schedule_type": "SUP",
-      "instructor": "C. Yang",
+      "instructor": "Jaime Vengoechea Barrios",
       "instructors": [
         {
-          "name": "C. Yang",
-          "email": null
+          "name": "Jaime Vengoechea Barrios",
+          "email": "jvengoe@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2619",
       "crn": "6365",
       "section_number": "4",
       "schedule_type": "SUP",
-      "instructor": "D. Arnold",
+      "instructor": "Jessica Roberts",
       "instructors": [
         {
-          "name": "D. Arnold",
-          "email": null
+          "name": "Jessica Roberts",
+          "email": "jlrobe3@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2620",
       "crn": "6366",
       "section_number": "5",
       "schedule_type": "SUP",
-      "instructor": "S. Tang",
+      "instructor": "Barbara M Weissman",
       "instructors": [
         {
-          "name": "S. Tang",
-          "email": null
+          "name": "Barbara M Weissman",
+          "email": "bweissm@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2621",
       "crn": "6367",
       "section_number": "6",
       "schedule_type": "SUP",
-      "instructor": "K. Shu",
+      "instructor": "Donald Lee Batisky",
       "instructors": [
         {
-          "name": "K. Shu",
-          "email": null
+          "name": "Donald Lee Batisky",
+          "email": "dbatisk@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2622",
       "crn": "6368",
       "section_number": "7",
       "schedule_type": "SUP",
-      "instructor": "N. El-Sayed",
+      "instructor": "Patrice Kruszewski",
       "instructors": [
         {
-          "name": "N. El-Sayed",
-          "email": null
+          "name": "Patrice Kruszewski",
+          "email": null,
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2623",
       "crn": "6369",
       "section_number": "8",
       "schedule_type": "SUP",
-      "instructor": "L. Zhao",
+      "instructor": "Yih-Ming Yang",
       "instructors": [
         {
-          "name": "L. Zhao",
-          "email": null
+          "name": "Yih-Ming Yang",
+          "email": "yyang22@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "8",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6362",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "J. Choi",
-      "instructors": [
-        {
-          "name": "J. Choi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6363",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "L. Xiong",
-      "instructors": [
-        {
-          "name": "L. Xiong",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6364",
-      "section_number": "3",
-      "schedule_type": "SUP",
-      "instructor": "C. Yang",
-      "instructors": [
-        {
-          "name": "C. Yang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6365",
-      "section_number": "4",
-      "schedule_type": "SUP",
-      "instructor": "D. Arnold",
-      "instructors": [
-        {
-          "name": "D. Arnold",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6366",
-      "section_number": "5",
-      "schedule_type": "SUP",
-      "instructor": "S. Tang",
-      "instructors": [
-        {
-          "name": "S. Tang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6367",
-      "section_number": "6",
-      "schedule_type": "SUP",
-      "instructor": "K. Shu",
-      "instructors": [
-        {
-          "name": "K. Shu",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6368",
-      "section_number": "7",
-      "schedule_type": "SUP",
-      "instructor": "N. El-Sayed",
-      "instructors": [
-        {
-          "name": "N. El-Sayed",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6369",
-      "section_number": "8",
-      "schedule_type": "SUP",
-      "instructor": "L. Zhao",
-      "instructors": [
-        {
-          "name": "L. Zhao",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "8",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 16,
+    "total_sections": 8,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 16,
-    "open": 16,
+    "other": 8,
+    "open": 8,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Yang",
-    "D. Arnold",
-    "J. Choi",
-    "K. Shu",
-    "L. Xiong",
-    "L. Zhao",
-    "N. El-Sayed",
-    "S. Tang"
+    "Barbara M Weissman",
+    "Diana Fridlyand",
+    "Donald Lee Batisky",
+    "Jaime Vengoechea Barrios",
+    "Jessica Roberts",
+    "Patrice Kruszewski",
+    "Tom Fox",
+    "Yih-Ming Yang"
   ],
-  "scraped_at": "2026-06-17T23:01:53.996Z"
+  "scraped_at": "2026-06-18T02:16:08.229Z"
 }

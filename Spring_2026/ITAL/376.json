@@ -5,147 +5,171 @@
   "catalog_number": "376",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "HSC",
   "requirements": [
-    "HSC"
+    "HSC",
+    "Continuing Comm.& Writing with Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Topics to be announced each semester. Course is offered in English. Course content will vary, including topics of literature, history, culture, art history, political thought, current trends, and more. May be repeated for credit when syllabus changes.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Selected topics in history for students in non-history originating (cross-listed) courses. May be repeated for credit when topic varies.",
+  "course_notes": "(Same as AFS 389 4, AAS 385 6) This course offers a critical exploration of Liberia from past to present as one of the most unique political and cultural experiments in the modern Black world. Founded in the nineteenth century by formerly enslaved African Americans and free Black settlers, Liberia became the first modern African republic and a powerful symbol of Black self-governance, sovereignty, and possibility. Often celebrated, misunderstood, or overlooked, Liberia's history reveals complex questions about freedom, citizenship, identity, empire, and Pan-Africanism. Through historical study and contemporary analysis, students will examine Liberia's founding, settler-indigenous relations, state formation, economic development, and role in global Black politics. The course also explores the nation's civil wars, reconstruction, democratic transitions, migration, and present-day cultural and political life. Special attention will be given to Liberia's contributions to Black internationalism, anti-colonial thought, and movements for liberation across Africa and the diaspora. Drawing from history, political science, sociology, literature, film, and music, students will engage Liberia not as a footnote, but as a central site for understanding race, nationhood, and Black futures. By the end of the course, students will be able to critically assess Liberia's past, interpret its present, and imagine its place in global African futures.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3589",
       "crn": "6771",
       "section_number": "9000",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "instructor": "Elijah Zehyoue",
+      "instructors": [
+        {
+          "name": "Elijah Zehyoue",
+          "email": "elijah.robert.zehyoue@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 3,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3590",
       "crn": "6785",
       "section_number": "9001",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "instructor": "Nathan Suhr-Sytsma",
+      "instructors": [
+        {
+          "name": "Nathan Suhr-Sytsma",
+          "email": "nathan.e.suhr-sytsma@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "Few Bldg 131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
+      "requirements": [
+        "Continuing Comm.& Writing with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "3",
+      "enrollment_capacity": 4,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3591",
       "crn": "6843",
       "section_number": "9002",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "instructor": "Susan Elizabeth Gagliardi",
+      "instructors": [
+        {
+          "name": "Susan Elizabeth Gagliardi",
+          "email": "susan.e.gagliardi@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "Carlos Hall 212",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
+      "requirements": [
+        "Continuing Comm.& Writing with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 3,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6771",
-      "section_number": "9000",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6785",
-      "section_number": "9001",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6843",
-      "section_number": "9002",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 6,
+    "open": 2,
+    "closed": 0,
     "waitlisted": 0
   },
-  "instructors_unique": [],
-  "scraped_at": "2026-06-17T23:03:31.575Z"
+  "instructors_unique": [
+    "Elijah Zehyoue",
+    "Nathan Suhr-Sytsma",
+    "Susan Elizabeth Gagliardi"
+  ],
+  "scraped_at": "2026-06-18T02:27:29.787Z"
 }

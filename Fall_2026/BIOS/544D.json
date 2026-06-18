@@ -5,13 +5,13 @@
   "catalog_number": "544D",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Online Asynchronous. For non-BIOS Students Only. The goal of the course is to will provide an introduction to R in organizing, analyzing, and visualizing data. Once you've completed this course you'll be able to enter, save, retrieve, summarize, display and analyze data.",
+  "course_notes": "Laptop Required for class. NON-BIOS STUDENT ONLY.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,66 +20,59 @@
   },
   "sections": [
     {
+      "atlas_key": "4502",
       "crn": "5852",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Edwards",
+      "instructor": "Johnathan Edwards",
       "instructors": [
         {
-          "name": "J. Edwards",
-          "email": null
+          "name": "Johnathan Edwards",
+          "email": "alex.edwards@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5852",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Edwards",
-      "instructors": [
-        {
-          "name": "J. Edwards",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Edwards"
+    "Johnathan Edwards"
   ],
-  "scraped_at": "2026-06-17T23:09:27.868Z"
+  "scraped_at": "2026-06-18T02:49:02.134Z"
 }

@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "CW",
   "requirements": [
-    "CW"
+    "CW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This writing-intensive course provides students with practice developing rhetorically effective and ethically sensitive communication in genres that characterize professional activity across and outside the university. No prior technical knowledge required.",
-  "course_notes": null,
+  "course_notes": "(Same as DATASCI 302W 1) (Permission Required Prior to Enrollment) Juniors and seniors with declared majors or minors offered by the Department of Data and Decision Sciences or the Writing (RWID) Program will receive permission codes for this course prior to the pre-registration period. DATASCI and RWID students must use the provided code to enroll during their assigned registration period. Enrollment will be on a first-come, first-served basis, and once the enrollment cap is reached, the waitlist will be activated automatically. For enrollment in ENGRD 302W 1 only: Non-RWID students may contact ahackne@emory.edu for a permission code after April 15, 2026. This writing-intensive course introduces students to the theory and practice of technical and professional communication, with sustained emphasis on data-driven writing across disciplines. Students will engage in frequent, guided writing activities that support the analysis, design, and production of technical documents for diverse audiences. Central to the course is the practice of reading, analyzing, and interpreting quantitative information and translating data into clear, accessible qualitative discourse for audiences ranging from professional researchers to the lay public.",
   "requisites": null,
   "cross_listed": "QTM 302W",
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "3382",
       "crn": "3280",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Dutta",
+      "instructor": "Suchismita Dutta",
       "instructors": [
         {
-          "name": "S. Dutta",
-          "email": null
+          "name": "Suchismita Dutta",
+          "email": "suchismita.dutta@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Modern Language 330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "2",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -54,26 +72,47 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3383",
       "crn": "3281",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "S. Dutta",
+      "instructor": "Suchismita Dutta",
       "instructors": [
         {
-          "name": "S. Dutta",
-          "email": null
+          "name": "Suchismita Dutta",
+          "email": "suchismita.dutta@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Modern Language 330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "2",
+      "enrollment_capacity": 3,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -89,91 +128,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3280",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Dutta",
-      "instructors": [
-        {
-          "name": "S. Dutta",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3281",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "S. Dutta",
-      "instructors": [
-        {
-          "name": "S. Dutta",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 4
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Dutta"
+    "Suchismita Dutta"
   ],
-  "scraped_at": "2026-06-17T23:10:26.482Z"
+  "scraped_at": "2026-06-18T02:56:24.448Z"
 }

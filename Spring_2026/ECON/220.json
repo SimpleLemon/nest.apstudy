@@ -8,37 +8,55 @@
   "credit_hours": "4",
   "requirement_designation": "QR",
   "requirements": [
-    "QR"
+    "QR",
+    "Humanities and Arts(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Methods of collection, classification, analysis, and interpretation of economic data; measures of central tendency and dispersion; probability; estimation; hypothesis testing; regression analysis.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduces fundamental issues in photography &amp; visual thinking using 35mm film cameras &amp; B/W film. Topics: camera use, film developing, darkroom &amp; printing skills, image selection &amp; presentation, an overview of the history of photography, basic philosophy of photography, &amp; interpretation of images.",
   "course_notes": "(ECON 101 or ECON_OX 101 or FIN 201) and (MATH 111 or MATH_OX 111 or MATH 112 or MATH_OX 112 or MATH 112Z or MATH_OX 112Z or MATH 116) or equivalent transfer credit as prerequisite.",
   "requisites": "(ECON 101 or ECON_OX 101 or FIN 201) and (MATH 111 or MATH_OX 111 or MATH 112 or MATH_OX 112 or MATH 112Z or MATH_OX 112Z or MATH 116) or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "672",
       "crn": "3923",
       "section_number": "LAB2",
       "schedule_type": "LAB",
-      "instructor": "J. Kim",
+      "instructor": "Stephanie Dowda",
       "instructors": [
         {
-          "name": "J. Kim",
-          "email": null
+          "name": "Stephanie Dowda",
+          "email": "stephanie.leigh.dowda@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Visual Arts 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 7,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1-1:50p",
@@ -49,26 +67,47 @@
             "end": "1350"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "673",
       "crn": "3924",
       "section_number": "LAB3",
       "schedule_type": "LAB",
-      "instructor": "Q. Tang",
+      "instructor": "Stephanie Dowda",
       "instructors": [
         {
-          "name": "Q. Tang",
-          "email": null
+          "name": "Stephanie Dowda",
+          "email": "stephanie.leigh.dowda@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Visual Arts 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 7,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 11:30a-12:20p",
@@ -79,9 +118,14 @@
             "end": "1220"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "674",
       "crn": "3926",
       "section_number": "LAB4",
       "schedule_type": "LAB",
@@ -89,16 +133,32 @@
       "instructors": [
         {
           "name": "Q. Tang",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Visual Arts 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 10,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 2:30-3:20p",
@@ -109,26 +169,47 @@
             "end": "1520"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "669",
       "crn": "3844",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "S. Wunderly",
+      "instructor": "Larkin Ford",
       "instructors": [
         {
-          "name": "S. Wunderly",
-          "email": null
+          "name": "Larkin Ford",
+          "email": "larkin.henry.ford@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Visual Arts 118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 7,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -144,26 +225,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "670",
       "crn": "3845",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "J. Kim",
+      "instructor": "Sara Ghazi Asadollahi",
       "instructors": [
         {
-          "name": "J. Kim",
-          "email": null
+          "name": "Sara Ghazi Asadollahi",
+          "email": "sara.ghazi.asadollahi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Visual Arts 118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 7,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -179,9 +281,14 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "671",
       "crn": "3847",
       "section_number": "4",
       "schedule_type": "LEC",
@@ -189,16 +296,32 @@
       "instructors": [
         {
           "name": "P. Lopez de mesa Moyano",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Visual Arts 118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 12,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -214,219 +337,29 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3923",
-      "section_number": "LAB2",
-      "schedule_type": "LAB",
-      "instructor": "J. Kim",
-      "instructors": [
-        {
-          "name": "J. Kim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3924",
-      "section_number": "LAB3",
-      "schedule_type": "LAB",
-      "instructor": "Q. Tang",
-      "instructors": [
-        {
-          "name": "Q. Tang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3926",
-      "section_number": "LAB4",
-      "schedule_type": "LAB",
-      "instructor": "Q. Tang",
-      "instructors": [
-        {
-          "name": "Q. Tang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 2:30-3:20p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1430",
-            "end": "1520"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3844",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "S. Wunderly",
-      "instructors": [
-        {
-          "name": "S. Wunderly",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3845",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "J. Kim",
-      "instructors": [
-        {
-          "name": "J. Kim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3847",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "P. Lopez de mesa Moyano",
-      "instructors": [
-        {
-          "name": "P. Lopez de mesa Moyano",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
-    "lectures": 6,
-    "labs": 6,
+    "total_sections": 6,
+    "lectures": 3,
+    "labs": 3,
     "discussions": 0,
     "other": 0,
-    "open": 8,
-    "closed": 0,
-    "waitlisted": 4
+    "open": 2,
+    "closed": 4,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Kim",
+    "Larkin Ford",
     "P. Lopez de mesa Moyano",
     "Q. Tang",
-    "S. Wunderly"
+    "Sara Ghazi Asadollahi",
+    "Stephanie Dowda"
   ],
-  "scraped_at": "2026-06-17T23:02:03.795Z"
+  "scraped_at": "2026-06-18T02:17:46.574Z"
 }

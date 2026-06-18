@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "SS",
   "requirements": [
-    "SS"
+    "SS",
+    "Social Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course introduces students to the academic study of History and the varied approaches historians use to make sense of the past. It explores the ways historians scrutinize evidence, use digital methods, analyze images, conduct oral history and borrow from other disciplines to study the past.",
-  "course_notes": null,
+  "course_notes": "This entry-level course introduces students to the academic study of History. How do historians discover and use evidence? How do they research past cultures? What is the relationship between the past and the present? Over the course of the semester, students will hear compelling lectures by a number of Emory History professors, who will acquaint students with the many and varied approaches historians use to make sense of the past. The course explores the ways historians scrutinize evidence, use digital methods, analyze images, conduct oral histories, and use the tools of other disciplines to understand the past. Topics vary from the historical construction of race, the history of pandemics and the political uses of degenerate art and much more. The lectures cover different world regions and time periods. It is an ideal introduction to the study of history.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,50 @@
   },
   "sections": [
     {
+      "atlas_key": "703",
       "crn": "2517",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Tonio Andrade",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Tonio Andrade",
+          "email": "tandrad@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Savanna Courtney-Durrett",
+          "email": "savanna.courtney-durrett@emory.edu",
+          "role": "Teaching Assistant"
+        },
+        {
+          "name": "Ziying Lin",
+          "email": "ziying.lin@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 60,
+      "seats_available": 38,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,56 +82,27 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2517",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Team"
+    "Savanna Courtney-Durrett",
+    "Tonio Andrade",
+    "Ziying Lin"
   ],
-  "scraped_at": "2026-06-17T23:11:08.773Z"
+  "scraped_at": "2026-06-18T03:00:28.222Z"
 }

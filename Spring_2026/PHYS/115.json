@@ -8,37 +8,55 @@
   "credit_hours": "3",
   "requirement_designation": "NS",
   "requirements": [
-    "NS"
+    "NS",
+    "Social Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Students having taken Physics 116 for credit may not take this course. A descriptive overview of astronomy. The celestial coordinate system, time keeping, the planetary system, ancient astronomy, the sun, stellar evolution, galactic astronomy, cosmology, and the origin of the universe.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Social etiology and ecology of disease, sociological factors affecting treatment and rehabilitation, and the organization of medical care and medicine as a social institution.",
+  "course_notes": "The \"life chances\" that we are dealt by society have vast implications for our health. Indeed, social phenomena such as racism, stigma, and immigration manage to get \"under the skin\" and determine health outcomes. Perspectives derived from the sociology of health and illness (also termed \"medical sociology\") help us understand what makes people sick and what keeps them healthy. Sociological understandings of health and illness provide critical contributions to sociology as well as medicine, epidemiology, public health, and population health. The goal of this course is to think critically about how social processes shape health and are written on the body. We will draw from multiple disciplines alongside sociology, with the aim of broadening our powers of sociological imagination. This course is organized around four broad themes: 1) Theories and approaches, 2) Social identities and health inequalities, 3) Social interactions, relationships, and the illness experience, and 4) Social nature of medical structures. Through these modules, this course will introduce key concepts from the study of health and illness, including: social determinants of health, health inequalities, social stress, medicalization, the development of medical knowledge, the structure of the healthcare workforce and healthcare delivery, institutional harm, and medical ethics.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1186",
       "crn": "1918",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "T. Bing",
+      "instructor": "Surbhi Shrivastava",
       "instructors": [
         {
-          "name": "T. Bing",
-          "email": null
+          "name": "Surbhi Shrivastava",
+          "email": "surbhi.shrivastava@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 50,
+      "seats_available": 50,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,56 +72,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "1918",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "T. Bing",
-      "instructors": [
-        {
-          "name": "T. Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "T. Bing"
+    "Surbhi Shrivastava"
   ],
-  "scraped_at": "2026-06-17T23:06:11.155Z"
+  "scraped_at": "2026-06-18T02:39:58.690Z"
 }

@@ -5,40 +5,60 @@
   "catalog_number": "329R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "2",
   "requirement_designation": "HSC",
   "requirements": [
     "HSC"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Topic changes to meet current interest of students and faculty. Course may be repeated for credit as topic varies.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The relationship between sequence, structure, and function of macromolecules focusing on the practical aspects of macromolecular synthesis, structural and functional characterization, and degradation.",
+  "course_notes": "This lab is typically offered in fall, spring, and summer semesters.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3609",
       "crn": "4500",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "T. Holman",
+      "instructor": "Julia Smith",
       "instructors": [
         {
-          "name": "T. Holman",
-          "email": null
+          "name": "Julia Smith",
+          "email": "julia.smith@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Julia Smith",
+          "email": "julia.smith@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 240",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 72,
+      "seats_available": 27,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -54,26 +74,50 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3610",
       "crn": "4501",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "G. Lovisetto",
+      "instructor": "Julia Smith",
       "instructors": [
         {
-          "name": "G. Lovisetto",
-          "email": null
+          "name": "Julia Smith",
+          "email": "julia.smith@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Julia Smith",
+          "email": "julia.smith@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 240",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 72,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -89,92 +133,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "4500",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "T. Holman",
-      "instructors": [
-        {
-          "name": "T. Holman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4501",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "G. Lovisetto",
-      "instructors": [
-        {
-          "name": "G. Lovisetto",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 2,
+    "other": 2,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Lovisetto",
-    "T. Holman"
+    "Julia Smith"
   ],
-  "scraped_at": "2026-06-17T23:01:44.128Z"
+  "scraped_at": "2026-06-18T02:13:32.884Z"
 }

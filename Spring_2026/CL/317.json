@@ -5,40 +5,60 @@
   "catalog_number": "317",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "2",
   "requirement_designation": "HAP",
   "requirements": [
     "HAP"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Reading of Vergil's Aeneid and Dante's Divine Comedy in English translation.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This is a project-design based lab course. It will bring together materials from previous lab courses, as well as covering new techniques/methods.",
+  "course_notes": "This lab is offered in fall and spring semesters.",
   "requisites": null,
   "cross_listed": "ITAL 317",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3668",
       "crn": "2922",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "N. Slater",
+      "instructor": "Richard Himes",
       "instructors": [
         {
-          "name": "N. Slater",
-          "email": null
+          "name": "Richard Himes",
+          "email": "richard.allen.himes@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Richard Himes",
+          "email": "richard.allen.himes@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MWF 1-1:50p",
@@ -59,61 +79,25 @@
             "end": "1350"
           }
         ]
-      }
-    },
-    {
-      "crn": "2922",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "N. Slater",
-      "instructors": [
-        {
-          "name": "N. Slater",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MWF 1-1:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1350"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1350"
-          },
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "N. Slater"
+    "Richard Himes"
   ],
-  "scraped_at": "2026-06-17T23:01:44.126Z"
+  "scraped_at": "2026-06-18T02:13:32.883Z"
 }

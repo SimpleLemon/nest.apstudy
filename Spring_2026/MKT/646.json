@@ -5,38 +5,53 @@
   "catalog_number": "646",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Includes electrochemical and biophysical mechanisms for neuronal signaling, synaptic transmission, and neural bases of behavior and perception. GER Note: This course and BIOL360L satisfies half of SNTL requirement. This course w/o BIOL360L will award half of SNT only.",
+  "course_notes": "(Same as NBB 301 1) (This course is SHARED by the Biology Department and the NBB Program and fulfills the Column B requirement (or elective credit) for the Biology major. This course will provide students with an introduction to cellular and integrative neurobiology. Topics include the electrochemical and biophysical mechanisms for neuronal signaling and synaptic transmission, and the neural bases of behavior and perception. There is an optional 2-credit hour lab (Biology 360L/NBB 301L) associated with the course.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "447",
       "crn": "3423",
       "section_number": "3274",
       "schedule_type": "LEC",
-      "instructor": "M. Ward",
+      "instructor": "Robert C Liu",
       "instructors": [
         {
-          "name": "M. Ward",
-          "email": null
+          "name": "Robert C Liu",
+          "email": "robert.liu@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -52,26 +67,45 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "448",
       "crn": "3424",
       "section_number": "4574",
       "schedule_type": "LEC",
-      "instructor": "M. Ward",
+      "instructor": "Dieter Jaeger",
       "instructors": [
         {
-          "name": "M. Ward",
-          "email": null
+          "name": "Dieter Jaeger",
+          "email": "djaeger@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 70,
+      "seats_available": 32,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -87,91 +121,26 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "3423",
-      "section_number": "3274",
-      "schedule_type": "LEC",
-      "instructor": "M. Ward",
-      "instructors": [
-        {
-          "name": "M. Ward",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3424",
-      "section_number": "4574",
-      "schedule_type": "LEC",
-      "instructor": "M. Ward",
-      "instructors": [
-        {
-          "name": "M. Ward",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Ward"
+    "Dieter Jaeger",
+    "Robert C Liu"
   ],
-  "scraped_at": "2026-06-17T23:04:00.914Z"
+  "scraped_at": "2026-06-18T02:31:06.826Z"
 }

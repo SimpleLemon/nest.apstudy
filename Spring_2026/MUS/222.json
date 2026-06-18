@@ -8,37 +8,55 @@
   "credit_hours": "3",
   "requirement_designation": "HA",
   "requirements": [
-    "HA"
+    "HA",
+    "Social Sciences with Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Continuation of Theory and Analysis III. Analysis of 20- and 21-century compositions and techniques. Exercises include short original compositions.",
-  "course_notes": "This course requires MUS 221 or equivalent transfer credit as a prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Selected topics and problems in political science. Content will vary in successive offerings of this course. May be repeated for credit when topic varies.",
+  "course_notes": "(Same as AAS 259 1) This course examines the political, racial, and economic evolution of American cities and towns in the post-Civil Rights Movement era. The first half of the course focuses on dominant themes in political economy, political geography, and political behavior literature. The intersection of race and class at the local level is addressed, while exploring issues of institutional discrimination and redistribution. The second part of the course, applies learned concepts and ideas to 4 case studies: deindustrialization in Chicago, the rural healthcare crisis in Mississippi, rapid population change in Atlanta, and public education funding in Los Angeles. Students will gain an understanding of how the local political economy shapes opportunity, mobility, and racial relations in America.",
   "requisites": "This course requires MUS 221 or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1073",
       "crn": "2920",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "L. Emmery",
+      "instructor": "Jessica Lynn Stewart",
       "instructors": [
         {
-          "name": "L. Emmery",
-          "email": null
+          "name": "Jessica Lynn Stewart",
+          "email": "jessica.lynn.stewart@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway C203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences with Race & Ethnicity(*)",
+      "requirements": [
+        "Social Sciences with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2920",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "L. Emmery",
-      "instructors": [
-        {
-          "name": "L. Emmery",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Emmery"
+    "Jessica Lynn Stewart"
   ],
-  "scraped_at": "2026-06-17T23:04:14.002Z"
+  "scraped_at": "2026-06-18T02:32:04.589Z"
 }

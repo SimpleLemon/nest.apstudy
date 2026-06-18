@@ -5,62 +5,92 @@
   "catalog_number": "501",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "(Permission Required Prior to Enrollment) This course helps prepare graduate students in the history department for teaching at the college level. Students will distinguish, compare, and appraise different modes of presenting and analyzing material in the classroom. During the course of the semester, students will produce two polished syllabi, one of which will be the course they will teach in a subsequent semester to Emory undergraduates. The course will largely revolve around preparation for that course as well as providing support for students' current appointments as teaching assistants. This course is 2 credits and is graded on an S/U basis. To receive credit for it, you must attend all classes in the spring and fall and complete the following assignments: a teaching observation reflection; two syllabi (of which one will be for a 200-level course you intend to teach at Emory), a lecture (or part of a lecture) for an undergraduate course (typically the course you are TAing); and a number of smaller assignments, including reflections, teaching demonstrations, and presentations.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1505",
       "crn": "1415",
       "section_number": "L1",
       "schedule_type": "LAB",
-      "instructor": "Binongo/Choi",
+      "instructor": "Tonio Andrade",
       "instructors": [
         {
-          "name": "Binongo/Choi",
-          "email": null
+          "name": "Tonio Andrade",
+          "email": "tandrad@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1504",
       "crn": "1414",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Binongo",
+      "instructor": "Laura Nenzi",
       "instructors": [
         {
-          "name": "J. Binongo",
-          "email": null
+          "name": "Laura Nenzi",
+          "email": "laura.nenzi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 5:30-6:50p",
@@ -76,81 +106,26 @@
             "end": "1850"
           }
         ]
-      }
-    },
-    {
-      "crn": "1415",
-      "section_number": "L1",
-      "schedule_type": "LAB",
-      "instructor": "Binongo/Choi",
-      "instructors": [
-        {
-          "name": "Binongo/Choi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1414",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Binongo",
-      "instructors": [
-        {
-          "name": "J. Binongo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 5:30-6:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1730",
-            "end": "1850"
-          },
-          {
-            "day": "Thu",
-            "start": "1730",
-            "end": "1850"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 2,
-    "labs": 2,
+    "total_sections": 2,
+    "lectures": 1,
+    "labs": 1,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 0,
+    "open": 1,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Binongo/Choi",
-    "J. Binongo"
+    "Laura Nenzi",
+    "Tonio Andrade"
   ],
-  "scraped_at": "2026-06-17T23:01:24.580Z"
+  "scraped_at": "2026-06-18T02:10:09.754Z"
 }

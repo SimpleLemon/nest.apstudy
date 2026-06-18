@@ -8,10 +8,11 @@
   "credit_hours": "4",
   "requirement_designation": "HAPW",
   "requirements": [
-    "HAPW"
+    "HAPW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "A writing-intensive course in the construction and formatting of screenplays for upper-level undergraduates, which also broaches various aspects of pre-production planning. Weekly screenings required.",
   "course_notes": "ENGCW 270/270W or ENGCW_OX 270 or ENGCW 271/271W or ENGCW_OX 271 or ENGCW 272/272W or FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
   "requisites": "ENGCW 270/270W or ENGCW_OX 270 or ENGCW 271/271W or ENGCW_OX 271 or ENGCW 272/272W or FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "2006",
       "crn": "3880",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "J. Conway",
+      "instructor": "Joe Conway",
       "instructors": [
         {
-          "name": "J. Conway",
-          "email": null
+          "name": "Joe Conway",
+          "email": "joe.conway@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Atwood Chemistry Bldg. 270",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4:15-5:30p",
@@ -54,26 +72,47 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2007",
       "crn": "5349",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "C. Kras",
+      "instructor": "Carolyn Kras",
       "instructors": [
         {
-          "name": "C. Kras",
-          "email": null
+          "name": "Carolyn Kras",
+          "email": "carolyn.kras@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Emerson Chemistry Bldg. E103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 7,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-3:45p",
@@ -84,87 +123,26 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3880",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "J. Conway",
-      "instructors": [
-        {
-          "name": "J. Conway",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4:15-5:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1615",
-            "end": "1730"
-          },
-          {
-            "day": "Thu",
-            "start": "1615",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5349",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "C. Kras",
-      "instructors": [
-        {
-          "name": "C. Kras",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-3:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 2,
-    "closed": 2,
+    "other": 2,
+    "open": 1,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Kras",
-    "J. Conway"
+    "Carolyn Kras",
+    "Joe Conway"
   ],
-  "scraped_at": "2026-06-17T23:10:36.298Z"
+  "scraped_at": "2026-06-18T02:57:30.666Z"
 }

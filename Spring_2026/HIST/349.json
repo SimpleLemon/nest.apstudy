@@ -5,40 +5,58 @@
   "catalog_number": "349",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "1",
   "requirement_designation": "HSC",
   "requirements": [
-    "HSC"
+    "HSC",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "The agrarian South and the growth of an industrial ideal, segregation, dilemmas of political reform, race and politics, assaults upon segregation and its defenders, and modernization and change.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Non-music majors. Prerequisite: permission of instructor. The study of applied music involves the understanding of music literature through performance on a specific instrument. One-hour private instruction weekly. Students are required to practice a minimum of three hours per week and perform a final jury exam. Contact the instructor to arrange an audition. Lesson fees apply; refer to the departmental website (www.music.emory.edu) for current information.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "901",
       "crn": "3833",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Ward",
+      "instructor": "Paul Bhasin",
       "instructors": [
         {
-          "name": "J. Ward",
-          "email": null
+          "name": "Paul Bhasin",
+          "email": "paul.bhasin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,56 +72,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "3833",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Ward",
-      "instructors": [
-        {
-          "name": "J. Ward",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Ward"
+    "Paul Bhasin"
   ],
-  "scraped_at": "2026-06-17T23:03:05.499Z"
+  "scraped_at": "2026-06-18T02:24:48.783Z"
 }

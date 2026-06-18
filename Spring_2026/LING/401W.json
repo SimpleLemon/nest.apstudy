@@ -8,20 +8,23 @@
   "credit_hours": "4",
   "requirement_designation": "HAPW",
   "requirements": [
-    "HAPW"
+    "HAPW",
+    "Humanities and Arts with Cont.Communication(*)",
+    "Humanities and Arts(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "In this course, students think critically about fundamental questions in linguistics, including: Is language a product of how the mind works or a product of social interaction? What are the sources of linguistic structure? Is language innate in humans? Various perspectives are compared &amp; contrasted.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will introduce the principal figures and topics in ancient Greek and medieval philosophy.",
+  "course_notes": "During registration, this course is restricted to Philosophy majors. After registration, the restriction will be removed for the Add/Drop/Swap periods.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "978",
       "crn": "2843",
       "section_number": "1",
       "schedule_type": "SEM",
@@ -29,16 +32,32 @@
       "instructors": [
         {
           "name": "S. Tamasi",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Callaway S102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 18,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,26 +73,47 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "979",
       "crn": "3635",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "J. Boigues-Lopez",
+      "instructor": "Noah Gounoue",
       "instructors": [
         {
-          "name": "J. Boigues-Lopez",
-          "email": null
+          "name": "Noah Gounoue",
+          "email": "noah.gounoue@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 9,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -89,92 +129,26 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2843",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "S. Tamasi",
-      "instructors": [
-        {
-          "name": "S. Tamasi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3635",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "J. Boigues-Lopez",
-      "instructors": [
-        {
-          "name": "J. Boigues-Lopez",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 0,
+    "other": 2,
+    "open": 2,
     "closed": 0,
-    "waitlisted": 4
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Boigues-Lopez",
+    "Noah Gounoue",
     "S. Tamasi"
   ],
-  "scraped_at": "2026-06-17T23:03:51.050Z"
+  "scraped_at": "2026-06-18T02:28:50.751Z"
 }

@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "HA",
   "requirements": [
-    "HA"
+    "HA",
+    "Humanities and Arts(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course is about The Sufi Way (Islamic Mysticism or tasawwuf), the Muslim effort to experience God's presence and make society good. It focuses on South Asia (Afghanistan, Pakistan, India, Bangladesh) and the Chishti Order, the region's most popular and influential Sufi community.",
-  "course_notes": null,
+  "course_notes": "(Same as REL 231 1) This course is about The Sufi Way (Islamic Mysticism or tasawwuf), the Muslim effort to experience God's presence and make society good. This semester, it focuses on Iran and the Persianate World (Iran, Afghanistan, Pakistan, India and Uzbekistan) with special attention to saints and poets, including Rumi, Saadi, Amir Khusro, Hafez and the late revolutionary leader Ayatollah Khomeini.",
   "requisites": null,
   "cross_listed": "REL 231",
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "1163",
       "crn": "2826",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Kugle",
+      "instructor": "Scott A Kugle",
       "instructors": [
         {
-          "name": "S. Kugle",
-          "email": null
+          "name": "Scott A Kugle",
+          "email": "skugle@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway C101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -54,56 +72,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "2826",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Kugle",
-      "instructors": [
-        {
-          "name": "S. Kugle",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Kugle"
+    "Scott A Kugle"
   ],
-  "scraped_at": "2026-06-17T23:12:00.783Z"
+  "scraped_at": "2026-06-18T03:06:11.922Z"
 }

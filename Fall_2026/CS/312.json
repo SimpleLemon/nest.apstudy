@@ -10,8 +10,8 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Understanding ethical and societal concerns introduced by computing and AI into human life, including privacy, online influence and disinformation, information ownership and responsibility, fairness and bias in computer and AI technologies such as facial recognition and robotic systems.",
   "course_notes": "CS 211 or CS 323 or CS 325 or CS 334 or CS 470 or equivalent transfer credit as prerequisite.",
   "requisites": "CS 211 or CS 323 or CS 325 or CS 334 or CS 470 or equivalent transfer credit as prerequisite.",
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "4065",
       "crn": "2996",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Emami",
+      "instructor": "Ali Emami",
       "instructors": [
         {
-          "name": "A. Emami",
-          "email": null
+          "name": "Ali Emami",
+          "email": "ali.emami@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -54,56 +69,25 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "2996",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Emami",
-      "instructors": [
-        {
-          "name": "A. Emami",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Emami"
+    "Ali Emami"
   ],
-  "scraped_at": "2026-06-17T23:09:57.090Z"
+  "scraped_at": "2026-06-18T02:52:25.452Z"
 }

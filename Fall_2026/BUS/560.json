@@ -5,13 +5,13 @@
   "catalog_number": "560",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "Design thinking is a powerful approach for developing practical, creative solutions to real-world problems. It uses the mindset & methods of design practitioners to identify & address human needs by developing functional & emotionally meaningful products, services, processes, & spaces. In this course, you will learn the fundamental phases of the design thinking process. You will observe & interview real users in the field to get a better understanding of their challenges around experience with a product, service, process, or space.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,306 +20,264 @@
   },
   "sections": [
     {
+      "atlas_key": "340",
       "crn": "3676",
       "section_number": "2194",
       "schedule_type": "LEC",
-      "instructor": "J. Barton",
+      "instructor": "Jan Barton",
       "instructors": [
         {
-          "name": "J. Barton",
-          "email": null
+          "name": "Jan Barton",
+          "email": "jbarton@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-25"
       }
     },
     {
+      "atlas_key": "341",
       "crn": "3677",
       "section_number": "2195",
       "schedule_type": "LEC",
-      "instructor": "J. Barton",
+      "instructor": "Jan Barton",
       "instructors": [
         {
-          "name": "J. Barton",
-          "email": null
+          "name": "Jan Barton",
+          "email": "jbarton@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-25"
       }
     },
     {
+      "atlas_key": "342",
       "crn": "3678",
       "section_number": "2294",
       "schedule_type": "LEC",
-      "instructor": "J. Barton",
+      "instructor": "Jan Barton",
       "instructors": [
         {
-          "name": "J. Barton",
-          "email": null
+          "name": "Jan Barton",
+          "email": "jbarton@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 9,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-25"
       }
     },
     {
+      "atlas_key": "343",
       "crn": "3679",
       "section_number": "2295",
       "schedule_type": "LEC",
-      "instructor": "J. Barton",
+      "instructor": "Jan Barton",
       "instructors": [
         {
-          "name": "J. Barton",
-          "email": null
+          "name": "Jan Barton",
+          "email": "jbarton@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 9,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-25"
       }
     },
     {
+      "atlas_key": "344",
       "crn": "3680",
       "section_number": "3294",
       "schedule_type": "LEC",
-      "instructor": "J. Barton",
+      "instructor": "Jan Barton",
       "instructors": [
         {
-          "name": "J. Barton",
-          "email": null
+          "name": "Jan Barton",
+          "email": "jbarton@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 7,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-25"
       }
     },
     {
+      "atlas_key": "345",
       "crn": "3681",
       "section_number": "3295",
       "schedule_type": "LEC",
-      "instructor": "J. Barton",
+      "instructor": "Jan Barton",
       "instructors": [
         {
-          "name": "J. Barton",
-          "email": null
+          "name": "Jan Barton",
+          "email": "jbarton@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 7,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3676",
-      "section_number": "2194",
-      "schedule_type": "LEC",
-      "instructor": "J. Barton",
-      "instructors": [
-        {
-          "name": "J. Barton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3677",
-      "section_number": "2195",
-      "schedule_type": "LEC",
-      "instructor": "J. Barton",
-      "instructors": [
-        {
-          "name": "J. Barton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3678",
-      "section_number": "2294",
-      "schedule_type": "LEC",
-      "instructor": "J. Barton",
-      "instructors": [
-        {
-          "name": "J. Barton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3679",
-      "section_number": "2295",
-      "schedule_type": "LEC",
-      "instructor": "J. Barton",
-      "instructors": [
-        {
-          "name": "J. Barton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3680",
-      "section_number": "3294",
-      "schedule_type": "LEC",
-      "instructor": "J. Barton",
-      "instructors": [
-        {
-          "name": "J. Barton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3681",
-      "section_number": "3295",
-      "schedule_type": "LEC",
-      "instructor": "J. Barton",
-      "instructors": [
-        {
-          "name": "J. Barton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-25"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
-    "lectures": 12,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 8,
-    "closed": 4,
+    "open": 4,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Barton"
+    "Jan Barton"
   ],
-  "scraped_at": "2026-06-17T23:09:37.593Z"
+  "scraped_at": "2026-06-18T02:50:08.978Z"
 }

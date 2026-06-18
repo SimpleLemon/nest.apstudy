@@ -5,38 +5,53 @@
   "catalog_number": "585",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Designed to meet the Graduate School (TATTO) requirement for a teacher training course for students in art history. It is required of those graduate students serving as TAs in ARTHIST 101/102, and is offered in concert with their teaching experience in those courses.",
+  "course_notes": "ARTHIST 790/791 is designed to meet the Graduate School (TATTO) requirement for a teacher training course for students in art history. It is required of those graduate students serving as TAs in ARTHIST 101/102 and is offered in concert with their teaching experience in those courses.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1479",
       "crn": "1854",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "J. Lindo",
+      "instructor": "Linda Merrill",
       "instructors": [
         {
-          "name": "J. Lindo",
-          "email": null
+          "name": "Linda Merrill",
+          "email": "lmerri2@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Carlos Hall Conference",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:15p",
@@ -47,26 +62,43 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1480",
       "crn": "1863",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "D. Stout",
+      "instructor": "Eric Varner",
       "instructors": [
         {
-          "name": "D. Stout",
-          "email": null
+          "name": "Eric Varner",
+          "email": "evarner@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 3,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -82,181 +114,43 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1481",
       "crn": "2746",
       "section_number": "3",
       "schedule_type": "SEM",
-      "instructor": "J. Glass",
+      "instructor": "Todd S Cronan",
       "instructors": [
         {
-          "name": "J. Glass",
-          "email": null
+          "name": "Todd S Cronan",
+          "email": "todd.cronan@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4455",
-      "section_number": "4",
-      "schedule_type": "SEM",
-      "instructor": "G. Pandey",
-      "instructors": [
-        {
-          "name": "G. Pandey",
-          "email": null
-        }
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5465",
-      "section_number": "5",
-      "schedule_type": "SEM",
-      "instructor": "Y. Yannakakis",
-      "instructors": [
-        {
-          "name": "Y. Yannakakis",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1854",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "J. Lindo",
-      "instructors": [
-        {
-          "name": "J. Lindo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1863",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "D. Stout",
-      "instructors": [
-        {
-          "name": "D. Stout",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2746",
-      "section_number": "3",
-      "schedule_type": "SEM",
-      "instructor": "J. Glass",
-      "instructors": [
-        {
-          "name": "J. Glass",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
+      "enrollment_capacity": 2,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:15p",
@@ -267,26 +161,43 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1482",
       "crn": "4455",
       "section_number": "4",
       "schedule_type": "SEM",
-      "instructor": "G. Pandey",
+      "instructor": "Walter S Melion",
       "instructors": [
         {
-          "name": "G. Pandey",
-          "email": null
+          "name": "Walter S Melion",
+          "email": "wsmelio@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 3,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:30p",
@@ -297,26 +208,43 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1483",
       "crn": "5465",
       "section_number": "5",
       "schedule_type": "SEM",
-      "instructor": "Y. Yannakakis",
+      "instructor": "Lisa Lee",
       "instructors": [
         {
-          "name": "Y. Yannakakis",
-          "email": null
+          "name": "Lisa Lee",
+          "email": "lisa.lee2@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 2,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-5:30p",
@@ -327,25 +255,29 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
+    "total_sections": 5,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 10,
-    "open": 8,
-    "closed": 2,
+    "other": 5,
+    "open": 2,
+    "closed": 3,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Stout",
-    "G. Pandey",
-    "J. Glass",
-    "J. Lindo",
-    "Y. Yannakakis"
+    "Eric Varner",
+    "Linda Merrill",
+    "Lisa Lee",
+    "Todd S Cronan",
+    "Walter S Melion"
   ],
-  "scraped_at": "2026-06-17T23:01:04.714Z"
+  "scraped_at": "2026-06-18T02:07:32.583Z"
 }

@@ -8,37 +8,55 @@
   "credit_hours": "3",
   "requirement_designation": "QR",
   "requirements": [
-    "QR"
+    "QR",
+    "Natural Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Techniques of integration, exponential and logarithm functions, sequences and series, polar coordinates.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Students having taken Physics 116 for credit may not take this course. A descriptive overview of astronomy. The celestial coordinate system, time keeping, the planetary system, ancient astronomy, the sun, stellar evolution, galactic astronomy, cosmology, and the origin of the universe.",
   "course_notes": "This course requires MATH 111 OR MATH_OX111 OR MATH 115 OR MATH 119 OR MATH_OX119 or equivalent transfer credit as a prerequisite.",
   "requisites": "This course requires MATH 111 OR MATH_OX111 OR MATH 115 OR MATH 119 OR MATH_OX119 or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "995",
       "crn": "2781",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "E. Buser",
+      "instructor": "Erin Wells Bonning",
       "instructors": [
         {
-          "name": "E. Buser",
-          "email": null
+          "name": "Erin Wells Bonning",
+          "email": "erin.bonning@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Math & Science Center - E300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "5",
+      "enrollment_capacity": 36,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -54,26 +72,52 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "996",
       "crn": "2792",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "V. Rodl",
+      "instructor": "Alissa Bans",
       "instructors": [
         {
-          "name": "V. Rodl",
-          "email": null
+          "name": "Alissa Bans",
+          "email": "alissa.sue.bans@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Merida Batiste",
+          "email": "merida.g.batiste@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Math & Science Center - E300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 36,
+      "seats_available": 29,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -89,26 +133,50 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "997",
       "crn": "2799",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "V. Rodl",
+      "instructor": "Alissa Bans",
       "instructors": [
         {
-          "name": "V. Rodl",
-          "email": null
+          "name": "Alissa Bans",
+          "email": "alissa.sue.bans@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Merida Batiste",
+          "email": "merida.g.batiste@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - E300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 18,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -124,26 +192,50 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "998",
       "crn": "3125",
       "section_number": "5",
       "schedule_type": "LEC",
-      "instructor": "L. Onisk",
+      "instructor": "Alissa Bans",
       "instructors": [
         {
-          "name": "L. Onisk",
-          "email": null
+          "name": "Alissa Bans",
+          "email": "alissa.sue.bans@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Merida Batiste",
+          "email": "merida.g.batiste@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - E300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 18,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -159,26 +251,47 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "999",
       "crn": "3133",
       "section_number": "6",
       "schedule_type": "LEC",
-      "instructor": "A. Brown",
+      "instructor": "Thomas Bing",
       "instructors": [
         {
-          "name": "A. Brown",
-          "email": null
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "White Hall 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "5",
+      "enrollment_capacity": 160,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -194,199 +307,28 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "2781",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Buser",
-      "instructors": [
-        {
-          "name": "E. Buser",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2792",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "V. Rodl",
-      "instructors": [
-        {
-          "name": "V. Rodl",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2799",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "V. Rodl",
-      "instructors": [
-        {
-          "name": "V. Rodl",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3125",
-      "section_number": "5",
-      "schedule_type": "LEC",
-      "instructor": "L. Onisk",
-      "instructors": [
-        {
-          "name": "L. Onisk",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3133",
-      "section_number": "6",
-      "schedule_type": "LEC",
-      "instructor": "A. Brown",
-      "instructors": [
-        {
-          "name": "A. Brown",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
-    "lectures": 10,
+    "total_sections": 5,
+    "lectures": 5,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 8,
-    "closed": 0,
-    "waitlisted": 2
+    "open": 3,
+    "closed": 2,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Brown",
-    "E. Buser",
-    "L. Onisk",
-    "V. Rodl"
+    "Alissa Bans",
+    "Erin Wells Bonning",
+    "Merida Batiste",
+    "Thomas Bing"
   ],
-  "scraped_at": "2026-06-17T23:03:54.278Z"
+  "scraped_at": "2026-06-18T02:30:04.494Z"
 }

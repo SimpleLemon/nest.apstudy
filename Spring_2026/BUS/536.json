@@ -5,69 +5,114 @@
   "catalog_number": "536",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)",
+    "Continuing Comm.& Writing with Race & Ethnicity(*)",
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "(May be repeated for credit when topic varies.) Seminar or lecture series of topics of anthropological concern.",
+  "course_notes": "(Complete Topic: Theater, Performance & Community Engagement) How are theater, dance, live poetry, and spoken word used as tools for problem-solving, civic engagement, health education, and positive social change? How are communities engaged and enlisted in the creation of performance projects? This seminar course considers practices ranging from professional performances staged in mainstream venues to pop up performances and \"invisible theater\" in public areas. Guiding questions include: How are theater and performance projects developed for and with communities? What is stake? What is the value and impact of community-driven performance projects? What are the ethical, social, cultural, and political dimensions of community-based performance practices? We will examine several traditions of community-engaged theater-making and performance such as Playback Theatre, Theater for Development, and Augusto Boal's Forum Theatre and Image Theatre. In addition, through guest lectures, fieldtrips, and case studies students will learn about community-engaged performance projects in the Atlanta area. Course work includes: short assignments, team projects, and developing a proposal for a community-engaged performance, based on students' original research.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-05",
-    "end": "2026-01-09"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "404",
       "crn": "5412",
       "section_number": "2101",
       "schedule_type": "LEC",
-      "instructor": "Lord/Conner",
+      "instructor": "Debra Vidali",
       "instructors": [
         {
-          "name": "Lord/Conner",
-          "email": null
+          "name": "Debra Vidali",
+          "email": "debra.vidali@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Psychology Bldg 220",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "9",
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "402",
       "crn": "5413",
       "section_number": "2102",
       "schedule_type": "LEC",
-      "instructor": "Lord/Conner",
+      "instructor": "Chikako Ozawa-de Silva",
       "instructors": [
         {
-          "name": "Lord/Conner",
-          "email": null
+          "name": "Chikako Ozawa-de Silva",
+          "email": "cozawad@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - N301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "9",
+      "enrollment_capacity": 8,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "400",
       "crn": "5759",
       "section_number": "2103",
       "schedule_type": "LEC",
@@ -75,47 +120,87 @@
       "instructors": [
         {
           "name": "Lord/Conner",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Anthropology Bldg 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "9",
+      "enrollment_capacity": 25,
+      "seats_available": 21,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "405",
       "crn": "3386",
       "section_number": "2201",
       "schedule_type": "LEC",
-      "instructor": "Lord/Conner",
+      "instructor": "Bayo Holsey",
       "instructors": [
         {
-          "name": "Lord/Conner",
-          "email": null
+          "name": "Bayo Holsey",
+          "email": "bayo.holsey@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Bowden Hall 118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
+      "requirements": [
+        "Continuing Comm.& Writing with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "9",
+      "enrollment_capacity": 6,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "399",
       "crn": "3387",
       "section_number": "2202",
       "schedule_type": "LEC",
@@ -123,348 +208,232 @@
       "instructors": [
         {
           "name": "Lord/Conner",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Anthropology Bldg 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "9",
+      "enrollment_capacity": 25,
+      "seats_available": 17,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "401",
       "crn": "4397",
       "section_number": "2203",
       "schedule_type": "LEC",
-      "instructor": "Lord/Conner",
+      "instructor": "Chikako Ozawa-de Silva",
       "instructors": [
         {
-          "name": "Lord/Conner",
-          "email": null
+          "name": "Chikako Ozawa-de Silva",
+          "email": "cozawad@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - N301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "9",
+      "enrollment_capacity": 8,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "406",
       "crn": "5884",
       "section_number": "3201",
       "schedule_type": "LEC",
-      "instructor": "Lord/Ruskin",
+      "instructor": "Robert A Paul",
       "instructors": [
         {
-          "name": "Lord/Ruskin",
-          "email": null
+          "name": "Robert A Paul",
+          "email": "rpaul@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "9",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "407",
       "crn": "5885",
       "section_number": "3202",
       "schedule_type": "LEC",
-      "instructor": "Lord/Ruskin",
+      "instructor": "Robert A Paul",
       "instructors": [
         {
-          "name": "Lord/Ruskin",
-          "email": null
+          "name": "Robert A Paul",
+          "email": "rpaul@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "9",
+      "enrollment_capacity": 20,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "403",
       "crn": "5886",
       "section_number": "3203",
       "schedule_type": "LEC",
-      "instructor": "Lord/Ruskin",
+      "instructor": "Peter Little",
       "instructors": [
         {
-          "name": "Lord/Ruskin",
-          "email": null
+          "name": "Peter Little",
+          "email": "pdlittl@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "9",
+      "enrollment_capacity": 20,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5412",
-      "section_number": "2101",
-      "schedule_type": "LEC",
-      "instructor": "Lord/Conner",
-      "instructors": [
-        {
-          "name": "Lord/Conner",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5413",
-      "section_number": "2102",
-      "schedule_type": "LEC",
-      "instructor": "Lord/Conner",
-      "instructors": [
-        {
-          "name": "Lord/Conner",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5759",
-      "section_number": "2103",
-      "schedule_type": "LEC",
-      "instructor": "Lord/Conner",
-      "instructors": [
-        {
-          "name": "Lord/Conner",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3386",
-      "section_number": "2201",
-      "schedule_type": "LEC",
-      "instructor": "Lord/Conner",
-      "instructors": [
-        {
-          "name": "Lord/Conner",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3387",
-      "section_number": "2202",
-      "schedule_type": "LEC",
-      "instructor": "Lord/Conner",
-      "instructors": [
-        {
-          "name": "Lord/Conner",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "4397",
-      "section_number": "2203",
-      "schedule_type": "LEC",
-      "instructor": "Lord/Conner",
-      "instructors": [
-        {
-          "name": "Lord/Conner",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5884",
-      "section_number": "3201",
-      "schedule_type": "LEC",
-      "instructor": "Lord/Ruskin",
-      "instructors": [
-        {
-          "name": "Lord/Ruskin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5885",
-      "section_number": "3202",
-      "schedule_type": "LEC",
-      "instructor": "Lord/Ruskin",
-      "instructors": [
-        {
-          "name": "Lord/Ruskin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5886",
-      "section_number": "3203",
-      "schedule_type": "LEC",
-      "instructor": "Lord/Ruskin",
-      "instructors": [
-        {
-          "name": "Lord/Ruskin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 18,
-    "lectures": 18,
+    "total_sections": 9,
+    "lectures": 9,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 18,
-    "closed": 0,
+    "open": 6,
+    "closed": 3,
     "waitlisted": 0
   },
   "instructors_unique": [
+    "Bayo Holsey",
+    "Chikako Ozawa-de Silva",
+    "Debra Vidali",
     "Lord/Conner",
-    "Lord/Ruskin"
+    "Peter Little",
+    "Robert A Paul"
   ],
-  "scraped_at": "2026-06-17T23:01:34.286Z"
+  "scraped_at": "2026-06-18T02:12:20.934Z"
 }

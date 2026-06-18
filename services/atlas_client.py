@@ -72,6 +72,7 @@ CAPACITY_KEYS = (
     "seatsCapacity",
     "section_capacity",
     "sectionCapacity",
+    "enrollment_capacity",
 )
 LOCATION_KEYS = ("location", "loc", "room", "building", "bldg_room", "bldgRoom")
 COURSE_DESCRIPTION_KEYS = (
@@ -310,6 +311,172 @@ def _first_value(mapping, keys):
     return None
 
 
+def _strip_tags(html):
+    text = str(html or "")
+    text = re.sub(r"<br\s*/?>", " ", text, flags=re.I)
+    text = re.sub(r"</p>", " ", text, flags=re.I)
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = (
+        text.replace("&nbsp;", " ")
+        .replace("&amp;", "&")
+        .replace("&lt;", "<")
+        .replace("&gt;", ">")
+        .replace("&quot;", '"')
+        .replace("&#39;", "'")
+    )
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _parse_grading_mode_options(value):
+    return [item.strip() for item in str(value or "").split(",") if item.strip()]
+
+
+def _parse_seats_html(html):
+    text = _strip_tags(html)
+    capacity = re.search(r"Maximum Enrollment\D*(\d+)", text, re.I)
+    available = re.search(r"Seats Avail\D*(\d+)", text, re.I)
+    waitlist = re.search(r"Waitlist Total\D*(\d+)\s+of\s+(\d+)", text, re.I)
+    return {
+        "enrollment_capacity": int(capacity.group(1)) if capacity else None,
+        "seats_available": int(available.group(1)) if available else None,
+        "waitlist_total": int(waitlist.group(1)) if waitlist else None,
+        "waitlist_capacity": int(waitlist.group(2)) if waitlist else None,
+    }
+
+
+def _parse_meeting_location(html):
+    source = str(html or "")
+    link_match = re.search(r"\bin\s+<a[^>]*>([^<]+)</a>", source, re.I)
+    if link_match:
+        return _strip_tags(link_match.group(1))
+    plain_match = re.search(r"\bin\s+([^<]+?)(?:</span>|$)", source, re.I)
+    return _strip_tags(plain_match.group(1)) if plain_match else None
+
+
+def _cell_value(html):
+    return re.sub(r"^[^:]+:\s*", "", _strip_tags(html)).strip()
+
+
+def _parse_campus_from_all_sections(html, crn=None, section_number=None):
+    source = str(html or "")
+    if not source:
+        return None
+    wanted_crn = str(crn or "").strip()
+    wanted_section = str(section_number or "").strip()
+    for row_html in re.findall(r'<a[^>]*class="course-section"[^>]*>([\s\S]*?)</a>', source, re.I):
+        row_crn = _cell_value(
+            (re.search(r"course-section-crn[^>]*>([\s\S]*?)</div>", row_html, re.I) or [None, ""])[1]
+        )
+        row_section = _cell_value(
+            (re.search(r"course-section-section[^>]*>([\s\S]*?)</div>", row_html, re.I) or [None, ""])[1]
+        )
+        if wanted_crn and row_crn != wanted_crn:
+            continue
+        if not wanted_crn and wanted_section and row_section != wanted_section:
+            continue
+        campus = _cell_value(
+            (re.search(r"course-section-camp[^>]*>([\s\S]*?)</div>", row_html, re.I) or [None, ""])[1]
+        )
+        if campus:
+            return campus
+    return None
+
+
+def _parse_instructor_detail_html(html):
+    source = str(html or "")
+    if not source:
+        return []
+    instructors = []
+    for block in re.findall(
+        r'<div class="instructor-detail">([\s\S]*?)</div>\s*(?=<div class="instructor-detail">|</div>\s*</div>|$)',
+        source,
+        re.I,
+    ):
+        name = _strip_tags(
+            (re.search(r"instructor-name[^>]*>([\s\S]*?)</div>", block, re.I) or [None, ""])[1]
+        )
+        email_match = re.search(r"mailto:([^\"'>\s]+)", block, re.I)
+        role = _strip_tags(
+            (re.search(r"instructor-role[^>]*>([\s\S]*?)</div>", block, re.I) or [None, ""])[1]
+        )
+        if name:
+            instructors.append({
+                "name": name,
+                "email": email_match.group(1) if email_match else None,
+                "role": role or None,
+            })
+    return instructors
+
+
+def _parse_dates_html(value, search_row=None):
+    text = _strip_tags(value)
+    match = re.search(r"(\d{4}-\d{2}-\d{2})\s+through\s+(\d{4}-\d{2}-\d{2})", text, re.I)
+    if match:
+        return {"start": match.group(1), "end": match.group(2)}
+    search_row = search_row or {}
+    if search_row.get("start_date") or search_row.get("end_date"):
+        return {
+            "start": search_row.get("start_date"),
+            "end": search_row.get("end_date"),
+        }
+    return None
+
+
+def parse_atlas_details_payload(details, search_row=None):
+    if not isinstance(details, dict) or details.get("fatal"):
+        return {}
+    search_row = search_row or {}
+    crn = str(details.get("crn") or search_row.get("crn") or "").strip()
+    section_number = str(
+        details.get("section") or search_row.get("no") or search_row.get("section_number") or ""
+    ).strip()
+    seats = _parse_seats_html(details.get("seats"))
+    campus_description = _parse_campus_from_all_sections(details.get("all_sections"), crn, section_number)
+    requirement_designation = _strip_tags(details.get("clss_assoc_rqmnt_designt_html")) or None
+    instructor_details = _parse_instructor_detail_html(details.get("instructordetail_html"))
+    enrollment_status = _strip_tags(details.get("enrl_stat_html")) or _normalize_enrollment_status(
+        search_row.get("enrl_stat") or search_row.get("enrollment_status")
+    )
+    credit_hours = details.get("credit_hours_options") or _strip_tags(details.get("hours_html")) or None
+    return {
+        "atlas_key": str(details.get("key") or search_row.get("key") or "").strip() or None,
+        "credit_hours": credit_hours,
+        "enrollment_capacity": seats["enrollment_capacity"],
+        "seats_available": seats["seats_available"],
+        "waitlist_total": seats["waitlist_total"],
+        "waitlist_capacity": seats["waitlist_capacity"],
+        "grading_mode": details.get("grademode_code"),
+        "grading_mode_options": _parse_grading_mode_options(details.get("gmods")),
+        "instruction_method": details.get("inst_method_code"),
+        "enrollment_status": enrollment_status,
+        "requirement_designation": requirement_designation,
+        "requirements": _requirement_values({"requirement_designation": requirement_designation}),
+        "campus_description": campus_description,
+        "location": _parse_meeting_location(details.get("meeting_html")),
+        "course_description": _strip_tags(details.get("description")) or None,
+        "course_notes": _strip_tags(details.get("clssnotes")) or None,
+        "typically_offered": _strip_tags(details.get("crse_typoff_html")) or None,
+        "instructors": instructor_details or None,
+        "instructor": instructor_details[0]["name"] if instructor_details else None,
+        "date_range": _parse_dates_html(details.get("dates_html"), search_row),
+    }
+
+
+def merge_section_with_details(search_row, details_payload):
+    parsed = parse_atlas_details_payload(details_payload, search_row)
+    subject, _catalog = _split_course_code(search_row.get("code") or search_row.get("course_code"))
+    campus_description = parsed.get("campus_description") or _first_value(search_row, CAMPUS_KEYS)
+    merged = {**search_row, **parsed}
+    merged["campus"] = _normalize_campus_value(campus_description, subject=subject)
+    merged["campus_description"] = campus_description
+    if parsed.get("instructors"):
+        merged["instructors"] = parsed["instructors"]
+    if parsed.get("instructor"):
+        merged["instructor"] = parsed["instructor"]
+        merged["instr"] = parsed["instructor"]
+    return merged
+
+
 def get_starred_general_ed_requirements():
     return list(STARRED_GENERAL_ED_REQUIREMENTS)
 
@@ -353,11 +520,12 @@ def _requirement_values(*sources):
 def _normalize_campus_value(value, subject=None):
     raw = str(value or "").strip()
     lowered = raw.lower()
-    if "oxford" in lowered:
+    if "oxford" in lowered or lowered.startswith("oxf@"):
         return "Oxford"
-    if lowered in CAMPUS_FILTER_ALIASES["atlanta"] or "atlanta" in lowered or "main" in lowered:
+    if lowered in CAMPUS_FILTER_ALIASES["atlanta"] or "atlanta" in lowered or "main" in lowered or lowered.startswith("atl@"):
         return "Atlanta"
-    if str(subject or "").upper().startswith(OXFORD_SUBJECT_PREFIXES):
+    upper_subject = str(subject or "").upper()
+    if upper_subject.startswith(OXFORD_SUBJECT_PREFIXES) or upper_subject.endswith("_OX"):
         return "Oxford"
     return raw or None
 
@@ -500,11 +668,14 @@ def _section_row_from_course_data(term_name, subject_name, catalog_number, cours
     crn = str(section.get("crn") or "")
     section_number = str(section.get("section_number") or "")
     status = _normalize_enrollment_status(section.get("enrollment_status"))
-    seats_available = _infer_seats_available(status, section)
+    seats_available = _first_int(section, SEATS_AVAILABLE_KEYS)
+    if seats_available is None:
+        seats_available = _infer_seats_available(status, section)
     unique_id = build_section_id(course_term, subject_name, catalog_number, crn, section_number)
     instructors = _normalize_instructors(section.get("instructors") or section.get("instructor"))
     campus_value = _first_value(section, CAMPUS_KEYS) or _first_value(course_data, CAMPUS_KEYS)
     requirement_values = _requirement_values(section, course_data)
+    credit_hours = _first_value(section, ("credit_hours", "credits", "hours")) or course_data.get("credit_hours")
     return {
         "id": unique_id,
         "term": course_term,
@@ -522,17 +693,22 @@ def _section_row_from_course_data(term_name, subject_name, catalog_number, cours
         "enrollment_count": str(section.get("enrollment_count") or ""),
         "seats_available": seats_available,
         "enrollment_capacity": _first_int(section, CAPACITY_KEYS),
+        "waitlist_total": _first_int(section, ("waitlist_total",)),
+        "waitlist_capacity": _first_int(section, ("waitlist_capacity",)),
+        "grading_mode": section.get("grading_mode"),
+        "grading_mode_options": section.get("grading_mode_options") or [],
+        "instruction_method": section.get("instruction_method"),
         "is_cancelled": bool(section.get("is_cancelled", False)),
         "schedule_display": schedule.get("display") or "TBA",
         "meetings": schedule.get("meetings") or [],
         "date_range": section.get("date_range") or course_date_range,
-        "credit_hours": course_data.get("credit_hours"),
+        "credit_hours": credit_hours,
         "requirement_designation": requirement_values[0] if requirement_values else None,
         "requirements": requirement_values,
         "campus": _normalize_campus_value(campus_value, subject=subject_name),
         "campus_description": campus_value,
-        "course_description": _first_value(course_data, COURSE_DESCRIPTION_KEYS),
-        "course_notes": course_data.get("course_notes"),
+        "course_description": _first_value(section, COURSE_DESCRIPTION_KEYS) or _first_value(course_data, COURSE_DESCRIPTION_KEYS),
+        "course_notes": section.get("course_notes") or course_data.get("course_notes"),
         "section_summary": section_summary,
         "instructors_unique": instructors_unique,
     }
@@ -553,16 +729,27 @@ def _live_row_from_raw(term, raw):
     subject, catalog = _split_course_code(course_code)
     crn = str(raw.get("crn") or "").strip()
     section_number = str(raw.get("no") or raw.get("section_number") or "").strip()
-    status = _normalize_enrollment_status(raw.get("enrl_stat") or raw.get("enrollment_status"))
-    seats_available = _infer_seats_available(status, raw)
+    status = _normalize_enrollment_status(
+        raw.get("enrollment_status") or raw.get("enrl_stat_html") or raw.get("enrl_stat")
+    )
+    seats_available = _first_int(raw, SEATS_AVAILABLE_KEYS)
+    if seats_available is None:
+        seats_available = _infer_seats_available(status, raw)
     schedule_display = raw.get("meets") or raw.get("schedule_display") or "TBA"
+    if isinstance(raw.get("schedule"), dict):
+        schedule_display = raw["schedule"].get("display") or schedule_display
     instructors = _normalize_instructors(raw.get("instructors") or raw.get("instr") or raw.get("instructor"))
-    date_range = {
+    date_range = raw.get("date_range") or {
         "start": raw.get("start_date") or raw.get("startDate"),
         "end": raw.get("end_date") or raw.get("endDate"),
     }
     campus_value = _first_value(raw, CAMPUS_KEYS)
     requirement_values = _requirement_values(raw)
+    meetings = raw.get("meetings")
+    if not meetings and raw.get("schedule", {}).get("meetings"):
+        meetings = raw["schedule"]["meetings"]
+    if not meetings:
+        meetings = _parse_meeting_times(raw.get("meetingTimes") or raw.get("meetings"))
     return {
         "id": build_section_id(term, subject, catalog, crn, section_number),
         "term": term,
@@ -580,11 +767,16 @@ def _live_row_from_raw(term, raw):
         "enrollment_count": str(raw.get("total") or raw.get("enrollment_count") or ""),
         "seats_available": seats_available,
         "enrollment_capacity": _first_int(raw, CAPACITY_KEYS),
+        "waitlist_total": _first_int(raw, ("waitlist_total",)),
+        "waitlist_capacity": _first_int(raw, ("waitlist_capacity",)),
+        "grading_mode": raw.get("grading_mode") or raw.get("grademode_code"),
+        "grading_mode_options": raw.get("grading_mode_options") or _parse_grading_mode_options(raw.get("gmods")),
+        "instruction_method": raw.get("instruction_method") or raw.get("inst_method_code"),
         "is_cancelled": bool(raw.get("isCancelled") or raw.get("is_cancelled") or False),
         "schedule_display": schedule_display,
-        "meetings": _parse_meeting_times(raw.get("meetingTimes") or raw.get("meetings")),
+        "meetings": meetings,
         "date_range": date_range,
-        "credit_hours": _first_value(raw, ("credit_hours", "credits", "hours")),
+        "credit_hours": _first_value(raw, ("credit_hours", "credits", "hours", "credit_hours_options")),
         "requirement_designation": requirement_values[0] if requirement_values else None,
         "requirements": requirement_values,
         "campus": _normalize_campus_value(campus_value, subject=subject),
@@ -607,6 +799,9 @@ def _section_search_blob(section):
         section.get("credit_hours"),
         section.get("requirement_designation"),
         section.get("requirements"),
+        section.get("grading_mode"),
+        section.get("instruction_method"),
+        section.get("location"),
         section.get("campus"),
         section.get("campus_description"),
         section.get("course_description"),
@@ -1239,21 +1434,115 @@ def fetch_live_subject_sections(term, subject, catalog=None, timeout=15):
     return {"term": term, "subject": subject, "sections": sections, "count": len(sections)}
 
 
+def fetch_atlas_section_details(term, atlas_key, timeout=15):
+    """Fetch Atlas FOSE details for a section key."""
+    term = _validate_term(term or _default_term())
+    if not term:
+        return {"error": "Invalid term"}
+
+    atlas_key = str(atlas_key or "").strip()
+    if not atlas_key:
+        return {"error": "Missing atlas key"}
+
+    srcdb = ATLAS_TERM_SRCDB.get(term)
+    if not srcdb:
+        return {"error": f"No Atlas srcdb configured for {term}"}
+
+    try:
+        response = requests.post(
+            ATLAS_BASE_URL,
+            params={"page": "fose", "route": "details"},
+            json={"other": {"srcdb": srcdb}, "group": f"key:{atlas_key}"},
+            headers=ATLAS_REQUIRED_HEADERS,
+            timeout=timeout,
+        )
+        response.raise_for_status()
+        payload = response.json()
+    except (requests.RequestException, ValueError) as exc:
+        return {"error": f"Live Atlas details request failed: {exc}"}
+
+    if not payload or payload == "":
+        return {"error": "Live Atlas details returned an empty response"}
+    if isinstance(payload, dict) and payload.get("fatal"):
+        return {"error": f"Live Atlas details error: {payload.get('fatal')}"}
+    return payload if isinstance(payload, dict) else {"error": "Live Atlas details returned invalid data"}
+
+
+def _fetch_atlas_search_row(term, crn=None, subject=None, timeout=15):
+    term = _validate_term(term or _default_term())
+    if not term:
+        return None
+    srcdb = ATLAS_TERM_SRCDB.get(term)
+    if not srcdb:
+        return None
+
+    criteria = []
+    if crn:
+        criteria.append({"field": "crn", "value": str(crn)})
+    elif subject:
+        criteria.append({"field": "subject", "value": str(subject).upper()})
+    else:
+        return None
+
+    try:
+        response = requests.post(
+            ATLAS_BASE_URL,
+            params={"page": "fose", "route": "search"},
+            json={"other": {"srcdb": srcdb}, "criteria": criteria},
+            headers=ATLAS_REQUIRED_HEADERS,
+            timeout=timeout,
+        )
+        response.raise_for_status()
+        payload = response.json()
+    except (requests.RequestException, ValueError):
+        return None
+
+    results = payload.get("results", []) if isinstance(payload, dict) else []
+    if not isinstance(results, list) or not results:
+        return None
+    if crn:
+        for row in results:
+            if str(row.get("crn") or "") == str(crn):
+                return row
+    return results[0] if results else None
+
+
 def fetch_live_section_status(term, subject, catalog, crn=None, section_number=None, timeout=15):
     """Fetch a single live Atlas section and return the normalized row."""
-    result = fetch_live_subject_sections(term, subject, catalog=catalog, timeout=timeout)
-    if "error" in result:
-        return result
+    term = _validate_term(term or _default_term())
+    if not term:
+        return {"error": "Invalid term"}
 
     wanted_crn = str(crn or "").strip()
     wanted_section = str(section_number or "").strip()
-    for row in result.get("sections", []):
-        crn_matches = not wanted_crn or str(row.get("crn") or "") == wanted_crn
-        section_matches = not wanted_section or str(row.get("section_number") or "") == wanted_section
-        if crn_matches and section_matches:
-            return {"section": row}
+    search_row = _fetch_atlas_search_row(term, crn=wanted_crn, subject=subject, timeout=timeout)
+    if not search_row:
+        result = fetch_live_subject_sections(term, subject, catalog=catalog, timeout=timeout)
+        if "error" in result:
+            return result
+        for row in result.get("sections", []):
+            crn_matches = not wanted_crn or str(row.get("crn") or "") == wanted_crn
+            section_matches = not wanted_section or str(row.get("section_number") or "") == wanted_section
+            if crn_matches and section_matches:
+                return {"section": row}
+        return {"error": "Live section not found"}
 
-    return {"error": "Live section not found"}
+    atlas_key = str(search_row.get("key") or "").strip()
+    if atlas_key:
+        details = fetch_atlas_section_details(term, atlas_key, timeout=timeout)
+        if isinstance(details, dict) and "error" not in details:
+            merged = merge_section_with_details(search_row, details)
+            row = _live_row_from_raw(term, merged)
+            if str(row.get("subject") or "").upper() == str(subject or "").upper():
+                catalog_filter = str(catalog or "").strip().upper()
+                if not catalog_filter or str(row.get("catalog_number") or "").upper() == catalog_filter:
+                    return {"section": row}
+
+    row = _live_row_from_raw(term, search_row)
+    catalog_filter = str(catalog or "").strip().upper()
+    if catalog_filter and str(row.get("catalog_number") or "").upper() != catalog_filter:
+        return {"error": "Live section not found"}
+    return {"section": row}
 
 
 def get_meta():

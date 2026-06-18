@@ -13,7 +13,7 @@
   "campus": null,
   "campus_description": null,
   "course_description": "The course examines the rich tapestry of South Asian cuisine, examining how it has evolved and spread across the globe through migration. It also examines the South Asian diaspora's influence on global food cultures, focusing on and the emergence of new culinary expressions.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,6 +22,7 @@
   },
   "sections": [
     {
+      "atlas_key": "5016",
       "crn": "2605",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +30,25 @@
       "instructors": [
         {
           "name": "K. Singh",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,56 +64,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2605",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "K. Singh",
-      "instructors": [
-        {
-          "name": "K. Singh",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "K. Singh"
   ],
-  "scraped_at": "2026-06-17T23:03:57.662Z"
+  "scraped_at": "2026-06-18T02:30:25.526Z"
 }

@@ -5,40 +5,59 @@
   "catalog_number": "202",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "SS",
   "requirements": [
-    "SS"
+    "SS",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course explores key concepts in cultural anthropology. Through engaging ethnographic accounts from different world areas, students will analyze anthropological debates about culture, race, religion, ritual, health, gender, sexuality, politics, and/or exchange and learn about fieldwork methods.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course surveys the evolving role that social purpose organizations, their leaders (both management and board of directors), and critical stakeholders play in delivering social impact. These purpose-driven organizations, which make up the $6 trillion social solution economy, encompass an array of business models that range from traditional nonprofits to for-profit companies and hybrid organizations focusing on social outcomes. We will also cover the importance of key actors in the sector, including foundations / grant makers, charities, service providers, B corps, impact and ESG investors, government entities, and social enterprises.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3549",
       "crn": "1845",
       "section_number": "D1",
       "schedule_type": "DIS",
-      "instructor": "J. Abillama",
+      "instructor": "Brian Goebel",
       "instructors": [
         {
-          "name": "J. Abillama",
-          "email": null
+          "name": "Brian Goebel",
+          "email": "bgoebel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Randy Martin",
+          "email": "rmart31@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-10:50a",
@@ -49,26 +68,43 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3550",
       "crn": "1846",
       "section_number": "D2",
       "schedule_type": "DIS",
-      "instructor": "R. K K",
+      "instructor": "Laura Torres-Rodriguez",
       "instructors": [
         {
-          "name": "R. K K",
-          "email": null
+          "name": "Laura Torres-Rodriguez",
+          "email": "laura.juliana.torres-rodriguez@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S501",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 12,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 4-4:50p",
@@ -79,26 +115,43 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3551",
       "crn": "1847",
       "section_number": "D3",
       "schedule_type": "DIS",
-      "instructor": "L. Hickman",
+      "instructor": "Nicole Morris",
       "instructors": [
         {
-          "name": "L. Hickman",
-          "email": null
+          "name": "Nicole Morris",
+          "email": "nicole.n.morris@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 50,
+      "seats_available": 23,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 11-11:50a",
@@ -109,26 +162,47 @@
             "end": "1150"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "3552",
       "crn": "1848",
       "section_number": "D4",
       "schedule_type": "DIS",
-      "instructor": "C. Paillot",
+      "instructor": "Roberto Franzosi",
       "instructors": [
         {
-          "name": "C. Paillot",
-          "email": null
+          "name": "Roberto Franzosi",
+          "email": "rfranzo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Tarbutton Hall 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "6",
+      "enrollment_capacity": 5,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 2:30-3:20p",
@@ -139,26 +213,48 @@
             "end": "1520"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3547",
       "crn": "1843",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Glass",
+      "instructor": "Brian Goebel",
       "instructors": [
         {
-          "name": "J. Glass",
-          "email": null
+          "name": "Brian Goebel",
+          "email": "bgoebel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Randy Martin",
+          "email": "rmart31@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 28,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -174,26 +270,48 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3548",
       "crn": "1844",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "J. Glass",
+      "instructor": "Brian Goebel",
       "instructors": [
         {
-          "name": "J. Glass",
-          "email": null
+          "name": "Brian Goebel",
+          "email": "bgoebel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Randy Martin",
+          "email": "rmart31@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Masters Non-MBA",
+      "grading_mode_options": [
+        "MTR",
+        "Non-MBA Masters Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -209,215 +327,29 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "1845",
-      "section_number": "D1",
-      "schedule_type": "DIS",
-      "instructor": "J. Abillama",
-      "instructors": [
-        {
-          "name": "J. Abillama",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1846",
-      "section_number": "D2",
-      "schedule_type": "DIS",
-      "instructor": "R. K K",
-      "instructors": [
-        {
-          "name": "R. K K",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 4-4:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1847",
-      "section_number": "D3",
-      "schedule_type": "DIS",
-      "instructor": "L. Hickman",
-      "instructors": [
-        {
-          "name": "L. Hickman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11-11:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1100",
-            "end": "1150"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1848",
-      "section_number": "D4",
-      "schedule_type": "DIS",
-      "instructor": "C. Paillot",
-      "instructors": [
-        {
-          "name": "C. Paillot",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 2:30-3:20p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1430",
-            "end": "1520"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1843",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Glass",
-      "instructors": [
-        {
-          "name": "J. Glass",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1844",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "J. Glass",
-      "instructors": [
-        {
-          "name": "J. Glass",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
-    "lectures": 4,
+    "total_sections": 6,
+    "lectures": 2,
     "labs": 0,
-    "discussions": 8,
+    "discussions": 4,
     "other": 0,
-    "open": 12,
+    "open": 5,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Paillot",
-    "J. Abillama",
-    "J. Glass",
-    "L. Hickman",
-    "R. K K"
+    "Brian Goebel",
+    "Laura Torres-Rodriguez",
+    "Nicole Morris",
+    "Randy Martin",
+    "Roberto Franzosi"
   ],
-  "scraped_at": "2026-06-17T23:01:04.699Z"
+  "scraped_at": "2026-06-18T02:07:32.565Z"
 }

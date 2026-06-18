@@ -5,38 +5,51 @@
   "catalog_number": "590",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "4",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Torts is the study of private wrongs that harm one's person or one's property. Tort law seeks to both deter wrongful action and to compensate injured parties. Thus, tort law helps identify when a wrong occurs, whether an individual is entitled to redress, and, if so, the nature of that redress. This course will cover a variety of torts, including negligence and intentional torts as well as liability without fault arising from property and other torts. The course will focus on negligence law, which constitutes most tort claims. The social implications of tort law also are explored.",
+  "course_notes": "Final Assessment: Scheduled Exam",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "1839",
       "crn": "3148",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "B. Ettinger",
+      "instructor": "Bob Marcovitch",
       "instructors": [
         {
-          "name": "B. Ettinger",
-          "email": null
+          "name": "Bob Marcovitch",
+          "email": "rmarcov@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-10:50a",
@@ -47,51 +60,25 @@
             "end": "1050"
           }
         ]
-      }
-    },
-    {
-      "crn": "3148",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "B. Ettinger",
-      "instructors": [
-        {
-          "name": "B. Ettinger",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
-    "closed": 0,
+    "other": 1,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "B. Ettinger"
+    "Bob Marcovitch"
   ],
-  "scraped_at": "2026-06-17T23:03:54.293Z"
+  "scraped_at": "2026-06-18T02:30:04.514Z"
 }

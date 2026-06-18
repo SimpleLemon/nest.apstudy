@@ -5,40 +5,59 @@
   "catalog_number": "102",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "First Year Seminar",
+    "Humanities and Arts(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Prerequisites: Hebrew 101 or permission of instructor. Second in a series of courses designed to teach speaking, writing, reading, and comprehension of modern Hebrew.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Fulfills the freshman seminar requirement of the General Education Requirements. A variety of courses covering a wide range of topics in music. Refer to the Music Department website for a listing of classes currently offered.",
+  "course_notes": "(Freshmen Seminar - Limited to First Year Students Only)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "871",
       "crn": "4479",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "I. Ben-Simon",
+      "instructor": "Dwight D Andrews",
       "instructors": [
         {
-          "name": "I. Ben-Simon",
-          "email": null
+          "name": "Dwight D Andrews",
+          "email": "dwightandrews@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Burlington Rd Bldg. 107",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a; Th 10-10:50a",
@@ -59,26 +78,52 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "872",
       "crn": "4480",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "I. Ben-Simon",
+      "instructor": "FNU Darsono",
       "instructors": [
         {
-          "name": "I. Ben-Simon",
-          "email": null
+          "name": "FNU Darsono",
+          "email": "darsono@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Maho Ishiguro",
+          "email": "maho.amy.ishiguro@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Burlington Rd Bldg. 107",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 15,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p; Th 11:30a-12:20p",
@@ -99,26 +144,47 @@
             "end": "1220"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "873",
       "crn": "4481",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "I. Ben-Simon",
+      "instructor": "Laura Emmery",
       "instructors": [
         {
-          "name": "I. Ben-Simon",
-          "email": null
+          "name": "Laura Emmery",
+          "email": "laura.emmery@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Burlington Rd Bldg. 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 30,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p; Th 1-1:50p",
@@ -139,26 +205,45 @@
             "end": "1350"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "874",
       "crn": "4482",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "S. Shaked",
+      "instructor": "Laura Emmery",
       "instructors": [
         {
-          "name": "S. Shaked",
-          "email": null
+          "name": "Laura Emmery",
+          "email": "laura.emmery@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Burlington Road Building 324",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 15,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a; F 10-10:50a",
@@ -179,182 +264,28 @@
             "end": "1050"
           }
         ]
-      }
-    },
-    {
-      "crn": "4479",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "I. Ben-Simon",
-      "instructors": [
-        {
-          "name": "I. Ben-Simon",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a; Th 10-10:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4480",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "I. Ben-Simon",
-      "instructors": [
-        {
-          "name": "I. Ben-Simon",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p; Th 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4481",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "I. Ben-Simon",
-      "instructors": [
-        {
-          "name": "I. Ben-Simon",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p; Th 1-1:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4482",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "S. Shaked",
-      "instructors": [
-        {
-          "name": "S. Shaked",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a; F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 8,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
-    "closed": 2,
+    "open": 3,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "I. Ben-Simon",
-    "S. Shaked"
+    "Dwight D Andrews",
+    "FNU Darsono",
+    "Laura Emmery",
+    "Maho Ishiguro"
   ],
-  "scraped_at": "2026-06-17T23:02:59.037Z"
+  "scraped_at": "2026-06-18T02:23:44.206Z"
 }

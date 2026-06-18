@@ -5,38 +5,63 @@
   "catalog_number": "433",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "1",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "The purpose of this course is to reflect on scientific temper and its role in the conduct and communication of science, public health, and policy. Scientific temper - characterized by critical thinking, evidence-based reasoning, and skepticism toward misinformation - is essential for addressing complex public health challenges but is often underemphasized in formal training. This course will explore the instinctual, emotional, and cognitive features (\"mindset\") that shape scientific inquiry, along with the broader societal and political forces that influence how science is conducted, interpreted, and communicated. Students will critically engage with selected readings and case studies to develop their ability to appraise research, navigate scientific uncertainty, counter misinformation, and effectively communicate evidence-based messages to diverse audiences. The course is designed for students and global learners interested in strengthening their scientific reasoning and communication.",
+  "course_notes": "Asynchronous reading material will be available for students starting on August 10. The class will meet via Zoom on Aug 18, 19, 20, 21, and 25, 2025 from 10am to 12 pm (EST).",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-12",
-    "end": "2026-04-27"
+    "start": "2026-08-10",
+    "end": "2026-08-25"
   },
   "sections": [
     {
+      "atlas_key": "4395",
       "crn": "5691",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Weston",
+      "instructor": "Yara Beyh",
       "instructors": [
         {
-          "name": "J. Weston",
-          "email": null
+          "name": "Yara Beyh",
+          "email": "yara.beyh@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shivani A Patel",
+          "email": "s.a.patel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "K.M. Venkat Narayan",
+          "email": "knaraya@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 36,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4-5:50p",
@@ -47,51 +72,27 @@
             "end": "1750"
           }
         ]
-      }
-    },
-    {
-      "crn": "5691",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Weston",
-      "instructors": [
-        {
-          "name": "J. Weston",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 4-5:50p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1750"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-25"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Weston"
+    "K.M. Venkat Narayan",
+    "Shivani A Patel",
+    "Yara Beyh"
   ],
-  "scraped_at": "2026-06-17T23:04:23.800Z"
+  "scraped_at": "2026-06-18T02:34:22.350Z"
 }

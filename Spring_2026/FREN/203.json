@@ -5,40 +5,59 @@
   "catalog_number": "203",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "First Year Seminar",
+    "Humanities and Arts with Cont.Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Emphasis on oral and written communication skills. Assignments include a thorough review of the fine points of French grammar, cultural and literary readings, French films, and frequent compositions.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Freshman-only seminar designed to engage students in various aspects of inquiry and research with the close guidance of a faculty member.",
+  "course_notes": "(Freshmen Seminar - Limited to First Year Students Only) (The title of our course plays on the classical philosophical definition of the human being as a \"rational animal.\" This definition presumably establishes a clear distinction between the human on one hand and the animal on the other, even as it classifies the human as a specific kind of animal. In our course, we will reconsider this philosophical distinction between the human and the animal. Not only will we consider how the concept of the animal has been formulated within the discipline of philosophy, but we will also consider how the discipline of philosophy itself has been founded on the conceptual containment of the animal. Our course thus broaches the following question: Is it possible to think about the animal philosophically, or does the animal expose the very limits of philosophical thought?) Two short essays (5-6 pp. each, 40% total); Long essay (10-12 pp., 40%); Attendance and participation (20%). Required texts: Peter Singer, Animal Liberation, rev. ed. (New York: Harper Perennial, 2009), ISBN 978-0061711305 Jacques Derrida, The Animal That Therefore I Am, ed. Marie-Louise Mallet, trans. David Wills (New York: Fordham University Press, 2008) ISBN 9780823227914; Donna J. Haraway, The Companion Species Manifesto (Chicago: Prickly Paradigm Press, 2003), ISBN 9780971757585; Joshua Bennett, Being Property Once Myself (Cambridge, MA: Belknap Press, 2020), ISBN 978067427116",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "787",
       "crn": "1681",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "V. Bornert",
+      "instructor": "Sean Meighoo",
       "instructors": [
         {
-          "name": "V. Bornert",
-          "email": null
+          "name": "Sean Meighoo",
+          "email": "sean.meighoo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Callaway S108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p; F 1-1:50p",
@@ -59,26 +78,47 @@
             "end": "1350"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "788",
       "crn": "1682",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "L. Migliorini",
+      "instructor": "Timothy Lavenz",
       "instructors": [
         {
-          "name": "L. Migliorini",
-          "email": null
+          "name": "Timothy Lavenz",
+          "email": "timothy.lavenz@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Tarbutton Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 20,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p; F 11:30a-12:20p",
@@ -99,102 +139,26 @@
             "end": "1220"
           }
         ]
-      }
-    },
-    {
-      "crn": "1681",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "V. Bornert",
-      "instructors": [
-        {
-          "name": "V. Bornert",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p; F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1682",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "L. Migliorini",
-      "instructors": [
-        {
-          "name": "L. Migliorini",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p; F 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 0,
+    "open": 1,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Migliorini",
-    "V. Bornert"
+    "Sean Meighoo",
+    "Timothy Lavenz"
   ],
-  "scraped_at": "2026-06-17T23:02:39.579Z"
+  "scraped_at": "2026-06-18T02:22:47.201Z"
 }

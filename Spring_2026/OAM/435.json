@@ -5,81 +5,74 @@
   "catalog_number": "435",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides a fundamental knowledge of taxes for individuals, corporations, partnerships, and S corporations. Topics include the types of taxes, the role of the federal income tax, tax planning for income and deductions, income measurement, tax accounting, business expenses and losses, depreciation and cost recovery, passive activity gains and losses, taxation of property transactions, non-recognition transactions, tax credits, and the alternative minimum tax. We will lay the foundation for understanding the federal tax policy and basic concepts that are common to most tax provisions. This course should enable you to understand the role of taxes in decision-making and risk management.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "348",
       "crn": "6721",
       "section_number": "1109",
       "schedule_type": "LEC",
-      "instructor": "D. Clear",
+      "instructor": "Usha Rackliffe",
       "instructors": [
         {
-          "name": "D. Clear",
-          "email": null
+          "name": "Usha Rackliffe",
+          "email": "usha.rackliffe@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 334",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6721",
-      "section_number": "1109",
-      "schedule_type": "LEC",
-      "instructor": "D. Clear",
-      "instructors": [
-        {
-          "name": "D. Clear",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Clear"
+    "Usha Rackliffe"
   ],
-  "scraped_at": "2026-06-17T23:04:30.307Z"
+  "scraped_at": "2026-06-18T02:35:28.941Z"
 }

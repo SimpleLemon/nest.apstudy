@@ -1,0 +1,136 @@
+{
+  "course_code": "ENG_OX 399RE",
+  "course_title": "Independent Study",
+  "subject": "ENG_OX",
+  "catalog_number": "399RE",
+  "term": "Spring_2026",
+  "srcdb": "5261",
+  "credit_hours": "5",
+  "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+  "requirements": [
+    "Intercultural Communication w.Cont.Comm(*)",
+    "Social Sciences with Continuing Communication(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Integrated review of grammar and culture through an investigation of environmental issues in the German speaking world. Counts towards Emory¿s sustainability minor.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "50",
+      "crn": "5858",
+      "section_number": "2",
+      "schedule_type": "IND",
+      "instructor": "Daniel Walter",
+      "instructors": [
+        {
+          "name": "Daniel Walter",
+          "email": "daniel.walter@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Daniel Walter",
+          "email": "daniel.walter@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "Humanities Hall 201",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "5",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 20,
+      "seats_available": 19,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "51",
+      "crn": "5859",
+      "section_number": "3",
+      "schedule_type": "IND",
+      "instructor": "David Leinweber",
+      "instructors": [
+        {
+          "name": "David Leinweber",
+          "email": "david.leinweber@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "Seney Hall 322",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Social Sciences with Continuing Communication(*)",
+      "requirements": [
+        "Social Sciences with Continuing Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 20,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Daniel Walter",
+    "David Leinweber"
+  ],
+  "scraped_at": "2026-06-18T02:19:33.371Z"
+}

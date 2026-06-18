@@ -5,13 +5,15 @@
   "catalog_number": "313",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "3",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "In the 1960s, the Georgia State Asylum in Milledgeville, GA was the largest psychiatric institution in the world. This course includes a fieldtrip to the campus of the Milledgeville asylum and gives students hands-on experience with archival documents from Milledgeville and other asylums in the US.",
+  "course_notes": "(In the 1960s, the Georgia State Asylum in Milledgeville, GA was the largest psychiatric institution in the world, housing over 10,000 patients. The asylum campus had over 200 buildings and facilities (multiple chapels, a laundry, a fire station, a train station, staff dormitories, kitchens, a morgue, segregated wards, and segregated cemeteries) spread over 2000 acres (more than three times the size of Emory's Atlanta campus). What was life like in the Milledgeville asylum for the people working or incarcerated there? This course gives students hands on experience with archival documents about Milledgeville and other psychiatric asylums in the US and formal training in how to research using archival materials. Students will undertake two major experiential research projects: (1) a fieldtrip to, and digital mapping of, the campus of the Milledgeville asylum (2) intensive, hands-on training in how to locate, order, and analyze archival documents from the asylum (e.g., intuitional reports, patient admission records, newspaper reporting). This \"Experience and Application\" (XA) course will enable students from across Emory College to apply their knowledge in WGSS, psychology, history, and other fields to the archival study of madness. These archival skills can be used by students in honors projects, graduate study, and work in community-based organizations.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +22,40 @@
   },
   "sections": [
     {
+      "atlas_key": "4468",
       "crn": "3007",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "E. Wilson",
+      "instructor": "Elizabeth Wilson",
       "instructors": [
         {
-          "name": "E. Wilson",
-          "email": null
+          "name": "Elizabeth Wilson",
+          "email": "e.a.wilson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Candler Library 121",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -52,56 +71,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "3007",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "E. Wilson",
-      "instructors": [
-        {
-          "name": "E. Wilson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Wilson"
+    "Elizabeth Wilson"
   ],
-  "scraped_at": "2026-06-17T23:15:06.178Z"
+  "scraped_at": "2026-06-18T03:19:50.997Z"
 }

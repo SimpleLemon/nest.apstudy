@@ -8,20 +8,22 @@
   "credit_hours": "3",
   "requirement_designation": "SNT",
   "requirements": [
-    "SNT"
+    "SNT",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Electrostatics, Poisson and Laplace equations, steady currents and electromagnetic induction, magnetostatics, integral and differential forms of Maxwell equations, propagation of electromagnetic waves, fundamental laws of optics, basic laws of radiation",
-  "course_notes": "PHYS 220 or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Further development of students' communicative skills, with particular emphasis on reading, writing and critical thinking, through discussion of readings and films from Hispanic cultures. May be appropriate for heritage speakers pending Official Spanish Placement.",
+  "course_notes": "CONTENT: This course focuses on developing both cultural understanding and linguistic skills. It explores cultural issues in the Hispanic world, such as diversity, gender roles and power structures through writing about and discussion of written texts and films. These texts also serve as the basis for practicing Spanish vocabulary and grammar in context, as well as honing listening, speaking, and particularly, reading and writing skills. By the end of the course, students should be able to use critical thinking skills in Spanish to interpret and discuss literature and film in Spanish, gain advanced proficiency in reading and writing the language, and gain knowledge of significant historical events. REQUIRED TEXT: Coutard, James, Evelyn, Katryn, Gaspar, Martin. Intrigas, 3rd ed. VHL, 2021. PARTICULARS: Movie screenings will be required outside of class. EVALUATION: Class participation, chapter quizzes, weekly homework, presentations, unit lesson essays. PREREQUISITE: SPAN 202 or Official Spanish Placement for SPAN 212. Take the online Spanish Placement Exam at https://spanport.emory.edu/undergraduate/placement/index.html SPAN 212 may be combined with a Spanish Foundational Course (300-318) or PORT 110 to satisfy both the HAL or Intercultural Communication requirement and major/minor requirements or electives. See https://spanport.emory.edu for details.",
   "requisites": "PHYS 220 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1220",
       "crn": "1713",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +31,32 @@
       "instructors": [
         {
           "name": "S. Boettcher",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "1462 Clifton Rd 100C",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 9,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 5:30-6:45p",
@@ -54,56 +72,25 @@
             "end": "1845"
           }
         ]
-      }
-    },
-    {
-      "crn": "1713",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Boettcher",
-      "instructors": [
-        {
-          "name": "S. Boettcher",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 5:30-6:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1730",
-            "end": "1845"
-          },
-          {
-            "day": "Thu",
-            "start": "1730",
-            "end": "1845"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
     "S. Boettcher"
   ],
-  "scraped_at": "2026-06-17T23:06:11.163Z"
+  "scraped_at": "2026-06-18T02:39:58.696Z"
 }

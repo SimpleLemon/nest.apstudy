@@ -5,40 +5,63 @@
   "catalog_number": "370",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course introduces basic concepts and techniques of software engineering, and applies these in the context of a semester-long group programming project.",
-  "course_notes": "CS 253 or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Every semester. Emphasis on oral and written communication skills. Assignments include a thorough review of French grammar, short readings, a French movie, and frequent short compositions. Prerequisites: French 102 or by placement.",
+  "course_notes": "FREN 201 Intermediate French I (F. Lopez Cochachi / MW 10:00-11:15am; F 10:00-10:50am online synchronous). Content: The course seeks to expand upon previous French courses by introducing students to new vocabulary, new grammar structures, and more challenging cultural material that will provide a better sense of the diversity of the Francophone world. In the context of the manual « Imaginez, 5th edition », and its fully integrated accompanying literary and cultural texts, audio recordings and songs, videos and short films, students get an in-depth review of the basic patterns and structures of French. During this journey to different parts of the French-speaking world, students have the opportunity to reactivate their previous knowledge of the language and to expand upon that base so that they can communicate with confidence. Required Textbooks, Articles, and Resources: Champeny, Séverine, \"IMAGINEZ: le français sans frontières, 5th Edition\". Vista Higher Learning, 2020. ISBN: 978-1-54330-546-3. Students will need the supersite access code. May be purchased via the VHL website or Emory bookstore. Additional Resources: 'IMAGINEZ' Supersite, vhlcentral.com, and Student Activities Manual Course Requisites FREN 102 as prerequisite, or by placement exam.)",
   "requisites": "CS 253 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "629",
       "crn": "3667",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Fossati",
+      "instructor": "Jose Lopez Cochachi",
       "instructors": [
         {
-          "name": "D. Fossati",
-          "email": null
+          "name": "Jose Lopez Cochachi",
+          "email": "jose.lopez.cochachi@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jose Lopez Cochachi",
+          "email": "jose.lopez.cochachi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway C202",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 18,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -54,26 +77,52 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "630",
       "crn": "3669",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "D. Fossati",
+      "instructor": "Johanna Montlouis-Gabriel",
       "instructors": [
         {
-          "name": "D. Fossati",
-          "email": null
+          "name": "Johanna Montlouis-Gabriel",
+          "email": "johanna.montlouis-gabriel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Johanna Montlouis-Gabriel",
+          "email": "johanna.montlouis-gabriel@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway C202",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 18,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 5:30-6:45p",
@@ -89,91 +138,26 @@
             "end": "1845"
           }
         ]
-      }
-    },
-    {
-      "crn": "3667",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Fossati",
-      "instructors": [
-        {
-          "name": "D. Fossati",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3669",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "D. Fossati",
-      "instructors": [
-        {
-          "name": "D. Fossati",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 5:30-6:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1730",
-            "end": "1845"
-          },
-          {
-            "day": "Thu",
-            "start": "1730",
-            "end": "1845"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Fossati"
+    "Johanna Montlouis-Gabriel",
+    "Jose Lopez Cochachi"
   ],
-  "scraped_at": "2026-06-17T23:01:53.992Z"
+  "scraped_at": "2026-06-18T02:16:08.225Z"
 }

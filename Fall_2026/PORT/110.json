@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Builds oral proficiency and increases knowledge of Portuguese, Lusophone African, and Brazilian cultures through discussion, listening, reading, and writing on topics pertaining to current events and literature.",
-  "course_notes": null,
+  "course_notes": "CONTENT: PORT 110 is an intensive course for students with little or no preparation in the language, but are Spanish speakers (or of another Romance Language). It stresses the fundamental language skills of understanding, speaking, reading and also writing. Aspects of Lusophone culture will also be presented. Classes will be taught mostly in Portuguese in order to expose the students to the language. It is also a goal of the course to create a positive interaction among the students. Group work will be frequent, as well as the use of the students' different background and experience with the language. It covers the equivalent of two semesters (PORT 101 and PORT 102). PARTICULARS: Evaluation is based on daily and active participation, homework, quizzes, writing activities, exams, and Portuguese program activities. PREREQUISITES: No preparation in the language is required but the course is designed specifically for speakers of another Romance Language. Students who have taken the Spanish Placement exam and have been placed at the 300 level or above are encouraged to take Port 110. Students who place in SPAN 212 should contact ana.teixeira@emory.edu for placement information. PORT 110 may be combined with PORT 201 or with SPAN 212 or a Spanish Foundational Course (300-318) to satisfy the HAL or Intercultural Communication requirement.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "2012",
       "crn": "1767",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Teixeira",
+      "instructor": "Ana Catarina Teixeira",
       "instructors": [
         {
-          "name": "A. Teixeira",
-          "email": null
+          "name": "Ana Catarina Teixeira",
+          "email": "ana.teixeira@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 18,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,26 +72,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2013",
       "crn": "1768",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "A. Teixeira",
+      "instructor": "Ana Catarina Teixeira",
       "instructors": [
         {
-          "name": "A. Teixeira",
-          "email": null
+          "name": "Ana Catarina Teixeira",
+          "email": "ana.teixeira@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 18,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -89,91 +128,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "1767",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Teixeira",
-      "instructors": [
-        {
-          "name": "A. Teixeira",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1768",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "A. Teixeira",
-      "instructors": [
-        {
-          "name": "A. Teixeira",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Teixeira"
+    "Ana Catarina Teixeira"
   ],
-  "scraped_at": "2026-06-17T23:14:23.821Z"
+  "scraped_at": "2026-06-18T03:15:42.082Z"
 }

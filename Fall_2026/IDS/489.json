@@ -5,15 +5,15 @@
   "catalog_number": "489",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Examination of interdisciplinary issues at an advanced level; typically appropriate for seniors. This course number is used for piloting new courses or cross-listing.",
-  "course_notes": null,
+  "course_notes": "This course is required for ALL ILA Honors candidates (Special exemption by petition only--contact the DUS) . Interested students from other majors may be admitted with permission; please contact instructors. Two interweaving threads define our inquiry. First, we grapple with overarching classical discussions of power--e.g. Michel Foucault, Louis Althusser, Paulo Freire, bell hooks, Sara Ruddick, Gayatri Spivak, Henry A. Giroux, and others. Second, we will examine critiques of academia across the past century, a study that will also paint an history of the changes in both mission and social significance of higher education through the same period. Authors in this second section of the course will include: Derek Bok, William Deresiewicz, Martha Nussbaum, and others. We will also monitor and discuss contemporary articles from professional publications such as \"The Chronicle of Higher Education\". We will use the theoretical and historical understanding of academia we gain to engage several distinguished ILA alumni and other visitors to our class, whose professional work lends critical perspective on our topic, particularly perspective on our own institution--Emory--from which students will soon be graduating. Assignments: student-led classes, formal interviews with academic leaders, final paper.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,43 @@
   },
   "sections": [
     {
+      "atlas_key": "3094",
       "crn": "1649",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "Wakefield/Loudermilk",
+      "instructor": "Kim Loudermilk",
       "instructors": [
         {
-          "name": "Wakefield/Loudermilk",
-          "email": null
+          "name": "Kim Loudermilk",
+          "email": "klouder@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Peter W Wakefield",
+          "email": "pwakefi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S420",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 19,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-5:15p",
@@ -49,51 +69,26 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "1649",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "Wakefield/Loudermilk",
-      "instructors": [
-        {
-          "name": "Wakefield/Loudermilk",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Wakefield/Loudermilk"
+    "Kim Loudermilk",
+    "Peter W Wakefield"
   ],
-  "scraped_at": "2026-06-17T23:11:21.838Z"
+  "scraped_at": "2026-06-18T03:02:41.820Z"
 }

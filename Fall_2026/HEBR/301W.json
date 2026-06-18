@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "ICW",
   "requirements": [
-    "ICW"
+    "ICW",
+    "Intercultural Communication w.Cont.Comm(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Prerequisites: Hebrew 202 or permission of instructor. Fifth in a series of courses designed to teach modern Hebrew, advanced study of grammar, vocabulary, and stylistics; intensive practice speaking and writing Hebrew.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "3765",
       "crn": "2813",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "P. Kahlon",
+      "instructor": "Pazit Kahlon",
       "instructors": [
         {
-          "name": "P. Kahlon",
-          "email": null
+          "name": "Pazit Kahlon",
+          "email": "pazit.kahlon@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,56 +72,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2813",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "P. Kahlon",
-      "instructors": [
-        {
-          "name": "P. Kahlon",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "P. Kahlon"
+    "Pazit Kahlon"
   ],
-  "scraped_at": "2026-06-17T23:11:02.337Z"
+  "scraped_at": "2026-06-18T02:59:32.470Z"
 }

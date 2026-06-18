@@ -5,13 +5,13 @@
   "catalog_number": "515",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,41 @@
   },
   "sections": [
     {
+      "atlas_key": "1519",
       "crn": "5355",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Seldin/Deans",
+      "instructor": "Michael Deans",
       "instructors": [
         {
-          "name": "Seldin/Deans",
-          "email": null
+          "name": "Michael Deans",
+          "email": "michael.deans@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Lindsey Seldin",
+          "email": "lseldin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Emerson Chemistry Bldg. E102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 3-5p",
@@ -47,51 +65,26 @@
             "end": "1700"
           }
         ]
-      }
-    },
-    {
-      "crn": "5355",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Seldin/Deans",
-      "instructors": [
-        {
-          "name": "Seldin/Deans",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 3-5p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1500",
-            "end": "1700"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Seldin/Deans"
+    "Lindsey Seldin",
+    "Michael Deans"
   ],
-  "scraped_at": "2026-06-17T23:11:18.589Z"
+  "scraped_at": "2026-06-18T03:02:29.085Z"
 }

@@ -5,38 +5,57 @@
   "catalog_number": "624",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "3",
+  "requirement_designation": "First Year Seminar",
+  "requirements": [
+    "First Year Seminar"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Freshmen only. Variable topics.",
+  "course_notes": "(Freshmen Seminar - Limited to First Year Students Only) (We will discuss \"making babies\" and the many aspects of assisted reproductive technology (ART) from both a scientific and ethical viewpoint. Non-science majors are welcome, as any technical information will be explained. You will be assigned relatively short books (Pandora's Baby, by Robin Marantz Henig, 2006, ISBN 9780879698096 and The Pursuit of Parenthood, by Margaret Marsh and Wanda Ronner, 2019, ISBN-13: 978-1421429847) that are written for a general audience (please be finished with Pandora's Baby before we are two weeks into the semester) and there will be some additional readings and lecture (for background material), but the principal focus will be on presentations and discussions. A short, written \"summarize what you learned\" paper will be due at the end of the semester. Most of your grade will be determined by attendance, presentation, and your seminar participation.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "428",
       "crn": "3405",
       "section_number": "3201",
       "schedule_type": "LEC",
-      "instructor": "N. Valerio III",
+      "instructor": "Steven L'Hernault",
       "instructors": [
         {
-          "name": "N. Valerio III",
-          "email": null
+          "name": "Steven L'Hernault",
+          "email": "bioslh@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "1462 Clifton Rd 100A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -52,56 +71,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "3405",
-      "section_number": "3201",
-      "schedule_type": "LEC",
-      "instructor": "N. Valerio III",
-      "instructors": [
-        {
-          "name": "N. Valerio III",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "N. Valerio III"
+    "Steven L'Hernault"
   ],
-  "scraped_at": "2026-06-17T23:02:36.315Z"
+  "scraped_at": "2026-06-18T02:22:28.138Z"
 }

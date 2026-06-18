@@ -5,23 +5,24 @@
   "catalog_number": "205",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "2",
   "requirement_designation": "SNT",
   "requirements": [
     "SNT"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "CHEM 205 will address the origins of electronic orbitals and the quantized energy states associated with molecular motions. How light causes transitions between energy levels will be central to our discussion, illuminating topics from spectroscopy to the Earth's climate and solar energy conversion.",
-  "course_notes": "(CHEM 203 or CHEM_OX 203 or CHEM 222 or CHEM_OX 222 or CHEM 222Z or CHEM 203Z) and (MATH 111 or MATH_OX 111 or MATH 112 or MATH 112Z or MATH_OX 112) or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course prepares students for transition to independent practice as professional and visionary nurse leaders.",
+  "course_notes": "This section is for MN semester 4 students only. Clinical may be scheduled any day not in lecture, including weekends for 12 hours.",
   "requisites": "(CHEM 203 or CHEM_OX 203 or CHEM 222 or CHEM_OX 222 or CHEM 222Z or CHEM 203Z) and (MATH 111 or MATH_OX 111 or MATH 112 or MATH 112Z or MATH_OX 112) or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-10-19",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4285",
       "crn": "3707",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +30,28 @@
       "instructors": [
         {
           "name": "R. Ribeiro",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 80,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,56 +67,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "3707",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "R. Ribeiro",
-      "instructors": [
-        {
-          "name": "R. Ribeiro",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-10-19",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "R. Ribeiro"
   ],
-  "scraped_at": "2026-06-17T23:01:37.679Z"
+  "scraped_at": "2026-06-18T02:13:14.111Z"
 }

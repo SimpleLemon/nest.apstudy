@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HAW",
   "requirements": [
-    "HAW"
+    "HAW",
+    "Humanities and Arts with Cont.Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Long historical surveys of national, regional, or ethnic traditions; or of genres or subgenres. Examples: History of African Literature, History of Latinx Literature, History of Science Fiction, History of the Sonnet, History of Southern U.S. Literature, History of Drama.",
-  "course_notes": null,
+  "course_notes": "This course will survey the long tradition of British gothic literature, beginning with its origins in Jacobean revenge drama and concluding with the ghost stories of the early twentieth century. We will read some of the best-known works of gothic fiction - such as Mary Shelley's Frankenstein and Bram Stoker's Dracula - as well as novels, short stories, and plays by John Webster, Anne Radcliffe, Jane Austen, Robert Louis Stevenson, M. R. James, and others. The development of gothic literature coincided with the rise of modern science and the erosion of belief in the supernatural, and the relation between Gothicism and Enlightenment will be among our primary themes. Other major points of discussion will include gender, sexuality, and empire.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "3768",
       "crn": "4921",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "R. Knecht",
+      "instructor": "Ross Knecht",
       "instructors": [
         {
-          "name": "R. Knecht",
-          "email": null
+          "name": "Ross Knecht",
+          "email": "ross.knecht@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Tarbutton Hall 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -54,56 +72,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "4921",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "R. Knecht",
-      "instructors": [
-        {
-          "name": "R. Knecht",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Knecht"
+    "Ross Knecht"
   ],
-  "scraped_at": "2026-06-17T23:10:23.253Z"
+  "scraped_at": "2026-06-18T02:55:51.550Z"
 }

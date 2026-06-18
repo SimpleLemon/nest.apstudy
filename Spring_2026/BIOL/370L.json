@@ -5,40 +5,55 @@
   "catalog_number": "370L",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "2",
+  "credit_hours": "1",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Introduction to basic laboratory techniques in microbiology. Experiments dealing with the physiology, biochemistry, genetics, and molecular biology of microbes will be included. (This course meets the upper-level laboratory requirement and will count as elective credit for the Biology major.)",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "Up to three semester hours credit. For approval, a topic must be selected that is not included in a course to be offered before the student would normally graduate; a faculty adviser from among the full-time faculty must agree to supervise the study program, and a written description of the program must be submitted to and approved by the director of undergraduate studies in the semester preceding the one in which the student intends to participate.",
   "course_notes": "[(BIOL 142 and BIOL 142L) or BIOL_OX142 or BIOL 152] and BIOL 370 or equivalent transfer credit as a prerequisite.",
   "requisites": "[(BIOL 142 and BIOL 142L) or BIOL_OX142 or BIOL 152] and BIOL 370 or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "563",
       "crn": "1658",
       "section_number": "1",
       "schedule_type": "LAB",
-      "instructor": "E. Battaglioli",
+      "instructor": "Teddy Kim",
       "instructors": [
         {
-          "name": "E. Battaglioli",
-          "email": null
+          "name": "Teddy Kim",
+          "email": "kyungmin.kim@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 999,
+      "seats_available": 997,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 1-4p",
@@ -49,26 +64,45 @@
             "end": "1600"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "564",
       "crn": "1659",
       "section_number": "2",
       "schedule_type": "LAB",
-      "instructor": "E. Battaglioli",
+      "instructor": "Sara Markowitz",
       "instructors": [
         {
-          "name": "E. Battaglioli",
-          "email": null
+          "name": "Sara Markowitz",
+          "email": "smarko2@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9a-12p",
@@ -79,81 +113,26 @@
             "end": "1200"
           }
         ]
-      }
-    },
-    {
-      "crn": "1658",
-      "section_number": "1",
-      "schedule_type": "LAB",
-      "instructor": "E. Battaglioli",
-      "instructors": [
-        {
-          "name": "E. Battaglioli",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 1-4p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1600"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1659",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "E. Battaglioli",
-      "instructors": [
-        {
-          "name": "E. Battaglioli",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 9a-12p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "900",
-            "end": "1200"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
-    "labs": 4,
+    "labs": 2,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Battaglioli"
+    "Sara Markowitz",
+    "Teddy Kim"
   ],
-  "scraped_at": "2026-06-17T23:01:21.204Z"
+  "scraped_at": "2026-06-18T02:09:43.796Z"
 }

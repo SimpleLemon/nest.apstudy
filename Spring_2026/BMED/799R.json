@@ -5,81 +5,80 @@
   "catalog_number": "799R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course is designed as an introduction to clay modeling, hand-building, and throwing. In this class you will engage in making clay vessels and sculpture using a variety of construction techniques. Beginning with hand building methods (pinch technique, coil building, and slab building) you will then move on to begin throwing on the electric potter's wheel. Once you have been introduced to the various methods of construction, you will then begin to design and build your own ceramic vessels and sculpture.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3961",
       "crn": "1633",
       "section_number": "1",
       "schedule_type": "RSC",
-      "instructor": "M. Davis",
+      "instructor": "Julia Burns",
       "instructors": [
         {
-          "name": "M. Davis",
-          "email": null
+          "name": "Julia Burns",
+          "email": "julia.burns@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1633",
-      "section_number": "1",
-      "schedule_type": "RSC",
-      "instructor": "M. Davis",
-      "instructors": [
-        {
-          "name": "M. Davis",
-          "email": null
-        }
-      ],
-      "location": null,
+      "location": "Tarbutton Art",
       "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": 6,
+      "waitlist_capacity": 6,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
-    "closed": 0,
+    "other": 1,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Davis"
+    "Julia Burns"
   ],
-  "scraped_at": "2026-06-17T23:01:27.812Z"
+  "scraped_at": "2026-06-18T02:10:15.376Z"
 }

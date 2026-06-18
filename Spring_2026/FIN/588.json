@@ -5,21 +5,22 @@
   "catalog_number": "588",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3.5",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Students refine their diagnostic and management skills while appraising health outcomes for well, acutely, and chronically ill or injured pediatric patients in primary care settings. Team and clinical leadership skills are emphasized as the student prepares to transition to the APRN role.",
+  "course_notes": "Online asynchronous with synchronous sessions.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-03",
-    "end": "2026-01-10"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4159",
       "crn": "3507",
       "section_number": "2195",
       "schedule_type": "LEC",
@@ -27,16 +28,28 @@
       "instructors": [
         {
           "name": "T. Smith",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MTThF 6:30-9:30p; Sa 9a-12p; Sa 1-5p",
@@ -72,9 +85,14 @@
             "end": "1700"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4160",
       "crn": "3508",
       "section_number": "2295",
       "schedule_type": "LEC",
@@ -82,181 +100,28 @@
       "instructors": [
         {
           "name": "T. Smith",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3.5",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MTThF 6:30-9:30p; Sa 9a-12p; Sa 1-5p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Thu",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Fri",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Sat",
-            "start": "900",
-            "end": "1200"
-          },
-          {
-            "day": "Sat",
-            "start": "1300",
-            "end": "1700"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3509",
-      "section_number": "3295",
-      "schedule_type": "LEC",
-      "instructor": "T. Smith",
-      "instructors": [
-        {
-          "name": "T. Smith",
-          "email": null
-        }
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MTThF 6:30-9:30p; Sa 9a-12p; Sa 1-5p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Thu",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Fri",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Sat",
-            "start": "900",
-            "end": "1200"
-          },
-          {
-            "day": "Sat",
-            "start": "1300",
-            "end": "1700"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "6203",
-      "section_number": "4295",
-      "schedule_type": "LEC",
-      "instructor": "T. Smith",
-      "instructors": [
-        {
-          "name": "T. Smith",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MTThF 6:30-9:30p; Sa 9a-12p; Sa 1-5p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Thu",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Fri",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Sat",
-            "start": "900",
-            "end": "1200"
-          },
-          {
-            "day": "Sat",
-            "start": "1300",
-            "end": "1700"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3507",
-      "section_number": "2195",
-      "schedule_type": "LEC",
-      "instructor": "T. Smith",
-      "instructors": [
-        {
-          "name": "T. Smith",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MTThF 6:30-9:30p; Sa 9a-12p; Sa 1-5p",
@@ -292,64 +157,14 @@
             "end": "1700"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
-      "crn": "3508",
-      "section_number": "2295",
-      "schedule_type": "LEC",
-      "instructor": "T. Smith",
-      "instructors": [
-        {
-          "name": "T. Smith",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MTThF 6:30-9:30p; Sa 9a-12p; Sa 1-5p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Thu",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Fri",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Sat",
-            "start": "900",
-            "end": "1200"
-          },
-          {
-            "day": "Sat",
-            "start": "1300",
-            "end": "1700"
-          }
-        ]
-      }
-    },
-    {
+      "atlas_key": "4161",
       "crn": "3509",
       "section_number": "3295",
       "schedule_type": "LEC",
@@ -357,16 +172,28 @@
       "instructors": [
         {
           "name": "T. Smith",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "6",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MTThF 6:30-9:30p; Sa 9a-12p; Sa 1-5p",
@@ -402,9 +229,14 @@
             "end": "1700"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4162",
       "crn": "6203",
       "section_number": "4295",
       "schedule_type": "LEC",
@@ -412,16 +244,28 @@
       "instructors": [
         {
           "name": "T. Smith",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "6",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MTThF 6:30-9:30p; Sa 9a-12p; Sa 1-5p",
@@ -457,21 +301,25 @@
             "end": "1700"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 8,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 4,
     "closed": 0,
-    "waitlisted": 6
+    "waitlisted": 0
   },
   "instructors_unique": [
     "T. Smith"
   ],
-  "scraped_at": "2026-06-17T23:02:36.313Z"
+  "scraped_at": "2026-06-18T02:22:28.137Z"
 }

@@ -5,23 +5,24 @@
   "catalog_number": "352W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "4.5",
   "requirement_designation": "CW",
   "requirements": [
     "CW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Explores the role of business in \"doing good\" for society, how to develop a vision for sustainability within a company, what it means to work on environmental concerns in a major corporation, and compares the approaches of leading companies. Emphasis on readings, writing assignments and discussion.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides a historical overview of extracorporeal technology and principles of design and safety features of equipment and laboratory components. Emphasis is on simulated experiences with the varied components and extracorporeal techniques used to manage the total perfusion process.",
   "course_notes": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or ENVS 225 or ENVS 227/POLS 227 or ENVS 227W/POLS 227W or equivalent transfer credit as prerequisite.",
   "requisites": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or ENVS 225 or ENVS 227/POLS 227 or ENVS 227W/POLS 227W or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4140",
       "crn": "2690",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +30,28 @@
       "instructors": [
         {
           "name": "B. Jordan",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6-8:45p",
@@ -49,51 +62,25 @@
             "end": "2045"
           }
         ]
-      }
-    },
-    {
-      "crn": "2690",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "B. Jordan",
-      "instructors": [
-        {
-          "name": "B. Jordan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6-8:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1800",
-            "end": "2045"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "B. Jordan"
   ],
-  "scraped_at": "2026-06-17T23:02:26.543Z"
+  "scraped_at": "2026-06-18T02:20:39.952Z"
 }

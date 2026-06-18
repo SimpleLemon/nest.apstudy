@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "How do we understand the events that recently erupted with different degrees of violence in North African and Middle Eastern countries? Why were experts including diplomats, pundits, and politicians taken by surprise? How do media outlets like CNN, BBC, and Al Jazeera cover this \"social uprising\"?",
-  "course_notes": null,
+  "course_notes": "(Same as MESAS 319 1, AFS 319 1, and SOC 319 1)",
   "requisites": null,
   "cross_listed": "SOC 319 AFS 319 MESAS 319",
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "1732",
       "crn": "3955",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Cherribi",
+      "instructor": "Sam Cherribi",
       "instructors": [
         {
-          "name": "S. Cherribi",
-          "email": null
+          "name": "Sam Cherribi",
+          "email": "scherri@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Anthropology Bldg 303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -54,56 +69,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "3955",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Cherribi",
-      "instructors": [
-        {
-          "name": "S. Cherribi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Cherribi"
+    "Sam Cherribi"
   ],
-  "scraped_at": "2026-06-17T23:10:36.297Z"
+  "scraped_at": "2026-06-18T02:57:30.666Z"
 }

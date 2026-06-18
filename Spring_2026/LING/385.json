@@ -5,40 +5,53 @@
   "catalog_number": "385",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "2",
   "requirement_designation": "HSC",
   "requirements": [
     "HSC"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Investigation of a particular issue or topic in the study of language, linguistics, and communication. May be repeated when topic varies. Topics may include: the Romance languages; intercultural communication; words and the world; language and human nature.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "EH department students only. Required foundation course for students in all master's programs administered by Department of Environmental Health. Introduces students to major topics in environmental health, including mechanisms of toxicity, pesticides and other chemicals, children's health, WASH (water, sanitation, and hygiene), infectious disease, air pollution, climate change, and planetary health. Describes tools used to understand these EH topics, such as exposure science, epidemiology, toxicology, biomarkers/omics, risk assessment, implementation science, and policy.",
+  "course_notes": "EH, GEH, EH-EPI and DSMPH students only.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3628",
       "crn": "2715",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "L. Arnsperger",
+      "instructor": "Christine Ekenga",
       "instructors": [
         {
-          "name": "L. Arnsperger",
-          "email": null
+          "name": "Christine Ekenga",
+          "email": "cekenga@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 21,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 11:30a-12:45p",
@@ -49,51 +62,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2715",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "L. Arnsperger",
-      "instructors": [
-        {
-          "name": "L. Arnsperger",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Arnsperger"
+    "Christine Ekenga"
   ],
-  "scraped_at": "2026-06-17T23:03:51.049Z"
+  "scraped_at": "2026-06-18T02:28:50.751Z"
 }

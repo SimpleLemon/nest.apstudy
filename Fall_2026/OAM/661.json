@@ -5,13 +5,13 @@
   "catalog_number": "661",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Class focuses on the following essential business and entrepreneurial concepts, and learn how to: - Determine if a business opportunity is worth pursuing; - Find the next big opportunity; - Understand how buyers really make decisions; - Design products the market \"\"really\"\" wants, quicker, less expensively and with lower risk; - Generate significant market interest for your products and services on a small budget; - Create tactics that are high impact, and easy to implement; - Develop strategies that have a significantly greater likelihood for success; - Improve your management skills to increase your odds of achieving your business objectives; - Leverage the effectiveness of working with partners and minimize the risks associated with partnering; - Negotiate more effectively with an investor (or as an investor); - Deal with the reality of business when it deviates from your business plan (as it inevitably will); - Create a business environment second to none; - Buy a business without over paying; and - Recognize if and when to sell your business and how much it's really worth.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "2236",
       "crn": "3732",
       "section_number": "2172",
       "schedule_type": "LEC",
-      "instructor": "C. Goetz",
+      "instructor": "Charles Goetz",
       "instructors": [
         {
-          "name": "C. Goetz",
-          "email": null
+          "name": "Charles Goetz",
+          "email": "charles.goetz@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W100",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6:30-9:30p",
@@ -47,26 +60,43 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2237",
       "crn": "3733",
       "section_number": "2672",
       "schedule_type": "LEC",
-      "instructor": "C. Goetz",
+      "instructor": "Charles Goetz",
       "instructors": [
         {
-          "name": "C. Goetz",
-          "email": null
+          "name": "Charles Goetz",
+          "email": "charles.goetz@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 14,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6:30-9:30p",
@@ -77,26 +107,43 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2238",
       "crn": "3734",
       "section_number": "3272",
       "schedule_type": "LEC",
-      "instructor": "C. Goetz",
+      "instructor": "Charles Goetz",
       "instructors": [
         {
-          "name": "C. Goetz",
-          "email": null
+          "name": "Charles Goetz",
+          "email": "charles.goetz@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W100",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 11,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6:30-9:30p",
@@ -107,26 +154,43 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2239",
       "crn": "5432",
       "section_number": "4172",
       "schedule_type": "LEC",
-      "instructor": "C. Goetz",
+      "instructor": "Charles Goetz",
       "instructors": [
         {
-          "name": "C. Goetz",
-          "email": null
+          "name": "Charles Goetz",
+          "email": "charles.goetz@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W100",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Masters Non-MBA",
+      "grading_mode_options": [
+        "MTR",
+        "Non-MBA Masters Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 4,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6:30-9:30p",
@@ -137,26 +201,43 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2240",
       "crn": "5433",
       "section_number": "4272",
       "schedule_type": "LEC",
-      "instructor": "C. Goetz",
+      "instructor": "Charles Goetz",
       "instructors": [
         {
-          "name": "C. Goetz",
-          "email": null
+          "name": "Charles Goetz",
+          "email": "charles.goetz@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W100",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "5",
+      "enrollment_capacity": 6,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6:30-9:30p",
@@ -167,171 +248,25 @@
             "end": "2130"
           }
         ]
-      }
-    },
-    {
-      "crn": "3732",
-      "section_number": "2172",
-      "schedule_type": "LEC",
-      "instructor": "C. Goetz",
-      "instructors": [
-        {
-          "name": "C. Goetz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3733",
-      "section_number": "2672",
-      "schedule_type": "LEC",
-      "instructor": "C. Goetz",
-      "instructors": [
-        {
-          "name": "C. Goetz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3734",
-      "section_number": "3272",
-      "schedule_type": "LEC",
-      "instructor": "C. Goetz",
-      "instructors": [
-        {
-          "name": "C. Goetz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5432",
-      "section_number": "4172",
-      "schedule_type": "LEC",
-      "instructor": "C. Goetz",
-      "instructors": [
-        {
-          "name": "C. Goetz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5433",
-      "section_number": "4272",
-      "schedule_type": "LEC",
-      "instructor": "C. Goetz",
-      "instructors": [
-        {
-          "name": "C. Goetz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
-    "lectures": 10,
+    "total_sections": 5,
+    "lectures": 5,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 8,
+    "open": 4,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Goetz"
+    "Charles Goetz"
   ],
-  "scraped_at": "2026-06-17T23:12:33.356Z"
+  "scraped_at": "2026-06-18T03:10:44.997Z"
 }

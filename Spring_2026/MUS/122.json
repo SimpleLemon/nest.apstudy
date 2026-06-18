@@ -5,40 +5,60 @@
   "catalog_number": "122",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "HA",
   "requirements": [
-    "HA"
+    "HA",
+    "Humanities and Arts(*)",
+    "Social Sciences(*)",
+    "First Year Seminar"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Continuation of Theory,Analysis,Aural Skills I. Applied technical study of harmony and counterpoint focusing on written and aural aspects of the common-practice period but including repertoire from earlier periods and modern times. Designed for music majors and minors.",
-  "course_notes": "MUS 121 as prerequisite or equivalent transfer credit.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to select perennial themes in the history of political philosophy.",
+  "course_notes": "IMPORTANT NOTICE: THIS COURSE WILL MEET THREE (3) DAYS PER WEEK. TWO DAYS OF LECTURE FOLLOWED BY A SMALL GROUP DISCUSSIONS ON FRIDAYS. Please be sure to enroll in a Friday discussion section to complete your registration for this course. This course will introduce you to the perennial questions that have driven the great tradition of political thought going back to the Greeks. It thus serves as good preparation for our courses in Classical Political Thought, Modern Political Thought, and Foundations of American Democracy. This semester our themes will include the promise and perils of political ambition, the problem of justice, the temptations of tyranny, the power of rhetoric, and the meaning of political wisdom. Note that (accommodations excepted) this class will be \"unplugged.\" No laptops, phones, or tablets. You will read books made of paper, and you will take notes and write exams by hand. Evaluation will be based on class participation, quizzes, and exams.",
   "requisites": "MUS 121 as prerequisite or equivalent transfer credit.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1064",
       "crn": "2966",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "N. Cobb",
+      "instructor": "Judd Owen",
       "instructors": [
         {
-          "name": "N. Cobb",
-          "email": null
+          "name": "Judd Owen",
+          "email": "jjowen@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 35,
+      "seats_available": 27,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a",
@@ -54,26 +74,45 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1065",
       "crn": "2969",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "I. Ilic",
+      "instructor": "Judd Owen",
       "instructors": [
         {
-          "name": "I. Ilic",
-          "email": null
+          "name": "Judd Owen",
+          "email": "jjowen@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 12,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a",
@@ -89,26 +128,45 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1066",
       "crn": "2972",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "I. Ilic",
+      "instructor": "Judd Owen",
       "instructors": [
         {
-          "name": "I. Ilic",
-          "email": null
+          "name": "Judd Owen",
+          "email": "jjowen@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 12,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -124,26 +182,45 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1067",
       "crn": "2974",
       "section_number": "4",
       "schedule_type": "LAB",
-      "instructor": "J. Eklund",
+      "instructor": "Judd Owen",
       "instructors": [
         {
-          "name": "J. Eklund",
-          "email": null
+          "name": "Judd Owen",
+          "email": "jjowen@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 11,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -159,26 +236,47 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1068",
       "crn": "2975",
       "section_number": "5",
       "schedule_type": "LAB",
-      "instructor": "N. Cobb",
+      "instructor": "David Davis III",
       "instructors": [
         {
-          "name": "N. Cobb",
-          "email": null
+          "name": "David Davis III",
+          "email": "poldd@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "White Hall 101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 90,
+      "seats_available": 79,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -194,26 +292,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1069",
       "crn": "2978",
       "section_number": "6",
       "schedule_type": "LAB",
-      "instructor": "I. Ilic",
+      "instructor": "Kiela Crabtree",
       "instructors": [
         {
-          "name": "I. Ilic",
-          "email": null
+          "name": "Kiela Crabtree",
+          "email": "kiela.crabtree@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Tarbutton Hall 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -229,233 +348,27 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2966",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "N. Cobb",
-      "instructors": [
-        {
-          "name": "N. Cobb",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2969",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "I. Ilic",
-      "instructors": [
-        {
-          "name": "I. Ilic",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2972",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "I. Ilic",
-      "instructors": [
-        {
-          "name": "I. Ilic",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2974",
-      "section_number": "4",
-      "schedule_type": "LAB",
-      "instructor": "J. Eklund",
-      "instructors": [
-        {
-          "name": "J. Eklund",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2975",
-      "section_number": "5",
-      "schedule_type": "LAB",
-      "instructor": "N. Cobb",
-      "instructors": [
-        {
-          "name": "N. Cobb",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2978",
-      "section_number": "6",
-      "schedule_type": "LAB",
-      "instructor": "I. Ilic",
-      "instructors": [
-        {
-          "name": "I. Ilic",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
-    "lectures": 6,
-    "labs": 6,
+    "total_sections": 6,
+    "lectures": 3,
+    "labs": 3,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 0,
-    "waitlisted": 8
+    "open": 5,
+    "closed": 1,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "I. Ilic",
-    "J. Eklund",
-    "N. Cobb"
+    "David Davis III",
+    "Judd Owen",
+    "Kiela Crabtree"
   ],
-  "scraped_at": "2026-06-17T23:04:13.995Z"
+  "scraped_at": "2026-06-18T02:32:04.583Z"
 }

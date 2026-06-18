@@ -5,38 +5,53 @@
   "catalog_number": "695",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "1",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Investigation of a particular issue or topic in the study of language, linguistics, and communication. May be repeated when topic varies. Topics may include: the Romance languages; intercultural communication; words and the world; language and human nature.",
+  "course_notes": "Full Title: Teaching Grammar to English Language Learners. This grammar course is designed specifically for students who wish to teach or tutor English Language Learners (ELLs). We will research and analyze the form and meaning of various grammatical structures using the associated metalanguage. In addition, we will review, critique and practice techniques for teaching those items.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "2997",
       "crn": "3477",
       "section_number": "3258",
       "schedule_type": "LEC",
-      "instructor": "K. Baks",
+      "instructor": "Hiram Maxim",
       "instructors": [
         {
-          "name": "K. Baks",
-          "email": null
+          "name": "Hiram Maxim",
+          "email": "hmaxim@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Modern Language 128",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-6:30p",
@@ -47,51 +62,25 @@
             "end": "1830"
           }
         ]
-      }
-    },
-    {
-      "crn": "3477",
-      "section_number": "3258",
-      "schedule_type": "LEC",
-      "instructor": "K. Baks",
-      "instructors": [
-        {
-          "name": "K. Baks",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 4-6:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1830"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Baks"
+    "Hiram Maxim"
   ],
-  "scraped_at": "2026-06-17T23:02:36.318Z"
+  "scraped_at": "2026-06-18T02:22:28.143Z"
 }

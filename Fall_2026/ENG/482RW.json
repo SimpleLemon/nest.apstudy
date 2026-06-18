@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HAPW",
   "requirements": [
-    "HAPW"
+    "HAPW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Studies in narrative fiction and narrative forms. Readings vary and may focus on one or more authors or on questions of literary art. May be repeated for credit when topic varies.",
-  "course_notes": null,
+  "course_notes": "(Complete Topic: Youth & Experience in Modern British Fiction) (Modernist fiction famously presents the world as a place of fragmented or difficult experience, and the history of the first half of the twentieth century is marked both by a sense of perpetual change (social and sexual mores, technological advancement, the end of empire) and the feeling of an irreparable break from the past (the two world wars). In this course, we'll read British novels from across the century, examining stories about the education and transformation of the self within this rapidly transforming world. We will ask: what does the coming-of-age novel look like in an age where, as Yeats put it, \"the centre cannot hold,\" and old wisdom may no longer apply? What kinds of knowledge and schooling are available to its youthful protagonists? How do the experiences of love and passion, disappointment and displacement, contribute to developmental narratives? What is the relationship between the modern novel and developmental psychology? And what modes of belonging might be achievable in a more pluralistic and diverse nation?) Texts may include Hardy, Jude the Obscure; Forster, A Room With A View; Woolf, Jacob's Room; Joyce, A Portrait of the Artist as a Young Man; Bowen, The Death of the Heart; Emecheta, Second Class Citizen; Isherwood, Goodbye to Berlin; Spark, The Girls of Slender Means; Kureishi, The Black Album. Active participation in discussions; short reading responses via Canvas; midterm and final essays.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "610",
       "crn": "2481",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "E. Rosinberg",
+      "instructor": "Erwin Rosinberg",
       "instructors": [
         {
-          "name": "E. Rosinberg",
-          "email": null
+          "name": "Erwin Rosinberg",
+          "email": "erosinb@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Candler Library 122",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2481",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "E. Rosinberg",
-      "instructors": [
-        {
-          "name": "E. Rosinberg",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Rosinberg"
+    "Erwin Rosinberg"
   ],
-  "scraped_at": "2026-06-17T23:10:23.259Z"
+  "scraped_at": "2026-06-18T02:55:51.553Z"
 }

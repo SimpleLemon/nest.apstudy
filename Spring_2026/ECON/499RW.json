@@ -5,181 +5,159 @@
   "catalog_number": "499RW",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3 - 5",
+  "credit_hours": "3",
   "requirement_designation": "XAW",
   "requirements": [
     "XAW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Students will learn the craft of research in economics. Coursework will consist of synthesis of literature; collection, collation, cleaning of data; data analysis, contributing to manuscript preparation, and/or other work related to the sustaining of an academic research project.",
-  "course_notes": "(ECON 201 or ECON_OX 201 or ECON 212 or ECON_OX 212) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisites.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course employs a sociological lens to examine the dynamic patterns of religiosity in Latin America. Christianity in Latin America must not merely be pressed into the categories that are assumed in the U.S., or other regions. Instead, it must be examined within its own context, which necessitates consideration of popular religions, indigenous and Afro-diasporic movements, & secularization therein. It is necessary to understand how Latin American religion is wielding influence globally. Finally, Latin America provides an important case for examining how theories of religious competition play out in a context beyond the U.S. This course draws from a variety of voices, primarily from within the social sciences, to highlight macro-level patterns, examine localized case studies, and address contested interpretations of Latin America's unique religious ecologies.",
+  "course_notes": "(ON CAMPUS)",
   "requisites": "(ECON 201 or ECON_OX 201 or ECON 212 or ECON_OX 212) and (ECON 220 or ECON_OX 220 or MATH 361) or equivalent transfer credit as prerequisites.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4488",
       "crn": "5632",
       "section_number": "1",
       "schedule_type": "RSC",
-      "instructor": "M. Arbatskaya",
+      "instructor": "Jonathan Calvillo",
       "instructors": [
         {
-          "name": "M. Arbatskaya",
-          "email": null
+          "name": "Jonathan Calvillo",
+          "email": "jcalvillo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rita Anne Rollins Building_549",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 18,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4489",
       "crn": "6169",
       "section_number": "2",
       "schedule_type": "RSC",
-      "instructor": "S. O'Connell",
+      "instructor": "Soren Hessler",
       "instructors": [
         {
-          "name": "S. O'Connell",
-          "email": null
+          "name": "Soren Hessler",
+          "email": "soren.michael.hessler@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Off Campus Location",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 8,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4490",
       "crn": "6553",
       "section_number": "3",
       "schedule_type": "RSC",
-      "instructor": "M. Ayar",
+      "instructor": "Soren Hessler",
       "instructors": [
         {
-          "name": "M. Ayar",
-          "email": null
+          "name": "Soren Hessler",
+          "email": "soren.michael.hessler@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Off Campus Location",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 6,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5632",
-      "section_number": "1",
-      "schedule_type": "RSC",
-      "instructor": "M. Arbatskaya",
-      "instructors": [
-        {
-          "name": "M. Arbatskaya",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6169",
-      "section_number": "2",
-      "schedule_type": "RSC",
-      "instructor": "S. O'Connell",
-      "instructors": [
-        {
-          "name": "S. O'Connell",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6553",
-      "section_number": "3",
-      "schedule_type": "RSC",
-      "instructor": "M. Ayar",
-      "instructors": [
-        {
-          "name": "M. Ayar",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
+    "total_sections": 3,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 6,
-    "open": 6,
+    "other": 3,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Arbatskaya",
-    "M. Ayar",
-    "S. O'Connell"
+    "Jonathan Calvillo",
+    "Soren Hessler"
   ],
-  "scraped_at": "2026-06-17T23:02:03.803Z"
+  "scraped_at": "2026-06-18T02:17:46.583Z"
 }

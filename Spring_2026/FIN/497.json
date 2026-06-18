@@ -10,8 +10,8 @@
   "requirements": [],
   "campus": null,
   "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "course_description": "",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,6 +20,7 @@
   },
   "sections": [
     {
+      "atlas_key": "4729",
       "crn": "6319",
       "section_number": "1101",
       "schedule_type": "SUP",
@@ -27,23 +28,37 @@
       "instructors": [
         {
           "name": "T. Smith",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     },
     {
+      "atlas_key": "4730",
       "crn": "6629",
       "section_number": "1102",
       "schedule_type": "SUP",
@@ -51,23 +66,37 @@
       "instructors": [
         {
           "name": "N. Valerio III",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     },
     {
+      "atlas_key": "4731",
       "crn": "6800",
       "section_number": "1103",
       "schedule_type": "SUP",
@@ -75,16 +104,25 @@
       "instructors": [
         {
           "name": "C. Robinson",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-5:15a",
@@ -95,95 +133,21 @@
             "end": "515"
           }
         ]
-      }
-    },
-    {
-      "crn": "6319",
-      "section_number": "1101",
-      "schedule_type": "SUP",
-      "instructor": "T. Smith",
-      "instructors": [
-        {
-          "name": "T. Smith",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6629",
-      "section_number": "1102",
-      "schedule_type": "SUP",
-      "instructor": "N. Valerio III",
-      "instructors": [
-        {
-          "name": "N. Valerio III",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6800",
-      "section_number": "1103",
-      "schedule_type": "SUP",
-      "instructor": "C. Robinson",
-      "instructors": [
-        {
-          "name": "C. Robinson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-5:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "230",
-            "end": "515"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
+    "total_sections": 3,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 6,
-    "open": 2,
-    "closed": 4,
+    "other": 3,
+    "open": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
@@ -191,5 +155,5 @@
     "N. Valerio III",
     "T. Smith"
   ],
-  "scraped_at": "2026-06-17T23:02:36.309Z"
+  "scraped_at": "2026-06-18T02:22:28.133Z"
 }

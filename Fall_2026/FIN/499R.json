@@ -5,13 +5,13 @@
   "catalog_number": "499R",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Special topics courses include courses that address a current or timely topic, that are in a \"pilot\" phase before being offered on an ongoing basis, or that are known to be one time offerings. Special topics course offerings can vary from term to term.",
+  "course_notes": "Standard economic models assume people are perfectly rational. They're not - and it matters. This course explores what happens to markets, prices, and financial decisions when real human behavior - biases, short-sightedness, overconfidence, and social pressure - enters the picture. You'll run experiments, analyze real market data, and learn frameworks that apply directly to careers in finance, consulting, product design, and policy - and to your own financial life.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "3653",
       "crn": "3783",
       "section_number": "1101",
       "schedule_type": "LEC",
-      "instructor": "S. Ramachandran",
+      "instructor": "Shankar Ramachandran",
       "instructors": [
         {
-          "name": "S. Ramachandran",
-          "email": null
+          "name": "Shankar Ramachandran",
+          "email": "rlshankar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 61,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -52,56 +65,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "3783",
-      "section_number": "1101",
-      "schedule_type": "LEC",
-      "instructor": "S. Ramachandran",
-      "instructors": [
-        {
-          "name": "S. Ramachandran",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Ramachandran"
+    "Shankar Ramachandran"
   ],
-  "scraped_at": "2026-06-17T23:10:39.538Z"
+  "scraped_at": "2026-06-18T02:58:24.249Z"
 }

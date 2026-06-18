@@ -5,40 +5,55 @@
   "catalog_number": "220",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "1",
   "requirement_designation": "HA",
   "requirements": [
     "HA"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course traces the development of Western concert dance from 19th century Romantic Ballet to the present. Emphasis will be placed on the development of American modern dance, post modern dance, and current trends and dance artists. This course is required for all dance and movement studies majors and minors. Students wishing to enroll must be a declared dance and movement studies major or minor, or obtain permission of the instructor.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Through a study and analysis of grammar's impact on rhetorical effectiveness, students work with their own writing as they learn to make and adapt grammatical choices to fit audience, purpose, constraints, exigencies, and timing.",
+  "course_notes": "(This course is designed to help you write with clarity and power by expanding your grammar toolkit. Focusing on the work that language can do in the real world, this course is less about mastering the \"rules\" of grammar and more about making the best choices to suit your purposes as a communicator. Through a study of grammar's impact on rhetorical effectiveness, students work with their own writing as they learn to make and adapt grammatical choices to fit their audience, purpose, constraints, exigencies, and timing.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3355",
       "crn": "3070",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "G. Staib",
+      "instructor": "Robert Birdwell",
       "instructors": [
         {
-          "name": "G. Staib",
-          "email": null
+          "name": "Robert Birdwell",
+          "email": "robert.zachary.birdwell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -54,56 +69,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3070",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "G. Staib",
-      "instructors": [
-        {
-          "name": "G. Staib",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Staib"
+    "Robert Birdwell"
   ],
-  "scraped_at": "2026-06-17T23:01:57.217Z"
+  "scraped_at": "2026-06-18T02:16:29.857Z"
 }

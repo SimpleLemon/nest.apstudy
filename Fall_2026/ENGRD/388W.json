@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HAPW",
   "requirements": [
-    "HAPW"
+    "HAPW",
+    "Continuing Comm.& Writing with Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "A study of literary works of various genres and other imaginative writing about the relation of humans to the non-human world. Approaches may focus on particular genres, periods, or themes (e.g., ecofiction, ecopoetry, literature of climate change, multispecies writing, animal ethics, etc.).",
-  "course_notes": null,
+  "course_notes": "(Same as ENG 388W 1) (By studying Latinx cultural expressions on environments in mediums such as film, music, and visual art as well as literary forms, this course offers us an overview of the complex and varied relationships Latinx people have with their environments, including their views toward climate change and sustainability and conceptions of \"nature,\" \"wilderness,\" and place-making. We also study how intimate and constant encounters with \"extreme\" or hazardous environments give rise to environmental subjectivity and particular methods for storytelling. Thus, while close reading, historicizing, and critiquing narratives about environmental harm, we consider questions such as What does environmental harm feel like? How do people perceive slow violence (Rob Nixon)? What story-telling techniques do fence-line communities employ to make slow violence visible? What are the affective results of portraying trans-corporeality, the porousness between human bodies and \"the stuff of the world\" (Stacy Alaimo) and how do they shape environmental ethics and practice?) A knowledge of Spanish language is not required.",
   "requisites": null,
   "cross_listed": "ENG 388W",
   "date_range": {
@@ -22,54 +23,55 @@
   },
   "sections": [
     {
+      "atlas_key": "608",
       "crn": "5498",
       "section_number": "1",
       "schedule_type": "LEC",
       "instructor": "Staff",
       "instructors": [],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
+      "requirements": [
+        "Continuing Comm.& Writing with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5498",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [],
-  "scraped_at": "2026-06-17T23:10:26.484Z"
+  "scraped_at": "2026-06-18T02:56:24.449Z"
 }

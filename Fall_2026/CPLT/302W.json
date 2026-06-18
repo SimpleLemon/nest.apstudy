@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HAPW",
   "requirements": [
-    "HAPW"
+    "HAPW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Learning to read literature from a rheoretical viewpoint, its formal properties, distinctive features, origins, purposes, and capacities for representing the world; representative critics and schools from contemporary and earlier periods. *Note: This course is non-repeatable.",
-  "course_notes": null,
+  "course_notes": "This course will focus on some of the most significant intellectual movements in literary theory and cultural criticism from the early twentieth century to the present: Formalism, the Bakhtin Circle, the Frankfurt School, Structuralism, Semiotics, Psychoanalysis, Poststructuralism, Feminism, Postcolonial Theory, Black Literary Theory, Queer Theory, Disability Studies, and Animal Studies. Although our class discussions and written assignments will be based on our assigned course readings, we may also draw from literature and other cultural forms beyond our readings in order to illustrate these different and sometimes conflicting theoretical approaches. Four (4) response papers (2-3 pp. each, 40% total); Long essay (10-12 pp., 40%); Attendance and participation (20%). All assigned readings will be posted electronically on Course Reserves.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "2153",
       "crn": "2326",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "S. Meighoo",
+      "instructor": "Sean Meighoo",
       "instructors": [
         {
-          "name": "S. Meighoo",
-          "email": null
+          "name": "Sean Meighoo",
+          "email": "sean.meighoo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Few Bldg 129",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -54,56 +72,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "2326",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "S. Meighoo",
-      "instructors": [
-        {
-          "name": "S. Meighoo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Meighoo"
+    "Sean Meighoo"
   ],
-  "scraped_at": "2026-06-17T23:09:53.854Z"
+  "scraped_at": "2026-06-18T02:51:35.559Z"
 }

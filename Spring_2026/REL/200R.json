@@ -5,40 +5,53 @@
   "catalog_number": "200R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "1,2,3,4,5,6,7,8,9",
   "requirement_designation": "HA",
   "requirements": [
     "HA"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Religion and contemporary issues of human existence, the role of religion in politics and international conflicts, or the nature of contemporary religious movements such as fundamentalism.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "Research and writing of a Ph.D. dissertation on a topic previously approved by the Department faculty, under the supervision of a committee appointed with the advice and consent of the faculty. Students may register for this course on an S/U basis only.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1369",
       "crn": "3162",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "E. Reinders",
+      "instructor": "Zheng Fang",
       "instructors": [
         {
-          "name": "E. Reinders",
-          "email": null
+          "name": "Zheng Fang",
+          "email": "zheng.fang@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 997,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,56 +67,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3162",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "E. Reinders",
-      "instructors": [
-        {
-          "name": "E. Reinders",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Reinders"
+    "Zheng Fang"
   ],
-  "scraped_at": "2026-06-17T23:06:34.016Z"
+  "scraped_at": "2026-06-18T02:42:57.899Z"
 }

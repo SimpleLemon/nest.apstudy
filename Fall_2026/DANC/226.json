@@ -5,15 +5,16 @@
   "catalog_number": "226",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 4",
+  "credit_hours": "1",
   "requirement_designation": "PE",
   "requirements": [
-    "PE"
+    "PE",
+    "Physical Education(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Somatic movement education builds a relationship between the body and mind by guiding the mover through a process of full body integration. A variety of somatic practices may be covered, including Bartenieff Fundamentals, Iyengar-based yoga, and core movement training. Somatic practices can be applied to everyday activities and performance, affecting levels of confidence and encouraging authenticity.",
-  "course_notes": null,
+  "course_notes": "Open to dancers only with priority given to declared dance majors and minors. Email mara.p.mandradjieff@emory.edu for a permission number. This course explores traditional Pilates Mat exercises, as well as conditioning and stretching techniques for dancers. Students will develop deeper muscular awareness, gain overall strength and flexibility, and grasp the connectivity between alignment, core muscles, and breath. The course additionally addresses overall physical maintenance for dancers, such as injury prevention and approaches to self-care.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "534",
       "crn": "2411",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Mandradjieff",
+      "instructor": "Mara Mandradjieff",
       "instructors": [
         {
-          "name": "M. Mandradjieff",
-          "email": null
+          "name": "Mara Mandradjieff",
+          "email": "mara.p.mandradjieff@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Rich Building 117 - Dance Studio",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,56 +72,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "2411",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Mandradjieff",
-      "instructors": [
-        {
-          "name": "M. Mandradjieff",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Mandradjieff"
+    "Mara Mandradjieff"
   ],
-  "scraped_at": "2026-06-17T23:10:00.479Z"
+  "scraped_at": "2026-06-18T02:52:45.211Z"
 }

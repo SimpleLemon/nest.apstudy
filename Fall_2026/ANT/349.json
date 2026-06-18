@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Human health is intrinsically linked to dietary practices. The pharmacological properties of foods will be examined and case studies of dietary complexes will be examined in order to better understand the food-medicine continuum as a determinant of health and well-being.",
-  "course_notes": null,
+  "course_notes": "(Same as HLTH 340 1, BIOL 344 1) Human health is intrinsically linked to dietary practices. Plants, in particular, may be used both as medicine and food, and it can often be difficult to draw a line between the two groups: food may be used as medicine and vice versa. The lens of ethnopharmacology can be used to gain an integrated biocultural perspective on foods, encompassing not only the substantive (or physical) qualities, but also the intangible (symbolic). In this course, we will explore the ways that human groups identify, collect, create, and transform foods, how they shape those into dietary behaviors, and how this influences human health. The pharmacological properties of foods will be examined and we will use case studies of dietary complexes, such as the Mediterranean diet, in order to better understand the food-medicine continuum as a determinant of health and well-being. Lastly, we will examine trends in the industrialization of food, and the resulting health impact of modern food practices.",
   "requisites": null,
   "cross_listed": "HLTH 340 BIOL 344",
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "3155",
       "crn": "3527",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "C. Quave",
+      "instructor": "Cassandra Quave",
       "instructors": [
         {
-          "name": "C. Quave",
-          "email": null
+          "name": "Cassandra Quave",
+          "email": "cassandra.leah.quave@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Anthropology Bldg 303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a",
@@ -54,56 +69,25 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "3527",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "C. Quave",
-      "instructors": [
-        {
-          "name": "C. Quave",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Quave"
+    "Cassandra Quave"
   ],
-  "scraped_at": "2026-06-17T23:09:08.324Z"
+  "scraped_at": "2026-06-18T02:46:36.829Z"
 }

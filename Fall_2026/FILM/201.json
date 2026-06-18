@@ -8,10 +8,11 @@
   "credit_hours": "4",
   "requirement_designation": "HA",
   "requirements": [
-    "HA"
+    "HA",
+    "Humanities and Arts(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Cinema from its origins in 19th century technological experimentation through the 1960s. Weekly screenings required.",
   "course_notes": "FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
   "requisites": "FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
@@ -22,23 +23,45 @@
   },
   "sections": [
     {
+      "atlas_key": "640",
       "crn": "3876",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Reynolds",
+      "instructor": "Daniel Reynolds",
       "instructors": [
         {
-          "name": "D. Reynolds",
-          "email": null
+          "name": "Daniel Reynolds",
+          "email": "daniel.reynolds@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Daniel Reynolds",
+          "email": "daniel.reynolds@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Rich Building 211",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a; M 8-10p",
@@ -59,61 +82,25 @@
             "end": "2200"
           }
         ]
-      }
-    },
-    {
-      "crn": "3876",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Reynolds",
-      "instructors": [
-        {
-          "name": "D. Reynolds",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a; M 8-10p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Mon",
-            "start": "2000",
-            "end": "2200"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Reynolds"
+    "Daniel Reynolds"
   ],
-  "scraped_at": "2026-06-17T23:10:36.285Z"
+  "scraped_at": "2026-06-18T02:57:30.663Z"
 }

@@ -8,12 +8,13 @@
   "credit_hours": "1",
   "requirement_designation": "PE",
   "requirements": [
-    "PE"
+    "PE",
+    "Physical Education(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This class is designed for students with little or no climbing experience and moderate fitness. Students will learn to climb, belay, and rappel safely in the gym. The cross-training portion encompasses a variety of cardio, strength, and flexibility group exercise sessions.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "2693",
       "crn": "2918",
       "section_number": "1",
       "schedule_type": "PE",
-      "instructor": "W. Donohue",
+      "instructor": "Wil Donohue",
       "instructors": [
         {
-          "name": "W. Donohue",
-          "email": null
+          "name": "Wil Donohue",
+          "email": "wil.donohue@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff PE Center- Atrium",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,26 +72,47 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2694",
       "crn": "2931",
       "section_number": "2",
       "schedule_type": "PE",
-      "instructor": "W. Donohue",
+      "instructor": "Wil Donohue",
       "instructors": [
         {
-          "name": "W. Donohue",
-          "email": null
+          "name": "Wil Donohue",
+          "email": "wil.donohue@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff PE Center- Atrium",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -89,91 +128,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2918",
-      "section_number": "1",
-      "schedule_type": "PE",
-      "instructor": "W. Donohue",
-      "instructors": [
-        {
-          "name": "W. Donohue",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2931",
-      "section_number": "2",
-      "schedule_type": "PE",
-      "instructor": "W. Donohue",
-      "instructors": [
-        {
-          "name": "W. Donohue",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
+    "other": 2,
     "open": 0,
-    "closed": 4,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "W. Donohue"
+    "Wil Donohue"
   ],
-  "scraped_at": "2026-06-17T23:14:01.031Z"
+  "scraped_at": "2026-06-18T03:12:33.747Z"
 }

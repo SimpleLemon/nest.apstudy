@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "CW",
   "requirements": [
-    "CW"
+    "CW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Communicating health and science requires learning to identify new developments, conduct interviews, and craft an argument, while translating professional jargon into everyday language. You'll also learn journalism's norms and standards: speed, thoroughness, accuracy, novelty and evidentiary rigor.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Communicating health and science requires learning to identify new developments, conduct interviews, and craft an argument, while translating professional jargon into everyday language. You¿ll also learn journalism's norms and standards: speed, thoroughness, accuracy, novelty and evidentiary rigor.",
+  "course_notes": "Writing clearly about health and medicine is an essential skill for aspiring scientists, policymakers, science communicators, and physicians and health professionals, as well as for future journalists planning to work in any medium. Communicating health and science requires learning to identify new developments, conduct an interview, craft an argument, and organize a narrative, while translating professional jargon into everyday language. This class, taught by a professional journalist, trains you in journalism's norms and standards: speed, thoroughness, accuracy, novelty and evidentiary rigor. Students read new scientific papers and compare them to news coverage, while interrogating the storytelling strategies of different journalistic genres. Guest speakers include text journalists working in short and long forms, audio and video creators, data specialists and interview strategists. Assignments include writing short and long pieces in a range of genres; completed work may be published in the CSHH online journal, Exploring Health. This is a fast-paced, high-workload class in how to write about health and science for a popular audience. It is not an introductory writing class and therefore not intended for first year students.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "4191",
       "crn": "2323",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. McKenna",
+      "instructor": "Maryn McKenna",
       "instructors": [
         {
-          "name": "M. McKenna",
-          "email": null
+          "name": "Maryn McKenna",
+          "email": "maryn.mckenna@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "1462 Clifton Rd 101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -54,56 +72,25 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "2323",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. McKenna",
-      "instructors": [
-        {
-          "name": "M. McKenna",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "M. McKenna"
+    "Maryn McKenna"
   ],
-  "scraped_at": "2026-06-17T23:11:11.999Z"
+  "scraped_at": "2026-06-18T03:01:54.416Z"
 }

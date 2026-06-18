@@ -5,62 +5,92 @@
   "catalog_number": "330",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides a comprehensive introduction to analyzing, running and improving business operations regardless of industry. The concepts taught in this course apply broadly to management activities in areas from medicine to entertainment, and are specifically suited to assisting in the daily operations of the wide variety of other professional services that dominate the economy (e.g. financial management, law, marketing, consulting, etc.).",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "263",
       "crn": "6686",
       "section_number": "1109",
       "schedule_type": "LEC",
-      "instructor": "D. Clear",
+      "instructor": "Steve Walton",
       "instructors": [
         {
-          "name": "D. Clear",
-          "email": null
+          "name": "Steve Walton",
+          "email": "steve.walton@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W100",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "264",
       "crn": "3304",
       "section_number": "1130",
       "schedule_type": "LEC",
-      "instructor": "M. Williams",
+      "instructor": "Steve Walton",
       "instructors": [
         {
-          "name": "M. Williams",
-          "email": null
+          "name": "Steve Walton",
+          "email": "steve.walton@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W100",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -76,26 +106,43 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "265",
       "crn": "3305",
       "section_number": "1131",
       "schedule_type": "LEC",
-      "instructor": "J. Scruggs",
+      "instructor": "Huy Huynh",
       "instructors": [
         {
-          "name": "J. Scruggs",
-          "email": null
+          "name": "Huy Huynh",
+          "email": "huy.huynh@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 231",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "7",
+      "enrollment_capacity": 56,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -111,26 +158,43 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "266",
       "crn": "3306",
       "section_number": "1132",
       "schedule_type": "LEC",
-      "instructor": "J. Scruggs",
+      "instructor": "Nikki Graves",
       "instructors": [
         {
-          "name": "J. Scruggs",
-          "email": null
+          "name": "Nikki Graves",
+          "email": "ngraves@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W320",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 46,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -146,155 +210,43 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "267",
       "crn": "3307",
       "section_number": "1430",
       "schedule_type": "LEC",
-      "instructor": "M. Williams",
+      "instructor": "Nikki Graves",
       "instructors": [
         {
-          "name": "M. Williams",
-          "email": null
+          "name": "Nikki Graves",
+          "email": "ngraves@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W320",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3308",
-      "section_number": "1431",
-      "schedule_type": "LEC",
-      "instructor": "J. Scruggs",
-      "instructors": [
-        {
-          "name": "J. Scruggs",
-          "email": null
-        }
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3309",
-      "section_number": "1432",
-      "schedule_type": "LEC",
-      "instructor": "J. Scruggs",
-      "instructors": [
-        {
-          "name": "J. Scruggs",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "6686",
-      "section_number": "1109",
-      "schedule_type": "LEC",
-      "instructor": "D. Clear",
-      "instructors": [
-        {
-          "name": "D. Clear",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3304",
-      "section_number": "1130",
-      "schedule_type": "LEC",
-      "instructor": "M. Williams",
-      "instructors": [
-        {
-          "name": "M. Williams",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "7",
+      "enrollment_capacity": 46,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -310,131 +262,43 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
-      "crn": "3305",
-      "section_number": "1131",
-      "schedule_type": "LEC",
-      "instructor": "J. Scruggs",
-      "instructors": [
-        {
-          "name": "J. Scruggs",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3306",
-      "section_number": "1132",
-      "schedule_type": "LEC",
-      "instructor": "J. Scruggs",
-      "instructors": [
-        {
-          "name": "J. Scruggs",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3307",
-      "section_number": "1430",
-      "schedule_type": "LEC",
-      "instructor": "M. Williams",
-      "instructors": [
-        {
-          "name": "M. Williams",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
+      "atlas_key": "268",
       "crn": "3308",
       "section_number": "1431",
       "schedule_type": "LEC",
-      "instructor": "J. Scruggs",
+      "instructor": "Nikki Graves",
       "instructors": [
         {
-          "name": "J. Scruggs",
-          "email": null
+          "name": "Nikki Graves",
+          "email": "ngraves@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
+      "location": "Goizueta Foundation Ctr W320",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 46,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -450,26 +314,43 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "269",
       "crn": "3309",
       "section_number": "1432",
       "schedule_type": "LEC",
-      "instructor": "J. Scruggs",
+      "instructor": "Jessica Lowy",
       "instructors": [
         {
-          "name": "J. Scruggs",
-          "email": null
+          "name": "Jessica Lowy",
+          "email": "jessica.lowy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
+      "location": "Goizueta Foundation Ctr W320",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 46,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -485,23 +366,28 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 14,
-    "lectures": 14,
+    "total_sections": 7,
+    "lectures": 7,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 2,
-    "closed": 6,
-    "waitlisted": 6
+    "closed": 4,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Clear",
-    "J. Scruggs",
-    "M. Williams"
+    "Huy Huynh",
+    "Jessica Lowy",
+    "Nikki Graves",
+    "Steve Walton"
   ],
-  "scraped_at": "2026-06-17T23:04:30.292Z"
+  "scraped_at": "2026-06-18T02:35:28.935Z"
 }

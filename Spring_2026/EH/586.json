@@ -5,38 +5,53 @@
   "catalog_number": "586",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Seminar or lecture series on topics of anthropological interest at an intermediate level. Maybe repeated for credit when topic varies.",
+  "course_notes": "(Same as REL 270 3, HIST 296 2, SOC 289 1) (This course satisfies the Religion major requirement:- Tradition-Christianity, Theme.) (Complete Topic: Apocalypse and Rebellion: Millennial Movements in Latin America) (The relationship between religious radicalism and social-political dissent has long stood as one of the most compelling dimensions of Latin American history. This course traces the recurring emergence of millenarian and messianic movements from the colonial period through the national era, examining how visions of an imminent end shaped collective action, resistance, and hope. We will study the formation, diffusion, and eventual suppression of these movements within the wider context of major social, economic, and political transformations in Ibero-America. Central to our work will be an analysis of millennial rhetoric and, more broadly, the dynamics of authority, persuasion, and the social construction of reality that sustained these movements. Throughout the course, we will also confront the ways race, class, and gender inequalities informed millennial projects, apocalyptic expectations, and utopian quests for redemption.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3062",
       "crn": "1488",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Liu/Zhu",
+      "instructor": "Javier Villa-Flores",
       "instructors": [
         {
-          "name": "Liu/Zhu",
-          "email": null
+          "name": "Javier Villa-Flores",
+          "email": "javier.villa-flores@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S107",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 4,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 1-2:50p",
@@ -47,51 +62,25 @@
             "end": "1450"
           }
         ]
-      }
-    },
-    {
-      "crn": "1488",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Liu/Zhu",
-      "instructors": [
-        {
-          "name": "Liu/Zhu",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 1-2:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1450"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Liu/Zhu"
+    "Javier Villa-Flores"
   ],
-  "scraped_at": "2026-06-17T23:02:13.545Z"
+  "scraped_at": "2026-06-18T02:18:13.757Z"
 }

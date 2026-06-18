@@ -5,13 +5,15 @@
   "catalog_number": "330LW",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "3",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Students will perform experiments spanning areas of physical chemistry including kinetics, thermodynamics, and spectroscopy; analyze results and solve problems using data and visualization tools common in the chemical sciences; and build skills of effective written and oral scientific communication.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +22,45 @@
   },
   "sections": [
     {
+      "atlas_key": "4376",
       "crn": "3939",
       "section_number": "1",
       "schedule_type": "LAB",
-      "instructor": "A. Brathwaite",
+      "instructor": "Antonio Brathwaite",
       "instructors": [
         {
-          "name": "A. Brathwaite",
-          "email": null
+          "name": "Antonio Brathwaite",
+          "email": "antonio.brathwaite@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Antonio Brathwaite",
+          "email": "antonio.brathwaite@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Atwood Chemistry Bldg. 316",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 8,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-3:45p; W 2:30-5:15p",
@@ -52,26 +76,52 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4377",
       "crn": "3940",
       "section_number": "2",
       "schedule_type": "LAB",
-      "instructor": "A. Brathwaite",
+      "instructor": "Antonio Brathwaite",
       "instructors": [
         {
-          "name": "A. Brathwaite",
-          "email": null
+          "name": "Antonio Brathwaite",
+          "email": "antonio.brathwaite@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Antonio Brathwaite",
+          "email": "antonio.brathwaite@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Atwood Chemistry Bldg. 316",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 8,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-3:45p; Th 10a-12:45p",
@@ -87,26 +137,52 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4378",
       "crn": "3942",
       "section_number": "3",
       "schedule_type": "LAB",
-      "instructor": "A. Brathwaite",
+      "instructor": "Antonio Brathwaite",
       "instructors": [
         {
-          "name": "A. Brathwaite",
-          "email": null
+          "name": "Antonio Brathwaite",
+          "email": "antonio.brathwaite@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Antonio Brathwaite",
+          "email": "antonio.brathwaite@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Atwood Chemistry Bldg. 316",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 8,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-3:45p; F 1-3:45p",
@@ -122,126 +198,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3939",
-      "section_number": "1",
-      "schedule_type": "LAB",
-      "instructor": "A. Brathwaite",
-      "instructors": [
-        {
-          "name": "A. Brathwaite",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 2:30-3:45p; W 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3940",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "A. Brathwaite",
-      "instructors": [
-        {
-          "name": "A. Brathwaite",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 2:30-3:45p; Th 10a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3942",
-      "section_number": "3",
-      "schedule_type": "LAB",
-      "instructor": "A. Brathwaite",
-      "instructors": [
-        {
-          "name": "A. Brathwaite",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 2:30-3:45p; F 1-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
+    "total_sections": 3,
     "lectures": 0,
-    "labs": 6,
+    "labs": 3,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 4,
+    "open": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Brathwaite"
+    "Antonio Brathwaite"
   ],
-  "scraped_at": "2026-06-17T23:09:40.824Z"
+  "scraped_at": "2026-06-18T02:50:59.315Z"
 }

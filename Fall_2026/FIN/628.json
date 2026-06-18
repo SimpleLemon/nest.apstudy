@@ -5,13 +5,13 @@
   "catalog_number": "628",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is intended to give students an idea of the work conducted by investment banks. Areas reviewed will include debt financing, equity underwriting, merger & acquisition advisory assignments, and trading activity. Special emphasis will be placed on the methods commonly applied when conducting valuation, debt capacity, and transaction analysis. In addition, to provide context, there will be a brief summary of investment banking history and of the peripheral players (private equity and hedge funds) that interact with banks.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "354",
       "crn": "3688",
       "section_number": "2135",
       "schedule_type": "LEC",
-      "instructor": "K. Crowley",
+      "instructor": "Kevin Crowley",
       "instructors": [
         {
-          "name": "K. Crowley",
-          "email": null
+          "name": "Kevin Crowley",
+          "email": "kevin.crowley@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 6:30-9:30p",
@@ -47,26 +60,43 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "355",
       "crn": "3689",
       "section_number": "2635",
       "schedule_type": "LEC",
-      "instructor": "K. Crowley",
+      "instructor": "Kevin Crowley",
       "instructors": [
         {
-          "name": "K. Crowley",
-          "email": null
+          "name": "Kevin Crowley",
+          "email": "kevin.crowley@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 13,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 6:30-9:30p",
@@ -77,26 +107,43 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "356",
       "crn": "3690",
       "section_number": "3235",
       "schedule_type": "LEC",
-      "instructor": "K. Crowley",
+      "instructor": "Kevin Crowley",
       "instructors": [
         {
-          "name": "K. Crowley",
-          "email": null
+          "name": "Kevin Crowley",
+          "email": "kevin.crowley@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 33,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 6:30-9:30p",
@@ -107,111 +154,25 @@
             "end": "2130"
           }
         ]
-      }
-    },
-    {
-      "crn": "3688",
-      "section_number": "2135",
-      "schedule_type": "LEC",
-      "instructor": "K. Crowley",
-      "instructors": [
-        {
-          "name": "K. Crowley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3689",
-      "section_number": "2635",
-      "schedule_type": "LEC",
-      "instructor": "K. Crowley",
-      "instructors": [
-        {
-          "name": "K. Crowley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3690",
-      "section_number": "3235",
-      "schedule_type": "LEC",
-      "instructor": "K. Crowley",
-      "instructors": [
-        {
-          "name": "K. Crowley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Crowley"
+    "Kevin Crowley"
   ],
-  "scraped_at": "2026-06-17T23:10:39.539Z"
+  "scraped_at": "2026-06-18T02:58:24.251Z"
 }

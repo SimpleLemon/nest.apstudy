@@ -5,524 +5,470 @@
   "catalog_number": "497R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "4",
   "requirement_designation": "XA",
   "requirements": [
     "XA"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Students conduct directed or supervised research in support of a faculty member's research project or agenda. Permission of the department and a supervising faculty member is required.Three combined credits of CS 497R, CS 498R and CS 499R may be used to fulfill a maximum of one 400-level elective for Computer Science majors.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Innovations in clinical care are increasingly impacted by the development and implementation of machine learning (ML) and artificial intelligence (AI). As future clinicians, medical students should be informed and prepared for technological changes that will affect how they provide care for their patients. The goals of this senior elective are to demystify AI and ML in healthcare, enabling students to have informed conversations about these technologies and participate in their clinical advancement.",
+  "course_notes": "(Permission Required Prior to Enrollment)(School of Medicine Students Only)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-06-29",
+    "end": "2026-12-19"
   },
   "sections": [
     {
+      "atlas_key": "2624",
       "crn": "6594",
       "section_number": "1",
       "schedule_type": "RSC",
-      "instructor": "A. Julian",
+      "instructor": "Verena Brown",
       "instructors": [
         {
-          "name": "A. Julian",
-          "email": null
+          "name": "Verena Brown",
+          "email": "verena.w.brown@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2625",
       "crn": "6595",
       "section_number": "2",
       "schedule_type": "RSC",
-      "instructor": "A. Zufle",
+      "instructor": "Robert Pettignano",
       "instructors": [
         {
-          "name": "A. Zufle",
-          "email": null
+          "name": "Robert Pettignano",
+          "email": "rpetti2@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2626",
       "crn": "6596",
       "section_number": "3",
       "schedule_type": "RSC",
-      "instructor": "C. Yang",
+      "instructor": "Gerald Lee",
       "instructors": [
         {
-          "name": "C. Yang",
-          "email": null
+          "name": "Gerald Lee",
+          "email": "gerald.b.lee@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2627",
       "crn": "6597",
       "section_number": "4",
       "schedule_type": "RSC",
-      "instructor": "D. Fossati",
+      "instructor": "Prateek C. Gandiga",
       "instructors": [
         {
-          "name": "D. Fossati",
-          "email": null
+          "name": "Prateek C. Gandiga",
+          "email": "prateek.gandiga@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2628",
       "crn": "6598",
       "section_number": "5",
       "schedule_type": "RSC",
-      "instructor": "J. Choi",
+      "instructor": "Aine Kelly",
       "instructors": [
         {
-          "name": "J. Choi",
-          "email": null
+          "name": "Aine Kelly",
+          "email": "aine.marie.kelly@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Colin Segovis",
+          "email": "colin.m.segovis@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2629",
       "crn": "6599",
       "section_number": "6",
       "schedule_type": "RSC",
-      "instructor": "K. Shu",
+      "instructor": "Aine Kelly",
       "instructors": [
         {
-          "name": "K. Shu",
-          "email": null
+          "name": "Aine Kelly",
+          "email": "aine.marie.kelly@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sarah Milla",
+          "email": null,
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Colin Segovis",
+          "email": "colin.m.segovis@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2630",
       "crn": "6600",
       "section_number": "7",
       "schedule_type": "RSC",
-      "instructor": "K. Williams",
+      "instructor": "Bill Majdalany",
       "instructors": [
         {
-          "name": "K. Williams",
-          "email": null
+          "name": "Bill Majdalany",
+          "email": null,
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2631",
       "crn": "6601",
       "section_number": "8",
       "schedule_type": "RSC",
-      "instructor": "L. Xiong",
+      "instructor": "Hassan Monfared",
       "instructors": [
         {
-          "name": "L. Xiong",
-          "email": null
+          "name": "Hassan Monfared",
+          "email": "hassan.monfared@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2632",
       "crn": "6602",
       "section_number": "9",
       "schedule_type": "RSC",
-      "instructor": "S. Tang",
+      "instructor": "Stacy M Higgins",
       "instructors": [
         {
-          "name": "S. Tang",
-          "email": null
+          "name": "Stacy M Higgins",
+          "email": "smhiggi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2633",
       "crn": "6603",
       "section_number": "10",
       "schedule_type": "RSC",
-      "instructor": "Y. Rankin",
+      "instructor": "Maureen Powers",
       "instructors": [
         {
-          "name": "Y. Rankin",
-          "email": null
+          "name": "Maureen Powers",
+          "email": "mpowers@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6594",
-      "section_number": "1",
-      "schedule_type": "RSC",
-      "instructor": "A. Julian",
-      "instructors": [
-        {
-          "name": "A. Julian",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6595",
-      "section_number": "2",
-      "schedule_type": "RSC",
-      "instructor": "A. Zufle",
-      "instructors": [
-        {
-          "name": "A. Zufle",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6596",
-      "section_number": "3",
-      "schedule_type": "RSC",
-      "instructor": "C. Yang",
-      "instructors": [
-        {
-          "name": "C. Yang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6597",
-      "section_number": "4",
-      "schedule_type": "RSC",
-      "instructor": "D. Fossati",
-      "instructors": [
-        {
-          "name": "D. Fossati",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6598",
-      "section_number": "5",
-      "schedule_type": "RSC",
-      "instructor": "J. Choi",
-      "instructors": [
-        {
-          "name": "J. Choi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6599",
-      "section_number": "6",
-      "schedule_type": "RSC",
-      "instructor": "K. Shu",
-      "instructors": [
-        {
-          "name": "K. Shu",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6600",
-      "section_number": "7",
-      "schedule_type": "RSC",
-      "instructor": "K. Williams",
-      "instructors": [
-        {
-          "name": "K. Williams",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6601",
-      "section_number": "8",
-      "schedule_type": "RSC",
-      "instructor": "L. Xiong",
-      "instructors": [
-        {
-          "name": "L. Xiong",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6602",
-      "section_number": "9",
-      "schedule_type": "RSC",
-      "instructor": "S. Tang",
-      "instructors": [
-        {
-          "name": "S. Tang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6603",
-      "section_number": "10",
-      "schedule_type": "RSC",
-      "instructor": "Y. Rankin",
-      "instructors": [
-        {
-          "name": "Y. Rankin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "10",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 20,
+    "total_sections": 10,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 20,
-    "open": 20,
+    "other": 10,
+    "open": 10,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Julian",
-    "A. Zufle",
-    "C. Yang",
-    "D. Fossati",
-    "J. Choi",
-    "K. Shu",
-    "K. Williams",
-    "L. Xiong",
-    "S. Tang",
-    "Y. Rankin"
+    "Aine Kelly",
+    "Bill Majdalany",
+    "Colin Segovis",
+    "Gerald Lee",
+    "Hassan Monfared",
+    "Maureen Powers",
+    "Prateek C. Gandiga",
+    "Robert Pettignano",
+    "Sarah Milla",
+    "Stacy M Higgins",
+    "Verena Brown"
   ],
-  "scraped_at": "2026-06-17T23:01:53.996Z"
+  "scraped_at": "2026-06-18T02:16:08.229Z"
 }

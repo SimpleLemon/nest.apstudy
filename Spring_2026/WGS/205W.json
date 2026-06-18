@@ -5,40 +5,63 @@
   "catalog_number": "205W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "2",
   "requirement_designation": "HSCW",
   "requirements": [
     "HSCW"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course is an introduction to the interdisciplinary field of sexuality studies.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-10",
+    "end": "2026-12-11"
   },
   "sections": [
     {
+      "atlas_key": "2960",
       "crn": "2808",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "E. Wilson",
+      "instructor": "Gwen Gunn",
       "instructors": [
         {
-          "name": "E. Wilson",
-          "email": null
+          "name": "Gwen Gunn",
+          "email": "gwendolyn.gisiner.gunn@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Lauren Lichten",
+          "email": "lauren.lichten@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Ami R Rosen",
+          "email": "arosen3@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 25,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-5:15p",
@@ -49,26 +72,43 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-12-11"
       }
     },
     {
+      "atlas_key": "2961",
       "crn": "2809",
       "section_number": "2",
       "schedule_type": "DIS",
-      "instructor": "M. Goldman",
+      "instructor": "Lauren Lichten",
       "instructors": [
         {
-          "name": "M. Goldman",
-          "email": null
+          "name": "Lauren Lichten",
+          "email": "lauren.lichten@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 25,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-11:15a",
@@ -79,26 +119,45 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-12-11"
       }
     },
     {
+      "atlas_key": "2962",
       "crn": "2810",
       "section_number": "3",
       "schedule_type": "DIS",
-      "instructor": "T. Stanford",
+      "instructor": "Andre Patrao",
       "instructors": [
         {
-          "name": "T. Stanford",
-          "email": null
+          "name": "Andre Patrao",
+          "email": "andre.patrao@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Carlos Hall 212",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "4",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 11:30a-12:45p",
@@ -109,26 +168,45 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2963",
       "crn": "2811",
       "section_number": "4",
       "schedule_type": "DIS",
-      "instructor": "R. Rodina",
+      "instructor": "Achille Castaldo",
       "instructors": [
         {
-          "name": "R. Rodina",
-          "email": null
+          "name": "Achille Castaldo",
+          "email": "achille.castaldo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Modern Language 330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 9,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1-2:15p",
@@ -139,144 +217,29 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2808",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Wilson",
-      "instructors": [
-        {
-          "name": "E. Wilson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2809",
-      "section_number": "2",
-      "schedule_type": "DIS",
-      "instructor": "M. Goldman",
-      "instructors": [
-        {
-          "name": "M. Goldman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-11:15a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2810",
-      "section_number": "3",
-      "schedule_type": "DIS",
-      "instructor": "T. Stanford",
-      "instructors": [
-        {
-          "name": "T. Stanford",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2811",
-      "section_number": "4",
-      "schedule_type": "DIS",
-      "instructor": "R. Rodina",
-      "instructors": [
-        {
-          "name": "R. Rodina",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-2:15p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 2,
+    "total_sections": 4,
+    "lectures": 1,
     "labs": 0,
-    "discussions": 6,
+    "discussions": 3,
     "other": 0,
-    "open": 8,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Wilson",
-    "M. Goldman",
-    "R. Rodina",
-    "T. Stanford"
+    "Achille Castaldo",
+    "Ami R Rosen",
+    "Andre Patrao",
+    "Gwen Gunn",
+    "Lauren Lichten"
   ],
-  "scraped_at": "2026-06-17T23:07:03.454Z"
+  "scraped_at": "2026-06-18T02:45:32.676Z"
 }

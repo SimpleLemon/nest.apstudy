@@ -8,10 +8,11 @@
   "credit_hours": "4",
   "requirement_designation": "NS",
   "requirements": [
-    "NS"
+    "NS",
+    "Natural Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Meteorology is the science of the atmosphere and the weather it produces. It seeks to understand the dynamics of the system in terms of available energy and how those dynamics produce the daily weather and long-term climate of the globe. This course will include a weekly lab.",
   "course_notes": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or equivalent transfer credit as prerequisite.",
   "requisites": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or equivalent transfer credit as prerequisite.",
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "2052",
       "crn": "1787",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Donaher",
+      "instructor": "Shaunna Donaher",
       "instructors": [
         {
-          "name": "S. Donaher",
-          "email": null
+          "name": "Shaunna Donaher",
+          "email": "shaunna.donaher@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Math & Science Center - W502",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 16,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,26 +72,45 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2053",
       "crn": "1788",
       "section_number": "2",
       "schedule_type": "LAB",
-      "instructor": "S. Donaher",
+      "instructor": "Shaunna Donaher",
       "instructors": [
         {
-          "name": "S. Donaher",
-          "email": null
+          "name": "Shaunna Donaher",
+          "email": "shaunna.donaher@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W502",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 16,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-3:45p",
@@ -84,86 +121,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "1787",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Donaher",
-      "instructors": [
-        {
-          "name": "S. Donaher",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1788",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "S. Donaher",
-      "instructors": [
-        {
-          "name": "S. Donaher",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-3:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 2,
-    "labs": 2,
+    "total_sections": 2,
+    "lectures": 1,
+    "labs": 1,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Donaher"
+    "Shaunna Donaher"
   ],
-  "scraped_at": "2026-06-17T23:10:29.837Z"
+  "scraped_at": "2026-06-18T02:57:02.092Z"
 }

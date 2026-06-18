@@ -8,20 +8,22 @@
   "credit_hours": "3",
   "requirement_designation": "FS",
   "requirements": [
-    "FS"
+    "FS",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Freshman seminar, for first year students only. Variable topics.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The first half of a yearlong review, with emphasis on continued development of the four basic linguistic skills (speaking, listening, reading, and writing) and knowledge of Hispanic cultures and societies.",
+  "course_notes": "CONTENT: This course, which is the first half of our intermediate sequence in Spanish and intended to be followed by Span 202, continues to develop students' communicative skills in Spanish and is designed for students who have fewer than four years formal experience studying Spanish and/ or who do not identify as heritage or native speakers of Spanish. While reviewing and acquiring new vocabulary, grammar, and pronunciation are central, learning about Hispanic/ Latino cultures is an integral part of the course as we will discuss our personal experiences and values, along with differences and changes among Spanish-speaking communities throughout the world. To this end, Span 201 aims to help students - continue to learn to use Spanish to communicate via active (speaking and writing) and passive modes (listening and reading); - further develop their knowledge of and about the tools of communication: basic linguistic units (words, idioms, conjugations, sounds) and grammar (rules which permit you to combine the units meaningfully); - explore, appreciate, and reflect upon a variety of Hispanic/ Latin/ Latinx cultures to critically discuss, compare, and analyze cultural productions. REQUIRED PROGRAM: Contraseña: Your Passport to Foundational Spanish (LingroLearning), a completely mobile and digital immersive experience. There is no required printed textbook. Purchase access to Contraseña directly from LingroLearning. PARTICULARS: Classes are conducted in Spanish, and daily attendance and active engagement are expected. EVALUATION is based on active participation and timely completion of homework, end-of-unit cumulative activities or quizzes, end-of-unit projects, and bi-weekly online meetings with coaches who are native speakers of Spanish. There is no final exam in SPAN 201. PREREQUISITES: SPAN 102, SPAN 111 or an Official Placement for SPAN 201 from the Department of Spanish and Portuguese. If you haven't done so already, be sure to take the required online Spanish Placement exam at http://spanport.emory.edu/home/undergraduate/placement/exam.html well before fall semester starts.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1217",
       "crn": "1710",
       "section_number": "1",
       "schedule_type": "SEM",
@@ -29,16 +31,32 @@
       "instructors": [
         {
           "name": "T. Bing",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Candler Library 123",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 11,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -54,9 +72,14 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1218",
       "crn": "1921",
       "section_number": "2",
       "schedule_type": "SEM",
@@ -64,16 +87,32 @@
       "instructors": [
         {
           "name": "J. Rieser",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Candler Library 122",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 11,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -89,92 +128,26 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "1710",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "T. Bing",
-      "instructors": [
-        {
-          "name": "T. Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1921",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "J. Rieser",
-      "instructors": [
-        {
-          "name": "J. Rieser",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
+    "other": 2,
     "open": 0,
-    "closed": 4,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
     "J. Rieser",
     "T. Bing"
   ],
-  "scraped_at": "2026-06-17T23:06:11.161Z"
+  "scraped_at": "2026-06-18T02:39:58.695Z"
 }

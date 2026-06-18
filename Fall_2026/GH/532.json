@@ -5,13 +5,13 @@
   "catalog_number": "532",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisites: EPI 530 and BIOS 500 . EPI 540 , BIOS 501 , and GH 531 strongly recommended. This course provides a conceptual and experiential foundation to address research questions using quantitative data. The course emphasizes the technical skills required to transform a quantitative data set (exemplars: NHANES and Demographic and Health Surveys) into a reproducible analysis for global health applications. Students will receive guided, structured experience with quantitatively operationalizing research questions, data acquisition and management, data exploration, formal data description, conceptualization and construction of composite variables, analysis of statistical associations, and addressing common threats to valid inference. Exercises will be completed using SAS software with an emphasis on programming specific to complex survey designs. Students must register for both lecture and lab components.",
+  "course_notes": "GH students can enroll through March 27. GH and GEH students through March 31. All others may enroll AFTER March 31.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,41 @@
   },
   "sections": [
     {
+      "atlas_key": "165",
       "crn": "2249",
       "section_number": "L1",
       "schedule_type": "LAB",
-      "instructor": "Patel/Varghese",
+      "instructor": "Shivani A Patel",
       "instructors": [
         {
-          "name": "Patel/Varghese",
-          "email": null
+          "name": "Shivani A Patel",
+          "email": "s.a.patel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jithin Sam Varghese",
+          "email": "jithin.sam.varghese@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-2:20p",
@@ -47,26 +65,48 @@
             "end": "1420"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "166",
       "crn": "2250",
       "section_number": "L2",
       "schedule_type": "LAB",
-      "instructor": "Patel/Varghese",
+      "instructor": "Shivani A Patel",
       "instructors": [
         {
-          "name": "Patel/Varghese",
-          "email": null
+          "name": "Shivani A Patel",
+          "email": "s.a.patel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jithin Sam Varghese",
+          "email": "jithin.sam.varghese@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 25,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 3-4:20p",
@@ -77,26 +117,48 @@
             "end": "1620"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "164",
       "crn": "2248",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Patel/Varghese",
+      "instructor": "Shivani A Patel",
       "instructors": [
         {
-          "name": "Patel/Varghese",
-          "email": null
+          "name": "Shivani A Patel",
+          "email": "s.a.patel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jithin Sam Varghese",
+          "email": "jithin.sam.varghese@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 50,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 8:30-9:50a",
@@ -107,111 +169,26 @@
             "end": "950"
           }
         ]
-      }
-    },
-    {
-      "crn": "2249",
-      "section_number": "L1",
-      "schedule_type": "LAB",
-      "instructor": "Patel/Varghese",
-      "instructors": [
-        {
-          "name": "Patel/Varghese",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-2:20p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1420"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2250",
-      "section_number": "L2",
-      "schedule_type": "LAB",
-      "instructor": "Patel/Varghese",
-      "instructors": [
-        {
-          "name": "Patel/Varghese",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 3-4:20p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1500",
-            "end": "1620"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2248",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Patel/Varghese",
-      "instructors": [
-        {
-          "name": "Patel/Varghese",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 8:30-9:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "950"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 2,
-    "labs": 4,
+    "total_sections": 3,
+    "lectures": 1,
+    "labs": 2,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 2,
+    "open": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Patel/Varghese"
+    "Jithin Sam Varghese",
+    "Shivani A Patel"
   ],
-  "scraped_at": "2026-06-17T23:10:49.337Z"
+  "scraped_at": "2026-06-18T02:59:07.913Z"
 }

@@ -5,40 +5,59 @@
   "catalog_number": "264",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Social Sciences(*)",
+    "Quantitative Reasoning(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course will build on historical foundations of genetics to critically explore the structure and function of genes and genomics using molecular biology tools through a human perspective using problem solving and reading of primary scientific literature.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Determination of national income, employment, and the price level; business fluctuations; and international monetary issues.",
   "course_notes": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
   "requisites": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "554",
       "crn": "1652",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "L. Rieder",
+      "instructor": "Kaiji Chen",
       "instructors": [
         {
-          "name": "L. Rieder",
-          "email": null
+          "name": "Kaiji Chen",
+          "email": "kaiji.chen@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "White Hall 101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "4",
+      "enrollment_capacity": 45,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,26 +73,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "555",
       "crn": "2599",
       "section_number": "2",
       "schedule_type": "DIS",
-      "instructor": "L. Rieder",
+      "instructor": "Vivian Yue",
       "instructors": [
         {
-          "name": "L. Rieder",
-          "email": null
+          "name": "Vivian Yue",
+          "email": "vivian.yue@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Atwood Chemistry Bldg. 240",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 45,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 11:30a-12:20p",
@@ -84,26 +124,47 @@
             "end": "1220"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "556",
       "crn": "2600",
       "section_number": "3",
       "schedule_type": "DIS",
-      "instructor": "L. Rieder",
+      "instructor": "Musa Ayar",
       "instructors": [
         {
-          "name": "L. Rieder",
-          "email": null
+          "name": "Musa Ayar",
+          "email": "musa.ayar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "White Hall 101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 80,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 1-1:50p",
@@ -114,26 +175,47 @@
             "end": "1350"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "557",
       "crn": "2601",
       "section_number": "4",
       "schedule_type": "DIS",
-      "instructor": "L. Rieder",
+      "instructor": "Hau Nguyen",
       "instructors": [
         {
-          "name": "L. Rieder",
-          "email": null
+          "name": "Hau Nguyen",
+          "email": "hau.nguyen@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "White Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "4",
+      "enrollment_capacity": 50,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-3:20p",
@@ -144,146 +226,28 @@
             "end": "1520"
           }
         ]
-      }
-    },
-    {
-      "crn": "1652",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "L. Rieder",
-      "instructors": [
-        {
-          "name": "L. Rieder",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2599",
-      "section_number": "2",
-      "schedule_type": "DIS",
-      "instructor": "L. Rieder",
-      "instructors": [
-        {
-          "name": "L. Rieder",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2600",
-      "section_number": "3",
-      "schedule_type": "DIS",
-      "instructor": "L. Rieder",
-      "instructors": [
-        {
-          "name": "L. Rieder",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 1-1:50p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2601",
-      "section_number": "4",
-      "schedule_type": "DIS",
-      "instructor": "L. Rieder",
-      "instructors": [
-        {
-          "name": "L. Rieder",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-3:20p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1520"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 2,
+    "total_sections": 4,
+    "lectures": 1,
     "labs": 0,
-    "discussions": 6,
+    "discussions": 3,
     "other": 0,
-    "open": 0,
+    "open": 2,
     "closed": 0,
-    "waitlisted": 8
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Rieder"
+    "Hau Nguyen",
+    "Kaiji Chen",
+    "Musa Ayar",
+    "Vivian Yue"
   ],
-  "scraped_at": "2026-06-17T23:01:21.201Z"
+  "scraped_at": "2026-06-18T02:09:43.789Z"
 }

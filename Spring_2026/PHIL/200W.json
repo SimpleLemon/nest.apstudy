@@ -5,40 +5,55 @@
   "catalog_number": "200W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "HAW",
   "requirements": [
     "HAW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course will introduce the principal figures and topics in ancient Greek and medieval philosophy.",
-  "course_notes": "One PHIL course or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Through variables such as arts, politics, freedom, race, nd coloniality, this repeatable special topics course will explore various ways in which religion and law intersect and pose questions in political life, social justice struggles, community conversations and spaces, and cultural consciousness.",
+  "course_notes": "Topic : Law and Religion: Approaches to Interdisciplinary Scholarship This course satisfies the Religion major requirement: - Theme Permission Required Prior to Enrollment. To request permission to register, contact Prof. Wei Wu wei.wu@emory.edu Law school schedule: Tuesdays 9:00-11:55am DESCRIPTION: Interdisciplinary scholarship is often lauded for challenging assumptions, contributing new perspectives, and leading to groundbreaking new insights that would not be possible without crossing disciplinary borders. While there are certainly benefits to interdisciplinary scholarship, such approaches also pose a unique set of challenges. The success of interdisciplinary scholarship depends on the scholar's ability to communicate to audiences who often use different nomenclature, evidence, and analytical methods. A failure to appreciate these challenges can lead to attempts at interdisciplinary scholarship that are reductive, one- sided, vague, or confused. In this course, students will survey the interdisciplinary field of law and religion. The course will begin by discussing the nature of the field known as law and religion. What areas of inquiry constitute this field? What do we mean when we talk about \"law\" and \"religion?\" The course will then cover different substantive areas and methodological approaches by reading, analyzing, and critiquing examples of law and religion scholarship from leading scholars. Students will be asked to think about the choices that scholars make: What is the relationship of law and religion in this example of scholarship? What does the scholar draw on as evidence for the argument? How does the scholar construct the argument? How does the scholar think about law? How does the scholar think about religion? These and other questions will help students understand how different approaches function; what they can achieve; what they cannot achieve; and why a scholar would choose a certain approach. This course is recommended for students interested in exploring the field of law and religion, as well as for students in advance of a significant writing project in law and religion, including a journal comment, major seminar paper, or thesis. ATTENDANCE POLICY: Regular class attendance is expected. Absences will be factored into the class participation grade",
   "requisites": "One PHIL course or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1173",
       "crn": "1994",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Dutton",
+      "instructor": "Silas Allard",
       "instructors": [
         {
-          "name": "S. Dutton",
-          "email": null
+          "name": "Silas Allard",
+          "email": "silas.allard@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 2,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -54,56 +69,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "1994",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Dutton",
-      "instructors": [
-        {
-          "name": "S. Dutton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Dutton"
+    "Silas Allard"
   ],
-  "scraped_at": "2026-06-17T23:06:07.918Z"
+  "scraped_at": "2026-06-18T02:38:17.518Z"
 }

@@ -5,15 +5,15 @@
   "catalog_number": "299R",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 8",
+  "credit_hours": "1,2,3,4,5,6,7,8",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Variable credit. Permission of faculty supervisor required prior to enrollment. Designed primarily for sophomores, this course provides ENVS students with foundational skills for research under the supervision of a faculty member. A stepping stone to more advanced research work.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,115 +22,105 @@
   },
   "sections": [
     {
+      "atlas_key": "2423",
       "crn": "5674",
       "section_number": "1",
       "schedule_type": "RSC",
-      "instructor": "X. Huang",
+      "instructor": "Xiao Huang",
       "instructors": [
         {
-          "name": "X. Huang",
-          "email": null
+          "name": "Xiao Huang",
+          "email": "xiao.huang2@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 5,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2424",
       "crn": "5812",
       "section_number": "2",
       "schedule_type": "RSC",
-      "instructor": "G. Vazquez Prokopec",
+      "instructor": "Gonzalo Vazquez Prokopec",
       "instructors": [
         {
-          "name": "G. Vazquez Prokopec",
-          "email": null
+          "name": "Gonzalo Vazquez Prokopec",
+          "email": "gmvazqu@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 3,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5674",
-      "section_number": "1",
-      "schedule_type": "RSC",
-      "instructor": "X. Huang",
-      "instructors": [
-        {
-          "name": "X. Huang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5812",
-      "section_number": "2",
-      "schedule_type": "RSC",
-      "instructor": "G. Vazquez Prokopec",
-      "instructors": [
-        {
-          "name": "G. Vazquez Prokopec",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 4,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Vazquez Prokopec",
-    "X. Huang"
+    "Gonzalo Vazquez Prokopec",
+    "Xiao Huang"
   ],
-  "scraped_at": "2026-06-17T23:10:29.843Z"
+  "scraped_at": "2026-06-18T02:57:02.093Z"
 }

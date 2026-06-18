@@ -5,40 +5,58 @@
   "catalog_number": "377",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "MQR",
   "requirements": [
-    "MQR"
+    "MQR",
+    "Intercultural Communication w.Cont.Comm(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Introduction to storage hierarchies, database models, consistency, reliability, and security issues. Query languages and their implementations, efficiency considerations, and compression and encoding techniques.",
-  "course_notes": "CS 253 or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Third-year-level course given in French. Intensive study of written French based on syntactic and lexical analysis of a variety of texts. Bi-weekly compositions with extensive revisions and concern for the process of writing in a foreign language.",
+  "course_notes": "FREN 310W Writing Skills (Prof. Giguere / TTh 1:00-2:15pm). Content: Third-year-level course given in French. Intensive study of written French based on syntactic and stylistic analysis of a variety of texts. Bi-weekly compositions with extensive revisions and concern for the process of writing in a foreign language. Required Textbooks, Articles, and Resources 1. Siskin et al. Tâches d'encre (5th Edition) EBOOK ISBN: 9780357658901 OR Tâches d'encre HARDCOPY ISBN: 9780357658888. 2. Bescherelle (recommended / FRENCH Edition). Course Requisites: FREN 203 or by placement exam.",
   "requisites": "CS 253 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "633",
       "crn": "3642",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "N. El-Sayed",
+      "instructor": "Noelle Giguere",
       "instructors": [
         {
-          "name": "N. El-Sayed",
-          "email": null
+          "name": "Noelle Giguere",
+          "email": "noelle.c.giguere@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff Library 874",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 12,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,96 +72,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "634",
       "crn": "3685",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "A. Zufle",
+      "instructor": "Eric Bulakites",
       "instructors": [
         {
-          "name": "A. Zufle",
-          "email": null
+          "name": "Eric Bulakites",
+          "email": "eric.raymond.bulakites@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 5:30-6:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1730",
-            "end": "1845"
-          },
-          {
-            "day": "Wed",
-            "start": "1730",
-            "end": "1845"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3642",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "N. El-Sayed",
-      "instructors": [
-        {
-          "name": "N. El-Sayed",
-          "email": null
-        }
+      "location": "Woodruff Library 874",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3685",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "A. Zufle",
-      "instructors": [
-        {
-          "name": "A. Zufle",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
+      "enrollment_capacity": 12,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 5:30-6:45p",
@@ -159,22 +128,26 @@
             "end": "1845"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 2,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Zufle",
-    "N. El-Sayed"
+    "Eric Bulakites",
+    "Noelle Giguere"
   ],
-  "scraped_at": "2026-06-17T23:01:53.992Z"
+  "scraped_at": "2026-06-18T02:16:08.227Z"
 }

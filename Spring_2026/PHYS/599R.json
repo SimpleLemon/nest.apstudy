@@ -5,333 +5,580 @@
   "catalog_number": "599R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This class provides an overview of the foundational principles of state and local taxation in the United States. The course does not concentrate on the laws of any particular state nor is any prior course in taxation required. The course focuses on the economic, administrative, political, and constitutional and federal law constraints on states' and localities' authority to impose taxes, including limits arising under the U.S. Constitution and principles of federal preemption. The course also examines how state and local governments balance revenue needs with the goal of attracting jobs and investment in developing sound tax policy. Instruction is grounded in case studies, many drawn from the Professors' experience representing some of the world's largest companies. Subject to performance and availability, select students may have the opportunity to apply for an internship at Eversheds Sutherland (US) LLP.",
+  "course_notes": "Final Assessment: Self-Scheduled Exam",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "1902",
       "crn": "1956",
       "section_number": "1",
       "schedule_type": "THE",
-      "instructor": "H. Harutyunyan",
+      "instructor": "Maria Todorova",
       "instructors": [
         {
-          "name": "H. Harutyunyan",
-          "email": null
+          "name": "Maria Todorova",
+          "email": "maria.milkova.todorova@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Eric Tresh",
+          "email": "eric.steven.tresh@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "20",
+      "enrollment_capacity": 50,
+      "seats_available": 29,
+      "waitlist_total": 0,
+      "waitlist_capacity": 5,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "1903",
       "crn": "1766",
       "section_number": "2",
       "schedule_type": "THE",
-      "instructor": "J. Burton",
+      "instructor": "Helen Ingebritsen",
       "instructors": [
         {
-          "name": "J. Burton",
-          "email": null
+          "name": "Helen Ingebritsen",
+          "email": "helen.ingebritsen@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Adena Brumer",
+          "email": "adena.brumer@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "20",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": 1,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "1904",
       "crn": "1770",
       "section_number": "3",
       "schedule_type": "THE",
-      "instructor": "J. Rieser",
+      "instructor": "Helen Ingebritsen",
       "instructors": [
         {
-          "name": "J. Rieser",
-          "email": null
+          "name": "Helen Ingebritsen",
+          "email": "helen.ingebritsen@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Adena Brumer",
+          "email": "adena.brumer@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "20",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": 3,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "1905",
       "crn": "1772",
       "section_number": "4",
       "schedule_type": "THE",
-      "instructor": "K. Warncke",
+      "instructor": "Julie Ivey Still",
       "instructors": [
         {
-          "name": "K. Warncke",
-          "email": null
+          "name": "Julie Ivey Still",
+          "email": "julie.ivey.still@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "20",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "1906",
       "crn": "1774",
       "section_number": "5",
       "schedule_type": "THE",
-      "instructor": "E. Weeks",
+      "instructor": "Franklin Lebo",
       "instructors": [
         {
-          "name": "E. Weeks",
-          "email": null
+          "name": "Franklin Lebo",
+          "email": "franklin.lebo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "20",
+      "enrollment_capacity": 30,
+      "seats_available": 3,
+      "waitlist_total": 0,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "1907",
       "crn": "1776",
       "section_number": "6",
       "schedule_type": "THE",
-      "instructor": "D. Weissman",
+      "instructor": "Franklin Lebo",
       "instructors": [
         {
-          "name": "D. Weissman",
-          "email": null
+          "name": "Franklin Lebo",
+          "email": "franklin.lebo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "20",
+      "enrollment_capacity": 80,
+      "seats_available": 72,
+      "waitlist_total": 0,
+      "waitlist_capacity": 10,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "1908",
       "crn": "1778",
       "section_number": "7",
       "schedule_type": "THE",
-      "instructor": "L. Santos",
+      "instructor": "Jason Yustein",
       "instructors": [
         {
-          "name": "L. Santos",
-          "email": null
+          "name": "Jason Yustein",
+          "email": "jason.yustein@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Cathy Quinones",
+          "email": "cquinon@emory.edu",
+          "role": "Teaching Assistant"
+        },
+        {
+          "name": "Shelby A Smith",
+          "email": "shelby.smith@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "20",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "1909",
       "crn": "1780",
       "section_number": "8",
       "schedule_type": "THE",
-      "instructor": "M. Kim",
+      "instructor": "Shannon Stevenson",
       "instructors": [
         {
-          "name": "M. Kim",
-          "email": null
+          "name": "Shannon Stevenson",
+          "email": "shannon.stevenson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1.5",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "20",
+      "enrollment_capacity": 80,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-10-14"
       }
     },
     {
+      "atlas_key": "1910",
       "crn": "1964",
       "section_number": "9",
       "schedule_type": "THE",
-      "instructor": "K. Davis",
+      "instructor": "Shannon Stevenson",
       "instructors": [
         {
-          "name": "K. Davis",
-          "email": null
+          "name": "Shannon Stevenson",
+          "email": "shannon.stevenson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "20",
+      "enrollment_capacity": 80,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-10-19",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1911",
       "crn": "1957",
       "section_number": "10",
       "schedule_type": "THE",
-      "instructor": "C. Roth",
+      "instructor": "Weihua Zhang",
       "instructors": [
         {
-          "name": "C. Roth",
-          "email": null
+          "name": "Weihua Zhang",
+          "email": "wzhang3@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1.5",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "20",
+      "enrollment_capacity": 80,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-10-14"
       }
     },
     {
+      "atlas_key": "1912",
       "crn": "1756",
       "section_number": "11",
       "schedule_type": "THE",
-      "instructor": "T. Can",
+      "instructor": "Weihua Zhang",
       "instructors": [
         {
-          "name": "T. Can",
-          "email": null
+          "name": "Weihua Zhang",
+          "email": "wzhang3@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "20",
+      "enrollment_capacity": 80,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-10-19",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1913",
       "crn": "1958",
       "section_number": "12",
       "schedule_type": "THE",
-      "instructor": "W. Benalcazar",
+      "instructor": "Jeannie Cimiotti",
       "instructors": [
         {
-          "name": "W. Benalcazar",
-          "email": null
+          "name": "Jeannie Cimiotti",
+          "email": "jeannie.p.cimiotti@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "20",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1914",
       "crn": "1758",
       "section_number": "13",
       "schedule_type": "THE",
-      "instructor": "J. Lin",
+      "instructor": "Jeannie Cimiotti",
       "instructors": [
         {
-          "name": "J. Lin",
-          "email": null
+          "name": "Jeannie Cimiotti",
+          "email": "jeannie.p.cimiotti@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "20",
+      "enrollment_capacity": 10,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1915",
       "crn": "1959",
       "section_number": "14",
       "schedule_type": "THE",
@@ -339,23 +586,40 @@
       "instructors": [
         {
           "name": "S. Boettcher",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "20",
+      "enrollment_capacity": 200,
+      "seats_available": 104,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1916",
       "crn": "1760",
       "section_number": "15",
       "schedule_type": "THE",
@@ -363,23 +627,40 @@
       "instructors": [
         {
           "name": "D. Sussman",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "20",
+      "enrollment_capacity": 200,
+      "seats_available": 104,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1917",
       "crn": "1960",
       "section_number": "16",
       "schedule_type": "THE",
@@ -387,23 +668,40 @@
       "instructors": [
         {
           "name": "I. Nemenman",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "20",
+      "enrollment_capacity": 30,
+      "seats_available": 27,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1918",
       "crn": "1762",
       "section_number": "17",
       "schedule_type": "THE",
@@ -411,71 +709,126 @@
       "instructors": [
         {
           "name": "S. Urazhdin",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "20",
+      "enrollment_capacity": 200,
+      "seats_available": 193,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1919",
       "crn": "1962",
       "section_number": "18",
       "schedule_type": "THE",
-      "instructor": "A. Srivastava",
+      "instructor": "Kristy Martyn",
       "instructors": [
         {
-          "name": "A. Srivastava",
-          "email": null
+          "name": "Kristy Martyn",
+          "email": "kristy.k.martyn@emory.edu",
+          "role": "Clinical Coordinator"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Nursing School - 124",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "20",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1920",
       "crn": "1764",
       "section_number": "19",
       "schedule_type": "THE",
-      "instructor": "S. Shekhar",
+      "instructor": "Rebecca A Gary",
       "instructors": [
         {
-          "name": "S. Shekhar",
-          "email": null
+          "name": "Rebecca A Gary",
+          "email": "ragary@emory.edu",
+          "role": "Clinical Coordinator"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Nursing School - 124",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "20",
+      "enrollment_capacity": 15,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1921",
       "crn": "1768",
       "section_number": "20",
       "schedule_type": "THE",
@@ -483,534 +836,69 @@
       "instructors": [
         {
           "name": "G. Berman",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "20",
+      "enrollment_capacity": 999,
+      "seats_available": 991,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "1956",
-      "section_number": "1",
-      "schedule_type": "THE",
-      "instructor": "H. Harutyunyan",
-      "instructors": [
-        {
-          "name": "H. Harutyunyan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1766",
-      "section_number": "2",
-      "schedule_type": "THE",
-      "instructor": "J. Burton",
-      "instructors": [
-        {
-          "name": "J. Burton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1770",
-      "section_number": "3",
-      "schedule_type": "THE",
-      "instructor": "J. Rieser",
-      "instructors": [
-        {
-          "name": "J. Rieser",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1772",
-      "section_number": "4",
-      "schedule_type": "THE",
-      "instructor": "K. Warncke",
-      "instructors": [
-        {
-          "name": "K. Warncke",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1774",
-      "section_number": "5",
-      "schedule_type": "THE",
-      "instructor": "E. Weeks",
-      "instructors": [
-        {
-          "name": "E. Weeks",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1776",
-      "section_number": "6",
-      "schedule_type": "THE",
-      "instructor": "D. Weissman",
-      "instructors": [
-        {
-          "name": "D. Weissman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1778",
-      "section_number": "7",
-      "schedule_type": "THE",
-      "instructor": "L. Santos",
-      "instructors": [
-        {
-          "name": "L. Santos",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1780",
-      "section_number": "8",
-      "schedule_type": "THE",
-      "instructor": "M. Kim",
-      "instructors": [
-        {
-          "name": "M. Kim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1964",
-      "section_number": "9",
-      "schedule_type": "THE",
-      "instructor": "K. Davis",
-      "instructors": [
-        {
-          "name": "K. Davis",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1957",
-      "section_number": "10",
-      "schedule_type": "THE",
-      "instructor": "C. Roth",
-      "instructors": [
-        {
-          "name": "C. Roth",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1756",
-      "section_number": "11",
-      "schedule_type": "THE",
-      "instructor": "T. Can",
-      "instructors": [
-        {
-          "name": "T. Can",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1958",
-      "section_number": "12",
-      "schedule_type": "THE",
-      "instructor": "W. Benalcazar",
-      "instructors": [
-        {
-          "name": "W. Benalcazar",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1758",
-      "section_number": "13",
-      "schedule_type": "THE",
-      "instructor": "J. Lin",
-      "instructors": [
-        {
-          "name": "J. Lin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1959",
-      "section_number": "14",
-      "schedule_type": "THE",
-      "instructor": "S. Boettcher",
-      "instructors": [
-        {
-          "name": "S. Boettcher",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1760",
-      "section_number": "15",
-      "schedule_type": "THE",
-      "instructor": "D. Sussman",
-      "instructors": [
-        {
-          "name": "D. Sussman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1960",
-      "section_number": "16",
-      "schedule_type": "THE",
-      "instructor": "I. Nemenman",
-      "instructors": [
-        {
-          "name": "I. Nemenman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1762",
-      "section_number": "17",
-      "schedule_type": "THE",
-      "instructor": "S. Urazhdin",
-      "instructors": [
-        {
-          "name": "S. Urazhdin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1962",
-      "section_number": "18",
-      "schedule_type": "THE",
-      "instructor": "A. Srivastava",
-      "instructors": [
-        {
-          "name": "A. Srivastava",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1764",
-      "section_number": "19",
-      "schedule_type": "THE",
-      "instructor": "S. Shekhar",
-      "instructors": [
-        {
-          "name": "S. Shekhar",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1768",
-      "section_number": "20",
-      "schedule_type": "THE",
-      "instructor": "G. Berman",
-      "instructors": [
-        {
-          "name": "G. Berman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "20",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 40,
+    "total_sections": 20,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 40,
-    "open": 40,
-    "closed": 0,
+    "other": 20,
+    "open": 15,
+    "closed": 3,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Srivastava",
-    "C. Roth",
+    "Adena Brumer",
+    "Cathy Quinones",
     "D. Sussman",
-    "D. Weissman",
-    "E. Weeks",
+    "Eric Tresh",
+    "Franklin Lebo",
     "G. Berman",
-    "H. Harutyunyan",
+    "Helen Ingebritsen",
     "I. Nemenman",
-    "J. Burton",
-    "J. Lin",
-    "J. Rieser",
-    "K. Davis",
-    "K. Warncke",
-    "L. Santos",
-    "M. Kim",
+    "Jason Yustein",
+    "Jeannie Cimiotti",
+    "Julie Ivey Still",
+    "Kristy Martyn",
+    "Maria Todorova",
+    "Rebecca A Gary",
     "S. Boettcher",
-    "S. Shekhar",
     "S. Urazhdin",
-    "T. Can",
-    "W. Benalcazar"
+    "Shannon Stevenson",
+    "Shelby A Smith",
+    "Weihua Zhang"
   ],
-  "scraped_at": "2026-06-17T23:06:11.172Z"
+  "scraped_at": "2026-06-18T02:39:58.706Z"
 }

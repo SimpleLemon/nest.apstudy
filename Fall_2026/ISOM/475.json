@@ -5,13 +5,13 @@
   "catalog_number": "475",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Data Visualization will introduce students to the techniques and tools used to create effective visualizations that clearly and efficiently communicate relationships within data. The field of data visualization combines the art of graphic design with the science of data analytics. Students will learn how to perform exploratory analysis through visualization, how to create professional looking visualizations for use in business reports and presentations, and how to design interactive visualizations and dashboards. The course will cover the common quantitative messages users attempt to understand or communicate from a set of data and the associated visualizations used to help communicate each message. These include time series, rankings, proportions,deviations, frequencies and distributions, correlations, categorical comparisons, and geo-spatial plots. Students will analyze real data sets and utilize Tableau and other tools to design and prototype their visualizations.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "3935",
       "crn": "3798",
       "section_number": "1101",
       "schedule_type": "LEC",
-      "instructor": "A. Bharadwaj",
+      "instructor": "Anandhi Bharadwaj",
       "instructors": [
         {
-          "name": "A. Bharadwaj",
-          "email": null
+          "name": "Anandhi Bharadwaj",
+          "email": "a.bharadwaj@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 331",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 51,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -52,26 +65,43 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3936",
       "crn": "3799",
       "section_number": "1142",
       "schedule_type": "LEC",
-      "instructor": "P. Parasurama",
+      "instructor": "Prasanna Parasurama",
       "instructors": [
         {
-          "name": "P. Parasurama",
-          "email": null
+          "name": "Prasanna Parasurama",
+          "email": "pparasurama@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "2",
+      "enrollment_capacity": 9,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6:30-9:30p",
@@ -82,87 +112,26 @@
             "end": "2130"
           }
         ]
-      }
-    },
-    {
-      "crn": "3798",
-      "section_number": "1101",
-      "schedule_type": "LEC",
-      "instructor": "A. Bharadwaj",
-      "instructors": [
-        {
-          "name": "A. Bharadwaj",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3799",
-      "section_number": "1142",
-      "schedule_type": "LEC",
-      "instructor": "P. Parasurama",
-      "instructors": [
-        {
-          "name": "P. Parasurama",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Bharadwaj",
-    "P. Parasurama"
+    "Anandhi Bharadwaj",
+    "Prasanna Parasurama"
   ],
-  "scraped_at": "2026-06-17T23:11:31.489Z"
+  "scraped_at": "2026-06-18T03:03:26.830Z"
 }

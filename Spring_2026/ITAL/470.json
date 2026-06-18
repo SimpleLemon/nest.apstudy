@@ -5,40 +5,53 @@
   "catalog_number": "470",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "IC",
   "requirements": [
     "IC"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "In Italian. Intensive study of a single author, genre, literary movement, or period. Topic to be announced in advance. May be repeated for credit when topic varies. Prerequisite: Italian 302 or permission of program director.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "An introduction to the theory and practice of chaplaincy in various locations.",
+  "course_notes": "(ONLINE: synchronous live sessions Mondays 1:00-3:00pm; remaining contact time fulfilled via asynchronous online engagement)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3746",
       "crn": "2858",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Castaldo",
+      "instructor": "Danielle Tumminio Hansen",
       "instructors": [
         {
-          "name": "A. Castaldo",
-          "email": null
+          "name": "Danielle Tumminio Hansen",
+          "email": "danielle.elizabeth.tumminio.hansen@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,56 +67,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2858",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Castaldo",
-      "instructors": [
-        {
-          "name": "A. Castaldo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Castaldo"
+    "Danielle Tumminio Hansen"
   ],
-  "scraped_at": "2026-06-17T23:03:31.575Z"
+  "scraped_at": "2026-06-18T02:27:29.788Z"
 }

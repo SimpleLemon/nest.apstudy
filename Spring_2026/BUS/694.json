@@ -5,321 +5,296 @@
   "catalog_number": "694",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "1,2,3,4",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Credit, one to four hours per semester. Prerequisite: permission of instructor.",
+  "course_notes": "THIS COURSE DOES NOT COUNT FOR THE BIOLOGY MAJOR. Directed study with a Biology faculty member. Faculty member and student will determine the parameters of the directed study. Permission of instructor is required. Once permission of instructor is obtained, contact Tonya Woolcock at tdavis6@emory.edu to request a permission number and add the course to your schedule before add/drop/swap ends for the semester.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-02",
-    "end": "2026-01-11"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "468",
       "crn": "6221",
       "section_number": "3201",
       "schedule_type": "ABR",
-      "instructor": "H. Ruskin",
+      "instructor": "Skye Comstra",
       "instructors": [
         {
-          "name": "H. Ruskin",
-          "email": null
+          "name": "Skye Comstra",
+          "email": "skye.comstra@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "469",
       "crn": "6222",
       "section_number": "3202",
       "schedule_type": "ABR",
-      "instructor": "H. Ruskin",
+      "instructor": "Jacobus De Roode",
       "instructors": [
         {
-          "name": "H. Ruskin",
-          "email": null
+          "name": "Jacobus De Roode",
+          "email": "jderood@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 991,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "467",
       "crn": "6223",
       "section_number": "3203",
       "schedule_type": "ABR",
-      "instructor": "H. Ruskin",
+      "instructor": "Megan F. Cole",
       "instructors": [
         {
-          "name": "H. Ruskin",
-          "email": null
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "464",
       "crn": "6224",
       "section_number": "3204",
       "schedule_type": "ABR",
-      "instructor": "H. Ruskin",
+      "instructor": "Eladio Abreu",
       "instructors": [
         {
-          "name": "H. Ruskin",
-          "email": null
+          "name": "Eladio Abreu",
+          "email": "eladio.b.abreu@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "465",
       "crn": "6225",
       "section_number": "3205",
       "schedule_type": "ABR",
-      "instructor": "H. Ruskin",
+      "instructor": "Josephine Bou Dagher",
       "instructors": [
         {
-          "name": "H. Ruskin",
-          "email": null
+          "name": "Josephine Bou Dagher",
+          "email": "josephine.bou.dagher@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 997,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "466",
       "crn": "6226",
       "section_number": "3206",
       "schedule_type": "ABR",
-      "instructor": "H. Ruskin",
+      "instructor": "Patrick William Cafferty",
       "instructors": [
         {
-          "name": "H. Ruskin",
-          "email": null
+          "name": "Patrick William Cafferty",
+          "email": "patrick.w.cafferty@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6221",
-      "section_number": "3201",
-      "schedule_type": "ABR",
-      "instructor": "H. Ruskin",
-      "instructors": [
-        {
-          "name": "H. Ruskin",
-          "email": null
-        }
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6222",
-      "section_number": "3202",
-      "schedule_type": "ABR",
-      "instructor": "H. Ruskin",
-      "instructors": [
-        {
-          "name": "H. Ruskin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6223",
-      "section_number": "3203",
-      "schedule_type": "ABR",
-      "instructor": "H. Ruskin",
-      "instructors": [
-        {
-          "name": "H. Ruskin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6224",
-      "section_number": "3204",
-      "schedule_type": "ABR",
-      "instructor": "H. Ruskin",
-      "instructors": [
-        {
-          "name": "H. Ruskin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6225",
-      "section_number": "3205",
-      "schedule_type": "ABR",
-      "instructor": "H. Ruskin",
-      "instructors": [
-        {
-          "name": "H. Ruskin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6226",
-      "section_number": "3206",
-      "schedule_type": "ABR",
-      "instructor": "H. Ruskin",
-      "instructors": [
-        {
-          "name": "H. Ruskin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
+    "total_sections": 6,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 12,
+    "other": 6,
     "open": 6,
-    "closed": 6,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "H. Ruskin"
+    "Eladio Abreu",
+    "Jacobus De Roode",
+    "Josephine Bou Dagher",
+    "Megan F. Cole",
+    "Patrick William Cafferty",
+    "Skye Comstra"
   ],
-  "scraped_at": "2026-06-17T23:01:34.291Z"
+  "scraped_at": "2026-06-18T02:12:20.936Z"
 }

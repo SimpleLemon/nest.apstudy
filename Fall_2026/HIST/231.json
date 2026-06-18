@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "HA",
   "requirements": [
-    "HA"
+    "HA",
+    "Humanities and Arts(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Considers the development of American society from tentative beginnings to Reconstruction. Special emphasis is given to certain critical periods including colonialism, the American Revolution, and the Civil War.",
-  "course_notes": null,
+  "course_notes": "(Same as AMST 285 2) (How did the society we know as \"America\" emerge? Where did it come from? Why did it evolve in the way it did? What were the key elements of its development? Using readings in primary and secondary sources (including movies), and organized around both lectures and discussion, History 231 explores these issues from the originating years of American History through Reconstruction. Focusing on central strands of social, cultural, and political history, the course rests on two guiding assumptions: that an informed awareness of the present begins with a responsible and sophisticated understanding of the past; and that learning about early American history provides important insight into the American story as a whole.) (Grading is based on two take-home examinations and participation in weekly discussions.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "714",
       "crn": "2528",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Prude",
+      "instructor": "Jonathan Prude",
       "instructors": [
         {
-          "name": "J. Prude",
-          "email": null
+          "name": "Jonathan Prude",
+          "email": "histjp@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Math & Science Center - N306",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 19,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 5:30-6:45p",
@@ -54,56 +72,25 @@
             "end": "1845"
           }
         ]
-      }
-    },
-    {
-      "crn": "2528",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Prude",
-      "instructors": [
-        {
-          "name": "J. Prude",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 5:30-6:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1730",
-            "end": "1845"
-          },
-          {
-            "day": "Thu",
-            "start": "1730",
-            "end": "1845"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Prude"
+    "Jonathan Prude"
   ],
-  "scraped_at": "2026-06-17T23:11:08.774Z"
+  "scraped_at": "2026-06-18T03:00:28.231Z"
 }

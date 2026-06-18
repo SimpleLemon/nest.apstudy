@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course employs multiple perspectives, including organizational theory, business, and economics, to examine the structure, financing, and performance of the US health care system and its ability to deliver health. Mental health, long-term care, and public health sectors are explored in depth.",
-  "course_notes": null,
+  "course_notes": "This course provides an overview of key parts of the health care delivery system and their ability to deliver health. We will focus on the role of insurance, the government-sponsored Medicare and Medicaid programs, and the hospital and mental health sectors. We will analyze the organization of and financing mechanisms for these sectors and the incentives faced by health care providers in terms of the volume and type of services they provide. We will also examine consumer access barriers, particularly those of disadvantaged groups, to seeing care. We will identify how each sector attempts to measure its impact on individual's health, whether these measures are meaningful and what they indicate about sector performance. Practical examples will be explored throughout the semester, such as how does the Medicaid program deliver mental health services to extremely vulnerable and marginalized populations. We will also have lectures provided by experts in the field, such as the Director of Georgia Families, Amerigroup Inc. and physician practice managers.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "3726",
       "crn": "2629",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "V. Phillips",
+      "instructor": "Victoria L Phillips",
       "instructors": [
         {
-          "name": "V. Phillips",
-          "email": null
+          "name": "Victoria L Phillips",
+          "email": "victoria.phillips@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 100C",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 42,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-4:10p",
@@ -49,51 +64,25 @@
             "end": "1610"
           }
         ]
-      }
-    },
-    {
-      "crn": "2629",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "V. Phillips",
-      "instructors": [
-        {
-          "name": "V. Phillips",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-4:10p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1610"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "V. Phillips"
+    "Victoria L Phillips"
   ],
-  "scraped_at": "2026-06-17T23:11:11.999Z"
+  "scraped_at": "2026-06-18T03:01:54.415Z"
 }

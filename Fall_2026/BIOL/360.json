@@ -10,10 +10,10 @@
   "requirements": [
     "SNT"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Includes electrochemical and biophysical mechanisms for neuronal signaling, synaptic transmission, and neural bases of behavior and perception. GER Note: This course and BIOL360L satisfies half of SNTL requirement. This course w/o BIOL360L will award half of SNT only.",
-  "course_notes": "[(BIOL 142 and BIOL 142L) or BIOL_OX 142] and (CHEM 142 or CHEM_OX 142 or CHEM 202 or CHEM_OX 202 or CHEM 202Z) or equivalent transfer credit as prerequisite..",
+  "course_notes": "(Same as NBB 301 1) (This course is SHARED by the Biology Department and the NBB Program and fulfills the Column B requirement (or elective credit) for the Biology major. This course will provide students with an introduction to cellular and integrative neurobiology. Topics include the electrochemical and biophysical mechanisms for neuronal signaling and synaptic transmission, and the neural bases of behavior and perception. There is an optional 2-credit hour lab (Biology 360L/NBB 301L) associated with the course.)",
   "requisites": "[(BIOL 142 and BIOL 142L) or BIOL_OX 142] and (CHEM 142 or CHEM_OX 142 or CHEM 202 or CHEM_OX 202 or CHEM 202Z) or equivalent transfer credit as prerequisite..",
   "cross_listed": "NBB 301",
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "446",
       "crn": "1671",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Jaeger",
+      "instructor": "Dieter Jaeger",
       "instructors": [
         {
-          "name": "D. Jaeger",
-          "email": null
+          "name": "Dieter Jaeger",
+          "email": "djaeger@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,26 +69,45 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "447",
       "crn": "1776",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "R. Liu",
+      "instructor": "Robert C Liu",
       "instructors": [
         {
-          "name": "R. Liu",
-          "email": null
+          "name": "Robert C Liu",
+          "email": "robert.liu@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -89,92 +123,26 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "1671",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Jaeger",
-      "instructors": [
-        {
-          "name": "D. Jaeger",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1776",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "R. Liu",
-      "instructors": [
-        {
-          "name": "R. Liu",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Jaeger",
-    "R. Liu"
+    "Dieter Jaeger",
+    "Robert C Liu"
   ],
-  "scraped_at": "2026-06-17T23:09:24.579Z"
+  "scraped_at": "2026-06-18T02:48:31.758Z"
 }

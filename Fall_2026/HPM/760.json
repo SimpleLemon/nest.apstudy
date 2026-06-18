@@ -5,13 +5,13 @@
   "catalog_number": "760",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "4",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The goal of this course is for students to learn a set of statistical tools and modeling approaches that are useful for conducting high quality empirical research in applied health services and health policy research. We will focus on extensions to linear models and nonlinear models, analysis of binary/categorical/count data, independent variable and model selection, and understanding and interpreting different types of treatment effects. This course will combine lecture-based instruction with hands-on data exercises and replication to facilitate understanding.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "2345",
       "crn": "4443",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Dieci",
+      "instructor": "Maria Dieci",
       "instructors": [
         {
-          "name": "M. Dieci",
-          "email": null
+          "name": "Maria Dieci",
+          "email": "maria.dieci@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Grace Crum Rollins 649",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:50p",
@@ -52,56 +65,25 @@
             "end": "1450"
           }
         ]
-      }
-    },
-    {
-      "crn": "4443",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Dieci",
-      "instructors": [
-        {
-          "name": "M. Dieci",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1450"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1450"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Dieci"
+    "Maria Dieci"
   ],
-  "scraped_at": "2026-06-17T23:11:15.226Z"
+  "scraped_at": "2026-06-18T03:02:13.578Z"
 }

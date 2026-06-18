@@ -63,8 +63,12 @@
 
   function formatSeats(section) {
     const seats = section?.seats_available;
+    const capacity = section?.enrollment_capacity;
     if (seats === null || typeof seats === "undefined" || seats === "") {
       return "Seats unknown";
+    }
+    if (capacity !== null && typeof capacity !== "undefined" && capacity !== "") {
+      return `${seats} of ${capacity} seats`;
     }
     return `${seats} ${Number(seats) === 1 ? "seat" : "seats"}`;
   }

@@ -8,37 +8,57 @@
   "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Intercultural Communication(*)",
+    "Continuing Comm.& Writing with Race & Ethnicity(*)",
+    "Quantitative Reasoning(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "A course training students to be peer health partners for the HLTH 100 course. Strong focus on health education and working as a peer partner.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Foundational course for the major and the minor that introduces students to the field of Hispanic linguistics, including phonetics, phonology, morphology, pragmatics, and linguistic variation in the Spanish-speaking world.",
+  "course_notes": "(Same as SPAN 304 2) (CONTENT: In June 2020 the Supreme Court ruled that the section of the Civil Rights Act of 1964 that outlaws employment discrimination on the basis of sex must be interpreted to also protect gay and transgender people. The whole basis for this ruling was the analysis of the specific language used in the Civil Rights Act, however, how do words convey meaning? How are words' meaning established and by whom? How does language portray real world situations? This course, taught in Spanish, explores answers to these questions by presenting students with fundamental concepts in Linguistics through a comparison between Spanish and English at different levels: the sounds of languages (phonetics and phonology), the structure of words (morphology), the structure of sentence (syntax) and the study of meaning (semantics and pragmatics). The course also incorporates an introduction to linguistic variation in the Spanish-speaking world, including the Spanish spoken in the US, and how languages evolve and change with time (historical linguistics). (EVALUATION is based on active class participation, exams (two midterms) and homework assignments.) (Spanish/Linguistics 304 is a core course of the Spanish & Linguistics Joint Major and a foundational course for the Spanish Major and Minor. If SPAN 304 is at full capacity, please consider enrolling in LING 304, which will satisfy the same major requirements, as well as the IC requirement.) (PREREQUISITE: SPAN 212 or an Official Spanish Placement into our Foundational Course level (Span 300-318). Take the online Spanish Placement Exam at http://spanport.emory.edu/home/undergraduate/placement/index.html.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3346",
       "crn": "2887",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Jose Luis Boigues-Lopez",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Jose Luis Boigues-Lopez",
+          "email": "jboigue@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Few Bldg 129",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 5,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 11:30a-12:45p",
@@ -49,26 +69,43 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3347",
       "crn": "4322",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Timothy Lash",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Timothy Lash",
+          "email": "timothy.lee.lash@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 36,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 1-2:15p",
@@ -79,26 +116,47 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3348",
       "crn": "4324",
       "section_number": "3",
       "schedule_type": "DIS",
-      "instructor": "Team",
+      "instructor": "Lilika Kukiela",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Lilika Kukiela",
+          "email": "lilika.ioki.kukiela@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Johnson Hall 102",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
+      "requirements": [
+        "Continuing Comm.& Writing with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 20,
+      "seats_available": 8,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
       "is_cancelled": false,
       "schedule": {
         "display": "W 8:30-9:45a",
@@ -109,26 +167,47 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3349",
       "crn": "4328",
       "section_number": "4",
       "schedule_type": "DIS",
-      "instructor": "Team",
+      "instructor": "Jasminka Ninkovic",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Jasminka Ninkovic",
+          "email": "jninkov@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Seney Hall 322",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 25,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 10-11:15a",
@@ -139,26 +218,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3350",
       "crn": "4334",
       "section_number": "5",
       "schedule_type": "DIS",
-      "instructor": "Team",
+      "instructor": "Teresa Romano",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Teresa Romano",
+          "email": "teresa.romano@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Pierce Hall 209",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 25,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4-5:15p",
@@ -169,26 +269,45 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3351",
       "crn": "4336",
       "section_number": "6",
       "schedule_type": "DIS",
-      "instructor": "Team",
+      "instructor": "Abhishek Ananth",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Abhishek Ananth",
+          "email": "abhishek.ananth@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 220",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "7",
+      "enrollment_capacity": 20,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 11:30a-12:45p",
@@ -199,26 +318,45 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3352",
       "crn": "6157",
       "section_number": "7",
       "schedule_type": "DIS",
-      "instructor": "Team",
+      "instructor": "Sameena Mulla",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Sameena Mulla",
+          "email": "sameena.mulla@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 15,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 1-2:15p",
@@ -229,231 +367,31 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2887",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4322",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4324",
-      "section_number": "3",
-      "schedule_type": "DIS",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4328",
-      "section_number": "4",
-      "schedule_type": "DIS",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 10-11:15a",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4334",
-      "section_number": "5",
-      "schedule_type": "DIS",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 4-5:15p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4336",
-      "section_number": "6",
-      "schedule_type": "DIS",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "6157",
-      "section_number": "7",
-      "schedule_type": "DIS",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 1-2:15p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 14,
-    "lectures": 4,
+    "total_sections": 7,
+    "lectures": 2,
     "labs": 0,
-    "discussions": 10,
+    "discussions": 5,
     "other": 0,
-    "open": 10,
+    "open": 6,
     "closed": 0,
-    "waitlisted": 4
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "Team"
+    "Abhishek Ananth",
+    "Jasminka Ninkovic",
+    "Jose Luis Boigues-Lopez",
+    "Lilika Kukiela",
+    "Sameena Mulla",
+    "Teresa Romano",
+    "Timothy Lash"
   ],
-  "scraped_at": "2026-06-17T23:03:08.799Z"
+  "scraped_at": "2026-06-18T02:25:23.367Z"
 }

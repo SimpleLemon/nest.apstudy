@@ -10,8 +10,8 @@
   "requirements": [],
   "campus": null,
   "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "course_description": "",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,6 +20,7 @@
   },
   "sections": [
     {
+      "atlas_key": "4780",
       "crn": "3601",
       "section_number": "2195",
       "schedule_type": "LEC",
@@ -27,16 +28,25 @@
       "instructors": [
         {
           "name": "M. Cooley",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "5",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MTWTh 6-9:30p; SaSu 8:30a-3:30p; Sa 8:30a-3p; Su 8:30-11:30a",
@@ -82,9 +92,14 @@
             "end": "1130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-01-03",
+        "end": "2026-01-11"
       }
     },
     {
+      "atlas_key": "4781",
       "crn": "3602",
       "section_number": "2295",
       "schedule_type": "LEC",
@@ -92,16 +107,25 @@
       "instructors": [
         {
           "name": "M. Cooley",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "5",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MTWTh 6-9:30p; SaSu 8:30a-3:30p; Sa 8:30a-3p; Su 8:30-11:30a",
@@ -147,9 +171,14 @@
             "end": "1130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-01-03",
+        "end": "2026-01-11"
       }
     },
     {
+      "atlas_key": "4782",
       "crn": "3603",
       "section_number": "3295",
       "schedule_type": "LEC",
@@ -157,16 +186,25 @@
       "instructors": [
         {
           "name": "M. Cooley",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MTWTh 6-9:30p; SaSu 8:30a-3:30p; Sa 8:30a-3p; Su 8:30-11:30a",
@@ -212,9 +250,14 @@
             "end": "1130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-01-03",
+        "end": "2026-01-11"
       }
     },
     {
+      "atlas_key": "4779",
       "crn": "3600",
       "section_number": "4567",
       "schedule_type": "LEC",
@@ -222,16 +265,25 @@
       "instructors": [
         {
           "name": "M. Cooley",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -247,9 +299,14 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     },
     {
+      "atlas_key": "4783",
       "crn": "6358",
       "section_number": "6295",
       "schedule_type": "LEC",
@@ -257,16 +314,25 @@
       "instructors": [
         {
           "name": "M. Cooley",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Closed",
       "enrollment_count": "5",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MTWTh 6-9:30p; SaSu 8:30a-3:30p; Sa 8:30a-3p; Su 8:30-11:30a",
@@ -312,316 +378,25 @@
             "end": "1130"
           }
         ]
-      }
-    },
-    {
-      "crn": "3601",
-      "section_number": "2195",
-      "schedule_type": "LEC",
-      "instructor": "M. Cooley",
-      "instructors": [
-        {
-          "name": "M. Cooley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MTWTh 6-9:30p; SaSu 8:30a-3:30p; Sa 8:30a-3p; Su 8:30-11:30a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1800",
-            "end": "2130"
-          },
-          {
-            "day": "Tue",
-            "start": "1800",
-            "end": "2130"
-          },
-          {
-            "day": "Wed",
-            "start": "1800",
-            "end": "2130"
-          },
-          {
-            "day": "Thu",
-            "start": "1800",
-            "end": "2130"
-          },
-          {
-            "day": "Sat",
-            "start": "830",
-            "end": "1530"
-          },
-          {
-            "day": "Sun",
-            "start": "830",
-            "end": "1530"
-          },
-          {
-            "day": "Sat",
-            "start": "830",
-            "end": "1500"
-          },
-          {
-            "day": "Sun",
-            "start": "830",
-            "end": "1130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3602",
-      "section_number": "2295",
-      "schedule_type": "LEC",
-      "instructor": "M. Cooley",
-      "instructors": [
-        {
-          "name": "M. Cooley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MTWTh 6-9:30p; SaSu 8:30a-3:30p; Sa 8:30a-3p; Su 8:30-11:30a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1800",
-            "end": "2130"
-          },
-          {
-            "day": "Tue",
-            "start": "1800",
-            "end": "2130"
-          },
-          {
-            "day": "Wed",
-            "start": "1800",
-            "end": "2130"
-          },
-          {
-            "day": "Thu",
-            "start": "1800",
-            "end": "2130"
-          },
-          {
-            "day": "Sat",
-            "start": "830",
-            "end": "1530"
-          },
-          {
-            "day": "Sun",
-            "start": "830",
-            "end": "1530"
-          },
-          {
-            "day": "Sat",
-            "start": "830",
-            "end": "1500"
-          },
-          {
-            "day": "Sun",
-            "start": "830",
-            "end": "1130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3603",
-      "section_number": "3295",
-      "schedule_type": "LEC",
-      "instructor": "M. Cooley",
-      "instructors": [
-        {
-          "name": "M. Cooley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MTWTh 6-9:30p; SaSu 8:30a-3:30p; Sa 8:30a-3p; Su 8:30-11:30a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1800",
-            "end": "2130"
-          },
-          {
-            "day": "Tue",
-            "start": "1800",
-            "end": "2130"
-          },
-          {
-            "day": "Wed",
-            "start": "1800",
-            "end": "2130"
-          },
-          {
-            "day": "Thu",
-            "start": "1800",
-            "end": "2130"
-          },
-          {
-            "day": "Sat",
-            "start": "830",
-            "end": "1530"
-          },
-          {
-            "day": "Sun",
-            "start": "830",
-            "end": "1530"
-          },
-          {
-            "day": "Sat",
-            "start": "830",
-            "end": "1500"
-          },
-          {
-            "day": "Sun",
-            "start": "830",
-            "end": "1130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3600",
-      "section_number": "4567",
-      "schedule_type": "LEC",
-      "instructor": "M. Cooley",
-      "instructors": [
-        {
-          "name": "M. Cooley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "6358",
-      "section_number": "6295",
-      "schedule_type": "LEC",
-      "instructor": "M. Cooley",
-      "instructors": [
-        {
-          "name": "M. Cooley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MTWTh 6-9:30p; SaSu 8:30a-3:30p; Sa 8:30a-3p; Su 8:30-11:30a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1800",
-            "end": "2130"
-          },
-          {
-            "day": "Tue",
-            "start": "1800",
-            "end": "2130"
-          },
-          {
-            "day": "Wed",
-            "start": "1800",
-            "end": "2130"
-          },
-          {
-            "day": "Thu",
-            "start": "1800",
-            "end": "2130"
-          },
-          {
-            "day": "Sat",
-            "start": "830",
-            "end": "1530"
-          },
-          {
-            "day": "Sun",
-            "start": "830",
-            "end": "1530"
-          },
-          {
-            "day": "Sat",
-            "start": "830",
-            "end": "1500"
-          },
-          {
-            "day": "Sun",
-            "start": "830",
-            "end": "1130"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-01-03",
+        "end": "2026-01-11"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
-    "lectures": 10,
+    "total_sections": 5,
+    "lectures": 5,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 2,
-    "waitlisted": 4
+    "open": 2,
+    "closed": 1,
+    "waitlisted": 2
   },
   "instructors_unique": [
     "M. Cooley"
   ],
-  "scraped_at": "2026-06-17T23:04:00.911Z"
+  "scraped_at": "2026-06-18T02:31:06.824Z"
 }

@@ -5,13 +5,13 @@
   "catalog_number": "575",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Data Visualization will introduce students to the techniques and tools used to create effective visualizations that clearly and efficiently communicate relationships within data. Students will learn how to perform exploratory analysis through visualization, how to create professional looking visualizations for use in business reports and presentations, and how to design interactive visualizations and dashboards. Students will primarily utilize Tableau, but will be exposed other tools including Power BI and R. No prior coding experience is necessary.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "3939",
       "crn": "3800",
       "section_number": "2142",
       "schedule_type": "LEC",
-      "instructor": "P. Parasurama",
+      "instructor": "Prasanna Parasurama",
       "instructors": [
         {
-          "name": "P. Parasurama",
-          "email": null
+          "name": "Prasanna Parasurama",
+          "email": "pparasurama@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 44,
+      "seats_available": 44,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6:30-9:30p",
@@ -47,26 +60,43 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3940",
       "crn": "3801",
       "section_number": "3201",
       "schedule_type": "LEC",
-      "instructor": "A. Bharadwaj",
+      "instructor": "Anandhi Bharadwaj",
       "instructors": [
         {
-          "name": "A. Bharadwaj",
-          "email": null
+          "name": "Anandhi Bharadwaj",
+          "email": "a.bharadwaj@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 331",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 66,
+      "seats_available": 17,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -82,26 +112,43 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3941",
       "crn": "3802",
       "section_number": "3242",
       "schedule_type": "LEC",
-      "instructor": "P. Parasurama",
+      "instructor": "Prasanna Parasurama",
       "instructors": [
         {
-          "name": "P. Parasurama",
-          "email": null
+          "name": "Prasanna Parasurama",
+          "email": "pparasurama@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 11,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6:30-9:30p",
@@ -112,117 +159,26 @@
             "end": "2130"
           }
         ]
-      }
-    },
-    {
-      "crn": "3800",
-      "section_number": "2142",
-      "schedule_type": "LEC",
-      "instructor": "P. Parasurama",
-      "instructors": [
-        {
-          "name": "P. Parasurama",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3801",
-      "section_number": "3201",
-      "schedule_type": "LEC",
-      "instructor": "A. Bharadwaj",
-      "instructors": [
-        {
-          "name": "A. Bharadwaj",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3802",
-      "section_number": "3242",
-      "schedule_type": "LEC",
-      "instructor": "P. Parasurama",
-      "instructors": [
-        {
-          "name": "P. Parasurama",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Bharadwaj",
-    "P. Parasurama"
+    "Anandhi Bharadwaj",
+    "Prasanna Parasurama"
   ],
-  "scraped_at": "2026-06-17T23:11:31.494Z"
+  "scraped_at": "2026-06-18T03:03:26.834Z"
 }

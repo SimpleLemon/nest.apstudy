@@ -5,40 +5,55 @@
   "catalog_number": "490W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "CW",
   "requirements": [
     "CW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Selected topics in religious studies. Required for majors.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Various topics, such as theoretical, generic, or cultural studies of literature.",
+  "course_notes": "(Same as CPLT 751R 1, WGS 730 1, FREN 780 1, RLR 700 10, PHIL 789 2) The course will be based on readings of some of Derrida's earlier work (broadly speaking up to 1972), and attempt to come to as clear an understanding as possible of some basic Derridean terms and concepts (trace, writing, differance, deconstruction, iterability, metaphoricity, signature, quasi-transcendental...). We will also look in some detail at Derrida's polemical exchanges with Foucault, Lacan, and Searle.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1378",
       "crn": "3253",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "E. Gough",
+      "instructor": "Geoffrey Bennington",
       "instructors": [
         {
-          "name": "E. Gough",
-          "email": null
+          "name": "Geoffrey Bennington",
+          "email": "geoffrey.bennington@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 3,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1-3:45p",
@@ -49,51 +64,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3253",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "E. Gough",
-      "instructors": [
-        {
-          "name": "E. Gough",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-3:45p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Gough"
+    "Geoffrey Bennington"
   ],
-  "scraped_at": "2026-06-17T23:06:34.027Z"
+  "scraped_at": "2026-06-18T02:42:57.905Z"
 }

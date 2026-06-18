@@ -5,38 +5,53 @@
   "catalog_number": "547",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Seminar or lecture series on topics of anthropological interest at an intermediate level. Maybe repeated for credit when topic varies.",
+  "course_notes": "(Same as REL 270 1, HIST 296 1, LACS 270 1) This course satisfies the Religion major requirement:- Tradition-Christianity, Region. Throughout history, acts of crime have served as a revealing measure of the social and cultural values that bind communities together. In New Spain (colonial Mexico), a society fundamentally organized around the defense and propagation of the Catholic faith, religious offenses posed a profound challenge to the very ideological foundations that legitimized Spanish rule. Such transgressions not only threatened the moral order but also exposed the deep-seated social tensions that shaped daily life in colonial Mexico. This course examines colonial society through the lens of criminality by exploring major offenses prosecuted by the Mexican Inquisition between 1520 and 1820, along with the specific historical contexts in which these trials unfolded. Our objective is not only to understand the motivations behind inquisitorial repression, but also to unravel the complex social dynamics of the colony, particularly as they intersected with enduring divisions of race, class, and gender.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3061",
       "crn": "1592",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Freeman",
+      "instructor": "Javier Villa-Flores",
       "instructors": [
         {
-          "name": "M. Freeman",
-          "email": null
+          "name": "Javier Villa-Flores",
+          "email": "javier.villa-flores@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S107",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 4,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 8-8:50a",
@@ -47,51 +62,25 @@
             "end": "850"
           }
         ]
-      }
-    },
-    {
-      "crn": "1592",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Freeman",
-      "instructors": [
-        {
-          "name": "M. Freeman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 8-8:50a",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "800",
-            "end": "850"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Freeman"
+    "Javier Villa-Flores"
   ],
-  "scraped_at": "2026-06-17T23:02:13.536Z"
+  "scraped_at": "2026-06-18T02:18:13.752Z"
 }

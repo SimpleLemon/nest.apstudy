@@ -5,38 +5,51 @@
   "catalog_number": "454",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "Required for all first-year Master of Divinity students in the fall semester, this course seeks to ground the MDiv student experience by joining critical studies of theological education with reflection on the questions that motivate each of us-faculty and students-to take up this work. In the course of studying communities of theological education, we will learn how to create community together, and how to shape that community into one that supports shared vocational, spiritual, and intellectual growth. Part A of the course takes place during the week of and integrated with New Student Orientation. Part B (which must be taken in the same semester as Part A) takes place in the regular Fall session. It includes on campus meetings and attending chapel together in person for residential plan students and online meetings as well as participating in chapel via live streaming or recordings for hybrid plan students.",
+  "course_notes": "(ONLINE) (Prerequisite MDiv 500a 800; required for MDiv hybrid plan students who entered in Spring 2026 and Fall 2026)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-12",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4120",
       "crn": "4141",
       "section_number": "1",
       "schedule_type": "THE",
-      "instructor": "R. Chicas",
+      "instructor": "Joel Kemp",
       "instructors": [
         {
-          "name": "R. Chicas",
-          "email": null
+          "name": "Joel Kemp",
+          "email": "joel.bernard.kemp@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 100,
+      "seats_available": 93,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-5p",
@@ -47,51 +60,25 @@
             "end": "1700"
           }
         ]
-      }
-    },
-    {
-      "crn": "4141",
-      "section_number": "1",
-      "schedule_type": "THE",
-      "instructor": "R. Chicas",
-      "instructors": [
-        {
-          "name": "R. Chicas",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-5p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1700"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Chicas"
+    "Joel Kemp"
   ],
-  "scraped_at": "2026-06-17T23:04:23.800Z"
+  "scraped_at": "2026-06-18T02:34:22.351Z"
 }

@@ -13,7 +13,7 @@
   "campus": null,
   "campus_description": null,
   "course_description": "This course is open to chemistry majors who are currently engaged in an eligible internship experience or have completed an internship in the previous term. Course activities consist of assignments in which the student reflects on their internship, to maximize the benefits of the experience.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,6 +22,7 @@
   },
   "sections": [
     {
+      "atlas_key": "4811",
       "crn": "2980",
       "section_number": "1",
       "schedule_type": "PRA",
@@ -29,59 +30,48 @@
       "instructors": [
         {
           "name": "J. Kindt",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "2980",
-      "section_number": "1",
-      "schedule_type": "PRA",
-      "instructor": "J. Kindt",
-      "instructors": [
-        {
-          "name": "J. Kindt",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "J. Kindt"
   ],
-  "scraped_at": "2026-06-17T23:01:37.685Z"
+  "scraped_at": "2026-06-18T02:13:14.115Z"
 }

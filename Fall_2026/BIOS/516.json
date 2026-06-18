@@ -5,13 +5,13 @@
   "catalog_number": "516",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "1",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisites: BIOS 501 or permission of instructor. This is the overview course for the Bioinformatics, Imaging and Genetics (BIG) concentration in the PhD program of the Department of Biostatistics and Bioinformatics. It aims to introduce students to modern high-dimensional biomedical data, including data in bioinformatics and computational biology, biomedical imaging, and statistical genetics. This course will be co-taught by all BIG core faculty members, with each faculty member giving one or two lectures. The focus of the course will be on the data characteristics, opportunities and challenges for statisticians, as well as current developments and hot areas of the research fields of bioinformatics, biomedical imaging and statistical genetics.",
+  "course_notes": "Pre-requisite: BIOS 501 or instructor permission.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "3122",
       "crn": "3503",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Z. Qin",
+      "instructor": "Zhaohui Qin",
       "instructors": [
         {
-          "name": "Z. Qin",
-          "email": null
+          "name": "Zhaohui Qin",
+          "email": "zhaohui.qin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 3-4:50p",
@@ -47,51 +60,25 @@
             "end": "1650"
           }
         ]
-      }
-    },
-    {
-      "crn": "3503",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Z. Qin",
-      "instructors": [
-        {
-          "name": "Z. Qin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 3-4:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1500",
-            "end": "1650"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-10-20"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Z. Qin"
+    "Zhaohui Qin"
   ],
-  "scraped_at": "2026-06-17T23:09:27.867Z"
+  "scraped_at": "2026-06-18T02:49:02.134Z"
 }

@@ -5,40 +5,55 @@
   "catalog_number": "102",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "1,2,3,4",
   "requirement_designation": "IC",
   "requirements": [
     "IC"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Continuation of 101 - Introduction to spoken and written language. Oral practice emphasized through multimedia exercises and drills.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Arranged with individual graduate faculty members. Must be approved by the Director of Graduate Studies.",
+  "course_notes": "Arranged with individual graduate faculty members. Must be approved by the Director of Graduate Studies.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1381",
       "crn": "2824",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Z. Budenkova",
+      "instructor": "Emma Davenport",
       "instructors": [
         {
-          "name": "Z. Budenkova",
-          "email": null
+          "name": "Emma Davenport",
+          "email": "emma.davenport@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 99,
+      "seats_available": 98,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a; F 10-10:50a",
@@ -59,26 +74,45 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1382",
       "crn": "2851",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "V. Proskurina",
+      "instructor": "Michelle Wright",
       "instructors": [
         {
-          "name": "V. Proskurina",
-          "email": null
+          "name": "Michelle Wright",
+          "email": "michelle.maria.wright@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 99,
+      "seats_available": 98,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -94,26 +128,45 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1383",
       "crn": "2831",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "V. Proskurina",
+      "instructor": "Nathan Suhr-Sytsma",
       "instructors": [
         {
-          "name": "V. Proskurina",
-          "email": null
+          "name": "Nathan Suhr-Sytsma",
+          "email": "nathan.e.suhr-sytsma@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 99,
+      "seats_available": 98,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p; F 4-4:50p",
@@ -134,137 +187,27 @@
             "end": "1650"
           }
         ]
-      }
-    },
-    {
-      "crn": "2824",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Z. Budenkova",
-      "instructors": [
-        {
-          "name": "Z. Budenkova",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a; F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2851",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "V. Proskurina",
-      "instructors": [
-        {
-          "name": "V. Proskurina",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2831",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "V. Proskurina",
-      "instructors": [
-        {
-          "name": "V. Proskurina",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p; F 4-4:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Fri",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 2,
+    "open": 3,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "V. Proskurina",
-    "Z. Budenkova"
+    "Emma Davenport",
+    "Michelle Wright",
+    "Nathan Suhr-Sytsma"
   ],
-  "scraped_at": "2026-06-17T23:06:40.465Z"
+  "scraped_at": "2026-06-18T02:43:10.613Z"
 }

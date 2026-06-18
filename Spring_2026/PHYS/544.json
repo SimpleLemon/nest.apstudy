@@ -5,38 +5,51 @@
   "catalog_number": "544",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "1",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "In this course, students participate in the editorial work of both the Journal of Law and Religion and its companion publication, Canopy Forum. Students will learn the skills of developmental editing, copyediting, proposition checking, and fact checking; how to review and evaluate academic writing by reviewing submissions to both publications; and perform research on topics, contributors, and reviewers for both publications. Students will be exposed to different genres of academic and professional writing in law and religion, both expanding their substantive knowledge in this area of scholarship and learning how to evaluate and craft good prose and arguments. Students will also have the opportunity to develop a contribution to Canopy Forum on a subject of their choosing in the spring semester. This course is an opportunity to hone professional and academic research, writing, and editing skills under the mentorship of experienced writers and editors.",
+  "course_notes": "LAW 708 is either a prerequisite or corequisite for this course.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "1898",
       "crn": "1955",
       "section_number": "1",
       "schedule_type": "LAB",
-      "instructor": "J. Brody",
+      "instructor": "Silas Allard",
       "instructors": [
         {
-          "name": "J. Brody",
-          "email": null
+          "name": "Silas Allard",
+          "email": "silas.allard@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": 2,
+      "waitlist_capacity": 2,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-5:15p",
@@ -52,56 +65,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "1955",
-      "section_number": "1",
-      "schedule_type": "LAB",
-      "instructor": "J. Brody",
-      "instructors": [
-        {
-          "name": "J. Brody",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
-    "labs": 2,
+    "labs": 1,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Brody"
+    "Silas Allard"
   ],
-  "scraped_at": "2026-06-17T23:06:11.170Z"
+  "scraped_at": "2026-06-18T02:39:58.703Z"
 }

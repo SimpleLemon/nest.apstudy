@@ -5,13 +5,15 @@
   "catalog_number": "151",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Jewish and Christian canons of the Bible, in translation, examined as scriptural texts and with reference to historical contexts and cultural influences.",
+  "course_notes": "This course satisfies the Religion major requirement:- Tradition-Christianity. What is the Bible? Answering this deceptively simple question will be the focus of this course, which will provide an introduction to and overview of the Bible in its various forms and versions, Jewish and Christian, and to the diverse ways it has been interpreted and understood, especially in the United States context. While the course will give significant attention to how various communities identify, interpret, and appeal to the Bible as a sacred and authoritative book, no particular position of belief about the Bible will be assumed or required for participation in the course, nor will any prior knowledge of the Bible be expected. The course is for students who have been reading the Bible all their lives as well as those who will be opening its covers for the first time. Emphasis will be placed on the primary reading of biblical texts and class discussion.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +22,40 @@
   },
   "sections": [
     {
+      "atlas_key": "1160",
       "crn": "3434",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "W. Gilders",
+      "instructor": "William K Gilders",
       "instructors": [
         {
-          "name": "W. Gilders",
-          "email": null
+          "name": "William K Gilders",
+          "email": "wgilder@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Emerson Chemistry Bldg. E101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 9,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -52,56 +71,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "3434",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "W. Gilders",
-      "instructors": [
-        {
-          "name": "W. Gilders",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 2,
+    "open": 1,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "W. Gilders"
+    "William K Gilders"
   ],
-  "scraped_at": "2026-06-17T23:14:36.842Z"
+  "scraped_at": "2026-06-18T03:17:38.882Z"
 }

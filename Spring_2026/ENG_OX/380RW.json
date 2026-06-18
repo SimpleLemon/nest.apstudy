@@ -1,0 +1,89 @@
+{
+  "course_code": "ENG_OX 380RW",
+  "course_title": "Topic: Writing/Rhetoric/Literacy: Feminist Rhetorical Traditions",
+  "subject": "ENG_OX",
+  "catalog_number": "380RW",
+  "term": "Spring_2026",
+  "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will discuss the transformative world of blockchains and crypto assets and how they are reshaping aspects of accounting, finance, and global trade. We will cover the evolution of money, inflation, ledgers, and the impact of decentralized systems on the modern economy. We will cover foundational concepts such as decentralization, cryptography, consensus mechanisms, and block creation to show how crypto assets are tied to blockchains. We will discuss topics such as tokenomics, staking, and farming and potential opportunities and risks associated with blockchain and crypto assets.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4320",
+      "crn": "5102",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Matthew Lyle",
+      "instructors": [
+        {
+          "name": "Matthew Lyle",
+          "email": "matthew.lyle@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "Goizueta Foundation Ctr W100",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Matthew Lyle"
+  ],
+  "scraped_at": "2026-06-18T02:19:33.369Z"
+}

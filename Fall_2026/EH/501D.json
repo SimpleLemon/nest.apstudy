@@ -5,13 +5,13 @@
   "catalog_number": "501D",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Online Asynchronous. EH department students only. Required foundation course for students in all master's programs administered by Department of Environmental Health. Introduces students to major topics in environmental health, including mechanisms of toxicity, pesticides and other chemicals, children's health, WASH (water, sanitation, and hygiene), infectious disease, air pollution, climate change, and planetary health. Describes tools used to understand these EH topics, such as exposure science, epidemiology, toxicology, biomarkers/omics, risk assessment, implementation science, and policy.",
+  "course_notes": "EH, GEH, EH-EPI and DSMPH students only. No meeting time; asynchronous.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,66 +20,59 @@
   },
   "sections": [
     {
+      "atlas_key": "4518",
       "crn": "5880",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Freeman",
+      "instructor": "Matthew Freeman",
       "instructors": [
         {
-          "name": "M. Freeman",
-          "email": null
+          "name": "Matthew Freeman",
+          "email": "matthew.freeman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5880",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Freeman",
-      "instructors": [
-        {
-          "name": "M. Freeman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Freeman"
+    "Matthew Freeman"
   ],
-  "scraped_at": "2026-06-17T23:10:16.802Z"
+  "scraped_at": "2026-06-18T02:55:19.313Z"
 }

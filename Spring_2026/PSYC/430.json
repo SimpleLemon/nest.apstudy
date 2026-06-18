@@ -10,35 +10,48 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course provides an introduction to advanced statistics and the research questions and designs that require their use. Topics include mediation and moderation in multiple regression, complex ANOVA, data reduction techniques, multivariate ANOVA, advanced regression, and resampling methods.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Enzyme catalysts will be described using chemical principles. Topics will be organized from the perspective of mechanism and cofactor rather than metabolism or control. Examples from major classes of enzymes will be presented and their mechanisms discussed. Experimental approaches used to investigate catalytic mechanism will also be emphasized.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1317",
       "crn": "2055",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Y. Cheong",
+      "instructor": "Monika Raj",
       "instructors": [
         {
-          "name": "Y. Cheong",
-          "email": null
+          "name": "Monika Raj",
+          "email": "monika.raj@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 316",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 24,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 10a-12:45p",
@@ -49,51 +62,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2055",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Y. Cheong",
-      "instructors": [
-        {
-          "name": "Y. Cheong",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 10a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 2,
+    "open": 1,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Y. Cheong"
+    "Monika Raj"
   ],
-  "scraped_at": "2026-06-17T23:06:24.220Z"
+  "scraped_at": "2026-06-18T02:42:27.313Z"
 }

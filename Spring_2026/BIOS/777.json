@@ -5,38 +5,61 @@
   "catalog_number": "777",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1516",
       "crn": "3172",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Sur",
+      "instructor": "Anita Corbett",
       "instructors": [
         {
-          "name": "A. Sur",
-          "email": null
+          "name": "Anita Corbett",
+          "email": "acorbe2@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shakira Suglia",
+          "email": "shakira.suglia@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kristen Walden",
+          "email": "kristen.alexandria.walden@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 123",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 4:30-5:20p",
@@ -47,51 +70,27 @@
             "end": "1720"
           }
         ]
-      }
-    },
-    {
-      "crn": "3172",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Sur",
-      "instructors": [
-        {
-          "name": "A. Sur",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4:30-5:20p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1630",
-            "end": "1720"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Sur"
+    "Anita Corbett",
+    "Kristen Walden",
+    "Shakira Suglia"
   ],
-  "scraped_at": "2026-06-17T23:01:24.588Z"
+  "scraped_at": "2026-06-18T02:10:09.771Z"
 }

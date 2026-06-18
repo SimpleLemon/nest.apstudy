@@ -5,40 +5,53 @@
   "catalog_number": "490",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1",
+  "credit_hours": "2",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course is required for all ENVS majors (BA and BS) in their final semester prior to graduation.During this course you will develop a capstone portfolio that includes examples of past coursework and has written reflections evaluating your academic growth throughout the major.",
-  "course_notes": null,
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Online Asynchronous. Provides the student with basic knowledge about the behavioral sciences as they are applied to public health. Content includes an overview of each discipline and current issues for students who are not enrolled in the BSHE MPH Program.",
+  "course_notes": "This is an asynchronous online class.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4504",
       "crn": "2592",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Donaher",
+      "instructor": "Cynthia Jorgensen",
       "instructors": [
         {
-          "name": "S. Donaher",
-          "email": null
+          "name": "Cynthia Jorgensen",
+          "email": "cmjorge@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 95,
+      "seats_available": 54,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1-1:50p",
@@ -49,51 +62,25 @@
             "end": "1350"
           }
         ]
-      }
-    },
-    {
-      "crn": "2592",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Donaher",
-      "instructors": [
-        {
-          "name": "S. Donaher",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Donaher"
+    "Cynthia Jorgensen"
   ],
-  "scraped_at": "2026-06-17T23:02:26.545Z"
+  "scraped_at": "2026-06-18T02:20:39.957Z"
 }

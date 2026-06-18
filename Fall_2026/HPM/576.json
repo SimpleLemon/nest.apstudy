@@ -5,13 +5,13 @@
   "catalog_number": "576",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Description Prerequisites: HPM 501 , HPM 510 , HPM 521 , HPM 522 , HPM 523 , HPM 561 or 557 . Students will learn how to use the tools of economics, statistics, and decision analysis to predict the impact of yet-to-be enacted state and federal policy changes. Topics covered include market failures, cost-benefit analysis, interpretation of results from observational studies, discounting, inflation adjustment, measurement of willingness-to-pay, and writing for non-technical audiences. During the course of the semester, students will develop a policy analysis on a topic of their choosing. Some examples of topics covered in students' analyses include: caps on non-economic damages in malpractice suits, mandated coverage of contraceptives by insurance plans, abortion bans, and increases in tobacco excise taxes.",
+  "course_notes": "HPM students only.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "2174",
       "crn": "2149",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Howard",
+      "instructor": "David H Howard",
       "instructors": [
         {
-          "name": "D. Howard",
-          "email": null
+          "name": "David H Howard",
+          "email": "dhhowar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:20a",
@@ -52,56 +65,25 @@
             "end": "1120"
           }
         ]
-      }
-    },
-    {
-      "crn": "2149",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Howard",
-      "instructors": [
-        {
-          "name": "D. Howard",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:20a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1120"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1120"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Howard"
+    "David H Howard"
   ],
-  "scraped_at": "2026-06-17T23:11:15.224Z"
+  "scraped_at": "2026-06-18T03:02:13.576Z"
 }

@@ -10,35 +10,48 @@
   "requirements": [
     "HAP"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course is designed for dancers, movers, and aspiring movement practitioners to develop a deeper anatomical understanding of the body and to explore anatomical relationships through movement, somatic practices, and neuromuscular exercises.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course centers children as active spiritual participants in worship and explores how the arts shape their faith and formation. Drawing on theological, pastoral and educational frameworks, as well as practices from The Sacred Arts Collective, students examine how movement, music, visual art, storytelling, and ritual play deepen children's engagement with God and enrich congregational worship.",
+  "course_notes": "(THIS CLASS IS FULL; email candlerregistrar@emory.edu to be placed on the waiting list) (same as PT 652 1 and RE 652 1) (ONLINE: synchronous live sessions Mondays 4:00-5:30pm; remaining contact time fulfilled via asynchronous online engagement)",
   "requisites": null,
   "cross_listed": "HLTH 369",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4492",
       "crn": "3086",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "E. Faulkner",
+      "instructor": "Khalia Williams",
       "instructors": [
         {
-          "name": "E. Faulkner",
-          "email": null
+          "name": "Khalia Williams",
+          "email": "khalia.j.williams@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -54,56 +67,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "3086",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Faulkner",
-      "instructors": [
-        {
-          "name": "E. Faulkner",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Faulkner"
+    "Khalia Williams"
   ],
-  "scraped_at": "2026-06-17T23:01:57.218Z"
+  "scraped_at": "2026-06-18T02:16:29.862Z"
 }

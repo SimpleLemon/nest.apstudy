@@ -10,10 +10,10 @@
   "requirements": [
     "HSC"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course examines the logic and exercise of violence in contemporary Asia, including insurgency, terrorism, intervention, political violence during decolonization, conflict between regional powers, & social mobilization in e.g. Afghanistan, Philippines, India, Pakistan, Myanmar, and North Korea.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "1633",
       "crn": "2655",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "R. Sexton",
+      "instructor": "Renard Sexton",
       "instructors": [
         {
-          "name": "R. Sexton",
-          "email": null
+          "name": "Renard Sexton",
+          "email": "renard.sexton@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 35,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -54,56 +69,25 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "2655",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "R. Sexton",
-      "instructors": [
-        {
-          "name": "R. Sexton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Sexton"
+    "Renard Sexton"
   ],
-  "scraped_at": "2026-06-17T23:14:20.601Z"
+  "scraped_at": "2026-06-18T03:15:33.874Z"
 }

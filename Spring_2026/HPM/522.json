@@ -5,38 +5,56 @@
   "catalog_number": "522",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisites: EPI 530 and BIOS 500 . EPI 540 , BIOS 501 , and GH 531 strongly recommended. This course provides a conceptual and experiential foundation to address research questions using quantitative data. The course emphasizes the technical skills required to transform a quantitative data set (exemplars: NHANES and Demographic and Health Surveys) into a reproducible analysis for global health applications. Students will receive guided, structured experience with quantitatively operationalizing research questions, data acquisition and management, data exploration, formal data description, conceptualization and construction of composite variables, analysis of statistical associations, and addressing common threats to valid inference. Exercises will be completed using SAS software with an emphasis on programming specific to complex survey designs. Students must register for both lecture and lab components.",
+  "course_notes": "GH students can enroll through March 27. GH and GEH students through March 31. All others may enroll AFTER March 31.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "166",
       "crn": "1496",
       "section_number": "L1",
       "schedule_type": "LAB",
-      "instructor": "Phillips/Chen",
+      "instructor": "Shivani A Patel",
       "instructors": [
         {
-          "name": "Phillips/Chen",
-          "email": null
+          "name": "Shivani A Patel",
+          "email": "s.a.patel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jithin Sam Varghese",
+          "email": "jithin.sam.varghese@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 25,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 3-3:50p",
@@ -47,26 +65,43 @@
             "end": "1550"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "167",
       "crn": "1497",
       "section_number": "L2",
       "schedule_type": "LAB",
-      "instructor": "Phillips/Chen",
+      "instructor": "Julia Smith",
       "instructors": [
         {
-          "name": "Phillips/Chen",
-          "email": null
+          "name": "Julia Smith",
+          "email": "jsmit15@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "5",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-4:50p",
@@ -77,50 +112,89 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-09-11",
+        "end": "2026-09-20"
       }
     },
     {
+      "atlas_key": "168",
       "crn": "2579",
       "section_number": "L3",
       "schedule_type": "LAB",
-      "instructor": "Phillips/Chen",
+      "instructor": "Usha Ramakrishnan",
       "instructors": [
         {
-          "name": "Phillips/Chen",
-          "email": null
+          "name": "Usha Ramakrishnan",
+          "email": "uramakr@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 15,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "164",
       "crn": "1495",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Shivani A Patel",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Shivani A Patel",
+          "email": "s.a.patel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jithin Sam Varghese",
+          "email": "jithin.sam.varghese@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 50,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 9-11:50a",
@@ -131,184 +205,74 @@
             "end": "1150"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "165",
       "crn": "2577",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Shivani A Patel",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Shivani A Patel",
+          "email": "s.a.patel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jithin Sam Varghese",
+          "email": "jithin.sam.varghese@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "5",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "1496",
-      "section_number": "L1",
-      "schedule_type": "LAB",
-      "instructor": "Phillips/Chen",
-      "instructors": [
-        {
-          "name": "Phillips/Chen",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 3-3:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1500",
-            "end": "1550"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1497",
-      "section_number": "L2",
-      "schedule_type": "LAB",
-      "instructor": "Phillips/Chen",
-      "instructors": [
-        {
-          "name": "Phillips/Chen",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 4-4:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2579",
-      "section_number": "L3",
-      "schedule_type": "LAB",
-      "instructor": "Phillips/Chen",
-      "instructors": [
-        {
-          "name": "Phillips/Chen",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1495",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 9-11:50a",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "900",
-            "end": "1150"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2577",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
-    "lectures": 4,
-    "labs": 6,
+    "total_sections": 5,
+    "lectures": 2,
+    "labs": 3,
     "discussions": 0,
     "other": 0,
-    "open": 10,
-    "closed": 0,
+    "open": 3,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Phillips/Chen",
-    "Team"
+    "Jithin Sam Varghese",
+    "Julia Smith",
+    "Shivani A Patel",
+    "Usha Ramakrishnan"
   ],
-  "scraped_at": "2026-06-17T23:03:12.090Z"
+  "scraped_at": "2026-06-18T02:25:48.089Z"
 }

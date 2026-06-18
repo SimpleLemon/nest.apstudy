@@ -5,13 +5,15 @@
   "catalog_number": "229",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences with Race & Ethnicity(*)",
+  "requirements": [
+    "Social Sciences with Race & Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Survey of American Jewish history from colonial period to present, Jewish immigration to the United States, patterns of religious and cultural adjustment, social relations and antisemitism, Jewish politics, the construction of Jewish identities.",
+  "course_notes": "(Same as HIST 229 1 and JS 285 1) (This course is a survey of the Jewish experience in America, examining the religious, cultural, political, and economic activities of American Jews from the colonial period to the present. Students will explore the ways Jewish tradition has adapted to America, how patterns of communal life have been transformed, what the relationship of American Jews has been to other Americans and to the international Jewish community, and how American Jewish identities have been created from Jews' dual impulses for integration and distinctiveness. We will also use the Jewish experience as a means of evaluating different definitions of American national identity.) This course satisfies the Race and Ethnicity Requirement and carries the Exploration: Social Science (SS) tag for the General Education Requirements. For History majors, it also counts toward the concentration requirements in U.S. History (modern); Empires, Nations, & Citizenship (modern); and Law, Economics & Human Rights (modern). For Jewish Studies majors, it satisfies the History and Modern Elective distribution requirements.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +22,40 @@
   },
   "sections": [
     {
+      "atlas_key": "713",
       "crn": "3285",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "E. Goldstein",
+      "instructor": "Eric L Goldstein",
       "instructors": [
         {
-          "name": "E. Goldstein",
-          "email": null
+          "name": "Eric L Goldstein",
+          "email": "egoldst@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences with Race & Ethnicity(*)",
+      "requirements": [
+        "Social Sciences with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -52,56 +71,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "3285",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Goldstein",
-      "instructors": [
-        {
-          "name": "E. Goldstein",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Goldstein"
+    "Eric L Goldstein"
   ],
-  "scraped_at": "2026-06-17T23:11:41.293Z"
+  "scraped_at": "2026-06-18T03:04:05.633Z"
 }

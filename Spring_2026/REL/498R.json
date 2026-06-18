@@ -5,131 +5,117 @@
   "catalog_number": "498R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "2",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Students study, read, and write on a topic under the direction or supervision of a faculty member. Permission of the department and a supervising faculty member is required.",
-  "course_notes": null,
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Online Asynchronous. The course introduces the use of geographic information systems (GIS) in the analysis of public health data. We develop GIS skills through homework, quizzes, and a case study. Specific skills include map layouts, visualization, and basic GIS operations such as buffering, layering, summarizing, geocoding, digitizing and spatial queries.",
+  "course_notes": "***1st Half of the Semester Course**. Asynchronous session.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-10-20"
   },
   "sections": [
     {
+      "atlas_key": "4515",
       "crn": "6474",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "S. Subramaniam",
+      "instructor": "Johnathan Edwards",
       "instructors": [
         {
-          "name": "S. Subramaniam",
-          "email": null
+          "name": "Johnathan Edwards",
+          "email": "alex.edwards@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 100,
+      "seats_available": 53,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-10-20"
       }
     },
     {
+      "atlas_key": "4516",
       "crn": "6475",
       "section_number": "2",
       "schedule_type": "SUP",
-      "instructor": "S. Subramaniam",
+      "instructor": "Johnathan Edwards",
       "instructors": [
         {
-          "name": "S. Subramaniam",
-          "email": null
+          "name": "Johnathan Edwards",
+          "email": "alex.edwards@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6474",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "S. Subramaniam",
-      "instructors": [
-        {
-          "name": "S. Subramaniam",
-          "email": null
-        }
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 40,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6475",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "S. Subramaniam",
-      "instructors": [
-        {
-          "name": "S. Subramaniam",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-10-21",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
+    "other": 2,
     "open": 2,
-    "closed": 2,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Subramaniam"
+    "Johnathan Edwards"
   ],
-  "scraped_at": "2026-06-17T23:06:34.028Z"
+  "scraped_at": "2026-06-18T02:42:57.905Z"
 }

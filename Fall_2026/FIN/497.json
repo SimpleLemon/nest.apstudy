@@ -5,13 +5,13 @@
   "catalog_number": "497",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A Directed Study (DS) is conducted with permission and semi-autonomously, under the supervision of a Goizueta faculty member. The content should represent a line of intellectual inquiry that is aligned with, but falls outside, what is available in the context of the School's elective offerings. It replaces an academic course and may carry variable academic hours. The DS project should contain significant & commensurate content that carries the rigor, time commitment & standards of an elective in the area of study.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,66 +20,59 @@
   },
   "sections": [
     {
+      "atlas_key": "4051",
       "crn": "5623",
       "section_number": "1101",
       "schedule_type": "SUP",
-      "instructor": "G. Maturana",
+      "instructor": "Gonzalo Maturana",
       "instructors": [
         {
-          "name": "G. Maturana",
-          "email": null
+          "name": "Gonzalo Maturana",
+          "email": "gonzalo.maturana@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5623",
-      "section_number": "1101",
-      "schedule_type": "SUP",
-      "instructor": "G. Maturana",
-      "instructors": [
-        {
-          "name": "G. Maturana",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Maturana"
+    "Gonzalo Maturana"
   ],
-  "scraped_at": "2026-06-17T23:10:39.537Z"
+  "scraped_at": "2026-06-18T02:58:24.248Z"
 }

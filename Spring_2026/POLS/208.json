@@ -5,40 +5,55 @@
   "catalog_number": "208",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "SS",
   "requirements": [
     "SS"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Fundamental concepts and quantitative techniques of empirical political inquiry. Introduction to concepts of measurement, parametric, and non-parametric statistics. Basic bivariate and univariate statistics used in political science.",
-  "course_notes": "QTM 100 or QTM_OX 100 or MATH_OX 117 or MATH_OX 117Q or QTM 220 or ECON 220 or ECON_OX 220 or POLS 310 or POLS 310W or ISOM 350 or BUS 350 or BUS_OX 350 or equivalent transfer credit as prerequisite.",
+  "course_notes": "(Complete Topic - Energy Matters: Energy, Culture, Society)",
   "requisites": "QTM 100 or QTM_OX 100 or MATH_OX 117 or MATH_OX 117Q or QTM 220 or ECON 220 or ECON_OX 220 or POLS 310 or POLS 310W or ISOM 350 or BUS 350 or BUS_OX 350 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1268",
       "crn": "3204",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "N. Bueno",
+      "instructor": "Kristin D Phillips",
       "instructors": [
         {
-          "name": "N. Bueno",
-          "email": null
+          "name": "Kristin D Phillips",
+          "email": "kristin.d.phillips@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": 5,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,26 +69,45 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1269",
       "crn": "3205",
       "section_number": "2",
       "schedule_type": "DIS",
-      "instructor": "Bueno/Li",
+      "instructor": "Peter Little",
       "instructors": [
         {
-          "name": "Bueno/Li",
-          "email": null
+          "name": "Peter Little",
+          "email": "pdlittl@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 5,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-10:50a",
@@ -84,26 +118,45 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1270",
       "crn": "3207",
       "section_number": "3",
       "schedule_type": "DIS",
-      "instructor": "Bueno/Lyu",
+      "instructor": "Jacobus Saers",
       "instructors": [
         {
-          "name": "Bueno/Lyu",
-          "email": null
+          "name": "Jacobus Saers",
+          "email": "jacobus.petrus.paulus.saers@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 10,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 11-11:50a",
@@ -114,26 +167,45 @@
             "end": "1150"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1271",
       "crn": "3208",
       "section_number": "4",
       "schedule_type": "DIS",
-      "instructor": "Bueno/Sylvia",
+      "instructor": "David L Nugent",
       "instructors": [
         {
-          "name": "Bueno/Sylvia",
-          "email": null
+          "name": "David L Nugent",
+          "email": "david.nugent@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 5,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1-1:50p",
@@ -144,149 +216,28 @@
             "end": "1350"
           }
         ]
-      }
-    },
-    {
-      "crn": "3204",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "N. Bueno",
-      "instructors": [
-        {
-          "name": "N. Bueno",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3205",
-      "section_number": "2",
-      "schedule_type": "DIS",
-      "instructor": "Bueno/Li",
-      "instructors": [
-        {
-          "name": "Bueno/Li",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3207",
-      "section_number": "3",
-      "schedule_type": "DIS",
-      "instructor": "Bueno/Lyu",
-      "instructors": [
-        {
-          "name": "Bueno/Lyu",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11-11:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1100",
-            "end": "1150"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3208",
-      "section_number": "4",
-      "schedule_type": "DIS",
-      "instructor": "Bueno/Sylvia",
-      "instructors": [
-        {
-          "name": "Bueno/Sylvia",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 2,
+    "total_sections": 4,
+    "lectures": 1,
     "labs": 0,
-    "discussions": 6,
+    "discussions": 3,
     "other": 0,
-    "open": 8,
-    "closed": 0,
+    "open": 3,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Bueno/Li",
-    "Bueno/Lyu",
-    "Bueno/Sylvia",
-    "N. Bueno"
+    "David L Nugent",
+    "Jacobus Saers",
+    "Kristin D Phillips",
+    "Peter Little"
   ],
-  "scraped_at": "2026-06-17T23:06:17.734Z"
+  "scraped_at": "2026-06-18T02:40:43.646Z"
 }

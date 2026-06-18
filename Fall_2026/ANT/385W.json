@@ -5,15 +5,17 @@
   "catalog_number": "385W",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 5",
+  "credit_hours": "4",
   "requirement_designation": "HSCW",
   "requirements": [
-    "HSCW"
+    "HSCW",
+    "Continuing Communication and Writing(*)",
+    "Continuing Comm.& Writing with Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "(May be repeated for credit when topic varies.) Seminar or lecture series of topics of anthropological concern.",
-  "course_notes": null,
+  "course_notes": "(Complete Topic: Theater, Performance & Community Engagement) How are theater, dance, live poetry, and spoken word used as tools for problem-solving, civic engagement, health education, and positive social change? How are communities engaged and enlisted in the creation of performance projects? This seminar course considers practices ranging from professional performances staged in mainstream venues to pop up performances and \"invisible theater\" in public areas. Guiding questions include: How are theater and performance projects developed for and with communities? What is stake? What is the value and impact of community-driven performance projects? What are the ethical, social, cultural, and political dimensions of community-based performance practices? We will examine several traditions of community-engaged theater-making and performance such as Playback Theatre, Theater for Development, and Augusto Boal's Forum Theatre and Image Theatre. In addition, through guest lectures, fieldtrips, and case studies students will learn about community-engaged performance projects in the Atlanta area. Course work includes: short assignments, team projects, and developing a proposal for a community-engaged performance, based on students' original research.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +24,40 @@
   },
   "sections": [
     {
+      "atlas_key": "404",
       "crn": "3101",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "D. Vidali",
+      "instructor": "Debra Vidali",
       "instructors": [
         {
-          "name": "D. Vidali",
-          "email": null
+          "name": "Debra Vidali",
+          "email": "debra.vidali@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Psychology Bldg 220",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -54,26 +73,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "405",
       "crn": "3903",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "B. Holsey",
+      "instructor": "Bayo Holsey",
       "instructors": [
         {
-          "name": "B. Holsey",
-          "email": null
+          "name": "Bayo Holsey",
+          "email": "bayo.holsey@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Bowden Hall 118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
+      "requirements": [
+        "Continuing Comm.& Writing with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 6,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -89,92 +129,26 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3101",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "D. Vidali",
-      "instructors": [
-        {
-          "name": "D. Vidali",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3903",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "B. Holsey",
-      "instructors": [
-        {
-          "name": "B. Holsey",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 2,
-    "closed": 2,
+    "other": 2,
+    "open": 1,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "B. Holsey",
-    "D. Vidali"
+    "Bayo Holsey",
+    "Debra Vidali"
   ],
-  "scraped_at": "2026-06-17T23:09:08.325Z"
+  "scraped_at": "2026-06-18T02:46:36.833Z"
 }

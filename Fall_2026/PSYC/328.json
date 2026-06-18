@@ -5,13 +5,13 @@
   "catalog_number": "328",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This class will explore facets of psychology associated with sustainability and confront the tensions with the modern economy. The goal is for you to leave this class with an understanding of how to foster solutions to these problems both on the individual and societal levels.",
+  "course_notes": "Prior completion of PSYC 110, OR PSYC 111, OR AP/IB credit in psychology.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,38 @@
   },
   "sections": [
     {
+      "atlas_key": "4457",
       "crn": "2182",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "G. Berns",
+      "instructor": "Gregory S Berns",
       "instructors": [
         {
-          "name": "G. Berns",
-          "email": null
+          "name": "Gregory S Berns",
+          "email": "gberns@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 393",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "2",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-3:45p",
@@ -47,26 +62,45 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4458",
       "crn": "4418",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "G. Berns",
+      "instructor": "Gregory S Berns",
       "instructors": [
         {
-          "name": "G. Berns",
-          "email": null
+          "name": "Gregory S Berns",
+          "email": "gberns@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 393",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "2",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-6:45p",
@@ -77,81 +111,25 @@
             "end": "1845"
           }
         ]
-      }
-    },
-    {
-      "crn": "2182",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "G. Berns",
-      "instructors": [
-        {
-          "name": "G. Berns",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-3:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4418",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "G. Berns",
-      "instructors": [
-        {
-          "name": "G. Berns",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 4-6:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1845"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 4
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Berns"
+    "Gregory S Berns"
   ],
-  "scraped_at": "2026-06-17T23:14:27.055Z"
+  "scraped_at": "2026-06-18T03:17:10.149Z"
 }

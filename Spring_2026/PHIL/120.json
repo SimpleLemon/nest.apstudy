@@ -10,35 +10,50 @@
   "requirements": [
     "HA"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course is an introduction to the central concepts in social and political philosophy, such as liberty, equality, justice, and fairness.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An introductory course on the nature and methods of history. May be repeated for credit when topic varies.",
+  "course_notes": "This course explores overlapping cultural environments and multiple legal sovereigns within the historical and present-day territorial jurisdictions of the Muscogee Creek Nation, the state of Oklahoma, and the United States. Through legal concepts and policies, these multiple sovereigns have personal impacts on individual North American Indigenous and/or national citizens. As part of the partnership between CMN and Emory to co-develop Native American and Indigenous Studies, these classes are held concurrently in a hybrid format, and will occasionally meet fully online via zoom. The courses have the same curriculum and schedule, with additional in-person enrichment opportunities for students. Emory and CMN students will partner to create semester/trimester-long projects linking historical and legal issues to Muscogee homelands, Muscogee reservation lands, and each student's home communities.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3085",
       "crn": "2000",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "P. Imani",
+      "instructor": "Malinda Lowery",
       "instructors": [
         {
-          "name": "P. Imani",
-          "email": null
+          "name": "Malinda Lowery",
+          "email": "malinda.maynor.lowery@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 14,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TThF 8:30-9:20a",
@@ -59,61 +74,25 @@
             "end": "920"
           }
         ]
-      }
-    },
-    {
-      "crn": "2000",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "P. Imani",
-      "instructors": [
-        {
-          "name": "P. Imani",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TThF 8:30-9:20a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "920"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "920"
-          },
-          {
-            "day": "Fri",
-            "start": "830",
-            "end": "920"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "P. Imani"
+    "Malinda Lowery"
   ],
-  "scraped_at": "2026-06-17T23:06:07.914Z"
+  "scraped_at": "2026-06-18T02:38:17.506Z"
 }

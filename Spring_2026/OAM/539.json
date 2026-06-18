@@ -5,38 +5,51 @@
   "catalog_number": "539",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides a simple and clear survey of the formation, organization, financing, management, and dissolution of sole proprietorships, partnerships, corporations, limited partnerships, and limited liability companies. The course includes fundamental rights and responsibilities of owners, managers, and other stakeholders. The course also considers the special needs of closely-held enterprises, basic issues in corporate finance, and the impact of federal and state laws and regulations governing the formation, management, financing, and dissolution of business enterprises. This course includes consideration of major federal securities laws governing insider trading and other fraudulent practices under Rule 10b-5.",
+  "course_notes": "Final Assessment: Scheduled Exam Mid-term Assessment: Take-Home Midterm May be used towards partial fulfillment of the requirements for the JD Health Law concentration.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "2687",
       "crn": "3472",
       "section_number": "3201",
       "schedule_type": "LEC",
-      "instructor": "L. Thomas",
+      "instructor": "Ifeoma Ajunwa",
       "instructors": [
         {
-          "name": "L. Thomas",
-          "email": null
+          "name": "Ifeoma Ajunwa",
+          "email": "ifeoma.yvonne.ajunwa@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "2",
+      "enrollment_capacity": 90,
+      "seats_available": 0,
+      "waitlist_total": 2,
+      "waitlist_capacity": 10,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -52,26 +65,43 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "2688",
       "crn": "5758",
       "section_number": "3202",
       "schedule_type": "LEC",
-      "instructor": "S. Turner",
+      "instructor": "Andrew Jennings",
       "instructors": [
         {
-          "name": "S. Turner",
-          "email": null
+          "name": "Andrew Jennings",
+          "email": "andrew.jennings@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 90,
+      "seats_available": 14,
+      "waitlist_total": 0,
+      "waitlist_capacity": 10,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -87,92 +117,26 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "3472",
-      "section_number": "3201",
-      "schedule_type": "LEC",
-      "instructor": "L. Thomas",
-      "instructors": [
-        {
-          "name": "L. Thomas",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5758",
-      "section_number": "3202",
-      "schedule_type": "LEC",
-      "instructor": "S. Turner",
-      "instructors": [
-        {
-          "name": "S. Turner",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Thomas",
-    "S. Turner"
+    "Andrew Jennings",
+    "Ifeoma Ajunwa"
   ],
-  "scraped_at": "2026-06-17T23:04:30.311Z"
+  "scraped_at": "2026-06-18T02:35:28.942Z"
 }

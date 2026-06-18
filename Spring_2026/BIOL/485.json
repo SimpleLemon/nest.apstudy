@@ -5,40 +5,78 @@
   "catalog_number": "485",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "2",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "A course on topics of special biological interest, designed for Biology majors elective credit. This course is repeatable when the topic varies.",
-  "course_notes": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The Professional Leadership and Development course expands on the leadership theme taught throughout the curriculum. Through this course, students become better prepared for transition from student to professional as they embark on their physical therapy careers. Students will learn about leadership, identifying individual styles along with personal strengths and weaknesses. Students will learn skills for professional development and establish plans for professional growth.",
+  "course_notes": "(School of Medicine Students Only)",
   "requisites": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-10",
+    "end": "2026-12-11"
   },
   "sections": [
     {
+      "atlas_key": "3708",
       "crn": "2657",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "B. Levin",
+      "instructor": "Vince Carter",
       "instructors": [
         {
-          "name": "B. Levin",
-          "email": null
+          "name": "Vince Carter",
+          "email": "vcarter@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Beth Davis",
+          "email": "bethpdavis@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "George Fulk",
+          "email": "george.david.fulk@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kathleen Geist",
+          "email": "kgeist@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Anjanette Nunez",
+          "email": "anjanette.nunez@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Jocelyn Monique Smith",
+          "email": "jocelyn.mayes@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 100,
+      "seats_available": 100,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -54,56 +92,30 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "2657",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "B. Levin",
-      "instructors": [
-        {
-          "name": "B. Levin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-12-11"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "B. Levin"
+    "Anjanette Nunez",
+    "Beth Davis",
+    "George Fulk",
+    "Jocelyn Monique Smith",
+    "Kathleen Geist",
+    "Vince Carter"
   ],
-  "scraped_at": "2026-06-17T23:01:21.206Z"
+  "scraped_at": "2026-06-18T02:09:43.798Z"
 }

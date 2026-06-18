@@ -5,40 +5,55 @@
   "catalog_number": "285",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "SNT",
   "requirements": [
     "SNT"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "A course on topics of special biological interest, designed for Biology majors elective credit. This course is repeatable when the topic varies.",
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Introduces students to ways of knowing and producing knowledge within a field of study. Emphasizes inquiry, communication, and development of critical thinking and research abilities through exploration of a specific topic.",
   "course_notes": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
   "requisites": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3526",
       "crn": "2603",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "N. Vega",
+      "instructor": "Joshua Mousie",
       "instructors": [
         {
-          "name": "N. Vega",
-          "email": null
+          "name": "Joshua Mousie",
+          "email": "joshua.mousie@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Johnson Hall 202",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,96 +69,45 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3527",
       "crn": "5221",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "K. O'Toole",
+      "instructor": "Danielle Griffin",
       "instructors": [
         {
-          "name": "K. O'Toole",
-          "email": null
+          "name": "Danielle Griffin",
+          "email": "danielle.griffin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2603",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "N. Vega",
-      "instructors": [
-        {
-          "name": "N. Vega",
-          "email": null
-        }
-      ],
-      "location": null,
+      "location": "Seney Hall 208",
       "campus": "Oxford",
-      "campus_description": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5221",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "K. O'Toole",
-      "instructors": [
-        {
-          "name": "K. O'Toole",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -159,22 +123,26 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 2,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "K. O'Toole",
-    "N. Vega"
+    "Danielle Griffin",
+    "Joshua Mousie"
   ],
-  "scraped_at": "2026-06-17T23:01:21.201Z"
+  "scraped_at": "2026-06-18T02:09:43.791Z"
 }

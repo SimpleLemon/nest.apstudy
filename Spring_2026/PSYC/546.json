@@ -5,38 +5,51 @@
   "catalog_number": "546",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "0",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "EH, GEH, and EH-EPI students only.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1976",
       "crn": "2439",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "Z. Delawalla",
+      "instructor": "Jeremy Sarnat",
       "instructors": [
         {
-          "name": "Z. Delawalla",
-          "email": null
+          "name": "Jeremy Sarnat",
+          "email": "jsarnat@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 8:45-11a",
@@ -47,51 +60,25 @@
             "end": "1100"
           }
         ]
-      }
-    },
-    {
-      "crn": "2439",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "Z. Delawalla",
-      "instructors": [
-        {
-          "name": "Z. Delawalla",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 8:45-11a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "845",
-            "end": "1100"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Z. Delawalla"
+    "Jeremy Sarnat"
   ],
-  "scraped_at": "2026-06-17T23:06:24.225Z"
+  "scraped_at": "2026-06-18T02:42:27.316Z"
 }

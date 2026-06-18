@@ -5,64 +5,113 @@
   "catalog_number": "131",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "2",
+  "credit_hours": "4",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Applies and integrates theories and concepts of environmental science through field study. Introduction to Piedmont geology, water, land and forest use, management and policy. Introduction to ENVS research and community engaged learning. This course is required for ENVS majors.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed to introduce students to the everyday language of Japan. Lessons will be organized around natural conversational topics, leading students from fundamental aspects of grammar to readings in simple texts.",
   "course_notes": "ENVS 120 or ENVS 130 or ENVS 140 as prerequisite or co-requisite, or equivalent transfer credit",
   "requisites": "ENVS 120 or ENVS 130 or ENVS 140 as prerequisite or co-requisite, or equivalent transfer credit",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "758",
       "crn": "2525",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Mucioki/Fe'a",
+      "instructor": "Mizuki Mazzotta",
       "instructors": [
         {
-          "name": "Mucioki/Fe'a",
-          "email": null
+          "name": "Mizuki Mazzotta",
+          "email": "mizuki.mazzotta@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Mizuki Mazzotta",
+          "email": "mizuki.mazzotta@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Modern Language 127",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 7,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "759",
       "crn": "2526",
       "section_number": "2",
       "schedule_type": "LAB",
-      "instructor": "M. Mucioki",
+      "instructor": "Mizuki Mazzotta",
       "instructors": [
         {
-          "name": "M. Mucioki",
-          "email": null
+          "name": "Mizuki Mazzotta",
+          "email": "mizuki.mazzotta@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Mizuki Mazzotta",
+          "email": "mizuki.mazzotta@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Modern Language 127",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 7,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 8:30-11:15a",
@@ -73,110 +122,52 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "760",
       "crn": "2527",
       "section_number": "3",
       "schedule_type": "LAB",
-      "instructor": "M. Mucioki",
+      "instructor": "Hiroko Matsuzaki",
       "instructors": [
         {
-          "name": "M. Mucioki",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 8:30-11:15a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "830",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2525",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Mucioki/Fe'a",
-      "instructors": [
+          "name": "Hiroko Matsuzaki",
+          "email": "hiroko.matsuzaki@emory.edu",
+          "role": "Primary Instructor"
+        },
         {
-          "name": "Mucioki/Fe'a",
-          "email": null
+          "name": "Hiroko Matsuzaki",
+          "email": "hiroko.matsuzaki@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "2526",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "M. Mucioki",
-      "instructors": [
-        {
-          "name": "M. Mucioki",
-          "email": null
-        }
+      "location": "Modern Language 127",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Closed",
       "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 8:30-11:15a",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2527",
-      "section_number": "3",
-      "schedule_type": "LAB",
-      "instructor": "M. Mucioki",
-      "instructors": [
-        {
-          "name": "M. Mucioki",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
+      "enrollment_capacity": 7,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 8:30-11:15a",
@@ -187,22 +178,26 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 2,
-    "labs": 4,
+    "total_sections": 3,
+    "lectures": 1,
+    "labs": 2,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 1,
     "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Mucioki",
-    "Mucioki/Fe'a"
+    "Hiroko Matsuzaki",
+    "Mizuki Mazzotta"
   ],
-  "scraped_at": "2026-06-17T23:02:26.540Z"
+  "scraped_at": "2026-06-18T02:20:39.935Z"
 }

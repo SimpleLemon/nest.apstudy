@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "HA",
   "requirements": [
-    "HA"
+    "HA",
+    "Humanities and Arts(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "An introduction to the history and interpretation of major developments in architectural theory and practice in Europe and the United States from the late nineteenth century to World War II.",
-  "course_notes": null,
+  "course_notes": "Myriad ideas and characters contributed to the built environment of the Modernist era, here defined as the period immediately following the Industrial Revolution through WWII (1880-1945). Through the study of selected works of architecture and urban design, issues of political and social ideology, economy, building technology, materiality, siting, and climate will inform discussions of design process, form, and performance. We will investigate together how modernist buildings and urban spaces were realized and the ways in which they shaped and were shaped by culture in which they sat. Themes that thread through the course include industrialization, technology, power, patronage, identity, health and hygiene, and urbanization. Art History major/minor: Division III Architectural Studies minor: elective",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "687",
       "crn": "1759",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "C. Crawford",
+      "instructor": "Christina Crawford",
       "instructors": [
         {
-          "name": "C. Crawford",
-          "email": null
+          "name": "Christina Crawford",
+          "email": "christina.crawford@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Psychology Bldg 220",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "1759",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "C. Crawford",
-      "instructors": [
-        {
-          "name": "C. Crawford",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Crawford"
+    "Christina Crawford"
   ],
-  "scraped_at": "2026-06-17T23:09:14.906Z"
+  "scraped_at": "2026-06-18T02:47:16.212Z"
 }

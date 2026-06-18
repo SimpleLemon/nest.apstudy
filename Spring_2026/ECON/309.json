@@ -10,66 +10,71 @@
   "requirements": [
     "HSC"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Economic analysis and public policy. Discussion of selected issues such as the economics of discrimination, environment, medical care, cultural arts, education, and social responsibility of business.",
-  "course_notes": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as a prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will walk students through modern data privacy practice and the important tangential corporate laws and regulations governing how global corporations comply with the myriad of privacy laws and regulations to which they are subject. Since the modern practice of privacy law is focused on how corporations gather, process, and store personal data, this course will focus on areas of the law important to in-house corporate practitioners and the lawyers that advise in-house practitioners. The goal of the course is to produce highly competent privacy practitioners ready to take in-house and law firm jobs advising businesses. The course will also focus on AI Law issues as related to privacy law.",
+  "course_notes": "Final Assessment: TBD Mid-term Assessment: Take-Home Midterm",
   "requisites": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "3555",
       "crn": "6828",
       "section_number": "9000",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
+      "instructor": "Ifeoma Ajunwa",
+      "instructors": [
+        {
+          "name": "Ifeoma Ajunwa",
+          "email": "ifeoma.yvonne.ajunwa@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 0,
+      "waitlist_total": 3,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6828",
-      "section_number": "9000",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
-  "instructors_unique": [],
-  "scraped_at": "2026-06-17T23:02:03.796Z"
+  "instructors_unique": [
+    "Ifeoma Ajunwa"
+  ],
+  "scraped_at": "2026-06-18T02:17:46.575Z"
 }

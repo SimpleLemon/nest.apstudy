@@ -5,40 +5,58 @@
   "catalog_number": "385",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "4",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Experience and Application with Cont.Comm(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Highly focused courses, drawing on multiple disciplines of the humanities and social sciences; may be repeated for credit when topics vary.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Selected topics in history for students in non-history originating (cross-listed) courses. May be repeated for credit when topic varies.",
+  "course_notes": "(Same ARTHIST 490W 1, POLS 490RW 1, SOC 489W 1) Mining the Archive: Atlanta's New Deal Public Housing Atlanta was the site of both the first so-called \"slum clearance\" project in the United States, in 1934, and of America's first completed - racially segregated - federally-funded public housing: Techwood Homes (1936-1996, for white families), and University Homes (1937-2009, for Black families). These projects, composed of low-slung brick apartment buildings set in footpath-crossed open spaces, became models for subsequent housing projects built throughout the U.S. and will be the focus of this archivally-based seminar. Students will gain facility working in the archival environment through theoretical and historical readings and discussions, workshops with archival and library representatives, and, critically, through hands-on experience working in an Atlanta-area archive. Student research + writing of a self-framed, public-oriented narrative about the projects will be featured in the digital humanities site Atlanta Housing Interplay, developed by the professor with Emory Center for Digital Scholarship (ECDS). This is an upper-level, writing-intensive seminar designed for students who have some experience with art history, typically having taken courses at the 200 or 300 level. Please contact the professor if you have any questions about your suitability for the course. Art History major/minor: Division III Architectural Studies minor: elective",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3592",
       "crn": "5186",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Blakeley/Pei",
+      "instructor": "Christina Crawford",
       "instructors": [
         {
-          "name": "Blakeley/Pei",
-          "email": null
+          "name": "Christina Crawford",
+          "email": "christina.crawford@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Atwood Chemistry Bldg. 280",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application with Cont.Comm(*)",
+      "requirements": [
+        "Experience and Application with Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 3,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,94 +72,67 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3593",
       "crn": "6813",
       "section_number": "9000",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5186",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Blakeley/Pei",
+      "instructor": "Alison Greene",
       "instructors": [
         {
-          "name": "Blakeley/Pei",
-          "email": null
+          "name": "Alison Greene",
+          "email": "alison.collis.greene@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
+      "location": "Rita Anne Rollins Building_549",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "6813",
-      "section_number": "9000",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 2,
-    "waitlisted": 2
+    "open": 1,
+    "closed": 1,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "Blakeley/Pei"
+    "Alison Greene",
+    "Christina Crawford"
   ],
-  "scraped_at": "2026-06-17T23:03:18.569Z"
+  "scraped_at": "2026-06-18T02:26:24.115Z"
 }

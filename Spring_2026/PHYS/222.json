@@ -8,20 +8,22 @@
   "credit_hours": "3",
   "requirement_designation": "NS",
   "requirements": [
-    "NS"
+    "NS",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course builds on thebasics of the introductory science courses, including the basics of quantum mechanics in PHYS 253 Modern Physics (or its equivalent Physical Chemistry course), to understand the fundamental principles of how various engineering applications and devices work.",
-  "course_notes": "(PHYS 142 or PHYS_OX 142 or PHYS 152 or PHYS_OX 152) and (MATH 112 or MATH_OX 112 or MATH 112Z or MATH 116) and (CHEM 205 or CHEM_OX 205 or CHEM 331 or PHYS 253 or PHYS_OX 253) or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Further development of students' communicative skills, with particular emphasis on reading, writing and critical thinking, through discussion of readings and films from Hispanic cultures. May be appropriate for heritage speakers pending Official Spanish Placement.",
+  "course_notes": "CONTENT: This course focuses on developing both cultural understanding and linguistic skills. It explores cultural issues in the Hispanic world, such as diversity, gender roles and power structures through writing about and discussion of written texts and films. These texts also serve as the basis for practicing Spanish vocabulary and grammar in context, as well as honing listening, speaking, and particularly, reading and writing skills. By the end of the course, students should be able to use critical thinking skills in Spanish to interpret and discuss literature and film in Spanish, gain advanced proficiency in reading and writing the language, and gain knowledge of significant historical events. REQUIRED TEXT: Coutard, James, Evelyn, Katryn, Gaspar, Martin. Intrigas, 3rd ed. VHL, 2021. PARTICULARS: Movie screenings will be required outside of class. EVALUATION: Class participation, chapter quizzes, weekly homework, presentations, unit lesson essays. PREREQUISITE: SPAN 202 or Official Spanish Placement for SPAN 212. Take the online Spanish Placement Exam at https://spanport.emory.edu/undergraduate/placement/index.html SPAN 212 may be combined with a Spanish Foundational Course (300-318) or PORT 110 to satisfy both the HAL or Intercultural Communication requirement and major/minor requirements or electives. See https://spanport.emory.edu for details.",
   "requisites": "(PHYS 142 or PHYS_OX 142 or PHYS 152 or PHYS_OX 152) and (MATH 112 or MATH_OX 112 or MATH 112Z or MATH 116) and (CHEM 205 or CHEM_OX 205 or CHEM 331 or PHYS 253 or PHYS_OX 253) or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1219",
       "crn": "2013",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +31,32 @@
       "instructors": [
         {
           "name": "J. Brody",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Candler Library 123",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 9,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -54,56 +72,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "2013",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Brody",
-      "instructors": [
-        {
-          "name": "J. Brody",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
     "J. Brody"
   ],
-  "scraped_at": "2026-06-17T23:06:11.162Z"
+  "scraped_at": "2026-06-18T02:39:58.695Z"
 }

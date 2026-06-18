@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HPWE",
   "requirements": [
-    "HPWE"
+    "HPWE",
+    "Continuing Comm.& Writing with Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Study of Indigenous literatures, with a focus on a specific topic. May be repeated for credit when topic varies.",
-  "course_notes": null,
+  "course_notes": "(This course will be co-taught by Emory Professor Mandy Suhr-Sytsma and College of Muscogee Nation (CMN) Professor Colton Wood. We will meet in person at Emory and video conference with Dr. Wood and his CMN students. As we read Angeline Boulley's YA novel Warrior Girl Unearthed and a range of shorter works, we will ground our study in principles of relational accountability. We will do all our learning in deep, respectful collaboration with our CMN partners. We will attend the annual Indigenous Celebration at the Ocmulgee Mounds (required field trip) and the annual Muscogee Teach-In at Emory. We will practice regular self-reflection, examining how our personal experiences, communities, and places inform our learning. We will consider the literature we study in relation to pressing political, social, and cultural concerns of Indigenous peoples. Finally, through two creative, collaborative course projects, we will not only deepen our own knowledge of Indigenous literatures, but we will also share that knowledge with others, contributing to more accurate, respectful, and enjoyable learning about Indigenous nations.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "2023",
       "crn": "2479",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Suhr-Sytsma",
+      "instructor": "Mandy Suhr-Sytsma",
       "instructors": [
         {
-          "name": "M. Suhr-Sytsma",
-          "email": null
+          "name": "Mandy Suhr-Sytsma",
+          "email": "mandy.sue.suhr-sytsma@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Callaway S104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
+      "requirements": [
+        "Continuing Comm.& Writing with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,56 +72,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2479",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Suhr-Sytsma",
-      "instructors": [
-        {
-          "name": "M. Suhr-Sytsma",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Suhr-Sytsma"
+    "Mandy Suhr-Sytsma"
   ],
-  "scraped_at": "2026-06-17T23:10:23.258Z"
+  "scraped_at": "2026-06-18T02:55:51.552Z"
 }

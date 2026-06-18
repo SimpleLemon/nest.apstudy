@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HAPW",
   "requirements": [
-    "HAPW"
+    "HAPW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "The senior seminar serves as the capstone experience for all each class of interdisciplinary undergraduate scholars. Students write and present a portion of their senior project, read contemporary debates about interdisciplinarity, and design a shared unit of interdisciplinary study.",
-  "course_notes": null,
+  "course_notes": "(Same as AMST 490W 1) (This course is a capstone to your interdisciplinary major. There are two major goals: First, while you are working continuously on your independent senior thesis, we will use our time together to better understand interdisciplinary theory and methods in ways that will help you construct the context for your thesis. We will discuss the definitions of, and arguments surrounding, interdisciplinary scholarship, and examine how scholars weave together information from a variety of disciplines to form a coherent whole. Second, as you prepare for your post-graduation pathway, we will work on your communication skills. How will you translate your liberal arts education more broadly, and your research experience more specifically, in ways to communicate to multiple audiences for multiple purposes. As you expand into the world, how will you present yourself and your accomplishments efficiently and effectively? Across the semester, we will practice a variety of communication strategies, working together to provide guidance and constructive feedback, culminating in a draft of your senior thesis.)",
   "requisites": null,
   "cross_listed": "AMST 490W",
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "3324",
       "crn": "3899",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "J. Tulke",
+      "instructor": "Julia Tulke",
       "instructors": [
         {
-          "name": "J. Tulke",
-          "email": null
+          "name": "Julia Tulke",
+          "email": "julia.tulke@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S420",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -54,56 +72,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "3899",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "J. Tulke",
-      "instructors": [
-        {
-          "name": "J. Tulke",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Tulke"
+    "Julia Tulke"
   ],
-  "scraped_at": "2026-06-17T23:11:21.839Z"
+  "scraped_at": "2026-06-18T03:02:41.829Z"
 }

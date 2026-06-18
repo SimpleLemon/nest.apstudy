@@ -5,75 +5,55 @@
   "catalog_number": "340",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "1",
   "requirement_designation": "HSC",
   "requirements": [
     "HSC"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course studies relations between language and society, relations between language and sociocultural context. Topics may include: language variation; multilingualism; verbal interaction; discourse analysis; ethnography of communication; sociolinguistics of Spanish.",
-  "course_notes": null,
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course gives undergraduate students the opportunity to follow a reading plan and/or conduct empirical research under the direction of a faculty member.",
+  "course_notes": "(Permission of Instructor Required Prior to Enrollment)",
   "requisites": null,
   "cross_listed": "ANT 340",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3688",
       "crn": "2708",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "E. Britt",
+      "instructor": "Jack Hardy",
       "instructors": [
         {
-          "name": "E. Britt",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2708",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "E. Britt",
-      "instructors": [
-        {
-          "name": "E. Britt",
-          "email": null
+          "name": "Jack Hardy",
+          "email": "jack.hardy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
       "campus": "Oxford",
-      "campus_description": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 6,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -89,21 +69,25 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Britt"
+    "Jack Hardy"
   ],
-  "scraped_at": "2026-06-17T23:03:51.047Z"
+  "scraped_at": "2026-06-18T02:28:50.750Z"
 }

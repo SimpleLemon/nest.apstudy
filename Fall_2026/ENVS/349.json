@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course will familiarize students with principles of ecological invasions and methods for assessing the spread and impacts of invasive species on a global scale. Students will also become familiar with major sources of exotic species introductions and methods available for prevention and control.",
-  "course_notes": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or (BIOL 142 and BIOL 142L) or BIOL_OX 142 or equivalent transfer credit as prerequisite.",
+  "course_notes": "(Same as BIOL 349 1)",
   "requisites": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or (BIOL 142 and BIOL 142L) or BIOL_OX 142 or equivalent transfer credit as prerequisite.",
   "cross_listed": "BIOL 349",
   "date_range": {
@@ -22,23 +22,43 @@
   },
   "sections": [
     {
+      "atlas_key": "2116",
       "crn": "2088",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "C. Keogh",
+      "instructor": "Carolyn Keogh",
       "instructors": [
         {
-          "name": "C. Keogh",
-          "email": null
+          "name": "Carolyn Keogh",
+          "email": "carolyn.keogh@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Carolyn Keogh",
+          "email": "carolyn.keogh@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W501",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p; W 2:30-5:15p",
@@ -59,61 +79,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "2088",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "C. Keogh",
-      "instructors": [
-        {
-          "name": "C. Keogh",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p; W 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Keogh"
+    "Carolyn Keogh"
   ],
-  "scraped_at": "2026-06-17T23:10:29.845Z"
+  "scraped_at": "2026-06-18T02:57:02.094Z"
 }

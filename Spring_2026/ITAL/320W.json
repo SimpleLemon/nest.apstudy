@@ -10,35 +10,48 @@
   "requirements": [
     "ICW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Development of linguistic and communication skills needed to initiate a conversation with Italian speaking businesses and prospective employers, combined with an introduction of Italian business culture, practices and etiquette.",
-  "course_notes": "ITAL 202 or ITAL_OX 202 or equivalent transfer credit as prerequisite.",
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Online Asynchronous. Prerequisite/concurrent: BIOS 500 . Emphasizes the concepts and premises of the science of epidemiology. Methods of hypothesis formulation and evaluation are stressed. Techniques for quantifying the amount of disease (or other health indicator) in populations are introduced, followed by discussion of epidemiologic study designs useful for identifying etiologic factors and other relevant correlates of disease. Students gain facility with the calculation of basic epidemiologic measures of frequency, association, and impact. The concepts of random variability, bias, and effect modification are examined in detail. The use of stratified analysis, including Mantel-Haenszel techniques, is explored. Inferences from study results are discussed. Students are required to analyze and critique studies from the current medical and scientific literature.",
+  "course_notes": "This section is open to all BSHES, EH, GEH, GH, BIOS, and HPM students. This is an ONLINE Asynchronous course.",
   "requisites": "ITAL 202 or ITAL_OX 202 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4522",
       "crn": "5231",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Muratore",
+      "instructor": "Patrick S Sullivan",
       "instructors": [
         {
-          "name": "S. Muratore",
-          "email": null
+          "name": "Patrick S Sullivan",
+          "email": "pssulli@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 50,
+      "seats_available": 29,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -54,56 +67,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "5231",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Muratore",
-      "instructors": [
-        {
-          "name": "S. Muratore",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Muratore"
+    "Patrick S Sullivan"
   ],
-  "scraped_at": "2026-06-17T23:03:31.574Z"
+  "scraped_at": "2026-06-18T02:27:29.787Z"
 }

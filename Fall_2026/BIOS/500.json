@@ -5,13 +5,13 @@
   "catalog_number": "500",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed to teach students the fundamentals of applied statistical data analysis. Students successfully completing this course will be able to: choose appropriate statistical analyses for a variety of data types; perform exploratory data analyses; implement commonly used one and two-sample hypothesis testing and confidence interval methods for continuous variables; perform tests of association for categorical variables; conduct correlation and simple linear regression analyses; produce meaningful reports of statistical analyses and provide sound interpretations of analysis results. Students will be able to implement the statistical methods learned using SAS and JMP software on personal computers.",
+  "course_notes": "Group A: BSHES, GH, GEH, EH, HPM Students. This section is for GHMPH, GEHMPH, EHMPH, BSHEMPH, HPMMPH, and HPMMSPH students. Students must sign up for Group A lab sections: Sections 1, 2, and 3.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "1293",
       "crn": "3471",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Nizam",
+      "instructor": "Azhar Nizam",
       "instructors": [
         {
-          "name": "A. Nizam",
-          "email": null
+          "name": "Azhar Nizam",
+          "email": "anizam@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 170,
+      "seats_available": 99,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:50a",
@@ -52,26 +65,43 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1294",
       "crn": "3472",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "J. Binongo",
+      "instructor": "Jose Binongo",
       "instructors": [
         {
-          "name": "J. Binongo",
-          "email": null
+          "name": "Jose Binongo",
+          "email": "jose.n.binongo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 156,
+      "seats_available": 70,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 3-4:20p",
@@ -87,91 +117,37 @@
             "end": "1620"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1295",
       "crn": "3473",
       "section_number": "3",
       "schedule_type": "LEC",
       "instructor": "Staff",
       "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 3-4:20p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1500",
-            "end": "1620"
-          },
-          {
-            "day": "Thu",
-            "start": "1500",
-            "end": "1620"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3471",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Nizam",
-      "instructors": [
-        {
-          "name": "A. Nizam",
-          "email": null
-        }
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "950"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3472",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "J. Binongo",
-      "instructors": [
-        {
-          "name": "J. Binongo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
+      "enrollment_capacity": 110,
+      "seats_available": 83,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 3-4:20p",
@@ -187,52 +163,26 @@
             "end": "1620"
           }
         ]
-      }
-    },
-    {
-      "crn": "3473",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 3-4:20p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1500",
-            "end": "1620"
-          },
-          {
-            "day": "Thu",
-            "start": "1500",
-            "end": "1620"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Nizam",
-    "J. Binongo"
+    "Azhar Nizam",
+    "Jose Binongo"
   ],
-  "scraped_at": "2026-06-17T23:09:27.864Z"
+  "scraped_at": "2026-06-18T02:49:02.127Z"
 }

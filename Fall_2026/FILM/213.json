@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course combines the theoretical and practical elements of cinematography and lighting. Historical and contemporary trends and styles are examined. Video formats, exposure, camera placement,composition, movement and continuity will be covered.",
-  "course_notes": "FILM 107 or ARTVIS 107 or FILM_OX 107 or FILM_OX 107E or equivalent transfer credit as prerequisite.",
+  "course_notes": "This class will be held in the Department of Film and Media's brand new production facility located at Emory Point. Address: 1568 Avenue Pl Ste 140 Atlanta, GA 30329 This class has an Equipment Fee of $125 which grants students access to equipment provided by the department.",
   "requisites": "FILM 107 or ARTVIS 107 or FILM_OX 107 or FILM_OX 107E or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "3723",
       "crn": "3890",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "T. Ozdemir",
+      "instructor": "Tanju Ozdemir",
       "instructors": [
         {
-          "name": "T. Ozdemir",
-          "email": null
+          "name": "Tanju Ozdemir",
+          "email": "tanju.ozdemir@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 200",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1:15-5:15p",
@@ -49,51 +64,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "3890",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "T. Ozdemir",
-      "instructors": [
-        {
-          "name": "T. Ozdemir",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1:15-5:15p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1315",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "T. Ozdemir"
+    "Tanju Ozdemir"
   ],
-  "scraped_at": "2026-06-17T23:10:36.293Z"
+  "scraped_at": "2026-06-18T02:57:30.665Z"
 }

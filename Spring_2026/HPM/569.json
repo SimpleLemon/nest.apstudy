@@ -5,38 +5,53 @@
   "catalog_number": "569",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "MDP 585 courses are used to cover topics of interest to students, particularly those taught by outside development experts. Examples of special topics couses may include Social Network Analysis, Building Inclusive Markets, Non-Profit Management and Organizational Behavior, Refugee Resettlement and Displacement, or a host of other topics. These classes can be one to three credits depending on the topic and duration.",
+  "course_notes": "Course Title: Nonprofit Development: Grantwriting & Fundraising Course Description: This course will enable students to develop practical skills related to cultivating and managing funding for the development sector, and gain a deeper understanding of the funding landscape for global and local development. Students will learn in-depth skills related to grant funding, such as finding grant opportunities, grant writing, and grants management. Students will also learn the fundamentals of individual and foundation giving, including prospecting and cultivation of donors. These skills will be contextualized within the broader political and economic environment for global and local development funding.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "2695",
       "crn": "1511",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Blake/Feliciano",
+      "instructor": "Claire Bolton",
       "instructors": [
         {
-          "name": "Blake/Feliciano",
-          "email": null
+          "name": "Claire Bolton",
+          "email": "claire.bolton@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Modern Language 219",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-3:50p",
@@ -47,51 +62,25 @@
             "end": "1550"
           }
         ]
-      }
-    },
-    {
-      "crn": "1511",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Blake/Feliciano",
-      "instructors": [
-        {
-          "name": "Blake/Feliciano",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-3:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1550"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Blake/Feliciano"
+    "Claire Bolton"
   ],
-  "scraped_at": "2026-06-17T23:03:12.096Z"
+  "scraped_at": "2026-06-18T02:25:48.094Z"
 }

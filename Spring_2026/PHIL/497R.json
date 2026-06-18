@@ -5,230 +5,219 @@
   "catalog_number": "497R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "First Year Seminar",
+    "Social Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "A course of readings decided in consultation with a member of the faculty.",
-  "course_notes": "Two PHIL courses or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A small class on topics of sociological concern that fosters a highly interactive and mutually collaborative learning environment among students and between students and teachers.",
+  "course_notes": "(Same as LING 190 2) (Freshmen Seminar - Limited to First Year Students Only) (This course deals with issues of socio-historical research and how to carry it out in the digital era. The ready online availability of a huge number of documents and of different types of documents (e.g., newspapers, birth, marriage, and death records, wills and property deeds) makes socio-historical research easier. For one thing, this greatly reduces the need of travelling from archive to archive. Secondly, it greatly increases the ability to cross-reference different types of data. Once the death record of an individual is found in one type of digital archive, a potential obituary can be searched for (and, hopefully, found) in digital newspaper archives.) (This course focuses mostly on Georgia during the period 1800 to 1940. We will focus on a handful of small towns in the South-West Piedmont area: The Rock (200 people back then and now) in Upson County, Thomaston, the county seat, Milner, in Lamar County, all lying less than 20 miles apart. Occasionally, we will venture further out, to Atlanta, to Macon, Savannah, up North in New York, Boston, Providence, Chicago. Starting from the lives of three individuals from these towns - Ed White, born a slave around 1860 (d. 1944), Dr. Edward Archelaus Flewellen (1819-1910), and Capt. Andrew Jackson White (1815-1888) - we will shed light on an era and on a remarkable set of racial, gender, and class relations.) (There will be some readings to be done and films and documentaries to be watched. There will be visitors coming to share their work/research experience. But most of the work will consist in searching through various forms of historical records available online (e.g., newspapers, censuses, birth, marriage, death) on specific individuals and specific events.) (Students will look at socio-historical processes through their own lenses, constructing their own knowledge. Students will learn how to search for these records in various databases available for historical research (e.g., familysearch.org, ancestry.com, ProQuest, Readex, ChroniclingAmerica, Georgia historic newspapers). Students will be exposed to what digital technology allows us to do with these records (e.g., dynamic network graphs or dynamic geographic maps); how digital technology is ushering in a new kind of historical web-based scholarship in the form of digital humanities.) (Learning outcomes By the end of term, students are expected to be able: 1. To collect evidence on a variety of historical processes 2. To evaluate the reliability and validity of the evidence 3. To interpret the evidence and contextualize it in a body of scholarly work 4. To construct hypotheses and arguments from the evidence collected 5. To ask such questions as: a. If I had a magic wand, what kind of evidence would I ideally need to answer my research questions? b. What kind of research question(s) does the evidence suggest? 6. To work in teams 7. To make public presentations before an audience 8. To put things in historical perspective 9. To develop their own bibliographies using Google Scholar 10. To provide answers to epistemological questions such as: How can you learn anything from such an insignificant villages and people? How can you generalize from an N of 1? 10. To design and carry out a research project.)",
   "requisites": "Two PHIL courses or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1182",
       "crn": "6093",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "J. Lysaker",
+      "instructor": "Roberto Franzosi",
       "instructors": [
         {
-          "name": "J. Lysaker",
-          "email": null
+          "name": "Roberto Franzosi",
+          "email": "rfranzo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Tarbutton Hall 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1183",
       "crn": "6410",
       "section_number": "2",
       "schedule_type": "SUP",
-      "instructor": "J. Wahman",
+      "instructor": "Megan Reed",
       "instructors": [
         {
-          "name": "J. Wahman",
-          "email": null
+          "name": "Megan Reed",
+          "email": "megan.nicole.reed@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 60,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1184",
       "crn": "6530",
       "section_number": "3",
       "schedule_type": "SUP",
-      "instructor": "A. Mitchell",
+      "instructor": "Ju Hyun Park",
       "instructors": [
         {
-          "name": "A. Mitchell",
-          "email": null
+          "name": "Ju Hyun Park",
+          "email": "ju.hyun.park@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": 30,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1185",
       "crn": "6545",
       "section_number": "4",
       "schedule_type": "SUP",
-      "instructor": "N. McAfee",
+      "instructor": "Ju Hyun Park",
       "instructors": [
         {
-          "name": "N. McAfee",
-          "email": null
+          "name": "Ju Hyun Park",
+          "email": "ju.hyun.park@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Tarbutton Hall 218",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": 35,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6093",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "J. Lysaker",
-      "instructors": [
-        {
-          "name": "J. Lysaker",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6410",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "J. Wahman",
-      "instructors": [
-        {
-          "name": "J. Wahman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6530",
-      "section_number": "3",
-      "schedule_type": "SUP",
-      "instructor": "A. Mitchell",
-      "instructors": [
-        {
-          "name": "A. Mitchell",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6545",
-      "section_number": "4",
-      "schedule_type": "SUP",
-      "instructor": "N. McAfee",
-      "instructors": [
-        {
-          "name": "N. McAfee",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 8,
-    "open": 8,
-    "closed": 0,
+    "other": 4,
+    "open": 1,
+    "closed": 3,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Mitchell",
-    "J. Lysaker",
-    "J. Wahman",
-    "N. McAfee"
+    "Ju Hyun Park",
+    "Megan Reed",
+    "Roberto Franzosi"
   ],
-  "scraped_at": "2026-06-17T23:06:07.921Z"
+  "scraped_at": "2026-06-18T02:38:17.521Z"
 }

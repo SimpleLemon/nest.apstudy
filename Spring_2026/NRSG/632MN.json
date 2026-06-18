@@ -10,8 +10,8 @@
   "requirements": [],
   "campus": null,
   "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "course_description": "",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,6 +20,7 @@
   },
   "sections": [
     {
+      "atlas_key": "4958",
       "crn": "4240",
       "section_number": "401",
       "schedule_type": "CLN",
@@ -27,23 +28,37 @@
       "instructors": [
         {
           "name": "S. Stevenson",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-01-12",
+        "end": "2026-03-04"
       }
     },
     {
+      "atlas_key": "4959",
       "crn": "4241",
       "section_number": "402",
       "schedule_type": "CLN",
@@ -51,83 +66,48 @@
       "instructors": [
         {
           "name": "S. Stevenson",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "4240",
-      "section_number": "401",
-      "schedule_type": "CLN",
-      "instructor": "S. Stevenson",
-      "instructors": [
-        {
-          "name": "S. Stevenson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "4241",
-      "section_number": "402",
-      "schedule_type": "CLN",
-      "instructor": "S. Stevenson",
-      "instructors": [
-        {
-          "name": "S. Stevenson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-03-16",
+        "end": "2026-05-06"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 4,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "S. Stevenson"
   ],
-  "scraped_at": "2026-06-17T23:04:23.812Z"
+  "scraped_at": "2026-06-18T02:34:22.367Z"
 }

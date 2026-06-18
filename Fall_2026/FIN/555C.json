@@ -5,81 +5,74 @@
   "catalog_number": "555C",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "0",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "In this course, students will review essential concepts of the Python (v.3) language, focusing on data science and financial analytics. Topics will include variables; classes & data structures; functions & methods; control flow; statistics; and simple interaction with SQL databases. Students will practice operations such as regressions, statistical analysis, and interactions with financial data systems (e.g., WRDS). Some topics may be condensed in winter offerings in lieu of adding basic visualization; decision algorithms (clustering, k-means, decision trees, etc.); and other topics.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-08-17",
+    "start": "2026-08-10",
     "end": "2026-08-25"
   },
   "sections": [
     {
+      "atlas_key": "4171",
       "crn": "3836",
       "section_number": "4201",
       "schedule_type": "LEC",
-      "instructor": "T. Balch",
+      "instructor": "Tucker Balch",
       "instructors": [
         {
-          "name": "T. Balch",
-          "email": null
+          "name": "Tucker Balch",
+          "email": "tucker.balch@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3836",
-      "section_number": "4201",
-      "schedule_type": "LEC",
-      "instructor": "T. Balch",
-      "instructors": [
-        {
-          "name": "T. Balch",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-25"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "T. Balch"
+    "Tucker Balch"
   ],
-  "scraped_at": "2026-06-17T23:10:39.539Z"
+  "scraped_at": "2026-06-18T02:58:24.250Z"
 }

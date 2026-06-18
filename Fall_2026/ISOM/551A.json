@@ -5,13 +5,13 @@
   "catalog_number": "551A",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "1.5",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course looks at how processes and systems, the so-called operating core of the organization, impacts the ability of a firm to execute its strategy. The challenges confronting firms competing in today's dynamic environment demand a multi-disciplinary focus. As we prepare students who seek to understand and face these challenges, this course covers the multiple activities comprising a firm's operating core and its supply chain. The operating core of a firm is an integrated system that combines activities related to design and engineering, production, quality management, networks of material and information flows, and the development, distribution and delivery of goods and services to customers.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "3595",
       "crn": "3770",
       "section_number": "3201",
       "schedule_type": "LEC",
-      "instructor": "R. Chellappa",
+      "instructor": "Ramnath Chellappa",
       "instructors": [
         {
-          "name": "R. Chellappa",
-          "email": null
+          "name": "Ramnath Chellappa",
+          "email": "ramnath.chellappa@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 66,
+      "seats_available": 66,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:20a",
@@ -52,26 +65,43 @@
             "end": "920"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3596",
       "crn": "3771",
       "section_number": "3202",
       "schedule_type": "LEC",
-      "instructor": "R. Chellappa",
+      "instructor": "Ramnath Chellappa",
       "instructors": [
         {
-          "name": "R. Chellappa",
-          "email": null
+          "name": "Ramnath Chellappa",
+          "email": "ramnath.chellappa@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 66,
+      "seats_available": 66,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-10:50a",
@@ -87,140 +117,67 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3597",
       "crn": "3772",
       "section_number": "4401",
       "schedule_type": "LEC",
-      "instructor": "S. Walton",
+      "instructor": "Steve Walton",
       "instructors": [
         {
-          "name": "S. Walton",
-          "email": null
+          "name": "Steve Walton",
+          "email": "steve.walton@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3770",
-      "section_number": "3201",
-      "schedule_type": "LEC",
-      "instructor": "R. Chellappa",
-      "instructors": [
-        {
-          "name": "R. Chellappa",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:20a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "920"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "920"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3771",
-      "section_number": "3202",
-      "schedule_type": "LEC",
-      "instructor": "R. Chellappa",
-      "instructors": [
-        {
-          "name": "R. Chellappa",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-10:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1050"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3772",
-      "section_number": "4401",
-      "schedule_type": "LEC",
-      "instructor": "S. Walton",
-      "instructors": [
-        {
-          "name": "S. Walton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 2,
+    "open": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Chellappa",
-    "S. Walton"
+    "Ramnath Chellappa",
+    "Steve Walton"
   ],
-  "scraped_at": "2026-06-17T23:11:31.492Z"
+  "scraped_at": "2026-06-18T03:03:26.832Z"
 }

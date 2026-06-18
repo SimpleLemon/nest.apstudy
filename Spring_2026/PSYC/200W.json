@@ -5,40 +5,53 @@
   "catalog_number": "200W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "5",
+  "credit_hours": "2",
   "requirement_designation": "SSW",
   "requirements": [
     "SSW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Introduction to basic methods and design of psychological research in the areas of learning, memory, sensation, perception, personality, and social processes. Laboratory exercises and fundamentals of scientific writing are emphasized.",
-  "course_notes": "(PSYC 110 or PSYC_OX 110 or PSYC 111 or PSYC_OX 111) and (PSYC 230 or QTM 100 or QTM_OX 100) or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisites: BIOS 506 , BIOS 507 , BIOS 510 , and BIOS 511 or permission of instructor. This course provides an introduction to statistical concepts and methods related to the analysis of survival data. Topics include survival functions, hazard rates, types of censoring and truncation, life tables, log-rank tests, Cox regression models, and parametric regression models. The emphasis is on practical implementation of standard methods using SAS or R and interpretation of results.",
+  "course_notes": "**Permission of Instructor or BIOS ADAP required**",
   "requisites": "(PSYC 110 or PSYC_OX 110 or PSYC 111 or PSYC_OX 111) and (PSYC 230 or QTM 100 or QTM_OX 100) or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1299",
       "crn": "2036",
       "section_number": "LAB1",
       "schedule_type": "LAB",
-      "instructor": "N. Menon",
+      "instructor": "Jose Binongo",
       "instructors": [
         {
-          "name": "N. Menon",
-          "email": null
+          "name": "Jose Binongo",
+          "email": "jose.n.binongo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 20,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-3:45p",
@@ -49,26 +62,43 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1300",
       "crn": "2037",
       "section_number": "LAB2",
       "schedule_type": "LAB",
-      "instructor": "C. Wilson",
+      "instructor": "Natalie Dean",
       "instructors": [
         {
-          "name": "C. Wilson",
-          "email": null
+          "name": "Natalie Dean",
+          "email": "nataliedean@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 48,
+      "seats_available": 26,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-5:15p",
@@ -79,9 +109,14 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1301",
       "crn": "2038",
       "section_number": "LAB3",
       "schedule_type": "LAB",
@@ -89,16 +124,28 @@
       "instructors": [
         {
           "name": "N. Jiang",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 120,
+      "seats_available": 91,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 5:30-6:45p",
@@ -109,26 +156,43 @@
             "end": "1845"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1302",
       "crn": "2039",
       "section_number": "LAB4",
       "schedule_type": "LAB",
-      "instructor": "S. Frandsen",
+      "instructor": "Raphiel Murden",
       "instructors": [
         {
-          "name": "S. Frandsen",
-          "email": null
+          "name": "Raphiel Murden",
+          "email": "r.j.murden@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 7-8:15p",
@@ -139,26 +203,45 @@
             "end": "2015"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1303",
       "crn": "5455",
       "section_number": "LAB5",
       "schedule_type": "LAB",
-      "instructor": "N. Slepneva",
+      "instructor": "Max Lau",
       "instructors": [
         {
-          "name": "N. Slepneva",
-          "email": null
+          "name": "Max Lau",
+          "email": "msy.lau@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 1-2:15p",
@@ -169,26 +252,43 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1298",
       "crn": "2035",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Kazama/Medina",
+      "instructor": "Rebecca Zhang",
       "instructors": [
         {
-          "name": "Kazama/Medina",
-          "email": null
+          "name": "Rebecca Zhang",
+          "email": "hzhang3@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -204,211 +304,30 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "2036",
-      "section_number": "LAB1",
-      "schedule_type": "LAB",
-      "instructor": "N. Menon",
-      "instructors": [
-        {
-          "name": "N. Menon",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2037",
-      "section_number": "LAB2",
-      "schedule_type": "LAB",
-      "instructor": "C. Wilson",
-      "instructors": [
-        {
-          "name": "C. Wilson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2038",
-      "section_number": "LAB3",
-      "schedule_type": "LAB",
-      "instructor": "N. Jiang",
-      "instructors": [
-        {
-          "name": "N. Jiang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 5:30-6:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1730",
-            "end": "1845"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2039",
-      "section_number": "LAB4",
-      "schedule_type": "LAB",
-      "instructor": "S. Frandsen",
-      "instructors": [
-        {
-          "name": "S. Frandsen",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 7-8:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1900",
-            "end": "2015"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5455",
-      "section_number": "LAB5",
-      "schedule_type": "LAB",
-      "instructor": "N. Slepneva",
-      "instructors": [
-        {
-          "name": "N. Slepneva",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2035",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Kazama/Medina",
-      "instructors": [
-        {
-          "name": "Kazama/Medina",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
-    "lectures": 2,
-    "labs": 10,
+    "total_sections": 6,
+    "lectures": 1,
+    "labs": 5,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 8,
+    "open": 6,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Wilson",
-    "Kazama/Medina",
+    "Jose Binongo",
+    "Max Lau",
     "N. Jiang",
-    "N. Menon",
-    "N. Slepneva",
-    "S. Frandsen"
+    "Natalie Dean",
+    "Raphiel Murden",
+    "Rebecca Zhang"
   ],
-  "scraped_at": "2026-06-17T23:06:24.210Z"
+  "scraped_at": "2026-06-18T02:42:27.305Z"
 }

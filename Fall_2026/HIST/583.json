@@ -5,13 +5,13 @@
   "catalog_number": "583",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "For 1st year History graduate students only. This course centers on how we understand the productions of historical knowledge inside and outside the academy. We will explore how questions on and about the past have come to be framed, and both the possibilities and occlusions that have unfolded within the guild of professional historians, including the relationship between history and other disciplines. Throughout we will consider: what are the topics historians should be working on in the twenty-first century? This course is designed primarily for incoming Ph.D. students in the History Program. As we delve into the productions of history and some of the debates that have consumed scholars over the past few decades, we will also explore how the profession has developed and its current disciplinary organization. (Permission Required Prior to Enrollment)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,38 @@
   },
   "sections": [
     {
+      "atlas_key": "2161",
       "crn": "2712",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "J. Liu",
+      "instructor": "Jinyu Liu",
       "instructors": [
         {
-          "name": "J. Liu",
-          "email": null
+          "name": "Jinyu Liu",
+          "email": "jinyu.liu@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Emerson Chemistry Bldg. E103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 7,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-5:30p",
@@ -47,51 +62,25 @@
             "end": "1730"
           }
         ]
-      }
-    },
-    {
-      "crn": "2712",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "J. Liu",
-      "instructors": [
-        {
-          "name": "J. Liu",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Liu"
+    "Jinyu Liu"
   ],
-  "scraped_at": "2026-06-17T23:11:08.778Z"
+  "scraped_at": "2026-06-18T03:00:28.244Z"
 }

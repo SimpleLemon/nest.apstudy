@@ -5,35 +5,58 @@
   "catalog_number": "499R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 5",
+  "credit_hours": "3",
   "requirement_designation": "HAP",
   "requirements": [
-    "HAP"
+    "HAP",
+    "Quantitative Reasoning(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "A supervised project in an area of study to be determined by the instructor and student in the semester preceding the independent study. Requires faculty approval prior to registration. Only four credit hours can be applied toward fulfillment of the requirement of the major.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Limits, continuity, derivatives, antiderivatives, the definite integral.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "803",
       "crn": "3700",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "instructor": "Akash Sureshkumar",
+      "instructors": [
+        {
+          "name": "Akash Sureshkumar",
+          "email": "akash.sureshkumar@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "Math & Science Center - W307C",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6-11p",
@@ -44,26 +67,47 @@
             "end": "2300"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "804",
       "crn": "5236",
       "section_number": "2",
       "schedule_type": "SUP",
-      "instructor": "Porst/Barba",
+      "instructor": "Yizhou(Riley) Chen",
       "instructors": [
         {
-          "name": "Porst/Barba",
-          "email": null
+          "name": "Yizhou(Riley) Chen",
+          "email": "yizhou.chen@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Math & Science Center - N302",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 28,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4-6p",
@@ -74,174 +118,118 @@
             "end": "1800"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "805",
       "crn": "6398",
       "section_number": "3",
       "schedule_type": "SUP",
-      "instructor": "D. Barba",
+      "instructor": "Rafael Kazuhiro Miyazaki",
       "instructors": [
         {
-          "name": "D. Barba",
-          "email": null
+          "name": "Rafael Kazuhiro Miyazaki",
+          "email": "rafael.kazuhiro.miyazaki@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6562",
-      "section_number": "4",
-      "schedule_type": "SUP",
-      "instructor": "S. Garner",
-      "instructors": [
-        {
-          "name": "S. Garner",
-          "email": null
-        }
+      "location": "Math & Science Center - W307C",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3700",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6-11p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1800",
-            "end": "2300"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5236",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "Porst/Barba",
-      "instructors": [
-        {
-          "name": "Porst/Barba",
-          "email": null
-        }
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 4-6p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1800"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "6398",
-      "section_number": "3",
-      "schedule_type": "SUP",
-      "instructor": "D. Barba",
-      "instructors": [
-        {
-          "name": "D. Barba",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
+      "enrollment_capacity": 22,
+      "seats_available": 19,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "806",
       "crn": "6562",
       "section_number": "4",
       "schedule_type": "SUP",
-      "instructor": "S. Garner",
+      "instructor": "Maddie Allen",
       "instructors": [
         {
-          "name": "S. Garner",
-          "email": null
+          "name": "Maddie Allen",
+          "email": "maddie.allen@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Math & Science Center - N304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 28,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 8,
-    "open": 2,
-    "closed": 6,
+    "other": 4,
+    "open": 4,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Barba",
-    "Porst/Barba",
-    "S. Garner"
+    "Akash Sureshkumar",
+    "Maddie Allen",
+    "Rafael Kazuhiro Miyazaki",
+    "Yizhou(Riley) Chen"
   ],
-  "scraped_at": "2026-06-17T23:02:32.989Z"
+  "scraped_at": "2026-06-18T02:21:20.321Z"
 }

@@ -5,23 +5,25 @@
   "catalog_number": "224R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1",
+  "credit_hours": "4",
   "requirement_designation": "PE",
   "requirements": [
-    "PE"
+    "PE",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course includes further development of skills introduced in Jazz Dance I with greater emphasis on style, performance, and technique. More technically challenging movement sequences will be introduced and students will be expected to individualize movement at a beginner/intermediate level. May be taken up to three times for credit.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Fall, Summer (Vienna). The first of the two-course sequence (101-102) that introduces students to reading, writing, speaking, and understanding the German language through an exploration of the different identities of young adults in the United States and the German-speaking world.",
+  "course_notes": "German 101 is the first of the two-course sequence that explores the roles and group affiliations that contribute to the identity formation of young adults in the United States and the German-speaking world. Specifically, students will examine the following three roles in 101, devoting 4-5 weeks to each: The young adult as (1) a student; (2) a hobbyist; and (3) a family member. Students will use a free, online textbook and supplemental materials to acquire the language necessary to communicate meaningfully about each topic. Through this process of examining identity formation, students in this course and in its sequel, German 102, will be introduced to the principles of speaking, writing, reading, and understanding German and to life in German-speaking countries. Texts: Free, online textbook and supplemental materials provided by instructor. Particulars: Participation (10%) Writing assignments (30%) Speaking events (30%) Preparation/homework (30%). Prerequisite: none; students who have had any prior exposure to the German language should take the department's online placement exam.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "644",
       "crn": "3078",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +31,32 @@
       "instructors": [
         {
           "name": "T. Myers",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Modern Language 128",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 11,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -54,56 +72,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3078",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "T. Myers",
-      "instructors": [
-        {
-          "name": "T. Myers",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
     "T. Myers"
   ],
-  "scraped_at": "2026-06-17T23:01:57.218Z"
+  "scraped_at": "2026-06-18T02:16:29.861Z"
 }

@@ -5,81 +5,74 @@
   "catalog_number": "719D",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "0",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Students who complete Clinical Pastoral Education who do not wish to claim academic credit hours but wish to record completion of a CPE unit for the purpose of completing concentration or similar requirements may elect this zero credit course upon verification of completion of the CPE unit by the Candler Office of Contextual Education.",
+  "course_notes": "(For students who wish to record completion of CPE (such as for concentration in Chaplaincy) but does not wish to claim hours of academic credit); requires approval from the Office of Contextual Education; student submits online CPE enrollment form including proof of completion of CPE unit to Office of Contextual Education via a form on the Candler intranet/Inside Candler for approval; graduating seniors adding the course in their final semester must do so prior to the end of add/drop for the semester even if completion proof is not yet available; Office of Contextual Education submits to Candler Registrar for processing)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-12",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3933",
       "crn": "4134",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "C. Coburn",
+      "instructor": "Letitia Campbell",
       "instructors": [
         {
-          "name": "C. Coburn",
-          "email": null
+          "name": "Letitia Campbell",
+          "email": "letitia.campbell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "4134",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "C. Coburn",
-      "instructors": [
-        {
-          "name": "C. Coburn",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 2,
+    "open": 1,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Coburn"
+    "Letitia Campbell"
   ],
-  "scraped_at": "2026-06-17T23:04:23.816Z"
+  "scraped_at": "2026-06-18T02:34:22.370Z"
 }

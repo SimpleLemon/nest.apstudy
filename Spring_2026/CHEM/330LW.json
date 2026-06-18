@@ -10,8 +10,8 @@
   "requirements": [],
   "campus": null,
   "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "course_description": "",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,6 +20,7 @@
   },
   "sections": [
     {
+      "atlas_key": "5067",
       "crn": "3756",
       "section_number": "1",
       "schedule_type": "LAB",
@@ -27,16 +28,25 @@
       "instructors": [
         {
           "name": "A. Brathwaite",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "4",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 1-2:15p; T 5:30-8:15p",
@@ -52,9 +62,14 @@
             "end": "2015"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     },
     {
+      "atlas_key": "5068",
       "crn": "3758",
       "section_number": "2",
       "schedule_type": "LAB",
@@ -62,16 +77,25 @@
       "instructors": [
         {
           "name": "A. Brathwaite",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "4",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 1-2:15p; W 10a-12:45p",
@@ -87,9 +111,14 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     },
     {
+      "atlas_key": "5069",
       "crn": "3760",
       "section_number": "3",
       "schedule_type": "LAB",
@@ -97,16 +126,25 @@
       "instructors": [
         {
           "name": "A. Brathwaite",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "4",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 1-2:15p; Th 2:30-5:15p",
@@ -122,9 +160,14 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     },
     {
+      "atlas_key": "5070",
       "crn": "5699",
       "section_number": "4",
       "schedule_type": "LAB",
@@ -132,16 +175,25 @@
       "instructors": [
         {
           "name": "A. Brathwaite",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 1-2:15p; F 10a-12:45p",
@@ -157,161 +209,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "3756",
-      "section_number": "1",
-      "schedule_type": "LAB",
-      "instructor": "A. Brathwaite",
-      "instructors": [
-        {
-          "name": "A. Brathwaite",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 1-2:15p; T 5:30-8:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Tue",
-            "start": "1730",
-            "end": "2015"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3758",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "A. Brathwaite",
-      "instructors": [
-        {
-          "name": "A. Brathwaite",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 1-2:15p; W 10a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3760",
-      "section_number": "3",
-      "schedule_type": "LAB",
-      "instructor": "A. Brathwaite",
-      "instructors": [
-        {
-          "name": "A. Brathwaite",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 1-2:15p; Th 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5699",
-      "section_number": "4",
-      "schedule_type": "LAB",
-      "instructor": "A. Brathwaite",
-      "instructors": [
-        {
-          "name": "A. Brathwaite",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 1-2:15p; F 10a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
+    "total_sections": 4,
     "lectures": 0,
-    "labs": 8,
+    "labs": 4,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
-    "waitlisted": 6
+    "closed": 1,
+    "waitlisted": 3
   },
   "instructors_unique": [
     "A. Brathwaite"
   ],
-  "scraped_at": "2026-06-17T23:01:37.681Z"
+  "scraped_at": "2026-06-18T02:13:14.113Z"
 }

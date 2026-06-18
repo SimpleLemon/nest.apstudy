@@ -5,15 +5,16 @@
   "catalog_number": "495A",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 8",
+  "credit_hours": "4",
   "requirement_designation": "XA",
   "requirements": [
-    "XA"
+    "XA",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Permission of Honors Coordinator required. Restricted to students who are accepted into the departmental Honors program. Fulfills ENVS Independent Study requirement (4 credit hours).",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,262 +23,247 @@
   },
   "sections": [
     {
+      "atlas_key": "2079",
       "crn": "5365",
       "section_number": "1",
       "schedule_type": "RSC",
-      "instructor": "J. Ajibade",
+      "instructor": "Jola Ajibade",
       "instructors": [
         {
-          "name": "J. Ajibade",
-          "email": null
+          "name": "Jola Ajibade",
+          "email": "idowu.ajibade@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "5",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2080",
       "crn": "5371",
       "section_number": "2",
       "schedule_type": "RSC",
-      "instructor": "T. Gillespie",
+      "instructor": "Thomas R. Gillespie",
       "instructors": [
         {
-          "name": "T. Gillespie",
-          "email": null
+          "name": "Thomas R. Gillespie",
+          "email": "thomas.gillespie@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "5",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2081",
       "crn": "5422",
       "section_number": "3",
       "schedule_type": "RSC",
-      "instructor": "G. Vazquez Prokopec",
+      "instructor": "Gonzalo Vazquez Prokopec",
       "instructors": [
         {
-          "name": "G. Vazquez Prokopec",
-          "email": null
+          "name": "Gonzalo Vazquez Prokopec",
+          "email": "gmvazqu@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "5",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2082",
       "crn": "5513",
       "section_number": "4",
       "schedule_type": "RSC",
-      "instructor": "A. Avramov",
+      "instructor": "Alexander Avramov",
       "instructors": [
         {
-          "name": "A. Avramov",
-          "email": null
+          "name": "Alexander Avramov",
+          "email": "alexander.avramov@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2083",
       "crn": "5669",
       "section_number": "5",
       "schedule_type": "RSC",
-      "instructor": "E. Saikawa",
+      "instructor": "Eri Saikawa",
       "instructors": [
         {
-          "name": "E. Saikawa",
-          "email": null
+          "name": "Eri Saikawa",
+          "email": "eri.saikawa@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 2,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5365",
-      "section_number": "1",
-      "schedule_type": "RSC",
-      "instructor": "J. Ajibade",
-      "instructors": [
-        {
-          "name": "J. Ajibade",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5371",
-      "section_number": "2",
-      "schedule_type": "RSC",
-      "instructor": "T. Gillespie",
-      "instructors": [
-        {
-          "name": "T. Gillespie",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5422",
-      "section_number": "3",
-      "schedule_type": "RSC",
-      "instructor": "G. Vazquez Prokopec",
-      "instructors": [
-        {
-          "name": "G. Vazquez Prokopec",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5513",
-      "section_number": "4",
-      "schedule_type": "RSC",
-      "instructor": "A. Avramov",
-      "instructors": [
-        {
-          "name": "A. Avramov",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5669",
-      "section_number": "5",
-      "schedule_type": "RSC",
-      "instructor": "E. Saikawa",
-      "instructors": [
-        {
-          "name": "E. Saikawa",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
+    "total_sections": 5,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 10,
-    "open": 4,
-    "closed": 6,
+    "other": 5,
+    "open": 2,
+    "closed": 3,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Avramov",
-    "E. Saikawa",
-    "G. Vazquez Prokopec",
-    "J. Ajibade",
-    "T. Gillespie"
+    "Alexander Avramov",
+    "Eri Saikawa",
+    "Gonzalo Vazquez Prokopec",
+    "Jola Ajibade",
+    "Thomas R. Gillespie"
   ],
-  "scraped_at": "2026-06-17T23:10:29.848Z"
+  "scraped_at": "2026-06-18T02:57:02.096Z"
 }

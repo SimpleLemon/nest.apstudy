@@ -10,35 +10,50 @@
   "requirements": [
     "HAE"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course is an introduction to the central questions in the philosophy of race and ethnicity, such as the concept of race: its historical origins, its cogency, and the various uses to which it has been put, including its possible intersection with other forms of oppression.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Seminar of lecture series of topics in human health. May be repeated for credit when topic varies. Credit varies from one to four hours.",
+  "course_notes": "This course examines contemporary ethical challenges in healthcare, public health, and emerging biotechnologies. Students will apply moral theories and core health ethics principles to real-world cases involving chronic and mental illness, aging, xenotransplantation, climate change, reproductive technologies, AI in medicine, health data privacy, and more. Special Note: HLTH 385 courses count differently within the majors/minors; they are not all equivalent. Please pay close attention to the exact course title and categories that specific title counts in, which you can find on our requirements sheets and course summary sheets. If you have any questions, please reach out to CSHH administration.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3087",
       "crn": "2001",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Iradukunda",
+      "instructor": "Ju Zhang",
       "instructors": [
         {
-          "name": "S. Iradukunda",
-          "email": null
+          "name": "Ju Zhang",
+          "email": "ju.zhang@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 220",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 27,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MWF 8:30-9:20a",
@@ -59,26 +74,45 @@
             "end": "920"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3088",
       "crn": "5144",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "D. Westbrook",
+      "instructor": "Ju Zhang",
       "instructors": [
         {
-          "name": "D. Westbrook",
-          "email": null
+          "name": "Ju Zhang",
+          "email": "ju.zhang@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Emerson Chemistry Bldg. E363",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "2",
+      "enrollment_capacity": 19,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MWF 4-4:50p",
@@ -99,102 +133,25 @@
             "end": "1650"
           }
         ]
-      }
-    },
-    {
-      "crn": "2001",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Iradukunda",
-      "instructors": [
-        {
-          "name": "S. Iradukunda",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MWF 8:30-9:20a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "920"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "920"
-          },
-          {
-            "day": "Fri",
-            "start": "830",
-            "end": "920"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5144",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "D. Westbrook",
-      "instructors": [
-        {
-          "name": "D. Westbrook",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MWF 4-4:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1650"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1650"
-          },
-          {
-            "day": "Fri",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Westbrook",
-    "S. Iradukunda"
+    "Ju Zhang"
   ],
-  "scraped_at": "2026-06-17T23:06:07.916Z"
+  "scraped_at": "2026-06-18T02:38:17.513Z"
 }

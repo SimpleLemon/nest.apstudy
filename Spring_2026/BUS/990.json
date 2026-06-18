@@ -5,81 +5,76 @@
   "catalog_number": "990",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Seminar or lecture series of topics of anthropological concern. May be repeated for credit when topic varies.",
+  "course_notes": "(Same as ENVS 385 2) (Complete Topic - Energy Matters: Energy, Culture, Society) In this era of both climate change and high mass consumption, our world faces enormous challenges to our systems of producing, consuming, distributing, and transitioning energy. While we often think of these challenges as technological, they are bound up in questions of culture, inequality, economic order, political power, social organization, and ethics. This course draws upon historical, anthropological, and literary sources to examine the infrastructures - the constructed networks of ideas, technologies, people, and goods - that constitute energy systems. We will consider how energy both constitutes and bears upon our social worlds, our physical well-being, our economic and political relations, and our everyday lives.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3064",
       "crn": "6662",
       "section_number": "1109",
       "schedule_type": "ABR",
-      "instructor": "D. Clear",
+      "instructor": "Kristin D Phillips",
       "instructors": [
         {
-          "name": "D. Clear",
-          "email": null
+          "name": "Kristin D Phillips",
+          "email": "kristin.d.phillips@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6662",
-      "section_number": "1109",
-      "schedule_type": "ABR",
-      "instructor": "D. Clear",
-      "instructors": [
-        {
-          "name": "D. Clear",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 0,
-    "closed": 2,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Clear"
+    "Kristin D Phillips"
   ],
-  "scraped_at": "2026-06-17T23:01:34.305Z"
+  "scraped_at": "2026-06-18T02:12:20.939Z"
 }

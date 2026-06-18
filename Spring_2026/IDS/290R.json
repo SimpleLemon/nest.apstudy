@@ -5,40 +5,53 @@
   "catalog_number": "290R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "A side-car course brings together a subset of students from two courses that overlap in methodologies, topics, etc., to create a short interdisciplinary course that runs simultaneously with its two sponsoring courses. One credit, S/U only. Schedule and format arranged by sponsoring professors.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course teaches students how to use analytics with financial data to make better, data informed decisions. This course is an overview course and is designed to expose students to the many different ways in which data analytic tools can be used in accounting settings. To teach students how to successfully combine their understanding of accounting concepts with data analytics skills and tools, this course focuses on: 1. Reframing business issues that require the use of accounting knowledge into specific analytical questions 2. Manipulating data and calculating answers to the above framed questions 3. Communicating results with appropriate context in a meaningful and easy to understand manner",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4123",
       "crn": "5519",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "Sharma/Gutierrez",
+      "instructor": "Allison Kays",
       "instructors": [
         {
-          "name": "Sharma/Gutierrez",
-          "email": null
+          "name": "Allison Kays",
+          "email": "allison.kays@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W320",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-6p",
@@ -49,26 +62,43 @@
             "end": "1800"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4124",
       "crn": "5743",
       "section_number": "3",
       "schedule_type": "SEM",
-      "instructor": "Team",
+      "instructor": "Allison Kays",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Allison Kays",
+          "email": "allison.kays@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W320",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 28,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1:30-4p",
@@ -79,26 +109,43 @@
             "end": "1600"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4125",
       "crn": "5735",
       "section_number": "4",
       "schedule_type": "SEM",
-      "instructor": "Team",
+      "instructor": "Allison Kays",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Allison Kays",
+          "email": "allison.kays@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W320",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-5:15p",
@@ -109,26 +156,43 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4126",
       "crn": "5738",
       "section_number": "5",
       "schedule_type": "SEM",
-      "instructor": "Team",
+      "instructor": "Allison Kays",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Allison Kays",
+          "email": "allison.kays@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W320",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Masters Non-MBA",
+      "grading_mode_options": [
+        "MTR",
+        "Non-MBA Masters Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-5:15p",
@@ -139,26 +203,43 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4127",
       "crn": "5822",
       "section_number": "6",
       "schedule_type": "SEM",
-      "instructor": "Bekele/Faniyi",
+      "instructor": "Allison Kays",
       "instructors": [
         {
-          "name": "Bekele/Faniyi",
-          "email": null
+          "name": "Allison Kays",
+          "email": "allison.kays@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W320",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 3,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-6:45p",
@@ -169,173 +250,25 @@
             "end": "1845"
           }
         ]
-      }
-    },
-    {
-      "crn": "5519",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "Sharma/Gutierrez",
-      "instructors": [
-        {
-          "name": "Sharma/Gutierrez",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 4-6p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1800"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5743",
-      "section_number": "3",
-      "schedule_type": "SEM",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1:30-4p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1330",
-            "end": "1600"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5735",
-      "section_number": "4",
-      "schedule_type": "SEM",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5738",
-      "section_number": "5",
-      "schedule_type": "SEM",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 4-5:15p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5822",
-      "section_number": "6",
-      "schedule_type": "SEM",
-      "instructor": "Bekele/Faniyi",
-      "instructors": [
-        {
-          "name": "Bekele/Faniyi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 4-6:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1845"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
+    "total_sections": 5,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 10,
-    "open": 4,
+    "other": 5,
+    "open": 2,
     "closed": 0,
-    "waitlisted": 6
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "Bekele/Faniyi",
-    "Sharma/Gutierrez",
-    "Team"
+    "Allison Kays"
   ],
-  "scraped_at": "2026-06-17T23:03:18.569Z"
+  "scraped_at": "2026-06-18T02:26:24.115Z"
 }

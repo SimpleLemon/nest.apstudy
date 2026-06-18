@@ -8,12 +8,13 @@
   "credit_hours": "2",
   "requirement_designation": "XA",
   "requirements": [
-    "XA"
+    "XA",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Explores skills to effectively and successfully combine singing, facial expression, gestures, interpretation, movement, and interaction with other performers without tension and self-judgment. Repeatable without music major credit. Instructor approval required",
-  "course_notes": null,
+  "course_notes": "(Same as THEA 443R 1) Same as THEA 443r",
   "requisites": null,
   "cross_listed": "THEA 443R",
   "date_range": {
@@ -22,23 +23,45 @@
   },
   "sections": [
     {
+      "atlas_key": "2278",
       "crn": "3037",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Mamola/Dinkins-Matthews",
+      "instructor": "Patricia A Dinkins-Matthews",
       "instructors": [
         {
-          "name": "Mamola/Dinkins-Matthews",
-          "email": null
+          "name": "Patricia A Dinkins-Matthews",
+          "email": "pdinkin@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Bethany Mamola",
+          "email": "bethany.grace.mamola@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "BRB Performing Arts Studio",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -54,56 +77,26 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "3037",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Mamola/Dinkins-Matthews",
-      "instructors": [
-        {
-          "name": "Mamola/Dinkins-Matthews",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Mamola/Dinkins-Matthews"
+    "Bethany Mamola",
+    "Patricia A Dinkins-Matthews"
   ],
-  "scraped_at": "2026-06-17T23:12:17.057Z"
+  "scraped_at": "2026-06-18T03:07:37.827Z"
 }

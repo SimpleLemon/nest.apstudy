@@ -1,0 +1,89 @@
+{
+  "course_code": "ENG_OX 221RW",
+  "course_title": "Advanced Writing Workshop: Writing in the Health Sciences",
+  "subject": "ENG_OX",
+  "catalog_number": "221RW",
+  "term": "Spring_2026",
+  "srcdb": "5261",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will expose you to state-of-the-art research and valuable frameworks on the optimal use of accounting information for forecasting and on the identification of market inefficiencies in using accounting information for equity valuation. You will identify relevant research, access appropriate databases, and use effective tools for performing analyses to distinguish between the fundamental value versus investor sentiment components of stock prices. Using these accounting signals will therefore aid in identifying mispriced stocks.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4387",
+      "crn": "6209",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Teri Yohn",
+      "instructors": [
+        {
+          "name": "Teri Yohn",
+          "email": "teri.lombardi.yohn@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "Goizueta Foundation Ctr W320",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Teri Yohn"
+  ],
+  "scraped_at": "2026-06-18T02:19:33.365Z"
+}

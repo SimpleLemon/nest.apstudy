@@ -5,13 +5,13 @@
   "catalog_number": "555A",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "0",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This bootcamp provides a refresher on all four financial statements (in the context of macro economic factors - rising inflation, rising interest rates, foreign currency headwinds): the statement of operations (P&L), Balance Sheet, Statement of Cash Flows, and the Statement of Shareholders' Equity. The session reviews how to read a financial statement and to derive stories of the performance of the company including trends in top-line and bottom line growth, EPS, dividends, key ratios reflecting financial position of the company. All keys to fundamental analysis. The course also focuses on the impact of special events such as stock splits and supply chain issues on financial statements.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,66 +20,59 @@
   },
   "sections": [
     {
+      "atlas_key": "4173",
       "crn": "3838",
       "section_number": "4201",
       "schedule_type": "LEC",
-      "instructor": "U. Rackliffe",
+      "instructor": "Usha Rackliffe",
       "instructors": [
         {
-          "name": "U. Rackliffe",
-          "email": null
+          "name": "Usha Rackliffe",
+          "email": "usha.rackliffe@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3838",
-      "section_number": "4201",
-      "schedule_type": "LEC",
-      "instructor": "U. Rackliffe",
-      "instructors": [
-        {
-          "name": "U. Rackliffe",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "U. Rackliffe"
+    "Usha Rackliffe"
   ],
-  "scraped_at": "2026-06-17T23:10:39.539Z"
+  "scraped_at": "2026-06-18T02:58:24.250Z"
 }

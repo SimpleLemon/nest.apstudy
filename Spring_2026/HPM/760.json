@@ -5,38 +5,51 @@
   "catalog_number": "760",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "1",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Doctoral education in public health trains students to drive innovation and discovery in public health. Apart from the usual doctoral milestones of coursework, the qualifying exam, and the dissertation, much of the doctoral process is self-directed. Identifying your goals for your doctoral experience and how to achieve them can be daunting. This conversation-based course is designed to provide students the tools to develop a personal strategy for successfully navigating the doctoral experience.",
+  "course_notes": "This course is for first year Public Health Sciences Doctoral Students.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "2950",
       "crn": "5147",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Dieci",
+      "instructor": "Lauren McCullough",
       "instructors": [
         {
-          "name": "M. Dieci",
-          "email": null
+          "name": "Lauren McCullough",
+          "email": "lauren.mccullough@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 45,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-2:50p; Th 2-3:50p",
@@ -52,56 +65,25 @@
             "end": "1550"
           }
         ]
-      }
-    },
-    {
-      "crn": "5147",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Dieci",
-      "instructors": [
-        {
-          "name": "M. Dieci",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-2:50p; Th 2-3:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1450"
-          },
-          {
-            "day": "Thu",
-            "start": "1400",
-            "end": "1550"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Dieci"
+    "Lauren McCullough"
   ],
-  "scraped_at": "2026-06-17T23:03:12.100Z"
+  "scraped_at": "2026-06-18T02:25:48.096Z"
 }

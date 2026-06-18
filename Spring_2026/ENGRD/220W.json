@@ -5,40 +5,59 @@
   "catalog_number": "220W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "CW",
   "requirements": [
-    "CW"
+    "CW",
+    "Humanities and Arts with Race & Ethnicity(*)",
+    "Social Sciences with Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Introduction to rhetoric and rhetorical analysis. While learning rhetorical tactics of Ancient Greece and Rome, students will apply that learning to their academic and vocational goals. Practice in writing and speaking, grounded in ethics, are central to the course.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is an introduction to the Middle Ages (500 to 1500 CE) and Europe's place in the world. It provides a survey of interactions with pagans (Germanic tribes and the Vikings) and the Byzantine, Islamic, and Mongol empires that shaped medieval society.",
+  "course_notes": "This course is an introduction to the Middle Ages (500 to 1500 CE) and Europe's place in the world. It provides a survey of interactions with pagans and the Byzantine and Islamic empires that shaped medieval society, particularly how medieval Europeans viewed the world and why they believed themselves to be religiously and culturally superior. Special attention will be given to the enslavement of people, the Muslim and Jewish communities living within medieval Europe, and European involvement in the Mediterranean through the crusades, conquest, and trade. The history of Muslim-Christian relations in this region meant that contact facilitated the spread of ideas, food, technology, art, and architecture from the Islamic world to Europe. We will read accounts of Christian merchants who traveled throughout the Middle East and to the Mongol empire in Central Asia. Other highlights of the course include forced conversions, knightly culture, the power of queens and noblewomen, religious devotion, monasticism and the military orders. This course has a light reading load.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "709",
       "crn": "4082",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "R. Spera",
+      "instructor": "Michelle Armstrong-Partida",
       "instructors": [
         {
-          "name": "R. Spera",
-          "email": null
+          "name": "Michelle Armstrong-Partida",
+          "email": "marmstrongpartida@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Rich Building 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts with Race & Ethnicity(*)",
+      "requirements": [
+        "Humanities and Arts with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 30,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,26 +73,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "710",
       "crn": "4083",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "R. Spera",
+      "instructor": "Gerardo Manrique de Lara Ruiz",
       "instructors": [
         {
-          "name": "R. Spera",
-          "email": null
+          "name": "Gerardo Manrique de Lara Ruiz",
+          "email": "gerardo.manrique.de.lara.ruiz@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Rich Building 211",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences with Race & Ethnicity(*)",
+      "requirements": [
+        "Social Sciences with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "2",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -89,91 +129,26 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "4082",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "R. Spera",
-      "instructors": [
-        {
-          "name": "R. Spera",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4083",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "R. Spera",
-      "instructors": [
-        {
-          "name": "R. Spera",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 4
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Spera"
+    "Gerardo Manrique de Lara Ruiz",
+    "Michelle Armstrong-Partida"
   ],
-  "scraped_at": "2026-06-17T23:02:23.318Z"
+  "scraped_at": "2026-06-18T02:19:56.735Z"
 }

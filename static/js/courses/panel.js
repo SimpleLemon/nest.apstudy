@@ -245,6 +245,8 @@
             ${detailRow("Campus", formatCampus(section))}
             ${detailRow("Seats", formatSeats(section))}
             ${detailRow("Credits", section.credit_hours || "N/A")}
+            ${detailRow("Grading Mode", section.grading_mode || "N/A")}
+            ${detailRow("Instruction Method", section.instruction_method || "N/A")}
             ${detailRow("Requirement", formatRequirement(section))}
             ${detailRow("Dates", formatDateRange(section.date_range))}
             ${detailRow("Live Status", liveText)}

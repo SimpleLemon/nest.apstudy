@@ -5,38 +5,53 @@
   "catalog_number": "655",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "4",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to the concepts of microbial physiology, biochemistry, genetics, and evolution.",
+  "course_notes": "This course will provide an Introduction to the concepts of microbial physiology, biochemistry, genetics, and evolution. This course will fulfill the Column B requirement (or elective credit) for the Biology major. Students must also register for and attend a BIOL 370 Discussion Section. There is an optional 2-credit laboratory (BIOL 370L) associated with this course. Prerequisites: Biology 142 + 142L.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "454",
       "crn": "3433",
       "section_number": "2163",
       "schedule_type": "LEC",
-      "instructor": "D. Lee",
+      "instructor": "Eric Battaglioli",
       "instructors": [
         {
-          "name": "D. Lee",
-          "email": null
+          "name": "Eric Battaglioli",
+          "email": "eric.john.battaglioli@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "6",
+      "enrollment_capacity": 80,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 6:30-9:30p",
@@ -47,26 +62,45 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "455",
       "crn": "3434",
       "section_number": "2663",
       "schedule_type": "LEC",
-      "instructor": "D. Lee",
+      "instructor": "Eric Battaglioli",
       "instructors": [
         {
-          "name": "D. Lee",
-          "email": null
+          "name": "Eric Battaglioli",
+          "email": "eric.john.battaglioli@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "6",
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 6:30-9:30p",
@@ -77,26 +111,45 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "456",
       "crn": "3435",
       "section_number": "3263",
       "schedule_type": "LEC",
-      "instructor": "D. Lee",
+      "instructor": "Eric Battaglioli",
       "instructors": [
         {
-          "name": "D. Lee",
-          "email": null
+          "name": "Eric Battaglioli",
+          "email": "eric.john.battaglioli@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "6",
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 6:30-9:30p",
@@ -107,26 +160,45 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "457",
       "crn": "3436",
       "section_number": "4165",
       "schedule_type": "LEC",
-      "instructor": "D. Lee",
+      "instructor": "Eric Battaglioli",
       "instructors": [
         {
-          "name": "D. Lee",
-          "email": null
+          "name": "Eric Battaglioli",
+          "email": "eric.john.battaglioli@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "6",
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -142,26 +214,45 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "458",
       "crn": "3437",
       "section_number": "4565",
       "schedule_type": "LEC",
-      "instructor": "D. Lee",
+      "instructor": "Eric Battaglioli",
       "instructors": [
         {
-          "name": "D. Lee",
-          "email": null
+          "name": "Eric Battaglioli",
+          "email": "eric.john.battaglioli@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "6",
+      "enrollment_capacity": 20,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -177,26 +268,45 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "459",
       "crn": "6241",
       "section_number": "6163",
       "schedule_type": "LEC",
-      "instructor": "D. Lee",
+      "instructor": "Eric Battaglioli",
       "instructors": [
         {
-          "name": "D. Lee",
-          "email": null
+          "name": "Eric Battaglioli",
+          "email": "eric.john.battaglioli@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 117",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "6",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 6:30-9:30p",
@@ -207,211 +317,25 @@
             "end": "2130"
           }
         ]
-      }
-    },
-    {
-      "crn": "3433",
-      "section_number": "2163",
-      "schedule_type": "LEC",
-      "instructor": "D. Lee",
-      "instructors": [
-        {
-          "name": "D. Lee",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3434",
-      "section_number": "2663",
-      "schedule_type": "LEC",
-      "instructor": "D. Lee",
-      "instructors": [
-        {
-          "name": "D. Lee",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3435",
-      "section_number": "3263",
-      "schedule_type": "LEC",
-      "instructor": "D. Lee",
-      "instructors": [
-        {
-          "name": "D. Lee",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3436",
-      "section_number": "4165",
-      "schedule_type": "LEC",
-      "instructor": "D. Lee",
-      "instructors": [
-        {
-          "name": "D. Lee",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3437",
-      "section_number": "4565",
-      "schedule_type": "LEC",
-      "instructor": "D. Lee",
-      "instructors": [
-        {
-          "name": "D. Lee",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "6241",
-      "section_number": "6163",
-      "schedule_type": "LEC",
-      "instructor": "D. Lee",
-      "instructors": [
-        {
-          "name": "D. Lee",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
-    "lectures": 12,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 8,
-    "closed": 2,
-    "waitlisted": 2
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Lee"
+    "Eric Battaglioli"
   ],
-  "scraped_at": "2026-06-17T23:03:28.352Z"
+  "scraped_at": "2026-06-18T02:27:13.164Z"
 }

@@ -5,40 +5,53 @@
   "catalog_number": "101",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "SS",
   "requirements": [
     "SS"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Study of human social behavior. Social and cultural aspects of the emergence, maintenance, modification, and adjustment of human groups.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisite/concurrent: BIOS 500 . Emphasizes the concepts and premises of the science of epidemiology. Methods of hypothesis formulation and evaluation are stressed. Techniques for quantifying the amount of disease (or other health indicator) in populations are introduced, followed by discussion of epidemiologic study designs useful for identifying etiologic factors and other relevant correlates of disease. Students gain facility with the calculation of basic epidemiologic measures of frequency, association, and impact. The concepts of random variability, bias, and effect modification are examined in detail. The use of stratified analysis, including Mantel-Haenszel techniques, is explored. Inferences from study results are discussed. Students are required to analyze and critique studies from the current medical and scientific literature.",
+  "course_notes": "Section 2 Lecture: EPI, GLEPI, EH-EPI, BIOS, PhD and DSMSPH Students Only. Students must enroll in corresponding Section 2 Labs: L6, L7, L8, L9, L10, L11, and L12.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1387",
       "crn": "3028",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Barra",
+      "instructor": "Jodie L. Guest",
       "instructors": [
         {
-          "name": "A. Barra",
-          "email": null
+          "name": "Jodie L. Guest",
+          "email": "jodie.guest@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 175,
+      "seats_available": 87,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 5:30-6:45p",
@@ -54,26 +67,43 @@
             "end": "1845"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1388",
       "crn": "3032",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "A. Barra",
+      "instructor": "Sharia Ahmed",
       "instructors": [
         {
-          "name": "A. Barra",
-          "email": null
+          "name": "Sharia Ahmed",
+          "email": "sharia.m.ahmed@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 25,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -89,26 +119,43 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1389",
       "crn": "3040",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "T. Scott",
+      "instructor": "Jodie L. Guest",
       "instructors": [
         {
-          "name": "T. Scott",
-          "email": null
+          "name": "Jodie L. Guest",
+          "email": "jodie.guest@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 25,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -124,127 +171,26 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "3028",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Barra",
-      "instructors": [
-        {
-          "name": "A. Barra",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 5:30-6:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1730",
-            "end": "1845"
-          },
-          {
-            "day": "Wed",
-            "start": "1730",
-            "end": "1845"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3032",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "A. Barra",
-      "instructors": [
-        {
-          "name": "A. Barra",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3040",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "T. Scott",
-      "instructors": [
-        {
-          "name": "T. Scott",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Barra",
-    "T. Scott"
+    "Jodie L. Guest",
+    "Sharia Ahmed"
   ],
-  "scraped_at": "2026-06-17T23:06:47.061Z"
+  "scraped_at": "2026-06-18T02:44:07.404Z"
 }

@@ -10,35 +10,55 @@
   "requirements": [
     "MQR"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Solution of linear and nonlinear systems of equations, interpolation, least-squares approximation, numerical integration, and differentiation.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Special theory of relativity, wave and particle properties of electromagnetic radiation and matter, introduction to quantum mechanics, Schrodinger equation, atomic models, and simple molecules.",
   "course_notes": "(MATH 221 or MATH_OX 221 or MATH 275 or MATH 321) and (CS 170 or CS_OX 170 or MATH 170) or equivalent transfer credit as a prerequisite.",
   "requisites": "(MATH 221 or MATH_OX 221 or MATH 275 or MATH 321) and (CS 170 or CS_OX 170 or MATH 170) or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1032",
       "crn": "2802",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Mayo/Chen",
+      "instructor": "Cordell Donofrio",
       "instructors": [
         {
-          "name": "Mayo/Chen",
-          "email": null
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shashank Shekhar",
+          "email": "shekhar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - N307",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p; F 11:30a-12:20p",
@@ -59,26 +79,50 @@
             "end": "1220"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1033",
       "crn": "5178",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "MARTIN TEMPESTTI/Fikes",
+      "instructor": "Cordell Donofrio",
       "instructors": [
         {
-          "name": "MARTIN TEMPESTTI/Fikes",
-          "email": null
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shashank Shekhar",
+          "email": "shekhar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - N307",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 15,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p; F 1-1:50p",
@@ -99,102 +143,26 @@
             "end": "1350"
           }
         ]
-      }
-    },
-    {
-      "crn": "2802",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Mayo/Chen",
-      "instructors": [
-        {
-          "name": "Mayo/Chen",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p; F 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5178",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "MARTIN TEMPESTTI/Fikes",
-      "instructors": [
-        {
-          "name": "MARTIN TEMPESTTI/Fikes",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p; F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 0,
+    "open": 1,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "MARTIN TEMPESTTI/Fikes",
-    "Mayo/Chen"
+    "Cordell Donofrio",
+    "Shashank Shekhar"
   ],
-  "scraped_at": "2026-06-17T23:03:54.284Z"
+  "scraped_at": "2026-06-18T02:30:04.507Z"
 }

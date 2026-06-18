@@ -5,13 +5,13 @@
   "catalog_number": "550",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "(Permission Required Prior to Enrollment)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,43 @@
   },
   "sections": [
     {
+      "atlas_key": "1650",
       "crn": "2296",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Manns/Rodman",
+      "instructor": "Joseph Manns",
       "instructors": [
         {
-          "name": "Manns/Rodman",
-          "email": null
+          "name": "Joseph Manns",
+          "email": "jmanns@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Hillary R Rodman",
+          "email": "hrrodma@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 393",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -52,56 +72,26 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2296",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Manns/Rodman",
-      "instructors": [
-        {
-          "name": "Manns/Rodman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Manns/Rodman"
+    "Hillary R Rodman",
+    "Joseph Manns"
   ],
-  "scraped_at": "2026-06-17T23:14:27.058Z"
+  "scraped_at": "2026-06-18T03:17:10.157Z"
 }

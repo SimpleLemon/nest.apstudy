@@ -8,10 +8,11 @@
   "credit_hours": "4",
   "requirement_designation": "QR",
   "requirements": [
-    "QR"
+    "QR",
+    "Quantitative Reasoning(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Methods of collection, classification, analysis, and interpretation of economic data; measures of central tendency and dispersion; probability; estimation; hypothesis testing; regression analysis.",
   "course_notes": "(ECON 101 or ECON_OX 101 or FIN 201) and (MATH 111 or MATH_OX 111 or MATH 112 or MATH_OX 112 or MATH 112Z or MATH_OX 112Z or MATH 116) or equivalent transfer credit as prerequisite.",
   "requisites": "(ECON 101 or ECON_OX 101 or FIN 201) and (MATH 111 or MATH_OX 111 or MATH 112 or MATH_OX 112 or MATH 112Z or MATH_OX 112Z or MATH 116) or equivalent transfer credit as prerequisite.",
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "559",
       "crn": "2925",
       "section_number": "LAB1",
       "schedule_type": "LAB",
-      "instructor": "M. Fidakar",
+      "instructor": "Mohammad Fidakar",
       "instructors": [
         {
-          "name": "M. Fidakar",
-          "email": null
+          "name": "Mohammad Fidakar",
+          "email": "mohammad.fidakar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "White Hall 205",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "4",
+      "enrollment_capacity": 50,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 11:30a-12:20p",
@@ -49,26 +67,47 @@
             "end": "1220"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "560",
       "crn": "2926",
       "section_number": "LAB2",
       "schedule_type": "LAB",
-      "instructor": "M. Fidakar",
+      "instructor": "Mohammad Fidakar",
       "instructors": [
         {
-          "name": "M. Fidakar",
-          "email": null
+          "name": "Mohammad Fidakar",
+          "email": "mohammad.fidakar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 205",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 45,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1-1:50p",
@@ -79,26 +118,47 @@
             "end": "1350"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "557",
       "crn": "2922",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "H. Nguyen",
+      "instructor": "Hau Nguyen",
       "instructors": [
         {
-          "name": "H. Nguyen",
-          "email": null
+          "name": "Hau Nguyen",
+          "email": "hau.nguyen@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "White Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "4",
+      "enrollment_capacity": 50,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -114,26 +174,47 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "558",
       "crn": "2923",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "J. Kim",
+      "instructor": "Jong Kim",
       "instructors": [
         {
-          "name": "J. Kim",
-          "email": null
+          "name": "Jong Kim",
+          "email": "jong.hwa.kim@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 45,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -149,153 +230,27 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2925",
-      "section_number": "LAB1",
-      "schedule_type": "LAB",
-      "instructor": "M. Fidakar",
-      "instructors": [
-        {
-          "name": "M. Fidakar",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2926",
-      "section_number": "LAB2",
-      "schedule_type": "LAB",
-      "instructor": "M. Fidakar",
-      "instructors": [
-        {
-          "name": "M. Fidakar",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2922",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "H. Nguyen",
-      "instructors": [
-        {
-          "name": "H. Nguyen",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2923",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "J. Kim",
-      "instructors": [
-        {
-          "name": "J. Kim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 4,
-    "labs": 4,
+    "total_sections": 4,
+    "lectures": 2,
+    "labs": 2,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
-    "waitlisted": 4
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "H. Nguyen",
-    "J. Kim",
-    "M. Fidakar"
+    "Hau Nguyen",
+    "Jong Kim",
+    "Mohammad Fidakar"
   ],
-  "scraped_at": "2026-06-17T23:10:06.958Z"
+  "scraped_at": "2026-06-18T02:53:56.610Z"
 }

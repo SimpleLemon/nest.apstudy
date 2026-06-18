@@ -13,7 +13,7 @@
   "campus": null,
   "campus_description": null,
   "course_description": "This course is an introduction to the major historical decipherments of ancient writing systems, including Egyptian hieroglyphics, Babylonian cuneiform, Linear B, and Maya hieroglyphs. It includes the examination of scripts that have yet to be deciphered.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": "LING 245W",
   "date_range": {
@@ -22,6 +22,7 @@
   },
   "sections": [
     {
+      "atlas_key": "4763",
       "crn": "2612",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +30,25 @@
       "instructors": [
         {
           "name": "D. Stewart",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -54,56 +64,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "2612",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Stewart",
-      "instructors": [
-        {
-          "name": "D. Stewart",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "D. Stewart"
   ],
-  "scraped_at": "2026-06-17T23:03:57.663Z"
+  "scraped_at": "2026-06-18T02:30:25.528Z"
 }

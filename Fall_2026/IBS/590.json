@@ -5,13 +5,13 @@
   "catalog_number": "590",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "1,2,3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The goal of the course is to give students key skills and resources early to help them succeed as a graduate student and manage their career.",
+  "course_notes": "Open to all LGS students. Sections can be taken for partial credit (Section I: Managing Your Research, Section II: Scientific Writing, Section III: About Networking, Mentoring, and Mentors, Section IV: Career Planning).",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,41 @@
   },
   "sections": [
     {
+      "atlas_key": "3732",
       "crn": "5641",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "LaRock/McBride",
+      "instructor": "Christopher LaRock",
       "instructors": [
         {
-          "name": "LaRock/McBride",
-          "email": null
+          "name": "Christopher LaRock",
+          "email": "christopher.larock@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Shonna McBride",
+          "email": "shonna.mcbride@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rollins Building 3052",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "WF 2-3:30p",
@@ -52,56 +70,26 @@
             "end": "1530"
           }
         ]
-      }
-    },
-    {
-      "crn": "5641",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "LaRock/McBride",
-      "instructors": [
-        {
-          "name": "LaRock/McBride",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "WF 2-3:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1400",
-            "end": "1530"
-          },
-          {
-            "day": "Fri",
-            "start": "1400",
-            "end": "1530"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "LaRock/McBride"
+    "Christopher LaRock",
+    "Shonna McBride"
   ],
-  "scraped_at": "2026-06-17T23:11:18.599Z"
+  "scraped_at": "2026-06-18T03:02:29.091Z"
 }

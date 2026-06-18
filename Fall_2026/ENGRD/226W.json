@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "CW",
   "requirements": [
-    "CW"
+    "CW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "In this course, students will produce written, visual, and interactive media. Their work will translate technical language for public-facing genres through techniques grounded in science communication theory. Intended for students in any major who are passionate about science.",
-  "course_notes": null,
+  "course_notes": "(Science Communication for Public Audiences -- The most important conversations about science don't always happen in the lab. Many of us communicate about science when we do things like advocate for our health, speculate on our changing environment, and share our awe over the weird beauty of the natural and physical world. To meet this wide range of situations, effective scientist communicators face challenging questions: Are we saying this clearly? Is anyone listening? And - are we sure we're right? In this course, students will produce written, visual, and interactive media on topics such as COVID-19 and environmental justice. While this continuing communication course may be of particular interest to students in science majors, it is intended for students in any major who are passionate about integrating scientific evidence and ideas into their work.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "4400",
       "crn": "3278",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. McDermott",
+      "instructor": "Donna McDermott",
       "instructors": [
         {
-          "name": "D. McDermott",
-          "email": null
+          "name": "Donna McDermott",
+          "email": "donna.rosa.mcdermott@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway N118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,26 +72,47 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4401",
       "crn": "3279",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "D. McDermott",
+      "instructor": "Donna McDermott",
       "instructors": [
         {
-          "name": "D. McDermott",
-          "email": null
+          "name": "Donna McDermott",
+          "email": "donna.rosa.mcdermott@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway N118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 16,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -89,91 +128,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "3278",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. McDermott",
-      "instructors": [
-        {
-          "name": "D. McDermott",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3279",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "D. McDermott",
-      "instructors": [
-        {
-          "name": "D. McDermott",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 2,
+    "open": 1,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. McDermott"
+    "Donna McDermott"
   ],
-  "scraped_at": "2026-06-17T23:10:26.481Z"
+  "scraped_at": "2026-06-18T02:56:24.447Z"
 }

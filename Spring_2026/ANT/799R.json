@@ -5,21 +5,24 @@
   "catalog_number": "799R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "1,2,3",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Variable credit. Prerequisite: approval of project by instructor. Focused on students' pursuing projects of their own design or gaining research skills through work with the instructor.",
+  "course_notes": "(Permission Required Prior to Enrollment)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1490",
       "crn": "6051",
       "section_number": "1",
       "schedule_type": "SUP",
@@ -27,451 +30,402 @@
       "instructors": [
         {
           "name": "Ozawa-de Silva/Phillips",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "9",
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1491",
       "crn": "6052",
       "section_number": "2",
       "schedule_type": "SUP",
-      "instructor": "M. Benitez",
+      "instructor": "Astrid M. Eckert",
       "instructors": [
         {
-          "name": "M. Benitez",
-          "email": null
+          "name": "Astrid M. Eckert",
+          "email": "aeckert@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Matthew Payne",
+          "email": "mpayn01@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Bowden Hall 323",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "9",
+      "enrollment_capacity": 14,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1492",
       "crn": "6053",
       "section_number": "3",
       "schedule_type": "SUP",
-      "instructor": "Lonsdorf/Benitez",
+      "instructor": "Laura Nenzi",
       "instructors": [
         {
-          "name": "Lonsdorf/Benitez",
-          "email": null
+          "name": "Laura Nenzi",
+          "email": "laura.nenzi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Bowden Hall 323",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "9",
+      "enrollment_capacity": 12,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1493",
       "crn": "6055",
       "section_number": "5",
       "schedule_type": "SUP",
-      "instructor": "M. Peletz",
+      "instructor": "Chris Suh",
       "instructors": [
         {
-          "name": "M. Peletz",
-          "email": null
+          "name": "Chris Suh",
+          "email": "chris.suh@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Bowden Hall 323",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "9",
+      "enrollment_capacity": 12,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1494",
       "crn": "6056",
       "section_number": "6",
       "schedule_type": "SUP",
-      "instructor": "Nugent/Holsey",
+      "instructor": "Jason Ward",
       "instructors": [
         {
-          "name": "Nugent/Holsey",
-          "email": null
+          "name": "Jason Ward",
+          "email": "jason.morgan.ward@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Few Bldg 129",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "9",
+      "enrollment_capacity": 12,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1495",
       "crn": "6057",
       "section_number": "7",
       "schedule_type": "SUP",
-      "instructor": "Knauft/Mulla",
+      "instructor": "Walter Rucker",
       "instructors": [
         {
-          "name": "Knauft/Mulla",
-          "email": null
+          "name": "Walter Rucker",
+          "email": "wrucker@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Candler Library 212",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "9",
+      "enrollment_capacity": 4,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1496",
       "crn": "6058",
       "section_number": "8",
       "schedule_type": "SUP",
-      "instructor": "Phillips/Hall-Clifford",
+      "instructor": "Crystal Sanders",
       "instructors": [
         {
-          "name": "Phillips/Hall-Clifford",
-          "email": null
+          "name": "Crystal Sanders",
+          "email": "crystal.sanders@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "9",
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1497",
       "crn": "6059",
       "section_number": "9",
       "schedule_type": "SUP",
-      "instructor": "B. Knauft",
+      "instructor": "Jason Ward",
       "instructors": [
         {
-          "name": "B. Knauft",
-          "email": null
+          "name": "Jason Ward",
+          "email": "jason.morgan.ward@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "9",
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1498",
       "crn": "6060",
       "section_number": "10",
       "schedule_type": "SUP",
-      "instructor": "A. Grimshaw",
+      "instructor": "Julia Bullock",
       "instructors": [
         {
-          "name": "A. Grimshaw",
-          "email": null
+          "name": "Julia Bullock",
+          "email": "jbullo2@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "9",
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6051",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "Ozawa-de Silva/Phillips",
-      "instructors": [
-        {
-          "name": "Ozawa-de Silva/Phillips",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6052",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "M. Benitez",
-      "instructors": [
-        {
-          "name": "M. Benitez",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6053",
-      "section_number": "3",
-      "schedule_type": "SUP",
-      "instructor": "Lonsdorf/Benitez",
-      "instructors": [
-        {
-          "name": "Lonsdorf/Benitez",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6055",
-      "section_number": "5",
-      "schedule_type": "SUP",
-      "instructor": "M. Peletz",
-      "instructors": [
-        {
-          "name": "M. Peletz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6056",
-      "section_number": "6",
-      "schedule_type": "SUP",
-      "instructor": "Nugent/Holsey",
-      "instructors": [
-        {
-          "name": "Nugent/Holsey",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6057",
-      "section_number": "7",
-      "schedule_type": "SUP",
-      "instructor": "Knauft/Mulla",
-      "instructors": [
-        {
-          "name": "Knauft/Mulla",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6058",
-      "section_number": "8",
-      "schedule_type": "SUP",
-      "instructor": "Phillips/Hall-Clifford",
-      "instructors": [
-        {
-          "name": "Phillips/Hall-Clifford",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6059",
-      "section_number": "9",
-      "schedule_type": "SUP",
-      "instructor": "B. Knauft",
-      "instructors": [
-        {
-          "name": "B. Knauft",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6060",
-      "section_number": "10",
-      "schedule_type": "SUP",
-      "instructor": "A. Grimshaw",
-      "instructors": [
-        {
-          "name": "A. Grimshaw",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 18,
+    "total_sections": 9,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 18,
-    "open": 18,
+    "other": 9,
+    "open": 9,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Grimshaw",
-    "B. Knauft",
-    "Knauft/Mulla",
-    "Lonsdorf/Benitez",
-    "M. Benitez",
-    "M. Peletz",
-    "Nugent/Holsey",
+    "Astrid M. Eckert",
+    "Chris Suh",
+    "Crystal Sanders",
+    "Jason Ward",
+    "Julia Bullock",
+    "Laura Nenzi",
+    "Matthew Payne",
     "Ozawa-de Silva/Phillips",
-    "Phillips/Hall-Clifford"
+    "Walter Rucker"
   ],
-  "scraped_at": "2026-06-17T23:01:04.715Z"
+  "scraped_at": "2026-06-18T02:07:32.585Z"
 }

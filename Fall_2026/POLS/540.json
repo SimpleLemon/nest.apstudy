@@ -5,13 +5,13 @@
   "catalog_number": "540",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "All enrollment by permission only and must go through the Political Science Department.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,38 @@
   },
   "sections": [
     {
+      "atlas_key": "1639",
       "crn": "2847",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "Z. Peskowitz",
+      "instructor": "Zachary Peskowitz",
       "instructors": [
         {
-          "name": "Z. Peskowitz",
-          "email": null
+          "name": "Zachary Peskowitz",
+          "email": "zachary.f.peskowitz@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 120A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 8:30-11:15a",
@@ -47,51 +62,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "2847",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "Z. Peskowitz",
-      "instructors": [
-        {
-          "name": "Z. Peskowitz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 8:30-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Z. Peskowitz"
+    "Zachary Peskowitz"
   ],
-  "scraped_at": "2026-06-17T23:14:20.604Z"
+  "scraped_at": "2026-06-18T03:15:33.877Z"
 }

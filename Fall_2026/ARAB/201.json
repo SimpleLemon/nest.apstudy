@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Prerequisites: Arabic 102 or permission of instructor. Third in a series of courses that develop reading, speaking, listening, writing, and cultural skills in Arabic. Course includes video materials and stresses communication in formal and spoken Arabic.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,45 @@
   },
   "sections": [
     {
+      "atlas_key": "416",
       "crn": "2927",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "G. Shehata",
+      "instructor": "Gehane Shehata",
       "instructors": [
         {
-          "name": "G. Shehata",
-          "email": null
+          "name": "Gehane Shehata",
+          "email": "gshehat@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Gehane Shehata",
+          "email": "gshehat@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a; Th 10-10:50a",
@@ -59,61 +82,25 @@
             "end": "1050"
           }
         ]
-      }
-    },
-    {
-      "crn": "2927",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "G. Shehata",
-      "instructors": [
-        {
-          "name": "G. Shehata",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a; Th 10-10:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Shehata"
+    "Gehane Shehata"
   ],
-  "scraped_at": "2026-06-17T23:09:11.617Z"
+  "scraped_at": "2026-06-18T02:46:44.281Z"
 }

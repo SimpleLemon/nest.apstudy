@@ -5,15 +5,15 @@
   "catalog_number": "385",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "HSC",
   "requirements": [
     "HSC"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Investigation of a particular issue or topic in the study of language, linguistics, and communication. May be repeated when topic varies. Topics may include: the Romance languages; intercultural communication; words and the world; language and human nature.",
-  "course_notes": null,
+  "course_notes": "(Same as ANT 385 4) This course examines the politics of language, representation, and migration through a multidisciplinary lens drawing on linguistic anthropology, sociolinguistics, and critical legal studies. Taking as its entry point the global \"asylum crisis\" discourses that have proliferated across media in recent years, the course investigates how language constructs national identities, negotiates belonging, and determines who is let in -- and who is kept out. The course moves through several interconnected themes: the historical and structural drivers of migration; the criminalization of mobility and the legal construction of \"illegality;\" the particular vulnerabilities of immigrant children in asylum systems; and the role of language in legal proceedings and credibility assessments. A recurring concern throughout is how communicative inequities shape migrants' life chances.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "2996",
       "crn": "1784",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "X. Marsilli-Vargas",
+      "instructor": "Xochiquetzal Marsilli-Vargas",
       "instructors": [
         {
-          "name": "X. Marsilli-Vargas",
-          "email": null
+          "name": "Xochiquetzal Marsilli-Vargas",
+          "email": "xochitl.marsilli@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Candler Library 121",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 13,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,26 +69,45 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2997",
       "crn": "1786",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "H. Maxim",
+      "instructor": "Hiram Maxim",
       "instructors": [
         {
-          "name": "H. Maxim",
-          "email": null
+          "name": "Hiram Maxim",
+          "email": "hmaxim@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Modern Language 128",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1-1:50p",
@@ -84,87 +118,26 @@
             "end": "1350"
           }
         ]
-      }
-    },
-    {
-      "crn": "1784",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "X. Marsilli-Vargas",
-      "instructors": [
-        {
-          "name": "X. Marsilli-Vargas",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1786",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "H. Maxim",
-      "instructors": [
-        {
-          "name": "H. Maxim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-1:50p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "H. Maxim",
-    "X. Marsilli-Vargas"
+    "Hiram Maxim",
+    "Xochiquetzal Marsilli-Vargas"
   ],
-  "scraped_at": "2026-06-17T23:11:54.327Z"
+  "scraped_at": "2026-06-18T03:04:55.511Z"
 }

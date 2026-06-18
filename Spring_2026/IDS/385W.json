@@ -5,40 +5,58 @@
   "catalog_number": "385W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 5",
+  "credit_hours": "1",
   "requirement_designation": "CW",
   "requirements": [
     "CW"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Highly focused courses, drawing on multiple disciplines of the humanities and social sciences; may be repeated for credit when topics vary.",
-  "course_notes": null,
+  "course_notes": "(School of Medicine Students Only)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-06-29",
+    "end": "2026-12-19"
   },
   "sections": [
     {
+      "atlas_key": "2512",
       "crn": "2502",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "V. Bergbauer",
+      "instructor": "Joanna Schindler",
       "instructors": [
         {
-          "name": "V. Bergbauer",
-          "email": null
+          "name": "Joanna Schindler",
+          "email": "jlavi@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sasha Horton",
+          "email": "sasha.horton@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 1-3:45p",
@@ -49,26 +67,48 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2513",
       "crn": "2503",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "K. Dimmery",
+      "instructor": "Joanna Schindler",
       "instructors": [
         {
-          "name": "K. Dimmery",
-          "email": null
+          "name": "Joanna Schindler",
+          "email": "jlavi@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sasha Horton",
+          "email": "sasha.horton@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -84,26 +124,48 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2514",
       "crn": "2504",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "L. Koutsoukos Chalhoub",
+      "instructor": "Joanna Schindler",
       "instructors": [
         {
-          "name": "L. Koutsoukos Chalhoub",
-          "email": null
+          "name": "Joanna Schindler",
+          "email": "jlavi@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sasha Horton",
+          "email": "sasha.horton@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -119,26 +181,48 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2515",
       "crn": "2505",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "J. Williams",
+      "instructor": "Joanna Schindler",
       "instructors": [
         {
-          "name": "J. Williams",
-          "email": null
+          "name": "Joanna Schindler",
+          "email": "jlavi@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sasha Horton",
+          "email": "sasha.horton@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -154,26 +238,53 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2516",
       "crn": "2506",
       "section_number": "5",
       "schedule_type": "LEC",
-      "instructor": "A. Prince",
+      "instructor": "Marie-Helene Gagnon",
       "instructors": [
         {
-          "name": "A. Prince",
-          "email": null
+          "name": "Marie-Helene Gagnon",
+          "email": "marie-helene.gagnon@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Smyrna Tuburan",
+          "email": null,
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Andres W. Su",
+          "email": null,
+          "role": "Secondary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 200,
+      "seats_available": 200,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-6:45p",
@@ -184,26 +295,43 @@
             "end": "1845"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2517",
       "crn": "4428",
       "section_number": "7",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Kathy Kinlaw",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Kathy Kinlaw",
+          "email": "kathleen.kinlaw@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 160,
+      "seats_available": 160,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -219,226 +347,30 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "2502",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "V. Bergbauer",
-      "instructors": [
-        {
-          "name": "V. Bergbauer",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 1-3:45p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2503",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "K. Dimmery",
-      "instructors": [
-        {
-          "name": "K. Dimmery",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2504",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "L. Koutsoukos Chalhoub",
-      "instructors": [
-        {
-          "name": "L. Koutsoukos Chalhoub",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2505",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "J. Williams",
-      "instructors": [
-        {
-          "name": "J. Williams",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2506",
-      "section_number": "5",
-      "schedule_type": "LEC",
-      "instructor": "A. Prince",
-      "instructors": [
-        {
-          "name": "A. Prince",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-6:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1845"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4428",
-      "section_number": "7",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
-    "lectures": 12,
+    "total_sections": 6,
+    "lectures": 6,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 8,
-    "closed": 4,
+    "open": 5,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Prince",
-    "J. Williams",
-    "K. Dimmery",
-    "L. Koutsoukos Chalhoub",
-    "Team",
-    "V. Bergbauer"
+    "Andres W. Su",
+    "Joanna Schindler",
+    "Kathy Kinlaw",
+    "Marie-Helene Gagnon",
+    "Sasha Horton",
+    "Smyrna Tuburan"
   ],
-  "scraped_at": "2026-06-17T23:03:18.569Z"
+  "scraped_at": "2026-06-18T02:26:24.117Z"
 }

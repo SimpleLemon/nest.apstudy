@@ -5,38 +5,57 @@
   "catalog_number": "506",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "3",
+  "requirement_designation": "Intercultural Communication w. Race & Ethnicity(*)",
+  "requirements": [
+    "Intercultural Communication w. Race & Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A survey of literary and cultural creations from the Francophone world, with a special emphasis on Africa, the Caribbean, and South East Asia.",
+  "course_notes": "FREN 391 Indigeneity in the French-speaking world. L. Ami Ali / Tuesdays/Thursdays 2:30-3:45pm Content: This course explores indigenous art and culture from peoples native to Africa, Oceania, and the Caribbean in French language texts, film and art. It traces Pan-African indigeneities among Touareg and Pygmy communities, the shifting meanings of indigeneity in Algeria from colonial categorization to postcolonial reappropriation, and solidarities among Kabyle, Parisian, and Kanak communities shaped by 19th-century deportations to New Caledonia. The course also considers how indigenous identities are erased and others recreated in the Caribbean, concluding with global perspectives on migration and indigeneity. This course will be conducted entirely in French. Texts may include: Abdelwaheb Sefsaf, Kaldûn, (2023, Théâtre de Sartrouville, 140 min.) Guy Cabort Masson, La Mangrove mulâtre (1986) Isis Labeau-Caberia, La Prophétie Des Soeurs-Serpents (2022) Kateb Yacine, Louise Michel et La Nouvelle-Calédonie (2004) Mouloud Mammeri, La Colline Oubliée (1952) Sarah Maldoror, Monangambeee (1968, Angola, Algeria, 16 min.) Victor Anicet, Restitution (1989) Werewere Liking, Un Touareg s'est marié à une Pygmée (1992)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "2076",
       "crn": "3228",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "H. Sohn",
+      "instructor": "Lyna Ami Ali Barrow",
       "instructors": [
         {
-          "name": "H. Sohn",
-          "email": null
+          "name": "Lyna Ami Ali Barrow",
+          "email": "lyna.ami.ali@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Candler Library 124",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication w. Race & Ethnicity(*)",
+      "requirements": [
+        "Intercultural Communication w. Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 17,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 8:30-11:15a",
@@ -47,51 +66,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "3228",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "H. Sohn",
-      "instructors": [
-        {
-          "name": "H. Sohn",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 8:30-11:15a",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "H. Sohn"
+    "Lyna Ami Ali Barrow"
   ],
-  "scraped_at": "2026-06-17T23:06:47.074Z"
+  "scraped_at": "2026-06-18T02:44:07.426Z"
 }

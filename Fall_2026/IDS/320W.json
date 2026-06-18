@@ -5,13 +5,15 @@
   "catalog_number": "320W",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to qualitative methods for interdisciplinary research, including interviews, participant observation, archives, and creative approaches. Students examine ethics, epistemology, and representation while designing and completing an independent qualitative research project.",
+  "course_notes": "This course provides an introduction to qualitative research methods and their practical applications in interdisciplinary research. Students will engage with various qualitative approaches--including interviews and oral history, participant observation, archival research, as well as various creative and visual methods--and consider how these methods may be operationalized towards answering specific research questions. Through hands-on exercises, students will design and conduct their own qualitative research projects, developing skills in data collection, analysis, and interpretation. Taking into account issues of epistemology (ways of knowing), methodology (ways of gathering and examining data), and representation (ways of creating and disseminating knowledge), the course critically examines the ethical and theoretical foundations of qualitative research. Discussions will address researcher positionality and reflexivity, practicalities of research design and approval, as well as debates on validity and rigor. Course readings will include methodological literature alongside examples of qualitative interdisciplinary research, supplemented by guest lectures, practical workshops, and a visit to the Rose library. Through a sequence of interconnected assignments--including research design tasks, reflective writing, and exercises in qualitative data analysis--students will develop and complete an independent research project culminating in a final essay.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +22,40 @@
   },
   "sections": [
     {
+      "atlas_key": "4477",
       "crn": "4415",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "J. Tulke",
+      "instructor": "Julia Tulke",
       "instructors": [
         {
-          "name": "J. Tulke",
-          "email": null
+          "name": "Julia Tulke",
+          "email": "julia.tulke@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Callaway S420",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 19,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -52,56 +71,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "4415",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "J. Tulke",
-      "instructors": [
-        {
-          "name": "J. Tulke",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Tulke"
+    "Julia Tulke"
   ],
-  "scraped_at": "2026-06-17T23:11:21.836Z"
+  "scraped_at": "2026-06-18T03:02:41.818Z"
 }

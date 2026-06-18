@@ -5,40 +5,63 @@
   "catalog_number": "350",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "MQR",
   "requirements": [
-    "MQR"
+    "MQR",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "System programming topics are illustrated by the POSIX API to the Linux operating system. Topics include: file i/o, the TTY driver, window systems, processes, shared memory, message passing, semaphores, signals, and interrupt handlers.",
-  "course_notes": "CS 253 and CS 255 or equivalent transfer credit as prerequisites.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Every semester. Emphasis on oral and written communication skills. Assignments include a thorough review of French grammar, short readings, a French movie, and frequent short compositions. Prerequisites: French 102 or by placement.",
+  "course_notes": "FREN 201 Intermediate French I (Prof. Bukalites / TTh 10:00-11:15am; F 10:00-10:50am online synchronous). Content: The course seeks to expand upon previous French courses by introducing students to new vocabulary, new grammar structures, and more challenging cultural material that will provide a better sense of the diversity of the Francophone world. In the context of the manual « Imaginez, 5th edition », and its fully integrated accompanying literary and cultural texts, audio recordings and songs, videos and short films, students get an in-depth review of the basic patterns and structures of French. During this journey to different parts of the French-speaking world, students have the opportunity to reactivate their previous knowledge of the language and to expand upon that base so that they can communicate with confidence. Required Textbooks, Articles, and Resources: Champeny, Séverine, \"IMAGINEZ: le français sans frontières, 5th Edition\". Vista Higher Learning, 2020. ISBN: 978-1-54330-546-3. Students will need the supersite access code. May be purchased via the VHL website or Emory bookstore. Additional Resources: 'IMAGINEZ' Supersite, vhlcentral.com, and Student Activities Manual Course Requisites FREN 102 as prerequisite, or by placement exam.)",
   "requisites": "CS 253 and CS 255 or equivalent transfer credit as prerequisites.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "627",
       "crn": "3628",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Arnold",
+      "instructor": "Eric Bulakites",
       "instructors": [
         {
-          "name": "D. Arnold",
-          "email": null
+          "name": "Eric Bulakites",
+          "email": "eric.raymond.bulakites@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Eric Bulakites",
+          "email": "eric.raymond.bulakites@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Candler Library 122",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 18,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a",
@@ -54,26 +77,52 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "628",
       "crn": "3653",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "K. Mandelberg",
+      "instructor": "Calvin Osei Tenkorang",
       "instructors": [
         {
-          "name": "K. Mandelberg",
-          "email": null
+          "name": "Calvin Osei Tenkorang",
+          "email": "calvin.osei.tenkorang@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Calvin Osei Tenkorang",
+          "email": "calvin.osei.tenkorang@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Modern Language 128",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 18,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -89,92 +138,26 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "3628",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Arnold",
-      "instructors": [
-        {
-          "name": "D. Arnold",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3653",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "K. Mandelberg",
-      "instructors": [
-        {
-          "name": "K. Mandelberg",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Arnold",
-    "K. Mandelberg"
+    "Calvin Osei Tenkorang",
+    "Eric Bulakites"
   ],
-  "scraped_at": "2026-06-17T23:01:53.991Z"
+  "scraped_at": "2026-06-18T02:16:08.225Z"
 }

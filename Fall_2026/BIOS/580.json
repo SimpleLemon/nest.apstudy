@@ -5,13 +5,13 @@
   "catalog_number": "580",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Course only for BIOS MPH and MSPH students. This course will cover topics dedicated to preparing students for collaborations with non-statisticians in public health and biomedical projects. Covered topics include best practices in data analysis (data inspection, summarization, exploration, visualization, hypothesis formulation, analysis method selection, result interpretation, result presentation etc.), and professionalism as a collaborative statistician. The students will work individually or together in small groups on projects and conduct peer review for each other¿s work. In addition, each student will complete a series of milestones for setting up individual capstone/thesis project to be completed in the Spring semester.",
+  "course_notes": "**BIOS Students Only**",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,41 @@
   },
   "sections": [
     {
+      "atlas_key": "3697",
       "crn": "3511",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Dean/Binongo",
+      "instructor": "Jose Binongo",
       "instructors": [
         {
-          "name": "Dean/Binongo",
-          "email": null
+          "name": "Jose Binongo",
+          "email": "jose.n.binongo@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Natalie Dean",
+          "email": "nataliedean@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 70,
+      "seats_available": 43,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 10-11:50a",
@@ -47,51 +65,26 @@
             "end": "1150"
           }
         ]
-      }
-    },
-    {
-      "crn": "3511",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Dean/Binongo",
-      "instructors": [
-        {
-          "name": "Dean/Binongo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 10-11:50a",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1150"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Dean/Binongo"
+    "Jose Binongo",
+    "Natalie Dean"
   ],
-  "scraped_at": "2026-06-17T23:09:27.868Z"
+  "scraped_at": "2026-06-18T02:49:02.134Z"
 }

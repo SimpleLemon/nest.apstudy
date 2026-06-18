@@ -5,15 +5,15 @@
   "catalog_number": "285",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "HAP",
   "requirements": [
     "HAP"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Topic changes to meet current interest of students and faculty. Course may be repeated for credit as topic varies.",
-  "course_notes": null,
+  "course_notes": "(Same as ARTHIST 289 1, ANT 285 5, HIST 296 3, MESAS 270 1) The Art and Architecture of Ancient Mesopotamia This course surveys the art and architecture of Mesopotamia from the rise of the first cities, the invention of writing, and the emergence of monumental art and architecture in the fourth millennium BCE through the Parthian period (third century CE). Within this broad historical framework, the course focuses on the revolutionary innovations in ancient visual culture, including the development of narrative representation, the appearance of historical public monuments, and the formation of sacred architectural spaces. Particular attention is given to the making, use, and reception of images and monuments: rituals of animating statues, building and foundation rituals, the treatment of images in warfare, and the performative dimensions of visual culture. Alongside large-scale monuments and state-sponsored art, the course also considers small-scale and personal objects, situating them within practices of private ownership, daily life, and embodied experience. Art History major/minor: Division I or IV",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "4058",
       "crn": "4491",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "G. Lovisetto",
+      "instructor": "Giovanni Lovisetto",
       "instructors": [
         {
-          "name": "G. Lovisetto",
-          "email": null
+          "name": "Giovanni Lovisetto",
+          "email": "giovanni.lovisetto@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway C101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 3,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -54,56 +69,25 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "4491",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "G. Lovisetto",
-      "instructors": [
-        {
-          "name": "G. Lovisetto",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Lovisetto"
+    "Giovanni Lovisetto"
   ],
-  "scraped_at": "2026-06-17T23:09:47.405Z"
+  "scraped_at": "2026-06-18T02:51:15.025Z"
 }

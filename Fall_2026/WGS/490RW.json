@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HSCW",
   "requirements": [
-    "HSCW"
+    "HSCW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Exploration of selected topics pertaining to women, gender, and feminist theory. Each year the seminar has a specific theme that is designed to integrate central questions, topics, and problems of method. This course is offered only in the fall and is open to seniors who are Women's, Gender, and Sexuality Studies majors or minors.",
-  "course_notes": null,
+  "course_notes": "(Permission Required Prior to Enrollment) WGS 490RW: Senior Seminar. Exploration of selected topics pertaining to women, gender, and feminist theory. Each year the seminar has a specific theme that is designed to integrate central questions, topics, and problems of method. This course is offered only in the fall and is open to seniors who are Women's, Gender, and Sexuality Studies majors or minors. Please email William Smith at william.smith2@emory.edu with any enrollment concerns.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "2140",
       "crn": "2345",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "M. Chin",
+      "instructor": "Matthew Chin",
       "instructors": [
         {
-          "name": "M. Chin",
-          "email": null
+          "name": "Matthew Chin",
+          "email": "matthew.chin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Candler Library 122",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,56 +72,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2345",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "M. Chin",
-      "instructors": [
-        {
-          "name": "M. Chin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Chin"
+    "Matthew Chin"
   ],
-  "scraped_at": "2026-06-17T23:15:06.179Z"
+  "scraped_at": "2026-06-18T03:19:51.001Z"
 }

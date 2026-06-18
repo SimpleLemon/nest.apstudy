@@ -5,40 +5,55 @@
   "catalog_number": "371",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3 - 4",
+  "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Through variables such as arts, politics, freedom, race, nd coloniality, this repeatable special topics course will explore various ways in which religion and law intersect and pose questions in political life, social justice struggles, community conversations and spaces, and cultural consciousness.",
-  "course_notes": "REL 250 as prerequiisite",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is for students who are engaged in research and writing of their thesis topic.",
+  "course_notes": "This course is for students who are engaged in research and writing of their thesis topic.",
   "requisites": "REL 250 as prerequiisite",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1375",
       "crn": "5669",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Allard",
+      "instructor": "Dan Sinykin",
       "instructors": [
         {
-          "name": "S. Allard",
-          "email": null
+          "name": "Dan Sinykin",
+          "email": "daniel.sinykin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 99,
+      "seats_available": 99,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2-4:30p",
@@ -49,26 +64,45 @@
             "end": "1630"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1376",
       "crn": "5670",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "W. Barth",
+      "instructor": "Emma Davenport",
       "instructors": [
         {
-          "name": "W. Barth",
-          "email": null
+          "name": "Emma Davenport",
+          "email": "emma.davenport@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway C201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10:35a-12p",
@@ -84,26 +118,50 @@
             "end": "1200"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1377",
       "crn": "5671",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "D. Waters Jr.",
+      "instructor": "Lauren Klein",
       "instructors": [
         {
-          "name": "D. Waters Jr.",
-          "email": null
+          "name": "Lauren Klein",
+          "email": "lauren.klein@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sarah Salter",
+          "email": "sarah.h.salter@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway C201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 9,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 3:30-4:55p",
@@ -119,123 +177,28 @@
             "end": "1655"
           }
         ]
-      }
-    },
-    {
-      "crn": "5669",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Allard",
-      "instructors": [
-        {
-          "name": "S. Allard",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2-4:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1400",
-            "end": "1630"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5670",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "W. Barth",
-      "instructors": [
-        {
-          "name": "W. Barth",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10:35a-12p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1035",
-            "end": "1200"
-          },
-          {
-            "day": "Wed",
-            "start": "1035",
-            "end": "1200"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5671",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "D. Waters Jr.",
-      "instructors": [
-        {
-          "name": "D. Waters Jr.",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 3:30-4:55p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1530",
-            "end": "1655"
-          },
-          {
-            "day": "Thu",
-            "start": "1530",
-            "end": "1655"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 4,
+    "open": 3,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Waters Jr.",
-    "S. Allard",
-    "W. Barth"
+    "Dan Sinykin",
+    "Emma Davenport",
+    "Lauren Klein",
+    "Sarah Salter"
   ],
-  "scraped_at": "2026-06-17T23:06:34.026Z"
+  "scraped_at": "2026-06-18T02:42:57.904Z"
 }

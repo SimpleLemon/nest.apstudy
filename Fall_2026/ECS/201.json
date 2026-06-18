@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course provides a framework for students to articulate how to leverage a liberal arts education as they launch their post-graduation pursuits. Through assignments focused on self-assessment and exploration, students will identify and translate skills that transfer from college to career.",
-  "course_notes": null,
+  "course_notes": "This course, ECS 201: Transfers, is for new transfer students only. First-year undergraduates should register for a section of ECS 101: Emory Essentials.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,41 @@
   },
   "sections": [
     {
+      "atlas_key": "3972",
       "crn": "2891",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Rego/Griffin",
+      "instructor": "Rebecca Rego",
       "instructors": [
         {
-          "name": "Rego/Griffin",
-          "email": null
+          "name": "Rebecca Rego",
+          "email": "rebecca.rego@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Cristina Griffin",
+          "email": "cristina.griffin@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 11-11:50a",
@@ -49,51 +67,26 @@
             "end": "1150"
           }
         ]
-      }
-    },
-    {
-      "crn": "2891",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Rego/Griffin",
-      "instructors": [
-        {
-          "name": "Rego/Griffin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11-11:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1100",
-            "end": "1150"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Rego/Griffin"
+    "Cristina Griffin",
+    "Rebecca Rego"
   ],
-  "scraped_at": "2026-06-17T23:10:10.222Z"
+  "scraped_at": "2026-06-18T02:54:59.897Z"
 }

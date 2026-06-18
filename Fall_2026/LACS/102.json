@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "HAE",
   "requirements": [
-    "HAE"
+    "HAE",
+    "Humanities and Arts with Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course focuses on the historical and political contexts that impact Hispanic, Latino/a, and Latinx identity formation in the United States, identity maintenance, racialization, and ideologies of gender and sexuality.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "4323",
       "crn": "5405",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "T. Figueroa",
+      "instructor": "Taína Figueroa",
       "instructors": [
         {
-          "name": "T. Figueroa",
-          "email": null
+          "name": "Taína Figueroa",
+          "email": "tfiguer@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Callaway C101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts with Race & Ethnicity(*)",
+      "requirements": [
+        "Humanities and Arts with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,56 +72,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "5405",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "T. Figueroa",
-      "instructors": [
-        {
-          "name": "T. Figueroa",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "T. Figueroa"
+    "Taína Figueroa"
   ],
-  "scraped_at": "2026-06-17T23:11:47.747Z"
+  "scraped_at": "2026-06-18T03:04:30.111Z"
 }

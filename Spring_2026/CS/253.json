@@ -5,40 +5,63 @@
   "catalog_number": "253",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "QR",
   "requirements": [
-    "QR"
+    "QR",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "A third course in Computer Science, focusing on advanced programming. Emphasis is on mastery in the use and implementation of data structures and algorithms for classical programming paradigms, using the Java programming language and object oriented design.",
-  "course_notes": "CS 171 or 171Z or CS_OX 171 or equivalent transfer credit as a prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is open to students who have had some French ( FREN 101 or two years in high school). It is designed to help students build proficiency in French reading, writing, speaking and listening in the context of cultural exploration.",
+  "course_notes": "FREN 102 Elementary French II (Prof. Giguere, TT 8:30-9:45am; F 9:00-9:50am online synchronous) ***NOTE: This course has \"tiered enrollment\" (certain number of seats available for each class). The class will open to all at the beginning of the drop/add period.*** Content: This course is designed to help students build proficiency in French reading, writing, speaking and listening in the context of cultural exploration of the Francophone world. The course is conducted entirely in French. Instruction proceeds from guided to more creative and independent work with emphasis on speaking, writing, communication and active participation. Students will complete at-home practice with the required online textbook and platform: Atelier-MindTap. Please note: FREN 102 is open to students who have had some French (FREN 101 or up to two years in high school). Language placement results must be provided to the instructor. Waitlists will open for the course during the add/drop period at the beginning of the semester.",
   "requisites": "CS 171 or 171Z or CS_OX 171 or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "624",
       "crn": "3656",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Barker",
+      "instructor": "Noelle Giguere",
       "instructors": [
         {
-          "name": "M. Barker",
-          "email": null
+          "name": "Noelle Giguere",
+          "email": "noelle.c.giguere@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Noelle Giguere",
+          "email": "noelle.c.giguere@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Woodruff Library 875",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 13,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,26 +77,52 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "625",
       "crn": "3657",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "M. Barker",
+      "instructor": "Noelle Giguere",
       "instructors": [
         {
-          "name": "M. Barker",
-          "email": null
+          "name": "Noelle Giguere",
+          "email": "noelle.c.giguere@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Noelle Giguere",
+          "email": "noelle.c.giguere@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Woodruff Library 875",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 13,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -89,91 +138,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3656",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Barker",
-      "instructors": [
-        {
-          "name": "M. Barker",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3657",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "M. Barker",
-      "instructors": [
-        {
-          "name": "M. Barker",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 0,
+    "open": 0,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Barker"
+    "Noelle Giguere"
   ],
-  "scraped_at": "2026-06-17T23:01:53.986Z"
+  "scraped_at": "2026-06-18T02:16:08.222Z"
 }

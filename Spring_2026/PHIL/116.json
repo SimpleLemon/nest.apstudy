@@ -10,35 +10,50 @@
   "requirements": [
     "HA"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course is an introduction to the central questions of biomedical ethics, such as end-of-life issues, abortion, and justice in the distribution of health care.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Through variables such as arts, politics, freedom, race, nd coloniality, this repeatable special topics course will explore various ways in which religion and law intersect and pose questions in political life, social justice struggles, community conversations and spaces, and cultural consciousness.",
+  "course_notes": "Topic: Perspectives in Law and Religion Seminar: Law, Religion, and Environment This course satisfies the Religion major requirement: - Theme, Region. Permission Required Prior to Enrollment. To request permission to register, contact Prof. Wei Wu wei.wu@emory.edu Law school schedule: Mondays, 2:00 pm - 4:00 pm (REL 371-2 scheduled from 2:00 pm - 4:30 pm); please see below. LAW 831A emphasizes the production of scholarly writing in the form of a seminar paper. To support the success of undergraduate students enrolled in the course, an additional writing workshop component is included for undergraduate students. Undergraduate students enrolled in the cross-listed course number for LAW 831A will meet with the instructor for 30 minutes at the conclusion of each class to discuss expectations, best practices, and strategies for scholarly research and writing. Graduate and professional students enrolled in LAW 831A are also invited to join the discussion. For this reason, while LAW 831A is scheduled from 2:00 pm -4:00 pm on Mondays, the cross-listed course number will be scheduled from 2:00 pm - 4:30 pm. DESCRIPTION: This course examines the role of religious ideas, institutions, and people in shaping environmental law and policy primarily in the United States. The course draws upon public law, legal history, American studies, environmental history, comparative religion, and theology, among other areas of scholarship. The learning objectives for this course include: 1) to understand the role(s) of religious beliefs, ideas, and activism within debates about environmental issues in U.S. history to the present; 2) to explore in comparative perspective how religiously-infused language/framing in these debates is employed to justify action and to foster a sense of place or connectedness; and 3) to consider different arguments about whether and how religious justifications for legal action ought to be employed in public life, and the future of such activism given recent trends in religious adherence and growing environmental concerns.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1174",
       "crn": "1919",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Iliopoulos",
+      "instructor": "Whittney Barth",
       "instructors": [
         {
-          "name": "A. Iliopoulos",
-          "email": null
+          "name": "Whittney Barth",
+          "email": "whittney.barth@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 2,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -54,56 +69,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "1919",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Iliopoulos",
-      "instructors": [
-        {
-          "name": "A. Iliopoulos",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Iliopoulos"
+    "Whittney Barth"
   ],
-  "scraped_at": "2026-06-17T23:06:07.914Z"
+  "scraped_at": "2026-06-18T02:38:17.504Z"
 }

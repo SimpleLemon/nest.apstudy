@@ -8,37 +8,56 @@
   "credit_hours": "4",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Quantitative Reasoning(*)",
+    "Social Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Introduction to the concepts of microbial physiology, biochemistry, genetics, and evolution.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Methods of collection, classification, analysis, and interpretation of economic data; measures of central tendency and dispersion; probability; estimation; hypothesis testing; regression analysis.",
   "course_notes": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
   "requisites": "(BIOL 142 and BIOL 142L) or BIOL_OX 142WE or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "558",
       "crn": "1653",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "E. Battaglioli",
+      "instructor": "Jong Kim",
       "instructors": [
         {
-          "name": "E. Battaglioli",
-          "email": null
+          "name": "Jong Kim",
+          "email": "jong.hwa.kim@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 45,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,26 +73,47 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "559",
       "crn": "1893",
       "section_number": "2",
       "schedule_type": "DIS",
-      "instructor": "E. Battaglioli",
+      "instructor": "Mohammad Fidakar",
       "instructors": [
         {
-          "name": "E. Battaglioli",
-          "email": null
+          "name": "Mohammad Fidakar",
+          "email": "mohammad.fidakar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "White Hall 205",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "5",
+      "enrollment_capacity": 50,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6-6:50p",
@@ -84,26 +124,47 @@
             "end": "1850"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "560",
       "crn": "1655",
       "section_number": "3",
       "schedule_type": "DIS",
-      "instructor": "E. Battaglioli",
+      "instructor": "Mohammad Fidakar",
       "instructors": [
         {
-          "name": "E. Battaglioli",
-          "email": null
+          "name": "Mohammad Fidakar",
+          "email": "mohammad.fidakar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 205",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 45,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6-6:50p",
@@ -114,26 +175,47 @@
             "end": "1850"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "561",
       "crn": "1894",
       "section_number": "4",
       "schedule_type": "DIS",
-      "instructor": "E. Battaglioli",
+      "instructor": "Tom Smith",
       "instructors": [
         {
-          "name": "E. Battaglioli",
-          "email": null
+          "name": "Tom Smith",
+          "email": "tom.smith@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 50,
+      "seats_available": 31,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6-6:50p",
@@ -144,26 +226,45 @@
             "end": "1850"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "562",
       "crn": "1657",
       "section_number": "5",
       "schedule_type": "DIS",
-      "instructor": "E. Battaglioli",
+      "instructor": "Maria Arbatskaya",
       "instructors": [
         {
-          "name": "E. Battaglioli",
-          "email": null
+          "name": "Maria Arbatskaya",
+          "email": "marbats@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "5",
+      "enrollment_capacity": 55,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 6-6:50p",
@@ -174,176 +275,28 @@
             "end": "1850"
           }
         ]
-      }
-    },
-    {
-      "crn": "1653",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Battaglioli",
-      "instructors": [
-        {
-          "name": "E. Battaglioli",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1893",
-      "section_number": "2",
-      "schedule_type": "DIS",
-      "instructor": "E. Battaglioli",
-      "instructors": [
-        {
-          "name": "E. Battaglioli",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6-6:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1800",
-            "end": "1850"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1655",
-      "section_number": "3",
-      "schedule_type": "DIS",
-      "instructor": "E. Battaglioli",
-      "instructors": [
-        {
-          "name": "E. Battaglioli",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6-6:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1800",
-            "end": "1850"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1894",
-      "section_number": "4",
-      "schedule_type": "DIS",
-      "instructor": "E. Battaglioli",
-      "instructors": [
-        {
-          "name": "E. Battaglioli",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6-6:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1800",
-            "end": "1850"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1657",
-      "section_number": "5",
-      "schedule_type": "DIS",
-      "instructor": "E. Battaglioli",
-      "instructors": [
-        {
-          "name": "E. Battaglioli",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 6-6:50p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1800",
-            "end": "1850"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
-    "lectures": 2,
+    "total_sections": 5,
+    "lectures": 1,
     "labs": 0,
-    "discussions": 8,
+    "discussions": 4,
     "other": 0,
-    "open": 10,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Battaglioli"
+    "Jong Kim",
+    "Maria Arbatskaya",
+    "Mohammad Fidakar",
+    "Tom Smith"
   ],
-  "scraped_at": "2026-06-17T23:01:21.204Z"
+  "scraped_at": "2026-06-18T02:09:43.795Z"
 }

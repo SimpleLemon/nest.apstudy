@@ -10,35 +10,50 @@
   "requirements": [
     "HAPW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Advanced seminar with emphasis on critical texts, methods, and techniques of art historical investigation. For art history majors; open to others with permission from the instructor.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is an applied technical study of harmony and counterpoint focusing on the written and aural aspects of the common-practice period, but including repertory from earlier periods and modern times. This course is designed for music majors and minors.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "868",
       "crn": "3769",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "E. Pastan",
+      "instructor": "Jason Eklund",
       "instructors": [
         {
-          "name": "E. Pastan",
-          "email": null
+          "name": "Jason Eklund",
+          "email": "jason.r.eklund@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Burlington Road Building 324",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 1-3:45p",
@@ -49,51 +64,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3769",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "E. Pastan",
-      "instructors": [
-        {
-          "name": "E. Pastan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 1-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Pastan"
+    "Jason Eklund"
   ],
-  "scraped_at": "2026-06-17T23:01:11.279Z"
+  "scraped_at": "2026-06-18T02:08:18.950Z"
 }

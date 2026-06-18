@@ -5,40 +5,58 @@
   "catalog_number": "268",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "1",
   "requirement_designation": "HAE",
   "requirements": [
-    "HAE"
+    "HAE",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Covers the history of the Israeli-Palestinian conflict from the 1880s to today. It will introduce students to early Zionist debates and the late Ottoman context before discussing the British Mandate period, the State of Israel, and the Palestinian cause on the world stage after the 1967 war.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Non-music majors. Prerequisite: permission of instructor. The study of applied music involves the understanding of music literature through performance on a specific instrument. One-hour private instruction weekly. Students are required to practice a minimum of three hours per week and perform a final jury exam. Contact the instructor to arrange an audition. Lesson fees apply; refer to the departmental website (www.music.emory.edu) for current information.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": "JS 268 HIST 268 MESAS 268",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "897",
       "crn": "4784",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "DeBoard/Schrenzel",
+      "instructor": "Jack Mitchener",
       "instructors": [
         {
-          "name": "DeBoard/Schrenzel",
-          "email": null
+          "name": "Jack Mitchener",
+          "email": "john.edward.mitchener@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "4784",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "DeBoard/Schrenzel",
-      "instructors": [
-        {
-          "name": "DeBoard/Schrenzel",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "DeBoard/Schrenzel"
+    "Jack Mitchener"
   ],
-  "scraped_at": "2026-06-17T23:06:17.736Z"
+  "scraped_at": "2026-06-18T02:40:43.647Z"
 }

@@ -8,12 +8,13 @@
   "credit_hours": "1",
   "requirement_designation": "PE",
   "requirements": [
-    "PE"
+    "PE",
+    "Physical Education(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "CBCT is a system of meditative practices designed to expand and strengthen compassion for self and others. Practices include training in Attentional stability and increased emotional awareness, as well as targeted analytical reflections to better understand one's relationship with self and others.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "CBCT is a system of meditative practices designed to expand and strengthen compassion for self and others. Practices include training in Attentional stability and increased emotional awareness, as well as targeted analytical reflections to better understand one¿s relationship with self and others.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "941",
       "crn": "3363",
       "section_number": "1",
       "schedule_type": "PE",
-      "instructor": "N. Alarcon",
+      "instructor": "Nic Alarcon",
       "instructors": [
         {
-          "name": "N. Alarcon",
-          "email": null
+          "name": "Nic Alarcon",
+          "email": "naalarc@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff PE Center Mult",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,56 +72,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "3363",
-      "section_number": "1",
-      "schedule_type": "PE",
-      "instructor": "N. Alarcon",
-      "instructors": [
-        {
-          "name": "N. Alarcon",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "N. Alarcon"
+    "Nic Alarcon"
   ],
-  "scraped_at": "2026-06-17T23:14:01.024Z"
+  "scraped_at": "2026-06-18T03:12:33.744Z"
 }

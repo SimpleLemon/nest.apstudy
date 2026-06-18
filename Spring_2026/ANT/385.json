@@ -5,40 +5,57 @@
   "catalog_number": "385",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "1,2,3,4",
   "requirement_designation": "HSC",
   "requirements": [
-    "HSC"
+    "HSC",
+    "Continuing Communication and Writing(*)",
+    "Continuing Comm.& Writing with Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Seminar or lecture series of topics of anthropological concern. May be repeated for credit when topic varies.",
-  "course_notes": null,
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course gives undergraduate students the opportunity to follow a reading plan and/or conduct empirical research under the direction of a faculty member.",
+  "course_notes": "Oxford Research Scholars (Permission Required Prior to Enrollment)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3689",
       "crn": "1856",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Nugent",
+      "instructor": "Daniel Walter",
       "instructors": [
         {
-          "name": "D. Nugent",
-          "email": null
+          "name": "Daniel Walter",
+          "email": "daniel.walter@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1,2,3,4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 3,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 5:30-6:45p",
@@ -54,26 +71,43 @@
             "end": "1845"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3690",
       "crn": "1858",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "J. Saers",
+      "instructor": "Eri Saikawa",
       "instructors": [
         {
-          "name": "J. Saers",
-          "email": null
+          "name": "Eri Saikawa",
+          "email": "eri.saikawa@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W502",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:15p",
@@ -84,26 +118,43 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3691",
       "crn": "2743",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "Jones/Buckmaster",
+      "instructor": "Heather Bradley",
       "instructors": [
         {
-          "name": "Jones/Buckmaster",
-          "email": null
+          "name": "Heather Bradley",
+          "email": "hbradl2@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 75,
+      "seats_available": 44,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -119,26 +170,47 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3692",
       "crn": "2872",
       "section_number": "5",
       "schedule_type": "LEC",
-      "instructor": "J. Glass",
+      "instructor": "Ellie Schainker",
       "instructors": [
         {
-          "name": "J. Glass",
-          "email": null
+          "name": "Ellie Schainker",
+          "email": "ellie.schainker@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Callaway N204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:15p",
@@ -149,26 +221,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3693",
       "crn": "4395",
       "section_number": "6",
       "schedule_type": "LEC",
-      "instructor": "B. Holsey",
+      "instructor": "Ellie Schainker",
       "instructors": [
         {
-          "name": "B. Holsey",
-          "email": null
+          "name": "Ellie Schainker",
+          "email": "ellie.schainker@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Callaway N204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 4,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -184,26 +277,47 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3694",
       "crn": "4537",
       "section_number": "7",
       "schedule_type": "LEC",
-      "instructor": "D. Seeman",
+      "instructor": "Jonathan Prude",
       "instructors": [
         {
-          "name": "D. Seeman",
-          "email": null
+          "name": "Jonathan Prude",
+          "email": "histjp@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Woodruff Library 773",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6-8:45p",
@@ -214,26 +328,47 @@
             "end": "2045"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3695",
       "crn": "5613",
       "section_number": "9",
       "schedule_type": "LEC",
-      "instructor": "J. Saers",
+      "instructor": "Thomas Rogers",
       "instructors": [
         {
-          "name": "J. Saers",
-          "email": null
+          "name": "Thomas Rogers",
+          "email": "tomrogers@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Bowden Hall 323",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
+      "requirements": [
+        "Continuing Comm.& Writing with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-6:45p",
@@ -244,251 +379,30 @@
             "end": "1845"
           }
         ]
-      }
-    },
-    {
-      "crn": "1856",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Nugent",
-      "instructors": [
-        {
-          "name": "D. Nugent",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 5:30-6:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1730",
-            "end": "1845"
-          },
-          {
-            "day": "Thu",
-            "start": "1730",
-            "end": "1845"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1858",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "J. Saers",
-      "instructors": [
-        {
-          "name": "J. Saers",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2743",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "Jones/Buckmaster",
-      "instructors": [
-        {
-          "name": "Jones/Buckmaster",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2872",
-      "section_number": "5",
-      "schedule_type": "LEC",
-      "instructor": "J. Glass",
-      "instructors": [
-        {
-          "name": "J. Glass",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4395",
-      "section_number": "6",
-      "schedule_type": "LEC",
-      "instructor": "B. Holsey",
-      "instructors": [
-        {
-          "name": "B. Holsey",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4537",
-      "section_number": "7",
-      "schedule_type": "LEC",
-      "instructor": "D. Seeman",
-      "instructors": [
-        {
-          "name": "D. Seeman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6-8:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1800",
-            "end": "2045"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5613",
-      "section_number": "9",
-      "schedule_type": "LEC",
-      "instructor": "J. Saers",
-      "instructors": [
-        {
-          "name": "J. Saers",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-6:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1845"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 14,
-    "lectures": 14,
+    "total_sections": 7,
+    "lectures": 7,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 12,
+    "open": 4,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "B. Holsey",
-    "D. Nugent",
-    "D. Seeman",
-    "J. Glass",
-    "J. Saers",
-    "Jones/Buckmaster"
+    "Daniel Walter",
+    "Ellie Schainker",
+    "Eri Saikawa",
+    "Heather Bradley",
+    "Jonathan Prude",
+    "Thomas Rogers"
   ],
-  "scraped_at": "2026-06-17T23:01:04.709Z"
+  "scraped_at": "2026-06-18T02:07:32.580Z"
 }

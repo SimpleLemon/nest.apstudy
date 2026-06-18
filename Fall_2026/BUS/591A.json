@@ -5,13 +5,13 @@
   "catalog_number": "591A",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "0",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Provides a foundation for professional development that continues throughout your MBA education, and beyond. Cornerstone has three main focus areas: Leadership and Teamwork, Presentation Skills, and Professional Development. Each area is essential to the overall development and success of the MBA student and professional. Focusing on Leadership and Teamwork, Presentation Skill, Professional Development Series.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,162 +20,141 @@
   },
   "sections": [
     {
+      "atlas_key": "3598",
       "crn": "5963",
       "section_number": "2201",
       "schedule_type": "LEC",
-      "instructor": "J. Conner",
+      "instructor": "Jaclyn Conner",
       "instructors": [
         {
-          "name": "J. Conner",
-          "email": null
+          "name": "Jaclyn Conner",
+          "email": "jaclyn.conner@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 66,
+      "seats_available": 64,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3599",
       "crn": "5965",
       "section_number": "2488",
       "schedule_type": "LEC",
-      "instructor": "J. Conner",
+      "instructor": "Jaclyn Conner",
       "instructors": [
         {
-          "name": "J. Conner",
-          "email": null
+          "name": "Jaclyn Conner",
+          "email": "jaclyn.conner@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 33,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3600",
       "crn": "5966",
       "section_number": "2588",
       "schedule_type": "LEC",
-      "instructor": "J. Conner",
+      "instructor": "Jaclyn Conner",
       "instructors": [
         {
-          "name": "J. Conner",
-          "email": null
+          "name": "Jaclyn Conner",
+          "email": "jaclyn.conner@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "0",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 33,
+      "seats_available": 33,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5963",
-      "section_number": "2201",
-      "schedule_type": "LEC",
-      "instructor": "J. Conner",
-      "instructors": [
-        {
-          "name": "J. Conner",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5965",
-      "section_number": "2488",
-      "schedule_type": "LEC",
-      "instructor": "J. Conner",
-      "instructors": [
-        {
-          "name": "J. Conner",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5966",
-      "section_number": "2588",
-      "schedule_type": "LEC",
-      "instructor": "J. Conner",
-      "instructors": [
-        {
-          "name": "J. Conner",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Conner"
+    "Jaclyn Conner"
   ],
-  "scraped_at": "2026-06-17T23:09:37.593Z"
+  "scraped_at": "2026-06-18T02:50:08.978Z"
 }

@@ -5,326 +5,284 @@
   "catalog_number": "797R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed to conduct an exhaustive exploration of the science and art of cross- examination with extensive in-class exploration and performance of advanced cross-examination techniques. In addition to performance, students will critique and analyze the cross-examinations of their peers and example cross-examinations from high-profile cases.",
+  "course_notes": "Final Assessment: Scheduled Exam Mid-term Assessment: In-Class Exam PREREQUISITE: EVIDENCE (CONCURRENTLY OK); THE MIDTERM AND FINAL EXAM WILL BE CROSS-EXAMINATIONS OF LIVE WITNESSES. May be used towards partial fulfillment of the requirements for the JD Criminal Litigation or Civil Litigation and Dispute Resolution concentration. Counts towards partial fulfillment of the JD Experiential degree requirement.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "1887",
       "crn": "1727",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "N. McAfee",
+      "instructor": "Frank Costa",
       "instructors": [
         {
-          "name": "N. McAfee",
-          "email": null
+          "name": "Frank Costa",
+          "email": "frank.j.costa@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "6",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": 1,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "1888",
       "crn": "6207",
       "section_number": "2",
       "schedule_type": "SUP",
-      "instructor": "J. Lysaker",
+      "instructor": "Mary L. Dudziak",
       "instructors": [
         {
-          "name": "J. Lysaker",
-          "email": null
+          "name": "Mary L. Dudziak",
+          "email": "mary.dudziak@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2,3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": 3,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "1889",
       "crn": "6216",
       "section_number": "3",
       "schedule_type": "SUP",
-      "instructor": "C. Willett",
+      "instructor": "Deepa Das Acevedo",
       "instructors": [
         {
-          "name": "C. Willett",
-          "email": null
+          "name": "Deepa Das Acevedo",
+          "email": "dasacevedo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 30,
+      "seats_available": 1,
+      "waitlist_total": 0,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "1890",
       "crn": "6313",
       "section_number": "4",
       "schedule_type": "SUP",
-      "instructor": "G. Yancy",
+      "instructor": "Matthew Sag",
       "instructors": [
         {
-          "name": "G. Yancy",
-          "email": null
+          "name": "Matthew Sag",
+          "email": "matthew.james.sag@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "6",
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": 1,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "1891",
       "crn": "6315",
       "section_number": "5",
       "schedule_type": "SUP",
-      "instructor": "A. Mitchell",
+      "instructor": "Margo Bagley",
       "instructors": [
         {
-          "name": "A. Mitchell",
-          "email": null
+          "name": "Margo Bagley",
+          "email": "margo.a.bagley@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 14,
+      "seats_available": 7,
+      "waitlist_total": 0,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "1892",
       "crn": "6347",
       "section_number": "6",
       "schedule_type": "SUP",
-      "instructor": "D. Marriott",
+      "instructor": "Sara Zdeb",
       "instructors": [
         {
-          "name": "D. Marriott",
-          "email": null
+          "name": "Sara Zdeb",
+          "email": "sara.zdeb@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2,3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 15,
+      "seats_available": 2,
+      "waitlist_total": 0,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "1727",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "N. McAfee",
-      "instructors": [
-        {
-          "name": "N. McAfee",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6207",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "J. Lysaker",
-      "instructors": [
-        {
-          "name": "J. Lysaker",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6216",
-      "section_number": "3",
-      "schedule_type": "SUP",
-      "instructor": "C. Willett",
-      "instructors": [
-        {
-          "name": "C. Willett",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6313",
-      "section_number": "4",
-      "schedule_type": "SUP",
-      "instructor": "G. Yancy",
-      "instructors": [
-        {
-          "name": "G. Yancy",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6315",
-      "section_number": "5",
-      "schedule_type": "SUP",
-      "instructor": "A. Mitchell",
-      "instructors": [
-        {
-          "name": "A. Mitchell",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6347",
-      "section_number": "6",
-      "schedule_type": "SUP",
-      "instructor": "D. Marriott",
-      "instructors": [
-        {
-          "name": "D. Marriott",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
+    "total_sections": 6,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 12,
-    "open": 12,
-    "closed": 0,
+    "other": 6,
+    "open": 3,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Mitchell",
-    "C. Willett",
-    "D. Marriott",
-    "G. Yancy",
-    "J. Lysaker",
-    "N. McAfee"
+    "Deepa Das Acevedo",
+    "Frank Costa",
+    "Margo Bagley",
+    "Mary L. Dudziak",
+    "Matthew Sag",
+    "Sara Zdeb"
   ],
-  "scraped_at": "2026-06-17T23:06:07.922Z"
+  "scraped_at": "2026-06-18T02:38:17.523Z"
 }

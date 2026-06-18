@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "FS",
   "requirements": [
-    "FS"
+    "FS",
+    "First Year Seminar"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Dynamics of inquiry on a focused research topic. Will include discussion, debate, oral and written presentations. Topic varies.",
-  "course_notes": null,
+  "course_notes": "This course satisfies the Religion major requirement:- Theme. We will discuss Dracula by Bram Stoker (1897), as related to issues of gender, sexuality, race, nationalism, technology, mental illness, blood, colonialism, the British Empire, Freud, science, narrative, genre, horror, souls, magic, and religion. Featuring a cast of stiff-upper-lip Brits, a weird old Catholic from Holland, a married woman who parades around like a sex worker, hypnosis, evil aristocrats, ruined abbeys, decapitation, gender inversions, experiments in a mental asylum, and a happy ending. Students should have already read the novel at the start of the course.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "1161",
       "crn": "2490",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "E. Reinders",
+      "instructor": "Eric Reinders",
       "instructors": [
         {
-          "name": "E. Reinders",
-          "email": null
+          "name": "Eric Reinders",
+          "email": "ereinde@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Candler Library 124",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -54,56 +72,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "2490",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "E. Reinders",
-      "instructors": [
-        {
-          "name": "E. Reinders",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Reinders"
+    "Eric Reinders"
   ],
-  "scraped_at": "2026-06-17T23:14:36.843Z"
+  "scraped_at": "2026-06-18T03:17:38.884Z"
 }

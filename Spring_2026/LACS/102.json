@@ -13,7 +13,7 @@
   "campus": null,
   "campus_description": null,
   "course_description": "This course focuses on the historical and political contexts that impact Hispanic, Latino/a, and Latinx identity formation in the United States, identity maintenance, racialization, and ideologies of gender and sexuality.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,6 +22,7 @@
   },
   "sections": [
     {
+      "atlas_key": "5007",
       "crn": "3757",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +30,25 @@
       "instructors": [
         {
           "name": "T. Figueroa",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,9 +64,14 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     },
     {
+      "atlas_key": "5008",
       "crn": "3759",
       "section_number": "2",
       "schedule_type": "LEC",
@@ -64,16 +79,25 @@
       "instructors": [
         {
           "name": "T. Figueroa",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "2",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -89,91 +113,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3757",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "T. Figueroa",
-      "instructors": [
-        {
-          "name": "T. Figueroa",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3759",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "T. Figueroa",
-      "instructors": [
-        {
-          "name": "T. Figueroa",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 4
+    "waitlisted": 2
   },
   "instructors_unique": [
     "T. Figueroa"
   ],
-  "scraped_at": "2026-06-17T23:03:44.589Z"
+  "scraped_at": "2026-06-18T02:28:19.726Z"
 }

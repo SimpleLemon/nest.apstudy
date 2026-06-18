@@ -5,13 +5,13 @@
   "catalog_number": "789",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Various topics, such as theoretical, generic, or cultural studies of literature.",
+  "course_notes": "Through readings of literature, literary and cultural theory, and criticism, this course explores novel theory: its history and trajectory, its major figures and concepts, its long-running and recent debates. Our literary readings will be drawn from Britain during the Victorian era (1837 to 1901), when the novel became the ascendant popular literary form and proliferated among a wide variety of sub-genres. Our theory and criticism will encompass the nineteenth century through the present, focusing on foundational twentieth-century approaches to the genre. Throughout our study, we will evaluate how novels themselves shape their own theories and how, in doing so, they actively create a world they are sometimes thought passively to represent. The aims of this course extend beyond familiarizing you with Victorian fiction and theories of the novel: this course will equip you with a set of theoretical models, interpretive methods, and practical skills that you will be able to adapt to other historical eras and literary forms. You will be able to carry this analytical toolkit to your future coursework, research, and teaching, enabling you and your students to examine texts with a sensitive, discerning, and creative eye. Assignments will include a midterm conference-length paper and a choice of final project (a seminar-length paper; a syllabus with assignments; a digital or public humanities project; or equivalent options).",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,38 @@
   },
   "sections": [
     {
+      "atlas_key": "1376",
       "crn": "2483",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "E. Davenport",
+      "instructor": "Emma Davenport",
       "instructors": [
         {
-          "name": "E. Davenport",
-          "email": null
+          "name": "Emma Davenport",
+          "email": "emma.davenport@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway C201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 1-3:45p",
@@ -47,26 +62,50 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1377",
       "crn": "2485",
       "section_number": "3",
       "schedule_type": "SEM",
-      "instructor": "Klein/Salter",
+      "instructor": "Lauren Klein",
       "instructors": [
         {
-          "name": "Klein/Salter",
-          "email": null
+          "name": "Lauren Klein",
+          "email": "lauren.klein@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sarah Salter",
+          "email": "sarah.h.salter@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway C201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 9,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 10a-12:45p",
@@ -77,26 +116,45 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1378",
       "crn": "4008",
       "section_number": "4",
       "schedule_type": "SEM",
-      "instructor": "G. Bennington",
+      "instructor": "Geoffrey Bennington",
       "instructors": [
         {
-          "name": "G. Bennington",
-          "email": null
+          "name": "Geoffrey Bennington",
+          "email": "geoffrey.bennington@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 3,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 1-4p",
@@ -107,26 +165,45 @@
             "end": "1600"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1379",
       "crn": "5404",
       "section_number": "5",
       "schedule_type": "SEM",
-      "instructor": "S. Gagliardi",
+      "instructor": "Susan Elizabeth Gagliardi",
       "instructors": [
         {
-          "name": "S. Gagliardi",
-          "email": null
+          "name": "Susan Elizabeth Gagliardi",
+          "email": "susan.e.gagliardi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Carlos Hall Conference",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 10a-12:45p",
@@ -137,144 +214,29 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2483",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "E. Davenport",
-      "instructors": [
-        {
-          "name": "E. Davenport",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 1-3:45p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2485",
-      "section_number": "3",
-      "schedule_type": "SEM",
-      "instructor": "Klein/Salter",
-      "instructors": [
-        {
-          "name": "Klein/Salter",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 10a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4008",
-      "section_number": "4",
-      "schedule_type": "SEM",
-      "instructor": "G. Bennington",
-      "instructors": [
-        {
-          "name": "G. Bennington",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 1-4p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1600"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5404",
-      "section_number": "5",
-      "schedule_type": "SEM",
-      "instructor": "S. Gagliardi",
-      "instructors": [
-        {
-          "name": "S. Gagliardi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 10a-12:45p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 8,
-    "open": 8,
+    "other": 4,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Davenport",
-    "G. Bennington",
-    "Klein/Salter",
-    "S. Gagliardi"
+    "Emma Davenport",
+    "Geoffrey Bennington",
+    "Lauren Klein",
+    "Sarah Salter",
+    "Susan Elizabeth Gagliardi"
   ],
-  "scraped_at": "2026-06-17T23:10:23.260Z"
+  "scraped_at": "2026-06-18T02:55:51.554Z"
 }

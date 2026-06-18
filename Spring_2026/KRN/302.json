@@ -5,40 +5,55 @@
   "catalog_number": "302",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "2",
   "requirement_designation": "IC",
   "requirements": [
     "IC"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course, as a continuation of KRN 301, is designed to further develop advanced skills of speaking, listening, reading, writing and grammar in Korean. This course emphasizes reading and writing with advanced grammar, vocabulary and expressions. KRN 301 or instructor permission required.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The purpose of this course is to prepare students for upper-level, data analysis-related courses. This course emphasizes on skills that are relevant for data analysis which include 1) data manipulation such as merging, appending, and reshaping data, and 2) making plots for descriptive analysis.",
+  "course_notes": "Please note that DATASCI 185 Computational Methods in Data Sci (sections 1 and 3) will count for both DATASCI 150 and DATASCI 151. DATASCI majors and minors are encouraged to enroll for these courses instead. DATASCI 185 (Sections 1 and 3) does not cover any material from DATASCI 150. Instead, 185 is intended as a more updated and extended version of DATASCI 151.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3508",
       "crn": "3018",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "E. Jo",
+      "instructor": "Peter Sentz",
       "instructors": [
         {
-          "name": "E. Jo",
-          "email": null
+          "name": "Peter Sentz",
+          "email": "peter.thomas.sentz@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 205",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 75,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +69,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "3018",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Jo",
-      "instructors": [
-        {
-          "name": "E. Jo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Jo"
+    "Peter Sentz"
   ],
-  "scraped_at": "2026-06-17T23:03:41.309Z"
+  "scraped_at": "2026-06-18T02:28:07.317Z"
 }

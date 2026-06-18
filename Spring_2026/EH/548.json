@@ -5,38 +5,56 @@
   "catalog_number": "548",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "1",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The Intersession curriculum will consist of two separate one-week blocks, one in the middle of the Application Phase and the other at the end. During these weeks, all students in the clerkship year will come together to focus on topics that don't readily fit into the paradigm of typical clerkship content; this will include a focus on service learning, personal and professional development, patient safety and quality, and communication skills, among many other topics.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-06-29",
+    "end": "2026-12-19"
   },
   "sections": [
     {
+      "atlas_key": "3448",
       "crn": "1489",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Wolfe",
+      "instructor": "Maya McCarthy",
       "instructors": [
         {
-          "name": "M. Wolfe",
-          "email": null
+          "name": "Maya McCarthy",
+          "email": "maya.larah.eady@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "David Alexander Schulman",
+          "email": "daschul@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 150,
+      "seats_available": 150,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9-11:50a",
@@ -47,51 +65,26 @@
             "end": "1150"
           }
         ]
-      }
-    },
-    {
-      "crn": "1489",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Wolfe",
-      "instructors": [
-        {
-          "name": "M. Wolfe",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 9-11:50a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "900",
-            "end": "1150"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Wolfe"
+    "David Alexander Schulman",
+    "Maya McCarthy"
   ],
-  "scraped_at": "2026-06-17T23:02:13.537Z"
+  "scraped_at": "2026-06-18T02:18:13.753Z"
 }

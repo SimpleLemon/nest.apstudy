@@ -13,7 +13,7 @@
   "campus": null,
   "campus_description": null,
   "course_description": "The course provides an overview of the modern Iranian society through its cinema in the last 40 years of post-revolutionary Iran. It covers topics like Social Diversity; Revolution & War; Women & Gender Issues; Family & Relationship; Class Conflict; Morality; Education; Immigration; Forbidden Life.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": "FILM 265",
   "date_range": {
@@ -22,6 +22,7 @@
   },
   "sections": [
     {
+      "atlas_key": "4756",
       "crn": "2676",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +30,25 @@
       "instructors": [
         {
           "name": "H. Samei",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 11:30a-2p",
@@ -49,51 +59,25 @@
             "end": "1400"
           }
         ]
-      }
-    },
-    {
-      "crn": "2676",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "H. Samei",
-      "instructors": [
-        {
-          "name": "H. Samei",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 11:30a-2p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1400"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "H. Samei"
   ],
-  "scraped_at": "2026-06-17T23:03:57.663Z"
+  "scraped_at": "2026-06-18T02:30:25.529Z"
 }

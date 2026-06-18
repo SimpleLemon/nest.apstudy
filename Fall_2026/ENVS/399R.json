@@ -5,15 +5,15 @@
   "catalog_number": "399R",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 8",
+  "credit_hours": "1,2,3,4,5,6,7,8",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Variable credit. Permission required. Intended for students who have had some prior introduction to research, either in ENVS 299 or in another class or field. In this individual research course, research skills are developed and refined under supervision of an ENVS faculty member.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,115 +22,105 @@
   },
   "sections": [
     {
+      "atlas_key": "2425",
       "crn": "5664",
       "section_number": "1",
       "schedule_type": "RSC",
-      "instructor": "S. Donaher",
+      "instructor": "Shaunna Donaher",
       "instructors": [
         {
-          "name": "S. Donaher",
-          "email": null
+          "name": "Shaunna Donaher",
+          "email": "shaunna.donaher@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2426",
       "crn": "5834",
       "section_number": "2",
       "schedule_type": "RSC",
-      "instructor": "J. Ajibade",
+      "instructor": "Jola Ajibade",
       "instructors": [
         {
-          "name": "J. Ajibade",
-          "email": null
+          "name": "Jola Ajibade",
+          "email": "idowu.ajibade@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 3,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5664",
-      "section_number": "1",
-      "schedule_type": "RSC",
-      "instructor": "S. Donaher",
-      "instructors": [
-        {
-          "name": "S. Donaher",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5834",
-      "section_number": "2",
-      "schedule_type": "RSC",
-      "instructor": "J. Ajibade",
-      "instructors": [
-        {
-          "name": "J. Ajibade",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 2,
-    "closed": 2,
+    "other": 2,
+    "open": 1,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Ajibade",
-    "S. Donaher"
+    "Jola Ajibade",
+    "Shaunna Donaher"
   ],
-  "scraped_at": "2026-06-17T23:10:29.847Z"
+  "scraped_at": "2026-06-18T02:57:02.095Z"
 }

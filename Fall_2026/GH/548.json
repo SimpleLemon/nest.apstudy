@@ -5,13 +5,13 @@
   "catalog_number": "548",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "4",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisites: One year of biology and organic chemistry and permission of instructor. The goal of the course is for students to learn the fundamental principles that underlie nutrient regulation and function and their integrative role in metabolic pathways. This course will address macronutrient requirements and how nutrient biochemical and metabolic processes are implicated in health and disease pathology as well as the potential for disease prevention or management through nutrient-dependent processes. These objectives will be accomplished by lectures and discussion sessions that focus on the basic principles of nutrient requirements, cell biology, physiology and biochemistry relevant to nutrition, followed by the role of macronutrients in health and disease. Cross- listed with NHS 580 .",
+  "course_notes": "Letter Grade Only. Prerequisite: One Year Biology and Organic Chemistry.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "168",
       "crn": "2252",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "U. Ramakrishnan",
+      "instructor": "Usha Ramakrishnan",
       "instructors": [
         {
-          "name": "U. Ramakrishnan",
-          "email": null
+          "name": "Usha Ramakrishnan",
+          "email": "uramakr@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:50a",
@@ -52,56 +65,25 @@
             "end": "1150"
           }
         ]
-      }
-    },
-    {
-      "crn": "2252",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "U. Ramakrishnan",
-      "instructors": [
-        {
-          "name": "U. Ramakrishnan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1150"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1150"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "U. Ramakrishnan"
+    "Usha Ramakrishnan"
   ],
-  "scraped_at": "2026-06-17T23:10:49.338Z"
+  "scraped_at": "2026-06-18T02:59:07.915Z"
 }

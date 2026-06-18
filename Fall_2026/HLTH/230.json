@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Health is a fundamental human experience with multifaceted intersections in areas of humanistic inquiry.",
-  "course_notes": null,
+  "course_notes": "This class explores the role of the Humanities in broadening our perspectives on the meaning of Health. We examine how narratives and metaphors can shape our bodily experience and why certain illnesses are either stigmatized or romanticized. We also study various philosophical accounts of embodiment, along with recent critiques of the expanding medicalization of everyday life.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "2907",
       "crn": "2563",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Zhang",
+      "instructor": "Ju Zhang",
       "instructors": [
         {
-          "name": "J. Zhang",
-          "email": null
+          "name": "Ju Zhang",
+          "email": "ju.zhang@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 45,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a",
@@ -54,56 +69,25 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "2563",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Zhang",
-      "instructors": [
-        {
-          "name": "J. Zhang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Zhang"
+    "Ju Zhang"
   ],
-  "scraped_at": "2026-06-17T23:11:11.997Z"
+  "scraped_at": "2026-06-18T03:01:54.411Z"
 }

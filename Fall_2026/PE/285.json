@@ -8,12 +8,13 @@
   "credit_hours": "1",
   "requirement_designation": "PE",
   "requirements": [
-    "PE"
+    "PE",
+    "Physical Education(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Course based on selected topics of interest in fitness and exercise. Activity focus will vary. May be repeated (up to 2 credit hours) for credit when topic varies.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,18 +23,34 @@
   },
   "sections": [
     {
+      "atlas_key": "3022",
       "crn": "2949",
       "section_number": "1",
       "schedule_type": "PE",
       "instructor": "Staff",
       "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff PE Center 306",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-5:30p",
@@ -44,26 +61,52 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3023",
       "crn": "4466",
       "section_number": "2",
       "schedule_type": "PE",
-      "instructor": "Flint/Bedzow",
+      "instructor": "Ira Bedzow",
       "instructors": [
         {
-          "name": "Flint/Bedzow",
-          "email": null
+          "name": "Ira Bedzow",
+          "email": "ira.jay.bedzow@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "April Flint",
+          "email": "april.flint@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff PE Center Cycle Studi",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 10-10:50a",
@@ -74,26 +117,47 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3024",
       "crn": "5652",
       "section_number": "3",
       "schedule_type": "PE",
-      "instructor": "A. Murphy",
+      "instructor": "Arlenda Murphy",
       "instructors": [
         {
-          "name": "A. Murphy",
-          "email": null
+          "name": "Arlenda Murphy",
+          "email": "arlenda.peterson.murphy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff PE Center 306",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 29,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 1-2:15p",
@@ -104,107 +168,27 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2949",
-      "section_number": "1",
-      "schedule_type": "PE",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-5:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4466",
-      "section_number": "2",
-      "schedule_type": "PE",
-      "instructor": "Flint/Bedzow",
-      "instructors": [
-        {
-          "name": "Flint/Bedzow",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 10-10:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5652",
-      "section_number": "3",
-      "schedule_type": "PE",
-      "instructor": "A. Murphy",
-      "instructors": [
-        {
-          "name": "A. Murphy",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
+    "total_sections": 3,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 6,
-    "open": 2,
-    "closed": 4,
+    "other": 3,
+    "open": 1,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Murphy",
-    "Flint/Bedzow"
+    "April Flint",
+    "Arlenda Murphy",
+    "Ira Bedzow"
   ],
-  "scraped_at": "2026-06-17T23:14:01.033Z"
+  "scraped_at": "2026-06-18T03:12:33.749Z"
 }

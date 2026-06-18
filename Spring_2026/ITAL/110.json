@@ -5,40 +5,58 @@
   "catalog_number": "110",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "8",
+  "credit_hours": "1",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Physical Education(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Innovative eBook Italian Virtual Class: engaging approach to language learning, full immersion in Italian culture, literature and art with authentic materials; development of analytical, critical skills, cross-cultural competency and higher than norm linguistic fluency.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Development of specific fitness components utilizing routine participation in jogging and/or running on WPEC indoor and outdoor tracks, local streets and Lullwater Park. Instruction in running biomechanics, pace, and building a progressive program are included. Fulfills the PPF requirement.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "937",
       "crn": "2595",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Ristaino/Di Pietro",
+      "instructor": "Elizabeth Noell",
       "instructors": [
         {
-          "name": "Ristaino/Di Pietro",
-          "email": null
+          "name": "Elizabeth Noell",
+          "email": "enoell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff PE Center- Atrium",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MTWTh 11:30a-12:45p; F 11:30a-12:20p",
@@ -69,71 +87,25 @@
             "end": "1220"
           }
         ]
-      }
-    },
-    {
-      "crn": "2595",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Ristaino/Di Pietro",
-      "instructors": [
-        {
-          "name": "Ristaino/Di Pietro",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MTWTh 11:30a-12:45p; F 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Ristaino/Di Pietro"
+    "Elizabeth Noell"
   ],
-  "scraped_at": "2026-06-17T23:03:31.573Z"
+  "scraped_at": "2026-06-18T02:27:29.786Z"
 }

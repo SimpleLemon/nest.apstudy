@@ -5,40 +5,58 @@
   "catalog_number": "386",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "1",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Physical Education(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This is a variable credit course; special topics in Political Science.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course introduces students to the basics of Kuchipudi, an Asian Indian classical dance form of South India based on dance dramas that tell a story. Students will gain familiarity with hand gestures, foot movements, rhythmic syllables, and how to use combinations of these to express themselves through dance. This course culminates in a performance or lecture demonstration.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3778",
       "crn": "3189",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Baker/Tucker",
+      "instructor": "Sasikala Penumarthi",
       "instructors": [
         {
-          "name": "Baker/Tucker",
-          "email": null
+          "name": "Sasikala Penumarthi",
+          "email": "sasikala.penumarthi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Schwartz Center 255",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 23,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-3:20p",
@@ -49,51 +67,25 @@
             "end": "1520"
           }
         ]
-      }
-    },
-    {
-      "crn": "3189",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Baker/Tucker",
-      "instructors": [
-        {
-          "name": "Baker/Tucker",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 2:30-3:20p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1520"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Baker/Tucker"
+    "Sasikala Penumarthi"
   ],
-  "scraped_at": "2026-06-17T23:06:17.745Z"
+  "scraped_at": "2026-06-18T02:40:43.652Z"
 }

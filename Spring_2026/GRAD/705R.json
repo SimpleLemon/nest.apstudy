@@ -5,81 +5,80 @@
   "catalog_number": "705R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "1",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Required for all first-year Master of Divinity students in the fall semester, this course seeks to ground the MDiv student experience by joining critical studies of theological education with reflection on the questions that motivate each of us-faculty and students-to take up this work. In the course of studying communities of theological education, we will learn how to create community together, and how to shape that community into one that supports shared vocational, spiritual, and intellectual growth. Part A of the course takes place as an intensive in person experience during the same week as and integrated with New Student Orientation.",
+  "course_notes": "(ON CAMPUS AUGUST-TERM INTENSIVE AUGUST 17-21, 2026) (Required for all new MDiv Students who entered in Spring 2026 and Fall 2026; meets on campus during and is integrated with New Student Orientation; times listed are not exact but you should plan to be on campus in Atlanta all day on all five days that week; see NSO schedule for exact meetings times and locations for the class portion of the week)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-08-21"
   },
   "sections": [
     {
+      "atlas_key": "4118",
       "crn": "6388",
       "section_number": "1",
       "schedule_type": "PRA",
-      "instructor": "K. Leonard",
+      "instructor": "Sarah Bogue",
       "instructors": [
         {
-          "name": "K. Leonard",
-          "email": null
+          "name": "Sarah Bogue",
+          "email": "sarah.bogue@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Joel Kemp",
+          "email": "joel.bernard.kemp@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rita Anne Rollins Building_252",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 150,
+      "seats_available": 141,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6388",
-      "section_number": "1",
-      "schedule_type": "PRA",
-      "instructor": "K. Leonard",
-      "instructors": [
-        {
-          "name": "K. Leonard",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-08-21"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 0,
-    "closed": 2,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Leonard"
+    "Joel Kemp",
+    "Sarah Bogue"
   ],
-  "scraped_at": "2026-06-17T23:02:49.252Z"
+  "scraped_at": "2026-06-18T02:23:24.121Z"
 }

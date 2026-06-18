@@ -5,38 +5,61 @@
   "catalog_number": "598",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "0.5",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Board Rooms build community, engagement, and cohesion while connecting students to each other and to resources at Goizueta. Each student will stay in the same Room for their tenure in the program. Cohorts will meet monthly, with 1-2 additional community events offered each semester. Each Room will have one lead faculty/staff member. At each meeting, specific content around a provided subject will be developed and led by the student members. Individual sessions will feature program announcements, a student-led discussion of a contemporary problem, networking, and celebration of achievements.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "203",
       "crn": "1564",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "L. Vasudevan",
+      "instructor": "Allison Kays",
       "instructors": [
         {
-          "name": "L. Vasudevan",
-          "email": null
+          "name": "Allison Kays",
+          "email": "allison.kays@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Allison Kays",
+          "email": "allison.kays@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Allison Kays",
+          "email": "allison.kays@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0.5",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 60,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:50a",
@@ -52,26 +75,53 @@
             "end": "1150"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "204",
       "crn": "1589",
       "section_number": "4",
       "schedule_type": "SEM",
-      "instructor": "M. Young",
+      "instructor": "Emily Bianchi",
       "instructors": [
         {
-          "name": "M. Young",
-          "email": null
+          "name": "Emily Bianchi",
+          "email": "emilybianchi@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Emily Bianchi",
+          "email": "emilybianchi@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Emily Bianchi",
+          "email": "emilybianchi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 60,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:50p",
@@ -87,26 +137,53 @@
             "end": "1450"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "205",
       "crn": "1598",
       "section_number": "5",
       "schedule_type": "SEM",
-      "instructor": "R. Bednarczyk",
+      "instructor": "Sophia A'Lisa Cruz",
       "instructors": [
         {
-          "name": "R. Bednarczyk",
-          "email": null
+          "name": "Sophia A'Lisa Cruz",
+          "email": "sophia.alisa.cruz@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sophia A'Lisa Cruz",
+          "email": "sophia.alisa.cruz@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sophia A'Lisa Cruz",
+          "email": "sophia.alisa.cruz@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 60,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 3-4:50p",
@@ -122,26 +199,53 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "206",
       "crn": "1599",
       "section_number": "6",
       "schedule_type": "SEM",
-      "instructor": "H. Shao",
+      "instructor": "Jessica Lowy",
       "instructors": [
         {
-          "name": "H. Shao",
-          "email": null
+          "name": "Jessica Lowy",
+          "email": "jessica.lowy@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jessica Lowy",
+          "email": "jessica.lowy@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jessica Lowy",
+          "email": "jessica.lowy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 60,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:50a",
@@ -157,164 +261,28 @@
             "end": "1150"
           }
         ]
-      }
-    },
-    {
-      "crn": "1564",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "L. Vasudevan",
-      "instructors": [
-        {
-          "name": "L. Vasudevan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1150"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1150"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1589",
-      "section_number": "4",
-      "schedule_type": "SEM",
-      "instructor": "M. Young",
-      "instructors": [
-        {
-          "name": "M. Young",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1450"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1450"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1598",
-      "section_number": "5",
-      "schedule_type": "SEM",
-      "instructor": "R. Bednarczyk",
-      "instructors": [
-        {
-          "name": "R. Bednarczyk",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 3-4:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1500",
-            "end": "1650"
-          },
-          {
-            "day": "Wed",
-            "start": "1500",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1599",
-      "section_number": "6",
-      "schedule_type": "SEM",
-      "instructor": "H. Shao",
-      "instructors": [
-        {
-          "name": "H. Shao",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1150"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1150"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 8,
-    "open": 6,
-    "closed": 2,
+    "other": 4,
+    "open": 4,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "H. Shao",
-    "L. Vasudevan",
-    "M. Young",
-    "R. Bednarczyk"
+    "Allison Kays",
+    "Emily Bianchi",
+    "Jessica Lowy",
+    "Sophia A'Lisa Cruz"
   ],
-  "scraped_at": "2026-06-17T23:02:46.040Z"
+  "scraped_at": "2026-06-18T02:23:19.058Z"
 }

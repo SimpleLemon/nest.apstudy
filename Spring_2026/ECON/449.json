@@ -5,83 +5,81 @@
   "catalog_number": "449",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "2",
+  "credit_hours": "3",
   "requirement_designation": "XA",
   "requirements": [
-    "XA"
+    "XA",
+    "Intercultural Communication w. Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Open to economics majors and minors only. Majors need to obtain permission from their economics advisers. Economics minors obtain permission from the director of undergraduate studies.",
-  "course_notes": "This course requires ECON 201 OR ECON_OX201 ECON 212 OR ECON_OX212 AND ECON 220 or MATH 207 or MATH_OX207 or MATH 361 or MATH 362 or equivalent transfer credit as a prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Advanced study of the language used in the Israeli media; includes selections from newspapers, radio, and television broadcasts.",
+  "course_notes": "(Same as HEBR 435 1)",
   "requisites": "This course requires ECON 201 OR ECON_OX201 ECON 212 OR ECON_OX212 AND ECON 220 or MATH 207 or MATH_OX207 or MATH 361 or MATH 362 or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "702",
       "crn": "6438",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "H. Mialon",
+      "instructor": "Pazit Kahlon",
       "instructors": [
         {
-          "name": "H. Mialon",
-          "email": null
+          "name": "Pazit Kahlon",
+          "email": "pazit.kahlon@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Psychology Bldg 250",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication w. Race & Ethnicity(*)",
+      "requirements": [
+        "Intercultural Communication w. Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6438",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "H. Mialon",
-      "instructors": [
-        {
-          "name": "H. Mialon",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "H. Mialon"
+    "Pazit Kahlon"
   ],
-  "scraped_at": "2026-06-17T23:02:03.801Z"
+  "scraped_at": "2026-06-18T02:17:46.582Z"
 }

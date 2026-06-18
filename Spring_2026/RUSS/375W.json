@@ -5,40 +5,53 @@
   "catalog_number": "375W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 5",
+  "credit_hours": "4",
   "requirement_designation": "CW",
   "requirements": [
     "CW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Study of Russian language, literature, or culture, alone or in conjunction with other literary or cultural trends. Topics to be announced in advance. May be repeated for credit when topic varies.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisite/concurrent: BIOS 500 . Emphasizes the concepts and premises of the science of epidemiology. Methods of hypothesis formulation and evaluation are stressed. Techniques for quantifying the amount of disease (or other health indicator) in populations are introduced, followed by discussion of epidemiologic study designs useful for identifying etiologic factors and other relevant correlates of disease. Students gain facility with the calculation of basic epidemiologic measures of frequency, association, and impact. The concepts of random variability, bias, and effect modification are examined in detail. The use of stratified analysis, including Mantel-Haenszel techniques, is explored. Inferences from study results are discussed. Students are required to analyze and critique studies from the current medical and scientific literature.",
+  "course_notes": "Section 1 Lecture: All RSPH students except for EPI, GLEPI, EH-EPI, BIOS, and PhD students may enroll in this section. Students outside of RSPH interested in registering, contact EPI ADAPs at sphepidept@emory.edu. RSPH students must enroll in corresponding Section 1 Labs: L1, L2, L3, L4, and L5.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1386",
       "crn": "2841",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "R. De Luca",
+      "instructor": "Sharia Ahmed",
       "instructors": [
         {
-          "name": "R. De Luca",
-          "email": null
+          "name": "Sharia Ahmed",
+          "email": "sharia.m.ahmed@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 125,
+      "seats_available": 81,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -54,56 +67,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "2841",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "R. De Luca",
-      "instructors": [
-        {
-          "name": "R. De Luca",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. De Luca"
+    "Sharia Ahmed"
   ],
-  "scraped_at": "2026-06-17T23:06:40.473Z"
+  "scraped_at": "2026-06-18T02:43:10.619Z"
 }

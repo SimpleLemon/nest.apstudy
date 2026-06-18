@@ -5,13 +5,13 @@
   "catalog_number": "522R",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "4",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "Location: SOM 313",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,41 @@
   },
   "sections": [
     {
+      "atlas_key": "1521",
       "crn": "5302",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Costa/Fleischer",
+      "instructor": "Vincent Costa",
       "instructors": [
         {
-          "name": "Costa/Fleischer",
-          "email": null
+          "name": "Vincent Costa",
+          "email": "vincent.d.costa@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Candace Fleischer",
+          "email": "candace.fleischer@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 40,
+      "seats_available": 36,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 3-5p",
@@ -47,26 +65,68 @@
             "end": "1700"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1522",
       "crn": "5345",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Graeme Conn",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Graeme Conn",
+          "email": "gconn@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Christine Dunham",
+          "email": "cmdunha@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Dorothy Lerit",
+          "email": "dlerit@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Christopher Neufeldt",
+          "email": "c.neufeldt@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Anne Piantadosi",
+          "email": "anne.piantadosi@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Timothy D Read",
+          "email": "tread@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 26,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-11:45a",
@@ -77,82 +137,32 @@
             "end": "1145"
           }
         ]
-      }
-    },
-    {
-      "crn": "5302",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Costa/Fleischer",
-      "instructors": [
-        {
-          "name": "Costa/Fleischer",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 3-5p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1500",
-            "end": "1700"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5345",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-11:45a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1145"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Costa/Fleischer",
-    "Team"
+    "Anne Piantadosi",
+    "Candace Fleischer",
+    "Christine Dunham",
+    "Christopher Neufeldt",
+    "Dorothy Lerit",
+    "Graeme Conn",
+    "Timothy D Read",
+    "Vincent Costa"
   ],
-  "scraped_at": "2026-06-17T23:11:18.591Z"
+  "scraped_at": "2026-06-18T03:02:29.086Z"
 }

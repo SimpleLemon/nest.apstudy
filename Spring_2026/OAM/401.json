@@ -5,81 +5,74 @@
   "catalog_number": "401",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Second-year MDiv students on the Hybrid Plan who are not in the Teaching Parish or EAS Program choose an ecclesial setting in their own geographic area that shares a life of worship as well as ministry. The student's work in the ecclesial setting is supervised by a site mentor. Students meet in reflection groups each semester via Zoom. These groups inquire into the history, meaning, and execution of the practices of an ecclesial community. Students remain in the same placement and small group for two semesters. An evaluation is made at the end of each semester, and an IP (in progress) grade is assigned at the end of the first semester if the student is performing satisfactorily. To receive credit, the student must satisfactorily complete two consecutive semesters.",
+  "course_notes": "(prerequisites: Con Ed 500-Level a and b) (Those who entered the MDiv prior to Fall 2023 must also petition the academic dean to designate a related class as fulfilling the CEE requirement) M (Students must be available Monday 9:00am-2:00pm or at the time their group is scheduled for the duration of the 26-27 academic year; meeting times vary by group)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4227",
       "crn": "6690",
       "section_number": "1109",
       "schedule_type": "ABR",
-      "instructor": "D. Clear",
+      "instructor": "Thomas Elliott",
       "instructors": [
         {
-          "name": "D. Clear",
-          "email": null
+          "name": "Thomas Elliott",
+          "email": "thomas.elliott@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 120,
+      "seats_available": 87,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6690",
-      "section_number": "1109",
-      "schedule_type": "ABR",
-      "instructor": "D. Clear",
-      "instructors": [
-        {
-          "name": "D. Clear",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Clear"
+    "Thomas Elliott"
   ],
-  "scraped_at": "2026-06-17T23:04:30.298Z"
+  "scraped_at": "2026-06-18T02:35:28.939Z"
 }

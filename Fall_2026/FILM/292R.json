@@ -10,10 +10,10 @@
   "requirements": [
     "HAP"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "History and theory of one or more major Hollywood genres, such as the Western, the gangster film, the musical, the horror film, film noir, and science fiction and their international analogues (e.g., the American Western and the Japanese chambara film). Weekly screenings required.",
-  "course_notes": "FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
+  "course_notes": "MCP Elective Topic: French New Wave This course examines one, if not the, most innovative and influential cinematic movements in film history, the French New Wave [La nouvelle vague]. Like Soviet Montage, Italian Neorealism, and other well-known national film movements, the French New Wave reshaped preconceptions about what cinema was and could become. Taken together, the New Wave filmmakers harnessed new cinematic technologies, the spirit of the postwar era in France, and critical approaches to the medium as they challenged formal and narrative cinematic traditions. Figures such as Agnés Varda, Jean-Luc Godard, Alain Resnais, and François Truffaut became synonymous with a certain youthful attitude of the late 1950s and 1960s: rebellious, self-reflexive, and impassioned. Through screenings, assigned readings, and a culminating final project, the course will introduce students to the crucial precursors to and \"best hit\" examples of the New Wave, while also engaging broader questions about film authorship, cinema's history and aesthetics, as well as the issues of gender, race, and sexuality\"",
   "requisites": "FILM 101 or FILM_OX 101 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,43 @@
   },
   "sections": [
     {
+      "atlas_key": "4382",
       "crn": "3898",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "T. Holland",
+      "instructor": "Timothy Holland",
       "instructors": [
         {
-          "name": "T. Holland",
-          "email": null
+          "name": "Timothy Holland",
+          "email": "timothy.holland@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Timothy Holland",
+          "email": "timothy.holland@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rich Building 103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p; T 8-10p",
@@ -59,61 +79,25 @@
             "end": "2200"
           }
         ]
-      }
-    },
-    {
-      "crn": "3898",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "T. Holland",
-      "instructors": [
-        {
-          "name": "T. Holland",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p; T 8-10p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Tue",
-            "start": "2000",
-            "end": "2200"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "T. Holland"
+    "Timothy Holland"
   ],
-  "scraped_at": "2026-06-17T23:10:36.296Z"
+  "scraped_at": "2026-06-18T02:57:30.665Z"
 }

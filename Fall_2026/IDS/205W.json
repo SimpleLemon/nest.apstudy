@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "NSW",
   "requirements": [
-    "NSW"
+    "NSW",
+    "Natural Sciences with Continuing Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "IDS205 addresses: What is the nature of scientific evidence? How does it compare to other types of evidence? What counts as evidence in science? In other disciplines? What are the histories of the answers to these questions? How do they affect our everyday lives?",
-  "course_notes": null,
+  "course_notes": "We will use memory--from the molecular to the historical--as a lens into the question: what do you believe and why? And what role does science play in this? We'll examine memory at multiple levels of life, from the molecular and the cellular to the societal and historical. Memory across generations of cells, generations of humans. . . from a deeply interdisciplinary perspective, engaging history, neuroscience, music, genetics, literature, and religion, among other areas.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "2447",
       "crn": "1508",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Eisen",
+      "instructor": "Arri Eisen",
       "instructors": [
         {
-          "name": "A. Eisen",
-          "email": null
+          "name": "Arri Eisen",
+          "email": "aeisen@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S420",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Natural Sciences with Continuing Communication(*)",
+      "requirements": [
+        "Natural Sciences with Continuing Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,56 +72,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "1508",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Eisen",
-      "instructors": [
-        {
-          "name": "A. Eisen",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Eisen"
+    "Arri Eisen"
   ],
-  "scraped_at": "2026-06-17T23:11:21.834Z"
+  "scraped_at": "2026-06-18T03:02:41.815Z"
 }

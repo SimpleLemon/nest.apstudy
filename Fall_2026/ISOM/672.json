@@ -5,13 +5,13 @@
   "catalog_number": "672",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "We will study the fundamental principles and techniques of data mining in order to extract useful information and knowledge from data. We will improve our ability to approach problems \"data-analytically\", examine real-world examples that place data mining in context, and apply data-mining techniques while working hands-on with data mining projects. The course will provide an understanding of the general framework for building and evaluating predictive models, both for classification and numeric prediction data mining tasks. The course will cover supervised predictive modeling techniques, as well as unsupervised predictive modeling techniques.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "3562",
       "crn": "3761",
       "section_number": "4101",
       "schedule_type": "LEC",
-      "instructor": "V. Todri",
+      "instructor": "Vilma Todri",
       "instructors": [
         {
-          "name": "V. Todri",
-          "email": null
+          "name": "Vilma Todri",
+          "email": "vilma.todri@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Masters Non-MBA",
+      "grading_mode_options": [
+        "MTR",
+        "Non-MBA Masters Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 66,
+      "seats_available": 66,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-11:15a",
@@ -52,56 +65,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "3761",
-      "section_number": "4101",
-      "schedule_type": "LEC",
-      "instructor": "V. Todri",
-      "instructors": [
-        {
-          "name": "V. Todri",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "V. Todri"
+    "Vilma Todri"
   ],
-  "scraped_at": "2026-06-17T23:11:31.499Z"
+  "scraped_at": "2026-06-18T03:03:26.841Z"
 }

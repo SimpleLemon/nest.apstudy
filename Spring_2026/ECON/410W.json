@@ -5,40 +5,55 @@
   "catalog_number": "410W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 5",
+  "credit_hours": "3",
   "requirement_designation": "CW",
   "requirements": [
     "CW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "The course covers the microeconomic foundations of macroeconomics, the theoretical and empirical analysis of general equilibrium, and optimal monetary and fiscal policies.",
-  "course_notes": "(ECON 201 or ECON_OX 201) and (ECON 212 or ECON_OX 212) or equivalent transfer credit as a prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Traditional genres of African art with a focus on masks and figure sculpture in West and Central African city-states and chiefdoms from 1500 to European colonization. May be repeated for credit when topic changes, up to a maximum of twelve hours.",
+  "course_notes": "(Same as AAS 355 1, ARTHIST 355 1) Complete Title: The Uninitiated See Nothing: African Arts & Material Culture This course explores the diversity of the African continent's art, architecture, and material culture, spanning from ancient history to contemporary eras. Complementary themes such as the arts of nature and royalty, divination and masquerade, architecture and the body, and initiation and funerary rites will serve as guiding frameworks. Examining various artistic mediums (e.g. metal, wood, clay, beads, textiles, and the body), students will investigate how the arts have been used to build African empires, invent polyrhythmic music, resist colonialism and slavery, and open portals to the divine world. Ultimately, this class will encourage students to redefine their definitions of \"art\" and cultivate greater appreciation for Africa's vibrant aesthetic traditions and dynamic material cultures.",
   "requisites": "(ECON 201 or ECON_OX 201) and (ECON 212 or ECON_OX 212) or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "691",
       "crn": "3972",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "L. Fang",
+      "instructor": "Kyrah Malika Daniels",
       "instructors": [
         {
-          "name": "L. Fang",
-          "email": null
+          "name": "Kyrah Malika Daniels",
+          "email": "kyrah.malika.daniels@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 235",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 5:30-6:45p",
@@ -54,56 +69,25 @@
             "end": "1845"
           }
         ]
-      }
-    },
-    {
-      "crn": "3972",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "L. Fang",
-      "instructors": [
-        {
-          "name": "L. Fang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 5:30-6:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1730",
-            "end": "1845"
-          },
-          {
-            "day": "Wed",
-            "start": "1730",
-            "end": "1845"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Fang"
+    "Kyrah Malika Daniels"
   ],
-  "scraped_at": "2026-06-17T23:02:03.800Z"
+  "scraped_at": "2026-06-18T02:17:46.580Z"
 }

@@ -5,38 +5,53 @@
   "catalog_number": "691",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Topics include consumer health systems, telehealth, computerized provider order entry, electronic medical systems, artificial intelligence, and related research methods.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-24",
-    "end": "2026-01-25"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4439",
       "crn": "3556",
       "section_number": "2191",
       "schedule_type": "LEC",
-      "instructor": "K. Kuhnert",
+      "instructor": "Nicole Carlson",
       "instructors": [
         {
-          "name": "K. Kuhnert",
-          "email": null
+          "name": "Nicole Carlson",
+          "email": "nicole.carlson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Nursing School - 124",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 15,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "SaSu 9a-4p",
@@ -52,26 +67,47 @@
             "end": "1600"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4440",
       "crn": "3557",
       "section_number": "2691",
       "schedule_type": "LEC",
-      "instructor": "K. Kuhnert",
+      "instructor": "Mary Johnson",
       "instructors": [
         {
-          "name": "K. Kuhnert",
-          "email": null
+          "name": "Mary Johnson",
+          "email": "mary.abigail.johnson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Pierce Hall 110",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 12,
+      "seats_available": 4,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
       "is_cancelled": false,
       "schedule": {
         "display": "SaSu 9a-4p",
@@ -87,91 +123,26 @@
             "end": "1600"
           }
         ]
-      }
-    },
-    {
-      "crn": "3556",
-      "section_number": "2191",
-      "schedule_type": "LEC",
-      "instructor": "K. Kuhnert",
-      "instructors": [
-        {
-          "name": "K. Kuhnert",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "SaSu 9a-4p",
-        "meetings": [
-          {
-            "day": "Sat",
-            "start": "900",
-            "end": "1600"
-          },
-          {
-            "day": "Sun",
-            "start": "900",
-            "end": "1600"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3557",
-      "section_number": "2691",
-      "schedule_type": "LEC",
-      "instructor": "K. Kuhnert",
-      "instructors": [
-        {
-          "name": "K. Kuhnert",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "SaSu 9a-4p",
-        "meetings": [
-          {
-            "day": "Sat",
-            "start": "900",
-            "end": "1600"
-          },
-          {
-            "day": "Sun",
-            "start": "900",
-            "end": "1600"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 2,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Kuhnert"
+    "Mary Johnson",
+    "Nicole Carlson"
   ],
-  "scraped_at": "2026-06-17T23:04:30.315Z"
+  "scraped_at": "2026-06-18T02:35:28.945Z"
 }

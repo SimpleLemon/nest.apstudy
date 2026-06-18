@@ -5,40 +5,58 @@
   "catalog_number": "300",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "HAP",
   "requirements": [
-    "HAP"
+    "HAP",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "An inquiry into fundamental questions in epistemology and metaphysics, with special attention to how problems in one area impacts problems in the other. The course will include texts from various historical periods, providing students with some sense of philosophical questions evolve over time.Philosophy course.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to spoken and written language. Oral practice emphasized through multimedia exercises and drills.",
+  "course_notes": "This class will meet in person MW with additional online materials to be completed asynchronously.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1175",
       "crn": "1995",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Iliopoulos",
+      "instructor": "Vera Proskurina",
       "instructors": [
         {
-          "name": "A. Iliopoulos",
-          "email": null
+          "name": "Vera Proskurina",
+          "email": "vprosku@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Few Bldg 131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "1995",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Iliopoulos",
-      "instructors": [
-        {
-          "name": "A. Iliopoulos",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 0,
-    "waitlisted": 2
+    "closed": 1,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Iliopoulos"
+    "Vera Proskurina"
   ],
-  "scraped_at": "2026-06-17T23:06:07.918Z"
+  "scraped_at": "2026-06-18T02:38:17.519Z"
 }

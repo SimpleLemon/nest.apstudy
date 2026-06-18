@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "NS",
   "requirements": [
-    "NS"
+    "NS",
+    "Natural Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Students having taken Physics 115 for credit may not take this course. A descriptive astronomy course with laboratory. The celestial coordinate system, ancient astronomy, light and telescopes, the solar system, the sun, stellar evolution, galactic astronomy, and cosmology.",
-  "course_notes": null,
+  "course_notes": "This lab will also meet in MSC_N303- Faculty will advise students when lab will meet in N303",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,43 @@
   },
   "sections": [
     {
+      "atlas_key": "997",
       "crn": "2116",
       "section_number": "LAB1",
       "schedule_type": "LAB",
-      "instructor": "Batiste/Bans",
+      "instructor": "Alissa Bans",
       "instructors": [
         {
-          "name": "Batiste/Bans",
-          "email": null
+          "name": "Alissa Bans",
+          "email": "alissa.sue.bans@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Merida Batiste",
+          "email": "merida.g.batiste@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - E300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 18,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:15p",
@@ -49,26 +70,50 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "998",
       "crn": "2117",
       "section_number": "LAB2",
       "schedule_type": "LAB",
-      "instructor": "Batiste/Bans",
+      "instructor": "Alissa Bans",
       "instructors": [
         {
-          "name": "Batiste/Bans",
-          "email": null
+          "name": "Alissa Bans",
+          "email": "alissa.sue.bans@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Merida Batiste",
+          "email": "merida.g.batiste@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - E300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 18,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10a-12:45p",
@@ -79,26 +124,52 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "996",
       "crn": "1387",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Batiste/Bans",
+      "instructor": "Alissa Bans",
       "instructors": [
         {
-          "name": "Batiste/Bans",
-          "email": null
+          "name": "Alissa Bans",
+          "email": "alissa.sue.bans@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Merida Batiste",
+          "email": "merida.g.batiste@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Math & Science Center - E300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 36,
+      "seats_available": 29,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -114,116 +185,26 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2116",
-      "section_number": "LAB1",
-      "schedule_type": "LAB",
-      "instructor": "Batiste/Bans",
-      "instructors": [
-        {
-          "name": "Batiste/Bans",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2117",
-      "section_number": "LAB2",
-      "schedule_type": "LAB",
-      "instructor": "Batiste/Bans",
-      "instructors": [
-        {
-          "name": "Batiste/Bans",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10a-12:45p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1387",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Batiste/Bans",
-      "instructors": [
-        {
-          "name": "Batiste/Bans",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 2,
-    "labs": 4,
+    "total_sections": 3,
+    "lectures": 1,
+    "labs": 2,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Batiste/Bans"
+    "Alissa Bans",
+    "Merida Batiste"
   ],
-  "scraped_at": "2026-06-17T23:14:13.986Z"
+  "scraped_at": "2026-06-18T03:14:54.783Z"
 }

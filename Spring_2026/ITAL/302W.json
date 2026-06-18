@@ -5,40 +5,58 @@
   "catalog_number": "302W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "1",
   "requirement_designation": "ICW",
   "requirements": [
-    "ICW"
+    "ICW",
+    "Physical Education(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Utilizing authentic texts, this engaging content-based approach to language learning focuses on a historically sequenced in-depth study of Italian art, history, and literature, developing analytical-critical skills, cross-cultural competency and higher than norm linguistic fluency.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Cybex machines and freestanding exercise stations used for muscular strength and muscular endurance training. Fulfills the Principles of Physical Fitness (PPF) requirement.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "940",
       "crn": "2516",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "C. Ristaino",
+      "instructor": "Corey Jones",
       "instructors": [
         {
-          "name": "C. Ristaino",
-          "email": null
+          "name": "Corey Jones",
+          "email": "corey.ellis.jones@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Woodruff PE Ctr-WghtRm Corrido",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,56 +72,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "2516",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "C. Ristaino",
-      "instructors": [
-        {
-          "name": "C. Ristaino",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Ristaino"
+    "Corey Jones"
   ],
-  "scraped_at": "2026-06-17T23:03:31.574Z"
+  "scraped_at": "2026-06-18T02:27:29.787Z"
 }

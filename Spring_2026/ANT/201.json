@@ -5,40 +5,58 @@
   "catalog_number": "201",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "NS",
   "requirements": [
-    "NS"
+    "NS",
+    "Quantitative Reasoning(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Biological and cultural evolution and adaptation of the human species, fossil populations, human variation, and primate behavior. Methods in biological anthropology, survey of the prehistoric evolution of cultures, contemporary issues in paleoanthropology. Weekly lab in biological anthro methods.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A third course in Computer Science, focusing on advanced programming. Emphasis is on mastery in the use and implementation of data structures and algorithms for classical programming paradigms, using the Java programming language and object oriented design.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "512",
       "crn": "2741",
       "section_number": "L1",
       "schedule_type": "LAB",
-      "instructor": "Broehl/Vieira dos Santos Hauskrecht",
+      "instructor": "Joon-Seok Kim",
       "instructors": [
         {
-          "name": "Broehl/Vieira dos Santos Hauskrecht",
-          "email": null
+          "name": "Joon-Seok Kim",
+          "email": "joonseok.kim@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 40,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 9-11a",
@@ -49,26 +67,47 @@
             "end": "1100"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "513",
       "crn": "1841",
       "section_number": "L2",
       "schedule_type": "LAB",
-      "instructor": "Broehl/Kesserwani",
+      "instructor": "Wei Jin",
       "instructors": [
         {
-          "name": "Broehl/Kesserwani",
-          "email": null
+          "name": "Wei Jin",
+          "email": "wei.jin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 40,
+      "seats_available": 19,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 12-2p",
@@ -79,26 +118,47 @@
             "end": "1400"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "514",
       "crn": "1842",
       "section_number": "L3",
       "schedule_type": "LAB",
-      "instructor": "Broehl/Kurilla",
+      "instructor": "Martha Barker",
       "instructors": [
         {
-          "name": "Broehl/Kurilla",
-          "email": null
+          "name": "Martha Barker",
+          "email": "martha.barker@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Math & Science Center - W201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 35,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9-11a",
@@ -109,26 +169,52 @@
             "end": "1100"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "511",
       "crn": "1839",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "K. Broehl",
+      "instructor": "Abbey Julian",
       "instructors": [
         {
-          "name": "K. Broehl",
-          "email": null
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 11,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -144,149 +230,28 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "2741",
-      "section_number": "L1",
-      "schedule_type": "LAB",
-      "instructor": "Broehl/Vieira dos Santos Hauskrecht",
-      "instructors": [
-        {
-          "name": "Broehl/Vieira dos Santos Hauskrecht",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 9-11a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "900",
-            "end": "1100"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1841",
-      "section_number": "L2",
-      "schedule_type": "LAB",
-      "instructor": "Broehl/Kesserwani",
-      "instructors": [
-        {
-          "name": "Broehl/Kesserwani",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 12-2p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1200",
-            "end": "1400"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1842",
-      "section_number": "L3",
-      "schedule_type": "LAB",
-      "instructor": "Broehl/Kurilla",
-      "instructors": [
-        {
-          "name": "Broehl/Kurilla",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 9-11a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "900",
-            "end": "1100"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1839",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "K. Broehl",
-      "instructors": [
-        {
-          "name": "K. Broehl",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 2,
-    "labs": 6,
+    "total_sections": 4,
+    "lectures": 1,
+    "labs": 3,
     "discussions": 0,
     "other": 0,
-    "open": 8,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Broehl/Kesserwani",
-    "Broehl/Kurilla",
-    "Broehl/Vieira dos Santos Hauskrecht",
-    "K. Broehl"
+    "Abbey Julian",
+    "Joon-Seok Kim",
+    "Martha Barker",
+    "Wei Jin"
   ],
-  "scraped_at": "2026-06-17T23:01:04.698Z"
+  "scraped_at": "2026-06-18T02:07:32.564Z"
 }

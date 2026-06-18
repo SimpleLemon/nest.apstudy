@@ -8,37 +8,60 @@
   "credit_hours": "4",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Quantitative Reasoning(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Spring. Continuation of Greek 101. Further study of forms and syntax, followed by reading from one or more authors.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is a short treatment of MATH 112 and 211 with a lab component. It is not appropriate for students who have taken MATH 211 . Topics include: advanced integration, Taylor series; and multivariable differentiation, optimization and integration; and applications to statistics and science.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "822",
       "crn": "2923",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "N. Slater",
+      "instructor": "Mike Carr",
       "instructors": [
         {
-          "name": "N. Slater",
-          "email": null
+          "name": "Mike Carr",
+          "email": "mpcarr@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Francesco Brarda",
+          "email": "francesco.brarda@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Math & Science Center - N301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MTWF 10-10:50a",
@@ -64,26 +87,52 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "823",
       "crn": "2924",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "L. Pratt",
+      "instructor": "Mike Carr",
       "instructors": [
         {
-          "name": "L. Pratt",
-          "email": null
+          "name": "Mike Carr",
+          "email": "mpcarr@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Francesco Brarda",
+          "email": "francesco.brarda@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Math & Science Center - N301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 20,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MTWF 8:50-9:40a",
@@ -109,112 +158,26 @@
             "end": "940"
           }
         ]
-      }
-    },
-    {
-      "crn": "2923",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "N. Slater",
-      "instructors": [
-        {
-          "name": "N. Slater",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MTWF 10-10:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1050"
-          },
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1050"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1050"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2924",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "L. Pratt",
-      "instructors": [
-        {
-          "name": "L. Pratt",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MTWF 8:50-9:40a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "850",
-            "end": "940"
-          },
-          {
-            "day": "Tue",
-            "start": "850",
-            "end": "940"
-          },
-          {
-            "day": "Wed",
-            "start": "850",
-            "end": "940"
-          },
-          {
-            "day": "Fri",
-            "start": "850",
-            "end": "940"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Pratt",
-    "N. Slater"
+    "Francesco Brarda",
+    "Mike Carr"
   ],
-  "scraped_at": "2026-06-17T23:02:52.546Z"
+  "scraped_at": "2026-06-18T02:23:32.816Z"
 }

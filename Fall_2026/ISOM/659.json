@@ -5,13 +5,13 @@
   "catalog_number": "659",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "This course reviews process analysis in detail. Process analysis is a key component of Six Sigma programs. Six Sigma is an approach for performance improvement that was made famous by GE and is currently being implemented by thousands of companies. The analytical skills you learn in this course are important to many employers and can be foundational for a career in operational performance improvement.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "2016",
       "crn": "3707",
       "section_number": "2144",
       "schedule_type": "LEC",
-      "instructor": "G. Easton",
+      "instructor": "George Easton",
       "instructors": [
         {
-          "name": "G. Easton",
-          "email": null
+          "name": "George Easton",
+          "email": "geaston@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 33,
+      "seats_available": 33,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 7-10p",
@@ -47,26 +60,43 @@
             "end": "2200"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2017",
       "crn": "3708",
       "section_number": "2244",
       "schedule_type": "LEC",
-      "instructor": "G. Easton",
+      "instructor": "George Easton",
       "instructors": [
         {
-          "name": "G. Easton",
-          "email": null
+          "name": "George Easton",
+          "email": "geaston@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 33,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 7-10p",
@@ -77,26 +107,43 @@
             "end": "2200"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2018",
       "crn": "3709",
       "section_number": "3243",
       "schedule_type": "LEC",
-      "instructor": "G. Easton",
+      "instructor": "George Easton",
       "instructors": [
         {
-          "name": "G. Easton",
-          "email": null
+          "name": "George Easton",
+          "email": "geaston@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 23,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -112,26 +159,43 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2019",
       "crn": "5437",
       "section_number": "4143",
       "schedule_type": "LEC",
-      "instructor": "G. Easton",
+      "instructor": "George Easton",
       "instructors": [
         {
-          "name": "G. Easton",
-          "email": null
+          "name": "George Easton",
+          "email": "geaston@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Masters Non-MBA",
+      "grading_mode_options": [
+        "MTR",
+        "Non-MBA Masters Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "5",
+      "enrollment_capacity": 6,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -147,26 +211,43 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2020",
       "crn": "5438",
       "section_number": "4243",
       "schedule_type": "LEC",
-      "instructor": "G. Easton",
+      "instructor": "George Easton",
       "instructors": [
         {
-          "name": "G. Easton",
-          "email": null
+          "name": "George Easton",
+          "email": "geaston@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 4,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -182,186 +263,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3707",
-      "section_number": "2144",
-      "schedule_type": "LEC",
-      "instructor": "G. Easton",
-      "instructors": [
-        {
-          "name": "G. Easton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 7-10p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1900",
-            "end": "2200"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3708",
-      "section_number": "2244",
-      "schedule_type": "LEC",
-      "instructor": "G. Easton",
-      "instructors": [
-        {
-          "name": "G. Easton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 7-10p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1900",
-            "end": "2200"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3709",
-      "section_number": "3243",
-      "schedule_type": "LEC",
-      "instructor": "G. Easton",
-      "instructors": [
-        {
-          "name": "G. Easton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5437",
-      "section_number": "4143",
-      "schedule_type": "LEC",
-      "instructor": "G. Easton",
-      "instructors": [
-        {
-          "name": "G. Easton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5438",
-      "section_number": "4243",
-      "schedule_type": "LEC",
-      "instructor": "G. Easton",
-      "instructors": [
-        {
-          "name": "G. Easton",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
-    "lectures": 10,
+    "total_sections": 5,
+    "lectures": 5,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 8,
+    "open": 4,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Easton"
+    "George Easton"
   ],
-  "scraped_at": "2026-06-17T23:11:31.498Z"
+  "scraped_at": "2026-06-18T03:03:26.838Z"
 }

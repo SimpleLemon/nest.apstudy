@@ -5,83 +5,86 @@
   "catalog_number": "499R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "4",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Provides students with an opportunity to explore individually designed projects under faculty supervision and evaluation. May be repeated for credit when project varies.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Fall, Summer (Vienna). The first of the two-course sequence (201-202) that explores how different societal factors have affected German-speaking young adults' coming of age and draws comparisons with English language cultures. Continued focus on development of students' German language abilities.",
+  "course_notes": "Entitled \"Coming of age through the ages,\" German 201 is the first of a two-course sequence that moves students from the focus on personal identity in first-year German to an examination of how young adults have come of age over time in the German-speaking world. Following a thematically-based approach to language instruction, this course explores how different societal factors affected German-speaking youth's coming of age in the 18th and 19th centuries and draws comparisons with comings of age in English language cultures. Specifically, the following themes as they pertain to coming of age will be studied in German 201: - Family (conformity to or rebellion against family order) - Nature (nature as a hindrance or ally for maturation) - Travel (gaining self-knowledge through travel) Through this focus on coming of age in 18th and 19th-century German cultural history, students will build on the foundation established in first-year German and develop further their abilities as readers, writers, and speakers of German. In this course (201) and in its sequel (202), that examines coming of age in the 20th and 21st century German speaking world, students will use supplemental texts and a grammar review textbook to acquire the language necessary to communicate meaningfully about the topic of coming of age.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "649",
       "crn": "6645",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "L. Teague",
+      "instructor": "Julia Ruck",
       "instructors": [
         {
-          "name": "L. Teague",
-          "email": null
+          "name": "Julia Ruck",
+          "email": "julia.ruck@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Julia Ruck",
+          "email": "julia.ruck@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Callaway S103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6645",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "L. Teague",
-      "instructors": [
-        {
-          "name": "L. Teague",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 0,
-    "closed": 2,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Teague"
+    "Julia Ruck"
   ],
-  "scraped_at": "2026-06-17T23:01:57.219Z"
+  "scraped_at": "2026-06-18T02:16:29.867Z"
 }

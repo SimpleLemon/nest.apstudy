@@ -5,13 +5,13 @@
   "catalog_number": "582",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will explore the public health impacts of global climate change, the responses undertaken by the health sector to become more resilient to those impacts, and potential mitigation efforts and activities. Public health responses will cover examples from around the world, and include issues around risk communication and implementation of the adaptation strategies. It will provide a practical approach to conducting vulnerability and risk assessments, and students will be introduced to a range of skills to assess and respond to climate-related health impacts.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "2159",
       "crn": "2234",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "N. Scovronick",
+      "instructor": "Noah C Scovronick",
       "instructors": [
         {
-          "name": "N. Scovronick",
-          "email": null
+          "name": "Noah C Scovronick",
+          "email": "scovronick@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 21,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 10-11:50a",
@@ -47,51 +60,25 @@
             "end": "1150"
           }
         ]
-      }
-    },
-    {
-      "crn": "2234",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "N. Scovronick",
-      "instructors": [
-        {
-          "name": "N. Scovronick",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 10-11:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1150"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "N. Scovronick"
+    "Noah C Scovronick"
   ],
-  "scraped_at": "2026-06-17T23:10:16.810Z"
+  "scraped_at": "2026-06-18T02:55:19.314Z"
 }

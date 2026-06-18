@@ -10,70 +10,50 @@
   "requirements": [
     "HSC"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "The course provides a multi-disciplinary approach to the universal human experience of death. It covers themes such as the process of death (biological and cultural), the human cadaver, grief and mourning, ritual responses, mass death, suicide, ethical issues, etc.",
-  "course_notes": null,
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Select readings and seminar discussions on the social construction of \"nature\" and its intersections with human social relationships. This course will emphasize interdisciplinary understandings of people and nature and their overlaps.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3673",
       "crn": "1855",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "K. Broehl",
+      "instructor": "Deric Shannon",
       "instructors": [
         {
-          "name": "K. Broehl",
-          "email": null
+          "name": "Deric Shannon",
+          "email": "deric.shannon@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1855",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "K. Broehl",
-      "instructors": [
-        {
-          "name": "K. Broehl",
-          "email": null
-        }
-      ],
-      "location": null,
+      "location": "Seney Hall 208",
       "campus": "Oxford",
-      "campus_description": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 11,
+      "seats_available": 0,
+      "waitlist_total": 2,
+      "waitlist_capacity": 6,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -89,21 +69,25 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Broehl"
+    "Deric Shannon"
   ],
-  "scraped_at": "2026-06-17T23:01:04.707Z"
+  "scraped_at": "2026-06-18T02:07:32.579Z"
 }

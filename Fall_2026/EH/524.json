@@ -5,13 +5,13 @@
   "catalog_number": "524",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Surveys the general principles and practices of environmental health risk assessment for toxic exposures in the environment and interactions with other factors contributing to human health risks. A variety of case studies will be used to demonstrate the basic methods and results of risk assessment, including estimation/evaluation of potential risk based on empirical evidence (e.g., laboratory animal studies, epidemiological studies), hazard and dose-response assessment for regulatory decisions, and uncertainty analysis and risk communication. Students will be introduced to and use key tools used in quantitative risk assessment.",
+  "course_notes": "GDEH students have priority registration, others may enroll starting August 26.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "136",
       "crn": "2226",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "T. Frederick",
+      "instructor": "Timothy Frederick",
       "instructors": [
         {
-          "name": "T. Frederick",
-          "email": null
+          "name": "Timothy Frederick",
+          "email": "timothy.amos.frederick@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 5-6:50p",
@@ -47,51 +60,25 @@
             "end": "1850"
           }
         ]
-      }
-    },
-    {
-      "crn": "2226",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "T. Frederick",
-      "instructors": [
-        {
-          "name": "T. Frederick",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 5-6:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1700",
-            "end": "1850"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "T. Frederick"
+    "Timothy Frederick"
   ],
-  "scraped_at": "2026-06-17T23:10:16.805Z"
+  "scraped_at": "2026-06-18T02:55:19.313Z"
 }

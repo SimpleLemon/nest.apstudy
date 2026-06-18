@@ -5,40 +5,58 @@
   "catalog_number": "488RW",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "2",
   "requirement_designation": "CW",
   "requirements": [
-    "CW"
+    "CW",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "All history majors except those who complete the Honors Program must take two colloquia (HIST 487, 488 or 489). Each colloquium treats a special theme by reading, discussion, and writing of papers. Enrollment in each is limited to twelve; non-majors are welcome within space limitations.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Music Majors. Prerequisite: permission of instructor. The study of applied music involves the understanding of music literature through performance on a specific instrument. One-hour private instruction weekly. Students are expected to practice a minimum of five hours per week, perform on a student recital and final jury exam, and attend several recitals and performances during the semester. Contact the instructor to arrange an audition. Lesson fees apply; refer to the departmental website (www.music.emory.edu) for current information.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "907",
       "crn": "3865",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "M. Montalvo",
+      "instructor": "Bethany Mamola",
       "instructors": [
         {
-          "name": "M. Montalvo",
-          "email": null
+          "name": "Bethany Mamola",
+          "email": "bethany.grace.mamola@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-3:45p",
@@ -49,26 +67,47 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "908",
       "crn": "3866",
       "section_number": "3",
       "schedule_type": "SEM",
-      "instructor": "C. Suddler",
+      "instructor": "Bethany Mamola",
       "instructors": [
         {
-          "name": "C. Suddler",
-          "email": null
+          "name": "Bethany Mamola",
+          "email": "bethany.grace.mamola@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 1-3:45p",
@@ -79,82 +118,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3865",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "M. Montalvo",
-      "instructors": [
-        {
-          "name": "M. Montalvo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-3:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3866",
-      "section_number": "3",
-      "schedule_type": "SEM",
-      "instructor": "C. Suddler",
-      "instructors": [
-        {
-          "name": "C. Suddler",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 1-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 4,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Suddler",
-    "M. Montalvo"
+    "Bethany Mamola"
   ],
-  "scraped_at": "2026-06-17T23:03:05.503Z"
+  "scraped_at": "2026-06-18T02:24:48.787Z"
 }

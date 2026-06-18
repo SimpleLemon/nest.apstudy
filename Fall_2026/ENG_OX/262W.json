@@ -1,0 +1,95 @@
+{
+  "course_code": "ENG_OX 262W",
+  "course_title": "Survey of African-American Literature Since 1900",
+  "subject": "ENG_OX",
+  "catalog_number": "262W",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities & Arts with C.Comm/Race & Ethnicity(*)",
+  "requirements": [
+    "Humanities & Arts with C.Comm/Race & Ethnicity(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "An overview of African-American literature since 1900. Study of the major contributors to each period in the genres of fiction, essay, poetry, and nonfiction.",
+  "course_notes": "Cross-listed with AAS_OX 262W",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3671",
+      "crn": "4222",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Adriane Ivey",
+      "instructors": [
+        {
+          "name": "Adriane Ivey",
+          "email": "aivey@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "Pierce Hall 228",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities & Arts with C.Comm/Race & Ethnicity(*)",
+      "requirements": [
+        "Humanities & Arts with C.Comm/Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Adriane Ivey"
+  ],
+  "scraped_at": "2026-06-18T02:56:05.936Z"
+}

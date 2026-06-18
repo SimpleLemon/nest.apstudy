@@ -5,40 +5,63 @@
   "catalog_number": "421R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1",
+  "credit_hours": "4",
   "requirement_designation": "PE",
   "requirements": [
-    "PE"
+    "PE",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course continues to reinforce and build upon the skills learned in Dance 321R. More emphasis is placed on style and execution. Combinations increase in intricacy and a larger dance movement vocabulary is introduced. Course work may include pointe work and variations. At least two semesters in Ballet III and consultation with the instructor are required before enrolling in this course. May be taken up to nine times for credit.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Fall, Summer (Vienna). The first of the two-course sequence (201-202) that explores how different societal factors have affected German-speaking young adults' coming of age and draws comparisons with English language cultures. Continued focus on development of students' German language abilities.",
+  "course_notes": "Entitled \"Coming of age through the ages,\" German 201 is the first of a two-course sequence that moves students from the focus on personal identity in first-year German to an examination of how young adults have come of age over time in the German-speaking world. Following a thematically-based approach to language instruction, this course explores how different societal factors affected German-speaking youth's coming of age in the 18th and 19th centuries and draws comparisons with comings of age in English language cultures. Specifically, the following themes as they pertain to coming of age will be studied in German 201: - Family (conformity to or rebellion against family order) - Nature (nature as a hindrance or ally for maturation) - Travel (gaining self-knowledge through travel) Through this focus on coming of age in 18th and 19th-century German cultural history, students will build on the foundation established in first-year German and develop further their abilities as readers, writers, and speakers of German. In this course (201) and in its sequel (202), that examines coming of age in the 20th and 21st century German speaking world, students will use supplemental texts and a grammar review textbook to acquire the language necessary to communicate meaningfully about the topic of coming of age.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "648",
       "crn": "3093",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Mandradjieff",
+      "instructor": "Hiram Maxim",
       "instructors": [
         {
-          "name": "M. Mandradjieff",
-          "email": null
+          "name": "Hiram Maxim",
+          "email": "hmaxim@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Hiram Maxim",
+          "email": "hmaxim@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Modern Language 330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,56 +77,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3093",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Mandradjieff",
-      "instructors": [
-        {
-          "name": "M. Mandradjieff",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Mandradjieff"
+    "Hiram Maxim"
   ],
-  "scraped_at": "2026-06-17T23:01:57.218Z"
+  "scraped_at": "2026-06-18T02:16:29.863Z"
 }

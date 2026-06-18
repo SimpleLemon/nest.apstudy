@@ -5,38 +5,51 @@
   "catalog_number": "506",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The United States Healthcare system is in desperate need of a strategy. Using different strategy tools, we will analyze industries, and companies to see how they can compete differently for competitive advantage. Healthcare costs in the US are 15%+ of GDP and some estimate that more than 1/3 of that is waste. The class will address this important, complex, and challenge problem together.",
+  "course_notes": "Th 8/20, Fri 8/21, Sat 8/22, Sun 8/23, 8-3pm",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-08-20",
-    "end": "2026-08-23"
+    "start": "2026-08-10",
+    "end": "2026-08-25"
   },
   "sections": [
     {
+      "atlas_key": "3625",
       "crn": "4410",
       "section_number": "2121",
       "schedule_type": "LEC",
-      "instructor": "J. Kim",
+      "instructor": "John Kim",
       "instructors": [
         {
-          "name": "J. Kim",
-          "email": null
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 33,
+      "seats_available": 32,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "ThFSaSu 8a-3p",
@@ -62,26 +75,43 @@
             "end": "1500"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-25"
       }
     },
     {
+      "atlas_key": "3626",
       "crn": "4411",
       "section_number": "2621",
       "schedule_type": "LEC",
-      "instructor": "J. Kim",
+      "instructor": "John Kim",
       "instructors": [
         {
-          "name": "J. Kim",
-          "email": null
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 17,
+      "seats_available": 17,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "ThFSaSu 8a-3p",
@@ -107,26 +137,43 @@
             "end": "1500"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-25"
       }
     },
     {
+      "atlas_key": "3627",
       "crn": "4412",
       "section_number": "3221",
       "schedule_type": "LEC",
-      "instructor": "J. Kim",
+      "instructor": "John Kim",
       "instructors": [
         {
-          "name": "J. Kim",
-          "email": null
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 16,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "ThFSaSu 8a-3p",
@@ -152,156 +199,25 @@
             "end": "1500"
           }
         ]
-      }
-    },
-    {
-      "crn": "4410",
-      "section_number": "2121",
-      "schedule_type": "LEC",
-      "instructor": "J. Kim",
-      "instructors": [
-        {
-          "name": "J. Kim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "ThFSaSu 8a-3p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "800",
-            "end": "1500"
-          },
-          {
-            "day": "Fri",
-            "start": "800",
-            "end": "1500"
-          },
-          {
-            "day": "Sat",
-            "start": "800",
-            "end": "1500"
-          },
-          {
-            "day": "Sun",
-            "start": "800",
-            "end": "1500"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4411",
-      "section_number": "2621",
-      "schedule_type": "LEC",
-      "instructor": "J. Kim",
-      "instructors": [
-        {
-          "name": "J. Kim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "ThFSaSu 8a-3p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "800",
-            "end": "1500"
-          },
-          {
-            "day": "Fri",
-            "start": "800",
-            "end": "1500"
-          },
-          {
-            "day": "Sat",
-            "start": "800",
-            "end": "1500"
-          },
-          {
-            "day": "Sun",
-            "start": "800",
-            "end": "1500"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4412",
-      "section_number": "3221",
-      "schedule_type": "LEC",
-      "instructor": "J. Kim",
-      "instructors": [
-        {
-          "name": "J. Kim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "ThFSaSu 8a-3p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "800",
-            "end": "1500"
-          },
-          {
-            "day": "Fri",
-            "start": "800",
-            "end": "1500"
-          },
-          {
-            "day": "Sat",
-            "start": "800",
-            "end": "1500"
-          },
-          {
-            "day": "Sun",
-            "start": "800",
-            "end": "1500"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-25"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Kim"
+    "John Kim"
   ],
-  "scraped_at": "2026-06-17T23:12:33.351Z"
+  "scraped_at": "2026-06-18T03:10:44.989Z"
 }

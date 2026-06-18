@@ -5,40 +5,62 @@
   "catalog_number": "142",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "NS",
   "requirements": [
-    "NS"
+    "NS",
+    "Social Sciences with Race & Ethnicity(*)",
+    "Social Sciences(*)",
+    "Continuing Communication and Writing(*)",
+    "Experience and Application(*)",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Introduction to electricity, magnetism, optics, and the essentials of quantum mechanics, atomic and nuclear physics, and special relativity.",
-  "course_notes": "This course requires PHYS 141 OR PHYS_OX 141 OR PHYS 151 OR PHYS_OX 151 or equivalent transfer credit as a prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Relations between and within groups, and conflict and cooperation in light of a number of models of social interaction. Application of principles to racial, religious, and ethnic minorities.",
+  "course_notes": "(Same as SOC 247 1) (For years we have understood that race is, biologically speaking, an exceedingly complex matter. Preconceived biases, much more than biology, govern the way people think about race. This course considers both the biological myth and social reality of race. We will focus on the social significance of race by examining the reality of racial stratification, the reality of the experience of racism, race, ethnicity, and nation, and the rationality of those who study racial dynamics and processes. The first portion of the course disentangles how race was leveraged to establish the sciences as an effective tool to understand and change society. The second portion of the course describes sociological theories of prejudice, privilege, and power to understand racism and racial stratification. The third portion of the course surveys empirical readings in Sociology that consider the state of ethnoracial inequality in the primary social institutions of society and everyday life opportunities. Throughout we consider how social change in social attitudes, classification systems, and policies shape the current global landscape of racism along the imperial projects of race, ethnicity, nation. The end product of the course increases competency in understanding the origins, dynamics, and state of racial and ethnic relations using the language and tools of Sociology through its scientific study of society.)",
   "requisites": "This course requires PHYS 141 OR PHYS_OX 141 OR PHYS 151 OR PHYS_OX 151 or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1192",
       "crn": "4275",
       "section_number": "L10",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Abigail Sewell",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Abigail Sewell",
+          "email": "alyasah.ali.sewell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Callaway C101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences with Race & Ethnicity(*)",
+      "requirements": [
+        "Social Sciences with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "18",
+      "enrollment_capacity": 4,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-5:15p",
@@ -49,26 +71,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1193",
       "crn": "4276",
       "section_number": "L11",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Abigail Sewell",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Abigail Sewell",
+          "email": "alyasah.ali.sewell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Callaway C101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences with Race & Ethnicity(*)",
+      "requirements": [
+        "Social Sciences with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "18",
+      "enrollment_capacity": 4,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6-8:45p",
@@ -79,26 +122,47 @@
             "end": "2045"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1194",
       "crn": "4277",
       "section_number": "L12",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Sonal Nalkur",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Sonal Nalkur",
+          "email": "snalkur@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "White Hall 110",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "18",
+      "enrollment_capacity": 50,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6-8:45p",
@@ -109,26 +173,47 @@
             "end": "2045"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1195",
       "crn": "4278",
       "section_number": "L13",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Jeff Mullis",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Jeff Mullis",
+          "email": "jmullis@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Tarbutton Hall 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "18",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:15p",
@@ -139,26 +224,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1196",
       "crn": "4279",
       "section_number": "L14",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "John Bernau",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "John Bernau",
+          "email": "john.bernau@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "White Hall 103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "18",
+      "enrollment_capacity": 40,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:15p",
@@ -169,26 +275,45 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1197",
       "crn": "4280",
       "section_number": "L15",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Tracy L Scott",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Tracy L Scott",
+          "email": "tscott@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 206",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "18",
+      "enrollment_capacity": 15,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 2:30-5:15p",
@@ -199,26 +324,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1198",
       "crn": "4281",
       "section_number": "L16",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Jeff Mullis",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Jeff Mullis",
+          "email": "jmullis@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "18",
+      "enrollment_capacity": 10,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 2:30-5:15p",
@@ -229,9 +375,14 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1199",
       "crn": "4266",
       "section_number": "LAB1",
       "schedule_type": "LAB",
@@ -239,16 +390,32 @@
       "instructors": [
         {
           "name": "Donofrio/Bing",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "18",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-5:15p",
@@ -259,26 +426,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1200",
       "crn": "4267",
       "section_number": "LAB2",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Roberto Franzosi",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Roberto Franzosi",
+          "email": "rfranzo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Tarbutton Hall 206",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "18",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-5:15p",
@@ -289,26 +477,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1201",
       "crn": "4268",
       "section_number": "LAB3",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Timothy J Dowd",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Timothy J Dowd",
+          "email": "tdowd@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "18",
+      "enrollment_capacity": 10,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6-8:45p",
@@ -319,9 +528,14 @@
             "end": "2045"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1202",
       "crn": "4269",
       "section_number": "LAB4",
       "schedule_type": "LAB",
@@ -329,16 +543,30 @@
       "instructors": [
         {
           "name": "Donofrio/Bing",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "18",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6-8:45p",
@@ -349,26 +577,45 @@
             "end": "2045"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1203",
       "crn": "4270",
       "section_number": "LAB5",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Roberto Franzosi",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Roberto Franzosi",
+          "email": "rfranzo@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "18",
+      "enrollment_capacity": 10,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-5:15p",
@@ -379,26 +626,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1204",
       "crn": "4271",
       "section_number": "LAB6",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Jennifer Feldman",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Jennifer Feldman",
+          "email": "jenfeldman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Candler Library 124",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "18",
+      "enrollment_capacity": 11,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-5:15p",
@@ -409,26 +677,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1205",
       "crn": "4272",
       "section_number": "LAB7",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Jennifer Feldman",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Jennifer Feldman",
+          "email": "jenfeldman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Candler Library 124",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "18",
+      "enrollment_capacity": 11,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6-8:45p",
@@ -439,9 +728,14 @@
             "end": "2045"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1206",
       "crn": "4273",
       "section_number": "LAB8",
       "schedule_type": "LAB",
@@ -449,16 +743,32 @@
       "instructors": [
         {
           "name": "Donofrio/Bing",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Callaway S105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "18",
+      "enrollment_capacity": 11,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6-8:45p",
@@ -469,9 +779,14 @@
             "end": "2045"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1207",
       "crn": "4274",
       "section_number": "LAB9",
       "schedule_type": "LAB",
@@ -479,16 +794,32 @@
       "instructors": [
         {
           "name": "Donofrio/Bing",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Callaway S103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "18",
+      "enrollment_capacity": 11,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-5:15p",
@@ -499,26 +830,52 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1190",
       "crn": "2011",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "K. Berland",
+      "instructor": "Janeria Easley",
       "instructors": [
         {
-          "name": "K. Berland",
-          "email": null
+          "name": "Janeria Easley",
+          "email": "janeria.easley@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Emma Burke",
+          "email": "emma.burke@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Psychology Bldg 235",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences with Race & Ethnicity(*)",
+      "requirements": [
+        "Social Sciences with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "18",
+      "enrollment_capacity": 5,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -534,26 +891,52 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1191",
       "crn": "1706",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "K. Berland",
+      "instructor": "Janeria Easley",
       "instructors": [
         {
-          "name": "K. Berland",
-          "email": null
+          "name": "Janeria Easley",
+          "email": "janeria.easley@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Emma Burke",
+          "email": "emma.burke@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Psychology Bldg 235",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences with Race & Ethnicity(*)",
+      "requirements": [
+        "Social Sciences with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "18",
+      "enrollment_capacity": 20,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -569,572 +952,35 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "4275",
-      "section_number": "L10",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4276",
-      "section_number": "L11",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6-8:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1800",
-            "end": "2045"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4277",
-      "section_number": "L12",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6-8:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1800",
-            "end": "2045"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4278",
-      "section_number": "L13",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4279",
-      "section_number": "L14",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4280",
-      "section_number": "L15",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4281",
-      "section_number": "L16",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4266",
-      "section_number": "LAB1",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4267",
-      "section_number": "LAB2",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4268",
-      "section_number": "LAB3",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6-8:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1800",
-            "end": "2045"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4269",
-      "section_number": "LAB4",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6-8:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1800",
-            "end": "2045"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4270",
-      "section_number": "LAB5",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4271",
-      "section_number": "LAB6",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4272",
-      "section_number": "LAB7",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6-8:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1800",
-            "end": "2045"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4273",
-      "section_number": "LAB8",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6-8:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1800",
-            "end": "2045"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4274",
-      "section_number": "LAB9",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2011",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "K. Berland",
-      "instructors": [
-        {
-          "name": "K. Berland",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1706",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "K. Berland",
-      "instructors": [
-        {
-          "name": "K. Berland",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "18",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 36,
-    "lectures": 4,
-    "labs": 32,
+    "total_sections": 18,
+    "lectures": 2,
+    "labs": 16,
     "discussions": 0,
     "other": 0,
-    "open": 30,
+    "open": 8,
     "closed": 6,
     "waitlisted": 0
   },
   "instructors_unique": [
+    "Abigail Sewell",
     "Donofrio/Bing",
-    "K. Berland"
+    "Emma Burke",
+    "Janeria Easley",
+    "Jeff Mullis",
+    "Jennifer Feldman",
+    "John Bernau",
+    "Roberto Franzosi",
+    "Sonal Nalkur",
+    "Timothy J Dowd",
+    "Tracy L Scott"
   ],
-  "scraped_at": "2026-06-17T23:06:11.158Z"
+  "scraped_at": "2026-06-18T02:39:58.693Z"
 }

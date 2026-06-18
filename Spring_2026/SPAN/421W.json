@@ -5,40 +5,63 @@
   "catalog_number": "421W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "CW",
   "requirements": [
-    "CW"
+    "CW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course explores how cinema has commented on and participated in constructing Mexican national identity. Students will acquire a competence in Mexican film history, the ability to speak and write about film analysis in Spanish, and familiarity with critical approaches to Mexican cinema.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Students will perform experiments spanning areas of physical chemistry including kinetics, thermodynamics, and spectroscopy; analyze results and solve problems using data and visualization tools common in the chemical sciences; and build skills of effective written and oral scientific communication.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": "LACS 421W",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4378",
       "crn": "3876",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "L. Torres-Rodriguez",
+      "instructor": "Antonio Brathwaite",
       "instructors": [
         {
-          "name": "L. Torres-Rodriguez",
-          "email": null
+          "name": "Antonio Brathwaite",
+          "email": "antonio.brathwaite@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Antonio Brathwaite",
+          "email": "antonio.brathwaite@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Atwood Chemistry Bldg. 316",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,56 +77,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3876",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "L. Torres-Rodriguez",
-      "instructors": [
-        {
-          "name": "L. Torres-Rodriguez",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 0,
+    "other": 1,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Torres-Rodriguez"
+    "Antonio Brathwaite"
   ],
-  "scraped_at": "2026-06-17T23:06:50.322Z"
+  "scraped_at": "2026-06-18T02:44:34.200Z"
 }

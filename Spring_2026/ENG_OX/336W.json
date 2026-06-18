@@ -1,0 +1,91 @@
+{
+  "course_code": "ENG_OX 336W",
+  "course_title": "The English Victorian Novel",
+  "subject": "ENG_OX",
+  "catalog_number": "336W",
+  "term": "Spring_2026",
+  "srcdb": "5261",
+  "credit_hours": "1,2,3,4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "For students desiring to pursue a specific individual project of their own design. Students must have project approved by the instructor in advance of preregistration. This course does not satisfy distribution requirements in humanities.",
+  "course_notes": "Oxford Research Scholars (Permission Required Prior to Enrollment)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "42",
+      "crn": "4908",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Joseph Nefcy Cheatle",
+      "instructors": [
+        {
+          "name": "Joseph Nefcy Cheatle",
+          "email": "joseph.james.nefcy.cheatle@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1,2,3,4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Joseph Nefcy Cheatle"
+  ],
+  "scraped_at": "2026-06-18T02:19:33.368Z"
+}

@@ -5,40 +5,58 @@
   "catalog_number": "338",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "2",
   "requirement_designation": "HSC",
   "requirements": [
     "HSC"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course is intended to present an overview of the history of Tibet in an unbiased format. Beginning with an introduction to Tibet's geography, people, language and religion, students will then study selected events and episodes in the history of Tibet.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course introduces basic concepts underpinning research and project design in environmental health. Students will learn of integrative learning experience (ILE) project types in environmental health, identify and/or refine their individual ILE project topics, develop key elements required for proposing work on their project topic, and demonstrate project feasibility by producing preliminary results. Throughout, students will develop and apply their writing skills and participate in providing feedback to peers. By the end of the course, students will submit a full written ILE proposal and a final presentation that provides an oral overview of their proposed ILE.",
+  "course_notes": "EH, GEH, and EH-EPI students only.",
   "requisites": null,
   "cross_listed": "REL 338",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4100",
       "crn": "2736",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "T. Rigzin",
+      "instructor": "Longxiang Li",
       "instructors": [
         {
-          "name": "T. Rigzin",
-          "email": null
+          "name": "Longxiang Li",
+          "email": "longxiang.li@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Amina Salamova",
+          "email": "amina.salamova@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 32,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -54,56 +72,26 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2736",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "T. Rigzin",
-      "instructors": [
-        {
-          "name": "T. Rigzin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "T. Rigzin"
+    "Amina Salamova",
+    "Longxiang Li"
   ],
-  "scraped_at": "2026-06-17T23:03:57.665Z"
+  "scraped_at": "2026-06-18T02:30:25.532Z"
 }

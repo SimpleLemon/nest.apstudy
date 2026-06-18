@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HAW",
   "requirements": [
-    "HAW"
+    "HAW",
+    "Humanities and Arts with Cont.Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Studies in poetry and poetic forms. Readings may vary in individual sections, but all sections emphasize critical reading and writing about poetic art. Required for English majors.",
-  "course_notes": null,
+  "course_notes": "Poetry 205: Freeing the Verse In this course, we will begin with the fundamentals of poetic theory and form, and from there, explore how the poets of the shifting cultures of the last century (roughly modernism through hip-hop) have experimented beyond traditional verse. We will also examine the historical contexts in which the poets were writing within. The course focuses primarily on American authors across a diverse array of backgrounds. Course authors include Gertrude Stein, ee cummings, Jack Kerouac, Tan Lin, Lucille Clifton, Gil Scott-Heron, Danez Smith, Chen Chen, Alexis Pauline Gumbs, Fatimah Ashghar, and Kendrick Lamar. This is a writing-intensive course that focuses on prose-based poetic criticism, but will still include some exhibition poetry exercises during class. The course grades will be determined by a mix of class participation, short essays, and midterm & final exams.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "585",
       "crn": "5791",
       "section_number": "3",
       "schedule_type": "SEM",
-      "instructor": "A. Prince",
+      "instructor": "Alanna Prince",
       "instructors": [
         {
-          "name": "A. Prince",
-          "email": null
+          "name": "Alanna Prince",
+          "email": "alanna.maria.prince@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Few Bldg 129",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,26 +72,47 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "586",
       "crn": "5792",
       "section_number": "4",
       "schedule_type": "SEM",
-      "instructor": "A. Prince",
+      "instructor": "Alanna Prince",
       "instructors": [
         {
-          "name": "A. Prince",
-          "email": null
+          "name": "Alanna Prince",
+          "email": "alanna.maria.prince@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 16,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -89,91 +128,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "5791",
-      "section_number": "3",
-      "schedule_type": "SEM",
-      "instructor": "A. Prince",
-      "instructors": [
-        {
-          "name": "A. Prince",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5792",
-      "section_number": "4",
-      "schedule_type": "SEM",
-      "instructor": "A. Prince",
-      "instructors": [
-        {
-          "name": "A. Prince",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 4,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Prince"
+    "Alanna Prince"
   ],
-  "scraped_at": "2026-06-17T23:10:23.246Z"
+  "scraped_at": "2026-06-18T02:55:51.548Z"
 }

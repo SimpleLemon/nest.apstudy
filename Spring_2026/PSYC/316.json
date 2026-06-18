@@ -5,40 +5,58 @@
   "catalog_number": "316",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "First-Year Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Language acquisition in young children. Identifying speech sounds, determining meaning, and comprehending the rules of syntax.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Instruction in rhetorical composition, critical reading, reflection, and writing as recursive process. Across themed sections, students engage with diverse genres. Courses share some common assignments including research writing and final student-curated portfolio with reflection project.",
+  "course_notes": "(Topic: Borders Breakdown) (What is even a border? The US-Mexico border, the Military Demarcation Line in Korea, the break between 2025 and 2026, the skin of the body, the line between friend and lover: all of these are borders of various kinds. Sometimes borders indicate intimacy, other times separation. Sometimes, borders imply closeness, other times distance. Sometimes they are rigid, other times porous.) (In this course, we will investigate the border as a concept that affects how we experience relationships with others and the external world. To set the scene for our inquiries, we will situate our studies in \"the Anthropocene\"-that is, a recent era in which the border between natural history and human history becomes difficult to determine. Understanding the Anthropocene as a fruitful time for reimagining the idea of the border, we will read contemporary short stories by Julio Cortázar, Ben Okri, Haruki Murakami, and Octavia Butler, and watch the K-drama series Crash Landing on You.)",
   "requisites": null,
   "cross_listed": "LING 316",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3808",
       "crn": "4403",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Y. Kim",
+      "instructor": "Sieun Cha",
       "instructors": [
         {
-          "name": "Y. Kim",
-          "email": null
+          "name": "Sieun Cha",
+          "email": "sieun.cha@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Woodruff Library 773",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "First-Year Writing(*)",
+      "requirements": [
+        "First-Year Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "4403",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Y. Kim",
-      "instructors": [
-        {
-          "name": "Y. Kim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "Y. Kim"
+    "Sieun Cha"
   ],
-  "scraped_at": "2026-06-17T23:06:24.215Z"
+  "scraped_at": "2026-06-18T02:42:27.308Z"
 }

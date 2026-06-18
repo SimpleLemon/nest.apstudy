@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Required of AMST and IDS majors spring semester of junior year, this course focuses intensively on the design and initiation of the senior research process. Students' projects are honed, refined, workshopped--bibliography, outline, budget, etc. Students are readied for required senior year research.",
-  "course_notes": null,
+  "course_notes": "This course is designed to help IDS and American studies majors in the Institute for the Liberal Arts (ILA) to develop their senior thesis. During the course of the semester students will learn how to design a strong and compelling academic research project. Students will gather, read, and analyze academic sources related to their intellectual interests and use them to identify a research topic, develop a research question, think about relevant theories, and choose a research method to help answer their question. Students will design a well-organized plan of research, culminating in the submission of their thesis prospectus and the completion of a presentation at the ILA Spring Research Symposium. During the semester students will complete a variety of assignments to familiarize themselves with the research resources available on campus. They will also work on developing their research network, by meeting to discuss their ideas with faculty in the ILA and across campus. As a cohort, students will work together to build a strong community of researchers who support one another through the highs, plateaus, and lows of research.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,43 @@
   },
   "sections": [
     {
+      "atlas_key": "742",
       "crn": "1648",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "Deighton/Hua",
+      "instructor": "Rose Deighton",
       "instructors": [
         {
-          "name": "Deighton/Hua",
-          "email": null
+          "name": "Rose Deighton",
+          "email": "rose.deighton@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Daniel Hua",
+          "email": "daniel.hua@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S420",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 19,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,56 +74,26 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "1648",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "Deighton/Hua",
-      "instructors": [
-        {
-          "name": "Deighton/Hua",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Deighton/Hua"
+    "Daniel Hua",
+    "Rose Deighton"
   ],
-  "scraped_at": "2026-06-17T23:11:21.837Z"
+  "scraped_at": "2026-06-18T03:02:41.818Z"
 }

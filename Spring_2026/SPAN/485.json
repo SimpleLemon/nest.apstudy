@@ -5,40 +5,83 @@
   "catalog_number": "485",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Upper-level research seminar on topics related to the language, discourse, literature, and/or culture of the Hispanic world. Students may take multiple SPAN 485 courses provided that they focus on different topics.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Students will assist the course instructor with course administrative duties, proctoring Examsoft exams via zoom, grading exams, participate in problem based learning sessions, review physiological concepts, lead student group sessions.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-10",
+    "end": "2026-12-11"
   },
   "sections": [
     {
+      "atlas_key": "3795",
       "crn": "3074",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "H. Feldman",
+      "instructor": "Vince Carter",
       "instructors": [
         {
-          "name": "H. Feldman",
-          "email": null
+          "name": "Vince Carter",
+          "email": "vcarter@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "George Fulk",
+          "email": "george.david.fulk@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kathleen Geist",
+          "email": "kgeist@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Mark Lyle",
+          "email": "mark.lyle@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Joe Nocera",
+          "email": "joenocera@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Anjanette Nunez",
+          "email": "anjanette.nunez@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Jocelyn Monique Smith",
+          "email": "jocelyn.mayes@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 100,
+      "seats_available": 100,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -54,56 +97,31 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3074",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "H. Feldman",
-      "instructors": [
-        {
-          "name": "H. Feldman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-12-11"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "H. Feldman"
+    "Anjanette Nunez",
+    "George Fulk",
+    "Jocelyn Monique Smith",
+    "Joe Nocera",
+    "Kathleen Geist",
+    "Mark Lyle",
+    "Vince Carter"
   ],
-  "scraped_at": "2026-06-17T23:06:50.323Z"
+  "scraped_at": "2026-06-18T02:44:34.201Z"
 }

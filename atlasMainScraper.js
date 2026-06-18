@@ -11,8 +11,8 @@
  *
  * Confirmed constraints (April 2026):
  *   - POST to https://atlas.emory.edu/api/?page=fose&route=search
+ *   - POST to https://atlas.emory.edu/api/?page=fose&route=details with group "key:{key}"
  *   - Browser-like headers required (Referer, Origin, X-Requested-With)
- *   - Details route is broken; search results are the only data source
  *   - No "list all subjects" endpoint; subject codes are hardcoded
  *   - enrl_stat server-side filter does not work; filtered client-side
  *   - meetingTimes is a JSON string inside JSON; must be double-parsed
@@ -24,6 +24,7 @@ const {
   buildCourseObject,
   decodeHtmlEntities,
   firstPresent,
+  mergeSectionWithDetails,
   normalizeCampus,
   normalizeRequirements,
   parseCatalogCourseCards,
@@ -46,6 +47,9 @@ const TERMS = {
 
 /** Delay between subject requests in ms. Be respectful. */
 const REQUEST_DELAY_MS = 1500;
+/** Delay between section detail requests in ms. */
+const DETAILS_DELAY_MS = Number.parseInt(process.env.ATLAS_DETAILS_DELAY_MS || '1000', 10);
+const DETAILS_ENABLED = process.env.ATLAS_DETAILS !== 'off';
 
 /** Output root directory. The Flask app reads term directories at repo root. */
 const OUTPUT_DIR = process.env.ATLAS_OUTPUT_DIR
@@ -91,7 +95,7 @@ const SUBJECT_CODES = [
   // D
   'DANC', 'DTSC',
   // E
-  'ECON', 'ECS', 'EDUC', 'EH', 'EMBRYO', 'ENG', 'ENGRD', 'ENVS', 'EPID',
+  'ECON', 'ECS', 'EDUC', 'EH', 'EMBRYO', 'ENG', 'ENG_OX', 'ENGRD', 'ENVS', 'EPID',
   // F
   'FILM', 'FIN', 'FREN',
   // G
@@ -286,11 +290,64 @@ async function fetchSubject(subject, srcdb, campus = '') {
       return null;
     }
 
-    return (data.results ?? []).map(row => ({ ...row, campus: row.campus ?? (campus || row.campus) }));
+    return data.results ?? [];
   } catch (err) {
     console.error(`  [ERROR] ${subject}${campus ? ` (${campus})` : ''} in ${srcdb}: ${err.message}`);
     return null;
   }
+}
+
+async function fetchSectionDetails(key, srcdb) {
+  if (!DETAILS_ENABLED || !key) return null;
+  try {
+    const data = await postJson(
+      ATLAS_BASE,
+      { page: 'fose', route: 'details' },
+      {
+        other: { srcdb },
+        group: `key:${key}`,
+      },
+      REQUIRED_HEADERS,
+      15000
+    );
+    if (!data || data === '' || data.fatal) {
+      const message = data?.fatal ? `: ${data.fatal}` : '';
+      console.warn(`  [WARN] Details skipped for key ${key}${message}`);
+      return null;
+    }
+    return data;
+  } catch (err) {
+    console.warn(`  [WARN] Details failed for key ${key}: ${err.message}`);
+    return null;
+  }
+}
+
+async function enrichSectionsWithDetails(sections, srcdb, termMeta) {
+  if (!DETAILS_ENABLED || !sections.length) return sections;
+
+  const detailsCache = new Map();
+  const enriched = [];
+
+  for (const section of sections) {
+    const key = String(section.key ?? '').trim();
+    if (!key) {
+      enriched.push(section);
+      continue;
+    }
+
+    if (!detailsCache.has(key)) {
+      termMeta.details_requests = (termMeta.details_requests ?? 0) + 1;
+      const details = await fetchSectionDetails(key, srcdb);
+      if (!details) termMeta.details_errors = (termMeta.details_errors ?? 0) + 1;
+      detailsCache.set(key, details);
+      await sleep(DETAILS_DELAY_MS);
+    }
+
+    const details = detailsCache.get(key);
+    enriched.push(details ? mergeSectionWithDetails(section, details) : section);
+  }
+
+  return enriched;
 }
 
 function sectionTagKey(section) {
@@ -348,12 +405,7 @@ async function fetchRequirementSections(requirement, srcdb, campus = '') {
       console.warn(`  [WARN] Requirement enrichment for ${requirement} returned ${results.length} rows; skipped to avoid an ignored Atlas filter.`);
       return [];
     }
-    return results.map(row => ({
-      ...row,
-      campus: row.campus ?? (campus || row.campus),
-      requirement_designation: row.requirement_designation ?? requirement,
-      requirements: normalizeRequirements(row, { requirements: [requirement] }),
-    }));
+    return results;
   } catch (err) {
     console.error(`  [ERROR] Requirement ${requirement}${campus ? ` (${campus})` : ''} in ${srcdb}: ${err.message}`);
     return [];
@@ -427,6 +479,8 @@ async function runScrape() {
       total_sections: 0,
       requirement_enrichment_requests: 0,
       requirement_enrichment_rows: 0,
+      details_requests: 0,
+      details_errors: 0,
       errors: [],
     };
 
@@ -461,7 +515,7 @@ async function runScrape() {
         await sleep(REQUEST_DELAY_MS);
       }
 
-      const results = mergedResults;
+      const results = await enrichSectionsWithDetails(mergedResults, srcdb, termMeta);
 
       if (!results || results.length === 0) {
         console.log(`  ${progress} ${subject}: no results`);
@@ -515,6 +569,8 @@ async function runScrape() {
     console.log(`    Total sections:     ${tm.total_sections}`);
     console.log(`    GE enrich requests: ${tm.requirement_enrichment_requests}`);
     console.log(`    GE enrich rows:     ${tm.requirement_enrichment_rows}`);
+    console.log(`    Detail requests:    ${tm.details_requests ?? 0}`);
+    console.log(`    Detail errors:      ${tm.details_errors ?? 0}`);
     if (tm.errors.length > 0) {
       console.log(`    Errors:             ${tm.errors.join(', ')}`);
     }
@@ -534,7 +590,10 @@ if (require.main === module) {
 module.exports = {
   buildCourseObject,
   decodeHtmlEntities,
+  enrichSectionsWithDetails,
+  fetchSectionDetails,
   firstPresent,
+  mergeSectionWithDetails,
   normalizeCampus,
   normalizeRequirements,
   parseCatalogCourseCards,

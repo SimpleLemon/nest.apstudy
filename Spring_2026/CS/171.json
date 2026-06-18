@@ -5,40 +5,53 @@
   "catalog_number": "171",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "QR",
   "requirements": [
     "QR"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "A second course in Computer Science, focusing on intermediate programming. Emphasis is on proficiency in the use and implementation of data structures, algorithms for classical programming paradigms, and object oriented design and programming with Java.",
-  "course_notes": "This course requires MUS 221 or equivalent transfer credit as a prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Innovations in clinical care are increasingly impacted by the development and implementation of machine learning (ML) and artificial intelligence (AI). As future clinicians, medical students should be informed and prepared for technological changes that will affect how they provide care for their patients. The goals of this senior elective are to demystify AI and ML in healthcare, enabling students to have informed conversations about these technologies and participate in their clinical advancement.",
+  "course_notes": "(Permission Required Prior to Enrollment)(School of Medicine Students Only)",
   "requisites": "This course requires MUS 221 or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-06-29",
+    "end": "2026-12-19"
   },
   "sections": [
     {
+      "atlas_key": "2614",
       "crn": "3686",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "N. El-Sayed",
+      "instructor": "Peter Seth Fischbach",
       "instructors": [
         {
-          "name": "N. El-Sayed",
-          "email": null
+          "name": "Peter Seth Fischbach",
+          "email": "pfischb@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,26 +67,53 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2615",
       "crn": "3689",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "A. Julian",
+      "instructor": "Shruthi Arora",
       "instructors": [
         {
-          "name": "A. Julian",
-          "email": null
+          "name": "Shruthi Arora",
+          "email": "shruthi.arora@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Eric Ian Felner",
+          "email": "efelner@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Presley Nichols",
+          "email": "presley.helen.nichols@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -89,92 +129,28 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3686",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "N. El-Sayed",
-      "instructors": [
-        {
-          "name": "N. El-Sayed",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3689",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "A. Julian",
-      "instructors": [
-        {
-          "name": "A. Julian",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Julian",
-    "N. El-Sayed"
+    "Eric Ian Felner",
+    "Peter Seth Fischbach",
+    "Presley Nichols",
+    "Shruthi Arora"
   ],
-  "scraped_at": "2026-06-17T23:01:53.985Z"
+  "scraped_at": "2026-06-18T02:16:08.220Z"
 }

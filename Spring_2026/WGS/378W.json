@@ -13,7 +13,7 @@
   "campus": null,
   "campus_description": null,
   "course_description": "This course centers on caste, a socio-religious system of hierarchy that has a long history in South Asia. We will approach caste as a system of power, and view it from an intersectional lens, understanding its relationship with other power structures such as race, religion, gender, and labor.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": "MESAS 378W",
   "date_range": {
@@ -22,6 +22,7 @@
   },
   "sections": [
     {
+      "atlas_key": "4805",
       "crn": "4490",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +30,25 @@
       "instructors": [
         {
           "name": "H. Kamath",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "1",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -54,56 +64,25 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "4490",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "H. Kamath",
-      "instructors": [
-        {
-          "name": "H. Kamath",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 1
   },
   "instructors_unique": [
     "H. Kamath"
   ],
-  "scraped_at": "2026-06-17T23:07:03.457Z"
+  "scraped_at": "2026-06-18T02:45:32.679Z"
 }

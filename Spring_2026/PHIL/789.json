@@ -5,38 +5,56 @@
   "catalog_number": "789",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This is a civil case litigation skills/simulation course. There are no exams but there are approximately six (6) written assignments along with preparation for two (2) oral arguments. Students will work as two-person teams to draft pleadings, written discovery, and conduct evidentiary and motions hearings.",
+  "course_notes": "OPEN TO 3L JD STUDENTS ONLY. May be used towards partial fulfillment of the requirements for the JD Civil Litigation and Dispute Resolution concentration. Counts towards partial fulfillment of the JD Experiential degree requirement.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "1882",
       "crn": "1927",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "M. Schwarz",
+      "instructor": "Natanya Brooks",
       "instructors": [
         {
-          "name": "M. Schwarz",
-          "email": null
+          "name": "Natanya Brooks",
+          "email": "natanya.l.brooks@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Todd Boyce",
+          "email": "todd.s.boyce@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": 2,
+      "waitlist_capacity": 2,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-3:45p",
@@ -47,26 +65,43 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "1883",
       "crn": "4402",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "C. Warren",
+      "instructor": "Todd Kuehl",
       "instructors": [
         {
-          "name": "C. Warren",
-          "email": null
+          "name": "Todd Kuehl",
+          "email": "todd.f.kuehl@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": 1,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2-5p",
@@ -77,9 +112,14 @@
             "end": "1700"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "1884",
       "crn": "5284",
       "section_number": "4",
       "schedule_type": "LEC",
@@ -87,16 +127,28 @@
       "instructors": [
         {
           "name": "L. Park",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-6:45p",
@@ -107,26 +159,43 @@
             "end": "1845"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "1885",
       "crn": "5287",
       "section_number": "5",
       "schedule_type": "LEC",
-      "instructor": "F. Sheth",
+      "instructor": "Sara Zdeb",
       "instructors": [
         {
-          "name": "F. Sheth",
-          "email": null
+          "name": "Sara Zdeb",
+          "email": "sara.zdeb@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 5,
+      "waitlist_total": 0,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "W 10a-1p",
@@ -137,26 +206,48 @@
             "end": "1300"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "1886",
       "crn": "5459",
       "section_number": "6",
       "schedule_type": "LEC",
-      "instructor": "I. Goh",
+      "instructor": "Lauren Brenner",
       "instructors": [
         {
-          "name": "I. Goh",
-          "email": null
+          "name": "Lauren Brenner",
+          "email": "lauren.whitney.brenner@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Melissa Bonnington",
+          "email": "melissa.b.capotosto@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 2,
+      "waitlist_total": 0,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 3-6p",
@@ -167,175 +258,31 @@
             "end": "1800"
           }
         ]
-      }
-    },
-    {
-      "crn": "1927",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "M. Schwarz",
-      "instructors": [
-        {
-          "name": "M. Schwarz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-3:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4402",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "C. Warren",
-      "instructors": [
-        {
-          "name": "C. Warren",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2-5p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1400",
-            "end": "1700"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5284",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "L. Park",
-      "instructors": [
-        {
-          "name": "L. Park",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-6:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1845"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5287",
-      "section_number": "5",
-      "schedule_type": "LEC",
-      "instructor": "F. Sheth",
-      "instructors": [
-        {
-          "name": "F. Sheth",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 10a-1p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1300"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5459",
-      "section_number": "6",
-      "schedule_type": "LEC",
-      "instructor": "I. Goh",
-      "instructors": [
-        {
-          "name": "I. Goh",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 3-6p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1500",
-            "end": "1800"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
-    "lectures": 10,
+    "total_sections": 5,
+    "lectures": 5,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 10,
-    "closed": 0,
+    "open": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Warren",
-    "F. Sheth",
-    "I. Goh",
     "L. Park",
-    "M. Schwarz"
+    "Lauren Brenner",
+    "Melissa Bonnington",
+    "Natanya Brooks",
+    "Sara Zdeb",
+    "Todd Boyce",
+    "Todd Kuehl"
   ],
-  "scraped_at": "2026-06-17T23:06:07.922Z"
+  "scraped_at": "2026-06-18T02:38:17.523Z"
 }

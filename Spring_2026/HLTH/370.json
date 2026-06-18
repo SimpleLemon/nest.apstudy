@@ -5,40 +5,60 @@
   "catalog_number": "370",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "2",
+  "credit_hours": "1",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "The course covers the US health care system, including the factors responsible for increasing health care spending, the purpose of regulation in the individual insurance market, the role of Medicare and Medicaid, and pros and cons of horizontal and vertical integration among providers and hospitals.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Cultivate your public health well-being and impact. This course will equip you with tools and strategies to thrive in both your career and your personal life. Through a blend of self-discovery exercises, interactive sessions, and expert presentations, you will gain clarity on your purpose, develop strategies to nurture your well-being, and create a personalized action plan to achieve balance and lasting impact.",
+  "course_notes": "This course is designed for Emory staff and faculty to advance their degree training in public health. Given the purpose and structure of the course, enrollment is available only to Emory staff and faculty. In-person days: August 22, 8am-5pm; August 23, 8am-12pm ET.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-22",
+    "end": "2026-08-23"
   },
   "sections": [
     {
+      "atlas_key": "4357",
       "crn": "3159",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Howard",
+      "instructor": "Juan Leon",
       "instructors": [
         {
-          "name": "D. Howard",
-          "email": null
+          "name": "Juan Leon",
+          "email": "juan.leon@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Juan Leon",
+          "email": "juan.leon@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 24,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-10:50a",
@@ -54,56 +74,25 @@
             "end": "1050"
           }
         ]
-      }
-    },
-    {
-      "crn": "3159",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Howard",
-      "instructors": [
-        {
-          "name": "D. Howard",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-10:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1050"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-22",
+        "end": "2026-08-23"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Howard"
+    "Juan Leon"
   ],
-  "scraped_at": "2026-06-17T23:03:08.807Z"
+  "scraped_at": "2026-06-18T02:25:23.376Z"
 }

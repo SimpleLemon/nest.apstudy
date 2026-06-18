@@ -5,15 +5,16 @@
   "catalog_number": "487W",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 5",
+  "credit_hours": "4",
   "requirement_designation": "CW",
   "requirements": [
-    "CW"
+    "CW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Variable course topic means that supplemental topic/structure will be variable as well (options include but are not limited to film/museum/travel/lecture series/independent research/experiential learning). Alternate course to CL 329 which is variable topic without extra component.",
-  "course_notes": null,
+  "course_notes": "(Same as ARTHIST 470RW 1) (Topic - \"Seeing Double: Originals, Copies, and Fakes from Antiquity to AI\") (In an age of AI-generated artworks and deep fakes, the boundaries between what is considered \"original\" and \"copy,\" and between reality and representation themselves, are more blurred than ever. This course examines how societies, past and present, have defined, valued, and contested the relationships between originality and replication, drawing on examples from multiple periods, geographies, and disciplines. Through case studies, object biographies, public debates, and philosophical inquiry, the course provides a thorough introduction to ancient and modern debates on aesthetic appreciation, visual representation, creativity, and the ethics of replication. At the same time, it addresses how technological developments have challenged long-standing ideas of authenticity, originality, and intellectual property. Case studies range from nineteenth- and twentieth-century plaster cast collections that shaped colonial ideologies, and forgeries that influenced art markets and public taste, to the enduring controversy surrounding Roman copies of Greek originals and contemporary AI-generated art and deep fakes. Alongside lectures, discussions, and museum visits, students engage in structured research, writing, and public-facing projects that mirror the stages of podcast production and op-ed writing. The final project is a collaborative assignment culminating in the production of a fully developed podcast episode centered on the course themes.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "503",
       "crn": "4487",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "G. Lovisetto",
+      "instructor": "Giovanni Lovisetto",
       "instructors": [
         {
-          "name": "G. Lovisetto",
-          "email": null
+          "name": "Giovanni Lovisetto",
+          "email": "giovanni.lovisetto@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Carlos Hall Conference",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 3,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:15p",
@@ -49,51 +67,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "4487",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "G. Lovisetto",
-      "instructors": [
-        {
-          "name": "G. Lovisetto",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Lovisetto"
+    "Giovanni Lovisetto"
   ],
-  "scraped_at": "2026-06-17T23:09:47.407Z"
+  "scraped_at": "2026-06-18T02:51:15.027Z"
 }

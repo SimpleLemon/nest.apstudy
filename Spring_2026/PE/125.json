@@ -5,71 +5,110 @@
   "catalog_number": "125",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1",
+  "credit_hours": "2",
   "requirement_designation": "PE",
   "requirements": [
     "PE"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Play Emory is an opportunity for students to receive credit through a structured yet flexible active lifestyle program. Students receive instruction in the topic and engage in a variety of fitness and health activities. Students have 15 weeks (one semester) to complete 30 hours of physical activity.",
-  "course_notes": null,
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course focuses on experimental practices including experimental design, accuracy and precision, data collection and analysis, and the use of evidence to make conclusions. Experiments will connect structure to properties of matter. It is recommended that students who withdraw from the laboratory course withdraw from the co-requisite lecture course as well.",
+  "course_notes": "Must enroll in CHEM_OX 150.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3484",
       "crn": "3064",
       "section_number": "1",
       "schedule_type": "PE",
-      "instructor": "E. Noell",
+      "instructor": "Austin Scharf",
       "instructors": [
         {
-          "name": "E. Noell",
-          "email": null
+          "name": "Austin Scharf",
+          "email": "austin.scharf@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Oxford Science Bldg. 417",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 20,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3485",
       "crn": "4009",
       "section_number": "2",
       "schedule_type": "PE",
-      "instructor": "A. Murphy",
+      "instructor": "Austin Scharf",
       "instructors": [
         {
-          "name": "A. Murphy",
-          "email": null
+          "name": "Austin Scharf",
+          "email": "austin.scharf@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Oxford Science Bldg. 417",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 20,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3486",
       "crn": "4012",
       "section_number": "3",
       "schedule_type": "PE",
@@ -77,23 +116,42 @@
       "instructors": [
         {
           "name": "A. Murphy",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Oxford Science Bldg. 417",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 20,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3487",
       "crn": "4015",
       "section_number": "4",
       "schedule_type": "PE",
@@ -101,181 +159,99 @@
       "instructors": [
         {
           "name": "L. Shepard",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Oxford Science Bldg. 417",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 20,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3488",
       "crn": "4016",
       "section_number": "5",
       "schedule_type": "PE",
-      "instructor": "L. Shepard",
+      "instructor": "Lloyd R Parker",
       "instructors": [
         {
-          "name": "L. Shepard",
-          "email": null
+          "name": "Lloyd R Parker",
+          "email": "lparker@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3064",
-      "section_number": "1",
-      "schedule_type": "PE",
-      "instructor": "E. Noell",
-      "instructors": [
-        {
-          "name": "E. Noell",
-          "email": null
-        }
-      ],
-      "location": null,
+      "location": "Oxford Science Bldg. 417",
       "campus": "Oxford",
-      "campus_description": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "4009",
-      "section_number": "2",
-      "schedule_type": "PE",
-      "instructor": "A. Murphy",
-      "instructors": [
-        {
-          "name": "A. Murphy",
-          "email": null
-        }
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "5",
+      "enrollment_capacity": 20,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "4012",
-      "section_number": "3",
-      "schedule_type": "PE",
-      "instructor": "A. Murphy",
-      "instructors": [
-        {
-          "name": "A. Murphy",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "4015",
-      "section_number": "4",
-      "schedule_type": "PE",
-      "instructor": "L. Shepard",
-      "instructors": [
-        {
-          "name": "L. Shepard",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "4016",
-      "section_number": "5",
-      "schedule_type": "PE",
-      "instructor": "L. Shepard",
-      "instructors": [
-        {
-          "name": "L. Shepard",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
+    "total_sections": 5,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 10,
-    "open": 0,
-    "closed": 10,
+    "other": 5,
+    "open": 5,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "A. Murphy",
-    "E. Noell",
-    "L. Shepard"
+    "Austin Scharf",
+    "L. Shepard",
+    "Lloyd R Parker"
   ],
-  "scraped_at": "2026-06-17T23:05:57.978Z"
+  "scraped_at": "2026-06-18T02:37:22.866Z"
 }

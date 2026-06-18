@@ -8,37 +8,55 @@
   "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Intercultural Communication w. Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Economic analysis of property rights, contracts, torts, and other aspects of the legal system. Legal rules will be viewed as mechanisms for allocating resources, and the efficiency of alternative legal rules is analyzed.",
-  "course_notes": "This course requires ECON 201 OR ECON_OX201 or equivalent transfer credit as a prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Advanced study of the language used in the Israeli media; includes selections from newspapers, radio, and television broadcasts.",
+  "course_notes": "(Same as JS 435 1)",
   "requisites": "This course requires ECON 201 OR ECON_OX201 or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "701",
       "crn": "3986",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Mialon",
+      "instructor": "Pazit Kahlon",
       "instructors": [
         {
-          "name": "S. Mialon",
-          "email": null
+          "name": "Pazit Kahlon",
+          "email": "pazit.kahlon@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Psychology Bldg 250",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication w. Race & Ethnicity(*)",
+      "requirements": [
+        "Intercultural Communication w. Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "3986",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Mialon",
-      "instructors": [
-        {
-          "name": "S. Mialon",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Mialon"
+    "Pazit Kahlon"
   ],
-  "scraped_at": "2026-06-17T23:02:03.801Z"
+  "scraped_at": "2026-06-18T02:17:46.582Z"
 }

@@ -5,130 +5,122 @@
   "catalog_number": "571R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "1",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides an opportunity for students to learn and apply principles and skills involved in organizing and teaching an introductory level course in epidemiologic methods. The course is designed to be taken concordantly with the student's teaching assistantship experience. Topics include using Blackboard, leading and facilitating discussion of epidemiologic topics and assignments, developing and evaluating laboratory exercises and exams, and diversity in the classroom (both culturally and with respect to learning styles) Discussions of specific labs will cover objectives and key concepts for each. There will also be an opportunity for students to discuss teaching issues and challenges with their peers and the instructor, and to offer adviceandsolutions basedon their experience. EPI PhD students only.",
+  "course_notes": "EPI PhD students only.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-04-28",
-    "end": "2026-05-08"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "2672",
       "crn": "6718",
       "section_number": "3201",
       "schedule_type": "LEC",
-      "instructor": "M. Cooley",
+      "instructor": "Michael Goodman",
       "instructors": [
         {
-          "name": "M. Cooley",
-          "email": null
+          "name": "Michael Goodman",
+          "email": "mgoodm2@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2673",
       "crn": "6719",
       "section_number": "3202",
       "schedule_type": "LEC",
-      "instructor": "C. Goetz",
+      "instructor": "Heidi Senungetuk",
       "instructors": [
         {
-          "name": "C. Goetz",
-          "email": null
+          "name": "Heidi Senungetuk",
+          "email": "heidi.aklaseaq.senungetuk@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Burlington Rd Bldg. 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6718",
-      "section_number": "3201",
-      "schedule_type": "LEC",
-      "instructor": "M. Cooley",
-      "instructors": [
-        {
-          "name": "M. Cooley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6719",
-      "section_number": "3202",
-      "schedule_type": "LEC",
-      "instructor": "C. Goetz",
-      "instructors": [
-        {
-          "name": "C. Goetz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Goetz",
-    "M. Cooley"
+    "Heidi Senungetuk",
+    "Michael Goodman"
   ],
-  "scraped_at": "2026-06-17T23:01:34.287Z"
+  "scraped_at": "2026-06-18T02:12:20.934Z"
 }

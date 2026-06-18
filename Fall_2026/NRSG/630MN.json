@@ -5,13 +5,13 @@
   "catalog_number": "630MN",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course develops student knowledge and skills required to meet nurses¿ professional duty to base practice on evidence and engage in lifelong learning, focusing on scholarly writing, effectively asking questions, and locating, evaluating, and integrating best available evidence to practice.¿",
+  "course_notes": "This section is for MN spring start semester 3 students only.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,18 +20,30 @@
   },
   "sections": [
     {
+      "atlas_key": "4267",
       "crn": "4663",
       "section_number": "300",
       "schedule_type": "LEC",
       "instructor": "Staff",
       "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Nursing School - 101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 150,
+      "seats_available": 72,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 8:30-10:20a",
@@ -42,44 +54,23 @@
             "end": "1020"
           }
         ]
-      }
-    },
-    {
-      "crn": "4663",
-      "section_number": "300",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 8:30-10:20a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "1020"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [],
-  "scraped_at": "2026-06-17T23:12:26.886Z"
+  "scraped_at": "2026-06-18T03:09:48.902Z"
 }

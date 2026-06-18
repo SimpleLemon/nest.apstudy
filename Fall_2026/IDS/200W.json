@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HAW",
   "requirements": [
-    "HAW"
+    "HAW",
+    "Humanities and Arts with Cont.Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "IDS 200 examines the origins and development of distinct disciplines in contemporary universities through the lens of what counts as evidence in different fields of human knowledge.",
-  "course_notes": null,
+  "course_notes": "IDS 200W examines the origins of distinct disciplines in contemporary universities through the lens of evidence in different fields of human knowledge. // Recommended for students at any level interested in health sciences, law, business, or future studies at the graduate level. IDS 200W introduces students to the Liberal Arts and supports student's studies in a wide range of majors. Systematic focus on writing essential in any career. // What counts as evidence in different fields of human knowledge? Do we have evidence of things unseen, e.g. gods, tradition, love, existence after death, meaning? In the ancient tragedy \"Antigone,\" for example, a young woman defies the law for love of her brother. But could the young woman's love, her thinking, speech patterns, and motivations be due to genetic dispositions, neural mechanisms, religious extremism, or mental disorder? Such questions highlight the problematic nature of evidence and explanation that we will examine.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "2303",
       "crn": "1507",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "P. Wakefield",
+      "instructor": "Peter W Wakefield",
       "instructors": [
         {
-          "name": "P. Wakefield",
-          "email": null
+          "name": "Peter W Wakefield",
+          "email": "pwakefi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S420",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a",
@@ -54,56 +72,25 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "1507",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "P. Wakefield",
-      "instructors": [
-        {
-          "name": "P. Wakefield",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "P. Wakefield"
+    "Peter W Wakefield"
   ],
-  "scraped_at": "2026-06-17T23:11:21.833Z"
+  "scraped_at": "2026-06-18T03:02:41.814Z"
 }

@@ -5,62 +5,92 @@
   "catalog_number": "584",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course aims to prepare pastors and Christian leaders to build relationships of trust and understanding with Muslims in their own communities. It approaches Islam as a lived religious tradition that is not merely present in the United States, but has become an American religion. It examines Islamic history, theological beliefs, and worship practices through the lens of Muslim American experiences and introduces students to the diverse manifestations of Islam in America and in Atlanta.",
+  "course_notes": "(ON CAMPUS Hybrid; meets on campus Thursdays 9:30am-10:50am; remaining contact time fulfilled asynchronous online engagement)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3401",
       "crn": "5132",
       "section_number": "LAB",
       "schedule_type": "LAB",
-      "instructor": "L. Nenzi",
+      "instructor": "Deanna Ferree Womack",
       "instructors": [
         {
-          "name": "L. Nenzi",
-          "email": null
+          "name": "Deanna Ferree Womack",
+          "email": "deanna.f.womack@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rita Anne Rollins Bldg. 102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 18,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3396",
       "crn": "3868",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "L. Nenzi",
+      "instructor": "Joellen Schildkraut",
       "instructors": [
         {
-          "name": "L. Nenzi",
-          "email": null
+          "name": "Joellen Schildkraut",
+          "email": "joellen.m.schildkraut@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 35,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9a-12p",
@@ -71,9 +101,14 @@
             "end": "1200"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3397",
       "crn": "6276",
       "section_number": "2",
       "schedule_type": "LAB",
@@ -81,23 +116,40 @@
       "instructors": [
         {
           "name": "C. Sanders",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "6",
+      "enrollment_capacity": 61,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3398",
       "crn": "6277",
       "section_number": "3",
       "schedule_type": "LAB",
@@ -105,237 +157,140 @@
       "instructors": [
         {
           "name": "A. Greene",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 130",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "6",
+      "enrollment_capacity": 61,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3399",
       "crn": "6279",
       "section_number": "4",
       "schedule_type": "LAB",
-      "instructor": "C. Suddler",
+      "instructor": "Allison Stashko",
       "instructors": [
         {
-          "name": "C. Suddler",
-          "email": null
+          "name": "Allison Stashko",
+          "email": "allison.stashko@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 220",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "6",
+      "enrollment_capacity": 30,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3400",
       "crn": "6294",
       "section_number": "5",
       "schedule_type": "LAB",
-      "instructor": "M. Payne",
+      "instructor": "R. Kendall Soulen",
       "instructors": [
         {
-          "name": "M. Payne",
-          "email": null
+          "name": "R. Kendall Soulen",
+          "email": "kendall.soulen@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rita Anne Rollins Building_421",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "6",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5132",
-      "section_number": "LAB",
-      "schedule_type": "LAB",
-      "instructor": "L. Nenzi",
-      "instructors": [
-        {
-          "name": "L. Nenzi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3868",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "L. Nenzi",
-      "instructors": [
-        {
-          "name": "L. Nenzi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 9a-12p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "900",
-            "end": "1200"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "6276",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "C. Sanders",
-      "instructors": [
-        {
-          "name": "C. Sanders",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6277",
-      "section_number": "3",
-      "schedule_type": "LAB",
-      "instructor": "A. Greene",
-      "instructors": [
-        {
-          "name": "A. Greene",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6279",
-      "section_number": "4",
-      "schedule_type": "LAB",
-      "instructor": "C. Suddler",
-      "instructors": [
-        {
-          "name": "C. Suddler",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6294",
-      "section_number": "5",
-      "schedule_type": "LAB",
-      "instructor": "M. Payne",
-      "instructors": [
-        {
-          "name": "M. Payne",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-14"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
-    "lectures": 2,
-    "labs": 10,
+    "total_sections": 6,
+    "lectures": 1,
+    "labs": 5,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 12,
+    "open": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
     "A. Greene",
+    "Allison Stashko",
     "C. Sanders",
-    "C. Suddler",
-    "L. Nenzi",
-    "M. Payne"
+    "Deanna Ferree Womack",
+    "Joellen Schildkraut",
+    "R. Kendall Soulen"
   ],
-  "scraped_at": "2026-06-17T23:03:05.504Z"
+  "scraped_at": "2026-06-18T02:24:48.790Z"
 }

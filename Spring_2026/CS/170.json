@@ -8,37 +8,60 @@
   "credit_hours": "4",
   "requirement_designation": "QR",
   "requirements": [
-    "QR"
+    "QR",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "An introduction to Computer Science for students expecting to utilize serious computing in coursework, research, or employment. Emphasis is on computing concepts, programming principles, algorithm development and basic data structures, using the Java programming language and Unix operating system.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Every semester. This beginning-level French language course provides students with new perspectives on French and francophone cultures while building writing, reading, speaking and listening skills.",
+  "course_notes": "FREN 101-1 Elementary French I (Prof. Descourtis MW 10:00-11:15am; F 10-10:50am online synchronous. ***NOTE: This course has \"tiered enrollment\" (certain number of seats available for each class). The class will open to all at the beginning of the drop/add period.*** Content: This beginning-level course introduces students to reading, writing, speaking, and understanding the French language via exploration of various aspects of the French-speaking world. The course is conducted entirely in French. Instruction proceeds from guided to more creative and independent work with emphasis on speaking, writing, communication, and active participation. Students will complete at-home practice with the required online textbook and platform: Atelier-MindTap. FREN 101 is open to beginners and students with up to one year of high school French. Please note: Students with prior experience in French must provide language placement results to the instructor. Wait lists will open for the course during the add/drop period at the beginning of the semester.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "620",
       "crn": "4052",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Julian",
+      "instructor": "Sandra Descourtis",
       "instructors": [
         {
-          "name": "A. Julian",
-          "email": null
+          "name": "Sandra Descourtis",
+          "email": "sdescourtis@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sandra Descourtis",
+          "email": "sdescourtis@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "COX 230A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p; F 8-8:50a",
@@ -59,26 +82,52 @@
             "end": "850"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "621",
       "crn": "4053",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "A. Julian",
+      "instructor": "Sandra Descourtis",
       "instructors": [
         {
-          "name": "A. Julian",
-          "email": null
+          "name": "Sandra Descourtis",
+          "email": "sdescourtis@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sandra Descourtis",
+          "email": "sdescourtis@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "COX 230A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p; F 9-9:50a",
@@ -99,26 +148,52 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "622",
       "crn": "4055",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "S. Das",
+      "instructor": "Jessica Li Zhi Biao",
       "instructors": [
         {
-          "name": "S. Das",
-          "email": null
+          "name": "Jessica Li Zhi Biao",
+          "email": "jessica.li.zhi.biao@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jessica Li Zhi Biao",
+          "email": "jessica.li.zhi.biao@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Candler Library 122",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a; F 3-3:50p",
@@ -139,26 +214,52 @@
             "end": "1550"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "623",
       "crn": "4056",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "S. Das",
+      "instructor": "Habi Diop",
       "instructors": [
         {
-          "name": "S. Das",
-          "email": null
+          "name": "Habi Diop",
+          "email": "habi.diop@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Habi Diop",
+          "email": "habi.diop@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Math & Science Center - N301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a; F 4-4:50p",
@@ -179,182 +280,27 @@
             "end": "1650"
           }
         ]
-      }
-    },
-    {
-      "crn": "4052",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Julian",
-      "instructors": [
-        {
-          "name": "A. Julian",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p; F 8-8:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Fri",
-            "start": "800",
-            "end": "850"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4053",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "A. Julian",
-      "instructors": [
-        {
-          "name": "A. Julian",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p; F 9-9:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Fri",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4055",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "S. Das",
-      "instructors": [
-        {
-          "name": "S. Das",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a; F 3-3:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Fri",
-            "start": "1500",
-            "end": "1550"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4056",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "S. Das",
-      "instructors": [
-        {
-          "name": "S. Das",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a; F 4-4:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Fri",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 8,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
-    "closed": 0,
-    "waitlisted": 2
+    "open": 0,
+    "closed": 4,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Julian",
-    "S. Das"
+    "Habi Diop",
+    "Jessica Li Zhi Biao",
+    "Sandra Descourtis"
   ],
-  "scraped_at": "2026-06-17T23:01:53.984Z"
+  "scraped_at": "2026-06-18T02:16:08.219Z"
 }

@@ -5,38 +5,51 @@
   "catalog_number": "525",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "With guidance from licensed patent practitioners, students will gain hands-on experience counseling clients on patent matters. This work may include interviewing clients regarding their inventions, conducting prior art searches, advising clients regarding patentability, and drafting and prosecuting patent applications before the USPTO. All work will be done on a pro bono basis, in partnership with one or more local non-profit organizations and Atlanta-based law firms. In seminar, students will be provided with legal and practical tools for addressing their clients' circumstances. Students will learn and practice skills for communicating effectively and providing appropriate legal advice. In clinic assignments, students will apply these skills in the representation of real-life clients. All client work will be supervised, with guidance from one or more practicing attorneys.",
+  "course_notes": "STUDENTS MUST MEET THE QUALIFICATIONS SET FORTH BY THE USPTO (INCLUDING LAW SCHOOL CERTIFICATION PROGRAM REQUIREMENTS (AVAILABLE AT HTTPS://WWW.USPTO.GOV/LEARNING-AND-RESOURCES/IP-POLICY/PUBLIC-INFORMATION-ABOUT-PRACTITIONERS/LAW-SCHOOL-CLINIC-1) AND TECHNICAL REQUIREMENTS WITH REGARD TO THE QUALIFICATIONS FOR REGISTRATION TO PRACTICE BEFORE THE USPTO IN PATENT CASES (AVAILABLE AT HTTPS://WWW.USPTO.GOV/SITES/DEFAULT/FILES/DOCUMENTS/OED_GRB.PDF). Counts towards partial fulfillment of the JD Experiential degree requirement.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "1880",
       "crn": "1998",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "D. Huseyinzadegan",
+      "instructor": "Nicole Morris",
       "instructors": [
         {
-          "name": "D. Huseyinzadegan",
-          "email": null
+          "name": "Nicole Morris",
+          "email": "nicole.n.morris@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 6,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-6:45p",
@@ -47,51 +60,25 @@
             "end": "1845"
           }
         ]
-      }
-    },
-    {
-      "crn": "1998",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "D. Huseyinzadegan",
-      "instructors": [
-        {
-          "name": "D. Huseyinzadegan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-6:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1845"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Huseyinzadegan"
+    "Nicole Morris"
   ],
-  "scraped_at": "2026-06-17T23:06:07.921Z"
+  "scraped_at": "2026-06-18T02:38:17.522Z"
 }

@@ -5,228 +5,217 @@
   "catalog_number": "497R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 12",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "First-Year Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Supervised reading in Portuguese.",
-  "course_notes": null,
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Introduction to writing and inquiry in the liberal arts, with attention to variations across disciplines and rhetorical situations. Intensive practice in academic reading, writing, and research. Guidance in writing strategies and processes for diverse purposes and genres. First-year writing requirement.",
+  "course_notes": "Placement exam required, Visit the FYW page to learn about 185/186 and read about our themes: https://inside.oxford.emory.edu/academics/writing-program/first-year-writing.html",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "2463",
       "crn": "5666",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Lesser",
+      "instructor": "Adriane Ivey",
       "instructors": [
         {
-          "name": "J. Lesser",
-          "email": null
+          "name": "Adriane Ivey",
+          "email": "aivey@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Humanities Hall 201",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "First-Year Writing(*)",
+      "requirements": [
+        "First-Year Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2464",
       "crn": "6083",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "J. Lesser",
+      "instructor": "Brad K Hawley",
       "instructors": [
         {
-          "name": "J. Lesser",
-          "email": null
+          "name": "Brad K Hawley",
+          "email": "bhawley@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Pierce Hall 227",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "First-Year Writing(*)",
+      "requirements": [
+        "First-Year Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2465",
       "crn": "6084",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "A. Teixeira",
+      "instructor": "Brad K Hawley",
       "instructors": [
         {
-          "name": "A. Teixeira",
-          "email": null
+          "name": "Brad K Hawley",
+          "email": "bhawley@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Pierce Hall 227",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "First-Year Writing(*)",
+      "requirements": [
+        "First-Year Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2466",
       "crn": "6439",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "A. Teixeira",
+      "instructor": "Adriane Ivey",
       "instructors": [
         {
-          "name": "A. Teixeira",
-          "email": null
+          "name": "Adriane Ivey",
+          "email": "aivey@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5666",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Lesser",
-      "instructors": [
-        {
-          "name": "J. Lesser",
-          "email": null
-        }
-      ],
-      "location": null,
+      "location": "Pierce Hall 227",
       "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6083",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "J. Lesser",
-      "instructors": [
-        {
-          "name": "J. Lesser",
-          "email": null
-        }
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "First-Year Writing(*)",
+      "requirements": [
+        "First-Year Writing(*)"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6084",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "A. Teixeira",
-      "instructors": [
-        {
-          "name": "A. Teixeira",
-          "email": null
-        }
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6439",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "A. Teixeira",
-      "instructors": [
-        {
-          "name": "A. Teixeira",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 8,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 8,
+    "open": 4,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Teixeira",
-    "J. Lesser"
+    "Adriane Ivey",
+    "Brad K Hawley"
   ],
-  "scraped_at": "2026-06-17T23:06:20.977Z"
+  "scraped_at": "2026-06-18T02:40:54.360Z"
 }

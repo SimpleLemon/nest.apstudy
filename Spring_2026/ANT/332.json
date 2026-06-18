@@ -10,35 +10,50 @@
   "requirements": [
     "HSCE"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "The course will take a contemporary view on how population genetics has changed our understating of the biological explanation of race.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "System programming topics are illustrated by the POSIX API to the Linux operating system. Topics include: file i/o, the TTY driver, window systems, processes, shared memory, message passing, semaphores, signals, and interrupt handlers.",
   "course_notes": "Juniors or Seniors only or permission of instructor required for enrollment.",
   "requisites": "Juniors or Seniors only or permission of instructor required for enrollment.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "517",
       "crn": "1853",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Lindo",
+      "instructor": "Kenneth I Mandelberg",
       "instructors": [
         {
-          "name": "J. Lindo",
-          "email": null
+          "name": "Kenneth I Mandelberg",
+          "email": "km@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:15p",
@@ -49,51 +64,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "1853",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Lindo",
-      "instructors": [
-        {
-          "name": "J. Lindo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Lindo"
+    "Kenneth I Mandelberg"
   ],
-  "scraped_at": "2026-06-17T23:01:04.706Z"
+  "scraped_at": "2026-06-18T02:07:32.577Z"
 }

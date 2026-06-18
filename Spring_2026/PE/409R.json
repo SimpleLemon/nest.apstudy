@@ -5,83 +5,81 @@
   "catalog_number": "409R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1",
+  "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
   "requirement_designation": "PE",
   "requirements": [
-    "PE"
+    "PE",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Must register by permission only from head coach. Meets the Principles of Physical Fitness (PPF) requirement with exams on curricular content.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Credit variable. Psychology majors only, registration by permission of faculty supervisor.",
+  "course_notes": "Permission Required Prior to Enrollment) Psychology majors only. Credit is variable, 1.00 - 12.00 (For 3.00 hrs/week = 1.00 credit). Students must have consent of faculty member (inside or outside of the department) and agreement on a research, expectations and responsibilities in the lab. Students are required to complete a PSYC 498R/499R Contract with a faculty member or principal investigator detailing their research. Contract is available through Lorenza Houser (lhouser@emory.edu). Please e-mail Ms. Houser to obtain a copy of the contract to complete and sign along with your faculty supervisor and/or principal investigator inside or outside the department before returning it to her. Enrollment in PSYC 499R are done administratively; Ms. Houser will enroll you in directed research herself. For students conducting research outside of the Department of Psychology, the contract must be approved by Dr. Andrew Kazama (akazama@emory.edu) as the department's director of undergraduate research before submitting it to Ms. Houser.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1154",
       "crn": "5387",
       "section_number": "1",
       "schedule_type": "PE",
-      "instructor": "C. Hixon",
+      "instructor": "Irwin Waldman",
       "instructors": [
         {
-          "name": "C. Hixon",
-          "email": null
+          "name": "Irwin Waldman",
+          "email": "psyiw@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5387",
-      "section_number": "1",
-      "schedule_type": "PE",
-      "instructor": "C. Hixon",
-      "instructors": [
-        {
-          "name": "C. Hixon",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Hixon"
+    "Irwin Waldman"
   ],
-  "scraped_at": "2026-06-17T23:05:57.996Z"
+  "scraped_at": "2026-06-18T02:37:22.881Z"
 }

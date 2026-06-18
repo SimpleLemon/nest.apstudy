@@ -10,8 +10,8 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This class is offered to students selected to participate in a one-week fieldwork trip to the U.N. Climate Change Negotiation as a part of Emory's delegation. The course explores interdisciplinary climate change issues from science, policy, and business perspectives.",
   "course_notes": "ENVS 326 or equivalent transfer credit as prerequisite.",
   "requisites": "ENVS 326 or equivalent transfer credit as prerequisite.",
@@ -22,66 +22,61 @@
   },
   "sections": [
     {
+      "atlas_key": "3543",
       "crn": "2219",
       "section_number": "1",
       "schedule_type": "PRA",
-      "instructor": "E. Saikawa",
+      "instructor": "Eri Saikawa",
       "instructors": [
         {
-          "name": "E. Saikawa",
-          "email": null
+          "name": "Eri Saikawa",
+          "email": "eri.saikawa@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "2219",
-      "section_number": "1",
-      "schedule_type": "PRA",
-      "instructor": "E. Saikawa",
-      "instructors": [
-        {
-          "name": "E. Saikawa",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Saikawa"
+    "Eri Saikawa"
   ],
-  "scraped_at": "2026-06-17T23:10:29.847Z"
+  "scraped_at": "2026-06-18T02:57:02.095Z"
 }

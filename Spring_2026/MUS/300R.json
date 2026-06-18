@@ -5,40 +5,60 @@
   "catalog_number": "300R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1",
+  "credit_hours": "3",
   "requirement_designation": "XA",
   "requirements": [
-    "XA"
+    "XA",
+    "Humanities and Arts(*)",
+    "Social Sciences(*)",
+    "Race and Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Group instruction in instrumental and/or vocal music and the performance of selected repertoire. Ensemble enrollment requires instructor approval. Interested students may participate in more than one ensemble; may be repeated for credit. For additional information, see music.emory.edu.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Political thought in the early modern period, from Machiavelli through the nineteenth century.",
+  "course_notes": "The course is part of Emory College's Voluntary Core Curriculum Program.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1074",
       "crn": "2983",
       "section_number": "1",
       "schedule_type": "MUS",
-      "instructor": "P. Bhasin",
+      "instructor": "Evan Gee",
       "instructors": [
         {
-          "name": "P. Bhasin",
-          "email": null
+          "name": "Evan Gee",
+          "email": "evan.cree.gee@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Tarbutton Hall 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4:30-6:30p",
@@ -54,26 +74,47 @@
             "end": "1830"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1075",
       "crn": "2984",
       "section_number": "2",
       "schedule_type": "MUS",
-      "instructor": "Bhasin/O'Hara",
+      "instructor": "Matthew Baker",
       "instructors": [
         {
-          "name": "Bhasin/O'Hara",
-          "email": null
+          "name": "Matthew Baker",
+          "email": "matthew.e.baker@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 90,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4:30-6:30p",
@@ -89,9 +130,14 @@
             "end": "1830"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1076",
       "crn": "2985",
       "section_number": "3",
       "schedule_type": "MUS",
@@ -99,16 +145,30 @@
       "instructors": [
         {
           "name": "P. Bhasin",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 218",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-5:30p",
@@ -119,9 +179,14 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1077",
       "crn": "2986",
       "section_number": "4",
       "schedule_type": "MUS",
@@ -129,16 +194,30 @@
       "instructors": [
         {
           "name": "L. Andonovska",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4:30-6:30p",
@@ -154,9 +233,14 @@
             "end": "1830"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1078",
       "crn": "2987",
       "section_number": "5",
       "schedule_type": "MUS",
@@ -164,16 +248,30 @@
       "instructors": [
         {
           "name": "E. Nelson",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 7:30-9:30p",
@@ -184,26 +282,45 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1079",
       "crn": "2989",
       "section_number": "6",
       "schedule_type": "MUS",
-      "instructor": "E. Nelson",
+      "instructor": "Eric Reinhardt",
       "instructors": [
         {
-          "name": "E. Nelson",
-          "email": null
+          "name": "Eric Reinhardt",
+          "email": "erein@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 110",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-6p",
@@ -219,26 +336,47 @@
             "end": "1800"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1080",
       "crn": "2990",
       "section_number": "7",
       "schedule_type": "MUS",
-      "instructor": "E. Cholakova",
+      "instructor": "Bernard Fraga",
       "instructors": [
         {
-          "name": "E. Cholakova",
-          "email": null
+          "name": "Bernard Fraga",
+          "email": "bernardfraga@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Anthropology Bldg 303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 45,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-11:15a",
@@ -249,26 +387,45 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1081",
       "crn": "2991",
       "section_number": "8",
       "schedule_type": "MUS",
-      "instructor": "G. Motley",
+      "instructor": "Courtney Brown",
       "instructors": [
         {
-          "name": "G. Motley",
-          "email": null
+          "name": "Courtney Brown",
+          "email": "polscb@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 32,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 8-10p",
@@ -279,26 +436,47 @@
             "end": "2200"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1082",
       "crn": "2992",
       "section_number": "9",
       "schedule_type": "MUS",
-      "instructor": "G. Motley",
+      "instructor": "Kiela Crabtree",
       "instructors": [
         {
-          "name": "G. Motley",
-          "email": null
+          "name": "Kiela Crabtree",
+          "email": "kiela.crabtree@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "White Hall 103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 55,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 5:30-7:30p",
@@ -309,26 +487,45 @@
             "end": "1930"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1083",
       "crn": "2993",
       "section_number": "10",
       "schedule_type": "MUS",
-      "instructor": "Mamola/Dinkins-Matthews",
+      "instructor": "Matthew Baker",
       "instructors": [
         {
-          "name": "Mamola/Dinkins-Matthews",
-          "email": null
+          "name": "Matthew Baker",
+          "email": "matthew.e.baker@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Anthropology Bldg 303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 80,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:30p",
@@ -344,507 +541,136 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1084",
       "crn": "2994",
       "section_number": "11",
       "schedule_type": "MUS",
-      "instructor": "E. Cholakova",
+      "instructor": "Pablo Montagnes",
       "instructors": [
         {
-          "name": "E. Cholakova",
-          "email": null
+          "name": "Pablo Montagnes",
+          "email": "pablo.montagnes@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Zachary Peskowitz",
+          "email": "zachary.f.peskowitz@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Anthropology Bldg 303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 80,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1085",
       "crn": "2995",
       "section_number": "12",
       "schedule_type": "MUS",
-      "instructor": "L. Andonovska",
+      "instructor": "Michael Rich",
       "instructors": [
         {
-          "name": "L. Andonovska",
-          "email": null
+          "name": "Michael Rich",
+          "email": "mrich@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "2996",
-      "section_number": "13",
-      "schedule_type": "MUS",
-      "instructor": "F. Darsono",
-      "instructors": [
-        {
-          "name": "F. Darsono",
-          "email": null
-        }
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6:30-8:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1830",
-            "end": "2030"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2997",
-      "section_number": "14",
-      "schedule_type": "MUS",
-      "instructor": "P. Bhasin",
-      "instructors": [
-        {
-          "name": "P. Bhasin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6:30-8:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2030"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2983",
-      "section_number": "1",
-      "schedule_type": "MUS",
-      "instructor": "P. Bhasin",
-      "instructors": [
-        {
-          "name": "P. Bhasin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4:30-6:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1630",
-            "end": "1830"
-          },
-          {
-            "day": "Thu",
-            "start": "1630",
-            "end": "1830"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2984",
-      "section_number": "2",
-      "schedule_type": "MUS",
-      "instructor": "Bhasin/O'Hara",
-      "instructors": [
-        {
-          "name": "Bhasin/O'Hara",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4:30-6:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1630",
-            "end": "1830"
-          },
-          {
-            "day": "Wed",
-            "start": "1630",
-            "end": "1830"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2985",
-      "section_number": "3",
-      "schedule_type": "MUS",
-      "instructor": "P. Bhasin",
-      "instructors": [
-        {
-          "name": "P. Bhasin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-5:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2986",
-      "section_number": "4",
-      "schedule_type": "MUS",
-      "instructor": "L. Andonovska",
-      "instructors": [
-        {
-          "name": "L. Andonovska",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4:30-6:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1630",
-            "end": "1830"
-          },
-          {
-            "day": "Wed",
-            "start": "1630",
-            "end": "1830"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2987",
-      "section_number": "5",
-      "schedule_type": "MUS",
-      "instructor": "E. Nelson",
-      "instructors": [
-        {
-          "name": "E. Nelson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 7:30-9:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1930",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2989",
-      "section_number": "6",
-      "schedule_type": "MUS",
-      "instructor": "E. Nelson",
-      "instructors": [
-        {
-          "name": "E. Nelson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-6p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1800"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1800"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2990",
-      "section_number": "7",
-      "schedule_type": "MUS",
-      "instructor": "E. Cholakova",
-      "instructors": [
-        {
-          "name": "E. Cholakova",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-11:15a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2991",
-      "section_number": "8",
-      "schedule_type": "MUS",
-      "instructor": "G. Motley",
-      "instructors": [
-        {
-          "name": "G. Motley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 8-10p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "2000",
-            "end": "2200"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2992",
-      "section_number": "9",
-      "schedule_type": "MUS",
-      "instructor": "G. Motley",
-      "instructors": [
-        {
-          "name": "G. Motley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 5:30-7:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1730",
-            "end": "1930"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2993",
-      "section_number": "10",
-      "schedule_type": "MUS",
-      "instructor": "Mamola/Dinkins-Matthews",
-      "instructors": [
-        {
-          "name": "Mamola/Dinkins-Matthews",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1730"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2994",
-      "section_number": "11",
-      "schedule_type": "MUS",
-      "instructor": "E. Cholakova",
-      "instructors": [
-        {
-          "name": "E. Cholakova",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 40,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
-      "crn": "2995",
-      "section_number": "12",
-      "schedule_type": "MUS",
-      "instructor": "L. Andonovska",
-      "instructors": [
-        {
-          "name": "L. Andonovska",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
+      "atlas_key": "1086",
       "crn": "2996",
       "section_number": "13",
       "schedule_type": "MUS",
-      "instructor": "F. Darsono",
+      "instructor": "Michael Rich",
       "instructors": [
         {
-          "name": "F. Darsono",
-          "email": null
+          "name": "Michael Rich",
+          "email": "mrich@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
+      "location": "Math & Science Center - N304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6:30-8:30p",
@@ -855,26 +681,45 @@
             "end": "2030"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1087",
       "crn": "2997",
       "section_number": "14",
       "schedule_type": "MUS",
-      "instructor": "P. Bhasin",
+      "instructor": "Michael Rich",
       "instructors": [
         {
-          "name": "P. Bhasin",
-          "email": null
+          "name": "Michael Rich",
+          "email": "mrich@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
+      "location": "Math & Science Center - N304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6:30-8:30p",
@@ -885,28 +730,36 @@
             "end": "2030"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 28,
+    "total_sections": 14,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 28,
-    "open": 26,
-    "closed": 2,
+    "other": 14,
+    "open": 8,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Bhasin/O'Hara",
-    "E. Cholakova",
+    "Bernard Fraga",
+    "Courtney Brown",
     "E. Nelson",
-    "F. Darsono",
-    "G. Motley",
+    "Eric Reinhardt",
+    "Evan Gee",
+    "Kiela Crabtree",
     "L. Andonovska",
-    "Mamola/Dinkins-Matthews",
-    "P. Bhasin"
+    "Matthew Baker",
+    "Michael Rich",
+    "P. Bhasin",
+    "Pablo Montagnes",
+    "Zachary Peskowitz"
   ],
-  "scraped_at": "2026-06-17T23:04:14.010Z"
+  "scraped_at": "2026-06-18T02:32:04.592Z"
 }

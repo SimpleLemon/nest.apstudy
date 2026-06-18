@@ -5,40 +5,58 @@
   "catalog_number": "489",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Social Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "A seminar or lecture series on topics of special sociological concern.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course introduces students to the cross-cultural study of gender and sexuality, providing anthropological perspectives on femininity, masculinity, heteronormativity, gender variance, same sex relations, and various theories and methods that are relevant to the study of these phenomena.Students who have taken ANT_OX 265 may not repeat this course for credit.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3937",
       "crn": "4466",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "R. Hall-Clifford",
+      "instructor": "Jessica Glass",
       "instructors": [
         {
-          "name": "R. Hall-Clifford",
-          "email": null
+          "name": "Jessica Glass",
+          "email": "j.l.glass@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Math & Science Center - W307C",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:15p",
@@ -49,51 +67,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "4466",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "R. Hall-Clifford",
-      "instructors": [
-        {
-          "name": "R. Hall-Clifford",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Hall-Clifford"
+    "Jessica Glass"
   ],
-  "scraped_at": "2026-06-17T23:06:47.073Z"
+  "scraped_at": "2026-06-18T02:44:07.421Z"
 }

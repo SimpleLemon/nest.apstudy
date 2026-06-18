@@ -5,13 +5,13 @@
   "catalog_number": "501D",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Online Asynchronous. Required for HPM students. Examines the formulation and implementation of health policy in the US health care system. Emphasizes the application of analytical contributions from health economics, health services research, and other policy-related disciplines to current issues in health care delivery, organization, and financing.",
+  "course_notes": "Online part-time HPM MPH Policy students only. Asynchronous course.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,66 +20,59 @@
   },
   "sections": [
     {
+      "atlas_key": "4527",
       "crn": "5891",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "G. Anderson",
+      "instructor": "Gregory Anderson",
       "instructors": [
         {
-          "name": "G. Anderson",
-          "email": null
+          "name": "Gregory Anderson",
+          "email": "gjander@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5891",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "G. Anderson",
-      "instructors": [
-        {
-          "name": "G. Anderson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Anderson"
+    "Gregory Anderson"
   ],
-  "scraped_at": "2026-06-17T23:11:15.215Z"
+  "scraped_at": "2026-06-18T03:02:13.573Z"
 }

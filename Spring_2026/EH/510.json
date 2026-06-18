@@ -5,38 +5,51 @@
   "catalog_number": "510",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "For postulants preparing for ordination in the Episcopal church or other Anglican traditions. Students are placed as interns in parish settings and participate each week in a two-hour reflection seminar, which examines the parish as a situation of ministry. The class analyzes specific church ministry situations, acts of ministry, priorities and dilemmas of ministry, and development of an operational theory of ministry.",
+  "course_notes": "(prerequisites: CE 500-Level a and b) (Those who entered the MDiv prior to Fall 2023 must also petition the academic dean to designate a related class as fulfilling the CEE requirement)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4231",
       "crn": "1491",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Sarnat/Cardelino",
+      "instructor": "Chief Thompson-Quartey",
       "instructors": [
         {
-          "name": "Sarnat/Cardelino",
-          "email": null
+          "name": "Chief Thompson-Quartey",
+          "email": "chief.john.thompson-quartey@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "ONLINE",
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 20,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10-11:50a",
@@ -47,100 +60,67 @@
             "end": "1150"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4232",
       "crn": "1593",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "D. Barr",
+      "instructor": "Thomas Elliott",
       "instructors": [
         {
-          "name": "D. Barr",
-          "email": null
+          "name": "Thomas Elliott",
+          "email": "thomas.elliott@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 40,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "1491",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Sarnat/Cardelino",
-      "instructors": [
-        {
-          "name": "Sarnat/Cardelino",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10-11:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1150"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1593",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "D. Barr",
-      "instructors": [
-        {
-          "name": "D. Barr",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Barr",
-    "Sarnat/Cardelino"
+    "Chief Thompson-Quartey",
+    "Thomas Elliott"
   ],
-  "scraped_at": "2026-06-17T23:02:13.533Z"
+  "scraped_at": "2026-06-18T02:18:13.749Z"
 }

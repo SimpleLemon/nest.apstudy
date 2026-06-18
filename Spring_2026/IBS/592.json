@@ -5,38 +5,51 @@
   "catalog_number": "592",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "4",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course examines the litigation process, by which civil litigation disputes are resolved in court. It entails study of the allocation of judicial power between federal and state courts, with particular attention to the jurisdiction, venue, and trial and appellate practice in the federal courts. Specific aspects of the litigation process include pleading, discovery, adjudication, including the function and control of juries, and post-trial motions. The course also engages problems inherent in a federal system of adjudication, including the roles of federal and state law as rules of decision.",
+  "course_notes": "Final Assessment: Scheduled Exam",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "1819",
       "crn": "5463",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "K. Koelle",
+      "instructor": "George B. Shepherd",
       "instructors": [
         {
-          "name": "K. Koelle",
-          "email": null
+          "name": "George B. Shepherd",
+          "email": "gshephe@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10a-12p",
@@ -52,56 +65,25 @@
             "end": "1200"
           }
         ]
-      }
-    },
-    {
-      "crn": "5463",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "K. Koelle",
-      "instructors": [
-        {
-          "name": "K. Koelle",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10a-12p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1200"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1200"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Koelle"
+    "George B. Shepherd"
   ],
-  "scraped_at": "2026-06-17T23:03:15.344Z"
+  "scraped_at": "2026-06-18T02:26:06.224Z"
 }

@@ -5,40 +5,58 @@
   "catalog_number": "370L",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Open only to students admitted as fellows in the program in Community Building and Social Change.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Foundational course for the major and the minor that introduces students to the field of Hispanic linguistics, including phonetics, phonology, morphology, pragmatics, and linguistic variation in the Spanish-speaking world.",
+  "course_notes": "(Same as LING 304 1) (CONTENT: In June 2020 the Supreme Court ruled that the section of the Civil Rights Act of 1964 that outlaws employment discrimination on the basis of sex must be interpreted to also protect gay and transgender people. The whole basis for this ruling was the analysis of the specific language used in the Civil Rights Act, however, how do words convey meaning? How are words' meaning established and by whom? How does language portray real world situations? This course, taught in Spanish, explores answers to these questions by presenting students with fundamental concepts in Linguistics through a comparison between Spanish and English at different levels: the sounds of languages (phonetics and phonology), the structure of words (morphology), the structure of sentence (syntax) and the study of meaning (semantics and pragmatics). The course also incorporates an introduction to linguistic variation in the Spanish-speaking world, including the Spanish spoken in the US, and how languages evolve and change with time (historical linguistics).) (EVALUATION is based on active class participation, exams (two midterms) and homework assignments.) (Spanish/Linguistics 304 is a core course of the Spanish & Linguistics Joint Major and a foundational course for the Spanish Major and Minor.) ***If SPAN 304 is at full capacity, please enroll in LING 304, which will satisfy the same major requirements and the IC requirement.*** PREREQUISITE: SPAN 212 or an Official Spanish Placement into our Foundational Course level (Span 300-318). Take the online Spanish Placement Exam at http://spanport.emory.edu/home/undergraduate/placement/index.html.",
   "requisites": null,
   "cross_listed": "POLS 370L SOC 370L CBSC 370L",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3343",
       "crn": "4513",
       "section_number": "1",
       "schedule_type": "LAB",
-      "instructor": "D. Thurman",
+      "instructor": "Jose Luis Boigues-Lopez",
       "instructors": [
         {
-          "name": "D. Thurman",
-          "email": null
+          "name": "Jose Luis Boigues-Lopez",
+          "email": "jboigue@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Few Bldg 129",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,56 +72,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "4513",
-      "section_number": "1",
-      "schedule_type": "LAB",
-      "instructor": "D. Thurman",
-      "instructors": [
-        {
-          "name": "D. Thurman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
-    "labs": 2,
+    "labs": 1,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Thurman"
+    "Jose Luis Boigues-Lopez"
   ],
-  "scraped_at": "2026-06-17T23:02:26.544Z"
+  "scraped_at": "2026-06-18T02:20:39.953Z"
 }

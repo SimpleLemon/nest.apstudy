@@ -5,40 +5,55 @@
   "catalog_number": "110",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "HA",
   "requirements": [
     "HA"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Social, anthropological, and cultural aspects of two or more ancient Mediterranean cultures from a comparative perspective.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Student teams work on an environmental project for an external stakeholder, using problem identification, research and analysis, report and policy drafting, and public presentation skills. Project and stakeholders vary by semester. Fulfills an ENVS Independent Study.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": "ANCMED 101",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "618",
       "crn": "3136",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Gilders/Koo",
+      "instructor": "Carolyn Keogh",
       "instructors": [
         {
-          "name": "Gilders/Koo",
-          "email": null
+          "name": "Carolyn Keogh",
+          "email": "carolyn.keogh@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +69,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "3136",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Gilders/Koo",
-      "instructors": [
-        {
-          "name": "Gilders/Koo",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "Gilders/Koo"
+    "Carolyn Keogh"
   ],
-  "scraped_at": "2026-06-17T23:06:34.014Z"
+  "scraped_at": "2026-06-18T02:42:57.898Z"
 }

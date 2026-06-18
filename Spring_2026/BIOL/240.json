@@ -5,40 +5,56 @@
   "catalog_number": "240",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Major topics include the biology of animals and plants, physiology, evolution, and ecology.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Urban ecology is broadly defined as the study of interactions between organisms and communities with urban environments and of the linkages between them and human activities. By taking a global perspective, this course will provide the foundations of urban ecology.",
   "course_notes": "This course requires BIOL 141 and BIOL 141L, or BIOL 151or BIOL_OX141 or equivalent transfer credit as a prerequisite.",
   "requisites": "This course requires BIOL 141 and BIOL 141L, or BIOL 151or BIOL_OX141 or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3043",
       "crn": "1665",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "C. Beck",
+      "instructor": "Gonzalo Vazquez Prokopec",
       "instructors": [
         {
-          "name": "C. Beck",
-          "email": null
+          "name": "Gonzalo Vazquez Prokopec",
+          "email": "gmvazqu@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 235",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 18,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,26 +70,47 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3044",
       "crn": "5920",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "K. O'Toole",
+      "instructor": "Hyekyung Jin",
       "instructors": [
         {
-          "name": "K. O'Toole",
-          "email": null
+          "name": "Hyekyung Jin",
+          "email": "hyekyung.jin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Modern Language 127",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 16,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -89,92 +126,26 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "1665",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "C. Beck",
-      "instructors": [
-        {
-          "name": "C. Beck",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5920",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "K. O'Toole",
-      "instructors": [
-        {
-          "name": "K. O'Toole",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Beck",
-    "K. O'Toole"
+    "Gonzalo Vazquez Prokopec",
+    "Hyekyung Jin"
   ],
-  "scraped_at": "2026-06-17T23:01:21.198Z"
+  "scraped_at": "2026-06-18T02:09:43.786Z"
 }

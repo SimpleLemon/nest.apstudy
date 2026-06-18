@@ -5,40 +5,53 @@
   "catalog_number": "480",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "1",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Students will gain currency and relevance in the field of applied neuroethics. Class discussions will supplement assignments which will include a peer commentary of a target article in AJOB Neuroscience and a statement paper that addresses content from an upper level neuroethics elective.",
-  "course_notes": null,
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Online Asynchronous. The lab portion of BIOS 500 is designed with two purposes in mind: 1) to illustrate concepts and methods presented in the lectures using hands-on demonstrations and 2) to introduce SAS, a widely used statistical software package, as a data analysis tool. By the end of the semester, you should be able to produce and interpret statistical output for methods learned in BIOS 500 lecture.",
+  "course_notes": "Online asynchronous session. Students must register for BIOS 500D also.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4503",
       "crn": "1724",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Iannitelli",
+      "instructor": "Alexander Taurone",
       "instructors": [
         {
-          "name": "A. Iannitelli",
-          "email": null
+          "name": "Alexander Taurone",
+          "email": "alexander.taurone@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 110,
+      "seats_available": 80,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -54,56 +67,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "1724",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Iannitelli",
-      "instructors": [
-        {
-          "name": "A. Iannitelli",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 2,
+    "open": 1,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Iannitelli"
+    "Alexander Taurone"
   ],
-  "scraped_at": "2026-06-17T23:04:17.250Z"
+  "scraped_at": "2026-06-18T02:32:26.232Z"
 }

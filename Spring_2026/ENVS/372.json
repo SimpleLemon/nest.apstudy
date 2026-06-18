@@ -5,83 +5,78 @@
   "catalog_number": "372",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "2",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Permission required. This is the field course to accompany the lecture course on tropical ecology. Field trip will take place during the spring recess.",
-  "course_notes": "This course requires ENVS 371 or BIOL 371 as a prerequisite OR permission of instructor.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to Jewish populations and cultures within the framework of four fields of general anthropology: biological, archaeological, cultural, and linguistic.",
+  "course_notes": "(Same as JS 258 1 and REL 258 1) (This is a fascinating time to be-or just learn about-Judaism and Jewishness. We are less than a century out from the genocidal devastation of the Holocaust, the birth of the State of Israel as the first independent Jewish commonwealth in almost two millennia, unprecedented freedom for Jews in many (but not all) parts of the world, and vast migrations by almost every historical Jewish community to a different part of the world than it lived in a century ago. Surely, these are features of the modern Jewish condition we will need to discuss anthropologically.)",
   "requisites": "This course requires ENVS 371 or BIOL 371 as a prerequisite OR permission of instructor.",
   "cross_listed": "BIOL 372",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "770",
       "crn": "4551",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "L. Wilson",
+      "instructor": "Don Seeman",
       "instructors": [
         {
-          "name": "L. Wilson",
-          "email": null
+          "name": "Don Seeman",
+          "email": "dseeman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 200",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "4551",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "L. Wilson",
-      "instructors": [
-        {
-          "name": "L. Wilson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 2,
+    "open": 1,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Wilson"
+    "Don Seeman"
   ],
-  "scraped_at": "2026-06-17T23:02:26.544Z"
+  "scraped_at": "2026-06-18T02:20:39.954Z"
 }

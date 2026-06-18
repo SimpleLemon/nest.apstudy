@@ -5,40 +5,53 @@
   "catalog_number": "396",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 3",
+  "credit_hours": "2",
   "requirement_designation": "HSC",
   "requirements": [
     "HSC"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Selected topics in history for students in non-history originating (cross-listed) courses. May be repeated for credit when topic varies.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisites: Students should have taken BIOS 500 and EPI 530 . It is preferred that students also take BIOS 501 or BIOS 591P . Students should be comfortable using R. While not required, it is preferable that students take BIOS 544 concurrently or prior to taking this course. In the Methods for Environmental Mixtures course, students will learn the importance of evaluating environmental exposures as mixtures, as well as an overview of selected environmental mixture methods and data analysis techniques commonly used in public health research. This course focuses on developing an understanding of when to use a specific method, the pros and cons of different approaches, and hands-on applications of environmental mixture methods in R. The course is an elective that is open to second year MPH students and PhD students. It is required that students bring their laptops to class.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4248",
       "crn": "4792",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "R. DeBoard",
+      "instructor": "Stephanie Eick",
       "instructors": [
         {
-          "name": "R. DeBoard",
-          "email": null
+          "name": "Stephanie Eick",
+          "email": "stephanie.marie.eick@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -54,56 +67,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "4792",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "R. DeBoard",
-      "instructors": [
-        {
-          "name": "R. DeBoard",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 2,
+    "open": 1,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. DeBoard"
+    "Stephanie Eick"
   ],
-  "scraped_at": "2026-06-17T23:03:05.501Z"
+  "scraped_at": "2026-06-18T02:24:48.786Z"
 }

@@ -5,40 +5,58 @@
   "catalog_number": "371",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "2",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "First Year Seminar with Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Explores the diverse biomes of the tropics. Focus will be on tropical forests and grasslands, with an emphasis on ecological processes, biodiversity, human impact in the tropics, indigenous peoples, and ethnobotany.",
-  "course_notes": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or (BIOL 142 and BIOL 142L) or BIOL_OX 142 or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Designed to engage first-year students in aspects of inquiry and research into areas of Jewish religion, culture, history, or language. Topics will vary.",
+  "course_notes": "(Same as HIST 190 3) (Freshmen Seminar - Limited to First Year Students Only) (This course will explore Jews' place in America's diverse ethnic and racial mix. We will compare the history and experiences of Jews in the U.S. to those of African Americans, Asian Americans, Latinos, and European ethnic groups, and will also consider how Jewishness has often overlapped with these other identities. In all of these cases, we will be exploring how American definitions of race and ethnicity have shaped Jewish identity, and to what extent Jews can be considered \"insiders\" or \"outsiders\" in American life.)",
   "requisites": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or (BIOL 142 and BIOL 142L) or BIOL_OX 142 or equivalent transfer credit as prerequisite.",
   "cross_listed": "BIOL 371",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "768",
       "crn": "4550",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "L. Wilson",
+      "instructor": "Eric L Goldstein",
       "instructors": [
         {
-          "name": "L. Wilson",
-          "email": null
+          "name": "Eric L Goldstein",
+          "email": "egoldst@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Callaway N204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar with Race & Ethnicity(*)",
+      "requirements": [
+        "First Year Seminar with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-4:30p",
@@ -49,51 +67,25 @@
             "end": "1630"
           }
         ]
-      }
-    },
-    {
-      "crn": "4550",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "L. Wilson",
-      "instructors": [
-        {
-          "name": "L. Wilson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-4:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1630"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Wilson"
+    "Eric L Goldstein"
   ],
-  "scraped_at": "2026-06-17T23:02:26.544Z"
+  "scraped_at": "2026-06-18T02:20:39.953Z"
 }

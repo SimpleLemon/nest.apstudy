@@ -10,8 +10,8 @@
   "requirements": [
     "SNT"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Newton's laws, energy, momentum, angular momentum, conservation laws, many-particle systems, oscillations, planetary motion and Kepler's laws, Lagrange's and Hamiltonian formalisms, non-inertial reference frames, rotation and tensor of inertia, non-linear dynamics and chaos.",
   "course_notes": "(PHYS 142 or PHYS_OX 142 or PHYS 152 or PHYS_OX 152) as prerequisite and (PHYS 220 or MATH 212 or MATH_OX 212) as co-requisite or equivalent transfer credit.",
   "requisites": "(PHYS 142 or PHYS_OX 142 or PHYS 152 or PHYS_OX 152) as prerequisite and (PHYS 220 or MATH 212 or MATH_OX 212) as co-requisite or equivalent transfer credit.",
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "1035",
       "crn": "1395",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Urazhdin",
+      "instructor": "Sergei Urazhdin",
       "instructors": [
         {
-          "name": "S. Urazhdin",
-          "email": null
+          "name": "Sergei Urazhdin",
+          "email": "sergei.urazhdin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - N306",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 35,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -54,56 +69,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "1395",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Urazhdin",
-      "instructors": [
-        {
-          "name": "S. Urazhdin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Urazhdin"
+    "Sergei Urazhdin"
   ],
-  "scraped_at": "2026-06-17T23:14:14.005Z"
+  "scraped_at": "2026-06-18T03:14:54.792Z"
 }

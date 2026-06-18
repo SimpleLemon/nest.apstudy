@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "SS",
   "requirements": [
-    "SS"
+    "SS",
+    "Social Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Introduction to social behavior, development, and individual differences.",
-  "course_notes": "Students completing PSYC_OX 100 or equivalent cannot enroll in PSYC 111. For concerns, please contact the Psychology department.",
+  "course_notes": "OPUS waitlist available at the beginning of add/drop/swap. (There will be small group discussions. This second semester of introductory psychology will cover in broad brushstrokes the major areas of research design, social psychology, social and emotional development, personality measurement and theory, psychopathology, and therapeutic interventions. Emphasis will be on the empirical foundations of psychological knowledge, and on fostering students' scientific thinking about behavior. Particulars: There will be one primary textbook and supplemental readings. Participation in research projects or equivalent is required.)",
   "requisites": "Students completing PSYC_OX 100 or equivalent cannot enroll in PSYC 111. For concerns, please contact the Psychology department.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "1097",
       "crn": "2121",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "E. Kim",
+      "instructor": "Elizabeth Kim",
       "instructors": [
         {
-          "name": "E. Kim",
-          "email": null
+          "name": "Elizabeth Kim",
+          "email": "elizabeth.kim@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Psychology Bldg 290",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 63,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,26 +72,47 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1098",
       "crn": "2122",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "A. Tasimi",
+      "instructor": "Arber Tasimi",
       "instructors": [
         {
-          "name": "A. Tasimi",
-          "email": null
+          "name": "Arber Tasimi",
+          "email": "arber.tasimi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 205",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 63,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -89,92 +128,26 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2121",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Kim",
-      "instructors": [
-        {
-          "name": "E. Kim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2122",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "A. Tasimi",
-      "instructors": [
-        {
-          "name": "A. Tasimi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 4,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Tasimi",
-    "E. Kim"
+    "Arber Tasimi",
+    "Elizabeth Kim"
   ],
-  "scraped_at": "2026-06-17T23:14:27.051Z"
+  "scraped_at": "2026-06-18T03:17:10.139Z"
 }

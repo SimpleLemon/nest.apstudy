@@ -5,13 +5,13 @@
   "catalog_number": "792",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Advanced seminar with emphasis on critical texts, methods, and techniques of art historical investigation. For art history majors; open to others with permission from the instructor.",
+  "course_notes": "\"The Construction of Landscape in Premodern China\"This graduate seminar centers on the theory that landscape is produced through human actions. Through artmaking, history writing, cartography, and engineering, swamps become rivers, mountains become sacred, and land becomes cities. We will use case studies from premodern China to approach this theory from multiple perspectives: How do people define and transform natural elements through discourse and activity? How might constructed landscapes shape human experience? How do landscapes index political and gender dynamics? Knowledge of Chinese is not required for this seminar.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,38 @@
   },
   "sections": [
     {
+      "atlas_key": "2030",
       "crn": "1765",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "P. Zhu",
+      "instructor": "Pinyan Zhu",
       "instructors": [
         {
-          "name": "P. Zhu",
-          "email": null
+          "name": "Pinyan Zhu",
+          "email": "pinyan.zhu@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Carlos Hall Conference",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-5:15p",
@@ -47,51 +62,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "1765",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "P. Zhu",
-      "instructors": [
-        {
-          "name": "P. Zhu",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "P. Zhu"
+    "Pinyan Zhu"
   ],
-  "scraped_at": "2026-06-17T23:09:14.913Z"
+  "scraped_at": "2026-06-18T02:47:16.216Z"
 }

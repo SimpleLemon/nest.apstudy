@@ -5,13 +5,13 @@
   "catalog_number": "565M",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Management and Leadership Communication builds on the critical thinking skills you developed in your undergraduate degree, and then applies those skills to leadership positions in organizations. In this class, you will learn behaviors, communication strategies, and management communication norms that prepare you succeed as a leader. Communication is most effectively mastered through practice. Therefore, Management & Leadership Communication requires experiential learning and highly interactive participation. In class, you will develop your skills through discussions, role plays, presentations, and exercises; outside of class your strategy development, iterative writing, and analysis of the readings furthers the foundation of your communication skills.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "4253",
       "crn": "3844",
       "section_number": "4501",
       "schedule_type": "LEC",
-      "instructor": "S. Savage",
+      "instructor": "Steve Savage",
       "instructors": [
         {
-          "name": "S. Savage",
-          "email": null
+          "name": "Steve Savage",
+          "email": "steve.savage@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 421",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Masters Non-MBA",
+      "grading_mode_options": [
+        "MTR",
+        "Non-MBA Masters Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 36,
+      "seats_available": 36,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -52,56 +65,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "3844",
-      "section_number": "4501",
-      "schedule_type": "LEC",
-      "instructor": "S. Savage",
-      "instructors": [
-        {
-          "name": "S. Savage",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Savage"
+    "Steve Savage"
   ],
-  "scraped_at": "2026-06-17T23:09:37.593Z"
+  "scraped_at": "2026-06-18T02:50:08.978Z"
 }

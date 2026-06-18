@@ -5,38 +5,51 @@
   "catalog_number": "534",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "(Same as AAS 585R 1) Topic: Caribbean Hauntings Course Description: This course is designed to examine the foundational pillars of modernity in the originating site of the Caribbean: the myth of indigenous extinction and the logics of the plantation. Engaging core theorists who conceptualize the notion of the Human/Man, we trace the ongoing legacies of conquest, slavery, and indentureship, as well as the bodily and territorial practices of dispossession in its wake. From a Caribbean feminist perspective, we engage sovereignty, state formation and statecraft, the politics of recognition, indigeneity, and antiblackness. As such, students in this course will a) Demonstrate knowledge of key theoretical perspectives at the following levels: (1) its analytical and explanatory importance for understanding the Caribbean as site of ongoing hauntings produced by the project of modernity; (2) their potential contributions to current social and political dialogues and debates around political conditions and practices in the Caribbean; b)provide students with an understanding of how the Caribbean as a site of extraction forms the core of relations between states and citizen-subjects, and are in turn central to imperial ideas and representations of the Caribbean c)provide students with an understanding of Caribbean representation, hauntings, and political and otherwise subjectivities.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1812",
       "crn": "5517",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "G. Berman",
+      "instructor": "Shanya Cordis",
       "instructors": [
         {
-          "name": "G. Berman",
-          "email": null
+          "name": "Shanya Cordis",
+          "email": "shanya.dennen.cordis@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Candler Library 125",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -52,56 +65,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "5517",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "G. Berman",
-      "instructors": [
-        {
-          "name": "G. Berman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Berman"
+    "Shanya Cordis"
   ],
-  "scraped_at": "2026-06-17T23:03:15.336Z"
+  "scraped_at": "2026-06-18T02:26:06.220Z"
 }

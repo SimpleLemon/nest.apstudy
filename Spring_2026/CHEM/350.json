@@ -5,40 +5,58 @@
   "catalog_number": "350",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "SNT",
   "requirements": [
-    "SNT"
+    "SNT",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Intermediate-level course covering structures and reactivity of coordination compounds and solid state inorganic materials. GER Note: Completion of this course and associated lab satisfies the SNTL requirement. Completion of this course and lab only completes half of the SNT requirement.",
-  "course_notes": "(CHEM 203 or CHEM 203Z or CHEM_OX 203) and (CHEM 203L or CHEM 203ZL or CHEM_OX 203L) and (CHEM 205 or CHEM_OX 205) and (CHEM 205L or CHEM_OX 205L) or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Every semester. Introductory workshop in fiction writing. Counts as a prerequisite for 300-level intermediate workshops but not for Advanced Fiction, Advanced Poetry, or Advanced Playwriting. May not be repeated for credit.",
+  "course_notes": "(Permission Required Prior to Enrollment) Application required. If accepted, YOU MUST ATTEND THE FIRST CLASS session (or as much of the first class as you can attend) to remain enrolled. Class description and application form are available on the Creative Writing Program website: https://creativewriting.emory.edu/academics/applications.html Please email nora.lewis@emory.edu if you have any questions. Making People and Place: Empathy and Attention This is an introductory course on the art of fiction writing. We will focus on elements of craft such as character development, narrative control, dialogue, scene development, setting, structure, openings and endings. We will engage with fiction writing as always about creating human beings with histories, bodies, and social realities; as always about creating a world anew for an audience; and as always a form of communication with an ongoing humanity -- be it dead writers, current beloveds, future anonymous readers or one's own self. Students will come to understand the fiction workshop as a place to face fears, biases and the limitations of the imagination all via practice and hard work. Students will come to see fiction as a place to communicate as writers and critics. Students come to see fiction writing and critical reading as a place to engage bravely and vulnerably with grief, joy and the full range of human emotions between.",
   "requisites": "(CHEM 203 or CHEM 203Z or CHEM_OX 203) and (CHEM 203L or CHEM 203ZL or CHEM_OX 203L) and (CHEM 205 or CHEM_OX 205) and (CHEM 205L or CHEM_OX 205L) or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "593",
       "crn": "2973",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "F. Zhai",
+      "instructor": "Tiphanie Yanique",
       "instructors": [
         {
-          "name": "F. Zhai",
-          "email": null
+          "name": "Tiphanie Yanique",
+          "email": "tiphanie.yanique@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff Library 773",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 11,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2973",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "F. Zhai",
-      "instructors": [
-        {
-          "name": "F. Zhai",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "F. Zhai"
+    "Tiphanie Yanique"
   ],
-  "scraped_at": "2026-06-17T23:01:37.683Z"
+  "scraped_at": "2026-06-18T02:13:14.113Z"
 }

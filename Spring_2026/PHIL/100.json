@@ -8,37 +8,55 @@
   "credit_hours": "3",
   "requirement_designation": "HA",
   "requirements": [
-    "HA"
+    "HA",
+    "Humanities and Arts(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course surveys basic problems in philosophy, such as questions concerning truth, knowledge, justice, beauty, and the good.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An exploration of diverse ways of being religious (for example, in thought, action, community, and experience) as they are displayed in several traditions and cultures.",
+  "course_notes": "This course satisfies the Religion major requirement:- Theme. You can't understand the world today without reference to religion. Every day,religion is in the news. In America, Zohran Mamdani has been elected the first Muslim mayor of New York, Harvard has been accused of antisemitism, and Christian Evangelicals are some of the loudest promotors of President Trump. Outside of America, India has elected a Hindu nationalist prime minister, Buddhists are accused of slaughtering Muslims in Myanmar, and French law forbids face coverings in public. This course introduces classic topics in the study of religion - God, ritual, sacred space, gender, Orientalism, Black theology, etc. - in the context of contemporary issues such as abortion, MAHA, race in America, Islamophobia, immigration, LGBTQ issues, Indigenous rights, and violent conflicts throughout the world. The course aims to make the conceptual resources of the study of religion available for understanding and critiquing contemporary life.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1159",
       "crn": "1700",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Yancy/Schoina",
+      "instructor": "Ellen Gough",
       "instructors": [
         {
-          "name": "Yancy/Schoina",
-          "email": null
+          "name": "Ellen Gough",
+          "email": "ellen.m.gough@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "White Hall 101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 65,
+      "seats_available": 19,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -54,26 +72,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1160",
       "crn": "1912",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "N. Gounoue",
+      "instructor": "William K Gilders",
       "instructors": [
         {
-          "name": "N. Gounoue",
-          "email": null
+          "name": "William K Gilders",
+          "email": "wgilder@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Emerson Chemistry Bldg. E101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 9,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TThF 8:30-9:20a",
@@ -94,97 +133,26 @@
             "end": "920"
           }
         ]
-      }
-    },
-    {
-      "crn": "1700",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Yancy/Schoina",
-      "instructors": [
-        {
-          "name": "Yancy/Schoina",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1912",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "N. Gounoue",
-      "instructors": [
-        {
-          "name": "N. Gounoue",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TThF 8:30-9:20a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "920"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "920"
-          },
-          {
-            "day": "Fri",
-            "start": "830",
-            "end": "920"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 2,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "N. Gounoue",
-    "Yancy/Schoina"
+    "Ellen Gough",
+    "William K Gilders"
   ],
-  "scraped_at": "2026-06-17T23:06:07.910Z"
+  "scraped_at": "2026-06-18T02:38:17.496Z"
 }

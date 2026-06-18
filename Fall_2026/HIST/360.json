@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "HSCE",
   "requirements": [
-    "HSCE"
+    "HSCE",
+    "Race and Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course examines 500 plus years of Mexican history, from the Aztec Empire to the \"Narco State.\" Major themes include empire; colonialism; neocolonialism; class and ethnic relations; modernization; popular resistance; revolution; national identity; migration; neoliberalism; and drug trafficking.",
-  "course_notes": null,
+  "course_notes": "(Same as LACS 360 1) (This course engages the broad sweep of Mexican history from the twilight of the Aztec Empire through the drug wars of today. We will key in on major themes and turning points in the development of Mexican society, including Spanish conquest and colonialism, Native and Black resistance, independence and modernization, the Mexican Revolution, neoliberal restructuring, and narco-trafficking. Throughout, students will hone analytical and writing skills by interacting with diverse materials, including primary documents (i.e. letters, petitions, court cases, and travel accounts) and visual sources (i.e. paintings, photographs, and political cartoons, and film clips). Major questions include: How can we understand the relationship between state and society from a historical perspective? How do certain state forms, such as a \"revolutionary state\" or a \"narco-state\" emerge, and why do they endure or fail?) (Grading structure: Class Participation: 20%, Primary Source facilitation 5%, Mexico in the News presentation 5%, 2 exams 30%, 1 in-class assignment: 10%; Research project: 30%) (This course is appropriate for first year students.)",
   "requisites": null,
   "cross_listed": "LACS 360",
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "721",
       "crn": "2535",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Y. Yannakakis",
+      "instructor": "Yanna Yannakakis",
       "instructors": [
         {
-          "name": "Y. Yannakakis",
-          "email": null
+          "name": "Yanna Yannakakis",
+          "email": "yanna.yannakakis@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Rich Building 104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -54,56 +72,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "2535",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Y. Yannakakis",
-      "instructors": [
-        {
-          "name": "Y. Yannakakis",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "Y. Yannakakis"
+    "Yanna Yannakakis"
   ],
-  "scraped_at": "2026-06-17T23:11:08.776Z"
+  "scraped_at": "2026-06-18T03:00:28.237Z"
 }

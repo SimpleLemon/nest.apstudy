@@ -1,0 +1,94 @@
+{
+  "course_code": "ENGRD 202",
+  "course_title": "Multiliteracy Tutor Practicum",
+  "subject": "ENGRD",
+  "catalog_number": "202",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "None",
+  "requirements": [
+    "None"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Designed as a companion to first semester experience as a Writing Center Tutor. Course includes theoretical and pedagogical readings, reflection on tutoring experiences, practice in tutoring methods, discussion of rhetorical concepts, and development of tutoring-based research.",
+  "course_notes": "(Permission Required Prior to Enrollment) This practicum course is designed as a companion to first semester experience as a Writing Center tutor. Tutors will have a chance to reflect on their tutoring experiences and discuss tutoring strategies. They will also learn about writing in different disciplines, promoting transfer of skills, and tutoring no n-native speakers of English. And they will conduct academic and practical research related to their tutoring work. Contact ahackne@emory.edu for a permission number.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "584",
+      "crn": "5997",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Levin Arnsperger",
+      "instructors": [
+        {
+          "name": "Levin Arnsperger",
+          "email": "levin.arnsperger@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Melissa Yang",
+          "email": "melissa.yang@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "Woodruff Library 773",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 14,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-2:15p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Levin Arnsperger",
+    "Melissa Yang"
+  ],
+  "scraped_at": "2026-06-18T02:56:24.443Z"
+}

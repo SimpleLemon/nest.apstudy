@@ -5,40 +5,58 @@
   "catalog_number": "407",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "HAP",
   "requirements": [
-    "HAP"
+    "HAP",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Only open to Film and Media Management Concentration students. Learn from industry professionals to obtain critical perspectives and practical experience in generating content. Students will collaborate on a capstone project that will be presented to academic and industry stakeholders.",
-  "course_notes": "FILM 301 or FILM 301W or FILM 302 or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Topics will vary; the course may be repeated for credit as topic varies.",
+  "course_notes": "Homeric Hymns. A reading of selected Homeric Hymns, including the Homeric Hymn to Aphrodite and the Homeric Hymn to Hermes. Others may be added at student suggestion and as time permits",
   "requisites": "FILM 301 or FILM 301W or FILM 302 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3084",
       "crn": "3881",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Porst",
+      "instructor": "Louise Pratt",
       "instructors": [
         {
-          "name": "J. Porst",
-          "email": null
+          "name": "Louise Pratt",
+          "email": "louise.pratt@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Candler Library 222A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p; Th 4-6p",
@@ -59,61 +77,25 @@
             "end": "1800"
           }
         ]
-      }
-    },
-    {
-      "crn": "3881",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Porst",
-      "instructors": [
-        {
-          "name": "J. Porst",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p; Th 4-6p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1800"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Porst"
+    "Louise Pratt"
   ],
-  "scraped_at": "2026-06-17T23:02:32.987Z"
+  "scraped_at": "2026-06-18T02:21:20.320Z"
 }

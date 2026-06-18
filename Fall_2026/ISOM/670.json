@@ -5,13 +5,13 @@
   "catalog_number": "670",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is a refresher and a new look at how statistical methods begin the process of understanding and describing data. We will use r/rstudio to review basic data exploration and statistical methods. The course will be very hands on and practical, working with real world data. We will cover topics from simple descriptive statistics like (mean/variance) up though hypothesis testing and modeling. The tools and techniques in the class will be fundamental to all following classes.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,66 +20,59 @@
   },
   "sections": [
     {
+      "atlas_key": "3560",
       "crn": "3759",
       "section_number": "4101",
       "schedule_type": "LEC",
-      "instructor": "A. Lim",
+      "instructor": "Alvin Lim",
       "instructors": [
         {
-          "name": "A. Lim",
-          "email": null
+          "name": "Alvin Lim",
+          "email": "alvin.lim@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Masters Non-MBA",
+      "grading_mode_options": [
+        "MTR",
+        "Non-MBA Masters Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3759",
-      "section_number": "4101",
-      "schedule_type": "LEC",
-      "instructor": "A. Lim",
-      "instructors": [
-        {
-          "name": "A. Lim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Lim"
+    "Alvin Lim"
   ],
-  "scraped_at": "2026-06-17T23:11:31.498Z"
+  "scraped_at": "2026-06-18T03:03:26.840Z"
 }

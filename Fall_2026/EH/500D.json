@@ -5,13 +5,13 @@
   "catalog_number": "500D",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Online Asynchronous. EH 500 is a survey course designed to introduce public health students to basic concepts of environmental sciences, to the methods used to study the interface of health and the environment, to the health impacts of various environmental processes and exposures, and to the public health approach to controlling or eliminating environmental health risks. To address these concepts, basic environmental health principles (exposure assessment, environmental toxicology, environmental epidemiology, risk assessment), as well as specific environmental health issues including water and air pollution, hazardous chemical/waste exposures, climate change, and environmental drivers of disease ecology, will be covered.",
+  "course_notes": "Online asynchronous.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,66 +20,59 @@
   },
   "sections": [
     {
+      "atlas_key": "134",
       "crn": "5879",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Liang",
+      "instructor": "Donghai Liang",
       "instructors": [
         {
-          "name": "D. Liang",
-          "email": null
+          "name": "Donghai Liang",
+          "email": "donghai.liang@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 115,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5879",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Liang",
-      "instructors": [
-        {
-          "name": "D. Liang",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Liang"
+    "Donghai Liang"
   ],
-  "scraped_at": "2026-06-17T23:10:16.800Z"
+  "scraped_at": "2026-06-18T02:55:19.312Z"
 }

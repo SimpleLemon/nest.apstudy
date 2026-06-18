@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HAW",
   "requirements": [
-    "HAW"
+    "HAW",
+    "Humanities and Arts with Cont.Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "An introduction to literary and legal forms of interpretation, with consideration of the relationship between these two discourses. Emphasis on close reading, critical analysis, and argumentative writing.",
-  "course_notes": null,
+  "course_notes": "What can literature teach us about the law, and what can the law teach us about literature? Within these broad queries lurk questions about the nature of justice, punishment, human psychology, institutional structures, cultural norms, and disciplinary methodology. In this course we will consider the productive and limiting aspects of positing law and literature as opposing or complementary forces. Our legal texts will comprise some of the stickiest judicial opinions in Anglo-American law, centered around themes of privacy and bodily autonomy. Our two novels (Yann Martel's Life of Pi and Toni Morrison's Beloved) might seem unlikely texts for this course, but their legal resonances may surprise you. In the course of learning an array of skills, we will analyze and redeploy case law as lawyers do, close-read and persuasively defend arguments as literary scholars do, and think critically and converse together as informed and engaged citizens do. Please note: Our classroom will be a technology-free space: no electronics will be permitted (except for accommodation documented through DAS). Additionally, all work for this course will be subject to a full and total prohibition on the use of generative AI. If you feel that you cannot adhere to these policies, this is not the course for you. Please also note: If you wish to add this course after the first two classes have occurred, you must first contact the instructor to discuss missed work.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "594",
       "crn": "2469",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "E. Davenport",
+      "instructor": "Emma Davenport",
       "instructors": [
         {
-          "name": "E. Davenport",
-          "email": null
+          "name": "Emma Davenport",
+          "email": "emma.davenport@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Candler Library 114",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -54,56 +72,25 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "2469",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Davenport",
-      "instructors": [
-        {
-          "name": "E. Davenport",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Davenport"
+    "Emma Davenport"
   ],
-  "scraped_at": "2026-06-17T23:10:23.252Z"
+  "scraped_at": "2026-06-18T02:55:51.550Z"
 }

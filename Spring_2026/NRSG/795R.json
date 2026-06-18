@@ -5,81 +5,86 @@
   "catalog_number": "795R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "1",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "The goal of this class is to help you become an excellent grant writer. Some students will work on grant proposals that will be submitted to funding agencies such as the NIH while others will write a `practice¿ grant proposal that will be of the quality of an actual competitive grant proposal. The final product for this course is a grant proposal with all the required components outlined in the table below. You will receive feedback from the instructors on all your writing throughout the course.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3026",
       "crn": "4129",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "I. Choi",
+      "instructor": "Anne Fitzpatrick",
       "instructors": [
         {
-          "name": "I. Choi",
-          "email": null
+          "name": "Anne Fitzpatrick",
+          "email": "anne.fitzpatrick@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Janet Gross",
+          "email": "jsgros2@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Caitlin Moran",
+          "email": "caitlin.moran@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 29,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "4129",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "I. Choi",
-      "instructors": [
-        {
-          "name": "I. Choi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "I. Choi"
+    "Anne Fitzpatrick",
+    "Caitlin Moran",
+    "Janet Gross"
   ],
-  "scraped_at": "2026-06-17T23:04:23.817Z"
+  "scraped_at": "2026-06-18T02:34:22.372Z"
 }

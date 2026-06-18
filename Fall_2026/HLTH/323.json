@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course addresses how nutrition helps individuals meet exercise goals, promote health, and achieve optimal performance through examination of the physiological roles of nutrients and dietary components, basic principles of exercise science, and conventional and contemporary fueling strategies.",
-  "course_notes": null,
+  "course_notes": "Proper nutrition supports the physiological processes that make it possible for the body to respond and adapt to exercise. All individuals, from the occasional exerciser to the elite athlete, can benefit from optimal nutrition strategies to prepare for exercise, meet increased metabolic demands during exercise, and facilitate recovery following exercise. This course addresses the roles of nutrition in meeting exercise goals and achieving optimal performance and good health. Students will be introduced to the basic principles of exercise physiology and exercise training. We will explore the functional roles of macronutrients and micronutrients in the body, with emphasis on how they participate in exercise-associated processes. We will also examine dietary recommendations for individuals and athletes and discuss both conventional and contemporary fueling strategies for optimizing exercise training and athletic performance.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "3646",
       "crn": "2548",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Benardot",
+      "instructor": "Dan Benardot",
       "instructors": [
         {
-          "name": "D. Benardot",
-          "email": null
+          "name": "Dan Benardot",
+          "email": "dan.benardot@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 28,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,56 +69,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "2548",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Benardot",
-      "instructors": [
-        {
-          "name": "D. Benardot",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Benardot"
+    "Dan Benardot"
   ],
-  "scraped_at": "2026-06-17T23:11:11.998Z"
+  "scraped_at": "2026-06-18T03:01:54.414Z"
 }

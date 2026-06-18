@@ -5,13 +5,13 @@
   "catalog_number": "368L",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "4",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This lab introduces approaches used in drug discovery and vaccine development including gene cloning, protein expression, and recombinant protein purification. We will also conduct cell culture, fluorescent imaging, and design and execute our own research experiments.",
+  "course_notes": "Complete Topic: Foundational Techniques in Molecular Biology & Biotechnology Laboratory. In this LAB course you will learn techniques with practical applications in biotechnology related to gene cloning, protein expression in prokaryotic and eukaryotic systems, and recombinant protein purification. You will also express your engineered gene in mammalian cells and learn cell culture and fluorescent imaging techniques, gaining hands on experience with the same approaches used in drug discovery and vaccine development. Throughout the semester, you will construct and then carry out your own research question related to the effects of small molecules on calcium signaling. This course will fulfill elective and upper-level lab credit for the Biology major. Prerequisites: Biology 142 + 142L.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,38 @@
   },
   "sections": [
     {
+      "atlas_key": "4399",
       "crn": "1781",
       "section_number": "1",
       "schedule_type": "LAB",
-      "instructor": "S. Comstra",
+      "instructor": "Skye Comstra",
       "instructors": [
         {
-          "name": "S. Comstra",
-          "email": null
+          "name": "Skye Comstra",
+          "email": "skye.comstra@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 115",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-4p",
@@ -52,56 +67,25 @@
             "end": "1600"
           }
         ]
-      }
-    },
-    {
-      "crn": "1781",
-      "section_number": "1",
-      "schedule_type": "LAB",
-      "instructor": "S. Comstra",
-      "instructors": [
-        {
-          "name": "S. Comstra",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-4p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1600"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1600"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
-    "labs": 2,
+    "labs": 1,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Comstra"
+    "Skye Comstra"
   ],
-  "scraped_at": "2026-06-17T23:09:24.579Z"
+  "scraped_at": "2026-06-18T02:48:31.758Z"
 }

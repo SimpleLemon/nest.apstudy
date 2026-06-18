@@ -5,64 +5,101 @@
   "catalog_number": "415",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "1",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Physical Education(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This is the required capstone course for the Human Health major, to be taken in the final year. Students will be expected to undertake a focused project that will demonstrate proficiency from problem solving approaches to multidisciplinary aspects of health.",
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course is designed to provide students with an understanding of rhythm using a series of Balance, Auditory and Vision exercises using bags and balls. Exercises address visual tracking deficiencies, auditory imprecision, impulsivity, rhythmic balance, and anxiety issues. We will be focusing on all this using Bal-A-Vis-X exercises.",
   "course_notes": "HLTH 210 & HLTH 230 & HLTH 250 or equivalent transfer credit as prerequisite. Used for: HLTH 415",
   "requisites": "HLTH 210 & HLTH 230 & HLTH 250 or equivalent transfer credit as prerequisite. Used for: HLTH 415",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4057",
       "crn": "3276",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Gregory Moss-Brown",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Gregory Moss-Brown",
+          "email": "mossbrown@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Williams Hall Gym",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4058",
       "crn": "4059",
       "section_number": "2",
       "schedule_type": "DIS",
-      "instructor": "J. Welkley",
+      "instructor": "Giovanni Lovisetto",
       "instructors": [
         {
-          "name": "J. Welkley",
-          "email": null
+          "name": "Giovanni Lovisetto",
+          "email": "giovanni.lovisetto@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway C101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "3",
+      "enrollment_capacity": 3,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 10-11:15a",
@@ -73,110 +110,43 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4059",
       "crn": "4060",
       "section_number": "3",
       "schedule_type": "DIS",
-      "instructor": "J. Welkley",
+      "instructor": "Jeremy Billetdeaux",
       "instructors": [
         {
-          "name": "J. Welkley",
-          "email": null
+          "name": "Jeremy Billetdeaux",
+          "email": "jeremy.billetdeaux@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0.5",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3276",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "4059",
-      "section_number": "2",
-      "schedule_type": "DIS",
-      "instructor": "J. Welkley",
-      "instructors": [
-        {
-          "name": "J. Welkley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4060",
-      "section_number": "3",
-      "schedule_type": "DIS",
-      "instructor": "J. Welkley",
-      "instructors": [
-        {
-          "name": "J. Welkley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 11:30a-12:45p",
@@ -187,22 +157,27 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 2,
+    "total_sections": 3,
+    "lectures": 1,
     "labs": 0,
-    "discussions": 4,
+    "discussions": 2,
     "other": 0,
-    "open": 4,
+    "open": 0,
     "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Welkley",
-    "Team"
+    "Giovanni Lovisetto",
+    "Gregory Moss-Brown",
+    "Jeremy Billetdeaux"
   ],
-  "scraped_at": "2026-06-17T23:03:08.810Z"
+  "scraped_at": "2026-06-18T02:25:23.381Z"
 }

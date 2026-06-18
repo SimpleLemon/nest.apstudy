@@ -5,40 +5,58 @@
   "catalog_number": "461",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "SNT",
   "requirements": [
-    "SNT"
+    "SNT",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Introductory quantum theory, including the Schrödinger equation, simple soluble problems, hydrogen atom, operator formalism, approximation methods, and perturbation theory.",
-  "course_notes": "PHYS 220 and (PHYS 253 or PHYS_OX 253) and (MATH 212 or MATH_OX 212) or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course presents the history and multiple theories of translation, as well as basic methods/techniques and problems of translating between English and Spanish. A portion of class time will be devoted to translation practice and the comparison of multiple translations of a single text.",
+  "course_notes": "Translators are both skilled writers and excellent readers, as the process involves textual analysis, interpretation and creativity. It is a process richer than its final product and requires choices with important political and cultural implications. This course will examine these issues, challenge your syntax, and compel you to consider linguistic nuances in English and Spanish. You'll learn the history and theories of translation, and methods/techniques of translating English and Spanish. Time will be devoted to translation practice, comparing multiple translations of a text, and discussing translations done both by students and professional translators. Advanced Spanish is required.",
   "requisites": "PHYS 220 and (PHYS 253 or PHYS_OX 253) and (MATH 212 or MATH_OX 212) or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1230",
       "crn": "1925",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "L. Santos",
+      "instructor": "Lisa Dillman",
       "instructors": [
         {
-          "name": "L. Santos",
-          "email": null
+          "name": "Lisa Dillman",
+          "email": "ldillma@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Candler Library 121",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -54,56 +72,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "1925",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "L. Santos",
-      "instructors": [
-        {
-          "name": "L. Santos",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Santos"
+    "Lisa Dillman"
   ],
-  "scraped_at": "2026-06-17T23:06:11.166Z"
+  "scraped_at": "2026-06-18T02:39:58.700Z"
 }

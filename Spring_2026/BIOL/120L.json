@@ -22,6 +22,7 @@
   },
   "sections": [
     {
+      "atlas_key": "4792",
       "crn": "1669",
       "section_number": "1",
       "schedule_type": "LAB",
@@ -29,16 +30,25 @@
       "instructors": [
         {
           "name": "Cole/Schwab",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "4",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-5:30p",
@@ -49,9 +59,14 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     },
     {
+      "atlas_key": "4793",
       "crn": "1670",
       "section_number": "2",
       "schedule_type": "LAB",
@@ -59,16 +74,25 @@
       "instructors": [
         {
           "name": "Cole/Roman",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Waitlist",
       "enrollment_count": "4",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6-9p",
@@ -79,9 +103,14 @@
             "end": "2100"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     },
     {
+      "atlas_key": "4794",
       "crn": "5620",
       "section_number": "3",
       "schedule_type": "LAB",
@@ -89,16 +118,25 @@
       "instructors": [
         {
           "name": "Cole/Schwab",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:30p",
@@ -109,9 +147,14 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     },
     {
+      "atlas_key": "4795",
       "crn": "5621",
       "section_number": "4",
       "schedule_type": "LAB",
@@ -119,16 +162,25 @@
       "instructors": [
         {
           "name": "Cole/Roman",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 6-9p",
@@ -139,142 +191,26 @@
             "end": "2100"
           }
         ]
-      }
-    },
-    {
-      "crn": "1669",
-      "section_number": "1",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Schwab",
-      "instructors": [
-        {
-          "name": "Cole/Schwab",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1670",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Roman",
-      "instructors": [
-        {
-          "name": "Cole/Roman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6-9p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1800",
-            "end": "2100"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5620",
-      "section_number": "3",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Schwab",
-      "instructors": [
-        {
-          "name": "Cole/Schwab",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5621",
-      "section_number": "4",
-      "schedule_type": "LAB",
-      "instructor": "Cole/Roman",
-      "instructors": [
-        {
-          "name": "Cole/Roman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 6-9p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1800",
-            "end": "2100"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
+    "total_sections": 4,
     "lectures": 0,
-    "labs": 8,
+    "labs": 4,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 4,
-    "waitlisted": 4
+    "closed": 2,
+    "waitlisted": 2
   },
   "instructors_unique": [
     "Cole/Roman",
     "Cole/Schwab"
   ],
-  "scraped_at": "2026-06-17T23:01:21.181Z"
+  "scraped_at": "2026-06-18T02:09:43.779Z"
 }

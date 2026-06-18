@@ -5,40 +5,58 @@
   "catalog_number": "140",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "NS",
   "requirements": [
-    "NS"
+    "NS",
+    "Continuing Comm.& Writing with Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Human and environmental health are incredibly intertwined. This course will introduce the relationships emerging between humans, animals and environmental change and examine health issues, scientific understanding of causes, and possible future approaches to global environmental and health problems.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "As the destination of immigration for half a million Holocaust survivors, Israel is the center of formation of Holocaust literature. This course is a survey of works authored by survivors (Fink, Kovner, Appelfeld, Orlev), second generation (Keret), and Israel`s most popular author, Lea Goldberg.",
+  "course_notes": "(Same as JS 347W 1)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4393",
       "crn": "2477",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "G. Vazquez Prokopec",
+      "instructor": "Ofra Yeglin",
       "instructors": [
         {
-          "name": "G. Vazquez Prokopec",
-          "email": null
+          "name": "Ofra Yeglin",
+          "email": "oyeglin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Callaway S105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
+      "requirements": [
+        "Continuing Comm.& Writing with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a",
@@ -54,56 +72,25 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "2477",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "G. Vazquez Prokopec",
-      "instructors": [
-        {
-          "name": "G. Vazquez Prokopec",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Vazquez Prokopec"
+    "Ofra Yeglin"
   ],
-  "scraped_at": "2026-06-17T23:02:26.541Z"
+  "scraped_at": "2026-06-18T02:20:39.939Z"
 }

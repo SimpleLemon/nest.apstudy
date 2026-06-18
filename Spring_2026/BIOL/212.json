@@ -5,40 +5,60 @@
   "catalog_number": "212",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "NS",
   "requirements": [
     "NS"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Computation is one of the pillars of modern science, in addition to experiment and theory. In this course, various computational modeling methods will be introduced to study specific examples derived from physical, biological, chemical and social systems.",
-  "course_notes": "(PHYS 151 or PHYS_OX 151) or [(PHYS 141 or PHYS_OX 141) and (MATH 112 or MATH 112Z or MATH_OX 112 or MATH_OX 112Z0] or [(PHYS 141 or PHYS_OX 141) and MATH 116)] or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Fundamental machine learning theory and techniques.",
+  "course_notes": "All CSI Students may enroll in this course. All other students must contact the instructor(s) of record for permission to enroll in the course. Meets in Woodruff Memorial Research Building 4004.",
   "requisites": "(PHYS 151 or PHYS_OX 151) or [(PHYS 141 or PHYS_OX 141) and (MATH 112 or MATH 112Z or MATH_OX 112 or MATH_OX 112Z0] or [(PHYS 141 or PHYS_OX 141) and MATH 116)] or equivalent transfer credit as prerequisite.",
   "cross_listed": "PHYS 212",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3995",
       "crn": "5274",
       "section_number": "LAB1",
       "schedule_type": "LAB",
-      "instructor": "D. Sussman",
+      "instructor": "Babak Mahmoudi",
       "instructors": [
         {
-          "name": "D. Sussman",
-          "email": null
+          "name": "Babak Mahmoudi",
+          "email": "b.mahmoudi@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Yun Wang",
+          "email": "yun.wang2@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Woodruff Memorial Bldg. 4004",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 20,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 10a-12:45p",
@@ -49,26 +69,45 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3996",
       "crn": "5275",
       "section_number": "LAB2",
       "schedule_type": "LAB",
-      "instructor": "D. Sussman",
+      "instructor": "Saima Rathore",
       "instructors": [
         {
-          "name": "D. Sussman",
-          "email": null
+          "name": "Saima Rathore",
+          "email": "saima.rathore@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Woodruff Memorial Bldg. 4004",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 2:30-5:15p",
@@ -79,26 +118,45 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3994",
       "crn": "5273",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Sussman",
+      "instructor": "Guangchen Chen",
       "instructors": [
         {
-          "name": "D. Sussman",
-          "email": null
+          "name": "Guangchen Chen",
+          "email": "guangchen.chen@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Modern Language 128",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 6,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a",
@@ -114,116 +172,28 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "5274",
-      "section_number": "LAB1",
-      "schedule_type": "LAB",
-      "instructor": "D. Sussman",
-      "instructors": [
-        {
-          "name": "D. Sussman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 10a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5275",
-      "section_number": "LAB2",
-      "schedule_type": "LAB",
-      "instructor": "D. Sussman",
-      "instructors": [
-        {
-          "name": "D. Sussman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5273",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Sussman",
-      "instructors": [
-        {
-          "name": "D. Sussman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 2,
-    "labs": 4,
+    "total_sections": 3,
+    "lectures": 1,
+    "labs": 2,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 6,
+    "open": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Sussman"
+    "Babak Mahmoudi",
+    "Guangchen Chen",
+    "Saima Rathore",
+    "Yun Wang"
   ],
-  "scraped_at": "2026-06-17T23:01:21.188Z"
+  "scraped_at": "2026-06-18T02:09:43.783Z"
 }

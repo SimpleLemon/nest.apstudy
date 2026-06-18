@@ -5,40 +5,53 @@
   "catalog_number": "424",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "0.5",
   "requirement_designation": "SNT",
   "requirements": [
     "SNT"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Students will design and conduct their own fMRI study. Students will learn and apply the basic physics underlying MRI, the biological principles of fMRI, the principles of experimental design, the processing steps associated with data analysis, and the use of available software packages.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Board Rooms build community, engagement, and cohesion while connecting students to each other and to resources at Goizueta. Each student will stay in the same Room for their tenure in the program. Cohorts will meet monthly, with 1-2 additional community events offered each semester. Each Room will have one lead faculty/staff member. At each meeting, specific content around a provided subject will be developed and led by the student members. Individual sessions will feature program announcements, a student-led discussion of a contemporary problem, networking, and celebration of achievements.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4245",
       "crn": "2054",
       "section_number": "1",
       "schedule_type": "PRA",
-      "instructor": "G. Berns",
+      "instructor": "Jeremy Billetdeaux",
       "instructors": [
         {
-          "name": "G. Berns",
-          "email": null
+          "name": "Jeremy Billetdeaux",
+          "email": "jeremy.billetdeaux@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-6:30p",
@@ -49,51 +62,25 @@
             "end": "1830"
           }
         ]
-      }
-    },
-    {
-      "crn": "2054",
-      "section_number": "1",
-      "schedule_type": "PRA",
-      "instructor": "G. Berns",
-      "instructors": [
-        {
-          "name": "G. Berns",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 4-6:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1830"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Berns"
+    "Jeremy Billetdeaux"
   ],
-  "scraped_at": "2026-06-17T23:06:24.220Z"
+  "scraped_at": "2026-06-18T02:42:27.311Z"
 }

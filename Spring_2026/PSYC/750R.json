@@ -5,226 +5,202 @@
   "catalog_number": "750R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Second-year MDiv students who are in the Teaching Parish Program may enroll in CE600TPa,b to fulfill the Con Ed II requirement. Participants are assigned to student pastor groups in respective districts under the leadership of the teaching parish supervisory pastors: ordained ministers who serve as Candler adjunct faculty. Coursework is experiential and collegial in nature, with student-pastors engaging in practice and reflection on a variety of ministerial activities (e.g., preaching, systems analysis, pastoral care, and teaching). At the end of Part A a grade of IP is awarded for successful completion of the Fall semester. At the end of the Spring semester, a grade of S is awarded for both Fall and Spring upon successful completion of the Spring semester portion.",
+  "course_notes": "(prerequisites: CE 500-Level a and b) (Those who entered the MDiv prior to Fall 2023 must also petition the academic dean to designate a related class as fulfilling the CEE requirement) M (Students must be available Monday 9:00am-2:00pm or at the time their group is scheduled for the duration of the 26-27 academic year; meeting times vary by group)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1999",
       "crn": "2442",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "H. Trotman",
+      "instructor": "Thomas Elliott",
       "instructors": [
         {
-          "name": "H. Trotman",
-          "email": null
+          "name": "Thomas Elliott",
+          "email": "thomas.elliott@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2000",
       "crn": "2443",
       "section_number": "2",
       "schedule_type": "SUP",
-      "instructor": "H. Trotman",
+      "instructor": "Cari Jo Clark",
       "instructors": [
         {
-          "name": "H. Trotman",
-          "email": null
+          "name": "Cari Jo Clark",
+          "email": "cari.j.clark@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 72,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2001",
       "crn": "2444",
       "section_number": "3",
       "schedule_type": "SUP",
-      "instructor": "Z. Delawalla",
+      "instructor": "David H Howard",
       "instructors": [
         {
-          "name": "Z. Delawalla",
-          "email": null
+          "name": "David H Howard",
+          "email": "dhhowar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 70,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2002",
       "crn": "2446",
       "section_number": "5",
       "schedule_type": "SUP",
-      "instructor": "Z. Delawalla",
+      "instructor": "Melissa (Moose) Alperin",
       "instructors": [
         {
-          "name": "Z. Delawalla",
-          "email": null
+          "name": "Melissa (Moose) Alperin",
+          "email": "malperi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "2442",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "H. Trotman",
-      "instructors": [
-        {
-          "name": "H. Trotman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "2443",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "H. Trotman",
-      "instructors": [
-        {
-          "name": "H. Trotman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "2444",
-      "section_number": "3",
-      "schedule_type": "SUP",
-      "instructor": "Z. Delawalla",
-      "instructors": [
-        {
-          "name": "Z. Delawalla",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "2446",
-      "section_number": "5",
-      "schedule_type": "SUP",
-      "instructor": "Z. Delawalla",
-      "instructors": [
-        {
-          "name": "Z. Delawalla",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 8,
-    "open": 8,
-    "closed": 0,
+    "other": 4,
+    "open": 2,
+    "closed": 2,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "H. Trotman",
-    "Z. Delawalla"
+    "Cari Jo Clark",
+    "David H Howard",
+    "Melissa (Moose) Alperin",
+    "Thomas Elliott"
   ],
-  "scraped_at": "2026-06-17T23:06:24.226Z"
+  "scraped_at": "2026-06-18T02:42:27.318Z"
 }

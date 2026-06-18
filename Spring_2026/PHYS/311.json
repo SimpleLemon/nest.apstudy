@@ -5,40 +5,53 @@
   "catalog_number": "311",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "SNTL",
   "requirements": [
     "SNTL"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Covers astronomical coordinates, celestial mechanics, Kepler's Laws, gravitation, planetary analysis techniques, planetary and interplanetary debris composition and structure, ring system formation, extrasolar planetary systems, with laboratory sessions in the Emory observatory.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Animal law is a burgeoning field. Over 135 law schools in North America offer courses in animal law, six specialty journals are devoted to the topic, and at least one poll indicates a career in the area is in the top seven of all desired careers. Whether it is our clothing, food, household products, companions, or back yards, our daily lives are touched by animals. Nonhuman animals are considered property under law, and a sprawling body of federal and state civil and criminal law regulates human use of them. This seminar will explore our legal and ethical obligations to nonhuman animals, focusing on domestic animals. Selected topics may include: conceptions of animals, standing to sue on behalf of animals, preemption of animal protection statutes, companion animal abuse, breed discrimination, exotic pets and public health, veterinary malpractice, farm animals, hunted and poached animals, exhibited animals, service and emotional support animals, police and military dogs, exhibited and entertainment animals, laboratory animals, animals used for fiber and medicine, animals and religious freedom, and animal trusts and custody. The seminar is divided into eleven topics from which we will choose eight or nine. Longer topics may be discussed over two weeks or covered in part. I estimate we will spend ten to eleven weeks on the topics and a few weeks on our class conference.",
   "course_notes": "This course requires PHYS 253 or equivalent transfer credit as a prerequisite.",
   "requisites": "This course requires PHYS 253 or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "1894",
       "crn": "1749",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Bans",
+      "instructor": "Ani B. Satz",
       "instructors": [
         {
-          "name": "A. Bans",
-          "email": null
+          "name": "Ani B. Satz",
+          "email": "asatz@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "3",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 5:30-6:45p",
@@ -54,26 +67,58 @@
             "end": "1845"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "1895",
       "crn": "1750",
       "section_number": "2",
       "schedule_type": "LAB",
-      "instructor": "Batiste/Bans",
+      "instructor": "Robert Wellon",
       "instructors": [
         {
-          "name": "Batiste/Bans",
-          "email": null
+          "name": "Robert Wellon",
+          "email": "rwello3@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Benjamin Barrett",
+          "email": "benjamin.francis.barrett@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Alexander Bartko",
+          "email": "alexander.j.bartko@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "William Hill",
+          "email": "william.bradley.hill@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 12,
+      "seats_available": 5,
+      "waitlist_total": 0,
+      "waitlist_capacity": 3,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 10a-12:45p",
@@ -84,26 +129,43 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     },
     {
+      "atlas_key": "1896",
       "crn": "4061",
       "section_number": "3",
       "schedule_type": "LAB",
-      "instructor": "Batiste/Bans",
+      "instructor": "Adrienne Johnson",
       "instructors": [
         {
-          "name": "Batiste/Bans",
-          "email": null
+          "name": "Adrienne Johnson",
+          "email": "adrienne.johnson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 14,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 2:30-5:15p",
@@ -114,117 +176,30 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "1749",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Bans",
-      "instructors": [
-        {
-          "name": "A. Bans",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 5:30-6:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1730",
-            "end": "1845"
-          },
-          {
-            "day": "Wed",
-            "start": "1730",
-            "end": "1845"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1750",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "Batiste/Bans",
-      "instructors": [
-        {
-          "name": "Batiste/Bans",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 10a-12:45p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4061",
-      "section_number": "3",
-      "schedule_type": "LAB",
-      "instructor": "Batiste/Bans",
-      "instructors": [
-        {
-          "name": "Batiste/Bans",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 2,
-    "labs": 4,
+    "total_sections": 3,
+    "lectures": 1,
+    "labs": 2,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 6,
+    "open": 2,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Bans",
-    "Batiste/Bans"
+    "Adrienne Johnson",
+    "Alexander Bartko",
+    "Ani B. Satz",
+    "Benjamin Barrett",
+    "Robert Wellon",
+    "William Hill"
   ],
-  "scraped_at": "2026-06-17T23:06:11.163Z"
+  "scraped_at": "2026-06-18T02:39:58.696Z"
 }

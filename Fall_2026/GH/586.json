@@ -5,13 +5,13 @@
   "catalog_number": "586",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisite: GH 521 or equivalent; Co-requisite: GH 522 or equivalent. Open to learners with qualitative research experience at the instructor¿s discretion. This hands¿on methodology course builds the theoretical foundation, technical skills, and critical thinking needed to conduct a Community Health Assessment (CHA) while applying a ¿glocal¿ (global+local) public health lens to inform equitable action. Using a community¿engaged and asset¿based approach, students learn how CHAs identify priority health assets, capacities, and needs, guide resource allocation, and meaningfully involve all interest holders and impacted groups. The course combines lectures with applied lab sessions, and students work in small groups to complete a rapid CHA over the semester.",
+  "course_notes": "Prerequisite: GH 521 or equivalent; Co-requisite: GH 522 or equivalent. Open to learners with qualitative research experience at the instructor's discretion. This hands-on methodology course builds the theoretical foundation, technical skills, and critical thinking needed to conduct a Community Health Assessment (CHA) while applying a \"glocal\" (global+local) public health lens to inform equitable action. Using a community-engaged and asset-based approach, students learn how CHAs identify priority health assets, capacities, and needs, guide resource allocation, and meaningfully involve all interest holders and impacted groups. The course combines lectures with applied lab sessions, and students work in small groups to complete a rapid CHA over the semester.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "3756",
       "crn": "2269",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "C. Ordóñez",
+      "instructor": "Claudia Ordóñez",
       "instructors": [
         {
-          "name": "C. Ordóñez",
-          "email": null
+          "name": "Claudia Ordóñez",
+          "email": "claudia.ordonez@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 28,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9-11:50a",
@@ -47,51 +60,25 @@
             "end": "1150"
           }
         ]
-      }
-    },
-    {
-      "crn": "2269",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "C. Ordóñez",
-      "instructors": [
-        {
-          "name": "C. Ordóñez",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 9-11:50a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "900",
-            "end": "1150"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Ordóñez"
+    "Claudia Ordóñez"
   ],
-  "scraped_at": "2026-06-17T23:10:49.342Z"
+  "scraped_at": "2026-06-18T02:59:07.915Z"
 }

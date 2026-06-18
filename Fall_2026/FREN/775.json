@@ -5,13 +5,13 @@
   "catalog_number": "775",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "FREN 775 (Same as CPLT 751R 2, PHIL 789 3). Prof. Elissa Marder / Wednesdays 1:00-4:00pm. Since its invention in 1839, photography has been a source of fascination, reflection, inspiration, and revulsion for many nineteenth and twentieth century thinkers and writers. Because the medium of photography has the capacity to record images that are not available to the naked eye and to preserve and repeat them indefinitely, photography has given rise to many powerful written reflections about mourning, memory, time, history, fantasy, ghosts, death, and desire. In this course, we will examine a selection of literary, philosophical, and theoretical texts to help us think about how photographic writing affects our understanding of images, events, the imagination, and history. Readings may include literary works by: Baudelaire, Balzac, Champfleury, Maupassant, Nadar, Edgar Allan Poe, Frederick Douglass, Rodenbach, Villiers de L'Isle Adam, Proust, Cixous, Leila Sebbar, and Marguerite Duras and philosophical/critical works by Roland Barthes, Walter Benjamin, Freud, Susan Sontag, Malek Alloula, Philippe Lacoue-Labarthe, and Jacques Derrida. This course will be taught in English. Reading knowledge of French and/or German is desirable.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "1469",
       "crn": "4011",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "E. Marder",
+      "instructor": "Elissa Marder",
       "instructors": [
         {
-          "name": "E. Marder",
-          "email": null
+          "name": "Elissa Marder",
+          "email": "emarder@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Few Bldg 131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 1-4p",
@@ -47,51 +60,25 @@
             "end": "1600"
           }
         ]
-      }
-    },
-    {
-      "crn": "4011",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "E. Marder",
-      "instructors": [
-        {
-          "name": "E. Marder",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 1-4p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1600"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Marder"
+    "Elissa Marder"
   ],
-  "scraped_at": "2026-06-17T23:10:42.831Z"
+  "scraped_at": "2026-06-18T02:58:43.329Z"
 }

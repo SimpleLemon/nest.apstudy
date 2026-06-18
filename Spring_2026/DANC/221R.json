@@ -5,23 +5,24 @@
   "catalog_number": "221R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1",
+  "credit_hours": "1,2,3,4,5",
   "requirement_designation": "PE",
   "requirements": [
     "PE"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course is designed for students who can demonstrate an understanding of and familiarity with basic ballet vocabulary. Includes barre exercises with a continued emphasis on alignment. Center work will include adagio, tendu, turns, petite allegro, and grande allegro in simple combinations. The course is designed to develop individual body awareness, strength, flexibility, musicality, and an appreciation of the art of ballet. At least 2-3 semesters in Ballet I and consultation with the instructor are required before entry into this course. May be taken up to three times for credit.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A supervised project in an area of study to be determined by the instructor and student in the semester preceding the independent study. Requires faculty approval prior to registration. Only four credit hours can be applied toward fulfillment of the requirement of the major.",
+  "course_notes": "This class requires you to have a faculty supervisor and must be approved by the department. Application can be found here: https://filmandmedia.emory.edu/documents/499-form.pdf",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "642",
       "crn": "3073",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -29,16 +30,30 @@
       "instructors": [
         {
           "name": "M. Mandradjieff",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,56 +69,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "3073",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Mandradjieff",
-      "instructors": [
-        {
-          "name": "M. Mandradjieff",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
     "M. Mandradjieff"
   ],
-  "scraped_at": "2026-06-17T23:01:57.217Z"
+  "scraped_at": "2026-06-18T02:16:29.858Z"
 }

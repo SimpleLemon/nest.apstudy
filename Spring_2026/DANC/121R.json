@@ -5,40 +5,58 @@
   "catalog_number": "121R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1",
+  "credit_hours": "3",
   "requirement_designation": "PE",
   "requirements": [
-    "PE"
+    "PE",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course is designed for students with no or very minimal experience in ballet technique. Ballet I introduces students to the basic skills and terminology of ballet. The course includes barre exercises with an emphasis on alignment. Center work will include adagio, tendu, basic turns, petite allegro, and grande allegro in simple combinations. The course is designed to develop individual body awareness, strength, flexibility, and an appreciation of the art of ballet. May be taken up to three times for credit. Students are required to take this course at least two times before progressing to the next level and should secure the permission of the instructor before doing so.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course focuses on the development of key concepts, ideas, or movements across historical periods and cultural contexts. By retracing their elaboration it serves to highlight continuities and discontinuities in the historical development of French and Francophone literatures and cultures.",
+  "course_notes": "FR 331 All Too Real: Tales and Fairytales Professor C. Nouvet / MW 11:30am-12:45pm. Content: Literature may ask us to cross into another world, another space and time which seem utterly disconnected from reality. Far from being simply unreal, this other world points in fact to another kind of reality: the psychic reality of fantasies and desires. It is the various facets of this psychic reality (beyond or below what passes for \"reality\") that the genre of the \"conte\" explores as it moves from the world of Celtic legends, to the fairy tales of Perrault, and finally to the uncanny experiences staged in 19th century \"contes fantastiques.\"Texts may include Chrétien de Troyes: Perceval ou le conte du Graal Marie de France: Lais Charles Perrault: Contes [selections] Gustave Flaubert: Trois contes Guy de Maupassant: Contes fantastiques [selections] Villiers de l'Isle-Adam: Contes cruels [selections] Mérimée: La Vénus d'Ille Gautier: Contes et récits fantastiques [selections]",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "636",
       "crn": "3034",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Harris/Radell",
+      "instructor": "Claire Nouvet",
       "instructors": [
         {
-          "name": "Harris/Radell",
-          "email": null
+          "name": "Claire Nouvet",
+          "email": "cnouvet@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway C202",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 18,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,26 +72,45 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "637",
       "crn": "3035",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "Harris/Radell",
+      "instructor": "Vincent Bruyere",
       "instructors": [
         {
-          "name": "Harris/Radell",
-          "email": null
+          "name": "Vincent Bruyere",
+          "email": "vincent.bruyere@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Candler Library 123",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 9,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -89,91 +126,26 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "3034",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Harris/Radell",
-      "instructors": [
-        {
-          "name": "Harris/Radell",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3035",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "Harris/Radell",
-      "instructors": [
-        {
-          "name": "Harris/Radell",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Harris/Radell"
+    "Claire Nouvet",
+    "Vincent Bruyere"
   ],
-  "scraped_at": "2026-06-17T23:01:57.216Z"
+  "scraped_at": "2026-06-18T02:16:29.851Z"
 }

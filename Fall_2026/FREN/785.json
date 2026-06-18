@@ -5,13 +5,13 @@
   "catalog_number": "785",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "(Same as WGS 730R 2) Topic: Postcolonial Lives, French Archives (1920s-2020s) Prof. Johanna Montlouis-Gabriel / Tuesdays, 1:00-4:00pm (same as WGS 730R-2). Content: Since the colonial period, France has been shaped by multiple diasporic populations whose histories have been inadequately preserved, distorted, or erased by institutional archives. This course examines how Caribbean, North African, West African, and other diasporic communities in France have created counter-archives through cultural production (literature, film, performance, and digital media) to document their own lives and resist erasure. Beginning with the Nardal sisters' salons and the intellectual ferment of 1920s Paris, we trace a century of diasporic memory-making, moving through the Négritude movement, interwar and postwar migrations, contemporary Afrofeminist organizing, and digital activism. Throughout, we ask: What gets preserved and what vanishes? Who holds the power to archive? How do artists and writers create alternative narratives when official archives fail them? The course intends to develop archival and diaspora literacy (Vèvè Clark), teaching students to identify gaps and silences, to read against the grain of colonial records, and to recognize cultural production itself as archival practice. We conclude by examining the ethics and possibilities of digital archives for diasporic communities. Readings may include literary works by: Paulette Nardal, Aimé Césaire, Bernard Dadié, Françoise Ega, Mehdi Charef, Alain Mabanckou, Faïza Guène, Léonora Miano, Fatima Daas; films by Amandine Gay, Alice Diop ; performances by Rebecca Chaillon, Eva Doumbia and Alice Zeniter; and theoretical/critical works by Achille Mbembe, Françoise Vergès, Elsa Dorlin, Norman Ajari, Maboula Soumahoro, Ann Laura Stoler, Safiya Umoja Noble, Saidiya Hartman, and Diana Taylor. This course will be taught in French. Native or near-native proficiency in French is required.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,38 @@
   },
   "sections": [
     {
+      "atlas_key": "2098",
       "crn": "1790",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Montlouis-Gabriel",
+      "instructor": "Johanna Montlouis-Gabriel",
       "instructors": [
         {
-          "name": "J. Montlouis-Gabriel",
-          "email": null
+          "name": "Johanna Montlouis-Gabriel",
+          "email": "johanna.montlouis-gabriel@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway C202",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 13,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 1-4p",
@@ -47,51 +62,25 @@
             "end": "1600"
           }
         ]
-      }
-    },
-    {
-      "crn": "1790",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Montlouis-Gabriel",
-      "instructors": [
-        {
-          "name": "J. Montlouis-Gabriel",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 1-4p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1600"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Montlouis-Gabriel"
+    "Johanna Montlouis-Gabriel"
   ],
-  "scraped_at": "2026-06-17T23:10:42.831Z"
+  "scraped_at": "2026-06-18T02:58:43.329Z"
 }

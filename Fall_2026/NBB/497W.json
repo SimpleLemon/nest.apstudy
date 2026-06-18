@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "CW",
   "requirements": [
-    "CW"
+    "CW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Independent, faculty-mentored research and writing, with major writing assignment(s) accounting for at least 60% of the grade. Prerequisite: permission of instructor; may not receive credit for NBB 497WR and 495BW under the direction of the same faculty mentor.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,66 +23,63 @@
   },
   "sections": [
     {
+      "atlas_key": "2226",
       "crn": "1849",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "R. Wyttenbach",
+      "instructor": "Robert Wyttenbach",
       "instructors": [
         {
-          "name": "R. Wyttenbach",
-          "email": null
+          "name": "Robert Wyttenbach",
+          "email": "rwytten@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 2,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "1849",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "R. Wyttenbach",
-      "instructors": [
-        {
-          "name": "R. Wyttenbach",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Wyttenbach"
+    "Robert Wyttenbach"
   ],
-  "scraped_at": "2026-06-17T23:12:20.363Z"
+  "scraped_at": "2026-06-18T03:08:01.419Z"
 }

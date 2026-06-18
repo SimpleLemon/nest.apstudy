@@ -5,15 +5,16 @@
   "catalog_number": "495BW",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 8",
+  "credit_hours": "1,2,3,4,5,6,7,8",
   "requirement_designation": "CW",
   "requirements": [
-    "CW"
+    "CW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Must have completed NBB495A, permission of NBB honors coordinator and faculty research mentor. Cannot be taken concurrently with NBB 497WR, 498R, or 499R. Students attend regular meetings. WR is satisfied by written thesis on the honors research project.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Must have completed NBB495A, permission of NBB honors coordinator and faculty research mentor. Cannot be taken concurrently with NBB 497WR , 498R , or 499R . Students attend regular meetings. WR is satisfied by written thesis on the honors research project.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "2100",
       "crn": "1853",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "L. Roesch",
+      "instructor": "Leah Anderson Roesch",
       "instructors": [
         {
-          "name": "L. Roesch",
-          "email": null
+          "name": "Leah Anderson Roesch",
+          "email": "leah.roesch@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "1462 Clifton Rd 308",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 8:30-9:45a",
@@ -49,26 +67,47 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2101",
       "crn": "1854",
       "section_number": "2",
       "schedule_type": "SUP",
-      "instructor": "L. Roesch",
+      "instructor": "Leah Anderson Roesch",
       "instructors": [
         {
-          "name": "L. Roesch",
-          "email": null
+          "name": "Leah Anderson Roesch",
+          "email": "leah.roesch@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "1462 Clifton Rd 308",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-5:15p",
@@ -79,81 +118,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "1853",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "L. Roesch",
-      "instructors": [
-        {
-          "name": "L. Roesch",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1854",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "L. Roesch",
-      "instructors": [
-        {
-          "name": "L. Roesch",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 4-5:15p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 4,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Roesch"
+    "Leah Anderson Roesch"
   ],
-  "scraped_at": "2026-06-17T23:12:20.363Z"
+  "scraped_at": "2026-06-18T03:08:01.417Z"
 }

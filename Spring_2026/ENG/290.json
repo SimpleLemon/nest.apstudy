@@ -8,37 +8,55 @@
   "credit_hours": "3",
   "requirement_designation": "HA",
   "requirements": [
-    "HA"
+    "HA",
+    "Humanities and Arts with Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Long historical surveys of national, regional, or ethnic traditions; or of genres or subgenres. Examples: History of African Literature, History of Latinx Literature, History of Science Fiction, History of the Sonnet, History of Southern U.S. Literature, History of Drama.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "\"From Arab Jew to Mizrahi\" tells the story of Middle Eastern and North African (MENA) Jewish experiences in modern times, from these communities' lives in Islamic lands through their mass migration, mostly to Israel and the creation of a new culture there.",
+  "course_notes": "(Same as HIST 257 1 and JS 257 1)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "716",
       "crn": "5489",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "I. Goh",
+      "instructor": "Geoffrey Levin",
       "instructors": [
         {
-          "name": "I. Goh",
-          "email": null
+          "name": "Geoffrey Levin",
+          "email": "geoffrey.phillip.levin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Callaway N111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts with Race & Ethnicity(*)",
+      "requirements": [
+        "Humanities and Arts with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,56 +72,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "5489",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "I. Goh",
-      "instructors": [
-        {
-          "name": "I. Goh",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "I. Goh"
+    "Geoffrey Levin"
   ],
-  "scraped_at": "2026-06-17T23:02:20.050Z"
+  "scraped_at": "2026-06-18T02:19:11.741Z"
 }

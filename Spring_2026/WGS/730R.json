@@ -5,38 +5,61 @@
   "catalog_number": "730R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "8",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "(School of Medicine Students Only)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-06-29",
+    "end": "2026-12-19"
   },
   "sections": [
     {
+      "atlas_key": "2486",
       "crn": "3103",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "L. Park",
+      "instructor": "Audrey B. Jernigan",
       "instructors": [
         {
-          "name": "L. Park",
-          "email": null
+          "name": "Audrey B. Jernigan",
+          "email": "audrey.bell.jernigan@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Dheepa Sekar",
+          "email": "dheepa.sekar@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Mary Pierre",
+          "email": "mary.occean@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "8",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 4-6:45p",
@@ -47,116 +70,53 @@
             "end": "1845"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2487",
       "crn": "4406",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "K. Wallace-Sanders",
+      "instructor": "Audrey B. Jernigan",
       "instructors": [
         {
-          "name": "K. Wallace-Sanders",
-          "email": null
+          "name": "Audrey B. Jernigan",
+          "email": "audrey.bell.jernigan@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Varun Phadke",
+          "email": "varun.phadke@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Mary Pierre",
+          "email": "mary.occean@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "8",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 9a-12p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "900",
-            "end": "1200"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5460",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "I. Goh",
-      "instructors": [
-        {
-          "name": "I. Goh",
-          "email": null
-        }
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 3-6p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1500",
-            "end": "1800"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3103",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "L. Park",
-      "instructors": [
-        {
-          "name": "L. Park",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 4-6:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1845"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4406",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "K. Wallace-Sanders",
-      "instructors": [
-        {
-          "name": "K. Wallace-Sanders",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9a-12p",
@@ -167,26 +127,53 @@
             "end": "1200"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2488",
       "crn": "5460",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "I. Goh",
+      "instructor": "Audrey B. Jernigan",
       "instructors": [
         {
-          "name": "I. Goh",
-          "email": null
+          "name": "Audrey B. Jernigan",
+          "email": "audrey.bell.jernigan@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Varun Phadke",
+          "email": "varun.phadke@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Mary Pierre",
+          "email": "mary.occean@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "8",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 3-6p",
@@ -197,23 +184,28 @@
             "end": "1800"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 4,
+    "open": 3,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "I. Goh",
-    "K. Wallace-Sanders",
-    "L. Park"
+    "Audrey B. Jernigan",
+    "Dheepa Sekar",
+    "Mary Pierre",
+    "Varun Phadke"
   ],
-  "scraped_at": "2026-06-17T23:07:03.466Z"
+  "scraped_at": "2026-06-18T02:45:32.681Z"
 }

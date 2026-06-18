@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HAPW",
   "requirements": [
-    "HAPW"
+    "HAPW",
+    "Continuing Comm.& Writing with Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Selected works from various genres by writers from the 1950s to the present.",
-  "course_notes": null,
+  "course_notes": "(Same as HIST 396W 1) (Topic: Britain After Empire) (This course will explore the literary contours of Britain from the eve of the Second World War through Brexit by way of fiction, poetry, criticism, and film. Focusing on cultural transformations catalyzed both by the war and by struggles for decolonization, we will ask questions such as: How do disparate genres of writing work to define Britain In what ways does contemporary literature register the legacies of empire in Britain What strategies do writers employ to represent immigration and challenge racism?) (You will read works by groundbreaking Trinidadian-born novelist Sam Selvon, Jamaican-born dub poet Linton Kwesi Johnson, Scottish former Poet Laureate Carol Ann Duffy, Japanese-born Nobel Laureate Kazuo Ishiguro, and Scottish novelist Ali Smith, winner of the Orwell Prize for Political Fiction, among others. You will also have the opportunity to familiarize yourself with critical approaches to British literature and culture and to consult poets - drafts in the Stuart A. Rose Manuscript, Archives, and Rare Book Library. In addition to writing about what you find in the Rose Library, expect to practice close reading of fiction, annotate a scholarly essay, put together a collaborative presentation, and create a final project.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "600",
       "crn": "2478",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "N. Suhr-Sytsma",
+      "instructor": "Nathan Suhr-Sytsma",
       "instructors": [
         {
-          "name": "N. Suhr-Sytsma",
-          "email": null
+          "name": "Nathan Suhr-Sytsma",
+          "email": "nathan.e.suhr-sytsma@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Few Bldg 131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
+      "requirements": [
+        "Continuing Comm.& Writing with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,56 +72,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2478",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "N. Suhr-Sytsma",
-      "instructors": [
-        {
-          "name": "N. Suhr-Sytsma",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "N. Suhr-Sytsma"
+    "Nathan Suhr-Sytsma"
   ],
-  "scraped_at": "2026-06-17T23:10:23.258Z"
+  "scraped_at": "2026-06-18T02:55:51.551Z"
 }

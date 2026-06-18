@@ -5,38 +5,53 @@
   "catalog_number": "660",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to basic laboratory techniques in microbiology. Experiments dealing with the physiology, biochemistry, genetics, and molecular biology of microbes will be included. (This course meets the upper-level laboratory requirement and will count as elective credit for the Biology major.)",
+  "course_notes": "This is the 2-credit hour OPTIONAL laboratory to accompany Biology 370 (Introduction to Microbiology) and will introduce students to some of the basic techniques used in the study of physiology, biochemistry, and genetics of microorganisms. There is no textbook for this course. This course will fulfill two (2) hours of elective credit AND the upper-level lab requirement for the Biology major. Prerequisites: Biology 142 + 142L; pre- or co-requisite: Biology 370. (BIOL 370LW will no longer be offered.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-04",
-    "end": "2026-01-11"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "460",
       "crn": "3438",
       "section_number": "2195",
       "schedule_type": "LEC",
-      "instructor": "A. Oshotse",
+      "instructor": "Eric Battaglioli",
       "instructors": [
         {
-          "name": "A. Oshotse",
-          "email": null
+          "name": "Eric Battaglioli",
+          "email": "eric.john.battaglioli@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 117",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "4",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MTWThF 6:30-9:30p; Sa 9a-5p; Su 11a-7p; Su 11a-5:30p",
@@ -82,26 +97,45 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "461",
       "crn": "3439",
       "section_number": "2295",
       "schedule_type": "LEC",
-      "instructor": "A. Oshotse",
+      "instructor": "Alexander Escobar",
       "instructors": [
         {
-          "name": "A. Oshotse",
-          "email": null
+          "name": "Alexander Escobar",
+          "email": "alexander.escobar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 206",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "4",
+      "enrollment_capacity": 100,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MTWThF 6:30-9:30p; Sa 9a-5p; Su 11a-7p; Su 11a-5:30p",
@@ -147,26 +181,45 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "462",
       "crn": "3440",
       "section_number": "3295",
       "schedule_type": "LEC",
-      "instructor": "A. Oshotse",
+      "instructor": "Alexander Escobar",
       "instructors": [
         {
-          "name": "A. Oshotse",
-          "email": null
+          "name": "Alexander Escobar",
+          "email": "alexander.escobar@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 206",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 100,
+      "seats_available": 34,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MTWThF 6:30-9:30p; Sa 9a-5p; Su 11a-7p; Su 11a-5:30p",
@@ -212,26 +265,45 @@
             "end": "1730"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "463",
       "crn": "6359",
       "section_number": "6295",
       "schedule_type": "LEC",
-      "instructor": "A. Oshotse",
+      "instructor": "Eladio Abreu",
       "instructors": [
         {
-          "name": "A. Oshotse",
-          "email": null
+          "name": "Eladio Abreu",
+          "email": "eladio.b.abreu@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "4",
+      "enrollment_capacity": 100,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MTWThF 6:30-9:30p; Sa 9a-5p; Su 11a-7p; Su 11a-5:30p",
@@ -277,281 +349,27 @@
             "end": "1730"
           }
         ]
-      }
-    },
-    {
-      "crn": "3438",
-      "section_number": "2195",
-      "schedule_type": "LEC",
-      "instructor": "A. Oshotse",
-      "instructors": [
-        {
-          "name": "A. Oshotse",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MTWThF 6:30-9:30p; Sa 9a-5p; Su 11a-7p; Su 11a-5:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Wed",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Thu",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Fri",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Sat",
-            "start": "900",
-            "end": "1700"
-          },
-          {
-            "day": "Sun",
-            "start": "1100",
-            "end": "1900"
-          },
-          {
-            "day": "Sun",
-            "start": "1100",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3439",
-      "section_number": "2295",
-      "schedule_type": "LEC",
-      "instructor": "A. Oshotse",
-      "instructors": [
-        {
-          "name": "A. Oshotse",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MTWThF 6:30-9:30p; Sa 9a-5p; Su 11a-7p; Su 11a-5:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Wed",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Thu",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Fri",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Sat",
-            "start": "900",
-            "end": "1700"
-          },
-          {
-            "day": "Sun",
-            "start": "1100",
-            "end": "1900"
-          },
-          {
-            "day": "Sun",
-            "start": "1100",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3440",
-      "section_number": "3295",
-      "schedule_type": "LEC",
-      "instructor": "A. Oshotse",
-      "instructors": [
-        {
-          "name": "A. Oshotse",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MTWThF 6:30-9:30p; Sa 9a-5p; Su 11a-7p; Su 11a-5:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Wed",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Thu",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Fri",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Sat",
-            "start": "900",
-            "end": "1700"
-          },
-          {
-            "day": "Sun",
-            "start": "1100",
-            "end": "1900"
-          },
-          {
-            "day": "Sun",
-            "start": "1100",
-            "end": "1730"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "6359",
-      "section_number": "6295",
-      "schedule_type": "LEC",
-      "instructor": "A. Oshotse",
-      "instructors": [
-        {
-          "name": "A. Oshotse",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MTWThF 6:30-9:30p; Sa 9a-5p; Su 11a-7p; Su 11a-5:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Wed",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Thu",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Fri",
-            "start": "1830",
-            "end": "2130"
-          },
-          {
-            "day": "Sat",
-            "start": "900",
-            "end": "1700"
-          },
-          {
-            "day": "Sun",
-            "start": "1100",
-            "end": "1900"
-          },
-          {
-            "day": "Sun",
-            "start": "1100",
-            "end": "1730"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 8,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 2,
-    "waitlisted": 2
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Oshotse"
+    "Alexander Escobar",
+    "Eladio Abreu",
+    "Eric Battaglioli"
   ],
-  "scraped_at": "2026-06-17T23:04:30.315Z"
+  "scraped_at": "2026-06-18T02:35:28.944Z"
 }

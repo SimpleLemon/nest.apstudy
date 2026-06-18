@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Language acquisition in young children. Identifying speech sounds, determining meaning, and comprehending the rules of syntax.",
-  "course_notes": null,
+  "course_notes": "(Same as PSYC 316 1) Language is an incredibly complex system of knowledge. Not only are there multiple levels of representation - sounds and words and phrases and meanings - but within a given level, even simple output forms can be derived from multiple interacting pieces of knowledge. Yet as speakers of any given language, we are often blissfully unaware of how much we need to know in order to be able to communicate with language. In this class, we survey the broad topic of language acquisition, focusing not only on children's developmental trajectory, but also on what knowledge of language is and how language acquisition relates to cognition in general. Topics include the biological basis of language, levels of linguistic knowledge and language and cognition. Becoming familiar with (learning how to read, understand, and synthesize) published research articles is one of the main aims of the course that you will work toward by closely analyzing a number of research papers and by writing a research paper. You will learn how to critically read papers, lead a discussion on a paper, and write summaries. Also, this course will provide hands-on experience in using and analyzing corpus from CHILDES database.",
   "requisites": null,
   "cross_listed": "PSYC 316",
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "3128",
       "crn": "1531",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Y. Kim",
+      "instructor": "Yun Kim",
       "instructors": [
         {
-          "name": "Y. Kim",
-          "email": null
+          "name": "Yun Kim",
+          "email": "yun.kim@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Modern Language 330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 14,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -54,56 +69,25 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "1531",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Y. Kim",
-      "instructors": [
-        {
-          "name": "Y. Kim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "Y. Kim"
+    "Yun Kim"
   ],
-  "scraped_at": "2026-06-17T23:11:54.325Z"
+  "scraped_at": "2026-06-18T03:04:55.509Z"
 }

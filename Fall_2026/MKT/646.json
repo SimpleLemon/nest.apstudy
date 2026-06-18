@@ -5,13 +5,13 @@
   "catalog_number": "646",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Marketing begins and ends with the customer, from determining customers' needs and wants to providing customer satisfaction and maintaining customer relationships. This course examines the basic concepts and principles in consumer psychology with the goal of understanding how these ideas can be used in marketing decision making.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "377",
       "crn": "3704",
       "section_number": "3250",
       "schedule_type": "LEC",
-      "instructor": "M. Gaerth",
+      "instructor": "Maximilian Gaerth",
       "instructors": [
         {
-          "name": "M. Gaerth",
-          "email": null
+          "name": "Maximilian Gaerth",
+          "email": "maximilian.gaerth@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 234",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 33,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -52,56 +65,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3704",
-      "section_number": "3250",
-      "schedule_type": "LEC",
-      "instructor": "M. Gaerth",
-      "instructors": [
-        {
-          "name": "M. Gaerth",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Gaerth"
+    "Maximilian Gaerth"
   ],
-  "scraped_at": "2026-06-17T23:12:04.121Z"
+  "scraped_at": "2026-06-18T03:06:42.629Z"
 }

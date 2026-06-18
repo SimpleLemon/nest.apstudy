@@ -5,13 +5,15 @@
   "catalog_number": "369LW",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "In this research-focused SEA-PHAGES lab, students isolate and characterize their own novel bacteriophage. Topics include best practices in microbiology, phage-bacteria interactions including lysogeny and host range, and molecular biology (DNA isolation, restriction digests, sequencing).",
+  "course_notes": "This course is the first of two semesters in the SEA-PHAGES curriculum and is designed to be an introduction to laboratory research. In semester 1 (PHAGES), students will isolate and characterize their own bacteriophage using techniques in microbiology and molecular biology; in semester 2 (GENOMES), students will use bioinformatic tools to annotate and analyze the genome sequences of isolated phage. Completion of PHAGES is highly recommended for students intending to take GENOMES, and both semesters are required for participation in the annual SEA-PHAGES symposium in spring. Enrollment is by permission of instructor; priority will be given to second-year students. Contact Dr. Nic Vega at nic.vega@emory.edu for permission. Prerequisites: Biology 142 + 142L. This curriculum focuses on student-led discovery. Lab notebooks and written lab reports will be used to document hypotheses, protocols, troubleshooting, and outcomes as we progress through the term. The knowledge-based portion of the class will rely heavily on the primary literature as students learn to read and critically interpret scientific papers. We will use existing AI tools to accelerate the process of learning from the peer-reviewed literature. As the focus of evaluations is on comprehension as demonstrated through participation and lab reports, there are no exams.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +22,40 @@
   },
   "sections": [
     {
+      "atlas_key": "4467",
       "crn": "3985",
       "section_number": "1",
       "schedule_type": "LAB",
-      "instructor": "N. Vega",
+      "instructor": "Nic Vega",
       "instructors": [
         {
-          "name": "N. Vega",
-          "email": null
+          "name": "Nic Vega",
+          "email": "nic.vega@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "1462 Clifton Rd 115",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-4:30p",
@@ -52,56 +71,25 @@
             "end": "1630"
           }
         ]
-      }
-    },
-    {
-      "crn": "3985",
-      "section_number": "1",
-      "schedule_type": "LAB",
-      "instructor": "N. Vega",
-      "instructors": [
-        {
-          "name": "N. Vega",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-4:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1630"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1630"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
-    "labs": 2,
+    "labs": 1,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "N. Vega"
+    "Nic Vega"
   ],
-  "scraped_at": "2026-06-17T23:09:24.579Z"
+  "scraped_at": "2026-06-18T02:48:31.758Z"
 }

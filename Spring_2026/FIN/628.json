@@ -5,38 +5,53 @@
   "catalog_number": "628",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A study of human physiology emphasizing integrated body functions. Topics include respiration, circulation, contractility, osmoregulation, endocrinology, and neurophysiology.",
+  "course_notes": "This course is a study of human physiology emphasizing homeostatic mechanisms of integrated body functions. Topics covered in this class include cellular communication, endocrinology, neurophysiology, muscle physiology, circulation, respiration, and renal physiology. Prerequisites: Biology 142 and 142L. This course may be taken as elective credit for the Biology major.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "431",
       "crn": "3408",
       "section_number": "3201",
       "schedule_type": "LEC",
-      "instructor": "K. Crowley",
+      "instructor": "Patrick William Cafferty",
       "instructors": [
         {
-          "name": "K. Crowley",
-          "email": null
+          "name": "Patrick William Cafferty",
+          "email": "patrick.w.cafferty@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 207",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 90,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -52,56 +67,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "3408",
-      "section_number": "3201",
-      "schedule_type": "LEC",
-      "instructor": "K. Crowley",
-      "instructors": [
-        {
-          "name": "K. Crowley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Crowley"
+    "Patrick William Cafferty"
   ],
-  "scraped_at": "2026-06-17T23:02:36.316Z"
+  "scraped_at": "2026-06-18T02:22:28.139Z"
 }

@@ -10,35 +10,50 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course is the capstone seminar for MESAS majors. Students will conduct an in-depth examination of selected topics linking South Asia and the Middle East. Topics will change according to the choice of the instructor.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "CHEM 205 will address the origins of electronic orbitals and the quantized energy states associated with molecular motions. How light causes transitions between energy levels will be central to our discussion, illuminating topics from spectroscopy to the Earth's climate and solar energy conversion.",
+  "course_notes": "This course is typically offered in fall, spring, and summer semesters.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3611",
       "crn": "2778",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "Team",
+      "instructor": "Raphael Ribeiro",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Raphael Ribeiro",
+          "email": "raphael.ribeiro@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 72,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +69,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2778",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Team"
+    "Raphael Ribeiro"
   ],
-  "scraped_at": "2026-06-17T23:03:57.667Z"
+  "scraped_at": "2026-06-18T02:30:25.535Z"
 }

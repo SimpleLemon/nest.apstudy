@@ -5,38 +5,57 @@
   "catalog_number": "503",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
-  "requirement_designation": null,
-  "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "credit_hours": "4",
+  "requirement_designation": "Race and Ethnicity(*)",
+  "requirements": [
+    "Race and Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course introduces students to the multiple disciplines that comprise the field of African American Studies and the most salient themes and topics that continue to guide scholars' research interests.",
+  "course_notes": "From the auction block to the White House, African Americans have played a central role in shaping democracy and national culture. This course will provide a survey of the historical, political, and cultural dimensions of the African American experience in the U.S. The course will be organized chronologically and thematically and will cover topics such as American slavery, medical experimentation, Hurricane Katrina, aesthetics, hip-hop, and Afro-futurism. We will grapple with important ethical, political, and philosophical questions that the African American experience raises. For example, what does it mean to be human? How does race complicate ideas of beauty? We will use multi-disciplinary strategies of reading and interpretation to examine the continuity, and rupture, of historical experiences. The course will use primary historical documents, literature, film, and secondary critical sources to investigate the contours of this experience.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "385",
       "crn": "3373",
       "section_number": "3201",
       "schedule_type": "LEC",
-      "instructor": "Rosensweig/Sullivan",
+      "instructor": "Meina Yates-Richard",
       "instructors": [
         {
-          "name": "Rosensweig/Sullivan",
-          "email": null
+          "name": "Meina Yates-Richard",
+          "email": "meina.yates-richard@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Psychology Bldg 235",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -52,56 +71,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3373",
-      "section_number": "3201",
-      "schedule_type": "LEC",
-      "instructor": "Rosensweig/Sullivan",
-      "instructors": [
-        {
-          "name": "Rosensweig/Sullivan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Rosensweig/Sullivan"
+    "Meina Yates-Richard"
   ],
-  "scraped_at": "2026-06-17T23:02:36.310Z"
+  "scraped_at": "2026-06-18T02:22:28.134Z"
 }

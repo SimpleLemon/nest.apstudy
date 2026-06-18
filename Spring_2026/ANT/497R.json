@@ -5,121 +5,137 @@
   "catalog_number": "497R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "1",
   "requirement_designation": "XA",
   "requirements": [
-    "XA"
+    "XA",
+    "Physical Education(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Consultation with faculty prior to registration required.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed for students with no or very minimal experience in ballet technique. Ballet I introduces students to the basic skills and terminology of ballet. The course includes barre exercises with an emphasis on alignment. Center work will include adagio, tendu, basic turns, petite allegro, and grande allegro in simple combinations. The course is designed to develop individual body awareness, strength, flexibility, and an appreciation of the art of ballet. May be taken up to three times for credit. Students are required to take this course at least two times before progressing to the next level and should secure the permission of the instructor before doing so.",
+  "course_notes": "Dancewear required for this class (leotard, tights, ballet slippers).",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "523",
       "crn": "5654",
       "section_number": "1",
       "schedule_type": "RSC",
-      "instructor": "R. Paul",
+      "instructor": "Angela Harris",
       "instructors": [
         {
-          "name": "R. Paul",
-          "email": null
+          "name": "Angela Harris",
+          "email": "angela.nicole.harris@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sally A Radell",
+          "email": "sradell@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff PE - Dance",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 23,
+      "seats_available": 17,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "524",
       "crn": "6806",
       "section_number": "9000",
       "schedule_type": "RSC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "5654",
-      "section_number": "1",
-      "schedule_type": "RSC",
-      "instructor": "R. Paul",
+      "instructor": "Angela Harris",
       "instructors": [
         {
-          "name": "R. Paul",
-          "email": null
+          "name": "Angela Harris",
+          "email": "angela.nicole.harris@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sally A Radell",
+          "email": "sradell@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff PE - Dance",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 23,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6806",
-      "section_number": "9000",
-      "schedule_type": "RSC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
+    "other": 2,
     "open": 2,
-    "closed": 2,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Paul"
+    "Angela Harris",
+    "Sally A Radell"
   ],
-  "scraped_at": "2026-06-17T23:01:04.713Z"
+  "scraped_at": "2026-06-18T02:07:32.582Z"
 }

@@ -5,40 +5,53 @@
   "catalog_number": "202",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "1.5",
   "requirement_designation": "HA",
   "requirements": [
     "HA"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course introduces students to the way translation between different literatures, literary genres, and new media impacts our comparative reading of texts. *Note: This course is non-repeatable.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course looks at how processes and systems, the so-called operating core of the organization, impacts the ability of a firm to execute its strategy. The challenges confronting firms competing in today's dynamic environment demand a multi-disciplinary focus. As we prepare students who seek to understand and face these challenges, this course covers the multiple activities comprising a firm's operating core and its supply chain. The operating core of a firm is an integrated system that combines activities related to design and engineering, production, quality management, networks of material and information flows, and the development, distribution and delivery of goods and services to customers.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3596",
       "crn": "2889",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "I. Goh",
+      "instructor": "Ramnath Chellappa",
       "instructors": [
         {
-          "name": "I. Goh",
-          "email": null
+          "name": "Ramnath Chellappa",
+          "email": "ramnath.chellappa@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 66,
+      "seats_available": 66,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,56 +67,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2889",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "I. Goh",
-      "instructors": [
-        {
-          "name": "I. Goh",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "I. Goh"
+    "Ramnath Chellappa"
   ],
-  "scraped_at": "2026-06-17T23:01:50.684Z"
+  "scraped_at": "2026-06-18T02:13:53.396Z"
 }

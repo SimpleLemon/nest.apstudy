@@ -5,13 +5,13 @@
   "catalog_number": "634",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Topic: Business unit and corporate strategy This is an introduction to business unit and corporate strategy. The course brings together a research-based set of concepts and analytical tools that students use to evaluate existing firm strategies and craft new ones. It is designed to prepare managers for positions that require integrative thinking across functional and product boundaries. The initial focus is on strategy at the level of the business unit, which is the foundation for competitive analysis. We examine the sources of competitive advantage in market position and resources. Students learn to identify whether a company has a competitive advantage and determine what courses of action it can take to maintain and expand its advantage. The latter part of the course focuses on how choices about corporate scope and strategy relate to threats to sustainability of competitive advantages.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,162 +20,141 @@
   },
   "sections": [
     {
+      "atlas_key": "367",
       "crn": "3697",
       "section_number": "2201",
       "schedule_type": "LEC",
-      "instructor": "R. Kazanjian",
+      "instructor": "Robert Kazanjian",
       "instructors": [
         {
-          "name": "R. Kazanjian",
-          "email": null
+          "name": "Robert Kazanjian",
+          "email": "kazanjian@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "368",
       "crn": "3698",
       "section_number": "2470",
       "schedule_type": "LEC",
-      "instructor": "R. Kazanjian",
+      "instructor": "Robert Kazanjian",
       "instructors": [
         {
-          "name": "R. Kazanjian",
-          "email": null
+          "name": "Robert Kazanjian",
+          "email": "kazanjian@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "369",
       "crn": "3699",
       "section_number": "2570",
       "schedule_type": "LEC",
-      "instructor": "R. Kazanjian",
+      "instructor": "Robert Kazanjian",
       "instructors": [
         {
-          "name": "R. Kazanjian",
-          "email": null
+          "name": "Robert Kazanjian",
+          "email": "kazanjian@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3697",
-      "section_number": "2201",
-      "schedule_type": "LEC",
-      "instructor": "R. Kazanjian",
-      "instructors": [
-        {
-          "name": "R. Kazanjian",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3698",
-      "section_number": "2470",
-      "schedule_type": "LEC",
-      "instructor": "R. Kazanjian",
-      "instructors": [
-        {
-          "name": "R. Kazanjian",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3699",
-      "section_number": "2570",
-      "schedule_type": "LEC",
-      "instructor": "R. Kazanjian",
-      "instructors": [
-        {
-          "name": "R. Kazanjian",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 6,
+    "closed": 3,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Kazanjian"
+    "Robert Kazanjian"
   ],
-  "scraped_at": "2026-06-17T23:12:33.355Z"
+  "scraped_at": "2026-06-18T03:10:44.996Z"
 }

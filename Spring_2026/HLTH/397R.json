@@ -5,83 +5,81 @@
   "catalog_number": "397R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 12",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Natural Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Variable Credit. Registration by permission of faculty supervisor and health program educational director.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is an introduction to the concepts and methods related to the study of environmental sciences. Students will be introduced to relevant theories from physical, ecological and social sciences. This course is intended for majors and minors in Environmental Sciences.",
   "course_notes": "HLTH 210 or equivalent transfer credit as prerequisite.",
   "requisites": "HLTH 210 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3406",
       "crn": "3163",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "R. Hall-Clifford",
+      "instructor": "Jessica Deere",
       "instructors": [
         {
-          "name": "R. Hall-Clifford",
-          "email": null
+          "name": "Jessica Deere",
+          "email": "jessica.r.deere@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Math & Science Center - E208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "3163",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "R. Hall-Clifford",
-      "instructors": [
-        {
-          "name": "R. Hall-Clifford",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
-    "closed": 0,
+    "other": 1,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Hall-Clifford"
+    "Jessica Deere"
   ],
-  "scraped_at": "2026-06-17T23:03:08.809Z"
+  "scraped_at": "2026-06-18T02:25:23.379Z"
 }

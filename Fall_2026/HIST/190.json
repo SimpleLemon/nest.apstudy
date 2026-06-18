@@ -8,12 +8,14 @@
   "credit_hours": "3",
   "requirement_designation": "FS",
   "requirements": [
-    "FS"
+    "FS",
+    "First Year Seminar",
+    "First Year Seminar with Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Introduces first-year students to the discipline of history, particularly historical sources and methods; aims to improve critical reading, analytical, and writing skills in small group discussion.",
-  "course_notes": null,
+  "course_notes": "(Freshmen Only) How did medieval European people conceive of love? If the medieval church ranked chastity above marriage, what roles did romantic love and sex have in marriage? Although Christian ideals greatly influenced Western modern notions of marriage and expressions of sexuality, the reality is that medieval people had different expectations about love, divorce, and sex than we do today. Some chose a chaste marriage, many found love outside of marriage, and others resisted and even challenged the church's teachings and legal prescriptions in their intimate relationships. This course explores the feelings of love and desire in marital and non-marital relationships and will discuss courtship, the match-making efforts of parents and employers, the kidnapping of women, the disposing of spouses, clandestine marriages, concubinage, adultery, bigamy, and sex outside of marriage, as well as human trafficking and sex work.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +24,40 @@
   },
   "sections": [
     {
+      "atlas_key": "705",
       "crn": "2519",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "M. Armstrong-Partida",
+      "instructor": "Michelle Armstrong-Partida",
       "instructors": [
         {
-          "name": "M. Armstrong-Partida",
-          "email": null
+          "name": "Michelle Armstrong-Partida",
+          "email": "marmstrongpartida@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Bowden Hall 323",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,26 +73,47 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "706",
       "crn": "2521",
       "section_number": "3",
       "schedule_type": "SEM",
-      "instructor": "E. Goldstein",
+      "instructor": "Eric L Goldstein",
       "instructors": [
         {
-          "name": "E. Goldstein",
-          "email": null
+          "name": "Eric L Goldstein",
+          "email": "egoldst@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway N204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar with Race & Ethnicity(*)",
+      "requirements": [
+        "First Year Seminar with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-5:15p",
@@ -84,26 +124,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "707",
       "crn": "2523",
       "section_number": "5",
       "schedule_type": "SEM",
-      "instructor": "A. Tullos",
+      "instructor": "Allen Tullos",
       "instructors": [
         {
-          "name": "A. Tullos",
-          "email": null
+          "name": "Allen Tullos",
+          "email": "allen.tullos@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Bowden Hall 116",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar with Race & Ethnicity(*)",
+      "requirements": [
+        "First Year Seminar with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -119,26 +180,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "708",
       "crn": "3908",
       "section_number": "6",
       "schedule_type": "SEM",
-      "instructor": "T. Menashe",
+      "instructor": "Tamar Menashe",
       "instructors": [
         {
-          "name": "T. Menashe",
-          "email": null
+          "name": "Tamar Menashe",
+          "email": "tamar.menashe@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Candler Library 122",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -154,159 +236,28 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2519",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "M. Armstrong-Partida",
-      "instructors": [
-        {
-          "name": "M. Armstrong-Partida",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2521",
-      "section_number": "3",
-      "schedule_type": "SEM",
-      "instructor": "E. Goldstein",
-      "instructors": [
-        {
-          "name": "E. Goldstein",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2523",
-      "section_number": "5",
-      "schedule_type": "SEM",
-      "instructor": "A. Tullos",
-      "instructors": [
-        {
-          "name": "A. Tullos",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3908",
-      "section_number": "6",
-      "schedule_type": "SEM",
-      "instructor": "T. Menashe",
-      "instructors": [
-        {
-          "name": "T. Menashe",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
+    "total_sections": 4,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 8,
+    "other": 4,
     "open": 0,
-    "closed": 8,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Tullos",
-    "E. Goldstein",
-    "M. Armstrong-Partida",
-    "T. Menashe"
+    "Allen Tullos",
+    "Eric L Goldstein",
+    "Michelle Armstrong-Partida",
+    "Tamar Menashe"
   ],
-  "scraped_at": "2026-06-17T23:11:08.773Z"
+  "scraped_at": "2026-06-18T03:00:28.226Z"
 }

@@ -5,47 +5,71 @@
   "catalog_number": "397R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 12",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Intercultural Communication(*)",
+    "Intercultural Communication w.Cont.Comm(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Credit, two to four hours. Prerequisite: consent of instructor. Adapted to particular needs of individual student with instructor acting as adviser.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Further development of students' communicative skills, with particular emphasis on reading, writing and critical thinking, through discussion of readings and films from Hispanic cultures. May be appropriate for heritage speakers pending Official Spanish Placement.",
+  "course_notes": "CONTENT: This course focuses on developing both cultural understanding and linguistic skills. It explores cultural issues in the Hispanic world, such as diversity, gender roles and power structures through writing about and discussion of written texts and films. These texts also serve as the basis for practicing Spanish vocabulary and grammar in context, as well as honing listening, speaking, and particularly, reading and writing skills. By the end of the course, students should be able to use critical thinking skills in Spanish to interpret and discuss literature and film in Spanish, gain advanced proficiency in reading and writing the language, and gain knowledge of significant historical events. REQUIRED TEXT: Coutard, James, Evelyn, Katryn, Gaspar, Martin. Intrigas, 3rd ed. VHL, 2021. PARTICULARS: Movie screenings will be required outside of class. EVALUATION: Class participation, chapter quizzes, weekly homework, presentations, unit lesson essays. PREREQUISITE: SPAN 202 or Official Spanish Placement for SPAN 212. Take the online Spanish Placement Exam at https://spanport.emory.edu/undergraduate/placement/index.html SPAN 212 may be combined with a Spanish Foundational Course (300-318) or PORT 110 to satisfy both the HAL or Intercultural Communication requirement and major/minor requirements or electives. See https://spanport.emory.edu for details.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1221",
       "crn": "1923",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "A. Bans",
+      "instructor": "Cesar Sierra",
       "instructors": [
         {
-          "name": "A. Bans",
-          "email": null
+          "name": "Cesar Sierra",
+          "email": "csierra@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 9,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1222",
       "crn": "6178",
       "section_number": "2",
       "schedule_type": "SUP",
@@ -53,47 +77,89 @@
       "instructors": [
         {
           "name": "L. Santos",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 9,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1223",
       "crn": "6334",
       "section_number": "3",
       "schedule_type": "SUP",
-      "instructor": "T. Bing",
+      "instructor": "Maria Gonzalez",
       "instructors": [
         {
-          "name": "T. Bing",
-          "email": null
+          "name": "Maria Gonzalez",
+          "email": "egonza3@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Callaway C203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 9,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1224",
       "crn": "6517",
       "section_number": "4",
       "schedule_type": "SUP",
@@ -101,281 +167,196 @@
       "instructors": [
         {
           "name": "S. Boettcher",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6548",
-      "section_number": "5",
-      "schedule_type": "SUP",
-      "instructor": "Batiste/Bans",
-      "instructors": [
-        {
-          "name": "Batiste/Bans",
-          "email": null
-        }
+      "location": "Callaway S104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6612",
-      "section_number": "6",
-      "schedule_type": "SUP",
-      "instructor": "E. Bonning",
-      "instructors": [
-        {
-          "name": "E. Bonning",
-          "email": null
-        }
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6615",
-      "section_number": "7",
-      "schedule_type": "SUP",
-      "instructor": "T. Can",
-      "instructors": [
-        {
-          "name": "T. Can",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "1923",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "A. Bans",
-      "instructors": [
-        {
-          "name": "A. Bans",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6178",
-      "section_number": "2",
-      "schedule_type": "SUP",
-      "instructor": "L. Santos",
-      "instructors": [
-        {
-          "name": "L. Santos",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 9,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
-      "crn": "6334",
-      "section_number": "3",
-      "schedule_type": "SUP",
-      "instructor": "T. Bing",
-      "instructors": [
-        {
-          "name": "T. Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "6517",
-      "section_number": "4",
-      "schedule_type": "SUP",
-      "instructor": "S. Boettcher",
-      "instructors": [
-        {
-          "name": "S. Boettcher",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
+      "atlas_key": "1225",
       "crn": "6548",
       "section_number": "5",
       "schedule_type": "SUP",
-      "instructor": "Batiste/Bans",
+      "instructor": "Robyn Clarke",
       "instructors": [
         {
-          "name": "Batiste/Bans",
-          "email": null
+          "name": "Robyn Clarke",
+          "email": "hrclark@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Callaway C203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "7",
+      "enrollment_capacity": 9,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1226",
       "crn": "6612",
       "section_number": "6",
       "schedule_type": "SUP",
-      "instructor": "E. Bonning",
+      "instructor": "Leonardo Velloso-Lyons",
       "instructors": [
         {
-          "name": "E. Bonning",
-          "email": null
+          "name": "Leonardo Velloso-Lyons",
+          "email": "leonardo.velloso.lyons@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Anthropology Bldg 107",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 15,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1227",
       "crn": "6615",
       "section_number": "7",
       "schedule_type": "SUP",
-      "instructor": "T. Can",
+      "instructor": "Hernan Feldman",
       "instructors": [
         {
-          "name": "T. Can",
-          "email": null
+          "name": "Hernan Feldman",
+          "email": "hfeldma@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Candler Library 122",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 15,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 14,
+    "total_sections": 7,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 14,
-    "open": 12,
-    "closed": 2,
+    "other": 7,
+    "open": 3,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Bans",
-    "Batiste/Bans",
-    "E. Bonning",
+    "Cesar Sierra",
+    "Hernan Feldman",
     "L. Santos",
-    "S. Boettcher",
-    "T. Bing",
-    "T. Can"
+    "Leonardo Velloso-Lyons",
+    "Maria Gonzalez",
+    "Robyn Clarke",
+    "S. Boettcher"
   ],
-  "scraped_at": "2026-06-17T23:06:11.164Z"
+  "scraped_at": "2026-06-18T02:39:58.698Z"
 }

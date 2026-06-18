@@ -8,37 +8,55 @@
   "credit_hours": "3",
   "requirement_designation": "SS",
   "requirements": [
-    "SS"
+    "SS",
+    "Humanities and Arts(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "An introduction to international trade, capital flows, and finance. Topics include the impact of public policy decisions concerning protectionism, balance of payments, and foreign exchange markets on economic activities.",
-  "course_notes": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as a prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A hands-on introduction to the production of cinematic media. The course focuses on the basic gestures of filmmaking (from writing to filming and editing) in order to develop successful visual storytelling skills. Significant amounts of filming and editing take place outside of class.",
+  "course_notes": "This class will be held in the Department of Film and Media's brand new production facility located at Emory Point. Address: 1568 Avenue Pl Ste 140 Atlanta, GA 30329 This class has an Equipment Fee of $125 which grants students access to equipment provided by the department.",
   "requisites": "ECON 101 or ECON_OX 101 or FIN 201 or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "675",
       "crn": "3930",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "T. Smith",
+      "instructor": "Alonso Llosa",
       "instructors": [
         {
-          "name": "T. Smith",
-          "email": null
+          "name": "Alonso Llosa",
+          "email": "alonso.llosa@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "EP_118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a",
@@ -54,56 +72,25 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "3930",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "T. Smith",
-      "instructors": [
-        {
-          "name": "T. Smith",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "T. Smith"
+    "Alonso Llosa"
   ],
-  "scraped_at": "2026-06-17T23:02:03.795Z"
+  "scraped_at": "2026-06-18T02:17:46.575Z"
 }

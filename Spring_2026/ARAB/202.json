@@ -5,40 +5,58 @@
   "catalog_number": "202",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "1",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Physical Education(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Fourth in a series of courses that develop reading, speaking, listening, writing, and cultural skills in Arabic. Course includes video materials and stresses communication in formal and spoken Arabic.",
-  "course_notes": "ARAB_OX 201 or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An investigation of your body's potential to move without preconception. Explorations in a variety of improvisational forms emphasize group interplay, problem-solving, and inner listening in order to reveal new movement vocabularies and increase kinesthetic awareness. Required course for dance and movement studies majors and minors.",
+  "course_notes": "Prior dance experience highly recommended.",
   "requisites": "ARAB_OX 201 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "527",
       "crn": "2795",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "G. Shehata",
+      "instructor": "Kristin O'Neal",
       "instructors": [
         {
-          "name": "G. Shehata",
-          "email": null
+          "name": "Kristin O'Neal",
+          "email": "kristin.o",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff PE - Dance",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 23,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p; Th 1-1:50p",
@@ -59,61 +77,25 @@
             "end": "1350"
           }
         ]
-      }
-    },
-    {
-      "crn": "2795",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "G. Shehata",
-      "instructors": [
-        {
-          "name": "G. Shehata",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p; Th 1-1:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Shehata"
+    "Kristin O'Neal"
   ],
-  "scraped_at": "2026-06-17T23:01:08.029Z"
+  "scraped_at": "2026-06-18T02:07:40.072Z"
 }

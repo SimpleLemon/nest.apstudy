@@ -5,40 +5,53 @@
   "catalog_number": "440",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "1",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Mankind has long recognized that plants are extremely useful as source of medicine. Medical traditions based on botanical sources are found in all human cultures and date back to prehistory. In this course both ancient and modern day botanical traditions across many cultures will be examined.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A seminar for first year Global Health and Development students.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": "HLTH 440 BIOL 442",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3826",
       "crn": "4464",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Quave/Chen",
+      "instructor": "Usha Ramakrishnan",
       "instructors": [
         {
-          "name": "Quave/Chen",
-          "email": null
+          "name": "Usha Ramakrishnan",
+          "email": "uramakr@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 6,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +67,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "4464",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Quave/Chen",
-      "instructors": [
-        {
-          "name": "Quave/Chen",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Quave/Chen"
+    "Usha Ramakrishnan"
   ],
-  "scraped_at": "2026-06-17T23:01:04.711Z"
+  "scraped_at": "2026-06-18T02:07:32.582Z"
 }

@@ -5,40 +5,55 @@
   "catalog_number": "114",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1",
+  "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
   "requirement_designation": "PE",
   "requirements": [
     "PE"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Development of specific fitness components utilizing routine participation in jogging and/or running on WPEC indoor and outdoor tracks, local streets and Lullwater Park. Instruction in running biomechanics, pace, and building a progressive program are included. Fulfills the PPF requirement.",
-  "course_notes": "Pre-req: Limit PPF",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Credit variable. Psychology majors only, registration by permission of faculty supervisor.",
+  "course_notes": "(Permission Required Prior to Enrollment) Credit is variable, 1.00 - 12.00 (For 3.00 hrs/week = 1.00 credit). Students must have consent of faculty member (inside or outside of the department) and agreement on a topic. Students are required to complete a PSYC 498R/499R Contract with a faculty member who agreed to supervise the student's work. Contract is available through Lorenza Houser (lhouser@emory.edu). Please e-mail Ms. Houser to obtain a copy of the contract. Enrollment in PSYC 498R is done administratively. Completed and signed contract must be returned to Ms. Houser on or before the end of add/drop/swap for enrollment.",
   "requisites": "Pre-req: Limit PPF",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1125",
       "crn": "3887",
       "section_number": "1",
       "schedule_type": "PE",
-      "instructor": "E. Noell",
+      "instructor": "Donna Maney",
       "instructors": [
         {
-          "name": "E. Noell",
-          "email": null
+          "name": "Donna Maney",
+          "email": "dmaney@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 2,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MWF 10-10:50a",
@@ -59,61 +74,25 @@
             "end": "1050"
           }
         ]
-      }
-    },
-    {
-      "crn": "3887",
-      "section_number": "1",
-      "schedule_type": "PE",
-      "instructor": "E. Noell",
-      "instructors": [
-        {
-          "name": "E. Noell",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MWF 10-10:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1050"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1050"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
-    "closed": 0,
+    "other": 1,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Noell"
+    "Donna Maney"
   ],
-  "scraped_at": "2026-06-17T23:05:57.976Z"
+  "scraped_at": "2026-06-18T02:37:22.863Z"
 }

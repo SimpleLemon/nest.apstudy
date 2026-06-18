@@ -5,13 +5,13 @@
   "catalog_number": "522",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisites: GH 521 or instructor permission. This course provides students with the principles and skills for analyzing qualitative data. Students will learn how to assess data quality, prepare data for analysis, use different analytic techniques, and write and present data. Students will learn analytic techniques through guided classroom activities, lab sessions using MAXQDA software and structured assignments. No data are required, we provide class data sets, but students can use qualitative data collected during their summer applied practice experience if suitable. Each student will work with an individual data set in course assignments.",
+  "course_notes": "GH students can enroll through March 27. GLEPI and GEH students through March 31st. All others may enroll AFTER March 31st.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "2272",
       "crn": "2263",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Hennink",
+      "instructor": "Monique Marcelle Hennink",
       "instructors": [
         {
-          "name": "M. Hennink",
-          "email": null
+          "name": "Monique Marcelle Hennink",
+          "email": "mhennin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 30,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 1-3:50p",
@@ -47,26 +60,43 @@
             "end": "1550"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2273",
       "crn": "2264",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "M. Hennink",
+      "instructor": "Monique Marcelle Hennink",
       "instructors": [
         {
-          "name": "M. Hennink",
-          "email": null
+          "name": "Monique Marcelle Hennink",
+          "email": "mhennin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 30,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 9-11:50a",
@@ -77,81 +107,25 @@
             "end": "1150"
           }
         ]
-      }
-    },
-    {
-      "crn": "2263",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Hennink",
-      "instructors": [
-        {
-          "name": "M. Hennink",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 1-3:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1550"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2264",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "M. Hennink",
-      "instructors": [
-        {
-          "name": "M. Hennink",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 9-11:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "900",
-            "end": "1150"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Hennink"
+    "Monique Marcelle Hennink"
   ],
-  "scraped_at": "2026-06-17T23:10:49.334Z"
+  "scraped_at": "2026-06-18T02:59:07.912Z"
 }

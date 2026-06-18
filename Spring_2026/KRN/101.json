@@ -5,40 +5,53 @@
   "catalog_number": "101",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "0",
   "requirement_designation": "IC",
   "requirements": [
     "IC"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This is the first half of the Elementary Korean language course. It is designed for those who have very limited or no prior knowledge of Korean language. Emphasis is placed on the fundamentals of listening, speaking, reading, and writing.",
-  "course_notes": null,
+  "course_notes": "The course will be offered in a hybrid format with asynchronous modules and live Zoom modules. All enrolled students must block August 21 to complete the Zoom modules. Enrolled students do not need to be in Atlanta to complete this course, but they must have stable internet connection with Zoom audio/video capabilities on August 21. All course modules must be completed to receive course credit; there are no partial credits for this course. Students who miss any modules will be removed from the course. All course materials and asynchronous assignments will be available on the Canvas page, which will open to enrolled students in advance in early August.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-10",
+    "end": "2026-08-25"
   },
   "sections": [
     {
+      "atlas_key": "2911",
       "crn": "2865",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "B. Choi",
+      "instructor": "Mike Suh",
       "instructors": [
         {
-          "name": "B. Choi",
-          "email": null
+          "name": "Mike Suh",
+          "email": "mksuh@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 350,
+      "seats_available": 97,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-4:50p",
@@ -54,26 +67,43 @@
             "end": "1650"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-08-25"
       }
     },
     {
+      "atlas_key": "2912",
       "crn": "2866",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "J. Lee",
+      "instructor": "Mike Suh",
       "instructors": [
         {
-          "name": "J. Lee",
-          "email": null
+          "name": "Mike Suh",
+          "email": "mksuh@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 8:30-9:45a; F 8:30-9:20a",
@@ -94,97 +124,25 @@
             "end": "920"
           }
         ]
-      }
-    },
-    {
-      "crn": "2865",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "B. Choi",
-      "instructors": [
-        {
-          "name": "B. Choi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-4:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1650"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1650"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2866",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "J. Lee",
-      "instructors": [
-        {
-          "name": "J. Lee",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 8:30-9:45a; F 8:30-9:20a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Wed",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Fri",
-            "start": "830",
-            "end": "920"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-19"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 0,
+    "open": 1,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "B. Choi",
-    "J. Lee"
+    "Mike Suh"
   ],
-  "scraped_at": "2026-06-17T23:03:41.305Z"
+  "scraped_at": "2026-06-18T02:28:07.312Z"
 }

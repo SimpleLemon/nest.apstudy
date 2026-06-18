@@ -5,38 +5,51 @@
   "catalog_number": "551A",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The purpose of this course is to familiarize you with the basic concepts and principles of Marketing Management by introducing you to a framework-based analysis of marketing issues and how they impact organizations and their customers. Through cases, current examples, and a group project, the course will endow you with an appreciation for the role of marketing in organizations and an understanding of how to apply marketing concepts. The course will improve your approach to structured problem solving, analytical skills, and vocabulary around the marketing discipline, teach you various data analysis techniques corresponding to functional topics within the marketing discipline, and provide you with an introduction to the process required to develop marketing strategies and implementation plans. As an emerging professional, you will draw from other core courses to better understand how the marketing function interacts with other functions within the organization.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-21",
-    "end": "2026-03-01"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4255",
       "crn": "3524",
       "section_number": "2188",
       "schedule_type": "LEC",
-      "instructor": "R. Cui",
+      "instructor": "Morgan Ward",
       "instructors": [
         {
-          "name": "R. Cui",
-          "email": null
+          "name": "Morgan Ward",
+          "email": "morgan.k.ward@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W320",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Masters Non-MBA",
+      "grading_mode_options": [
+        "MTR",
+        "Non-MBA Masters Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 66,
+      "seats_available": 66,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6:30-9:30p",
@@ -47,26 +60,43 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4256",
       "crn": "3525",
       "section_number": "2189",
       "schedule_type": "LEC",
-      "instructor": "R. Cui",
+      "instructor": "Richard Berlin",
       "instructors": [
         {
-          "name": "R. Cui",
-          "email": null
+          "name": "Richard Berlin",
+          "email": "richard.berlin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 421",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Masters Non-MBA",
+      "grading_mode_options": [
+        "MTR",
+        "Non-MBA Masters Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 36,
+      "seats_available": 35,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6:30-9:30p",
@@ -77,26 +107,48 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4257",
       "crn": "3526",
       "section_number": "2688",
       "schedule_type": "LEC",
-      "instructor": "R. Cui",
+      "instructor": "Sarah Leist",
       "instructors": [
         {
-          "name": "R. Cui",
-          "email": null
+          "name": "Sarah Leist",
+          "email": "sarah.leist@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Carla Morales",
+          "email": "carlamorales@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 338",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 36,
+      "seats_available": 36,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6:30-9:30p",
@@ -107,26 +159,43 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "4258",
       "crn": "3527",
       "section_number": "2689",
       "schedule_type": "LEC",
-      "instructor": "R. Cui",
+      "instructor": "Dr. Cherie Cofield",
       "instructors": [
         {
-          "name": "R. Cui",
-          "email": null
+          "name": "Dr. Cherie Cofield",
+          "email": "cherie.cofield@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Nursing School - 101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 170,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6:30-9:30p",
@@ -137,141 +206,29 @@
             "end": "2130"
           }
         ]
-      }
-    },
-    {
-      "crn": "3524",
-      "section_number": "2188",
-      "schedule_type": "LEC",
-      "instructor": "R. Cui",
-      "instructors": [
-        {
-          "name": "R. Cui",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3525",
-      "section_number": "2189",
-      "schedule_type": "LEC",
-      "instructor": "R. Cui",
-      "instructors": [
-        {
-          "name": "R. Cui",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3526",
-      "section_number": "2688",
-      "schedule_type": "LEC",
-      "instructor": "R. Cui",
-      "instructors": [
-        {
-          "name": "R. Cui",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3527",
-      "section_number": "2689",
-      "schedule_type": "LEC",
-      "instructor": "R. Cui",
-      "instructors": [
-        {
-          "name": "R. Cui",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 8,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 4,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Cui"
+    "Carla Morales",
+    "Dr. Cherie Cofield",
+    "Morgan Ward",
+    "Richard Berlin",
+    "Sarah Leist"
   ],
-  "scraped_at": "2026-06-17T23:03:28.350Z"
+  "scraped_at": "2026-06-18T02:27:13.162Z"
 }

@@ -5,40 +5,59 @@
   "catalog_number": "116",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "NS",
   "requirements": [
-    "NS"
+    "NS",
+    "Social Sciences(*)",
+    "Social Sciences with Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Students having taken Physics 115 for credit may not take this course. A descriptive astronomy course with laboratory. The celestial coordinate system, ancient astronomy, light and telescopes, the solar system, the sun, stellar evolution, galactic astronomy, and cosmology.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Conditions and processes of group formation and change, and the effects of these on individual behavior and adaptation.",
+  "course_notes": "How do groups-ranging from small friendship circles to ethnic groups to entire societies-affect the life of an individual and how does the individual, in turn, affect the group? This course examines the reciprocal relationship between individual-level and group-level phenomena, beginning with a focus on the nature of social psychology and its methodology. Attention turns to defining situations and the identity processes that unfold. The second part of the course examines the cognitions, attitudes, and feelings of individuals in social interaction. The course concludes with an analysis of dynamics of power, status, and fairness. Consideration of intergroup processes bring together components of the course and illustrate prejudice and discrimination. In doing so, the course exemplifies how inequalities that emerge in interaction have consequences for larger groups. Book: Hegtvedt, Karen A. and Cathryn Johnson. 2018. Social Psychology: Individuals, Interactions, and Inequality. Thousand Oaks, CA: Sage. (Required) Priority will be given to sophomores and juniors should a waitlist emerge.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1187",
       "crn": "1701",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "E. Bonning",
+      "instructor": "Karen A Hegtvedt",
       "instructors": [
         {
-          "name": "E. Bonning",
-          "email": null
+          "name": "Karen A Hegtvedt",
+          "email": "khegtve@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 30,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,26 +73,47 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1188",
       "crn": "1702",
       "section_number": "2",
       "schedule_type": "LAB",
-      "instructor": "Batiste/Bonning",
+      "instructor": "Abigail Sewell",
       "instructors": [
         {
-          "name": "Batiste/Bonning",
-          "email": null
+          "name": "Abigail Sewell",
+          "email": "alyasah.ali.sewell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Callaway C101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences with Race & Ethnicity(*)",
+      "requirements": [
+        "Social Sciences with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 29,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:15p",
@@ -84,26 +124,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1189",
       "crn": "1703",
       "section_number": "3",
       "schedule_type": "LAB",
-      "instructor": "Batiste/Bonning",
+      "instructor": "Abigail Sewell",
       "instructors": [
         {
-          "name": "Batiste/Bonning",
-          "email": null
+          "name": "Abigail Sewell",
+          "email": "alyasah.ali.sewell@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Callaway C101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences with Race & Ethnicity(*)",
+      "requirements": [
+        "Social Sciences with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "3",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 10a-12:45p",
@@ -114,117 +175,26 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "1701",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "E. Bonning",
-      "instructors": [
-        {
-          "name": "E. Bonning",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1702",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "Batiste/Bonning",
-      "instructors": [
-        {
-          "name": "Batiste/Bonning",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1703",
-      "section_number": "3",
-      "schedule_type": "LAB",
-      "instructor": "Batiste/Bonning",
-      "instructors": [
-        {
-          "name": "Batiste/Bonning",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 10a-12:45p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 2,
-    "labs": 4,
+    "total_sections": 3,
+    "lectures": 1,
+    "labs": 2,
     "discussions": 0,
     "other": 0,
-    "open": 6,
-    "closed": 0,
+    "open": 0,
+    "closed": 3,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Batiste/Bonning",
-    "E. Bonning"
+    "Abigail Sewell",
+    "Karen A Hegtvedt"
   ],
-  "scraped_at": "2026-06-17T23:06:11.156Z"
+  "scraped_at": "2026-06-18T02:39:58.691Z"
 }

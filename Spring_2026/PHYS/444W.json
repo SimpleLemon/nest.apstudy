@@ -5,40 +5,58 @@
   "catalog_number": "444W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "5",
+  "credit_hours": "3",
   "requirement_designation": "XAW",
   "requirements": [
-    "XAW"
+    "XAW",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Introduces modern experimental techniques and methods; the experiments include analog electronics, instrumentation and computer interfacing, cryogenics, and electro-optics.",
-  "course_notes": "This course requires PHYS 253 or equivalent transfer credit as a prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to the study of the Spanish language and cultures in an academic context specifically designed for Spanish heritage speakers.",
+  "course_notes": "DESCRIPTION: This course is designed specifically for heritage speakers: students who already speak Spanish and come from a Spanish-speaking family (typically their parents or grandparents speak this language); they have however never been schooled in Spanish or have received limited education in Spanish. The course introduces students to the study of the Spanish language and cultures in an academic context, and it is divided in three parts: 1) a sociohistorical background on the presence of the Spanish language in the United States, 2) a study on language variation and language ideologies, with a specific focus on the dialectal characteristics of US Spanish and how they differ and connect to other Spanish dialects, 3) a methodology for the critical analysis of cultural production in Spanish, such as films, literary works, music, etc. EVALUATION: Evaluation will be based on class participation, daily assignments, one exam, one oral presentation and three essays. PRE-REQUISITES: Heritage speakers of Spanish who have an official placement for foundational courses, or have completed Span 212, or with permission from instructor.",
   "requisites": "This course requires PHYS 253 or equivalent transfer credit as a prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1229",
       "crn": "1716",
       "section_number": "1",
       "schedule_type": "LAB",
-      "instructor": "J. Brody",
+      "instructor": "Jose Luis Boigues-Lopez",
       "instructors": [
         {
-          "name": "J. Brody",
-          "email": null
+          "name": "Jose Luis Boigues-Lopez",
+          "email": "jboigue@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Few Bldg 129",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-5:15p",
@@ -54,56 +72,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "1716",
-      "section_number": "1",
-      "schedule_type": "LAB",
-      "instructor": "J. Brody",
-      "instructors": [
-        {
-          "name": "J. Brody",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
-    "labs": 2,
+    "labs": 1,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Brody"
+    "Jose Luis Boigues-Lopez"
   ],
-  "scraped_at": "2026-06-17T23:06:11.165Z"
+  "scraped_at": "2026-06-18T02:39:58.700Z"
 }

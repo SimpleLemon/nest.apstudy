@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "IN CHEM 203L students will be exposed to the practical aspects of working with small molecules, both organic and inorganic. Students will learn to analyze and synthesize compounds and analyze their characteristic properties such as structure, function, size distribution, and purity.",
-  "course_notes": "CHEM 202L or CHEM_OX 202L or CHEM 202ZL as prerequisite and CHEM 203 or CHEM_OX 203 as co-requisite, or equivalent transfer credit.",
+  "course_notes": "This lab is offered in the fall and summer semesters only.",
   "requisites": "CHEM 202L or CHEM_OX 202L or CHEM 202ZL as prerequisite and CHEM 203 or CHEM_OX 203 as co-requisite, or equivalent transfer credit.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,43 @@
   },
   "sections": [
     {
+      "atlas_key": "3465",
       "crn": "3170",
       "section_number": "1",
       "schedule_type": "LAB",
-      "instructor": "D. Mulford",
+      "instructor": "Douglas Mulford",
       "instructors": [
         {
-          "name": "D. Mulford",
-          "email": null
+          "name": "Douglas Mulford",
+          "email": "dmulfor@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Douglas Mulford",
+          "email": "dmulfor@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 240",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "7",
+      "enrollment_capacity": 72,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-5:15p; T 5:15-7:20p",
@@ -54,26 +74,50 @@
             "end": "1920"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3466",
       "crn": "3173",
       "section_number": "2",
       "schedule_type": "LAB",
-      "instructor": "D. Mulford",
+      "instructor": "Douglas Mulford",
       "instructors": [
         {
-          "name": "D. Mulford",
-          "email": null
+          "name": "Douglas Mulford",
+          "email": "dmulfor@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Douglas Mulford",
+          "email": "dmulfor@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 240",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "7",
+      "enrollment_capacity": 48,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 10-11:15a; W 11:15a-1:20p",
@@ -89,26 +133,50 @@
             "end": "1320"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3467",
       "crn": "3179",
       "section_number": "3",
       "schedule_type": "LAB",
-      "instructor": "D. Mulford",
+      "instructor": "Douglas Mulford",
       "instructors": [
         {
-          "name": "D. Mulford",
-          "email": null
+          "name": "Douglas Mulford",
+          "email": "dmulfor@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Douglas Mulford",
+          "email": "dmulfor@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 240",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "7",
+      "enrollment_capacity": 72,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-3:45p; W 3:45-5:50p",
@@ -124,26 +192,50 @@
             "end": "1750"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3468",
       "crn": "3183",
       "section_number": "4",
       "schedule_type": "LAB",
-      "instructor": "D. Mulford",
+      "instructor": "Douglas Mulford",
       "instructors": [
         {
-          "name": "D. Mulford",
-          "email": null
+          "name": "Douglas Mulford",
+          "email": "dmulfor@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Douglas Mulford",
+          "email": "dmulfor@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 240",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 72,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 1-2:15p; Th 2:15-4:20p",
@@ -159,26 +251,50 @@
             "end": "1620"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3469",
       "crn": "3184",
       "section_number": "5",
       "schedule_type": "LAB",
-      "instructor": "D. Mulford",
+      "instructor": "Douglas Mulford",
       "instructors": [
         {
-          "name": "D. Mulford",
-          "email": null
+          "name": "Douglas Mulford",
+          "email": "dmulfor@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Douglas Mulford",
+          "email": "dmulfor@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 240",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "7",
+      "enrollment_capacity": 72,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4:30-5:45p; Th 5:45-7:50p",
@@ -194,26 +310,50 @@
             "end": "1950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3470",
       "crn": "3185",
       "section_number": "6",
       "schedule_type": "LAB",
-      "instructor": "D. Mulford",
+      "instructor": "Douglas Mulford",
       "instructors": [
         {
-          "name": "D. Mulford",
-          "email": null
+          "name": "Douglas Mulford",
+          "email": "dmulfor@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Douglas Mulford",
+          "email": "dmulfor@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 240",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "7",
+      "enrollment_capacity": 72,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 8:30-9:45a; F 9:45-11:50a",
@@ -229,26 +369,50 @@
             "end": "1150"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3471",
       "crn": "3186",
       "section_number": "7",
       "schedule_type": "LAB",
-      "instructor": "D. Mulford",
+      "instructor": "Douglas Mulford",
       "instructors": [
         {
-          "name": "D. Mulford",
-          "email": null
+          "name": "Douglas Mulford",
+          "email": "dmulfor@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Douglas Mulford",
+          "email": "dmulfor@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 240",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "7",
+      "enrollment_capacity": 72,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1-2:15p; F 2:15-4:20p",
@@ -264,266 +428,25 @@
             "end": "1620"
           }
         ]
-      }
-    },
-    {
-      "crn": "3170",
-      "section_number": "1",
-      "schedule_type": "LAB",
-      "instructor": "D. Mulford",
-      "instructors": [
-        {
-          "name": "D. Mulford",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-5:15p; T 5:15-7:20p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Tue",
-            "start": "1715",
-            "end": "1920"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3173",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "D. Mulford",
-      "instructors": [
-        {
-          "name": "D. Mulford",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 10-11:15a; W 11:15a-1:20p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1115",
-            "end": "1320"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3179",
-      "section_number": "3",
-      "schedule_type": "LAB",
-      "instructor": "D. Mulford",
-      "instructors": [
-        {
-          "name": "D. Mulford",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 2:30-3:45p; W 3:45-5:50p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1545",
-            "end": "1750"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3183",
-      "section_number": "4",
-      "schedule_type": "LAB",
-      "instructor": "D. Mulford",
-      "instructors": [
-        {
-          "name": "D. Mulford",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 1-2:15p; Th 2:15-4:20p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1415",
-            "end": "1620"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3184",
-      "section_number": "5",
-      "schedule_type": "LAB",
-      "instructor": "D. Mulford",
-      "instructors": [
-        {
-          "name": "D. Mulford",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 4:30-5:45p; Th 5:45-7:50p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1630",
-            "end": "1745"
-          },
-          {
-            "day": "Thu",
-            "start": "1745",
-            "end": "1950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3185",
-      "section_number": "6",
-      "schedule_type": "LAB",
-      "instructor": "D. Mulford",
-      "instructors": [
-        {
-          "name": "D. Mulford",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 8:30-9:45a; F 9:45-11:50a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Fri",
-            "start": "945",
-            "end": "1150"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3186",
-      "section_number": "7",
-      "schedule_type": "LAB",
-      "instructor": "D. Mulford",
-      "instructors": [
-        {
-          "name": "D. Mulford",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "7",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-2:15p; F 2:15-4:20p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Fri",
-            "start": "1415",
-            "end": "1620"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 14,
+    "total_sections": 7,
     "lectures": 0,
-    "labs": 14,
+    "labs": 7,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
-    "waitlisted": 10
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Mulford"
+    "Douglas Mulford"
   ],
-  "scraped_at": "2026-06-17T23:09:40.819Z"
+  "scraped_at": "2026-06-18T02:50:59.312Z"
 }

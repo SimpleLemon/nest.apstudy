@@ -5,83 +5,81 @@
   "catalog_number": "495A",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "XA",
   "requirements": [
-    "XA"
+    "XA",
+    "Race and Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Enrollment limited to linguistics majors invited to participate in the Linguistics Honors Program.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Development of religion among African Americans; trends and tendencies.",
+  "course_notes": "(Same as AAS 320R 1) This course satisfies the Religion major requirement:- Tradition-Christianity, Region. Complete Topic: Psychology of the Black Church Experience In Psychology of the Black Church Experience, we will explore the intersection of Black psychology and African American Christianity through the lens of the Black Church. From a critical psychological approach, we will examine how the Black Church functions as a social, spiritual, and psychological support system in historical and contemporary racial experiences for Black people in America. Aspects of the Black Church experience that this course will examine include its historical relevance in America, racial identity and empowerment, gender socialization, spiritual experiences, the Black family, and mental health and healing. We will delve into topics like communal identity, leadership dynamics, coping mechanisms, and the Black Church's role in social activism, community development, and mental health within Black communities.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "2948",
       "crn": "4297",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "Y. Kim",
+      "instructor": "Jason Ashe",
       "instructors": [
         {
-          "name": "Y. Kim",
-          "email": null
+          "name": "Jason Ashe",
+          "email": "jason.ashe@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "White Hall 200",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "4297",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "Y. Kim",
-      "instructors": [
-        {
-          "name": "Y. Kim",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
-    "closed": 2,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Y. Kim"
+    "Jason Ashe"
   ],
-  "scraped_at": "2026-06-17T23:03:51.051Z"
+  "scraped_at": "2026-06-18T02:28:50.752Z"
 }

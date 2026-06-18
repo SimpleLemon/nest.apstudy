@@ -5,13 +5,13 @@
   "catalog_number": "570MN",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course focuses on the role of the nurse in managing drug therapies and the use of pharmacotherapeutic agents to treat illness and restore and maintain wellness for individuals across the lifespan.",
+  "course_notes": "This section is for MN+MSN semester 2 students only.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "4259",
       "crn": "4655",
       "section_number": "400",
       "schedule_type": "LEC",
-      "instructor": "H. Allstrom",
+      "instructor": "Heather Allstrom",
       "instructors": [
         {
-          "name": "H. Allstrom",
-          "email": null
+          "name": "Heather Allstrom",
+          "email": "heather.allstrom@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Nursing Learning Ctr, Rm 225",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 150,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "ThF 10:30-11:50a",
@@ -52,56 +65,25 @@
             "end": "1150"
           }
         ]
-      }
-    },
-    {
-      "crn": "4655",
-      "section_number": "400",
-      "schedule_type": "LEC",
-      "instructor": "H. Allstrom",
-      "instructors": [
-        {
-          "name": "H. Allstrom",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "ThF 10:30-11:50a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1030",
-            "end": "1150"
-          },
-          {
-            "day": "Fri",
-            "start": "1030",
-            "end": "1150"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "H. Allstrom"
+    "Heather Allstrom"
   ],
-  "scraped_at": "2026-06-17T23:12:26.883Z"
+  "scraped_at": "2026-06-18T03:09:48.900Z"
 }

@@ -5,13 +5,13 @@
   "catalog_number": "789R",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Advanced seminar on African art and/or architecture with emphasis on critical texts, methods, and techniques of art historical investigation. For art history majors; open to others with permission from the instructor.",
+  "course_notes": "(Same as ENG 789 5) Where is the human in the humanities? Kathleen Fitzpatrick argues that humanities in universities have prioritized the individual and their acclaim over shared understandings developed through compassionate listening, careful reflection, and thoughtful exchange. Suzanne Hudson asserts that the discipline of art history has encouraged \"experts\" to disavow their own humanity while making claims about the intentions and thus the personhood of the artists they study. In this seminar, we will consider whether and how art history and the humanities more broadly can embrace the human in their practices. We will experiment with ways to recognize and honor our individual and shared humanity. We will also focus attention on the human in our objects of study, reflecting on the personhood of each author and that of the people who create or otherwise contribute to the works that humanists study. Assigned materials will offer us opportunities to engage with an array of scholars and other professionals. Students will also have a chance to recommend readings later in the semester. At the end of the semester, we will reflect on how and why arts, humanities, and the human may be as important as ever in the age of social media and artificial intelligence. For the final project, students will create hand-rendered field guides to a topic within the humanities of their own choice with the aim of bringing rigorous research to curious but uninformed audiences in thoughtful, fun, and engaging ways.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "1478",
       "crn": "1764",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "S. Gagliardi",
+      "instructor": "Susan Elizabeth Gagliardi",
       "instructors": [
         {
-          "name": "S. Gagliardi",
-          "email": null
+          "name": "Susan Elizabeth Gagliardi",
+          "email": "susan.e.gagliardi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Carlos Hall Conference",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 7,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 10a-12:45p",
@@ -47,51 +60,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "1764",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "S. Gagliardi",
-      "instructors": [
-        {
-          "name": "S. Gagliardi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 10a-12:45p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Gagliardi"
+    "Susan Elizabeth Gagliardi"
   ],
-  "scraped_at": "2026-06-17T23:09:14.913Z"
+  "scraped_at": "2026-06-18T02:47:16.215Z"
 }

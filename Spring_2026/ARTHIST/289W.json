@@ -5,40 +5,60 @@
   "catalog_number": "289W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 5",
+  "credit_hours": "3",
   "requirement_designation": "HAPW",
   "requirements": [
     "HAPW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Focuses on one of several diverse, non-European art historical traditions, such as ancient Egypt, pre-Hispanic Americas, medieval Islam, Oceania, and sub-Saharan Africa. May be repeated for credit when topic changes.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to the use of calculus in economic analysis; comparative static problem and optimization theory; consideration of the mathematical techniques used in game theory.",
+  "course_notes": "(Same as MATH 425 1) (Same as ECON 425 1) Students, please copy and past this link in your browser to complete the enrollment request form: https://forms.office.com/pages/responsepage.aspx?id=nPsE4KSwT0K80DImBtXfOLvImdUxeSZHj9gS8LFCanlUQUtIMTZVOVdYOUZLNTBKRThWV0VWRTBNNS4u&route=shorturl Seating is extremely limited. Permission codes will be sent out during Add/Drop/Swap. For enrollment in ECON/MATH 425, please contact Erica Bowersox (erica.blake.bowersox@emory.edu).",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "855",
       "crn": "4354",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Gagliardi",
+      "instructor": "Mike Carr",
       "instructors": [
         {
-          "name": "S. Gagliardi",
-          "email": null
+          "name": "Mike Carr",
+          "email": "mpcarr@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Teddy Kim",
+          "email": "kyungmin.kim@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Carlos Hall 212",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,56 +74,26 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "4354",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Gagliardi",
-      "instructors": [
-        {
-          "name": "S. Gagliardi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Gagliardi"
+    "Mike Carr",
+    "Teddy Kim"
   ],
-  "scraped_at": "2026-06-17T23:01:11.260Z"
+  "scraped_at": "2026-06-18T02:08:18.943Z"
 }

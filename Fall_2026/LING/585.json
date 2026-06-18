@@ -5,13 +5,13 @@
   "catalog_number": "585",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Investigation of a particular issue or topic in the study of language, linguistics, and communication. May be repeated when topic varies.",
+  "course_notes": "(Same as FREN 505 1) FREN 505 Seminar on Pedagogy. Prof. Sandra Descourtis / M 1:00-4:00pm Content: This course will offer a foundational background to the history of language teaching approaches, current trends in the field, and practical approaches to lesson planning, course building, assessment, and other major areas of concern for language teachers including the teaching of literature and culture. The course will involve observations and reflections on one's own teaching and will culminate in the development of a teaching portfolio.\" Textbook: A multiliteracies framework for collegiate foreign language teaching (2015) by K. PAesani, H. Willis Allen, B. Dupuy, J. Liskin-Gasparro, and M. Lacorte ISBN - 0205954049 Pearson. Other readings will be made available on Canvas.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "2122",
       "crn": "5926",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "S. Descourtis",
+      "instructor": "Sandra Descourtis",
       "instructors": [
         {
-          "name": "S. Descourtis",
-          "email": null
+          "name": "Sandra Descourtis",
+          "email": "sdescourtis@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway C202",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 1-4p",
@@ -47,51 +60,25 @@
             "end": "1600"
           }
         ]
-      }
-    },
-    {
-      "crn": "5926",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "S. Descourtis",
-      "instructors": [
-        {
-          "name": "S. Descourtis",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 1-4p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1600"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Descourtis"
+    "Sandra Descourtis"
   ],
-  "scraped_at": "2026-06-17T23:11:54.329Z"
+  "scraped_at": "2026-06-18T03:04:55.514Z"
 }

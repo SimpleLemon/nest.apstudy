@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Every semester. This beginning-level French language course provides students with new perspectives on French and francophone cultures while building writing, reading, speaking and listening skills.",
-  "course_notes": null,
+  "course_notes": "FREN 101-1 Elementary French I (Prof. Descourtis MW 10:00-11:15am; F 10-10:50am online synchronous. ***NOTE: This course has \"tiered enrollment\" (certain number of seats available for each class). The class will open to all at the beginning of the drop/add period.*** Content: This beginning-level course introduces students to reading, writing, speaking, and understanding the French language via exploration of various aspects of the French-speaking world. The course is conducted entirely in French. Instruction proceeds from guided to more creative and independent work with emphasis on speaking, writing, communication, and active participation. Students will complete at-home practice with the required online textbook and platform: Atelier-MindTap. FREN 101 is open to beginners and students with up to one year of high school French. Please note: Students with prior experience in French must provide language placement results to the instructor. Wait lists will open for the course during the add/drop period at the beginning of the semester.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,45 @@
   },
   "sections": [
     {
+      "atlas_key": "620",
       "crn": "1643",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Descourtis",
+      "instructor": "Sandra Descourtis",
       "instructors": [
         {
-          "name": "S. Descourtis",
-          "email": null
+          "name": "Sandra Descourtis",
+          "email": "sdescourtis@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sandra Descourtis",
+          "email": "sdescourtis@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "COX 230A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a; F 10-10:50a",
@@ -59,26 +82,52 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "621",
       "crn": "1506",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "S. Descourtis",
+      "instructor": "Sandra Descourtis",
       "instructors": [
         {
-          "name": "S. Descourtis",
-          "email": null
+          "name": "Sandra Descourtis",
+          "email": "sdescourtis@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Sandra Descourtis",
+          "email": "sdescourtis@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "COX 230A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p; F 11:30a-12:20p",
@@ -99,26 +148,52 @@
             "end": "1220"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "622",
       "crn": "1644",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "J. Li Zhi Biao",
+      "instructor": "Jessica Li Zhi Biao",
       "instructors": [
         {
-          "name": "J. Li Zhi Biao",
-          "email": null
+          "name": "Jessica Li Zhi Biao",
+          "email": "jessica.li.zhi.biao@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jessica Li Zhi Biao",
+          "email": "jessica.li.zhi.biao@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Candler Library 122",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a; F 9-9:50a",
@@ -139,26 +214,52 @@
             "end": "950"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "623",
       "crn": "1509",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "H. Diop",
+      "instructor": "Habi Diop",
       "instructors": [
         {
-          "name": "H. Diop",
-          "email": null
+          "name": "Habi Diop",
+          "email": "habi.diop@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Habi Diop",
+          "email": "habi.diop@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Math & Science Center - N301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
       "enrollment_status": "Closed",
       "enrollment_count": "4",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a; F 10-10:50a",
@@ -179,183 +280,27 @@
             "end": "1050"
           }
         ]
-      }
-    },
-    {
-      "crn": "1643",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Descourtis",
-      "instructors": [
-        {
-          "name": "S. Descourtis",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a; F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1506",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "S. Descourtis",
-      "instructors": [
-        {
-          "name": "S. Descourtis",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p; F 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1644",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "J. Li Zhi Biao",
-      "instructors": [
-        {
-          "name": "J. Li Zhi Biao",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a; F 9-9:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Fri",
-            "start": "900",
-            "end": "950"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1509",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "H. Diop",
-      "instructors": [
-        {
-          "name": "H. Diop",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a; F 10-10:50a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 8,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 8,
+    "closed": 4,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "H. Diop",
-    "J. Li Zhi Biao",
-    "S. Descourtis"
+    "Habi Diop",
+    "Jessica Li Zhi Biao",
+    "Sandra Descourtis"
   ],
-  "scraped_at": "2026-06-17T23:10:42.829Z"
+  "scraped_at": "2026-06-18T02:58:43.326Z"
 }

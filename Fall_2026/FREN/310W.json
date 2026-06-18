@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "ICW",
   "requirements": [
-    "ICW"
+    "ICW",
+    "Intercultural Communication w.Cont.Comm(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Third-year-level course given in French. Intensive study of written French based on syntactic and lexical analysis of a variety of texts. Bi-weekly compositions with extensive revisions and concern for the process of writing in a foreign language.",
-  "course_notes": null,
+  "course_notes": "FREN 310W Writing Skills (Prof. Giguere / TTh 1:00-2:15pm). Content: Third-year-level course given in French. Intensive study of written French based on syntactic and stylistic analysis of a variety of texts. Bi-weekly compositions with extensive revisions and concern for the process of writing in a foreign language. Required Textbooks, Articles, and Resources 1. Siskin et al. Tâches d'encre (5th Edition) EBOOK ISBN: 9780357658901 OR Tâches d'encre HARDCOPY ISBN: 9780357658888. 2. Bescherelle (recommended / FRENCH Edition). Course Requisites: FREN 203 or by placement exam.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "633",
       "crn": "1650",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "N. Giguere",
+      "instructor": "Noelle Giguere",
       "instructors": [
         {
-          "name": "N. Giguere",
-          "email": null
+          "name": "Noelle Giguere",
+          "email": "noelle.c.giguere@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff Library 874",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 12,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,26 +72,47 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "634",
       "crn": "1522",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "E. Bulakites",
+      "instructor": "Eric Bulakites",
       "instructors": [
         {
-          "name": "E. Bulakites",
-          "email": null
+          "name": "Eric Bulakites",
+          "email": "eric.raymond.bulakites@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff Library 874",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 12,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -89,92 +128,26 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "1650",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "N. Giguere",
-      "instructors": [
-        {
-          "name": "N. Giguere",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1522",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "E. Bulakites",
-      "instructors": [
-        {
-          "name": "E. Bulakites",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "E. Bulakites",
-    "N. Giguere"
+    "Eric Bulakites",
+    "Noelle Giguere"
   ],
-  "scraped_at": "2026-06-17T23:10:42.830Z"
+  "scraped_at": "2026-06-18T02:58:43.328Z"
 }

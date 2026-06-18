@@ -10,10 +10,10 @@
   "requirements": [
     "HAP"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Advanced seminars dealing with various specialized problems in the history of art from antiquity to modern times, such as individual artists, genres (e.g. portraiture, landscape); themes (e.g. theory, iconography); artistic movements and museum studies. May be repeated for credit when topic varies.",
-  "course_notes": null,
+  "course_notes": "\"Preservation of World Heritage Sites\"Preservation strategies for cultural heritage sites are impacted by interdependent factors including socio-political context, economic circumstances, climate change, urban development, and natural disasters. Along with stakeholder input and value assessment, these factors determine decisions about management, access, reconstruction, and tourism. Students will explore these course topics through case studies, discussions, and workshop activities. Case studies and related readings will be drawn from the Americas, Africa, Europe, Middle East, Oceania, and Asia. Workshops will provide experimental, hands-on opportunities to engage with materials, deterioration, imaging, and intervention. Students will select world sites to investigate and develop site-specific reports as well as a collaborative online presentation, further developing the course ArcGIS Storymap. Students will be encouraged to choose sites that relate to their major fields of study as well as personal interests. Art History major/minor: makers & materials course Architectural Studies minor: elective",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,43 @@
   },
   "sections": [
     {
+      "atlas_key": "692",
       "crn": "1757",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "Stein/Dinneen",
+      "instructor": "Brittany Dinneen",
       "instructors": [
         {
-          "name": "Stein/Dinneen",
-          "email": null
+          "name": "Brittany Dinneen",
+          "email": "brittany.helen.dolph@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Renee Stein",
+          "email": "rastein@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Carlos Museum - Tate",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 14,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 1-3:45p",
@@ -49,51 +69,26 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "1757",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "Stein/Dinneen",
-      "instructors": [
-        {
-          "name": "Stein/Dinneen",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 1-3:45p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Stein/Dinneen"
+    "Brittany Dinneen",
+    "Renee Stein"
   ],
-  "scraped_at": "2026-06-17T23:09:14.910Z"
+  "scraped_at": "2026-06-18T02:47:16.214Z"
 }

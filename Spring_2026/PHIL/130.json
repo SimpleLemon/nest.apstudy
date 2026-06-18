@@ -8,37 +8,55 @@
   "credit_hours": "3",
   "requirement_designation": "HA",
   "requirements": [
-    "HA"
+    "HA",
+    "Race and Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course considers the nature of literature, its epistemic import, and its personal and social value.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Spiritual transformations involving worship, magic and healing, ritual, and aesthetic performance in Black speech and literature, music, and drama; and spiritual uses of Biblical themes to empower social political movements.",
+  "course_notes": "(Same as REL 326 1) This course satisfies the Religion major requirement:- Tradition-Christianity, Theme. This course exposes students to a wide range of contexts, sociocultural environments, and global arrangements that have shaped diverse expressions of Black Christian thought primarily in North America, but also in Africa and the wider African diaspora, especially since the Civil Rights and Black Power movements. Given our current moment of domestic and global upheaval regarding legacies of chattel slavery, colonial conquest, anti-Black and anti-Brown racism and their collateral consequences, we will place emphasis upon Black Christian nationalism, Black liberation theology, womanist theology, Afro-Caribbean and Afro-Latin American/Latinx popular religion and theology, and African theology. Although we will engage diverse scholarly approaches to Black Christian thought, the course emphasizes liberation theological inquiry, methods and rhetorical styles. The success of this course is contingent upon consistent, engaged discussion, collaborative approaches to knowledge production and praxis/reflection methodologies in the liberation theological tradition. Students will be encouraged to struggle with the readings while critically appraising past and present thinkers, and complementary audiovisual sources toward the end of articulating their own perspectives.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1167",
       "crn": "1712",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Sykes Jr.",
+      "instructor": "Dianne Stewart",
       "instructors": [
         {
-          "name": "D. Sykes Jr.",
-          "email": null
+          "name": "Dianne Stewart",
+          "email": "dstewa4@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "White Hall 102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 23,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MWF 10-10:50a",
@@ -59,61 +77,25 @@
             "end": "1050"
           }
         ]
-      }
-    },
-    {
-      "crn": "1712",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Sykes Jr.",
-      "instructors": [
-        {
-          "name": "D. Sykes Jr.",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MWF 10-10:50a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1050"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1050"
-          },
-          {
-            "day": "Fri",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Sykes Jr."
+    "Dianne Stewart"
   ],
-  "scraped_at": "2026-06-17T23:06:07.917Z"
+  "scraped_at": "2026-06-18T02:38:17.515Z"
 }

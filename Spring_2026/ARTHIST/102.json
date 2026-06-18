@@ -8,37 +8,55 @@
   "credit_hours": "3",
   "requirement_designation": "HA",
   "requirements": [
-    "HA"
+    "HA",
+    "Quantitative Reasoning(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Introduction to the fundamental concepts of art history through 100 representative works of art and architecture produced in Europe, Africa, and the United States between 1700 and the present day. Focus on the formal structure and historical contexts in which the works were made and understood.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Vectors; multivariable functions; partial derivatives; multiple integrals; vector and scalar fields; Green's and Stokes' theorems; divergence theorem.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "829",
       "crn": "1622",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "L. Merrill",
+      "instructor": "Deependra Singh",
       "instructors": [
         {
-          "name": "L. Merrill",
-          "email": null
+          "name": "Deependra Singh",
+          "email": "deependra.singh@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Math & Science Center - N302",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 35,
+      "seats_available": 19,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:20p",
@@ -54,26 +72,47 @@
             "end": "1220"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "830",
       "crn": "3775",
       "section_number": "2",
       "schedule_type": "DIS",
-      "instructor": "Askew/Merrill",
+      "instructor": "Manuela Manetta",
       "instructors": [
         {
-          "name": "Askew/Merrill",
-          "email": null
+          "name": "Manuela Manetta",
+          "email": "manuela.manetta@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 207",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 65,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 10-10:50a",
@@ -84,26 +123,47 @@
             "end": "1050"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "831",
       "crn": "3776",
       "section_number": "3",
       "schedule_type": "DIS",
-      "instructor": "Askew/Merrill",
+      "instructor": "Manuela Manetta",
       "instructors": [
         {
-          "name": "Askew/Merrill",
-          "email": null
+          "name": "Manuela Manetta",
+          "email": "manuela.manetta@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "White Hall 207",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "6",
+      "enrollment_capacity": 65,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 11:30a-12:20p",
@@ -114,26 +174,52 @@
             "end": "1220"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "832",
       "crn": "3777",
       "section_number": "4",
       "schedule_type": "DIS",
-      "instructor": "Bifarin/Merrill",
+      "instructor": "Alina Chen",
       "instructors": [
         {
-          "name": "Bifarin/Merrill",
-          "email": null
+          "name": "Alina Chen",
+          "email": "jiayi.chen@emory.edu",
+          "role": "Teaching Assistant"
+        },
+        {
+          "name": "Alina Chen",
+          "email": "jiayi.chen@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Math & Science Center - W201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 25,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 1-1:50p",
@@ -144,26 +230,52 @@
             "end": "1350"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "833",
       "crn": "3778",
       "section_number": "5",
       "schedule_type": "DIS",
-      "instructor": "Weichlein/Merrill",
+      "instructor": "Alina Chen",
       "instructors": [
         {
-          "name": "Weichlein/Merrill",
-          "email": null
+          "name": "Alina Chen",
+          "email": "jiayi.chen@emory.edu",
+          "role": "Teaching Assistant"
+        },
+        {
+          "name": "Alina Chen",
+          "email": "jiayi.chen@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Math & Science Center - W201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "6",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-3:20p",
@@ -174,26 +286,62 @@
             "end": "1520"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "834",
       "crn": "3779",
       "section_number": "6",
       "schedule_type": "DIS",
-      "instructor": "Snyder/Merrill",
+      "instructor": "Juan Villeta-García",
       "instructors": [
         {
-          "name": "Snyder/Merrill",
-          "email": null
+          "name": "Juan Villeta-García",
+          "email": "juan.villeta-garcia@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Juan Villeta-García",
+          "email": "juan.villeta-garcia@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Viktorya Grigoryan",
+          "email": "viktorya.grigoryan@emory.edu",
+          "role": "Teaching Assistant"
+        },
+        {
+          "name": "Viktorya Grigoryan",
+          "email": "viktorya.grigoryan@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Math & Science Center - W201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "6",
+      "enrollment_capacity": 25,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 11:30a-12:20p",
@@ -204,210 +352,29 @@
             "end": "1220"
           }
         ]
-      }
-    },
-    {
-      "crn": "1622",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "L. Merrill",
-      "instructors": [
-        {
-          "name": "L. Merrill",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1220"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3775",
-      "section_number": "2",
-      "schedule_type": "DIS",
-      "instructor": "Askew/Merrill",
-      "instructors": [
-        {
-          "name": "Askew/Merrill",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 10-10:50a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1050"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3776",
-      "section_number": "3",
-      "schedule_type": "DIS",
-      "instructor": "Askew/Merrill",
-      "instructors": [
-        {
-          "name": "Askew/Merrill",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3777",
-      "section_number": "4",
-      "schedule_type": "DIS",
-      "instructor": "Bifarin/Merrill",
-      "instructors": [
-        {
-          "name": "Bifarin/Merrill",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 1-1:50p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1350"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3778",
-      "section_number": "5",
-      "schedule_type": "DIS",
-      "instructor": "Weichlein/Merrill",
-      "instructors": [
-        {
-          "name": "Weichlein/Merrill",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-3:20p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1520"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3779",
-      "section_number": "6",
-      "schedule_type": "DIS",
-      "instructor": "Snyder/Merrill",
-      "instructors": [
-        {
-          "name": "Snyder/Merrill",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "6",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 12,
-    "lectures": 2,
+    "total_sections": 6,
+    "lectures": 1,
     "labs": 0,
-    "discussions": 10,
+    "discussions": 5,
     "other": 0,
-    "open": 12,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Askew/Merrill",
-    "Bifarin/Merrill",
-    "L. Merrill",
-    "Snyder/Merrill",
-    "Weichlein/Merrill"
+    "Alina Chen",
+    "Deependra Singh",
+    "Juan Villeta-García",
+    "Manuela Manetta",
+    "Viktorya Grigoryan"
   ],
-  "scraped_at": "2026-06-17T23:01:11.253Z"
+  "scraped_at": "2026-06-18T02:08:18.932Z"
 }

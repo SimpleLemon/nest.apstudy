@@ -8,10 +8,11 @@
   "credit_hours": "4",
   "requirement_designation": "NS",
   "requirements": [
-    "NS"
+    "NS",
+    "Natural Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Introductory classical mechanics and thermodynamics. Physics 151 and 152 are primarily for students who are strongly motivated in science and mathematics.",
   "course_notes": "(MATH 111 or MATH_OX 111) as prerequisites and (MATH 112 or MATH_OX 112 or MATH 112Z or MATH 210 or MATH_OX 210) as co-requisites, or equivalent transfer credit.",
   "requisites": "(MATH 111 or MATH_OX 111) as prerequisites and (MATH 112 or MATH_OX 112 or MATH 112Z or MATH 210 or MATH_OX 210) as co-requisites, or equivalent transfer credit.",
@@ -22,23 +23,43 @@
   },
   "sections": [
     {
+      "atlas_key": "1018",
       "crn": "2366",
       "section_number": "LAB1",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Thomas Bing",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "9",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 6-8:45p",
@@ -49,26 +70,50 @@
             "end": "2045"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1019",
       "crn": "2367",
       "section_number": "LAB2",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Thomas Bing",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "9",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-5:15p",
@@ -79,26 +124,50 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1020",
       "crn": "2368",
       "section_number": "LAB3",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Thomas Bing",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "9",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6-8:45p",
@@ -109,26 +178,50 @@
             "end": "2045"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1021",
       "crn": "2369",
       "section_number": "LAB4",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Thomas Bing",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "9",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 2:30-5:15p",
@@ -139,26 +232,50 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1022",
       "crn": "2370",
       "section_number": "LAB5",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Thomas Bing",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "9",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6-8:45p",
@@ -169,26 +286,50 @@
             "end": "2045"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1023",
       "crn": "2371",
       "section_number": "LAB6",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Thomas Bing",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "9",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:15p",
@@ -199,26 +340,50 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1024",
       "crn": "2372",
       "section_number": "LAB7",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Thomas Bing",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "9",
+      "enrollment_capacity": 14,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 6-8:45p",
@@ -229,26 +394,50 @@
             "end": "2045"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1025",
       "crn": "2374",
       "section_number": "LAB8",
       "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
+      "instructor": "Thomas Bing",
       "instructors": [
         {
-          "name": "Donofrio/Bing",
-          "email": null
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "9",
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 2:30-5:15p",
@@ -259,26 +448,47 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1017",
       "crn": "1390",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Lin",
+      "instructor": "Jiang-Xiazi Lin",
       "instructors": [
         {
-          "name": "J. Lin",
-          "email": null
+          "name": "Jiang-Xiazi Lin",
+          "email": "jiangxiazi.lin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Math & Science Center - E208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "9",
+      "enrollment_capacity": 112,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -294,297 +504,27 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2366",
-      "section_number": "LAB1",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 6-8:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1800",
-            "end": "2045"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2367",
-      "section_number": "LAB2",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2368",
-      "section_number": "LAB3",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6-8:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1800",
-            "end": "2045"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2369",
-      "section_number": "LAB4",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2370",
-      "section_number": "LAB5",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6-8:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1800",
-            "end": "2045"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2371",
-      "section_number": "LAB6",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2372",
-      "section_number": "LAB7",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 6-8:45p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1800",
-            "end": "2045"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2374",
-      "section_number": "LAB8",
-      "schedule_type": "LAB",
-      "instructor": "Donofrio/Bing",
-      "instructors": [
-        {
-          "name": "Donofrio/Bing",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1390",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Lin",
-      "instructors": [
-        {
-          "name": "J. Lin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "9",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 18,
-    "lectures": 2,
-    "labs": 16,
+    "total_sections": 9,
+    "lectures": 1,
+    "labs": 8,
     "discussions": 0,
     "other": 0,
-    "open": 4,
-    "closed": 14,
+    "open": 2,
+    "closed": 7,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Donofrio/Bing",
-    "J. Lin"
+    "Cordell Donofrio",
+    "Jiang-Xiazi Lin",
+    "Thomas Bing"
   ],
-  "scraped_at": "2026-06-17T23:14:13.991Z"
+  "scraped_at": "2026-06-18T03:14:54.787Z"
 }

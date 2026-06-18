@@ -5,15 +5,16 @@
   "catalog_number": "470W",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 5",
+  "credit_hours": "4",
   "requirement_designation": "ICW",
   "requirements": [
-    "ICW"
+    "ICW",
+    "Intercultural Communication w.Cont.Comm(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "In Italian. Intensive study of a single author, genre, literary movement, or period. Topic to be announced in advance. May be repeated for credit when topic varies. Prerequisite: Italian 302 or permission of program director.",
-  "course_notes": null,
+  "course_notes": "ITAL 470 La Fortuna aiuta gli audaci: fortuna, inganno e potere (Prof. Garrett Waters / TT 10:00-11:15AM). Questo seminario indaga come la letteratura italiana del primo periodo moderno riconfiguri il rapporto tra fortuna, inganno, sessualità, retorica e potere politico. Partendo dall'intelligenza narrativa del Decameron di Boccaccio e procedendo attraverso Il Principe e Mandragola di Machiavelli, con selezioni da I Suppositi di Ariosto e dalle scrittrici del primo periodo moderno, il corso traccia l'emergere di una logica culturale in cui audacia, adattabilità e inganno strategico sostituiscono i tradizionali quadri morali. Piuttosto che trattare letteratura e teoria politica come ambiti diversi, esamineremo come l'inganno narrativo (beffa), la manipolazione retorica e la negoziazione sessuale diventino veri e propri laboratori per il ragionamento politico. In questi testi, studieremo come l'inganno - una volta semplice espediente narrativo - diventi un componente strutturale del politico. Attraverso letture approfondite in italiano e l'interazione con la critica secondaria, gli studenti esploreranno come l'Italia del primo periodo moderno contribuisca a comprendere il politico come uno spazio strutturato dalla performance, dalla persuasione, dalla contingenza e dal rischio. In un'epoca definita dalla manipolazione dei media, dallo spettacolo retorico e dalla disinformazione strategica, vedremo come questi testi rimangano straordinariamente pertinenti. Fortune Favors the Bold: Fortune, Deceit and Power (Prof. Garrett Waters / TT 10-11:15AM). This seminar investigates how early modern Italian literature reconfigures the relationship between fortune, deception, sexuality, rhetoric, and political power. Beginning with the narrative intelligence of Boccaccio's Decameron and moving through Machiavelli's Il Principe and Mandragola, with selections from Ariosto's I Suppositi and early modern women writers, the course traces the emergence of a cultural logic in which audacity, adaptability, and strategic deception displace traditional moral frameworks. Rather than treating literature and political theory as separate domains, we will examine how narrative trickery (beffa), rhetorical manipulation, and sexual negotiation become laboratories for political reasoning. In these texts, we will investigate how trickery - once a narrative device - becomes a structural component of the political. Through close readings in Italian and engaging with critical secondary scholarship, students will explore how early modern Italy contributes to an understanding of the political as a space structured by performance, persuasion, contingency, and risk. In an era defined by media manipulation, rhetorical spectacle, and strategic disinformation, we will see how these texts remain urgently appropriate.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "756",
       "crn": "1827",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "G. Waters",
+      "instructor": "Garrett Waters",
       "instructors": [
         {
-          "name": "G. Waters",
-          "email": null
+          "name": "Garrett Waters",
+          "email": "gary.russell.waters@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway C202",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,56 +72,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "1827",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "G. Waters",
-      "instructors": [
-        {
-          "name": "G. Waters",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Waters"
+    "Garrett Waters"
   ],
-  "scraped_at": "2026-06-17T23:11:34.847Z"
+  "scraped_at": "2026-06-18T03:03:39.340Z"
 }

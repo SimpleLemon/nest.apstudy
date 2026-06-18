@@ -5,40 +5,63 @@
   "catalog_number": "370W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 5",
+  "credit_hours": "1",
   "requirement_designation": "CW",
   "requirements": [
     "CW"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Study of variable topics of special interest in neuroscience and behavioral biology. May be repeated for credit when topics vary.",
-  "course_notes": null,
+  "course_notes": "(S/U Only)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-10",
+    "end": "2026-12-11"
   },
   "sections": [
     {
+      "atlas_key": "2965",
       "crn": "1985",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Grizzell",
+      "instructor": "Gwen Gunn",
       "instructors": [
         {
-          "name": "J. Grizzell",
-          "email": null
+          "name": "Gwen Gunn",
+          "email": "gwendolyn.gisiner.gunn@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Lauren Lichten",
+          "email": "lauren.lichten@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Ami R Rosen",
+          "email": "arosen3@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 4-6:45p",
@@ -49,51 +72,27 @@
             "end": "1845"
           }
         ]
-      }
-    },
-    {
-      "crn": "1985",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Grizzell",
-      "instructors": [
-        {
-          "name": "J. Grizzell",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 4-6:45p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1845"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-12-11"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 2,
+    "open": 1,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Grizzell"
+    "Ami R Rosen",
+    "Gwen Gunn",
+    "Lauren Lichten"
   ],
-  "scraped_at": "2026-06-17T23:04:17.244Z"
+  "scraped_at": "2026-06-18T02:32:26.229Z"
 }

@@ -5,15 +5,15 @@
   "catalog_number": "386",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "May be repeated for credit when topic varies. Seminar or lecture series of topics of anthropological concern.",
-  "course_notes": null,
+  "course_notes": "(Same as EAS 385 1) (This course explores how Social and Emotional Learning (SEL) and contemplative education programs are enacted in local cultural and educational contexts of East Asia. While often formalized in the West, these programs draw heavily from Asian traditions of mindfulness and compassion training, etc. As global interest in student well-being rises, this course examines how these initiatives address specific regional challenges, including school refusal, loneliness, bullying, and suicide. We will investigate the cultural translation of flourishing : How do Western-designed programs align with East Asian cultures and societal structures ? Can this exchange be bidirectional? Drawing on anthropology, education, and positive psychology, the course highlights ongoing research into Emory's SEE Learning (Social, Emotional and Ethical Learning) program. Students will move beyond theory, employing active and embodied learning techniques to experience how SEE Learning is adapted and taught in East Asian contexts. We will critically analyze the potential of these programs to foster purpose and meaning amidst the unique pressures of East Asian education systems.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,43 @@
   },
   "sections": [
     {
+      "atlas_key": "3067",
       "crn": "3971",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Ozawa-de Silva/Ozawa-de Silva",
+      "instructor": "Chikako Ozawa-de Silva",
       "instructors": [
         {
-          "name": "Ozawa-de Silva/Ozawa-de Silva",
-          "email": null
+          "name": "Chikako Ozawa-de Silva",
+          "email": "cozawad@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Brendan Ozawa-de Silva",
+          "email": "bozawad@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 250",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 4-6:30p",
@@ -49,51 +69,26 @@
             "end": "1830"
           }
         ]
-      }
-    },
-    {
-      "crn": "3971",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Ozawa-de Silva/Ozawa-de Silva",
-      "instructors": [
-        {
-          "name": "Ozawa-de Silva/Ozawa-de Silva",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 4-6:30p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1830"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Ozawa-de Silva/Ozawa-de Silva"
+    "Brendan Ozawa-de Silva",
+    "Chikako Ozawa-de Silva"
   ],
-  "scraped_at": "2026-06-17T23:09:08.325Z"
+  "scraped_at": "2026-06-18T02:46:36.835Z"
 }

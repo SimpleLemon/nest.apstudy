@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HPWE",
   "requirements": [
-    "HPWE"
+    "HPWE",
+    "Continuing Comm.& Writing with Race & Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Treatment of the major issues raised by the new genres of art that have resulted from the African experience of European colonization.",
-  "course_notes": null,
+  "course_notes": "(Same as AFS 386W 1, HIST 396W 2) (Topic -South Africa: Maps, Monuments, and Museums) (Through study of maps, monuments, and museums linked to South Africa, we will reflect on the area's centuries-long entanglements with European settlers and their descendants as well as the country's brutal history of legalized apartheid in the twentieth century. We consider how different individuals have thought about, attempted to make sense of, and otherwise confronted the past, navigated the present, or imagined the future. Another key feature of the course is for us to reflect on what it means for any of us and for anyone else in the world, past, present, or future, to be a person. To guide each student's independent thinking and fuel our class discussions, we will carefully read texts by scholars and other authors as well as attentively listen to recordings by various thinkers prior to and during our class meetings. At times, assigned materials and class discussions may raise difficult, troubling, and unsettling content, including content addressing various forms of violence. We will work together to listen to, learn from, and support each other. The course is not a lecture course. Rather, it is designed for students and the instructor to co-create knowledge about art, architecture, geography, history, and human experiences, including our own. Art History majors / minors: Division III or IV Museum Conc: elective Arch Std Minor: elective",
   "requisites": null,
   "cross_listed": "AFS 386W",
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "4328",
       "crn": "4479",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Gagliardi",
+      "instructor": "Susan Elizabeth Gagliardi",
       "instructors": [
         {
-          "name": "S. Gagliardi",
-          "email": null
+          "name": "Susan Elizabeth Gagliardi",
+          "email": "susan.e.gagliardi@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Carlos Hall 212",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
+      "requirements": [
+        "Continuing Comm.& Writing with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -54,56 +72,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "4479",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Gagliardi",
-      "instructors": [
-        {
-          "name": "S. Gagliardi",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Gagliardi"
+    "Susan Elizabeth Gagliardi"
   ],
-  "scraped_at": "2026-06-17T23:09:14.909Z"
+  "scraped_at": "2026-06-18T02:47:16.213Z"
 }

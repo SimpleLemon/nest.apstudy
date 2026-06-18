@@ -5,40 +5,58 @@
   "catalog_number": "385W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 5",
+  "credit_hours": "3",
   "requirement_designation": "HAPW",
   "requirements": [
-    "HAPW"
+    "HAPW",
+    "Quantitative Reasoning(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Rotating topics in film and media. May be repeated for credit when the topic varies.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Limits, continuity, derivatives, antiderivatives, the definite integral.",
   "course_notes": "FILM 102 and (FILM 201 or FILM 202 or FILM 203 or FILM 204 or FILM_OX 204 or FILM 205) or equivalent transfer credit as prerequisites.",
   "requisites": "FILM 102 and (FILM 201 or FILM 202 or FILM 203 or FILM 204 or FILM_OX 204 or FILM 205) or equivalent transfer credit as prerequisites.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "798",
       "crn": "4423",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "C. Kras",
+      "instructor": "Neha Gupta",
       "instructors": [
         {
-          "name": "C. Kras",
-          "email": null
+          "name": "Neha Gupta",
+          "email": "neha.gupta@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
+      "location": "Math & Science Center - N302",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 29,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:15p",
@@ -49,51 +67,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "4423",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "C. Kras",
-      "instructors": [
-        {
-          "name": "C. Kras",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Kras"
+    "Neha Gupta"
   ],
-  "scraped_at": "2026-06-17T23:02:32.987Z"
+  "scraped_at": "2026-06-18T02:21:20.320Z"
 }

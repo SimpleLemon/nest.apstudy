@@ -8,37 +8,55 @@
   "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "First Year Seminar"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course examines pathogen vector bionomics and environmental determinants of pathogen transmission. The course will also cover vector monitoring and management.",
-  "course_notes": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Designed to engage first-year students in aspects of inquiry and research into areas of Jewish religion, culture, history, or language. Topics will vary.",
+  "course_notes": "(Same as HIST 190 6 and WGS 190 3) (Freshmen Seminar - Limited to First Year Students Only) (This class offers an exploration of various Jewish approaches to and understandings of gender, sexuality, and the body from ancient times to the present. How are the categories of gender created over time and whose voices counts? How was gender taught and performed? We will use religious, legal, literary, theoretical, and fictional sources, aiming to better understand Jewish communities throughout history as well as their non-Jewish neighbors. To do so, we will also examine Christian and Muslim religious negotiation of gender and sexuality. We will study the social processes that undergird the development of some of the main historical and theoretical understandings of gender. In this first-year seminar, students engage historians' \"bread and butter,\" namely historical sources that through careful analysis can shed light on the course questions across time and geography. Some of the topics we will study include love, marriage, the erotic body, virginity, rituals and rites of passage, youth, family law, mysticism, messianism, LGBTQ+, and Jewish people and the feminist movement.)",
   "requisites": "ENVS 120 or ENVS 130 or ENVS 131 or ENVS_OX 131 or ENVS 140 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "767",
       "crn": "2596",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Clennon",
+      "instructor": "Tamar Menashe",
       "instructors": [
         {
-          "name": "J. Clennon",
-          "email": null
+          "name": "Tamar Menashe",
+          "email": "tamar.menashe@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
+      "location": "Candler Library 122",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2596",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Clennon",
-      "instructors": [
-        {
-          "name": "J. Clennon",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 0,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Clennon"
+    "Tamar Menashe"
   ],
-  "scraped_at": "2026-06-17T23:02:26.544Z"
+  "scraped_at": "2026-06-18T02:20:39.953Z"
 }

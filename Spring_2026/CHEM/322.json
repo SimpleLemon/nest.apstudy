@@ -5,40 +5,65 @@
   "catalog_number": "322",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "SNT",
   "requirements": [
     "SNT"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "A course that furthers a deeper understanding of organic chemistry, building on the foundational principles from earlier chemistry courses: molecular orbital theory, organic reaction mechanisms, stereochemistry, and the relationship between structure and reactivity.",
   "course_notes": "(CHEM 204 or CHEM_X 204) and (CHEM 204L or CHEM_OX 204L) or equivalent transfer credit as prerequisite.CHEM 204 & CHEM 204 prereq.",
   "requisites": "(CHEM 204 or CHEM_X 204) and (CHEM 204L or CHEM_OX 204L) or equivalent transfer credit as prerequisite.CHEM 204 & CHEM 204 prereq.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1527",
       "crn": "2962",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Weinschenk",
+      "instructor": "Chaoran Li",
       "instructors": [
         {
-          "name": "M. Weinschenk",
-          "email": null
+          "name": "Chaoran Li",
+          "email": "chaoran.li@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jeff Tomalka",
+          "email": "jeffrey.alan.tomalka@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Matthew Woodruff",
+          "email": "matthew.charles.woodruff@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Whitehead Auditorium",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,56 +79,27 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2962",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Weinschenk",
-      "instructors": [
-        {
-          "name": "M. Weinschenk",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Weinschenk"
+    "Chaoran Li",
+    "Jeff Tomalka",
+    "Matthew Woodruff"
   ],
-  "scraped_at": "2026-06-17T23:01:37.680Z"
+  "scraped_at": "2026-06-18T02:13:14.112Z"
 }

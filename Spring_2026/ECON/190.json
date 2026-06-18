@@ -8,37 +8,55 @@
   "credit_hours": "3",
   "requirement_designation": "FS",
   "requirements": [
-    "FS"
+    "FS",
+    "Humanities and Arts(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Open only to students with freshman standing. Topics and prerequisites vary; consult the Course Atlas.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to fundamental concepts of art history through 100 representative works of art and architecture produced in Egypt, Europe, Asia, the Americas, and the Islamic world before 1800. Focus on the formal structure and historical contexts in which the works were made and understood.",
+  "course_notes": "One hundred compelling works of art form the nucleus of Encounters with Art & Architecture, an innovative course addressing key issues in the history of art and architecture. Why is a picture worth a thousand words? What makes a building political? How does a statue represent cultural ideals? What is art, anyway? Encounters encourages us to look both at and beneath the surface-to question appearances, challenge preconceptions, and seize the significance of the smallest detail when engaging with art and architecture. In Encounters, every member of the Art History faculty lectures in their area of expertise on several of their favorite things. By hearing so many voices, you'll gain an appreciation for the variety of approaches we take to understand human creativity in visual and spatial form. In weekly discussion sections, you'll talk about what you've learned and visit the Carlos Museum and the Rose Library. Encounters Part I introduces images, objects, and buildings produced from prehistory through the seventeenth century in Europe, Africa, Asia, and the Americas; Encounters Part II, from the seventeenth century to the present day, in Europe, Africa, and North America. Art History major/minor: core requirement",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "658",
       "crn": "3810",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "M. Ayogu",
+      "instructor": "Linda Merrill",
       "instructors": [
         {
-          "name": "M. Ayogu",
-          "email": null
+          "name": "Linda Merrill",
+          "email": "lmerri2@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 205",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 60,
+      "seats_available": 43,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,9 +72,14 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "659",
       "crn": "3812",
       "section_number": "2",
       "schedule_type": "SEM",
@@ -64,121 +87,30 @@
       "instructors": [
         {
           "name": "K. Lanier",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Carlos Hall 211",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3814",
-      "section_number": "3",
-      "schedule_type": "SEM",
-      "instructor": "C. Fohlin",
-      "instructors": [
-        {
-          "name": "C. Fohlin",
-          "email": null
-        }
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3810",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "M. Ayogu",
-      "instructors": [
-        {
-          "name": "M. Ayogu",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3812",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "K. Lanier",
-      "instructors": [
-        {
-          "name": "K. Lanier",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -194,9 +126,14 @@
             "end": "1415"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "660",
       "crn": "3814",
       "section_number": "3",
       "schedule_type": "SEM",
@@ -204,16 +141,30 @@
       "instructors": [
         {
           "name": "C. Fohlin",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
+      "location": "Carlos Hall 211",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -229,23 +180,27 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
+    "total_sections": 3,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 6,
-    "open": 2,
-    "closed": 4,
+    "other": 3,
+    "open": 3,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "C. Fohlin",
     "K. Lanier",
-    "M. Ayogu"
+    "Linda Merrill"
   ],
-  "scraped_at": "2026-06-17T23:02:03.793Z"
+  "scraped_at": "2026-06-18T02:17:46.573Z"
 }

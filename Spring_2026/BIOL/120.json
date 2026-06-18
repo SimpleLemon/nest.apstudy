@@ -5,40 +5,58 @@
   "catalog_number": "120",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "1,2",
   "requirement_designation": "NS",
   "requirements": [
-    "NS"
+    "NS",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Principles of genetics, physiology, ecology, taxonomy, and evolution with special reference to contemporary life situations. Intended for non-science majors. This course does not fulfill requirements for medical and dental schools or for a biology major.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Emory Dance Company is a professionally oriented performance company that exposes students to the diverse choreographic approaches of faculty, student and guest artist work, as well as historical reconstructions. Course admission is by audition. Students gain performance techniques, collaborative skills, and often contribute to the making of original choreography as they prepare for a fully produced dance concert. Simultaneous enrollment in a dance technique class is required. In addition, students gain experience in some of the technical aspects of dance concert production. Credit hours are assigned in accordance with the number of works in which a student participates. Evaluation procedures announced in class.",
+  "course_notes": "(Permission Required Prior to Enrollment) Entrance by audition only at the beginning of the semester. Check www.dance.emory.edu for audition details or email dance@emory.edu.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "528",
       "crn": "1627",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "P. Stillson",
+      "instructor": "George Staib",
       "instructors": [
         {
-          "name": "P. Stillson",
-          "email": null
+          "name": "George Staib",
+          "email": "gstaib@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -54,56 +72,25 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "1627",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "P. Stillson",
-      "instructors": [
-        {
-          "name": "P. Stillson",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "P. Stillson"
+    "George Staib"
   ],
-  "scraped_at": "2026-06-17T23:01:21.179Z"
+  "scraped_at": "2026-06-18T02:09:43.776Z"
 }

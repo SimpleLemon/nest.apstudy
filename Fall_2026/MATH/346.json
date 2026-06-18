@@ -10,8 +10,8 @@
   "requirements": [
     "MQR"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Theory of linear programming, duality, optimal flows in networks, and mathematical programming.",
   "course_notes": "(MATH 221 or MATH_OX 221 or MATH 275 or MATH 321) and (CS 170 or CS_OX 170 or MATH 170) or equivalent transfer credit as a prerequisite.",
   "requisites": "(MATH 221 or MATH_OX 221 or MATH 275 or MATH 321) and (CS 170 or CS_OX 170 or MATH 170) or equivalent transfer credit as a prerequisite.",
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "848",
       "crn": "3132",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "R. Roth Jr.",
+      "instructor": "Robert Roth Jr.",
       "instructors": [
         {
-          "name": "R. Roth Jr.",
-          "email": null
+          "name": "Robert Roth Jr.",
+          "email": "laker@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 35,
+      "seats_available": 19,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,56 +69,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "3132",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "R. Roth Jr.",
-      "instructors": [
-        {
-          "name": "R. Roth Jr.",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Roth Jr."
+    "Robert Roth Jr."
   ],
-  "scraped_at": "2026-06-17T23:11:57.558Z"
+  "scraped_at": "2026-06-18T03:05:52.815Z"
 }

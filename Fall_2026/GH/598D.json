@@ -5,13 +5,13 @@
   "catalog_number": "598D",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "4",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Online Asynchronous. Prerequisites: GH501, GH502, GH511, GH512, GH521, GH531 and GH522 or GH 532 (some may be taken concurrently). GH 598 is the GH Capstone Integrative Learning Experience and is taken in the student's final semester. The Capstone provides an opportunity for students to demonstrate skills acquired in prior coursework. Each capstone section will differ in content, based on instructor expertise, but all will require integration of deliverables from the HDGH Foundational, Program Cycle, and Quantitative and Qualitative sequences. At the end of the capstone course, each student will submit an individual deliverable in response to a global health challenge or opportunity. The deliverable may describe a program implementation plan or a formative research plan that will inform a future project, program or policy. All Capstone sections share the same underlying structure, of 10-15 students working closely with the instructor. The course is graded as Satisfactory/Unsatisfactory.",
+  "course_notes": "Only GH ADAPs can enroll students. This is an asynchronous course.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,66 +20,59 @@
   },
   "sections": [
     {
+      "atlas_key": "4526",
       "crn": "5889",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "J. Leon",
+      "instructor": "Juan Leon",
       "instructors": [
         {
-          "name": "J. Leon",
-          "email": null
+          "name": "Juan Leon",
+          "email": "juan.leon@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5889",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "J. Leon",
-      "instructors": [
-        {
-          "name": "J. Leon",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Leon"
+    "Juan Leon"
   ],
-  "scraped_at": "2026-06-17T23:10:49.344Z"
+  "scraped_at": "2026-06-18T02:59:07.916Z"
 }

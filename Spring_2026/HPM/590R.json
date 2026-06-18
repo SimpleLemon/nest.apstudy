@@ -5,38 +5,56 @@
   "catalog_number": "590R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "1",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-05",
-    "end": "2026-01-10"
+    "start": "2026-08-10",
+    "end": "2026-12-11"
   },
   "sections": [
     {
+      "atlas_key": "177",
       "crn": "2663",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "P. Joski",
+      "instructor": "Jennifer Stever",
       "instructors": [
         {
-          "name": "P. Joski",
-          "email": null
+          "name": "Jennifer Stever",
+          "email": "jstever@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Stephanie T Dixon",
+          "email": "stephanie.dixon@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 100,
+      "seats_available": 58,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MTWThF 9a-4:30p",
@@ -67,71 +85,26 @@
             "end": "1630"
           }
         ]
-      }
-    },
-    {
-      "crn": "2663",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "P. Joski",
-      "instructors": [
-        {
-          "name": "P. Joski",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MTWThF 9a-4:30p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "900",
-            "end": "1630"
-          },
-          {
-            "day": "Tue",
-            "start": "900",
-            "end": "1630"
-          },
-          {
-            "day": "Wed",
-            "start": "900",
-            "end": "1630"
-          },
-          {
-            "day": "Thu",
-            "start": "900",
-            "end": "1630"
-          },
-          {
-            "day": "Fri",
-            "start": "900",
-            "end": "1630"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-12-11"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 0,
-    "closed": 2,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "P. Joski"
+    "Jennifer Stever",
+    "Stephanie T Dixon"
   ],
-  "scraped_at": "2026-06-17T23:03:12.098Z"
+  "scraped_at": "2026-06-18T02:25:48.094Z"
 }

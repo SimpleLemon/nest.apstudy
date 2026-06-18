@@ -5,40 +5,53 @@
   "catalog_number": "276",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "QR",
   "requirements": [
     "QR"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course is the second half of the advanced mathematics introductory sequence. It covers the basics of vector calculus: differentiable mappings, differential forms, and integration theory.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Teaches students to deal with, manipulate, and gain insight from data to solve problems in the 21st-century business context. Students will analyze business data and perform predictive analytics by working with real-world data across a variety of industries and business contexts to engage in applied problem-solving. The class will familiarize students with a set of increasingly sophisticated tools and techniques (models and methodologies) for data-based business decision making. Students will additionally be exposed to a variety of technological tools commonly used in business analytics.",
   "course_notes": "MATH 275 or equivalent transfer credit as prerequisite.",
   "requisites": "MATH 275 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3975",
       "crn": "2752",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "L. Nurbekyan",
+      "instructor": "Huy Huynh",
       "instructors": [
         {
-          "name": "L. Nurbekyan",
-          "email": null
+          "name": "Huy Huynh",
+          "email": "huy.huynh@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 231",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 62,
+      "seats_available": 36,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,26 +67,43 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3976",
       "crn": "5516",
       "section_number": "2",
       "schedule_type": "LAB",
-      "instructor": "Nurbekyan/Sureshkumar",
+      "instructor": "Huy Huynh",
       "instructors": [
         {
-          "name": "Nurbekyan/Sureshkumar",
-          "email": null
+          "name": "Huy Huynh",
+          "email": "huy.huynh@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 231",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 62,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 11:30a-12:20p",
@@ -84,87 +114,25 @@
             "end": "1220"
           }
         ]
-      }
-    },
-    {
-      "crn": "2752",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "L. Nurbekyan",
-      "instructors": [
-        {
-          "name": "L. Nurbekyan",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5516",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "Nurbekyan/Sureshkumar",
-      "instructors": [
-        {
-          "name": "Nurbekyan/Sureshkumar",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 2,
-    "labs": 2,
+    "total_sections": 2,
+    "lectures": 1,
+    "labs": 1,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Nurbekyan",
-    "Nurbekyan/Sureshkumar"
+    "Huy Huynh"
   ],
-  "scraped_at": "2026-06-17T23:03:54.283Z"
+  "scraped_at": "2026-06-18T02:30:04.506Z"
 }

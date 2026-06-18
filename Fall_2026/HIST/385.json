@@ -5,15 +5,15 @@
   "catalog_number": "385",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "HSC",
   "requirements": [
     "HSC"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Selected topics in history for advanced students. May be repeated for credit when topic varies.",
-  "course_notes": null,
+  "course_notes": "(Same as AAS 385 3) (This course investigates the historical construction of police power in the United States, tracing its evolution from the early twentieth-century Great Migration to the modern era of mass incarceration. Rather than viewing policing as a static institution, we examine it as a dynamic political force shaped by the intersections of race, gender, and grassroots struggle. Using mostly U.S. as sites of inquiry, alongside national analyses of police organizing, we will explore how discretionary authority was built through the surveillance of Black and Brown neighborhoods and the regulation of women's bodies. Course readings will cover topics that include: the rise of rank-and-file unionism and its impact on democratic oversight; the role of morals laws and sexual policing in expanding state power; and the persistent cycles of police violence and community resistance, from the 1919 Red Summer to the 1992 Los Angeles rebellion. By the end of the semester, students will understand how policing became a primary engine of urban transformation and social control.) This course investigates the historical construction of police power in the United States, tracing its evolution from the early twentieth-century Great Migration to the modern era of mass incarceration. Rather than viewing policing as a static institution, we examine it as a dynamic political force shaped by the intersections of race, gender, and grassroots struggle. Using mostly U.S. as sites of inquiry, alongside national analyses of police organizing, we will explore how discretionary authority was built through the surveillance of Black and Brown neighborhoods and the regulation of women's bodies. Course readings will cover topics that include: the rise of rank-and-file unionism and its impact on democratic oversight; the role of morals laws and sexual policing in expanding state power; and the persistent cycles of police violence and community resistance, from the 1919 Red Summer to the 1992 Los Angeles rebellion. By the end of the semester, students will understand how policing became a primary engine of urban transformation and social control.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,43 @@
   },
   "sections": [
     {
+      "atlas_key": "2951",
       "crn": "2543",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Suddler/Trawick-Junta",
+      "instructor": "Carl Suddler",
       "instructors": [
         {
-          "name": "Suddler/Trawick-Junta",
-          "email": null
+          "name": "Carl Suddler",
+          "email": "carl.suddler@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Jayden Trawick-Junta",
+          "email": "jayden.trawick-junta@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rich Building 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -54,26 +74,45 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2952",
       "crn": "2546",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "B. Vick",
+      "instructor": "Brian Vick",
       "instructors": [
         {
-          "name": "B. Vick",
-          "email": null
+          "name": "Brian Vick",
+          "email": "bvick@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Rich Building 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -89,92 +128,27 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2543",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Suddler/Trawick-Junta",
-      "instructors": [
-        {
-          "name": "Suddler/Trawick-Junta",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2546",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "B. Vick",
-      "instructors": [
-        {
-          "name": "B. Vick",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "B. Vick",
-    "Suddler/Trawick-Junta"
+    "Brian Vick",
+    "Carl Suddler",
+    "Jayden Trawick-Junta"
   ],
-  "scraped_at": "2026-06-17T23:11:08.776Z"
+  "scraped_at": "2026-06-18T03:00:28.238Z"
 }

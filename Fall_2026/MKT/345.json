@@ -5,13 +5,13 @@
   "catalog_number": "345",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides an overview of the key concepts and tools needed to develop and implement effective marketing strategies. Topics covered include market research, segmentation, targeting, positioning, and the development of a comprehensive marketing plan. These topics will be covered in relation to the lifecycle of a business, with learnings applied to the strategic needs of new businesses, established business, and businesses facing competitive stresses. Students will have the opportunity to apply their knowledge through a case study analysis and a group project, where they will develop and present a marketing plan for a real-world product or service. By the end of the course, students will have a thorough understanding of the strategic aspects of marketing and be able to develop and implement effective marketing strategies.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,41 @@
   },
   "sections": [
     {
+      "atlas_key": "2860",
       "crn": "3744",
       "section_number": "1101",
       "schedule_type": "LEC",
-      "instructor": "Hamilton/Cooley",
+      "instructor": "Marina Cooley",
       "instructors": [
         {
-          "name": "Hamilton/Cooley",
-          "email": null
+          "name": "Marina Cooley",
+          "email": "marinacooley@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Ryan Hamilton",
+          "email": "rphamil@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 234",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 51,
+      "seats_available": 21,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -52,96 +70,48 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2861",
       "crn": "3745",
       "section_number": "1102",
       "schedule_type": "LEC",
-      "instructor": "Hamilton/Cooley",
+      "instructor": "Marina Cooley",
       "instructors": [
         {
-          "name": "Hamilton/Cooley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3744",
-      "section_number": "1101",
-      "schedule_type": "LEC",
-      "instructor": "Hamilton/Cooley",
-      "instructors": [
+          "name": "Marina Cooley",
+          "email": "marinacooley@emory.edu",
+          "role": "Primary Instructor"
+        },
         {
-          "name": "Hamilton/Cooley",
-          "email": null
+          "name": "Ryan Hamilton",
+          "email": "rphamil@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
+      "location": "Goizueta Business School 234",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3745",
-      "section_number": "1102",
-      "schedule_type": "LEC",
-      "instructor": "Hamilton/Cooley",
-      "instructors": [
-        {
-          "name": "Hamilton/Cooley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
+      "enrollment_capacity": 51,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -157,21 +127,26 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 2,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "Hamilton/Cooley"
+    "Marina Cooley",
+    "Ryan Hamilton"
   ],
-  "scraped_at": "2026-06-17T23:12:04.109Z"
+  "scraped_at": "2026-06-18T03:06:42.614Z"
 }

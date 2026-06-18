@@ -5,13 +5,13 @@
   "catalog_number": "585",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Various topics in Sociology.",
+  "course_notes": "(Permission Required Prior to Enrollment)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "2171",
       "crn": "2630",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "K. Brown",
+      "instructor": "Karida Brown",
       "instructors": [
         {
-          "name": "K. Brown",
-          "email": null
+          "name": "Karida Brown",
+          "email": "klbrow3@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 206",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 8-11a",
@@ -47,51 +60,25 @@
             "end": "1100"
           }
         ]
-      }
-    },
-    {
-      "crn": "2630",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "K. Brown",
-      "instructors": [
-        {
-          "name": "K. Brown",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 8-11a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "800",
-            "end": "1100"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Brown"
+    "Karida Brown"
   ],
-  "scraped_at": "2026-06-17T23:14:49.785Z"
+  "scraped_at": "2026-06-18T03:18:24.356Z"
 }

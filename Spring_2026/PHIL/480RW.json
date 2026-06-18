@@ -5,40 +5,58 @@
   "catalog_number": "480RW",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "HAPW",
   "requirements": [
-    "HAPW"
+    "HAPW",
+    "First Year Seminar"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Intensive study and analysis of the thought of one major philosopher. May be repeated for credit when the subject varies.",
-  "course_notes": "Two PHIL courses or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A small class on topics of sociological concern that fosters a highly interactive and mutually collaborative learning environment among students and between students and teachers.",
+  "course_notes": "(Freshmen Seminar - Limited to First Year Students Only) The transition from premodern to modern society has been analyzed by every major social theorist from the Enlightenment onward. In this first-year seminar, we will explore several \"master trends\" associated with this change, including: Rationalization. This refers to a highly general historical process that has permeated all aspects of modern life and which broadly speaking involves the gradual displacement of Tradition by Reason; Individualization. Another very general historical trend, individualism is characterized by a diverse set of ideas and practices that promote the individual over the group as the primary unit of modern society; Secularization. This is a complex set of changes in which religion loses some of its cultural authority to define meaning and purpose; Medicalization. This is the process by which everyday experiences and conditions come to be defined as medical problems requiring treatment; Globalization. This is an ancient process that has accelerated in the modern era as various kinds of international connections (economic, political, cultural) develop and multiply. We will discuss a wide range of specific topics related to these trends, including why McDonalds is a model of bureaucratic organization; how legal due process and political democracy came to be seen as basic human rights; why fashion is paradoxically a sign of both self-expression and group conformity; how views of deviant behavior have evolved over time, from sin to crime to sickness; your morning cup of coffee as a global supply chain; and terrorism as backlash against the forces of globalization and secularization.",
   "requisites": "Two PHIL courses or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1180",
       "crn": "5141",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "L. Huffer",
+      "instructor": "Jeff Mullis",
       "instructors": [
         {
-          "name": "L. Huffer",
-          "email": null
+          "name": "Jeff Mullis",
+          "email": "jmullis@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Anthropology Bldg 107",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,56 +72,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "5141",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "L. Huffer",
-      "instructors": [
-        {
-          "name": "L. Huffer",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
-    "closed": 0,
-    "waitlisted": 2
+    "closed": 1,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Huffer"
+    "Jeff Mullis"
   ],
-  "scraped_at": "2026-06-17T23:06:07.920Z"
+  "scraped_at": "2026-06-18T02:38:17.520Z"
 }

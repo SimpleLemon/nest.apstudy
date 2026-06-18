@@ -5,40 +5,61 @@
   "catalog_number": "203ZL",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "2",
+  "credit_hours": "1",
   "requirement_designation": "None",
   "requirements": [
-    "None"
+    "None",
+    "Social Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Chem 203zL introduces more sophisticated methods for studying the reactivity of compounds. The preparation and structure elucidation of organic and organometallic compounds will be studied in the context of a research lab type setting.",
-  "course_notes": "CHEM 202ZL as prerequisite and CHEM 203Z as co-requisite or equivalent transfer credit.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Cultivate your public health well-being and impact. This course will equip you with tools and strategies to thrive in both your career and your personal life. Through a blend of self-discovery exercises, interactive sessions, and expert presentations, you will gain clarity on your purpose, develop strategies to nurture your well-being, and create a personalized action plan to achieve balance and lasting impact.",
+  "course_notes": "This course is designed for Emory staff and faculty to advance their degree training in public health. Given the purpose and structure of the course, enrollment is available only to Emory staff and faculty. October 10, 8am-5pm; October 11, 8am-12pm ET.",
   "requisites": "CHEM 202ZL as prerequisite and CHEM 203Z as co-requisite or equivalent transfer credit.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-10-10",
+    "end": "2026-10-11"
   },
   "sections": [
     {
+      "atlas_key": "4358",
       "crn": "3725",
       "section_number": "1",
       "schedule_type": "LAB",
-      "instructor": "J. Soria",
+      "instructor": "Juan Leon",
       "instructors": [
         {
-          "name": "J. Soria",
-          "email": null
+          "name": "Juan Leon",
+          "email": "juan.leon@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Juan Leon",
+          "email": "juan.leon@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "M 2:30-3:45p; M 3:45-5:50p",
@@ -54,26 +75,47 @@
             "end": "1750"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-10-10",
+        "end": "2026-10-11"
       }
     },
     {
+      "atlas_key": "4359",
       "crn": "3726",
       "section_number": "2",
       "schedule_type": "LAB",
-      "instructor": "J. Soria",
+      "instructor": "Courtney Freer",
       "instructors": [
         {
-          "name": "J. Soria",
-          "email": null
+          "name": "Courtney Freer",
+          "email": "courtney.jean.freer@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 30,
+      "seats_available": 19,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 2:30-3:45p; T 3:45-5:50p",
@@ -89,91 +131,26 @@
             "end": "1750"
           }
         ]
-      }
-    },
-    {
-      "crn": "3725",
-      "section_number": "1",
-      "schedule_type": "LAB",
-      "instructor": "J. Soria",
-      "instructors": [
-        {
-          "name": "J. Soria",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "M 2:30-3:45p; M 3:45-5:50p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Mon",
-            "start": "1545",
-            "end": "1750"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3726",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "J. Soria",
-      "instructors": [
-        {
-          "name": "J. Soria",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 2:30-3:45p; T 3:45-5:50p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Tue",
-            "start": "1545",
-            "end": "1750"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
-    "labs": 4,
+    "labs": 2,
     "discussions": 0,
     "other": 0,
-    "open": 4,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Soria"
+    "Courtney Freer",
+    "Juan Leon"
   ],
-  "scraped_at": "2026-06-17T23:01:37.677Z"
+  "scraped_at": "2026-06-18T02:13:14.108Z"
 }

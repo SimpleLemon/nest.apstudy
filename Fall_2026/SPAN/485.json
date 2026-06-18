@@ -5,15 +5,15 @@
   "catalog_number": "485",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Upper-level research seminar on topics related to the language, discourse, literature, and/or culture of the Hispanic world. Students may take multiple SPAN 485 courses provided that they focus on different topics.",
-  "course_notes": null,
+  "course_notes": "(LACS 490R 1) This course examines the documentary film genre in Latin America, focusing on critical issues such as migration, social inequality, human rights struggles, the reconstruction of testimonies, historical memory, the displacement and exploitation of indigenous populations, as well as political and military repression. With the rise of new technologies for creating documentaries, we will explore the meaning of documenting Latin America in the global era through international, local, and independent productions. In addition, the course will explore how Latin America is represented through the increasing presence of documentaries on digital platforms and websites. Students will engage with these trends through oral presentations and develop their own documentation projects on Latin America. PREREQUISITES: At least one Foundational Course (SPAN 300 - 318W), or one 400-level Spanish course, or permission from the instructor. ***If SPAN 485 is at full capacity, please consider enrolling in LACS 490R, which will satisfy the same major/minor requirements.***",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "3116",
       "crn": "1641",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "A. Herrero-Olaizola",
+      "instructor": "Alejandro Herrero-Olaizola",
       "instructors": [
         {
-          "name": "A. Herrero-Olaizola",
-          "email": null
+          "name": "Alejandro Herrero-Olaizola",
+          "email": "alejandro@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Callaway S104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 13,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,86 +69,39 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3117",
       "crn": "1813",
       "section_number": "2",
       "schedule_type": "LEC",
       "instructor": "Staff",
       "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 218",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1641",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "A. Herrero-Olaizola",
-      "instructors": [
-        {
-          "name": "A. Herrero-Olaizola",
-          "email": null
-        }
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
       ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "1813",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
+      "enrollment_capacity": 13,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -149,21 +117,25 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 4
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Herrero-Olaizola"
+    "Alejandro Herrero-Olaizola"
   ],
-  "scraped_at": "2026-06-17T23:14:53.055Z"
+  "scraped_at": "2026-06-18T03:18:50.188Z"
 }

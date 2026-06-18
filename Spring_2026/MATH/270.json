@@ -10,70 +10,50 @@
   "requirements": [
     "MQR"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Topics in the history of mathematics and their philosophical background. Genesis and evolution of ideas in analysis, algebra, geometry, mechanics, foundations. Historical and philosophical aspects of concepts of infinity, mathematical rigor, probability, etc.",
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Introduces students to ways of knowing and producing knowledge within a field of study. Emphasizes inquiry, communication, and development of critical thinking and research abilities through exploration of a specific topic.",
   "course_notes": "MATH 112 or MATH 112S or MATH 112Z or equivalent transfer credit as prerequisite.",
   "requisites": "MATH 112 or MATH 112S or MATH 112Z or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3525",
       "crn": "2805",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Villeta-García",
+      "instructor": "Tameka Cage Conley",
       "instructors": [
         {
-          "name": "J. Villeta-García",
-          "email": null
+          "name": "Tameka Cage Conley",
+          "email": "tameka.latrece.cage.conley@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2805",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Villeta-García",
-      "instructors": [
-        {
-          "name": "J. Villeta-García",
-          "email": null
-        }
-      ],
-      "location": null,
+      "location": "Seney Hall 310",
       "campus": "Oxford",
-      "campus_description": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -89,21 +69,25 @@
             "end": "1245"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Villeta-García"
+    "Tameka Cage Conley"
   ],
-  "scraped_at": "2026-06-17T23:03:54.283Z"
+  "scraped_at": "2026-06-18T02:30:04.506Z"
 }

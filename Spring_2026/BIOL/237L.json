@@ -10,8 +10,8 @@
   "requirements": [],
   "campus": null,
   "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "course_description": "",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,6 +20,7 @@
   },
   "sections": [
     {
+      "atlas_key": "5080",
       "crn": "1671",
       "section_number": "1",
       "schedule_type": "LEC",
@@ -27,16 +28,25 @@
       "instructors": [
         {
           "name": "J. Bou Dagher",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -52,9 +62,14 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     },
     {
+      "atlas_key": "5081",
       "crn": "2597",
       "section_number": "2",
       "schedule_type": "LAB",
@@ -62,16 +77,25 @@
       "instructors": [
         {
           "name": "J. Bou Dagher",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 10a-1p",
@@ -82,9 +106,14 @@
             "end": "1300"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     },
     {
+      "atlas_key": "5082",
       "crn": "2598",
       "section_number": "3",
       "schedule_type": "LAB",
@@ -92,16 +121,25 @@
       "instructors": [
         {
           "name": "J. Bou Dagher",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
       "campus": null,
       "campus_description": null,
+      "credit_hours": null,
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": null,
+      "grading_mode_options": [],
+      "instruction_method": null,
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": null,
+      "seats_available": null,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 11a-2p",
@@ -112,116 +150,25 @@
             "end": "1400"
           }
         ]
-      }
-    },
-    {
-      "crn": "1671",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Bou Dagher",
-      "instructors": [
-        {
-          "name": "J. Bou Dagher",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2597",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "J. Bou Dagher",
-      "instructors": [
-        {
-          "name": "J. Bou Dagher",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 10a-1p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1300"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2598",
-      "section_number": "3",
-      "schedule_type": "LAB",
-      "instructor": "J. Bou Dagher",
-      "instructors": [
-        {
-          "name": "J. Bou Dagher",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 11a-2p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1100",
-            "end": "1400"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-01-13",
+        "end": "2026-04-27"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 2,
-    "labs": 4,
+    "total_sections": 3,
+    "lectures": 1,
+    "labs": 2,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
     "J. Bou Dagher"
   ],
-  "scraped_at": "2026-06-17T23:01:21.197Z"
+  "scraped_at": "2026-06-18T02:09:43.785Z"
 }

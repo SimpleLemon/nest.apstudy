@@ -5,13 +5,13 @@
   "catalog_number": "622",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The course is designed as a workshop in which law students and business students work together to structure and negotiate varying aspects of a private equity deal, from the initial term sheet stages, through execution of the purchase agreement, to completion of the financing and closing. Private equity deals that are economically justified sometimes fail in the transaction negotiation and documentation phase. This course will seek to provide students with the tools necessary to understand and resolve difficult issues and complete successful transactions.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "2479",
       "crn": "5460",
       "section_number": "3282",
       "schedule_type": "LEC",
-      "instructor": "K. Crowley",
+      "instructor": "Kevin Crowley",
       "instructors": [
         {
-          "name": "K. Crowley",
-          "email": null
+          "name": "Kevin Crowley",
+          "email": "kevin.crowley@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 56,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-6:30p",
@@ -47,26 +60,43 @@
             "end": "1830"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2480",
       "crn": "5461",
       "section_number": "4182",
       "schedule_type": "LEC",
-      "instructor": "K. Crowley",
+      "instructor": "Kevin Crowley",
       "instructors": [
         {
-          "name": "K. Crowley",
-          "email": null
+          "name": "Kevin Crowley",
+          "email": "kevin.crowley@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Masters Non-MBA",
+      "grading_mode_options": [
+        "MTR",
+        "Non-MBA Masters Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "3",
+      "enrollment_capacity": 3,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-6:30p",
@@ -77,26 +107,43 @@
             "end": "1830"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "2481",
       "crn": "5462",
       "section_number": "4282",
       "schedule_type": "LEC",
-      "instructor": "K. Crowley",
+      "instructor": "Kevin Crowley",
       "instructors": [
         {
-          "name": "K. Crowley",
-          "email": null
+          "name": "Kevin Crowley",
+          "email": "kevin.crowley@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "3",
+      "enrollment_capacity": 7,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-6:30p",
@@ -107,111 +154,25 @@
             "end": "1830"
           }
         ]
-      }
-    },
-    {
-      "crn": "5460",
-      "section_number": "3282",
-      "schedule_type": "LEC",
-      "instructor": "K. Crowley",
-      "instructors": [
-        {
-          "name": "K. Crowley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-6:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1830"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5461",
-      "section_number": "4182",
-      "schedule_type": "LEC",
-      "instructor": "K. Crowley",
-      "instructors": [
-        {
-          "name": "K. Crowley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-6:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1830"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5462",
-      "section_number": "4282",
-      "schedule_type": "LEC",
-      "instructor": "K. Crowley",
-      "instructors": [
-        {
-          "name": "K. Crowley",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-6:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1830"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 4
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Crowley"
+    "Kevin Crowley"
   ],
-  "scraped_at": "2026-06-17T23:10:39.539Z"
+  "scraped_at": "2026-06-18T02:58:24.250Z"
 }

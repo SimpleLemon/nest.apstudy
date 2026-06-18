@@ -5,40 +5,53 @@
   "catalog_number": "391R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "ICE",
   "requirements": [
     "ICE"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "A survey of literary and cultural creations from the Francophone world, with a special emphasis on Africa, the Caribbean, and South East Asia.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Innovations in clinical care are increasingly impacted by the development and implementation of machine learning (ML) and artificial intelligence (AI). As future clinicians, medical students should be informed and prepared for technological changes that will affect how they provide care for their patients. The goals of this senior elective are to demystify AI and ML in healthcare, enabling students to have informed conversations about these technologies and participate in their clinical advancement.",
   "course_notes": "FREN 310 or FREN_OX 310 and FREN 314 or FREN_OX 314 or equivalent transfer credit as prerequisite. Used for: FREN-331, 341, 351, 385, 391",
   "requisites": "FREN 310 or FREN_OX 310 and FREN 314 or FREN_OX 314 or equivalent transfer credit as prerequisite. Used for: FREN-331, 341, 351, 385, 391",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-06-29",
+    "end": "2026-12-19"
   },
   "sections": [
     {
+      "atlas_key": "2579",
       "crn": "2029",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Montlouis-Gabriel",
+      "instructor": "Judy Wawira Gichoya",
       "instructors": [
         {
-          "name": "J. Montlouis-Gabriel",
-          "email": null
+          "name": "Judy Wawira Gichoya",
+          "email": "judywawira@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,56 +67,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "2029",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Montlouis-Gabriel",
-      "instructors": [
-        {
-          "name": "J. Montlouis-Gabriel",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Montlouis-Gabriel"
+    "Judy Wawira Gichoya"
   ],
-  "scraped_at": "2026-06-17T23:02:39.580Z"
+  "scraped_at": "2026-06-18T02:22:47.204Z"
 }

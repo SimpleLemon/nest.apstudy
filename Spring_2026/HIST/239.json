@@ -10,35 +10,48 @@
   "requirements": [
     "HAE"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Examines African American history from 1865 to the present. Emphasizes regional, gender, and class distinction within African American communities, and the ways in which industrial transformations shaped African American life, thought, and resistance.",
-  "course_notes": null,
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "In this course, students study the formation, financing, and management of the life cycle of business organizations. Students will consider a) business entity forms and formation (the solo to the partnership, to large corporate forms, to nonprofits and public benefit corporations); b) the life cycle of a business (starting, managing, and ending a business; mergers, acquisitions, franchises) and capitalizing business (forms of financing, and other modern financing opportunities).",
+  "course_notes": "JM/MLS Students only. Per ABA rules, JD and LLM students will not receive credit for JM/MLS courses.",
   "requisites": null,
   "cross_listed": "AAS 239",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "3649",
       "crn": "4371",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "C. Sanders",
+      "instructor": "Jared Carter",
       "instructors": [
         {
-          "name": "C. Sanders",
-          "email": null
+          "name": "Jared Carter",
+          "email": "jared.k.carter@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 24,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,56 +67,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "4371",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "C. Sanders",
-      "instructors": [
-        {
-          "name": "C. Sanders",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Sanders"
+    "Jared Carter"
   ],
-  "scraped_at": "2026-06-17T23:03:05.489Z"
+  "scraped_at": "2026-06-18T02:24:48.781Z"
 }

@@ -5,40 +5,55 @@
   "catalog_number": "370",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Topics will vary; the course may be repeated for credit as topic varies.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Study of Japanese language, literature, society, thought, or culture, alone or in conjunction with other literary or cultural trends. Topics to be announced in advance.",
+  "course_notes": "Pre-requisite: Japanese 102 Please contact instructor for permission to enroll. This course is designed as an extensive reading course grounded in second language acquisition theory, which emphasizes the role of incidental learning. Students select books based on their interests and immerse themselves in Japanese through sustained reading. Unlike sequenced language courses, this course does not include formal grammar instruction or exams. Students progress at their own pace through meaningful engagement with texts.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3730",
       "crn": "2936",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "L. Pratt",
+      "instructor": "Mizuki Mazzotta",
       "instructors": [
         {
-          "name": "L. Pratt",
-          "email": null
+          "name": "Mizuki Mazzotta",
+          "email": "mizuki.mazzotta@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "MODERN LANGUAGE_302",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MWF 11:30a-12:20p",
@@ -59,61 +74,25 @@
             "end": "1220"
           }
         ]
-      }
-    },
-    {
-      "crn": "2936",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "L. Pratt",
-      "instructors": [
-        {
-          "name": "L. Pratt",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MWF 11:30a-12:20p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1220"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1220"
-          },
-          {
-            "day": "Fri",
-            "start": "1130",
-            "end": "1220"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
-    "closed": 0,
+    "other": 1,
+    "open": 0,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "L. Pratt"
+    "Mizuki Mazzotta"
   ],
-  "scraped_at": "2026-06-17T23:02:52.548Z"
+  "scraped_at": "2026-06-18T02:23:32.821Z"
 }

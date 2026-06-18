@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "ETHN",
   "requirements": [
-    "ETHN"
+    "ETHN",
+    "Race and Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Addresses the historical position and cultural production of Spanish and Latin American Jewry, from medieval Spain to the present. We examine how diasporic Jewish subjects have framed their identity while negotiating the pressures of exile, immigration, antisemitism, and political violence.",
-  "course_notes": null,
+  "course_notes": "(Same as JS 422 1, LACS 490R 2) This course addresses the historical position and cultural production of Spanish and Latin American Jewry, centering on intergroup relations of coexistence and/or conflict. Looking first at medieval Iberia, then shifting focus to contemporary Spain and Latin America, we will examine how majority cultures construct an Other belonging to a minority culture; how Jews could be both beneficiaries and victims of systems of inequality; and how diasporic Jewish subjects in different parts of the Hispanic world have historically framed their identity while negotiating the pressures of exile and immigration, religious intolerance, and political marginalization. Looking at examples as diverse as Spain's hidden crypto-Jews and the Jewish gauchos of Argentina, the course explores how Jewish subjects have negotiated tensions between assimilation and the preservation of differences and how they are impacted in private and public life by the intersection of religion, class, gender, nationality, and race. Readings highlight the role of memory in constructing symbolic representations through which ethnic and religious identity is expressed; we will compare these representations with the ways in which concepts of otherness in our own society structure social relations. SPAN 422/JS 422/LACS 490R fulfills the GER Race and Ethnicity requirement. It also fulfills the 400-level requirement for the Spanish major/minor and the Spanish 400-level and/or Spanish electives requirement for the Spanish and Portuguese major. In consultation with an adviser, it may fulfill the requirement for two Spanish courses (212 or higher) for the Spanish and Linguistics major. SPAN 422/JS 422/LACS 490R will be taught in English; readings provided in English translation. ***If SPAN 422 is at full capacity, please consider enrolling in JS 422-1 or LACS 490R-2, which will satisfy the same major/minor requirements and the Race and Ethnicity requirement.*** PREREQUISITES: At least one 300-level foundational course in the Spanish major/minor or one 400-level is recommended. Students wishing to enroll without these prerequisites should consult with the instructor.",
   "requisites": null,
   "cross_listed": "JS 422",
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "1231",
       "crn": "1812",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "H. Gold",
+      "instructor": "Hazel Gold",
       "instructors": [
         {
-          "name": "H. Gold",
-          "email": null
+          "name": "Hazel Gold",
+          "email": "hgold@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Modern Language 330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 7,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "1812",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "H. Gold",
-      "instructors": [
-        {
-          "name": "H. Gold",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "H. Gold"
+    "Hazel Gold"
   ],
-  "scraped_at": "2026-06-17T23:14:53.055Z"
+  "scraped_at": "2026-06-18T03:18:50.187Z"
 }

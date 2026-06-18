@@ -5,13 +5,13 @@
   "catalog_number": "511D",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Online Asynchronous. Prerequisites: None. GH511 is the first in the two-semester Program Cycle sequence and is typically taken in the student's second semester. This course will provide students with theoretical principles and practical skills for designing and managing global health programs and projects. Sessions will focus on core activities following the project life cycle, including community engagement, formative research, situational analysis, theory of change, project design, principles of project and financial management, and ethical considerations and challenges. This course uses a variety of approaches to foster the development of practical skills in program design and management including lectures, interactive group sessions, discussions with experts, and task-based assignments. This course is a prerequisite for GH512 Program Cycle 2: Monitoring and Evaluation of Global Health Programs. The course is taken for a letter grade.",
+  "course_notes": "This is an online asynchronous course. GH Online students can enroll through March 23. Second-year GH students can enroll through March 27. GLEPI and GEH students through March 31. All others may enroll AFTER August 26.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,66 +20,59 @@
   },
   "sections": [
     {
+      "atlas_key": "4525",
       "crn": "5888",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Giovenco",
+      "instructor": "Danielle Giovenco",
       "instructors": [
         {
-          "name": "D. Giovenco",
-          "email": null
+          "name": "Danielle Giovenco",
+          "email": "danielle.giovenco@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5888",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Giovenco",
-      "instructors": [
-        {
-          "name": "D. Giovenco",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Giovenco"
+    "Danielle Giovenco"
   ],
-  "scraped_at": "2026-06-17T23:10:49.331Z"
+  "scraped_at": "2026-06-18T02:59:07.912Z"
 }

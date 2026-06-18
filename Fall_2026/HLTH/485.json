@@ -5,15 +5,15 @@
   "catalog_number": "485",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 4",
+  "credit_hours": "2",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Seminar or lecture in various topics on human health. May be repeated for credit (up to 9 hours) when topic varies.",
-  "course_notes": null,
+  "course_notes": "This course is designed to be an introduction to concepts in Global Health. Students will be exposed to core global health competencies through formal didactic sessions, skills workshops, and relevant \"local-global\" experiences. The Consortium of Universities for Global Health (CUGH) has identified 12 competency domains applicable to 21st Century Global Health Practitioners. The course will provide students with basic education across these domains with an emphasis on Global Burden of Disease, Globalization of Health and Health Care, Ethics, and Health Equity. Didactic sessions will be led by the course directors as well as by guest lecturers from the School of Medicine, School of Public Health, Emory Global Health Institute, and CDC. Speakers will be encouraged to build connections with course students for future collaboration in research and global health related projects (i.e. during Discovery). Skills workshops will be led by residents in global health tracks. \"Local-global\" experiences will be observational and hands-on in nature and will take place with organizations such as the Clarkston Community Health Center, Refugee Women's Network, or through Emory University. This course is intended for Human Health/ Global Health seniors and permission only. You can reach out to Ms. Addy (shiyra.sadoff@emory.edu) with any questions and you can apply for permission at this link: https:www.surveymonkey.com/r/CSHHOPR5269 Special Note: HLTH 485 courses count differently within the majors/minors; they are not all equivalent. Please pay close attention to the exact course title and categories that specific title counts in, which you can find on our requirements sheets and course summary sheets. If you have any questions, please reach out to CSHH administration.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,48 @@
   },
   "sections": [
     {
+      "atlas_key": "3166",
       "crn": "2639",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Team",
+      "instructor": "Rewa Choudhary",
       "instructors": [
         {
-          "name": "Team",
-          "email": null
+          "name": "Rewa Choudhary",
+          "email": "rchoud4@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Elizabeth Downes",
+          "email": "edownes@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Aya Fanny",
+          "email": "aya.fanny@emory.edu",
+          "role": "Secondary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1525Clifton-Alperin Auditorium",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 1-3p",
@@ -49,51 +74,27 @@
             "end": "1500"
           }
         ]
-      }
-    },
-    {
-      "crn": "2639",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Team",
-      "instructors": [
-        {
-          "name": "Team",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 1-3p",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "1300",
-            "end": "1500"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Team"
+    "Aya Fanny",
+    "Elizabeth Downes",
+    "Rewa Choudhary"
   ],
-  "scraped_at": "2026-06-17T23:11:12.000Z"
+  "scraped_at": "2026-06-18T03:01:54.418Z"
 }

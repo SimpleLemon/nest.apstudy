@@ -1,0 +1,86 @@
+{
+  "course_code": "ENG_OX 202E",
+  "course_title": "Writing & Communication Center Practicum",
+  "subject": "ENG_OX",
+  "catalog_number": "202E",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Designed as a companion to first semester experience as a Writing & Communication Center tutor. Course includes reflection on tutoring experiences and practice in tutoring strategies. Includes the history of writing centers, theoretical and pedagogical readings, and writing center research.",
+  "course_notes": "(Permission Required Prior to Enrollment)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "39",
+      "crn": "4151",
+      "section_number": "1",
+      "schedule_type": "PRA",
+      "instructor": "Joseph Nefcy Cheatle",
+      "instructors": [
+        {
+          "name": "Joseph Nefcy Cheatle",
+          "email": "joseph.james.nefcy.cheatle@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "Pierce Hall 227",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Joseph Nefcy Cheatle"
+  ],
+  "scraped_at": "2026-06-18T02:56:05.934Z"
+}

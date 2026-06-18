@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "CW",
   "requirements": [
-    "CW"
+    "CW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Introduction to research design and data analysis, including logic of research, methods of data collection, elementary statistics, and computer analysis.",
-  "course_notes": "Any SOC or SOC_OX or equivalent transfer credit as prerequisite.",
+  "course_notes": "Course Description: This course introduces students to the research methods commonly used in sociology and related fields. Topics include measurement validity and reliability; random and nonrandom sampling; experimental and quasi-experimental designs; survey research and questionnaire construction; ethnographic methods such as participant observation and intensive interviewing; evaluation research versus traditional social research; and ethical issues such as informed consent, privacy, and conflicts of interest. The course has four basic objectives. First, you will learn how to translate abstract theoretical ideas into testable hypotheses. Second, you will be able to identify the strengths and limitations of different methods and determine which methods are most appropriate for answering your particular research questions. Third, you will become better equipped to critically assess the methodological soundness of research presented in scholarly journals and the news media. Fourth, you will develop a detailed understanding of research ethics, including how ethical guidelines have evolved historically and how they potentially vary across different methods and fields of study. The overarching goal of this course is to provide you with the necessary practical skills for being a discerning consumer and producer of social research. The course is required for sociology majors and fulfills a continuing writing requirement.",
   "requisites": "Any SOC or SOC_OX or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "1195",
       "crn": "2991",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Mullis",
+      "instructor": "Jeff Mullis",
       "instructors": [
         {
-          "name": "J. Mullis",
-          "email": null
+          "name": "Jeff Mullis",
+          "email": "jmullis@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Tarbutton Hall 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2991",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Mullis",
-      "instructors": [
-        {
-          "name": "J. Mullis",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Mullis"
+    "Jeff Mullis"
   ],
-  "scraped_at": "2026-06-17T23:14:49.781Z"
+  "scraped_at": "2026-06-18T03:18:24.353Z"
 }

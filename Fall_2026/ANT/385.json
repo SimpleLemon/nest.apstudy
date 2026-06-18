@@ -5,15 +5,15 @@
   "catalog_number": "385",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "HSC",
   "requirements": [
     "HSC"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Seminar or lecture series of topics of anthropological concern. May be repeated for credit when topic varies.",
-  "course_notes": null,
+  "course_notes": "(Same as ENVS 385 2) (Complete Topic - Energy Matters: Energy, Culture, Society) In this era of both climate change and high mass consumption, our world faces enormous challenges to our systems of producing, consuming, distributing, and transitioning energy. While we often think of these challenges as technological, they are bound up in questions of culture, inequality, economic order, political power, social organization, and ethics. This course draws upon historical, anthropological, and literary sources to examine the infrastructures - the constructed networks of ideas, technologies, people, and goods - that constitute energy systems. We will consider how energy both constitutes and bears upon our social worlds, our physical well-being, our economic and political relations, and our everyday lives.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "3064",
       "crn": "3102",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "K. Phillips",
+      "instructor": "Kristin D Phillips",
       "instructors": [
         {
-          "name": "K. Phillips",
-          "email": null
+          "name": "Kristin D Phillips",
+          "email": "kristin.d.phillips@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -54,26 +69,45 @@
             "end": "945"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3065",
       "crn": "3535",
       "section_number": "3",
       "schedule_type": "LEC",
-      "instructor": "S. Blakely",
+      "instructor": "Sandra Blakely",
       "instructors": [
         {
-          "name": "S. Blakely",
-          "email": null
+          "name": "Sandra Blakely",
+          "email": "sblakel@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Candler Library 114",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 27,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -89,26 +123,45 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3066",
       "crn": "3924",
       "section_number": "4",
       "schedule_type": "LEC",
-      "instructor": "X. Marsilli-Vargas",
+      "instructor": "Xochiquetzal Marsilli-Vargas",
       "instructors": [
         {
-          "name": "X. Marsilli-Vargas",
-          "email": null
+          "name": "Xochiquetzal Marsilli-Vargas",
+          "email": "xochitl.marsilli@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Candler Library 121",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -124,128 +177,27 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "3102",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "K. Phillips",
-      "instructors": [
-        {
-          "name": "K. Phillips",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3535",
-      "section_number": "3",
-      "schedule_type": "LEC",
-      "instructor": "S. Blakely",
-      "instructors": [
-        {
-          "name": "S. Blakely",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3924",
-      "section_number": "4",
-      "schedule_type": "LEC",
-      "instructor": "X. Marsilli-Vargas",
-      "instructors": [
-        {
-          "name": "X. Marsilli-Vargas",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 6,
+    "total_sections": 3,
+    "lectures": 3,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "K. Phillips",
-    "S. Blakely",
-    "X. Marsilli-Vargas"
+    "Kristin D Phillips",
+    "Sandra Blakely",
+    "Xochiquetzal Marsilli-Vargas"
   ],
-  "scraped_at": "2026-06-17T23:09:08.325Z"
+  "scraped_at": "2026-06-18T02:46:36.830Z"
 }

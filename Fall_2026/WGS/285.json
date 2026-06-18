@@ -5,15 +5,16 @@
   "catalog_number": "285",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 4",
+  "credit_hours": "3",
   "requirement_designation": "HSC",
   "requirements": [
-    "HSC"
+    "HSC",
+    "Race and Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Offerings vary each semester.",
-  "course_notes": null,
+  "course_notes": "(Same as AAS 285 3, ENVS 285 3) NO FRESHMAN Topic Title: Race, Gender and the Environment This course is an interdisciplinary look into the role of race and gender in shaping experiences with the natural world. Looking across literature, anthropology, cultural geography, and science studies among other disciplines, this course will speak towards diverse perspectives on the environment. Our course will center ecological worldviews from the African Diaspora, Indigenous cultures of the Americas, immigrant communities, and among diverse gender experiences. While most environmental thought centers the perspectives of the Eurocentric ideals of environmentalism and conservation, we will ask how environmental studies shifts when we center race and gender within our analyses. Some areas of study we will cover are Black feminist ecology, Indigenous environmental sciences, and environmental justice organizing.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,45 @@
   },
   "sections": [
     {
+      "atlas_key": "3103",
       "crn": "4526",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "Cato/Holsey",
+      "instructor": "Adrian Cato",
       "instructors": [
         {
-          "name": "Cato/Holsey",
-          "email": null
+          "name": "Adrian Cato",
+          "email": "adrian.cato@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Bayo Holsey",
+          "email": "bayo.holsey@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
+      "location": "Callaway S103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 3,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -54,56 +77,26 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "4526",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "Cato/Holsey",
-      "instructors": [
-        {
-          "name": "Cato/Holsey",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "Cato/Holsey"
+    "Adrian Cato",
+    "Bayo Holsey"
   ],
-  "scraped_at": "2026-06-17T23:15:06.177Z"
+  "scraped_at": "2026-06-18T03:19:50.994Z"
 }

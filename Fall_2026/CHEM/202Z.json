@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "NS",
   "requirements": [
-    "NS"
+    "NS",
+    "Natural Sciences(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "CHEM 202Z will provide students with a basic understanding of covalent bonding models, the energetics of reactions, and the kinetics and thermodynamics associated with reactions. The course will emphasize how reactivity is related to molecular structure and how reactivity can be controlled.",
-  "course_notes": "(CHEM 150 and CHEM 150L) or AP score of 4 or higher or IB score of 5 or higher required.",
+  "course_notes": "This course is reserved for freshmen entering with AP, IB, or Chem 150 transfer credit.",
   "requisites": "(CHEM 150 and CHEM 150L) or AP score of 4 or higher or IB score of 5 or higher required.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,38 @@
   },
   "sections": [
     {
+      "atlas_key": "3464",
       "crn": "2777",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Weinschenk",
+      "instructor": "Matthew Weinschenk",
       "instructors": [
         {
-          "name": "M. Weinschenk",
-          "email": null
+          "name": "Matthew Weinschenk",
+          "email": "mweinsc@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Atwood Chemistry Bldg. 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 1-2:15p",
@@ -54,56 +70,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "2777",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Weinschenk",
-      "instructors": [
-        {
-          "name": "M. Weinschenk",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 1-2:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Thu",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Weinschenk"
+    "Matthew Weinschenk"
   ],
-  "scraped_at": "2026-06-17T23:09:40.817Z"
+  "scraped_at": "2026-06-18T02:50:59.311Z"
 }

@@ -5,38 +5,58 @@
   "catalog_number": "636",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course focuses on the conservation of biodiversity and introduces students to ways that ecological and evolutionary principles can be used to conserve and protect species and ecosystems at risk.",
+  "course_notes": "(Same as ENVS 345 1)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "438",
       "crn": "3414",
       "section_number": "2177",
       "schedule_type": "LEC",
-      "instructor": "C. Goetz",
+      "instructor": "Jessica Deere",
       "instructors": [
         {
-          "name": "C. Goetz",
-          "email": null
+          "name": "Jessica Deere",
+          "email": "jessica.r.deere@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Thomas R. Gillespie",
+          "email": "thomas.gillespie@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W501",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "5",
+      "enrollment_capacity": 5,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6:30-9:30p",
@@ -47,50 +67,93 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "439",
       "crn": "3415",
       "section_number": "2201",
       "schedule_type": "LEC",
-      "instructor": "C. Goetz",
+      "instructor": "Jessica Deere",
       "instructors": [
         {
-          "name": "C. Goetz",
-          "email": null
+          "name": "Jessica Deere",
+          "email": "jessica.r.deere@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Thomas R. Gillespie",
+          "email": "thomas.gillespie@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W501",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "5",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "440",
       "crn": "3416",
       "section_number": "2677",
       "schedule_type": "LEC",
-      "instructor": "C. Goetz",
+      "instructor": "Miguel Reyes",
       "instructors": [
         {
-          "name": "C. Goetz",
-          "email": null
+          "name": "Miguel Reyes",
+          "email": "miguel.l.reyes@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "5",
+      "enrollment_capacity": 70,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6:30-9:30p",
@@ -101,26 +164,45 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "441",
       "crn": "3417",
       "section_number": "3277",
       "schedule_type": "LEC",
-      "instructor": "C. Goetz",
+      "instructor": "Miguel Reyes",
       "instructors": [
         {
-          "name": "C. Goetz",
-          "email": null
+          "name": "Miguel Reyes",
+          "email": "miguel.l.reyes@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "5",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6:30-9:30p",
@@ -131,26 +213,45 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "442",
       "crn": "3418",
       "section_number": "4577",
       "schedule_type": "LEC",
-      "instructor": "C. Goetz",
+      "instructor": "Arri Eisen",
       "instructors": [
         {
-          "name": "C. Goetz",
-          "email": null
+          "name": "Arri Eisen",
+          "email": "aeisen@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Atwood Chemistry Bldg. 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "5",
+      "enrollment_capacity": 50,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 6:30-9:30p",
@@ -161,165 +262,28 @@
             "end": "2130"
           }
         ]
-      }
-    },
-    {
-      "crn": "3414",
-      "section_number": "2177",
-      "schedule_type": "LEC",
-      "instructor": "C. Goetz",
-      "instructors": [
-        {
-          "name": "C. Goetz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3415",
-      "section_number": "2201",
-      "schedule_type": "LEC",
-      "instructor": "C. Goetz",
-      "instructors": [
-        {
-          "name": "C. Goetz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "3416",
-      "section_number": "2677",
-      "schedule_type": "LEC",
-      "instructor": "C. Goetz",
-      "instructors": [
-        {
-          "name": "C. Goetz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3417",
-      "section_number": "3277",
-      "schedule_type": "LEC",
-      "instructor": "C. Goetz",
-      "instructors": [
-        {
-          "name": "C. Goetz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3418",
-      "section_number": "4577",
-      "schedule_type": "LEC",
-      "instructor": "C. Goetz",
-      "instructors": [
-        {
-          "name": "C. Goetz",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "5",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 10,
-    "lectures": 10,
+    "total_sections": 5,
+    "lectures": 5,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 10,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Goetz"
+    "Arri Eisen",
+    "Jessica Deere",
+    "Miguel Reyes",
+    "Thomas R. Gillespie"
   ],
-  "scraped_at": "2026-06-17T23:04:30.314Z"
+  "scraped_at": "2026-06-18T02:35:28.944Z"
 }

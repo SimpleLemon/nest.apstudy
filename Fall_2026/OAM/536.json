@@ -5,13 +5,13 @@
   "catalog_number": "536",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course surveys the evolving role that social purpose organizations, their leaders (both management and board of directors), and critical stakeholders play in delivering social impact. These purpose-driven organizations, which make up the $6 trillion social solution economy, encompass an array of business models that range from traditional nonprofits to for-profit companies and hybrid organizations focusing on social outcomes. We will also cover the importance of key actors in the sector, including foundations / grant makers, charities, service providers, B corps, impact and ESG investors, government entities, and social enterprises.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,41 @@
   },
   "sections": [
     {
+      "atlas_key": "3546",
       "crn": "3757",
       "section_number": "2168",
       "schedule_type": "LEC",
-      "instructor": "Goebel/Martin",
+      "instructor": "Brian Goebel",
       "instructors": [
         {
-          "name": "Goebel/Martin",
-          "email": null
+          "name": "Brian Goebel",
+          "email": "bgoebel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Randy Martin",
+          "email": "rmart31@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 28,
+      "seats_available": 28,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6:30-9:30p",
@@ -47,26 +65,48 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3547",
       "crn": "3758",
       "section_number": "3268",
       "schedule_type": "LEC",
-      "instructor": "Goebel/Martin",
+      "instructor": "Brian Goebel",
       "instructors": [
         {
-          "name": "Goebel/Martin",
-          "email": null
+          "name": "Brian Goebel",
+          "email": "bgoebel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Randy Martin",
+          "email": "rmart31@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 28,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6:30-9:30p",
@@ -77,26 +117,48 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3548",
       "crn": "5428",
       "section_number": "4168",
       "schedule_type": "LEC",
-      "instructor": "Goebel/Martin",
+      "instructor": "Brian Goebel",
       "instructors": [
         {
-          "name": "Goebel/Martin",
-          "email": null
+          "name": "Brian Goebel",
+          "email": "bgoebel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Randy Martin",
+          "email": "rmart31@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Masters Non-MBA",
+      "grading_mode_options": [
+        "MTR",
+        "Non-MBA Masters Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6:30-9:30p",
@@ -107,26 +169,48 @@
             "end": "2130"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "3549",
       "crn": "5429",
       "section_number": "4268",
       "schedule_type": "LEC",
-      "instructor": "Goebel/Martin",
+      "instructor": "Brian Goebel",
       "instructors": [
         {
-          "name": "Goebel/Martin",
-          "email": null
+          "name": "Brian Goebel",
+          "email": "bgoebel@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Randy Martin",
+          "email": "rmart31@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "4",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "W 6:30-9:30p",
@@ -137,141 +221,26 @@
             "end": "2130"
           }
         ]
-      }
-    },
-    {
-      "crn": "3757",
-      "section_number": "2168",
-      "schedule_type": "LEC",
-      "instructor": "Goebel/Martin",
-      "instructors": [
-        {
-          "name": "Goebel/Martin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3758",
-      "section_number": "3268",
-      "schedule_type": "LEC",
-      "instructor": "Goebel/Martin",
-      "instructors": [
-        {
-          "name": "Goebel/Martin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5428",
-      "section_number": "4168",
-      "schedule_type": "LEC",
-      "instructor": "Goebel/Martin",
-      "instructors": [
-        {
-          "name": "Goebel/Martin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5429",
-      "section_number": "4268",
-      "schedule_type": "LEC",
-      "instructor": "Goebel/Martin",
-      "instructors": [
-        {
-          "name": "Goebel/Martin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "4",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "W 6:30-9:30p",
-        "meetings": [
-          {
-            "day": "Wed",
-            "start": "1830",
-            "end": "2130"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 8,
-    "lectures": 8,
+    "total_sections": 4,
+    "lectures": 4,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 8,
+    "open": 4,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Goebel/Martin"
+    "Brian Goebel",
+    "Randy Martin"
   ],
-  "scraped_at": "2026-06-17T23:12:33.353Z"
+  "scraped_at": "2026-06-18T03:10:44.992Z"
 }

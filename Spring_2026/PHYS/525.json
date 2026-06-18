@@ -5,38 +5,51 @@
   "catalog_number": "525",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Fundamentals of Innovation I is the first of a two-course sequence on various techniques and approaches needed to understand the innovation process. Issues explored will include patterns of technological change, identifying market and technological opportunities, competitive market analysis, the process of technology commercialization, intellectual property protection, and methods of valuing new technology.",
+  "course_notes": "Final Assessment: Paper/Project THIS COURSE REQUIRES PROFESSOR PERMISSION. STUDENTS WILL BE ENROLLED ONCE NOTIFIED BY THE PROFESSOR. Counts towards partial fulfillment of the JD Experiential degree requirement.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-17",
+    "end": "2026-11-23"
   },
   "sections": [
     {
+      "atlas_key": "1897",
       "crn": "1752",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Lin",
+      "instructor": "Nicole Morris",
       "instructors": [
         {
-          "name": "J. Lin",
-          "email": null
+          "name": "Nicole Morris",
+          "email": "nicole.n.morris@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 5:30-6:45p",
@@ -52,56 +65,25 @@
             "end": "1845"
           }
         ]
-      }
-    },
-    {
-      "crn": "1752",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Lin",
-      "instructors": [
-        {
-          "name": "J. Lin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 5:30-6:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1730",
-            "end": "1845"
-          },
-          {
-            "day": "Wed",
-            "start": "1730",
-            "end": "1845"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-17",
+        "end": "2026-11-23"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Lin"
+    "Nicole Morris"
   ],
-  "scraped_at": "2026-06-17T23:06:11.169Z"
+  "scraped_at": "2026-06-18T02:39:58.703Z"
 }

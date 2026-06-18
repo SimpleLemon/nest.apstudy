@@ -5,40 +5,73 @@
   "catalog_number": "301L",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "2",
+  "credit_hours": "3",
   "requirement_designation": "SNTL",
   "requirements": [
     "SNTL"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "This course will explore topics in cellular and small network neuroscience by performing virtual electrophysiology experiments on the computer. The content matches the material covered in Biology 360/NBB 301 and will help students understand neurons and neuronal networks in greater depth.",
   "course_notes": "[(BIOL 142 and BIOl 142L) or BIOL_OX142] and (BIOL 360 or NBB 301) or equivalent transfer credit as a prerequisite.",
   "requisites": "[(BIOL 142 and BIOl 142L) or BIOL_OX142] and (BIOL 360 or NBB 301) or equivalent transfer credit as a prerequisite.",
   "cross_listed": "BIOL 360L",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-10",
+    "end": "2026-12-11"
   },
   "sections": [
     {
+      "atlas_key": "2925",
       "crn": "4548",
       "section_number": "1",
       "schedule_type": "LAB",
-      "instructor": "S. Sober",
+      "instructor": "Vince Carter",
       "instructors": [
         {
-          "name": "S. Sober",
-          "email": null
+          "name": "Vince Carter",
+          "email": "vcarter@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "George Fulk",
+          "email": "george.david.fulk@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Kathleen Geist",
+          "email": "kgeist@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Anjanette Nunez",
+          "email": "anjanette.nunez@emory.edu",
+          "role": "Secondary Instructor"
+        },
+        {
+          "name": "Jocelyn Monique Smith",
+          "email": "jocelyn.mayes@emory.edu",
+          "role": "Teaching Assistant"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,56 +87,29 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "4548",
-      "section_number": "1",
-      "schedule_type": "LAB",
-      "instructor": "S. Sober",
-      "instructors": [
-        {
-          "name": "S. Sober",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-10",
+        "end": "2026-12-11"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
-    "labs": 2,
+    "labs": 1,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Sober"
+    "Anjanette Nunez",
+    "George Fulk",
+    "Jocelyn Monique Smith",
+    "Kathleen Geist",
+    "Vince Carter"
   ],
-  "scraped_at": "2026-06-17T23:04:17.237Z"
+  "scraped_at": "2026-06-18T02:32:26.227Z"
 }

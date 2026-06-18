@@ -8,10 +8,11 @@
   "credit_hours": "1",
   "requirement_designation": "PE",
   "requirements": [
-    "PE"
+    "PE",
+    "Physical Education(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Cybex machines and freestanding exercise stations used for muscular strength and muscular endurance training. Fulfills the Principles of Physical Fitness (PPF) requirement.",
   "course_notes": "Pre-req: Limit PPF",
   "requisites": "Pre-req: Limit PPF",
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "940",
       "crn": "2921",
       "section_number": "1",
       "schedule_type": "PE",
-      "instructor": "C. Jones",
+      "instructor": "Corey Jones",
       "instructors": [
         {
-          "name": "C. Jones",
-          "email": null
+          "name": "Corey Jones",
+          "email": "corey.ellis.jones@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff PE Ctr-WghtRm Corrido",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2921",
-      "section_number": "1",
-      "schedule_type": "PE",
-      "instructor": "C. Jones",
-      "instructors": [
-        {
-          "name": "C. Jones",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Thu",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
+    "other": 1,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Jones"
+    "Corey Jones"
   ],
-  "scraped_at": "2026-06-17T23:14:01.024Z"
+  "scraped_at": "2026-06-18T03:12:33.744Z"
 }

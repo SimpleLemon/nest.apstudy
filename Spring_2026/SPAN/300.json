@@ -10,35 +10,50 @@
   "requirements": [
     "IC"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "The foundation course for the major and minor. A course in Hispanic cultural literacy that also strengthens written and oral language skills.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Modern literatures form around the world taught in a comparative or global framework. Course may be repeated when topic changes.",
+  "course_notes": "(Same as ENG 389 2, MESAS 370 1) (World literature often presents itself as capacious and inclusive. Whether framed geographically or temporally, it promises maximum scope, circulation, and connection. Yet as a modern system, it does not simply gather texts from across the globe. It also produces exclusions, rendering certain life and literary forms marginal, invisible, or residual.) (Alongside an introduction to major debates in world literature, including questions of translation, worlding, globalization, and cosmopolitanism, this course focuses on what remains outside or falls out of world literature's dominant modes of circulation. We examine how writers register these dynamics of exclusion formally and thematically, often by reworking inherited genres, drawing on oral or local traditions, or staging encounters with worldliness that never fully arrive.) (Readings may include Ama Ata Aidoo's Anowa, Ibrahim al-Koni's The Puppet, Hamid Ismailov's Manaschi, Sabahattin Ali's Madonna in a Fur Coat, and Aga Shahid Ali's The Country without a Post Office, Yoko Tawada's The Last Children of Tokyo.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3569",
       "crn": "3079",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Tuten",
+      "instructor": "Mehtap Ozdemir",
       "instructors": [
         {
-          "name": "D. Tuten",
-          "email": null
+          "name": "Mehtap Ozdemir",
+          "email": "mehtap.ozdemir@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Few Bldg 129",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -54,56 +69,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "3079",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Tuten",
-      "instructors": [
-        {
-          "name": "D. Tuten",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
+    "open": 1,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Tuten"
+    "Mehtap Ozdemir"
   ],
-  "scraped_at": "2026-06-17T23:06:50.319Z"
+  "scraped_at": "2026-06-18T02:44:34.193Z"
 }

@@ -10,10 +10,10 @@
   "requirements": [
     "SNT"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Why and how do humans sleep and dream? This is a survey course presenting a biologically informed approach to sleep and dreaming under both typical and pathological conditions. Format will be primarily lecture, but some discussion and active exercises will also be used.",
-  "course_notes": "(PSYC 110 or PSYC_OX 110 or NBB 201 or ANT 200 or NBB_OX 201 or NBB 301 or BIOL 360) and (QTM 100 or QTM_OX 100) or equivalent transfer credit as prerequisite.",
+  "course_notes": "(Same as NBB 370 3) Why do humans sleep and dream? How does the brain control these and related states of consciousness? What are the implications of being a \"night owl\" versus a \"morning person\"? Is lucid dreaming a brain state and can you learn to do it? Do animals sleep differently and do they dream like we do? Do classic and more recent theories of dreaming make sense in terms of what we can measure? Does sleep really form memories and regulate our emotions? Does chronic sleep deprivation matter for mind and body? Can you perform complex actions in your sleep without knowing it? This is a survey course presenting a biologically informed approach to sleep and dreaming under both typical and pathological conditions. Format will be primarily lecture, but discussion and active exercises will also be used. Readings: Selections from academic and general audience books, scientific journals, and online sources. Assignment/ Exam Details: Several exams and quizzes throughout the semester; sleep log and dream journal projects; one short reflection paper. Class participation also counts.",
   "requisites": "(PSYC 110 or PSYC_OX 110 or NBB 201 or ANT 200 or NBB_OX 201 or NBB 301 or BIOL 360) and (QTM 100 or QTM_OX 100) or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
@@ -22,23 +22,38 @@
   },
   "sections": [
     {
+      "atlas_key": "3687",
       "crn": "2177",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "H. Rodman",
+      "instructor": "Hillary R Rodman",
       "instructors": [
         {
-          "name": "H. Rodman",
-          "email": null
+          "name": "Hillary R Rodman",
+          "email": "hrrodma@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Psychology Bldg 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +69,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2177",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "H. Rodman",
-      "instructors": [
-        {
-          "name": "H. Rodman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
     "closed": 0,
-    "waitlisted": 2
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "H. Rodman"
+    "Hillary R Rodman"
   ],
-  "scraped_at": "2026-06-17T23:14:27.055Z"
+  "scraped_at": "2026-06-18T03:17:10.147Z"
 }

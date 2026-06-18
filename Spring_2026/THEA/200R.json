@@ -5,83 +5,82 @@
   "catalog_number": "200R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1 - 8",
+  "credit_hours": "2",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "A required course for all majors and minors. Students undertake a substantial technical theater responsibility in a Theater Emory production (e.g. light or sound operator, costume crew, running props backstage, etc.)",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This is a 2-credit course intended for continuing student members of the Emory College Honor Council. Members are required to develop a project related to academic integrity and to help facilitate the general practicum, which covers new research and trends concerning academic dishonesty.",
+  "course_notes": "(Permission Required Prior to Enrollment)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3357",
       "crn": "2485",
       "section_number": "1",
       "schedule_type": "PRA",
-      "instructor": "B. Glenn",
+      "instructor": "Melissa Shoemake",
       "instructors": [
         {
-          "name": "B. Glenn",
-          "email": null
+          "name": "Melissa Shoemake",
+          "email": "melissa.shoemake@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Blaire Wilson",
+          "email": "blaire.wilson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Candler Library 114",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "2485",
-      "section_number": "1",
-      "schedule_type": "PRA",
-      "instructor": "B. Glenn",
-      "instructors": [
-        {
-          "name": "B. Glenn",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "B. Glenn"
+    "Blaire Wilson",
+    "Melissa Shoemake"
   ],
-  "scraped_at": "2026-06-17T23:06:56.781Z"
+  "scraped_at": "2026-06-18T02:44:56.649Z"
 }

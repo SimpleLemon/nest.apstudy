@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "HAPW",
   "requirements": [
-    "HAPW"
+    "HAPW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Intensive reading of literary and theoretical texts that raise critical issues in the field of Comparative Literature and related disciplines. Note: This course is non-repeatable.",
-  "course_notes": null,
+  "course_notes": "(Topic: Reading By Example ) (Lacking a fixed national language or shared methodology, Comparative Literature is defined less by its boundaries than by its unique knowledge-making practice: the act of reading. This capstone seminar explores \"exemplary readings\" that have defined the discipline by expanding the limits of what a text can signify.) (Operating as a reading workshop, the course examines pivotal intellectual encounters-from Jacques Derrida's debate with Jacques Lacan over E.A. Poe to Zakiyyah Iman Jackson's engagement with Octavia Butler. Students will grapple with the implications of these influential texts while cultivating the rigorous, specialized attention that characterizes the field's distinct mode of inquiry.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "3643",
       "crn": "2331",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "R. Mendoza-De Jesus",
+      "instructor": "Ronald Mendoza-De Jesus",
       "instructors": [
         {
-          "name": "R. Mendoza-De Jesus",
-          "email": null
+          "name": "Ronald Mendoza-De Jesus",
+          "email": "ronald.mendoza-de.jesus@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Callaway S108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "2331",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "R. Mendoza-De Jesus",
-      "instructors": [
-        {
-          "name": "R. Mendoza-De Jesus",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Mendoza-De Jesus"
+    "Ronald Mendoza-De Jesus"
   ],
-  "scraped_at": "2026-06-17T23:09:53.856Z"
+  "scraped_at": "2026-06-18T02:51:35.563Z"
 }

@@ -5,13 +5,13 @@
   "catalog_number": "540M",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The purpose of this course is to familiarize you with the basic concepts and principles of Marketing Management by introducing you to a framework-based analysis of marketing issues and how they impact organizations and their customers. Through cases, current examples, and a group project, the course will endow you with an appreciation for the role of marketing in organizations and an understanding of how to apply marketing concepts. The course will improve your approach to structured problem solving, analytical skills, and vocabulary around the marketing discipline, teach you various data analysis techniques corresponding to functional topics within the marketing discipline, and provide you with an introduction to the process required to develop marketing strategies and implementation plans. As an emerging professional, you will draw from other core courses to better understand how the marketing function interacts with other functions within the organization.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "4255",
       "crn": "3846",
       "section_number": "4501",
       "schedule_type": "LEC",
-      "instructor": "M. Ward",
+      "instructor": "Morgan Ward",
       "instructors": [
         {
-          "name": "M. Ward",
-          "email": null
+          "name": "Morgan Ward",
+          "email": "morgan.k.ward@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Foundation Ctr W320",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Masters Non-MBA",
+      "grading_mode_options": [
+        "MTR",
+        "Non-MBA Masters Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 66,
+      "seats_available": 66,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 1-2:15p",
@@ -52,56 +65,25 @@
             "end": "1415"
           }
         ]
-      }
-    },
-    {
-      "crn": "3846",
-      "section_number": "4501",
-      "schedule_type": "LEC",
-      "instructor": "M. Ward",
-      "instructors": [
-        {
-          "name": "M. Ward",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 1-2:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1300",
-            "end": "1415"
-          },
-          {
-            "day": "Wed",
-            "start": "1300",
-            "end": "1415"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Ward"
+    "Morgan Ward"
   ],
-  "scraped_at": "2026-06-17T23:12:04.118Z"
+  "scraped_at": "2026-06-18T03:06:42.619Z"
 }

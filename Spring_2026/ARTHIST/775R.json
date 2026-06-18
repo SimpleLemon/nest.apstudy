@@ -5,38 +5,51 @@
   "catalog_number": "775R",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The nature of a teaching assistantship varies from department to department. The defining characteristic of this position across all departments and programs is a controlled, carefully monitored initial teaching opportunity. A teaching assistant may be responsible for 10 to 12 hours per week of discussion or laboratory supervision.",
+  "course_notes": "(S/U Only) (Permission Required Prior to Enrollment)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "1761",
       "crn": "3774",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "A. Patrao",
+      "instructor": "Jean Welsh",
       "instructors": [
         {
-          "name": "A. Patrao",
-          "email": null
+          "name": "Jean Welsh",
+          "email": "jwelsh1@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 7,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 8:30-11:15a",
@@ -47,9 +60,14 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "1762",
       "crn": "4405",
       "section_number": "2",
       "schedule_type": "SEM",
@@ -57,16 +75,28 @@
       "instructors": [
         {
           "name": "K. Wallace-Sanders",
-          "email": null
+          "email": null,
+          "role": null
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 9a-12p",
@@ -77,82 +107,26 @@
             "end": "1200"
           }
         ]
-      }
-    },
-    {
-      "crn": "3774",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "A. Patrao",
-      "instructors": [
-        {
-          "name": "A. Patrao",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 8:30-11:15a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "4405",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "K. Wallace-Sanders",
-      "instructors": [
-        {
-          "name": "K. Wallace-Sanders",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 9a-12p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "900",
-            "end": "1200"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
+    "other": 2,
     "open": 2,
-    "closed": 2,
+    "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Patrao",
+    "Jean Welsh",
     "K. Wallace-Sanders"
   ],
-  "scraped_at": "2026-06-17T23:01:11.281Z"
+  "scraped_at": "2026-06-18T02:08:18.954Z"
 }

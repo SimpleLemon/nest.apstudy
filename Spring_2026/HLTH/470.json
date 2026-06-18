@@ -5,40 +5,53 @@
   "catalog_number": "470",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "0.5",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This is a capstone course that combines health economics and human health content with data science. You will complete an empirical research project using raw data and employ econometric methods to analyze a research question relevant to contemporary health care issues and/or health.",
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Given the sudden rise of AI agents, this tech toolbox will introduce students to the underlying technology and have them build a basic agents to assist them in increasing their productivity. It will take advantage of computer use (available from both Anthropic via Claude and Amazon via Nova Act). Students will use Python to make API calls that will enable them to perform tasks such as adding appointments to their calendar from emails that are in their inboxes, automating product ordering, and automating email replies.",
   "course_notes": "ECON 320 and (ECON 371 or ECON 372 or ECON 372W or HLTH 370) or equivalent transfer credit as prerequisite.",
   "requisites": "ECON 320 and (ECON 371 or ECON 372 or ECON 372W or HLTH 370) or equivalent transfer credit as prerequisite.",
   "cross_listed": "ECON 470",
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4411",
       "crn": "4390",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "I. McCarthy",
+      "instructor": "David Schweidel",
       "instructors": [
         {
-          "name": "I. McCarthy",
-          "email": null
+          "name": "David Schweidel",
+          "email": "dschweidel@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "0.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 300,
+      "seats_available": 245,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -54,56 +67,25 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "4390",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "I. McCarthy",
-      "instructors": [
-        {
-          "name": "I. McCarthy",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "I. McCarthy"
+    "David Schweidel"
   ],
-  "scraped_at": "2026-06-17T23:03:08.814Z"
+  "scraped_at": "2026-06-18T02:25:23.383Z"
 }

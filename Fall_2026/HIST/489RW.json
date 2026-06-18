@@ -8,12 +8,13 @@
   "credit_hours": "4",
   "requirement_designation": "CW",
   "requirements": [
-    "CW"
+    "CW",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "All history majors except those who complete the Honors Program must take two colloquia (HIST 487, 488 or 489). Each colloquium treats a special theme by reading, discussion, and writing of papers. Enrollment in each is limited to twelve; non-majors are welcome within space limitations.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "All history majors except those who complete the Honors Program must take two colloquia ( HIST 487 , 488 or 489 ). Each colloquium treats a special theme by reading, discussion, and writing of papers. Enrollment in each is limited to twelve; non-majors are welcome within space limitations.",
+  "course_notes": "(This course deals with the memory/history of the Partition of British India in 1947, an event that resulted in the establishment of the nation-states of India, Pakistan and (in time) Bangladesh. It investigates official and unofficial histories of this turning point, when an estimated 2 - 3 million people died and over ten million became refugees in the subcontinent, and analyzes these histories by juxtaposing them with the memories of \"survivors\" who lived through the times. The exploration tells us something about how critical historical events are remembered and represented. Through close reading, reflection, and discussion of a range of written and visual sources, the course will help students from diverse disciplinary backgrounds develop a critical approach to the understanding of modern societies and their contested histories. Students will have the opportunity to engage with a variety of primary and secondary sources, including but not limited to path-breaking historical scholarship, fiction, and film from the 1940s to today.)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "731",
       "crn": "2560",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "G. Pandey",
+      "instructor": "Gyanendra Pandey",
       "instructors": [
         {
-          "name": "G. Pandey",
-          "email": null
+          "name": "Gyanendra Pandey",
+          "email": "gpande2@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Woodruff Library 773",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 2:30-5:15p",
@@ -49,51 +67,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "2560",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "G. Pandey",
-      "instructors": [
-        {
-          "name": "G. Pandey",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 2:30-5:15p",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Pandey"
+    "Gyanendra Pandey"
   ],
-  "scraped_at": "2026-06-17T23:11:08.777Z"
+  "scraped_at": "2026-06-18T03:00:28.243Z"
 }

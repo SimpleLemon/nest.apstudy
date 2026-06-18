@@ -5,13 +5,13 @@
   "catalog_number": "185",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "2",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This 2-credit course is an introduction to the wide range of topics, traditions, themes, and approaches in the study of religion at Emory. Each week, a different Emory professor will introduce a new topic, tradition, theme, and approach in the study of religion. The course meets once a week.",
+  "course_notes": "This course satisfies the Religion major requirement:- Theme. This course is the same as REL 170 Studying Religion at Emory in the previous semesters. If you have taken REL 170 before, you shall not enroll in this course.\" This 2-credit course introduces students to the wide range of course topics, traditions, themes, and approaches in the study of religion at Emory. The course meets once a week for 100 minutes, during which time students will be treated to a presentation by one of Emory University's many scholars of religion. Students will get a taste of the variety of methods used by these scholars in their study of religion - including literary, historical, philosophical, anthropological, art historical, cultural, and sociological. Topics may cover major religious traditions such as Buddhism, Judaism, Christianity, Islam, Hinduism, Jainism, Taoism, or African religions. Themes will introduce particular lenses such as gender, sexuality, race, ethics, politics, or media through which to consider religion. Prior to each session, students will read an accessible article or other source provided by the guest teacher, and will also post a response to this material. Subsequent to class, students will post a second response reflecting on the guest's presentation and the ensuing discussion. There are no other major assignments or exams.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,38 @@
   },
   "sections": [
     {
+      "atlas_key": "4460",
       "crn": "2909",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Premawardhana",
+      "instructor": "Devaka Premawardhana",
       "instructors": [
         {
-          "name": "D. Premawardhana",
-          "email": null
+          "name": "Devaka Premawardhana",
+          "email": "devaka.premawardhana@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "White Hall 101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 75,
+      "seats_available": 19,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 4-5:40p",
@@ -47,51 +62,25 @@
             "end": "1740"
           }
         ]
-      }
-    },
-    {
-      "crn": "2909",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Premawardhana",
-      "instructors": [
-        {
-          "name": "D. Premawardhana",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 4-5:40p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1740"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Premawardhana"
+    "Devaka Premawardhana"
   ],
-  "scraped_at": "2026-06-17T23:14:36.843Z"
+  "scraped_at": "2026-06-18T03:17:38.884Z"
 }

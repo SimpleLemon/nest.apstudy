@@ -5,40 +5,58 @@
   "catalog_number": "314",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Humanities and Arts with Cont.Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "An introduction to the reading and interpretation of a variety of literary and cultural media including poetry, drama, prose fiction, political writings, publicity, films, painting, and architecture.",
-  "course_notes": "FREN 310 or equivalent transfer credit as prerequisite. Used for: FREN 313, FREN 314",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course introduces students to the way translation between different literatures, literary genres, and new media impacts our comparative reading of texts. *Note: This course is non-repeatable.",
+  "course_notes": "(Topic: Thinking Possession) (Is \"thinking\" in decline? Have we been unable to truly think thinking? The mere thought of \"thinking,\" how it is to be represented and understood, tends to induce in us a series of crises. It appears that even when we are asked to present \"thinking,\" it is commonplace to refer to it by way of concepts such as \"intellect,\" \"cognition,\" \"consciousness\" and \"sentience.\" But, as psychoanalysis teaches us, \"thinking\" occurs, too, in dreams, in states of unconsciousness. Where there is an abundance of thinking, there is doubt and objection, judgment and restriction, memory and contestation.) (Using the island of Haiti as our focus, this course will seek to apprehend the thought of \"thinking.\" The literature of Haiti, in its poetic, literary, theological, and philosophical iterations, exposes the relation between \"thinking\" and \"possession\" as fraught with contradictions. Thus, to understand these contradictions, we will seek to understand whether it is possible to possess \"thinking\" in its different forms, such as how \"thinking\" appears as appropriation, how \"thinking\" is used to cope with the pressure of thoughts, how, as Hans-Georg Gadamer suggests, \"thinking requires saying something to oneself,\" and even, how \"thinking\" is to be represented-if at all.) (This course will read selections from the work of Haitian scholars, such as Willy Apollon, Edwidge Danticat, René Dépestre, Frankétienne, René Philoctète, Jacques Roumain, as well as selections from Aristotle, Walter Benjamin, Wilfred Bion, Jean-Martin Charcot, Maya Deren, Sigmund Freud, Saidiya Hartman, Friedrich Hölderlin, Friedrich Nietzsche, Orlando Patterson, Plato, Donald Winnicott, and others.) Required Assignments: Over the course of the semester, students will complete three two-paged reading responses, upload collaborative annotations, and one final paper. Required Texts: All required and optional materials will be provided by the instructor.",
   "requisites": "FREN 310 or equivalent transfer credit as prerequisite. Used for: FREN 313, FREN 314",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "791",
       "crn": "1687",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "S. Xavier",
+      "instructor": "Kyliel Thompson",
       "instructors": [
         {
-          "name": "S. Xavier",
-          "email": null
+          "name": "Kyliel Thompson",
+          "email": "kyliel.thompson@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,56 +72,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "1687",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "S. Xavier",
-      "instructors": [
-        {
-          "name": "S. Xavier",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "S. Xavier"
+    "Kyliel Thompson"
   ],
-  "scraped_at": "2026-06-17T23:02:39.579Z"
+  "scraped_at": "2026-06-18T02:22:47.203Z"
 }

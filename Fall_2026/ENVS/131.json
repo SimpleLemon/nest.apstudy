@@ -10,10 +10,10 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
   "course_description": "Applies and integrates theories and concepts of environmental science through field study. Introduction to Piedmont geology, water, land and forest use, management and policy. Introduction to ENVS research and community engaged learning. This course is required for ENVS majors.",
-  "course_notes": "ENVS 120 or ENVS 130 or ENVS 140 as prerequisite or co-requisite, or equivalent transfer credit",
+  "course_notes": "Lecture section is online/asynchronous. ALL LAB SECTIONS ARE IN-PERSON. ENVS 131 is required for ALL ENVS majors. This course does NOT fulfill any General Education Requirements.",
   "requisites": "ENVS 120 or ENVS 130 or ENVS 140 as prerequisite or co-requisite, or equivalent transfer credit",
   "cross_listed": null,
   "date_range": {
@@ -22,47 +22,86 @@
   },
   "sections": [
     {
+      "atlas_key": "612",
       "crn": "2084",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Keogh/Deere",
+      "instructor": "Jessica Deere",
       "instructors": [
         {
-          "name": "Keogh/Deere",
-          "email": null
+          "name": "Jessica Deere",
+          "email": "jessica.r.deere@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Carolyn Keogh",
+          "email": "carolyn.keogh@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 28,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "613",
       "crn": "2085",
       "section_number": "2",
       "schedule_type": "LAB",
-      "instructor": "J. Deere",
+      "instructor": "Jessica Deere",
       "instructors": [
         {
-          "name": "J. Deere",
-          "email": null
+          "name": "Jessica Deere",
+          "email": "jessica.r.deere@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W501",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 14,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Th 8:30-11:15a",
@@ -73,26 +112,45 @@
             "end": "1115"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     },
     {
+      "atlas_key": "614",
       "crn": "2086",
       "section_number": "3",
       "schedule_type": "LAB",
-      "instructor": "C. Keogh",
+      "instructor": "Carolyn Keogh",
       "instructors": [
         {
-          "name": "C. Keogh",
-          "email": null
+          "name": "Carolyn Keogh",
+          "email": "carolyn.keogh@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - W501",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "3",
+      "enrollment_capacity": 14,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "F 8:30-11:15a",
@@ -103,107 +161,26 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "2084",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Keogh/Deere",
-      "instructors": [
-        {
-          "name": "Keogh/Deere",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
-      }
-    },
-    {
-      "crn": "2085",
-      "section_number": "2",
-      "schedule_type": "LAB",
-      "instructor": "J. Deere",
-      "instructors": [
-        {
-          "name": "J. Deere",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Th 8:30-11:15a",
-        "meetings": [
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "1115"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "2086",
-      "section_number": "3",
-      "schedule_type": "LAB",
-      "instructor": "C. Keogh",
-      "instructors": [
-        {
-          "name": "C. Keogh",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "3",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "F 8:30-11:15a",
-        "meetings": [
-          {
-            "day": "Fri",
-            "start": "830",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 6,
-    "lectures": 2,
-    "labs": 4,
+    "total_sections": 3,
+    "lectures": 1,
+    "labs": 2,
     "discussions": 0,
     "other": 0,
-    "open": 6,
+    "open": 3,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "C. Keogh",
-    "J. Deere",
-    "Keogh/Deere"
+    "Carolyn Keogh",
+    "Jessica Deere"
   ],
-  "scraped_at": "2026-06-17T23:10:29.833Z"
+  "scraped_at": "2026-06-18T02:57:02.087Z"
 }

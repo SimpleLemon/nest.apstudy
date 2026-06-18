@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "HAPE",
   "requirements": [
-    "HAPE"
+    "HAPE",
+    "Race and Ethnicity(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Spiritual transformations involving worship, magic and healing, ritual, and aesthetic performance in Black speech and literature, music, and drama; and spiritual uses of Biblical themes to empower social political movements.",
-  "course_notes": null,
+  "course_notes": "(Same AAS 326 1) This course satisfies the Religion major requirement:- Tradition-Christianity, Theme. This course exposes students to a wide range of contexts, sociocultural environments, and global arrangements that have shaped diverse expressions of Black Christian thought primarily in North America, but also in Africa and the wider African diaspora, especially since the Civil Rights and Black Power movements. Given our current moment of domestic and global upheaval regarding legacies of chattel slavery, colonial conquest, anti-Black and anti-Brown racism and their collateral consequences, we will place emphasis upon Black Christian nationalism, Black liberation theology, womanist theology, Afro-Caribbean and Afro-Latin American/Latinx popular religion and theology, and African theology. Although we will engage diverse scholarly approaches to Black Christian thought, the course emphasizes liberation theological inquiry, methods and rhetorical styles. The success of this course is contingent upon consistent, engaged discussion, collaborative approaches to knowledge production and praxis/reflection methodologies in the liberation theological tradition. Students will be encouraged to struggle with the readings while critically appraising past and present thinkers, and complementary audiovisual sources toward the end of articulating their own perspectives.",
   "requisites": null,
   "cross_listed": "AAS 326",
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "1166",
       "crn": "2576",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Stewart",
+      "instructor": "Dianne Stewart",
       "instructors": [
         {
-          "name": "D. Stewart",
-          "email": null
+          "name": "Dianne Stewart",
+          "email": "dstewa4@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "White Hall 102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 24,
+      "seats_available": 19,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -54,56 +72,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2576",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Stewart",
-      "instructors": [
-        {
-          "name": "D. Stewart",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Stewart"
+    "Dianne Stewart"
   ],
-  "scraped_at": "2026-06-17T23:14:36.845Z"
+  "scraped_at": "2026-06-18T03:17:38.888Z"
 }

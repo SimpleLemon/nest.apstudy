@@ -10,35 +10,53 @@
   "requirements": [
     "CW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Topics vary. Each colloquium treats a different theme in depth, often combining reading and seminar discussion with research and writing. If listed as WR, fulfills the post-freshman writing requirement.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Innovations in clinical care are increasingly impacted by the development and implementation of machine learning (ML) and artificial intelligence (AI). As future clinicians, medical students should be informed and prepared for technological changes that will affect how they provide care for their patients. The goals of this senior elective are to demystify AI and ML in healthcare, enabling students to have informed conversations about these technologies and participate in their clinical advancement.",
+  "course_notes": "(Permission Required Prior to Enrollment)(School of Medicine Students Only)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-06-29",
+    "end": "2026-12-19"
   },
   "sections": [
     {
+      "atlas_key": "2649",
       "crn": "4556",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "V. Hartfield-Mendez",
+      "instructor": "Mohan John",
       "instructors": [
         {
-          "name": "V. Hartfield-Mendez",
-          "email": null
+          "name": "Mohan John",
+          "email": "mohan.m.john@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Subhadra Shashidharan",
+          "email": "subhadra.shashidharan@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "T 1-3:45p",
@@ -49,26 +67,48 @@
             "end": "1545"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     },
     {
+      "atlas_key": "2650",
       "crn": "5603",
       "section_number": "2",
       "schedule_type": "SEM",
-      "instructor": "D. Nichols",
+      "instructor": "Olamide Alabi",
       "instructors": [
         {
-          "name": "D. Nichols",
-          "email": null
+          "name": "Olamide Alabi",
+          "email": "olamide.alabi@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Guillermo Escobar",
+          "email": null,
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -84,87 +124,28 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "4556",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "V. Hartfield-Mendez",
-      "instructors": [
-        {
-          "name": "V. Hartfield-Mendez",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "T 1-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1300",
-            "end": "1545"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "5603",
-      "section_number": "2",
-      "schedule_type": "SEM",
-      "instructor": "D. Nichols",
-      "instructors": [
-        {
-          "name": "D. Nichols",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-06-29",
+        "end": "2026-12-19"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
+    "total_sections": 2,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 4,
-    "open": 4,
+    "other": 2,
+    "open": 2,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Nichols",
-    "V. Hartfield-Mendez"
+    "Guillermo Escobar",
+    "Mohan John",
+    "Olamide Alabi",
+    "Subhadra Shashidharan"
   ],
-  "scraped_at": "2026-06-17T23:03:44.592Z"
+  "scraped_at": "2026-06-18T02:28:19.732Z"
 }

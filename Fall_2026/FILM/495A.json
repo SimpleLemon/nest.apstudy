@@ -5,15 +5,16 @@
   "catalog_number": "495A",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": "1 - 4",
+  "credit_hours": "4",
   "requirement_designation": "XA",
   "requirements": [
-    "XA"
+    "XA",
+    "Experience and Application(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Prerequisite: Admission to the Honors Program and approval of adviser. Open to students writing honors theses. This course fulfills the postfreshman year writing requirement.",
-  "course_notes": null,
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -22,23 +23,45 @@
   },
   "sections": [
     {
+      "atlas_key": "2987",
       "crn": "3885",
       "section_number": "1",
       "schedule_type": "SUP",
-      "instructor": "G. Zinman",
+      "instructor": "Gregory Zinman",
       "instructors": [
         {
-          "name": "G. Zinman",
-          "email": null
+          "name": "Gregory Zinman",
+          "email": "gregory.austen.zinman@emory.edu",
+          "role": "Primary Instructor"
+        },
+        {
+          "name": "Gregory Zinman",
+          "email": "gregory.austen.zinman@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Rich Building 103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a; T 8-10p",
@@ -59,61 +82,25 @@
             "end": "2200"
           }
         ]
-      }
-    },
-    {
-      "crn": "3885",
-      "section_number": "1",
-      "schedule_type": "SUP",
-      "instructor": "G. Zinman",
-      "instructors": [
-        {
-          "name": "G. Zinman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a; T 8-10p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Tue",
-            "start": "2000",
-            "end": "2200"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "G. Zinman"
+    "Gregory Zinman"
   ],
-  "scraped_at": "2026-06-17T23:10:36.299Z"
+  "scraped_at": "2026-06-18T02:57:30.667Z"
 }

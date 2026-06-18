@@ -5,13 +5,13 @@
   "catalog_number": "531M",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will introduce students to the role of people in organizations and organizations as embedded in the larger society. Topics to be explored include human behavior in organizations, organizational decision-making, competition among individuals and in markets, teamwork and leadership, complex organizational problems, and the organization's role in global challenges. This course will help you consider what motivates people to succeed, what success means, and how people can position themselves and their organizations for success. It is a foundation course for further exploration of business organizations and their social impact. It is designed to shape your understanding of individual behavior in an organizational setting based on an accumulation of research in psychology, sociology, economics, and organizational behavior. The class will additionally delve into some of the biggest challenges facing businesses today, such as inequality, the role of capitalism in society, and how businesses can help build a more inclusive and sustainable world. To do this, we will draw upon your liberal arts training in critical inquiry and analysis.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,36 @@
   },
   "sections": [
     {
+      "atlas_key": "4256",
       "crn": "3847",
       "section_number": "4501",
       "schedule_type": "LEC",
-      "instructor": "R. Berlin",
+      "instructor": "Richard Berlin",
       "instructors": [
         {
-          "name": "R. Berlin",
-          "email": null
+          "name": "Richard Berlin",
+          "email": "richard.berlin@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Goizueta Business School 421",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Masters Non-MBA",
+      "grading_mode_options": [
+        "MTR",
+        "Non-MBA Masters Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 36,
+      "seats_available": 35,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 10-11:15a",
@@ -52,56 +65,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "3847",
-      "section_number": "4501",
-      "schedule_type": "LEC",
-      "instructor": "R. Berlin",
-      "instructors": [
-        {
-          "name": "R. Berlin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 10-11:15a",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Wed",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "R. Berlin"
+    "Richard Berlin"
   ],
-  "scraped_at": "2026-06-17T23:12:33.352Z"
+  "scraped_at": "2026-06-18T03:10:44.992Z"
 }

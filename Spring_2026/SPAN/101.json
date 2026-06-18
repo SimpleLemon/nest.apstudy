@@ -5,71 +5,76 @@
   "catalog_number": "101",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "1",
   "requirement_designation": "IC",
   "requirements": [
     "IC"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "The first half of a yearlong introductory course designed to train students to understand, speak, read, and write Spanish.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Various topics by Epi faculty. Check OPUS/Atlas for current topics and descriptions.",
+  "course_notes": "Infectious disease surveillance is a core function of public health programs that provides critical information on disease burden and epidemiology, monitors the impact of interventions, and detects outbreaks. Innovations in infectious disease surveillance have facilitated more rapid data collection and analysis through electronic laboratory reporting and electronic case reporting from health facilities. These data are used at the state and national level, but begin at the local level (e.g., county or health district) where epidemiologists interface with providers and the community to ensure high quality data collection, analysis, and dissemination for decision-making. This blended seminar and lab course introduces students to how infectious disease surveillance systems are used for monitoring epidemics, informing public health programming, and communicating disease epidemiology to the public. Through readings and class activities, students will explore complexities in data collection and completeness, integration of data from various health surveillance systems, use of surveillance data for targeting health services, cluster detection and molecular epidemiology. Throughout the class, students will analyze a surveillance dataset using Excel and R, with the goal of developing a concise summary report of disease epidemiology. The prerequisites are EPI 534 or BIOS 544.",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-10-20"
   },
   "sections": [
     {
+      "atlas_key": "1417",
       "crn": "6790",
       "section_number": "9000",
       "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "instructor": "Sarita Shah",
+      "instructors": [
+        {
+          "name": "Sarita Shah",
+          "email": "sarita.shah@emory.edu",
+          "role": "Primary Instructor"
+        }
+      ],
+      "location": "Claudia Nance Rollins TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Closed",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Does Not Meet",
         "meetings": []
-      }
-    },
-    {
-      "crn": "6790",
-      "section_number": "9000",
-      "schedule_type": "LEC",
-      "instructor": "Staff",
-      "instructors": [],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Does Not Meet",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-10-20"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 0,
-    "closed": 2,
+    "open": 1,
+    "closed": 0,
     "waitlisted": 0
   },
-  "instructors_unique": [],
-  "scraped_at": "2026-06-17T23:06:50.315Z"
+  "instructors_unique": [
+    "Sarita Shah"
+  ],
+  "scraped_at": "2026-06-18T02:44:34.187Z"
 }

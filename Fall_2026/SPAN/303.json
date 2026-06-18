@@ -8,12 +8,13 @@
   "credit_hours": "3",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Intercultural Communication(*)"
   ],
-  "campus": null,
-  "campus_description": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
   "course_description": "Foundational course for the major and the minor that focuses on the description and production of the sounds of Spanish while also introducing students to the study of linguistic variation.",
-  "course_notes": null,
+  "course_notes": "(Same as LING 303 1) In this course (taught in Spanish), we will explore how diverse pronunciations are produced and organized by Spanish-speakers (including native/heritage and second-language speakers). As part of this, we will compare typical pronunciations of Spanish with those of English, and we will examine how different communities assign different social meanings and values to different pronunciations (for instance, why and in what circumstances do people value positively or negatively pronunciations such as \"ello están contento\" as opposed to \"ellos están contentos\"). This semester, we will include a component focusing on how different pronunciations and intonation can contribute to the performance of literary, theatrical and other spoken-language texts/events. TEXT: Tuten, D. N., Tejedo-Herrero, L. F., R. Rao, & H. R. Clarke. 2022. Pronunciaciones del español (Routledge). PARTICULARS: This course is designed for a wide variety of students, including those for whom Spanish is a primary/native or heritage language as well as for those who are learning Spanish as a second language. This is an introductory course in Hispanic Linguistics and therefore no background in Linguistics is required. Span/Ling 303 is a core course for the Spanish and Linguistics Joint Major and a Foundational Course for the Spanish Major and Minor. It counts as an elective or IC/HAL course for other Linguistics majors and minors. ***If SPAN 303 is at full capacity, please consider enrolling in LING 303, which will satisfy the same major requirements and the IC requirement.*** EVALUATION is based on attendance/participation, homework assignments, exams, and performance projects. PREREQUISITE: SPAN 212, permission of instructor or an Official Spanish Placement into our Foundational Course level (Span 300-318). For more information on Foundational Courses, please go to www.spanport.emory.edu. Take the online Spanish Placement Exam at http://spanport.emory.edu/home/undergraduate/placement/index.html.",
   "requisites": null,
   "cross_listed": "LING 303",
   "date_range": {
@@ -22,23 +23,40 @@
   },
   "sections": [
     {
+      "atlas_key": "2024",
       "crn": "1811",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "D. Tuten",
+      "instructor": "Donald Tuten",
       "instructors": [
         {
-          "name": "D. Tuten",
-          "email": null
+          "name": "Donald Tuten",
+          "email": "dtuten@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Modern Language 330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Closed",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 4-5:15p",
@@ -54,56 +72,25 @@
             "end": "1715"
           }
         ]
-      }
-    },
-    {
-      "crn": "1811",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "D. Tuten",
-      "instructors": [
-        {
-          "name": "D. Tuten",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Closed",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 4-5:15p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Wed",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
     "open": 0,
-    "closed": 2,
+    "closed": 1,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "D. Tuten"
+    "Donald Tuten"
   ],
-  "scraped_at": "2026-06-17T23:14:53.054Z"
+  "scraped_at": "2026-06-18T03:18:50.186Z"
 }

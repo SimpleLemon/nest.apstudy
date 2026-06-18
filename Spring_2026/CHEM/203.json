@@ -5,40 +5,58 @@
   "catalog_number": "203",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "4",
   "requirement_designation": "NS",
   "requirements": [
-    "NS"
+    "NS",
+    "Continuing Communication and Writing(*)"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "CHEM 203 will focus on the chemistry of organic and organometallic compounds; specifically how the molecular orbital theory can be used to predict structure and properties. This course covers kinetics, mechanisms, and catalysis.",
-  "course_notes": "CHEM 202 or CHEM_OX 202 or CHEM 202Z or CHEM 221 or CHEM_OX 221 or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Every semester. Introductory workshop in poetry writing. Counts as a prerequisite for 300-level intermediate workshops but not for Advanced Fiction, Advanced Poetry, or Advanced Playwriting. May not be repeated for credit.",
+  "course_notes": "(Permission Required Prior to Enrollment) Application required. If accepted, YOU MUST ATTEND THE FIRST CLASS session to remain enrolled. Class description and application form are available on the Creative Writing Program website: https://creativewriting.emory.edu/academics/applications.html Please email nora.lewis@emory.edu if you have any questions. \"Too often in workshops and classrooms there is a concentration on the poem's garments instead of its life's blood,\" writes poet Linda Gregg in her essay \"The Art of Finding.\" In this introductory course, we will, of course, address the fundamental \"garments\" of writing poetry, those essential poetic tools of craft. But, more than that, we will strive to tap into the experiences that compose our \"life's blood\" -- those things that have shaped who we are, what we think, what we feel, and how we see the world. Each student should feel affirmed that the singularity of their lived experience lends them the power to write poems that no one else can write. Through considered attention to our work and that of our peers, and the close reading of work by other poets, we will find ways to make that \"life's blood\" sing. Students will write weekly poems, as well as reading responses, feedback to one another, and a final portfolio. We will work to create a space of community through dynamic discussion, participation, and the sharing aloud and workshopping of our own poems. Over the course of the semester, each workshop participant, buoyed by our classroom community, will move closer to writing the poems they most want, and most need, to write.",
   "requisites": "CHEM 202 or CHEM_OX 202 or CHEM 202Z or CHEM 221 or CHEM_OX 221 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "591",
       "crn": "3705",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Soria",
+      "instructor": "James Ciano",
       "instructors": [
         {
-          "name": "J. Soria",
-          "email": null
+          "name": "James Ciano",
+          "email": "james.ciano@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "location": "Modern Language 219",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 11,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 11:30a-12:45p",
@@ -54,56 +72,25 @@
             "end": "1245"
           }
         ]
-      }
-    },
-    {
-      "crn": "3705",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Soria",
-      "instructors": [
-        {
-          "name": "J. Soria",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 11:30a-12:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1130",
-            "end": "1245"
-          },
-          {
-            "day": "Wed",
-            "start": "1130",
-            "end": "1245"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Soria"
+    "James Ciano"
   ],
-  "scraped_at": "2026-06-17T23:01:37.677Z"
+  "scraped_at": "2026-06-18T02:13:14.107Z"
 }

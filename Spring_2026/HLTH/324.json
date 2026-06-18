@@ -10,35 +10,48 @@
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Performing artists are subject to nutrition myths, making it difficult for them to manage the interaction between nutrient utilization and provision to assure a successful career. This course covers nutritional factors for helping performing artists achieve the desired performance outcomes.",
-  "course_notes": "HLTH 220 or equivalent transfer credit as prerequisite.",
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Online Asynchronous. This course provides an overview of the theoretical approaches to developing public health policy. Students will become familiar with commonly known policy frameworks that explain how and why health policies are made, implemented, and evaluated. Students will also learn about evidence-based strategies for supporting policy development to improve population health through the application of theoretical models.",
+  "course_notes": "DrPH Leadership for Public Health Policy only.",
   "requisites": "HLTH 220 or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4465",
       "crn": "3152",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "Benardot/Klein",
+      "instructor": "Sarah Blake",
       "instructors": [
         {
-          "name": "Benardot/Klein",
-          "email": null
+          "name": "Sarah Blake",
+          "email": "scblake@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 10-11:15a",
@@ -54,56 +67,25 @@
             "end": "1115"
           }
         ]
-      }
-    },
-    {
-      "crn": "3152",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "Benardot/Klein",
-      "instructors": [
-        {
-          "name": "Benardot/Klein",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 10-11:15a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1000",
-            "end": "1115"
-          },
-          {
-            "day": "Thu",
-            "start": "1000",
-            "end": "1115"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "Benardot/Klein"
+    "Sarah Blake"
   ],
-  "scraped_at": "2026-06-17T23:03:08.805Z"
+  "scraped_at": "2026-06-18T02:25:23.374Z"
 }

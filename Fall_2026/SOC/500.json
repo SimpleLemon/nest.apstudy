@@ -5,13 +5,13 @@
   "catalog_number": "500",
   "term": "Fall_2026",
   "srcdb": "5269",
-  "credit_hours": null,
+  "credit_hours": "3",
   "requirement_designation": null,
   "requirements": [],
-  "campus": null,
-  "campus_description": null,
-  "course_description": null,
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is an introduction to descriptive and inferential statistics for bivariate and multivariate analyses. The course will help you understand statistics reported in social science publications and in the news media, as well as help you conduct original research. The overall goal is to increase your statistical literacy - your ability to create, interpret, and critically evaluate statistical evidence. This is a set of skills that you will find highly useful in your current academic life and in your future career. It is also a valuable set of skills for virtually everyone in modern society, as statistical knowledge (and numerical literacy more broadly) is key for making sense of the growing amounts of information that we encounter in a digital world.",
+  "course_notes": "This course provides a graduate-level introduction to statistics and its uses in sociology. It has no prerequisites except an interest in doing social science research, and it designed to be useful both for students who plan only to read quantitative studies and for those who will conduct sophisticated statistical analyses in their core research. While the course does introduce theories of probability and statistics, it puts more of an emphasis on practical skills such as cleaning data, interpreting quantitative analyses, creating visualizations, and understanding descriptive and causal research frameworks. Students will learn to: 1. Develop computational skills to conduct analysis using statistical software and meaningful interpret results 2. Produce data visualizations to shed light on social relationships 3. Leverage knowledge of sampling theory and survey design to work with survey data 4. Apply descriptive and causal frameworks in relation to social research questions 5. Gain a working knowledge of probability distributions and statistical uncertainty in the service of conducting and interpreting social science research (Permission Required Prior to Enrollment)",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
@@ -20,23 +20,38 @@
   },
   "sections": [
     {
+      "atlas_key": "1735",
       "crn": "2626",
       "section_number": "1",
       "schedule_type": "SEM",
-      "instructor": "N. Hoffmann",
+      "instructor": "Nathan Hoffmann",
       "instructors": [
         {
-          "name": "N. Hoffmann",
-          "email": null
+          "name": "Nathan Hoffmann",
+          "email": "nihoffm@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Tarbutton Hall 313",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 2:30-3:45p",
@@ -52,56 +67,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2626",
-      "section_number": "1",
-      "schedule_type": "SEM",
-      "instructor": "N. Hoffmann",
-      "instructors": [
-        {
-          "name": "N. Hoffmann",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Thu",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
+    "total_sections": 1,
     "lectures": 0,
     "labs": 0,
     "discussions": 0,
-    "other": 2,
-    "open": 2,
+    "other": 1,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "N. Hoffmann"
+    "Nathan Hoffmann"
   ],
-  "scraped_at": "2026-06-17T23:14:49.784Z"
+  "scraped_at": "2026-06-18T03:18:24.355Z"
 }

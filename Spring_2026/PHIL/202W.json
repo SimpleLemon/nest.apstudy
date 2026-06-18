@@ -5,40 +5,55 @@
   "catalog_number": "202W",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "4",
+  "credit_hours": "3",
   "requirement_designation": "HAW",
   "requirements": [
     "HAW"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course will introduce the principal figures and topics in Renaissance and modern philosophy.",
-  "course_notes": "One PHIL course or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Seminar of lecture series of topics in human health. May be repeated for credit when topic varies. Credit varies from one to four hours.",
+  "course_notes": "This interactive and discussion-based course will integrate scientific understandings of the key drivers and significance of maternal and child health across the continuum of preconception, pregnancy, lactation, and childhood on long term health and development in low-income settings. This course will count as a predictive health core course for Predictive Health minors.",
   "requisites": "One PHIL course or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "3090",
       "crn": "2003",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "J. Wahman",
+      "instructor": "Melissa Fox Young",
       "instructors": [
         {
-          "name": "J. Wahman",
-          "email": null
+          "name": "Melissa Fox Young",
+          "email": "melissa.young@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "1462 Clifton Rd 101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Open",
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
       "enrollment_count": "1",
+      "enrollment_capacity": 19,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "MW 2:30-3:45p",
@@ -54,56 +69,25 @@
             "end": "1545"
           }
         ]
-      }
-    },
-    {
-      "crn": "2003",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "J. Wahman",
-      "instructors": [
-        {
-          "name": "J. Wahman",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "MW 2:30-3:45p",
-        "meetings": [
-          {
-            "day": "Mon",
-            "start": "1430",
-            "end": "1545"
-          },
-          {
-            "day": "Wed",
-            "start": "1430",
-            "end": "1545"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 0,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "J. Wahman"
+    "Melissa Fox Young"
   ],
-  "scraped_at": "2026-06-17T23:06:07.918Z"
+  "scraped_at": "2026-06-18T02:38:17.518Z"
 }

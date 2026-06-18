@@ -5,40 +5,53 @@
   "catalog_number": "326",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "3",
+  "credit_hours": "1.5",
   "requirement_designation": "MQR",
   "requirements": [
     "MQR"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "This course explores the formal underpinnings of computational complexity, and studies how to mathematically characterize the efficiency and running times of different computer algorithms.",
-  "course_notes": "(CS 170 or CS_OX 170) and (CS 171 or CS_OX 171) and (CS 224 or CS_OX 224) and CS 253, or equivalent transfer credit as prerequisite.",
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "In this course, students will focus on analyzing clinical problems, leading to the prioritization, and beginning evaluation of care through clinical judgment for infants, children, and young adults with health needs.",
+  "course_notes": "This section is for traditional BSN semester 3 students only. Clinical may be scheduled any day not in lecture, including weekends for 12 hours; onsite simulation may be scheduled any day not in lecture except Sundays.",
   "requisites": "(CS 170 or CS_OX 170) and (CS 171 or CS_OX 171) and (CS 224 or CS_OX 224) and CS 253, or equivalent transfer credit as prerequisite.",
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-10-14"
   },
   "sections": [
     {
+      "atlas_key": "4370",
       "crn": "3890",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Grigni",
+      "instructor": "Sheena Gonzalez",
       "instructors": [
         {
-          "name": "M. Grigni",
-          "email": null
+          "name": "Sheena Gonzalez",
+          "email": "sheena.rene.gonzalez@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1.5",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "2",
+      "enrollment_capacity": 80,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 4-5:15p",
@@ -54,26 +67,43 @@
             "end": "1715"
           }
         ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-10-14"
       }
     },
     {
+      "atlas_key": "4371",
       "crn": "3891",
       "section_number": "2",
       "schedule_type": "LEC",
-      "instructor": "A. Julian",
+      "instructor": "Sheena Gonzalez",
       "instructors": [
         {
-          "name": "A. Julian",
-          "email": null
+          "name": "Sheena Gonzalez",
+          "email": "sheena.rene.gonzalez@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
       "location": null,
-      "campus": null,
-      "campus_description": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1.5",
       "requirement_designation": null,
       "requirements": [],
-      "enrollment_status": "Waitlist",
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
       "enrollment_count": "2",
+      "enrollment_capacity": 80,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "TTh 8:30-9:45a",
@@ -89,92 +119,25 @@
             "end": "945"
           }
         ]
-      }
-    },
-    {
-      "crn": "3890",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Grigni",
-      "instructors": [
-        {
-          "name": "M. Grigni",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 4-5:15p",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "1600",
-            "end": "1715"
-          },
-          {
-            "day": "Thu",
-            "start": "1600",
-            "end": "1715"
-          }
-        ]
-      }
-    },
-    {
-      "crn": "3891",
-      "section_number": "2",
-      "schedule_type": "LEC",
-      "instructor": "A. Julian",
-      "instructors": [
-        {
-          "name": "A. Julian",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Waitlist",
-      "enrollment_count": "2",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "TTh 8:30-9:45a",
-        "meetings": [
-          {
-            "day": "Tue",
-            "start": "830",
-            "end": "945"
-          },
-          {
-            "day": "Thu",
-            "start": "830",
-            "end": "945"
-          }
-        ]
+      },
+      "date_range": {
+        "start": "2026-10-19",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 4,
-    "lectures": 4,
+    "total_sections": 2,
+    "lectures": 2,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
-    "closed": 0,
-    "waitlisted": 2
+    "open": 1,
+    "closed": 1,
+    "waitlisted": 0
   },
   "instructors_unique": [
-    "A. Julian",
-    "M. Grigni"
+    "Sheena Gonzalez"
   ],
-  "scraped_at": "2026-06-17T23:01:53.990Z"
+  "scraped_at": "2026-06-18T02:16:08.224Z"
 }

@@ -5,83 +5,78 @@
   "catalog_number": "223",
   "term": "Spring_2026",
   "srcdb": "5261",
-  "credit_hours": "1",
+  "credit_hours": "3",
   "requirement_designation": "None",
   "requirements": [
     "None"
   ],
-  "campus": null,
-  "campus_description": null,
-  "course_description": "Through a study and analysis of grammar's impact on rhetorical effectiveness, students work with their own writing as they learn to make and adapt grammatical choices to fit audience, purpose, constraints, exigencies, and timing.",
-  "course_notes": null,
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed to teach students methods for effective communication of empirical results. Students will become proficient in interpreting, organizing, displaying, and writing results of quantitative research. Students will learn techniques for writing an academic paper. Students will also learn how to summarize and present empirical results for different audiences. We will explore methods for communication to academics, policy makers, industry leaders, and the mass media.",
+  "course_notes": "",
   "requisites": null,
   "cross_listed": null,
   "date_range": {
-    "start": "2026-01-13",
-    "end": "2026-04-27"
+    "start": "2026-08-26",
+    "end": "2026-12-09"
   },
   "sections": [
     {
+      "atlas_key": "4056",
       "crn": "5259",
       "section_number": "1",
       "schedule_type": "LEC",
-      "instructor": "M. Uddin",
+      "instructor": "Sue Mialon",
       "instructors": [
         {
-          "name": "M. Uddin",
-          "email": null
+          "name": "Sue Mialon",
+          "email": "smialon@emory.edu",
+          "role": "Primary Instructor"
         }
       ],
-      "location": null,
-      "campus": null,
-      "campus_description": null,
+      "location": "Math & Science Center - N301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
       "requirement_designation": null,
       "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
       "enrollment_status": "Open",
       "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
       "is_cancelled": false,
       "schedule": {
         "display": "Meets Online",
         "meetings": []
-      }
-    },
-    {
-      "crn": "5259",
-      "section_number": "1",
-      "schedule_type": "LEC",
-      "instructor": "M. Uddin",
-      "instructors": [
-        {
-          "name": "M. Uddin",
-          "email": null
-        }
-      ],
-      "location": null,
-      "campus": "Oxford",
-      "campus_description": "Oxford",
-      "requirement_designation": null,
-      "requirements": [],
-      "enrollment_status": "Open",
-      "enrollment_count": "1",
-      "is_cancelled": false,
-      "schedule": {
-        "display": "Meets Online",
-        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
       }
     }
   ],
   "section_summary": {
-    "total_sections": 2,
-    "lectures": 2,
+    "total_sections": 1,
+    "lectures": 1,
     "labs": 0,
     "discussions": 0,
     "other": 0,
-    "open": 2,
+    "open": 1,
     "closed": 0,
     "waitlisted": 0
   },
   "instructors_unique": [
-    "M. Uddin"
+    "Sue Mialon"
   ],
-  "scraped_at": "2026-06-17T23:02:23.319Z"
+  "scraped_at": "2026-06-18T02:19:56.735Z"
 }
