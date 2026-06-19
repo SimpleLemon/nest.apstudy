@@ -101,6 +101,11 @@ APPWRITE_OAUTH_PROVIDERS = {
     "github": OAuthProvider.GITHUB,
     "google": OAuthProvider.GOOGLE,
 }
+OAUTH_PROVIDER_SCOPES = {
+    "google": ["openid", "email", "profile"],
+    "github": ["read:user", "user:email"],
+    "discord": ["identify", "email"],
+}
 APPWRITE_OAUTH_STATE_KEY = "appwrite_oauth_state"
 APPWRITE_OAUTH_PROVIDER_KEY = "appwrite_oauth_provider"
 APPWRITE_OAUTH_LINK_MODE_KEY = "appwrite_oauth_link_mode"
@@ -154,12 +159,36 @@ def _appwrite_oauth_failure_url(state):
     return url_for("auth.appwrite_oauth_failure", state=state, _external=True)
 
 
+def _normalize_session_key(key):
+    return re.sub(r"[_\s-]", "", str(key or "").lower())
+
+
+def _session_field(payload, *aliases):
+    """Return the first non-empty value for any Appwrite session field alias."""
+    if not payload or not isinstance(payload, dict) or not aliases:
+        return None
+    wanted = {_normalize_session_key(alias) for alias in aliases}
+    for key, value in payload.items():
+        if _normalize_session_key(key) in wanted and value not in (None, ""):
+            return value
+    return None
+
+
+def _oauth_provider_scopes(provider_key):
+    scopes = OAUTH_PROVIDER_SCOPES.get(str(provider_key or "").strip().lower())
+    return scopes or None
+
+
 def _appwrite_oauth_redirect_url(provider_key, success_url, failure_url):
-    return Account(appwrite_client).create_o_auth2_token(
-        provider=APPWRITE_OAUTH_PROVIDERS[provider_key],
-        success=success_url,
-        failure=failure_url,
-    )
+    kwargs = {
+        "provider": APPWRITE_OAUTH_PROVIDERS[provider_key],
+        "success": success_url,
+        "failure": failure_url,
+    }
+    scopes = _oauth_provider_scopes(provider_key)
+    if scopes:
+        kwargs["scopes"] = scopes
+    return Account(appwrite_client).create_o_auth2_token(**kwargs)
 
 
 def _log_oauth_exception(message, exc, *args):
@@ -221,6 +250,104 @@ def appwrite_oauth_preflight(provider, base_url):
     click.echo(f"provider: {provider_key}")
     click.echo(f"success_url: {success_url}")
     click.echo(f"failure_url: {failure_url}")
+
+
+def _user_needs_avatar_backfill(user_doc):
+    if not user_doc:
+        return False
+    avatar_source = str(user_doc.get("avatar_source") or "").strip().lower()
+    if avatar_source == "upload":
+        return False
+    return _clean_avatar_url(user_doc.get("picture_url")) is None
+
+
+def _backfill_user_avatar(user_doc, *, dry_run=False):
+    user_id = str(user_doc.get("$id") or user_doc.get("id") or "").strip()
+    if not user_id:
+        return {"user_id": None, "status": "skipped", "reason": "missing_user_id"}
+
+    if not _user_needs_avatar_backfill(user_doc):
+        return {"user_id": user_id, "status": "skipped", "reason": "avatar_present"}
+
+    provider = str(user_doc.get("provider") or "google").strip().lower()
+    remote_user = _account_from_user_id(user_id)
+    identity_token = _provider_access_token_from_identities(user_id, provider=provider)
+    provider_access_token = identity_token.get("provider_access_token")
+    if identity_token.get("provider"):
+        provider = identity_token["provider"]
+
+    provider_profile = _fetch_provider_profile(provider, provider_access_token)
+    avatar_url = _provider_avatar_url(provider_profile, remote_user, provider=provider)
+    if not avatar_url:
+        return {"user_id": user_id, "status": "unresolved", "reason": "no_avatar_source"}
+
+    if dry_run:
+        return {
+            "user_id": user_id,
+            "status": "would_update",
+            "provider": provider,
+            "avatar_url": avatar_url,
+        }
+
+    picture_url, avatar_file_id, storage_result = _store_provider_avatar(
+        user_id,
+        avatar_url,
+        page_context="auth/backfill-avatars",
+    )
+    update_row_safe(
+        COLLECTIONS["users"],
+        user_id,
+        {
+            "picture_url": picture_url,
+            "avatar_file_id": avatar_file_id,
+            "avatar_source": "provider",
+            "provider": provider,
+        },
+    )
+    return {
+        "user_id": user_id,
+        "status": "updated",
+        "provider": provider,
+        "storage_result": storage_result,
+        "picture_url": picture_url,
+    }
+
+
+@auth_bp.cli.command("backfill-avatars")
+@click.option("--dry-run", is_flag=True, help="Report candidates without writing changes.")
+@click.option("--limit", default=100, show_default=True, help="Maximum users to inspect.")
+def backfill_avatars(dry_run, limit):
+    """Repair users missing provider avatars after OAuth signup."""
+    from appwrite_helpers import list_rows_all
+
+    response = list_rows_all(
+        COLLECTIONS["users"],
+        [Query.is_null("avatar_source"), Query.limit(limit)],
+        limit=limit,
+    )
+    candidates = [
+        row for row in response.get("rows", [])
+        if _user_needs_avatar_backfill(row)
+    ]
+
+    click.echo(f"candidates: {len(candidates)} (limit={limit}, dry_run={dry_run})")
+    updated = 0
+    unresolved = 0
+    skipped = 0
+    for user_doc in candidates:
+        result = _backfill_user_avatar(user_doc, dry_run=dry_run)
+        status = result.get("status")
+        if status in {"updated", "would_update"}:
+            updated += 1
+        elif status == "unresolved":
+            unresolved += 1
+        else:
+            skipped += 1
+        click.echo(result)
+
+    click.echo(
+        f"summary: updated={updated} unresolved={unresolved} skipped={skipped} dry_run={dry_run}"
+    )
 
 
 def _set_oauth_session(provider, user_id, email, name=None, picture_url=None):
@@ -292,8 +419,12 @@ def _discord_identity_from_appwrite(*appwrite_user_ids):
             if provider != "discord":
                 continue
             provider_uid = str(
-                identity.get("providerUid")
-                or identity.get("provideruid")
+                _session_field(
+                    identity,
+                    "providerUid",
+                    "provideruid",
+                    "provider_uid",
+                )
                 or ""
             ).strip()
             if not provider_uid:
@@ -301,9 +432,11 @@ def _discord_identity_from_appwrite(*appwrite_user_ids):
             return {
                 "id": provider_uid,
                 "username": identity.get("providerEmail") or identity.get("provideremail"),
-                "access_token": (
-                    identity.get("providerAccessToken")
-                    or identity.get("provideraccesstoken")
+                "access_token": _session_field(
+                    identity,
+                    "providerAccessToken",
+                    "provideraccesstoken",
+                    "provider_access_token",
                 ),
             }
     return {}
@@ -513,6 +646,83 @@ def _clean_avatar_url(value):
     return text
 
 
+def _provider_access_token_from_identities(appwrite_user_id, provider=None):
+    """Best-effort provider token lookup from linked Appwrite identities."""
+    provider_key = str(provider or "").strip().lower()
+    for identity in _identities_for_appwrite_user(appwrite_user_id):
+        identity_provider = str(identity.get("provider") or "").strip().lower()
+        if provider_key and identity_provider and identity_provider != provider_key:
+            continue
+        token = _session_field(
+            identity,
+            "providerAccessToken",
+            "provideraccesstoken",
+            "provider_access_token",
+        )
+        if token:
+            return {
+                "provider_access_token": token,
+                "provider_uid": _session_field(
+                    identity,
+                    "providerUid",
+                    "provideruid",
+                    "provider_uid",
+                ),
+                "provider": identity_provider or provider_key or None,
+            }
+    return {}
+
+
+def _sanitize_avatar_log_url(url):
+    return _sanitize_log_text(url, limit=120)
+
+
+def _log_avatar_collection(
+    *,
+    user_id,
+    provider,
+    page_context,
+    created_user,
+    has_provider_token,
+    provider_profile_avatar,
+    remote_avatar_candidate,
+    resolved_avatar_url,
+    storage_result,
+):
+    logger.info(
+        "Avatar collection: user_id=%s provider=%s page_context=%s created_user=%s "
+        "has_provider_token=%s profile_avatar=%s remote_avatar=%s resolved=%s storage=%s",
+        user_id,
+        provider,
+        page_context,
+        created_user,
+        has_provider_token,
+        bool(provider_profile_avatar),
+        bool(remote_avatar_candidate),
+        bool(resolved_avatar_url),
+        storage_result,
+    )
+
+
+def _store_provider_avatar(user_id, source_url, *, page_context="auth"):
+    """Copy a provider avatar into storage; keep the source URL when copy fails."""
+    clean_url = _clean_avatar_url(source_url)
+    if not clean_url:
+        return None, None, "missing_source_url"
+
+    stored_avatar = store_avatar_from_url(user_id, clean_url)
+    if stored_avatar:
+        return stored_avatar["view_url"], stored_avatar["file_id"], "stored"
+
+    logger.warning(
+        "Provider avatar storage copy failed; keeping provider URL: user_id=%s page_context=%s source=%s",
+        user_id,
+        page_context,
+        _sanitize_avatar_log_url(clean_url),
+    )
+    return clean_url, None, "provider_url_fallback"
+
+
 def _provider_avatar_url(provider_profile, remote_user, provider=None):
     remote_user = remote_user or {}
     provider_key = str(provider or "").strip().lower()
@@ -669,9 +879,29 @@ def _complete_appwrite_login(
         user_doc = _find_user_by_email(email)
     created_user = False
 
+    if not provider_access_token:
+        identity_token = _provider_access_token_from_identities(appwrite_user_id, provider=provider)
+        provider_access_token = identity_token.get("provider_access_token") or provider_access_token
+        if not provider_uid:
+            provider_uid = identity_token.get("provider_uid")
+        if identity_token.get("provider"):
+            provider = identity_token["provider"]
+
     provider_profile = _fetch_provider_profile(provider, provider_access_token)
     provider_name = provider_profile.get("name")
     provider_avatar_url = _provider_avatar_url(provider_profile, remote_user, provider=provider)
+    remote_avatar_candidate = _provider_avatar_url({}, remote_user, provider=provider)
+    _log_avatar_collection(
+        user_id=appwrite_user_id,
+        provider=provider,
+        page_context=page_context,
+        created_user=not bool(user_doc),
+        has_provider_token=bool(provider_access_token),
+        provider_profile_avatar=provider_profile.get("avatar_url"),
+        remote_avatar_candidate=remote_avatar_candidate,
+        resolved_avatar_url=provider_avatar_url,
+        storage_result="pending",
+    )
 
     discord_id_value = None
     discord_username_value = None
@@ -690,11 +920,13 @@ def _complete_appwrite_login(
     if not user_doc:
         created_at = format_datetime(datetime.utcnow())
         avatar_file_id = None
+        storage_result = "none"
         if picture_url:
-            stored_avatar = store_avatar_from_url(appwrite_user_id, picture_url)
-            if stored_avatar:
-                picture_url = stored_avatar["view_url"]
-                avatar_file_id = stored_avatar["file_id"]
+            picture_url, avatar_file_id, storage_result = _store_provider_avatar(
+                appwrite_user_id,
+                picture_url,
+                page_context=page_context,
+            )
         row_data = {
             "google_id": appwrite_user_id,
             "email": email,
@@ -749,17 +981,21 @@ def _complete_appwrite_login(
         if name:
             updates["name"] = name
         if picture_url and _avatar_can_use_provider(user_doc):
-            stored_avatar = store_avatar_from_url(appwrite_user_id, picture_url)
-            if stored_avatar:
-                previous_file_id = user_doc.get("avatar_file_id")
-                updates["picture_url"] = stored_avatar["view_url"]
-                updates["avatar_file_id"] = stored_avatar["file_id"]
-                updates["avatar_source"] = "provider"
-                if previous_file_id and previous_file_id != stored_avatar["file_id"]:
+            stored_picture_url, stored_file_id, storage_result = _store_provider_avatar(
+                appwrite_user_id,
+                picture_url,
+                page_context=page_context,
+            )
+            previous_file_id = user_doc.get("avatar_file_id")
+            updates["picture_url"] = stored_picture_url
+            updates["avatar_source"] = "provider"
+            if stored_file_id:
+                updates["avatar_file_id"] = stored_file_id
+                if previous_file_id and previous_file_id != stored_file_id:
                     delete_avatar_file(previous_file_id)
-            else:
-                updates["picture_url"] = picture_url
-                updates["avatar_source"] = "provider"
+            elif previous_file_id and storage_result == "provider_url_fallback":
+                updates["avatar_file_id"] = None
+                delete_avatar_file(previous_file_id)
         if email:
             updates["email"] = email
         if provider and provider != "appwrite":
@@ -955,9 +1191,19 @@ def appwrite_oauth_callback(state):
 
     try:
         appwrite_session = _account_to_dict(Account(appwrite_client).create_session(user_id, secret))
-        provider = appwrite_session.get("provider") or provider
-        provider_access_token = appwrite_session.get("providerAccessToken")
-        provider_uid = appwrite_session.get("providerUid")
+        provider = _session_field(appwrite_session, "provider") or provider
+        provider_access_token = _session_field(
+            appwrite_session,
+            "providerAccessToken",
+            "provideraccesstoken",
+            "provider_access_token",
+        )
+        provider_uid = _session_field(
+            appwrite_session,
+            "providerUid",
+            "provideruid",
+            "provider_uid",
+        )
         remote_user = _account_from_user_id(user_id)
         result = _complete_appwrite_login(
             remote_user,
@@ -1031,8 +1277,18 @@ def appwrite_discord_link_callback(state):
     try:
         appwrite_session = _account_to_dict(Account(appwrite_client).create_session(user_id, secret))
         discord_identity = _resolve_discord_link_identity(
-            provider_uid=appwrite_session.get("providerUid"),
-            provider_access_token=appwrite_session.get("providerAccessToken"),
+            provider_uid=_session_field(
+                appwrite_session,
+                "providerUid",
+                "provideruid",
+                "provider_uid",
+            ),
+            provider_access_token=_session_field(
+                appwrite_session,
+                "providerAccessToken",
+                "provideraccesstoken",
+                "provider_access_token",
+            ),
             appwrite_user_ids=[user_id, str(current_user.id)],
         )
         discord_id_value = discord_identity.get("id")

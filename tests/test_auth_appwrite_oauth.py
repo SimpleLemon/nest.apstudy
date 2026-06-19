@@ -89,6 +89,7 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
 
         self.assertEqual(len(calls), 1)
         self.assertEqual(calls[0]["provider"], auth.OAuthProvider.GOOGLE)
+        self.assertEqual(calls[0]["scopes"], auth.OAUTH_PROVIDER_SCOPES["google"])
         self.assertIn("/auth/appwrite/callback/", calls[0]["success"])
         self.assertIn("/auth/appwrite/failure/", calls[0]["failure"])
         self.assertNotIn("auth_error", calls[0]["failure"])
@@ -353,6 +354,74 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
             provider_uid=None,
             page_context="auth/appwrite/callback",
         )
+
+    def test_valid_callback_accepts_session_field_aliases(self):
+        fake_account = SimpleNamespace(
+            create_session=lambda user_id, secret: {
+                "provider": "google",
+                "provider_access_token": "provider-token",
+                "provider_uid": "google-user-1",
+                "userId": user_id,
+            },
+        )
+        remote_user = {"$id": "user-1", "email": "student@example.com", "name": "Student"}
+
+        with self.app.test_request_context("/auth/appwrite/callback/state?userId=user-1&secret=secret"):
+            session[auth.APPWRITE_OAUTH_STATE_KEY] = "state"
+            session[auth.APPWRITE_OAUTH_PROVIDER_KEY] = "google"
+            with patch.object(auth, "Account", return_value=fake_account), \
+                    patch.object(auth, "_account_from_user_id", return_value=remote_user), \
+                    patch.object(auth, "_complete_appwrite_login", return_value={"redirect": "/dashboard", "user_id": "user-1"}) as complete_login:
+                response = auth.appwrite_oauth_callback("state")
+
+        self.assertEqual(response.status_code, 302)
+        complete_login.assert_called_once_with(
+            remote_user,
+            provider="google",
+            provider_access_token="provider-token",
+            provider_uid="google-user-1",
+            page_context="auth/appwrite/callback",
+        )
+
+    def test_session_field_reads_camel_and_snake_case_aliases(self):
+        payload = {
+            "providerAccessToken": "camel-token",
+            "provider_uid": "uid-1",
+        }
+        self.assertEqual(
+            auth._session_field(payload, "providerAccessToken", "provider_access_token"),
+            "camel-token",
+        )
+        self.assertEqual(
+            auth._session_field(payload, "providerUid", "provider_uid"),
+            "uid-1",
+        )
+
+    def test_backfill_avatars_dry_run_reports_candidates(self):
+        candidates = [
+            {
+                "$id": "user-1",
+                "email": "student@example.com",
+                "provider": "google",
+                "picture_url": "",
+                "avatar_source": None,
+            },
+        ]
+
+        with patch("appwrite_helpers.list_rows_all", return_value={"rows": candidates}), \
+                patch.object(auth, "_account_from_user_id", return_value={
+                    "prefs": {"picture_url": "https://lh3.googleusercontent.com/remote=s96"},
+                }), \
+                patch.object(auth, "_provider_access_token_from_identities", return_value={}), \
+                patch.object(auth, "update_row_safe") as update_row:
+            result = self.app.test_cli_runner().invoke(
+                args=["auth", "backfill-avatars", "--dry-run", "--limit", "10"],
+            )
+
+        self.assertEqual(result.exit_code, 0)
+        self.assertIn("would_update", result.output)
+        self.assertIn("user-1", result.output)
+        update_row.assert_not_called()
 
     def test_resolve_discord_link_identity_uses_appwrite_identities(self):
         with patch.object(

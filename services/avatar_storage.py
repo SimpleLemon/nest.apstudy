@@ -77,17 +77,28 @@ def store_avatar_from_url(user_id, source_url, *, timeout=8, max_bytes=MAX_AVATA
     try:
         response = http_requests.get(clean_url, timeout=timeout, stream=True)
     except Exception:
-        logger.exception("Failed to download provider avatar")
+        logger.exception(
+            "Failed to download provider avatar: source=%s",
+            clean_url[:120],
+        )
         return None
 
     try:
         if response.status_code != 200:
-            logger.warning("Provider avatar download failed: %s", response.status_code)
+            logger.warning(
+                "Provider avatar download failed: status=%s source=%s",
+                response.status_code,
+                clean_url[:120],
+            )
             return None
 
         mime_type = _normalize_mime_type(response.headers.get("Content-Type"))
         if mime_type not in ALLOWED_AVATAR_MIME_TYPES:
-            logger.warning("Provider avatar has unsupported content type: %s", mime_type)
+            logger.warning(
+                "Provider avatar has unsupported content type: %s source=%s",
+                mime_type,
+                clean_url[:120],
+            )
             return None
 
         content_length = response.headers.get("Content-Length")
