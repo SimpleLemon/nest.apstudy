@@ -44,6 +44,7 @@ from services.chat_presence import sync_chat_presence_labels_for_user
 from services.discord_audit import emit_creation_event, emit_user_event, format_actor
 from services import discord_bridge
 from services.calendar_store import delete_calendar_rows_by_user
+from services.user_cleanup import delete_user_data
 from services.universities import school_payload
 
 settings_bp = Blueprint("settings", __name__)
@@ -430,67 +431,24 @@ def _storage_summary(user_id):
     }
 
 
-def _delete_user_artifacts(user_id):
-    rows_to_delete = [
-        COLLECTIONS["user_settings"],
-        COLLECTIONS["user_courses"],
-        COLLECTIONS["shared_files"],
-        COLLECTIONS.get("file_folders", "file_folders"),
-        COLLECTIONS.get("chat_messages", "chat_messages"),
-        COLLECTIONS.get("chat_presence", "chat_presence"),
-        COLLECTIONS.get("chat_read_states", "chat_read_states"),
-    ]
+@settings_bp.route("/api/account/delete", methods=["POST"])
+@login_required
+def delete_account():
+    user_id = str(current_user.id)
+
+    result = delete_user_data(user_id)
+    errors = result if isinstance(result, list) else []
+    if errors:
+        logger.error("Incomplete account data deletion for %s: %s", user_id, errors)
+        return jsonify({"error": "Unable to delete all account data."}), 500
 
     try:
-        delete_calendar_rows_by_user(user_id)
-    except AppwriteException:
-        logger.exception("Failed to delete local calendar rows for user %s", user_id)
+        Users(appwrite_client).delete(user_id)
+    except Exception:
+        logger.exception("Failed to delete Appwrite auth account")
+        return jsonify({"error": "Unable to delete account."}), 500
 
-    for table_id in rows_to_delete:
-        try:
-            rows = list_rows_all(
-                table_id,
-                [Query.equal("user_id", [user_id])],
-            )
-        except AppwriteException:
-            logger.exception("Failed to list rows for deletion: %s", table_id)
-            continue
-
-        for row in rows:
-            row_id = row.get("$id") or row.get("id")
-            if not row_id:
-                continue
-            if table_id == COLLECTIONS["shared_files"]:
-                _delete_file_share_storage_file(row)
-            try:
-                delete_row_safe(table_id, row_id)
-            except AppwriteException:
-                logger.exception("Failed to delete %s row %s", table_id, row_id)
-
-    for table_id, fields in (
-        (COLLECTIONS.get("chat_dm_threads", "chat_dm_threads"), ("participant_a", "participant_b")),
-        (COLLECTIONS.get("chat_blocks", "chat_blocks"), ("blocker_id", "blocked_id")),
-    ):
-        for field in fields:
-            try:
-                rows = list_rows_all(table_id, [Query.equal(field, [user_id])])
-            except AppwriteException:
-                logger.exception("Failed to list rows for deletion: %s", table_id)
-                continue
-            for row in rows:
-                row_id = row.get("$id") or row.get("id")
-                if row_id:
-                    try:
-                        delete_row_safe(table_id, row_id)
-                    except AppwriteException:
-                        logger.exception("Failed to delete %s row %s", table_id, row_id)
-
-    user_upload_root = os.path.abspath(os.path.join("uploads", "file_share", user_id))
-    if os.path.isdir(user_upload_root):
-        try:
-            shutil.rmtree(user_upload_root)
-        except OSError:
-            logger.exception("Failed to remove upload directory %s", user_upload_root)
+    return jsonify({"status": "ok"})
 
 
 def _normalize_calendar_url(url):
@@ -1669,22 +1627,6 @@ def request_account_recovery():
         logger.exception("Failed to start password recovery")
         return jsonify({"error": "Unable to start password recovery."}), 500
 
-    return jsonify({"status": "ok"})
-
-
-@settings_bp.route("/api/account/delete", methods=["POST"])
-@login_required
-def delete_account():
-    user_id = str(current_user.id)
-    users_service = Users(appwrite_client)
-
-    try:
-        users_service.delete(user_id)
-    except Exception:
-        logger.exception("Failed to delete Appwrite auth account")
-        return jsonify({"error": "Unable to delete account."}), 500
-
-    _delete_user_artifacts(user_id)
     return jsonify({"status": "ok"})
 
 

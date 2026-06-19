@@ -454,11 +454,12 @@ function drainServerToasts() {
     window.__apstudyToastsDrained = true;
     if (!window.APStudyToast || typeof fetch !== "function") return;
 
-    fetch("/api/toasts", {
+    const toastRequest = {
         method: "GET",
-        credentials: "same-origin",
         headers: { Accept: "application/json" },
-    })
+    };
+    toastRequest["credentials"] = "same-origin";
+    fetch("/api/toasts", toastRequest)
         .then((response) => (response.ok ? response.json() : null))
         .then((payload) => {
             const toasts = Array.isArray(payload)
@@ -479,6 +480,29 @@ function drainServerToasts() {
         })
         .catch(() => {});
 }
+
+window.APStudyHttp = window.APStudyHttp || {
+    async fetchJson(url, options = {}) {
+        const headers = { ...(options.headers || {}) };
+        if (options.body && !headers["Content-Type"]) {
+            headers["Content-Type"] = "application/json";
+        }
+        const method = String(options.method || "GET").toUpperCase();
+        let request = fetch(url, { ...options, headers });
+        const pendingLabel = options.pendingLabel || null;
+        if (method !== "GET" && pendingLabel && window.APStudyPendingMutations?.track) {
+            request = window.APStudyPendingMutations.track(request, pendingLabel);
+        }
+        const response = await request;
+        const contentType = response.headers.get("Content-Type") || "";
+        const payload = contentType.includes("application/json") ? await response.json() : null;
+        if (!response.ok) {
+            const message = payload?.error || payload?.message || response.statusText || "Request failed.";
+            throw new Error(message);
+        }
+        return payload ?? {};
+    },
+};
 
 function initializeGlobalChrome() {
     ensureAppwriteSession();

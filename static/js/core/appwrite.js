@@ -1,5 +1,11 @@
-const APPWRITE_ENDPOINT = "https://nyc.cloud.appwrite.io/v1";
-const APPWRITE_PROJECT_ID = "69f77663000c16abdff2";
+const configMeta = typeof document !== "undefined"
+    ? {
+        endpoint: document.querySelector('meta[name="apstudy-appwrite-endpoint"]')?.content,
+        projectId: document.querySelector('meta[name="apstudy-appwrite-project-id"]')?.content,
+    }
+    : {};
+const APPWRITE_ENDPOINT = configMeta.endpoint || "https://nyc.cloud.appwrite.io/v1";
+const APPWRITE_PROJECT_ID = configMeta.projectId || "69f77663000c16abdff2";
 
 const client = new Appwrite.Client()
     .setEndpoint(APPWRITE_ENDPOINT)

@@ -33,6 +33,13 @@ from blueprints.settings import _settings_defaults
 from blueprints.chat_api import create_university_channel, emit_chat_event
 from services.chat_presence import sync_chat_presence_labels_for_school
 from services.toasts import push_toast
+from services.user_cleanup import delete_user_data
+from services.user_profile import (
+    is_early_member as _is_early_member,
+    is_emory_school as _is_emory_school,
+    normalize_banner_color as _normalize_banner_color,
+    profile_handle as _profile_handle,
+)
 from services.app_config import (
     get_course_tracking_refresh_minutes,
     set_course_tracking_refresh_minutes,
@@ -102,43 +109,6 @@ def _format_admin_datetime(value):
     if parsed:
         return parsed.strftime("%B %-d, %Y %-I:%M %p")
     return str(value) if value else None
-
-
-def _normalize_banner_color(value):
-    if not isinstance(value, str):
-        return "#fecae1"
-    normalized = value.strip()
-    if not normalized.startswith("#"):
-        normalized = f"#{normalized}"
-    if len(normalized) == 7:
-        try:
-            int(normalized[1:], 16)
-            return normalized.lower()
-        except ValueError:
-            return "#fecae1"
-    return "#fecae1"
-
-
-def _profile_handle(name, user_id, username=None):
-    if username:
-        return f"@{username}"
-    base = "".join(char.lower() if char.isalnum() else "-" for char in (name or "")).strip("-")
-    base = "-".join(part for part in base.split("-") if part)
-    return f"@{base or user_id or 'apstudy-user'}"
-
-
-def _is_emory_school(value):
-    normalized = str(value or "").strip().lower()
-    return normalized in {"emory", "emory university"}
-
-
-def _is_early_member(value):
-    parsed = parse_datetime(value)
-    if not parsed:
-        return False
-    if parsed.tzinfo is not None:
-        parsed = parsed.replace(tzinfo=None)
-    return parsed < datetime(2026, 8, 20)
 
 
 def _admin_profile_payload(user_doc):
@@ -676,63 +646,7 @@ def _collect_folder_tree_ids(user_id, root_folder_id):
 
 
 def _delete_user_rows(user_id):
-    table_ids = [
-        COLLECTIONS["user_settings"],
-        COLLECTIONS["user_courses"],
-        COLLECTIONS["course_seat_tracks"],
-        COLLECTIONS["notes"],
-        COLLECTIONS["note_folders"],
-        COLLECTIONS["shared_files"],
-        COLLECTIONS["file_folders"],
-        COLLECTIONS["chat_messages"],
-        COLLECTIONS["chat_presence"],
-        COLLECTIONS["chat_read_states"],
-    ]
-
-    try:
-        delete_calendar_rows_by_user(user_id)
-    except AppwriteException:
-        logger.exception("Failed to delete local calendar rows for user %s", user_id)
-
-    for table_id in table_ids:
-        try:
-            rows = list_rows_all(
-                table_id,
-                [Query.equal("user_id", [user_id])],
-            )
-        except AppwriteException:
-            logger.exception("Failed to list %s rows for deletion", table_id)
-            continue
-
-        for row in rows:
-            row_id = _row_id(row)
-            if not row_id:
-                continue
-            if table_id == COLLECTIONS["shared_files"]:
-                _delete_shared_file_row(row)
-                continue
-            try:
-                delete_row_safe(table_id, row_id)
-            except AppwriteException:
-                logger.exception("Failed to delete %s row %s", table_id, row_id)
-
-    for table_id, fields in (
-        (COLLECTIONS["chat_dm_threads"], ("participant_a", "participant_b")),
-        (COLLECTIONS["chat_blocks"], ("blocker_id", "blocked_id")),
-    ):
-        for field in fields:
-            try:
-                rows = list_rows_all(table_id, [Query.equal(field, [user_id])])
-            except AppwriteException:
-                logger.exception("Failed to list %s rows for deletion", table_id)
-                continue
-            for row in rows:
-                row_id = _row_id(row)
-                if row_id:
-                    try:
-                        delete_row_safe(table_id, row_id)
-                    except AppwriteException:
-                        logger.exception("Failed to delete %s row %s", table_id, row_id)
+    return delete_user_data(user_id)
 
 
 def _load_section(section, user_id):
@@ -1941,6 +1855,12 @@ def delete_user(user_id):
 
     avatar_file_id = user_doc.get("avatar_file_id")
 
+    result = _delete_user_rows(user_id)
+    errors = result if isinstance(result, list) else []
+    if errors:
+        logger.error("Incomplete user data deletion for %s: %s", user_id, errors)
+        return _redirect_detail(user_id, "overview", error="Unable to delete all user data.")
+
     try:
         Users(appwrite_client).delete(user_id)
     except Exception:
@@ -1949,22 +1869,12 @@ def delete_user(user_id):
 
     _log_admin_action("delete_user", f"user:{user_id}", target_user=user_doc, color="red")
 
-    try:
-        _delete_user_rows(user_id)
-    except AppwriteException:
-        logger.exception("Failed to remove user data for %s", user_id)
-
     if avatar_file_id:
         try:
             _storage_service().delete_file(PROFILE_AVATAR_BUCKET_ID, avatar_file_id)
         except AppwriteException as exc:
             if _status_code(exc) != 404:
                 logger.exception("Failed to delete avatar file %s", avatar_file_id)
-
-    try:
-        delete_row_safe(COLLECTIONS["users"], user_id)
-    except AppwriteException:
-        logger.exception("Failed to delete user row %s", user_id)
 
     push_toast("User deleted.", type="success")
     return redirect(url_for("admin.admin_users"))

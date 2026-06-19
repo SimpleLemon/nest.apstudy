@@ -89,6 +89,12 @@ export function normalizeList(list) {
 }
 
 export async function fetchJson(url, options = {}) {
+    if (window.APStudyHttp?.fetchJson) {
+        return window.APStudyHttp.fetchJson(url, {
+            ...options,
+            pendingLabel: options.pendingLabel || "task-save",
+        });
+    }
     const method = String(options.method || "GET").toUpperCase();
     const request = fetch(url, {
         headers: { "Content-Type": "application/json", ...(options.headers || {}) },

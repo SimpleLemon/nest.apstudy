@@ -290,7 +290,6 @@ def delete_note(note_id):
     return jsonify({"ok": True})
 
 
-@notes_api_bp.route("/api/note-folders", methods=["POST"])
 @notes_api_bp.route("/api/notes/folders", methods=["POST"])
 @login_required
 def create_folder():
@@ -333,7 +332,6 @@ def create_folder():
 
 
 @notes_api_bp.route("/api/notes/folders/<folder_id>", methods=["PATCH"])
-@notes_api_bp.route("/api/note-folders/<folder_id>", methods=["PATCH"])
 @login_required
 def update_folder(folder_id):
     _folder_owner_or_404(folder_id)
@@ -361,7 +359,6 @@ def update_folder(folder_id):
 
 
 @notes_api_bp.route("/api/notes/folders/<folder_id>", methods=["DELETE"])
-@notes_api_bp.route("/api/note-folders/<folder_id>", methods=["DELETE"])
 @login_required
 def delete_folder(folder_id):
     _folder_owner_or_404(folder_id)

@@ -118,7 +118,13 @@ def create_app():
         from flask_login import current_user
 
         if not current_user.is_authenticated:
-            return {"sidebar_default": "expanded", "avatar_src": avatar_url_for_size, "can_access_admin": False}
+            return {
+                "sidebar_default": "expanded",
+                "avatar_src": avatar_url_for_size,
+                "can_access_admin": False,
+                "appwrite_endpoint": os.environ.get("APPWRITE_ENDPOINT", "https://nyc.cloud.appwrite.io/v1"),
+                "appwrite_project_id": os.environ.get("APPWRITE_PROJECT_ID", "69f77663000c16abdff2"),
+            }
 
         try:
             from appwrite.query import Query
@@ -144,6 +150,8 @@ def create_app():
             "sidebar_default": sidebar_default,
             "avatar_src": avatar_url_for_size,
             "can_access_admin": user_can_access_admin(user_id),
+            "appwrite_endpoint": os.environ.get("APPWRITE_ENDPOINT", "https://nyc.cloud.appwrite.io/v1"),
+            "appwrite_project_id": os.environ.get("APPWRITE_PROJECT_ID", "69f77663000c16abdff2"),
         }
 
     # Register all blueprints
