@@ -121,6 +121,20 @@
                             <span class="material-symbols-outlined" aria-hidden="true">code</span>
                         </button>
                     </div>
+                    <div class="notes-toolbar-segment notes-toolbar-format" data-toolbar-item data-overflow-priority="35" aria-label="Format">
+                        <button type="button" class="notes-toolbar-menu-trigger" data-toolbar-menu-trigger="font-size" title="Font size" aria-label="Font size" aria-expanded="false">
+                            <span class="material-symbols-outlined notes-toolbar-icon" aria-hidden="true">format_size</span>
+                            <span class="material-symbols-outlined notes-toolbar-chevron" aria-hidden="true">expand_more</span>
+                        </button>
+                        <button type="button" class="notes-toolbar-menu-trigger" data-toolbar-menu-trigger="text-color" title="Text color" aria-label="Text color" aria-expanded="false">
+                            <span class="material-symbols-outlined notes-toolbar-icon" aria-hidden="true">format_color_text</span>
+                            <span class="material-symbols-outlined notes-toolbar-chevron" aria-hidden="true">expand_more</span>
+                        </button>
+                        <button type="button" class="notes-toolbar-menu-trigger" data-toolbar-menu-trigger="highlight-color" title="Highlight" aria-label="Highlight" aria-expanded="false">
+                            <span class="material-symbols-outlined notes-toolbar-icon" aria-hidden="true">border_color</span>
+                            <span class="material-symbols-outlined notes-toolbar-chevron" aria-hidden="true">expand_more</span>
+                        </button>
+                    </div>
                     <div class="notes-toolbar-segment notes-toolbar-blocks" data-toolbar-item data-overflow-priority="40" aria-label="Block style">
                         <button type="button" class="notes-toolbar-menu-trigger notes-style-trigger" data-toolbar-menu-trigger="block-style" title="Block style" aria-label="Block style" aria-expanded="false">
                             <span class="material-symbols-outlined notes-toolbar-icon" data-current-block-icon aria-hidden="true">subject</span>
@@ -218,6 +232,9 @@
                             <span>Checklist</span>
                         </button>
                     </div>
+                    <div class="notes-toolbar-menu notes-font-size-menu" data-toolbar-menu="font-size" hidden></div>
+                    <div class="notes-toolbar-menu notes-color-menu" data-toolbar-menu="text-color" hidden></div>
+                    <div class="notes-toolbar-menu notes-color-menu" data-toolbar-menu="highlight-color" hidden></div>
                     <div class="notes-toolbar-menu notes-add-block-menu" data-toolbar-menu="add-block" hidden>
                         <label class="notes-add-block-search">
                             <span class="material-symbols-outlined" aria-hidden="true">search</span>
@@ -268,6 +285,7 @@
                             <input type="url" data-link-url placeholder="https://example.com" autocomplete="off" />
                         </label>
                         <div class="notes-link-actions">
+                            <button type="button" class="notes-link-remove" data-editor-action="remove-link">Remove</button>
                             <button type="button" class="notes-link-cancel" data-toolbar-menu-close>Cancel</button>
                             <button type="submit" class="notes-link-apply">Apply</button>
                         </div>

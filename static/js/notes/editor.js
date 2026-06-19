@@ -1,10 +1,29 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { useCreateBlockNote, useEditorContentOrSelectionChange } from '@blocknote/react';
+import {
+    FormattingToolbarController,
+    SideMenuController,
+    SuggestionMenuController,
+    useBlockNoteEditor,
+    useCreateBlockNote,
+    useEditorContentOrSelectionChange,
+    useSelectedBlocks,
+} from '@blocknote/react';
 import { checkBlockHasDefaultProp, checkBlockTypeHasDefaultProp, mapTableCell } from '@blocknote/core';
 import { BlockNoteView } from '@blocknote/mantine';
 import { notesEditorSchema } from './toolbar.js';
+import {
+    BLOCK_CATALOG,
+    FONT_SIZE_PRESETS,
+    FORMAT_COLORS,
+    blockIconClass,
+    blockPayloadForCatalogItem,
+    catalogItemByKey,
+    catalogItemByType,
+    filterBlockCatalog,
+} from './editor/block-catalog.js';
+import { hiddenBlocksForCollapsedHeadings } from './editor/heading-collapse.js';
 import { clipboardTextLooksStructured, normalizeImportedMarkdownBlocks } from './editor/markdown-repair.js';
 import { blockOwnContentIsEmpty, buildLoadingIndicatorHtml, documentHasText, formatRelativeSavedTime, isBlankTitle, noteIdFromPath, parseSavedDate } from './editor/utils.js';
 
@@ -39,6 +58,7 @@ const PAGE_SETUP_MARGIN_MIN = 2;
 const PAGE_SETUP_MARGIN_MAX = 18;
 const VISUAL_INDENT_BLOCKS = new Set(['paragraph', 'heading']);
 const LIST_BLOCK_TYPES = new Set(['bulletListItem', 'numberedListItem', 'checkListItem']);
+const ATOM_BLOCK_TYPES = new Set(['divider', 'bookmark', 'image', 'video', 'audio', 'file']);
 const MAX_INDENT_LEVEL = 4;
 const TEXT_BLOCK_OPTIONS = [
     { label: 'Paragraph', type: 'paragraph', icon: 'subject', key: 'paragraph' },
@@ -46,6 +66,7 @@ const TEXT_BLOCK_OPTIONS = [
     { label: 'Heading 2', type: 'heading', props: { level: 2 }, icon: 'H2', key: 'heading-2' },
     { label: 'Heading 3', type: 'heading', props: { level: 3 }, icon: 'H3', key: 'heading-3' },
     { label: 'Quote', type: 'quote', icon: 'format_quote', key: 'quote' },
+    { label: 'Callout', type: 'callout', icon: 'lightbulb', key: 'callout' },
 ];
 const LIST_STYLE_OPTIONS = [
     { label: 'Bulleted list', type: 'bulletListItem', icon: 'format_list_bulleted', key: 'bulletListItem' },
@@ -74,6 +95,9 @@ let pageSetupSaveTimer = null;
 let addBlockActiveIndex = 0;
 let defaultSideMarginPercent = null;
 let normalizingEditorDocument = false;
+let selectedBlockAnchorId = null;
+let urlBlockPopover = null;
+let urlBlockResolve = null;
 
 const titleInput = document.getElementById('note-title-input');
 const saveStatus = document.getElementById('save-status');
@@ -245,6 +269,64 @@ function iconHtml(icon) {
         return icon;
     }
     return icon;
+}
+
+function textFromInlineContent(content) {
+    if (!Array.isArray(content)) return '';
+    return content.map((item) => {
+        if (typeof item === 'string') return item;
+        if (item?.type === 'link') return textFromInlineContent(item.content);
+        return item?.text || '';
+    }).join('');
+}
+
+function noteUrl(value) {
+    const raw = String(value || '').trim();
+    if (!raw) return '';
+    try {
+        const parsed = new URL(raw);
+        if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return '';
+        return parsed.href;
+    } catch (error) {
+        return '';
+    }
+}
+
+function materialIcon(name, className = 'material-symbols-outlined') {
+    return React.createElement('span', {
+        className,
+        'aria-hidden': 'true',
+    }, name);
+}
+
+function toolbarButton(label, icon, onClick, options = {}) {
+    return React.createElement(
+        'button',
+        {
+            type: 'button',
+            className: options.className || 'notes-context-button',
+            title: label,
+            'aria-label': label,
+            'aria-pressed': options.active ? 'true' : 'false',
+            disabled: options.disabled || false,
+            onMouseDown: (event) => event.preventDefault(),
+            onClick,
+        },
+        icon?.startsWith?.('H')
+            ? React.createElement('span', { className: 'notes-toolbar-text-icon', 'aria-hidden': 'true' }, icon)
+            : materialIcon(icon || 'more_horiz')
+    );
+}
+
+function updateBlockPayloadForPreservedText(block, payload) {
+    if (!block || !payload) return payload;
+    if (ATOM_BLOCK_TYPES.has(payload.type) || payload.type === 'table') return payload;
+    return {
+        ...payload,
+        props: mergedPropsForBlockType(payload.type, block, payload.props),
+        content: block.content,
+        children: block.children || [],
+    };
 }
 
 function isBlockStyleSelected(block, option) {
@@ -467,9 +549,36 @@ function openToolbarMenu(name, trigger) {
         }
     } else if (name === 'add-block') {
         prepareAddBlockMenu(menu);
+    } else if (name === 'font-size') {
+        renderFontSizeMenu(menu);
+    } else if (name === 'text-color' || name === 'highlight-color') {
+        renderColorMenu(menu, name === 'highlight-color' ? 'backgroundColor' : 'textColor');
     }
 
     positionToolbarMenu(trigger, menu, triggerRect);
+}
+
+function renderFontSizeMenu(menu) {
+    if (!menu || menu.dataset.rendered === 'font-size') return;
+    menu.dataset.rendered = 'font-size';
+    menu.innerHTML = FONT_SIZE_PRESETS.map((item) => `
+        <button type="button" class="notes-toolbar-menu-item" data-editor-action="font-size" data-font-size="${item.value}" data-menu-check="font-size-${item.value}">
+            <span class="material-symbols-outlined" aria-hidden="true">format_size</span>
+            <span>${item.label}</span>
+        </button>
+    `).join('');
+}
+
+function renderColorMenu(menu, style) {
+    if (!menu || menu.dataset.rendered === style) return;
+    menu.dataset.rendered = style;
+    const action = style === 'backgroundColor' ? 'highlight-color' : 'text-color';
+    menu.innerHTML = FORMAT_COLORS.map((item) => `
+        <button type="button" class="notes-toolbar-menu-item notes-color-menu-item" data-editor-action="${action}" data-color="${item.value}" data-menu-check="${action}-${item.value}">
+            <span class="notes-format-swatch" data-${style === 'backgroundColor' ? 'background' : 'text'}-color="${item.value}" aria-hidden="true"></span>
+            <span>${item.label}</span>
+        </button>
+    `).join('');
 }
 
 function visibleAddBlockItems(menu) {
@@ -491,14 +600,28 @@ function setActiveAddBlockItem(menu, index) {
 function filterAddBlockMenu(menu) {
     const input = menu?.querySelector('[data-add-block-search]');
     const query = (input?.value || '').trim().toLowerCase();
+    const items = filterBlockCatalog(query);
+    const visibleKeys = new Set(items.map((item) => item.key));
     menu?.querySelectorAll('.notes-add-block-item').forEach((item) => {
-        const text = item.textContent.toLowerCase();
-        item.hidden = Boolean(query && !text.includes(query));
+        item.hidden = !visibleKeys.has(item.dataset.blockKey);
     });
     setActiveAddBlockItem(menu, 0);
 }
 
+function renderAddBlockMenu(menu) {
+    const list = menu?.querySelector('[data-add-block-list]');
+    if (!list || list.dataset.rendered === 'catalog') return;
+    list.dataset.rendered = 'catalog';
+    list.innerHTML = BLOCK_CATALOG.map((item) => `
+        <button type="button" class="notes-add-block-item" data-editor-action="insert-block" data-block-key="${item.key}" data-block-type="${item.type}">
+            <span class="${blockIconClass(item.icon)}" aria-hidden="true">${iconHtml(item.icon)}</span>
+            <span><strong>${item.label}</strong><small>${item.description}</small></span>
+        </button>
+    `).join('');
+}
+
 function prepareAddBlockMenu(menu) {
+    renderAddBlockMenu(menu);
     const input = menu?.querySelector('[data-add-block-search]');
     if (input) {
         input.value = '';
@@ -667,52 +790,156 @@ function openBlockSuggestionMenu(block) {
     focusEditorBody();
 }
 
-function blockPropsFromDataset(button) {
-    const type = button?.dataset.blockType || 'paragraph';
-    if (type === 'heading') {
-        return { level: Number(button.dataset.level) || 1, indentLevel: 0 };
+function removeUrlBlockPopover() {
+    if (!urlBlockPopover) return;
+    urlBlockPopover.remove();
+    urlBlockPopover = null;
+    urlBlockResolve = null;
+}
+
+function positionUrlBlockPopover(anchorRect) {
+    if (!urlBlockPopover) return;
+    const rect = anchorRect || editorPage?.getBoundingClientRect() || { left: 16, bottom: 80 };
+    const width = Math.min(360, window.innerWidth - 16);
+    const left = Math.max(8, Math.min(rect.left || 8, window.innerWidth - width - 8));
+    const top = Math.max(8, Math.min((rect.bottom || 80) + 8, window.innerHeight - 160));
+    urlBlockPopover.style.width = `${width}px`;
+    urlBlockPopover.style.left = `${Math.round(left)}px`;
+    urlBlockPopover.style.top = `${Math.round(top)}px`;
+}
+
+function requestUrlForBlock(item, anchorRect = null) {
+    removeUrlBlockPopover();
+    return new Promise((resolve) => {
+        urlBlockResolve = resolve;
+        const label = item?.label || 'URL block';
+        urlBlockPopover = document.createElement('form');
+        urlBlockPopover.className = 'notes-url-block-popover';
+        urlBlockPopover.innerHTML = `
+            <label class="notes-url-block-field">
+                <span>${label} URL</span>
+                <input type="url" name="url" placeholder="https://example.com" autocomplete="off" required />
+            </label>
+            <div class="notes-url-block-error" hidden></div>
+            <div class="notes-url-block-actions">
+                <button type="button" data-url-block-cancel>Cancel</button>
+                <button type="submit">Insert</button>
+            </div>
+        `;
+        document.body.appendChild(urlBlockPopover);
+        positionUrlBlockPopover(anchorRect);
+        const input = urlBlockPopover.querySelector('input[name="url"]');
+        const error = urlBlockPopover.querySelector('.notes-url-block-error');
+        input?.focus();
+
+        urlBlockPopover.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const url = noteUrl(input?.value);
+            if (!url) {
+                if (error) {
+                    error.hidden = false;
+                    error.textContent = 'Enter a valid http or https URL.';
+                }
+                return;
+            }
+            removeUrlBlockPopover();
+            resolve(url);
+        });
+        urlBlockPopover.querySelector('[data-url-block-cancel]')?.addEventListener('click', () => {
+            removeUrlBlockPopover();
+            resolve('');
+        });
+    });
+}
+
+async function previewForBookmark(url) {
+    try {
+        const response = await fetch(`/api/notes/tools/link-preview?url=${encodeURIComponent(url)}`);
+        if (!response.ok) throw new Error('Preview unavailable');
+        return await response.json();
+    } catch (error) {
+        let hostname = '';
+        try {
+            hostname = new URL(url).hostname;
+        } catch (urlError) {
+            hostname = '';
+        }
+        return {
+            url,
+            title: hostname || url,
+            description: '',
+            image_url: '',
+            site_name: hostname,
+            content_type: '',
+            preview_found: false,
+        };
     }
-    if (type === 'codeBlock') {
-        return { language: '' };
+}
+
+async function payloadForCatalogItem(item, anchorRect = null) {
+    if (!item) return blockPayloadForCatalogItem(catalogItemByKey('paragraph'));
+    if (!item.requiresUrl) return blockPayloadForCatalogItem(item);
+    const url = await requestUrlForBlock(item, anchorRect);
+    if (!url) return null;
+    if (item.type === 'bookmark') {
+        const preview = await previewForBookmark(url);
+        return blockPayloadForCatalogItem(item, {
+            url: preview?.url || url,
+            title: preview?.title || url,
+            description: preview?.description || '',
+            image_url: preview?.image_url || '',
+            site_name: preview?.site_name || '',
+            content_type: preview?.content_type || '',
+        });
     }
-    return undefined;
+    return blockPayloadForCatalogItem(item, { url });
+}
+
+function insertBlockPayload(block, editor = editorInstance) {
+    if (!editor || !block) return null;
+    const currentBlock = editor.getTextCursorPosition?.()?.block;
+    if (!currentBlock) {
+        editor.focus?.();
+        return null;
+    }
+    let insertedOrUpdated = null;
+    if (blockOwnContentIsEmpty(currentBlock)) {
+        insertedOrUpdated = editor.updateBlock(currentBlock, block);
+    } else {
+        insertedOrUpdated = editor.insertBlocks?.([block], currentBlock, 'after')?.[0] || null;
+    }
+
+    if (!insertedOrUpdated) return null;
+
+    if (ATOM_BLOCK_TYPES.has(insertedOrUpdated.type)) {
+        const after = editor.insertBlocks?.([{ type: 'paragraph' }], insertedOrUpdated, 'after')?.[0];
+        if (after) editor.setTextCursorPosition?.(after);
+    } else {
+        editor.setTextCursorPosition?.(insertedOrUpdated);
+    }
+
+    editor.focus?.();
+    updateEditorChrome();
+    triggerDebouncedSave();
+    return insertedOrUpdated;
+}
+
+async function insertCatalogItem(item, anchorRect = null, editor = editorInstance) {
+    const payload = await payloadForCatalogItem(item, anchorRect);
+    if (!payload) {
+        focusEditorBody();
+        return null;
+    }
+    closeToolbarMenus();
+    return insertBlockPayload(payload, editor);
 }
 
 function insertBlockFromMenu(button) {
     if (!editorInstance) return;
-
-    const currentBlock = getCurrentBlock();
-    if (!currentBlock) {
-        focusEditorBody();
-        return;
-    }
-
-    const type = button?.dataset.blockType || 'paragraph';
-    const props = blockPropsFromDataset(button);
-    const block = { type };
-    if (props) block.props = props;
-
-    if (blockOwnContentIsEmpty(currentBlock)) {
-        editorInstance.updateBlock(currentBlock, block);
-        editorInstance.setTextCursorPosition?.(currentBlock);
-        closeToolbarMenus();
-        focusEditorBody();
-        updateEditorChrome();
-        triggerDebouncedSave();
-        return;
-    }
-
-    const insertedBlock = editorInstance.insertBlocks?.(
-        [block],
-        currentBlock,
-        'after'
-    )?.[0];
-
-    if (insertedBlock) editorInstance.setTextCursorPosition?.(insertedBlock);
-    closeToolbarMenus();
-    focusEditorBody();
-    updateEditorChrome();
-    triggerDebouncedSave();
+    const item = catalogItemByKey(button?.dataset.blockKey) || catalogItemByType(button?.dataset.blockType, {
+        level: Number(button?.dataset.level || 1),
+    });
+    void insertCatalogItem(item || catalogItemByKey('paragraph'), button?.getBoundingClientRect?.());
 }
 
 function selectedBlocks() {
@@ -763,6 +990,144 @@ function toggleBasicStyle(style) {
         return;
     }
     focusEditorBody();
+}
+
+function applyInlineStyle(style, value) {
+    if (!editorInstance) return;
+    editorInstance.focus?.();
+    if (value === 'default' || value === '') {
+        editorInstance.removeStyles?.({ [style]: value });
+    } else {
+        editorInstance.addStyles?.({ [style]: value });
+    }
+    updateEditorChrome();
+    triggerDebouncedSave();
+}
+
+function applyTextColor(color) {
+    applyInlineStyle('textColor', color);
+}
+
+function applyHighlightColor(color) {
+    applyInlineStyle('backgroundColor', color);
+}
+
+function applyFontSizePreset(value) {
+    const preset = FONT_SIZE_PRESETS.find((item) => item.value === value) || FONT_SIZE_PRESETS[0];
+    if (preset.value === 'default') {
+        editorInstance?.removeStyles?.({ fontSize: '' });
+    } else {
+        editorInstance?.addStyles?.({ fontSize: preset.cssValue });
+    }
+    focusEditorBody();
+    updateEditorChrome();
+    triggerDebouncedSave();
+}
+
+function deleteSelectedBlocks() {
+    if (!editorInstance) return;
+    const blocks = selectedBlocks();
+    if (!blocks.length) return;
+    const reference = blocks[0];
+    const nextBlock = editorInstance.getNextBlock?.(reference) || editorInstance.getPrevBlock?.(reference) || editorInstance.document?.[0];
+    editorInstance.removeBlocks?.(blocks);
+    if (nextBlock) editorInstance.setTextCursorPosition?.(nextBlock);
+    selectedBlockAnchorId = null;
+    focusEditorBody();
+    updateEditorChrome();
+    triggerDebouncedSave();
+}
+
+function duplicateSelectedBlocks() {
+    if (!editorInstance) return;
+    const blocks = selectedBlocks();
+    if (!blocks.length) return;
+    const copied = JSON.parse(JSON.stringify(blocks)).map((block) => {
+        delete block.id;
+        return block;
+    });
+    const inserted = editorInstance.insertBlocks?.(copied, blocks[blocks.length - 1], 'after') || [];
+    if (inserted[0]) {
+        editorInstance.setSelection?.(inserted[0], inserted[inserted.length - 1] || inserted[0]);
+        selectedBlockAnchorId = inserted[0].id;
+    }
+    focusEditorBody();
+    updateEditorChrome();
+    triggerDebouncedSave();
+}
+
+async function copySelectedBlocks({ cut = false } = {}) {
+    if (!editorInstance) return;
+    const blocks = selectedBlocks();
+    if (!blocks.length) return;
+    const markdown = await editorInstance.blocksToMarkdownLossy?.(blocks) || blocks.map((block) => textFromInlineContent(block.content)).join('\n\n');
+    const json = JSON.stringify(blocks);
+    try {
+        if (window.ClipboardItem && navigator.clipboard?.write) {
+            await navigator.clipboard.write([
+                new ClipboardItem({
+                    'text/plain': new Blob([markdown], { type: 'text/plain' }),
+                    'text/markdown': new Blob([markdown], { type: 'text/markdown' }),
+                    'application/x-nest-blocknote+json': new Blob([json], { type: 'application/x-nest-blocknote+json' }),
+                }),
+            ]);
+        } else {
+            await navigator.clipboard?.writeText(markdown);
+        }
+    } catch (error) {
+        try {
+            await navigator.clipboard?.writeText(markdown);
+        } catch (clipboardError) {
+            console.warn('Unable to write selected note blocks to clipboard', clipboardError);
+        }
+    }
+    if (cut) deleteSelectedBlocks();
+}
+
+function moveSelectedBlocks(direction) {
+    if (!editorInstance) return;
+    if (direction === 'up') {
+        editorInstance.moveBlocksUp?.();
+    } else {
+        editorInstance.moveBlocksDown?.();
+    }
+    focusEditorBody();
+    updateEditorChrome();
+    triggerDebouncedSave();
+}
+
+function firstSelectedHeading() {
+    return selectedBlocks().find((block) => block?.type === 'heading') || null;
+}
+
+function toggleHeadingCollapse(block = firstSelectedHeading()) {
+    if (!editorInstance || !block || block.type !== 'heading') return;
+    editorInstance.updateBlock(block, {
+        props: {
+            ...block.props,
+            isCollapsed: !Boolean(block.props?.isCollapsed),
+        },
+    });
+    focusEditorBody();
+    updateEditorChrome();
+    triggerDebouncedSave();
+}
+
+function selectBlockRange(block, extend = false) {
+    if (!editorInstance || !block) return;
+    const anchor = extend && selectedBlockAnchorId ? editorInstance.getBlock?.(selectedBlockAnchorId) : null;
+    if (anchor) {
+        editorInstance.setSelection?.(anchor, block);
+    } else {
+        selectedBlockAnchorId = block.id;
+        editorInstance.setSelection?.(block, block);
+    }
+    editorInstance.setForceSelectionVisible?.(true);
+    updateEditorChrome();
+}
+
+function selectedBlockIds() {
+    return new Set(selectedBlocks().map((block) => block?.id).filter(Boolean));
 }
 
 function canRunHistoryAction(action) {
@@ -854,6 +1219,15 @@ function applyLinkFromMenu(menu) {
     triggerDebouncedSave();
 }
 
+function removeSelectedLink() {
+    if (!editorInstance) return;
+    editorInstance.focus?.();
+    editorInstance._tiptapEditor?.chain?.().focus().unsetLink().run();
+    closeToolbarMenus();
+    updateEditorChrome();
+    triggerDebouncedSave();
+}
+
 function historyDepth(action) {
     const state = editorInstance?._tiptapEditor?.state;
     if (!state?.plugins) return null;
@@ -877,6 +1251,7 @@ function updateToolbarState() {
     const activeStyles = typeof editorInstance.getActiveStyles === 'function'
         ? editorInstance.getActiveStyles()
         : {};
+    const activeFontPreset = FONT_SIZE_PRESETS.find((item) => item.cssValue && item.cssValue === activeStyles?.fontSize) || FONT_SIZE_PRESETS[0];
     const activeBlockOption = TEXT_BLOCK_OPTIONS.find((option) => isBlockStyleSelected(block, option)) || TEXT_BLOCK_OPTIONS[0];
     const activeListOption = LIST_STYLE_OPTIONS.find((option) => isBlockStyleSelected(block, option));
     const currentAlignment = getSelectedTextAlignment();
@@ -910,6 +1285,12 @@ function updateToolbarState() {
             active = button.dataset.align === currentAlignment;
         } else if (action === 'basic-style') {
             active = Boolean(activeStyles?.[button.dataset.style]);
+        } else if (action === 'text-color') {
+            active = (activeStyles?.textColor || 'default') === button.dataset.color;
+        } else if (action === 'highlight-color') {
+            active = (activeStyles?.backgroundColor || 'default') === button.dataset.color;
+        } else if (action === 'font-size') {
+            active = activeFontPreset.value === button.dataset.fontSize;
         } else if (action === 'undo' || action === 'redo') {
             disabled = !canRunHistoryAction(action);
         } else if (action === 'indent' || action === 'outdent') {
@@ -927,7 +1308,12 @@ function updateToolbarState() {
 
     writingToolbar.querySelectorAll('[data-menu-check]').forEach((item) => {
         const key = item.dataset.menuCheck;
-        const checked = key === activeBlockOption.key || key === activeListOption?.key || key === activeAlignment.key;
+        const checked = key === activeBlockOption.key
+            || key === activeListOption?.key
+            || key === activeAlignment.key
+            || key === `text-color-${activeStyles?.textColor || 'default'}`
+            || key === `highlight-color-${activeStyles?.backgroundColor || 'default'}`
+            || key === `font-size-${activeFontPreset.value}`;
         item.classList.toggle('is-active', checked);
         item.setAttribute('aria-checked', String(checked));
     });
@@ -938,9 +1324,58 @@ function updateEditorHint() {
     editorHint.hidden = documentHasText(editorInstance.document);
 }
 
+function blockOuterById(id) {
+    if (!id || !blocknoteRoot) return null;
+    return blocknoteRoot.querySelector(`.bn-block-outer[data-id="${CSS.escape(String(id))}"]`);
+}
+
+function syncSelectedBlockClasses() {
+    if (!blocknoteRoot) return;
+    const ids = selectedBlockIds();
+    blocknoteRoot.querySelectorAll('.bn-block-outer[data-id]').forEach((element) => {
+        element.classList.toggle('notes-block-selected', ids.has(element.dataset.id));
+    });
+}
+
+function syncHeadingCollapseChrome() {
+    if (!editorInstance || !blocknoteRoot) return;
+    const { hidden, counts } = hiddenBlocksForCollapsedHeadings(editorInstance.document || []);
+    blocknoteRoot.querySelectorAll('.bn-block-outer[data-id]').forEach((element) => {
+        const blockId = element.dataset.id;
+        const hiddenBy = hidden.get(blockId);
+        element.classList.toggle('notes-block-hidden-by-collapse', Boolean(hiddenBy));
+        if (hiddenBy) element.dataset.hiddenByHeading = hiddenBy;
+        else delete element.dataset.hiddenByHeading;
+    });
+
+    (editorInstance.document || []).forEach((block) => {
+        if (block?.type !== 'heading') return;
+        const outer = blockOuterById(block.id);
+        const content = outer?.querySelector('.bn-block-content[data-content-type="heading"]');
+        if (!content) return;
+        content.classList.toggle('notes-heading-collapsed', Boolean(block.props?.isCollapsed));
+        content.dataset.collapsedCount = String(counts.get(block.id) || 0);
+        let button = content.querySelector(':scope > .notes-heading-collapse-toggle');
+        if (!button) {
+            button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'notes-heading-collapse-toggle';
+            button.contentEditable = 'false';
+            button.setAttribute('aria-label', 'Toggle heading collapse');
+            button.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>';
+            content.insertBefore(button, content.firstChild);
+        }
+        button.setAttribute('aria-expanded', String(!block.props?.isCollapsed));
+    });
+}
+
 function updateEditorChrome() {
     updateToolbarState();
     updateEditorHint();
+    window.requestAnimationFrame(() => {
+        syncSelectedBlockClasses();
+        syncHeadingCollapseChrome();
+    });
 }
 
 function bindWritingToolbar() {
@@ -983,6 +1418,17 @@ function bindWritingToolbar() {
             setZoomIndex(zoomIndex + 1);
         } else if (action === 'basic-style') {
             toggleBasicStyle(actionButton.dataset.style);
+        } else if (action === 'text-color') {
+            applyTextColor(actionButton.dataset.color || 'default');
+            closeToolbarMenus();
+        } else if (action === 'highlight-color') {
+            applyHighlightColor(actionButton.dataset.color || 'default');
+            closeToolbarMenus();
+        } else if (action === 'font-size') {
+            applyFontSizePreset(actionButton.dataset.fontSize || 'default');
+            closeToolbarMenus();
+        } else if (action === 'remove-link') {
+            removeSelectedLink();
         } else if (action === 'set-block') {
             const blockType = actionButton.dataset.blockType;
             const level = Number(actionButton.dataset.level);
@@ -1031,6 +1477,10 @@ function bindWritingToolbar() {
         if (activeToolbarMenu && !writingToolbar.contains(event.target)) {
             closeToolbarMenus();
         }
+        if (urlBlockPopover && !urlBlockPopover.contains(event.target) && !writingToolbar?.contains(event.target)) {
+            urlBlockResolve?.('');
+            removeUrlBlockPopover();
+        }
         if (!pageSetupPopover || pageSetupPopover.hidden) return;
         const trigger = writingToolbar.querySelector('[data-editor-action="page-setup"]');
         if (pageSetupPopover.contains(event.target) || trigger?.contains(event.target)) return;
@@ -1039,9 +1489,48 @@ function bindWritingToolbar() {
     });
 
     document.addEventListener('keydown', (event) => {
-        if (event.key !== 'Escape') return;
-        if (activeToolbarMenu) closeToolbarMenus();
-        if (pageSetupPopover && !pageSetupPopover.hidden) closePageSetupPopover();
+        if (event.key === 'Escape') {
+            if (activeToolbarMenu) closeToolbarMenus();
+            if (pageSetupPopover && !pageSetupPopover.hidden) closePageSetupPopover();
+            if (urlBlockPopover) {
+                urlBlockResolve?.('');
+                removeUrlBlockPopover();
+            }
+            return;
+        }
+        if (!editorInstance) return;
+        const mod = event.metaKey || event.ctrlKey;
+        if (mod && event.key.toLowerCase() === 'k') {
+            event.preventDefault();
+            const trigger = writingToolbar.querySelector('[data-toolbar-menu-trigger="link"]');
+            openToolbarMenu('link', trigger);
+        } else if (mod && event.shiftKey && event.key.toLowerCase() === 'l') {
+            event.preventDefault();
+            const trigger = writingToolbar.querySelector('[data-toolbar-menu-trigger="text-color"]');
+            openToolbarMenu('text-color', trigger);
+        } else if (mod && event.shiftKey && event.key.toLowerCase() === 'h') {
+            event.preventDefault();
+            const trigger = writingToolbar.querySelector('[data-toolbar-menu-trigger="highlight-color"]');
+            openToolbarMenu('highlight-color', trigger);
+        } else if (mod && event.altKey && event.key.toLowerCase() === 'h') {
+            event.preventDefault();
+            toggleHeadingCollapse();
+        } else if (event.altKey && event.key === 'ArrowUp') {
+            event.preventDefault();
+            moveSelectedBlocks('up');
+        } else if (event.altKey && event.key === 'ArrowDown') {
+            event.preventDefault();
+            moveSelectedBlocks('down');
+        } else if ((event.key === 'Delete' || event.key === 'Backspace') && selectedBlocks().length > 1) {
+            event.preventDefault();
+            deleteSelectedBlocks();
+        } else if (mod && event.key.toLowerCase() === 'c' && selectedBlocks().length > 1) {
+            event.preventDefault();
+            void copySelectedBlocks();
+        } else if (mod && event.key.toLowerCase() === 'x' && selectedBlocks().length > 1) {
+            event.preventDefault();
+            void copySelectedBlocks({ cut: true });
+        }
     });
 
     pageSetupPopover?.addEventListener('click', (event) => {
@@ -1167,6 +1656,26 @@ function schedulePastedContentNormalization() {
 
 function handleNotesPaste({ event, editor, defaultPasteHandler }) {
     const plainText = event.clipboardData?.getData('text/plain') || '';
+    const blockJson = event.clipboardData?.getData('application/x-nest-blocknote+json') || '';
+    if (blockJson) {
+        try {
+            const blocks = JSON.parse(blockJson);
+            if (Array.isArray(blocks) && blocks.length) {
+                const current = editor.getTextCursorPosition?.()?.block;
+                if (current) {
+                    editor.insertBlocks?.(blocks.map((block) => {
+                        const next = { ...block };
+                        delete next.id;
+                        return next;
+                    }), current, 'after');
+                    schedulePastedContentNormalization();
+                    return true;
+                }
+            }
+        } catch (error) {
+            // Fall back to markdown/plain text paste.
+        }
+    }
     if (clipboardTextHasMarkdownSyntax(plainText)) {
         editor.pasteMarkdown?.(plainText);
         schedulePastedContentNormalization();
@@ -1185,6 +1694,232 @@ function handleNotesPaste({ event, editor, defaultPasteHandler }) {
     return handled;
 }
 
+function NotesSlashMenu(props) {
+    const { items, selectedIndex, onItemClick } = props;
+    return React.createElement(
+        'div',
+        { className: 'notes-slash-menu', role: 'listbox' },
+        items.map((item, index) => React.createElement(
+            'button',
+            {
+                key: item.key || item.label,
+                type: 'button',
+                className: `notes-slash-item${index === selectedIndex ? ' is-active' : ''}`,
+                role: 'option',
+                'aria-selected': String(index === selectedIndex),
+                onMouseDown: (event) => event.preventDefault(),
+                onClick: (event) => {
+                    event.stopPropagation();
+                    onItemClick?.(item);
+                },
+            },
+            React.createElement('span', { className: blockIconClass(item.icon), 'aria-hidden': 'true' }, iconHtml(item.icon)),
+            React.createElement('span', null,
+                React.createElement('strong', null, item.label),
+                React.createElement('small', null, item.description)
+            )
+        ))
+    );
+}
+
+function NotesSelectionToolbar() {
+    const editor = useBlockNoteEditor();
+    const activeStyles = editor.getActiveStyles?.() || {};
+    const blocks = useSelectedBlocks(editor);
+    const selected = blocks?.length || 0;
+    const block = blocks?.[0];
+    const [menu, setMenu] = React.useState('');
+
+    const colorButtons = (style) => React.createElement(
+        'div',
+        { className: 'notes-context-popover' },
+        FORMAT_COLORS.map((item) => React.createElement(
+            'button',
+            {
+                key: `${style}-${item.value}`,
+                type: 'button',
+                className: 'notes-context-menu-item',
+                onMouseDown: (event) => event.preventDefault(),
+                onClick: () => {
+                    if (style === 'textColor') applyTextColor(item.value);
+                    else applyHighlightColor(item.value);
+                    setMenu('');
+                },
+            },
+            React.createElement('span', {
+                className: 'notes-format-swatch',
+                [`data-${style === 'textColor' ? 'text' : 'background'}-color`]: item.value,
+                'aria-hidden': 'true',
+            }),
+            React.createElement('span', null, item.label)
+        ))
+    );
+
+    const fontButtons = React.createElement(
+        'div',
+        { className: 'notes-context-popover' },
+        FONT_SIZE_PRESETS.map((item) => React.createElement(
+            'button',
+            {
+                key: item.value,
+                type: 'button',
+                className: 'notes-context-menu-item',
+                onMouseDown: (event) => event.preventDefault(),
+                onClick: () => {
+                    applyFontSizePreset(item.value);
+                    setMenu('');
+                },
+            },
+            materialIcon('format_size'),
+            React.createElement('span', null, item.label)
+        ))
+    );
+
+    const turnIntoButtons = React.createElement(
+        'div',
+        { className: 'notes-context-popover' },
+        filterBlockCatalog('', { includeAtoms: false, turnIntoOnly: true }).map((item) => React.createElement(
+            'button',
+            {
+                key: item.key,
+                type: 'button',
+                className: 'notes-context-menu-item',
+                onMouseDown: (event) => event.preventDefault(),
+                onClick: () => {
+                    const payload = blockPayloadForCatalogItem(item);
+                    selectedBlocks().forEach((selectedBlock) => {
+                        editorInstance.updateBlock(selectedBlock, updateBlockPayloadForPreservedText(selectedBlock, payload));
+                    });
+                    setMenu('');
+                    updateEditorChrome();
+                    triggerDebouncedSave();
+                },
+            },
+            React.createElement('span', { className: blockIconClass(item.icon), 'aria-hidden': 'true' }, iconHtml(item.icon)),
+            React.createElement('span', null, item.label)
+        ))
+    );
+
+    return React.createElement(
+        'div',
+        { className: 'notes-context-toolbar' },
+        toolbarButton('Bold', 'format_bold', () => toggleBasicStyle('bold'), { active: Boolean(activeStyles.bold) }),
+        toolbarButton('Italic', 'format_italic', () => toggleBasicStyle('italic'), { active: Boolean(activeStyles.italic) }),
+        toolbarButton('Underline', 'format_underlined', () => toggleBasicStyle('underline'), { active: Boolean(activeStyles.underline) }),
+        toolbarButton('Strike', 'strikethrough_s', () => toggleBasicStyle('strike'), { active: Boolean(activeStyles.strike) }),
+        toolbarButton('Code', 'code', () => toggleBasicStyle('code'), { active: Boolean(activeStyles.code) }),
+        toolbarButton('Link', 'link', () => openToolbarMenu('link', writingToolbar?.querySelector('[data-toolbar-menu-trigger="link"]'))),
+        toolbarButton('Text color', 'format_color_text', () => setMenu(menu === 'text' ? '' : 'text')),
+        toolbarButton('Highlight', 'border_color', () => setMenu(menu === 'highlight' ? '' : 'highlight')),
+        toolbarButton('Font size', 'format_size', () => setMenu(menu === 'font' ? '' : 'font')),
+        selected > 1 ? toolbarButton(`Copy ${selected} blocks`, 'content_copy', () => void copySelectedBlocks()) : null,
+        selected > 1 ? toolbarButton('Cut selected blocks', 'content_cut', () => void copySelectedBlocks({ cut: true })) : null,
+        selected > 0 ? toolbarButton('Duplicate', 'content_copy', () => duplicateSelectedBlocks()) : null,
+        selected > 0 ? toolbarButton('Delete', 'delete', () => deleteSelectedBlocks()) : null,
+        selected > 0 ? toolbarButton('Move up', 'arrow_upward', () => moveSelectedBlocks('up')) : null,
+        selected > 0 ? toolbarButton('Move down', 'arrow_downward', () => moveSelectedBlocks('down')) : null,
+        selected > 0 ? toolbarButton('Indent', 'format_indent_increase', () => runIndentAction('indent')) : null,
+        selected > 0 ? toolbarButton('Outdent', 'format_indent_decrease', () => runIndentAction('outdent')) : null,
+        selected > 0 ? toolbarButton('Turn into', 'swap_vert', () => setMenu(menu === 'turn' ? '' : 'turn')) : null,
+        block?.type === 'heading' ? toolbarButton('Toggle collapse', block.props?.isCollapsed ? 'unfold_more' : 'unfold_less', () => toggleHeadingCollapse(block)) : null,
+        menu === 'text' ? colorButtons('textColor') : null,
+        menu === 'highlight' ? colorButtons('backgroundColor') : null,
+        menu === 'font' ? fontButtons : null,
+        menu === 'turn' ? turnIntoButtons : null
+    );
+}
+
+function NotesSideMenu(props) {
+    const { block } = props;
+    const [open, setOpen] = React.useState(false);
+    const [turnIntoOpen, setTurnIntoOpen] = React.useState(false);
+    const select = (event) => {
+        event.preventDefault();
+        selectBlockRange(block, event.shiftKey);
+    };
+    const addBelow = async (event) => {
+        event.preventDefault();
+        editorInstance?.setTextCursorPosition?.(block);
+        await insertCatalogItem(catalogItemByKey('paragraph'), event.currentTarget.getBoundingClientRect());
+    };
+    const duplicate = () => {
+        editorInstance?.setSelection?.(block, block);
+        duplicateSelectedBlocks();
+        setOpen(false);
+    };
+    const remove = () => {
+        editorInstance?.setSelection?.(block, block);
+        deleteSelectedBlocks();
+        setOpen(false);
+    };
+    const turnIntoItems = filterBlockCatalog('', { includeAtoms: false, turnIntoOnly: true });
+    const turnIntoMenu = turnIntoOpen ? React.createElement(
+        'div',
+        { className: 'notes-side-submenu' },
+        turnIntoItems.map((item) => React.createElement(
+            'button',
+            {
+                key: item.key,
+                type: 'button',
+                onClick: () => {
+                    editorInstance?.setSelection?.(block, block);
+                    const payload = blockPayloadForCatalogItem(item);
+                    editorInstance.updateBlock(block, updateBlockPayloadForPreservedText(block, payload));
+                    setTurnIntoOpen(false);
+                    setOpen(false);
+                    updateEditorChrome();
+                    triggerDebouncedSave();
+                },
+            },
+            React.createElement('span', { className: blockIconClass(item.icon), 'aria-hidden': 'true' }, iconHtml(item.icon)),
+            React.createElement('span', null, item.label)
+        ))
+    ) : null;
+    return React.createElement(
+        'div',
+        { className: 'notes-side-tools' },
+        React.createElement('button', {
+            type: 'button',
+            className: 'notes-side-button',
+            title: 'Add block below',
+            'aria-label': 'Add block below',
+            onMouseDown: (event) => event.preventDefault(),
+            onClick: addBelow,
+        }, materialIcon('add')),
+        React.createElement('button', {
+            type: 'button',
+            className: 'notes-side-button notes-block-select-handle',
+            title: 'Select block',
+            'aria-label': 'Select block',
+            onMouseDown: (event) => event.preventDefault(),
+            onClick: select,
+        }, materialIcon('drag_indicator')),
+        React.createElement('button', {
+            type: 'button',
+            className: 'notes-side-button',
+            title: 'Block actions',
+            'aria-label': 'Block actions',
+            'aria-expanded': String(open),
+            onMouseDown: (event) => event.preventDefault(),
+            onClick: () => setOpen(!open),
+        }, materialIcon('more_vert')),
+        open ? React.createElement(
+        'div',
+        { className: 'notes-side-menu' },
+            React.createElement('button', { type: 'button', onClick: () => { editorInstance?.setSelection?.(block, block); void copySelectedBlocks(); setOpen(false); } }, materialIcon('content_copy'), React.createElement('span', null, 'Copy')),
+            React.createElement('button', { type: 'button', onClick: () => setTurnIntoOpen(!turnIntoOpen) }, materialIcon('swap_vert'), React.createElement('span', null, 'Turn into')),
+            turnIntoMenu,
+            React.createElement('button', { type: 'button', onClick: duplicate }, materialIcon('content_copy'), React.createElement('span', null, 'Duplicate')),
+            React.createElement('button', { type: 'button', onClick: () => { moveSelectedBlocks('up'); setOpen(false); } }, materialIcon('arrow_upward'), React.createElement('span', null, 'Move up')),
+            React.createElement('button', { type: 'button', onClick: () => { moveSelectedBlocks('down'); setOpen(false); } }, materialIcon('arrow_downward'), React.createElement('span', null, 'Move down')),
+            block.type === 'heading'
+                ? React.createElement('button', { type: 'button', onClick: () => { toggleHeadingCollapse(block); setOpen(false); } }, materialIcon(block.props?.isCollapsed ? 'unfold_more' : 'unfold_less'), React.createElement('span', null, 'Collapse'))
+                : null,
+            React.createElement('button', { type: 'button', className: 'is-danger', onClick: remove }, materialIcon('delete'), React.createElement('span', null, 'Delete'))
+        ) : null
+    );
+}
+
 function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
     const editor = useCreateBlockNote({
         initialContent,
@@ -1195,6 +1930,15 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
             emptyDocument: "Enter text or type '/' for commands",
         },
     });
+
+    const getSlashItems = React.useCallback(async (query) => (
+        filterBlockCatalog(query).map((item) => ({
+            ...item,
+            onItemClick: async () => {
+                await insertCatalogItem(item, null, editor);
+            },
+        }))
+    ), [editor]);
 
     React.useEffect(() => {
         editorInstance = editor;
@@ -1225,6 +1969,8 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
             formattingToolbar: false,
             linkToolbar: false,
             sideMenu: false,
+            slashMenu: false,
+            filePanel: false,
             theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
             onChange: () => {
                 if (normalizingEditorDocument) {
@@ -1235,7 +1981,18 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
                 updateEditorChrome();
                 triggerDebouncedSave();
             },
-        }
+        },
+        React.createElement(FormattingToolbarController, {
+            formattingToolbar: NotesSelectionToolbar,
+        }),
+        React.createElement(SuggestionMenuController, {
+            triggerCharacter: '/',
+            getItems: getSlashItems,
+            suggestionMenuComponent: NotesSlashMenu,
+        }),
+        React.createElement(SideMenuController, {
+            sideMenu: NotesSideMenu,
+        })
     );
 }
 
@@ -1315,7 +2072,16 @@ async function initEditorPage() {
         event.preventDefault();
         focusEditorBody();
     });
-    rootElement.addEventListener('click', () => {
+    rootElement.addEventListener('click', (event) => {
+        const collapseButton = event.target.closest('.notes-heading-collapse-toggle');
+        if (collapseButton) {
+            event.preventDefault();
+            event.stopPropagation();
+            const blockId = collapseButton.closest('.bn-block-outer[data-id]')?.dataset.id;
+            const block = blockId ? editorInstance?.getBlock?.(blockId) : null;
+            toggleHeadingCollapse(block);
+            return;
+        }
         focusEditorBody();
     });
     window.setTimeout(() => {

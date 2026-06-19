@@ -56,7 +56,7 @@ function textLikeBlock(block, overrides = {}) {
 function pageBreakBlock(block) {
     return {
         id: block?.id,
-        type: 'pageBreak',
+        type: 'divider',
         props: {},
         children: [],
     };
@@ -148,6 +148,13 @@ function normalizeImportedMarkdownBlocks(blocks) {
     for (let index = 0; index < blocks.length; index += 1) {
         const block = blocks[index];
         const text = ownText(block);
+
+        if (block?.type === 'pageBreak' || block?.type === 'horizontalRule') {
+            output.push(pageBreakBlock(block));
+            listStack.length = 0;
+            changed = true;
+            continue;
+        }
 
         if (isPageBreakText(text)) {
             output.push(pageBreakBlock(block));

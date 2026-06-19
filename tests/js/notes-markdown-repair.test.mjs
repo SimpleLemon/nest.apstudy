@@ -83,7 +83,7 @@ test("notes markdown repair converts dividers and quote markers", async () => {
     ]);
 
     assert.equal(result.changed, true);
-    assert.equal(result.blocks[0].type, "pageBreak");
+    assert.equal(result.blocks[0].type, "divider");
     assert.equal(result.blocks[1].type, "quote");
     assert.equal(result.blocks[1].content[0].text, "Also called GDRs.");
     assert.equal(clipboardTextLooksStructured("# Title\n\n- Item"), true);

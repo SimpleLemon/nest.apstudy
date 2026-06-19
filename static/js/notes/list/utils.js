@@ -22,9 +22,24 @@
         if (typeof note.content !== 'string' || !note.content.trim()) return 'Blank note';
         try {
             const blocks = JSON.parse(note.content);
+            const blockText = (block) => {
+                if (!block) return '';
+                if (block.type === 'bookmark') return [block.props?.title, block.props?.description, block.props?.url].filter(Boolean).join(' ');
+                if (block.type === 'image' || block.type === 'video') return [block.props?.caption, block.props?.name, block.props?.url].filter(Boolean).join(' ');
+                if (block.type === 'divider' || block.type === 'pageBreak' || block.type === 'horizontalRule') return '';
+                const own = Array.isArray(block.content)
+                    ? block.content.map((item) => {
+                        if (item?.type === 'link' && Array.isArray(item.content)) {
+                            return item.content.map((child) => child?.text || '').join('');
+                        }
+                        return item?.text || '';
+                    }).join(' ')
+                    : '';
+                const children = Array.isArray(block.children) ? block.children.map(blockText).join(' ') : '';
+                return `${own} ${children}`.trim();
+            };
             const text = (Array.isArray(blocks) ? blocks : [])
-                .flatMap((block) => Array.isArray(block.content) ? block.content : [])
-                .map((item) => item?.text || '')
+                .map(blockText)
                 .join(' ')
                 .replace(/\s+/g, ' ')
                 .trim();

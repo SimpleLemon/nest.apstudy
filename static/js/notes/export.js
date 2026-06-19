@@ -35,6 +35,7 @@
         return contentNode
             .map((item) => {
                 if (typeof item === 'string') return item;
+                if (item?.type === 'link') return parseBlockContent(item.content);
                 if (item && typeof item.text === 'string') return item.text;
                 return '';
             })
@@ -67,27 +68,53 @@
 
     function blockToMarkdown(block) {
         const text = parseBlockContent(block?.content);
-        if (!text) return '';
 
         switch (block?.type) {
             case 'heading': {
+                if (!text) return '';
                 const level = Math.min(Math.max(Number(block.props?.level || 1), 1), 6);
                 return `${'#'.repeat(level)} ${text}`;
             }
             case 'bulletListItem':
+                if (!text) return '';
                 return `- ${text}`;
             case 'numberedListItem':
+                if (!text) return '';
                 return `1. ${text}`;
             case 'checkListItem': {
+                if (!text) return '';
                 const checked = block.props?.checked ? 'x' : ' ';
                 return `- [${checked}] ${text}`;
             }
             case 'quote':
+                if (!text) return '';
                 return `> ${text}`;
             case 'codeBlock':
+                if (!text) return '';
                 return `\`\`\`\n${text}\n\`\`\``;
+            case 'callout':
+                return text ? `> [!NOTE] ${text}` : '';
+            case 'divider':
+            case 'pageBreak':
+            case 'horizontalRule':
+                return '---';
+            case 'bookmark': {
+                const title = block.props?.title || block.props?.url || 'Bookmark';
+                const url = block.props?.url || '';
+                return url ? `[${title}](${url})` : title;
+            }
+            case 'image': {
+                const url = block.props?.url || '';
+                const caption = block.props?.caption || block.props?.name || 'Image';
+                return url ? `![${caption}](${url})` : caption;
+            }
+            case 'video': {
+                const url = block.props?.url || '';
+                const caption = block.props?.caption || block.props?.name || 'Video';
+                return url ? `[${caption}](${url})` : caption;
+            }
             default:
-                return text;
+                return text || '';
         }
     }
 

@@ -2,6 +2,7 @@ import logging
 import json
 import uuid
 from datetime import datetime, timezone
+from urllib.parse import urlparse
 
 from flask import Blueprint, abort, jsonify, request
 from flask_login import current_user, login_required
@@ -18,6 +19,7 @@ from appwrite_helpers import (
     update_row_safe,
 )
 from services.discord_audit import emit_creation_event, format_actor
+from services.chat_formatting import _is_public_host, fetch_link_preview, safe_url, url_hash
 
 
 notes_api_bp = Blueprint("notes_api", __name__)
@@ -26,6 +28,7 @@ logger = logging.getLogger(__name__)
 NOTES_TABLE_ID = "notes"
 FOLDERS_TABLE_ID = "note_folders"
 USER_SETTINGS_TABLE_ID = "user_settings"
+LINK_PREVIEWS_TABLE_ID = "chat_link_previews"
 PAGE_SETUP_COLORS = {"default", "paper", "warm", "blue", "green", "rose", "dark"}
 PAGE_SETUP_FONT_TYPES = {"default", "sans", "display", "serif", "mono"}
 PAGE_SETUP_MARGIN_MIN = 2
@@ -153,6 +156,84 @@ def _normalize_owned_folder_id(folder_id):
     return normalized
 
 
+def _fallback_link_preview(url):
+    parsed = urlparse(url)
+    hostname = parsed.netloc or url
+    return {
+        "url": url,
+        "title": hostname,
+        "description": "",
+        "image_url": "",
+        "site_name": hostname,
+        "content_type": "",
+        "preview_found": False,
+    }
+
+
+def _link_preview_payload(url):
+    normalized_url = safe_url(url)
+    if not normalized_url:
+        return None, 400
+    if not _is_public_host(normalized_url):
+        return None, 400
+
+    key = url_hash(normalized_url)
+    try:
+        cached = first_row(LINK_PREVIEWS_TABLE_ID, queries=[Query.equal("url_hash", [key])])
+    except AppwriteException:
+        logger.exception("Failed to read cached notes link preview")
+        cached = None
+
+    if cached:
+        return {
+            "url": cached.get("url") or normalized_url,
+            "title": cached.get("title") or "",
+            "description": cached.get("description") or "",
+            "image_url": cached.get("image_url") or "",
+            "site_name": cached.get("site_name") or "",
+            "content_type": cached.get("content_type") or "",
+            "preview_found": True,
+        }, 200
+
+    try:
+        preview = fetch_link_preview(normalized_url)
+    except Exception:
+        logger.exception("Failed to fetch notes link preview")
+        preview = None
+
+    if not preview:
+        return _fallback_link_preview(normalized_url), 200
+
+    now = _utcnow_iso()
+    try:
+        create_row_safe(
+            LINK_PREVIEWS_TABLE_ID,
+            row_id=str(uuid.uuid4()),
+            data={
+                "url_hash": key,
+                "url": preview.get("url") or normalized_url,
+                "title": preview.get("title") or None,
+                "description": preview.get("description") or None,
+                "image_url": preview.get("image_url") or None,
+                "site_name": preview.get("site_name") or None,
+                "content_type": preview.get("content_type") or None,
+                "created_at": now,
+            },
+        )
+    except AppwriteException:
+        logger.exception("Failed to cache notes link preview")
+
+    return {
+        "url": preview.get("url") or normalized_url,
+        "title": preview.get("title") or "",
+        "description": preview.get("description") or "",
+        "image_url": preview.get("image_url") or "",
+        "site_name": preview.get("site_name") or "",
+        "content_type": preview.get("content_type") or "",
+        "preview_found": True,
+    }, 200
+
+
 @notes_api_bp.route("/api/notes", methods=["GET"])
 @login_required
 def list_notes():
@@ -223,6 +304,15 @@ def create_note():
         color="green",
     )
     return jsonify(_note_to_payload(created)), 201
+
+
+@notes_api_bp.route("/api/notes/tools/link-preview", methods=["GET"])
+@login_required
+def notes_link_preview():
+    payload, status = _link_preview_payload(request.args.get("url", ""))
+    if status == 400:
+        return jsonify({"error": "Enter a valid public http or https URL."}), 400
+    return jsonify(payload), status
 
 
 @notes_api_bp.route("/api/notes/<note_id>", methods=["GET"])
