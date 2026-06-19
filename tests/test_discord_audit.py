@@ -154,6 +154,14 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
         with patch.dict(os.environ, {}, clear=True):
             self.assertEqual(discord_audit._env_channel_id("server_logs"), "1509603923433099356")
 
+    def test_console_logs_channel_defaults_to_requested_channel(self):
+        with patch.dict(os.environ, {}, clear=True):
+            self.assertEqual(discord_audit._env_channel_id("console_logs"), "1517608382591139951")
+
+    def test_console_logs_channel_env_override(self):
+        with patch.dict(os.environ, {"DISCORD_AUDIT_CONSOLE_LOGS_CHANNEL_ID": "override-console"}):
+            self.assertEqual(discord_audit._env_channel_id("console_logs"), "override-console")
+
     def test_chat_delete_channel_env_override(self):
         with patch.dict(os.environ, {"DISCORD_AUDIT_CHAT_DELETES_CHANNEL_ID": "override-channel"}):
             self.assertEqual(discord_audit._env_channel_id("chat_deletes"), "override-channel")
@@ -267,6 +275,44 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
             sent = service.emit_console_content("```text\n[error] hello\n```")
 
         self.assertTrue(sent)
+
+    def test_emit_console_content_targets_console_logs_channel(self):
+        captured = {}
+
+        def request_func(method, url, **kwargs):
+            captured["url"] = url
+            return ResponseStub(200)
+
+        service = DiscordAuditService(token_getter=lambda: "token", request_func=request_func)
+        with patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "token"}, clear=False):
+            service.emit_console_content("hello")
+
+        self.assertIn(discord_audit.DEFAULT_CHANNEL_IDS["console_logs"], captured["url"])
+
+    def test_send_audit_event_sync_posts_embed(self):
+        calls = []
+
+        def request_func(method, url, **kwargs):
+            calls.append((method, url, kwargs))
+            return ResponseStub(200)
+
+        service = DiscordAuditService(token_getter=lambda: "token", request_func=request_func)
+        event = DiscordAuditEvent(
+            channel="server_logs",
+            title="Database Backup Created",
+            actor="System",
+            target="/var/backups/nest-db/backup_test",
+            metadata={"databases": "nest.sqlite3"},
+            color="green",
+        )
+        with patch.object(discord_audit, "get_audit_service", return_value=service), \
+                patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "token"}, clear=False):
+            sent = discord_audit.send_audit_event_sync(event)
+
+        self.assertTrue(sent)
+        self.assertEqual(calls[0][0], "POST")
+        self.assertIn(discord_audit.DEFAULT_CHANNEL_IDS["server_logs"], calls[0][1])
+        self.assertEqual(calls[0][2]["json"]["embeds"][0]["title"], "Database Backup Created")
 
     def test_queue_server_console_lines_batches_into_server_block(self):
         service = DiscordAuditService(token_getter=lambda: "token")

@@ -36,7 +36,7 @@ def _normalize_console_lines(payload):
 @debug_api_bp.route("/api/debug/console", methods=["POST"])
 @login_required
 def report_browser_console():
-    """Forward batched browser console output to Discord server logs."""
+    """Forward batched browser console output to Discord console logs."""
     payload = request.get_json(silent=True) or {}
     lines = _normalize_console_lines(payload)
     if not lines:

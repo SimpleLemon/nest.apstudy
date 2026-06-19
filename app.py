@@ -178,6 +178,23 @@ def create_app():
 
         cleanup_expired_files()
 
+    @app.cli.command("backup-db")
+    def backup_db_command():
+        from scripts.backup_nest_db import run_backup
+        from pathlib import Path
+
+        instance_dir = Path(app.instance_path)
+        backup_dir = Path(os.environ.get("NEST_BACKUP_DIR", "/var/backups/nest-db"))
+        max_backups = int(os.environ.get("NEST_BACKUP_RETENTION", "7"))
+        raise SystemExit(
+            run_backup(
+                instance_dir=instance_dir,
+                backup_dir=backup_dir,
+                max_backups=max_backups,
+                notify_discord=True,
+            )
+        )
+
     from services.discord_audit import init_discord_audit
     init_discord_audit(app)
     from services.scheduler import init_scheduler

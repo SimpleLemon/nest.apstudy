@@ -18,7 +18,6 @@ import requests
 logger = logging.getLogger(__name__)
 
 DISCORD_API_BASE = "https://discord.com/api/v10"
-DEFAULT_GUILD_ID = "867928393558151228"
 DEFAULT_CHANNEL_IDS = {
     "admin": "1508544226491633834",
     "course_tracks": "1508544241679335555",
@@ -26,7 +25,9 @@ DEFAULT_CHANNEL_IDS = {
     "chat_deletes": "1508949346639675543",
     "user_logs": "1509036183865262100",
     "server_logs": "1509603923433099356",
+    "console_logs": "1517608382591139951",
 }
+DEFAULT_GUILD_ID = "867928393558151228"
 
 COLOR_VALUES = {
     "red": 0xED4245,
@@ -60,6 +61,7 @@ def _env_channel_id(channel):
         "chat_deletes": "DISCORD_AUDIT_CHAT_DELETES_CHANNEL_ID",
         "user_logs": "DISCORD_AUDIT_USER_LOGS_CHANNEL_ID",
         "server_logs": "DISCORD_AUDIT_SERVER_LOGS_CHANNEL_ID",
+        "console_logs": "DISCORD_AUDIT_CONSOLE_LOGS_CHANNEL_ID",
     }.get(channel)
     return (os.environ.get(env_name or "") or DEFAULT_CHANNEL_IDS.get(channel) or "").strip()
 
@@ -565,12 +567,12 @@ class DiscordAuditService:
     def emit_console_content(self, content):
         if not _console_log_enabled():
             return False
-        channel_id = _env_channel_id("server_logs")
+        channel_id = _env_channel_id("console_logs")
         if not channel_id:
-            logger.warning("Discord server_logs channel is not configured for browser console output")
+            logger.warning("Discord console_logs channel is not configured for console output")
             return False
         if not self.token_getter():
-            logger.warning("Discord bot token missing; skipping browser console output")
+            logger.warning("Discord bot token missing; skipping console output")
             return False
         try:
             self._send_console_content(channel_id, str(content or "")[:MAX_DISCORD_CONTENT_CHARS])
@@ -894,6 +896,7 @@ def discord_audit_status():
         "bot_token_present": bool(_bot_token()),
         "course_tracks_channel_present": bool(_env_channel_id("course_tracks")),
         "server_logs_channel_present": bool(_env_channel_id("server_logs")),
+        "console_logs_channel_present": bool(_env_channel_id("console_logs")),
         "service_initialized": _service is not None,
         "sender_thread_alive": thread_alive,
         "queue_length": queue_length,
@@ -1004,3 +1007,61 @@ def emit_server_log_event(title, *, actor="System", target="Server", metadata=No
             color=color,
         )
     )
+
+
+def emit_backup_event(title, *, actor="System", target="SQLite backup", metadata=None, color="green"):
+    return emit_audit_event(
+        DiscordAuditEvent(
+            channel="server_logs",
+            title=title,
+            actor=actor,
+            target=target,
+            metadata=metadata or {},
+            color=color,
+        )
+    )
+
+
+def send_audit_event_sync(event):
+    """Send an audit embed immediately without the background sender queue."""
+    service = get_audit_service()
+    if not _bot_token():
+        logger.warning("Discord bot token missing; skipping synchronous audit event")
+        return False
+    channel_id = event.channel_id()
+    if not channel_id:
+        logger.warning("Discord audit channel ID missing for channel %s", event.channel)
+        return False
+    try:
+        response = service._request(
+            "POST",
+            f"/channels/{channel_id}/messages",
+            json={"embeds": [event.embed()], "allowed_mentions": {"parse": []}},
+        )
+    except Exception:
+        logger.exception("Failed to send synchronous Discord audit event to %s", event.channel)
+        return False
+    if 200 <= response.status_code < 300:
+        return True
+    logger.warning(
+        "Synchronous Discord audit send returned HTTP %s for channel %s",
+        response.status_code,
+        event.channel,
+    )
+    return False
+
+
+def send_console_content_sync(content):
+    """Send a plain console log message immediately without the background sender queue."""
+    if not _console_log_enabled():
+        return False
+    channel_id = _env_channel_id("console_logs")
+    if not channel_id or not _bot_token():
+        return False
+    service = get_audit_service()
+    try:
+        service._send_console_content(channel_id, str(content or "")[:MAX_DISCORD_CONTENT_CHARS])
+        return True
+    except Exception:
+        logger.exception("Failed to send synchronous console output to Discord")
+        return False
