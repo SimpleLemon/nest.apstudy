@@ -44,28 +44,43 @@ def utcnow_iso():
     return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
+def resolve_env_path(path_value):
+    if not path_value:
+        return None
+    expanded = os.path.expanduser(str(path_value).strip())
+    if not expanded:
+        return None
+    if os.path.isabs(expanded):
+        return os.path.normpath(expanded)
+    return os.path.normpath(os.path.join(BASE_DIR, expanded))
+
+
 def database_path(path=None):
     if path:
-        return path
+        return resolve_env_path(path) or path
 
-    if os.environ.get(LOCAL_INSTANCE_ONLY) == "1" and os.environ.get("FLASK_ENV") != "production":
-        if has_app_context():
-            return os.path.join(current_app.instance_path, "nest.sqlite3")
-        return os.path.join(BASE_DIR, "instance", "nest.sqlite3")
-
-    configured = os.environ.get("DATABASE_PATH") or os.environ.get("NEST_DATABASE_PATH")
+    configured = resolve_env_path(os.environ.get("DATABASE_PATH") or os.environ.get("NEST_DATABASE_PATH"))
     if configured:
         return configured
 
+    if os.environ.get(LOCAL_INSTANCE_ONLY) == "1" and os.environ.get("FLASK_ENV") != "production":
+        return os.path.join(BASE_DIR, "instance", "nest.sqlite3")
+
     if has_app_context():
-        configured = current_app.config.get("DATABASE_PATH")
+        configured = resolve_env_path(current_app.config.get("DATABASE_PATH"))
         if configured:
             return configured
-        return os.path.join(current_app.instance_path, "nest.sqlite3")
 
     if os.environ.get("FLASK_ENV") == "production":
         return PRODUCTION_DATABASE_PATH
     return os.path.join(BASE_DIR, "instance", "nest.sqlite3")
+
+
+def nest_instance_dir():
+    configured = resolve_env_path(os.environ.get("NEST_INSTANCE_DIR"))
+    if configured:
+        return configured
+    return os.path.dirname(database_path())
 
 
 def migrations_path():

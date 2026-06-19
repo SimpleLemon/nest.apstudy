@@ -14,8 +14,6 @@ if os.environ.get("APSTUDY_ALLOW_INSECURE_OAUTH") == "1" or os.environ.get("FLAS
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PRODUCTION_DATABASE_PATH = "/var/www/nest.apstudy.org/instance/nest.sqlite3"
-LOCAL_INSTANCE_ONLY = "APSTUDY_FORCE_LOCAL_INSTANCE_DB"
 
 
 def create_app():
@@ -33,17 +31,11 @@ def create_app():
     app.jinja_env.filters["avatar_url"] = avatar_url_for_size
     app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-fallback-key")
     app.config["APPWRITE_DATABASE_ID"] = os.environ.get("APPWRITE_DATABASE_ID", "")
-    if os.environ.get(LOCAL_INSTANCE_ONLY) == "1" and os.environ.get("FLASK_ENV") != "production":
-        database_path = os.path.join(app.instance_path, "nest.sqlite3")
-    else:
-        database_path = os.environ.get(
-            "DATABASE_PATH",
-            PRODUCTION_DATABASE_PATH
-            if os.environ.get("FLASK_ENV") == "production"
-            else os.path.join(app.instance_path, "nest.sqlite3"),
-        )
-    app.config["DATABASE_PATH"] = database_path
-    app.config["CALENDAR_SQLITE_PATH"] = app.config["DATABASE_PATH"]
+    from services.database import database_path, nest_instance_dir
+
+    resolved_database_path = database_path()
+    app.config["DATABASE_PATH"] = resolved_database_path
+    app.config["CALENDAR_SQLITE_PATH"] = resolved_database_path
     app.config["MAX_CONTENT_LENGTH"] = 5 * 50 * 1024 * 1024
     app.config["FILE_SHARE_UPLOAD_DIR"] = os.path.join(app.root_path, "uploads", "file_share")
     allow_insecure_http = (
@@ -57,6 +49,7 @@ def create_app():
     app.config["WTF_CSRF_CHECK_DEFAULT"] = False
     os.makedirs(app.config["FILE_SHARE_UPLOAD_DIR"], exist_ok=True)
     os.makedirs(app.instance_path, exist_ok=True)
+    os.makedirs(nest_instance_dir(), exist_ok=True)
 
     # Initialize extensions
     from extensions import csrf, login_manager
@@ -180,10 +173,12 @@ def create_app():
 
     @app.cli.command("backup-db")
     def backup_db_command():
-        from scripts.backup_nest_db import run_backup
         from pathlib import Path
 
-        instance_dir = Path(app.instance_path)
+        from scripts.backup_nest_db import run_backup
+        from services.database import nest_instance_dir
+
+        instance_dir = Path(nest_instance_dir())
         backup_dir = Path(os.environ.get("NEST_BACKUP_DIR", "/var/backups/nest-db"))
         max_backups = int(os.environ.get("NEST_BACKUP_RETENTION", "7"))
         raise SystemExit(

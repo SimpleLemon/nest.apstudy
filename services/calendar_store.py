@@ -483,24 +483,12 @@ from services import database as _nest_database
 
 def calendar_db_path(path=None):
     if path:
-        return path
-    if (
-        os.environ.get(_nest_database.LOCAL_INSTANCE_ONLY) == "1"
-        and os.environ.get("FLASK_ENV") != "production"
-    ):
-        return _nest_database.database_path()
-    configured = os.environ.get("DATABASE_PATH") or os.environ.get("NEST_DATABASE_PATH")
-    if configured:
-        return configured
-    try:
-        configured = current_app.config.get("DATABASE_PATH")
-    except RuntimeError:
-        configured = None
-    if configured:
-        return configured
+        return _nest_database.resolve_env_path(path) or path
     legacy = os.environ.get("CALENDAR_SQLITE_PATH") or os.environ.get("CALENDAR_DB_PATH")
     if legacy:
-        return legacy
+        resolved = _nest_database.resolve_env_path(legacy)
+        if resolved:
+            return resolved
     return _nest_database.database_path()
 
 

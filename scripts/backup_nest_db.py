@@ -20,16 +20,10 @@ from dotenv import load_dotenv
 load_dotenv(ROOT_DIR / ".env")
 
 from services.discord_audit import DiscordAuditEvent, emit_backup_event, send_audit_event_sync
+from services.database import nest_instance_dir
 
 
-DEFAULT_INSTANCE_DIR = Path(
-    os.environ.get(
-        "NEST_INSTANCE_DIR",
-        "/var/www/nest.apstudy.org/instance"
-        if os.environ.get("FLASK_ENV") == "production"
-        else str(ROOT_DIR / "instance"),
-    )
-)
+DEFAULT_INSTANCE_DIR = Path(nest_instance_dir())
 DEFAULT_BACKUP_DIR = Path(os.environ.get("NEST_BACKUP_DIR", "/var/backups/nest-db"))
 MAX_BACKUPS = int(os.environ.get("NEST_BACKUP_RETENTION", "7"))
 
