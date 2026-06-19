@@ -134,19 +134,34 @@ class TestSettingsPreferences(unittest.TestCase):
             with patch.object(settings_bp, "current_user", user), \
                     patch.object(settings_bp, "update_row_safe", return_value={}) as update_row, \
                     patch.object(settings_bp, "emit_user_event") as emit_user_event, \
-                    patch.object(settings_bp, "url_for", return_value="/"):
+                    patch.object(settings_bp, "url_for", return_value="/"), \
+                    patch("blueprints.chat_api.initialize_new_user_discord_read_states") as init_reads, \
+                    patch("blueprints.chat_api.create_welcome_dm_for_user") as create_welcome:
                 response = settings_bp.save_onboarding.__wrapped__()
 
         payload = response.get_json()
         self.assertEqual(payload["redirect_url"], "/")
         self.assertTrue(user.onboarding_complete)
         self.assertEqual(user.onboarding_step, 5)
-        self.assertEqual(
-            update_row.call_args.args[2],
-            {"onboarding_complete": True, "onboarding_step": 5},
-        )
+        init_reads.assert_called_once_with("user-1")
+        create_welcome.assert_called_once_with("user-1")
         emit_user_event.assert_called_once()
         self.assertEqual(emit_user_event.call_args.args[0], "Onboarding Complete")
+
+    def test_onboarding_step_five_does_not_block_on_post_chat_helper_failure(self):
+        user = self._onboarding_user(onboarding_step=5)
+
+        with self.app.test_request_context("/onboarding", method="POST", json={"step": 5}):
+            with patch.object(settings_bp, "current_user", user), \
+                    patch.object(settings_bp, "update_row_safe", return_value={}), \
+                    patch.object(settings_bp, "emit_user_event"), \
+                    patch.object(settings_bp, "url_for", return_value="/"), \
+                    patch("blueprints.chat_api.initialize_new_user_discord_read_states", side_effect=RuntimeError("read init failed")), \
+                    patch("blueprints.chat_api.create_welcome_dm_for_user", side_effect=RuntimeError("welcome failed")):
+                response = settings_bp.save_onboarding.__wrapped__()
+
+        self.assertEqual(response.get_json()["redirect_url"], "/")
+        self.assertTrue(user.onboarding_complete)
 
     def test_onboarding_step_two_defaults_emory_school(self):
         user = self._onboarding_user(onboarding_step=2)

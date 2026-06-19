@@ -90,12 +90,15 @@
             </header>
 
             <div id="chat-status" class="chat-status" hidden></div>
+            <div id="chat-announcements-unread" class="chat-history-limited chat-announcements-unread" hidden>
+                <span>Unread announcements</span>
+                <button id="chat-announcements-read" class="chat-announcements-read" type="button" aria-label="Mark announcements read">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
             <div id="chat-history-limited" class="chat-history-limited" hidden>
                 <span>Older Discord history lives in the server.</span>
                 <a id="chat-join-discord" href="#" target="_blank" rel="noopener noreferrer">Join Discord</a>
-                <button id="chat-history-close" class="chat-history-close" type="button" aria-label="Hide older Discord history banner">
-                    <span class="material-symbols-outlined">close</span>
-                </button>
             </div>
             <div id="chat-messages" class="chat-messages" aria-live="polite"></div>
             <div id="chat-typing-indicator" class="chat-typing-indicator" hidden></div>

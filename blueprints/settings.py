@@ -963,6 +963,19 @@ def save_onboarding():
             return jsonify({"error": "Unable to save onboarding."}), 500
         current_user.onboarding_complete = True
         current_user.onboarding_step = 5
+        from blueprints.chat_api import (
+            create_welcome_dm_for_user,
+            initialize_new_user_discord_read_states,
+        )
+
+        try:
+            initialize_new_user_discord_read_states(user_id)
+        except Exception:
+            logger.exception("Failed to initialize Discord read states after onboarding")
+        try:
+            create_welcome_dm_for_user(user_id)
+        except Exception:
+            logger.exception("Failed to create welcome DM after onboarding")
         emit_user_event(
             "Onboarding Complete",
             actor=format_actor(current_user),

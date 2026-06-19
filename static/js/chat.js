@@ -17,6 +17,8 @@
   const CHAT_CACHE_SCHEMA = "v1";
   const CHAT_CACHE_MESSAGE_LIMIT = 50;
   const CHAT_PREFETCH_ROOM_LIMIT = 8;
+  const REALTIME_FALLBACK_MS = 5000;
+  const ANNOUNCEMENTS_CHANNEL_ID = "nest_announcements";
 
   const state = {
     user: root.dataset.currentUserId ? { id: root.dataset.currentUserId } : null,
@@ -49,7 +51,8 @@
     localReadSeq: 0,
     contextMenuRoom: null,
     loadingMessages: false,
-    closedHistoryBanners: new Set(),
+    roomReadState: null,
+    announcementsBannerVisible: false,
     membersCollapsed: sessionStorage.getItem("apstudy-chat-members-collapsed") === "true",
     hydratedFromPersistentCache: false,
     persistentCacheReady: false,
@@ -58,6 +61,9 @@
   };
 
   window.NestChat = state;
+
+  let realtimeFallbackTimer = null;
+  let inlineProfilePopover = null;
 
   const els = {
     channelList: document.getElementById("chat-channel-list"),
@@ -71,8 +77,9 @@
     roomMeta: document.getElementById("chat-room-meta"),
     status: document.getElementById("chat-status"),
     historyLimited: document.getElementById("chat-history-limited"),
+    announcementsUnread: document.getElementById("chat-announcements-unread"),
+    announcementsRead: document.getElementById("chat-announcements-read"),
     joinDiscord: document.getElementById("chat-join-discord"),
-    historyClose: document.getElementById("chat-history-close"),
     messages: document.getElementById("chat-messages"),
     typing: document.getElementById("chat-typing-indicator"),
     composer: document.getElementById("chat-composer"),
@@ -658,8 +665,16 @@
     return null;
   }
 
+  function shouldAutoMarkRoomRead(room, cache = cacheFor(room)) {
+    if (room?.type === "channel" && room.id === ANNOUNCEMENTS_CHANNEL_ID) {
+      return unreadAnnouncementMessages(cache?.messages, state.roomReadState).length === 0;
+    }
+    return true;
+  }
+
   function markRoomRead(room, cache = cacheFor(room)) {
     if (!room?.type || !room?.id || document.visibilityState === "hidden") return;
+    if (!shouldAutoMarkRoomRead(room, cache)) return;
     const latest = latestMessageForRead(cache);
     const body = {
       scope_type: room.type === "channel" ? "channel" : "thread",
@@ -930,24 +945,212 @@
 
   function setHistoryBanner(channel) {
     if (!els.historyLimited) return;
-    const shouldShow = Boolean(
-      channel
-      && channel.kind === "discord"
-      && DISCORD_HISTORY_CHANNEL_IDS.has(channel.id)
-      && channel.history_limited === true
-      && !state.closedHistoryBanners.has(channel.id)
-    );
-    els.historyLimited.hidden = !shouldShow;
-    if (channel?.id) {
-      els.historyLimited.dataset.channelId = channel.id;
-    } else {
-      delete els.historyLimited.dataset.channelId;
-    }
+    const invite = root.dataset.discordInviteUrl || "";
     if (els.joinDiscord) {
-      const invite = root.dataset.discordInviteUrl || "";
       els.joinDiscord.hidden = !invite;
       if (invite) els.joinDiscord.href = invite;
     }
+    if (!channel || channel.kind !== "discord" || channel.history_limited !== true) {
+      els.historyLimited.hidden = true;
+      delete els.historyLimited.dataset.channelId;
+      return;
+    }
+    els.historyLimited.dataset.channelId = channel.id;
+    updateHistoryBannerVisibility();
+  }
+
+  function messagePaneIsScrollable() {
+    if (!els.messages) return false;
+    return els.messages.scrollHeight > els.messages.clientHeight + 1;
+  }
+
+  function updateHistoryBannerVisibility() {
+    if (!els.historyLimited) return;
+    const channelId = els.historyLimited.dataset.channelId;
+    if (!channelId) {
+      els.historyLimited.hidden = true;
+      return;
+    }
+    const channel = activeChannel();
+    const shouldConsider = Boolean(
+      channel
+      && channel.id === channelId
+      && channel.kind === "discord"
+      && channel.history_limited === true
+    );
+    if (!shouldConsider) {
+      els.historyLimited.hidden = true;
+      return;
+    }
+    const atTop = (els.messages?.scrollTop || 0) <= 16;
+    els.historyLimited.hidden = !(messagePaneIsScrollable() && atTop);
+  }
+
+  function unreadAnnouncementMessages(messages, readState) {
+    const lastReadAt = readState?.last_read_at ? parseMessageDate(readState.last_read_at) : null;
+    const currentUserId = String(state.user?.id || "");
+    return (messages || []).filter((message) => {
+      if (String(message.user_id || "") === currentUserId) return false;
+      const created = parseMessageDate(message.created_at);
+      if (!created) return false;
+      if (!lastReadAt) return true;
+      return created.getTime() > lastReadAt.getTime();
+    });
+  }
+
+  function announcementUnreadFitsInPane(unreadNodes) {
+    if (!els.messages || !unreadNodes.length) return true;
+    const paneTop = els.messages.getBoundingClientRect().top;
+    const paneBottom = paneTop + els.messages.clientHeight;
+    const first = unreadNodes[0].getBoundingClientRect();
+    const last = unreadNodes[unreadNodes.length - 1].getBoundingClientRect();
+    return first.top >= paneTop && last.bottom <= paneBottom;
+  }
+
+  async function markAnnouncementsRead() {
+    const room = state.activeRoom;
+    if (!room || room.type !== "channel" || room.id !== ANNOUNCEMENTS_CHANNEL_ID) return;
+    const cache = cacheFor(room);
+    const latest = latestMessageForRead(cache);
+    if (!latest?.id) return;
+    await fetchJson("/api/chat/read", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        scope_type: "channel",
+        scope_id: room.id,
+        message_id: latest.id,
+      }),
+    });
+    state.roomReadState = {
+      last_read_at: latest.created_at,
+      last_read_message_id: latest.id,
+    };
+    clearRoomUnread(room);
+    state.announcementsBannerVisible = false;
+    if (els.announcementsUnread) els.announcementsUnread.hidden = true;
+    void refreshChatSummary();
+  }
+
+  function updateAnnouncementsUnreadBanner(messages) {
+    if (!els.announcementsUnread) return;
+    const channel = activeChannel();
+    if (!channel || channel.id !== ANNOUNCEMENTS_CHANNEL_ID) {
+      els.announcementsUnread.hidden = true;
+      state.announcementsBannerVisible = false;
+      return;
+    }
+    const unread = unreadAnnouncementMessages(messages, state.roomReadState);
+    if (!unread.length) {
+      els.announcementsUnread.hidden = true;
+      state.announcementsBannerVisible = false;
+      return;
+    }
+    window.requestAnimationFrame(() => {
+      const unreadNodes = unread
+        .map((message) => els.messages?.querySelector(`[data-message-id="${CSS.escape(message.id)}"]`))
+        .filter(Boolean);
+      if (!unreadNodes.length) {
+        els.announcementsUnread.hidden = true;
+        state.announcementsBannerVisible = false;
+        return;
+      }
+      if (announcementUnreadFitsInPane(unreadNodes)) {
+        void markAnnouncementsRead();
+        return;
+      }
+      els.announcementsUnread.hidden = false;
+      state.announcementsBannerVisible = true;
+    });
+  }
+
+  function closeInlineProfilePopover() {
+    if (inlineProfilePopover) {
+      inlineProfilePopover.remove();
+      inlineProfilePopover = null;
+    }
+  }
+
+  function positionInlineProfilePopover(anchor, popover) {
+    const padding = 8;
+    const pane = els.messages;
+    const bounds = pane?.getBoundingClientRect() || {
+      left: padding,
+      top: padding,
+      right: window.innerWidth - padding,
+      bottom: window.innerHeight - padding,
+    };
+    const anchorRect = anchor.getBoundingClientRect();
+    popover.style.visibility = "hidden";
+    popover.style.left = "0px";
+    popover.style.top = "0px";
+    document.body.appendChild(popover);
+    const popoverRect = popover.getBoundingClientRect();
+    let left = anchorRect.right + padding;
+    let top = anchorRect.top;
+    if (left + popoverRect.width > bounds.right) {
+      left = anchorRect.left - popoverRect.width - padding;
+    }
+    if (left < bounds.left) {
+      left = Math.min(Math.max(bounds.left, anchorRect.left), bounds.right - popoverRect.width);
+      top = anchorRect.bottom + padding;
+    }
+    if (top + popoverRect.height > bounds.bottom) {
+      top = Math.max(bounds.top, bounds.bottom - popoverRect.height);
+    }
+    if (top < bounds.top) top = bounds.top;
+    if (left + popoverRect.width > bounds.right) {
+      left = bounds.right - popoverRect.width;
+    }
+    if (left < bounds.left) left = bounds.left;
+    popover.style.left = `${Math.round(left)}px`;
+    popover.style.top = `${Math.round(top)}px`;
+    popover.style.visibility = "visible";
+  }
+
+  function openInlineProfileForMessage(message, anchor) {
+    if (!message || !anchor) return;
+    closeInlineProfilePopover();
+    const limited = !message.author_profile;
+    const profileUser = message.author_profile || {
+      id: message.user_id || "",
+      name: message.author_name || "Nest User",
+      username: message.author_username || "",
+      picture_url: message.author_avatar_url,
+      handle: message.author_username ? `@${message.author_username}` : `@${message.author_name || "nest-user"}`,
+    };
+    const popover = document.createElement("div");
+    popover.className = `chat-inline-profile-popover${limited ? " is-limited" : ""}`;
+    popover.innerHTML = profileMarkup(profileUser, { showBlock: false, status: "offline" });
+    positionInlineProfilePopover(anchor, popover);
+    inlineProfilePopover = popover;
+  }
+
+  function startRealtimeFallback() {
+    if (realtimeFallbackTimer || state.realtimeReady) return;
+    realtimeFallbackTimer = window.setInterval(() => {
+      if (document.visibilityState !== "visible") return;
+      if (state.realtimeReady) {
+        stopRealtimeFallback();
+        return;
+      }
+      const room = state.activeRoom;
+      const cache = cacheFor(room);
+      if (room && cache) {
+        if (cache.latestCursor) {
+          void loadMessages({ after: cache.latestCursor, quiet: true });
+        } else {
+          void loadMessages({ force: true, quiet: true });
+        }
+      }
+      void refreshChatSummary();
+    }, REALTIME_FALLBACK_MS);
+  }
+
+  function stopRealtimeFallback() {
+    if (!realtimeFallbackTimer) return;
+    window.clearInterval(realtimeFallbackTimer);
+    realtimeFallbackTimer = null;
   }
 
   function setComposer(enabled, placeholder) {
@@ -1029,6 +1232,8 @@
         ${groupMessages(messages).map(renderMessageGroup).join("")}
       </div>
     `;
+    updateAnnouncementsUnreadBanner(messages);
+    updateHistoryBannerVisibility();
   }
 
   function renderMessageGroup(group) {
@@ -1056,10 +1261,12 @@
       : "";
     return `
       <article class="chat-message" data-message-id="${escapeHtml(message.id)}">
-        <img class="chat-message-avatar" ${avatarAttrs(message.author_avatar_url, 84, "42px")} alt="">
+        <button type="button" class="chat-message-avatar-button chat-author-button" data-author-message-id="${escapeHtml(message.id)}" aria-label="View ${escapeHtml(message.author_name || "author")} profile">
+          <img class="chat-message-avatar" ${avatarAttrs(message.author_avatar_url, 84, "42px")} alt="">
+        </button>
         <div class="chat-message-content">
           <div class="chat-message-head">
-            <span class="chat-message-author">${escapeHtml(message.author_name || "Nest User")}</span>
+            <button type="button" class="chat-author-button" data-author-message-id="${escapeHtml(message.id)}">${escapeHtml(message.author_name || "Nest User")}</button>
             <span class="chat-message-time">${escapeHtml(formatMessageTimestamp(message.created_at))}</span>
           </div>
           <div class="chat-message-body">${message.rendered_html || escapeHtml(message.content || "")}</div>
@@ -1498,6 +1705,7 @@
 
       if (payload.channel) updateChannel(payload.channel);
       if (payload.thread) updateThread(payload.thread);
+      if (payload.read_state) state.roomReadState = payload.read_state;
 
       const messages = payload.messages || [];
       if (after || before) {
@@ -1618,6 +1826,7 @@
   async function selectRoom(room, options = {}) {
     const previousRoom = state.activeRoom;
     saveActiveScroll();
+    closeInlineProfilePopover();
     state.activeRoom = room;
     state.activeProfile = null;
     updateRoomLists();
@@ -1760,8 +1969,14 @@
 
   async function initializeRealtime() {
     if (state.realtimeReady || state.realtimeUnsubscribe || state.realtimeConnecting) return;
-    if (!root.dataset.appwriteDatabaseId || !root.dataset.chatEventsTableId) return;
-    if (!window.Appwrite || !window.client) return;
+    if (!root.dataset.appwriteDatabaseId || !root.dataset.chatEventsTableId) {
+      startRealtimeFallback();
+      return;
+    }
+    if (!window.Appwrite || !window.client) {
+      startRealtimeFallback();
+      return;
+    }
 
     const channel = realtimeChannelName();
     state.realtimeConnecting = true;
@@ -1770,9 +1985,13 @@
       if (typeof unsubscribe === "function") {
         state.realtimeUnsubscribe = unsubscribe;
         state.realtimeReady = true;
+        stopRealtimeFallback();
+      } else {
+        startRealtimeFallback();
       }
     } catch (error) {
       console.warn("Chat realtime unavailable", error);
+      startRealtimeFallback();
     } finally {
       state.realtimeConnecting = false;
     }
@@ -2190,6 +2409,7 @@
     els.messages?.addEventListener("scroll", () => {
       const cache = cacheFor(state.activeRoom);
       if (cache) cache.scrollTop = els.messages.scrollTop;
+      updateHistoryBannerVisibility();
       window.clearTimeout(state.scrollSaveTimer);
       state.scrollSaveTimer = window.setTimeout(() => {
         schedulePersistentRoomSave(state.activeRoom);
@@ -2197,8 +2417,18 @@
       if (els.messages.scrollTop <= 16 && cache?.hasMore && cache.oldestCursor && !state.loadingMessages) {
         void loadMessages({ before: cache.oldestCursor, preserveScroll: true, quiet: true });
       }
+      closeInlineProfilePopover();
     });
     els.messages?.addEventListener("click", (event) => {
+      const authorButton = event.target.closest("[data-author-message-id]");
+      if (authorButton) {
+        event.preventDefault();
+        const messageId = authorButton.dataset.authorMessageId;
+        const cache = cacheFor(state.activeRoom);
+        const message = cache?.messages?.find((candidate) => candidate.id === messageId);
+        if (message) openInlineProfileForMessage(message, authorButton);
+        return;
+      }
       const deleteButton = event.target.closest("[data-delete-message]");
       if (deleteButton) void deleteMessage(deleteButton.dataset.deleteMessage);
     });
@@ -2217,10 +2447,8 @@
       if (!blockButton) return;
       void toggleBlock(blockButton.dataset.blockUser, blockButton.dataset.blocked === "true");
     });
-    els.historyClose?.addEventListener("click", () => {
-      const channelId = els.historyLimited?.dataset.channelId;
-      if (channelId) state.closedHistoryBanners.add(channelId);
-      setHistoryBanner(activeChannel());
+    els.announcementsRead?.addEventListener("click", () => {
+      void markAnnouncementsRead();
     });
     els.dmNew?.addEventListener("click", () => {
       els.dmSearch.hidden = !els.dmSearch.hidden;
@@ -2237,6 +2465,9 @@
     document.addEventListener("click", (event) => {
       const menu = document.getElementById("chat-room-context-menu");
       if (menu && !menu.hidden && !menu.contains(event.target)) closeRoomContextMenu();
+      if (inlineProfilePopover && !event.target.closest(".chat-inline-profile-popover") && !event.target.closest(".chat-author-button")) {
+        closeInlineProfilePopover();
+      }
     });
     els.profileToggle?.addEventListener("click", () => setMembersCollapsed(!state.membersCollapsed));
     document.querySelector("[data-restore-members]")?.addEventListener("click", () => setMembersCollapsed(false));
@@ -2265,12 +2496,14 @@
       if (event.key === "Escape") {
         closeRoomContextMenu();
         closeChatDrawers();
+        closeInlineProfilePopover();
       }
     });
     els.channelList?.addEventListener("scroll", closeRoomContextMenu);
     els.dmList?.addEventListener("scroll", closeRoomContextMenu);
     window.addEventListener("resize", () => {
       closeRoomContextMenu();
+      closeInlineProfilePopover();
       if (window.innerWidth > 1100) closeChatDrawers();
     });
     document.addEventListener("visibilitychange", () => {
@@ -2314,6 +2547,7 @@
       void deletePresence(presenceId);
       if (state.realtimeUnsubscribe) state.realtimeUnsubscribe();
       if (state.presenceUnsubscribe) state.presenceUnsubscribe();
+      stopRealtimeFallback();
     });
   }
 

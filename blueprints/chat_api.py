@@ -1,3 +1,4 @@
+import hashlib
 import html
 import json
 import logging
@@ -85,6 +86,11 @@ DISCORD_SYNC_COMPARE_FIELDS = (
 DISCORD_PARTIAL_CREATE_REQUIRED_FIELDS = ("content", "timestamp")
 CHAT_SUMMARY_SCAN_LIMIT = 50
 CHAT_UNREAD_CAP = 99
+WELCOME_DM_SENDER_ID = "69f922da37638df6557b"
+WELCOME_DM_TEXT = (
+    "Welcome to your Nest! If you have any questions, feedback, or run into any issues, "
+    "please feel free to message me anytime :)"
+)
 
 
 def _now():
@@ -607,12 +613,29 @@ def _discord_media_json(previews, images):
     return "[]"
 
 
+def _discord_message_row_id(channel, discord_message_id):
+    discord_channel_id = str(channel.get("discord_channel_id") or "")
+    discord_id = str(discord_message_id or "")
+    if not discord_channel_id or not discord_id:
+        return None
+    digest = hashlib.sha1(f"{discord_channel_id}:{discord_id}".encode("utf-8")).hexdigest()[:24]
+    return f"discord_{digest}"
+
+
+def _discord_message_external_id(channel, discord_message_id):
+    discord_channel_id = str(channel.get("discord_channel_id") or "")
+    discord_id = str(discord_message_id or "")
+    if not discord_channel_id or not discord_id:
+        return None
+    return f"discord:{discord_channel_id}:{discord_id}"
+
+
 def _discord_message_payload(channel, message, *, partial=False):
     channel_id = _row_id(channel)
     discord_id = str(message.get("id") or "")
     if not discord_id:
         return None
-    external_id = f"discord:{channel.get('discord_channel_id')}:{discord_id}"
+    external_id = _discord_message_external_id(channel, discord_id)
     author = message.get("author") or {}
     payload = {
         "channel_id": channel_id,
@@ -743,9 +766,31 @@ def _render_discord_content(content, message):
     return DISCORD_CUSTOM_EMOJI_RE.sub(lambda match: _emoji_img(match.group(1), match.group(2), match.group(3)), rendered)
 
 
-def _serialize_message(row):
+def _load_users_by_id(user_ids):
+    users_by_id = {}
+    for user_id in sorted({str(value) for value in (user_ids or []) if value}):
+        try:
+            row = get_row_safe(COLLECTIONS["users"], user_id, allow_missing=True)
+        except AppwriteException:
+            row = None
+        if row:
+            users_by_id[user_id] = row
+    return users_by_id
+
+
+def _serialize_message(row, users_by_id=None):
     created = _message_timestamp(row)
     user_id = row.get("user_id")
+    author_profile = None
+    if user_id:
+        user_row = (users_by_id or {}).get(str(user_id))
+        if user_row is None and users_by_id is None:
+            try:
+                user_row = get_row_safe(COLLECTIONS["users"], str(user_id), allow_missing=True)
+            except AppwriteException:
+                user_row = None
+        if user_row:
+            author_profile = _public_user(user_row)
     can_delete = (
         user_id
         and str(user_id) == _current_user_id()
@@ -781,6 +826,26 @@ def _serialize_message(row):
             if user_id and str(user_id) == _current_user_id()
             else None
         ),
+        "author_profile": author_profile,
+    }
+
+
+def _serialize_messages(rows):
+    users_by_id = _load_users_by_id([row.get("user_id") for row in rows if row.get("user_id")])
+    return [_serialize_message(row, users_by_id) for row in rows]
+
+
+def _room_message_metadata(scope_type, scope_id):
+    user_id = _current_user_id()
+    read_state_row = _read_state_for_scope(user_id, scope_type, scope_id)
+    last_read_at = (read_state_row or {}).get("last_read_at")
+    unread, _ = _unread_count(scope_type, scope_id, user_id, last_read_at)
+    return {
+        "read_state": {
+            "last_read_at": last_read_at,
+            "last_read_message_id": (read_state_row or {}).get("last_read_message_id"),
+        },
+        "unread_count": unread,
     }
 
 
@@ -817,10 +882,14 @@ def _upsert_discord_message(channel, message, emit_event=False, *, partial=False
     channel_id = payload.get("channel_id")
     external_id = payload.get("external_id")
     discord_id = payload.get("discord_message_id")
+    row_id = _discord_message_row_id(channel, discord_id)
     changes = payload
-    row_id = None
     try:
-        existing = first_row(COLLECTIONS["chat_messages"], [Query.equal("external_id", [external_id])])
+        existing = None
+        if row_id:
+            existing = get_row_safe(COLLECTIONS["chat_messages"], row_id, allow_missing=True)
+        if not existing and external_id:
+            existing = first_row(COLLECTIONS["chat_messages"], [Query.equal("external_id", [external_id])])
         if existing:
             row_id = _row_id(existing)
             changes = _discord_message_changes(existing, payload)
@@ -841,7 +910,7 @@ def _upsert_discord_message(channel, message, emit_event=False, *, partial=False
         if partial and any(key not in payload for key in DISCORD_PARTIAL_CREATE_REQUIRED_FIELDS):
             logger.info("Skipping partial Discord message update for unknown message %s", discord_id)
             return None, False
-        row = create_row_safe(COLLECTIONS["chat_messages"], row_id=ID.unique(), data=payload)
+        row = create_row_safe(COLLECTIONS["chat_messages"], row_id=row_id or ID.unique(), data=payload)
         if emit_event:
             emit_chat_event(
                 "channel",
@@ -852,13 +921,37 @@ def _upsert_discord_message(channel, message, emit_event=False, *, partial=False
             )
         return row, True
     except AppwriteException:
-        if not row_id and external_id:
+        existing = None
+        if row_id:
+            try:
+                existing = get_row_safe(COLLECTIONS["chat_messages"], row_id, allow_missing=True)
+            except AppwriteException:
+                existing = None
+        if not existing and external_id:
             try:
                 existing = first_row(COLLECTIONS["chat_messages"], [Query.equal("external_id", [external_id])])
-                if existing:
-                    return existing, False
             except AppwriteException:
-                pass
+                existing = None
+        if existing:
+            row_id = _row_id(existing)
+            changes = _discord_message_changes(existing, payload)
+            if partial and not changes and message.get("edited_timestamp"):
+                changes = {"updated_at": payload.get("updated_at")}
+            if not changes:
+                return existing, False
+            try:
+                row = update_row_safe(COLLECTIONS["chat_messages"], row_id, changes)
+                if emit_event:
+                    emit_chat_event(
+                        "channel",
+                        channel_id,
+                        "message_updated",
+                        message_id=row_id,
+                        channel_id=channel_id,
+                    )
+                return row, False
+            except AppwriteException:
+                return existing, False
         _log_discord_upsert_failure(row_id, external_id, discord_id, changes)
         return None, False
 
@@ -867,9 +960,14 @@ def _soft_delete_discord_message(channel, discord_message_id, *, emit_event=Fals
     if not channel or not discord_message_id:
         return None
     channel_id = _row_id(channel)
-    external_id = f"discord:{channel.get('discord_channel_id')}:{discord_message_id}"
+    external_id = _discord_message_external_id(channel, discord_message_id)
+    row_id = _discord_message_row_id(channel, discord_message_id)
     try:
-        row = first_row(COLLECTIONS["chat_messages"], [Query.equal("external_id", [external_id])])
+        row = None
+        if row_id:
+            row = get_row_safe(COLLECTIONS["chat_messages"], row_id, allow_missing=True)
+        if not row and external_id:
+            row = first_row(COLLECTIONS["chat_messages"], [Query.equal("external_id", [external_id])])
         if not row:
             row = first_row(
                 COLLECTIONS["chat_messages"],
@@ -1086,6 +1184,107 @@ def _thread_key(user_a, user_b):
     return ":".join(sorted([str(user_a), str(user_b)]))
 
 
+def _get_or_create_thread_between(user_a, user_b):
+    key = _thread_key(user_a, user_b)
+    existing = first_row(COLLECTIONS["chat_dm_threads"], [Query.equal("participant_key", [key])])
+    if existing:
+        return existing
+    now = format_datetime(_now())
+    participant_a, participant_b = key.split(":", 1)
+    return create_row_safe(
+        COLLECTIONS["chat_dm_threads"],
+        row_id=ID.unique(),
+        data={
+            "participant_a": participant_a,
+            "participant_b": participant_b,
+            "participant_key": key,
+            "created_at": now,
+            "updated_at": now,
+        },
+    )
+
+
+def initialize_new_user_discord_read_states(user_id):
+    user_id = str(user_id or "").strip()
+    if not user_id:
+        return
+    _default_channels()
+    try:
+        channels = list_rows_all(COLLECTIONS["chat_channels"], [Query.equal("kind", ["discord"])])
+    except AppwriteException:
+        logger.exception("Failed to list Discord channels for onboarding read init")
+        return
+    for channel in channels:
+        channel_id = _row_id(channel)
+        if not channel_id:
+            continue
+        latest = _latest_visible_message("channel", channel_id)
+        if latest:
+            _persist_read_state(user_id, "channel", channel_id, latest)
+
+
+def create_welcome_dm_for_user(user_id):
+    user_id = str(user_id or "").strip()
+    if not user_id or user_id == WELCOME_DM_SENDER_ID:
+        return None
+    external_id = f"welcome:{WELCOME_DM_SENDER_ID}:{user_id}"
+    try:
+        existing = first_row(COLLECTIONS["chat_messages"], [Query.equal("external_id", [external_id])])
+    except AppwriteException:
+        logger.exception("Failed to check welcome DM for user %s", user_id)
+        return None
+    if existing:
+        return existing
+
+    sender = get_row_safe(COLLECTIONS["users"], WELCOME_DM_SENDER_ID, allow_missing=True)
+    try:
+        thread = _get_or_create_thread_between(WELCOME_DM_SENDER_ID, user_id)
+    except AppwriteException:
+        logger.exception("Failed to create welcome DM thread for user %s", user_id)
+        return None
+
+    thread_id = _row_id(thread)
+    now = format_datetime(_now())
+    content = WELCOME_DM_TEXT
+    try:
+        row = create_row_safe(
+            COLLECTIONS["chat_messages"],
+            row_id=ID.unique(),
+            data={
+                "thread_id": thread_id,
+                "source": "system",
+                "external_id": external_id,
+                "user_id": WELCOME_DM_SENDER_ID,
+                "author_name": (sender or {}).get("name") or (sender or {}).get("username") or "Nest User",
+                "author_username": (sender or {}).get("username") or "",
+                "author_avatar_url": (sender or {}).get("picture_url") or "",
+                "content": content,
+                "rendered_html": render_markdown(content),
+                "link_preview_json": "[]",
+                "created_at": now,
+                "updated_at": now,
+            },
+        )
+        update_row_safe(
+            COLLECTIONS["chat_dm_threads"],
+            thread_id,
+            {"last_message_at": now, "updated_at": now},
+        )
+        emit_chat_event(
+            "thread",
+            thread_id,
+            "message_created",
+            message_id=_row_id(row),
+            thread_id=thread_id,
+            actor_id=WELCOME_DM_SENDER_ID,
+            readable_user_ids=_thread_participant_ids(thread),
+        )
+        return row
+    except AppwriteException:
+        logger.exception("Failed to create welcome DM for user %s", user_id)
+        return None
+
+
 def _get_or_create_thread(other_user_id):
     user_id = _current_user_id()
     if other_user_id == user_id:
@@ -1093,23 +1292,7 @@ def _get_or_create_thread(other_user_id):
     other = get_row_safe(COLLECTIONS["users"], other_user_id, allow_missing=True)
     if not other:
         raise ValueError("User not found.")
-    key = _thread_key(user_id, other_user_id)
-    existing = first_row(COLLECTIONS["chat_dm_threads"], [Query.equal("participant_key", [key])])
-    if existing:
-        return existing
-    now = format_datetime(_now())
-    a, b = key.split(":", 1)
-    return create_row_safe(
-        COLLECTIONS["chat_dm_threads"],
-        row_id=ID.unique(),
-        data={
-            "participant_a": a,
-            "participant_b": b,
-            "participant_key": key,
-            "created_at": now,
-            "updated_at": now,
-        },
-    )
+    return _get_or_create_thread_between(user_id, other_user_id)
 
 
 def _thread_for_user(thread_id):
@@ -1561,9 +1744,10 @@ def channel_messages(channel_id):
     after = request.args.get("after")
     rows = _list_messages("channel", channel_id, request.args.get("before"), after)
     return jsonify({
-        "messages": [_serialize_message(row) for row in rows],
+        "messages": _serialize_messages(rows),
         "has_more": not after and channel.get("kind") != "discord" and len(rows) == MESSAGE_PAGE_SIZE,
         "channel": _channel_payload(channel),
+        **_room_message_metadata("channel", channel_id),
     })
 
 
@@ -1609,7 +1793,7 @@ def send_channel_message(channel_id):
             return jsonify({"error": "Unable to send to Discord right now."}), 502
         base_payload.update({
             "source": "discord",
-            "external_id": f"discord:{channel.get('discord_channel_id')}:{discord_message.get('id')}",
+            "external_id": _discord_message_external_id(channel, discord_message.get("id")),
             "discord_message_id": discord_message.get("id"),
             "discord_webhook_id": discord_message.get("webhook_id"),
             "created_at": discord_message.get("timestamp") or now,
@@ -1617,20 +1801,46 @@ def send_channel_message(channel_id):
     else:
         base_payload["source"] = "appwrite"
 
+    row_id = None
+    if channel.get("kind") == "discord" and base_payload.get("discord_message_id"):
+        row_id = _discord_message_row_id(channel, base_payload.get("discord_message_id"))
+
     try:
-        row = create_row_safe(COLLECTIONS["chat_messages"], row_id=ID.unique(), data=base_payload)
+        row = create_row_safe(
+            COLLECTIONS["chat_messages"],
+            row_id=row_id or ID.unique(),
+            data=base_payload,
+        )
+        created = True
+    except AppwriteException:
+        existing = None
+        if row_id:
+            existing = get_row_safe(COLLECTIONS["chat_messages"], row_id, allow_missing=True)
+        if not existing and base_payload.get("external_id"):
+            existing = first_row(
+                COLLECTIONS["chat_messages"],
+                [Query.equal("external_id", [base_payload.get("external_id")])],
+            )
+        if existing:
+            row = existing
+            created = False
+        else:
+            logger.exception("Failed to persist channel message")
+            return jsonify({"error": "Unable to save message."}), 500
+    try:
         if channel.get("kind") == "discord":
             _prune_discord_messages(channel_id)
-        emit_chat_event(
-            "channel",
-            channel_id,
-            "message_created",
-            message_id=_row_id(row),
-            channel_id=channel_id,
-            actor_id=_current_user_id(),
-        )
+        if created:
+            emit_chat_event(
+                "channel",
+                channel_id,
+                "message_created",
+                message_id=_row_id(row),
+                channel_id=channel_id,
+                actor_id=_current_user_id(),
+            )
     except AppwriteException:
-        logger.exception("Failed to persist channel message")
+        logger.exception("Failed to finalize channel message")
         return jsonify({"error": "Unable to save message."}), 500
     return jsonify({"message": _serialize_message(row)}), 201
 
@@ -1766,7 +1976,7 @@ def dm_thread_messages(thread_id):
         rows = _list_messages("thread", thread_id, request.args.get("before"), after)
         thread_payload = _thread_payload(thread) or {}
         return jsonify({
-            "messages": [_serialize_message(row) for row in rows],
+            "messages": _serialize_messages(rows),
             "has_more": not after and len(rows) == MESSAGE_PAGE_SIZE,
             "thread": {
                 "id": thread_id,
@@ -1778,6 +1988,7 @@ def dm_thread_messages(thread_id):
                 "presence_read_permissions": thread_payload.get("presence_read_permissions") or _presence_read_permissions_for_thread(thread),
                 "presence_profile_resolve_allowed": True,
             },
+            **_room_message_metadata("thread", thread_id),
         })
 
     if not other:

@@ -335,20 +335,63 @@ test("chat renders discord mention pills and scalable message avatars", async ()
   assert.match(styles, /font-weight: 650/);
 });
 
-test("chat history banner is closeable per session and only for discord history rooms", async () => {
+test("chat history banner has no close control and follows scroll-top visibility", async () => {
   const script = await sourceFor("static/js/chat.js");
   const template = await sourceFor("templates/chat.html");
   const styles = await sourceFor("static/css/chat.css");
 
-  assert.match(script, /closedHistoryBanners: new Set\(\)/);
-  assert.match(script, /DISCORD_HISTORY_CHANNEL_IDS = new Set\(\["nest_announcements", "nest_chat"\]\)/);
-  assert.match(script, /channel\.kind === "discord"/);
+  assert.doesNotMatch(script, /closedHistoryBanners/);
+  assert.match(script, /function updateHistoryBannerVisibility/);
   assert.match(script, /channel\.history_limited === true/);
-  assert.match(script, /state\.closedHistoryBanners\.add\(channelId\)/);
-  assert.doesNotMatch(script, /localStorage\.setItem\([^)]*history/i);
-  assert.match(template, /id="chat-history-close"/);
-  assert.match(styles, /chat-history-close/);
-  assert.match(styles, /\.chat-history-limited\[hidden\]/);
+  assert.match(script, /messagePaneIsScrollable/);
+  assert.match(script, /scrollTop <= 16/);
+  assert.doesNotMatch(template, /chat-history-close/);
+  assert.doesNotMatch(styles, /chat-history-close/);
+  assert.match(template, /Older Discord history lives in the server\./);
+});
+
+test("chat starts realtime fallback refresh every five seconds after failure", async () => {
+  const script = await sourceFor("static/js/chat.js");
+
+  assert.doesNotMatch(script, /pollTimer/);
+  assert.match(script, /const REALTIME_FALLBACK_MS = 5000/);
+  assert.match(script, /function startRealtimeFallback/);
+  assert.match(script, /function stopRealtimeFallback/);
+  assert.match(script, /document\.visibilityState === "visible"/);
+  assert.match(script, /after: cache\.latestCursor, quiet: true/);
+  assert.match(script, /void refreshChatSummary\(\)/);
+  assert.match(script, /startRealtimeFallback\(\)/);
+  assert.match(script, /stopRealtimeFallback\(\)/);
+});
+
+test("chat author names and avatars open inline profile popovers", async () => {
+  const script = await sourceFor("static/js/chat.js");
+  const styles = await sourceFor("static/css/chat.css");
+
+  assert.match(script, /class="chat-author-button"/);
+  assert.match(script, /class="chat-message-avatar-button/);
+  assert.match(script, /function openInlineProfileForMessage/);
+  assert.match(script, /function positionInlineProfilePopover/);
+  assert.match(script, /function closeInlineProfilePopover/);
+  assert.match(script, /author_profile/);
+  assert.match(script, /is-limited/);
+  assert.match(styles, /\.chat-inline-profile-popover/);
+  assert.match(styles, /\.chat-author-button/);
+  assert.match(styles, /\.chat-message-avatar-button/);
+});
+
+test("chat announcement unread banner auto-reads small ranges and marks read on close", async () => {
+  const script = await sourceFor("static/js/chat.js");
+  const template = await sourceFor("templates/chat.html");
+
+  assert.match(template, /id="chat-announcements-unread"/);
+  assert.match(template, /Unread announcements/);
+  assert.match(template, /aria-label="Mark announcements read"/);
+  assert.match(script, /function updateAnnouncementsUnreadBanner/);
+  assert.match(script, /function markAnnouncementsRead/);
+  assert.match(script, /const ANNOUNCEMENTS_CHANNEL_ID = "nest_announcements"/);
+  assert.match(script, /fetchJson\("\/api\/chat\/read"/);
+  assert.match(script, /read_state/);
 });
 
 test("chat DM pane uses compact public profile card fields", async () => {

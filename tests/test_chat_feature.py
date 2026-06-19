@@ -495,6 +495,191 @@ class TestChatFeature(unittest.TestCase):
         self.assertIn('loading="lazy"', rendered)
         self.assertNotIn("&lt;:bleak:1320062766026854541&gt;", rendered)
 
+    def test_discord_message_row_id_is_deterministic(self):
+        channel = {"discord_channel_id": "discord-channel"}
+        row_id = chat_api._discord_message_row_id(channel, "discord-message-1")
+        self.assertTrue(row_id.startswith("discord_"))
+        self.assertEqual(len(row_id), len("discord_") + 24)
+        self.assertEqual(row_id, chat_api._discord_message_row_id(channel, "discord-message-1"))
+        self.assertNotEqual(
+            row_id,
+            chat_api._discord_message_row_id(channel, "discord-message-2"),
+        )
+
+    def test_discord_upsert_uses_deterministic_row_id_on_create(self):
+        channel = {
+            "$id": "nest_chat",
+            "kind": "discord",
+            "discord_channel_id": "discord-channel",
+        }
+        message = {
+            "id": "discord-message-1",
+            "content": "fresh from discord",
+            "timestamp": "2026-05-26T22:00:00Z",
+            "author": {"id": "author-1", "username": "UrbanPanda"},
+        }
+        expected_row_id = chat_api._discord_message_row_id(channel, message["id"])
+
+        with patch.object(chat_api, "get_row_safe", return_value=None), \
+                patch.object(chat_api, "first_row", return_value=None), \
+                patch.object(chat_api, "create_row_safe", return_value={"$id": expected_row_id}) as create_row, \
+                patch.object(chat_api, "emit_chat_event"):
+            row, created = chat_api._upsert_discord_message(channel, message, emit_event=True)
+
+        self.assertTrue(created)
+        self.assertEqual(create_row.call_args.kwargs["row_id"], expected_row_id)
+        self.assertEqual(row["$id"], expected_row_id)
+
+    def test_discord_upsert_recovers_from_duplicate_create_race(self):
+        channel = {
+            "$id": "nest_chat",
+            "kind": "discord",
+            "discord_channel_id": "discord-channel",
+        }
+        message = {
+            "id": "discord-message-1",
+            "content": "same discord payload",
+            "timestamp": "2026-05-26T22:00:00Z",
+            "author": {"id": "author-1", "username": "UrbanPanda"},
+        }
+        existing = {
+            "$id": chat_api._discord_message_row_id(channel, message["id"]),
+            **chat_api._discord_message_payload(channel, message),
+        }
+
+        with patch.object(chat_api, "get_row_safe", side_effect=[None, existing]), \
+                patch.object(chat_api, "first_row", return_value=None), \
+                patch.object(chat_api, "create_row_safe", side_effect=chat_api.AppwriteException("duplicate")), \
+                patch.object(chat_api, "update_row_safe") as update_row, \
+                patch.object(chat_api, "emit_chat_event") as emit_event:
+            row, created = chat_api._upsert_discord_message(channel, message, emit_event=True)
+
+        self.assertFalse(created)
+        self.assertEqual(row["$id"], existing["$id"])
+        update_row.assert_not_called()
+        emit_event.assert_not_called()
+
+    def test_discord_upsert_is_idempotent_for_duplicate_gateway_delivery(self):
+        channel = {
+            "$id": "nest_chat",
+            "kind": "discord",
+            "discord_channel_id": "discord-channel",
+        }
+        message = {
+            "id": "discord-message-1",
+            "content": "same discord payload",
+            "timestamp": "2026-05-26T22:00:00Z",
+            "author": {"id": "author-1", "username": "UrbanPanda"},
+        }
+        existing = {
+            "$id": chat_api._discord_message_row_id(channel, message["id"]),
+            **chat_api._discord_message_payload(channel, message),
+        }
+
+        with patch.object(chat_api, "get_row_safe", return_value=existing), \
+                patch.object(chat_api, "first_row", return_value=None), \
+                patch.object(chat_api, "create_row_safe") as create_row, \
+                patch.object(chat_api, "update_row_safe") as update_row, \
+                patch.object(chat_api, "emit_chat_event") as emit_event:
+            row, created = chat_api._upsert_discord_message(channel, message, emit_event=True)
+
+        self.assertFalse(created)
+        self.assertEqual(row["$id"], existing["$id"])
+        create_row.assert_not_called()
+        update_row.assert_not_called()
+        emit_event.assert_not_called()
+
+    def test_serialize_message_includes_author_profile_for_nest_user(self):
+        row = {
+            "$id": "message-1",
+            "user_id": "user-2",
+            "source": "appwrite",
+            "author_name": "Derek",
+            "created_at": "2026-05-25T00:00:00Z",
+        }
+        users_by_id = {
+            "user-2": {
+                "$id": "user-2",
+                "name": "Derek",
+                "username": "derek",
+                "picture_url": "https://example.test/avatar.png",
+                "created_at": "2026-01-01T00:00:00Z",
+            },
+        }
+        with self.app.test_request_context("/api/chat/channels/nest_chat/messages"):
+            with patch.object(chat_api, "current_user", self.user):
+                payload = chat_api._serialize_message(row, users_by_id)
+
+        self.assertEqual(payload["author_profile"]["id"], "user-2")
+        self.assertEqual(payload["author_profile"]["username"], "derek")
+
+    def test_serialize_message_sets_null_author_profile_for_discord_only_author(self):
+        row = {
+            "$id": "message-1",
+            "source": "discord",
+            "author_name": "Discord User",
+            "created_at": "2026-05-25T00:00:00Z",
+        }
+        with self.app.test_request_context("/api/chat/channels/nest_chat/messages"):
+            with patch.object(chat_api, "current_user", self.user):
+                payload = chat_api._serialize_message(row, {})
+
+        self.assertIsNone(payload["author_profile"])
+
+    def test_initialize_new_user_discord_read_states_marks_accessible_channels(self):
+        channels = [
+            {"$id": "nest_chat", "kind": "discord"},
+            {"$id": "nest_announcements", "kind": "discord"},
+        ]
+        latest = {"$id": "message-1", "created_at": "2026-05-26T22:00:00Z"}
+
+        with patch.object(chat_api, "_default_channels"), \
+                patch.object(chat_api, "list_rows_all", return_value=channels), \
+                patch.object(chat_api, "_latest_visible_message", return_value=latest), \
+                patch.object(chat_api, "_persist_read_state") as persist_read:
+            chat_api.initialize_new_user_discord_read_states("new-user")
+
+        self.assertEqual(persist_read.call_count, 2)
+        persist_read.assert_any_call("new-user", "channel", "nest_chat", latest)
+        persist_read.assert_any_call("new-user", "channel", "nest_announcements", latest)
+
+    def test_create_welcome_dm_is_idempotent_and_emits_event(self):
+        sender = {
+            "$id": chat_api.WELCOME_DM_SENDER_ID,
+            "name": "Nest Team",
+            "username": "nest",
+            "picture_url": "https://example.test/nest.png",
+        }
+        thread = {
+            "$id": "thread-1",
+            "participant_a": chat_api.WELCOME_DM_SENDER_ID,
+            "participant_b": "new-user",
+        }
+        existing = {"$id": "welcome-message", "external_id": f"welcome:{chat_api.WELCOME_DM_SENDER_ID}:new-user"}
+
+        with patch.object(chat_api, "first_row", return_value=existing):
+            row = chat_api.create_welcome_dm_for_user("new-user")
+
+        self.assertEqual(row["$id"], "welcome-message")
+
+        with patch.object(chat_api, "first_row", return_value=None), \
+                patch.object(chat_api, "get_row_safe", return_value=sender), \
+                patch.object(chat_api, "_get_or_create_thread_between", return_value=thread), \
+                patch.object(chat_api, "create_row_safe", return_value={"$id": "welcome-message"}) as create_row, \
+                patch.object(chat_api, "update_row_safe"), \
+                patch.object(chat_api, "emit_chat_event") as emit_event:
+            row = chat_api.create_welcome_dm_for_user("new-user")
+
+        payload = create_row.call_args.kwargs["data"]
+        self.assertEqual(payload["thread_id"], "thread-1")
+        self.assertEqual(payload["source"], "system")
+        self.assertEqual(payload["external_id"], f"welcome:{chat_api.WELCOME_DM_SENDER_ID}:new-user")
+        self.assertEqual(payload["user_id"], chat_api.WELCOME_DM_SENDER_ID)
+        self.assertEqual(payload["content"], chat_api.WELCOME_DM_TEXT)
+        self.assertEqual(payload["author_name"], "Nest Team")
+        emit_event.assert_called_once()
+        self.assertEqual(emit_event.call_args.args[2], "message_created")
+
     def test_discord_upsert_emits_realtime_event_for_new_message(self):
         channel = {
             "$id": "nest_chat",
@@ -508,7 +693,8 @@ class TestChatFeature(unittest.TestCase):
             "author": {"id": "author-1", "username": "UrbanPanda"},
         }
 
-        with patch.object(chat_api, "first_row", return_value=None), \
+        with patch.object(chat_api, "get_row_safe", return_value=None), \
+                patch.object(chat_api, "first_row", return_value=None), \
                 patch.object(chat_api, "create_row_safe", return_value={"$id": "row-1"}) as create_row, \
                 patch.object(chat_api, "emit_chat_event") as emit_event:
             row, created = chat_api._upsert_discord_message(channel, message, emit_event=True)
@@ -534,7 +720,8 @@ class TestChatFeature(unittest.TestCase):
             "author": {"id": "author-1", "username": "UrbanPanda"},
         }
 
-        with patch.object(chat_api, "first_row", return_value={"$id": "existing-row"}), \
+        with patch.object(chat_api, "get_row_safe", return_value={"$id": "existing-row"}), \
+                patch.object(chat_api, "first_row", return_value={"$id": "existing-row"}), \
                 patch.object(chat_api, "update_row_safe", return_value={"$id": "existing-row"}) as update_row, \
                 patch.object(chat_api, "emit_chat_event") as emit_event:
             row, created = chat_api._upsert_discord_message(channel, message, emit_event=True)
@@ -563,7 +750,8 @@ class TestChatFeature(unittest.TestCase):
             "updated_at": "2026-05-26T22:01:00Z",
         }
 
-        with patch.object(chat_api, "first_row", return_value=existing), \
+        with patch.object(chat_api, "get_row_safe", return_value=existing), \
+                patch.object(chat_api, "first_row", return_value=existing), \
                 patch.object(chat_api, "update_row_safe") as update_row, \
                 patch.object(chat_api, "emit_chat_event") as emit_event:
             row, created = chat_api._upsert_discord_message(channel, message, emit_event=True)
@@ -595,7 +783,8 @@ class TestChatFeature(unittest.TestCase):
             "updated_at": "2026-05-26T22:01:00Z",
         }
 
-        with patch.object(chat_api, "first_row", return_value=existing), \
+        with patch.object(chat_api, "get_row_safe", return_value=existing), \
+                patch.object(chat_api, "first_row", return_value=existing), \
                 patch.object(chat_api, "update_row_safe", return_value={"$id": "existing-row"}) as update_row:
             row, created = chat_api._upsert_discord_message(channel, edited)
 
@@ -628,7 +817,8 @@ class TestChatFeature(unittest.TestCase):
             "edited_timestamp": "2026-05-26T22:02:00Z",
         }
 
-        with patch.object(chat_api, "first_row", return_value=existing), \
+        with patch.object(chat_api, "get_row_safe", return_value=existing), \
+                patch.object(chat_api, "first_row", return_value=existing), \
                 patch.object(chat_api, "update_row_safe", return_value={"$id": "existing-row"}) as update_row, \
                 patch.object(chat_api, "emit_chat_event") as emit_event:
             row, created = chat_api._upsert_discord_message(channel, partial, emit_event=True, partial=True)
@@ -710,7 +900,7 @@ class TestChatFeature(unittest.TestCase):
         self.assertEqual(media[1]["kind"], "discord_image")
         self.assertLessEqual(len(media[0]["title"]), 2048)
 
-    def test_discord_upsert_returns_false_when_existing_update_fails(self):
+    def test_discord_upsert_returns_existing_when_existing_update_fails(self):
         channel = {
             "$id": "nest_chat",
             "kind": "discord",
@@ -731,14 +921,15 @@ class TestChatFeature(unittest.TestCase):
             **chat_api._discord_message_payload(channel, original),
         }
 
-        with patch.object(chat_api, "first_row", return_value=existing), \
+        with patch.object(chat_api, "get_row_safe", return_value=existing), \
+                patch.object(chat_api, "first_row", return_value=existing), \
                 patch.object(chat_api, "update_row_safe", side_effect=chat_api.AppwriteException("Server Error")), \
                 patch.object(chat_api.logger, "exception") as log_exception:
             row, created = chat_api._upsert_discord_message(channel, edited)
 
-        self.assertIsNone(row)
+        self.assertEqual(row["$id"], "existing-row")
         self.assertFalse(created)
-        log_exception.assert_called_once()
+        log_exception.assert_not_called()
 
     def test_discord_ingest_endpoint_upserts_and_emits_for_bot_message(self):
         channel = {
@@ -764,6 +955,7 @@ class TestChatFeature(unittest.TestCase):
         ):
             with patch.dict(os.environ, {"DISCORD_CHAT_INGEST_SECRET": "ingest-secret"}, clear=False), \
                     patch.object(chat_api, "first_row", side_effect=[channel, None]), \
+                    patch.object(chat_api, "get_row_safe", return_value=None), \
                     patch.object(chat_api, "create_row_safe", return_value={"$id": "row-2"}) as create_row, \
                     patch.object(chat_api, "emit_chat_event") as emit_event:
                 response = chat_api.discord_message_ingest()
