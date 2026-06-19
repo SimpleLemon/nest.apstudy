@@ -39,6 +39,12 @@
     }
 
     async function apiJson(url, options = {}) {
+        if (global.APStudyHttp?.fetchJson) {
+            return global.APStudyHttp.fetchJson(url, {
+                ...options,
+                pendingLabel: options.pendingLabel || "notes-save",
+            });
+        }
         const headers = { ...(options.headers || {}) };
         if (options.body && !headers['Content-Type']) headers['Content-Type'] = 'application/json';
         const method = String(options.method || 'GET').toUpperCase();

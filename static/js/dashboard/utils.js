@@ -93,6 +93,9 @@
     }
 
     function fetchJson(url, options = {}) {
+        if (window.APStudyHttp?.fetchJson) {
+            return window.APStudyHttp.fetchJson(url, options);
+        }
         return fetch(url, {
             headers: { "Content-Type": "application/json", ...(options.headers || {}) },
             ...options,

@@ -558,13 +558,16 @@
   }
 
   async function fetchJson(url, options = {}) {
+    if (window.APStudyHttp?.fetchJson) {
+      return window.APStudyHttp.fetchJson(url, options);
+    }
     const response = await fetch(url, {
       headers: { "Content-Type": "application/json", ...(options.headers || {}) },
       ...options,
     });
     const payload = await response.json().catch(() => ({}));
     if (!response.ok) {
-      throw new Error(payload.error || "Something went wrong.");
+      throw new Error(payload.error || payload.message || "Something went wrong.");
     }
     return payload;
   }

@@ -2,11 +2,7 @@
 blueprints/auth.py
 
 OAuth 2.0 authentication flow.
-Handles login, callback, session creation, and logout.
-
-Migrated from the monolithic app.py implementation [2].
-Requires: client_secret.json in project root,
-          GOOGLE_CLIENT_ID and FLASK_SECRET_KEY in .env.
+Handles login, callback, session creation, and logout via Appwrite OAuth.
 """
 
 import os
@@ -17,11 +13,8 @@ import html
 from datetime import datetime
 
 import click
-if os.environ.get("APSTUDY_ALLOW_INSECURE_OAUTH") == "1" or os.environ.get("FLASK_DEBUG") == "1":
-    os.environ.setdefault("OAUTHLIB_INSECURE_TRANSPORT", "1")
 
 import requests as http_requests
-import google_auth_oauthlib.flow
 from flask import (
     Blueprint, Response, abort, redirect, url_for, session, render_template, request, jsonify, make_response,
     current_app
@@ -51,6 +44,12 @@ from services.avatar_storage import delete_avatar_file, store_avatar_from_url
 from services.chat_presence import sync_chat_presence_labels_for_user
 from services.discord_audit import emit_server_log_event, emit_user_event, format_actor, format_user_target
 from services import discord_bridge
+from services.user_profile import (
+    is_early_member as _is_early_member,
+    is_emory_school as _is_emory_school,
+    normalize_banner_color as _normalize_banner_color,
+    profile_handle as _profile_handle,
+)
 
 auth_bp = Blueprint("auth", __name__)
 logger = logging.getLogger(__name__)
@@ -94,12 +93,6 @@ PUBLIC_PROFILE_CSP = "; ".join([
     "form-action 'self'",
 ])
 
-CLIENT_SECRETS_FILE = "client_secret.json"
-SCOPES = [
-    "openid",
-    "https://www.googleapis.com/auth/userinfo.email",
-    "https://www.googleapis.com/auth/userinfo.profile",
-]
 USERNAME_MIN_LENGTH = 3
 USERNAME_MAX_LENGTH = 20
 USERNAME_PATTERN = re.compile(r"^[a-zA-Z0-9_-]+$")
@@ -470,21 +463,6 @@ def _format_member_since(value):
         return str(value)
 
 
-def _normalize_banner_color(value):
-    if not isinstance(value, str):
-        return "#fecae1"
-    normalized = value.strip()
-    if not normalized.startswith("#"):
-        normalized = f"#{normalized}"
-    if len(normalized) == 7:
-        try:
-            int(normalized[1:], 16)
-            return normalized.lower()
-        except ValueError:
-            return "#fecae1"
-    return "#fecae1"
-
-
 def _normalize_username(value):
     if not value:
         return ""
@@ -494,37 +472,6 @@ def _normalize_username(value):
     if len(normalized) < USERNAME_MIN_LENGTH or len(normalized) > USERNAME_MAX_LENGTH:
         return ""
     return normalized
-
-
-def _profile_handle(name, user_id, username=None):
-    if username:
-        return f"@{username}"
-    base = "".join(
-        char.lower() if char.isalnum() else "-"
-        for char in (name or "")
-    ).strip("-")
-    base = "-".join(part for part in base.split("-") if part)
-    return f"@{base or user_id or 'apstudy-user'}"
-
-
-def _is_emory_school(value):
-    normalized = str(value or "").strip().lower()
-    return normalized in {"emory", "emory university"}
-
-
-def _is_early_member(value):
-    if not value:
-        return False
-    parsed = value
-    if isinstance(value, str) and value.endswith("Z"):
-        parsed = value[:-1] + "+00:00"
-    try:
-        created_at = parsed if isinstance(parsed, datetime) else datetime.fromisoformat(parsed)
-    except (TypeError, ValueError):
-        return False
-    if created_at.tzinfo is not None:
-        created_at = created_at.replace(tzinfo=None)
-    return created_at < datetime(2026, 8, 20)
 
 
 def _public_profile_payload(user_doc):
@@ -1278,187 +1225,6 @@ def appwrite_session():
         return jsonify({"error": "Unable to complete session exchange."}), 500
 
     return jsonify({"status": "ok", "user_id": result["user_id"], "redirect": result["redirect"]})
-
-
-@auth_bp.route("/authorize")
-def authorize():
-    """Initiate OAuth 2.0 flow by redirecting to Google's consent screen."""
-    flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
-        CLIENT_SECRETS_FILE, scopes=SCOPES
-    )
-    flow.redirect_uri = url_for("auth.oauth2callback", _external=True)
-
-    authorization_url, state = flow.authorization_url(
-        access_type="offline",
-        include_granted_scopes="true",
-        prompt="select_account",
-    )
-
-    session["oauth_state"] = state
-    return redirect(authorization_url)
-
-
-@auth_bp.route("/oauth2callback")
-def oauth2callback():
-    """Handle Google's redirect after user consent."""
-    state = session.get("oauth_state")
-    if not state:
-        return redirect(url_for("auth.login"))
-
-    flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
-        CLIENT_SECRETS_FILE, scopes=SCOPES, state=state
-    )
-    flow.redirect_uri = url_for("auth.oauth2callback", _external=True)
-
-    # Exchange authorization code for tokens
-    flow.fetch_token(authorization_response=request.url)
-    credentials = flow.credentials
-
-    # Store credentials in session for potential token revocation later
-    session["credentials"] = {
-        "token": credentials.token,
-        "refresh_token": credentials.refresh_token,
-        "token_uri": credentials.token_uri,
-        "client_id": credentials.client_id,
-        "client_secret": credentials.client_secret,
-        "scopes": list(credentials.scopes or []),
-    }
-
-    # Fetch user profile from Google
-    userinfo_response = http_requests.get(
-        "https://www.googleapis.com/oauth2/v2/userinfo",
-        headers={"Authorization": f"Bearer {credentials.token}"},
-    )
-
-    if userinfo_response.status_code != 200:
-        session.clear()
-        return redirect(url_for("auth.login"))
-
-    user_info = userinfo_response.json()
-
-    email = user_info.get("email", "")
-
-    google_id = str(user_info["id"])
-    _set_oauth_session(
-        "google",
-        google_id,
-        email,
-        name=user_info.get("name"),
-        picture_url=user_info.get("picture"),
-    )
-    user_doc = None
-    created_user = False
-
-    try:
-        user_doc = get_row_safe(COLLECTIONS["users"], google_id)
-    except AppwriteException as exc:
-        if exc.code != 404:
-            logger.exception("Failed to fetch user row")
-            return redirect(url_for("auth.login"))
-
-    if not user_doc:
-        created_at = format_datetime(datetime.utcnow())
-        try:
-            user_doc = create_row_safe(
-                COLLECTIONS["users"],
-                row_id=google_id,
-                data={
-                    "google_id": google_id,
-                    "email": email,
-                    "name": user_info.get("name"),
-                    "picture_url": user_info.get("picture"),
-                    "school": None,
-                    "major": None,
-                    "graduation_year": None,
-                    "onboarding_complete": False,
-                    "onboarding_step": 1,
-                    "created_at": created_at,
-                    "last_login": created_at,
-                },
-            )
-        except AppwriteException:
-            return redirect(url_for("auth.login"))
-        created_user = True
-
-        # Create default settings with a unique .ics subscription token
-        try:
-            create_row_safe(
-                COLLECTIONS["user_settings"],
-                row_id=google_id,
-                data={
-                    "user_id": google_id,
-                    "ics_secret_token": secrets.token_urlsafe(32),
-                    "feed_refresh_minutes": 15,
-                    "preferred_calendar_view": "week",
-                    "interface_theme": "obsidian-dark",
-                    "theme": "dark",
-                    "sidebar_default": "expanded",
-                    "email_notifications": True,
-                    "product_updates": True,
-                    "task_sound_enabled": True,
-                    "chat_sound_enabled": True,
-                    "language": "en",
-                    "timezone": "",
-                    "created_at": created_at,
-                },
-            )
-        except AppwriteException:
-            return redirect(url_for("auth.login"))
-    else:
-        try:
-            user_doc = update_row_safe(
-                COLLECTIONS["users"],
-                google_id,
-                {
-                    "last_login": format_datetime(datetime.utcnow()),
-                    "name": user_info.get("name", user_doc.get("name")),
-                    "picture_url": user_info.get("picture", user_doc.get("picture_url")),
-                    "email": email or user_doc.get("email"),
-                },
-            )
-        except AppwriteException:
-            return redirect(url_for("auth.login"))
-
-    sync_chat_presence_labels_for_user(user_doc.get("$id") or user_doc.get("id"), user_doc)
-    login_user(user_from_doc(user_doc))
-    session["user_id"] = user_doc.get("$id") or user_doc.get("id")
-    session.pop("oauth_state", None)
-
-    if created_user:
-        emit_user_event(
-            "New User Created",
-            actor=format_actor(user_id=user_doc.get("$id") or user_doc.get("id"), username=user_doc.get("username") or user_doc.get("name")),
-            target=format_user_target(user_doc),
-            metadata={
-                "page_context": "oauth2callback",
-                "resource_type": "user",
-                "resource_id": user_doc.get("$id") or user_doc.get("id"),
-                "provider": "google",
-                "email": email,
-                "default_settings_created": True,
-            },
-            color="green",
-        )
-
-    emit_user_event(
-        "User Login",
-        actor=format_actor(user_id=user_doc.get("$id") or user_doc.get("id"), username=user_doc.get("username") or user_doc.get("name")),
-        target=format_user_target(user_doc),
-        metadata={
-            "page_context": "oauth2callback",
-            "resource_type": "user",
-            "resource_id": user_doc.get("$id") or user_doc.get("id"),
-            "provider": "google",
-            "created_user": created_user,
-        },
-        color="green",
-    )
-
-    # Redirect users who have not completed onboarding yet.
-    if not user_doc.get("onboarding_complete"):
-        return redirect(url_for("settings.onboarding"))
-
-    return redirect(_redirect_after_login(user_doc))
 
 
 @auth_bp.route("/logout")

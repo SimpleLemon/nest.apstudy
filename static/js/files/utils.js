@@ -214,6 +214,12 @@
     }
 
     async function apiJson(url, options = {}) {
+        if (window.APStudyHttp?.fetchJson && !(options.body instanceof FormData)) {
+            return window.APStudyHttp.fetchJson(url, {
+                ...options,
+                pendingLabel: options.pendingLabel || "files-save",
+            });
+        }
         const headers = { ...(options.headers || {}) };
         if (options.body && !(options.body instanceof FormData) && !headers["Content-Type"]) {
             headers["Content-Type"] = "application/json";

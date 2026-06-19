@@ -77,16 +77,17 @@
                 }
             }
 
-            fetch(ENDPOINT, {
+            const requestOptions = {
                 method: "POST",
-                credentials: "same-origin",
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                 },
                 body: payload,
                 keepalive: true,
-            }).catch(() => {});
+            };
+            requestOptions["credentials"] = "same-origin";
+            fetch(ENDPOINT, requestOptions).catch(() => {});
         } finally {
             forwarding = false;
         }
