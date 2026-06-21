@@ -25,11 +25,14 @@
             getFolderName,
             loadFolder,
             normalizeFolderId,
+            notify,
+            parseUploadResponse,
             renderManager,
             setButtonBusy,
             shareExpiryOptionsHtml,
             showAlert,
             showFormError,
+            uploadErrorMessage,
             uploadItemHtml,
             expiryOptionForDate,
         } = callbacks;
@@ -56,12 +59,12 @@
             if (!incoming.length) return;
             const remaining = maxUploadFiles - state.uploadItems.length;
             if (remaining <= 0) {
-                showFormError(els.uploadError, `You can upload up to ${maxUploadFiles} files at once.`);
+                notify(`You can upload up to ${maxUploadFiles} files at once.`, "error", { modalError: els.uploadError });
                 return;
             }
             const accepted = incoming.slice(0, remaining);
             if (incoming.length > remaining) {
-                showFormError(els.uploadError, `Only ${remaining} more file${remaining === 1 ? "" : "s"} can be added.`);
+                notify(`Only ${remaining} more file${remaining === 1 ? "" : "s"} can be added.`, "warning", { modalError: els.uploadError });
             }
             accepted.forEach((file) => {
                 state.uploadItems.push({
@@ -107,20 +110,20 @@
         async function uploadSelectedFiles() {
             clearFormError(els.uploadError);
             if (!state.uploadItems.length) {
-                showFormError(els.uploadError, "Select at least one file to upload.");
+                notify("Select at least one file to upload.", "error", { modalError: els.uploadError });
                 return;
             }
             for (const item of state.uploadItems) {
                 if (!item.name.trim()) {
-                    showFormError(els.uploadError, "Filename cannot be empty.");
+                    notify("Filename cannot be empty.", "error", { modalError: els.uploadError });
                     return;
                 }
                 if (item.file.size > maxFileSizeBytes) {
-                    showFormError(els.uploadError, `${item.file.name} exceeds the 50 MB limit.`);
+                    notify(`${item.file.name} exceeds the 50 MB limit.`, "error", { modalError: els.uploadError });
                     return;
                 }
                 if (item.file.size === 0) {
-                    showFormError(els.uploadError, `${item.file.name} is empty.`);
+                    notify(`${item.file.name} is empty.`, "error", { modalError: els.uploadError });
                     return;
                 }
             }
@@ -148,9 +151,10 @@
                 try {
                     setButtonBusy(els.uploadButton, false);
                     resetProgress();
-                    const payload = xhr.response || {};
+                    const payload = parseUploadResponse(xhr) || {};
                     if (xhr.status < 200 || xhr.status >= 300) {
-                        showFormError(els.uploadError, payload.error || firstUploadError(payload) || "Upload failed.");
+                        const message = uploadErrorMessage(xhr, payload);
+                        notify(message, "error", { modalError: els.uploadError });
                         return;
                     }
                     closeModal.close(els.uploadModal);
@@ -167,7 +171,8 @@
             xhr.onerror = () => {
                 setButtonBusy(els.uploadButton, false);
                 resetProgress();
-                showFormError(els.uploadError, "Upload failed.");
+                const message = uploadErrorMessage(xhr, parseUploadResponse(xhr));
+                notify(message, "error", { modalError: els.uploadError });
                 finishUploadMutation?.();
             };
             xhr.onabort = () => finishUploadMutation?.();
@@ -234,7 +239,7 @@
                 updateSharedItem(context.type, updated);
                 showAlert(visibility === "public" ? "Public link enabled." : "Link disabled.");
             } catch (error) {
-                showFormError(els.shareError, error.message || "Unable to update sharing.");
+                notify(error.message || "Unable to update sharing.", "error", { modalError: els.shareError });
                 renderShareModal();
             } finally {
                 setShareBusy(false);
@@ -255,7 +260,7 @@
                 updateSharedItem("file", updated);
                 showAlert("Expiration updated.");
             } catch (error) {
-                showFormError(els.shareError, error.message || "Unable to update expiration.");
+                notify(error.message || "Unable to update expiration.", "error", { modalError: els.shareError });
                 renderShareModal();
             } finally {
                 setShareBusy(false);

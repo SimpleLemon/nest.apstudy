@@ -17,6 +17,7 @@
             setButtonBusy,
             showAlert,
             showFormError,
+            notify,
         } = callbacks;
 
         function openFolderModal(mode, item = null) {
@@ -48,7 +49,7 @@
         async function saveFolderModal() {
             const name = (els.folderName?.value || "").trim();
             if (!name) {
-                showFormError(els.folderError, "Name cannot be empty.");
+                notify("Name cannot be empty.", "error", { modalError: els.folderError });
                 return;
             }
             const mode = state.folderModalMode?.mode;
@@ -75,7 +76,7 @@
                 await loadFolder(state.currentFolderId);
                 showAlert(mode === "folder-create" ? "Folder created." : mode === "folder-rename" ? "Folder renamed." : "File renamed.");
             } catch (error) {
-                showFormError(els.folderError, error.message || "Unable to save.");
+                notify(error.message || "Unable to save.", "error", { modalError: els.folderError });
             } finally {
                 setButtonBusy(els.folderSave, false);
             }
@@ -133,7 +134,7 @@
                 await loadFolder(state.currentFolderId);
                 showAlert("Moved.");
             } catch (error) {
-                showFormError(els.moveError, error.message || "Unable to move item.");
+                notify(error.message || "Unable to move item.", "error", { modalError: els.moveError });
             } finally {
                 setButtonBusy(els.moveSave, false);
             }
@@ -159,7 +160,7 @@
             const options = state.confirmContext;
             if (!options) return;
             if (options.requiredText && (els.confirmInput?.value || "") !== options.requiredText) {
-                showFormError(els.confirmError, "Confirmation text does not match.");
+                notify("Confirmation text does not match.", "error", { modalError: els.confirmError });
                 return;
             }
             setButtonBusy(els.confirmSubmit, true);
@@ -167,7 +168,7 @@
                 await options.onConfirm?.();
                 closeModal(els.confirmModal);
             } catch (error) {
-                showFormError(els.confirmError, error.message || "Unable to complete action.");
+                notify(error.message || "Unable to complete action.", "error", { modalError: els.confirmError });
             } finally {
                 setButtonBusy(els.confirmSubmit, false);
             }

@@ -324,6 +324,42 @@ class FileShareTestCase(unittest.TestCase):
         self.assertIn("Shared Notes", html)
         self.assertIn("notes.txt", html)
 
+    def test_appwrite_upload_error_maps_size_limit(self):
+        from appwrite.exception import AppwriteException
+
+        exc = AppwriteException("File size is larger than maximum allowed size", 400, "general_file_too_large")
+        self.assertEqual(
+            fs._appwrite_upload_error(exc),
+            "File exceeds the storage bucket size limit.",
+        )
+
+    def test_upload_surfaces_appwrite_error_and_top_level_error(self):
+        from appwrite.exception import AppwriteException
+
+        storage = Mock()
+        storage.create_file.side_effect = AppwriteException(
+            "File size is larger than maximum allowed size",
+            400,
+            "general_file_too_large",
+        )
+        data = {
+            "folderId": "folder-1",
+            "filename": "large.bin",
+            "visibility": "private",
+            "expiryDays": "1",
+            "file": (io.BytesIO(b"x" * 16), "large.bin"),
+        }
+        with self.app.test_request_context("/api/files/upload", method="POST", data=data):
+            with patch.object(fs, "current_user", self.user), \
+                    patch.object(fs, "_assert_folder_target"), \
+                    patch.object(fs, "_storage", return_value=storage):
+                response, status = fs.upload_file.__wrapped__()
+
+        payload = response.get_json()
+        self.assertEqual(status, 400)
+        self.assertEqual(payload["error"], "File exceeds the storage bucket size limit.")
+        self.assertEqual(payload["errors"][0]["error"], "File exceeds the storage bucket size limit.")
+
 
 if __name__ == "__main__":
     unittest.main()

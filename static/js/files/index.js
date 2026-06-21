@@ -10,6 +10,8 @@
         formatExpiry,
         expiryOptionForDate: expiryOptionForDateFromUtils,
         firstUploadError,
+        parseUploadResponse,
+        uploadErrorMessage,
         showFormError,
         clearFormError,
         setButtonBusy,
@@ -77,6 +79,7 @@
                 setButtonBusy,
                 showAlert,
                 showFormError,
+                notify,
             },
         });
         workflows = window.APStudyFilesWorkflows.createFilesWorkflows({
@@ -108,6 +111,7 @@
                 shareExpiryOptionsHtml,
                 showAlert,
                 showFormError,
+                notify,
                 uploadItemHtml,
             },
         });
@@ -456,6 +460,14 @@
         const toastType =
             type === "error" ? "error" : type === "warning" ? "warning" : type === "info" ? "info" : "success";
         window.APStudyToast.show({ message, type: toastType });
+    }
+
+    function notify(message, type = "info", options = {}) {
+        const { modalError } = options;
+        if (modalError) showFormError(modalError, message);
+        if (type === "error" || type === "warning") {
+            showAlert(message, type);
+        }
     }
 
     function clearAlert() {

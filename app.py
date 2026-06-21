@@ -4,6 +4,7 @@ from datetime import datetime, timedelta, timezone
 
 from flask import Flask, jsonify, redirect, render_template, request, session, url_for
 from dotenv import load_dotenv
+from werkzeug.exceptions import RequestEntityTooLarge
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 load_dotenv()
@@ -154,6 +155,12 @@ def create_app():
     @app.route("/apple-touch-icon.png")
     def apple_touch_icon():
         return app.send_static_file("apple-touch-icon.png")
+
+    @app.errorhandler(RequestEntityTooLarge)
+    def handle_request_entity_too_large(_error):
+        if request.path.startswith("/api/"):
+            return jsonify({"error": "Upload exceeds the maximum allowed size (50 MB per file)."}), 413
+        return jsonify({"error": "Upload exceeds the maximum allowed size."}), 413
 
     @app.errorhandler(404)
     def page_not_found(error):

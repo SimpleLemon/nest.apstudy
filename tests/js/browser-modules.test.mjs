@@ -439,6 +439,9 @@ test("files page keeps upload limits, modal elements, and share/delete endpoints
     assert.match(source, /const MAX_FILE_SIZE_BYTES = Number\(CONFIG\.maxFileSize\) \|\| \(50 \* 1024 \* 1024\)/);
     assert.match(source, /const MAX_UPLOAD_FILES = Number\(CONFIG\.maxUploadFiles\) \|\| 5/);
     assert.match(source, /allowedExpiryOptions/);
+    assert.match(combinedSource, /parseUploadResponse/);
+    assert.match(combinedSource, /uploadErrorMessage/);
+    assert.match(combinedSource, /function notify\(message, type = "info", options = \{\}\)/);
     assert.match(combinedSource, /file-share-upload-modal/);
     assert.match(combinedSource, /file-share-confirm-modal/);
     assert.match(combinedSource, /file-share-share-modal/);

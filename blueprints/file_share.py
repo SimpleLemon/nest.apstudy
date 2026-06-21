@@ -63,6 +63,20 @@ def _status_code(exc):
         return 0
 
 
+def _appwrite_upload_error(exc):
+    message = str(getattr(exc, "message", "") or "").strip()
+    lowered = message.lower()
+    if "maximum" in lowered and "size" in lowered:
+        return "File exceeds the storage bucket size limit."
+    if "extension" in lowered or "mime" in lowered:
+        return "This file type is not allowed."
+    if "bucket" in lowered and "not found" in lowered:
+        return "File storage is not configured. Contact support."
+    if message:
+        return message
+    return "Unable to upload file."
+
+
 def _row_id(row):
     return row.get("$id") or row.get("id")
 
@@ -643,9 +657,9 @@ def upload_file():
                     mime_type=uploaded_file.mimetype or "application/octet-stream",
                 ),
             )
-        except AppwriteException:
+        except AppwriteException as exc:
             logger.exception("Failed to upload file to Appwrite Storage")
-            errors.append({"index": idx, "error": "Unable to upload file."})
+            errors.append({"index": idx, "error": _appwrite_upload_error(exc)})
             continue
 
         is_public = visibility == "public"
@@ -710,6 +724,8 @@ def upload_file():
         )
     if errors:
         response.setdefault("errors", []).extend(errors)
+        if not created:
+            response["error"] = errors[0].get("error") or "Upload failed."
 
     return jsonify(response), 201 if created else 400
 

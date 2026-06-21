@@ -195,6 +195,34 @@
         return payload?.errors?.[0]?.error || "";
     }
 
+    function parseUploadResponse(xhr) {
+        if (!xhr) return null;
+        const contentType = xhr.getResponseHeader?.("Content-Type") || "";
+        if (contentType.includes("application/json") && xhr.response && typeof xhr.response === "object") {
+            return xhr.response;
+        }
+        const raw = xhr.responseText;
+        if (!raw) return null;
+        try {
+            return JSON.parse(raw);
+        } catch (_error) {
+            return null;
+        }
+    }
+
+    function uploadErrorMessage(xhr, payload) {
+        if (payload?.error) return payload.error;
+        const firstError = firstUploadError(payload);
+        if (firstError) return firstError;
+        const status = xhr?.status || 0;
+        if (status === 413) return "File is too large for the server upload limit.";
+        if (status === 401 || status === 403) return "Session expired. Please sign in again.";
+        if (status === 502 || status === 504) return "Upload timed out. Try again or use a smaller file.";
+        if (status === 0) return "Network error during upload. Check your connection.";
+        if (status) return `Upload failed (HTTP ${status}).`;
+        return "Upload failed.";
+    }
+
     function showFormError(element, message) {
         if (!element) return;
         element.textContent = message;
@@ -342,6 +370,8 @@
         expiryOptionForDate,
         formatRelative,
         firstUploadError,
+        parseUploadResponse,
+        uploadErrorMessage,
         showFormError,
         clearFormError,
         setButtonBusy,
