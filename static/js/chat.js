@@ -693,9 +693,11 @@
     return true;
   }
 
-  function markRoomRead(room, cache = cacheFor(room)) {
-    if (!room?.type || !room?.id || document.visibilityState === "hidden") return;
-    if (!shouldAutoMarkRoomRead(room, cache)) return;
+  function markRoomRead(room, cache = cacheFor(room), { force = false } = {}) {
+    if (!room?.type || !room?.id) return;
+    if (!force && document.visibilityState === "hidden") return;
+    if (!force && !shouldAutoMarkRoomRead(room, cache)) return;
+    if (force) clearRoomUnread(room);
     const latest = latestMessageForRead(cache);
     const body = {
       scope_type: room.type === "channel" ? "channel" : "thread",
@@ -706,30 +708,29 @@
       method: "POST",
       body: JSON.stringify(body),
     })
-      .then(() => {
-        clearRoomUnread(room);
+      .then((payload) => {
+        if (!force) clearRoomUnread(room);
+        if (
+          force
+          && room.type === "channel"
+          && room.id === ANNOUNCEMENTS_CHANNEL_ID
+          && state.activeRoom?.type === "channel"
+          && state.activeRoom.id === ANNOUNCEMENTS_CHANNEL_ID
+        ) {
+          const readState = payload?.read_state || {};
+          state.roomReadState = {
+            last_read_at: readState.last_read_at || latest?.created_at || state.roomReadState?.last_read_at || null,
+            last_read_message_id: readState.last_read_message_id || latest?.id || state.roomReadState?.last_read_message_id || null,
+          };
+          state.announcementsBannerVisible = false;
+          if (els.announcementsUnread) els.announcementsUnread.hidden = true;
+        }
         window.dispatchEvent(new CustomEvent("apstudy-chat-read-state-change", { detail: { room } }));
         void refreshChatSummary();
       })
-      .catch(() => {});
-  }
-
-  async function markRoomUnread(room) {
-    if (!room?.type || !room?.id) return;
-    try {
-      await fetchJson("/api/chat/unread", {
-        method: "POST",
-        body: JSON.stringify({
-          scope_type: room.type === "channel" ? "channel" : "thread",
-          scope_id: room.id,
-        }),
+      .catch(() => {
+        if (force) void refreshChatSummary();
       });
-      const summary = await refreshChatSummary();
-      if (!summary) setRoomUnread(room, { unread_count: 1, has_unread: true });
-      window.dispatchEvent(new CustomEvent("apstudy-chat-read-state-change", { detail: { room } }));
-    } catch (error) {
-      setStatus(error.message || "Unable to mark room unread.", "error");
-    }
   }
 
   function setStatus(message, tone = "info") {
@@ -852,8 +853,7 @@
     menu.hidden = true;
     menu.setAttribute("role", "menu");
     menu.innerHTML = `
-      <button type="button" role="menuitem" data-chat-room-action="read">Mark as read</button>
-      <button type="button" role="menuitem" data-chat-room-action="unread">Mark as unread</button>
+      <button type="button" class="chat-room-context-action" role="menuitem" data-chat-room-action="read">Mark as read</button>
     `;
     document.body.appendChild(menu);
     menu.addEventListener("click", (event) => {
@@ -862,9 +862,7 @@
       const room = { ...state.contextMenuRoom };
       closeRoomContextMenu();
       if (actionButton.dataset.chatRoomAction === "read") {
-        markRoomRead(room);
-      } else if (actionButton.dataset.chatRoomAction === "unread") {
-        void markRoomUnread(room);
+        markRoomRead(room, cacheFor(room), { force: true });
       }
     });
     return menu;

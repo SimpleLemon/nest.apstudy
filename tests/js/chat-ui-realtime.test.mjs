@@ -106,7 +106,7 @@ test("chat hydrates cached rooms before silent refresh and limits persisted mess
 test("chat marks selected cached rooms and sent messages as read", async () => {
   const script = await sourceFor("static/js/chat.js");
 
-  assert.match(script, /function markRoomRead\(room, cache = cacheFor\(room\)\)/);
+  assert.match(script, /function markRoomRead\(room, cache = cacheFor\(room\), \{ force = false \} = \{\}\)/);
   assert.match(script, /fetchJson\("\/api\/chat\/read"/);
   assert.match(script, /if \(latest\?\.id\) body\.message_id = latest\.id/);
   assert.match(script, /clearRoomUnread\(room\)/);
@@ -133,25 +133,26 @@ test("chat keeps and renders per-room unread state", async () => {
   assert.match(styles, /\.chat-room-unread-badge/);
 });
 
-test("chat room context menu supports mark read and unread", async () => {
+test("chat room context menu supports mark read", async () => {
   const script = await sourceFor("static/js/chat.js");
   const styles = await sourceFor("static/css/chat.css");
-  const api = await sourceFor("blueprints/chat_api.py");
 
   assert.match(script, /contextMenuRoom: null/);
   assert.match(script, /function ensureRoomContextMenu\(\)/);
   assert.match(script, /id = "chat-room-context-menu"/);
+  assert.match(script, /class="chat-room-context-action"/);
   assert.match(script, /data-chat-room-action="read"/);
-  assert.match(script, /data-chat-room-action="unread"/);
+  assert.doesNotMatch(script, /data-chat-room-action="unread"/);
+  assert.doesNotMatch(script, /function markRoomUnread\(/);
   assert.match(script, /addEventListener\("contextmenu", \(event\) => openRoomContextMenu/);
   assert.match(script, /event\.key !== "ContextMenu" && !\(event\.shiftKey && event\.key === "F10"\)/);
-  assert.match(script, /fetchJson\("\/api\/chat\/unread"/);
-  assert.match(script, /await refreshChatSummary\(\)/);
+  assert.match(script, /markRoomRead\(room, cacheFor\(room\), \{ force: true \}\)/);
+  assert.match(script, /function markRoomRead\(room, cache = cacheFor\(room\), \{ force = false \} = \{\}\)/);
   assert.match(script, /closeRoomContextMenu\(\)/);
   assert.match(styles, /\.chat-room-context-menu/);
   assert.match(styles, /\.chat-room-context-menu\[hidden\]/);
-  assert.match(api, /@chat_api_bp\.route\("\/api\/chat\/unread", methods=\["POST"\]\)/);
-  assert.match(api, /def mark_chat_unread\(\):/);
+  assert.match(styles, /\.chat-room-context-action/);
+  assert.match(styles, /background: transparent/);
 });
 
 test("chat refreshes and updates unread state across realtime and visibility", async () => {

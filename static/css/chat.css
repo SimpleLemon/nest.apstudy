@@ -185,34 +185,40 @@
   position: fixed;
   z-index: 90;
   width: 168px;
-  padding: 4px;
+  padding: 6px;
   display: flex;
   flex-direction: column;
   gap: 2px;
-  border: 1px solid var(--color-outline-variant);
-  border-radius: 8px;
-  background: var(--color-surface-container-high);
-  box-shadow: 0 14px 34px color-mix(in srgb, #000 24%, transparent);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-outline-variant) 35%, transparent);
+  border-radius: 12px;
+  background: var(--color-surface);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);
+  color: var(--color-on-surface);
 }
 
 .chat-room-context-menu[hidden] {
   display: none;
 }
 
-.chat-room-context-menu button {
+.chat-room-context-action {
   width: 100%;
   min-height: 34px;
   padding: 0 10px;
+  border: 0;
   border-radius: 6px;
+  background: transparent;
   color: var(--color-on-surface);
   font-size: 13px;
   font-weight: 650;
   text-align: left;
+  cursor: pointer;
+  transition: background-color 140ms ease, color 140ms ease;
 }
 
-.chat-room-context-menu button:hover,
-.chat-room-context-menu button:focus-visible {
-  background: color-mix(in srgb, var(--color-primary) 13%, transparent);
+.chat-room-context-action:hover,
+.chat-room-context-action:focus-visible {
+  background: var(--color-surface-container-high);
   outline: none;
 }
 

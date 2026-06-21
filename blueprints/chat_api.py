@@ -227,7 +227,7 @@ def _serialize_chat_event(row):
 def _list_chat_events_after(since=None, after_id=None, *, limit=CHAT_EVENTS_STREAM_LIMIT):
     queries = [Query.order_asc("created_at"), Query.limit(limit)]
     if since:
-        queries.insert(0, Query.greaterThanEqual("created_at", [since]))
+        queries.insert(0, Query.greater_than_equal("created_at", since))
     try:
         rows = list_rows_safe(COLLECTIONS["chat_events"], queries).get("rows", [])
     except AppwriteException:
