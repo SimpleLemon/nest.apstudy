@@ -5,9 +5,11 @@ import logging
 import os
 import re
 import secrets
+import threading
+import time
 from datetime import datetime, timedelta, timezone
 
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, Response, jsonify, request, stream_with_context
 from flask_login import current_user, login_required
 
 from appwrite.exception import AppwriteException
@@ -18,7 +20,6 @@ from appwrite.role import Role
 
 from appwrite_client import COLLECTIONS, client as appwrite_client
 from appwrite_helpers import (
-    APPWRITE_REPOSITORY,
     create_row_safe,
     delete_row_safe,
     first_row,
@@ -47,6 +48,13 @@ from services.universities import normalize_school_key, school_payload, search_u
 
 chat_api_bp = Blueprint("chat_api", __name__)
 logger = logging.getLogger(__name__)
+
+CHAT_EVENTS_POLL_SECONDS = float(os.environ.get("CHAT_EVENTS_POLL_SECONDS", "1"))
+CHAT_EVENTS_KEEPALIVE_SECONDS = float(os.environ.get("CHAT_EVENTS_KEEPALIVE_SECONDS", "15"))
+CHAT_EVENTS_STREAM_LIMIT = int(os.environ.get("CHAT_EVENTS_STREAM_LIMIT", "50"))
+
+_chat_event_listener_lock = threading.Lock()
+_chat_event_listeners = []
 
 DISCORD_MESSAGE_LIMIT = 50
 MESSAGE_PAGE_SIZE = 50
@@ -167,6 +175,75 @@ def _event_read_permissions(scope_type, *, channel=None, readable_user_ids=None)
     return [Permission.read(Role.users())]
 
 
+def _notify_chat_event_waiters():
+    with _chat_event_listener_lock:
+        listeners = list(_chat_event_listeners)
+    for listener in listeners:
+        with listener:
+            listener.notify_all()
+
+
+def _thread_accessible_by_user(thread_id, user_id):
+    thread = get_row_safe(COLLECTIONS["chat_dm_threads"], thread_id, allow_missing=True)
+    if not thread:
+        return False
+    return user_id in {thread.get("participant_a"), thread.get("participant_b")}
+
+
+def _event_visible_for_user(event):
+    scope_type = (event or {}).get("scope_type")
+    scope_id = (event or {}).get("scope_id")
+    if not scope_type or not scope_id:
+        return False
+    user_id = _current_user_id()
+    if scope_type == "channel":
+        channel = get_row_safe(COLLECTIONS["chat_channels"], scope_id, allow_missing=True)
+        return _can_access_channel(channel)
+    if scope_type == "thread":
+        return _thread_accessible_by_user(scope_id, user_id)
+    if scope_type == "university":
+        school = school_payload(current_user.school)
+        user_school_key = school.get("school_key") or getattr(current_user, "school_key", None)
+        return bool(user_school_key) and user_school_key == scope_id
+    return False
+
+
+def _serialize_chat_event(row):
+    event_id = _row_id(row)
+    return {
+        "$id": event_id,
+        "id": event_id,
+        "scope_type": row.get("scope_type"),
+        "scope_id": row.get("scope_id"),
+        "event_type": row.get("event_type"),
+        "message_id": row.get("message_id"),
+        "thread_id": row.get("thread_id"),
+        "channel_id": row.get("channel_id"),
+        "actor_id": row.get("actor_id"),
+        "created_at": row.get("created_at"),
+    }
+
+
+def _list_chat_events_after(since=None, after_id=None, *, limit=CHAT_EVENTS_STREAM_LIMIT):
+    queries = [Query.order_asc("created_at"), Query.limit(limit)]
+    if since:
+        queries.insert(0, Query.greaterThanEqual("created_at", [since]))
+    try:
+        rows = list_rows_safe(COLLECTIONS["chat_events"], queries).get("rows", [])
+    except AppwriteException:
+        logger.exception("Failed to list chat events")
+        return []
+    visible = []
+    for row in rows:
+        row_id = _row_id(row)
+        if since and after_id and row.get("created_at") == since and row_id == after_id:
+            continue
+        if not _event_visible_for_user(row):
+            continue
+        visible.append(row)
+    return visible
+
+
 def emit_chat_event(
     scope_type,
     scope_id,
@@ -208,15 +285,7 @@ def emit_chat_event(
     except AppwriteException:
         logger.exception("Failed to emit chat event to SQLite")
         return None
-    try:
-        APPWRITE_REPOSITORY.create_row(
-            COLLECTIONS["chat_events"],
-            row_id=event_id,
-            data=data,
-            permissions=permissions,
-        )
-    except (AppwriteException, AttributeError):
-        logger.exception("Failed to emit chat event to Appwrite Realtime")
+    _notify_chat_event_waiters()
     return row
 
 
@@ -1704,12 +1773,61 @@ def chat_realtime_token():
     try:
         result = Users(appwrite_client).create_jwt(user_id=user_id, duration=3600)
     except AppwriteException:
-        logger.exception("Failed to create Appwrite JWT for chat realtime")
+        logger.exception("Failed to create Appwrite JWT for chat presence")
         return jsonify({"error": "Unable to create realtime token."}), 502
     jwt = result.get("jwt") if isinstance(result, dict) else getattr(result, "jwt", None)
     if not jwt:
         return jsonify({"error": "Unable to create realtime token."}), 502
     return jsonify({"jwt": jwt})
+
+
+@chat_api_bp.route("/api/chat/events/stream")
+@login_required
+def chat_events_stream():
+    since = (request.args.get("since") or "").strip() or None
+    after_id = (request.args.get("after_id") or "").strip() or None
+
+    def generate():
+        cursor_since = since or format_datetime(_now())
+        cursor_after_id = after_id
+        listener = threading.Condition()
+        with _chat_event_listener_lock:
+            _chat_event_listeners.append(listener)
+        last_keepalive = time.monotonic()
+        try:
+            while True:
+                events = _list_chat_events_after(cursor_since, cursor_after_id)
+                for event in events:
+                    payload = json.dumps(_serialize_chat_event(event), separators=(",", ":"))
+                    yield f"data: {payload}\n\n"
+                    cursor_since = event.get("created_at") or cursor_since
+                    cursor_after_id = _row_id(event)
+                    last_keepalive = time.monotonic()
+                now = time.monotonic()
+                if now - last_keepalive >= CHAT_EVENTS_KEEPALIVE_SECONDS:
+                    yield ": keepalive\n\n"
+                    last_keepalive = now
+                    wait_seconds = CHAT_EVENTS_POLL_SECONDS
+                else:
+                    wait_seconds = min(
+                        CHAT_EVENTS_KEEPALIVE_SECONDS - (now - last_keepalive),
+                        CHAT_EVENTS_POLL_SECONDS,
+                    )
+                with listener:
+                    listener.wait(timeout=max(wait_seconds, CHAT_EVENTS_POLL_SECONDS))
+        finally:
+            with _chat_event_listener_lock:
+                try:
+                    _chat_event_listeners.remove(listener)
+                except ValueError:
+                    pass
+
+    headers = {
+        "Cache-Control": "no-cache",
+        "X-Accel-Buffering": "no",
+        "Connection": "keep-alive",
+    }
+    return Response(stream_with_context(generate()), mimetype="text/event-stream", headers=headers)
 
 
 @chat_api_bp.route("/api/chat/bootstrap")

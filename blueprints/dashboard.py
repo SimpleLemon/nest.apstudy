@@ -1221,5 +1221,4 @@ def chat():
         theme_preference=_theme_from_settings(user_settings),
         discord_invite_url=os.environ.get("DISCORD_INVITE_URL", ""),
         appwrite_database_id=DATABASE_ID or "",
-        chat_events_table_id=COLLECTIONS.get("chat_events", "chat_events"),
     )

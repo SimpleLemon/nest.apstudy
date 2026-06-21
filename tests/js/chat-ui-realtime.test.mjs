@@ -25,14 +25,16 @@ test("chat uses realtime event signals instead of message polling", async () => 
   assert.match(source, /startRealtimeHeartbeat/);
   assert.match(source, /ensureAppwriteRealtimeAuth/);
   assert.match(source, /\/api\/chat\/realtime-token/);
-  assert.match(source, /Channel\?\.tablesdb/);
-  assert.match(source, /\.table\(tableId\)\.row\(\)/);
-  assert.match(source, /client\.subscribe/);
+  assert.match(source, /\/api\/chat\/events\/stream/);
+  assert.match(source, /new EventSource/);
+  assert.match(source, /initializeChatEventStream/);
   assert.match(source, /handleRealtimePayload/);
   assert.match(source, /normalizeChatEvent/);
   assert.match(source, /refreshAppwriteRealtimeAuth/);
   assert.match(source, /await startRealtimeServices\(\)/);
   assert.match(source, /message_updated/);
+  assert.doesNotMatch(source, /realtimeChannelName/);
+  assert.doesNotMatch(source, /chatEventsTableId/);
 });
 
 test("chat uses Appwrite Presences for online and typing state", async () => {
@@ -299,8 +301,9 @@ test("scheduler uses discord gateway with slow reconciliation", async () => {
   assert.match(api, /_upsert_discord_message\(channel, message, emit_event=emit_events\)/);
   assert.match(api, /emit_chat_event\(\s*"channel",\s*channel_id,\s*"message_created"/);
   assert.match(api, /"message_updated"/);
-  assert.match(api, /APPWRITE_REPOSITORY\.create_row/);
-  assert.match(api, /def _event_read_permissions/);
+  assert.match(api, /@chat_api_bp\.route\("\/api\/chat\/events\/stream"\)/);
+  assert.match(api, /text\/event-stream/);
+  assert.match(api, /def _event_visible_for_user/);
   assert.match(api, /@chat_api_bp\.route\("\/api\/chat\/realtime-token"\)/);
   assert.match(api, /Users\(appwrite_client\)\.create_jwt/);
   assert.match(api, /@chat_api_bp\.route\("\/api\/chat\/discord\/messages", methods=\["POST"\]\)/);

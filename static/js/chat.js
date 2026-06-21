@@ -69,6 +69,9 @@
   let realtimeHeartbeatTimer = null;
   let realtimeReconnectTimer = null;
   let appwriteJwtRefreshTimer = null;
+  let chatEventSource = null;
+  let chatEventCursor = { since: null, after_id: null };
+  const seenChatEventIds = new Set();
   let inlineProfilePopover = null;
 
   const els = {
@@ -1390,6 +1393,10 @@
   }
 
   function resetRealtimeConnection() {
+    if (chatEventSource) {
+      chatEventSource.close();
+      chatEventSource = null;
+    }
     if (state.realtimeUnsubscribe) {
       state.realtimeUnsubscribe();
       state.realtimeUnsubscribe = null;
@@ -1399,13 +1406,21 @@
     stopRealtimeHeartbeat();
   }
 
+  function buildChatEventsStreamUrl() {
+    const params = new URLSearchParams();
+    if (chatEventCursor.since) params.set("since", chatEventCursor.since);
+    if (chatEventCursor.after_id) params.set("after_id", chatEventCursor.after_id);
+    const qs = params.toString();
+    return qs ? `/api/chat/events/stream?${qs}` : "/api/chat/events/stream";
+  }
+
   function scheduleRealtimeReconnect() {
     if (realtimeReconnectTimer) return;
     resetRealtimeConnection();
     startRealtimeFallback();
     realtimeReconnectTimer = window.setTimeout(() => {
       realtimeReconnectTimer = null;
-      void refreshAppwriteRealtimeAuth();
+      initializeChatEventStream();
     }, REALTIME_RECONNECT_MS);
   }
 
@@ -1416,11 +1431,13 @@
   async function refreshAppwriteRealtimeAuth() {
     const authed = await ensureAppwriteRealtimeAuth();
     if (!authed) return false;
-    if (state.realtimeReady || state.realtimeUnsubscribe) {
-      resetRealtimeConnection();
+    if (state.presenceUnsubscribe) {
+      state.presenceUnsubscribe();
+      state.presenceUnsubscribe = null;
+      state.presenceReady = false;
     }
-    await initializeRealtime();
-    return state.realtimeReady;
+    await initializePresenceRealtime();
+    return state.presenceReady;
   }
 
   async function ensureAppwriteRealtimeAuth() {
@@ -1456,8 +1473,8 @@
   }
 
   async function startRealtimeServices() {
+    initializeChatEventStream();
     await ensureAppwriteRealtimeAuth();
-    await initializeRealtime();
     await initializePresenceRealtime();
     void loadInitialPresences();
   }
@@ -2265,13 +2282,52 @@
     scheduleRoomPrefetches();
   }
 
-  function realtimeChannelName() {
-    const databaseId = root.dataset.appwriteDatabaseId || "";
-    const tableId = root.dataset.chatEventsTableId || "chat_events";
-    const Channel = window.Channel || (window.Appwrite && window.Appwrite.Channel);
-    if (Channel?.tablesdb) return Channel.tablesdb(databaseId).table(tableId).row();
-    if (Channel?.tablesDB) return Channel.tablesDB(databaseId).table(tableId).row();
-    return `tablesdb.${databaseId}.tables.${tableId}.rows`;
+  function initializeChatEventStream() {
+    if (state.realtimeReady || chatEventSource || state.realtimeConnecting) return;
+    if (typeof window.EventSource !== "function") {
+      startRealtimeFallback();
+      return;
+    }
+    state.realtimeConnecting = true;
+    try {
+      const source = new EventSource(buildChatEventsStreamUrl());
+      chatEventSource = source;
+      source.onopen = () => {
+        state.realtimeReady = true;
+        state.realtimeConnecting = false;
+        state.realtimeUnsubscribe = () => {
+          if (chatEventSource) {
+            chatEventSource.close();
+            chatEventSource = null;
+          }
+        };
+        stopRealtimeFallback();
+        startRealtimeHeartbeat();
+        pollActiveRoomMessages();
+      };
+      source.onmessage = (messageEvent) => {
+        let payload;
+        try {
+          payload = JSON.parse(messageEvent.data);
+        } catch {
+          return;
+        }
+        const eventId = payload?.$id || payload?.id;
+        if (eventId && seenChatEventIds.has(eventId)) return;
+        if (eventId) seenChatEventIds.add(eventId);
+        if (payload?.created_at) {
+          chatEventCursor = { since: payload.created_at, after_id: eventId || null };
+        }
+        void handleRealtimePayload({ payload });
+      };
+      source.onerror = () => {
+        handleRealtimeDisconnect();
+      };
+    } catch (error) {
+      console.warn("Chat event stream unavailable", error);
+      state.realtimeConnecting = false;
+      handleRealtimeDisconnect();
+    }
   }
 
   function presenceChannelName() {
@@ -2302,44 +2358,6 @@
       return normalizeRealtimeUnsubscribe(subscription);
     }
     return null;
-  }
-
-  async function initializeRealtime() {
-    if (state.realtimeReady || state.realtimeUnsubscribe || state.realtimeConnecting) return;
-    if (!root.dataset.appwriteDatabaseId || !root.dataset.chatEventsTableId) {
-      startRealtimeFallback();
-      return;
-    }
-    if (!window.Appwrite || !window.client) {
-      startRealtimeFallback();
-      return;
-    }
-
-    const channel = realtimeChannelName();
-    state.realtimeConnecting = true;
-    try {
-      const unsubscribe = await subscribeRealtime(channel, (response) => {
-        if (response?.error || response?.code) {
-          handleRealtimeDisconnect();
-          return;
-        }
-        void handleRealtimePayload(response);
-      });
-      if (typeof unsubscribe === "function") {
-        state.realtimeUnsubscribe = unsubscribe;
-        state.realtimeReady = true;
-        stopRealtimeFallback();
-        startRealtimeHeartbeat();
-        pollActiveRoomMessages();
-      } else {
-        startRealtimeFallback();
-      }
-    } catch (error) {
-      console.warn("Chat realtime unavailable", error);
-      handleRealtimeDisconnect();
-    } finally {
-      state.realtimeConnecting = false;
-    }
   }
 
   async function initializePresenceRealtime() {
