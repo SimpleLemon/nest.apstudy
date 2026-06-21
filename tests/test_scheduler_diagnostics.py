@@ -137,7 +137,7 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
         app = Flask(__name__)
         scheduler_factory = Mock(side_effect=FakeScheduler)
         with patch.dict(os.environ, {"SCHEDULER_ENABLED": "1"}, clear=False), \
-                patch.object(scheduler, "_acquire_scheduler_lock", return_value=False), \
+                patch.object(scheduler, "_acquire_scheduler_lock_with_retry", return_value=False), \
                 patch.object(scheduler, "BackgroundScheduler", scheduler_factory), \
                 patch("services.discord_audit.emit_server_log_event", return_value=True) as emit_event:
             scheduler.init_scheduler(app)
@@ -146,6 +146,38 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
         scheduler_factory.assert_not_called()
         emit_event.assert_not_called()
         self.assertFalse(scheduler.scheduler_status()["scheduler_lock_acquired"])
+
+    def test_werkzeug_reloader_parent_skips_scheduler_without_lock(self):
+        app = Flask(__name__)
+        app.debug = True
+        scheduler_factory = Mock(side_effect=FakeScheduler)
+        with patch.dict(os.environ, {"SCHEDULER_ENABLED": "1"}, clear=False), \
+                patch.object(scheduler, "_acquire_scheduler_lock_with_retry") as acquire_lock, \
+                patch.object(scheduler, "BackgroundScheduler", scheduler_factory), \
+                patch("services.discord_audit.emit_server_log_event", return_value=True) as emit_event:
+            scheduler.init_scheduler(app)
+
+        acquire_lock.assert_not_called()
+        scheduler_factory.assert_not_called()
+        emit_event.assert_not_called()
+        self.assertIsNone(scheduler._scheduler)
+
+    def test_werkzeug_reloader_child_starts_scheduler(self):
+        app = Flask(__name__)
+        app.debug = True
+        with tempfile.TemporaryDirectory() as temp_dir, \
+                patch.dict(os.environ, {
+                    "SCHEDULER_ENABLED": "1",
+                    "WERKZEUG_RUN_MAIN": "true",
+                    "SCHEDULER_LOCK_PATH": os.path.join(temp_dir, "scheduler.lock"),
+                }, clear=False), \
+                patch.object(scheduler, "BackgroundScheduler", FakeScheduler), \
+                patch.object(scheduler, "get_course_tracking_refresh_minutes", return_value=30), \
+                patch("services.discord_gateway.start_discord_gateway", return_value=True), \
+                patch("services.discord_audit.emit_server_log_event", return_value=True):
+            scheduler.init_scheduler(app)
+
+        self.assertTrue(scheduler.scheduler_status()["scheduler_running"])
 
     def test_scheduler_double_init_starts_once(self):
         app = Flask(__name__)

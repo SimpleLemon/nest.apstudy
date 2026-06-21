@@ -13,11 +13,13 @@ or Gunicorn's --preload flag with a worker check to ensure only one
 instance runs scheduled jobs [8].
 """
 
+import atexit
 import fcntl
 import os
 import json
 import logging
 import socket
+import time
 from datetime import datetime, timedelta, timezone
 
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -52,6 +54,30 @@ _scheduler_lock_path = None
 
 def _configured_scheduler_lock_path():
     return os.environ.get("SCHEDULER_LOCK_PATH") or "/tmp/nest_apstudy_scheduler.lock"
+
+
+def _should_own_scheduler(app):
+    """
+    Decide whether this process should try to own the scheduler.
+
+    Werkzeug's debug reloader runs create_app() in a parent that only watches
+    files, then forks a child (WERKZEUG_RUN_MAIN=true) that serves traffic.
+    The parent must not grab the scheduler lock or the child cannot start jobs.
+    """
+    werkzeug_run_main = os.environ.get("WERKZEUG_RUN_MAIN")
+    if werkzeug_run_main == "true":
+        return True
+    if app.debug and werkzeug_run_main is None:
+        return False
+    return True
+
+
+def _read_lock_holder_description(lock_path):
+    try:
+        with open(lock_path, encoding="utf-8") as lock_file:
+            return lock_file.read().strip() or "unknown"
+    except OSError:
+        return "unknown"
 
 
 def _release_scheduler_lock():
@@ -107,6 +133,15 @@ def _acquire_scheduler_lock():
     _scheduler_lock_acquired = True
     _scheduler_lock_path = lock_path
     return True
+
+
+def _acquire_scheduler_lock_with_retry(max_attempts=5, delay_seconds=0.2):
+    for attempt in range(max_attempts):
+        if _acquire_scheduler_lock():
+            return True
+        if attempt < max_attempts - 1:
+            time.sleep(delay_seconds)
+    return False
 
 
 def _emit_scheduler_event(title, metadata=None, color="gray"):
@@ -471,12 +506,24 @@ def init_scheduler(app):
         logger.warning("Scheduler already initialized. Skipping.")
         return
 
-    if not _acquire_scheduler_lock():
-        logger.warning(
-            "Scheduler lock is held by another process. Skipping scheduler startup: %s",
-            _scheduler_lock_path,
+    if not _should_own_scheduler(app):
+        logger.debug(
+            "Skipping scheduler startup in werkzeug reloader parent process."
         )
         return
+
+    if not _acquire_scheduler_lock_with_retry():
+        lock_path = _scheduler_lock_path or _configured_scheduler_lock_path()
+        holder = _read_lock_holder_description(lock_path)
+        logger.info(
+            "Scheduler lock is held by another process (%s). "
+            "Skipping scheduler startup in this worker: %s",
+            holder,
+            lock_path,
+        )
+        return
+
+    atexit.register(shutdown_scheduler)
 
     default_interval = int(
         os.environ.get("FEED_REFRESH_INTERVAL_MINUTES", "15")
