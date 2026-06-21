@@ -29,6 +29,9 @@ import { blockOwnContentIsEmpty, buildLoadingIndicatorHtml, documentHasText, for
 
 const noteId = noteIdFromPath();
 const SAVE_DEBOUNCE_MS = 800;
+const SAVE_DEBOUNCE_LARGE_DOC_MS = 1500;
+const LARGE_DOCUMENT_BLOCK_COUNT = 120;
+const EDITOR_CHROME_THROTTLE_MS = 120;
 const SAVED_TIME_REFRESH_MS = 60000;
 const ZOOM_STORAGE_KEY = 'apstudy.notes.editor.zoom';
 const ZOOM_LEVELS = [0.85, 1, 1.15, 1.3, 1.5];
@@ -98,6 +101,11 @@ let normalizingEditorDocument = false;
 let selectedBlockAnchorId = null;
 let urlBlockPopover = null;
 let urlBlockResolve = null;
+let editorChromeThrottleTimer = null;
+let editorChromeRafId = null;
+let lastSelectedBlockIds = new Set();
+let lastHeadingCollapseSignature = '';
+let lastSavedPayloadHash = '';
 
 const titleInput = document.getElementById('note-title-input');
 const saveStatus = document.getElementById('save-status');
@@ -741,23 +749,27 @@ function setSaveStatus(status, options = {}) {
 async function saveNote() {
     if (!noteId || !titleInput || !editorInstance) return;
 
+    const payload = {
+        title: titleInput.value,
+        content: JSON.stringify(editorInstance.document),
+    };
+    const payloadHash = `${payload.title}\u0000${payload.content}`;
+    if (payloadHash === lastSavedPayloadHash) {
+        noteHasPendingChanges = false;
+        return;
+    }
+
     setSaveStatus('saving');
 
     try {
         const response = await (window.APStudyPendingMutations?.track(fetch(`/api/notes/${noteId}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                title: titleInput.value,
-                content: JSON.stringify(editorInstance.document),
-            }),
+            body: JSON.stringify(payload),
         }), 'notes-save') || fetch(`/api/notes/${noteId}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                title: titleInput.value,
-                content: JSON.stringify(editorInstance.document),
-            }),
+            body: JSON.stringify(payload),
         }));
 
         if (!response.ok) {
@@ -765,12 +777,18 @@ async function saveNote() {
         }
 
         const updatedNote = await response.json();
+        lastSavedPayloadHash = payloadHash;
         noteHasPendingChanges = false;
         setSaveStatus('saved', { savedAt: updatedNote?.updated_at });
     } catch (error) {
         console.error(error);
         setSaveStatus('error');
     }
+}
+
+function currentSaveDebounceMs() {
+    const blockCount = Array.isArray(editorInstance?.document) ? editorInstance.document.length : 0;
+    return blockCount >= LARGE_DOCUMENT_BLOCK_COUNT ? SAVE_DEBOUNCE_LARGE_DOC_MS : SAVE_DEBOUNCE_MS;
 }
 
 function focusEditorBody() {
@@ -1092,7 +1110,7 @@ function moveSelectedBlocks(direction) {
         editorInstance.moveBlocksDown?.();
     }
     focusEditorBody();
-    updateEditorChrome();
+    updateEditorChrome({ structureChanged: true });
     triggerDebouncedSave();
 }
 
@@ -1109,7 +1127,7 @@ function toggleHeadingCollapse(block = firstSelectedHeading()) {
         },
     });
     focusEditorBody();
-    updateEditorChrome();
+    updateEditorChrome({ structureChanged: true });
     triggerDebouncedSave();
 }
 
@@ -1332,14 +1350,38 @@ function blockOuterById(id) {
 function syncSelectedBlockClasses() {
     if (!blocknoteRoot) return;
     const ids = selectedBlockIds();
-    blocknoteRoot.querySelectorAll('.bn-block-outer[data-id]').forEach((element) => {
-        element.classList.toggle('notes-block-selected', ids.has(element.dataset.id));
+    const toClear = [...lastSelectedBlockIds].filter((id) => !ids.has(id));
+    const toSet = [...ids].filter((id) => !lastSelectedBlockIds.has(id));
+
+    toClear.forEach((id) => {
+        const element = blockOuterById(id);
+        element?.classList.remove('notes-block-selected');
     });
+    toSet.forEach((id) => {
+        const element = blockOuterById(id);
+        element?.classList.add('notes-block-selected');
+    });
+    lastSelectedBlockIds = ids;
 }
 
-function syncHeadingCollapseChrome() {
+function headingCollapseSignature(documentBlocks) {
+    const { hidden, counts } = hiddenBlocksForCollapsedHeadings(documentBlocks || []);
+    const collapsed = (documentBlocks || [])
+        .filter((block) => block?.type === 'heading')
+        .map((block) => `${block.id}:${block.props?.isCollapsed ? 1 : 0}:${counts.get(block.id) || 0}`)
+        .join('|');
+    const hiddenPart = [...hidden.entries()].map(([id, by]) => `${id}:${by}`).join('|');
+    return `${collapsed}::${hiddenPart}`;
+}
+
+function syncHeadingCollapseChrome(force = false) {
     if (!editorInstance || !blocknoteRoot) return;
-    const { hidden, counts } = hiddenBlocksForCollapsedHeadings(editorInstance.document || []);
+    const documentBlocks = editorInstance.document || [];
+    const signature = headingCollapseSignature(documentBlocks);
+    if (!force && signature === lastHeadingCollapseSignature) return;
+    lastHeadingCollapseSignature = signature;
+
+    const { hidden } = hiddenBlocksForCollapsedHeadings(documentBlocks);
     blocknoteRoot.querySelectorAll('.bn-block-outer[data-id]').forEach((element) => {
         const blockId = element.dataset.id;
         const hiddenBy = hidden.get(blockId);
@@ -1348,13 +1390,12 @@ function syncHeadingCollapseChrome() {
         else delete element.dataset.hiddenByHeading;
     });
 
-    (editorInstance.document || []).forEach((block) => {
+    documentBlocks.forEach((block) => {
         if (block?.type !== 'heading') return;
         const outer = blockOuterById(block.id);
         const content = outer?.querySelector('.bn-block-content[data-content-type="heading"]');
         if (!content) return;
         content.classList.toggle('notes-heading-collapsed', Boolean(block.props?.isCollapsed));
-        content.dataset.collapsedCount = String(counts.get(block.id) || 0);
         let button = content.querySelector(':scope > .notes-heading-collapse-toggle');
         if (!button) {
             button = document.createElement('button');
@@ -1369,13 +1410,40 @@ function syncHeadingCollapseChrome() {
     });
 }
 
-function updateEditorChrome() {
+function flushEditorChromeSync() {
+    editorChromeRafId = null;
+    syncSelectedBlockClasses();
+    syncHeadingCollapseChrome();
+}
+
+function scheduleEditorChromeSync({ immediate = false } = {}) {
+    if (immediate) {
+        if (editorChromeThrottleTimer) {
+            clearTimeout(editorChromeThrottleTimer);
+            editorChromeThrottleTimer = null;
+        }
+        if (editorChromeRafId) {
+            cancelAnimationFrame(editorChromeRafId);
+        }
+        editorChromeRafId = window.requestAnimationFrame(flushEditorChromeSync);
+        return;
+    }
+    if (editorChromeThrottleTimer) return;
+    editorChromeThrottleTimer = window.setTimeout(() => {
+        editorChromeThrottleTimer = null;
+        if (editorChromeRafId) return;
+        editorChromeRafId = window.requestAnimationFrame(flushEditorChromeSync);
+    }, EDITOR_CHROME_THROTTLE_MS);
+}
+
+function updateEditorChrome({ immediate = false, structureChanged = false } = {}) {
     updateToolbarState();
     updateEditorHint();
-    window.requestAnimationFrame(() => {
-        syncSelectedBlockClasses();
-        syncHeadingCollapseChrome();
-    });
+    if (immediate || structureChanged) {
+        scheduleEditorChromeSync({ immediate: true });
+        return;
+    }
+    scheduleEditorChromeSync();
 }
 
 function bindWritingToolbar() {
@@ -1610,7 +1678,7 @@ function triggerDebouncedSave() {
 
     saveDebounceTimer = window.setTimeout(() => {
         saveNote();
-    }, SAVE_DEBOUNCE_MS);
+    }, currentSaveDebounceMs());
 }
 
 window.addEventListener('beforeunload', (event) => {
@@ -1643,7 +1711,7 @@ function normalizeEditorDocument({ save = true } = {}) {
         normalizingEditorDocument = false;
     }
 
-    updateEditorChrome();
+    updateEditorChrome({ structureChanged: true });
     if (save) triggerDebouncedSave();
     return true;
 }
@@ -1959,7 +2027,7 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
     }, [editor]);
 
     useEditorContentOrSelectionChange(() => {
-        updateEditorChrome();
+        updateEditorChrome({ immediate: true });
     }, editor);
 
     return React.createElement(
@@ -1974,7 +2042,7 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
             theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
             onChange: () => {
                 if (normalizingEditorDocument) {
-                    updateEditorChrome();
+                    updateEditorChrome({ structureChanged: true });
                     return;
                 }
                 if (normalizeEditorDocument()) return;
@@ -2033,6 +2101,9 @@ async function initEditorPage() {
     updatePageSetupControls();
     if (note?.updated_at) {
         setSaveStatus('saved', { savedAt: note.updated_at });
+    }
+    if (typeof note?.content === 'string') {
+        lastSavedPayloadHash = `${noteTitle}\u0000${note.content}`;
     }
 
     let parsedContent = undefined;

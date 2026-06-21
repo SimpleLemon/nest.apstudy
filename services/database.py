@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 import re
 import sqlite3
@@ -140,6 +141,8 @@ def init_db(app=None, path=None):
     if app is not None:
         db_path = path or app.config.get("DATABASE_PATH")
 
+    should_backfill_preview_text = False
+
     with db_connection(db_path) as conn:
         conn.execute(
             """
@@ -169,6 +172,18 @@ def init_db(app=None, path=None):
             conn.execute(
                 "INSERT OR IGNORE INTO schema_migrations (version, applied_at) VALUES (?, ?)",
                 [version, utcnow_iso()],
+            )
+            if version == "001_notes_preview_text":
+                should_backfill_preview_text = True
+
+    if should_backfill_preview_text:
+        try:
+            from services.note_store import backfill_preview_texts
+
+            backfill_preview_texts(path=db_path)
+        except Exception:
+            logging.getLogger(__name__).exception(
+                "Failed to backfill notes preview_text after migration"
             )
 
 

@@ -36,6 +36,9 @@
         lastFocusedElement: null,
         loading: false,
     };
+    const sortableInstances = [];
+    let folderDropListenersBound = false;
+
     const {
         apiJson,
         buildLoadingIndicatorHtml,
@@ -43,23 +46,47 @@
         formatCount,
         formatDate,
         notePreview,
+        preloadEditorBundle,
     } = window.APStudyNotesListUtils;
     const noteCardFactory = window.APStudyNotesListCards.createNotesListCards({
         callbacks: {
+            apiJson,
             closeAllMenus,
             escapeHtml,
             formatCount,
             formatDate,
             notePreview,
+            onFolderExpandChange: initDragDrop,
             openFolderModal,
             openMoveModal,
+            preloadEditorBundle,
             toggleCardMenu,
         },
     });
     const {
         createFolderCard,
         createNoteCard,
+        expandFolderById,
     } = noteCardFactory;
+
+    function noteIdOf(note) {
+        return note?.$id || note?.id || '';
+    }
+
+    function notesByFolderMap(notes = state.notes) {
+        const grouped = {};
+        notes.forEach((note) => {
+            const folderId = note.folder_id || 'root';
+            if (!grouped[folderId]) grouped[folderId] = [];
+            grouped[folderId].push(note);
+        });
+        return grouped;
+    }
+
+    function updateCounts(notesByFolder) {
+        if (els.foldersCount) els.foldersCount.textContent = formatCount(state.folders.length, 'folder');
+        if (els.notesCount) els.notesCount.textContent = formatCount((notesByFolder.root || []).length, 'note');
+    }
 
     function setButtonBusy(button, busy) {
         if (!button) return;
@@ -98,6 +125,7 @@
         els.page?.classList.toggle('is-loading', isLoading);
         if (!els.notesGrid) return;
         if (isLoading) {
+            destroyDragDrop();
             els.notesGrid.innerHTML = `
                 <div class="notes-loading-card">
                     ${buildLoadingIndicatorHtml(label, { sizePx: 52, textToneClass: 'text-on-surface' })}
@@ -149,7 +177,7 @@
     }
 
     function folderById(folderId) {
-        return state.folders.find((folder) => (folder.$id || folder.id) === folderId) || null;
+        return state.folders.find((folder) => noteIdOf(folder) === folderId) || null;
     }
 
     function openFolderModal(mode, folder = null) {
@@ -176,7 +204,7 @@
             els.moveDestination.innerHTML = [
                 '<option value="">No folder</option>',
                 ...state.folders.map((folder) => {
-                    const folderId = folder.$id || folder.id || '';
+                    const folderId = noteIdOf(folder);
                     const selected = folderId === currentFolderId ? ' selected' : '';
                     return `<option value="${escapeHtml(folderId)}"${selected}>${escapeHtml(folder.name || 'Untitled Folder')}</option>`;
                 }),
@@ -185,30 +213,30 @@
         openModal(els.moveModal, els.moveDestination);
     }
 
+    function destroyDragDrop() {
+        while (sortableInstances.length) {
+            const instance = sortableInstances.pop();
+            instance?.destroy?.();
+        }
+    }
+
     function render(data) {
+        destroyDragDrop();
         state.notes = data.notes || [];
         state.folders = data.folders || [];
-        const notesByFolder = {};
-        state.notes.forEach((note) => {
-            const folderId = note.folder_id || 'root';
-            if (!notesByFolder[folderId]) notesByFolder[folderId] = [];
-            notesByFolder[folderId].push(note);
-        });
+        const notesByFolder = notesByFolderMap();
 
-        if (els.foldersCount) els.foldersCount.textContent = formatCount(state.folders.length, 'folder');
-        if (els.notesCount) els.notesCount.textContent = formatCount((notesByFolder.root || []).length, 'note');
+        updateCounts(notesByFolder);
 
         if (els.foldersGrid) els.foldersGrid.innerHTML = '';
         if (!state.folders.length) {
             if (els.foldersSection) els.foldersSection.hidden = true;
         } else {
             if (els.foldersSection) els.foldersSection.hidden = false;
-            [...state.folders]
-                .sort((a, b) => (a.order || 0) - (b.order || 0))
-                .forEach((folder) => {
-                    const folderId = folder.$id || folder.id;
-                    els.foldersGrid.appendChild(createFolderCard(folder, notesByFolder[folderId] || []));
-                });
+            state.folders.forEach((folder) => {
+                const folderId = noteIdOf(folder);
+                els.foldersGrid.appendChild(createFolderCard(folder, notesByFolder[folderId] || []));
+            });
         }
 
         if (els.notesGrid) els.notesGrid.innerHTML = '';
@@ -246,7 +274,7 @@
                 method: 'POST',
                 body: JSON.stringify({ title: '', content: '' }),
             });
-            const noteId = note.$id || note.id;
+            const noteId = noteIdOf(note);
             if (noteId) {
                 window.location.href = `/notes/editor/${encodeURIComponent(noteId)}`;
                 return;
@@ -270,21 +298,35 @@
         setButtonBusy(els.folderSave, true);
         try {
             if (state.folderModalMode === 'rename') {
-                const folderId = state.activeFolder?.$id || state.activeFolder?.id;
-                await apiJson(`/api/notes/folders/${encodeURIComponent(folderId)}`, {
+                const folderId = noteIdOf(state.activeFolder);
+                const updated = await apiJson(`/api/notes/folders/${encodeURIComponent(folderId)}`, {
                     method: 'PATCH',
                     body: JSON.stringify({ name }),
                 });
+                state.folders = state.folders.map((folder) => (
+                    noteIdOf(folder) === folderId ? { ...folder, ...updated } : folder
+                ));
+                const folderCard = document.querySelector(`.folder-card[data-folder-id="${CSS.escape(folderId)}"]`);
+                folderCard?.querySelector('.folder-card-name')?.replaceChildren(document.createTextNode(name));
+                folderCard?.querySelector('.folder-card-menu-btn')?.setAttribute(
+                    'aria-label',
+                    `Folder options for ${name}`,
+                );
                 showAlert('Folder renamed.');
             } else {
-                await apiJson('/api/notes/folders', {
+                const created = await apiJson('/api/notes/folders', {
                     method: 'POST',
                     body: JSON.stringify({ name }),
                 });
+                state.folders.push(created);
+                const notesByFolder = notesByFolderMap();
+                updateCounts(notesByFolder);
+                if (els.foldersSection) els.foldersSection.hidden = false;
+                els.foldersGrid?.appendChild(createFolderCard(created, []));
+                initDragDrop();
                 showAlert('Folder created.');
             }
             closeModal(els.folderModal);
-            await loadAndRender({ clearAlert: false });
         } catch (error) {
             showFormError(els.folderError, error.message || 'Unable to save folder.');
         } finally {
@@ -293,19 +335,23 @@
     }
 
     async function saveMoveModal() {
-        const noteId = state.moveNote?.$id || state.moveNote?.id;
+        const noteId = noteIdOf(state.moveNote);
         if (!noteId) return;
         const folderId = els.moveDestination?.value || null;
         clearFormError(els.moveError);
         setButtonBusy(els.moveSave, true);
         try {
-            await apiJson(`/api/notes/${encodeURIComponent(noteId)}`, {
+            const updated = await apiJson(`/api/notes/${encodeURIComponent(noteId)}`, {
                 method: 'PATCH',
                 body: JSON.stringify({ folder_id: folderId }),
             });
             closeModal(els.moveModal);
+            const { content: _content, page_setup: _pageSetup, global_page_setup: _global, ...listFields } = updated || {};
+            state.notes = state.notes.map((note) => (
+                noteIdOf(note) === noteId ? { ...note, ...listFields } : note
+            ));
+            render({ notes: state.notes, folders: state.folders });
             showAlert(folderId ? `Moved to ${folderById(folderId)?.name || 'folder'}.` : 'Moved to unfiled notes.');
-            await loadAndRender({ clearAlert: false });
         } catch (error) {
             showFormError(els.moveError, error.message || 'Unable to move note.');
         } finally {
@@ -316,7 +362,7 @@
     async function deleteNote(noteCard, button) {
         const noteId = noteCard?.dataset.noteId;
         if (!noteId) return;
-        const note = state.notes.find((item) => (item.$id || item.id) === noteId);
+        const note = state.notes.find((item) => noteIdOf(item) === noteId);
         const title = note?.title || 'Untitled';
         const accepted = await (window.APStudyConfirm?.request?.({
             title: 'Delete note?',
@@ -328,8 +374,13 @@
         setButtonBusy(button, true);
         try {
             await apiJson(`/api/notes/${encodeURIComponent(noteId)}`, { method: 'DELETE' });
+            state.notes = state.notes.filter((item) => noteIdOf(item) !== noteId);
+            noteCard.remove();
+            updateCounts(notesByFolderMap());
+            if (!state.notes.filter((item) => !item.folder_id).length && els.notesEmptyState) {
+                els.notesEmptyState.style.display = '';
+            }
             showAlert('Note deleted.');
-            await loadAndRender({ clearAlert: false });
         } catch (error) {
             showAlert(error.message || 'Unable to delete note.', 'error');
         } finally {
@@ -352,8 +403,12 @@
         setButtonBusy(button, true);
         try {
             await apiJson(`/api/notes/folders/${encodeURIComponent(folderId)}`, { method: 'DELETE' });
+            state.notes = state.notes.filter((note) => note.folder_id !== folderId);
+            state.folders = state.folders.filter((item) => noteIdOf(item) !== folderId);
+            folderCard.remove();
+            updateCounts(notesByFolderMap());
+            if (!state.folders.length && els.foldersSection) els.foldersSection.hidden = true;
             showAlert('Folder deleted.');
-            await loadAndRender({ clearAlert: false });
         } catch (error) {
             showAlert(error.message || 'Unable to delete folder.', 'error');
         } finally {
@@ -363,8 +418,10 @@
 
     function initDragDrop() {
         if (typeof Sortable === 'undefined') return;
+        destroyDragDrop();
+
         if (els.notesGrid) {
-            Sortable.create(els.notesGrid, {
+            sortableInstances.push(Sortable.create(els.notesGrid, {
                 group: { name: 'notes', pull: true, put: true },
                 animation: 150,
                 draggable: '.note-card',
@@ -372,10 +429,12 @@
                 chosenClass: 'note-card-chosen',
                 dragClass: 'note-card-drag',
                 onEnd: handleDragEnd,
-            });
+            }));
         }
+
         document.querySelectorAll('.folder-card-notes-inner').forEach((container) => {
-            Sortable.create(container, {
+            if (!container.querySelector('.note-card')) return;
+            sortableInstances.push(Sortable.create(container, {
                 group: { name: 'notes', pull: true, put: true },
                 animation: 150,
                 draggable: '.note-card',
@@ -383,24 +442,32 @@
                 chosenClass: 'note-card-chosen',
                 dragClass: 'note-card-drag',
                 onEnd: handleDragEnd,
-            });
+            }));
         });
-        document.querySelectorAll('.folder-card').forEach((folderCard) => {
-            folderCard.addEventListener('dragover', (event) => {
-                event.preventDefault();
-                folderCard.classList.add('folder-drop-target');
-            });
-            folderCard.addEventListener('dragleave', () => folderCard.classList.remove('folder-drop-target'));
-            folderCard.addEventListener('drop', (event) => {
-                event.preventDefault();
-                folderCard.classList.remove('folder-drop-target');
-                const notesSection = folderCard.querySelector('.folder-card-notes');
-                const folderButton = folderCard.querySelector('.folder-card-inner');
-                notesSection.classList.remove('folder-collapsed');
-                notesSection.classList.add('folder-expanded');
-                folderCard.classList.add('is-expanded');
-                folderButton?.setAttribute('aria-expanded', 'true');
-            });
+
+        if (folderDropListenersBound) return;
+        folderDropListenersBound = true;
+        els.foldersGrid?.addEventListener('dragover', (event) => {
+            const folderCard = event.target.closest('.folder-card');
+            if (!folderCard) return;
+            event.preventDefault();
+            folderCard.classList.add('folder-drop-target');
+        });
+        els.foldersGrid?.addEventListener('dragleave', (event) => {
+            const folderCard = event.target.closest('.folder-card');
+            if (!folderCard || folderCard.contains(event.relatedTarget)) return;
+            folderCard.classList.remove('folder-drop-target');
+        });
+        els.foldersGrid?.addEventListener('drop', (event) => {
+            const folderCard = event.target.closest('.folder-card');
+            if (!folderCard) return;
+            event.preventDefault();
+            folderCard.classList.remove('folder-drop-target');
+            const folderId = folderCard.dataset.folderId;
+            if (folderId) {
+                expandFolderById(folderId, notesByFolderMap());
+                initDragDrop();
+            }
         });
     }
 
@@ -415,7 +482,10 @@
                 method: 'PATCH',
                 body: JSON.stringify({ folder_id: newFolderId, order: evt.newIndex }),
             });
+            const note = state.notes.find((entry) => noteIdOf(entry) === noteId);
+            if (note) note.folder_id = newFolderId;
             item.dataset.folderId = newFolderId || '';
+            updateCounts(notesByFolderMap());
         } catch (error) {
             showAlert(error.message || 'Unable to update note position.', 'error');
             await loadAndRender();

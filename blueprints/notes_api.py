@@ -11,22 +11,18 @@ from appwrite.exception import AppwriteException
 from appwrite.query import Query
 from appwrite_helpers import (
     create_row_safe,
-    delete_row_safe,
-    format_datetime,
     first_row,
-    get_row_safe,
+    format_datetime,
     list_rows_all,
-    update_row_safe,
 )
 from services.discord_audit import emit_creation_event, format_actor
 from services.chat_formatting import _is_public_host, fetch_link_preview, safe_url, url_hash
+from services import note_store
 
 
 notes_api_bp = Blueprint("notes_api", __name__)
 logger = logging.getLogger(__name__)
 
-NOTES_TABLE_ID = "notes"
-FOLDERS_TABLE_ID = "note_folders"
 USER_SETTINGS_TABLE_ID = "user_settings"
 LINK_PREVIEWS_TABLE_ID = "chat_link_previews"
 PAGE_SETUP_COLORS = {"default", "paper", "warm", "blue", "green", "rose", "dark"}
@@ -103,6 +99,7 @@ def _note_to_payload(note, global_page_setup=None):
         "folder_id": note.get("folder_id"),
         "title": note.get("title") or "Untitled",
         "content": note.get("content") or "",
+        "preview_text": note.get("preview_text") or "",
         "order": note.get("order") or 0,
         "page_setup": _parse_page_setup(note.get("page_setup_json")),
         "global_page_setup": global_page_setup if global_page_setup is not None else {},
@@ -111,37 +108,16 @@ def _note_to_payload(note, global_page_setup=None):
     }
 
 
-def _folder_to_payload(folder):
-    folder_id = folder.get("$id") or folder.get("id")
-    return {
-        "$id": folder_id,
-        "id": folder_id,
-        "name": folder.get("name") or "Untitled Folder",
-        "order": folder.get("order") or 0,
-        "created_at": folder.get("created_at"),
-    }
-
-
 def _note_owner_or_404(note_id):
-    try:
-        note = get_row_safe(NOTES_TABLE_ID, note_id, allow_missing=True)
-    except AppwriteException:
-        logger.exception("Failed to read note")
-        abort(500)
-
-    if not note or note.get("user_id") != str(current_user.id):
+    note = note_store.get_note_for_user(note_id, current_user.id)
+    if not note:
         abort(404)
     return note
 
 
 def _folder_owner_or_404(folder_id):
-    try:
-        folder = get_row_safe(FOLDERS_TABLE_ID, folder_id, allow_missing=True)
-    except AppwriteException:
-        logger.exception("Failed to read folder")
-        abort(500)
-
-    if not folder or folder.get("user_id") != str(current_user.id):
+    folder = note_store.get_folder_for_user(folder_id, current_user.id)
+    if not folder:
         abort(404)
     return folder
 
@@ -239,22 +215,16 @@ def _link_preview_payload(url):
 def list_notes():
     user_id = str(current_user.id)
     try:
-        notes = list_rows_all(
-            NOTES_TABLE_ID,
-            queries=[Query.equal("user_id", [user_id])],
-        )
-        folders = list_rows_all(
-            FOLDERS_TABLE_ID,
-            queries=[Query.equal("user_id", [user_id])],
-        )
+        notes = note_store.list_notes_for_user(user_id)
+        folders = note_store.list_folders_for_user(user_id)
     except AppwriteException:
         logger.exception("Failed to fetch notes/folders")
         return jsonify({"notes": [], "folders": [], "error": "Unable to fetch notes right now."}), 500
 
     return jsonify(
         {
-            "notes": [_note_to_payload(note) for note in notes],
-            "folders": [_folder_to_payload(folder) for folder in folders],
+            "notes": [note_store.note_list_payload(note) for note in notes],
+            "folders": [note_store.folder_payload(folder) for folder in folders],
         }
     )
 
@@ -268,24 +238,12 @@ def create_note():
     folder_id = _normalize_owned_folder_id(payload.get("folder_id"))
 
     try:
-        notes = list_rows_all(
-            NOTES_TABLE_ID,
-            queries=[Query.equal("user_id", [str(current_user.id)])],
-        )
-        max_order = max((int(note.get("order") or 0) for note in notes), default=0)
-
-        created = create_row_safe(
-            NOTES_TABLE_ID,
-            row_id=str(uuid.uuid4()),
-            data={
-                "user_id": str(current_user.id),
-                "folder_id": folder_id,
-                "title": title,
-                "content": content,
-                "order": max_order + 1000,
-                "created_at": _utcnow_iso(),
-                "updated_at": _utcnow_iso(),
-            },
+        created = note_store.create_note(
+            current_user.id,
+            title=title,
+            content=content,
+            folder_id=folder_id,
+            now=_utcnow_iso(),
         )
     except AppwriteException:
         logger.exception("Failed to create note")
@@ -354,7 +312,7 @@ def update_note(note_id):
     updates["updated_at"] = _utcnow_iso()
 
     try:
-        updated = update_row_safe(NOTES_TABLE_ID, note_id, updates)
+        updated = note_store.update_note(note_id, updates)
     except AppwriteException:
         logger.exception("Failed to update note")
         return jsonify({"error": "Unable to update note."}), 500
@@ -372,7 +330,7 @@ def update_note(note_id):
 def delete_note(note_id):
     _note_owner_or_404(note_id)
     try:
-        delete_row_safe(NOTES_TABLE_ID, note_id)
+        note_store.delete_note(note_id)
     except AppwriteException:
         logger.exception("Failed to delete note")
         return jsonify({"error": "Unable to delete note."}), 500
@@ -387,21 +345,10 @@ def create_folder():
     name = (payload.get("name") or "New Folder").strip() or "New Folder"
 
     try:
-        folders = list_rows_all(
-            FOLDERS_TABLE_ID,
-            queries=[Query.equal("user_id", [str(current_user.id)])],
-        )
-        max_order = max((int(folder.get("order") or 0) for folder in folders), default=0)
-
-        created = create_row_safe(
-            FOLDERS_TABLE_ID,
-            row_id=str(uuid.uuid4()),
-            data={
-                "user_id": str(current_user.id),
-                "name": name,
-                "order": max_order + 1000,
-                "created_at": _utcnow_iso(),
-            },
+        created = note_store.create_folder(
+            current_user.id,
+            name=name,
+            now=_utcnow_iso(),
         )
     except AppwriteException:
         logger.exception("Failed to create note folder")
@@ -418,7 +365,7 @@ def create_folder():
         },
         color="green",
     )
-    return jsonify(_folder_to_payload(created)), 201
+    return jsonify(note_store.folder_payload(created)), 201
 
 
 @notes_api_bp.route("/api/notes/folders/<folder_id>", methods=["PATCH"])
@@ -440,12 +387,12 @@ def update_folder(folder_id):
     updates["updated_at"] = _utcnow_iso()
 
     try:
-        updated = update_row_safe(FOLDERS_TABLE_ID, folder_id, updates)
+        updated = note_store.update_folder(folder_id, updates)
     except AppwriteException:
         logger.exception("Failed to update note folder")
         return jsonify({"error": "Unable to update folder."}), 500
 
-    return jsonify(_folder_to_payload(updated))
+    return jsonify(note_store.folder_payload(updated))
 
 
 @notes_api_bp.route("/api/notes/folders/<folder_id>", methods=["DELETE"])
@@ -454,19 +401,7 @@ def delete_folder(folder_id):
     _folder_owner_or_404(folder_id)
 
     try:
-        notes = list_rows_all(
-            NOTES_TABLE_ID,
-            queries=[
-                Query.equal("user_id", [str(current_user.id)]),
-                Query.equal("folder_id", [folder_id]),
-            ],
-        )
-        for note in notes:
-            note_id = note.get("$id") or note.get("id")
-            if note_id:
-                delete_row_safe(NOTES_TABLE_ID, note_id)
-
-        delete_row_safe(FOLDERS_TABLE_ID, folder_id)
+        note_store.delete_folder_and_notes(current_user.id, folder_id)
     except AppwriteException:
         logger.exception("Failed to delete note folder")
         return jsonify({"error": "Unable to delete folder."}), 500

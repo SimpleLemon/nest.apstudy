@@ -1,0 +1,1 @@
+ALTER TABLE notes ADD COLUMN preview_text TEXT DEFAULT '';

@@ -6,6 +6,8 @@
   "scripts": {
     "scrape:atlas": "node atlasMainScraper.js",
     "build:css": "tailwindcss -c ./tailwind.config.cjs -i ./static/css/tailwind-input.css -o ./static/css/tailwind.css --minify",
+    "build:notes": "vite build --config vite.notes.config.mjs",
+    "build": "npm run build:css && npm run build:notes",
     "watch:css": "tailwindcss -c ./tailwind.config.cjs -i ./static/css/tailwind-input.css -o ./static/css/tailwind.css --watch",
     "test": "npm run test:js && npm run test:py",
     "test:js": "node --test tests/js/*.test.cjs tests/js/*.test.mjs",
@@ -24,9 +26,11 @@
   },
   "homepage": "https://github.com/SimpleLemon/emory.apstudy#readme",
   "devDependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
     "jscpd": "^5.0.4",
     "playwright": "^1.60.0",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "vite": "^6.3.5"
   },
   "dependencies": {
     "@blocknote/core": "^0.28.0",

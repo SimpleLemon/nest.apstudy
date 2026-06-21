@@ -19,6 +19,9 @@
     }
 
     function notePreview(note) {
+        if (typeof note.preview_text === 'string' && note.preview_text.trim()) {
+            return note.preview_text.trim();
+        }
         if (typeof note.content !== 'string' || !note.content.trim()) return 'Blank note';
         try {
             const blocks = JSON.parse(note.content);
@@ -53,6 +56,18 @@
         return global.APStudyLoader.html(label, options);
     }
 
+    let editorBundlePreloaded = false;
+    function preloadEditorBundle() {
+        if (editorBundlePreloaded) return;
+        editorBundlePreloaded = true;
+        const scriptPath = '/static/js/notes/dist/notes-editor.js';
+        if (document.querySelector(`link[rel="modulepreload"][href="${scriptPath}"]`)) return;
+        const link = document.createElement('link');
+        link.rel = 'modulepreload';
+        link.href = scriptPath;
+        document.head.appendChild(link);
+    }
+
     async function apiJson(url, options = {}) {
         if (global.APStudyHttp?.fetchJson) {
             return global.APStudyHttp.fetchJson(url, {
@@ -82,5 +97,6 @@
         formatCount,
         formatDate,
         notePreview,
+        preloadEditorBundle,
     };
 })(window);

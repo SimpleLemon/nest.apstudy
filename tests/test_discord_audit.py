@@ -836,8 +836,7 @@ class DiscordAuditRouteInstrumentationTestCase(unittest.TestCase):
         }
         with self.app.test_request_context("/api/notes", method="POST", json={"title": "Lab Notes", "content": ""}):
             with patch.object(notes_api, "current_user", self.user), \
-                    patch.object(notes_api, "list_rows_all", return_value=[]), \
-                    patch.object(notes_api, "create_row_safe", return_value=created_note), \
+                    patch.object(notes_api.note_store, "create_note", return_value=created_note), \
                     patch.object(notes_api, "emit_creation_event") as emit_event:
                 response, status = notes_api.create_note.__wrapped__()
 
