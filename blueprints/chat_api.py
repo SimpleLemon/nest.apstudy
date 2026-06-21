@@ -225,7 +225,7 @@ def _serialize_chat_event(row):
 
 
 def _list_chat_events_after(since=None, after_id=None, *, limit=CHAT_EVENTS_STREAM_LIMIT):
-    queries = [Query.order_asc("created_at"), Query.limit(limit)]
+    queries = [Query.order_asc("created_at"), Query.order_asc("$id"), Query.limit(limit)]
     if since:
         queries.insert(0, Query.greater_than_equal("created_at", since))
     try:
@@ -1588,8 +1588,12 @@ def _mark_read(scope_type, scope_id, message_id=None):
         if latest:
             if not _message_in_scope(latest, scope_type, scope_id) or latest.get("deleted_at"):
                 latest = None
-    if not latest:
-        latest = _latest_visible_message(scope_type, scope_id)
+    server_latest = _latest_visible_message(scope_type, scope_id)
+    if server_latest:
+        if not latest or _message_timestamp(server_latest) > _message_timestamp(latest):
+            latest = server_latest
+    elif not latest:
+        latest = None
     return _persist_read_state(user_id, scope_type, scope_id, latest)
 
 

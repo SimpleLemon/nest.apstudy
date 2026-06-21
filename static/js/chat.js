@@ -52,6 +52,7 @@
     realtimeConnecting: false,
     chatSummaryLoading: false,
     localReadSeq: 0,
+    clearedReadRooms: new Set(),
     contextMenuRoom: null,
     loadingMessages: false,
     roomReadState: null,
@@ -72,6 +73,9 @@
   let chatEventSource = null;
   let chatEventCursor = { since: null, after_id: null };
   const seenChatEventIds = new Set();
+  const seenChatMessageIds = new Set();
+  let chatSoundCooldownTimer = null;
+  let unreadSummaryRefreshTimer = null;
   let inlineProfilePopover = null;
 
   const els = {
@@ -608,7 +612,25 @@
     for (const room of payload.rooms || []) {
       const unread = normalizeUnreadRoom(room);
       if (!unread) continue;
-      nextUnread.set(unreadKey(unread.type, unread.id), unread);
+      const key = unreadKey(unread.type, unread.id);
+      if (state.clearedReadRooms.has(key) && unread.has_unread) {
+        continue;
+      }
+      if (!unread.has_unread) {
+        state.clearedReadRooms.delete(key);
+      }
+      nextUnread.set(key, unread);
+    }
+    for (const key of state.clearedReadRooms) {
+      if (nextUnread.has(key)) continue;
+      const [type, id] = key.split(":");
+      if (!type || !id) continue;
+      nextUnread.set(key, {
+        type,
+        id,
+        unread_count: 0,
+        has_unread: false,
+      });
     }
     state.roomUnread = nextUnread;
     updateRoomLists();
@@ -654,20 +676,11 @@
     updateRoomLists();
   }
 
-  function incrementRoomUnread(room) {
-    if (!room?.type || !room?.id) return;
-    if (String(room.actor_id || "") === currentUserId()) return;
-    const current = unreadForRoom(room.type, room.id);
-    setRoomUnread(room, {
-      unread_count: Math.min(Number(current.unread_count || 0) + 1, 99),
-      has_unread: true,
-    });
-  }
-
   function clearRoomUnread(room) {
     const key = roomKey(room);
     if (!key) return;
     state.localReadSeq += 1;
+    state.clearedReadRooms.add(key);
     state.roomUnread.set(key, {
       type: room.type,
       id: room.id,
@@ -697,14 +710,20 @@
     if (!room?.type || !room?.id) return;
     if (!force && document.visibilityState === "hidden") return;
     if (!force && !shouldAutoMarkRoomRead(room, cache)) return;
-    if (force) clearRoomUnread(room);
+    if (force) {
+      clearRoomUnread(room);
+      cancelUnreadSummaryRefresh();
+      state.localReadSeq += 1;
+    }
     const latest = latestMessageForRead(cache);
     const body = {
       scope_type: room.type === "channel" ? "channel" : "thread",
       scope_id: room.id,
     };
-    if (latest?.id) body.message_id = latest.id;
-    void fetchJson("/api/chat/read", {
+    // Force-read must use the server latest message so prefetched/stale Discord
+    // caches cannot leave newer messages unread after the API call.
+    if (!force && latest?.id) body.message_id = latest.id;
+    return fetchJson("/api/chat/read", {
       method: "POST",
       body: JSON.stringify(body),
     })
@@ -725,11 +744,16 @@
           state.announcementsBannerVisible = false;
           if (els.announcementsUnread) els.announcementsUnread.hidden = true;
         }
+        state.localReadSeq += 1;
         window.dispatchEvent(new CustomEvent("apstudy-chat-read-state-change", { detail: { room } }));
-        void refreshChatSummary();
+        return refreshChatSummary();
       })
       .catch(() => {
-        if (force) void refreshChatSummary();
+        if (force) {
+          state.localReadSeq += 1;
+          return refreshChatSummary();
+        }
+        return null;
       });
   }
 
@@ -762,6 +786,7 @@
   function playChatSound(actorId) {
     if (!state.settings.chat_sound_enabled || !els.audio) return;
     if (actorId && state.user && String(actorId) === String(state.user.id)) return;
+    if (chatSoundCooldownTimer) return;
     try {
       els.audio.currentTime = 0;
       void els.audio.play();
@@ -769,6 +794,35 @@
       void error;
       // Browsers may block sound until the user interacts with the page.
     }
+    chatSoundCooldownTimer = window.setTimeout(() => {
+      chatSoundCooldownTimer = null;
+    }, 1500);
+  }
+
+  function scheduleUnreadSummaryRefresh() {
+    if (unreadSummaryRefreshTimer) return;
+    unreadSummaryRefreshTimer = window.setTimeout(() => {
+      unreadSummaryRefreshTimer = null;
+      void refreshChatSummary();
+    }, 400);
+  }
+
+  function cancelUnreadSummaryRefresh() {
+    if (!unreadSummaryRefreshTimer) return;
+    window.clearTimeout(unreadSummaryRefreshTimer);
+    unreadSummaryRefreshTimer = null;
+  }
+
+  function rememberChatMessageId(messageId) {
+    const id = String(messageId || "");
+    if (!id) return false;
+    if (seenChatMessageIds.has(id)) return false;
+    seenChatMessageIds.add(id);
+    if (seenChatMessageIds.size > 5000) {
+      seenChatMessageIds.clear();
+      seenChatMessageIds.add(id);
+    }
+    return true;
   }
 
   function activeChannel() {
@@ -862,7 +916,7 @@
       const room = { ...state.contextMenuRoom };
       closeRoomContextMenu();
       if (actionButton.dataset.chatRoomAction === "read") {
-        markRoomRead(room, cacheFor(room), { force: true });
+        void markRoomRead(room, cacheFor(room), { force: true });
       }
     });
     return menu;
@@ -2424,6 +2478,7 @@
     }
 
     if (event.event_type === "message_created") {
+      if (event.message_id && !rememberChatMessageId(event.message_id)) return;
       if (eventRoom?.type === "thread" && !threadExists(eventRoom.id)) {
         const thread = await fetchThread(eventRoom.id);
         if (!thread) {
@@ -2434,8 +2489,7 @@
         await ingestActiveRoomMessage(event);
       } else if (eventRoom) {
         markRoomStale(eventRoom);
-        incrementRoomUnread({ ...eventRoom, actor_id: event.actor_id });
-        void refreshChatSummary();
+        scheduleUnreadSummaryRefresh();
         playChatSound(event.actor_id);
       }
       return;

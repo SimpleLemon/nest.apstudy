@@ -108,7 +108,7 @@ test("chat marks selected cached rooms and sent messages as read", async () => {
 
   assert.match(script, /function markRoomRead\(room, cache = cacheFor\(room\), \{ force = false \} = \{\}\)/);
   assert.match(script, /fetchJson\("\/api\/chat\/read"/);
-  assert.match(script, /if \(latest\?\.id\) body\.message_id = latest\.id/);
+  assert.match(script, /if \(!force && latest\?\.id\) body\.message_id = latest\.id/);
   assert.match(script, /clearRoomUnread\(room\)/);
   assert.match(script, /if \(!cache\.stale \|\| latestMessageForRead\(cache\)\) \{\s*markRoomRead\(room, cache\)/);
   assert.match(script, /applyIncomingMessages\(room, \[payload\.message\], \{ toBottom: true \}\)/);
@@ -147,6 +147,8 @@ test("chat room context menu supports mark read", async () => {
   assert.match(script, /addEventListener\("contextmenu", \(event\) => openRoomContextMenu/);
   assert.match(script, /event\.key !== "ContextMenu" && !\(event\.shiftKey && event\.key === "F10"\)/);
   assert.match(script, /markRoomRead\(room, cacheFor\(room\), \{ force: true \}\)/);
+  assert.match(script, /clearedReadRooms/);
+  assert.match(script, /cancelUnreadSummaryRefresh\(\)/);
   assert.match(script, /function markRoomRead\(room, cache = cacheFor\(room\), \{ force = false \} = \{\}\)/);
   assert.match(script, /closeRoomContextMenu\(\)/);
   assert.match(styles, /\.chat-room-context-menu/);
@@ -161,8 +163,8 @@ test("chat refreshes and updates unread state across realtime and visibility", a
   assert.match(script, /async function refreshChatSummary\(\)/);
   assert.match(script, /fetchJson\("\/api\/chat\/summary"/);
   assert.match(script, /await refreshChatSummary\(\)/);
-  assert.match(script, /incrementRoomUnread\(\{ \.\.\.eventRoom, actor_id: event\.actor_id \}\)/);
-  assert.match(script, /void refreshChatSummary\(\);\s*playChatSound\(event\.actor_id\)/);
+  assert.match(script, /scheduleUnreadSummaryRefresh\(\)/);
+  assert.match(script, /scheduleUnreadSummaryRefresh\(\);\s*playChatSound\(event\.actor_id\)/);
   assert.match(script, /message_deleted"[\s\S]*void refreshChatSummary\(\)/);
   assert.match(script, /document\.visibilityState === "visible"[\s\S]*void refreshChatSummary\(\)/);
   assert.match(script, /setRoomUnread\(\{ type: "thread", id: payload\.thread\.id \}, \{ unread_count: 0, has_unread: false \}\)/);
@@ -289,7 +291,7 @@ test("scheduler uses discord gateway with slow reconciliation", async () => {
   const gateway = await sourceFor("services/discord_gateway.py");
 
   assert.match(scheduler, /def _reconcile_discord_chat\(app\):/);
-  assert.match(scheduler, /sync_discord_channels\(emit_events=True\)/);
+  assert.match(scheduler, /sync_discord_channels\(emit_events=False\)/);
   assert.match(scheduler, /DISCORD_CHAT_RECONCILE_SECONDS/);
   assert.match(scheduler, /id="reconcile_discord_chat"/);
   assert.match(scheduler, /start_discord_gateway\(app\)/);
@@ -297,6 +299,7 @@ test("scheduler uses discord gateway with slow reconciliation", async () => {
   assert.match(gateway, /on_message/);
   assert.match(gateway, /on_raw_message_edit/);
   assert.match(gateway, /on_raw_message_delete/);
+  assert.match(gateway, /sync_discord_channels\(emit_events=False\)/);
   assert.match(api, /def sync_discord_channels\(emit_events=True\):/);
   assert.match(api, /_sync_discord_channel\(channel, emit_events=emit_events\)/);
   assert.match(api, /_upsert_discord_message\(channel, message, emit_event=emit_events\)/);
