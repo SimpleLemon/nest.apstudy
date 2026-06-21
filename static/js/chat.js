@@ -17,7 +17,10 @@
   const CHAT_CACHE_SCHEMA = "v1";
   const CHAT_CACHE_MESSAGE_LIMIT = 50;
   const CHAT_PREFETCH_ROOM_LIMIT = 8;
-  const REALTIME_FALLBACK_MS = 5000;
+  const REALTIME_FALLBACK_MS = 3000;
+  const REALTIME_HEARTBEAT_MS = 8000;
+  const REALTIME_RECONNECT_MS = 1500;
+  const REALTIME_JWT_REFRESH_MS = 50 * 60 * 1000;
   const ANNOUNCEMENTS_CHANNEL_ID = "nest_announcements";
 
   const state = {
@@ -63,6 +66,9 @@
   window.NestChat = state;
 
   let realtimeFallbackTimer = null;
+  let realtimeHeartbeatTimer = null;
+  let realtimeReconnectTimer = null;
+  let appwriteJwtRefreshTimer = null;
   let inlineProfilePopover = null;
 
   const els = {
@@ -466,9 +472,7 @@
     if (payload.discordInviteUrl) root.dataset.discordInviteUrl = payload.discordInviteUrl;
     if (typeof payload.membersCollapsed === "boolean") setMembersCollapsed(payload.membersCollapsed);
     updateRoomLists();
-    initializeRealtime();
-    initializePresenceRealtime();
-    void loadInitialPresences();
+    await startRealtimeServices();
 
     const room = payload.activeRoom || (state.channels[0] && { type: "channel", id: state.channels[0].id });
     if (room) {
@@ -499,6 +503,7 @@
         messages: [],
         oldestCursor: null,
         latestCursor: null,
+        latestMessageId: null,
         hasMore: false,
         loaded: false,
         stale: false,
@@ -512,11 +517,21 @@
     if (!cache || !cache.messages.length) {
       cache.oldestCursor = null;
       cache.latestCursor = null;
+      cache.latestMessageId = null;
       return;
     }
     cache.messages.sort((a, b) => String(a.created_at || "").localeCompare(String(b.created_at || "")));
     cache.oldestCursor = cache.messages[0].created_at || null;
-    cache.latestCursor = cache.messages[cache.messages.length - 1].created_at || null;
+    const latest = cache.messages[cache.messages.length - 1];
+    cache.latestCursor = latest.created_at || null;
+    cache.latestMessageId = latest.id || null;
+  }
+
+  function deltaLoadParams(cache) {
+    if (!cache?.latestCursor) return {};
+    const params = { after: cache.latestCursor };
+    if (cache.latestMessageId) params.after_message_id = cache.latestMessageId;
+    return params;
   }
 
   function mergeMessages(existing, incoming) {
@@ -1129,6 +1144,218 @@
     inlineProfilePopover = popover;
   }
 
+  function stickToBottom() {
+    if (!els.messages) return;
+    els.messages.scrollTop = els.messages.scrollHeight;
+  }
+
+  function messageStackElement() {
+    if (!els.messages) return null;
+    if (els.messages.querySelector(".chat-message-loader")) {
+      els.messages.innerHTML = `<div class="chat-message-stack"></div>`;
+    }
+    let stack = els.messages.querySelector(".chat-message-stack");
+    if (!stack) {
+      els.messages.innerHTML = `<div class="chat-message-stack"></div>`;
+      stack = els.messages.querySelector(".chat-message-stack");
+    }
+    return stack;
+  }
+
+  function renderedMessageIds() {
+    const ids = new Set();
+    if (!els.messages) return ids;
+    for (const node of els.messages.querySelectorAll("[data-message-id]")) {
+      const id = node.getAttribute("data-message-id");
+      if (id) ids.add(id);
+    }
+    return ids;
+  }
+
+  function messageElementById(messageId) {
+    if (!els.messages || !messageId) return null;
+    return els.messages.querySelector(`[data-message-id="${String(messageId).replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"]`);
+  }
+
+  function appendNewMessagesToDom(newMessages, allMessages) {
+    if (!newMessages?.length) return true;
+    const stack = messageStackElement();
+    if (!stack) return false;
+
+    const renderedIds = renderedMessageIds();
+    const unseen = newMessages.filter((message) => message?.id && !renderedIds.has(String(message.id)));
+    if (!unseen.length) return true;
+
+    const empty = stack.querySelector(".chat-empty");
+    if (empty) stack.innerHTML = "";
+
+    const articles = stack.querySelectorAll("[data-message-id]");
+    const lastArticle = articles[articles.length - 1];
+    let lastMessage = null;
+    let lastGroupEl = stack.querySelector(".chat-message-group:last-child");
+    if (lastArticle) {
+      const lastId = lastArticle.getAttribute("data-message-id");
+      lastMessage = (allMessages || []).find((message) => String(message.id) === String(lastId)) || null;
+    }
+
+    for (const message of unseen) {
+      if (lastMessage && shouldGroupMessage(lastMessage, message) && lastGroupEl) {
+        lastGroupEl.insertAdjacentHTML("beforeend", renderContinuationMessage(message));
+      } else {
+        stack.insertAdjacentHTML("beforeend", renderMessageGroup({ id: message.id, messages: [message] }));
+        lastGroupEl = stack.querySelector(".chat-message-group:last-child");
+      }
+      lastMessage = message;
+    }
+    return true;
+  }
+
+  function patchMessageInDom(message) {
+    const el = messageElementById(message.id);
+    if (!el) return false;
+    const contentHtml = `
+      <div class="chat-message-body">${message.rendered_html || escapeHtml(message.content || "")}</div>
+      ${renderImages(message.images || [])}
+      ${renderPreviews(message.previews || [])}
+    `;
+    const isContinuation = el.classList.contains("chat-message-continuation");
+    const content = el.querySelector(".chat-message-content");
+    if (!content) return false;
+    if (isContinuation) {
+      content.innerHTML = contentHtml;
+    } else {
+      const head = content.querySelector(".chat-message-head");
+      content.innerHTML = head ? head.outerHTML : "";
+      content.insertAdjacentHTML("beforeend", contentHtml);
+    }
+    const deleteButton = renderDeleteButton(message);
+    const existingDelete = el.querySelector(".chat-delete");
+    if (deleteButton && !existingDelete) {
+      el.insertAdjacentHTML("beforeend", deleteButton);
+    } else if (!deleteButton && existingDelete) {
+      existingDelete.remove();
+    }
+    return true;
+  }
+
+  function removeMessageFromDom(messageId) {
+    const el = messageElementById(messageId);
+    if (!el) return false;
+    const group = el.closest(".chat-message-group");
+    el.remove();
+    if (group && !group.querySelector("[data-message-id]")) {
+      group.remove();
+    }
+    const stack = messageStackElement();
+    if (stack && !stack.querySelector("[data-message-id]") && !stack.querySelector(".chat-empty")) {
+      stack.innerHTML = `<div class="chat-empty">No messages yet.</div>`;
+    }
+    return true;
+  }
+
+  function syncMessagesToDom(messages, { incremental = false, incoming = [], scrollToBottom = false } = {}) {
+    if (!els.messages) return;
+    if (incremental && messages?.length) {
+      if (appendNewMessagesToDom(incoming, messages)) {
+        updateAnnouncementsUnreadBanner(messages);
+        updateHistoryBannerVisibility();
+        if (scrollToBottom) stickToBottom();
+        return;
+      }
+    }
+    renderMessages(messages);
+    if (scrollToBottom) stickToBottom();
+  }
+
+  function applyIncomingMessages(room, messages, { toBottom = false, markRead = true } = {}) {
+    const cache = cacheFor(room);
+    if (!cache || !messages?.length) return [];
+    const previousMessages = cache.messages;
+    const wasNearBottom = toBottom || isNearBottom();
+    cache.messages = mergeMessages(cache.messages, messages);
+    cache.loaded = true;
+    cache.stale = false;
+    updateCacheCursors(cache);
+    schedulePersistentRoomSave(room);
+    const incoming = messages.filter((message) => message?.id && !previousMessages.some((row) => row.id === message.id));
+    syncMessagesToDom(cache.messages, {
+      incremental: true,
+      incoming,
+      scrollToBottom: wasNearBottom,
+    });
+    if (wasNearBottom && markRead) markRoomRead(room, cache);
+    return messages;
+  }
+
+  async function fetchMessageById(messageId) {
+    if (!messageId) return null;
+    try {
+      const payload = await fetchJson(`/api/chat/messages/${encodeURIComponent(messageId)}`);
+      return payload?.message || null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  async function ingestMessageUpdate(event) {
+    const room = state.activeRoom;
+    const cache = cacheFor(room);
+    if (!room || !cache) return false;
+    if (event.message_id) {
+      const message = await fetchMessageById(event.message_id);
+      if (message) {
+        cache.messages = mergeMessages(cache.messages, [message]);
+        updateCacheCursors(cache);
+        schedulePersistentRoomSave(room);
+        if (patchMessageInDom(message)) {
+          updateAnnouncementsUnreadBanner(cache.messages);
+          return true;
+        }
+      }
+    }
+    await loadMessages({ force: true, quiet: true, preserveScroll: true, light: true });
+    return false;
+  }
+
+  async function ingestActiveRoomMessage(event) {
+    const room = state.activeRoom;
+    const cache = cacheFor(room);
+    if (!room || !cache) return false;
+
+    if (event.message_id && !cache.messages.some((message) => message.id === event.message_id)) {
+      const message = await fetchMessageById(event.message_id);
+      if (message) {
+        applyIncomingMessages(room, [message]);
+        playChatSound(event.actor_id);
+        return true;
+      }
+    }
+
+    const delta = deltaLoadParams(cache);
+    const incoming = delta.after
+      ? await loadMessages({ ...delta, quiet: true, force: true, light: true })
+      : await loadMessages({ force: true, quiet: true });
+    if (!incoming.length && event.message_id) {
+      await loadMessages({ force: true, quiet: true });
+    } else if (incoming.length) {
+      playChatSound(event.actor_id);
+      return true;
+    }
+    return incoming.length > 0;
+  }
+
+  function pollActiveRoomMessages() {
+    const room = state.activeRoom;
+    const cache = cacheFor(room);
+    if (!room || !cache) return;
+    const delta = deltaLoadParams(cache);
+    if (delta.after) {
+      void loadMessages({ ...delta, quiet: true, force: true, light: true });
+    } else {
+      void loadMessages({ force: true, quiet: true });
+    }
+  }
+
   function startRealtimeFallback() {
     if (realtimeFallbackTimer || state.realtimeReady) return;
     realtimeFallbackTimer = window.setInterval(() => {
@@ -1137,15 +1364,7 @@
         stopRealtimeFallback();
         return;
       }
-      const room = state.activeRoom;
-      const cache = cacheFor(room);
-      if (room && cache) {
-        if (cache.latestCursor) {
-          void loadMessages({ after: cache.latestCursor, quiet: true });
-        } else {
-          void loadMessages({ force: true, quiet: true });
-        }
-      }
+      pollActiveRoomMessages();
       void refreshChatSummary();
     }, REALTIME_FALLBACK_MS);
   }
@@ -1154,6 +1373,93 @@
     if (!realtimeFallbackTimer) return;
     window.clearInterval(realtimeFallbackTimer);
     realtimeFallbackTimer = null;
+  }
+
+  function startRealtimeHeartbeat() {
+    if (realtimeHeartbeatTimer) return;
+    realtimeHeartbeatTimer = window.setInterval(() => {
+      if (document.visibilityState !== "visible" || !state.realtimeReady) return;
+      pollActiveRoomMessages();
+    }, REALTIME_HEARTBEAT_MS);
+  }
+
+  function stopRealtimeHeartbeat() {
+    if (!realtimeHeartbeatTimer) return;
+    window.clearInterval(realtimeHeartbeatTimer);
+    realtimeHeartbeatTimer = null;
+  }
+
+  function resetRealtimeConnection() {
+    if (state.realtimeUnsubscribe) {
+      state.realtimeUnsubscribe();
+      state.realtimeUnsubscribe = null;
+    }
+    state.realtimeReady = false;
+    state.realtimeConnecting = false;
+    stopRealtimeHeartbeat();
+  }
+
+  function scheduleRealtimeReconnect() {
+    if (realtimeReconnectTimer) return;
+    resetRealtimeConnection();
+    startRealtimeFallback();
+    realtimeReconnectTimer = window.setTimeout(() => {
+      realtimeReconnectTimer = null;
+      void refreshAppwriteRealtimeAuth();
+    }, REALTIME_RECONNECT_MS);
+  }
+
+  function handleRealtimeDisconnect() {
+    scheduleRealtimeReconnect();
+  }
+
+  async function refreshAppwriteRealtimeAuth() {
+    const authed = await ensureAppwriteRealtimeAuth();
+    if (!authed) return false;
+    if (state.realtimeReady || state.realtimeUnsubscribe) {
+      resetRealtimeConnection();
+    }
+    await initializeRealtime();
+    return state.realtimeReady;
+  }
+
+  async function ensureAppwriteRealtimeAuth() {
+    if (!window.client || !root.dataset.appwriteDatabaseId) return false;
+    try {
+      const payload = await fetchJson("/api/chat/realtime-token");
+      const jwt = payload?.jwt;
+      if (!jwt) return false;
+      if (typeof window.client.setJWT === "function") {
+        window.client.setJWT(jwt);
+      } else if (typeof window.client.setJwt === "function") {
+        window.client.setJwt(jwt);
+      } else {
+        return false;
+      }
+      scheduleAppwriteJwtRefresh();
+      return true;
+    } catch (error) {
+      console.warn("Unable to authenticate Appwrite realtime", error);
+      return false;
+    }
+  }
+
+  function scheduleAppwriteJwtRefresh() {
+    if (appwriteJwtRefreshTimer) {
+      window.clearTimeout(appwriteJwtRefreshTimer);
+      appwriteJwtRefreshTimer = null;
+    }
+    appwriteJwtRefreshTimer = window.setTimeout(() => {
+      appwriteJwtRefreshTimer = null;
+      void refreshAppwriteRealtimeAuth();
+    }, REALTIME_JWT_REFRESH_MS);
+  }
+
+  async function startRealtimeServices() {
+    await ensureAppwriteRealtimeAuth();
+    await initializeRealtime();
+    await initializePresenceRealtime();
+    void loadInitialPresences();
   }
 
   function setComposer(enabled, placeholder) {
@@ -1228,6 +1534,8 @@
     if (!els.messages) return;
     if (!messages || !messages.length) {
       els.messages.innerHTML = `<div class="chat-message-stack"><div class="chat-empty">No messages yet.</div></div>`;
+      updateAnnouncementsUnreadBanner([]);
+      updateHistoryBannerVisibility();
       return;
     }
     els.messages.innerHTML = `
@@ -1683,7 +1991,7 @@
     return `/api/chat/dm/threads/${encodeURIComponent(room.id)}/messages${suffix}`;
   }
 
-  async function loadMessages({ before = null, after = null, force = false, preserveScroll = false, quiet = false } = {}) {
+  async function loadMessages({ before = null, after = null, after_message_id = null, force = false, preserveScroll = false, quiet = false, light = false } = {}) {
     const room = state.activeRoom;
     if (!room) return [];
     const cache = cacheFor(room);
@@ -1699,19 +2007,18 @@
     const wasNearBottom = isNearBottom();
     const previousHeight = els.messages.scrollHeight;
     const previousTop = els.messages.scrollTop;
+    const isDelta = Boolean(after || after_message_id);
+    const useLight = light || (quiet && isDelta && !before);
     state.loadingMessages = true;
-    if (!quiet && !before && !after && !cache.loaded) renderMessageLoader();
+    if (!quiet && !before && !after && !after_message_id && !cache.loaded) renderMessageLoader();
 
     try {
-      const payload = await fetchJson(currentRoomUrl(room, { before, after }));
+      const payload = await fetchJson(currentRoomUrl(room, { before, after, after_message_id }));
       if (!state.activeRoom || roomKey(state.activeRoom) !== roomKey(room)) return [];
 
-      if (payload.channel) updateChannel(payload.channel);
-      if (payload.thread) updateThread(payload.thread);
-      if (payload.read_state) state.roomReadState = payload.read_state;
-
       const messages = payload.messages || [];
-      if (after || before) {
+      const previousMessages = cache.messages;
+      if (isDelta || before) {
         cache.messages = mergeMessages(cache.messages, messages);
       } else {
         cache.messages = mergeMessages([], messages);
@@ -1721,24 +2028,45 @@
       cache.hasMore = Boolean(payload.has_more);
       updateCacheCursors(cache);
       schedulePersistentRoomSave(room);
-      renderHeader();
-      updateRoomLists();
-      renderMessages(cache.messages);
-      updateCurrentMembersFromPayload(payload);
+      if (!useLight) {
+        if (payload.channel) updateChannel(payload.channel);
+        if (payload.thread) updateThread(payload.thread);
+        if (payload.read_state) state.roomReadState = payload.read_state;
+        renderHeader();
+        updateRoomLists();
+        updateCurrentMembersFromPayload(payload);
+        schedulePersistentBootstrapSave();
+      }
+
+      const incoming = messages.filter((message) => message?.id && !previousMessages.some((row) => row.id === message.id));
+      const canIncremental = useLight && isDelta && !before;
+      if (canIncremental) {
+        if (incoming.length) {
+          syncMessagesToDom(cache.messages, {
+            incremental: true,
+            incoming,
+            scrollToBottom: wasNearBottom,
+          });
+        }
+      } else {
+        syncMessagesToDom(cache.messages, {
+          scrollToBottom: !before && !isDelta && !preserveScroll && wasNearBottom,
+        });
+        if (before) {
+          const delta = els.messages.scrollHeight - previousHeight;
+          els.messages.scrollTop = previousTop + delta;
+        } else if (!isDelta) {
+          restoreScroll(cache, !preserveScroll);
+        } else if (wasNearBottom) {
+          stickToBottom();
+        }
+      }
+
       setStatus(null);
 
-      if (before) {
-        const delta = els.messages.scrollHeight - previousHeight;
-        els.messages.scrollTop = previousTop + delta;
-      } else if (after) {
-        if (wasNearBottom) restoreScroll(cache, true);
-      } else {
-        restoreScroll(cache, !preserveScroll);
-      }
-      if (!before && (wasNearBottom || !after)) {
+      if (!before && (wasNearBottom || !isDelta)) {
         markRoomRead(room, cache);
       }
-      schedulePersistentBootstrapSave();
       return messages;
     } catch (error) {
       setStatus(error.message || "Unable to load messages.", "error");
@@ -1757,7 +2085,7 @@
     try {
       await hydrateRoomFromPersistentCache(room);
       const roomCache = cacheFor(room);
-      const params = roomCache?.latestCursor ? { after: roomCache.latestCursor } : {};
+      const params = deltaLoadParams(roomCache);
       const payload = await fetchJson(currentRoomUrl(room, params));
       if (payload.channel) updateChannel(payload.channel);
       if (payload.thread) updateThread(payload.thread);
@@ -1823,7 +2151,14 @@
       if (type && id) schedulePersistentRoomSave({ type, id });
     }
     const activeCache = cacheFor(state.activeRoom);
-    if (activeCache) renderMessages(activeCache.messages);
+    if (activeCache) {
+      if (!removeMessageFromDom(messageId)) {
+        renderMessages(activeCache.messages);
+      } else {
+        updateAnnouncementsUnreadBanner(activeCache.messages);
+        updateHistoryBannerVisibility();
+      }
+    }
   }
 
   async function selectRoom(room, options = {}) {
@@ -1860,8 +2195,9 @@
       if (!cache.stale || latestMessageForRead(cache)) {
         markRoomRead(room, cache);
       }
-      if (cache.stale && cache.latestCursor) {
-        await loadMessages({ after: cache.latestCursor, quiet: true });
+      if (cache.latestCursor) {
+        const delta = deltaLoadParams(cache);
+        await loadMessages({ ...delta, quiet: true, force: true, light: true });
         markRoomRead(room);
       } else if (cache.stale) {
         await loadMessages({ force: true, quiet: true });
@@ -1886,9 +2222,7 @@
     if (payload.discord_invite_url) root.dataset.discordInviteUrl = payload.discord_invite_url;
     state.serverBootstrapped = true;
     updateRoomLists();
-    initializeRealtime();
-    initializePresenceRealtime();
-    void loadInitialPresences();
+    await startRealtimeServices();
     setMembersCollapsed(state.membersCollapsed);
     schedulePersistentBootstrapSave();
     await refreshChatSummary();
@@ -1984,17 +2318,25 @@
     const channel = realtimeChannelName();
     state.realtimeConnecting = true;
     try {
-      const unsubscribe = await subscribeRealtime(channel, handleRealtimePayload);
+      const unsubscribe = await subscribeRealtime(channel, (response) => {
+        if (response?.error || response?.code) {
+          handleRealtimeDisconnect();
+          return;
+        }
+        void handleRealtimePayload(response);
+      });
       if (typeof unsubscribe === "function") {
         state.realtimeUnsubscribe = unsubscribe;
         state.realtimeReady = true;
         stopRealtimeFallback();
+        startRealtimeHeartbeat();
+        pollActiveRoomMessages();
       } else {
         startRealtimeFallback();
       }
     } catch (error) {
       console.warn("Chat realtime unavailable", error);
-      startRealtimeFallback();
+      handleRealtimeDisconnect();
     } finally {
       state.realtimeConnecting = false;
     }
@@ -2017,6 +2359,24 @@
     }
   }
 
+  function normalizeChatEvent(response) {
+    const raw = response?.payload ?? response?.row ?? response;
+    if (!raw || typeof raw !== "object") return null;
+    const nested = raw.data && typeof raw.data === "object" && !Array.isArray(raw.data) ? raw.data : null;
+    if (!nested) return raw;
+    return {
+      ...nested,
+      ...raw,
+      scope_type: raw.scope_type || nested.scope_type,
+      scope_id: raw.scope_id || nested.scope_id,
+      event_type: raw.event_type || nested.event_type,
+      message_id: raw.message_id || nested.message_id,
+      thread_id: raw.thread_id || nested.thread_id,
+      channel_id: raw.channel_id || nested.channel_id,
+      actor_id: raw.actor_id || nested.actor_id,
+    };
+  }
+
   function eventIsRelevant(event) {
     if (!event) return false;
     if (event.scope_type === "channel") {
@@ -2032,7 +2392,7 @@
   }
 
   async function handleRealtimePayload(response) {
-    const event = response?.payload || response?.row || response;
+    const event = normalizeChatEvent(response);
     if (!eventIsRelevant(event)) return;
     const active = state.activeRoom;
     const eventRoom = event.scope_type === "channel"
@@ -2055,11 +2415,7 @@
         }
       }
       if (eventRoom && active && roomKey(eventRoom) === roomKey(active)) {
-        const cache = cacheFor(active);
-        const incoming = cache?.latestCursor
-          ? await loadMessages({ after: cache.latestCursor, quiet: true })
-          : await loadMessages({ force: true, quiet: true });
-        if (incoming.length) playChatSound(event.actor_id);
+        await ingestActiveRoomMessage(event);
       } else if (eventRoom) {
         markRoomStale(eventRoom);
         incrementRoomUnread({ ...eventRoom, actor_id: event.actor_id });
@@ -2071,7 +2427,7 @@
 
     if (event.event_type === "message_updated") {
       if (eventRoom && active && roomKey(eventRoom) === roomKey(active)) {
-        await loadMessages({ force: true, quiet: true, preserveScroll: true });
+        await ingestMessageUpdate(event);
       } else if (eventRoom) {
         markRoomStale(eventRoom);
       }
@@ -2264,13 +2620,7 @@
       autosizeComposer();
       const cache = cacheFor(room);
       if (cache && payload.message) {
-        cache.messages = mergeMessages(cache.messages, [payload.message]);
-        cache.loaded = true;
-        updateCacheCursors(cache);
-        renderMessages(cache.messages);
-        restoreScroll(cache, true);
-        schedulePersistentRoomSave(room);
-        markRoomRead(room, cache);
+        applyIncomingMessages(room, [payload.message], { toBottom: true });
       }
       refreshViewingPresence();
       schedulePersistentBootstrapSave();
@@ -2515,7 +2865,8 @@
         const cache = cacheFor(room);
         if (cache?.loaded) {
           if (cache.latestCursor) {
-            void loadMessages({ after: cache.latestCursor, quiet: true })
+            const delta = deltaLoadParams(cache);
+            void loadMessages({ ...delta, quiet: true, force: true, light: true })
               .finally(() => {
                 markRoomRead(room, cache);
                 void refreshChatSummary();
@@ -2551,6 +2902,11 @@
       if (state.realtimeUnsubscribe) state.realtimeUnsubscribe();
       if (state.presenceUnsubscribe) state.presenceUnsubscribe();
       stopRealtimeFallback();
+      stopRealtimeHeartbeat();
+      if (appwriteJwtRefreshTimer) {
+        window.clearTimeout(appwriteJwtRefreshTimer);
+        appwriteJwtRefreshTimer = null;
+      }
     });
   }
 

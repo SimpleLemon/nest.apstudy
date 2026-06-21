@@ -7,6 +7,7 @@ from unittest.mock import Mock, patch
 
 from flask import Flask
 
+from extensions import login_manager
 import blueprints.chat_api as chat_api
 from avatar_images import APSTUDY_LOGO_URL
 import services.chat_presence as chat_presence
@@ -120,6 +121,24 @@ class TestChatFeature(unittest.TestCase):
         self.assertIn("5 minutes", response.get_json()["error"])
         update_row.assert_not_called()
 
+    def test_get_message_returns_serialized_payload_for_accessible_message(self):
+        row = {
+            "$id": "message-1",
+            "user_id": "user-2",
+            "channel_id": "nest_chat",
+            "source": "appwrite",
+            "content": "hello",
+            "created_at": "2026-05-23T20:00:00Z",
+        }
+        with self.app.test_request_context("/api/chat/messages/message-1", method="GET"):
+            with patch.object(chat_api, "current_user", self.user), \
+                    patch.object(chat_api, "_message_for_current_user", return_value=row):
+                response = chat_api.delete_message.__wrapped__("message-1")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json()["message"]["id"], "message-1")
+        self.assertEqual(response.get_json()["message"]["content"], "hello")
+
     def test_university_request_created_on_chat_bootstrap_helper(self):
         created = {"$id": "request-1", "status": "pending", "school_key": "emory-university"}
         with self.app.test_request_context("/api/chat/bootstrap"):
@@ -137,20 +156,34 @@ class TestChatFeature(unittest.TestCase):
         self.assertEqual(state["channel"]["university_status"], "pending")
         self.assertEqual(create_row.call_args.kwargs["data"]["label"], "[Uni Channel Approval]")
 
-    def test_message_queries_support_after_delta_loading(self):
-        queries = chat_api._message_queries(
-            "channel",
-            "nest_chat",
-            after="2026-05-23T20:00:00Z",
-        )
-        methods = [json.loads(query)["method"] for query in queries]
+    def test_list_messages_after_message_id_includes_same_timestamp(self):
+        shared_ts = "2026-05-23T20:00:00Z"
+        first = {
+            "$id": "message-a",
+            "channel_id": "nest_chat",
+            "user_id": "user-2",
+            "created_at": shared_ts,
+        }
+        second = {
+            "$id": "message-b",
+            "channel_id": "nest_chat",
+            "user_id": "user-2",
+            "created_at": shared_ts,
+        }
+        with patch.object(chat_api, "get_row_safe", return_value=first), \
+                patch.object(chat_api, "list_rows_safe", return_value={"rows": [first, second]}):
+            rows = chat_api._list_messages(
+                "channel",
+                "nest_chat",
+                after=shared_ts,
+                after_message_id="message-a",
+            )
 
-        self.assertIn("greaterThan", methods)
-        self.assertIn("orderAsc", methods)
-        self.assertNotIn("orderDesc", methods)
+        self.assertEqual([chat_api._row_id(row) for row in rows], ["message-b"])
 
     def test_chat_event_permissions_are_limited_to_dm_participants(self):
-        with patch.object(chat_api, "create_row_safe", return_value={"$id": "event-1"}) as create_row:
+        with patch.object(chat_api, "create_row_safe", return_value={"$id": "event-1"}) as create_row, \
+                patch.object(chat_api.APPWRITE_REPOSITORY, "create_row") as appwrite_create:
             chat_api.emit_chat_event(
                 "thread",
                 "thread-1",
@@ -160,11 +193,121 @@ class TestChatFeature(unittest.TestCase):
             )
 
         create_row.assert_called_once()
+        appwrite_create.assert_called_once()
+        self.assertEqual(create_row.call_args.kwargs["row_id"], appwrite_create.call_args.kwargs["row_id"])
         self.assertEqual(create_row.call_args.kwargs["data"]["message_id"], "message-1")
         self.assertEqual(
             create_row.call_args.kwargs["permissions"],
             ['read("user:user-a")', 'read("user:user-b")'],
         )
+        self.assertEqual(
+            appwrite_create.call_args.kwargs["permissions"],
+            ['read("user:user-a")', 'read("user:user-b")'],
+        )
+
+    def test_emit_chat_event_dual_writes_to_sqlite_and_appwrite(self):
+        with patch.object(chat_api, "create_row_safe", return_value={"$id": "event-1"}) as create_row, \
+                patch.object(chat_api.APPWRITE_REPOSITORY, "create_row") as appwrite_create:
+            row = chat_api.emit_chat_event(
+                "channel",
+                "nest_chat",
+                "message_created",
+                message_id="message-1",
+                channel_id="nest_chat",
+                actor_id="user-1",
+            )
+
+        self.assertEqual(row["$id"], "event-1")
+        create_row.assert_called_once()
+        appwrite_create.assert_called_once()
+        self.assertEqual(create_row.call_args.kwargs["row_id"], appwrite_create.call_args.kwargs["row_id"])
+        self.assertEqual(create_row.call_args.kwargs["data"], appwrite_create.call_args.kwargs["data"])
+        self.assertEqual(
+            create_row.call_args.kwargs["data"]["event_type"],
+            "message_created",
+        )
+
+    def test_emit_chat_event_survives_appwrite_failure(self):
+        with patch.object(chat_api, "create_row_safe", return_value={"$id": "event-1"}) as create_row, \
+                patch.object(
+                    chat_api.APPWRITE_REPOSITORY,
+                    "create_row",
+                    side_effect=chat_api.AppwriteException("boom"),
+                ) as appwrite_create:
+            row = chat_api.emit_chat_event(
+                "channel",
+                "nest_chat",
+                "message_created",
+                message_id="message-1",
+            )
+
+        self.assertEqual(row["$id"], "event-1")
+        create_row.assert_called_once()
+        appwrite_create.assert_called_once()
+
+    def test_emit_chat_event_uses_university_label_permissions(self):
+        school_key = "emory-university"
+        label = university_presence_label(school_key)
+        channel = {
+            "$id": "uni_emory-university",
+            "kind": "university",
+            "school_key": school_key,
+            "approved": True,
+        }
+        with patch.object(chat_api, "create_row_safe", return_value={"$id": "event-1"}) as create_row, \
+                patch.object(chat_api.APPWRITE_REPOSITORY, "create_row") as appwrite_create:
+            chat_api.emit_chat_event(
+                "channel",
+                channel["$id"],
+                "message_created",
+                message_id="message-1",
+                channel_id=channel["$id"],
+                channel=channel,
+            )
+
+        expected = [f'read("label:{label}")']
+        self.assertEqual(create_row.call_args.kwargs["permissions"], expected)
+        self.assertEqual(appwrite_create.call_args.kwargs["permissions"], expected)
+
+    def test_emit_chat_event_uses_users_permission_for_discord_channels(self):
+        channel = {
+            "$id": "nest_chat",
+            "kind": "discord",
+            "approved": True,
+        }
+        with patch.object(chat_api, "create_row_safe", return_value={"$id": "event-1"}) as create_row, \
+                patch.object(chat_api.APPWRITE_REPOSITORY, "create_row") as appwrite_create:
+            chat_api.emit_chat_event(
+                "channel",
+                channel["$id"],
+                "message_created",
+                message_id="message-1",
+                channel=channel,
+            )
+
+        expected = ['read("users")']
+        self.assertEqual(create_row.call_args.kwargs["permissions"], expected)
+        self.assertEqual(appwrite_create.call_args.kwargs["permissions"], expected)
+
+    def test_chat_realtime_token_returns_jwt_for_logged_in_user(self):
+        with self.app.test_request_context("/api/chat/realtime-token"):
+            with patch.object(chat_api, "current_user", self.user), \
+                    patch.object(chat_api, "sync_chat_presence_labels_for_user"), \
+                    patch.object(chat_api.Users, "create_jwt", return_value={"jwt": "token-abc"}) as create_jwt:
+                response = chat_api.chat_realtime_token.__wrapped__()
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json(), {"jwt": "token-abc"})
+        create_jwt.assert_called_once()
+        self.assertEqual(create_jwt.call_args.kwargs["user_id"], "user-1")
+        self.assertEqual(create_jwt.call_args.kwargs["duration"], 3600)
+
+    def test_chat_realtime_token_requires_login(self):
+        login_manager.init_app(self.app)
+        self.app.register_blueprint(chat_api.chat_api_bp)
+        with self.app.test_client() as client:
+            response = client.get("/api/chat/realtime-token")
+        self.assertIn(response.status_code, (302, 401))
 
     def test_dm_thread_payload_includes_presence_permissions(self):
         thread = {

@@ -16,8 +16,9 @@ from appwrite.permission import Permission
 from appwrite.query import Query
 from appwrite.role import Role
 
-from appwrite_client import COLLECTIONS
+from appwrite_client import COLLECTIONS, client as appwrite_client
 from appwrite_helpers import (
+    APPWRITE_REPOSITORY,
     create_row_safe,
     delete_row_safe,
     first_row,
@@ -28,6 +29,7 @@ from appwrite_helpers import (
     update_row_safe,
     parse_datetime,
 )
+from appwrite.services.users import Users
 from avatar_images import DEFAULT_AVATAR_URL
 from services.chat_formatting import extract_links, fetch_link_preview, render_markdown, url_hash
 from services.discord_bridge import (
@@ -155,6 +157,16 @@ def _presence_scope(scope_type, scope_id):
     }
 
 
+def _event_read_permissions(scope_type, *, channel=None, readable_user_ids=None):
+    if readable_user_ids is not None:
+        return _readable_by_users(readable_user_ids)
+    if scope_type == "channel" and channel:
+        permissions = _presence_read_permissions_for_channel(channel)
+        if permissions:
+            return permissions
+    return [Permission.read(Role.users())]
+
+
 def emit_chat_event(
     scope_type,
     scope_id,
@@ -165,29 +177,47 @@ def emit_chat_event(
     channel_id=None,
     actor_id=None,
     readable_user_ids=None,
+    channel=None,
 ):
     if not scope_type or not scope_id or not event_type:
         return None
     now = format_datetime(_now())
+    event_id = ID.unique()
+    data = {
+        "scope_type": str(scope_type),
+        "scope_id": str(scope_id),
+        "event_type": str(event_type),
+        "message_id": str(message_id) if message_id else None,
+        "thread_id": str(thread_id) if thread_id else None,
+        "channel_id": str(channel_id) if channel_id else None,
+        "actor_id": str(actor_id) if actor_id else None,
+        "created_at": now,
+    }
+    permissions = _event_read_permissions(
+        scope_type,
+        channel=channel,
+        readable_user_ids=readable_user_ids,
+    )
     try:
-        return create_row_safe(
+        row = create_row_safe(
             COLLECTIONS["chat_events"],
-            row_id=ID.unique(),
-            data={
-                "scope_type": str(scope_type),
-                "scope_id": str(scope_id),
-                "event_type": str(event_type),
-                "message_id": str(message_id) if message_id else None,
-                "thread_id": str(thread_id) if thread_id else None,
-                "channel_id": str(channel_id) if channel_id else None,
-                "actor_id": str(actor_id) if actor_id else None,
-                "created_at": now,
-            },
-            permissions=_readable_by_users(readable_user_ids),
+            row_id=event_id,
+            data=data,
+            permissions=permissions,
         )
     except AppwriteException:
-        logger.exception("Failed to emit chat event")
+        logger.exception("Failed to emit chat event to SQLite")
         return None
+    try:
+        APPWRITE_REPOSITORY.create_row(
+            COLLECTIONS["chat_events"],
+            row_id=event_id,
+            data=data,
+            permissions=permissions,
+        )
+    except (AppwriteException, AttributeError):
+        logger.exception("Failed to emit chat event to Appwrite Realtime")
+    return row
 
 
 def _message_timestamp(row):
@@ -863,8 +893,65 @@ def _message_queries(scope_type, scope_id, before=None, after=None):
     return queries
 
 
-def _list_messages(scope_type, scope_id, before=None, after=None):
-    query_list = _message_queries(scope_type, scope_id, before, after)
+def _message_is_after_cursor(row, cursor_row, cursor_id):
+    if not row:
+        return False
+    if not cursor_row and not cursor_id:
+        return True
+    row_id = str(_row_id(row) or "")
+    cursor_id = str(cursor_id or (_row_id(cursor_row) if cursor_row else "") or "")
+    if row_id and cursor_id and row_id == cursor_id:
+        return False
+    if not cursor_row:
+        return True
+    row_ts = _message_timestamp(row)
+    cursor_ts = _message_timestamp(cursor_row)
+    if row_ts > cursor_ts:
+        return True
+    if row_ts < cursor_ts:
+        return False
+    return row_id > cursor_id
+
+
+def _list_messages(scope_type, scope_id, before=None, after=None, after_message_id=None):
+    if before:
+        query_list = _message_queries(scope_type, scope_id, before=before)
+        query_list.append(Query.limit(MESSAGE_PAGE_SIZE))
+        rows = list_rows_safe(COLLECTIONS["chat_messages"], query_list).get("rows", [])
+        visible = [row for row in rows if not row.get("deleted_at")]
+        if scope_type == "thread":
+            blocked = _blocked_user_ids(_current_user_id())
+            visible = [row for row in visible if row.get("user_id") not in blocked]
+        visible.sort(key=_message_timestamp)
+        return visible
+
+    if after_message_id or after:
+        cursor_row = None
+        if after_message_id:
+            cursor_row = get_row_safe(COLLECTIONS["chat_messages"], after_message_id, allow_missing=True)
+        cursor_id = _row_id(cursor_row) if cursor_row else after_message_id
+        field = "channel_id" if scope_type == "channel" else "thread_id"
+        queries = [Query.equal(field, [scope_id])]
+        if after_message_id and cursor_row:
+            queries.append(Query.greater_than_equal("created_at", cursor_row.get("created_at")))
+        elif after:
+            queries.append(Query.greater_than("created_at", after))
+        queries.append(Query.order_asc("created_at"))
+        queries.append(Query.limit(MESSAGE_PAGE_SIZE + 5))
+        rows = list_rows_safe(COLLECTIONS["chat_messages"], queries).get("rows", [])
+        visible = [row for row in rows if not row.get("deleted_at")]
+        if scope_type == "thread":
+            blocked = _blocked_user_ids(_current_user_id())
+            visible = [row for row in visible if row.get("user_id") not in blocked]
+        if after_message_id and cursor_row:
+            visible = [
+                row for row in visible
+                if _message_is_after_cursor(row, cursor_row, cursor_id)
+            ]
+        visible.sort(key=_message_timestamp)
+        return visible[:MESSAGE_PAGE_SIZE]
+
+    query_list = _message_queries(scope_type, scope_id)
     query_list.append(Query.limit(MESSAGE_PAGE_SIZE))
     rows = list_rows_safe(COLLECTIONS["chat_messages"], query_list).get("rows", [])
     visible = [row for row in rows if not row.get("deleted_at")]
@@ -905,6 +992,7 @@ def _upsert_discord_message(channel, message, emit_event=False, *, partial=False
                     "message_updated",
                     message_id=row_id,
                     channel_id=channel_id,
+                    channel=channel,
                 )
             return row, False
         if partial and any(key not in payload for key in DISCORD_PARTIAL_CREATE_REQUIRED_FIELDS):
@@ -918,6 +1006,7 @@ def _upsert_discord_message(channel, message, emit_event=False, *, partial=False
                 "message_created",
                 message_id=_row_id(row),
                 channel_id=channel_id,
+                channel=channel,
             )
         return row, True
     except AppwriteException:
@@ -948,6 +1037,7 @@ def _upsert_discord_message(channel, message, emit_event=False, *, partial=False
                         "message_updated",
                         message_id=row_id,
                         channel_id=channel_id,
+                        channel=channel,
                     )
                 return row, False
             except AppwriteException:
@@ -996,6 +1086,7 @@ def _soft_delete_discord_message(channel, discord_message_id, *, emit_event=Fals
                 message_id=_row_id(row),
                 channel_id=channel_id,
                 actor_id="discord",
+                channel=channel,
             )
         return row
     except AppwriteException:
@@ -1362,6 +1453,26 @@ def _message_in_scope(row, scope_type, scope_id):
     return bool(row and row.get(_message_scope_field(scope_type)) == scope_id)
 
 
+def _message_for_current_user(message_id):
+    row = get_row_safe(COLLECTIONS["chat_messages"], message_id, allow_missing=True)
+    if not row or row.get("deleted_at"):
+        return None
+    channel_id = row.get("channel_id")
+    thread_id = row.get("thread_id")
+    if channel_id:
+        channel = get_row_safe(COLLECTIONS["chat_channels"], channel_id, allow_missing=True)
+        if not _can_access_channel(channel):
+            return None
+    elif thread_id:
+        if not _thread_for_user(thread_id):
+            return None
+        if str(row.get("user_id") or "") in _blocked_user_ids(_current_user_id()):
+            return None
+    else:
+        return None
+    return row
+
+
 def _message_visible_for_user(row, scope_type, blocked_user_ids=None):
     if not row or row.get("deleted_at"):
         return False
@@ -1585,6 +1696,22 @@ def discord_message_ingest():
     })
 
 
+@chat_api_bp.route("/api/chat/realtime-token")
+@login_required
+def chat_realtime_token():
+    user_id = _current_user_id()
+    sync_chat_presence_labels_for_user(user_id)
+    try:
+        result = Users(appwrite_client).create_jwt(user_id=user_id, duration=3600)
+    except AppwriteException:
+        logger.exception("Failed to create Appwrite JWT for chat realtime")
+        return jsonify({"error": "Unable to create realtime token."}), 502
+    jwt = result.get("jwt") if isinstance(result, dict) else getattr(result, "jwt", None)
+    if not jwt:
+        return jsonify({"error": "Unable to create realtime token."}), 502
+    return jsonify({"jwt": jwt})
+
+
 @chat_api_bp.route("/api/chat/bootstrap")
 @login_required
 def bootstrap():
@@ -1742,10 +1869,17 @@ def channel_messages(channel_id):
     if not _can_access_channel(channel):
         return jsonify({"error": "Channel unavailable."}), 404
     after = request.args.get("after")
-    rows = _list_messages("channel", channel_id, request.args.get("before"), after)
+    after_message_id = request.args.get("after_message_id")
+    rows = _list_messages(
+        "channel",
+        channel_id,
+        request.args.get("before"),
+        after,
+        after_message_id=after_message_id,
+    )
     return jsonify({
         "messages": _serialize_messages(rows),
-        "has_more": not after and channel.get("kind") != "discord" and len(rows) == MESSAGE_PAGE_SIZE,
+        "has_more": not after and not after_message_id and channel.get("kind") != "discord" and len(rows) == MESSAGE_PAGE_SIZE,
         "channel": _channel_payload(channel),
         **_room_message_metadata("channel", channel_id),
     })
@@ -1838,6 +1972,7 @@ def send_channel_message(channel_id):
                 message_id=_row_id(row),
                 channel_id=channel_id,
                 actor_id=_current_user_id(),
+                channel=channel,
             )
     except AppwriteException:
         logger.exception("Failed to finalize channel message")
@@ -1845,9 +1980,15 @@ def send_channel_message(channel_id):
     return jsonify({"message": _serialize_message(row)}), 201
 
 
-@chat_api_bp.route("/api/chat/messages/<message_id>", methods=["DELETE"])
+@chat_api_bp.route("/api/chat/messages/<message_id>", methods=["GET", "DELETE"])
 @login_required
 def delete_message(message_id):
+    if request.method == "GET":
+        row = _message_for_current_user(message_id)
+        if not row:
+            return jsonify({"error": "Message not found."}), 404
+        return jsonify({"message": _serialize_message(row)})
+
     row = get_row_safe(COLLECTIONS["chat_messages"], message_id, allow_missing=True)
     if not row or row.get("deleted_at"):
         return jsonify({"error": "Message not found."}), 404
@@ -1875,6 +2016,7 @@ def delete_message(message_id):
             },
         )
         if row.get("channel_id"):
+            channel = get_row_safe(COLLECTIONS["chat_channels"], row.get("channel_id"), allow_missing=True)
             emit_chat_event(
                 "channel",
                 row.get("channel_id"),
@@ -1882,6 +2024,7 @@ def delete_message(message_id):
                 message_id=message_id,
                 channel_id=row.get("channel_id"),
                 actor_id=_current_user_id(),
+                channel=channel,
             )
         elif row.get("thread_id"):
             thread = get_row_safe(COLLECTIONS["chat_dm_threads"], row.get("thread_id"), allow_missing=True)
@@ -1973,11 +2116,18 @@ def dm_thread_messages(thread_id):
     other = _public_user(_other_participant(thread))
     if request.method == "GET":
         after = request.args.get("after")
-        rows = _list_messages("thread", thread_id, request.args.get("before"), after)
+        after_message_id = request.args.get("after_message_id")
+        rows = _list_messages(
+            "thread",
+            thread_id,
+            request.args.get("before"),
+            after,
+            after_message_id=after_message_id,
+        )
         thread_payload = _thread_payload(thread) or {}
         return jsonify({
             "messages": _serialize_messages(rows),
-            "has_more": not after and len(rows) == MESSAGE_PAGE_SIZE,
+            "has_more": not after and not after_message_id and len(rows) == MESSAGE_PAGE_SIZE,
             "thread": {
                 "id": thread_id,
                 "other_user": thread_payload.get("other_user", other),

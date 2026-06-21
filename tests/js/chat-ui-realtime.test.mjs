@@ -21,11 +21,17 @@ test("chat uses realtime event signals instead of message polling", async () => 
   const source = await sourceFor("static/js/chat.js");
 
   assert.doesNotMatch(source, /pollTimer/);
-  assert.doesNotMatch(source, /setInterval\([^)]*loadMessages/s);
+  assert.match(source, /pollActiveRoomMessages/);
+  assert.match(source, /startRealtimeHeartbeat/);
+  assert.match(source, /ensureAppwriteRealtimeAuth/);
+  assert.match(source, /\/api\/chat\/realtime-token/);
   assert.match(source, /Channel\?\.tablesdb/);
   assert.match(source, /\.table\(tableId\)\.row\(\)/);
   assert.match(source, /client\.subscribe/);
   assert.match(source, /handleRealtimePayload/);
+  assert.match(source, /normalizeChatEvent/);
+  assert.match(source, /refreshAppwriteRealtimeAuth/);
+  assert.match(source, /await startRealtimeServices\(\)/);
   assert.match(source, /message_updated/);
 });
 
@@ -91,7 +97,6 @@ test("chat hydrates cached rooms before silent refresh and limits persisted mess
   assert.match(script, /await hydrateRoomFromPersistentCache\(room\)/);
   assert.match(script, /await selectRoom\(room, \{ fromCacheHydration: true, quiet: true \}\)/);
   assert.match(script, /if \(renderCachedRoom\(room\)\)/);
-  assert.match(script, /await loadMessages\(\{ after: cache\.latestCursor, quiet: true \}\)/);
   assert.match(script, /scheduleRoomPrefetches/);
   assert.match(script, /requestIdleCallback/);
 });
@@ -104,7 +109,8 @@ test("chat marks selected cached rooms and sent messages as read", async () => {
   assert.match(script, /if \(latest\?\.id\) body\.message_id = latest\.id/);
   assert.match(script, /clearRoomUnread\(room\)/);
   assert.match(script, /if \(!cache\.stale \|\| latestMessageForRead\(cache\)\) \{\s*markRoomRead\(room, cache\)/);
-  assert.match(script, /markRoomRead\(room, cache\);\s*\}\s*refreshViewingPresence/s);
+  assert.match(script, /applyIncomingMessages\(room, \[payload\.message\], \{ toBottom: true \}\)/);
+  assert.match(script, /refreshViewingPresence\(\)/);
   assert.match(script, /\.finally\(\(\) => \{\s*markRoomRead\(room, cache\);\s*void refreshChatSummary\(\);\s*\}\)/);
 });
 
@@ -293,6 +299,10 @@ test("scheduler uses discord gateway with slow reconciliation", async () => {
   assert.match(api, /_upsert_discord_message\(channel, message, emit_event=emit_events\)/);
   assert.match(api, /emit_chat_event\(\s*"channel",\s*channel_id,\s*"message_created"/);
   assert.match(api, /"message_updated"/);
+  assert.match(api, /APPWRITE_REPOSITORY\.create_row/);
+  assert.match(api, /def _event_read_permissions/);
+  assert.match(api, /@chat_api_bp\.route\("\/api\/chat\/realtime-token"\)/);
+  assert.match(api, /Users\(appwrite_client\)\.create_jwt/);
   assert.match(api, /@chat_api_bp\.route\("\/api\/chat\/discord\/messages", methods=\["POST"\]\)/);
   assert.match(api, /def discord_message_ingest\(\):/);
   assert.match(api, /_valid_discord_ingest_request\(\)/);
@@ -350,15 +360,13 @@ test("chat history banner has no close control and follows scroll-top visibility
   assert.match(template, /Older Discord history lives in the server\./);
 });
 
-test("chat starts realtime fallback refresh every five seconds after failure", async () => {
+test("chat starts realtime fallback refresh after websocket failure", async () => {
   const script = await sourceFor("static/js/chat.js");
 
   assert.doesNotMatch(script, /pollTimer/);
-  assert.match(script, /const REALTIME_FALLBACK_MS = 5000/);
   assert.match(script, /function startRealtimeFallback/);
   assert.match(script, /function stopRealtimeFallback/);
   assert.match(script, /document\.visibilityState === "visible"/);
-  assert.match(script, /after: cache\.latestCursor, quiet: true/);
   assert.match(script, /void refreshChatSummary\(\)/);
   assert.match(script, /startRealtimeFallback\(\)/);
   assert.match(script, /stopRealtimeFallback\(\)/);
