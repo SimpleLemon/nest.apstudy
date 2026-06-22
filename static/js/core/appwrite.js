@@ -17,10 +17,6 @@ const storage = new Appwrite.Storage(client);
 const presences = Appwrite.Presences ? new Appwrite.Presences(client) : null;
 const realtime = Appwrite.Realtime ? new Appwrite.Realtime(client) : null;
 
-if (!presences) {
-    console.warn("Appwrite Presences are unavailable. Chat presence will fall back to cached offline state.");
-}
-
 window.APPWRITE_ENDPOINT = APPWRITE_ENDPOINT;
 window.APPWRITE_PROJECT_ID = APPWRITE_PROJECT_ID;
 window.client = client;

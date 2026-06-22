@@ -45,6 +45,7 @@ test("chat uses Appwrite Presences for online and typing state", async () => {
   assert.match(template, /appwrite@25\.0\.0/);
   assert.match(appwrite, /new Appwrite\.Presences\(client\)/);
   assert.match(appwrite, /new Appwrite\.Realtime\(client\)/);
+  assert.doesNotMatch(appwrite, /console\.warn\([^)]*Presences are unavailable/);
   assert.match(appwrite, /window\.Permission = Appwrite\.Permission/);
   assert.match(appwrite, /window\.Role = Appwrite\.Role/);
   assert.match(appwrite, /window\.Query = Appwrite\.Query/);

@@ -75,6 +75,7 @@ if (false) {
     await import("../../static/js/settings/profile.js");
     await import("../../static/js/settings/utils.js");
     await import("../../static/js/tasks/task-app-helpers.js");
+    await import("../../static/js/tasks/task-audio.js");
     await import("../../static/js/tasks/task-components.js");
     await import("../../static/js/tasks/task-data.js");
     await import("../../static/js/tasks/task-entry-components.js");
@@ -187,20 +188,35 @@ test("dashboard daily quote fetches Flask endpoint and uses one smooth egg card"
     assert.match(source, /addFractureGeometry\(root\);\s*root\.dataset\.phase = "fracture"/);
     assert.doesNotMatch(source, /\.dashboard-egg-quote\{[^}]*border:1px/);
     assert.doesNotMatch(source, /\.dashboard-egg-quote\{[^}]*box-shadow/);
+    assert.doesNotMatch(source, /@radix-ui\/react-dialog|Dialog\.(?:Title|Description)/);
+    assert.match(source, /'h2',\s*\{ className: 'apstudy-visually-hidden' \}/);
 });
 
 test("sidebar keeps persisted collapse state, route targets, and preference event bridge", async () => {
     const source = await sourceFor("static/js/core/sidebar.js");
+    const template = await sourceFor("templates/_sidebar.html");
 
-    for (const route of ["/calendar", "/courses", "/files", "/notes", "/tasks", "/chat", "/settings"]) {
-        assert.match(source, new RegExp(`data-route="${route}"`));
+    for (const endpoint of [
+        "dashboard.calendar",
+        "dashboard.courses",
+        "file_share.file_share_page",
+        "dashboard.notes",
+        "dashboard.tasks",
+        "dashboard.chat",
+        "settings.settings_page",
+    ]) {
+        assert.match(template, new RegExp(`url_for\\('${endpoint.replaceAll('.', '\\.')}'\\)`));
     }
 
+    assert.match(template, /sidebar_path == '\/notes' or sidebar_path\.startswith\('\/notes\/'\)/);
     assert.match(source, /function normalizeSidebarDefault\(value\)/);
     assert.match(source, /localStorage\.getItem\('sidebar-collapsed'\)/);
     assert.match(source, /localStorage\.setItem\('sidebar-collapsed', String\(isCollapsed\)\)/);
     assert.match(source, /window\.APSTUDY_SET_SIDEBAR_COLLAPSED = applySidebarCollapsedState/);
     assert.match(source, /apstudy-sidebar-default-change/);
+    assert.match(source, /const idleMs = 300000/);
+    assert.match(source, /document\.addEventListener\('pointerdown', markActive/);
+    assert.match(source, /document\.visibilityState === 'hidden' \|\| isIdle\(\)/);
 });
 
 test("mobile shell uses a hamburger drawer without breaking desktop sidebar persistence", async () => {
@@ -320,10 +336,20 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(toolbarSource, /isCollapsed: collapsedProp/);
     assert.match(toolbarSource, /createReactStyleSpec/);
     assert.match(toolbarSource, /fontSizeStyle/);
-    assert.match(source, /FormattingToolbarController/);
-    assert.match(source, /function NotesSelectionToolbar\(\)/);
+    assert.doesNotMatch(source, /FormattingToolbarController/);
+    assert.doesNotMatch(source, /function NotesSelectionToolbar\(\)/);
+    assert.doesNotMatch(source, /function toolbarButton\(/);
     assert.match(source, /function NotesSlashMenu\(props\)/);
     assert.match(source, /function NotesSideMenu\(props\)/);
+    assert.match(source, /freezeMenu\?\.\(\)/);
+    assert.match(source, /unfreezeMenu\?\.\(\)/);
+    assert.match(source, /document\.addEventListener\('pointerdown', handlePointerDown\)/);
+    assert.match(source, /event\.key !== 'Escape'/);
+    assert.match(source, /draggable: true/);
+    assert.match(source, /onDragStart: \(event\) => blockDragStart\?\.\(event, block\)/);
+    assert.match(source, /onDragEnd: blockDragEnd/);
+    assert.match(source, /selectActionBlock\(\); moveSelectedBlocks\('up'\); closeMenu\(\)/);
+    assert.match(source, /selectActionBlock\(\); moveSelectedBlocks\('down'\); closeMenu\(\)/);
     assert.match(source, /formattingToolbar: false/);
     assert.match(source, /slashMenu: false/);
     assert.match(source, /filePanel: false/);
@@ -365,7 +391,10 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(styles, /\.notes-bookmark-block/);
     assert.match(styles, /\.notes-slash-menu/);
     assert.match(styles, /\.notes-side-tools/);
-    assert.match(styles, /\.notes-context-toolbar/);
+    assert.match(styles, /\.notes-side-button \.material-symbols-outlined\s*\{[^}]*font-size:\s*20px;[^}]*line-height:\s*1;/s);
+    assert.match(styles, /\.notes-block-select-handle\s*\{[^}]*cursor:\s*grab;/s);
+    assert.match(styles, /\.notes-side-menu\s*\{[^}]*left:\s*calc\(100% \+ 6px\);/s);
+    assert.doesNotMatch(styles, /\.notes-context-(?:toolbar|button|popover|menu-item)/);
     assert.match(styles, /\.notes-block-hidden-by-collapse/);
     assert.match(styles, /\.blocknote-container \[data-content-type="horizontalRule"\]/);
     assert.match(styles, /\.blocknote-container \.bn-block-group \.bn-block-group/);
@@ -374,6 +403,27 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(editorTemplate, /data-toolbar-menu-trigger="font-size"/);
     assert.match(editorTemplate, /data-toolbar-menu-trigger="text-color"/);
     assert.match(editorTemplate, /data-toolbar-menu-trigger="highlight-color"/);
+    assert.match(editorTemplate, /data-toolbar-menu-trigger="block-actions"/);
+    for (const action of ['copy-blocks', 'cut-blocks', 'duplicate-blocks', 'delete-blocks', 'move-blocks-up', 'move-blocks-down', 'toggle-heading-collapse']) {
+        assert.match(editorTemplate, new RegExp(`data-editor-action="${action}"`));
+    }
+    assert.match(editorTemplate, /data-block-type="codeBlock"/);
+    assert.match(editorTemplate, /data-block-type="callout"/);
+    assert.match(source, /action === 'copy-blocks'/);
+    assert.match(source, /action === 'cut-blocks'/);
+    assert.match(source, /action === 'duplicate-blocks'/);
+    assert.match(source, /action === 'delete-blocks'/);
+    assert.match(source, /action === 'move-blocks-up'/);
+    assert.match(source, /action === 'move-blocks-down'/);
+    assert.match(source, /action === 'toggle-heading-collapse'/);
+    assert.match(editorTemplate, /data-toolbar-menu="overflow" role="toolbar" aria-label="More writing tools" aria-orientation="horizontal"/);
+    assert.match(styles, /\.notes-toolbar-overflow-menu\s*\{[^}]*display:\s*flex;[^}]*width:\s*max-content;[^}]*flex-wrap:\s*nowrap;[^}]*overflow-x:\s*auto;/s);
+    assert.match(styles, /\.notes-toolbar-overflow-menu \.notes-toolbar-segment\s*\{[^}]*width:\s*auto;[^}]*flex:\s*0 0 auto;[^}]*flex-wrap:\s*nowrap;/s);
+    assert.match(styles, /\.notes-toolbar-overflow-menu \.notes-toolbar-label,[^{]*\{[^}]*display:\s*none;/s);
+    assert.doesNotMatch(styles, /\.notes-toolbar-overflow-menu \.notes-toolbar-segment\s*\{[^}]*width:\s*100%;/s);
+    assert.match(source, /const isOverflowToolbar = menu\.classList\.contains\('notes-toolbar-overflow-menu'\)/);
+    assert.match(source, /menu\.style\.maxWidth = isOverflowToolbar/);
+    assert.match(source, /b\.priority - a\.priority \|\| b\.index - a\.index/);
     assert.doesNotMatch(editorTemplate, /<global class="thefooter"><\/global>/);
     assert.match(notesTemplate, /<global class="thefooter"><\/global>/);
     assert.doesNotMatch(styles, /STATIC TOOLBAR/);
@@ -492,6 +542,7 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
 test("task app shell keeps data-layer wiring, destructive confirms, and mount contract", async () => {
     const source = await sourceFor("static/js/tasks/task.js");
     const helperSource = await sourceFor("static/js/tasks/task-app-helpers.js");
+    const template = await sourceFor("templates/task.html");
 
     assert.match(source, /from "\.\/task-components\.js"/);
     assert.match(source, /from "\.\/task-app-helpers\.js"/);
@@ -507,13 +558,20 @@ test("task app shell keeps data-layer wiring, destructive confirms, and mount co
     assert.match(source, /buildListOrderUpdates\(orderedIds\)/);
     assert.match(source, /taskOrderUpdatesFromDocument\(\)/);
     assert.match(source, /createRoot\(mount\)\.render\(h\(TaskApp/);
+    assert.match(source, /createTaskSounds\(\{ completeSound, uncompleteSound \}\)/);
+    assert.doesNotMatch(source, /use-sound|useSound/);
+    assert.doesNotMatch(template, /appwrite@|js\/core\/appwrite\.js|use-sound/);
+    assert.match(template, /data-probe-appwrite-session="false"/);
+    assert.match(template, /data-command-palette-preload="false"/);
 });
 
 test("appwrite bootstrap exposes configured SDK clients globally", async () => {
     const source = await sourceFor("static/js/core/appwrite.js");
 
-    assert.match(source, /const APPWRITE_ENDPOINT = "https:\/\/nyc\.cloud\.appwrite\.io\/v1"/);
-    assert.match(source, /const APPWRITE_PROJECT_ID = "69f77663000c16abdff2"/);
+    assert.match(source, /document\.querySelector\('meta\[name="apstudy-appwrite-endpoint"\]'\)\?\.content/);
+    assert.match(source, /document\.querySelector\('meta\[name="apstudy-appwrite-project-id"\]'\)\?\.content/);
+    assert.match(source, /const APPWRITE_ENDPOINT = configMeta\.endpoint \|\| "https:\/\/nyc\.cloud\.appwrite\.io\/v1"/);
+    assert.match(source, /const APPWRITE_PROJECT_ID = configMeta\.projectId \|\| "69f77663000c16abdff2"/);
     assert.match(source, /new Appwrite\.Client\(\)/);
     assert.match(source, /\.setEndpoint\(APPWRITE_ENDPOINT\)/);
     assert.match(source, /\.setProject\(APPWRITE_PROJECT_ID\)/);
@@ -636,6 +694,7 @@ test("navbar keeps avatar sizing, command palette shortcut, and logout/account f
     assert.match(source, /nearestDiscordAvatarSize\(normalizedSize\)/);
     assert.match(source, /googleAvatarUrlForSize\(rawUrl, normalizedSize\)/);
     assert.match(source, /import\('\/static\/js\/core\/command-palette\.js'\)/);
+    assert.match(source, /commandPalettePreload !== 'false'/);
     assert.match(source, /window\.APSTUDY_COMMAND_PALETTE_SHORTCUT_BOUND/);
     assert.match(source, /event\.metaKey && !event\.ctrlKey/);
     assert.match(source, /window\.location\.href = '\/settings#account'/);

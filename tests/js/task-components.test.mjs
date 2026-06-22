@@ -19,8 +19,15 @@ test("task component module keeps the expected public component surface", () => 
     ];
 
     for (const exportName of expectedExports) {
-        assert.match(source, new RegExp(`export function ${exportName}\\b`));
+        assert.match(source, new RegExp(`export (?:function|const) ${exportName}\\b`));
     }
+});
+
+test("task rows and sections are memoized while sortable dependencies stay ID-based", () => {
+    assert.match(source, /export const TaskSection = React\.memo/);
+    assert.match(entrySource, /export const TaskRow = React\.memo/);
+    assert.match(source, /taskItemsEqual\(previous\.tasks, next\.tasks\)/);
+    assert.match(source, /taskGroups\.active\.map\(\(task\) => task\.id\)\.join\("\|"\)/);
 });
 
 test("task component module depends on shared task utilities instead of duplicating rules", () => {

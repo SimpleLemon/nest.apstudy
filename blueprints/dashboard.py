@@ -6,7 +6,7 @@ import logging
 import os
 from datetime import datetime, timedelta, timezone
 
-from flask import Blueprint, jsonify, render_template, redirect, request, url_for
+from flask import Blueprint, g, jsonify, render_template, redirect, request, url_for
 from flask_login import login_required, current_user
 
 from appwrite.exception import AppwriteException
@@ -138,13 +138,18 @@ def _user_payload():
 
 
 def _load_user_settings():
+    if hasattr(g, "_apstudy_user_settings"):
+        return g._apstudy_user_settings
     try:
-        return first_row(
+        settings = first_row(
             COLLECTIONS["user_settings"],
             [Query.equal("user_id", [str(current_user.id)])],
         )
+        g._apstudy_user_settings = settings
+        return settings
     except AppwriteException:
         logger.exception("Failed to load user settings")
+        g._apstudy_user_settings = None
         return None
 
 

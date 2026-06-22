@@ -2,13 +2,10 @@ import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 
 import {
-    FormattingToolbarController,
     SideMenuController,
     SuggestionMenuController,
-    useBlockNoteEditor,
     useCreateBlockNote,
     useEditorContentOrSelectionChange,
-    useSelectedBlocks,
 } from '@blocknote/react';
 import { checkBlockHasDefaultProp, checkBlockTypeHasDefaultProp, mapTableCell } from '@blocknote/core';
 import { BlockNoteView } from '@blocknote/mantine';
@@ -69,6 +66,7 @@ const TEXT_BLOCK_OPTIONS = [
     { label: 'Heading 2', type: 'heading', props: { level: 2 }, icon: 'H2', key: 'heading-2' },
     { label: 'Heading 3', type: 'heading', props: { level: 3 }, icon: 'H3', key: 'heading-3' },
     { label: 'Quote', type: 'quote', icon: 'format_quote', key: 'quote' },
+    { label: 'Code block', type: 'codeBlock', icon: 'code_blocks', key: 'codeBlock' },
     { label: 'Callout', type: 'callout', icon: 'lightbulb', key: 'callout' },
 ];
 const LIST_STYLE_OPTIONS = [
@@ -307,25 +305,6 @@ function materialIcon(name, className = 'material-symbols-outlined') {
     }, name);
 }
 
-function toolbarButton(label, icon, onClick, options = {}) {
-    return React.createElement(
-        'button',
-        {
-            type: 'button',
-            className: options.className || 'notes-context-button',
-            title: label,
-            'aria-label': label,
-            'aria-pressed': options.active ? 'true' : 'false',
-            disabled: options.disabled || false,
-            onMouseDown: (event) => event.preventDefault(),
-            onClick,
-        },
-        icon?.startsWith?.('H')
-            ? React.createElement('span', { className: 'notes-toolbar-text-icon', 'aria-hidden': 'true' }, icon)
-            : materialIcon(icon || 'more_horiz')
-    );
-}
-
 function updateBlockPayloadForPreservedText(block, payload) {
     if (!block || !payload) return payload;
     if (ATOM_BLOCK_TYPES.has(payload.type) || payload.type === 'table') return payload;
@@ -515,13 +494,15 @@ function closeToolbarMenus() {
 function positionToolbarMenu(trigger, menu, triggerRectOverride = null) {
     if (!trigger || !menu) return;
     const triggerRect = triggerRectOverride || trigger.getBoundingClientRect();
+    const isOverflowToolbar = menu.classList.contains('notes-toolbar-overflow-menu');
     menu.style.left = '0px';
     menu.style.top = '0px';
-    menu.style.minWidth = `${Math.max(triggerRect.width, 150)}px`;
+    menu.style.minWidth = isOverflowToolbar ? '0px' : `${Math.max(triggerRect.width, 150)}px`;
 
     const editorRect = editorPage?.getBoundingClientRect();
     const viewportRight = window.innerWidth - 8;
     const boundaryRight = Math.min(viewportRight, editorRect ? editorRect.right - 8 : viewportRight);
+    menu.style.maxWidth = isOverflowToolbar ? `${Math.max(0, boundaryRight - 8)}px` : '';
     const menuRect = menu.getBoundingClientRect();
     let left = triggerRect.left;
 
@@ -1265,7 +1246,8 @@ function captureHistoryBaseline() {
 
 function updateToolbarState() {
     if (!writingToolbar || !editorInstance) return;
-    const block = selectedBlocks()[0];
+    const blocks = selectedBlocks();
+    const block = blocks[0];
     const activeStyles = typeof editorInstance.getActiveStyles === 'function'
         ? editorInstance.getActiveStyles()
         : {};
@@ -1290,6 +1272,11 @@ function updateToolbarState() {
     const alignIcon = writingToolbar.querySelector('[data-current-align-icon]');
     if (alignIcon) alignIcon.textContent = activeAlignment.icon;
 
+    const collapseIcon = writingToolbar.querySelector('[data-heading-collapse-icon]');
+    const collapseLabel = writingToolbar.querySelector('[data-heading-collapse-label]');
+    if (collapseIcon) collapseIcon.textContent = block?.props?.isCollapsed ? 'unfold_more' : 'unfold_less';
+    if (collapseLabel) collapseLabel.textContent = block?.props?.isCollapsed ? 'Expand heading' : 'Collapse heading';
+
     writingToolbar.querySelectorAll('button[data-editor-action]').forEach((button) => {
         const action = button.dataset.editorAction;
         let active = false;
@@ -1313,6 +1300,10 @@ function updateToolbarState() {
             disabled = !canRunHistoryAction(action);
         } else if (action === 'indent' || action === 'outdent') {
             disabled = !canRunIndentAction(action);
+        } else if (action === 'toggle-heading-collapse') {
+            disabled = block?.type !== 'heading';
+        } else if (['copy-blocks', 'cut-blocks', 'duplicate-blocks', 'delete-blocks', 'move-blocks-up', 'move-blocks-down'].includes(action)) {
+            disabled = blocks.length === 0;
         } else if (action === 'zoom-out') {
             disabled = zoomIndex === 0;
         } else if (action === 'zoom-in') {
@@ -1507,6 +1498,27 @@ function bindWritingToolbar() {
             closeToolbarMenus();
         } else if (action === 'indent' || action === 'outdent') {
             runIndentAction(action);
+        } else if (action === 'copy-blocks') {
+            void copySelectedBlocks();
+            closeToolbarMenus();
+        } else if (action === 'cut-blocks') {
+            void copySelectedBlocks({ cut: true });
+            closeToolbarMenus();
+        } else if (action === 'duplicate-blocks') {
+            duplicateSelectedBlocks();
+            closeToolbarMenus();
+        } else if (action === 'delete-blocks') {
+            deleteSelectedBlocks();
+            closeToolbarMenus();
+        } else if (action === 'move-blocks-up') {
+            moveSelectedBlocks('up');
+            closeToolbarMenus();
+        } else if (action === 'move-blocks-down') {
+            moveSelectedBlocks('down');
+            closeToolbarMenus();
+        } else if (action === 'toggle-heading-collapse') {
+            toggleHeadingCollapse();
+            closeToolbarMenus();
         }
     });
 
@@ -1790,117 +1802,45 @@ function NotesSlashMenu(props) {
     );
 }
 
-function NotesSelectionToolbar() {
-    const editor = useBlockNoteEditor();
-    const activeStyles = editor.getActiveStyles?.() || {};
-    const blocks = useSelectedBlocks(editor);
-    const selected = blocks?.length || 0;
-    const block = blocks?.[0];
-    const [menu, setMenu] = React.useState('');
-
-    const colorButtons = (style) => React.createElement(
-        'div',
-        { className: 'notes-context-popover' },
-        FORMAT_COLORS.map((item) => React.createElement(
-            'button',
-            {
-                key: `${style}-${item.value}`,
-                type: 'button',
-                className: 'notes-context-menu-item',
-                onMouseDown: (event) => event.preventDefault(),
-                onClick: () => {
-                    if (style === 'textColor') applyTextColor(item.value);
-                    else applyHighlightColor(item.value);
-                    setMenu('');
-                },
-            },
-            React.createElement('span', {
-                className: 'notes-format-swatch',
-                [`data-${style === 'textColor' ? 'text' : 'background'}-color`]: item.value,
-                'aria-hidden': 'true',
-            }),
-            React.createElement('span', null, item.label)
-        ))
-    );
-
-    const fontButtons = React.createElement(
-        'div',
-        { className: 'notes-context-popover' },
-        FONT_SIZE_PRESETS.map((item) => React.createElement(
-            'button',
-            {
-                key: item.value,
-                type: 'button',
-                className: 'notes-context-menu-item',
-                onMouseDown: (event) => event.preventDefault(),
-                onClick: () => {
-                    applyFontSizePreset(item.value);
-                    setMenu('');
-                },
-            },
-            materialIcon('format_size'),
-            React.createElement('span', null, item.label)
-        ))
-    );
-
-    const turnIntoButtons = React.createElement(
-        'div',
-        { className: 'notes-context-popover' },
-        filterBlockCatalog('', { includeAtoms: false, turnIntoOnly: true }).map((item) => React.createElement(
-            'button',
-            {
-                key: item.key,
-                type: 'button',
-                className: 'notes-context-menu-item',
-                onMouseDown: (event) => event.preventDefault(),
-                onClick: () => {
-                    const payload = blockPayloadForCatalogItem(item);
-                    selectedBlocks().forEach((selectedBlock) => {
-                        editorInstance.updateBlock(selectedBlock, updateBlockPayloadForPreservedText(selectedBlock, payload));
-                    });
-                    setMenu('');
-                    updateEditorChrome();
-                    triggerDebouncedSave();
-                },
-            },
-            React.createElement('span', { className: blockIconClass(item.icon), 'aria-hidden': 'true' }, iconHtml(item.icon)),
-            React.createElement('span', null, item.label)
-        ))
-    );
-
-    return React.createElement(
-        'div',
-        { className: 'notes-context-toolbar' },
-        toolbarButton('Bold', 'format_bold', () => toggleBasicStyle('bold'), { active: Boolean(activeStyles.bold) }),
-        toolbarButton('Italic', 'format_italic', () => toggleBasicStyle('italic'), { active: Boolean(activeStyles.italic) }),
-        toolbarButton('Underline', 'format_underlined', () => toggleBasicStyle('underline'), { active: Boolean(activeStyles.underline) }),
-        toolbarButton('Strike', 'strikethrough_s', () => toggleBasicStyle('strike'), { active: Boolean(activeStyles.strike) }),
-        toolbarButton('Code', 'code', () => toggleBasicStyle('code'), { active: Boolean(activeStyles.code) }),
-        toolbarButton('Link', 'link', () => openToolbarMenu('link', writingToolbar?.querySelector('[data-toolbar-menu-trigger="link"]'))),
-        toolbarButton('Text color', 'format_color_text', () => setMenu(menu === 'text' ? '' : 'text')),
-        toolbarButton('Highlight', 'border_color', () => setMenu(menu === 'highlight' ? '' : 'highlight')),
-        toolbarButton('Font size', 'format_size', () => setMenu(menu === 'font' ? '' : 'font')),
-        selected > 1 ? toolbarButton(`Copy ${selected} blocks`, 'content_copy', () => void copySelectedBlocks()) : null,
-        selected > 1 ? toolbarButton('Cut selected blocks', 'content_cut', () => void copySelectedBlocks({ cut: true })) : null,
-        selected > 0 ? toolbarButton('Duplicate', 'content_copy', () => duplicateSelectedBlocks()) : null,
-        selected > 0 ? toolbarButton('Delete', 'delete', () => deleteSelectedBlocks()) : null,
-        selected > 0 ? toolbarButton('Move up', 'arrow_upward', () => moveSelectedBlocks('up')) : null,
-        selected > 0 ? toolbarButton('Move down', 'arrow_downward', () => moveSelectedBlocks('down')) : null,
-        selected > 0 ? toolbarButton('Indent', 'format_indent_increase', () => runIndentAction('indent')) : null,
-        selected > 0 ? toolbarButton('Outdent', 'format_indent_decrease', () => runIndentAction('outdent')) : null,
-        selected > 0 ? toolbarButton('Turn into', 'swap_vert', () => setMenu(menu === 'turn' ? '' : 'turn')) : null,
-        block?.type === 'heading' ? toolbarButton('Toggle collapse', block.props?.isCollapsed ? 'unfold_more' : 'unfold_less', () => toggleHeadingCollapse(block)) : null,
-        menu === 'text' ? colorButtons('textColor') : null,
-        menu === 'highlight' ? colorButtons('backgroundColor') : null,
-        menu === 'font' ? fontButtons : null,
-        menu === 'turn' ? turnIntoButtons : null
-    );
-}
-
 function NotesSideMenu(props) {
-    const { block } = props;
+    const { block, blockDragStart, blockDragEnd, freezeMenu, unfreezeMenu } = props;
     const [open, setOpen] = React.useState(false);
     const [turnIntoOpen, setTurnIntoOpen] = React.useState(false);
+    const toolsRef = React.useRef(null);
+    const closeMenu = React.useCallback(() => {
+        setTurnIntoOpen(false);
+        setOpen(false);
+    }, []);
+    const selectActionBlock = React.useCallback(() => {
+        if (!editorInstance || !block) return;
+        selectedBlockAnchorId = block.id;
+        editorInstance.setSelection?.(block, block);
+        editorInstance.setForceSelectionVisible?.(true);
+    }, [block]);
+
+    React.useEffect(() => {
+        if (!open) return undefined;
+
+        freezeMenu?.();
+        const handlePointerDown = (event) => {
+            if (toolsRef.current?.contains(event.target)) return;
+            closeMenu();
+        };
+        const handleKeyDown = (event) => {
+            if (event.key !== 'Escape') return;
+            event.preventDefault();
+            closeMenu();
+        };
+        document.addEventListener('pointerdown', handlePointerDown);
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('pointerdown', handlePointerDown);
+            document.removeEventListener('keydown', handleKeyDown);
+            unfreezeMenu?.();
+        };
+    }, [closeMenu, freezeMenu, open, unfreezeMenu]);
+
     const select = (event) => {
         event.preventDefault();
         selectBlockRange(block, event.shiftKey);
@@ -1911,14 +1851,14 @@ function NotesSideMenu(props) {
         await insertCatalogItem(catalogItemByKey('paragraph'), event.currentTarget.getBoundingClientRect());
     };
     const duplicate = () => {
-        editorInstance?.setSelection?.(block, block);
+        selectActionBlock();
         duplicateSelectedBlocks();
-        setOpen(false);
+        closeMenu();
     };
     const remove = () => {
-        editorInstance?.setSelection?.(block, block);
+        selectActionBlock();
         deleteSelectedBlocks();
-        setOpen(false);
+        closeMenu();
     };
     const turnIntoItems = filterBlockCatalog('', { includeAtoms: false, turnIntoOnly: true });
     const turnIntoMenu = turnIntoOpen ? React.createElement(
@@ -1930,11 +1870,10 @@ function NotesSideMenu(props) {
                 key: item.key,
                 type: 'button',
                 onClick: () => {
-                    editorInstance?.setSelection?.(block, block);
+                    selectActionBlock();
                     const payload = blockPayloadForCatalogItem(item);
                     editorInstance.updateBlock(block, updateBlockPayloadForPreservedText(block, payload));
-                    setTurnIntoOpen(false);
-                    setOpen(false);
+                    closeMenu();
                     updateEditorChrome();
                     triggerDebouncedSave();
                 },
@@ -1945,7 +1884,11 @@ function NotesSideMenu(props) {
     ) : null;
     return React.createElement(
         'div',
-        { className: 'notes-side-tools' },
+        {
+            ref: toolsRef,
+            className: 'notes-side-tools',
+            onClick: (event) => event.stopPropagation(),
+        },
         React.createElement('button', {
             type: 'button',
             className: 'notes-side-button',
@@ -1959,7 +1902,9 @@ function NotesSideMenu(props) {
             className: 'notes-side-button notes-block-select-handle',
             title: 'Select block',
             'aria-label': 'Select block',
-            onMouseDown: (event) => event.preventDefault(),
+            draggable: true,
+            onDragStart: (event) => blockDragStart?.(event, block),
+            onDragEnd: blockDragEnd,
             onClick: select,
         }, materialIcon('drag_indicator')),
         React.createElement('button', {
@@ -1969,19 +1914,28 @@ function NotesSideMenu(props) {
             'aria-label': 'Block actions',
             'aria-expanded': String(open),
             onMouseDown: (event) => event.preventDefault(),
-            onClick: () => setOpen(!open),
+            onClick: () => {
+                if (open) {
+                    closeMenu();
+                } else {
+                    setOpen(true);
+                }
+            },
         }, materialIcon('more_vert')),
         open ? React.createElement(
         'div',
-        { className: 'notes-side-menu' },
-            React.createElement('button', { type: 'button', onClick: () => { editorInstance?.setSelection?.(block, block); void copySelectedBlocks(); setOpen(false); } }, materialIcon('content_copy'), React.createElement('span', null, 'Copy')),
-            React.createElement('button', { type: 'button', onClick: () => setTurnIntoOpen(!turnIntoOpen) }, materialIcon('swap_vert'), React.createElement('span', null, 'Turn into')),
+        {
+            className: 'notes-side-menu',
+            onMouseDown: (event) => event.preventDefault(),
+        },
+            React.createElement('button', { type: 'button', onClick: () => { selectActionBlock(); void copySelectedBlocks(); closeMenu(); } }, materialIcon('content_copy'), React.createElement('span', null, 'Copy')),
+            React.createElement('button', { type: 'button', 'aria-expanded': String(turnIntoOpen), onClick: () => setTurnIntoOpen(!turnIntoOpen) }, materialIcon('swap_vert'), React.createElement('span', null, 'Turn into')),
             turnIntoMenu,
             React.createElement('button', { type: 'button', onClick: duplicate }, materialIcon('content_copy'), React.createElement('span', null, 'Duplicate')),
-            React.createElement('button', { type: 'button', onClick: () => { moveSelectedBlocks('up'); setOpen(false); } }, materialIcon('arrow_upward'), React.createElement('span', null, 'Move up')),
-            React.createElement('button', { type: 'button', onClick: () => { moveSelectedBlocks('down'); setOpen(false); } }, materialIcon('arrow_downward'), React.createElement('span', null, 'Move down')),
+            React.createElement('button', { type: 'button', onClick: () => { selectActionBlock(); moveSelectedBlocks('up'); closeMenu(); } }, materialIcon('arrow_upward'), React.createElement('span', null, 'Move up')),
+            React.createElement('button', { type: 'button', onClick: () => { selectActionBlock(); moveSelectedBlocks('down'); closeMenu(); } }, materialIcon('arrow_downward'), React.createElement('span', null, 'Move down')),
             block.type === 'heading'
-                ? React.createElement('button', { type: 'button', onClick: () => { toggleHeadingCollapse(block); setOpen(false); } }, materialIcon(block.props?.isCollapsed ? 'unfold_more' : 'unfold_less'), React.createElement('span', null, 'Collapse'))
+                ? React.createElement('button', { type: 'button', onClick: () => { selectActionBlock(); toggleHeadingCollapse(block); closeMenu(); } }, materialIcon(block.props?.isCollapsed ? 'unfold_more' : 'unfold_less'), React.createElement('span', null, 'Collapse'))
                 : null,
             React.createElement('button', { type: 'button', className: 'is-danger', onClick: remove }, materialIcon('delete'), React.createElement('span', null, 'Delete'))
         ) : null
@@ -2050,9 +2004,6 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
                 triggerDebouncedSave();
             },
         },
-        React.createElement(FormattingToolbarController, {
-            formattingToolbar: NotesSelectionToolbar,
-        }),
         React.createElement(SuggestionMenuController, {
             triggerCharacter: '/',
             getItems: getSlashItems,

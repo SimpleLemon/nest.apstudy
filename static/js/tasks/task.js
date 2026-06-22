@@ -35,9 +35,9 @@ import {
     normalizeTask,
     sortedLists,
 } from "./task-utils.js";
+import { createTaskSounds } from "./task-audio.js";
 import * as React from "react";
 import { createRoot } from "react-dom/client";
-import useSound from "use-sound";
 
 const h = React.createElement;
 
@@ -52,16 +52,16 @@ function TaskApp({ completeSound, uncompleteSound }) {
     const [listDialog, setListDialog] = React.useState(null);
     const [actionMenu, setActionMenu] = React.useState(null);
     const [printListId, setPrintListId] = React.useState("");
-    const highlightTaskId = new URLSearchParams(window.location.search).get("task") || "";
-    const [playComplete] = useSound(completeSound, { volume: soundEnabled ? 0.55 : 0, interrupt: true });
+    const highlightTaskId = React.useMemo(() => new URLSearchParams(window.location.search).get("task") || "", []);
+    const sounds = React.useMemo(() => createTaskSounds({ completeSound, uncompleteSound }), [completeSound, uncompleteSound]);
 
     React.useEffect(() => {
         if (error && window.APStudyToast) {
             window.APStudyToast.error(error);
         }
     }, [error]);
-    const [playUncomplete] = useSound(uncompleteSound, { volume: soundEnabled ? 0.35 : 0, playbackRate: 0.86, interrupt: true });
     const listsRef = React.useRef(lists);
+    const tasksRef = React.useRef(tasks);
     const listMutationVersionsRef = React.useRef(new Map());
 
     const setListsAndRef = React.useCallback((nextListsOrUpdater) => {
@@ -72,15 +72,33 @@ function TaskApp({ completeSound, uncompleteSound }) {
         });
     }, []);
 
+    const setTasksAndRef = React.useCallback((nextTasksOrUpdater) => {
+        setTasks((current) => {
+            const nextTasks = typeof nextTasksOrUpdater === "function" ? nextTasksOrUpdater(current) : nextTasksOrUpdater;
+            tasksRef.current = nextTasks;
+            return nextTasks;
+        });
+    }, []);
+
     React.useEffect(() => {
         listsRef.current = lists;
     }, [lists]);
+
+    React.useEffect(() => {
+        tasksRef.current = tasks;
+    }, [tasks]);
+
+    React.useEffect(() => () => sounds.dispose(), [sounds]);
 
     const listById = React.useMemo(() => new Map(lists.map((list) => [list.id, list])), [lists]);
 
     const tasksByList = React.useMemo(() => {
         return groupTasksByList(lists, tasks, listById);
     }, [lists, listById, tasks]);
+    const listByIdRef = React.useRef(listById);
+    const tasksByListRef = React.useRef(tasksByList);
+    listByIdRef.current = listById;
+    tasksByListRef.current = tasksByList;
 
     const orderedLists = React.useMemo(() => sortedLists(lists), [lists]);
     const visibleOrderedLists = React.useMemo(() => orderedLists.filter((list) => !list.hidden), [orderedLists]);
@@ -91,7 +109,7 @@ function TaskApp({ completeSound, uncompleteSound }) {
         try {
             const { lists: nextLists, tasks: nextTasks, preferences } = await fetchTaskBoard();
             setListsAndRef(nextLists);
-            setTasks(nextTasks);
+            setTasksAndRef(nextTasks);
             setSoundEnabled(preferences?.task_sound_enabled !== false);
             if (highlightTaskId) {
                 const match = nextTasks.find((task) => task.id === highlightTaskId || task.$id === highlightTaskId);
@@ -100,15 +118,17 @@ function TaskApp({ completeSound, uncompleteSound }) {
                     setSelectedListId(match.list_id || "all");
                     setExpandedTaskId(match.id);
                 }
-            } else if (selectedListId !== "all" && selectedListId !== "starred" && !nextLists.some((list) => list.id === selectedListId && !list.hidden)) {
-                setSelectedListId("all");
-            }
+            } else setSelectedListId((current) => (
+                current !== "all" && current !== "starred" && !nextLists.some((list) => list.id === current && !list.hidden)
+                    ? "all"
+                    : current
+            ));
         } catch (err) {
             setError(err.message || "Unable to load tasks.");
         } finally {
             setLoading(false);
         }
-    }, [highlightTaskId, selectedListId, setListsAndRef]);
+    }, [highlightTaskId, setListsAndRef, setTasksAndRef]);
 
     React.useEffect(() => {
         load();
@@ -126,8 +146,8 @@ function TaskApp({ completeSound, uncompleteSound }) {
     }, [printListId]);
 
     const updateTaskInState = React.useCallback((updatedTask) => {
-        setTasks((current) => replaceById(current, updatedTask.id, normalizeTask(updatedTask)));
-    }, []);
+        setTasksAndRef((current) => replaceById(current, updatedTask.id, normalizeTask(updatedTask)));
+    }, [setTasksAndRef]);
 
     const createList = React.useCallback(async ({ name, description = "" }) => {
         const listName = (name || "New List").trim();
@@ -171,99 +191,97 @@ function TaskApp({ completeSound, uncompleteSound }) {
     }, [updateList]);
 
     const deleteList = React.useCallback(async (listId) => {
-        const list = listById.get(listId);
+        const list = listByIdRef.current.get(listId);
         const accepted = await requestDestructiveAction({
             title: "Delete list?",
             message: `Delete "${list?.name || "this list"}" and every task inside it? This cannot be undone.`,
             acceptLabel: "Delete list",
         });
         if (!accepted) return;
-        const previousLists = lists;
-        const previousTasks = tasks;
+        const previousLists = listsRef.current;
+        const previousTasks = tasksRef.current;
         setListsAndRef((current) => removeById(current, listId));
-        setTasks((current) => current.filter((task) => task.list_id !== listId));
-        if (selectedListId === listId) setSelectedListId("all");
+        setTasksAndRef((current) => current.filter((task) => task.list_id !== listId));
+        setSelectedListId((current) => current === listId ? "all" : current);
         try {
             await destroyTaskList(listId);
         } catch (err) {
             setError(err.message || "Unable to delete list.");
             setListsAndRef(previousLists);
-            setTasks(previousTasks);
+            setTasksAndRef(previousTasks);
         }
-    }, [listById, lists, selectedListId, setListsAndRef, tasks]);
+    }, [setListsAndRef, setTasksAndRef]);
 
     const deleteCompletedTasks = React.useCallback(async (listId) => {
-        const list = listById.get(listId);
+        const list = listByIdRef.current.get(listId);
         const accepted = await requestDestructiveAction({
             title: "Delete completed tasks?",
             message: `Delete completed tasks in "${list?.name || "this list"}"? Recurring task definitions will stay, but completed occurrences will be cleared.`,
             acceptLabel: "Delete completed",
         });
         if (!accepted) return;
-        const previousTasks = tasks;
-        setTasks((current) => removeCompletedTasksFromList(current, listId));
+        const previousTasks = tasksRef.current;
+        setTasksAndRef((current) => removeCompletedTasksFromList(current, listId));
         try {
             await destroyCompletedTasks(listId);
         } catch (err) {
             setError(err.message || "Unable to delete completed tasks.");
-            setTasks(previousTasks);
+            setTasksAndRef(previousTasks);
         }
-    }, [listById, tasks]);
+    }, [setTasksAndRef]);
 
     const createTask = React.useCallback(async (listId, draft) => {
         setError("");
         try {
             const task = await createTaskRecord(listId, draft);
-            setTasks((current) => appendTask(current, task));
+            setTasksAndRef((current) => appendTask(current, task));
         } catch (err) {
             setError(err.message || "Unable to create task.");
             throw err;
         }
-    }, []);
+    }, [setTasksAndRef]);
 
     const updateTask = React.useCallback(async (taskId, updates) => {
-        const previous = tasks;
-        setTasks((current) => mergeById(current, taskId, updates, normalizeTask));
+        const previous = tasksRef.current;
+        setTasksAndRef((current) => mergeById(current, taskId, updates, normalizeTask));
         try {
             updateTaskInState(await updateTaskRecord(taskId, updates));
         } catch (err) {
             setError(err.message || "Unable to update task.");
-            setTasks(previous);
+            setTasksAndRef(previous);
         }
-    }, [tasks, updateTaskInState]);
+    }, [setTasksAndRef, updateTaskInState]);
 
     const deleteTask = React.useCallback(async (taskId) => {
-        const task = tasks.find((item) => item.id === taskId);
+        const task = tasksRef.current.find((item) => item.id === taskId);
         const accepted = await requestDestructiveAction({
             title: "Delete task?",
             message: `Delete "${task?.title || "this task"}"? This cannot be undone.`,
             acceptLabel: "Delete task",
         });
         if (!accepted) return;
-        const previous = tasks;
-        setTasks((current) => removeById(current, taskId));
+        const previous = tasksRef.current;
+        setTasksAndRef((current) => removeById(current, taskId));
         try {
             await destroyTaskRecord(taskId);
         } catch (err) {
             setError(err.message || "Unable to delete task.");
-            setTasks(previous);
+            setTasksAndRef(previous);
         }
-    }, [tasks]);
+    }, [setTasksAndRef]);
 
     const completeTask = React.useCallback(async (task, completed) => {
-        const previous = tasks;
+        const previous = tasksRef.current;
         const optimistic = buildCompletedTaskOptimistic(task, completed);
-        setTasks((current) => replaceById(current, task.id, optimistic.task));
-        if (soundEnabled) {
-            completed ? playComplete() : playUncomplete();
-        }
+        setTasksAndRef((current) => replaceById(current, task.id, optimistic.task));
+        completed ? sounds.playComplete(soundEnabled) : sounds.playUncomplete(soundEnabled);
         try {
             updateTaskInState(await completeTaskRecord(task.id, completed, optimistic.occurrenceKey));
         } catch (err) {
             setError(err.message || "Unable to update completion.");
-            setTasks(previous);
+            setTasksAndRef(previous);
         }
-    }, [playComplete, playUncomplete, soundEnabled, tasks, updateTaskInState]);
+    }, [setTasksAndRef, soundEnabled, sounds, updateTaskInState]);
 
     const reorderLists = React.useCallback(async (orderedIds) => {
         const updates = buildListOrderUpdates(orderedIds);
@@ -278,14 +296,14 @@ function TaskApp({ completeSound, uncompleteSound }) {
 
     const reorderTasks = React.useCallback(async () => {
         const updates = taskOrderUpdatesFromDocument();
-        setTasks((current) => applyTaskOrderUpdates(current, updates));
+        setTasksAndRef((current) => applyTaskOrderUpdates(current, updates));
         try {
             await persistTaskOrder(updates);
         } catch (err) {
             setError(err.message || "Unable to reorder tasks.");
             load();
         }
-    }, [load]);
+    }, [load, setTasksAndRef]);
 
     const openListDialog = React.useCallback((request) => {
         if (request?.mode === "quick") {
@@ -312,15 +330,15 @@ function TaskApp({ completeSound, uncompleteSound }) {
     }, []);
 
     const openListMenu = React.useCallback((listId, position) => {
-        const list = listById.get(listId);
+        const list = listByIdRef.current.get(listId);
         if (!list) return;
-        const listTasks = tasksByList.get(listId) || [];
+        const listTasks = tasksByListRef.current.get(listId) || [];
         toggleActionMenu(setActionMenu, "list", listId, () => ({
             anchor: position.anchor,
             title: "Sort by",
             items: listMenuItems({ list, listTasks, updateList, openListDialog, printListById, deleteCompletedTasks, deleteList }),
         }));
-    }, [deleteCompletedTasks, deleteList, listById, openListDialog, printListById, tasksByList, updateList]);
+    }, [deleteCompletedTasks, deleteList, openListDialog, printListById, updateList]);
 
     const openTaskMenu = React.useCallback((taskId, position) => {
         toggleActionMenu(setActionMenu, "task", taskId, () => ({

@@ -2,7 +2,7 @@ import logging
 import os
 from datetime import datetime, timedelta, timezone
 
-from flask import Flask, jsonify, redirect, render_template, request, session, url_for
+from flask import Flask, g, jsonify, redirect, render_template, request, session, url_for
 from dotenv import load_dotenv
 from werkzeug.exceptions import RequestEntityTooLarge
 from werkzeug.middleware.proxy_fix import ProxyFix
@@ -123,14 +123,17 @@ def create_app():
         try:
             from appwrite.query import Query
             from appwrite_client import COLLECTIONS
-            from appwrite_helpers import list_rows_safe
+            from appwrite_helpers import first_row
 
-            response = list_rows_safe(
-                COLLECTIONS["user_settings"],
-                [Query.equal("user_id", [str(current_user.id)]), Query.limit(1)],
-            )
-            rows = response.get("rows", [])
-            raw_sidebar_default = rows[0].get("sidebar_default") if rows else ""
+            if hasattr(g, "_apstudy_user_settings"):
+                settings = g._apstudy_user_settings
+            else:
+                settings = first_row(
+                    COLLECTIONS["user_settings"],
+                    [Query.equal("user_id", [str(current_user.id)])],
+                )
+                g._apstudy_user_settings = settings
+            raw_sidebar_default = settings.get("sidebar_default") if settings else ""
         except Exception:
             raw_sidebar_default = ""
 

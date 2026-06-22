@@ -1,7 +1,6 @@
 import * as React from 'https://esm.sh/react@18.3.1';
 import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client?deps=react@18.3.1';
 import { Command } from 'https://esm.sh/cmdk@1.1.1?deps=react@18.3.1,react-dom@18.3.1';
-import * as Dialog from 'https://esm.sh/@radix-ui/react-dialog@1.1.15?deps=react@18.3.1,react-dom@18.3.1';
 
 const h = React.createElement;
 
@@ -323,12 +322,12 @@ function CommandPaletteApp() {
       },
     },
     h(
-      Dialog.Title,
+      'h2',
       { className: 'apstudy-visually-hidden' },
       'Command palette',
     ),
     h(
-      Dialog.Description,
+      'p',
       { className: 'apstudy-visually-hidden' },
       'Search navigation, help links, and theme commands.',
     ),

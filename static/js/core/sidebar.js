@@ -215,8 +215,14 @@ function setupChatSummaryBadge() {
   const nav = document.querySelector('global.thenav');
   if (!nav || !nav.hasAttribute('data-user-email')) return;
   const pollMs = 120000;
+  const idleMs = 300000;
   let timer = null;
   let inFlight = false;
+  let lastActivityAt = Date.now();
+
+  function isIdle() {
+    return Date.now() - lastActivityAt >= idleMs;
+  }
 
   function renderBadge(payload = {}) {
     const count = Number(payload.total_unread || 0);
@@ -234,12 +240,15 @@ function setupChatSummaryBadge() {
 
   function schedule(delay = pollMs) {
     window.clearTimeout(timer);
-    if (document.visibilityState === 'hidden') return;
-    timer = window.setTimeout(refresh, delay);
+    timer = null;
+    if (document.visibilityState === 'hidden' || isIdle()) return;
+    const activeForMs = Date.now() - lastActivityAt;
+    const untilIdleMs = Math.max(0, idleMs - activeForMs);
+    timer = window.setTimeout(refresh, Math.min(delay, untilIdleMs));
   }
 
   async function refresh() {
-    if (inFlight || document.visibilityState === 'hidden') return;
+    if (inFlight || document.visibilityState === 'hidden' || isIdle()) return;
     inFlight = true;
     try {
       const response = await fetch('/api/chat/summary', {
@@ -257,14 +266,27 @@ function setupChatSummaryBadge() {
     }
   }
 
+  function markActive() {
+    const wasIdle = isIdle();
+    lastActivityAt = Date.now();
+    if (wasIdle && document.visibilityState === 'visible') schedule(1000);
+  }
+
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
+      lastActivityAt = Date.now();
       schedule(1000);
     } else {
       window.clearTimeout(timer);
+      timer = null;
     }
   });
-  window.addEventListener('apstudy-chat-read-state-change', () => schedule(1000));
+  document.addEventListener('pointerdown', markActive, { passive: true });
+  document.addEventListener('keydown', markActive);
+  window.addEventListener('apstudy-chat-read-state-change', () => {
+    markActive();
+    schedule(1000);
+  });
   window.addEventListener('apstudy-chat-summary', (event) => {
     renderBadge(event.detail || {});
     schedule();

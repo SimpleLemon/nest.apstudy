@@ -41,6 +41,16 @@ class TestDashboardSummary(unittest.TestCase):
             onboarding_complete=True,
         )
 
+    def test_user_settings_are_cached_for_the_request(self):
+        settings = {"interface_theme": "nest-dark", "sidebar_default": "collapsed"}
+        with self.app.test_request_context("/tasks"):
+            with patch.object(dashboard_bp, "current_user", self.user), \
+                    patch.object(dashboard_bp, "first_row", return_value=settings) as first_row:
+                self.assertIs(dashboard_bp._load_user_settings(), settings)
+                self.assertIs(dashboard_bp._load_user_settings(), settings)
+
+        first_row.assert_called_once()
+
     def _summary_with_patches(self, *, settings=None, calendar=None, tasks=None, courses=None):
         with self.app.test_request_context("/api/dashboard/summary"):
             with patch.object(dashboard_bp, "current_user", self.user), \

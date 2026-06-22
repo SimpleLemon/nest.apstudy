@@ -351,7 +351,30 @@ export function ListRail(props) {
     );
 }
 
-export function TaskSection(props) {
+function taskItemsEqual(previous, next) {
+    if (previous.length !== next.length) return false;
+    return previous.every((task, index) => task === next[index]);
+}
+
+function taskSectionPropsEqual(previous, next) {
+    if (previous.list !== next.list || !taskItemsEqual(previous.tasks, next.tasks)) return false;
+    if (previous.highlightTaskId !== next.highlightTaskId) return false;
+    if (previous.expandedTaskId !== next.expandedTaskId) {
+        const affectedIds = new Set([previous.expandedTaskId, next.expandedTaskId]);
+        if (previous.tasks.some((task) => affectedIds.has(task.id))) return false;
+    }
+    return previous.updateList === next.updateList
+        && previous.createTask === next.createTask
+        && previous.updateTask === next.updateTask
+        && previous.deleteTask === next.deleteTask
+        && previous.completeTask === next.completeTask
+        && previous.setExpandedTaskId === next.setExpandedTaskId
+        && previous.reorderTasks === next.reorderTasks
+        && previous.openListMenu === next.openListMenu
+        && previous.openTaskMenu === next.openTaskMenu;
+}
+
+export const TaskSection = React.memo(function TaskSection(props) {
     const {
         list,
         tasks,
@@ -467,4 +490,4 @@ export function TaskSection(props) {
             ) : null
         ) : null
     );
-}
+}, taskSectionPropsEqual);

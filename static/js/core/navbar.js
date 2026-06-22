@@ -278,9 +278,11 @@ function setupNavbarInteractions(userEmail) {
     });
   }
 
-  ensureCommandPaletteModule().catch((error) => {
-    console.warn('Unable to preload command palette.', error);
-  });
+  if (document.body?.dataset?.commandPalettePreload !== 'false') {
+    ensureCommandPaletteModule().catch((error) => {
+      console.warn('Unable to preload command palette.', error);
+    });
+  }
 }
 
 // Initialize navbar when DOM is ready

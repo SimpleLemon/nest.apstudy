@@ -238,7 +238,7 @@ function TaskDetails({ task, updateTask }) {
     );
 }
 
-export function TaskRow({ task, isExpanded, setExpandedTaskId, updateTask, completeTask, highlighted, openTaskMenu, draggable = true }) {
+export const TaskRow = React.memo(function TaskRow({ task, isExpanded, setExpandedTaskId, updateTask, completeTask, highlighted, openTaskMenu, draggable = true }) {
     const [titleDraft, setTitleDraft] = React.useState(task.title);
     const completed = isRepeatingTaskCompleted(task);
     React.useEffect(() => setTitleDraft(task.title), [task.title]);
@@ -299,7 +299,7 @@ export function TaskRow({ task, isExpanded, setExpandedTaskId, updateTask, compl
         ),
         isExpanded ? h(TaskDetails, { task, updateTask }) : null
     );
-}
+});
 
 export function AddTaskForm({ listId, createTask }) {
     const [focused, setFocused] = React.useState(false);
