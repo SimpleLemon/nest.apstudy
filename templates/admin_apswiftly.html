@@ -38,15 +38,18 @@
             <div class="admin-system-meta admin-apswiftly-meta">
                 <div class="admin-status-chip">
                     <span>Service</span>
-                    <strong data-apswiftly-role="service-state">{{ apswiftly_status.service_state or "unknown" }}</strong>
+                    <strong data-apswiftly-role="service-state">{{ apswiftly_status.service_state_display or "Unknown" }}</strong>
                 </div>
                 <div class="admin-status-chip">
                     <span>Control API</span>
                     <strong data-apswiftly-role="api-state">{{ "Reachable" if apswiftly_status.api_reachable else "Unreachable" }}</strong>
                 </div>
-                <div class="admin-status-chip admin-status-chip--wide">
-                    <span>Last checked</span>
-                    <strong data-apswiftly-role="checked-at">{{ apswiftly_status.checked_at or "—" }}</strong>
+                <div class="admin-status-chip">
+                    <span>Last Checked</span>
+                    <strong
+                        data-apswiftly-role="checked-at"
+                        data-apswiftly-checked-at="{{ apswiftly_status.checked_at or '' }}"
+                    >{{ apswiftly_status.checked_at_display or "—" }}</strong>
                 </div>
             </div>
         </section>

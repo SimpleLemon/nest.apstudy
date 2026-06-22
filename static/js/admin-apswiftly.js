@@ -18,6 +18,57 @@
     }
   }
 
+  function formatServiceState(state) {
+    const normalized = (state || "unknown").trim().toLowerCase();
+    if (normalized === "unknown") {
+      return "Unknown";
+    }
+    return normalized.charAt(0).toUpperCase() + normalized.slice(1);
+  }
+
+  function formatCheckedAt(iso) {
+    if (!iso) {
+      return "—";
+    }
+
+    const checkedAt = new Date(iso);
+    if (Number.isNaN(checkedAt.getTime())) {
+      return "—";
+    }
+
+    const totalSeconds = Math.max(0, Math.floor((Date.now() - checkedAt.getTime()) / 1000));
+    if (totalSeconds > 5 * 86400) {
+      return checkedAt.toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+        timeZone: "UTC",
+      });
+    }
+
+    const hours = totalSeconds / 3600;
+    if (hours < 48) {
+      if (hours < 1) {
+        const minutes = Math.max(1, Math.floor(totalSeconds / 60));
+        return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
+      }
+      const hourCount = Math.max(1, Math.floor(hours));
+      return `${hourCount} hour${hourCount === 1 ? "" : "s"} ago`;
+    }
+
+    const dayCount = Math.max(1, Math.floor(totalSeconds / 86400));
+    return `${dayCount} day${dayCount === 1 ? "" : "s"} ago`;
+  }
+
+  function updateCheckedAt(iso) {
+    const el = document.querySelector('[data-apswiftly-role="checked-at"]');
+    if (!el) {
+      return;
+    }
+    el.dataset.apswiftlyCheckedAt = iso || "";
+    el.textContent = formatCheckedAt(iso);
+  }
+
   async function postJson(url, body) {
     const requestOptions = {
       method: "POST",
@@ -60,9 +111,9 @@
         return;
       }
       const payload = await response.json();
-      setText("service-state", payload.service_state || "unknown");
+      setText("service-state", payload.service_state_display || formatServiceState(payload.service_state));
       setText("api-state", payload.api_reachable ? "Reachable" : "Unreachable");
-      setText("checked-at", payload.checked_at || "—");
+      updateCheckedAt(payload.checked_at);
     } catch (error) {
       console.error("[Admin APSwiftly] Status refresh failed", error);
     }

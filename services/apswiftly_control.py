@@ -46,7 +46,55 @@ def _control_headers():
 
 
 def _checked_at():
-    return datetime.now(timezone.utc).strftime("%B %-d, %Y %-I:%M %p UTC")
+    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
+
+def format_service_state_display(state):
+    normalized = (state or "unknown").strip().lower()
+    if normalized == "unknown":
+        return "Unknown"
+    return normalized.capitalize()
+
+
+def format_checked_at_display(value, *, now=None):
+    if not value:
+        return "—"
+
+    if isinstance(value, datetime):
+        checked_at = value
+    elif isinstance(value, str):
+        text = value[:-1] + "+00:00" if value.endswith("Z") else value
+        try:
+            checked_at = datetime.fromisoformat(text)
+        except ValueError:
+            return value
+    else:
+        return str(value)
+
+    if checked_at.tzinfo is None:
+        checked_at = checked_at.replace(tzinfo=timezone.utc)
+    else:
+        checked_at = checked_at.astimezone(timezone.utc)
+
+    reference = now or datetime.now(timezone.utc)
+    total_seconds = max(0, int((reference - checked_at).total_seconds()))
+
+    if total_seconds > 5 * 86400:
+        return f"{checked_at.strftime('%B')} {checked_at.day}, {checked_at.strftime('%Y')}"
+
+    hours = total_seconds / 3600
+    if hours < 48:
+        if hours < 1:
+            minutes = max(1, total_seconds // 60)
+            suffix = "minute" if minutes == 1 else "minutes"
+            return f"{minutes} {suffix} ago"
+        hour_count = max(1, int(hours))
+        suffix = "hour" if hour_count == 1 else "hours"
+        return f"{hour_count} {suffix} ago"
+
+    day_count = max(1, total_seconds // 86400)
+    suffix = "day" if day_count == 1 else "days"
+    return f"{day_count} {suffix} ago"
 
 
 def _service_state():
@@ -88,14 +136,17 @@ def _api_status():
 def apswiftly_status():
     service_state = _service_state()
     api_reachable, api_payload = _api_status()
+    checked_at = _checked_at()
     return {
         "service_name": APSWIFTLY_SERVICE_NAME,
         "service_state": service_state,
+        "service_state_display": format_service_state_display(service_state),
         "service_active": service_state == "active",
         "api_reachable": api_reachable,
         "api_payload": api_payload,
         "control_url": APSWIFTLY_CONTROL_URL,
-        "checked_at": _checked_at(),
+        "checked_at": checked_at,
+        "checked_at_display": format_checked_at_display(checked_at),
     }
 
 

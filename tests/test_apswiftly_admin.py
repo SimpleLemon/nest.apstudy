@@ -2,6 +2,7 @@ import os
 import re
 import unittest
 from contextlib import ExitStack
+from datetime import datetime, timedelta, timezone
 from unittest.mock import patch
 
 from flask import Blueprint, Flask
@@ -11,6 +12,7 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 from extensions import csrf, login_manager
 import blueprints.admin as admin
 import services.apswiftly_control as apswiftly_control
+from services.apswiftly_control import format_checked_at_display, format_service_state_display
 
 
 class TestUser(UserMixin):
@@ -58,11 +60,13 @@ class APSwiftlyAdminTestCase(unittest.TestCase):
         self.status_payload = {
             "service_name": "apswiftly",
             "service_state": "active",
+            "service_state_display": "Active",
             "service_active": True,
             "api_reachable": True,
             "api_payload": {"ok": True},
             "control_url": "http://127.0.0.1:3921",
-            "checked_at": "June 21, 2026 12:00 PM UTC",
+            "checked_at": "2026-06-21T12:00:00Z",
+            "checked_at_display": "20 minutes ago",
         }
         self.page_patches = [
             patch.object(admin, "_theme_preference", return_value=None),
@@ -113,9 +117,13 @@ class APSwiftlyAdminTestCase(unittest.TestCase):
         self.assertIn("Refresh Slash Commands", html)
         self.assertIn("Graceful Shutdown", html)
         self.assertIn("Service Restart", html)
+        self.assertIn("Active", html)
+        self.assertIn("Last Checked", html)
         self.assertIn('data-apswiftly-action="reload"', html)
         self.assertIn('href="/admin/apswiftly"', html)
         self.assertIn("admin-apswiftly.js", html)
+        self.assertIn(">Active<", html)
+        self.assertIn(">20 minutes ago<", html)
 
     def test_admin_apswiftly_status_returns_json(self):
         with self.app.test_client() as client:
@@ -128,6 +136,32 @@ class APSwiftlyAdminTestCase(unittest.TestCase):
         self.assertTrue(payload["service_active"])
         self.assertTrue(payload["api_reachable"])
         self.assertEqual(payload["service_state"], "active")
+        self.assertEqual(payload["service_state_display"], "Active")
+
+    def test_format_service_state_display_active(self):
+        self.assertEqual(format_service_state_display("active"), "Active")
+
+    def test_format_checked_at_relative_units(self):
+        now = datetime(2026, 6, 22, 12, 0, tzinfo=timezone.utc)
+        self.assertEqual(
+            format_checked_at_display(now - timedelta(minutes=20), now=now),
+            "20 minutes ago",
+        )
+        self.assertEqual(
+            format_checked_at_display(now - timedelta(hours=5), now=now),
+            "5 hours ago",
+        )
+        self.assertEqual(
+            format_checked_at_display(now - timedelta(days=3), now=now),
+            "3 days ago",
+        )
+
+    def test_format_checked_at_absolute_after_five_days(self):
+        now = datetime(2026, 6, 22, 12, 0, tzinfo=timezone.utc)
+        self.assertEqual(
+            format_checked_at_display(now - timedelta(days=6), now=now),
+            "June 16, 2026",
+        )
 
     def test_admin_apswiftly_reload_requires_csrf_and_calls_service(self):
         with self.app.test_client() as client:

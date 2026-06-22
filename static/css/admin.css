@@ -1027,6 +1027,19 @@ body.admin-page [hidden] {
 
 .admin-apswiftly-meta {
     margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    width: min(100%, 720px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.admin-apswiftly-meta .admin-status-chip {
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
 }
 
 .admin-apswiftly-actions {
@@ -1050,6 +1063,8 @@ body.admin-page [hidden] {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    min-width: 0;
+    width: 100%;
 }
 
 .admin-apswiftly-confirm-label {
@@ -1587,9 +1602,35 @@ body.admin-page [hidden] {
         height: 120px;
     }
 
+    .admin-apswiftly-meta {
+        grid-template-columns: 1fr;
+        max-width: none;
+        width: 100%;
+    }
+
+    .admin-apswiftly-meta .admin-status-chip {
+        min-height: 64px;
+    }
+
     .admin-apswiftly-actions {
         grid-template-columns: 1fr;
         gap: 20px;
         max-width: none;
+        width: 100%;
+        margin-inline: 0;
+    }
+
+    .admin-apswiftly-actions .admin-control-tile {
+        min-width: 0;
+        padding: 14px 16px;
+        white-space: normal;
+    }
+
+    .admin-apswiftly-confirm-label {
+        overflow-wrap: anywhere;
+    }
+
+    .admin-apswiftly-confirm-label .admin-form-input {
+        font-size: 16px;
     }
 }
