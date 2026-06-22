@@ -416,7 +416,9 @@ class CourseTrackingEmailTests(unittest.TestCase):
             nest_details_url="https://nest.apstudy.org/courses?section=test#section=test",
         )
 
-        self.assertIn("https://resources.apstudy.org/images/AP-Resources-Logo.png", html)
+        self.assertIn("/static/images/apstudy-logo-email.jpg", html)
+        self.assertIn('width="100"', html)
+        self.assertIn("border-radius:50%", html)
         self.assertIn("https://atlas.emory.edu", html)
         self.assertIn("Nest Course Details", html)
         self.assertIn("Emory Atlas", html)
@@ -441,7 +443,7 @@ class CourseTrackingEmailTests(unittest.TestCase):
         kwargs = mock_messaging.create_email.call_args.kwargs
         self.assertTrue(kwargs["html"])
         self.assertIn("🎉 JPN 101 has 2 Open Seats", kwargs["subject"])
-        self.assertIn("AP-Resources-Logo.png", kwargs["content"])
+        self.assertIn("apstudy-logo-email.jpg", kwargs["content"])
         self.assertIn("#section=Spring_2026%7CJPN%7C101%7C1234%7C1", kwargs["content"])
 
 

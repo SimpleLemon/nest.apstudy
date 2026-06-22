@@ -3,7 +3,8 @@
 import html
 from urllib.parse import quote
 
-APSTUDY_LOGO_URL = "https://resources.apstudy.org/images/AP-Resources-Logo.png"
+APSTUDY_EMAIL_LOGO_PATH = "/static/images/apstudy-logo-email.jpg"
+APSTUDY_EMAIL_LOGO_SIZE = 100
 DEFAULT_ATLAS_URL = "https://atlas.emory.edu"
 NAVY = "#0C234B"
 PRIMARY_BLUE = "#1E5288"
@@ -48,6 +49,8 @@ def build_open_seat_html(section, *, base_url, atlas_url=None, nest_details_url=
     section_id = section.get("id") or section.get("section_id") or ""
     nest_url = nest_details_url or build_nest_courses_detail_url(base_url, section_id)
     atlas_link = str(atlas_url or DEFAULT_ATLAS_URL).strip() or DEFAULT_ATLAS_URL
+    logo_size = APSTUDY_EMAIL_LOGO_SIZE
+    logo_url = f"{str(base_url or 'https://nest.apstudy.org').rstrip('/')}{APSTUDY_EMAIL_LOGO_PATH}"
 
     rows = [
         ("Course code", course_code),
@@ -85,8 +88,8 @@ def build_open_seat_html(section, *, base_url, atlas_url=None, nest_details_url=
       <td align="center" style="padding:32px 16px;">
         <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background-color:#FFFFFF;font-family:Tahoma,Arial,Helvetica,sans-serif;">
           <tr>
-            <td align="center" style="padding:32px 40px 16px;">
-              <img src="{html.escape(APSTUDY_LOGO_URL)}" alt="APStudy Logo" width="250" style="display:block;max-width:250px;width:100%;height:auto;border:0;">
+            <td align="center" style="padding:24px 40px 12px;">
+              <img src="{html.escape(logo_url)}" alt="APStudy Logo" width="{logo_size}" height="{logo_size}" style="display:block;width:{logo_size}px;height:{logo_size}px;max-width:{logo_size}px;border-radius:50%;object-fit:cover;border:0;">
             </td>
           </tr>
           <tr>
