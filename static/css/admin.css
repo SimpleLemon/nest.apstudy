@@ -1020,6 +1020,69 @@ body.admin-page [hidden] {
     transform: none;
 }
 
+.admin-apswiftly-status-card,
+.admin-apswiftly-controls-card {
+    margin-top: 18px;
+}
+
+.admin-apswiftly-meta {
+    margin-top: 14px;
+}
+
+.admin-apswiftly-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 28px;
+    max-width: 720px;
+    margin: 18px auto 0;
+}
+
+.admin-control-tile {
+    border-radius: 14px;
+    min-height: 72px;
+    width: 100%;
+    padding: 16px 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.admin-apswiftly-danger-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.admin-apswiftly-confirm-label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--admin-muted);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.admin-apswiftly-confirm-label strong {
+    color: var(--admin-ink);
+}
+
+.admin-form-input {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--admin-border);
+    background: var(--admin-surface);
+    color: var(--admin-ink);
+    font-size: 14px;
+}
+
+.admin-apswiftly-actions .admin-button:disabled,
+.admin-apswiftly-actions .admin-control-tile:disabled {
+    cursor: wait;
+    opacity: 0.68;
+    transform: none;
+}
+
 .admin-metrics-card,
 .admin-scheduler-card,
 .admin-tracking-panel {
@@ -1522,5 +1585,11 @@ body.admin-page [hidden] {
     .admin-ring-svg {
         width: 120px;
         height: 120px;
+    }
+
+    .admin-apswiftly-actions {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: none;
     }
 }

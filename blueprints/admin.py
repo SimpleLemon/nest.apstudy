@@ -49,6 +49,8 @@ from services.app_config import (
 from services.admin_access import admin_user_ids
 from services.scheduler import update_course_tracking_refresh_interval
 from services.discord_audit import discord_audit_status, emit_admin_event, format_actor, format_user_target
+import services.apswiftly_control as apswiftly_control_service
+from services.apswiftly_control import APSwiftlyControlError, apswiftly_status
 from services.calendar_store import (
     count_calendar_rows,
     delete_calendar_rows_by_user,
@@ -359,6 +361,11 @@ def _admin_event_title(action):
         "scheduler_pause": "Admin Paused Scheduler",
         "scheduler_resume": "Admin Resumed Scheduler",
         "system_git_pull": "Admin Ran Git Pull",
+        "view_admin_apswiftly": "Admin Viewed APSwiftly",
+        "apswiftly_reload": "Admin Reloaded APSwiftly Commands",
+        "apswiftly_refresh_slash": "Admin Refreshed APSwiftly Slash Commands",
+        "apswiftly_shutdown": "Admin Shut Down APSwiftly",
+        "apswiftly_restart": "Admin Restarted APSwiftly Service",
     }
     return labels.get(action, "Admin Action")
 
@@ -1465,6 +1472,100 @@ def admin_requests():
         active_admin_page="requests",
         breadcrumbs=[("Admin", url_for("admin.admin_index")), ("Requests", None)],
     )
+
+
+APSWIFTLY_CONTROL_ACTIONS = {
+    "reload": "apswiftly_reload",
+    "refresh-slash": "apswiftly_refresh_slash",
+    "shutdown": "apswiftly_shutdown",
+    "restart": "apswiftly_service_restart",
+}
+
+APSWIFTLY_CONFIRM_ACTIONS = {
+    "shutdown": "SHUTDOWN",
+    "restart": "RESTART",
+}
+
+
+@admin_bp.route("/admin/apswiftly")
+@admin_required
+def admin_apswiftly():
+    status_payload = apswiftly_status()
+    _log_admin_action("view_admin_apswiftly", "APSwiftly")
+    return render_template(
+        "admin_apswiftly.html",
+        apswiftly_status=status_payload,
+        theme_preference=_theme_preference(),
+        pending_request_count=_pending_admin_request_count(),
+        active_admin_page="apswiftly",
+        breadcrumbs=[("Admin", url_for("admin.admin_index")), ("APSwiftly", None)],
+    )
+
+
+@admin_bp.route("/admin/apswiftly/status")
+@admin_required
+def admin_apswiftly_status():
+    return jsonify(apswiftly_status())
+
+
+@admin_bp.route("/admin/apswiftly/<action>", methods=["POST"])
+@admin_required
+def admin_apswiftly_control(action):
+    if action not in APSWIFTLY_CONTROL_ACTIONS:
+        abort(404)
+
+    payload = request.get_json(silent=True) or {}
+    required_confirm = APSWIFTLY_CONFIRM_ACTIONS.get(action)
+    if required_confirm:
+        confirm = str(payload.get("confirm") or "").strip().upper()
+        if confirm != required_confirm:
+            return jsonify(
+                {
+                    "error": "Confirmation required.",
+                    "message": f'Type "{required_confirm}" to confirm this action.',
+                }
+            ), 400
+
+    metadata = {
+        "apswiftly_action": action,
+        "command_mode": "fixed",
+    }
+    handler = getattr(apswiftly_control_service, APSWIFTLY_CONTROL_ACTIONS[action])
+    try:
+        result = handler()
+    except APSwiftlyControlError as exc:
+        message = _sanitize_admin_error(exc)
+        _log_admin_action(
+            f"apswiftly_{action.replace('-', '_')}",
+            "APSwiftly",
+            metadata={**metadata, "result": "failed"},
+            color="red",
+        )
+        return jsonify({"error": "APSwiftly command failed.", "message": message}), exc.status_code
+    except Exception as exc:
+        logger.exception("Failed APSwiftly action: %s", action)
+        message = _sanitize_admin_error(exc)
+        _log_admin_action(
+            f"apswiftly_{action.replace('-', '_')}",
+            "APSwiftly",
+            metadata={**metadata, "result": "failed"},
+            color="red",
+        )
+        return jsonify({"error": "Unable to run APSwiftly command.", "message": message}), 500
+
+    action_color = "green"
+    if action == "shutdown":
+        action_color = "red"
+    elif action in {"restart", "reload", "refresh-slash"}:
+        action_color = "yellow"
+
+    _log_admin_action(
+        f"apswiftly_{action.replace('-', '_')}",
+        "APSwiftly",
+        metadata={**metadata, "result": "success", "response": result if isinstance(result, dict) else {}},
+        color=action_color,
+    )
+    return jsonify({"status": "ok", "action": action, **(result if isinstance(result, dict) else {})})
 
 
 @admin_bp.route("/admin/course-tracking/spring-toggle", methods=["POST"])
