@@ -416,6 +416,7 @@ test("courses page keeps Atlas APIs, filtering state, and schedule constants con
     assert.match(combinedSource, /function layoutConflictGroup\(events\)/);
     assert.match(combinedSource, /event\.start >= activeGroup\.end/);
     assert.match(combinedSource, /course-card-tracked/);
+    assert.match(combinedSource, /notifications_active/);
     assert.match(combinedSource, /if \(section\?\.is_cancelled\) return false/);
     assert.match(combinedSource, /if \(seats === 0\) return true/);
     assert.match(combinedSource, /normalizeScheduleDisplay/);
@@ -425,6 +426,7 @@ test("courses page keeps Atlas APIs, filtering state, and schedule constants con
     assert.match(styles, /\.courses-view-toggle/);
     assert.match(styles, /\.course-section-inline/);
     assert.match(styles, /\.course-card-tracked/);
+    assert.match(styles, /\.course-card-meta-row/);
 });
 
 test("files page keeps upload limits, modal elements, and share/delete endpoints wired", async () => {

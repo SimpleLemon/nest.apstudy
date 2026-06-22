@@ -169,13 +169,15 @@
             <button type="button" class="course-card-action ${isAdded ? "is-added" : ""}" data-add-section-id="${escapeHtml(id)}" ${saving ? "disabled" : ""}>${isAdded ? "Added" : "Add"}</button>
           </div>
           <div class="course-card-schedule">${escapeHtml(scheduleDetail)}</div>
-          <div class="course-card-meta">
-            <span class="course-chip ${statusClass}">${escapeHtml(status)}</span>
-            <span class="course-chip">${escapeHtml(seats)}</span>
-            <span class="course-chip">${escapeHtml(section.schedule_type || "Type")}</span>
-            <span class="course-chip">${escapeHtml(formatCampus(section))}</span>
+          <div class="course-card-meta-row">
+            <div class="course-card-meta">
+              <span class="course-chip ${statusClass}">${escapeHtml(status)}</span>
+              <span class="course-chip">${escapeHtml(seats)}</span>
+              <span class="course-chip">${escapeHtml(section.schedule_type || "Type")}</span>
+              <span class="course-chip">${escapeHtml(formatCampus(section))}</span>
+            </div>
+            ${isAdded && isTracked ? `<span class="course-card-tracked material-symbols-outlined" aria-label="Seat tracking enabled" title="Seat tracking enabled">notifications_active</span>` : ""}
           </div>
-          ${isAdded && isTracked ? `<div class="course-card-tracked">Tracked</div>` : ""}
         </article>
       `;
     }
