@@ -11,7 +11,10 @@
     "HAPW",
     "First Year Seminar",
     "Humanities and Arts with Cont.Communication(*)",
-    "Humanities and Arts(*)"
+    "Humanities and Arts(*)",
+    "Humanities&Arts w. CW/ETHN(*)",
+    "Humanities & Arts with CW(*)",
+    "First Year Seminar(*)"
   ],
   "campus": "Atlanta",
   "campus_description": "ATL@ATLANTA",
@@ -48,7 +51,11 @@
       "credit_hours": "3",
       "requirement_designation": "First Year Seminar",
       "requirements": [
-        "First Year Seminar"
+        "First Year Seminar",
+        "Humanities&Arts w. CW/ETHN(*)",
+        "Humanities & Arts with CW(*)",
+        "Humanities and Arts(*)",
+        "First Year Seminar(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -104,7 +111,11 @@
       "credit_hours": "4",
       "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
       "requirements": [
-        "Humanities and Arts with Cont.Communication(*)"
+        "Humanities and Arts with Cont.Communication(*)",
+        "Humanities&Arts w. CW/ETHN(*)",
+        "Humanities & Arts with CW(*)",
+        "Humanities and Arts(*)",
+        "First Year Seminar(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -165,7 +176,10 @@
       "credit_hours": "3",
       "requirement_designation": "Humanities and Arts(*)",
       "requirements": [
-        "Humanities and Arts(*)"
+        "Humanities and Arts(*)",
+        "Humanities&Arts w. CW/ETHN(*)",
+        "Humanities & Arts with CW(*)",
+        "First Year Seminar(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -224,8 +238,13 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "4",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Humanities&Arts w. CW/ETHN(*)",
+      "requirements": [
+        "Humanities&Arts w. CW/ETHN(*)",
+        "Humanities & Arts with CW(*)",
+        "Humanities and Arts(*)",
+        "First Year Seminar(*)"
+      ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
         "GRD",

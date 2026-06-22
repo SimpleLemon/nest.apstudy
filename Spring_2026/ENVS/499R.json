@@ -10,7 +10,9 @@
   "requirements": [
     "XA",
     "Humanities and Arts(*)",
-    "Humanities & Arts with C.Comm/Race & Ethnicity(*)"
+    "Humanities & Arts with C.Comm/Race & Ethnicity(*)",
+    "Humanities&Arts w. CW/ETHN(*)",
+    "Experience and Application(*)"
   ],
   "campus": "Oxford",
   "campus_description": "OXF@OXFORD",
@@ -40,8 +42,12 @@
       "campus": "Oxford",
       "campus_description": "OXF@OXFORD",
       "credit_hours": "1,2,3,4",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Humanities&Arts w. CW/ETHN(*)",
+      "requirements": [
+        "Humanities&Arts w. CW/ETHN(*)",
+        "Humanities and Arts(*)",
+        "Experience and Application(*)"
+      ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
         "GRD",
@@ -85,7 +91,9 @@
       "credit_hours": "4",
       "requirement_designation": "Humanities and Arts(*)",
       "requirements": [
-        "Humanities and Arts(*)"
+        "Humanities and Arts(*)",
+        "Humanities&Arts w. CW/ETHN(*)",
+        "Experience and Application(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -130,7 +138,9 @@
       "credit_hours": "4",
       "requirement_designation": "Humanities and Arts(*)",
       "requirements": [
-        "Humanities and Arts(*)"
+        "Humanities and Arts(*)",
+        "Humanities&Arts w. CW/ETHN(*)",
+        "Experience and Application(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -175,7 +185,10 @@
       "credit_hours": "4",
       "requirement_designation": "Humanities & Arts with C.Comm/Race & Ethnicity(*)",
       "requirements": [
-        "Humanities & Arts with C.Comm/Race & Ethnicity(*)"
+        "Humanities & Arts with C.Comm/Race & Ethnicity(*)",
+        "Humanities&Arts w. CW/ETHN(*)",
+        "Humanities and Arts(*)",
+        "Experience and Application(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [

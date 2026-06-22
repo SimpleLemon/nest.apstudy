@@ -9,7 +9,9 @@
   "requirement_designation": "IC",
   "requirements": [
     "IC",
-    "Continuing Communication and Writing(*)"
+    "Continuing Communication and Writing(*)",
+    "Continuing Comm.& Writing(*)",
+    "Intercultural Communication(*)"
   ],
   "campus": "Atlanta",
   "campus_description": "ATL@ATLANTA",
@@ -39,8 +41,11 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "3",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Continuing Comm.& Writing(*)",
+      "requirements": [
+        "Continuing Comm.& Writing(*)",
+        "Intercultural Communication(*)"
+      ],
       "grading_mode": "Graded",
       "grading_mode_options": [
         "GRD",
@@ -93,7 +98,9 @@
       "credit_hours": "4",
       "requirement_designation": "Continuing Communication and Writing(*)",
       "requirements": [
-        "Continuing Communication and Writing(*)"
+        "Continuing Communication and Writing(*)",
+        "Continuing Comm.& Writing(*)",
+        "Intercultural Communication(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [

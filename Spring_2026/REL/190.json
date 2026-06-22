@@ -8,7 +8,8 @@
   "credit_hours": "1,2,3,4,5,6,7,8,9",
   "requirement_designation": "FS",
   "requirements": [
-    "FS"
+    "FS",
+    "First Year Seminar(*)"
   ],
   "campus": "Atlanta",
   "campus_description": "ATL@ONLINE",
@@ -38,8 +39,10 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ONLINE",
       "credit_hours": "1,2,3,4,5,6,7,8,9",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "First Year Seminar(*)",
+      "requirements": [
+        "First Year Seminar(*)"
+      ],
       "grading_mode": "Satisfactory/Unsatisfactory",
       "grading_mode_options": [
         "SUS",
@@ -90,8 +93,10 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ONLINE",
       "credit_hours": "1,2,3,4,5,6,7,8,9",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "First Year Seminar(*)",
+      "requirements": [
+        "First Year Seminar(*)"
+      ],
       "grading_mode": "Satisfactory/Unsatisfactory",
       "grading_mode_options": [
         "SUS",
@@ -142,8 +147,10 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ONLINE",
       "credit_hours": "1,2,3,4,5,6,7,8,9",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "First Year Seminar(*)",
+      "requirements": [
+        "First Year Seminar(*)"
+      ],
       "grading_mode": "Satisfactory/Unsatisfactory",
       "grading_mode_options": [
         "SUS",

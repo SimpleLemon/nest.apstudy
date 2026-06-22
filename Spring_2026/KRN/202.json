@@ -9,7 +9,8 @@
   "requirement_designation": "IC",
   "requirements": [
     "IC",
-    "Experience and Application(*)"
+    "Experience and Application(*)",
+    "Intercultural Communication(*)"
   ],
   "campus": "Atlanta",
   "campus_description": "ATL@ATLANTA",
@@ -41,7 +42,8 @@
       "credit_hours": "3",
       "requirement_designation": "Experience and Application(*)",
       "requirements": [
-        "Experience and Application(*)"
+        "Experience and Application(*)",
+        "Intercultural Communication(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -100,8 +102,11 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)",
+        "Experience and Application(*)"
+      ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
         "GRD",

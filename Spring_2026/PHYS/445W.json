@@ -8,7 +8,8 @@
   "credit_hours": "5",
   "requirement_designation": "XAW",
   "requirements": [
-    "XAW"
+    "XAW",
+    "Exp.& Application w. CW(*)"
   ],
   "campus": null,
   "campus_description": null,
@@ -38,8 +39,10 @@
       "campus": null,
       "campus_description": null,
       "credit_hours": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Exp.& Application w. CW(*)",
+      "requirements": [
+        "Exp.& Application w. CW(*)"
+      ],
       "grading_mode": null,
       "grading_mode_options": [],
       "instruction_method": null,

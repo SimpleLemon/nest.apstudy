@@ -8,7 +8,8 @@
   "credit_hours": "3",
   "requirement_designation": "PE",
   "requirements": [
-    "PE"
+    "PE",
+    "Physical Education(*)"
   ],
   "campus": "ONLIN@ONLINE",
   "campus_description": "ONLIN@ONLINE",
@@ -38,8 +39,10 @@
       "campus": "ONLIN@ONLINE",
       "campus_description": "ONLIN@ONLINE",
       "credit_hours": "3",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
       "grading_mode": "Graded",
       "grading_mode_options": [
         "GRD",

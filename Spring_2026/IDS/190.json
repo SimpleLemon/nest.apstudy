@@ -10,7 +10,8 @@
   "requirements": [
     "FS",
     "First Year Seminar",
-    "Natural Sciences(*)"
+    "Natural Sciences(*)",
+    "First Year Seminar(*)"
   ],
   "campus": "Atlanta",
   "campus_description": "ATL@ATLANTA",
@@ -42,7 +43,9 @@
       "credit_hours": "3",
       "requirement_designation": "First Year Seminar",
       "requirements": [
-        "First Year Seminar"
+        "First Year Seminar",
+        "Natural Sciences(*)",
+        "First Year Seminar(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -103,7 +106,8 @@
       "credit_hours": "3",
       "requirement_designation": "Natural Sciences(*)",
       "requirements": [
-        "Natural Sciences(*)"
+        "Natural Sciences(*)",
+        "First Year Seminar(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [

@@ -477,8 +477,164 @@ def merge_section_with_details(search_row, details_payload):
     return merged
 
 
+# Atlas starred filter labels use abbreviated names; scraped section details and
+# catalog enrichment often store the expanded text or legacy abbreviations.
+GENERAL_ED_REQUIREMENT_ALIASES = {
+    "Cont.Comm.& Writing w. ETHN(*)": (
+        "Continuing Comm.& Writing with Race & Ethnicity(*)",
+        "CWE",
+        "HPWE",
+    ),
+    "Continuing Comm.& Writing(*)": (
+        "Continuing Communication and Writing(*)",
+        "SNTW",
+    ),
+    "Exp.& Application w. CW(*)": (
+        "Experience and Application with Cont.Comm(*)",
+        "XAW",
+    ),
+    "Experience and Application(*)": (
+        "XA",
+    ),
+    "First Year Seminar w. ETHN(*)": (
+        "First Year Seminar with Race & Ethnicity(*)",
+    ),
+    "First Year Seminar(*)": (
+        "First Year Seminar",
+        "FS",
+        "FSEM",
+    ),
+    "First Year Writing w.ETHN(*)": (
+        "FWRT w/Race & Ethnicity Req.",
+        "First-Year Writing w/Race & Ethnicity Req.",
+    ),
+    "First Year Writing(*)": (
+        "First-Year Writing(*)",
+        "FW",
+        "FWRT",
+    ),
+    "Humanities and Arts(*)": (
+        "HA",
+        "HAL",
+        "HAP",
+    ),
+    "Intercultural Communication(*)": (
+        "IC",
+    ),
+    "Natural Sciences(*)": (
+        "NS",
+        "SNT",
+        "SNTL",
+    ),
+    "Physical Education(*)": (
+        "PE",
+    ),
+    "Quantitative Reasoning(*)": (
+        "QR",
+        "MQR",
+    ),
+    "Race and Ethnicity(*)": (
+        "ETHN",
+    ),
+    "Social Sciences(*)": (
+        "SS",
+    ),
+    "Health(*)": (
+        "HTH",
+    ),
+    "Humanities & Arts w.ETHN(*)": (
+        "Humanities and Arts with Race & Ethnicity(*)",
+        "HAE",
+    ),
+    "Humanities & Arts with CW(*)": (
+        "Humanities and Arts with Cont.Communication(*)",
+        "HAW",
+    ),
+    "Humanities&Arts w. CW/ETHN(*)": (
+        "Humanities & Arts with C.Comm/Race & Ethnicity(*)",
+        "HAWE",
+        "HAPW",
+    ),
+    "Intercult.Comm. w. CW(*)": (
+        "Intercultural Communication w.Cont.Comm(*)",
+        "ICW",
+    ),
+    "Intercult.Comm. w. CW/ETHN(*)": (
+        "Intercultural Communication with Writing/R&E(*)",
+    ),
+    "Intercult.Comm.with ETHN(*)": (
+        "Intercultural Communication w. Race & Ethnicity(*)",
+        "ICE",
+    ),
+    "Natural Sciences w. CW/ETHN(*)": (
+        "SNLW",
+    ),
+    "Natural Sciences with CW(*)": (
+        "Natural Sciences with Continuing Communication(*)",
+        "NSW",
+        "SNTW",
+    ),
+    "Natural Sciences with ETHN(*)": (
+        "SNT w/Race & Ethnicity Req.",
+    ),
+    "Quantit.Reasoning w.CW/ETHN(*)": (
+        "MQRW",
+    ),
+    "Quantitat.Reasoning w.CW(*)": (
+        "MQRW",
+    ),
+    "Quantitat.Reasoning w.ETHN(*)": (
+        "MQR w/Race & Ethnicity Req.",
+    ),
+    "Soc.Sciences w. CW/ETHN(*)": (
+        "Social Sciences with Continuing Communication(*)",
+        "Social Sciences with Race & Ethnicity(*)",
+        "SSW",
+        "SSE",
+    ),
+    "Social Sciences with CW(*)": (
+        "Social Sciences with Continuing Communication(*)",
+        "SSW",
+    ),
+    "Social Sciences with ETHN(*)": (
+        "Social Sciences with Race & Ethnicity(*)",
+        "SSE",
+    ),
+}
+
+
+GENERAL_ED_COMPOSITE_REQUIREMENTS = {
+    "First Year Writing w.ETHN(*)": (
+        "First Year Writing(*)",
+        "Race and Ethnicity(*)",
+    ),
+    "Natural Sciences with ETHN(*)": (
+        "Natural Sciences(*)",
+        "Race and Ethnicity(*)",
+    ),
+    "Quantitat.Reasoning w.ETHN(*)": (
+        "Quantitative Reasoning(*)",
+        "Race and Ethnicity(*)",
+    ),
+}
+
+
 def get_starred_general_ed_requirements():
     return list(STARRED_GENERAL_ED_REQUIREMENTS)
+
+
+def get_general_ed_requirement_aliases():
+    return {
+        requirement: list(GENERAL_ED_REQUIREMENT_ALIASES.get(requirement, []))
+        for requirement in STARRED_GENERAL_ED_REQUIREMENTS
+    }
+
+
+def get_general_ed_composite_requirements():
+    return {
+        requirement: list(parts)
+        for requirement, parts in GENERAL_ED_COMPOSITE_REQUIREMENTS.items()
+    }
 
 
 def _normalize_requirement_token(value):
@@ -489,6 +645,33 @@ STARRED_GENERAL_ED_REQUIREMENT_TOKENS = {
     _normalize_requirement_token(option): option
     for option in STARRED_GENERAL_ED_REQUIREMENTS
 }
+
+
+def _canonical_general_ed_requirement(requirement):
+    text = str(requirement or "").strip()
+    if not text:
+        return None
+    return STARRED_GENERAL_ED_REQUIREMENT_TOKENS.get(
+        _normalize_requirement_token(text),
+        text,
+    )
+
+
+def _general_ed_match_tokens(requirement):
+    canonical = _canonical_general_ed_requirement(requirement)
+    if not canonical:
+        return set()
+    values = [canonical, *GENERAL_ED_REQUIREMENT_ALIASES.get(canonical, ())]
+    tokens = set()
+    for value in values:
+        token = _normalize_requirement_token(value)
+        if not token:
+            continue
+        tokens.add(token)
+        relaxed = token.rstrip("*")
+        if relaxed:
+            tokens.add(relaxed)
+    return tokens
 
 
 def _append_requirement_value(values, value):
@@ -550,6 +733,29 @@ def _campus_matches(section, campus):
     return canonical in section_lower
 
 
+def _matches_ethn_component(section) -> bool:
+    if _requirement_matches(section, "Race and Ethnicity(*)"):
+        return True
+    for value in _requirement_values(section):
+        text = str(value).lower()
+        if "race" in text and "ethnic" in text:
+            return True
+    return False
+
+
+def _matches_composite_requirement(section, parts: tuple[str, ...]) -> bool:
+    if not parts:
+        return False
+    for part in parts:
+        if part == "Race and Ethnicity(*)":
+            if not _matches_ethn_component(section):
+                return False
+            continue
+        if not _requirement_matches(section, part):
+            return False
+    return True
+
+
 def _has_starred_requirement(section):
     values = _requirement_values(section)
     return any("*" in str(value or "") for value in values)
@@ -561,15 +767,23 @@ def _requirement_matches(section, requirement):
         return True
     if normalized in {"starred", "starred-ger", "ger_starred"}:
         return _has_starred_requirement(section)
-    requirement_token = _normalize_requirement_token(requirement)
-    canonical_requirement = STARRED_GENERAL_ED_REQUIREMENT_TOKENS.get(requirement_token)
-    values = _requirement_values(section)
-    for value in values:
-        value_token = _normalize_requirement_token(value)
-        if canonical_requirement:
-            if value_token == _normalize_requirement_token(canonical_requirement):
+    canonical = _canonical_general_ed_requirement(requirement)
+    match_tokens = _general_ed_match_tokens(requirement)
+    if match_tokens:
+        for value in _requirement_values(section):
+            value_token = _normalize_requirement_token(value)
+            if not value_token:
+                continue
+            if value_token in match_tokens or value_token.rstrip("*") in match_tokens:
                 return True
-            continue
+    composite = GENERAL_ED_COMPOSITE_REQUIREMENTS.get(canonical or "")
+    if composite:
+        return _matches_composite_requirement(section, composite)
+    if match_tokens:
+        return False
+    requirement_token = _normalize_requirement_token(requirement)
+    for value in _requirement_values(section):
+        value_token = _normalize_requirement_token(value)
         if requirement_token and requirement_token in value_token:
             return True
     return False

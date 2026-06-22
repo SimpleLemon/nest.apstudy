@@ -8,7 +8,8 @@
   "credit_hours": "1,2,3,4,5",
   "requirement_designation": "HAP",
   "requirements": [
-    "HAP"
+    "HAP",
+    "Humanities and Arts(*)"
   ],
   "campus": "Atlanta",
   "campus_description": "ATL@ATLANTA",
@@ -32,8 +33,10 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "1,2,3,4,5",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
         "GRD",

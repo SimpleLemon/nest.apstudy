@@ -11,7 +11,8 @@
     "None",
     "Intercultural Communication(*)",
     "Continuing Comm.& Writing with Race & Ethnicity(*)",
-    "Quantitative Reasoning(*)"
+    "Quantitative Reasoning(*)",
+    "Cont.Comm.& Writing w. ETHN(*)"
   ],
   "campus": "Atlanta",
   "campus_description": "ATL@ATLANTA",
@@ -43,7 +44,9 @@
       "credit_hours": "3",
       "requirement_designation": "Intercultural Communication(*)",
       "requirements": [
-        "Intercultural Communication(*)"
+        "Intercultural Communication(*)",
+        "Cont.Comm.& Writing w. ETHN(*)",
+        "Quantitative Reasoning(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -92,8 +95,12 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "2",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Cont.Comm.& Writing w. ETHN(*)",
+      "requirements": [
+        "Cont.Comm.& Writing w. ETHN(*)",
+        "Quantitative Reasoning(*)",
+        "Intercultural Communication(*)"
+      ],
       "grading_mode": "Graded",
       "grading_mode_options": [
         "GRD",
@@ -141,7 +148,10 @@
       "credit_hours": "4",
       "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
       "requirements": [
-        "Continuing Comm.& Writing with Race & Ethnicity(*)"
+        "Continuing Comm.& Writing with Race & Ethnicity(*)",
+        "Cont.Comm.& Writing w. ETHN(*)",
+        "Quantitative Reasoning(*)",
+        "Intercultural Communication(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -192,7 +202,9 @@
       "credit_hours": "4",
       "requirement_designation": "Quantitative Reasoning(*)",
       "requirements": [
-        "Quantitative Reasoning(*)"
+        "Quantitative Reasoning(*)",
+        "Cont.Comm.& Writing w. ETHN(*)",
+        "Intercultural Communication(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -243,7 +255,9 @@
       "credit_hours": "4",
       "requirement_designation": "Quantitative Reasoning(*)",
       "requirements": [
-        "Quantitative Reasoning(*)"
+        "Quantitative Reasoning(*)",
+        "Cont.Comm.& Writing w. ETHN(*)",
+        "Intercultural Communication(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -292,8 +306,12 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "3",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Cont.Comm.& Writing w. ETHN(*)",
+      "requirements": [
+        "Cont.Comm.& Writing w. ETHN(*)",
+        "Quantitative Reasoning(*)",
+        "Intercultural Communication(*)"
+      ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
         "GRD",
@@ -341,8 +359,12 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "1,2,3,4",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Cont.Comm.& Writing w. ETHN(*)",
+      "requirements": [
+        "Cont.Comm.& Writing w. ETHN(*)",
+        "Quantitative Reasoning(*)",
+        "Intercultural Communication(*)"
+      ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
         "GRD",

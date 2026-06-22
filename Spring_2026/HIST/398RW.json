@@ -8,7 +8,8 @@
   "credit_hours": "3",
   "requirement_designation": "XAW",
   "requirements": [
-    "XAW"
+    "XAW",
+    "Exp.& Application w. CW(*)"
   ],
   "campus": "Atlanta",
   "campus_description": "ATL@ATLANTA",
@@ -38,8 +39,10 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "3",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Exp.& Application w. CW(*)",
+      "requirements": [
+        "Exp.& Application w. CW(*)"
+      ],
       "grading_mode": "Masters Non-MBA",
       "grading_mode_options": [
         "MTR",

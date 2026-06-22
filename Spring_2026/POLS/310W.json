@@ -8,7 +8,9 @@
   "credit_hours": "1,2,3,4,5,6,7,8,9",
   "requirement_designation": "MQRW",
   "requirements": [
-    "MQRW"
+    "MQRW",
+    "Quantit.Reasoning w.CW/ETHN(*)",
+    "Quantitat.Reasoning w.CW(*)"
   ],
   "campus": "Atlanta",
   "campus_description": "ATL@ATLANTA",
@@ -43,8 +45,11 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "1,2,3,4,5,6,7,8,9",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Quantit.Reasoning w.CW/ETHN(*)",
+      "requirements": [
+        "Quantit.Reasoning w.CW/ETHN(*)",
+        "Quantitat.Reasoning w.CW(*)"
+      ],
       "grading_mode": "Satisfactory/Unsatisfactory",
       "grading_mode_options": [
         "SUS",

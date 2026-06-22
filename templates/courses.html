@@ -12,6 +12,8 @@
         window.APSTUDY_ATLAS_SRCDB = {{ atlas_srcdb | tojson }};
         window.APSTUDY_ATLAS_BROWSER_DIRECT_ENABLED = false;
         window.APSTUDY_COURSES_GENERAL_ED_REQUIREMENTS = {{ (general_ed_requirements or []) | tojson }};
+        window.APSTUDY_COURSES_GER_ALIASES = {{ (general_ed_requirement_aliases or {}) | tojson }};
+        window.APSTUDY_COURSES_GER_COMPOSITE = {{ (general_ed_composite_requirements or {}) | tojson }};
     </script>
     <script src="https://cdn.jsdelivr.net/npm/appwrite@25.0.0/dist/iife/sdk.js"></script>
     {% include '_appwrite_meta.html' %}
@@ -88,15 +90,15 @@
                         <label>
                             <span>Campus</span>
                             <select id="courses-campus-filter">
-                                <option value="all">All</option>
+                                <option value="all">Any</option>
                                 <option value="atlanta">Atlanta (Main)</option>
                                 <option value="oxford">Oxford</option>
                             </select>
                         </label>
                         <label>
-                            <span>General Ed</span>
+                            <span>General Education Req.</span>
                             <select id="courses-requirement-filter">
-                                <option value="all">All</option>
+                                <option value="all">Any</option>
                                 {% for requirement in general_ed_requirements or [] %}
                                     <option value="{{ requirement }}">{{ requirement }}</option>
                                 {% endfor %}

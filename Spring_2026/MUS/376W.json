@@ -8,7 +8,8 @@
   "credit_hours": "4",
   "requirement_designation": "HPWE",
   "requirements": [
-    "HPWE"
+    "HPWE",
+    "Cont.Comm.& Writing w. ETHN(*)"
   ],
   "campus": null,
   "campus_description": null,
@@ -38,8 +39,10 @@
       "campus": null,
       "campus_description": null,
       "credit_hours": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Cont.Comm.& Writing w. ETHN(*)",
+      "requirements": [
+        "Cont.Comm.& Writing w. ETHN(*)"
+      ],
       "grading_mode": null,
       "grading_mode_options": [],
       "instruction_method": null,

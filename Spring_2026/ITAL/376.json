@@ -9,7 +9,8 @@
   "requirement_designation": "HSC",
   "requirements": [
     "HSC",
-    "Continuing Comm.& Writing with Race & Ethnicity(*)"
+    "Continuing Comm.& Writing with Race & Ethnicity(*)",
+    "Cont.Comm.& Writing w. ETHN(*)"
   ],
   "campus": "Atlanta",
   "campus_description": "ATL@ATLANTA",
@@ -39,8 +40,10 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "3",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Cont.Comm.& Writing w. ETHN(*)",
+      "requirements": [
+        "Cont.Comm.& Writing w. ETHN(*)"
+      ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
         "GRD",
@@ -84,7 +87,8 @@
       "credit_hours": "4",
       "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
       "requirements": [
-        "Continuing Comm.& Writing with Race & Ethnicity(*)"
+        "Continuing Comm.& Writing with Race & Ethnicity(*)",
+        "Cont.Comm.& Writing w. ETHN(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -129,7 +133,8 @@
       "credit_hours": "4",
       "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
       "requirements": [
-        "Continuing Comm.& Writing with Race & Ethnicity(*)"
+        "Continuing Comm.& Writing with Race & Ethnicity(*)",
+        "Cont.Comm.& Writing w. ETHN(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [

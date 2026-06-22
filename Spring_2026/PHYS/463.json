@@ -8,7 +8,8 @@
   "credit_hours": "3",
   "requirement_designation": "SNT",
   "requirements": [
-    "SNT"
+    "SNT",
+    "Natural Sciences(*)"
   ],
   "campus": null,
   "campus_description": null,
@@ -38,8 +39,10 @@
       "campus": null,
       "campus_description": null,
       "credit_hours": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
       "grading_mode": null,
       "grading_mode_options": [],
       "instruction_method": null,

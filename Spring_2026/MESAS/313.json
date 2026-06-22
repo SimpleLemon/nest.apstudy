@@ -8,7 +8,8 @@
   "credit_hours": "3",
   "requirement_designation": "ETHN",
   "requirements": [
-    "ETHN"
+    "ETHN",
+    "Race and Ethnicity(*)"
   ],
   "campus": null,
   "campus_description": null,
@@ -38,8 +39,10 @@
       "campus": null,
       "campus_description": null,
       "credit_hours": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
       "grading_mode": null,
       "grading_mode_options": [],
       "instruction_method": null,

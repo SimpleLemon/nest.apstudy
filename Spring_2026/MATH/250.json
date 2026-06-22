@@ -10,7 +10,9 @@
   "requirements": [
     "QR",
     "First Year Seminar",
-    "Natural Sciences(*)"
+    "Natural Sciences(*)",
+    "Quantitative Reasoning(*)",
+    "First Year Seminar(*)"
   ],
   "campus": "Atlanta",
   "campus_description": "ATL@ATLANTA",
@@ -42,7 +44,10 @@
       "credit_hours": "3",
       "requirement_designation": "First Year Seminar",
       "requirements": [
-        "First Year Seminar"
+        "First Year Seminar",
+        "Natural Sciences(*)",
+        "Quantitative Reasoning(*)",
+        "First Year Seminar(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -98,7 +103,10 @@
       "credit_hours": "3",
       "requirement_designation": "First Year Seminar",
       "requirements": [
-        "First Year Seminar"
+        "First Year Seminar",
+        "Natural Sciences(*)",
+        "Quantitative Reasoning(*)",
+        "First Year Seminar(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -154,7 +162,9 @@
       "credit_hours": "3",
       "requirement_designation": "Natural Sciences(*)",
       "requirements": [
-        "Natural Sciences(*)"
+        "Natural Sciences(*)",
+        "Quantitative Reasoning(*)",
+        "First Year Seminar(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -210,7 +220,9 @@
       "credit_hours": "3",
       "requirement_designation": "Natural Sciences(*)",
       "requirements": [
-        "Natural Sciences(*)"
+        "Natural Sciences(*)",
+        "Quantitative Reasoning(*)",
+        "First Year Seminar(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -264,8 +276,12 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "3",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)",
+        "Quantitative Reasoning(*)",
+        "First Year Seminar(*)"
+      ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
         "GRD",

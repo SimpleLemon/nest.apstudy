@@ -9,7 +9,9 @@
   "requirement_designation": "SSW",
   "requirements": [
     "SSW",
-    "Social Sciences with Continuing Communication(*)"
+    "Social Sciences with Continuing Communication(*)",
+    "Social Sciences with CW(*)",
+    "Soc.Sciences w. CW/ETHN(*)"
   ],
   "campus": "Atlanta",
   "campus_description": "ATL@ATLANTA",
@@ -39,8 +41,11 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "5",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Social Sciences with CW(*)",
+      "requirements": [
+        "Social Sciences with CW(*)",
+        "Soc.Sciences w. CW/ETHN(*)"
+      ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
         "GRD",
@@ -88,8 +93,11 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "5",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Social Sciences with CW(*)",
+      "requirements": [
+        "Social Sciences with CW(*)",
+        "Soc.Sciences w. CW/ETHN(*)"
+      ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
         "GRD",
@@ -137,8 +145,11 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "5",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Social Sciences with CW(*)",
+      "requirements": [
+        "Social Sciences with CW(*)",
+        "Soc.Sciences w. CW/ETHN(*)"
+      ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
         "GRD",
@@ -186,8 +197,11 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "5",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Social Sciences with CW(*)",
+      "requirements": [
+        "Social Sciences with CW(*)",
+        "Soc.Sciences w. CW/ETHN(*)"
+      ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
         "GRD",
@@ -235,8 +249,11 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "5",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Social Sciences with CW(*)",
+      "requirements": [
+        "Social Sciences with CW(*)",
+        "Soc.Sciences w. CW/ETHN(*)"
+      ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
         "GRD",
@@ -286,7 +303,9 @@
       "credit_hours": "5",
       "requirement_designation": "Social Sciences with Continuing Communication(*)",
       "requirements": [
-        "Social Sciences with Continuing Communication(*)"
+        "Social Sciences with Continuing Communication(*)",
+        "Social Sciences with CW(*)",
+        "Soc.Sciences w. CW/ETHN(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [

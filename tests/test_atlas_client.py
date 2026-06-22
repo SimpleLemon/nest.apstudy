@@ -115,15 +115,63 @@ class AtlasClientTests(unittest.TestCase):
             "terms": ["Fall_2026"],
             "sections": [
                 {"course_code": "ENG 101", "subject": "ENG", "catalog_number": "101", "section_number": "1", "crn": "1", "requirements": [requirement]},
+                {"course_code": "ENG_OX 185", "subject": "ENG_OX", "catalog_number": "185", "section_number": "1", "crn": "3", "requirements": ["First-Year Writing(*)"]},
                 {"course_code": "ENG 181", "subject": "ENG", "catalog_number": "181", "section_number": "1", "crn": "2", "requirements": ["First Year Seminar(*)"]},
             ],
-            "count": 2,
+            "count": 3,
         }
 
         filtered = _filter_sections_result(result, requirement=requirement)
 
-        self.assertEqual(filtered["total"], 1)
-        self.assertEqual(filtered["sections"][0]["course_code"], "ENG 101")
+        self.assertEqual(filtered["total"], 2)
+        self.assertEqual({section["course_code"] for section in filtered["sections"]}, {"ENG 101", "ENG_OX 185"})
+
+    def test_general_ed_alias_and_composite_filters(self):
+        result = {
+            "term": "Spring_2026",
+            "terms": ["Spring_2026"],
+            "sections": [
+                {
+                    "course_code": "NBB 220",
+                    "subject": "NBB",
+                    "catalog_number": "220",
+                    "section_number": "1",
+                    "crn": "1",
+                    "requirements": ["NS", "Race and Ethnicity(*)"],
+                },
+                {
+                    "course_code": "HLTH 200",
+                    "subject": "HLTH",
+                    "catalog_number": "200",
+                    "section_number": "1",
+                    "crn": "2",
+                    "requirements": [
+                        "Quantitative Reasoning(*)",
+                        "Continuing Comm.& Writing with Race & Ethnicity(*)",
+                    ],
+                },
+                {
+                    "course_code": "ENG 190",
+                    "subject": "ENG",
+                    "catalog_number": "190",
+                    "section_number": "1",
+                    "crn": "3",
+                    "requirements": ["FS", "First Year Seminar"],
+                },
+            ],
+            "count": 3,
+        }
+
+        ns_ethn = _filter_sections_result(result, requirement="Natural Sciences with ETHN(*)")
+        qr_ethn = _filter_sections_result(result, requirement="Quantitat.Reasoning w.ETHN(*)")
+        first_year_seminar = _filter_sections_result(result, requirement="First Year Seminar(*)")
+
+        self.assertEqual(ns_ethn["total"], 1)
+        self.assertEqual(ns_ethn["sections"][0]["course_code"], "NBB 220")
+        self.assertEqual(qr_ethn["total"], 1)
+        self.assertEqual(qr_ethn["sections"][0]["course_code"], "HLTH 200")
+        self.assertEqual(first_year_seminar["total"], 1)
+        self.assertEqual(first_year_seminar["sections"][0]["course_code"], "ENG 190")
 
     def test_synthetic_eng_ox_oxford_and_starred_filters(self):
         result = {

@@ -8,7 +8,8 @@
   "credit_hours": "4",
   "requirement_designation": "HAWE",
   "requirements": [
-    "HAWE"
+    "HAWE",
+    "Humanities&Arts w. CW/ETHN(*)"
   ],
   "campus": null,
   "campus_description": null,
@@ -38,8 +39,10 @@
       "campus": null,
       "campus_description": null,
       "credit_hours": null,
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Humanities&Arts w. CW/ETHN(*)",
+      "requirements": [
+        "Humanities&Arts w. CW/ETHN(*)"
+      ],
       "grading_mode": null,
       "grading_mode_options": [],
       "instruction_method": null,

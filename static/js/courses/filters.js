@@ -72,23 +72,82 @@
       return value.includes(campus);
     }
 
-    function sectionMatchesRequirement(section) {
-      const requirement = String(state.requirementFilter || "all").toLowerCase();
-      if (!requirement || requirement === "all") return true;
-      const values = [
+    const GER_ALIASES = window.APSTUDY_COURSES_GER_ALIASES || {};
+    const GER_COMPOSITE = window.APSTUDY_COURSES_GER_COMPOSITE || {};
+    const GER_REQUIREMENTS = window.APSTUDY_COURSES_GENERAL_ED_REQUIREMENTS || [];
+
+    function requirementValues(section) {
+      return [
         section.requirement_designation,
         section.requirements,
         section.requirement,
         section.ger,
         section.attributes,
-      ].flatMap((value) => Array.isArray(value) ? value : [value]).map((value) => String(value || "").toLowerCase());
-      if (requirement === "starred") return values.some((value) => value.includes("*"));
-      const normalizedRequirement = normalizeRequirement(requirement);
-      return values.some((value) => normalizeRequirement(value) === normalizedRequirement || normalizeRequirement(value).includes(normalizedRequirement));
+      ].flatMap((value) => Array.isArray(value) ? value : [value])
+        .map((value) => String(value || "").trim())
+        .filter(Boolean);
     }
 
     function normalizeRequirement(value) {
       return String(value || "").toLowerCase().replace(/[^a-z0-9*]+/g, "");
+    }
+
+    function canonicalRequirement(requirement) {
+      const normalized = normalizeRequirement(requirement);
+      return GER_REQUIREMENTS.find((option) => normalizeRequirement(option) === normalized) || String(requirement || "").trim();
+    }
+
+    function buildMatchTokens(requirement) {
+      const canonical = canonicalRequirement(requirement);
+      const values = [canonical, ...(GER_ALIASES[canonical] || [])];
+      const tokens = new Set();
+      values.forEach((value) => {
+        const token = normalizeRequirement(value);
+        if (!token) return;
+        tokens.add(token);
+        const relaxed = token.replace(/\*+$/, "");
+        if (relaxed) tokens.add(relaxed);
+      });
+      return tokens;
+    }
+
+    function valuesMatchTokens(values, tokens) {
+      return values.some((value) => {
+        const token = normalizeRequirement(value);
+        if (!token) return false;
+        return tokens.has(token) || tokens.has(token.replace(/\*+$/, ""));
+      });
+    }
+
+    function matchesRequirementValue(requirement, section) {
+      const tokens = buildMatchTokens(requirement);
+      if (!tokens.size) return false;
+      return valuesMatchTokens(requirementValues(section), tokens);
+    }
+
+    function matchesEthnComponent(section) {
+      if (matchesRequirementValue("Race and Ethnicity(*)", section)) return true;
+      return requirementValues(section).some((value) => {
+        const text = String(value).toLowerCase();
+        return text.includes("race") && text.includes("ethnic");
+      });
+    }
+
+    function sectionMatchesRequirement(section) {
+      const requirement = String(state.requirementFilter || "all").trim();
+      if (!requirement || requirement.toLowerCase() === "all") return true;
+      const values = requirementValues(section).map((value) => value.toLowerCase());
+      if (requirement.toLowerCase() === "starred") return values.some((value) => value.includes("*"));
+      const canonical = canonicalRequirement(requirement);
+      const composite = GER_COMPOSITE[canonical];
+      if (composite?.length) {
+        return composite.every((part) => (
+          part === "Race and Ethnicity(*)"
+            ? matchesEthnComponent(section)
+            : matchesRequirementValue(part, section)
+        ));
+      }
+      return matchesRequirementValue(requirement, section);
     }
 
     function sectionMatchesTime(section) {

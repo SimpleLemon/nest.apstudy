@@ -8,7 +8,8 @@
   "credit_hours": "3",
   "requirement_designation": "IC",
   "requirements": [
-    "IC"
+    "IC",
+    "Intercultural Communication(*)"
   ],
   "campus": "Atlanta",
   "campus_description": "ATL@ONLINE",
@@ -38,8 +39,10 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ONLINE",
       "credit_hours": "3",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
       "grading_mode": "Graded",
       "grading_mode_options": [
         "GRD",

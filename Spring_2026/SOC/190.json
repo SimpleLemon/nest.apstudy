@@ -8,7 +8,8 @@
   "credit_hours": "4",
   "requirement_designation": "FS",
   "requirements": [
-    "FS"
+    "FS",
+    "First Year Seminar(*)"
   ],
   "campus": "Atlanta",
   "campus_description": "ATL@ONLINE",
@@ -38,8 +39,10 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ONLINE",
       "credit_hours": "4",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "First Year Seminar(*)",
+      "requirements": [
+        "First Year Seminar(*)"
+      ],
       "grading_mode": "Graded",
       "grading_mode_options": [
         "GRD",

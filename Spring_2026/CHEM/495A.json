@@ -8,7 +8,8 @@
   "credit_hours": "4",
   "requirement_designation": "XA",
   "requirements": [
-    "XA"
+    "XA",
+    "Experience and Application(*)"
   ],
   "campus": "Atlanta",
   "campus_description": "ATL@ATLANTA",
@@ -38,8 +39,10 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "4",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
       "grading_mode": "Satisfactory/Unsatisfactory",
       "grading_mode_options": [
         "SUS",

@@ -8,7 +8,8 @@
   "credit_hours": "3",
   "requirement_designation": "MQR",
   "requirements": [
-    "MQR"
+    "MQR",
+    "Quantitative Reasoning(*)"
   ],
   "campus": "Oxford",
   "campus_description": "OXF@OXFORD",
@@ -38,8 +39,10 @@
       "campus": "Oxford",
       "campus_description": "OXF@OXFORD",
       "credit_hours": "3",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
         "GRD",

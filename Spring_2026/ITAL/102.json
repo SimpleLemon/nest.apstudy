@@ -11,7 +11,9 @@
     "IC",
     "Continuing Communication and Writing(*)",
     "Experience and Application(*)",
-    "Physical Education(*)"
+    "Physical Education(*)",
+    "Intercultural Communication(*)",
+    "Continuing Comm.& Writing(*)"
   ],
   "campus": "Atlanta",
   "campus_description": "ATL@ATLANTA",
@@ -43,7 +45,11 @@
       "credit_hours": "4",
       "requirement_designation": "Continuing Communication and Writing(*)",
       "requirements": [
-        "Continuing Communication and Writing(*)"
+        "Continuing Communication and Writing(*)",
+        "Intercultural Communication(*)",
+        "Continuing Comm.& Writing(*)",
+        "Experience and Application(*)",
+        "Physical Education(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -104,7 +110,11 @@
       "credit_hours": "4",
       "requirement_designation": "Continuing Communication and Writing(*)",
       "requirements": [
-        "Continuing Communication and Writing(*)"
+        "Continuing Communication and Writing(*)",
+        "Intercultural Communication(*)",
+        "Continuing Comm.& Writing(*)",
+        "Experience and Application(*)",
+        "Physical Education(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -165,7 +175,11 @@
       "credit_hours": "4",
       "requirement_designation": "Continuing Communication and Writing(*)",
       "requirements": [
-        "Continuing Communication and Writing(*)"
+        "Continuing Communication and Writing(*)",
+        "Intercultural Communication(*)",
+        "Continuing Comm.& Writing(*)",
+        "Experience and Application(*)",
+        "Physical Education(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -226,7 +240,10 @@
       "credit_hours": "1,2,3,4",
       "requirement_designation": "Experience and Application(*)",
       "requirements": [
-        "Experience and Application(*)"
+        "Experience and Application(*)",
+        "Intercultural Communication(*)",
+        "Continuing Comm.& Writing(*)",
+        "Physical Education(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -287,7 +304,10 @@
       "credit_hours": "1,2,3,4",
       "requirement_designation": "Experience and Application(*)",
       "requirements": [
-        "Experience and Application(*)"
+        "Experience and Application(*)",
+        "Intercultural Communication(*)",
+        "Continuing Comm.& Writing(*)",
+        "Physical Education(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -346,8 +366,13 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "0",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)",
+        "Continuing Comm.& Writing(*)",
+        "Experience and Application(*)",
+        "Physical Education(*)"
+      ],
       "grading_mode": "Satisfactory/Unsatisfactory",
       "grading_mode_options": [
         "SUS",
@@ -405,7 +430,10 @@
       "credit_hours": "1",
       "requirement_designation": "Physical Education(*)",
       "requirements": [
-        "Physical Education(*)"
+        "Physical Education(*)",
+        "Intercultural Communication(*)",
+        "Continuing Comm.& Writing(*)",
+        "Experience and Application(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [

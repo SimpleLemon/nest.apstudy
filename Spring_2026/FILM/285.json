@@ -11,7 +11,10 @@
     "HAP",
     "Continuing Communication and Writing(*)",
     "Humanities & Arts with C.Comm/Race & Ethnicity(*)",
-    "Social Sciences(*)"
+    "Social Sciences(*)",
+    "Humanities and Arts(*)",
+    "Continuing Comm.& Writing(*)",
+    "Humanities&Arts w. CW/ETHN(*)"
   ],
   "campus": "Atlanta",
   "campus_description": "ATL@ATLANTA",
@@ -43,7 +46,11 @@
       "credit_hours": "4",
       "requirement_designation": "Continuing Communication and Writing(*)",
       "requirements": [
-        "Continuing Communication and Writing(*)"
+        "Continuing Communication and Writing(*)",
+        "Social Sciences(*)",
+        "Humanities and Arts(*)",
+        "Continuing Comm.& Writing(*)",
+        "Humanities&Arts w. CW/ETHN(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -99,7 +106,11 @@
       "credit_hours": "4",
       "requirement_designation": "Humanities & Arts with C.Comm/Race & Ethnicity(*)",
       "requirements": [
-        "Humanities & Arts with C.Comm/Race & Ethnicity(*)"
+        "Humanities & Arts with C.Comm/Race & Ethnicity(*)",
+        "Social Sciences(*)",
+        "Humanities and Arts(*)",
+        "Continuing Comm.& Writing(*)",
+        "Humanities&Arts w. CW/ETHN(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -155,7 +166,11 @@
       "credit_hours": "4",
       "requirement_designation": "Humanities & Arts with C.Comm/Race & Ethnicity(*)",
       "requirements": [
-        "Humanities & Arts with C.Comm/Race & Ethnicity(*)"
+        "Humanities & Arts with C.Comm/Race & Ethnicity(*)",
+        "Social Sciences(*)",
+        "Humanities and Arts(*)",
+        "Continuing Comm.& Writing(*)",
+        "Humanities&Arts w. CW/ETHN(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -206,7 +221,10 @@
       "credit_hours": "3",
       "requirement_designation": "Social Sciences(*)",
       "requirements": [
-        "Social Sciences(*)"
+        "Social Sciences(*)",
+        "Humanities and Arts(*)",
+        "Continuing Comm.& Writing(*)",
+        "Humanities&Arts w. CW/ETHN(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -257,7 +275,11 @@
       "credit_hours": "4",
       "requirement_designation": "Continuing Communication and Writing(*)",
       "requirements": [
-        "Continuing Communication and Writing(*)"
+        "Continuing Communication and Writing(*)",
+        "Social Sciences(*)",
+        "Humanities and Arts(*)",
+        "Continuing Comm.& Writing(*)",
+        "Humanities&Arts w. CW/ETHN(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -308,7 +330,11 @@
       "credit_hours": "4",
       "requirement_designation": "Continuing Communication and Writing(*)",
       "requirements": [
-        "Continuing Communication and Writing(*)"
+        "Continuing Communication and Writing(*)",
+        "Social Sciences(*)",
+        "Humanities and Arts(*)",
+        "Continuing Comm.& Writing(*)",
+        "Humanities&Arts w. CW/ETHN(*)"
       ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
@@ -351,8 +377,13 @@
       "campus": "Atlanta",
       "campus_description": "ATL@ATLANTA",
       "credit_hours": "3",
-      "requirement_designation": null,
-      "requirements": [],
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)",
+        "Humanities and Arts(*)",
+        "Continuing Comm.& Writing(*)",
+        "Humanities&Arts w. CW/ETHN(*)"
+      ],
       "grading_mode": "Student Option",
       "grading_mode_options": [
         "GRD",
