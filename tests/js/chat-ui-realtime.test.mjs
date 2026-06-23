@@ -52,18 +52,27 @@ test("chat uses local presence APIs for online and typing state", async () => {
   assert.match(global, /\/api\/presence\/heartbeat/);
   assert.match(global, /scope_type: "chat"/);
   assert.match(global, /scope_type: "site"/);
+  assert.match(global, /const siteHeartbeatMs = 60000/);
+  assert.match(global, /const chatHeartbeatMs = 5000/);
+  assert.match(global, /setChatRoom/);
+  assert.match(global, /apstudy-presence-tab-id/);
   assert.match(script, /\/api\/presence\/online/);
+  assert.match(script, /\/api\/presence\/statuses/);
+  assert.match(script, /\/api\/presence\/room/);
   assert.match(script, /\/api\/presence\/heartbeat/);
   assert.match(script, /typing_channel/);
   assert.match(script, /typing_thread/);
+  assert.match(script, /const PRESENCE_REFRESH_MS = 5000/);
   assert.match(script, /const TYPING_PRESENCE_TTL_MS = 8000/);
   assert.match(script, /tab_id: currentTabId\(\)/);
+  assert.match(script, /function refreshTargetedPresences/);
   assert.match(script, /function renderTypingIndicator/);
   assert.match(script, /Several people are typing\.\.\./);
   assert.match(script, /renderPresenceDrivenUi\(\)/);
   assert.match(script, /presenceStatusLabel/);
   assert.match(script, /Active/);
   assert.match(script, /Busy/);
+  assert.doesNotMatch(script, /apstudy-chat-tab-id/);
 });
 
 test("chat keeps a page lifetime room cache with delta loading", async () => {
@@ -316,6 +325,10 @@ test("scheduler uses discord gateway with slow reconciliation", async () => {
   assert.match(api, /@chat_api_bp\.route\("\/api\/presence\/heartbeat", methods=\["POST"\]\)/);
   assert.match(api, /@chat_api_bp\.route\("\/api\/presence\/online"\)/);
   assert.match(api, /@chat_api_bp\.route\("\/api\/presence\/statuses", methods=\["POST"\]\)/);
+  assert.match(api, /@chat_api_bp\.route\("\/api\/presence\/room", methods=\["POST"\]\)/);
+  assert.match(api, /PRESENCE_CHAT_FRESH_SECONDS/);
+  assert.match(api, /PRESENCE_SITE_FRESH_SECONDS/);
+  assert.match(api, /PRESENCE_TYPING_FRESH_SECONDS/);
   assert.doesNotMatch(api, /create_jwt/);
   assert.match(api, /@chat_api_bp\.route\("\/api\/chat\/discord\/messages", methods=\["POST"\]\)/);
   assert.match(api, /def discord_message_ingest\(\):/);

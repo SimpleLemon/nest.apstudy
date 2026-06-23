@@ -511,6 +511,11 @@ function initializePresenceHeartbeat() {
     window.APStudyPresenceHeartbeatStarted = true;
 
     const tabKey = "apstudy-presence-tab-id";
+    const siteHeartbeatMs = 60000;
+    const chatHeartbeatMs = 5000;
+    const chatRoomScopeKey = "chat-room";
+    const extraScopes = new Map();
+    let intervalId = null;
     let tabId = "";
     try {
         tabId = sessionStorage.getItem(tabKey) || "";
@@ -527,15 +532,26 @@ function initializePresenceHeartbeat() {
         }
     }
 
-    function pageScope() {
-        return window.location.pathname === "/chat"
-            ? { scope_type: "chat", scope_id: "global" }
-            : { scope_type: "site", scope_id: "global" };
+    function isChatPage() {
+        return window.location.pathname === "/chat";
     }
 
-    function sendHeartbeat({ keepalive = false } = {}) {
-        const body = JSON.stringify({ ...pageScope(), tab_id: tabId });
-        fetch("/api/presence/heartbeat", {
+    function heartbeatIntervalMs() {
+        return isChatPage() ? chatHeartbeatMs : siteHeartbeatMs;
+    }
+
+    function pageScopes() {
+        if (!isChatPage()) return [{ scope_type: "site", scope_id: "global" }];
+        const scopes = [{ scope_type: "chat", scope_id: "global" }];
+        for (const scope of extraScopes.values()) {
+            if (scope?.scope_type && scope?.scope_id) scopes.push(scope);
+        }
+        return scopes;
+    }
+
+    function postHeartbeat(scope, keepalive) {
+        const body = JSON.stringify({ ...scope, tab_id: tabId });
+        return fetch("/api/presence/heartbeat", {
             method: "POST",
             headers: { "Content-Type": "application/json", Accept: "application/json" },
             body,
@@ -544,11 +560,38 @@ function initializePresenceHeartbeat() {
         }).catch(() => {});
     }
 
+    function sendHeartbeat({ keepalive = false } = {}) {
+        return Promise.all(pageScopes().map((scope) => postHeartbeat(scope, keepalive)));
+    }
+
+    function startTimer() {
+        if (intervalId) window.clearInterval(intervalId);
+        intervalId = window.setInterval(sendHeartbeat, heartbeatIntervalMs());
+    }
+
+    function setChatRoom(roomId) {
+        const scopeId = String(roomId || "").trim();
+        const previous = extraScopes.get(chatRoomScopeKey)?.scope_id || "";
+        if (scopeId) {
+            extraScopes.set(chatRoomScopeKey, { scope_type: "chat", scope_id: scopeId });
+        } else {
+            extraScopes.delete(chatRoomScopeKey);
+        }
+        if (isChatPage() && previous !== scopeId) void sendHeartbeat();
+    }
+
     sendHeartbeat();
-    window.setInterval(sendHeartbeat, 10000);
+    startTimer();
     document.addEventListener("visibilitychange", () => sendHeartbeat({ keepalive: true }));
     window.addEventListener("pagehide", () => sendHeartbeat({ keepalive: true }));
-    window.APStudyPresenceHeartbeat = { send: sendHeartbeat, tabId };
+    window.APStudyPresenceHeartbeat = {
+        send: sendHeartbeat,
+        setChatRoom,
+        clearChatRoom: () => setChatRoom(null),
+        tabId,
+        siteHeartbeatMs,
+        chatHeartbeatMs,
+    };
 }
 
 function initializeGlobalChrome() {

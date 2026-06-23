@@ -317,8 +317,30 @@ class TestChatFeature(unittest.TestCase):
         self.assertEqual(statuses["user-3"], "busy")
         self.assertEqual(statuses["user-4"], "offline")
 
+    def test_presence_status_lookup_uses_scope_specific_freshness(self):
+        chat_rows = [
+            {"user_id": "user-2", "scope_type": "chat", "last_seen_at": "2026-06-23T12:00:01Z"},
+        ]
+        site_rows = [
+            {"user_id": "user-3", "scope_type": "site", "last_seen_at": "2026-06-23T12:00:00Z"},
+        ]
+        with patch.object(chat_api, "_fresh_presence_rows", side_effect=[chat_rows, site_rows]) as fresh_rows:
+            statuses = chat_api._presence_statuses_for_users(["user-2", "user-3", "user-4"])
+
+        self.assertEqual(statuses["user-2"], "active")
+        self.assertEqual(statuses["user-3"], "busy")
+        self.assertEqual(statuses["user-4"], "offline")
+        self.assertEqual(fresh_rows.call_args_list[0].kwargs["seconds"], chat_api.PRESENCE_CHAT_FRESH_SECONDS)
+        self.assertEqual(fresh_rows.call_args_list[1].kwargs["seconds"], chat_api.PRESENCE_SITE_FRESH_SECONDS)
+
+    def test_presence_scope_freshness_windows_are_specific(self):
+        self.assertEqual(chat_api._presence_fresh_seconds("chat"), 30)
+        self.assertEqual(chat_api._presence_fresh_seconds("site"), 180)
+        self.assertEqual(chat_api._presence_fresh_seconds("typing_channel"), 10)
+        self.assertEqual(chat_api._presence_fresh_seconds("typing_thread"), 10)
+
     def test_presence_status_ignores_stale_rows_from_fresh_query(self):
-        with patch.object(chat_api, "_fresh_presence_rows", return_value=[]):
+        with patch.object(chat_api, "_fresh_presence_rows_by_scope", return_value=[]):
             statuses = chat_api._presence_statuses_for_users(["user-2"])
 
         self.assertEqual(statuses, {"user-2": "offline"})
@@ -336,6 +358,34 @@ class TestChatFeature(unittest.TestCase):
         with self.app.test_client() as client:
             response = client.post("/api/presence/statuses", json={"user_ids": ["user-1"]})
         self.assertIn(response.status_code, (302, 401))
+
+    def test_presence_room_requires_login(self):
+        login_manager.init_app(self.app)
+        self.app.register_blueprint(chat_api.chat_api_bp)
+        with self.app.test_client() as client:
+            response = client.post("/api/presence/room", json={"scope_type": "channel", "scope_id": "nest_chat"})
+        self.assertIn(response.status_code, (302, 401))
+
+    def test_presence_room_returns_targeted_active_and_typing_users(self):
+        active_user = {"id": "user-2", "name": "Active User", "presence_status": "active"}
+        typing_user = {"id": "user-3", "name": "Typing User", "typing_channel_ids": ["nest_chat"]}
+        with self.app.test_request_context(
+            "/api/presence/room",
+            method="POST",
+            json={"scope_type": "channel", "scope_id": "nest_chat"},
+        ):
+            with patch.object(chat_api, "current_user", self.user), \
+                    patch.object(chat_api, "get_row_safe", return_value={"$id": "nest_chat", "kind": "discord"}), \
+                    patch.object(chat_api, "_fresh_chat_room_presence", return_value=[active_user]) as active, \
+                    patch.object(chat_api, "_fresh_typing_room_presence", return_value=[typing_user]) as typing:
+                response = chat_api.presence_room.__wrapped__()
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.get_json()
+        self.assertEqual(payload["active_users"], [active_user])
+        self.assertEqual(payload["typing_users"], [typing_user])
+        active.assert_called_once_with("chat", "nest_chat")
+        typing.assert_called_once_with("typing_channel", "nest_chat")
 
     def test_dm_thread_payload_includes_presence_permissions(self):
         thread = {

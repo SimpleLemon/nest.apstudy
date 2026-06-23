@@ -52,7 +52,10 @@ logger = logging.getLogger(__name__)
 CHAT_EVENTS_POLL_SECONDS = float(os.environ.get("CHAT_EVENTS_POLL_SECONDS", "1"))
 CHAT_EVENTS_KEEPALIVE_SECONDS = float(os.environ.get("CHAT_EVENTS_KEEPALIVE_SECONDS", "15"))
 CHAT_EVENTS_STREAM_LIMIT = int(os.environ.get("CHAT_EVENTS_STREAM_LIMIT", "50"))
-PRESENCE_FRESH_SECONDS = int(os.environ.get("PRESENCE_FRESH_SECONDS", "30"))
+PRESENCE_CHAT_FRESH_SECONDS = int(os.environ.get("PRESENCE_CHAT_FRESH_SECONDS", "30"))
+PRESENCE_SITE_FRESH_SECONDS = int(os.environ.get("PRESENCE_SITE_FRESH_SECONDS", "180"))
+PRESENCE_TYPING_FRESH_SECONDS = int(os.environ.get("PRESENCE_TYPING_FRESH_SECONDS", "10"))
+PRESENCE_FRESH_SECONDS = PRESENCE_CHAT_FRESH_SECONDS
 PRESENCE_LOOKUP_LIMIT = int(os.environ.get("PRESENCE_LOOKUP_LIMIT", "200"))
 PRESENCE_ONLINE_LIMIT = int(os.environ.get("PRESENCE_ONLINE_LIMIT", "500"))
 
@@ -172,6 +175,15 @@ def _presence_cutoff(seconds=PRESENCE_FRESH_SECONDS):
     return format_datetime(_now() - timedelta(seconds=seconds))
 
 
+def _presence_fresh_seconds(scope_type):
+    scope = str(scope_type or "")
+    if scope == "site":
+        return PRESENCE_SITE_FRESH_SECONDS
+    if scope in {"typing_channel", "typing_thread"}:
+        return PRESENCE_TYPING_FRESH_SECONDS
+    return PRESENCE_CHAT_FRESH_SECONDS
+
+
 def _presence_status_from_scopes(scopes):
     values = {str(scope or "") for scope in scopes}
     if "chat" in values:
@@ -198,6 +210,34 @@ def _fresh_presence_rows(scope_types=None, *, user_ids=None, seconds=PRESENCE_FR
         return []
 
 
+def _fresh_presence_rows_by_scope(scope_types, *, user_ids=None, limit=1000):
+    rows = []
+    seen = set()
+    for scope_type in scope_types or []:
+        scope = str(scope_type or "").strip()
+        if not scope:
+            continue
+        scoped_rows = _fresh_presence_rows(
+            [scope],
+            user_ids=user_ids,
+            seconds=_presence_fresh_seconds(scope),
+            limit=limit,
+        )
+        for row in scoped_rows:
+            key = _row_id(row) or row.get("presence_key") or (
+                row.get("user_id"),
+                row.get("scope_type"),
+                row.get("scope_id"),
+                row.get("last_seen_at"),
+            )
+            if key in seen:
+                continue
+            seen.add(key)
+            rows.append(row)
+    rows.sort(key=lambda row: row.get("last_seen_at") or "", reverse=True)
+    return rows[:limit]
+
+
 def _presence_statuses_for_users(user_ids):
     ordered_ids = []
     for value in user_ids or []:
@@ -210,7 +250,7 @@ def _presence_statuses_for_users(user_ids):
     if not ordered_ids:
         return statuses
     scopes_by_user = {user_id: set() for user_id in ordered_ids}
-    rows = _fresh_presence_rows(["site", "chat"], user_ids=ordered_ids, limit=max(len(ordered_ids) * 4, 20))
+    rows = _fresh_presence_rows_by_scope(["chat", "site"], user_ids=ordered_ids, limit=max(len(ordered_ids) * 4, 20))
     for row in rows:
         user_id = str(row.get("user_id") or "")
         if user_id in scopes_by_user:
@@ -221,7 +261,7 @@ def _presence_statuses_for_users(user_ids):
 
 
 def _presence_online_users():
-    rows = _fresh_presence_rows(
+    rows = _fresh_presence_rows_by_scope(
         ["site", "chat", "typing_channel", "typing_thread"],
         limit=PRESENCE_ONLINE_LIMIT * 8,
     )
@@ -269,7 +309,7 @@ def _presence_online_users():
 
 
 def _fresh_chat_room_presence(scope_type, scope_id):
-    rows = _fresh_presence_rows([scope_type], limit=1000)
+    rows = _fresh_presence_rows([scope_type], seconds=_presence_fresh_seconds(scope_type), limit=1000)
     users = []
     seen = set()
     for row in rows:
@@ -289,6 +329,39 @@ def _fresh_chat_room_presence(scope_type, scope_id):
             public_user["presence_status"] = "active"
             public_user["online"] = True
             users.append(public_user)
+    users.sort(key=lambda user: user.get("name") or "")
+    return users
+
+
+def _fresh_typing_room_presence(scope_type, scope_id):
+    rows = _fresh_presence_rows([scope_type], seconds=_presence_fresh_seconds(scope_type), limit=1000)
+    users = []
+    seen = set()
+    typing_user_ids = []
+    for row in rows:
+        if str(row.get("scope_id") or "") != str(scope_id or ""):
+            continue
+        user_id = str(row.get("user_id") or "")
+        if not user_id or user_id in seen or user_id == _current_user_id():
+            continue
+        seen.add(user_id)
+        typing_user_ids.append(user_id)
+        try:
+            user = get_row_safe(COLLECTIONS["users"], user_id, allow_missing=True)
+        except AppwriteException:
+            logger.exception("Failed to resolve typing presence user %s", user_id)
+            continue
+        public_user = _public_user(user)
+        if public_user:
+            if scope_type == "typing_channel":
+                public_user["typing_channel_ids"] = [str(scope_id)]
+            else:
+                public_user["typing_thread_ids"] = [str(scope_id)]
+            users.append(public_user)
+    statuses = _presence_statuses_for_users(typing_user_ids)
+    for user in users:
+        user["presence_status"] = statuses.get(user["id"], "offline")
+        user["online"] = user["presence_status"] != "offline"
     users.sort(key=lambda user: user.get("name") or "")
     return users
 
@@ -2036,6 +2109,34 @@ def presence_statuses():
     data = request.get_json(silent=True) or {}
     user_ids = data.get("user_ids") if isinstance(data.get("user_ids"), list) else []
     return jsonify({"statuses": _presence_statuses_for_users(user_ids)})
+
+
+@chat_api_bp.route("/api/presence/room", methods=["POST"])
+@login_required
+def presence_room():
+    data = request.get_json(silent=True) or {}
+    scope_type = str(data.get("scope_type") or "").strip()
+    scope_id = str(data.get("scope_id") or "").strip()
+    if not scope_id:
+        return jsonify({"error": "Missing presence scope."}), 400
+
+    if scope_type == "channel":
+        channel = get_row_safe(COLLECTIONS["chat_channels"], scope_id, allow_missing=True)
+        if not _can_access_channel(channel):
+            return jsonify({"error": "Presence scope unavailable."}), 404
+        typing_scope = "typing_channel"
+    elif scope_type == "thread":
+        thread = _thread_for_user(scope_id)
+        if not thread:
+            return jsonify({"error": "Presence scope unavailable."}), 404
+        typing_scope = "typing_thread"
+    else:
+        return jsonify({"error": "Unsupported presence scope."}), 400
+
+    return jsonify({
+        "active_users": _fresh_chat_room_presence("chat", scope_id),
+        "typing_users": _fresh_typing_room_presence(typing_scope, scope_id),
+    })
 
 
 @chat_api_bp.route("/api/chat/bootstrap")

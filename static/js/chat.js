@@ -3,9 +3,9 @@
   if (!root) return;
 
   const DEFAULT_AVATAR = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2096%2096'%3E%3Crect%20width='96'%20height='96'%20rx='24'%20fill='%23e5e7eb'/%3E%3Ccircle%20cx='48'%20cy='35'%20r='17'%20fill='%239ca3af'/%3E%3Cpath%20d='M20%2082c4-18%2017-28%2028-28s24%2010%2028%2028'%20fill='%239ca3af'/%3E%3C/svg%3E";
-  const PRESENCE_REFRESH_MS = 10000;
+  const PRESENCE_REFRESH_MS = 5000;
   const TYPING_PRESENCE_TTL_MS = 8000;
-  const CHAT_TAB_ID_KEY = "apstudy-chat-tab-id";
+  const PRESENCE_TAB_ID_KEY = "apstudy-presence-tab-id";
   const ROOM_SCROLL_RESTORE_DELAY = 0;
   const MESSAGE_GROUP_WINDOW_MS = 7 * 60 * 1000;
   const DISCORD_HISTORY_CHANNEL_IDS = new Set(["nest_announcements", "nest_chat"]);
@@ -228,12 +228,14 @@
   }
 
   function currentTabId() {
+    if (window.APStudyPresenceHeartbeat?.tabId) return window.APStudyPresenceHeartbeat.tabId;
     if (state.tabId) return state.tabId;
     try {
-      state.tabId = sessionStorage.getItem(CHAT_TAB_ID_KEY);
+      state.tabId = sessionStorage.getItem(PRESENCE_TAB_ID_KEY);
       if (!state.tabId) {
-        state.tabId = Math.random().toString(36).slice(2, 12);
-        sessionStorage.setItem(CHAT_TAB_ID_KEY, state.tabId);
+        state.tabId = window.crypto?.randomUUID?.() || Math.random().toString(36).slice(2, 12);
+        state.tabId = state.tabId.replace(/[^A-Za-z0-9_-]/g, "").slice(0, 64);
+        sessionStorage.setItem(PRESENCE_TAB_ID_KEY, state.tabId);
       }
     } catch (_) {
       state.tabId = state.tabId || Math.random().toString(36).slice(2, 12);
@@ -1805,6 +1807,19 @@
     registerKnownUser(normalized);
   }
 
+  function updatePresenceStatus(userId, status) {
+    const id = String(userId || "");
+    if (!id) return;
+    const normalizedStatus = normalizeLocalPresenceStatus(status);
+    const existing = state.presenceRecords.get(id) || state.knownUsers.get(id) || { id };
+    rememberPresenceUser({
+      ...existing,
+      id,
+      presence_status: normalizedStatus,
+      online: normalizedStatus !== "offline",
+    });
+  }
+
   function presenceStatusForUser(userId, fallback = "offline") {
     const record = state.presenceRecords.get(String(userId || ""));
     return normalizeLocalPresenceStatus(record?.presence_status || fallback);
@@ -1826,6 +1841,15 @@
       .filter((user) => user.id !== currentUserId())
       .filter((user) => (user[field] || []).includes(String(room.id)))
       .map((user) => state.knownUsers.get(user.id) || user);
+  }
+
+  function removePresenceScope(field, scopeId) {
+    const id = String(scopeId || "");
+    if (!id) return;
+    for (const user of state.presenceRecords.values()) {
+      if (!Array.isArray(user[field])) continue;
+      user[field] = user[field].filter((value) => String(value) !== id);
+    }
   }
 
   function renderTypingIndicator() {
@@ -2308,6 +2332,80 @@
     }
   }
 
+  function visiblePresenceUserIds() {
+    const ids = [];
+    const add = (value) => {
+      const id = String(value || "");
+      if (id && id !== currentUserId() && !ids.includes(id)) ids.push(id);
+    };
+    for (const thread of state.threads || []) {
+      add(thread.other_user?.id);
+    }
+    add(state.activeProfile?.id);
+    const thread = activeThread();
+    add(thread?.other_user?.id);
+    return ids.slice(0, 200);
+  }
+
+  async function refreshPresenceStatuses() {
+    const userIds = visiblePresenceUserIds();
+    if (!userIds.length) return;
+    try {
+      const payload = await fetchJson("/api/presence/statuses", {
+        method: "POST",
+        body: JSON.stringify({ user_ids: userIds }),
+      });
+      for (const [userId, status] of Object.entries(payload.statuses || {})) {
+        updatePresenceStatus(userId, status);
+      }
+    } catch (error) {
+      console.warn("Unable to refresh presence statuses", error);
+    }
+  }
+
+  async function refreshActiveRoomPresence() {
+    const room = state.activeRoom;
+    if (!room?.id || !["channel", "thread"].includes(room.type)) return;
+    try {
+      const payload = await fetchJson("/api/presence/room", {
+        method: "POST",
+        body: JSON.stringify({ scope_type: room.type, scope_id: room.id }),
+      });
+      if (!state.activeRoom || roomKey(state.activeRoom) !== roomKey(room)) return;
+      const typingField = room.type === "channel" ? "typing_channel_ids" : "typing_thread_ids";
+      removePresenceScope("active_chat_scopes", room.id);
+      removePresenceScope(typingField, room.id);
+      for (const user of payload.active_users || []) {
+        rememberPresenceUser({
+          ...user,
+          presence_status: "active",
+          online: true,
+          active_chat_scopes: [String(room.id)],
+        });
+      }
+      for (const user of payload.typing_users || []) {
+        rememberPresenceUser({
+          ...user,
+          [typingField]: [String(room.id)],
+        });
+      }
+    } catch (error) {
+      console.warn("Unable to refresh room presence", error);
+    }
+  }
+
+  function syncActiveRoomHeartbeat() {
+    const coordinator = window.APStudyPresenceHeartbeat;
+    if (!coordinator?.setChatRoom) return;
+    coordinator.setChatRoom(state.activeRoom?.id || null);
+  }
+
+  async function refreshTargetedPresences() {
+    syncActiveRoomHeartbeat();
+    await Promise.all([refreshPresenceStatuses(), refreshActiveRoomPresence()]);
+    renderPresenceDrivenUi();
+  }
+
   function heartbeatPayload(kind, room = state.activeRoom) {
     if (kind === "typing") {
       if (!room?.id || !["channel", "thread"].includes(room.type)) return null;
@@ -2317,11 +2415,14 @@
         tab_id: currentTabId(),
       };
     }
-    if (!room?.id) return { scope_type: "chat", scope_id: "global", tab_id: currentTabId() };
-    return { scope_type: "chat", scope_id: room.id, tab_id: currentTabId() };
+    return null;
   }
 
   async function sendPresenceHeartbeat(kind, room = state.activeRoom) {
+    if (kind === "viewing") {
+      syncActiveRoomHeartbeat();
+      return null;
+    }
     const payload = heartbeatPayload(kind, room);
     if (!payload) return null;
     try {
@@ -2342,8 +2443,7 @@
   }
 
   function refreshViewingPresence() {
-    void sendPresenceHeartbeat("viewing");
-    void loadInitialPresences();
+    void refreshTargetedPresences();
   }
 
   function handleActiveRoomPresenceChange(previousRoom) {
@@ -2666,7 +2766,6 @@
         } else {
           void refreshChatSummary();
         }
-        void loadInitialPresences();
         refreshViewingPresence();
       } else {
         clearTypingPresence();
