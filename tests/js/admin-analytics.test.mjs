@@ -56,6 +56,105 @@ test("admin analytics helpers normalize range, timezone URLs, and series data", 
   ]);
 });
 
+test("admin analytics charts use nice axes, hover details, and vertical category bars", async () => {
+  const window = await runBrowserScript("static/js/admin-analytics.js", {
+    window: {
+      Intl,
+    },
+  });
+
+  const axis = window.AdminAnalytics.niceAxis(87);
+  assert.ok(axis.max > 87);
+  assert.equal(String(axis.max).endsWith("0"), true);
+  assert.equal(axis.ticks.length, 6);
+
+  const line = window.AdminAnalytics.renderLineChart([
+    { label: "Jun 1", value: 14 },
+    { label: "Jun 2", value: 87 },
+  ]);
+  assert.match(line, /admin-analytics-tooltip/);
+  assert.match(line, /admin-analytics-grid-line/);
+  assert.match(line, /role="listitem"/);
+
+  const bars = window.AdminAnalytics.renderVerticalBarChart([
+    { label: "Google", value: 4 },
+    { label: "Emory (Main/Oxford)", value: 2 },
+  ]);
+  assert.match(bars, /admin-analytics-bar-column/);
+  assert.match(bars, /admin-analytics-tooltip/);
+  assert.doesNotMatch(bars, /admin-analytics-bars/);
+});
+
+test("admin analytics main card switches to selected metric graph", async () => {
+  const window = await runBrowserScript("static/js/admin-analytics.js", {
+    window: {
+      Intl,
+    },
+  });
+
+  const cards = new Map();
+  const nodes = {
+    main: {
+      innerHTML: "",
+      attrs: {},
+      setAttribute(name, value) {
+        this.attrs[name] = value;
+      },
+    },
+    title: { textContent: "" },
+    description: { textContent: "" },
+  };
+  const tabs = ["totalUsers", "activeUsers", "oauth", "uniType"].map((metric) => ({
+    dataset: { analyticsMetric: metric },
+    active: false,
+    attrs: {},
+    classList: {
+      toggle(name, selected) {
+        if (name === "is-active") this.owner.active = selected;
+      },
+    },
+    setAttribute(name, value) {
+      this.attrs[name] = value;
+    },
+  }));
+  tabs.forEach((tab) => {
+    tab.classList.owner = tab;
+  });
+  const root = {
+    dataset: { activeMetric: "oauth" },
+    querySelector(selector) {
+      const card = selector.match(/\[data-analytics-card="([^"]+)"\]/)?.[1];
+      if (card) {
+        if (!cards.has(card)) cards.set(card, { textContent: "" });
+        return cards.get(card);
+      }
+      if (selector === '[data-chart="main"]') return nodes.main;
+      if (selector === '[data-analytics-main-title]') return nodes.title;
+      if (selector === '[data-analytics-main-description]') return nodes.description;
+      return null;
+    },
+    querySelectorAll(selector) {
+      return selector === "[data-analytics-metric]" ? tabs : [];
+    },
+  };
+
+  window.AdminAnalytics.renderDashboard(root, {
+    cards: { totalUsers: 8, activeUsers: 3, pageViews: 0, onboardingRate: 0 },
+    series: { totalUsers: [], activeUsers: [], pageViews: [] },
+    breakdowns: {
+      oauth: [{ label: "Google", value: 5 }, { label: "Discord", value: 3 }],
+      uniType: [],
+    },
+    engagement: {},
+    ga4: { configured: false },
+  });
+
+  assert.equal(nodes.title.textContent, "OAuth");
+  assert.match(nodes.main.innerHTML, /admin-analytics-bar-column/);
+  assert.equal(cards.get("oauth").textContent, "8");
+  assert.equal(tabs.find((tab) => tab.dataset.analyticsMetric === "oauth").attrs["aria-selected"], "true");
+});
+
 test("admin timezone helper formats timestamps and exposes browser timezone", async () => {
   const window = await runBrowserScript("static/js/admin-timezone.js", {
     window: {

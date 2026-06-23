@@ -1,7 +1,10 @@
 import os
+import sys
 import tempfile
+import types
 import unittest
 from datetime import datetime, timezone
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from flask import Flask
@@ -201,6 +204,67 @@ class AdminAnalyticsServiceTestCase(unittest.TestCase):
 
         self.assertFalse(payload["ga4"]["configured"])
         self.assertEqual(payload["ga4"]["status"], "not_configured")
+
+    def test_ga4_defaults_to_nest_property_and_filters_hostname(self):
+        class FakeAnalyticsClient:
+            report_request = None
+            realtime_request = None
+
+            def run_report(self, request):
+                FakeAnalyticsClient.report_request = request
+                return SimpleNamespace(rows=[])
+
+            def run_realtime_report(self, request):
+                FakeAnalyticsClient.realtime_request = request
+                return SimpleNamespace(rows=[])
+
+        class FakeType:
+            def __init__(self, **kwargs):
+                self.__dict__.update(kwargs)
+
+        class FakeStringFilter(FakeType):
+            class MatchType:
+                EXACT = "EXACT"
+
+        class FakeFilter(FakeType):
+            StringFilter = FakeStringFilter
+
+        fake_google = types.ModuleType("google")
+        fake_analytics = types.ModuleType("google.analytics")
+        fake_data = types.ModuleType("google.analytics.data_v1beta")
+        fake_types = types.ModuleType("google.analytics.data_v1beta.types")
+        fake_data.BetaAnalyticsDataClient = FakeAnalyticsClient
+        fake_types.DateRange = FakeType
+        fake_types.Dimension = FakeType
+        fake_types.Filter = FakeFilter
+        fake_types.FilterExpression = FakeType
+        fake_types.Metric = FakeType
+        fake_types.RunReportRequest = FakeType
+        fake_types.RunRealtimeReportRequest = FakeType
+
+        with patch.dict(os.environ, {"GOOGLE_APPLICATION_CREDENTIALS": "/tmp/fake-ga.json"}, clear=True), \
+                patch.dict(sys.modules, {
+                    "google": fake_google,
+                    "google.analytics": fake_analytics,
+                    "google.analytics.data_v1beta": fake_data,
+                    "google.analytics.data_v1beta.types": fake_types,
+                }):
+            payload = admin_analytics.analytics_payload(
+                range_key="7d",
+                tz_name="UTC",
+                now=datetime(2026, 5, 3, 15, 0, tzinfo=timezone.utc),
+                path=self.db_path,
+            )
+
+        self.assertTrue(payload["ga4"]["configured"])
+        self.assertEqual(payload["ga4"]["status"], "ok")
+        self.assertEqual(payload["ga4"]["propertyId"], "446578226")
+        self.assertEqual(payload["ga4"]["hostName"], "nest.apstudy.org")
+        self.assertEqual(FakeAnalyticsClient.report_request.property, "properties/446578226")
+        self.assertEqual(FakeAnalyticsClient.realtime_request.property, "properties/446578226")
+        self.assertEqual(FakeAnalyticsClient.report_request.dimension_filter.filter.field_name, "hostName")
+        self.assertEqual(FakeAnalyticsClient.report_request.dimension_filter.filter.string_filter.value, "nest.apstudy.org")
+        self.assertEqual(FakeAnalyticsClient.realtime_request.dimension_filter.filter.string_filter.match_type, "EXACT")
 
 
 if __name__ == "__main__":

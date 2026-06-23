@@ -26,15 +26,6 @@
                 <h1 class="admin-title">Analytics</h1>
                 <p class="admin-subtitle">Monitor users, activity, acquisition, and feature engagement in your local timezone.</p>
             </div>
-            <nav class="admin-analytics-ranges" aria-label="Analytics date range">
-                {% for key, option in range_options.items() %}
-                    <button
-                        class="admin-analytics-range{% if key == default_range %} is-active{% endif %}"
-                        type="button"
-                        data-analytics-range="{{ key }}"
-                    >{{ option.label }}</button>
-                {% endfor %}
-            </nav>
         </header>
 
         {% if error %}
@@ -63,64 +54,42 @@
             {% endif %}
         </section>
 
-        <section class="admin-analytics-summary" aria-label="Analytics summary">
-            <article class="admin-card admin-analytics-kpi">
-                <span>Total Users</span>
-                <strong data-analytics-card="totalUsers">--</strong>
-            </article>
-            <article class="admin-card admin-analytics-kpi">
-                <span>Active Users</span>
-                <strong data-analytics-card="activeUsers">--</strong>
-            </article>
-            <article class="admin-card admin-analytics-kpi">
-                <span>Page Views</span>
-                <strong data-analytics-card="pageViews">--</strong>
-            </article>
-            <article class="admin-card admin-analytics-kpi">
-                <span>Onboarding Rate</span>
-                <strong data-analytics-card="onboardingRate">--</strong>
-            </article>
-        </section>
-
         <section class="admin-analytics-grid">
-            <article class="admin-card admin-analytics-chart-card admin-analytics-chart-card--wide">
+            <article class="admin-card admin-analytics-chart-card admin-analytics-chart-card--wide admin-analytics-main-card">
+                <div class="admin-analytics-tabs" role="tablist" aria-label="Analytics metric">
+                    <button class="admin-analytics-tab is-active" type="button" role="tab" aria-selected="true" data-analytics-metric="totalUsers">
+                        <span>Total Users</span>
+                        <strong data-analytics-card="totalUsers">--</strong>
+                    </button>
+                    <button class="admin-analytics-tab" type="button" role="tab" aria-selected="false" data-analytics-metric="activeUsers">
+                        <span>Users Active</span>
+                        <strong data-analytics-card="activeUsers">--</strong>
+                    </button>
+                    <button class="admin-analytics-tab" type="button" role="tab" aria-selected="false" data-analytics-metric="oauth">
+                        <span>OAuth</span>
+                        <strong data-analytics-card="oauth">--</strong>
+                    </button>
+                    <button class="admin-analytics-tab" type="button" role="tab" aria-selected="false" data-analytics-metric="uniType">
+                        <span>Uni Type</span>
+                        <strong data-analytics-card="uniType">--</strong>
+                    </button>
+                </div>
                 <div class="admin-section-heading">
                     <div>
-                        <h2 class="admin-title admin-title--small">Total Users</h2>
-                        <p class="admin-subtitle admin-subtitle--compact">Cumulative user growth from the first joined account.</p>
+                        <h2 class="admin-title admin-title--small" data-analytics-main-title>Total Users</h2>
+                        <p class="admin-subtitle admin-subtitle--compact" data-analytics-main-description>Cumulative user growth from the first joined account.</p>
                     </div>
                 </div>
-                <div class="admin-analytics-chart" data-chart="totalUsers" role="img" aria-label="Total user growth chart"></div>
-            </article>
-
-            <article class="admin-card admin-analytics-chart-card admin-analytics-chart-card--wide">
-                <div class="admin-section-heading">
-                    <div>
-                        <h2 class="admin-title admin-title--small">Users Active</h2>
-                        <p class="admin-subtitle admin-subtitle--compact">Distinct users who opened Nest in each bucket.</p>
-                    </div>
-                </div>
-                <div class="admin-analytics-chart" data-chart="activeUsers" role="img" aria-label="Active users chart"></div>
-            </article>
-
-            <article class="admin-card admin-analytics-chart-card">
-                <div class="admin-section-heading">
-                    <div>
-                        <h2 class="admin-title admin-title--small">OAuth</h2>
-                        <p class="admin-subtitle admin-subtitle--compact">Google, Discord, GitHub, and other account providers.</p>
-                    </div>
-                </div>
-                <div class="admin-analytics-chart" data-chart="oauth" role="img" aria-label="OAuth provider chart"></div>
-            </article>
-
-            <article class="admin-card admin-analytics-chart-card">
-                <div class="admin-section-heading">
-                    <div>
-                        <h2 class="admin-title admin-title--small">Uni Type</h2>
-                        <p class="admin-subtitle admin-subtitle--compact">Emory, university, high school, graduate, and other users.</p>
-                    </div>
-                </div>
-                <div class="admin-analytics-chart" data-chart="uniType" role="img" aria-label="University type chart"></div>
+                <div class="admin-analytics-chart admin-analytics-chart--main" data-chart="main" role="img" aria-label="Analytics chart"></div>
+                <nav class="admin-analytics-ranges" aria-label="Analytics date range">
+                    {% for key, option in range_options.items() %}
+                        <button
+                            class="admin-analytics-range{% if key == default_range %} is-active{% endif %}"
+                            type="button"
+                            data-analytics-range="{{ key }}"
+                        >{{ option.label }}</button>
+                    {% endfor %}
+                </nav>
             </article>
 
             <article class="admin-card admin-analytics-chart-card admin-analytics-chart-card--wide">

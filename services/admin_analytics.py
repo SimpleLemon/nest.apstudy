@@ -22,6 +22,10 @@ RANGE_OPTIONS = {
     "all": {"label": "All Time", "granularity": "day"},
 }
 
+DEFAULT_GA4_PROPERTY_ID = "446578226"
+GA4_ACCOUNT_ID = "318602205"
+GA4_HOSTNAME = "nest.apstudy.org"
+
 
 def utcnow():
     return datetime.now(timezone.utc)
@@ -349,16 +353,14 @@ def _breakdown(items, labels):
 
 
 def _ga4_payload(range_key, window):
-    property_id = (os.environ.get("GA4_PROPERTY_ID") or "").strip()
+    property_id = (os.environ.get("GA4_PROPERTY_ID") or DEFAULT_GA4_PROPERTY_ID).strip()
     credentials = (os.environ.get("GOOGLE_APPLICATION_CREDENTIALS") or "").strip()
-    if not property_id:
-        return {"configured": False, "status": "not_configured", "message": "GA4_PROPERTY_ID is not configured."}
     if not credentials:
         return {"configured": False, "status": "not_configured", "message": "GOOGLE_APPLICATION_CREDENTIALS is not configured."}
 
     try:
         from google.analytics.data_v1beta import BetaAnalyticsDataClient
-        from google.analytics.data_v1beta.types import DateRange, Dimension, Metric, RunReportRequest, RunRealtimeReportRequest
+        from google.analytics.data_v1beta.types import DateRange, Dimension, Filter, FilterExpression, Metric, RunReportRequest, RunRealtimeReportRequest
     except Exception:
         return {"configured": False, "status": "missing_dependency", "message": "google-analytics-data is not installed."}
 
@@ -366,6 +368,15 @@ def _ga4_payload(range_key, window):
         client = BetaAnalyticsDataClient()
         start_date = window["start_local"].date().isoformat()
         end_date = window["end_local"].date().isoformat()
+        hostname_filter = FilterExpression(
+            filter=Filter(
+                field_name="hostName",
+                string_filter=Filter.StringFilter(
+                    match_type=Filter.StringFilter.MatchType.EXACT,
+                    value=GA4_HOSTNAME,
+                ),
+            )
+        )
         report = client.run_report(
             RunReportRequest(
                 property=f"properties/{property_id}",
@@ -376,6 +387,7 @@ def _ga4_payload(range_key, window):
                     Metric(name="eventCount"),
                 ],
                 date_ranges=[DateRange(start_date=start_date, end_date=end_date)],
+                dimension_filter=hostname_filter,
             )
         )
         realtime = client.run_realtime_report(
@@ -383,6 +395,7 @@ def _ga4_payload(range_key, window):
                 property=f"properties/{property_id}",
                 dimensions=[Dimension(name="country")],
                 metrics=[Metric(name="activeUsers")],
+                dimension_filter=hostname_filter,
             )
         )
     except Exception as exc:
@@ -414,6 +427,8 @@ def _ga4_payload(range_key, window):
         "configured": True,
         "status": "ok",
         "range": range_key,
+        "propertyId": property_id,
+        "hostName": GA4_HOSTNAME,
         "totals": totals,
         "series": rows,
         "realtime": {"activeUsers": realtime_total, "countries": countries[:8]},
