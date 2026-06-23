@@ -1,0 +1,102 @@
+<section class="admin-card admin-tracking-panel" aria-labelledby="course-tracking-title" data-auth-section="course-tracking">
+    <div class="admin-section-heading">
+        <div>
+            <h2 id="course-tracking-title" class="admin-title admin-title--small">Course Tracking</h2>
+            <p class="admin-subtitle admin-subtitle--compact">Pause or resume grouped tracking and inspect individual user track rows.</p>
+        </div>
+        <div class="admin-tracking-tools">
+            <div class="admin-tracking-gate" data-spring-tracking-gate>
+                <span class="admin-field-label">Spring tracking</span>
+                <span class="admin-badge {{ '' if spring_tracking_open else 'admin-badge--muted' }}" data-spring-tracking-state>
+                    {{ "Open" if spring_tracking_open else "Closed" }}
+                </span>
+                <button
+                    id="admin-spring-tracking-toggle"
+                    class="admin-button admin-button--ghost"
+                    type="button"
+                    data-enabled="{{ 'false' if spring_tracking_open else 'true' }}"
+                >
+                    {{ "Close Spring" if spring_tracking_open else "Open Spring" }}
+                </button>
+            </div>
+            <label class="admin-select-field" for="admin-tracking-refresh">
+                <span>Refresh interval</span>
+                <select id="admin-tracking-refresh">
+                    <option value="5" {% if course_tracking_refresh_minutes == 5 %}selected{% endif %}>5m (default)</option>
+                    <option value="10" {% if course_tracking_refresh_minutes == 10 %}selected{% endif %}>10m</option>
+                    <option value="30" {% if course_tracking_refresh_minutes == 30 %}selected{% endif %}>30m</option>
+                    <option value="60" {% if course_tracking_refresh_minutes == 60 %}selected{% endif %}>60m</option>
+                </select>
+            </label>
+            <button id="admin-test-chem-150" class="admin-button" type="button">
+                <span class="material-symbols-outlined" aria-hidden="true">bug_report</span>
+                Test Fall 2026 CHEM 150
+            </button>
+        </div>
+    </div>
+    <div id="admin-tracking-alert" class="admin-inline-notice" role="status" hidden></div>
+    {% if tracking_error %}
+        <div class="admin-alert admin-alert--error">{{ tracking_error }}</div>
+    {% endif %}
+    {% if tracking_groups %}
+        <div class="admin-tracking-list" id="admin-tracking-list">
+            {% for group in tracking_groups %}
+                <details class="admin-track-group" data-track-group data-term="{{ group.term }}" data-subject="{{ group.subject }}" data-catalog="{{ group.catalog }}" data-crn="{{ group.crn }}">
+                    <summary>
+                        <span class="admin-track-summary-main">
+                            <strong>{{ group.course_code or (group.subject ~ " " ~ group.catalog) }}</strong>
+                            <span>{{ group.course_title or "Tracked course" }}</span>
+                        </span>
+                        <span class="admin-track-summary-meta">
+                            <span class="admin-badge">{{ group.active_count }} active</span>
+                            <span class="admin-badge admin-badge--muted">{{ group.paused_count }} paused</span>
+                            <span>{{ group.user_count }} users</span>
+                        </span>
+                    </summary>
+                    <div class="admin-track-group-body">
+                        <div class="admin-track-group-actions">
+                            <div class="admin-field">
+                                <span class="admin-field-label">Status</span>
+                                <span class="admin-field-value">{{ group.last_status or "--" }} / {{ group.last_seats_available if group.last_seats_available is not none else "--" }} seats</span>
+                            </div>
+                            <div class="admin-action-row">
+                                <button class="admin-button admin-button--ghost" type="button" data-group-toggle="true">Resume group</button>
+                                <button class="admin-button admin-button--ghost" type="button" data-group-toggle="false">Pause group</button>
+                            </div>
+                        </div>
+                        <table class="admin-table admin-track-table">
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>Enabled</th>
+                                    <th>Last Status</th>
+                                    <th>Seats</th>
+                                    <th>Last Notified</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for track in group.tracks %}
+                                    <tr data-track-id="{{ track.id }}">
+                                        <td data-label="User ID"><a class="admin-link" href="{{ url_for('admin.admin_detail', user_id=track.user_id, section='seat_tracks') }}">{{ track.user_id }}</a></td>
+                                        <td data-label="Enabled">{{ "Yes" if track.enabled else "No" }}</td>
+                                        <td data-label="Last Status">{{ track.last_status or "--" }}</td>
+                                        <td data-label="Seats">{{ track.last_seats_available if track.last_seats_available is not none else "--" }}</td>
+                                        <td data-label="Last Notified">{{ track.last_notified_at or "--" }}</td>
+                                        <td data-label="Actions">
+                                            <button class="admin-button admin-button--ghost" type="button" data-track-toggle="{{ 'false' if track.enabled else 'true' }}">
+                                                {{ "Pause" if track.enabled else "Resume" }}
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No course tracking rows found.</p>
+    {% endif %}
+</section>

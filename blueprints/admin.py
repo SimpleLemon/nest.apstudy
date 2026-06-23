@@ -343,6 +343,7 @@ def _admin_event_title(action):
         "view_admin_index": "Admin Viewed Dashboard",
         "view_admin_users": "Admin Viewed User Directory",
         "view_admin_requests": "Admin Viewed Requests",
+        "view_admin_auth": "Admin Viewed Auth",
         "view_admin_detail": "Admin Viewed Profile",
         "export_admin_detail": "Admin Exported User Data",
         "update_onboarding": "Admin Updated Onboarding",
@@ -884,9 +885,112 @@ def _redirect_detail(user_id, section, status=None, error=None):
     return redirect(url_for("admin.admin_detail", user_id=user_id, section=section))
 
 
+AUTH_TABS = ("users", "course-tracking", "channel-requests")
+ALLOWED_USERS_PER_PAGE = {5, 10, 25, 50, 100}
+DEFAULT_USERS_PER_PAGE = 10
+
+
+def _normalize_auth_tab(tab):
+    value = (tab or "users").strip().lower()
+    if value not in AUTH_TABS:
+        return "users"
+    return value
+
+
+def _auth_page_context(**extra):
+    context = {
+        "theme_preference": _theme_preference(),
+        "pending_request_count": _pending_admin_request_count(),
+        "active_admin_page": "auth",
+        "breadcrumbs": [("Admin", url_for("admin.admin_index")), ("Auth", None)],
+    }
+    context.update(extra)
+    return context
+
+
+def _load_auth_users_section():
+    query = (request.args.get("q") or "").strip()
+    field = (request.args.get("field") or "").strip()
+    try:
+        page = max(1, int(request.args.get("page") or 1))
+    except (TypeError, ValueError):
+        page = 1
+    try:
+        per_page = int(request.args.get("per_page") or DEFAULT_USERS_PER_PAGE)
+    except (TypeError, ValueError):
+        per_page = DEFAULT_USERS_PER_PAGE
+    if per_page not in ALLOWED_USERS_PER_PAGE:
+        per_page = DEFAULT_USERS_PER_PAGE
+
+    error = None
+    total_users = 0
+    users = []
+    total_pages = 1
+    try:
+        if query:
+            matched = _search_users(query, field)
+            total_users = len(matched)
+            total_pages = max(1, (total_users + per_page - 1) // per_page) if total_users else 1
+            if page > total_pages:
+                page = total_pages
+            start = (page - 1) * per_page
+            users = matched[start:start + per_page]
+        else:
+            offset = (page - 1) * per_page
+            response = list_rows_safe(
+                COLLECTIONS["users"],
+                [
+                    Query.order_desc("created_at"),
+                    Query.limit(per_page),
+                    Query.offset(offset),
+                ],
+            )
+            users = response.get("rows", [])
+            total_users = int(response.get("total") or 0)
+            total_pages = max(1, (total_users + per_page - 1) // per_page) if total_users else 1
+            if page > total_pages and total_users:
+                page = total_pages
+    except AppwriteException:
+        logger.exception("Failed to load admin user list")
+        users = []
+        total_users = 0
+        total_pages = 1
+        error = "Unable to load users right now."
+
+    return {
+        "users": [_user_summary(user) for user in users],
+        "q": query,
+        "field": field,
+        "page": page,
+        "per_page": per_page,
+        "total_users": total_users,
+        "total_pages": total_pages,
+        "allowed_users_per_page": sorted(ALLOWED_USERS_PER_PAGE),
+        "error": error,
+    }
+
+
+def _load_auth_channel_requests_section():
+    status_filter = (request.args.get("status") or "pending").strip().lower()
+    if status_filter not in {"pending", "approved", "denied", "all"}:
+        status_filter = "pending"
+    queries = [Query.order_desc("created_at")]
+    if status_filter != "all":
+        queries.insert(0, Query.equal("status", [status_filter]))
+    try:
+        requests_rows = list_rows_all(COLLECTIONS["admin_requests"], queries)
+    except AppwriteException:
+        logger.exception("Failed to load admin requests")
+        requests_rows = []
+    return {
+        "requests": requests_rows,
+        "status_filter": status_filter,
+    }
+
+
 def _redirect_requests(notice=None, error=None):
     _flash_admin_result(status=notice, error=error)
-    return redirect(url_for("admin.admin_requests"))
+    return redirect(url_for("admin.admin_auth", tab="channel-requests"))
 
 
 @admin_bp.route("/admin")
@@ -914,38 +1018,68 @@ def admin_index():
     )
 
 
+@admin_bp.route("/admin/auth")
+@admin_required
+def admin_auth():
+    tab = _normalize_auth_tab(request.args.get("tab"))
+    _log_admin_action("view_admin_auth", "admin auth", metadata={"tab": tab, "section": None})
+    return render_template(
+        "admin_auth.html",
+        initial_tab=tab,
+        status=request.args.get("status"),
+        error=request.args.get("error"),
+        **_auth_page_context(),
+    )
+
+
+@admin_bp.route("/admin/auth/sections/users")
+@admin_required
+def admin_auth_section_users():
+    payload = _load_auth_users_section()
+    _log_admin_action(
+        "view_admin_auth",
+        "admin auth users",
+        metadata={"section": "users", "query": payload["q"], "field": payload["field"]},
+    )
+    return render_template("partials/admin_auth_users.html", **payload)
+
+
+@admin_bp.route("/admin/auth/sections/course-tracking")
+@admin_required
+def admin_auth_section_course_tracking():
+    tracking_groups, tracking_error = _course_tracking_groups()
+    _log_admin_action("view_admin_auth", "admin auth course tracking", metadata={"section": "course-tracking"})
+    return render_template(
+        "partials/admin_auth_course_tracking.html",
+        tracking_groups=tracking_groups,
+        tracking_error=tracking_error,
+        course_tracking_refresh_minutes=get_course_tracking_refresh_minutes(),
+        spring_tracking_open=spring_course_tracking_open(),
+    )
+
+
+@admin_bp.route("/admin/auth/sections/channel-requests")
+@admin_required
+def admin_auth_section_channel_requests():
+    payload = _load_auth_channel_requests_section()
+    _log_admin_action(
+        "view_admin_auth",
+        "admin auth channel requests",
+        metadata={"section": "channel-requests", "status_filter": payload["status_filter"]},
+    )
+    return render_template("partials/admin_auth_channel_requests.html", **payload)
+
+
 @admin_bp.route("/admin/users")
 @admin_required
 def admin_users():
-    query = (request.args.get("q") or "").strip()
-    field = (request.args.get("field") or "").strip()
-    error = None
-
-    try:
-        if query:
-            users = _search_users(query, field)
-        else:
-            users = list_rows_all(
-                COLLECTIONS["users"],
-                [Query.order_desc("created_at")],
-            )
-    except AppwriteException:
-        logger.exception("Failed to load admin user list")
-        users = []
-        error = "Unable to load users right now."
-
-    _log_admin_action("view_admin_users", "admin user directory", metadata={"query": query, "field": field})
-    return render_template(
-        "admin_users.html",
-        users=[_user_summary(user) for user in users],
-        q=query,
-        field=field,
-        error=error,
-        status=request.args.get("status"),
-        theme_preference=_theme_preference(),
-        pending_request_count=_pending_admin_request_count(),
-        active_admin_page="users",
-        breadcrumbs=[("Admin", url_for("admin.admin_index")), ("User Directory", None)],
+    return redirect(
+        url_for(
+            "admin.admin_auth",
+            tab="users",
+            q=request.args.get("q"),
+            field=request.args.get("field"),
+        )
     )
 
 
@@ -1444,34 +1578,9 @@ def admin_course_tracking_run_now():
 @admin_bp.route("/admin/requests")
 @admin_required
 def admin_requests():
-    status_filter = (request.args.get("status") or "pending").strip().lower()
-    if status_filter not in {"pending", "approved", "denied", "all"}:
-        status_filter = "pending"
-    queries = [Query.order_desc("created_at")]
-    if status_filter != "all":
-        queries.insert(0, Query.equal("status", [status_filter]))
-    try:
-        requests_rows = list_rows_all(COLLECTIONS["admin_requests"], queries)
-    except AppwriteException:
-        logger.exception("Failed to load admin requests")
-        requests_rows = []
-    tracking_groups, tracking_error = _course_tracking_groups()
-    _log_admin_action("view_admin_requests", "admin requests", metadata={"status_filter": status_filter})
-    return render_template(
-        "admin_requests.html",
-        requests=requests_rows,
-        tracking_groups=tracking_groups,
-        tracking_error=tracking_error,
-        course_tracking_refresh_minutes=get_course_tracking_refresh_minutes(),
-        spring_tracking_open=spring_course_tracking_open(),
-        status_filter=status_filter,
-        status=request.args.get("notice"),
-        error=request.args.get("error"),
-        theme_preference=_theme_preference(),
-        pending_request_count=_pending_admin_request_count(),
-        active_admin_page="requests",
-        breadcrumbs=[("Admin", url_for("admin.admin_index")), ("Requests", None)],
-    )
+    status = request.args.get("status")
+    tab = "channel-requests" if status else "course-tracking"
+    return redirect(url_for("admin.admin_auth", tab=tab, status=status, error=request.args.get("error")))
 
 
 APSWIFTLY_CONTROL_ACTIONS = {
@@ -1719,10 +1828,10 @@ def admin_detail(user_id):
         error=request.args.get("error"),
         theme_preference=_theme_preference(),
         pending_request_count=_pending_admin_request_count(),
-        active_admin_page="users",
+        active_admin_page="auth",
         breadcrumbs=[
             ("Admin", url_for("admin.admin_index")),
-            ("User Directory", url_for("admin.admin_users")),
+            ("Auth", url_for("admin.admin_auth")),
             ((_user_summary(user_doc).get("name") or _row_id(user_doc) or "User"), None),
         ],
     )
@@ -1978,4 +2087,4 @@ def delete_user(user_id):
                 logger.exception("Failed to delete avatar file %s", avatar_file_id)
 
     push_toast("User deleted.", type="success")
-    return redirect(url_for("admin.admin_users"))
+    return redirect(url_for("admin.admin_auth", tab="users"))

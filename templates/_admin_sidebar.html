@@ -22,13 +22,9 @@
                 <span class="admin-sidebar-icon material-symbols-outlined" aria-hidden="true">home</span>
                 <span>Home</span>
             </a>
-            <a class="admin-sidebar-item {% if active_admin_page == 'users' %}is-active{% endif %}" href="{{ url_for('admin.admin_users') }}">
-                <span class="admin-sidebar-icon material-symbols-outlined" aria-hidden="true">group</span>
-                <span>User Directory</span>
-            </a>
-            <a class="admin-sidebar-item {% if active_admin_page == 'requests' %}is-active{% endif %}" href="{{ url_for('admin.admin_requests') }}">
-                <span class="admin-sidebar-icon material-symbols-outlined" aria-hidden="true">inbox</span>
-                <span>Requests</span>
+            <a class="admin-sidebar-item {% if active_admin_page == 'auth' %}is-active{% endif %}" href="{{ url_for('admin.admin_auth') }}">
+                <span class="admin-sidebar-icon material-symbols-outlined" aria-hidden="true">shield_person</span>
+                <span>Auth</span>
                 {% if pending_request_count %}
                     <span class="admin-sidebar-count">{{ pending_request_count }}</span>
                 {% endif %}

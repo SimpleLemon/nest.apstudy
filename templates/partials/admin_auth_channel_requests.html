@@ -1,0 +1,78 @@
+<section class="admin-card" aria-labelledby="university-channel-requests-title" data-auth-section="channel-requests">
+    <div class="admin-section-heading">
+        <div>
+            <h2 id="university-channel-requests-title" class="admin-title admin-title--small">University Channel Requests</h2>
+            <p class="admin-subtitle admin-subtitle--compact">Review channel approvals and other platform requests.</p>
+        </div>
+    </div>
+    <nav class="admin-tabs" data-auth-channel-status-tabs>
+        {% for value, label in [("pending", "Pending"), ("approved", "Approved"), ("denied", "Denied"), ("all", "All")] %}
+            <button
+                class="admin-tab{% if status_filter == value %} is-active{% endif %}"
+                type="button"
+                data-channel-status="{{ value }}"
+            >{{ label }}</button>
+        {% endfor %}
+    </nav>
+
+    {% if requests %}
+        <table class="admin-table" aria-label="Admin requests">
+            <thead>
+                <tr>
+                    <th>Label</th>
+                    <th>School</th>
+                    <th>Status</th>
+                    <th>Requests</th>
+                    <th>Created</th>
+                    <th>Resolved</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in requests %}
+                    {% set request_id = item.get('$id') or item.get('id') %}
+                    <tr>
+                        <td data-label="Label"><strong>{{ item.get('label') or item.get('request_type') }}</strong></td>
+                        <td data-label="School">{{ item.get('school_name') or '--' }}</td>
+                        <td data-label="Status">
+                            {% if item.get('status') == 'pending' %}
+                                <span class="admin-badge">Pending</span>
+                            {% else %}
+                                <span class="admin-badge admin-badge--muted">{{ item.get('status') or '--' }}</span>
+                            {% endif %}
+                        </td>
+                        <td data-label="Requests">{{ item.get('request_count') or 1 }}</td>
+                        <td data-label="Created">{{ item.get('created_at') or '--' }}</td>
+                        <td data-label="Resolved">{{ item.get('resolved_at') or '--' }}</td>
+                        <td data-label="Actions">
+                            {% if item.get('status') == 'pending' %}
+                                <div class="admin-action-row">
+                                    <form method="post" action="{{ url_for('admin.approve_admin_request', request_id=request_id) }}">
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                                        <button class="admin-button" type="submit">Approve</button>
+                                    </form>
+                                    <form method="post" action="{{ url_for('admin.deny_admin_request', request_id=request_id) }}">
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                                        <button class="admin-button admin-button--ghost" type="submit">Deny</button>
+                                    </form>
+                                </div>
+                            {% else %}
+                                --
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="7">
+                            <details>
+                                <summary>Raw request data</summary>
+                                <pre class="admin-code-block">{{ item | tojson }}</pre>
+                            </details>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="admin-card admin-empty-card">No requests found.</div>
+    {% endif %}
+</section>

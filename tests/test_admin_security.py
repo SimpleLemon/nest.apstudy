@@ -75,11 +75,8 @@ class AdminSecurityTestCase(unittest.TestCase):
             session["_fresh"] = True
 
     def _get_csrf_token(self, client, url, patches):
-        extra_patches = []
-        if url == "/admin/requests":
-            extra_patches.append(patch.object(admin, "get_course_tracking_refresh_minutes", return_value=5))
         with ExitStack() as stack:
-            for patcher in [*patches, *extra_patches]:
+            for patcher in patches:
                 stack.enter_context(patcher)
             response = client.get(url)
         html = response.get_data(as_text=True)
@@ -148,9 +145,10 @@ class AdminSecurityTestCase(unittest.TestCase):
             with patch.object(admin, "list_rows_all", return_value=requests_rows), \
                     patch.object(admin, "_theme_preference", return_value=None), \
                     patch.object(admin, "_pending_admin_request_count", return_value=1):
-                response = client.get("/admin/requests")
+                response = client.get("/admin/auth/sections/channel-requests")
 
         html = response.get_data(as_text=True)
+        self.assertEqual(response.status_code, 200)
         self.assertGreaterEqual(html.count('name="csrf_token"'), 2)
 
     def test_admin_home_renders_home_metrics(self):
@@ -506,37 +504,101 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertEqual(admin._normalize_oauth_provider({"google_id": "legacy"}), "google")
         self.assertEqual(admin._normalize_oauth_provider({}), "other")
 
-    def test_admin_users_renders_directory(self):
+    def test_admin_auth_renders_shell_without_section_data(self):
         with self.app.test_client() as client:
             self._login(client)
-            with patch.object(admin, "list_rows_all", return_value=[self.user_doc]), \
-                    patch.object(admin, "_theme_preference", return_value=None), \
-                    patch.object(admin, "_pending_admin_request_count", return_value=0):
-                response = client.get("/admin/users")
+            with patch.object(admin, "_theme_preference", return_value=None), \
+                    patch.object(admin, "_pending_admin_request_count", return_value=2):
+                response = client.get("/admin/auth")
 
         html = response.get_data(as_text=True)
         self.assertEqual(response.status_code, 200)
-        self.assertIn("User Directory", html)
-        self.assertIn('action="/admin/users"', html)
+        self.assertIn("Auth", html)
+        self.assertIn('data-auth-tab="users"', html)
+        self.assertIn('data-auth-tab="course-tracking"', html)
+        self.assertIn('data-auth-tab="channel-requests"', html)
+        self.assertIn('id="admin-auth-panel"', html)
+        self.assertIn('id="admin-auth-overlay"', html)
+        self.assertNotIn("user@example.com", html)
+        self.assertNotIn("admin-table--directory", html)
+
+    def test_admin_auth_users_section_renders_directory(self):
+        with self.app.test_client() as client:
+            self._login(client)
+            with patch.object(admin, "list_rows_safe", return_value={"rows": [self.user_doc], "total": 1}), \
+                    patch.object(admin, "_theme_preference", return_value=None), \
+                    patch.object(admin, "_pending_admin_request_count", return_value=0):
+                response = client.get("/admin/auth/sections/users")
+
+        html = response.get_data(as_text=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("admin-auth-users-toolbar", html)
+        self.assertIn("data-auth-columns-trigger", html)
+        self.assertIn('data-auth-users-search', html)
+        self.assertIn("Search by email, username, or Appwrite ID", html)
+        self.assertIn('data-column="id"', html)
         self.assertIn("user@example.com", html)
         self.assertIn("May 25, 2026", html)
         self.assertIn("May 25, 2026 1:00 AM", html)
         self.assertIn(">OAuth<", html)
         self.assertIn("admin-table__name--emory", html)
+        self.assertIn("Total: 1", html)
         self.assertNotIn(">Emory<", html)
 
-    def test_admin_requests_places_course_tracking_before_university_requests(self):
-        requests_rows = [{
-            "$id": "request-1",
-            "id": "request-1",
-            "label": "University Channel",
-            "request_type": "uni_channel_approval",
-            "school_name": "Emory University",
-            "status": "pending",
-            "request_count": 1,
-            "created_at": "2026-05-25T00:00:00Z",
-            "resolved_at": None,
-        }]
+    def test_admin_auth_users_section_pagination_footer(self):
+        with self.app.test_client() as client:
+            self._login(client)
+            with patch.object(admin, "list_rows_safe", return_value={"rows": [self.user_doc], "total": 33}), \
+                    patch.object(admin, "_theme_preference", return_value=None), \
+                    patch.object(admin, "_pending_admin_request_count", return_value=0):
+                response = client.get("/admin/auth/sections/users?per_page=10&page=1")
+
+        html = response.get_data(as_text=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Total: 33", html)
+        self.assertIn('data-auth-users-per-page', html)
+        self.assertIn('value="25"', html)
+        self.assertRegex(html, r'data-auth-users-page="next"')
+
+    def test_admin_auth_users_invalid_per_page_defaults_to_ten(self):
+        with self.app.test_client() as client:
+            self._login(client)
+            with patch.object(admin, "list_rows_safe", return_value={"rows": [], "total": 0}) as list_rows_safe, \
+                    patch.object(admin, "_theme_preference", return_value=None), \
+                    patch.object(admin, "_pending_admin_request_count", return_value=0):
+                response = client.get("/admin/auth/sections/users?per_page=999")
+
+        self.assertEqual(response.status_code, 200)
+        queries = list_rows_safe.call_args.args[1]
+        self.assertTrue(any("limit" in str(query).lower() and "10" in str(query) for query in queries))
+
+    def test_admin_auth_users_page_two_requests_offset(self):
+        with self.app.test_client() as client:
+            self._login(client)
+            with patch.object(admin, "list_rows_safe", return_value={"rows": [], "total": 50}) as list_rows_safe, \
+                    patch.object(admin, "_theme_preference", return_value=None), \
+                    patch.object(admin, "_pending_admin_request_count", return_value=0):
+                response = client.get("/admin/auth/sections/users?per_page=10&page=2")
+
+        html = response.get_data(as_text=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('aria-current="page">2<', html)
+        queries = list_rows_safe.call_args.args[1]
+        self.assertTrue(any("offset" in str(query).lower() and "10" in str(query) for query in queries))
+
+    def test_admin_users_redirects_to_auth(self):
+        with self.app.test_client() as client:
+            self._login(client)
+            response = client.get("/admin/users?q=user@example.com&field=email")
+
+        self.assertEqual(response.status_code, 302)
+        location = response.headers["Location"]
+        self.assertIn("/admin/auth", location)
+        self.assertIn("tab=users", location)
+        self.assertIn("q=user@example.com", location)
+        self.assertIn("field=email", location)
+
+    def test_admin_auth_course_tracking_section_renders_panel(self):
         groups = [{
             "id": "Fall_2026|CHEM|150|1234",
             "term": "Fall_2026",
@@ -563,20 +625,35 @@ class AdminSecurityTestCase(unittest.TestCase):
         }]
         with self.app.test_client() as client:
             self._login(client)
-            with patch.object(admin, "list_rows_all", return_value=requests_rows), \
-                    patch.object(admin, "_course_tracking_groups", return_value=(groups, None)), \
-                    patch.object(admin, "_theme_preference", return_value=None), \
-                    patch.object(admin, "_pending_admin_request_count", return_value=1):
-                response = client.get("/admin/requests")
+            with patch.object(admin, "_course_tracking_groups", return_value=(groups, None)), \
+                    patch.object(admin, "get_course_tracking_refresh_minutes", return_value=5), \
+                    patch.object(admin, "spring_course_tracking_open", return_value=False):
+                response = client.get("/admin/auth/sections/course-tracking")
 
         html = response.get_data(as_text=True)
-        self.assertLess(html.index("Course Tracking"), html.index("University Channel Requests"))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Course Tracking", html)
         self.assertIn("CHEM 150", html)
         self.assertIn('id="admin-tracking-refresh"', html)
         self.assertIn("5m (default)", html)
         self.assertIn("60m", html)
         self.assertIn("Spring tracking", html)
         self.assertIn("Open Spring", html)
+        self.assertNotIn("University Channel Requests", html)
+
+    def test_admin_requests_redirects_to_auth_tabs(self):
+        with self.app.test_client() as client:
+            self._login(client)
+            course_response = client.get("/admin/requests")
+            channel_response = client.get("/admin/requests?status=pending")
+
+        self.assertEqual(course_response.status_code, 302)
+        self.assertIn("/admin/auth", course_response.headers["Location"])
+        self.assertIn("tab=course-tracking", course_response.headers["Location"])
+        self.assertEqual(channel_response.status_code, 302)
+        self.assertIn("/admin/auth", channel_response.headers["Location"])
+        self.assertIn("tab=channel-requests", channel_response.headers["Location"])
+        self.assertIn("status=pending", channel_response.headers["Location"])
 
     def test_admin_export_requires_post_and_csrf(self):
         export_payload = {"user": self.user_doc, "settings": self.settings_doc}
@@ -739,7 +816,7 @@ class AdminSecurityTestCase(unittest.TestCase):
             self._login(client)
             token = self._get_csrf_token(
                 client,
-                "/admin/requests",
+                "/admin/auth",
                 [
                     patch.object(admin, "list_rows_all", return_value=[]),
                     patch.object(admin, "_course_tracking_groups", return_value=([], None)),
@@ -779,7 +856,7 @@ class AdminSecurityTestCase(unittest.TestCase):
             self._login(client)
             token = self._get_csrf_token(
                 client,
-                "/admin/requests",
+                "/admin/auth",
                 [
                     patch.object(admin, "list_rows_all", return_value=[]),
                     patch.object(admin, "_course_tracking_groups", return_value=([], None)),
@@ -805,7 +882,7 @@ class AdminSecurityTestCase(unittest.TestCase):
             self._login(client)
             token = self._get_csrf_token(
                 client,
-                "/admin/requests",
+                "/admin/auth",
                 [
                     patch.object(admin, "list_rows_all", return_value=[]),
                     patch.object(admin, "_course_tracking_groups", return_value=([], None)),
@@ -844,7 +921,7 @@ class AdminSecurityTestCase(unittest.TestCase):
             self._login(client)
             token = self._get_csrf_token(
                 client,
-                "/admin/requests",
+                "/admin/auth",
                 [
                     patch.object(admin, "list_rows_all", return_value=[]),
                     patch.object(admin, "_course_tracking_groups", return_value=([], None)),
@@ -876,7 +953,7 @@ class AdminSecurityTestCase(unittest.TestCase):
             self._login(client)
             token = self._get_csrf_token(
                 client,
-                "/admin/requests",
+                "/admin/auth",
                 [
                     patch.object(admin, "list_rows_all", return_value=[]),
                     patch.object(admin, "_course_tracking_groups", return_value=([], None)),
