@@ -366,6 +366,55 @@ def _fresh_typing_room_presence(scope_type, scope_id):
     return users
 
 
+def _school_key_for_user_row(user):
+    if not user:
+        return ""
+    return user.get("school_key") or school_payload(user.get("school")).get("school_key") or ""
+
+
+def _user_can_access_channel_presence(channel, user):
+    if not channel or not user:
+        return False
+    if channel.get("kind") == "discord":
+        return True
+    if channel.get("kind") == "university":
+        return bool(channel.get("approved")) and _school_key_for_user_row(user) == channel.get("school_key")
+    return False
+
+
+def _online_users_for_channel(channel):
+    rows = _fresh_presence_rows_by_scope(["chat", "site"], limit=PRESENCE_ONLINE_LIMIT * 4)
+    scopes_by_user = {}
+    latest_by_user = {}
+    for row in rows:
+        user_id = str(row.get("user_id") or "")
+        if not user_id:
+            continue
+        scopes_by_user.setdefault(user_id, set()).add(row.get("scope_type"))
+        latest = row.get("last_seen_at") or ""
+        if latest > latest_by_user.get(user_id, ""):
+            latest_by_user[user_id] = latest
+
+    users = []
+    for user_id, scopes in scopes_by_user.items():
+        try:
+            user = get_row_safe(COLLECTIONS["users"], user_id, allow_missing=True)
+        except AppwriteException:
+            logger.exception("Failed to resolve channel online user %s", user_id)
+            continue
+        if not _user_can_access_channel_presence(channel, user):
+            continue
+        public_user = _public_user(user)
+        if not public_user:
+            continue
+        public_user["presence_status"] = _presence_status_from_scopes(scopes)
+        public_user["online"] = public_user["presence_status"] != "offline"
+        public_user["last_seen_at"] = latest_by_user.get(user_id)
+        users.append(public_user)
+    users.sort(key=lambda user: (user.get("presence_status") != "active", user.get("name") or ""))
+    return users[:PRESENCE_ONLINE_LIMIT]
+
+
 def _event_read_permissions(scope_type, *, channel=None, readable_user_ids=None):
     if readable_user_ids is not None:
         return _readable_by_users(readable_user_ids)
@@ -811,7 +860,7 @@ def _channel_payload(channel, university_status=None):
     if not channel:
         return None
     channel_id = _row_id(channel)
-    active_users = _fresh_chat_room_presence("chat", channel_id)
+    online_users = _online_users_for_channel(channel)
     return {
         "id": channel_id,
         "kind": channel.get("kind"),
@@ -821,8 +870,10 @@ def _channel_payload(channel, university_status=None):
         "school_name": channel.get("school_name"),
         "read_only": bool(channel.get("read_only")),
         "approved": bool(channel.get("approved")),
-        "active_count": len(active_users),
-        "active_users": active_users,
+        "active_count": len(online_users),
+        "active_users": online_users,
+        "online_count": len(online_users),
+        "online_users": online_users,
         "history_limited": channel.get("kind") == "discord",
         "university_status": university_status or channel.get("university_status"),
         "presence_scope": _presence_scope("channel", channel_id),
@@ -2133,8 +2184,10 @@ def presence_room():
     else:
         return jsonify({"error": "Unsupported presence scope."}), 400
 
+    online_users = _online_users_for_channel(channel) if scope_type == "channel" else _fresh_chat_room_presence("chat", scope_id)
     return jsonify({
-        "active_users": _fresh_chat_room_presence("chat", scope_id),
+        "active_users": online_users,
+        "online_users": online_users,
         "typing_users": _fresh_typing_room_presence(typing_scope, scope_id),
     })
 

@@ -70,8 +70,9 @@ test("chat uses local presence APIs for online and typing state", async () => {
   assert.match(script, /Several people are typing\.\.\./);
   assert.match(script, /renderPresenceDrivenUi\(\)/);
   assert.match(script, /presenceStatusLabel/);
-  assert.match(script, /Active/);
+  assert.match(script, /Online/);
   assert.match(script, /Busy/);
+  assert.match(script, /online_users/);
   assert.doesNotMatch(script, /apstudy-chat-tab-id/);
 });
 
@@ -458,7 +459,7 @@ test("chat DM pane uses compact public profile card fields", async () => {
   assert.match(styles, /\.chat-profile-card \.profile-tile-detail-early-member::after/);
 });
 
-test("chat active users pane has desktop collapse controls", async () => {
+test("chat online users pane has desktop collapse controls", async () => {
   const script = await sourceFor("static/js/chat.js");
   const styles = await sourceFor("static/css/chat.css");
   const template = await sourceFor("templates/chat.html");
@@ -468,6 +469,8 @@ test("chat active users pane has desktop collapse controls", async () => {
   assert.doesNotMatch(template, /data-collapse-members/);
   assert.match(script, /profileToggle/);
   assert.match(template, /data-restore-members/);
+  assert.match(template, /Online/);
+  assert.match(template, /Online users and profile/);
   assert.match(script, /setMembersCollapsed/);
   assert.match(styles, /members-collapsed/);
 });

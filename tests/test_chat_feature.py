@@ -366,8 +366,8 @@ class TestChatFeature(unittest.TestCase):
             response = client.post("/api/presence/room", json={"scope_type": "channel", "scope_id": "nest_chat"})
         self.assertIn(response.status_code, (302, 401))
 
-    def test_presence_room_returns_targeted_active_and_typing_users(self):
-        active_user = {"id": "user-2", "name": "Active User", "presence_status": "active"}
+    def test_presence_room_returns_targeted_online_and_typing_users(self):
+        online_user = {"id": "user-2", "name": "Online User", "presence_status": "busy"}
         typing_user = {"id": "user-3", "name": "Typing User", "typing_channel_ids": ["nest_chat"]}
         with self.app.test_request_context(
             "/api/presence/room",
@@ -376,16 +376,34 @@ class TestChatFeature(unittest.TestCase):
         ):
             with patch.object(chat_api, "current_user", self.user), \
                     patch.object(chat_api, "get_row_safe", return_value={"$id": "nest_chat", "kind": "discord"}), \
-                    patch.object(chat_api, "_fresh_chat_room_presence", return_value=[active_user]) as active, \
+                    patch.object(chat_api, "_online_users_for_channel", return_value=[online_user]) as online, \
                     patch.object(chat_api, "_fresh_typing_room_presence", return_value=[typing_user]) as typing:
                 response = chat_api.presence_room.__wrapped__()
 
         self.assertEqual(response.status_code, 200)
         payload = response.get_json()
-        self.assertEqual(payload["active_users"], [active_user])
+        self.assertEqual(payload["active_users"], [online_user])
+        self.assertEqual(payload["online_users"], [online_user])
         self.assertEqual(payload["typing_users"], [typing_user])
-        active.assert_called_once_with("chat", "nest_chat")
+        online.assert_called_once_with({"$id": "nest_chat", "kind": "discord"})
         typing.assert_called_once_with("typing_channel", "nest_chat")
+
+    def test_online_users_for_university_channel_filters_by_school_access(self):
+        channel = {"$id": "uni_emory", "kind": "university", "approved": True, "school_key": "emory-university"}
+        rows = [
+            {"user_id": "user-2", "scope_type": "site", "last_seen_at": "2026-06-23T12:00:00Z"},
+            {"user_id": "user-3", "scope_type": "site", "last_seen_at": "2026-06-23T12:00:00Z"},
+        ]
+        users = {
+            "user-2": {"$id": "user-2", "name": "Emory User", "school_key": "emory-university"},
+            "user-3": {"$id": "user-3", "name": "Other User", "school_key": "other-school"},
+        }
+        with patch.object(chat_api, "_fresh_presence_rows_by_scope", return_value=rows), \
+                patch.object(chat_api, "get_row_safe", side_effect=lambda _collection, user_id, allow_missing=True: users[user_id]):
+            payload = chat_api._online_users_for_channel(channel)
+
+        self.assertEqual([user["id"] for user in payload], ["user-2"])
+        self.assertEqual(payload[0]["presence_status"], "busy")
 
     def test_dm_thread_payload_includes_presence_permissions(self):
         thread = {

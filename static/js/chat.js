@@ -251,6 +251,7 @@
   function registerKnownUsersFromState() {
     registerKnownUser(state.user);
     for (const channel of state.channels || []) {
+      for (const user of channel.online_users || []) registerKnownUser(user);
       for (const user of channel.active_users || []) registerKnownUser(user);
     }
     for (const thread of state.threads || []) {
@@ -263,6 +264,8 @@
       ...channel,
       active_count: 0,
       active_users: [],
+      online_count: 0,
+      online_users: [],
     };
   }
 
@@ -827,7 +830,7 @@
       if (channel.university_status === "denied") return "Denied";
       return "Waiting approval";
     }
-    return `${channel.active_count || 0} active`;
+    return `${channel.online_count ?? channel.active_count ?? 0} online`;
   }
 
   function channelSymbol(channel) {
@@ -944,7 +947,7 @@
   }
 
   function presenceStatusLabel(status) {
-    if (status === "active") return "Active";
+    if (status === "active") return "Online";
     if (status === "busy") return "Busy";
     return "Offline";
   }
@@ -1484,7 +1487,7 @@
         ? ""
         : channelIsPending(channel)
           ? "Waiting for admin approval"
-          : `${channel.active_count || 0} active`;
+          : `${channel.online_count ?? channel.active_count ?? 0} online`;
       setHistoryBanner(channelIsPending(channel) ? null : channel);
       const placeholder = channelIsPending(channel)
         ? "Waiting for admin approval"
@@ -1649,21 +1652,21 @@
   function renderMembers(users) {
     if (!els.members || !els.memberList || !els.profilePanel) return;
     els.members.classList.remove("is-dm-profile");
-    const activeUsers = users || [];
-    els.membersCount.textContent = plural(activeUsers.length, "user", "users");
-    els.membersRestoreCount.textContent = String(activeUsers.length);
+    const onlineUsers = users || [];
+    els.membersCount.textContent = plural(onlineUsers.length, "user", "users");
+    els.membersRestoreCount.textContent = String(onlineUsers.length);
     els.profilePanel.hidden = true;
     els.profilePanel.innerHTML = "";
-    if (!activeUsers.length) {
-      els.memberList.innerHTML = `<div class="chat-empty chat-empty-compact">No active users.</div>`;
+    if (!onlineUsers.length) {
+      els.memberList.innerHTML = `<div class="chat-empty chat-empty-compact">No online users.</div>`;
       return;
     }
-    els.memberList.innerHTML = activeUsers.map((user) => `
+    els.memberList.innerHTML = onlineUsers.map((user) => `
       <button class="chat-member" type="button" data-profile-id="${escapeHtml(user.id)}">
         <img ${avatarAttrs(user.picture_url, 72, "36px")} alt="">
         <span>
           <strong>${escapeHtml(user.name || user.username || "Nest User")}</strong>
-          <small>${escapeHtml(user.school || user.username || "Active now")}</small>
+          <small>${escapeHtml(user.school || user.username || presenceStatusLabel(user.presence_status || "active"))}</small>
         </span>
       </button>
     `).join("");
@@ -1871,8 +1874,16 @@
   function renderPresenceDrivenUi() {
     registerKnownUsersFromState();
     for (const channel of state.channels) {
-      const scope = channel.presence_scope || { scope_type: "channel", scope_id: channel.id };
-      const users = usersForPresenceScope(scope.scope_type, scope.scope_id);
+      const users = (channel.online_users || channel.active_users || []).map((user) => {
+        const status = presenceStatusForUser(user.id, user.presence_status || (user.online ? "active" : "offline"));
+        return {
+          ...user,
+          presence_status: status,
+          online: status !== "offline",
+        };
+      }).filter((user) => user.online);
+      channel.online_users = users;
+      channel.online_count = users.length;
       channel.active_users = users;
       channel.active_count = users.length;
       for (const user of users) registerKnownUser(user);
@@ -1893,7 +1904,7 @@
     if (thread) {
       renderDmProfile(thread);
     } else if (channel && !channelIsPending(channel)) {
-      renderMembers(channel.active_users || []);
+      renderMembers(channel.online_users || channel.active_users || []);
     }
     renderTypingIndicator();
   }
@@ -2103,7 +2114,7 @@
     if (thread) {
       renderDmProfile(thread);
     } else {
-      renderMembers(channel?.active_users || []);
+      renderMembers(channel?.online_users || channel?.active_users || []);
     }
 
     const cache = cacheFor(room);
@@ -2375,12 +2386,21 @@
       const typingField = room.type === "channel" ? "typing_channel_ids" : "typing_thread_ids";
       removePresenceScope("active_chat_scopes", room.id);
       removePresenceScope(typingField, room.id);
-      for (const user of payload.active_users || []) {
+      const roomUsers = payload.online_users || payload.active_users || [];
+      const channel = room.type === "channel" ? state.channels.find((candidate) => candidate.id === room.id) : null;
+      if (channel) {
+        channel.online_users = roomUsers;
+        channel.online_count = roomUsers.length;
+        channel.active_users = roomUsers;
+        channel.active_count = roomUsers.length;
+      }
+      for (const user of roomUsers) {
+        const status = normalizeLocalPresenceStatus(user.presence_status || "active");
         rememberPresenceUser({
           ...user,
-          presence_status: "active",
-          online: true,
-          active_chat_scopes: [String(room.id)],
+          presence_status: status,
+          online: status !== "offline",
+          active_chat_scopes: status === "active" ? [String(room.id)] : [],
         });
       }
       for (const user of payload.typing_users || []) {
@@ -2671,10 +2691,13 @@
       const profileButton = event.target.closest("[data-profile-id]");
       if (!profileButton) return;
       const channel = activeChannel();
-      const user = (channel?.active_users || []).find((candidate) => candidate.id === profileButton.dataset.profileId);
+      const user = (channel?.online_users || channel?.active_users || []).find((candidate) => candidate.id === profileButton.dataset.profileId);
       if (user) {
         els.profilePanel.hidden = false;
-        els.profilePanel.innerHTML = profileMarkup(user, { showBlock: false, status: "active" });
+        els.profilePanel.innerHTML = profileMarkup(user, {
+          showBlock: false,
+          status: user.presence_status || (user.online ? "active" : "offline"),
+        });
       }
     });
     els.profilePanel?.addEventListener("click", (event) => {
