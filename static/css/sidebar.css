@@ -184,7 +184,10 @@ body.with-sidebar main.flex-1 {
 
 body.with-sidebar.sidebar-collapsed main,
 body.with-sidebar.sidebar-collapsed > .flex-1,
-body.with-sidebar.sidebar-collapsed main.flex-1 {
+body.with-sidebar.sidebar-collapsed main.flex-1,
+html.apstudy-sidebar-collapsed body.with-sidebar main,
+html.apstudy-sidebar-collapsed body.with-sidebar > .flex-1,
+html.apstudy-sidebar-collapsed body.with-sidebar main.flex-1 {
 	margin-left: 70px;
 	width: calc(100% - 70px);
 }
@@ -194,7 +197,8 @@ body.with-sidebar header {
 	transition: margin-left 0.3s ease;
 }
 
-body.with-sidebar.sidebar-collapsed header {
+body.with-sidebar.sidebar-collapsed header,
+html.apstudy-sidebar-collapsed body.with-sidebar header {
 	margin-left: 70px;
 }
 
@@ -204,7 +208,8 @@ body.with-sidebar.sidebar-collapsed header {
 	transition: margin-left 0.3s ease;
 }
 
-body.with-sidebar.sidebar-collapsed .navbar-with-sidebar {
+body.with-sidebar.sidebar-collapsed .navbar-with-sidebar,
+html.apstudy-sidebar-collapsed body.with-sidebar .navbar-with-sidebar {
 	margin-left: 70px;
 }
 

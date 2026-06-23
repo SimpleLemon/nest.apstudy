@@ -43,7 +43,29 @@ function initSidebar() {
 }
 
 function normalizeSidebarDefault(value) {
+  if (typeof window.APSTUDY_NORMALIZE_SIDEBAR_DEFAULT === 'function') {
+    return window.APSTUDY_NORMALIZE_SIDEBAR_DEFAULT(value);
+  }
   return String(value || '').trim().toLowerCase() === 'collapsed' ? 'collapsed' : 'expanded';
+}
+
+function resolveSidebarCollapsed(sidebarDefault) {
+  if (typeof window.APSTUDY_RESOLVE_SIDEBAR_COLLAPSED === 'function') {
+    return window.APSTUDY_RESOLVE_SIDEBAR_COLLAPSED(sidebarDefault);
+  }
+  const storedCollapsed = localStorage.getItem('sidebar-collapsed');
+  if (storedCollapsed === null) {
+    return normalizeSidebarDefault(sidebarDefault) === 'collapsed';
+  }
+  return storedCollapsed === 'true';
+}
+
+function syncSidebarCollapsedHtmlClass(shouldCollapse) {
+  if (typeof window.APSTUDY_SYNC_SIDEBAR_COLLAPSED_HTML === 'function') {
+    window.APSTUDY_SYNC_SIDEBAR_COLLAPSED_HTML(shouldCollapse);
+    return;
+  }
+  document.documentElement.classList.toggle('apstudy-sidebar-collapsed', shouldCollapse);
 }
 
 function setupSidebarInteractions(sidebarDefault = 'expanded') {
@@ -135,22 +157,15 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
   function applySidebarCollapsedState(shouldCollapse) {
     sidebar.classList.toggle('collapsed', shouldCollapse);
     document.body.classList.toggle('sidebar-collapsed', shouldCollapse);
+    syncSidebarCollapsedHtmlClass(shouldCollapse);
     localStorage.setItem('sidebar-collapsed', String(shouldCollapse));
     updateToggleHandleState();
   }
 
   // Load per-session state first. On a fresh login, localStorage is cleared,
   // so the server-rendered preference becomes the default.
-  const storedCollapsed = localStorage.getItem('sidebar-collapsed');
-  const isCollapsed = storedCollapsed === null
-    ? normalizeSidebarDefault(sidebarDefault) === 'collapsed'
-    : storedCollapsed === 'true';
-  document.body.classList.toggle('sidebar-collapsed', isCollapsed);
-  if (isCollapsed) {
-    sidebar.classList.add('collapsed');
-  }
-  localStorage.setItem('sidebar-collapsed', String(isCollapsed));
-  updateToggleHandleState();
+  const isCollapsed = resolveSidebarCollapsed(sidebarDefault);
+  applySidebarCollapsedState(isCollapsed);
 
   window.APSTUDY_SET_SIDEBAR_COLLAPSED = applySidebarCollapsedState;
   document.addEventListener('apstudy-sidebar-default-change', (event) => {

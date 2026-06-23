@@ -8,6 +8,7 @@
         window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";
     </script>
     <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
+    {% include '_sidebar_init.html' %}
     <title>Settings - APStudy Nest</title>
     <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy Logo">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">

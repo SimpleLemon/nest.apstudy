@@ -12,6 +12,7 @@
         window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";
     </script>
     <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
+    {% include '_sidebar_init.html' %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">

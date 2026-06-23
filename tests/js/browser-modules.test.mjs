@@ -42,6 +42,7 @@ if (false) {
     await import("../../static/js/core/command-palette.js");
     await import("../../static/js/core/global.js");
     await import("../../static/js/core/navbar.js");
+    await import("../../static/js/core/sidebar-init.js");
     await import("../../static/js/core/sidebar.js");
     await import("../../static/js/core/theme-init.js");
     await import("../../static/js/courses/calendar.js");
@@ -196,7 +197,9 @@ test("dashboard daily quote fetches Flask endpoint and uses one smooth egg card"
 
 test("sidebar keeps persisted collapse state, route targets, and preference event bridge", async () => {
     const source = await sourceFor("static/js/core/sidebar.js");
+    const initSource = await sourceFor("static/js/core/sidebar-init.js");
     const template = await sourceFor("templates/_sidebar.html");
+    const dashboardTemplate = await sourceFor("templates/dashboard.html");
 
     for (const endpoint of [
         "dashboard.calendar",
@@ -210,10 +213,16 @@ test("sidebar keeps persisted collapse state, route targets, and preference even
         assert.match(template, new RegExp(`url_for\\('${endpoint.replaceAll('.', '\\.')}'\\)`));
     }
 
+    assert.match(dashboardTemplate, /_sidebar_init\.html/);
+    assert.match(await sourceFor("templates/_sidebar_init.html"), /js\/core\/sidebar-init\.js/);
+    assert.match(await sourceFor("templates/_sidebar_init.html"), /APSTUDY_SIDEBAR_DEFAULT/);
     assert.match(template, /sidebar_path == '\/notes' or sidebar_path\.startswith\('\/notes\/'\)/);
+    assert.match(initSource, /apstudy-sidebar-collapsed/);
+    assert.match(initSource, /window\.APSTUDY_RESOLVE_SIDEBAR_COLLAPSED = resolveSidebarCollapsed/);
     assert.match(source, /function normalizeSidebarDefault\(value\)/);
-    assert.match(source, /localStorage\.getItem\('sidebar-collapsed'\)/);
-    assert.match(source, /localStorage\.setItem\('sidebar-collapsed', String\(isCollapsed\)\)/);
+    assert.match(source, /resolveSidebarCollapsed\(sidebarDefault\)/);
+    assert.match(source, /syncSidebarCollapsedHtmlClass\(shouldCollapse\)/);
+    assert.match(source, /localStorage\.setItem\('sidebar-collapsed', String\(shouldCollapse\)\)/);
     assert.match(source, /window\.APSTUDY_SET_SIDEBAR_COLLAPSED = applySidebarCollapsedState/);
     assert.match(source, /apstudy-sidebar-default-change/);
     assert.match(source, /const idleMs = 300000/);
@@ -236,6 +245,7 @@ test("mobile shell uses a hamburger drawer without breaking desktop sidebar pers
     assert.match(sidebarSource, /window\.APSTUDY_SET_MOBILE_SIDEBAR_OPEN = setMobileSidebarOpen/);
     assert.match(sidebarSource, /localStorage\.setItem\('sidebar-collapsed', String\(shouldCollapse\)\)/);
 
+    assert.match(layoutStyles, /html\.apstudy-sidebar-collapsed/);
     assert.match(layoutStyles, /\.navbar-menu-button/);
     assert.match(layoutStyles, /\.sidebar-container\.mobile-open/);
     assert.match(layoutStyles, /transform: translateX\(-105%\)/);

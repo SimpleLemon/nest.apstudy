@@ -41,6 +41,11 @@ body {
   overflow-y: auto;
   transition: grid-template-columns 0.2s ease-in-out;
 }
+@media (min-width: 1025px) {
+  html.apstudy-sidebar-collapsed body {
+    grid-template-columns: var(--sidebar-collapsed) 1fr;
+  }
+}
 /* ============================================
    NAVBAR - Fixed at top, full width
    ============================================ */
@@ -169,7 +174,8 @@ body {
   overflow: visible;
   transition: width 0.2s ease-in-out;
 }
-.sidebar-container.collapsed {
+.sidebar-container.collapsed,
+html.apstudy-sidebar-collapsed .sidebar-container {
   width: var(--sidebar-collapsed);
 }
 .sidebar-scroll {
@@ -217,7 +223,8 @@ body {
   overflow: hidden;
   transition: all 0.2s ease-in-out;
 }
-.sidebar-container.collapsed .sidebar-section-label {
+.sidebar-container.collapsed .sidebar-section-label,
+html.apstudy-sidebar-collapsed .sidebar-container .sidebar-section-label {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -231,7 +238,8 @@ body {
   padding: 10px 0 6px;
   line-height: 0;
 }
-.sidebar-container.collapsed .sidebar-section-label::after {
+.sidebar-container.collapsed .sidebar-section-label::after,
+html.apstudy-sidebar-collapsed .sidebar-container .sidebar-section-label::after {
   content: '';
   display: block;
   width: 32px;
@@ -313,13 +321,15 @@ body {
 .sidebar-chat-badge[hidden] {
   display: none;
 }
-.sidebar-container.collapsed .sidebar-item-label {
+.sidebar-container.collapsed .sidebar-item-label,
+html.apstudy-sidebar-collapsed .sidebar-container .sidebar-item-label {
   opacity: 0;
   visibility: hidden;
   max-width: 0;
   transition: all 0.2s ease-in-out;
 }
-.sidebar-container.collapsed .sidebar-item {
+.sidebar-container.collapsed .sidebar-item,
+html.apstudy-sidebar-collapsed .sidebar-container .sidebar-item {
   width: 32px;
   height: 32px;
   min-height: 32px;
@@ -329,10 +339,12 @@ body {
   justify-content: flex-start;
   overflow: hidden;
 }
-.sidebar-container.collapsed .sidebar-item:has(.sidebar-chat-badge) {
+.sidebar-container.collapsed .sidebar-item:has(.sidebar-chat-badge),
+html.apstudy-sidebar-collapsed .sidebar-container .sidebar-item:has(.sidebar-chat-badge) {
   overflow: visible;
 }
-.sidebar-container.collapsed .sidebar-chat-badge {
+.sidebar-container.collapsed .sidebar-chat-badge,
+html.apstudy-sidebar-collapsed .sidebar-container .sidebar-chat-badge {
   position: absolute;
   top: -2px;
   right: -4px;
@@ -505,6 +517,7 @@ body.with-sidebar {
   grid-template-rows: var(--navbar-height) auto auto;
   align-content: start;
 }
+html.apstudy-sidebar-collapsed body.with-sidebar,
 body.with-sidebar.sidebar-collapsed {
   grid-template-columns: var(--sidebar-collapsed) 1fr;
 }
@@ -634,8 +647,10 @@ body.with-sidebar > footer {
   }
   .sidebar-container.collapsed .sidebar-item-label,
   .sidebar-container .sidebar-item-label,
+  html.apstudy-sidebar-collapsed .sidebar-container .sidebar-item-label,
   .sidebar-container.collapsed .sidebar-section-label,
-  .sidebar-container .sidebar-section-label {
+  .sidebar-container .sidebar-section-label,
+  html.apstudy-sidebar-collapsed .sidebar-container .sidebar-section-label {
     display: block;
     opacity: 1;
     visibility: visible;
@@ -652,10 +667,12 @@ body.with-sidebar > footer {
     font-size: 11px !important;
     line-height: normal !important;
   }
-  .sidebar-container.collapsed .sidebar-section-label::after {
+  .sidebar-container.collapsed .sidebar-section-label::after,
+  html.apstudy-sidebar-collapsed .sidebar-container .sidebar-section-label::after {
     display: none;
   }
   .sidebar-container.collapsed .sidebar-item,
+  html.apstudy-sidebar-collapsed .sidebar-container .sidebar-item,
   .sidebar-item {
     justify-content: flex-start;
     width: auto;
