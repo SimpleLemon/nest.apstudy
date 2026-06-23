@@ -92,11 +92,11 @@
                     </div>
                     <div class="admin-field">
                         <span class="admin-field-label">Created</span>
-                        <span class="admin-field-value">{{ user.created_at or "--" }}</span>
+                        <span class="admin-field-value" data-admin-timestamp="{{ user.created_at_raw or '' }}" data-admin-timestamp-mode="date">{{ user.created_at or "--" }}</span>
                     </div>
                     <div class="admin-field">
                         <span class="admin-field-label">Last Opened Website</span>
-                        <span class="admin-field-value">{{ user.last_login or "--" }}</span>
+                        <span class="admin-field-value" data-admin-timestamp="{{ user.last_login_raw or '' }}">{{ user.last_login or "--" }}</span>
                     </div>
                     <div class="admin-field">
                         <span class="admin-field-label">Onboarding</span>
@@ -878,5 +878,6 @@
     </main>
     <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/admin-nav.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/admin-timezone.js') }}" defer></script>
 </body>
 </html>

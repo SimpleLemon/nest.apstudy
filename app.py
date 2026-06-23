@@ -84,6 +84,20 @@ def create_app():
             return None
 
         now = datetime.now(timezone.utc)
+        if request.method == "GET":
+            try:
+                from services.admin_analytics import record_site_open
+
+                record_site_open(
+                    str(current_user.id),
+                    request.path,
+                    endpoint=request.endpoint,
+                    now=now,
+                    db_path=app.config.get("DATABASE_PATH"),
+                )
+            except Exception:
+                logger.exception("Failed to record analytics page view")
+
         tracked_at = session.get("last_site_open_tracked_at")
         if tracked_at:
             try:

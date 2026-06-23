@@ -82,7 +82,7 @@
                                         <td data-label="Enabled">{{ "Yes" if track.enabled else "No" }}</td>
                                         <td data-label="Last Status">{{ track.last_status or "--" }}</td>
                                         <td data-label="Seats">{{ track.last_seats_available if track.last_seats_available is not none else "--" }}</td>
-                                        <td data-label="Last Notified">{{ track.last_notified_at or "--" }}</td>
+                                        <td data-label="Last Notified"><span data-admin-timestamp="{{ track.last_notified_at or '' }}">{{ track.last_notified_at or "--" }}</span></td>
                                         <td data-label="Actions">
                                             <button class="admin-button admin-button--ghost" type="button" data-track-toggle="{{ 'false' if track.enabled else 'true' }}">
                                                 {{ "Pause" if track.enabled else "Resume" }}

@@ -12,8 +12,10 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../
 if (false) {
     await import("../../atlasCourseUtils.js");
     await import("../../atlasMainScraper.js");
+    await import("../../static/js/admin-analytics.js");
     await import("../../static/js/admin-nav.js");
     await import("../../static/js/admin-requests.js");
+    await import("../../static/js/admin-timezone.js");
     await import("../../static/js/calendar/bootstrap.js");
     await import("../../static/js/calendar/controls.js");
     await import("../../static/js/calendar/core.js");

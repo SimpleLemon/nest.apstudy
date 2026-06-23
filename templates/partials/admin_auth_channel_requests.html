@@ -42,8 +42,8 @@
                             {% endif %}
                         </td>
                         <td data-label="Requests">{{ item.get('request_count') or 1 }}</td>
-                        <td data-label="Created">{{ item.get('created_at') or '--' }}</td>
-                        <td data-label="Resolved">{{ item.get('resolved_at') or '--' }}</td>
+                        <td data-label="Created"><span data-admin-timestamp="{{ item.get('created_at') or '' }}">{{ item.get('created_at') or '--' }}</span></td>
+                        <td data-label="Resolved"><span data-admin-timestamp="{{ item.get('resolved_at') or '' }}">{{ item.get('resolved_at') or '--' }}</span></td>
                         <td data-label="Actions">
                             {% if item.get('status') == 'pending' %}
                                 <div class="admin-action-row">

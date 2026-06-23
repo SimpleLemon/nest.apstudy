@@ -56,6 +56,7 @@ from services.calendar_store import (
     delete_calendar_rows_by_user,
     list_calendar_rows_all,
 )
+from services.admin_analytics import RANGE_OPTIONS, analytics_payload, normalize_range
 
 try:
     import psutil
@@ -344,6 +345,7 @@ def _admin_event_title(action):
         "view_admin_users": "Admin Viewed User Directory",
         "view_admin_requests": "Admin Viewed Requests",
         "view_admin_auth": "Admin Viewed Auth",
+        "view_admin_analytics": "Admin Viewed Analytics",
         "view_admin_detail": "Admin Viewed Profile",
         "export_admin_detail": "Admin Exported User Data",
         "update_onboarding": "Admin Updated Onboarding",
@@ -447,7 +449,9 @@ def _user_summary(user_doc):
         "username": user_doc.get("username"),
         "name": user_doc.get("name"),
         "email": user_doc.get("email"),
+        "created_at_raw": user_doc.get("created_at"),
         "created_at": _format_admin_date(user_doc.get("created_at")),
+        "last_login_raw": user_doc.get("last_login"),
         "last_login": _format_admin_datetime(user_doc.get("last_login")),
         "onboarding_complete": bool(user_doc.get("onboarding_complete")),
         "onboarding_step": user_doc.get("onboarding_step") or 1,
@@ -996,19 +1000,10 @@ def _redirect_requests(notice=None, error=None):
 @admin_bp.route("/admin")
 @admin_required
 def admin_index():
-    error = None
-    metrics = {}
-    try:
-        metrics = _admin_home_metrics()
-    except AppwriteException:
-        logger.exception("Failed to load admin home metrics")
-        error = "Unable to load all admin metrics right now."
-
     _log_admin_action("view_admin_index", "admin home")
     return render_template(
         "admin.html",
-        metrics=metrics,
-        error=error,
+        error=request.args.get("error"),
         status=request.args.get("status"),
         system_status=_system_status(),
         theme_preference=_theme_preference(),
@@ -1016,6 +1011,41 @@ def admin_index():
         active_admin_page="home",
         breadcrumbs=[("Admin", url_for("admin.admin_index")), ("Home", None)],
     )
+
+
+@admin_bp.route("/admin/analytics")
+@admin_required
+def admin_analytics():
+    error = None
+    metrics = {}
+    try:
+        metrics = _admin_home_metrics()
+    except AppwriteException:
+        logger.exception("Failed to load admin analytics metrics")
+        error = "Unable to load all admin metrics right now."
+
+    _log_admin_action("view_admin_analytics", "admin analytics")
+    return render_template(
+        "admin_analytics.html",
+        metrics=metrics,
+        error=error,
+        status=request.args.get("status"),
+        range_options=RANGE_OPTIONS,
+        default_range="30d",
+        theme_preference=_theme_preference(),
+        pending_request_count=_pending_admin_request_count(),
+        active_admin_page="analytics",
+        breadcrumbs=[("Admin", url_for("admin.admin_index")), ("Analytics", None)],
+    )
+
+
+@admin_bp.route("/admin/analytics/data")
+@admin_required
+def admin_analytics_data():
+    range_key = normalize_range(request.args.get("range"))
+    tz_name = (request.args.get("tz") or "UTC").strip() or "UTC"
+    payload = analytics_payload(range_key=range_key, tz_name=tz_name)
+    return jsonify(payload)
 
 
 @admin_bp.route("/admin/auth")

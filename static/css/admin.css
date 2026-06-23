@@ -1467,6 +1467,270 @@ button.admin-tab {
     font-weight: 600;
 }
 
+.admin-analytics-shell {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.admin-analytics-header {
+    align-items: flex-start;
+    gap: 18px;
+}
+
+.admin-analytics-ranges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+    max-width: 620px;
+}
+
+.admin-analytics-range {
+    min-height: 38px;
+    padding: 0 12px;
+    border-radius: 8px;
+    border: 1px solid var(--admin-border);
+    background: var(--admin-surface);
+    color: var(--admin-muted);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 140ms ease, color 140ms ease, border-color 140ms ease;
+}
+
+.admin-analytics-range:hover,
+.admin-analytics-range.is-active {
+    border-color: color-mix(in srgb, var(--admin-accent) 46%, var(--admin-border));
+    background: var(--admin-accent-soft);
+    color: var(--admin-accent);
+}
+
+.admin-analytics-summary {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.admin-analytics-kpi {
+    min-height: 112px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+}
+
+.admin-analytics-kpi span {
+    color: var(--admin-muted);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.admin-analytics-kpi strong {
+    font-family: var(--font-display);
+    font-size: 34px;
+    line-height: 1.1;
+}
+
+.admin-analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.admin-analytics-chart-card {
+    min-width: 0;
+}
+
+.admin-analytics-chart-card--wide {
+    grid-column: 1 / -1;
+}
+
+.admin-analytics-chart {
+    min-height: 240px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.admin-analytics-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 220px;
+}
+
+.admin-analytics-axis {
+    stroke: var(--admin-border);
+    stroke-width: 1;
+}
+
+.admin-analytics-line {
+    fill: none;
+    stroke: var(--admin-accent);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.admin-analytics-area {
+    fill: color-mix(in srgb, var(--admin-accent) 14%, transparent);
+}
+
+.admin-analytics-dot {
+    fill: var(--admin-accent);
+}
+
+.admin-analytics-svg--success .admin-analytics-line,
+.admin-analytics-svg--success .admin-analytics-dot {
+    stroke: var(--admin-success);
+    fill: var(--admin-success);
+}
+
+.admin-analytics-svg--success .admin-analytics-area {
+    fill: color-mix(in srgb, var(--admin-success) 14%, transparent);
+}
+
+.admin-analytics-svg--secondary .admin-analytics-line,
+.admin-analytics-svg--secondary .admin-analytics-dot {
+    stroke: var(--color-secondary, #5ca6ff);
+    fill: var(--color-secondary, #5ca6ff);
+}
+
+.admin-analytics-svg--secondary .admin-analytics-area {
+    fill: color-mix(in srgb, var(--color-secondary, #5ca6ff) 14%, transparent);
+}
+
+.admin-analytics-x-label,
+.admin-analytics-y-label {
+    fill: var(--admin-muted);
+    font-size: 12px;
+    font-family: var(--font-body);
+}
+
+.admin-analytics-bars {
+    display: grid;
+    gap: 14px;
+    padding-top: 6px;
+}
+
+.admin-analytics-bar-row {
+    display: grid;
+    gap: 6px;
+}
+
+.admin-analytics-bar-meta,
+.admin-analytics-list-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--admin-muted);
+    font-size: 13px;
+}
+
+.admin-analytics-bar-meta strong,
+.admin-analytics-list-row strong {
+    color: var(--admin-ink);
+}
+
+.admin-analytics-bar-track {
+    height: 10px;
+    border-radius: 999px;
+    background: var(--admin-panel-strong);
+    overflow: hidden;
+}
+
+.admin-analytics-bar-track span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--admin-accent);
+}
+
+.admin-analytics-engagement {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(220px, 0.75fr) minmax(220px, 0.75fr);
+    gap: 18px;
+    align-items: start;
+}
+
+.admin-analytics-list {
+    display: grid;
+    gap: 10px;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid var(--admin-border);
+    border-radius: 8px;
+    background: var(--admin-surface);
+}
+
+.admin-analytics-list h3 {
+    margin: 0;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--admin-muted);
+}
+
+.admin-analytics-empty {
+    min-height: 180px;
+    display: grid;
+    place-items: center;
+    color: var(--admin-muted);
+    border: 1px dashed var(--admin-border);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--admin-panel) 70%, transparent);
+}
+
+.admin-analytics-ga4 {
+    display: grid;
+    gap: 14px;
+}
+
+.admin-analytics-ga4 p {
+    margin: 0;
+    color: var(--admin-muted);
+}
+
+.admin-analytics-ga4-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.admin-analytics-ga4-grid div {
+    display: grid;
+    gap: 2px;
+    padding: 12px;
+    border: 1px solid var(--admin-border);
+    border-radius: 8px;
+    background: var(--admin-surface);
+}
+
+.admin-analytics-ga4-grid span {
+    color: var(--admin-muted);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.admin-analytics-ga4-grid strong {
+    font-family: var(--font-display);
+    font-size: 24px;
+}
+
+.admin-analytics-notice {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 30;
+    max-width: min(420px, calc(100vw - 36px));
+}
+
 .admin-section-heading {
     display: flex;
     align-items: flex-start;
@@ -1904,6 +2168,24 @@ button.admin-tab {
     .admin-system-meta,
     .admin-metric-grid {
         grid-template-columns: 1fr;
+    }
+
+    .admin-analytics-ranges {
+        justify-content: flex-start;
+    }
+
+    .admin-analytics-summary,
+    .admin-analytics-grid,
+    .admin-analytics-engagement {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-analytics-kpi {
+        min-height: 96px;
+    }
+
+    .admin-analytics-chart {
+        min-height: 210px;
     }
 
     .admin-status-chip--wide {

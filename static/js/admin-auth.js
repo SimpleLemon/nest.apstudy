@@ -134,6 +134,9 @@
     if (tab === "course-tracking" && typeof window.initAdminCourseTracking === "function") {
       window.initAdminCourseTracking(root);
     }
+    if (typeof window.AdminTimezone?.formatAdminTimestamps === "function") {
+      window.AdminTimezone.formatAdminTimestamps(root);
+    }
   }
 
   async function loadSection(tab, { force = false, label } = {}) {

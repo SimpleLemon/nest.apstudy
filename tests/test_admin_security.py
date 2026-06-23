@@ -151,17 +151,7 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertGreaterEqual(html.count('name="csrf_token"'), 2)
 
-    def test_admin_home_renders_home_metrics(self):
-        metrics = {
-            "total_users": 3,
-            "emory_users": 2,
-            "non_emory_users": 1,
-            "pending_requests": 1,
-            "saved_courses": 4,
-            "active_course_tracks": 5,
-            "paused_course_tracks": 6,
-            "file_storage": {"formatted": "1.5 MB", "file_count": 7, "avatar_count": 2, "error": None},
-        }
+    def test_admin_home_renders_system_monitor_and_controls_without_metrics(self):
         system_status = {
             "scheduler_enabled": True,
             "scheduler_running": True,
@@ -172,19 +162,17 @@ class AdminSecurityTestCase(unittest.TestCase):
         }
         with self.app.test_client() as client:
             self._login(client)
-            with patch.object(admin, "_admin_home_metrics", return_value=metrics), \
-                    patch.object(admin, "_system_status", return_value=system_status), \
+            with patch.object(admin, "_system_status", return_value=system_status), \
                     patch.object(admin, "_theme_preference", return_value=None), \
                     patch.object(admin, "_pending_admin_request_count", return_value=1):
                 response = client.get("/admin")
 
         html = response.get_data(as_text=True)
         self.assertEqual(response.status_code, 200)
-        self.assertIn("System Numbers", html)
-        self.assertIn("Total Users", html)
-        self.assertIn("1.5 MB", html)
+        self.assertNotIn("System Numbers", html)
+        self.assertNotIn("Total Users", html)
+        self.assertNotIn("1.5 MB", html)
         self.assertIn("System Controls", html)
-        self.assertLess(html.index("System Numbers"), html.index("System Controls"))
         self.assertNotIn("Registered Jobs", html)
         self.assertNotIn("admin-system-chips", html)
         self.assertIn('id="admin-system-csrf-token"', html)

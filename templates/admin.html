@@ -130,28 +130,6 @@
             </div>
         </section>
 
-        {% set file_storage = metrics.file_storage if metrics else {} %}
-        <section class="admin-card admin-metrics-card" aria-labelledby="admin-metrics-title">
-            <h2 id="admin-metrics-title" class="admin-title admin-title--small">System Numbers</h2>
-            <div class="admin-metric-grid">
-                <div class="admin-metric"><span>Total Users</span><strong>{{ metrics.total_users if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Emory Users</span><strong>{{ metrics.emory_users if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Non-Emory / Unknown</span><strong>{{ metrics.non_emory_users if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Pending Requests</span><strong>{{ metrics.pending_requests if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Saved Courses</span><strong>{{ metrics.saved_courses if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Active Tracks</span><strong>{{ metrics.active_course_tracks if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Paused Tracks</span><strong>{{ metrics.paused_course_tracks if metrics else 0 }}</strong></div>
-                <div class="admin-metric">
-                    <span>File Storage</span>
-                    <strong>{{ file_storage.formatted or "--" }}</strong>
-                    <small>{{ file_storage.file_count or 0 }} shared files, {{ file_storage.avatar_count or 0 }} avatars tracked</small>
-                </div>
-            </div>
-            {% if file_storage.error %}
-                <p class="admin-inline-error">{{ file_storage.error }}</p>
-            {% endif %}
-        </section>
-
         <section class="admin-card admin-scheduler-card" aria-labelledby="scheduler-controls-title">
             <div class="admin-system-header">
                 <div class="admin-system-heading">

@@ -109,10 +109,10 @@
                             </span>
                         </td>
                         <td data-column="created" data-label="Created">
-                            <span class="admin-table__trunc" data-tooltip="{{ user.created_at or '--' }}">{{ user.created_at or "--" }}</span>
+                            <span class="admin-table__trunc" data-tooltip="{{ user.created_at or '--' }}" data-admin-timestamp="{{ user.created_at_raw or '' }}" data-admin-timestamp-mode="date">{{ user.created_at or "--" }}</span>
                         </td>
                         <td data-column="last_login" data-label="Last Opened Website">
-                            <span class="admin-table__trunc" data-tooltip="{{ user.last_login or '--' }}">{{ user.last_login or "--" }}</span>
+                            <span class="admin-table__trunc" data-tooltip="{{ user.last_login or '--' }}" data-admin-timestamp="{{ user.last_login_raw or '' }}">{{ user.last_login or "--" }}</span>
                         </td>
                     </tr>
                 {% endfor %}

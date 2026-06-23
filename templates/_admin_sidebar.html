@@ -29,6 +29,10 @@
                     <span class="admin-sidebar-count">{{ pending_request_count }}</span>
                 {% endif %}
             </a>
+            <a class="admin-sidebar-item {% if active_admin_page == 'analytics' %}is-active{% endif %}" href="{{ url_for('admin.admin_analytics') }}">
+                <span class="admin-sidebar-icon material-symbols-outlined" aria-hidden="true">monitoring</span>
+                <span>Analytics</span>
+            </a>
             <a class="admin-sidebar-item {% if active_admin_page == 'apswiftly' %}is-active{% endif %}" href="{{ url_for('admin.admin_apswiftly') }}">
                 <span class="admin-sidebar-icon material-symbols-outlined" aria-hidden="true">smart_toy</span>
                 <span>APSwiftly</span>
