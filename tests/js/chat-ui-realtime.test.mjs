@@ -23,46 +23,47 @@ test("chat uses realtime event signals instead of message polling", async () => 
   assert.doesNotMatch(source, /pollTimer/);
   assert.match(source, /pollActiveRoomMessages/);
   assert.match(source, /startRealtimeHeartbeat/);
-  assert.match(source, /ensureAppwriteRealtimeAuth/);
-  assert.match(source, /\/api\/chat\/realtime-token/);
   assert.match(source, /\/api\/chat\/events\/stream/);
   assert.match(source, /new EventSource/);
   assert.match(source, /initializeChatEventStream/);
   assert.match(source, /handleRealtimePayload/);
   assert.match(source, /normalizeChatEvent/);
-  assert.match(source, /refreshAppwriteRealtimeAuth/);
-  assert.match(source, /await startRealtimeServices\(\)/);
+  assert.match(source, /startRealtimeServices\(\)/);
   assert.match(source, /message_updated/);
   assert.doesNotMatch(source, /realtimeChannelName/);
   assert.doesNotMatch(source, /chatEventsTableId/);
+  assert.doesNotMatch(source, /ensureAppwriteRealtimeAuth/);
+  assert.doesNotMatch(source, /\/api\/chat\/realtime-token/);
 });
 
-test("chat uses Appwrite Presences for online and typing state", async () => {
+test("chat uses local presence APIs for online and typing state", async () => {
   const script = await sourceFor("static/js/chat.js");
   const appwrite = await sourceFor("static/js/core/appwrite.js");
+  const global = await sourceFor("static/js/core/global.js");
   const template = await sourceFor("templates/chat.html");
 
   assert.match(template, /appwrite@25\.0\.0/);
-  assert.match(appwrite, /new Appwrite\.Presences\(client\)/);
-  assert.match(appwrite, /new Appwrite\.Realtime\(client\)/);
-  assert.doesNotMatch(appwrite, /console\.warn\([^)]*Presences are unavailable/);
-  assert.match(appwrite, /window\.Permission = Appwrite\.Permission/);
-  assert.match(appwrite, /window\.Role = Appwrite\.Role/);
-  assert.match(appwrite, /window\.Query = Appwrite\.Query/);
-  assert.match(appwrite, /window\.Channel = Appwrite\.Channel/);
-  assert.doesNotMatch(script, /fetchJson\("\/api\/chat\/presence"/);
-  assert.match(script, /presences\.list/);
-  assert.match(script, /realtime\.upsertPresence/);
-  assert.match(script, /Channel\?\.presences/);
-  assert.match(script, /const VIEWING_PRESENCE_TTL_MS = 90000/);
+  assert.doesNotMatch(appwrite, /Appwrite\.Presences/);
+  assert.doesNotMatch(appwrite, /Appwrite\.Realtime/);
+  assert.doesNotMatch(appwrite, /window\.presences/);
+  assert.doesNotMatch(appwrite, /window\.realtime/);
+  assert.doesNotMatch(template, /data-appwrite-database-id/);
+  assert.match(global, /initializePresenceHeartbeat/);
+  assert.match(global, /\/api\/presence\/heartbeat/);
+  assert.match(global, /scope_type: "chat"/);
+  assert.match(global, /scope_type: "site"/);
+  assert.match(script, /\/api\/presence\/online/);
+  assert.match(script, /\/api\/presence\/heartbeat/);
+  assert.match(script, /typing_channel/);
+  assert.match(script, /typing_thread/);
   assert.match(script, /const TYPING_PRESENCE_TTL_MS = 8000/);
-  assert.match(script, /compactHash/);
-  assert.match(script, /tabId: currentTabId\(\)/);
-  assert.doesNotMatch(script, /metadata:\s*\{[^}]*content/s);
+  assert.match(script, /tab_id: currentTabId\(\)/);
   assert.match(script, /function renderTypingIndicator/);
   assert.match(script, /Several people are typing\.\.\./);
-  assert.match(script, /applyPresenceRecord\(\{\s*\.\.\.\(presence \|\| \{\}\)/);
   assert.match(script, /renderPresenceDrivenUi\(\)/);
+  assert.match(script, /presenceStatusLabel/);
+  assert.match(script, /Active/);
+  assert.match(script, /Busy/);
 });
 
 test("chat keeps a page lifetime room cache with delta loading", async () => {
@@ -233,7 +234,8 @@ test("chat direct messages render presence dots and profile-only side pane", asy
   assert.match(script, /chat-presence-dot/);
   assert.doesNotMatch(script, /function dmPresenceMarkup\(status\)[\s\S]*chat-presence-dot[\s\S]*function renderThreads/);
   assert.doesNotMatch(script, /Direct message/);
-  assert.match(styles, /chat-presence-dot\.is-online/);
+  assert.match(styles, /chat-presence-dot\.is-active/);
+  assert.match(styles, /chat-presence-dot\.is-busy/);
   assert.match(styles, /chat-presence-dot\.is-offline/);
   assert.match(script, /is-dm-profile/);
 });
@@ -309,8 +311,10 @@ test("scheduler uses discord gateway with slow reconciliation", async () => {
   assert.match(api, /@chat_api_bp\.route\("\/api\/chat\/events\/stream"\)/);
   assert.match(api, /text\/event-stream/);
   assert.match(api, /def _event_visible_for_user/);
-  assert.match(api, /@chat_api_bp\.route\("\/api\/chat\/realtime-token"\)/);
-  assert.match(api, /Users\(appwrite_client\)\.create_jwt/);
+  assert.match(api, /@chat_api_bp\.route\("\/api\/presence\/heartbeat", methods=\["POST"\]\)/);
+  assert.match(api, /@chat_api_bp\.route\("\/api\/presence\/online"\)/);
+  assert.match(api, /@chat_api_bp\.route\("\/api\/presence\/statuses", methods=\["POST"\]\)/);
+  assert.doesNotMatch(api, /create_jwt/);
   assert.match(api, /@chat_api_bp\.route\("\/api\/chat\/discord\/messages", methods=\["POST"\]\)/);
   assert.match(api, /def discord_message_ingest\(\):/);
   assert.match(api, /_valid_discord_ingest_request\(\)/);

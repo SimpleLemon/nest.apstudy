@@ -504,9 +504,57 @@ window.APStudyHttp = window.APStudyHttp || {
     },
 };
 
+function initializePresenceHeartbeat() {
+    if (window.APStudyPresenceHeartbeatStarted) return;
+    const nav = document.querySelector("global.thenav[data-user-email]");
+    if (!nav || typeof fetch !== "function") return;
+    window.APStudyPresenceHeartbeatStarted = true;
+
+    const tabKey = "apstudy-presence-tab-id";
+    let tabId = "";
+    try {
+        tabId = sessionStorage.getItem(tabKey) || "";
+    } catch (_) {
+        tabId = "";
+    }
+    if (!tabId) {
+        const random = window.crypto?.randomUUID?.() || `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+        tabId = random.replace(/[^A-Za-z0-9_-]/g, "").slice(0, 64);
+        try {
+            sessionStorage.setItem(tabKey, tabId);
+        } catch (_) {
+            // In private or locked-down contexts, a memory-only tab id is fine.
+        }
+    }
+
+    function pageScope() {
+        return window.location.pathname === "/chat"
+            ? { scope_type: "chat", scope_id: "global" }
+            : { scope_type: "site", scope_id: "global" };
+    }
+
+    function sendHeartbeat({ keepalive = false } = {}) {
+        const body = JSON.stringify({ ...pageScope(), tab_id: tabId });
+        fetch("/api/presence/heartbeat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body,
+            credentials: "same-origin",
+            keepalive,
+        }).catch(() => {});
+    }
+
+    sendHeartbeat();
+    window.setInterval(sendHeartbeat, 10000);
+    document.addEventListener("visibilitychange", () => sendHeartbeat({ keepalive: true }));
+    window.addEventListener("pagehide", () => sendHeartbeat({ keepalive: true }));
+    window.APStudyPresenceHeartbeat = { send: sendHeartbeat, tabId };
+}
+
 function initializeGlobalChrome() {
     ensureAppwriteSession();
     drainServerToasts();
+    initializePresenceHeartbeat();
 
     // Bind any links/buttons that request logout
     const logoutLinks = document.querySelectorAll("[data-logout]");

@@ -3,9 +3,7 @@
   if (!root) return;
 
   const DEFAULT_AVATAR = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2096%2096'%3E%3Crect%20width='96'%20height='96'%20rx='24'%20fill='%23e5e7eb'/%3E%3Ccircle%20cx='48'%20cy='35'%20r='17'%20fill='%239ca3af'/%3E%3Cpath%20d='M20%2082c4-18%2017-28%2028-28s24%2010%2028%2028'%20fill='%239ca3af'/%3E%3C/svg%3E";
-  const PRESENCE_APP_ID = "nest-chat";
-  const VIEWING_PRESENCE_REFRESH_MS = 45000;
-  const VIEWING_PRESENCE_TTL_MS = 90000;
+  const PRESENCE_REFRESH_MS = 10000;
   const TYPING_PRESENCE_TTL_MS = 8000;
   const CHAT_TAB_ID_KEY = "apstudy-chat-tab-id";
   const ROOM_SCROLL_RESTORE_DELAY = 0;
@@ -20,7 +18,6 @@
   const REALTIME_FALLBACK_MS = 3000;
   const REALTIME_HEARTBEAT_MS = 8000;
   const REALTIME_RECONNECT_MS = 1500;
-  const REALTIME_JWT_REFRESH_MS = 50 * 60 * 1000;
   const ANNOUNCEMENTS_CHANNEL_ID = "nest_announcements";
 
   const state = {
@@ -36,14 +33,8 @@
     presenceRefreshTimer: null,
     typingInputTimer: null,
     typingClearTimer: null,
-    presenceUnsubscribe: null,
-    presenceReady: false,
-    presenceConnecting: false,
     presenceRecords: new Map(),
     knownUsers: new Map(),
-    resolvingPresenceUsers: new Set(),
-    lastViewingPresenceId: null,
-    lastTypingPresenceId: null,
     tabId: null,
     searchTimer: null,
     scrollSaveTimer: null,
@@ -69,7 +60,6 @@
   let realtimeFallbackTimer = null;
   let realtimeHeartbeatTimer = null;
   let realtimeReconnectTimer = null;
-  let appwriteJwtRefreshTimer = null;
   let chatEventSource = null;
   let chatEventCursor = { since: null, after_id: null };
   const seenChatEventIds = new Set();
@@ -250,16 +240,6 @@
     return state.tabId;
   }
 
-  function compactHash(value) {
-    let hash = 2166136261;
-    const text = String(value || "");
-    for (let index = 0; index < text.length; index += 1) {
-      hash ^= text.charCodeAt(index);
-      hash = Math.imul(hash, 16777619);
-    }
-    return (hash >>> 0).toString(36);
-  }
-
   function registerKnownUser(user) {
     if (!user?.id) return;
     state.knownUsers.set(String(user.id), { ...(state.knownUsers.get(String(user.id)) || {}), ...user });
@@ -298,41 +278,6 @@
     if (room.type === "channel") return state.channels.find((channel) => channel.id === room.id) || null;
     if (room.type === "thread") return state.threads.find((thread) => thread.id === room.id) || null;
     return null;
-  }
-
-  function roomPresenceScope(room) {
-    const target = roomTarget(room);
-    if (target?.presence_scope?.scope_type && target?.presence_scope?.scope_id) return target.presence_scope;
-    if (!room?.type || !room?.id) return null;
-    return {
-      scope_type: room.type,
-      scope_id: room.id,
-      room_key: `${room.type}:${room.id}`,
-    };
-  }
-
-  function roomPresencePermissions(room) {
-    const target = roomTarget(room);
-    return Array.isArray(target?.presence_read_permissions) ? target.presence_read_permissions : [];
-  }
-
-  function presenceScopeKey(scopeOrMetadata) {
-    const scopeType = scopeOrMetadata?.scope_type || scopeOrMetadata?.scopeType;
-    const scopeId = scopeOrMetadata?.scope_id || scopeOrMetadata?.scopeId;
-    return scopeType && scopeId ? `${scopeType}:${scopeId}` : "";
-  }
-
-  function knownPresenceScopeKeys() {
-    const keys = new Set();
-    for (const channel of state.channels || []) {
-      const key = presenceScopeKey(channel.presence_scope || { scope_type: "channel", scope_id: channel.id });
-      if (key) keys.add(key);
-    }
-    for (const thread of state.threads || []) {
-      const key = presenceScopeKey(thread.presence_scope || { scope_type: "thread", scope_id: thread.id });
-      if (key) keys.add(key);
-    }
-    return keys;
   }
 
   function persistentCacheKey(suffix) {
@@ -972,12 +917,19 @@
   }
 
   function dmPresenceStatus(thread) {
-    if (thread?.presence_status) return thread.presence_status === "online" ? "online" : "offline";
-    return thread?.other_user?.online ? "online" : "offline";
+    if (thread?.presence_status) return normalizeLocalPresenceStatus(thread.presence_status);
+    if (thread?.other_user?.presence_status) return normalizeLocalPresenceStatus(thread.other_user.presence_status);
+    return thread?.other_user?.online ? "active" : "offline";
+  }
+
+  function presenceStatusLabel(status) {
+    if (status === "active") return "Active";
+    if (status === "busy") return "Busy";
+    return "Offline";
   }
 
   function dmPresenceMarkup(status) {
-    const label = status === "online" ? "Online" : "Offline";
+    const label = presenceStatusLabel(status);
     return `
       <small class="chat-presence-line">
         <span>${label}</span>
@@ -1486,54 +1438,8 @@
     scheduleRealtimeReconnect();
   }
 
-  async function refreshAppwriteRealtimeAuth() {
-    const authed = await ensureAppwriteRealtimeAuth();
-    if (!authed) return false;
-    if (state.presenceUnsubscribe) {
-      state.presenceUnsubscribe();
-      state.presenceUnsubscribe = null;
-      state.presenceReady = false;
-    }
-    await initializePresenceRealtime();
-    return state.presenceReady;
-  }
-
-  async function ensureAppwriteRealtimeAuth() {
-    if (!window.client || !root.dataset.appwriteDatabaseId) return false;
-    try {
-      const payload = await fetchJson("/api/chat/realtime-token");
-      const jwt = payload?.jwt;
-      if (!jwt) return false;
-      if (typeof window.client.setJWT === "function") {
-        window.client.setJWT(jwt);
-      } else if (typeof window.client.setJwt === "function") {
-        window.client.setJwt(jwt);
-      } else {
-        return false;
-      }
-      scheduleAppwriteJwtRefresh();
-      return true;
-    } catch (error) {
-      console.warn("Unable to authenticate Appwrite realtime", error);
-      return false;
-    }
-  }
-
-  function scheduleAppwriteJwtRefresh() {
-    if (appwriteJwtRefreshTimer) {
-      window.clearTimeout(appwriteJwtRefreshTimer);
-      appwriteJwtRefreshTimer = null;
-    }
-    appwriteJwtRefreshTimer = window.setTimeout(() => {
-      appwriteJwtRefreshTimer = null;
-      void refreshAppwriteRealtimeAuth();
-    }, REALTIME_JWT_REFRESH_MS);
-  }
-
   async function startRealtimeServices() {
     initializeChatEventStream();
-    await ensureAppwriteRealtimeAuth();
-    await initializePresenceRealtime();
     void loadInitialPresences();
   }
 
@@ -1748,7 +1654,7 @@
     const status = dmPresenceStatus(thread);
     els.members.classList.add("is-dm-profile");
     els.membersCount.textContent = "Profile";
-    els.membersRestoreCount.textContent = status === "online" ? "1" : "0";
+    els.membersRestoreCount.textContent = status === "offline" ? "0" : "1";
     els.memberList.innerHTML = "";
     els.profilePanel.hidden = false;
     els.profilePanel.innerHTML = profileMarkup(other, {
@@ -1774,7 +1680,7 @@
   }
 
   function profileMarkup(user, options = {}) {
-    const status = options.status || (user?.online ? "online" : "offline");
+    const status = normalizeLocalPresenceStatus(options.status || user?.presence_status || (user?.online ? "active" : "offline"));
     const handle = user?.handle || (user?.username ? `@${user.username}` : `@${user?.id || "apstudy-user"}`);
     const graduation = user?.graduation_year || user?.class_year || "";
     const memberSince = user?.member_since || "";
@@ -1796,7 +1702,7 @@
               <p>${escapeHtml(handle)}</p>
               <p class="chat-presence-line chat-profile-presence">
                 <span class="chat-presence-dot is-${status}" aria-hidden="true"></span>
-                <span>${status === "online" ? "Online" : "Offline"}</span>
+                <span>${presenceStatusLabel(status)}</span>
               </p>
             </div>
             <div class="profile-tile-details">
@@ -1862,119 +1768,45 @@
     return null;
   }
 
-  function normalizePresenceMetadata(metadata) {
-    if (!metadata) return {};
-    if (typeof metadata === "string") {
-      try {
-        return JSON.parse(metadata);
-      } catch (_) {
-        return {};
-      }
-    }
-    return metadata;
+  function normalizeLocalPresenceStatus(value) {
+    return ["active", "busy", "offline"].includes(value) ? value : "offline";
   }
 
-  function presenceUserId(record) {
-    return String(record?.userId || record?.user_id || record?.userInternalId || "");
-  }
-
-  function presenceExpiresAt(record) {
-    return parseMessageDate(record?.expiresAt || record?.expires_at);
-  }
-
-  function presenceIsExpired(record) {
-    const expiresAt = presenceExpiresAt(record);
-    return Boolean(expiresAt && expiresAt.getTime() <= Date.now());
-  }
-
-  function normalizePresenceRecord(record) {
-    if (!record) return null;
-    const metadata = normalizePresenceMetadata(record.metadata);
-    if (metadata.app !== PRESENCE_APP_ID) return null;
-    const scopeKey = presenceScopeKey(metadata);
-    if (!scopeKey || !knownPresenceScopeKeys().has(scopeKey)) return null;
-    const userId = presenceUserId(record);
-    if (!userId || presenceIsExpired(record)) return null;
-    return {
-      ...record,
-      userId,
-      status: record.status || "",
-      metadata,
+  function rememberPresenceUser(user) {
+    if (!user?.id) return;
+    const normalized = {
+      ...user,
+      id: String(user.id),
+      presence_status: normalizeLocalPresenceStatus(user.presence_status),
+      active_chat_scopes: Array.isArray(user.active_chat_scopes) ? user.active_chat_scopes.map(String) : [],
+      typing_channel_ids: Array.isArray(user.typing_channel_ids) ? user.typing_channel_ids.map(String) : [],
+      typing_thread_ids: Array.isArray(user.typing_thread_ids) ? user.typing_thread_ids.map(String) : [],
     };
+    state.presenceRecords.set(normalized.id, normalized);
+    registerKnownUser(normalized);
   }
 
-  function presenceAction(response) {
-    const events = response?.events || [];
-    if (events.some((event) => String(event).endsWith(".delete") || String(event).includes(".delete"))) return "delete";
-    if (events.some((event) => String(event).endsWith(".update") || String(event).includes(".update"))) return "update";
-    if (events.some((event) => String(event).endsWith(".upsert") || String(event).includes(".upsert"))) return "upsert";
-    return "upsert";
-  }
-
-  function applyPresenceRecord(record, action = "upsert") {
-    const presenceId = String(record?.$id || record?.id || "");
-    if (!presenceId) return;
-    if (action === "delete") {
-      state.presenceRecords.delete(presenceId);
-      return;
-    }
-    const normalized = normalizePresenceRecord(record);
-    if (normalized) {
-      state.presenceRecords.set(presenceId, normalized);
-    } else {
-      state.presenceRecords.delete(presenceId);
-    }
-  }
-
-  function pruneExpiredPresences() {
-    for (const [presenceId, record] of state.presenceRecords.entries()) {
-      if (presenceIsExpired(record)) state.presenceRecords.delete(presenceId);
-    }
-  }
-
-  function presenceRecordsForScope(scopeType, scopeId, kind = "viewing") {
-    pruneExpiredPresences();
-    const key = `${scopeType}:${scopeId}`;
-    return Array.from(state.presenceRecords.values()).filter((record) => {
-      const metadata = record.metadata || {};
-      if (presenceScopeKey(metadata) !== key) return false;
-      if (kind === "viewing") return metadata.kind === "viewing" && record.status === "online";
-      if (kind === "typing") return metadata.kind === "typing" && record.status === "typing";
-      return false;
-    });
-  }
-
-  function presenceUserIdsForScope(scopeType, scopeId, kind = "viewing") {
-    const ids = [];
-    for (const record of presenceRecordsForScope(scopeType, scopeId, kind)) {
-      const userId = presenceUserId(record);
-      if (userId && !ids.includes(userId)) ids.push(userId);
-    }
-    return ids;
-  }
-
-  function onlineUserIds() {
-    pruneExpiredPresences();
-    const ids = new Set();
-    for (const record of state.presenceRecords.values()) {
-      if (record.status === "online" && record.metadata?.kind === "viewing") {
-        ids.add(presenceUserId(record));
-      }
-    }
-    return ids;
+  function presenceStatusForUser(userId, fallback = "offline") {
+    const record = state.presenceRecords.get(String(userId || ""));
+    return normalizeLocalPresenceStatus(record?.presence_status || fallback);
   }
 
   function usersForPresenceScope(scopeType, scopeId) {
-    return presenceUserIdsForScope(scopeType, scopeId, "viewing")
-      .map((userId) => state.knownUsers.get(userId) || { id: userId, name: "Nest User" });
+    void scopeType;
+    const id = String(scopeId || "");
+    return Array.from(state.presenceRecords.values())
+      .filter((user) => (user.active_chat_scopes || []).includes(id))
+      .sort((a, b) => String(a.name || "").localeCompare(String(b.name || "")));
   }
 
   function typingUsersForActiveRoom() {
-    const scope = roomPresenceScope(state.activeRoom);
-    if (!scope) return [];
-    return presenceUserIdsForScope(scope.scope_type, scope.scope_id, "typing")
-      .filter((userId) => userId !== currentUserId())
-      .map((userId) => state.knownUsers.get(userId) || { id: userId, name: "Someone" });
+    const room = state.activeRoom;
+    if (!room?.id) return [];
+    const field = room.type === "channel" ? "typing_channel_ids" : "typing_thread_ids";
+    return Array.from(state.presenceRecords.values())
+      .filter((user) => user.id !== currentUserId())
+      .filter((user) => (user[field] || []).includes(String(room.id)))
+      .map((user) => state.knownUsers.get(user.id) || user);
   }
 
   function renderTypingIndicator() {
@@ -1995,7 +1827,6 @@
 
   function renderPresenceDrivenUi() {
     registerKnownUsersFromState();
-    const onlineIds = onlineUserIds();
     for (const channel of state.channels) {
       const scope = channel.presence_scope || { scope_type: "channel", scope_id: channel.id };
       const users = usersForPresenceScope(scope.scope_type, scope.scope_id);
@@ -2005,11 +1836,12 @@
     }
     for (const thread of state.threads) {
       const other = thread.other_user || {};
-      const isOnline = Boolean(other.id && onlineIds.has(String(other.id)));
-      thread.presence_status = isOnline ? "online" : "offline";
-      other.online = isOnline;
+      const status = presenceStatusForUser(other.id, other.presence_status || thread.presence_status);
+      thread.presence_status = status;
+      other.presence_status = status;
+      other.online = status !== "offline";
       const scope = thread.presence_scope || { scope_type: "thread", scope_id: thread.id };
-      thread.active_count = presenceUserIdsForScope(scope.scope_type, scope.scope_id, "viewing").length;
+      thread.active_count = usersForPresenceScope(scope.scope_type, scope.scope_id).length;
     }
     updateRoomLists();
     renderHeader();
@@ -2021,39 +1853,6 @@
       renderMembers(channel.active_users || []);
     }
     renderTypingIndicator();
-    void resolvePresenceUsersForActiveRoom();
-  }
-
-  async function resolvePresenceUsersForActiveRoom() {
-    const room = state.activeRoom;
-    const target = roomTarget(room);
-    const scope = roomPresenceScope(room);
-    if (!room || !target?.presence_profile_resolve_allowed || !scope) return;
-    const unknownIds = presenceUserIdsForScope(scope.scope_type, scope.scope_id, "viewing")
-      .concat(presenceUserIdsForScope(scope.scope_type, scope.scope_id, "typing"))
-      .filter((userId, index, all) => all.indexOf(userId) === index)
-      .filter((userId) => !state.knownUsers.has(userId));
-    if (!unknownIds.length) return;
-    const resolveKey = `${scope.scope_type}:${scope.scope_id}:${unknownIds.sort().join(",")}`;
-    if (state.resolvingPresenceUsers.has(resolveKey)) return;
-    state.resolvingPresenceUsers.add(resolveKey);
-    try {
-      const payload = await fetchJson("/api/chat/presence/users", {
-        method: "POST",
-        body: JSON.stringify({
-          scope_type: scope.scope_type,
-          scope_id: scope.scope_id,
-          user_ids: unknownIds,
-        }),
-      });
-      for (const user of payload.users || []) registerKnownUser(user);
-      if (roomKey(state.activeRoom) === roomKey(room)) renderPresenceDrivenUi();
-    } catch (error) {
-      void error;
-      // Profile resolution is best-effort; presence counts can still render.
-    } finally {
-      state.resolvingPresenceUsers.delete(resolveKey);
-    }
   }
 
   function currentRoomUrl(room, params = {}) {
@@ -2390,53 +2189,6 @@
     }
   }
 
-  function presenceChannelName() {
-    const Channel = window.Channel || (window.Appwrite && window.Appwrite.Channel);
-    if (Channel?.presences) return Channel.presences();
-    return "presences";
-  }
-
-  function normalizeRealtimeUnsubscribe(subscription) {
-    if (typeof subscription === "function") return subscription;
-    if (subscription && typeof subscription.unsubscribe === "function") {
-      return () => subscription.unsubscribe();
-    }
-    if (subscription && typeof subscription.close === "function") {
-      return () => subscription.close();
-    }
-    return null;
-  }
-
-  async function subscribeRealtime(channel, callback) {
-    const realtime = window.realtime || (window.Appwrite?.Realtime && window.client ? new window.Appwrite.Realtime(window.client) : null);
-    if (realtime?.subscribe) {
-      const subscription = await realtime.subscribe(channel, callback);
-      return normalizeRealtimeUnsubscribe(subscription);
-    }
-    if (typeof window.client?.subscribe === "function") {
-      const subscription = window.client.subscribe(channel, callback);
-      return normalizeRealtimeUnsubscribe(subscription);
-    }
-    return null;
-  }
-
-  async function initializePresenceRealtime() {
-    if (state.presenceReady || state.presenceUnsubscribe || state.presenceConnecting) return;
-    if (!window.presences && !window.realtime) return;
-    state.presenceConnecting = true;
-    try {
-      const unsubscribe = await subscribeRealtime(presenceChannelName(), handlePresenceRealtimePayload);
-      if (typeof unsubscribe === "function") {
-        state.presenceUnsubscribe = unsubscribe;
-        state.presenceReady = true;
-      }
-    } catch (error) {
-      console.warn("Appwrite presence realtime unavailable", error);
-    } finally {
-      state.presenceConnecting = false;
-    }
-  }
-
   function normalizeChatEvent(response) {
     const raw = response?.payload ?? response?.row ?? response;
     if (!raw || typeof raw !== "object") return null;
@@ -2525,131 +2277,59 @@
     }
   }
 
-  async function handlePresenceRealtimePayload(response) {
-    applyPresenceRecord(response?.payload || response?.presence || response, presenceAction(response));
-    renderPresenceDrivenUi();
-  }
-
   async function loadInitialPresences() {
-    if (!window.presences?.list || !window.Query) {
-      renderPresenceDrivenUi();
-      return;
-    }
     try {
-      const payload = await window.presences.list({
-        queries: [window.Query.equal("status", ["online", "typing"])],
-        total: false,
-        ttl: 0,
-      });
+      const payload = await fetchJson("/api/presence/online");
       state.presenceRecords.clear();
-      for (const record of payload.presences || payload.rows || payload.documents || []) {
-        applyPresenceRecord(record, "upsert");
-      }
+      for (const user of payload.users || []) rememberPresenceUser(user);
       renderPresenceDrivenUi();
     } catch (error) {
-      console.warn("Unable to load Appwrite presences", error);
+      console.warn("Unable to load presence", error);
       renderPresenceDrivenUi();
     }
   }
 
-  function activePresencePayload(kind, room = state.activeRoom) {
-    const scope = roomPresenceScope(room);
-    const permissions = roomPresencePermissions(room);
-    const userId = currentUserId();
-    if (!userId || !scope || !permissions.length) return null;
-    const status = kind === "typing" ? "typing" : "online";
-    const prefix = kind === "typing" ? "ct" : "cv";
-    const presenceId = `${prefix}_${compactHash(`${userId}:${currentTabId()}:${kind}:${scope.scope_type}:${scope.scope_id}`)}`;
-    return {
-      presenceId,
-      status,
-      permissions,
-      expiresAt: new Date(Date.now() + (kind === "typing" ? TYPING_PRESENCE_TTL_MS : VIEWING_PRESENCE_TTL_MS)).toISOString(),
-      metadata: {
-        app: PRESENCE_APP_ID,
-        kind,
-        scopeType: scope.scope_type,
-        scopeId: scope.scope_id,
-        roomKey: scope.room_key || `${scope.scope_type}:${scope.scope_id}`,
-        tabId: currentTabId(),
-      },
-    };
+  function heartbeatPayload(kind, room = state.activeRoom) {
+    if (kind === "typing") {
+      if (!room?.id || !["channel", "thread"].includes(room.type)) return null;
+      return {
+        scope_type: room.type === "channel" ? "typing_channel" : "typing_thread",
+        scope_id: room.id,
+        tab_id: currentTabId(),
+      };
+    }
+    if (!room?.id) return { scope_type: "chat", scope_id: "global", tab_id: currentTabId() };
+    return { scope_type: "chat", scope_id: room.id, tab_id: currentTabId() };
   }
 
-  async function upsertPresence(kind, room = state.activeRoom) {
-    const payload = activePresencePayload(kind, room);
-    if (!payload || document.visibilityState === "hidden") return null;
+  async function sendPresenceHeartbeat(kind, room = state.activeRoom) {
+    const payload = heartbeatPayload(kind, room);
+    if (!payload) return null;
     try {
-      if (window.presences?.upsert) {
-        const presence = await window.presences.upsert(payload);
-        applyPresenceRecord({
-          ...(presence || {}),
-          $id: presence?.$id || presence?.id || payload.presenceId,
-          id: presence?.id || presence?.$id || payload.presenceId,
-          userId: presence?.userId || currentUserId(),
-          status: presence?.status || payload.status,
-          expiresAt: presence?.expiresAt || payload.expiresAt,
-          metadata: presence?.metadata || payload.metadata,
-        });
-        renderPresenceDrivenUi();
-      } else {
-        const realtime = window.realtime;
-        if (!realtime?.upsertPresence) return null;
-        const { expiresAt, ...realtimePayload } = payload;
-        await realtime.upsertPresence(realtimePayload);
-        applyPresenceRecord({
-          $id: payload.presenceId,
-          id: payload.presenceId,
-          userId: currentUserId(),
-          status: payload.status,
-          expiresAt: payload.expiresAt,
-          metadata: payload.metadata,
-        });
-        renderPresenceDrivenUi();
-      }
-      if (kind === "typing") state.lastTypingPresenceId = payload.presenceId;
-      else state.lastViewingPresenceId = payload.presenceId;
-      return payload.presenceId;
+      await fetchJson("/api/presence/heartbeat", {
+        method: "POST",
+        body: JSON.stringify(payload),
+      });
+      return `${payload.scope_type}:${payload.scope_id}`;
     } catch (error) {
       console.warn("Unable to update chat presence", error);
       return null;
     }
   }
 
-  async function deletePresence(presenceId) {
-    if (!presenceId || !window.presences?.delete) return;
-    try {
-      await window.presences.delete({ presenceId });
-      state.presenceRecords.delete(presenceId);
-      renderPresenceDrivenUi();
-    } catch (error) {
-      void error;
-      // Expiration will clean this up if the delete races navigation or reconnects.
-    }
-  }
-
-  function presenceIdFor(kind, room) {
-    return activePresencePayload(kind, room)?.presenceId || null;
-  }
-
-  function clearTypingPresence(room = state.activeRoom) {
+  function clearTypingPresence() {
     window.clearTimeout(state.typingInputTimer);
     window.clearTimeout(state.typingClearTimer);
-    const presenceId = presenceIdFor("typing", room) || state.lastTypingPresenceId;
-    state.lastTypingPresenceId = null;
-    void deletePresence(presenceId);
   }
 
   function refreshViewingPresence() {
-    void upsertPresence("viewing");
+    void sendPresenceHeartbeat("viewing");
+    void loadInitialPresences();
   }
 
   function handleActiveRoomPresenceChange(previousRoom) {
     if (previousRoom && roomKey(previousRoom) !== roomKey(state.activeRoom)) {
-      clearTypingPresence(previousRoom);
-      const previousViewingId = presenceIdFor("viewing", previousRoom) || state.lastViewingPresenceId;
-      state.lastViewingPresenceId = null;
-      void deletePresence(previousViewingId);
+      clearTypingPresence();
     }
     refreshViewingPresence();
   }
@@ -2664,7 +2344,7 @@
     if ((channel && !channelIsWritable(channel)) || thread?.blocked) return;
     window.clearTimeout(state.typingInputTimer);
     state.typingInputTimer = window.setTimeout(() => {
-      void upsertPresence("typing");
+      void sendPresenceHeartbeat("typing");
       window.clearTimeout(state.typingClearTimer);
       state.typingClearTimer = window.setTimeout(() => clearTypingPresence(), TYPING_PRESENCE_TTL_MS + 400);
     }, 150);
@@ -2672,7 +2352,8 @@
 
   function startPresenceRefreshTimer() {
     window.clearInterval(state.presenceRefreshTimer);
-    state.presenceRefreshTimer = window.setInterval(refreshViewingPresence, VIEWING_PRESENCE_REFRESH_MS);
+    refreshViewingPresence();
+    state.presenceRefreshTimer = window.setInterval(refreshViewingPresence, PRESENCE_REFRESH_MS);
   }
 
   async function sendActiveMessage(event) {
@@ -2870,7 +2551,7 @@
       const user = (channel?.active_users || []).find((candidate) => candidate.id === profileButton.dataset.profileId);
       if (user) {
         els.profilePanel.hidden = false;
-        els.profilePanel.innerHTML = profileMarkup(user, { showBlock: false, status: "online" });
+        els.profilePanel.innerHTML = profileMarkup(user, { showBlock: false, status: "active" });
       }
     });
     els.profilePanel?.addEventListener("click", (event) => {
@@ -2966,25 +2647,14 @@
         refreshViewingPresence();
       } else {
         clearTypingPresence();
-        const presenceId = state.lastViewingPresenceId;
-        state.lastViewingPresenceId = null;
-        void deletePresence(presenceId);
       }
     });
     window.addEventListener("beforeunload", () => {
       saveActiveScroll();
       clearTypingPresence();
-      const presenceId = state.lastViewingPresenceId;
-      state.lastViewingPresenceId = null;
-      void deletePresence(presenceId);
       if (state.realtimeUnsubscribe) state.realtimeUnsubscribe();
-      if (state.presenceUnsubscribe) state.presenceUnsubscribe();
       stopRealtimeFallback();
       stopRealtimeHeartbeat();
-      if (appwriteJwtRefreshTimer) {
-        window.clearTimeout(appwriteJwtRefreshTimer);
-        appwriteJwtRefreshTimer = null;
-      }
     });
   }
 

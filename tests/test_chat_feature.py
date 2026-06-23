@@ -284,24 +284,57 @@ class TestChatFeature(unittest.TestCase):
             response = client.get("/api/chat/events/stream")
         self.assertIn(response.status_code, (302, 401))
 
-    def test_chat_realtime_token_returns_jwt_for_logged_in_user(self):
-        with self.app.test_request_context("/api/chat/realtime-token"):
+    def test_presence_heartbeat_returns_local_presence_row(self):
+        row = {
+            "$id": "presence-1",
+            "scope_type": "site",
+            "scope_id": "global",
+            "last_seen_at": "2026-06-23T12:00:00Z",
+        }
+        with self.app.test_request_context(
+            "/api/presence/heartbeat",
+            method="POST",
+            json={"scope_type": "site", "scope_id": "global", "tab_id": "tab-1"},
+        ):
             with patch.object(chat_api, "current_user", self.user), \
-                    patch.object(chat_api, "sync_chat_presence_labels_for_user"), \
-                    patch.object(chat_api.Users, "create_jwt", return_value={"jwt": "token-abc"}) as create_jwt:
-                response = chat_api.chat_realtime_token.__wrapped__()
+                    patch.object(chat_api, "_upsert_presence", return_value=row) as upsert:
+                response = chat_api.presence_heartbeat.__wrapped__()
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.get_json(), {"jwt": "token-abc"})
-        create_jwt.assert_called_once()
-        self.assertEqual(create_jwt.call_args.kwargs["user_id"], "user-1")
-        self.assertEqual(create_jwt.call_args.kwargs["duration"], 3600)
+        self.assertEqual(response.get_json()["presence"]["scope_type"], "site")
+        upsert.assert_called_once_with("site", "global", "tab-1")
 
-    def test_chat_realtime_token_requires_login(self):
+    def test_presence_status_precedence_uses_active_before_busy(self):
+        rows = [
+            {"user_id": "user-2", "scope_type": "site", "last_seen_at": "2026-06-23T12:00:00Z"},
+            {"user_id": "user-2", "scope_type": "chat", "last_seen_at": "2026-06-23T12:00:01Z"},
+            {"user_id": "user-3", "scope_type": "site", "last_seen_at": "2026-06-23T12:00:00Z"},
+        ]
+        with patch.object(chat_api, "_fresh_presence_rows", return_value=rows):
+            statuses = chat_api._presence_statuses_for_users(["user-2", "user-3", "user-4"])
+
+        self.assertEqual(statuses["user-2"], "active")
+        self.assertEqual(statuses["user-3"], "busy")
+        self.assertEqual(statuses["user-4"], "offline")
+
+    def test_presence_status_ignores_stale_rows_from_fresh_query(self):
+        with patch.object(chat_api, "_fresh_presence_rows", return_value=[]):
+            statuses = chat_api._presence_statuses_for_users(["user-2"])
+
+        self.assertEqual(statuses, {"user-2": "offline"})
+
+    def test_presence_online_requires_login(self):
         login_manager.init_app(self.app)
         self.app.register_blueprint(chat_api.chat_api_bp)
         with self.app.test_client() as client:
-            response = client.get("/api/chat/realtime-token")
+            response = client.get("/api/presence/online")
+        self.assertIn(response.status_code, (302, 401))
+
+    def test_presence_statuses_requires_login(self):
+        login_manager.init_app(self.app)
+        self.app.register_blueprint(chat_api.chat_api_bp)
+        with self.app.test_client() as client:
+            response = client.post("/api/presence/statuses", json={"user_ids": ["user-1"]})
         self.assertIn(response.status_code, (302, 401))
 
     def test_dm_thread_payload_includes_presence_permissions(self):
@@ -324,7 +357,9 @@ class TestChatFeature(unittest.TestCase):
         }
         with patch.object(chat_api, "current_user", self.user), \
                 patch.object(chat_api, "_other_participant", return_value=other_user), \
-                patch.object(chat_api, "_is_blocked_between", return_value=False):
+                patch.object(chat_api, "_is_blocked_between", return_value=False), \
+                patch.object(chat_api, "_presence_statuses_for_users", return_value={"user-2": "offline"}), \
+                patch.object(chat_api, "_fresh_chat_room_presence", return_value=[]):
             payload = chat_api._thread_payload(thread)
 
         self.assertEqual(payload["presence_status"], "offline")
@@ -347,13 +382,14 @@ class TestChatFeature(unittest.TestCase):
         self.assertEqual(payload["other_user"]["major"], "Biology")
 
     def test_channel_payload_includes_presence_permissions(self):
-        discord_payload = chat_api._channel_payload({
-            "$id": "nest_chat",
-            "kind": "discord",
-            "name": "chat",
-            "label": "Chat",
-            "approved": True,
-        })
+        with patch.object(chat_api, "_fresh_chat_room_presence", return_value=[]):
+            discord_payload = chat_api._channel_payload({
+                "$id": "nest_chat",
+                "kind": "discord",
+                "name": "chat",
+                "label": "Chat",
+                "approved": True,
+            })
         self.assertEqual(discord_payload["presence_read_permissions"], ['read("users")'])
         self.assertEqual(discord_payload["presence_scope"]["room_key"], "channel:nest_chat")
         self.assertTrue(discord_payload["presence_profile_resolve_allowed"])
@@ -362,14 +398,15 @@ class TestChatFeature(unittest.TestCase):
         self.assertTrue(label.startswith(CHAT_UNIVERSITY_LABEL_PREFIX))
         self.assertLessEqual(len(label), 36)
         self.assertRegex(label, r"^[A-Za-z0-9]+$")
-        university_payload = chat_api._channel_payload({
-            "$id": "uni_emory-university",
-            "kind": "university",
-            "name": "Emory University",
-            "label": "Emory University",
-            "school_key": "emory-university",
-            "approved": True,
-        })
+        with patch.object(chat_api, "_fresh_chat_room_presence", return_value=[]):
+            university_payload = chat_api._channel_payload({
+                "$id": "uni_emory-university",
+                "kind": "university",
+                "name": "Emory University",
+                "label": "Emory University",
+                "school_key": "emory-university",
+                "approved": True,
+            })
         self.assertEqual(university_payload["presence_read_permissions"], [f'read("label:{label}")'])
 
     def test_chat_summary_returns_zero_after_matching_read_state(self):

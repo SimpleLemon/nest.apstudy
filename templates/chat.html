@@ -33,8 +33,7 @@
     {% include "_sidebar.html" %}
     <main class="chat-app"
           data-current-user-id="{{ user.id or '' }}"
-          data-discord-invite-url="{{ discord_invite_url or '' }}"
-          data-appwrite-database-id="{{ appwrite_database_id or '' }}">
+          data-discord-invite-url="{{ discord_invite_url or '' }}">
         <div id="chat-drawer-backdrop" class="chat-drawer-backdrop" hidden></div>
         <section class="chat-rail" id="chat-rail" aria-label="Chat channels">
             <div class="chat-rail-head">

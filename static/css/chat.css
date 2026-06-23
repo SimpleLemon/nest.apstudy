@@ -273,8 +273,27 @@
     0 0 0 3px color-mix(in srgb, var(--color-outline) 72%, transparent);
 }
 
-.chat-presence-dot.is-online {
+.chat-presence-dot.is-active {
   background: #22c55e;
+}
+
+.chat-presence-dot.is-busy {
+  position: relative;
+  background: #22c55e;
+  border-color: #6b217a;
+  box-shadow:
+    0 0 0 2px var(--color-surface-container-low),
+    0 0 0 3px #6b217a;
+}
+
+.chat-presence-dot.is-busy::after {
+  content: "z";
+  position: absolute;
+  right: -5px;
+  top: -9px;
+  color: #8e3a9e;
+  font: 700 10px/1 var(--font-body, Inter, sans-serif);
+  text-transform: uppercase;
 }
 
 .chat-presence-dot.is-offline {

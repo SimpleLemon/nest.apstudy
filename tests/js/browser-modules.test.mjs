@@ -578,9 +578,9 @@ test("appwrite bootstrap exposes configured SDK clients globally", async () => {
     assert.match(source, /window\.account = account/);
     assert.match(source, /window\.databases = databases/);
     assert.match(source, /window\.storage = storage/);
-    assert.match(source, /window\.presences = presences/);
-    assert.match(source, /window\.realtime = realtime/);
-    assert.match(source, /window\.Channel = Appwrite\.Channel/);
+    assert.doesNotMatch(source, /window\.presences/);
+    assert.doesNotMatch(source, /window\.realtime/);
+    assert.doesNotMatch(source, /window\.Channel = Appwrite\.Channel/);
 });
 
 test("calendar context menu keeps task, event, override, and keyboard flows wired", async () => {

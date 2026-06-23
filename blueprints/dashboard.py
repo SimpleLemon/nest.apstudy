@@ -11,7 +11,7 @@ from flask_login import login_required, current_user
 
 from appwrite.exception import AppwriteException
 from appwrite.query import Query
-from appwrite_client import COLLECTIONS, DATABASE_ID
+from appwrite_client import COLLECTIONS
 from appwrite_helpers import (
     create_row_safe,
     first_row,
@@ -1227,5 +1227,4 @@ def chat():
         user=_user_payload(),
         theme_preference=_theme_from_settings(user_settings),
         discord_invite_url=os.environ.get("DISCORD_INVITE_URL", ""),
-        appwrite_database_id=DATABASE_ID or "",
     )
