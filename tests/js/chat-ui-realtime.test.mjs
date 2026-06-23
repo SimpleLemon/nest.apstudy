@@ -406,6 +406,8 @@ test("chat announcement unread banner auto-reads small ranges and marks read on 
   assert.match(script, /function updateAnnouncementsUnreadBanner/);
   assert.match(script, /function markAnnouncementsRead/);
   assert.match(script, /const ANNOUNCEMENTS_CHANNEL_ID = "nest_announcements"/);
+  assert.match(script, /function isAnnouncementsChannel/);
+  assert.match(script, /if \(isAnnouncementsChannel\(channel\)\) return ""/);
   assert.match(script, /fetchJson\("\/api\/chat\/read"/);
   assert.match(script, /read_state/);
 });

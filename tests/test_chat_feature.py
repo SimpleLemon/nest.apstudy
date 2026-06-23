@@ -658,14 +658,14 @@ class TestChatFeature(unittest.TestCase):
         }
         expected_row_id = chat_api._discord_message_row_id(channel, message["id"])
 
-        with patch.object(chat_api, "get_row_safe", return_value=None), \
+        with patch.object(chat_api, "get_row_safe", side_effect=[None, {"$id": expected_row_id}]), \
                 patch.object(chat_api, "first_row", return_value=None), \
-                patch.object(chat_api, "create_row_safe", return_value={"$id": expected_row_id}) as create_row, \
+                patch.object(chat_api, "insert_row_ignore_safe", return_value=True) as insert_row, \
                 patch.object(chat_api, "emit_chat_event"):
             row, created = chat_api._upsert_discord_message(channel, message, emit_event=True)
 
         self.assertTrue(created)
-        self.assertEqual(create_row.call_args.kwargs["row_id"], expected_row_id)
+        self.assertEqual(insert_row.call_args.kwargs["row_id"], expected_row_id)
         self.assertEqual(row["$id"], expected_row_id)
 
     def test_discord_upsert_recovers_from_duplicate_create_race(self):
@@ -687,7 +687,7 @@ class TestChatFeature(unittest.TestCase):
 
         with patch.object(chat_api, "get_row_safe", side_effect=[None, existing]), \
                 patch.object(chat_api, "first_row", return_value=None), \
-                patch.object(chat_api, "create_row_safe", side_effect=chat_api.AppwriteException("duplicate")), \
+                patch.object(chat_api, "insert_row_ignore_safe", return_value=False), \
                 patch.object(chat_api, "update_row_safe") as update_row, \
                 patch.object(chat_api, "emit_chat_event") as emit_event:
             row, created = chat_api._upsert_discord_message(channel, message, emit_event=True)
@@ -716,14 +716,14 @@ class TestChatFeature(unittest.TestCase):
 
         with patch.object(chat_api, "get_row_safe", return_value=existing), \
                 patch.object(chat_api, "first_row", return_value=None), \
-                patch.object(chat_api, "create_row_safe") as create_row, \
+                patch.object(chat_api, "insert_row_ignore_safe") as insert_row, \
                 patch.object(chat_api, "update_row_safe") as update_row, \
                 patch.object(chat_api, "emit_chat_event") as emit_event:
             row, created = chat_api._upsert_discord_message(channel, message, emit_event=True)
 
         self.assertFalse(created)
         self.assertEqual(row["$id"], existing["$id"])
-        create_row.assert_not_called()
+        insert_row.assert_not_called()
         update_row.assert_not_called()
         emit_event.assert_not_called()
 
@@ -831,15 +831,15 @@ class TestChatFeature(unittest.TestCase):
             "author": {"id": "author-1", "username": "UrbanPanda"},
         }
 
-        with patch.object(chat_api, "get_row_safe", return_value=None), \
+        with patch.object(chat_api, "get_row_safe", side_effect=[None, {"$id": "row-1"}]), \
                 patch.object(chat_api, "first_row", return_value=None), \
-                patch.object(chat_api, "create_row_safe", return_value={"$id": "row-1"}) as create_row, \
+                patch.object(chat_api, "insert_row_ignore_safe", return_value=True) as insert_row, \
                 patch.object(chat_api, "emit_chat_event") as emit_event:
             row, created = chat_api._upsert_discord_message(channel, message, emit_event=True)
 
         self.assertTrue(created)
         self.assertEqual(row["$id"], "row-1")
-        create_row.assert_called_once()
+        insert_row.assert_called_once()
         emit_event.assert_called_once()
         self.assertEqual(emit_event.call_args.args[:3], ("channel", "nest_chat", "message_created"))
         self.assertEqual(emit_event.call_args.kwargs["message_id"], "row-1")
@@ -1093,14 +1093,14 @@ class TestChatFeature(unittest.TestCase):
         ):
             with patch.dict(os.environ, {"DISCORD_CHAT_INGEST_SECRET": "ingest-secret"}, clear=False), \
                     patch.object(chat_api, "first_row", side_effect=[channel, None]), \
-                    patch.object(chat_api, "get_row_safe", return_value=None), \
-                    patch.object(chat_api, "create_row_safe", return_value={"$id": "row-2"}) as create_row, \
+                    patch.object(chat_api, "get_row_safe", side_effect=[None, {"$id": "row-2"}]), \
+                    patch.object(chat_api, "insert_row_ignore_safe", return_value=True) as insert_row, \
                     patch.object(chat_api, "emit_chat_event") as emit_event:
                 response = chat_api.discord_message_ingest()
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_json()["message_id"], "row-2")
-        create_row.assert_called_once()
+        insert_row.assert_called_once()
         emit_event.assert_called_once()
         self.assertEqual(emit_event.call_args.args[:3], ("channel", "nest_chat", "message_created"))
 

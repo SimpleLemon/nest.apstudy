@@ -847,11 +847,16 @@
     return Boolean(channel && !channel.read_only && channel.approved !== false);
   }
 
+  function isAnnouncementsChannel(channel) {
+    return channel?.id === ANNOUNCEMENTS_CHANNEL_ID;
+  }
+
   function channelLabel(channel) {
     return channel?.label || channel?.school_name || channel?.name || "Channel";
   }
 
   function channelMeta(channel) {
+    if (isAnnouncementsChannel(channel)) return "";
     if (channelIsPending(channel)) {
       if (channel.university_status === "denied") return "Denied";
       return "Waiting approval";
@@ -951,7 +956,8 @@
     for (const channel of state.channels) {
       const active = state.activeRoom?.type === "channel" && state.activeRoom.id === channel.id;
       const leading = `<span class="chat-channel-symbol" aria-hidden="true">${escapeHtml(channelSymbol(channel))}</span>`;
-      const meta = `<small>${escapeHtml(channelMeta(channel))}</small>`;
+      const metaText = channelMeta(channel);
+      const meta = metaText ? `<small>${escapeHtml(metaText)}</small>` : "";
       const button = roomButton({
         type: "channel",
         id: channel.id,
@@ -1547,9 +1553,11 @@
       els.roomSymbol.classList.remove("is-avatar");
       els.roomSymbol.textContent = channelSymbol(channel);
       els.roomName.textContent = channelLabel(channel);
-      els.roomMeta.textContent = channelIsPending(channel)
-        ? "Waiting for admin approval"
-        : `${channel.active_count || 0} active`;
+      els.roomMeta.textContent = isAnnouncementsChannel(channel)
+        ? ""
+        : channelIsPending(channel)
+          ? "Waiting for admin approval"
+          : `${channel.active_count || 0} active`;
       setHistoryBanner(channelIsPending(channel) ? null : channel);
       const placeholder = channelIsPending(channel)
         ? "Waiting for admin approval"

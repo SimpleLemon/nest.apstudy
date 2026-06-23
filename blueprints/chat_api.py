@@ -25,6 +25,7 @@ from appwrite_helpers import (
     first_row,
     format_datetime,
     get_row_safe,
+    insert_row_ignore_safe,
     list_rows_all,
     list_rows_safe,
     update_row_safe,
@@ -780,8 +781,44 @@ def _discord_message_changes(existing, payload):
     return changes
 
 
+def _find_discord_message_row(row_id, external_id):
+    existing = None
+    if row_id:
+        existing = get_row_safe(COLLECTIONS["chat_messages"], row_id, allow_missing=True)
+    if not existing and external_id:
+        existing = first_row(
+            COLLECTIONS["chat_messages"],
+            [Query.equal("external_id", [external_id])],
+        )
+    return existing
+
+
+def _apply_discord_message_changes(existing, payload, message, *, partial=False, emit_event=False, channel=None):
+    channel_id = payload.get("channel_id")
+    row_id = _row_id(existing)
+    changes = _discord_message_changes(existing, payload)
+    if partial and not changes and message.get("edited_timestamp"):
+        changes = {"updated_at": payload.get("updated_at")}
+    if not changes:
+        return existing, False
+    try:
+        row = update_row_safe(COLLECTIONS["chat_messages"], row_id, changes)
+    except AppwriteException:
+        return existing, False
+    if emit_event:
+        emit_chat_event(
+            "channel",
+            channel_id,
+            "message_updated",
+            message_id=row_id,
+            channel_id=channel_id,
+            channel=channel,
+        )
+    return row, False
+
+
 def _log_discord_upsert_failure(row_id, external_id, discord_id, changes):
-    logger.exception(
+    logger.error(
         "Failed to upsert Discord message row_id=%s external_id=%s discord_message_id=%s changed_fields=%s value_lengths=%s",
         row_id,
         external_id,
@@ -1039,35 +1076,24 @@ def _upsert_discord_message(channel, message, emit_event=False, *, partial=False
     external_id = payload.get("external_id")
     discord_id = payload.get("discord_message_id")
     row_id = _discord_message_row_id(channel, discord_id)
-    changes = payload
-    try:
-        existing = None
-        if row_id:
-            existing = get_row_safe(COLLECTIONS["chat_messages"], row_id, allow_missing=True)
-        if not existing and external_id:
-            existing = first_row(COLLECTIONS["chat_messages"], [Query.equal("external_id", [external_id])])
-        if existing:
-            row_id = _row_id(existing)
-            changes = _discord_message_changes(existing, payload)
-            if partial and not changes and message.get("edited_timestamp"):
-                changes = {"updated_at": payload.get("updated_at")}
-            if not changes:
-                return existing, False
-            row = update_row_safe(COLLECTIONS["chat_messages"], row_id, changes)
-            if emit_event:
-                emit_chat_event(
-                    "channel",
-                    channel_id,
-                    "message_updated",
-                    message_id=row_id,
-                    channel_id=channel_id,
-                    channel=channel,
-                )
-            return row, False
-        if partial and any(key not in payload for key in DISCORD_PARTIAL_CREATE_REQUIRED_FIELDS):
-            logger.info("Skipping partial Discord message update for unknown message %s", discord_id)
-            return None, False
-        row = create_row_safe(COLLECTIONS["chat_messages"], row_id=row_id or ID.unique(), data=payload)
+    existing = _find_discord_message_row(row_id, external_id)
+    if existing:
+        return _apply_discord_message_changes(
+            existing,
+            payload,
+            message,
+            partial=partial,
+            emit_event=emit_event,
+            channel=channel,
+        )
+    if partial and any(key not in payload for key in DISCORD_PARTIAL_CREATE_REQUIRED_FIELDS):
+        logger.info("Skipping partial Discord message update for unknown message %s", discord_id)
+        return None, False
+
+    insert_id = row_id or ID.unique()
+    inserted = insert_row_ignore_safe(COLLECTIONS["chat_messages"], row_id=insert_id, data=payload)
+    if inserted:
+        row = get_row_safe(COLLECTIONS["chat_messages"], insert_id)
         if emit_event:
             emit_chat_event(
                 "channel",
@@ -1078,41 +1104,20 @@ def _upsert_discord_message(channel, message, emit_event=False, *, partial=False
                 channel=channel,
             )
         return row, True
-    except AppwriteException:
-        existing = None
-        if row_id:
-            try:
-                existing = get_row_safe(COLLECTIONS["chat_messages"], row_id, allow_missing=True)
-            except AppwriteException:
-                existing = None
-        if not existing and external_id:
-            try:
-                existing = first_row(COLLECTIONS["chat_messages"], [Query.equal("external_id", [external_id])])
-            except AppwriteException:
-                existing = None
-        if existing:
-            row_id = _row_id(existing)
-            changes = _discord_message_changes(existing, payload)
-            if partial and not changes and message.get("edited_timestamp"):
-                changes = {"updated_at": payload.get("updated_at")}
-            if not changes:
-                return existing, False
-            try:
-                row = update_row_safe(COLLECTIONS["chat_messages"], row_id, changes)
-                if emit_event:
-                    emit_chat_event(
-                        "channel",
-                        channel_id,
-                        "message_updated",
-                        message_id=row_id,
-                        channel_id=channel_id,
-                        channel=channel,
-                    )
-                return row, False
-            except AppwriteException:
-                return existing, False
-        _log_discord_upsert_failure(row_id, external_id, discord_id, changes)
-        return None, False
+
+    existing = _find_discord_message_row(insert_id, external_id)
+    if existing:
+        return _apply_discord_message_changes(
+            existing,
+            payload,
+            message,
+            partial=partial,
+            emit_event=emit_event,
+            channel=channel,
+        )
+
+    _log_discord_upsert_failure(row_id, external_id, discord_id, payload)
+    return None, False
 
 
 def _soft_delete_discord_message(channel, discord_message_id, *, emit_event=False):
@@ -2061,26 +2066,31 @@ def send_channel_message(channel_id):
     if channel.get("kind") == "discord" and base_payload.get("discord_message_id"):
         row_id = _discord_message_row_id(channel, base_payload.get("discord_message_id"))
 
-    try:
-        row = create_row_safe(
+    created = False
+    if row_id:
+        inserted = insert_row_ignore_safe(
             COLLECTIONS["chat_messages"],
-            row_id=row_id or ID.unique(),
+            row_id=row_id,
             data=base_payload,
         )
-        created = True
-    except AppwriteException:
-        existing = None
-        if row_id:
-            existing = get_row_safe(COLLECTIONS["chat_messages"], row_id, allow_missing=True)
-        if not existing and base_payload.get("external_id"):
-            existing = first_row(
-                COLLECTIONS["chat_messages"],
-                [Query.equal("external_id", [base_payload.get("external_id")])],
-            )
-        if existing:
-            row = existing
-            created = False
+        if inserted:
+            row = get_row_safe(COLLECTIONS["chat_messages"], row_id)
+            created = True
         else:
+            existing = _find_discord_message_row(row_id, base_payload.get("external_id"))
+            if not existing:
+                logger.error("Failed to persist channel message after duplicate insert race row_id=%s", row_id)
+                return jsonify({"error": "Unable to save message."}), 500
+            row = existing
+    else:
+        try:
+            row = create_row_safe(
+                COLLECTIONS["chat_messages"],
+                row_id=ID.unique(),
+                data=base_payload,
+            )
+            created = True
+        except AppwriteException:
             logger.exception("Failed to persist channel message")
             return jsonify({"error": "Unable to save message."}), 500
     try:

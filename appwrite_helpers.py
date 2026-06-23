@@ -194,6 +194,14 @@ def create_row_safe(table_id, row_id, data, permissions=None):
         raise
 
 
+def insert_row_ignore_safe(table_id, row_id, data, permissions=None):
+    try:
+        return sqlite_database.insert_row_ignore(table_id, row_id=row_id, data=data)
+    except AppwriteException:
+        logger.exception("SQLite insert_row_ignore failed: %s", table_id)
+        raise
+
+
 def update_row_safe(table_id, row_id, data, permissions=None):
     try:
         return sqlite_database.update_row(table_id, row_id, data=data)
