@@ -44,6 +44,7 @@
     chatSummaryLoading: false,
     localReadSeq: 0,
     clearedReadRooms: new Set(),
+    messageSendInFlight: false,
     contextMenuRoom: null,
     loadingMessages: false,
     roomReadState: null,
@@ -579,8 +580,26 @@
     }
     state.roomUnread = nextUnread;
     updateRoomLists();
-    window.dispatchEvent(new CustomEvent("apstudy-chat-summary", { detail: payload }));
-    return payload;
+    const reconciledPayload = chatSummaryPayloadFromUnreadMap(payload);
+    window.dispatchEvent(new CustomEvent("apstudy-chat-summary", { detail: reconciledPayload }));
+    return reconciledPayload;
+  }
+
+  function chatSummaryPayloadFromUnreadMap(payload = {}) {
+    const rooms = Array.from(state.roomUnread.values()).map((room) => ({
+      type: room.type,
+      id: room.id,
+      unread_count: Math.max(0, Number(room.unread_count || 0)),
+      has_unread: room.has_unread === true && Number(room.unread_count || 0) > 0,
+    }));
+    const totalUnread = rooms.reduce((total, room) => total + Number(room.unread_count || 0), 0);
+    return {
+      ...payload,
+      rooms,
+      total_unread: Math.min(totalUnread, 99),
+      unread_capped: totalUnread >= 99 || rooms.some((room) => Number(room.unread_count || 0) >= 99),
+      has_unread: totalUnread > 0,
+    };
   }
 
   async function refreshChatSummary() {
@@ -2362,11 +2381,13 @@
     if (!room || !els.input) return;
     const content = els.input.value.trim();
     if (!content) return;
+    if (state.messageSendInFlight) return;
     const channel = activeChannel();
     const thread = activeThread();
     if (channel && !channelIsWritable(channel)) return;
     if (thread?.blocked) return;
 
+    state.messageSendInFlight = true;
     els.sendButton.disabled = true;
     clearTypingPresence(room);
     try {
@@ -2386,6 +2407,7 @@
     } catch (error) {
       setStatus(error.message || "Unable to send message.", "error");
     } finally {
+      state.messageSendInFlight = false;
       const writable = channel ? channelIsWritable(channel) : !activeThread()?.blocked;
       els.sendButton.disabled = !writable;
     }
@@ -2401,6 +2423,7 @@
       return;
     }
     event.preventDefault();
+    if (state.messageSendInFlight) return;
     if (els.composer?.requestSubmit) {
       els.composer.requestSubmit();
     } else {

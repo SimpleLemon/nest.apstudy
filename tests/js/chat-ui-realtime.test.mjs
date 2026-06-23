@@ -126,6 +126,8 @@ test("chat keeps and renders per-room unread state", async () => {
   assert.match(script, /function unreadKey\(type, id\)/);
   assert.match(script, /function applyChatSummary\(payload = \{\}\)/);
   assert.match(script, /state\.roomUnread = nextUnread/);
+  assert.match(script, /function chatSummaryPayloadFromUnreadMap\(payload = \{\}\)/);
+  assert.match(script, /total_unread: Math\.min\(totalUnread, 99\)/);
   assert.match(script, /window\.dispatchEvent\(new CustomEvent\("apstudy-chat-summary"/);
   assert.match(script, /function unreadBadgeMarkup\(type, id\)/);
   assert.match(script, /class="chat-room-unread-badge"/);
@@ -328,6 +330,7 @@ test("global sidebar chat badge uses summary polling and shared chat summary eve
   assert.match(sidebar, /const pollMs = 120000/);
   assert.match(sidebar, /document\.visibilityState === 'hidden'/);
   assert.match(sidebar, /apstudy-chat-summary/);
+  assert.match(sidebar, /payload\.rooms\.reduce/);
   assert.match(sidebar, /renderBadge\(event\.detail \|\| \{\}\)/);
   assert.doesNotMatch(sidebar, /window\.location\.pathname === '\/chat'/);
   assert.doesNotMatch(sidebar, /client\.subscribe/);
@@ -341,8 +344,18 @@ test("chat textarea enter sends and shift enter keeps multiline input", async ()
   assert.match(script, /event\.key !== "Enter"/);
   assert.match(script, /event\.shiftKey/);
   assert.match(script, /event\.preventDefault\(\)/);
+  assert.match(script, /if \(state\.messageSendInFlight\) return;/);
   assert.match(script, /els\.composer\.requestSubmit\(\)/);
   assert.match(script, /addEventListener\("keydown", handleComposerKeydown\)/);
+});
+
+test("chat composer ignores duplicate sends while a message is in flight", async () => {
+  const script = await sourceFor("static/js/chat.js");
+
+  assert.match(script, /messageSendInFlight: false/);
+  assert.match(script, /if \(state\.messageSendInFlight\) return;\s+const channel = activeChannel\(\)/);
+  assert.match(script, /state\.messageSendInFlight = true;\s+els\.sendButton\.disabled = true/);
+  assert.match(script, /finally \{\s+state\.messageSendInFlight = false;/);
 });
 
 test("chat renders discord mention pills and scalable message avatars", async () => {

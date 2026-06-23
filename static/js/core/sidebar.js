@@ -225,8 +225,14 @@ function setupChatSummaryBadge() {
   }
 
   function renderBadge(payload = {}) {
-    const count = Number(payload.total_unread || 0);
-    const capped = payload.unread_capped === true;
+    const roomCount = Array.isArray(payload.rooms)
+      ? payload.rooms.reduce((total, room) => {
+          const hasUnread = room?.has_unread === true || Number(room?.unread_count || 0) > 0;
+          return hasUnread ? total + Number(room?.unread_count || 0) : total;
+        }, 0)
+      : null;
+    const count = Number(roomCount ?? payload.total_unread ?? 0);
+    const capped = payload.unread_capped === true || count >= 99;
     badge.hidden = count <= 0;
     if (count <= 0) {
       badge.textContent = '';
