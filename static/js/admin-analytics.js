@@ -421,6 +421,7 @@
     const chart = root.querySelector('[data-chart="main"]');
     const title = root.querySelector("[data-analytics-main-title]");
     const description = root.querySelector("[data-analytics-main-description]");
+    const source = root.querySelector("[data-analytics-main-source]");
     const tabs = Array.from(root.querySelectorAll("[data-analytics-metric]"));
     tabs.forEach((tab) => {
       const selected = tab.dataset.analyticsMetric === key;
@@ -429,6 +430,7 @@
     });
     if (title) title.textContent = config.title;
     if (description) description.textContent = config.description;
+    if (source) source.textContent = sourceTextForMetric(payload, key);
     if (!chart) return;
     const data = valueAtPath(payload, config.seriesPath);
     chart.setAttribute("aria-label", `${config.label} analytics chart`);
@@ -439,31 +441,19 @@
         : renderLineChart(data, { tone: config.tone });
   }
 
-  function renderGa4(root, ga4) {
-    if (!root) return;
-    if (!ga4?.configured) {
-      root.innerHTML = `
-        <span class="admin-badge admin-badge--muted">Not configured</span>
-        <p>${escapeHtml(ga4?.message || "GA4 credentials are not configured.")}</p>
-      `;
-      return;
+  function sourceTextForMetric(payload, metricKey) {
+    if (metricKey === "activeUsers") {
+      return `Traffic source: ${payload?.sources?.traffic?.label || "Google Analytics unavailable"}`;
     }
-    if (ga4.status !== "ok") {
-      root.innerHTML = `
-        <span class="admin-badge admin-badge--muted">Unavailable</span>
-        <p>${escapeHtml(ga4.message || "Unable to load Google Analytics data.")}</p>
-      `;
-      return;
-    }
-    root.innerHTML = `
-      <div class="admin-analytics-ga4-grid">
-        <div><span>Active Users</span><strong>${formatNumber(ga4.totals?.activeUsers)}</strong></div>
-        <div><span>Views</span><strong>${formatNumber(ga4.totals?.screenPageViews)}</strong></div>
-        <div><span>Events</span><strong>${formatNumber(ga4.totals?.eventCount)}</strong></div>
-        <div><span>Realtime</span><strong>${formatNumber(ga4.realtime?.activeUsers)}</strong></div>
-      </div>
-      ${renderBarList((ga4.realtime?.countries || []).map((row) => ({ label: row.country, value: row.activeUsers })))}
-    `;
+    return "Source: Nest database";
+  }
+
+  function engagementSourceText(payload) {
+    const traffic = payload?.sources?.traffic?.status === "ok"
+      ? payload.sources.traffic.label
+      : "Google Analytics unavailable";
+    const featureUsage = payload?.sources?.featureUsage?.label || "Nest database";
+    return `Page views and top pages: ${traffic}. Feature usage: ${featureUsage}.`;
   }
 
   function renderDashboard(root, payload) {
@@ -473,13 +463,14 @@
 
     const chart = (name) => root.querySelector(`[data-chart="${name}"]`);
     const pageViews = chart("pageViews");
+    const engagementSource = root.querySelector("[data-analytics-engagement-source]");
 
     renderMainMetric(root, payload, root.dataset.activeMetric || "totalUsers");
     if (pageViews) pageViews.innerHTML = renderLineChart(payload?.series?.pageViews, { tone: "secondary" });
+    if (engagementSource) engagementSource.textContent = engagementSourceText(payload);
 
     renderList(root.querySelector('[data-analytics-list="topPages"]'), "Top Pages", payload?.engagement?.topPages);
     renderList(root.querySelector('[data-analytics-list="featureUsage"]'), "Feature Usage", payload?.engagement?.featureUsage);
-    renderGa4(root.querySelector("[data-analytics-ga4]"), payload?.ga4);
   }
 
   function setNotice(root, message, isError = false) {

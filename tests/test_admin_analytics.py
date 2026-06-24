@@ -88,6 +88,10 @@ class AdminAnalyticsRouteTestCase(unittest.TestCase):
         self.assertIn("Total Users", html)
         self.assertIn("1.5 MB", html)
         self.assertIn("admin-analytics.js", html)
+        self.assertIn("data-analytics-main-source", html)
+        self.assertIn("data-analytics-engagement-source", html)
+        self.assertNotIn("Live GA4 Data API status", html)
+        self.assertNotIn("data-analytics-ga4", html)
         self.assertLess(html.index(">Auth<"), html.index(">Analytics<"))
         self.assertLess(html.index(">Analytics<"), html.index(">APSwiftly<"))
 
@@ -178,7 +182,11 @@ class AdminAnalyticsServiceTestCase(unittest.TestCase):
         self.assertEqual(payload["range"], "7d")
         self.assertEqual(payload["timezone"], "America/Phoenix")
         self.assertEqual(payload["cards"]["totalUsers"], 3)
-        self.assertEqual(payload["cards"]["pageViews"], 3)
+        self.assertEqual(payload["cards"]["activeUsers"], 0)
+        self.assertEqual(payload["cards"]["pageViews"], 0)
+        self.assertTrue(all(point["value"] == 0 for point in payload["series"]["activeUsers"]))
+        self.assertTrue(all(point["value"] == 0 for point in payload["series"]["pageViews"]))
+        self.assertEqual(payload["engagement"]["topPages"], [])
         oauth = {row["key"]: row["value"] for row in payload["breakdowns"]["oauth"]}
         self.assertEqual(oauth["google"], 1)
         self.assertEqual(oauth["discord"], 1)
@@ -212,18 +220,34 @@ class AdminAnalyticsServiceTestCase(unittest.TestCase):
 
         self.assertFalse(payload["ga4"]["configured"])
         self.assertEqual(payload["ga4"]["status"], "not_configured")
+        self.assertEqual(payload["cards"]["activeUsers"], 0)
+        self.assertEqual(payload["cards"]["pageViews"], 0)
 
     def test_ga4_defaults_to_nest_property_and_filters_hostname(self):
+        def fake_row(dimensions, metrics):
+            return SimpleNamespace(
+                dimension_values=[SimpleNamespace(value=value) for value in dimensions],
+                metric_values=[SimpleNamespace(value=str(value)) for value in metrics],
+            )
+
         class FakeAnalyticsClient:
-            report_request = None
-            realtime_request = None
+            report_requests = []
 
             def run_report(self, request):
-                FakeAnalyticsClient.report_request = request
-                return SimpleNamespace(rows=[])
-
-            def run_realtime_report(self, request):
-                FakeAnalyticsClient.realtime_request = request
+                FakeAnalyticsClient.report_requests.append(request)
+                dimension_names = [dimension.name for dimension in getattr(request, "dimensions", []) or []]
+                if not dimension_names:
+                    return SimpleNamespace(rows=[fake_row([], [7, 42, 99])])
+                if dimension_names == ["date"]:
+                    return SimpleNamespace(rows=[
+                        fake_row(["20260501"], [2, 10]),
+                        fake_row(["20260503"], [5, 32]),
+                    ])
+                if dimension_names == ["pagePath"]:
+                    return SimpleNamespace(rows=[
+                        fake_row(["/notes"], [12]),
+                        fake_row(["/dashboard"], [30]),
+                    ])
                 return SimpleNamespace(rows=[])
 
         class FakeType:
@@ -248,7 +272,6 @@ class AdminAnalyticsServiceTestCase(unittest.TestCase):
         fake_types.FilterExpression = FakeType
         fake_types.Metric = FakeType
         fake_types.RunReportRequest = FakeType
-        fake_types.RunRealtimeReportRequest = FakeType
 
         with patch.dict(os.environ, {"GOOGLE_APPLICATION_CREDENTIALS": "/tmp/fake-ga.json"}, clear=True), \
                 patch.dict(sys.modules, {
@@ -268,11 +291,17 @@ class AdminAnalyticsServiceTestCase(unittest.TestCase):
         self.assertEqual(payload["ga4"]["status"], "ok")
         self.assertEqual(payload["ga4"]["propertyId"], "446578226")
         self.assertEqual(payload["ga4"]["hostName"], "nest.apstudy.org")
-        self.assertEqual(FakeAnalyticsClient.report_request.property, "properties/446578226")
-        self.assertEqual(FakeAnalyticsClient.realtime_request.property, "properties/446578226")
-        self.assertEqual(FakeAnalyticsClient.report_request.dimension_filter.filter.field_name, "hostName")
-        self.assertEqual(FakeAnalyticsClient.report_request.dimension_filter.filter.string_filter.value, "nest.apstudy.org")
-        self.assertIsNone(getattr(FakeAnalyticsClient.realtime_request, "dimension_filter", None))
+        self.assertEqual(payload["cards"]["activeUsers"], 7)
+        self.assertEqual(payload["cards"]["pageViews"], 42)
+        self.assertEqual(payload["series"]["activeUsers"][-1]["value"], 5)
+        self.assertEqual(payload["series"]["pageViews"][-1]["value"], 32)
+        self.assertEqual(payload["engagement"]["topPages"][0], {"label": "/dashboard", "value": 30})
+        self.assertEqual(payload["sources"]["traffic"]["label"], "Google Analytics")
+        self.assertEqual(len(FakeAnalyticsClient.report_requests), 3)
+        for request in FakeAnalyticsClient.report_requests:
+            self.assertEqual(request.property, "properties/446578226")
+            self.assertEqual(request.dimension_filter.filter.field_name, "hostName")
+            self.assertEqual(request.dimension_filter.filter.string_filter.value, "nest.apstudy.org")
 
 
 if __name__ == "__main__":

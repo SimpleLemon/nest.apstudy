@@ -1710,6 +1710,15 @@ button.admin-tab {
     overflow: visible;
 }
 
+.admin-analytics-source {
+    margin: 6px 0 0;
+    color: var(--admin-muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
 .admin-analytics-chart--main {
     min-height: 320px;
 }

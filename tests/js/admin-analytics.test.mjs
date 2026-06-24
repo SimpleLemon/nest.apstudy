@@ -130,6 +130,8 @@ test("admin analytics main card switches to selected metric graph", async () => 
     },
     title: { textContent: "" },
     description: { textContent: "" },
+    source: { textContent: "" },
+    engagementSource: { textContent: "" },
   };
   const tabs = ["totalUsers", "activeUsers", "oauth", "uniType"].map((metric) => ({
     dataset: { analyticsMetric: metric },
@@ -158,6 +160,8 @@ test("admin analytics main card switches to selected metric graph", async () => 
       if (selector === '[data-chart="main"]') return nodes.main;
       if (selector === '[data-analytics-main-title]') return nodes.title;
       if (selector === '[data-analytics-main-description]') return nodes.description;
+      if (selector === "[data-analytics-main-source]") return nodes.source;
+      if (selector === "[data-analytics-engagement-source]") return nodes.engagementSource;
       return null;
     },
     querySelectorAll(selector) {
@@ -182,10 +186,16 @@ test("admin analytics main card switches to selected metric graph", async () => 
       uniType: [],
     },
     engagement: {},
-    ga4: { configured: false },
+    sources: {
+      traffic: { label: "Google Analytics", status: "ok" },
+      featureUsage: { label: "Nest database", status: "ok" },
+    },
+    ga4: { configured: true, status: "ok" },
   });
 
   assert.equal(nodes.title.textContent, "OAuth");
+  assert.equal(nodes.source.textContent, "Source: Nest database");
+  assert.equal(nodes.engagementSource.textContent, "Page views and top pages: Google Analytics. Feature usage: Nest database.");
   assert.match(nodes.main.innerHTML, /admin-analytics-multiline/);
   assert.match(nodes.main.innerHTML, /admin-analytics-legend/);
   assert.match(nodes.main.innerHTML, /\+2/);
