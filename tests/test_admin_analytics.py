@@ -187,6 +187,14 @@ class AdminAnalyticsServiceTestCase(unittest.TestCase):
         self.assertEqual(uni_type["emory"], 1)
         self.assertEqual(uni_type["high_school"], 1)
         self.assertEqual(uni_type["graduate"], 1)
+        oauth_series = {row["key"]: row for row in payload["series"]["oauth"]}
+        self.assertEqual(oauth_series["google"]["points"][-1]["value"], 1)
+        self.assertEqual(oauth_series["discord"]["points"][-1]["value"], 1)
+        self.assertEqual(oauth_series["github"]["points"][-1]["value"], 1)
+        uni_series = {row["key"]: row for row in payload["series"]["uniType"]}
+        self.assertEqual(uni_series["emory"]["points"][-1]["value"], 1)
+        self.assertEqual(uni_series["high_school"]["points"][-1]["value"], 1)
+        self.assertEqual(uni_series["graduate"]["points"][-1]["value"], 1)
         self.assertEqual(payload["engagement"]["onboarding"]["complete"], 2)
         feature_usage = {row["label"]: row["value"] for row in payload["engagement"]["featureUsage"]}
         self.assertEqual(feature_usage["Tasks"], 1)

@@ -22,20 +22,20 @@
     oauth: {
       label: "OAuth",
       title: "OAuth",
-      description: "Google, Discord, GitHub, and other account providers.",
-      type: "bar",
+      description: "Cumulative signups by provider across the selected range.",
+      type: "multiLine",
       tone: "primary",
-      seriesPath: ["breakdowns", "oauth"],
-      value: (payload) => sumSeries(payload?.breakdowns?.oauth),
+      seriesPath: ["series", "oauth"],
+      value: (payload) => sumMultiSeriesIncrease(payload?.series?.oauth),
     },
     uniType: {
       label: "Uni Type",
       title: "Uni Type",
-      description: "Emory, university, high school, graduate, and other users.",
-      type: "bar",
+      description: "Cumulative signups by education type across the selected range.",
+      type: "multiLine",
       tone: "secondary",
-      seriesPath: ["breakdowns", "uniType"],
-      value: (payload) => sumSeries(payload?.breakdowns?.uniType),
+      seriesPath: ["series", "uniType"],
+      value: (payload) => sumMultiSeriesIncrease(payload?.series?.uniType),
     },
   };
 
@@ -70,6 +70,31 @@
 
   function sumSeries(points) {
     return normalizeSeries(points).reduce((total, point) => total + point.value, 0);
+  }
+
+  function seriesIntervalIncrease(points) {
+    const series = normalizeSeries(points);
+    if (!series.length) return 0;
+    if (series.length === 1) return series[0].value;
+    return series[series.length - 1].value - series[0].value;
+  }
+
+  function sumMultiSeriesIncrease(groups) {
+    return (Array.isArray(groups) ? groups : []).reduce(
+      (total, group) => total + seriesIntervalIncrease(group?.points),
+      0,
+    );
+  }
+
+  function stableSeriesColor(key, index = 0) {
+    let hash = 0;
+    const text = String(key ?? index);
+    for (let i = 0; i < text.length; i += 1) {
+      hash = ((hash << 5) - hash) + text.charCodeAt(i);
+      hash |= 0;
+    }
+    const hue = Math.abs(hash) % 360;
+    return `hsl(${hue} 62% 48%)`;
   }
 
   function formatNumber(value) {
@@ -121,6 +146,119 @@
       max: axisMax,
       ticks: Array.from({ length: 6 }, (_, index) => Number((step * index).toFixed(6))),
     };
+  }
+
+  function renderMultiTooltip(bucketLabel, entries, x, y, bounds = { width: 760, height: 300 }) {
+    const title = String(bucketLabel || "");
+    const rowMarkup = entries.map((entry, index) => `
+      <text x="12" y="${34 + index * 16}">
+        <tspan fill="${entry.color}">●</tspan>
+        <tspan> ${escapeHtml(truncateLabel(entry.label, 18))}: ${escapeHtml(formatNumber(entry.value))}</tspan>
+      </text>
+    `).join("");
+    const boxWidth = clamp(Math.max(160, title.length * 7 + 34, ...entries.map((entry) => entry.label.length * 7 + 48)), 160, 260);
+    const boxHeight = 28 + entries.length * 16;
+    const boxX = clamp(x - boxWidth / 2, 8, bounds.width - boxWidth - 8);
+    const boxY = y - boxHeight - 14 < 8 ? y + 16 : y - boxHeight - 14;
+    return `
+      <g class="admin-analytics-tooltip" role="tooltip" transform="translate(${boxX.toFixed(1)} ${boxY.toFixed(1)})">
+        <rect width="${boxWidth.toFixed(1)}" height="${boxHeight}" rx="8"></rect>
+        <text x="12" y="18">${escapeHtml(truncateLabel(title, 28))}</text>
+        ${rowMarkup}
+      </g>
+    `;
+  }
+
+  function renderMultiLineChart(seriesGroups) {
+    const groups = (Array.isArray(seriesGroups) ? seriesGroups : []).map((group, index) => ({
+      key: String(group?.key || index),
+      label: String(group?.label || group?.key || ""),
+      points: normalizeSeries(group?.points),
+      color: stableSeriesColor(group?.key, index),
+      increase: seriesIntervalIncrease(group?.points),
+    })).filter((group) => group.points.length && (group.increase > 0 || group.points.some((point) => point.value > 0)));
+    if (!groups.length) return chartEmpty();
+
+    const width = 760;
+    const height = 300;
+    const padLeft = 28;
+    const padRight = 58;
+    const padTop = 28;
+    const padBottom = 42;
+    const chartWidth = width - padLeft - padRight;
+    const chartHeight = height - padTop - padBottom;
+    const bucketCount = groups[0].points.length;
+    const axis = niceAxis(Math.max(0, ...groups.flatMap((group) => group.points.map((point) => point.value))));
+    const step = bucketCount > 1 ? chartWidth / (bucketCount - 1) : 0;
+    const labelEvery = Math.max(1, Math.ceil(bucketCount / 6));
+
+    const plotted = groups.map((group) => ({
+      ...group,
+      coords: group.points.map((point, index) => {
+        const x = bucketCount > 1 ? padLeft + index * step : padLeft + chartWidth / 2;
+        const y = padTop + chartHeight - (point.value / axis.max) * chartHeight;
+        return { ...point, x, y };
+      }),
+    }));
+
+    const hoverBuckets = Array.from({ length: bucketCount }, (_, index) => ({
+      label: plotted[0].coords[index]?.label || "",
+      x: plotted[0].coords[index]?.x || padLeft,
+      entries: plotted.map((group) => ({
+        label: group.label,
+        value: group.coords[index]?.value || 0,
+        color: group.color,
+      })),
+    }));
+
+    const legend = plotted.map((group) => `
+      <div class="admin-analytics-legend-item" role="listitem">
+        <span class="admin-analytics-legend-swatch" style="background:${group.color}"></span>
+        <span class="admin-analytics-legend-label">${escapeHtml(group.label)}</span>
+        <strong class="admin-analytics-legend-value">+${formatNumber(group.increase)}</strong>
+      </div>
+    `).join("");
+
+    return `
+      <div class="admin-analytics-multiline">
+        <svg class="admin-analytics-svg admin-analytics-svg--multiline" viewBox="0 0 ${width} ${height}" role="img" aria-label="Multi-series line chart">
+          ${axis.ticks.map((tick) => {
+            const y = padTop + chartHeight - (tick / axis.max) * chartHeight;
+            return `
+              <line class="admin-analytics-grid-line" x1="${padLeft}" y1="${y.toFixed(1)}" x2="${width - padRight}" y2="${y.toFixed(1)}"></line>
+              <text class="admin-analytics-y-label" x="${width - padRight + 14}" y="${(y + 4).toFixed(1)}">${formatNumber(tick)}</text>
+            `;
+          }).join("")}
+          <line class="admin-analytics-axis" x1="${padLeft}" y1="${height - padBottom}" x2="${width - padRight}" y2="${height - padBottom}"></line>
+          ${plotted.map((group) => {
+            const path = group.coords.map((point, index) => `${index === 0 ? "M" : "L"}${point.x.toFixed(1)} ${point.y.toFixed(1)}`).join(" ");
+            return `<path class="admin-analytics-line admin-analytics-series-line" d="${path}" style="stroke:${group.color}"></path>`;
+          }).join("")}
+          ${hoverBuckets.map((bucket, bucketIndex) => {
+            const hitWidth = Math.max(36, step || 36);
+            const hitX = clamp(bucket.x - hitWidth / 2, padLeft, width - padRight - hitWidth);
+            const summary = bucket.entries.map((entry) => `${entry.label}: ${formatNumber(entry.value)}`).join(", ");
+            const anchorY = bucket.entries.reduce((maxY, entry) => {
+              const y = padTop + chartHeight - (entry.value / axis.max) * chartHeight;
+              return Math.min(maxY, y);
+            }, padTop + chartHeight);
+            return `
+              <g class="admin-analytics-hover-target" tabindex="0" role="listitem" aria-label="${escapeHtml(bucket.label)}: ${escapeHtml(summary)}">
+                <rect class="admin-analytics-hit-area" x="${hitX.toFixed(1)}" y="${padTop}" width="${hitWidth.toFixed(1)}" height="${chartHeight}" rx="4"></rect>
+                <line class="admin-analytics-hover-line admin-analytics-series-hover-line" x1="${bucket.x.toFixed(1)}" y1="${padTop}" x2="${bucket.x.toFixed(1)}" y2="${height - padBottom}"></line>
+                ${plotted.map((group) => {
+                  const point = group.coords[bucketIndex];
+                  return `<circle class="admin-analytics-dot admin-analytics-series-dot" cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="4" style="fill:${group.color};stroke:${group.color}"></circle>`;
+                }).join("")}
+                ${renderMultiTooltip(bucket.label, bucket.entries, bucket.x, anchorY, { width, height })}
+              </g>
+            `;
+          }).join("")}
+          ${plotted[0].coords.filter((_, index) => index % labelEvery === 0 || index === plotted[0].coords.length - 1).map((point) => `<text class="admin-analytics-x-label" x="${point.x.toFixed(1)}" y="${height - 12}" text-anchor="middle">${escapeHtml(point.label)}</text>`).join("")}
+        </svg>
+        <div class="admin-analytics-legend" role="list" aria-label="Series legend">${legend}</div>
+      </div>
+    `;
   }
 
   function renderTooltip(label, value, x, y, bounds = { width: 760, height: 300 }) {
@@ -294,9 +432,11 @@
     if (!chart) return;
     const data = valueAtPath(payload, config.seriesPath);
     chart.setAttribute("aria-label", `${config.label} analytics chart`);
-    chart.innerHTML = config.type === "bar"
-      ? renderVerticalBarChart(data, { tone: config.tone })
-      : renderLineChart(data, { tone: config.tone });
+    chart.innerHTML = config.type === "multiLine"
+      ? renderMultiLineChart(data)
+      : config.type === "bar"
+        ? renderVerticalBarChart(data, { tone: config.tone })
+        : renderLineChart(data, { tone: config.tone });
   }
 
   function renderGa4(root, ga4) {
@@ -420,6 +560,10 @@
     renderBarList,
     renderVerticalBarChart,
     renderLineChart,
+    renderMultiLineChart,
+    seriesIntervalIncrease,
+    sumMultiSeriesIncrease,
+    stableSeriesColor,
     sumSeries,
   };
 

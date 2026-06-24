@@ -1711,6 +1711,73 @@ button.admin-tab {
     fill: color-mix(in srgb, var(--color-secondary, #5ca6ff) 14%, transparent);
 }
 
+.admin-analytics-multiline {
+    display: grid;
+    gap: 14px;
+}
+
+.admin-analytics-svg--multiline .admin-analytics-series-line {
+    stroke-width: 2.5;
+}
+
+.admin-analytics-svg--multiline .admin-analytics-series-dot {
+    opacity: 0;
+    transition: opacity 120ms ease;
+}
+
+.admin-analytics-svg--multiline .admin-analytics-series-hover-line {
+    stroke: var(--admin-muted);
+    stroke-width: 1;
+    stroke-dasharray: 4 4;
+    opacity: 0;
+    transition: opacity 120ms ease;
+}
+
+.admin-analytics-svg--multiline .admin-analytics-hover-target:hover .admin-analytics-series-dot,
+.admin-analytics-svg--multiline .admin-analytics-hover-target:focus .admin-analytics-series-dot,
+.admin-analytics-svg--multiline .admin-analytics-hover-target:hover .admin-analytics-series-hover-line,
+.admin-analytics-svg--multiline .admin-analytics-hover-target:focus .admin-analytics-series-hover-line {
+    opacity: 1;
+}
+
+.admin-analytics-legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 8px 14px;
+}
+
+.admin-analytics-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    font-size: 13px;
+    color: var(--admin-muted);
+}
+
+.admin-analytics-legend-swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    flex: 0 0 auto;
+}
+
+.admin-analytics-legend-label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--admin-ink);
+}
+
+.admin-analytics-legend-value {
+    margin-left: auto;
+    color: var(--admin-ink);
+    font-family: var(--font-display);
+    font-size: 13px;
+    white-space: nowrap;
+}
+
 .admin-analytics-bar-column {
     fill: var(--admin-accent);
     transition: filter 120ms ease, opacity 120ms ease;

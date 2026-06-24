@@ -85,6 +85,33 @@ test("admin analytics charts use nice axes, hover details, and vertical category
   assert.doesNotMatch(bars, /admin-analytics-bars/);
 });
 
+test("admin analytics multi-line charts render dynamic series colors and interval growth", async () => {
+  const window = await runBrowserScript("static/js/admin-analytics.js", {
+    window: {
+      Intl,
+    },
+  });
+
+  const chart = window.AdminAnalytics.renderMultiLineChart([
+    {
+      key: "google",
+      label: "Google",
+      points: [{ label: "May 1", value: 2 }, { label: "May 2", value: 5 }],
+    },
+    {
+      key: "discord",
+      label: "Discord",
+      points: [{ label: "May 1", value: 1 }, { label: "May 2", value: 2 }],
+    },
+  ]);
+
+  assert.match(chart, /admin-analytics-series-line/);
+  assert.match(chart, /admin-analytics-legend-item/);
+  assert.match(chart, /\+3/);
+  assert.match(chart, /\+1/);
+  assert.match(chart, /hsl\(/);
+});
+
 test("admin analytics main card switches to selected metric graph", async () => {
   const window = await runBrowserScript("static/js/admin-analytics.js", {
     window: {
@@ -140,7 +167,16 @@ test("admin analytics main card switches to selected metric graph", async () => 
 
   window.AdminAnalytics.renderDashboard(root, {
     cards: { totalUsers: 8, activeUsers: 3, pageViews: 0, onboardingRate: 0 },
-    series: { totalUsers: [], activeUsers: [], pageViews: [] },
+    series: {
+      totalUsers: [],
+      activeUsers: [],
+      pageViews: [],
+      oauth: [
+        { key: "google", label: "Google", points: [{ label: "May 1", value: 1 }, { label: "May 2", value: 3 }] },
+        { key: "discord", label: "Discord", points: [{ label: "May 1", value: 0 }, { label: "May 2", value: 2 }] },
+      ],
+      uniType: [],
+    },
     breakdowns: {
       oauth: [{ label: "Google", value: 5 }, { label: "Discord", value: 3 }],
       uniType: [],
@@ -150,8 +186,10 @@ test("admin analytics main card switches to selected metric graph", async () => 
   });
 
   assert.equal(nodes.title.textContent, "OAuth");
-  assert.match(nodes.main.innerHTML, /admin-analytics-bar-column/);
-  assert.equal(cards.get("oauth").textContent, "8");
+  assert.match(nodes.main.innerHTML, /admin-analytics-multiline/);
+  assert.match(nodes.main.innerHTML, /admin-analytics-legend/);
+  assert.match(nodes.main.innerHTML, /\+2/);
+  assert.equal(cards.get("oauth").textContent, "4");
   assert.equal(tabs.find((tab) => tab.dataset.analyticsMetric === "oauth").attrs["aria-selected"], "true");
 });
 

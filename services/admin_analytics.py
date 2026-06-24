@@ -352,6 +352,34 @@ def _breakdown(items, labels):
     return [{"key": key, "label": label, "value": counter.get(key, 0)} for key, label in labels]
 
 
+def _breakdown_growth_series(users, buckets, window, tz, classify_fn, labels):
+    granularity = window["granularity"]
+    by_category = {key: [] for key, _ in labels}
+    for user in users:
+        created_at = parse_utc(user.get("created_at"))
+        if not created_at:
+            continue
+        category = classify_fn(user)
+        if category in by_category:
+            by_category[category].append(created_at)
+    for key in by_category:
+        by_category[key].sort()
+
+    series = []
+    for key, label in labels:
+        created_values = by_category[key]
+        index = 0
+        points = []
+        for bucket in buckets:
+            local_start = parse_utc(bucket["start"]).astimezone(tz)
+            bucket_end = _add_bucket(local_start, granularity).astimezone(timezone.utc)
+            while index < len(created_values) and created_values[index] < bucket_end:
+                index += 1
+            points.append({"key": bucket["key"], "label": bucket["label"], "value": index})
+        series.append({"key": key, "label": label, "points": points})
+    return series
+
+
 def _ga4_payload(range_key, window):
     property_id = (os.environ.get("GA4_PROPERTY_ID") or DEFAULT_GA4_PROPERTY_ID).strip()
     credentials = (os.environ.get("GOOGLE_APPLICATION_CREDENTIALS") or "").strip()
@@ -489,6 +517,8 @@ def analytics_payload(range_key="30d", tz_name="UTC", *, include_ga=True, now=No
             "totalUsers": _total_user_growth(users, buckets, window, tz),
             "activeUsers": _active_users(events, daily_active_rows, buckets, window, tz),
             "pageViews": page_view_series,
+            "oauth": _breakdown_growth_series(users, buckets, window, tz, _normalize_provider, provider_labels),
+            "uniType": _breakdown_growth_series(users, buckets, window, tz, _uni_type, uni_labels),
         },
         "breakdowns": {
             "oauth": _breakdown((_normalize_provider(user) for user in selected_users), provider_labels),
