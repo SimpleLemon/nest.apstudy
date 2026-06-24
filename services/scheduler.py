@@ -462,9 +462,13 @@ def _reconcile_discord_chat(app):
         try:
             from blueprints.chat_api import sync_discord_channels
 
-            created_count = sync_discord_channels(emit_events=False)
-            if created_count:
-                logger.info("Discord chat reconciliation: %s new message(s).", created_count)
+            created_count, deleted_count = sync_discord_channels(emit_events=False, emit_delete_events=True)
+            if created_count or deleted_count:
+                logger.info(
+                    "Discord chat reconciliation: %s new message(s), %s deleted message(s).",
+                    created_count,
+                    deleted_count,
+                )
         except Exception:
             logger.exception("Discord chat reconciliation failed")
 

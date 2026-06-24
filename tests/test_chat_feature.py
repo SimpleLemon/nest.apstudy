@@ -661,12 +661,148 @@ class TestChatFeature(unittest.TestCase):
         response.json.return_value = {"id": "discord-message-1", "webhook_id": "webhook-1"}
         with patch.object(discord_bridge, "ensure_chat_webhook", return_value={"id": "webhook-1", "token": "token"}), \
                 patch.object(discord_bridge.requests, "post", return_value=response) as post:
-            result = discord_bridge.execute_chat_webhook("@everyone hello", "Derek", "https://example.test/a.png")
+            result, webhook = discord_bridge.execute_chat_webhook("@everyone hello", "Derek", "https://example.test/a.png")
 
         self.assertEqual(result["id"], "discord-message-1")
+        self.assertEqual(webhook["id"], "webhook-1")
         payload = post.call_args.kwargs["json"]
         self.assertEqual(payload["allowed_mentions"], {"parse": []})
         self.assertEqual(payload["username"], "Derek")
+
+    def test_delete_webhook_message_raises_when_webhook_missing(self):
+        with patch.object(discord_bridge, "_load_webhook", return_value=None):
+            with self.assertRaises(discord_bridge.DiscordBridgeError):
+                discord_bridge.delete_webhook_message("webhook-1", "message-1")
+
+    def test_delete_webhook_message_raises_on_webhook_id_mismatch(self):
+        with patch.object(discord_bridge, "_load_webhook", return_value={"id": "webhook-1", "token": "token"}):
+            with self.assertRaises(discord_bridge.DiscordBridgeError):
+                discord_bridge.delete_webhook_message("other-webhook", "message-1")
+
+    def test_delete_webhook_message_raises_when_message_id_missing(self):
+        with patch.object(discord_bridge, "_load_webhook", return_value={"id": "webhook-1", "token": "token"}):
+            with self.assertRaises(discord_bridge.DiscordBridgeError):
+                discord_bridge.delete_webhook_message("webhook-1", "")
+
+    def test_delete_message_calls_discord_delete_for_webhook_messages(self):
+        created_at = (datetime.now(timezone.utc) - timedelta(minutes=2)).isoformat()
+        row = {
+            "$id": "message-1",
+            "user_id": "user-1",
+            "source": "discord",
+            "channel_id": "nest_chat",
+            "discord_message_id": "discord-message-1",
+            "discord_webhook_id": "webhook-1",
+            "created_at": created_at,
+        }
+        with self.app.test_request_context("/api/chat/messages/message-1", method="DELETE"):
+            with patch.object(chat_api, "current_user", self.user), \
+                    patch.object(chat_api, "get_row_safe", return_value=row), \
+                    patch.object(chat_api, "delete_webhook_message", return_value=True) as delete_webhook, \
+                    patch.object(chat_api, "update_row_safe") as update_row, \
+                    patch.object(chat_api, "emit_chat_event"), \
+                    patch.object(chat_api, "emit_audit_event"):
+                response = chat_api.delete_message.__wrapped__("message-1")
+
+        self.assertEqual(response.status_code if hasattr(response, "status_code") else 200, 200)
+        delete_webhook.assert_called_once_with("webhook-1", "discord-message-1")
+        update_row.assert_called_once()
+
+    def test_delete_message_aborts_when_discord_delete_fails(self):
+        created_at = (datetime.now(timezone.utc) - timedelta(minutes=2)).isoformat()
+        row = {
+            "$id": "message-1",
+            "user_id": "user-1",
+            "source": "discord",
+            "channel_id": "nest_chat",
+            "discord_message_id": "discord-message-1",
+            "discord_webhook_id": "webhook-1",
+            "created_at": created_at,
+        }
+        with self.app.test_request_context("/api/chat/messages/message-1", method="DELETE"):
+            with patch.object(chat_api, "current_user", self.user), \
+                    patch.object(chat_api, "get_row_safe", return_value=row), \
+                    patch.object(
+                        chat_api,
+                        "delete_webhook_message",
+                        side_effect=discord_bridge.DiscordBridgeError("Discord unavailable"),
+                    ), \
+                    patch.object(chat_api, "update_row_safe") as update_row:
+                response, status = chat_api.delete_message.__wrapped__("message-1")
+
+        self.assertEqual(status, 502)
+        self.assertIn("Discord", response.get_json()["error"])
+        update_row.assert_not_called()
+
+    def test_reconcile_discord_deletes_soft_deletes_missing_recent_messages(self):
+        channel = {
+            "$id": "nest_chat",
+            "kind": "discord",
+            "discord_channel_id": "discord-channel",
+        }
+        discord_messages = [
+            {"id": "discord-message-2", "timestamp": "2026-05-26T22:05:00Z"},
+            {"id": "discord-message-3", "timestamp": "2026-05-26T22:00:00Z"},
+        ]
+        rows = [
+            {
+                "$id": "message-row-1",
+                "channel_id": "nest_chat",
+                "source": "discord",
+                "discord_message_id": "discord-message-1",
+                "created_at": "2026-05-26T22:02:00Z",
+            },
+            {
+                "$id": "message-row-2",
+                "channel_id": "nest_chat",
+                "source": "discord",
+                "discord_message_id": "discord-message-2",
+                "created_at": "2026-05-26T22:04:00Z",
+            },
+        ]
+        with patch.object(chat_api, "list_rows_all", return_value=rows), \
+                patch.object(chat_api, "_soft_delete_discord_message", return_value=rows[0]) as soft_delete:
+            deleted_count = chat_api._reconcile_discord_deletes(
+                channel,
+                discord_messages,
+                emit_events=True,
+            )
+
+        self.assertEqual(deleted_count, 1)
+        soft_delete.assert_called_once_with(
+            channel,
+            "discord-message-1",
+            emit_event=True,
+        )
+
+    def test_reconcile_discord_deletes_skips_messages_older_than_fetch_window(self):
+        channel = {
+            "$id": "nest_chat",
+            "kind": "discord",
+            "discord_channel_id": "discord-channel",
+        }
+        discord_messages = [
+            {"id": "discord-message-2", "timestamp": "2026-05-26T22:05:00Z"},
+        ]
+        rows = [
+            {
+                "$id": "message-row-1",
+                "channel_id": "nest_chat",
+                "source": "discord",
+                "discord_message_id": "discord-message-1",
+                "created_at": "2026-05-26T21:00:00Z",
+            },
+        ]
+        with patch.object(chat_api, "list_rows_all", return_value=rows), \
+                patch.object(chat_api, "_soft_delete_discord_message") as soft_delete:
+            deleted_count = chat_api._reconcile_discord_deletes(
+                channel,
+                discord_messages,
+                emit_events=True,
+            )
+
+        self.assertEqual(deleted_count, 0)
+        soft_delete.assert_not_called()
 
     def test_discord_image_attachments_become_images_not_previews(self):
         message = {

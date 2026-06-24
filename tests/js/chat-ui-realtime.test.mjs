@@ -306,7 +306,7 @@ test("scheduler uses discord gateway with slow reconciliation", async () => {
   const gateway = await sourceFor("services/discord_gateway.py");
 
   assert.match(scheduler, /def _reconcile_discord_chat\(app\):/);
-  assert.match(scheduler, /sync_discord_channels\(emit_events=False\)/);
+  assert.match(scheduler, /sync_discord_channels\(emit_events=False, emit_delete_events=True\)/);
   assert.match(scheduler, /DISCORD_CHAT_RECONCILE_SECONDS/);
   assert.match(scheduler, /id="reconcile_discord_chat"/);
   assert.match(scheduler, /start_discord_gateway\(app\)/);
@@ -314,9 +314,9 @@ test("scheduler uses discord gateway with slow reconciliation", async () => {
   assert.match(gateway, /on_message/);
   assert.match(gateway, /on_raw_message_edit/);
   assert.match(gateway, /on_raw_message_delete/);
-  assert.match(gateway, /sync_discord_channels\(emit_events=False\)/);
-  assert.match(api, /def sync_discord_channels\(emit_events=True\):/);
-  assert.match(api, /_sync_discord_channel\(channel, emit_events=emit_events\)/);
+  assert.match(gateway, /sync_discord_channels\(emit_events=False, emit_delete_events=True\)/);
+  assert.match(api, /def sync_discord_channels\(emit_events=True, emit_delete_events=None\):/);
+  assert.match(api, /_sync_discord_channel\(\s*channel,\s*emit_events=emit_events,\s*emit_delete_events=emit_delete_events,/);
   assert.match(api, /_upsert_discord_message\(channel, message, emit_event=emit_events\)/);
   assert.match(api, /emit_chat_event\(\s*"channel",\s*channel_id,\s*"message_created"/);
   assert.match(api, /"message_updated"/);

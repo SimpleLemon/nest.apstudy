@@ -1504,21 +1504,71 @@ def _emit_chat_delete_audit(row, deleted_at):
         logger.exception("Failed to emit chat delete audit event")
 
 
-def _sync_discord_channel(channel, emit_events=False):
+def _reconcile_discord_deletes(channel, discord_messages, *, emit_events=False):
+    if not channel or not discord_messages:
+        return 0
+    channel_id = _row_id(channel)
+    discord_ids = {str(message.get("id")) for message in discord_messages if message.get("id")}
+    oldest_ts = None
+    for message in discord_messages:
+        timestamp = message.get("timestamp")
+        if not timestamp:
+            continue
+        parsed = parse_datetime(timestamp)
+        if parsed and (oldest_ts is None or parsed < oldest_ts):
+            oldest_ts = parsed
+    if oldest_ts is None:
+        return 0
+    try:
+        rows = list_rows_all(
+            COLLECTIONS["chat_messages"],
+            [Query.equal("channel_id", [channel_id])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to list Discord chat messages for delete reconciliation")
+        return 0
+    deleted_count = 0
+    for row in rows:
+        if row.get("deleted_at"):
+            continue
+        if (row.get("source") or "") != "discord":
+            continue
+        discord_message_id = row.get("discord_message_id")
+        if not discord_message_id:
+            continue
+        if str(discord_message_id) in discord_ids:
+            continue
+        created = _message_timestamp(row)
+        if created < oldest_ts:
+            continue
+        result = _soft_delete_discord_message(
+            channel,
+            discord_message_id,
+            emit_event=emit_events,
+        )
+        if result is not None and not result.get("deleted_at"):
+            deleted_count += 1
+    return deleted_count
+
+
+def _sync_discord_channel(channel, emit_events=False, emit_delete_events=None):
     discord_channel_id = channel.get("discord_channel_id")
     if not discord_channel_id:
-        return 0
+        return 0, 0
+    if emit_delete_events is None:
+        emit_delete_events = emit_events
     messages = fetch_channel_messages(discord_channel_id, DISCORD_MESSAGE_LIMIT)
     created_count = 0
     for message in messages:
         _, created = _upsert_discord_message(channel, message, emit_event=emit_events)
         if created:
             created_count += 1
+    deleted_count = _reconcile_discord_deletes(channel, messages, emit_events=emit_delete_events)
     _prune_discord_messages(_row_id(channel))
-    return created_count
+    return created_count, deleted_count
 
 
-def sync_discord_channels(emit_events=True):
+def sync_discord_channels(emit_events=True, emit_delete_events=None):
     _default_channels()
     try:
         channels = list_rows_all(
@@ -1527,13 +1577,20 @@ def sync_discord_channels(emit_events=True):
         )
     except AppwriteException:
         logger.exception("Failed to list Discord chat channels for sync")
-        return 0
+        return 0, 0
     created_count = 0
+    deleted_count = 0
     for channel in channels:
         if not _can_sync_discord_channel(channel):
             continue
-        created_count += _sync_discord_channel(channel, emit_events=emit_events)
-    return created_count
+        created, deleted = _sync_discord_channel(
+            channel,
+            emit_events=emit_events,
+            emit_delete_events=emit_delete_events,
+        )
+        created_count += created
+        deleted_count += deleted
+    return created_count, deleted_count
 
 
 def ingest_discord_gateway_message(message, *, event_type="create"):
@@ -1550,8 +1607,20 @@ def ingest_discord_gateway_message(message, *, event_type="create"):
 def delete_discord_gateway_message(discord_channel_id, discord_message_id):
     channel = _discord_channel_for_discord_id(discord_channel_id)
     if not _can_sync_discord_channel(channel):
+        logger.warning(
+            "Discord delete ignored for channel %s message %s: channel not configured for sync.",
+            discord_channel_id,
+            discord_message_id,
+        )
         return None
-    return _soft_delete_discord_message(channel, discord_message_id, emit_event=True)
+    row = _soft_delete_discord_message(channel, discord_message_id, emit_event=True)
+    if row is None:
+        logger.warning(
+            "Discord delete received for channel %s message %s but no matching chat row was found.",
+            discord_channel_id,
+            discord_message_id,
+        )
+    return row
 
 
 def delete_discord_gateway_messages(discord_channel_id, discord_message_ids):
@@ -2400,7 +2469,7 @@ def send_channel_message(channel_id):
 
     if channel.get("kind") == "discord":
         try:
-            discord_message = execute_chat_webhook(
+            discord_message, webhook = execute_chat_webhook(
                 content,
                 current_user.name or current_user.username or "Nest User",
                 current_user.picture_url,
@@ -2412,7 +2481,7 @@ def send_channel_message(channel_id):
             "source": "discord",
             "external_id": _discord_message_external_id(channel, discord_message.get("id")),
             "discord_message_id": discord_message.get("id"),
-            "discord_webhook_id": discord_message.get("webhook_id"),
+            "discord_webhook_id": discord_message.get("webhook_id") or webhook.get("id"),
             "created_at": discord_message.get("timestamp") or now,
         })
     else:

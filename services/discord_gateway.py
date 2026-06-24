@@ -107,8 +107,13 @@ class DiscordGatewayBridge:
         with self.app.app_context():
             from blueprints.chat_api import sync_discord_channels
 
-            created = sync_discord_channels(emit_events=False)
-            logger.info("Discord Gateway reconciliation (%s): %s new message(s).", reason, created)
+            created, deleted = sync_discord_channels(emit_events=False, emit_delete_events=True)
+            logger.info(
+                "Discord Gateway reconciliation (%s): %s new message(s), %s deleted message(s).",
+                reason,
+                created,
+                deleted,
+            )
 
     def _handle_message_create(self, payload):
         with self.app.app_context():

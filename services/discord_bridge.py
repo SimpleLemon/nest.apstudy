@@ -301,15 +301,17 @@ def execute_chat_webhook(content, username, avatar_url=None):
     )
     if response.status_code >= 400:
         raise DiscordBridgeError(f"Discord webhook returned {response.status_code}: {response.text[:200]}")
-    return response.json()
+    return response.json(), webhook
 
 
 def delete_webhook_message(webhook_id, message_id):
     webhook = _load_webhook()
-    if not webhook or not message_id:
-        return False
+    if not webhook:
+        raise DiscordBridgeError("Discord chat webhook is not configured.")
+    if not message_id:
+        raise DiscordBridgeError("Discord message id is required for webhook delete.")
     if webhook_id and str(webhook_id) != str(webhook.get("id")):
-        return False
+        raise DiscordBridgeError("Stored Discord webhook id does not match the configured chat webhook.")
     response = requests.delete(
         f"{DISCORD_API_BASE}/webhooks/{webhook['id']}/{webhook['token']}/messages/{message_id}",
         timeout=8,
