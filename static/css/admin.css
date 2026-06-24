@@ -236,6 +236,10 @@ body.admin-page [hidden] {
     margin-bottom: 28px;
 }
 
+.admin-analytics-header {
+    margin-bottom: 12px;
+}
+
 .admin-eyebrow {
     margin: 0 0 6px;
     font-size: 12px;
@@ -1619,7 +1623,7 @@ button.admin-tab {
 
 .admin-analytics-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: 18px;
 }
 
@@ -2031,16 +2035,20 @@ button.admin-tab {
     overflow: hidden;
 }
 
-.admin-analytics-ga-details {
-    display: grid;
-    grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
-    gap: 18px;
+.admin-analytics-ga-detail-card--country {
+    grid-column: span 7;
+}
+
+.admin-analytics-ga-detail-card--pages {
+    grid-column: span 5;
 }
 
 .admin-analytics-ga-panel {
     min-width: 0;
+    min-height: 100%;
     display: grid;
-    gap: 18px;
+    gap: 8px;
+    grid-template-rows: auto 1fr auto;
 }
 
 .admin-analytics-detail-header {
@@ -2067,10 +2075,37 @@ button.admin-tab {
     white-space: nowrap;
 }
 
+.admin-analytics-detail-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 38px;
+    padding-top: 4px;
+}
+
+.admin-analytics-range-dropdown--compact {
+    min-width: 150px;
+}
+
+.admin-analytics-range-dropdown--compact .admin-analytics-range-trigger {
+    min-height: 34px;
+    padding: 8px 10px;
+    font-size: 11px;
+}
+
+.admin-analytics-range-dropdown--compact .admin-analytics-range-menu {
+    min-width: 180px;
+}
+
+.admin-analytics-range-dropdown--compact .admin-analytics-range-option {
+    padding: 8px 10px;
+    font-size: 11px;
+}
+
 .admin-analytics-country-layout {
     display: grid;
     grid-template-columns: minmax(280px, 1fr) minmax(260px, 0.82fr);
-    gap: 18px;
+    gap: 10px;
     align-items: start;
 }
 
@@ -2665,9 +2700,13 @@ button.admin-tab {
     .admin-analytics-summary,
     .admin-analytics-grid,
     .admin-analytics-engagement,
-    .admin-analytics-ga-details,
     .admin-analytics-country-layout {
         grid-template-columns: 1fr;
+    }
+
+    .admin-analytics-ga-detail-card--country,
+    .admin-analytics-ga-detail-card--pages {
+        grid-column: 1 / -1;
     }
 
     .admin-analytics-tabs {

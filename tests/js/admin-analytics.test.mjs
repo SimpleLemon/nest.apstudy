@@ -130,8 +130,6 @@ test("admin analytics main card switches to selected metric graph", async () => 
       },
     },
     source: { textContent: "" },
-    topPages: { innerHTML: "" },
-    featureUsage: { innerHTML: "" },
     countryMap: { innerHTML: "" },
     countryList: { innerHTML: "" },
     pageList: { innerHTML: "" },
@@ -169,8 +167,6 @@ test("admin analytics main card switches to selected metric graph", async () => 
       }
       if (selector === '[data-chart="main"]') return nodes.main;
       if (selector === "[data-analytics-main-source]") return nodes.source;
-      if (selector === '[data-analytics-list="topPages"]') return nodes.topPages;
-      if (selector === '[data-analytics-list="featureUsage"]') return nodes.featureUsage;
       if (selector === "[data-analytics-country-map]") return nodes.countryMap;
       if (selector === '[data-analytics-detail-list="countries"]') return nodes.countryList;
       if (selector === '[data-analytics-detail-list="pages"]') return nodes.pageList;
@@ -212,7 +208,7 @@ test("admin analytics main card switches to selected metric graph", async () => 
     },
     gaDetails: {
       countries: [{ countryId: "US", label: "United States", value: 7, comparison: { available: true, percentChange: 40, direction: "up" } }],
-      pages: [{ title: "Dashboard | APStudy", path: "/dashboard", label: "Dashboard | APStudy", value: 12, comparison: { available: true, percentChange: -25, direction: "down" } }],
+      pages: [{ title: "Dashboard | APStudy Nest", path: "/dashboard", label: "Dashboard | APStudy Nest", value: 12, comparison: { available: true, percentChange: -25, direction: "down" } }],
     },
     sources: {
       traffic: { label: "Google Analytics", status: "ok" },
@@ -227,13 +223,61 @@ test("admin analytics main card switches to selected metric graph", async () => 
   assert.equal(deltas.get("activeUsers").textContent, "↓ 20.0%");
   assert.equal(deltas.get("pageViews").textContent, "↑ 50.0%");
   assert.match(deltas.get("activeUsers").className, /admin-analytics-delta--down/);
-  assert.match(nodes.topPages.innerHTML, /Top Pages/);
-  assert.match(nodes.featureUsage.innerHTML, /Tasks/);
-  assert.match(nodes.countryMap.innerHTML, /admin-analytics-bars/);
-  assert.match(nodes.countryList.innerHTML, /United States/);
-  assert.match(nodes.pageList.innerHTML, /Dashboard \| APStudy/);
-  assert.match(nodes.pageList.innerHTML, /\/dashboard/);
+  assert.equal(nodes.countryMap.innerHTML, "");
+  assert.equal(nodes.countryList.innerHTML, "");
+  assert.equal(nodes.pageList.innerHTML, "");
   assert.equal(tabs.find((tab) => tab.dataset.analyticsMetric === "pageViews").attrs["aria-selected"], "true");
+});
+
+test("admin analytics GA detail panels render independently with cleaned page labels", async () => {
+  const window = await runBrowserScript("static/js/admin-analytics.js", {
+    window: {
+      Intl,
+    },
+  });
+
+  const countryPanel = {
+    querySelector(selector) {
+      if (selector === "[data-analytics-country-map]") return this.countryMap;
+      if (selector === '[data-analytics-detail-list="countries"]') return this.countryList;
+      if (selector === "[data-analytics-ga-details-source]") return this.gaSource;
+      return null;
+    },
+    countryMap: { innerHTML: "" },
+    countryList: { innerHTML: "" },
+    gaSource: { textContent: "" },
+  };
+  const pagePanel = {
+    querySelector(selector) {
+      if (selector === '[data-analytics-detail-list="pages"]') return this.pageList;
+      if (selector === "[data-analytics-page-details-source]") return this.pageSource;
+      return null;
+    },
+    pageList: { innerHTML: "" },
+    pageSource: { textContent: "" },
+  };
+  const payload = {
+    gaDetails: {
+      countries: [{ countryId: "US", label: "United States", value: 7, comparison: { available: true, percentChange: 40, direction: "up" } }],
+      pages: [
+        { title: "Dashboard - APStudy Nest", path: "/dashboard", label: "Dashboard - APStudy Nest", value: 12, comparison: { available: true, percentChange: -25, direction: "down" } },
+        { title: "APStudy Nest", path: "/", label: "APStudy Nest", value: 10, comparison: { available: true, percentChange: 100, direction: "up" } },
+      ],
+    },
+    sources: { traffic: { label: "Google Analytics", status: "ok" } },
+  };
+
+  window.AdminAnalytics.renderGaDetailPanel(countryPanel, payload, "countries");
+  window.AdminAnalytics.renderGaDetailPanel(pagePanel, payload, "pages");
+
+  assert.match(countryPanel.countryMap.innerHTML, /admin-analytics-bars/);
+  assert.match(countryPanel.countryList.innerHTML, /United States/);
+  assert.equal(countryPanel.gaSource.textContent, "Source: Google Analytics");
+  assert.match(pagePanel.pageList.innerHTML, /Dashboard/);
+  assert.doesNotMatch(pagePanel.pageList.innerHTML, /APStudy Nest/);
+  assert.match(pagePanel.pageList.innerHTML, /Landing Page/);
+  assert.match(pagePanel.pageList.innerHTML, /\/dashboard/);
+  assert.match(pagePanel.pageList.innerHTML, /↓ 25.0%/);
 });
 
 test("admin analytics GA details draw a Google GeoChart when available", async () => {

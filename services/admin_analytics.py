@@ -402,6 +402,18 @@ def _metric_value(row, index=0):
         return 0
 
 
+def _clean_ga_page_title(title, path):
+    page_path = str(path or "").strip()
+    if page_path == "/":
+        return "Landing Page"
+    text = str(title or "").strip()
+    for suffix in (" - APStudy Nest", " | APStudy Nest", " - APStudy", " | APStudy"):
+        if text.endswith(suffix):
+            text = text[: -len(suffix)].strip()
+            break
+    return text or page_path or "Untitled Page"
+
+
 def _ga_country_details_from_rows(current_rows, previous_rows):
     previous = {}
     for row in previous_rows or []:
@@ -438,7 +450,8 @@ def _ga_page_details_from_rows(current_rows, previous_rows):
     for row in previous_rows or []:
         title = _dimension_value(row, 0)
         path = _dimension_value(row, 1)
-        key = path or title
+        label = _clean_ga_page_title(title, path)
+        key = path or label
         if not key:
             continue
         previous[key] = previous.get(key, 0) + _metric_value(row)
@@ -447,16 +460,17 @@ def _ga_page_details_from_rows(current_rows, previous_rows):
     for row in current_rows or []:
         title = _dimension_value(row, 0)
         path = _dimension_value(row, 1)
-        key = path or title
+        label = _clean_ga_page_title(title, path)
+        key = path or label
         value = _metric_value(row)
         if not key or value <= 0:
             continue
         previous_value = previous.get(key, 0)
         pages.append({
             "key": key,
-            "title": title or path,
+            "title": label,
             "path": path,
-            "label": title or path,
+            "label": label,
             "value": value,
             "previous": previous_value,
             "comparison": _comparison_delta(value, previous_value),

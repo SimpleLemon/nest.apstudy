@@ -32,28 +32,6 @@
             <div class="admin-alert admin-alert--error">{{ error }}</div>
         {% endif %}
 
-        {% set file_storage = metrics.file_storage if metrics else {} %}
-        <section class="admin-card admin-metrics-card" aria-labelledby="admin-metrics-title">
-            <h2 id="admin-metrics-title" class="admin-title admin-title--small">System Numbers</h2>
-            <div class="admin-metric-grid">
-                <div class="admin-metric"><span>Total Users</span><strong>{{ metrics.total_users if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Emory Users</span><strong>{{ metrics.emory_users if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Non-Emory / Unknown</span><strong>{{ metrics.non_emory_users if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Pending Requests</span><strong>{{ metrics.pending_requests if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Saved Courses</span><strong>{{ metrics.saved_courses if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Active Tracks</span><strong>{{ metrics.active_course_tracks if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Paused Tracks</span><strong>{{ metrics.paused_course_tracks if metrics else 0 }}</strong></div>
-                <div class="admin-metric">
-                    <span>File Storage</span>
-                    <strong>{{ file_storage.formatted or "--" }}</strong>
-                    <small>{{ file_storage.file_count or 0 }} shared files, {{ file_storage.avatar_count or 0 }} avatars tracked</small>
-                </div>
-            </div>
-            {% if file_storage.error %}
-                <p class="admin-inline-error">{{ file_storage.error }}</p>
-            {% endif %}
-        </section>
-
         <section class="admin-analytics-grid">
             <article class="admin-card admin-analytics-chart-card admin-analytics-chart-card--wide admin-analytics-main-card">
                 <div class="admin-analytics-tabs" role="tablist" aria-label="Analytics metric">
@@ -87,10 +65,6 @@
                     <p class="admin-analytics-source" data-analytics-main-source></p>
                 </div>
                 <div class="admin-analytics-chart admin-analytics-chart--main" data-chart="main" role="img" aria-label="Analytics chart"></div>
-                <div class="admin-analytics-engagement admin-analytics-engagement--merged">
-                    <div class="admin-analytics-list" data-analytics-list="topPages"></div>
-                    <div class="admin-analytics-list" data-analytics-list="featureUsage"></div>
-                </div>
                 <div class="admin-analytics-range-toolbar">
                     <div class="admin-analytics-range-dropdown" data-analytics-range-dropdown>
                         <button
@@ -127,27 +101,118 @@
                 </div>
             </article>
 
-            <article class="admin-card admin-analytics-chart-card admin-analytics-chart-card--wide admin-analytics-ga-detail-card">
-                <div class="admin-analytics-ga-details">
-                    <div class="admin-analytics-ga-panel admin-analytics-ga-panel--country">
-                        <div class="admin-analytics-detail-header">
-                            <h2>Active users by Country</h2>
-                            <span data-analytics-ga-details-source></span>
-                        </div>
-                        <div class="admin-analytics-country-layout">
-                            <div class="admin-analytics-country-map" data-analytics-country-map aria-label="Active users by country map"></div>
-                            <div class="admin-analytics-rank-table" data-analytics-detail-list="countries"></div>
-                        </div>
+            <article class="admin-card admin-analytics-chart-card admin-analytics-ga-detail-card admin-analytics-ga-detail-card--country">
+                <div class="admin-analytics-ga-panel admin-analytics-ga-panel--country">
+                    <div class="admin-analytics-detail-header">
+                        <h2>Active users by Country</h2>
+                        <span data-analytics-ga-details-source></span>
                     </div>
-                    <div class="admin-analytics-ga-panel">
-                        <div class="admin-analytics-detail-header">
-                            <h2>Views by Page</h2>
-                            <span data-analytics-page-details-source></span>
+                    <div class="admin-analytics-country-layout">
+                        <div class="admin-analytics-country-map" data-analytics-country-map aria-label="Active users by country map"></div>
+                        <div class="admin-analytics-rank-table" data-analytics-detail-list="countries"></div>
+                    </div>
+                    <div class="admin-analytics-detail-footer">
+                        <div class="admin-analytics-range-dropdown admin-analytics-range-dropdown--compact" data-analytics-detail-range-dropdown="countries">
+                            <button
+                                class="admin-analytics-range-trigger"
+                                type="button"
+                                data-analytics-range-trigger
+                                aria-haspopup="listbox"
+                                aria-expanded="false"
+                                aria-controls="admin-analytics-country-range-menu"
+                            >
+                                <span data-analytics-range-label>{{ range_options[default_range].label }}</span>
+                                <span class="admin-analytics-range-caret" aria-hidden="true"></span>
+                            </button>
+                            <div
+                                id="admin-analytics-country-range-menu"
+                                class="admin-analytics-range-menu"
+                                role="listbox"
+                                aria-label="Country analytics date range"
+                                data-analytics-range-menu
+                                hidden
+                            >
+                                {% for key, option in range_options.items() %}
+                                    <button
+                                        id="admin-analytics-country-range-option-{{ key }}"
+                                        class="admin-analytics-range-option{% if key == default_range %} is-selected{% endif %}"
+                                        type="button"
+                                        role="option"
+                                        data-analytics-range="{{ key }}"
+                                        aria-selected="{{ 'true' if key == default_range else 'false' }}"
+                                    >{{ option.label }}</button>
+                                {% endfor %}
+                            </div>
                         </div>
-                        <div class="admin-analytics-rank-table" data-analytics-detail-list="pages"></div>
                     </div>
                 </div>
             </article>
+
+            <article class="admin-card admin-analytics-chart-card admin-analytics-ga-detail-card admin-analytics-ga-detail-card--pages">
+                <div class="admin-analytics-ga-panel">
+                    <div class="admin-analytics-detail-header">
+                        <h2>Views by Page</h2>
+                        <span data-analytics-page-details-source></span>
+                    </div>
+                    <div class="admin-analytics-rank-table" data-analytics-detail-list="pages"></div>
+                    <div class="admin-analytics-detail-footer">
+                        <div class="admin-analytics-range-dropdown admin-analytics-range-dropdown--compact" data-analytics-detail-range-dropdown="pages">
+                            <button
+                                class="admin-analytics-range-trigger"
+                                type="button"
+                                data-analytics-range-trigger
+                                aria-haspopup="listbox"
+                                aria-expanded="false"
+                                aria-controls="admin-analytics-page-range-menu"
+                            >
+                                <span data-analytics-range-label>{{ range_options[default_range].label }}</span>
+                                <span class="admin-analytics-range-caret" aria-hidden="true"></span>
+                            </button>
+                            <div
+                                id="admin-analytics-page-range-menu"
+                                class="admin-analytics-range-menu"
+                                role="listbox"
+                                aria-label="Page analytics date range"
+                                data-analytics-range-menu
+                                hidden
+                            >
+                                {% for key, option in range_options.items() %}
+                                    <button
+                                        id="admin-analytics-page-range-option-{{ key }}"
+                                        class="admin-analytics-range-option{% if key == default_range %} is-selected{% endif %}"
+                                        type="button"
+                                        role="option"
+                                        data-analytics-range="{{ key }}"
+                                        aria-selected="{{ 'true' if key == default_range else 'false' }}"
+                                    >{{ option.label }}</button>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        {% set file_storage = metrics.file_storage if metrics else {} %}
+        <section class="admin-card admin-metrics-card" aria-labelledby="admin-metrics-title">
+            <h2 id="admin-metrics-title" class="admin-title admin-title--small">System Numbers</h2>
+            <div class="admin-metric-grid">
+                <div class="admin-metric"><span>Total Users</span><strong>{{ metrics.total_users if metrics else 0 }}</strong></div>
+                <div class="admin-metric"><span>Emory Users</span><strong>{{ metrics.emory_users if metrics else 0 }}</strong></div>
+                <div class="admin-metric"><span>Non-Emory / Unknown</span><strong>{{ metrics.non_emory_users if metrics else 0 }}</strong></div>
+                <div class="admin-metric"><span>Pending Requests</span><strong>{{ metrics.pending_requests if metrics else 0 }}</strong></div>
+                <div class="admin-metric"><span>Saved Courses</span><strong>{{ metrics.saved_courses if metrics else 0 }}</strong></div>
+                <div class="admin-metric"><span>Active Tracks</span><strong>{{ metrics.active_course_tracks if metrics else 0 }}</strong></div>
+                <div class="admin-metric"><span>Paused Tracks</span><strong>{{ metrics.paused_course_tracks if metrics else 0 }}</strong></div>
+                <div class="admin-metric">
+                    <span>File Storage</span>
+                    <strong>{{ file_storage.formatted or "--" }}</strong>
+                    <small>{{ file_storage.file_count or 0 }} shared files, {{ file_storage.avatar_count or 0 }} avatars tracked</small>
+                </div>
+            </div>
+            {% if file_storage.error %}
+                <p class="admin-inline-error">{{ file_storage.error }}</p>
+            {% endif %}
         </section>
 
         <div class="admin-inline-notice admin-analytics-notice" data-analytics-notice hidden></div>

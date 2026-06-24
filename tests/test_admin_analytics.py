@@ -95,6 +95,26 @@ class AdminAnalyticsRouteTestCase(unittest.TestCase):
         self.assertIn('data-analytics-country-map', html)
         self.assertIn('data-analytics-detail-list="countries"', html)
         self.assertIn('data-analytics-detail-list="pages"', html)
+        self.assertIn('data-analytics-detail-range-dropdown="countries"', html)
+        self.assertIn('data-analytics-detail-range-dropdown="pages"', html)
+        self.assertIn("admin-analytics-country-range-menu", html)
+        self.assertIn("admin-analytics-page-range-menu", html)
+        self.assertIn("admin-analytics-ga-detail-card--country", html)
+        self.assertIn("admin-analytics-ga-detail-card--pages", html)
+        self.assertEqual(html.count("admin-analytics-ga-detail-card "), 2)
+        self.assertNotIn("admin-analytics-ga-details", html)
+        self.assertLess(
+            html.index('data-analytics-detail-list="countries"'),
+            html.index('data-analytics-detail-range-dropdown="countries"'),
+        )
+        self.assertLess(
+            html.index('data-analytics-detail-list="pages"'),
+            html.index('data-analytics-detail-range-dropdown="pages"'),
+        )
+        self.assertNotIn('data-analytics-list="topPages"', html)
+        self.assertNotIn('data-analytics-list="featureUsage"', html)
+        self.assertNotIn(">Feature Usage<", html)
+        self.assertNotIn(">Top Pages<", html)
         self.assertNotIn("data-analytics-engagement-source", html)
         self.assertNotIn("data-analytics-main-title", html)
         self.assertNotIn("data-analytics-main-description", html)
@@ -263,12 +283,14 @@ class AdminAnalyticsServiceTestCase(unittest.TestCase):
                 if dimension_names == ["pageTitle", "pagePath"]:
                     if previous:
                         return SimpleNamespace(rows=[
-                            fake_row(["Resources | APStudy", "/resources"], [10]),
-                            fake_row(["Dashboard | APStudy", "/dashboard"], [20]),
+                            fake_row(["Resources - APStudy Nest", "/resources"], [10]),
+                            fake_row(["Dashboard | APStudy Nest", "/dashboard"], [20]),
+                            fake_row(["APStudy Nest", "/"], [5]),
                         ])
                     return SimpleNamespace(rows=[
-                        fake_row(["Notes | APStudy", "/notes"], [12]),
-                        fake_row(["Dashboard | APStudy", "/dashboard"], [30]),
+                        fake_row(["Notes | APStudy Nest", "/notes"], [12]),
+                        fake_row(["Dashboard - APStudy Nest", "/dashboard"], [30]),
+                        fake_row(["APStudy Nest", "/"], [15]),
                     ])
                 if dimension_names == ["countryId", "country"]:
                     if previous:
@@ -335,9 +357,12 @@ class AdminAnalyticsServiceTestCase(unittest.TestCase):
         self.assertEqual(payload["comparison"]["metrics"]["pageViews"]["percentChange"], -30.0)
         self.assertEqual(payload["gaDetails"]["countries"][0]["countryId"], "US")
         self.assertEqual(payload["gaDetails"]["countries"][0]["comparison"]["percentChange"], 100.0)
-        self.assertEqual(payload["gaDetails"]["pages"][0]["title"], "Dashboard | APStudy")
+        self.assertEqual(payload["gaDetails"]["pages"][0]["title"], "Dashboard")
         self.assertEqual(payload["gaDetails"]["pages"][0]["path"], "/dashboard")
         self.assertEqual(payload["gaDetails"]["pages"][0]["comparison"]["percentChange"], 50.0)
+        landing_page = next(page for page in payload["gaDetails"]["pages"] if page["path"] == "/")
+        self.assertEqual(landing_page["title"], "Landing Page")
+        self.assertEqual(landing_page["comparison"]["percentChange"], 200.0)
         self.assertEqual(payload["sources"]["traffic"]["label"], "Google Analytics")
         self.assertEqual(len(FakeAnalyticsClient.report_requests), 7)
         for request in FakeAnalyticsClient.report_requests:

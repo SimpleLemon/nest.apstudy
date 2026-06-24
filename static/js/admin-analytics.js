@@ -164,6 +164,18 @@
     return text.length > limit ? `${text.slice(0, Math.max(0, limit - 1))}...` : text;
   }
 
+  function cleanPageTitle(title, path) {
+    const pagePath = String(path || "").trim();
+    if (pagePath === "/") return "Landing Page";
+    let text = String(title || "").trim();
+    [" - APStudy Nest", " | APStudy Nest", " - APStudy", " | APStudy"].some((suffix) => {
+      if (!text.endsWith(suffix)) return false;
+      text = text.slice(0, -suffix.length).trim();
+      return true;
+    });
+    return text || pagePath || "Untitled Page";
+  }
+
   function valueAtPath(payload, path) {
     return path.reduce((current, key) => current?.[key], payload);
   }
@@ -446,15 +458,19 @@
 
   function normalizeDetailRows(items) {
     return Array.isArray(items)
-      ? items.map((item) => ({
-          key: String(item?.key || item?.countryId || item?.path || item?.label || ""),
-          countryId: String(item?.countryId || ""),
-          label: String(item?.label || item?.title || item?.path || item?.countryId || ""),
-          title: String(item?.title || item?.label || item?.path || ""),
-          path: String(item?.path || ""),
-          value: Number(item?.value || 0),
-          comparison: item?.comparison || null,
-        })).filter((item) => item.label && item.value > 0)
+      ? items.map((item) => {
+          const path = String(item?.path || "");
+          const title = cleanPageTitle(item?.title || item?.label, path);
+          return {
+            key: String(item?.key || item?.countryId || path || item?.label || ""),
+            countryId: String(item?.countryId || ""),
+            label: String(item?.countryId ? (item?.label || item?.countryId) : title),
+            title,
+            path,
+            value: Number(item?.value || 0),
+            comparison: item?.comparison || null,
+          };
+        }).filter((item) => item.label && item.value > 0)
       : [];
   }
 
@@ -555,20 +571,29 @@
     }
   }
 
-  function renderGaDetails(root, payload) {
+  function renderGaDetailPanel(root, payload, type) {
+    if (!root) return;
     const countries = payload?.gaDetails?.countries || [];
     const pages = payload?.gaDetails?.pages || [];
     const traffic = payload?.sources?.traffic?.status === "ok"
       ? payload.sources.traffic.label
       : "Google Analytics unavailable";
     const sourceText = `Source: ${traffic}`;
-    const gaSource = root.querySelector("[data-analytics-ga-details-source]");
+    if (type === "countries") {
+      const gaSource = root.querySelector("[data-analytics-ga-details-source]");
+      if (gaSource) gaSource.textContent = sourceText;
+      renderCountryMap(root.querySelector("[data-analytics-country-map]"), countries);
+      renderDetailRows(root.querySelector('[data-analytics-detail-list="countries"]'), countries, { type: "countries" });
+      return;
+    }
     const pageSource = root.querySelector("[data-analytics-page-details-source]");
-    if (gaSource) gaSource.textContent = sourceText;
     if (pageSource) pageSource.textContent = sourceText;
-    renderCountryMap(root.querySelector("[data-analytics-country-map]"), countries);
-    renderDetailRows(root.querySelector('[data-analytics-detail-list="countries"]'), countries, { type: "countries" });
     renderDetailRows(root.querySelector('[data-analytics-detail-list="pages"]'), pages, { type: "pages" });
+  }
+
+  function renderGaDetails(root, payload) {
+    renderGaDetailPanel(root, payload, "countries");
+    renderGaDetailPanel(root, payload, "pages");
   }
 
   function setCard(root, key, value, suffix = "") {
@@ -625,10 +650,6 @@
     setMetricDeltas(root, payload);
 
     renderMainMetric(root, payload, root.dataset.activeMetric || "totalUsers");
-
-    renderList(root.querySelector('[data-analytics-list="topPages"]'), "Top Pages", payload?.engagement?.topPages);
-    renderList(root.querySelector('[data-analytics-list="featureUsage"]'), "Feature Usage", payload?.engagement?.featureUsage);
-    renderGaDetails(root, payload);
   }
 
   function setNotice(root, message, isError = false) {
@@ -640,7 +661,11 @@
   }
 
   function initAnalyticsRangeDropdown(root, { defaultRange = "30d", onChange } = {}) {
-    const dropdown = root.querySelector("[data-analytics-range-dropdown]");
+    let dropdown = root.matches?.("[data-analytics-range-dropdown], [data-analytics-detail-range-dropdown]") ? root : null;
+    if (!dropdown) {
+      dropdown = root.querySelector("[data-analytics-range-dropdown]")
+        || root.querySelector("[data-analytics-detail-range-dropdown]");
+    }
     if (!dropdown) return null;
 
     const trigger = dropdown.querySelector("[data-analytics-range-trigger]");
@@ -808,6 +833,7 @@
     let activeMetric = "totalUsers";
     let latestPayload = null;
     let token = 0;
+    const detailTokens = { countries: 0, pages: 0 };
     const timezone = getBrowserTimezone();
 
     const rangeDropdown = initAnalyticsRangeDropdown(shell, {
@@ -842,6 +868,42 @@
       }
     };
 
+    const loadDetailPanel = async (type, range) => {
+      const dropdown = shell.querySelector(`[data-analytics-detail-range-dropdown="${type}"]`);
+      const panel = dropdown?.closest(".admin-analytics-ga-panel") || dropdown?.closest(".admin-analytics-ga-detail-card");
+      if (!panel) return;
+      const detailRange = normalizeRange(range, defaultRange);
+      const requestToken = ++detailTokens[type];
+      try {
+        const response = await fetch(buildAnalyticsUrl(detailRange, timezone), {
+          credentials: "same-origin",
+          headers: { Accept: "application/json" },
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(payload.error || "Unable to load analytics.");
+        if (requestToken !== detailTokens[type]) return;
+        renderGaDetailPanel(panel, payload, type);
+      } catch {
+        if (requestToken !== detailTokens[type]) return;
+        renderGaDetailPanel(panel, {
+          gaDetails: { countries: [], pages: [] },
+          sources: { traffic: { label: "Google Analytics unavailable", status: "error" } },
+        }, type);
+      }
+    };
+
+    shell.querySelectorAll("[data-analytics-detail-range-dropdown]").forEach((dropdown) => {
+      const type = dropdown.dataset.analyticsDetailRangeDropdown;
+      if (type !== "countries" && type !== "pages") return;
+      initAnalyticsRangeDropdown(dropdown, {
+        defaultRange,
+        onChange: (range) => {
+          loadDetailPanel(type, range);
+        },
+      });
+      loadDetailPanel(type, defaultRange);
+    });
+
     metricTabs.forEach((tab) => {
       tab.addEventListener("click", () => {
         activeMetric = METRIC_CONFIG[tab.dataset.analyticsMetric] ? tab.dataset.analyticsMetric : "totalUsers";
@@ -863,6 +925,7 @@
     renderDashboard,
     renderBarList,
     renderDetailRows,
+    renderGaDetailPanel,
     renderGaDetails,
     renderVerticalBarChart,
     renderLineChart,
