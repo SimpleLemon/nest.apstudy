@@ -85,6 +85,29 @@ test("admin analytics charts use nice axes, hover details, and vertical category
   assert.doesNotMatch(bars, /admin-analytics-bars/);
 });
 
+test("admin analytics detail rows include compact layout, tooltips, and shortened country header", async () => {
+  const window = await runBrowserScript("static/js/admin-analytics.js", {
+    window: {
+      Intl,
+    },
+  });
+
+  const countryList = { innerHTML: "" };
+  window.AdminAnalytics.renderDetailRows(countryList, [
+    { label: "United States", countryId: "US", value: 42 },
+  ], { type: "countries" });
+  assert.match(countryList.innerHTML, /admin-analytics-rank-row--compact/);
+  assert.match(countryList.innerHTML, /title="United States"/);
+  assert.match(countryList.innerHTML, /aria-label="Active users">Users</);
+
+  const pageList = { innerHTML: "" };
+  window.AdminAnalytics.renderDetailRows(pageList, [
+    { title: "Calendar", path: "/calendar", value: 21 },
+  ], { type: "pages" });
+  assert.match(pageList.innerHTML, /title="Calendar"/);
+  assert.match(pageList.innerHTML, /title="\/calendar"/);
+});
+
 test("admin analytics multi-line charts render dynamic series colors and interval growth", async () => {
   const window = await runBrowserScript("static/js/admin-analytics.js", {
     window: {

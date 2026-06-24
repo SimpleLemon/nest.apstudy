@@ -3,6 +3,8 @@
   let googleChartsRequested = false;
   let googleChartsReady = false;
   const googleChartsCallbacks = [];
+  let geoChartThemeObserver = null;
+  let geoChartRedraw = null;
   const METRIC_CONFIG = {
     totalUsers: {
       label: "Total Users",
@@ -479,17 +481,23 @@
     const rows = normalizeDetailRows(items);
     const maxValue = Math.max(1, ...rows.map((row) => row.value));
     const primaryHeader = type === "pages" ? "Page title and screen path" : "Country";
-    const valueHeader = type === "pages" ? "Views" : "Active users";
+    const valueHeaderMarkup = type === "pages"
+      ? `<span>${escapeHtml("Views")}</span>`
+      : `<span aria-label="Active users">Users</span>`;
     root.innerHTML = `
       <div class="admin-analytics-rank-head">
         <span>${escapeHtml(primaryHeader)}</span>
-        <span>${escapeHtml(valueHeader)}</span>
+        ${valueHeaderMarkup}
       </div>
-      ${rows.length ? rows.map((row) => `
-        <div class="admin-analytics-rank-row">
+      ${rows.length ? rows.map((row) => {
+        const labelText = type === "pages" ? row.title : row.label;
+        const labelTitle = labelText ? ` title="${escapeHtml(labelText)}"` : "";
+        const pathTitle = row.path ? ` title="${escapeHtml(row.path)}"` : "";
+        return `
+        <div class="admin-analytics-rank-row admin-analytics-rank-row--compact">
           <div class="admin-analytics-rank-label">
-            <strong>${escapeHtml(type === "pages" ? row.title : row.label)}</strong>
-            ${type === "pages" && row.path ? `<span>${escapeHtml(row.path)}</span>` : ""}
+            <strong${labelTitle}>${escapeHtml(labelText)}</strong>
+            ${type === "pages" && row.path ? `<span${pathTitle}>${escapeHtml(row.path)}</span>` : ""}
           </div>
           <div class="admin-analytics-rank-value">
             <strong>${formatNumber(row.value)}</strong>
@@ -499,7 +507,8 @@
             <span style="width:${Math.max(3, (row.value / maxValue) * 100).toFixed(1)}%"></span>
           </div>
         </div>
-      `).join("") : chartEmpty()}
+      `;
+      }).join("") : chartEmpty()}
     `;
   }
 
@@ -538,6 +547,31 @@
     return true;
   }
 
+  function geoChartThemeOptions() {
+    const isDark = document.documentElement?.classList?.contains("dark") ?? false;
+    return isDark
+      ? {
+          colorAxis: { colors: ["#1e3a5f", "#60a5fa"] },
+          datalessRegionColor: "#2a2d35",
+        }
+      : {
+          colorAxis: { colors: ["#dbeafe", "#2563eb"] },
+          datalessRegionColor: "#eef2f7",
+        };
+  }
+
+  function ensureGeoChartThemeObserver(redraw) {
+    geoChartRedraw = redraw;
+    if (geoChartThemeObserver || typeof MutationObserver !== "function") return;
+    geoChartThemeObserver = new MutationObserver(() => {
+      geoChartRedraw?.();
+    });
+    geoChartThemeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class", "data-theme"],
+    });
+  }
+
   function renderCountryMapFallback(root, countries) {
     const rows = normalizeDetailRows(countries).slice(0, 6);
     root.innerHTML = rows.length ? renderBarList(rows) : chartEmpty();
@@ -555,13 +589,15 @@
         const table = [["Country", "Active users"], ...rows.map((row) => [row.countryId || row.label, row.value])];
         const data = window.google.visualization.arrayToDataTable(table);
         const chart = new window.google.visualization.GeoChart(root);
+        const themeOptions = geoChartThemeOptions();
         chart.draw(data, {
           backgroundColor: "transparent",
-          colorAxis: { colors: ["#dbeafe", "#2563eb"] },
-          datalessRegionColor: "#eef2f7",
+          colorAxis: themeOptions.colorAxis,
+          datalessRegionColor: themeOptions.datalessRegionColor,
           legend: "none",
           tooltip: { textStyle: { fontName: "Inter" } },
         });
+        ensureGeoChartThemeObserver(draw);
       } catch {
         renderCountryMapFallback(root, rows);
       }

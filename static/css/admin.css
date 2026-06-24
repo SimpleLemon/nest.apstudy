@@ -1625,6 +1625,7 @@ button.admin-tab {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: 18px;
+    align-items: stretch;
 }
 
 .admin-analytics-chart-card {
@@ -2032,7 +2033,7 @@ button.admin-tab {
 }
 
 .admin-analytics-ga-detail-card {
-    overflow: hidden;
+    overflow: visible;
 }
 
 .admin-analytics-ga-detail-card--country {
@@ -2046,9 +2047,20 @@ button.admin-tab {
 .admin-analytics-ga-panel {
     min-width: 0;
     min-height: 100%;
-    display: grid;
-    gap: 8px;
-    grid-template-rows: auto 1fr auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.admin-analytics-ga-panel__body {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-analytics-ga-panel--country .admin-analytics-ga-panel__body {
+    min-height: 0;
 }
 
 .admin-analytics-detail-header {
@@ -2080,6 +2092,7 @@ button.admin-tab {
     align-items: center;
     justify-content: flex-start;
     min-height: 38px;
+    margin-top: auto;
     padding-top: 4px;
 }
 
@@ -2104,13 +2117,17 @@ button.admin-tab {
 
 .admin-analytics-country-layout {
     display: grid;
-    grid-template-columns: minmax(280px, 1fr) minmax(260px, 0.82fr);
+    grid-template-columns: minmax(200px, 1.05fr) minmax(220px, 0.95fr);
     gap: 10px;
-    align-items: start;
+    align-items: stretch;
+    flex: 1;
+    min-height: 0;
 }
 
 .admin-analytics-country-map {
-    min-height: 320px;
+    min-height: 220px;
+    max-height: 240px;
+    aspect-ratio: 4 / 3;
     display: grid;
     align-items: center;
     overflow: hidden;
@@ -2123,19 +2140,21 @@ button.admin-tab {
 .admin-analytics-rank-table {
     min-width: 0;
     display: grid;
-    gap: 10px;
+    gap: 4px;
+    align-content: start;
+    flex: 1;
 }
 
 .admin-analytics-rank-head,
 .admin-analytics-rank-row {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    gap: 8px 14px;
+    gap: 4px 10px;
     align-items: center;
 }
 
 .admin-analytics-rank-head {
-    padding-bottom: 6px;
+    padding-bottom: 4px;
     border-bottom: 1px solid var(--admin-border);
     color: var(--admin-muted);
     font-size: 12px;
@@ -2145,8 +2164,12 @@ button.admin-tab {
 }
 
 .admin-analytics-rank-row {
-    padding-bottom: 8px;
+    padding-bottom: 4px;
     border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-analytics-rank-row--compact {
+    align-items: baseline;
 }
 
 .admin-analytics-rank-label {
@@ -2159,7 +2182,7 @@ button.admin-tab {
     min-width: 0;
     overflow: hidden;
     color: var(--admin-ink);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 800;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -2179,6 +2202,7 @@ button.admin-tab {
     align-items: center;
     justify-content: flex-end;
     gap: 10px;
+    min-width: 3.5rem;
     color: var(--admin-muted);
     font-size: 13px;
     white-space: nowrap;
@@ -2186,12 +2210,13 @@ button.admin-tab {
 
 .admin-analytics-rank-value strong {
     color: var(--admin-ink);
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .admin-analytics-rank-row .admin-analytics-bar-track {
     grid-column: 1 / -1;
-    height: 4px;
+    height: 3px;
+    margin-top: 2px;
 }
 
 .admin-analytics-empty {
@@ -2391,6 +2416,39 @@ button.admin-tab {
 .admin-page details > summary {
     cursor: pointer;
     overflow-wrap: anywhere;
+}
+
+@media (max-width: 1024px) {
+    .admin-analytics-ga-detail-card.admin-card {
+        padding: 16px;
+    }
+
+    .admin-analytics-ga-detail-card--country {
+        grid-column: span 6;
+    }
+
+    .admin-analytics-ga-detail-card--pages {
+        grid-column: span 6;
+    }
+
+    .admin-analytics-country-layout {
+        grid-template-columns: minmax(180px, 1.05fr) minmax(200px, 0.95fr);
+    }
+
+    .admin-analytics-country-map {
+        min-height: 200px;
+    }
+}
+
+@media (max-width: 900px) {
+    .admin-analytics-ga-detail-card--country,
+    .admin-analytics-ga-detail-card--pages {
+        grid-column: 1 / -1;
+    }
+
+    .admin-analytics-country-layout {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 720px) {
@@ -2699,14 +2757,8 @@ button.admin-tab {
 
     .admin-analytics-summary,
     .admin-analytics-grid,
-    .admin-analytics-engagement,
-    .admin-analytics-country-layout {
+    .admin-analytics-engagement {
         grid-template-columns: 1fr;
-    }
-
-    .admin-analytics-ga-detail-card--country,
-    .admin-analytics-ga-detail-card--pages {
-        grid-column: 1 / -1;
     }
 
     .admin-analytics-tabs {
@@ -2737,7 +2789,7 @@ button.admin-tab {
     }
 
     .admin-analytics-country-map {
-        min-height: 260px;
+        min-height: 200px;
     }
 
     .admin-analytics-kpi {
