@@ -490,10 +490,91 @@
     notice.classList.toggle("is-error", isError);
   }
 
+  function initAnalyticsRangeDropdown(root, { defaultRange = "30d", onChange } = {}) {
+    const dropdown = root.querySelector("[data-analytics-range-dropdown]");
+    if (!dropdown) return null;
+
+    const trigger = dropdown.querySelector("[data-analytics-range-trigger]");
+    const menu = dropdown.querySelector("[data-analytics-range-menu]");
+    const labelEl = dropdown.querySelector("[data-analytics-range-label]");
+    const options = Array.from(dropdown.querySelectorAll("[data-analytics-range]"));
+    let activeRange = normalizeRange(defaultRange);
+    let open = false;
+
+    const setOpen = (next) => {
+      open = Boolean(next);
+      dropdown.classList.toggle("is-open", open);
+      if (menu) menu.hidden = !open;
+      trigger?.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+
+    const syncSelection = () => {
+      options.forEach((option) => {
+        const selected = option.dataset.analyticsRange === activeRange;
+        option.classList.toggle("is-selected", selected);
+        option.setAttribute("aria-selected", selected ? "true" : "false");
+      });
+      const activeOption = options.find((option) => option.dataset.analyticsRange === activeRange);
+      if (labelEl && activeOption) labelEl.textContent = activeOption.textContent.trim();
+    };
+
+    const selectRange = (range) => {
+      const nextRange = normalizeRange(range, defaultRange);
+      if (nextRange === activeRange) {
+        setOpen(false);
+        return;
+      }
+      activeRange = nextRange;
+      syncSelection();
+      setOpen(false);
+      onChange?.(activeRange);
+    };
+
+    trigger?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      setOpen(!open);
+    });
+
+    options.forEach((option) => {
+      option.addEventListener("click", (event) => {
+        event.stopPropagation();
+        selectRange(option.dataset.analyticsRange);
+      });
+    });
+
+    const handleDocumentClick = (event) => {
+      if (!open) return;
+      if (!dropdown.contains(event.target)) setOpen(false);
+    };
+
+    const handleDocumentKeydown = (event) => {
+      if (event.key === "Escape" && open) setOpen(false);
+    };
+
+    document.addEventListener("click", handleDocumentClick);
+    document.addEventListener("keydown", handleDocumentKeydown);
+
+    syncSelection();
+
+    return {
+      destroy() {
+        document.removeEventListener("click", handleDocumentClick);
+        document.removeEventListener("keydown", handleDocumentKeydown);
+      },
+      getActiveRange: () => activeRange,
+      isOpen: () => open,
+      selectRange,
+      setActiveRange(range) {
+        activeRange = normalizeRange(range, defaultRange);
+        syncSelection();
+      },
+      setOpen,
+    };
+  }
+
   function initAdminAnalytics(root = document) {
     const shell = root.querySelector("[data-admin-analytics]");
     if (!shell) return;
-    const buttons = Array.from(shell.querySelectorAll("[data-analytics-range]"));
     const metricTabs = Array.from(shell.querySelectorAll("[data-analytics-metric]"));
     const defaultRange = normalizeRange(shell.dataset.defaultRange || "30d");
     let activeRange = defaultRange;
@@ -502,15 +583,16 @@
     let token = 0;
     const timezone = getBrowserTimezone();
 
-    const syncButtons = () => {
-      buttons.forEach((button) => {
-        button.classList.toggle("is-active", button.dataset.analyticsRange === activeRange);
-      });
-    };
+    const rangeDropdown = initAnalyticsRangeDropdown(shell, {
+      defaultRange,
+      onChange: (range) => {
+        load(range);
+      },
+    });
 
     const load = async (range) => {
       activeRange = normalizeRange(range, defaultRange);
-      syncButtons();
+      rangeDropdown?.setActiveRange(activeRange);
       setNotice(shell, "Loading analytics...");
       const requestToken = ++token;
       try {
@@ -533,12 +615,6 @@
       }
     };
 
-    buttons.forEach((button) => {
-      button.addEventListener("click", () => {
-        load(button.dataset.analyticsRange);
-      });
-    });
-
     metricTabs.forEach((tab) => {
       tab.addEventListener("click", () => {
         activeMetric = METRIC_CONFIG[tab.dataset.analyticsMetric] ? tab.dataset.analyticsMetric : "totalUsers";
@@ -553,6 +629,7 @@
   window.AdminAnalytics = {
     buildAnalyticsUrl,
     getBrowserTimezone,
+    initAnalyticsRangeDropdown,
     niceAxis,
     normalizeRange,
     normalizeSeries,

@@ -1478,34 +1478,95 @@ button.admin-tab {
     gap: 18px;
 }
 
-.admin-analytics-ranges {
+.admin-analytics-range-toolbar {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
     justify-content: flex-start;
-    max-width: 100%;
     padding-top: 4px;
 }
 
-.admin-analytics-range {
-    min-height: 38px;
-    padding: 0 12px;
-    border-radius: 8px;
-    border: 1px solid var(--admin-border);
-    background: var(--admin-surface);
-    color: var(--admin-muted);
-    font: inherit;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 140ms ease, color 140ms ease, border-color 140ms ease;
+.admin-analytics-range-dropdown {
+    position: relative;
+    display: inline-flex;
+    max-width: 100%;
 }
 
-.admin-analytics-range:hover,
-.admin-analytics-range.is-active {
-    border-color: color-mix(in srgb, var(--admin-accent) 46%, var(--admin-border));
-    background: var(--admin-accent-soft);
+.admin-analytics-range-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 36px;
+    padding: 0 4px 0 0;
+    border: 0;
+    background: transparent;
+    color: var(--admin-ink);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.admin-analytics-range-trigger:hover,
+.admin-analytics-range-dropdown.is-open .admin-analytics-range-trigger {
     color: var(--admin-accent);
+}
+
+.admin-analytics-range-caret {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid currentColor;
+    transform: translateY(1px);
+    transition: transform 140ms ease;
+}
+
+.admin-analytics-range-dropdown.is-open .admin-analytics-range-caret {
+    transform: rotate(180deg) translateY(-1px);
+}
+
+.admin-analytics-range-menu {
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 8px);
+    z-index: 30;
+    min-width: 220px;
+    margin: 0;
+    padding: 8px 0;
+    list-style: none;
+    border: 1px solid color-mix(in srgb, var(--admin-border) 88%, #fff);
+    border-radius: 8px;
+    background: var(--admin-surface);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.14);
+}
+
+.admin-analytics-range-menu[hidden] {
+    display: none;
+}
+
+.admin-analytics-range-option {
+    display: block;
+    width: 100%;
+    padding: 10px 16px;
+    border: 0;
+    background: transparent;
+    color: var(--admin-ink);
+    font: inherit;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: background 120ms ease, color 120ms ease;
+}
+
+.admin-analytics-range-option:hover,
+.admin-analytics-range-option:focus-visible {
+    background: color-mix(in srgb, var(--admin-accent) 8%, var(--admin-surface));
+}
+
+.admin-analytics-range-option.is-selected,
+.admin-analytics-range-option[aria-selected="true"] {
+    background: color-mix(in srgb, var(--admin-accent) 12%, var(--admin-surface));
+    color: var(--admin-accent);
+    font-weight: 600;
 }
 
 .admin-analytics-summary {
@@ -2392,7 +2453,7 @@ button.admin-tab {
         grid-template-columns: 1fr;
     }
 
-    .admin-analytics-ranges {
+    .admin-analytics-range-toolbar {
         justify-content: flex-start;
     }
 

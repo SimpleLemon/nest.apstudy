@@ -81,15 +81,41 @@
                     </div>
                 </div>
                 <div class="admin-analytics-chart admin-analytics-chart--main" data-chart="main" role="img" aria-label="Analytics chart"></div>
-                <nav class="admin-analytics-ranges" aria-label="Analytics date range">
-                    {% for key, option in range_options.items() %}
+                <div class="admin-analytics-range-toolbar">
+                    <div class="admin-analytics-range-dropdown" data-analytics-range-dropdown>
                         <button
-                            class="admin-analytics-range{% if key == default_range %} is-active{% endif %}"
+                            class="admin-analytics-range-trigger"
                             type="button"
-                            data-analytics-range="{{ key }}"
-                        >{{ option.label }}</button>
-                    {% endfor %}
-                </nav>
+                            data-analytics-range-trigger
+                            aria-haspopup="listbox"
+                            aria-expanded="false"
+                            aria-controls="admin-analytics-range-menu"
+                        >
+                            <span data-analytics-range-label>{{ range_options[default_range].label }}</span>
+                            <span class="admin-analytics-range-caret" aria-hidden="true"></span>
+                        </button>
+                        <ul
+                            id="admin-analytics-range-menu"
+                            class="admin-analytics-range-menu"
+                            role="listbox"
+                            aria-label="Analytics date range"
+                            data-analytics-range-menu
+                            hidden
+                        >
+                            {% for key, option in range_options.items() %}
+                                <li role="presentation">
+                                    <button
+                                        class="admin-analytics-range-option{% if key == default_range %} is-selected{% endif %}"
+                                        type="button"
+                                        role="option"
+                                        data-analytics-range="{{ key }}"
+                                        aria-selected="{{ 'true' if key == default_range else 'false' }}"
+                                    >{{ option.label }}</button>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
             </article>
 
             <article class="admin-card admin-analytics-chart-card admin-analytics-chart-card--wide">

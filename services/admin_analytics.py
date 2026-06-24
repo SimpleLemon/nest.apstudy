@@ -14,12 +14,12 @@ except ImportError:  # pragma: no cover - Python 3.8 fallback is not used in CI.
 
 
 RANGE_OPTIONS = {
-    "24h": {"label": "24 hours", "hours": 24, "granularity": "hour"},
-    "7d": {"label": "7 days", "days": 7, "granularity": "day"},
-    "14d": {"label": "14 days", "days": 14, "granularity": "day"},
-    "30d": {"label": "30 days", "days": 30, "granularity": "day"},
-    "60d": {"label": "60 days", "days": 60, "granularity": "day"},
-    "all": {"label": "All Time", "granularity": "day"},
+    "24h": {"label": "Last 24 hours", "hours": 24, "granularity": "hour"},
+    "7d": {"label": "Last 7 days", "days": 7, "granularity": "day"},
+    "14d": {"label": "Last 14 days", "days": 14, "granularity": "day"},
+    "30d": {"label": "Last 30 days", "days": 30, "granularity": "day"},
+    "60d": {"label": "Last 60 days", "days": 60, "granularity": "day"},
+    "all": {"label": "All time", "granularity": "day"},
 }
 
 DEFAULT_GA4_PROPERTY_ID = "446578226"

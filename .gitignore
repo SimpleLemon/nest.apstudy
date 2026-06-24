@@ -5,10 +5,13 @@
 .envrc
 .flaskenv
 *.local
+secrets/
 client_secret.json
 client_secret*.json
 credentials.json
 credentials*.json
+ga4-service-account.json
+*service-account*.json
 token.json
 token*.json
 secrets.json

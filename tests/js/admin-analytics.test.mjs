@@ -193,6 +193,105 @@ test("admin analytics main card switches to selected metric graph", async () => 
   assert.equal(tabs.find((tab) => tab.dataset.analyticsMetric === "oauth").attrs["aria-selected"], "true");
 });
 
+test("admin analytics range dropdown opens, selects, and closes on outside click", async () => {
+  const documentListeners = new Map();
+  const window = await runBrowserScript("static/js/admin-analytics.js", {
+    document: {
+      readyState: "complete",
+      querySelector: () => null,
+      querySelectorAll: () => [],
+      addEventListener: (type, handler) => {
+        const handlers = documentListeners.get(type) || [];
+        handlers.push(handler);
+        documentListeners.set(type, handlers);
+      },
+      removeEventListener: (type, handler) => {
+        const handlers = (documentListeners.get(type) || []).filter((item) => item !== handler);
+        documentListeners.set(type, handlers);
+      },
+    },
+    window: {
+      Intl,
+      location: { origin: "https://example.test" },
+    },
+  });
+
+  const menu = { hidden: true };
+  const label = { textContent: "Last 30 days" };
+  const trigger = {
+    attrs: {},
+    listeners: {},
+    addEventListener(type, handler) {
+      this.listeners[type] = handler;
+    },
+    setAttribute(name, value) {
+      this.attrs[name] = value;
+    },
+  };
+  const options = ["30d", "7d"].map((range) => ({
+    dataset: { analyticsRange: range },
+    textContent: range === "30d" ? "Last 30 days" : "Last 7 days",
+    classList: { values: new Set(), toggle(name, on) { if (on) this.values.add(name); else this.values.delete(name); } },
+    attrs: {},
+    listeners: {},
+    addEventListener(type, handler) {
+      this.listeners[type] = handler;
+    },
+    setAttribute(name, value) {
+      this.attrs[name] = value;
+    },
+  }));
+  const dropdown = {
+    classList: { values: new Set(), toggle(name, on) { if (on) this.values.add(name); else this.values.delete(name); } },
+    contains(target) {
+      return target === dropdown || target === trigger || target === menu || options.includes(target);
+    },
+    querySelector(selector) {
+      if (selector === "[data-analytics-range-trigger]") return trigger;
+      if (selector === "[data-analytics-range-menu]") return menu;
+      if (selector === "[data-analytics-range-label]") return label;
+      return null;
+    },
+    querySelectorAll(selector) {
+      return selector === "[data-analytics-range]" ? options : [];
+    },
+  };
+  const root = {
+    querySelector(selector) {
+      return selector === "[data-analytics-range-dropdown]" ? dropdown : null;
+    },
+  };
+
+  const changes = [];
+  const controller = window.AdminAnalytics.initAnalyticsRangeDropdown(root, {
+    defaultRange: "30d",
+    onChange: (range) => changes.push(range),
+  });
+
+  assert.equal(controller.getActiveRange(), "30d");
+  controller.setOpen(true);
+  assert.equal(controller.isOpen(), true);
+  assert.equal(menu.hidden, false);
+  assert.equal(trigger.attrs["aria-expanded"], "true");
+
+  controller.selectRange("7d");
+  assert.equal(controller.isOpen(), false);
+  assert.equal(menu.hidden, true);
+  assert.equal(controller.getActiveRange(), "7d");
+  assert.equal(label.textContent, "Last 7 days");
+  assert.deepEqual(changes, ["7d"]);
+
+  controller.setOpen(true);
+  documentListeners.get("click")?.[0]?.({ target: {} });
+  assert.equal(controller.isOpen(), false);
+
+  controller.setOpen(true);
+  documentListeners.get("keydown")?.[0]?.({ key: "Escape" });
+  assert.equal(controller.isOpen(), false);
+
+  controller.destroy();
+});
+
 test("admin timezone helper formats timestamps and exposes browser timezone", async () => {
   const window = await runBrowserScript("static/js/admin-timezone.js", {
     window: {
