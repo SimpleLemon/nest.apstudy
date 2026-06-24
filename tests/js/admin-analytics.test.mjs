@@ -195,11 +195,13 @@ test("admin analytics main card switches to selected metric graph", async () => 
 
 test("admin analytics range dropdown opens, selects, and closes on outside click", async () => {
   const documentListeners = new Map();
+  const windowListeners = new Map();
   const window = await runBrowserScript("static/js/admin-analytics.js", {
     document: {
       readyState: "complete",
       querySelector: () => null,
       querySelectorAll: () => [],
+      activeElement: null,
       addEventListener: (type, handler) => {
         const handlers = documentListeners.get(type) || [];
         handlers.push(handler);
@@ -210,25 +212,56 @@ test("admin analytics range dropdown opens, selects, and closes on outside click
         documentListeners.set(type, handlers);
       },
     },
+    globals: {
+      requestAnimationFrame: (callback) => {
+        callback();
+        return 1;
+      },
+    },
     window: {
       Intl,
       location: { origin: "https://example.test" },
+      innerHeight: 800,
+      addEventListener: (type, handler) => {
+        const handlers = windowListeners.get(type) || [];
+        handlers.push(handler);
+        windowListeners.set(type, handlers);
+      },
+      removeEventListener: (type, handler) => {
+        const handlers = (windowListeners.get(type) || []).filter((item) => item !== handler);
+        windowListeners.set(type, handlers);
+      },
     },
   });
 
-  const menu = { hidden: true };
+  const menu = {
+    hidden: true,
+    offsetHeight: 220,
+    listeners: {},
+    addEventListener(type, handler) {
+      this.listeners[type] = handler;
+    },
+  };
   const label = { textContent: "Last 30 days" };
   const trigger = {
     attrs: {},
     listeners: {},
+    getBoundingClientRect() {
+      return { top: 600, bottom: 644, left: 0, right: 180 };
+    },
     addEventListener(type, handler) {
       this.listeners[type] = handler;
     },
     setAttribute(name, value) {
       this.attrs[name] = value;
     },
+    removeAttribute(name) {
+      delete this.attrs[name];
+    },
+    focus() {},
   };
   const options = ["30d", "7d"].map((range) => ({
+    id: `admin-analytics-range-option-${range}`,
     dataset: { analyticsRange: range },
     textContent: range === "30d" ? "Last 30 days" : "Last 7 days",
     classList: { values: new Set(), toggle(name, on) { if (on) this.values.add(name); else this.values.delete(name); } },
@@ -240,9 +273,21 @@ test("admin analytics range dropdown opens, selects, and closes on outside click
     setAttribute(name, value) {
       this.attrs[name] = value;
     },
+    focus() {
+      window.document.activeElement = this;
+    },
   }));
   const dropdown = {
-    classList: { values: new Set(), toggle(name, on) { if (on) this.values.add(name); else this.values.delete(name); } },
+    classList: {
+      values: new Set(),
+      toggle(name, on) {
+        if (on) this.values.add(name);
+        else this.values.delete(name);
+      },
+      remove(...names) {
+        names.forEach((name) => this.values.delete(name));
+      },
+    },
     contains(target) {
       return target === dropdown || target === trigger || target === menu || options.includes(target);
     },
@@ -269,10 +314,15 @@ test("admin analytics range dropdown opens, selects, and closes on outside click
   });
 
   assert.equal(controller.getActiveRange(), "30d");
+  assert.equal(menu.hidden, true);
+  assert.equal(trigger.attrs["aria-expanded"], "false");
+  assert.equal(dropdown.classList.values.has("is-open"), false);
+
   controller.setOpen(true);
   assert.equal(controller.isOpen(), true);
   assert.equal(menu.hidden, false);
   assert.equal(trigger.attrs["aria-expanded"], "true");
+  assert.equal(dropdown.classList.values.has("is-flipped"), true);
 
   controller.selectRange("7d");
   assert.equal(controller.isOpen(), false);
@@ -286,9 +336,94 @@ test("admin analytics range dropdown opens, selects, and closes on outside click
   assert.equal(controller.isOpen(), false);
 
   controller.setOpen(true);
-  documentListeners.get("keydown")?.[0]?.({ key: "Escape" });
+  documentListeners.get("keydown")?.[0]?.({ key: "Escape", preventDefault() {} });
   assert.equal(controller.isOpen(), false);
 
+  controller.destroy();
+});
+
+test("admin analytics range dropdown flips down when space below is sufficient", async () => {
+  const window = await runBrowserScript("static/js/admin-analytics.js", {
+    document: {
+      readyState: "complete",
+      querySelector: () => null,
+      querySelectorAll: () => [],
+      activeElement: null,
+      addEventListener: () => {},
+      removeEventListener: () => {},
+    },
+    globals: {
+      requestAnimationFrame: (callback) => {
+        callback();
+        return 1;
+      },
+    },
+    window: {
+      Intl,
+      location: { origin: "https://example.test" },
+      innerHeight: 1200,
+      addEventListener: () => {},
+      removeEventListener: () => {},
+    },
+  });
+
+  const menu = { hidden: true, offsetHeight: 220, addEventListener() {} };
+  const trigger = {
+    attrs: {},
+    getBoundingClientRect() {
+      return { top: 120, bottom: 164, left: 0, right: 180 };
+    },
+    addEventListener() {},
+    setAttribute(name, value) {
+      this.attrs[name] = value;
+    },
+    removeAttribute(name) {
+      delete this.attrs[name];
+    },
+    focus() {},
+  };
+  const options = [{
+    id: "admin-analytics-range-option-30d",
+    dataset: { analyticsRange: "30d" },
+    textContent: "Last 30 days",
+    classList: { toggle() {} },
+    attrs: {},
+    addEventListener() {},
+    setAttribute(name, value) {
+      this.attrs[name] = value;
+    },
+    focus() {},
+  }];
+  const dropdown = {
+    classList: {
+      values: new Set(),
+      toggle(name, on) {
+        if (on) this.values.add(name);
+        else this.values.delete(name);
+      },
+      remove(...names) {
+        names.forEach((name) => this.values.delete(name));
+      },
+    },
+    contains: () => true,
+    querySelector(selector) {
+      if (selector === "[data-analytics-range-trigger]") return trigger;
+      if (selector === "[data-analytics-range-menu]") return menu;
+      if (selector === "[data-analytics-range-label]") return { textContent: "Last 30 days" };
+      return null;
+    },
+    querySelectorAll(selector) {
+      return selector === "[data-analytics-range]" ? options : [];
+    },
+  };
+  const controller = window.AdminAnalytics.initAnalyticsRangeDropdown({
+    querySelector: () => dropdown,
+  }, { defaultRange: "30d" });
+
+  controller.setOpen(true);
+  assert.equal(dropdown.classList.values.has("is-flipped"), false);
+  controller.updateMenuPlacement();
+  assert.equal(dropdown.classList.values.has("is-flipped"), false);
   controller.destroy();
 });
 

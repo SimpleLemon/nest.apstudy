@@ -94,7 +94,7 @@
                             <span data-analytics-range-label>{{ range_options[default_range].label }}</span>
                             <span class="admin-analytics-range-caret" aria-hidden="true"></span>
                         </button>
-                        <ul
+                        <div
                             id="admin-analytics-range-menu"
                             class="admin-analytics-range-menu"
                             role="listbox"
@@ -103,17 +103,16 @@
                             hidden
                         >
                             {% for key, option in range_options.items() %}
-                                <li role="presentation">
-                                    <button
-                                        class="admin-analytics-range-option{% if key == default_range %} is-selected{% endif %}"
-                                        type="button"
-                                        role="option"
-                                        data-analytics-range="{{ key }}"
-                                        aria-selected="{{ 'true' if key == default_range else 'false' }}"
-                                    >{{ option.label }}</button>
-                                </li>
+                                <button
+                                    id="admin-analytics-range-option-{{ key }}"
+                                    class="admin-analytics-range-option{% if key == default_range %} is-selected{% endif %}"
+                                    type="button"
+                                    role="option"
+                                    data-analytics-range="{{ key }}"
+                                    aria-selected="{{ 'true' if key == default_range else 'false' }}"
+                                >{{ option.label }}</button>
                             {% endfor %}
-                        </ul>
+                        </div>
                     </div>
                 </div>
             </article>

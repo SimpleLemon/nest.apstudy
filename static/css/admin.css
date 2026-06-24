@@ -1482,6 +1482,7 @@ button.admin-tab {
     display: flex;
     justify-content: flex-start;
     padding-top: 4px;
+    overflow: visible;
 }
 
 .admin-analytics-range-dropdown {
@@ -1494,20 +1495,26 @@ button.admin-tab {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    min-height: 36px;
-    padding: 0 4px 0 0;
-    border: 0;
-    background: transparent;
+    min-height: 44px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid var(--admin-border);
+    background: var(--admin-panel);
     color: var(--admin-ink);
     font: inherit;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
 }
 
 .admin-analytics-range-trigger:hover,
 .admin-analytics-range-dropdown.is-open .admin-analytics-range-trigger {
-    color: var(--admin-accent);
+    border-color: color-mix(in srgb, var(--admin-accent) 55%, transparent);
+    background: var(--admin-accent-soft);
+    color: var(--admin-ink);
 }
 
 .admin-analytics-range-caret {
@@ -1527,44 +1534,57 @@ button.admin-tab {
 .admin-analytics-range-menu {
     position: absolute;
     left: 0;
-    bottom: calc(100% + 8px);
+    top: calc(100% + 8px);
+    bottom: auto;
     z-index: 30;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
     min-width: 220px;
     margin: 0;
-    padding: 8px 0;
-    list-style: none;
-    border: 1px solid color-mix(in srgb, var(--admin-border) 88%, #fff);
-    border-radius: 8px;
-    background: var(--admin-surface);
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.14);
+    padding: 8px;
+    border: 1px solid var(--admin-border);
+    border-radius: 12px;
+    background: var(--admin-panel-strong);
+    box-shadow: var(--admin-shadow);
+}
+
+.admin-analytics-range-dropdown.is-flipped .admin-analytics-range-menu {
+    top: auto;
+    bottom: calc(100% + 8px);
 }
 
 .admin-analytics-range-menu[hidden] {
-    display: none;
+    display: none !important;
 }
 
 .admin-analytics-range-option {
     display: block;
     width: 100%;
-    padding: 10px 16px;
+    padding: 10px 12px;
     border: 0;
+    border-radius: 8px;
     background: transparent;
     color: var(--admin-ink);
     font: inherit;
     font-size: 14px;
+    font-weight: 500;
     text-align: left;
     cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
     transition: background 120ms ease, color 120ms ease;
 }
 
 .admin-analytics-range-option:hover,
 .admin-analytics-range-option:focus-visible {
-    background: color-mix(in srgb, var(--admin-accent) 8%, var(--admin-surface));
+    background: color-mix(in srgb, var(--admin-accent) 10%, transparent);
+    outline: none;
 }
 
 .admin-analytics-range-option.is-selected,
 .admin-analytics-range-option[aria-selected="true"] {
-    background: color-mix(in srgb, var(--admin-accent) 12%, var(--admin-surface));
+    background: color-mix(in srgb, var(--admin-accent) 12%, var(--admin-panel-strong));
     color: var(--admin-accent);
     font-weight: 600;
 }
@@ -1605,6 +1625,7 @@ button.admin-tab {
 
 .admin-analytics-chart-card {
     min-width: 0;
+    overflow: visible;
 }
 
 .admin-analytics-chart-card--wide {
@@ -1615,6 +1636,7 @@ button.admin-tab {
     display: grid;
     gap: 18px;
     padding-top: 0;
+    overflow: visible;
 }
 
 .admin-analytics-tabs {
