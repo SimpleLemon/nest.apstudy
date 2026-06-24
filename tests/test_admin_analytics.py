@@ -272,7 +272,7 @@ class AdminAnalyticsServiceTestCase(unittest.TestCase):
         self.assertEqual(FakeAnalyticsClient.realtime_request.property, "properties/446578226")
         self.assertEqual(FakeAnalyticsClient.report_request.dimension_filter.filter.field_name, "hostName")
         self.assertEqual(FakeAnalyticsClient.report_request.dimension_filter.filter.string_filter.value, "nest.apstudy.org")
-        self.assertEqual(FakeAnalyticsClient.realtime_request.dimension_filter.filter.string_filter.match_type, "EXACT")
+        self.assertIsNone(getattr(FakeAnalyticsClient.realtime_request, "dimension_filter", None))
 
 
 if __name__ == "__main__":

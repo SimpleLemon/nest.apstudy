@@ -418,12 +418,12 @@ def _ga4_payload(range_key, window):
                 dimension_filter=hostname_filter,
             )
         )
+        # Realtime API does not support hostName filters; scope historical reports only.
         realtime = client.run_realtime_report(
             RunRealtimeReportRequest(
                 property=f"properties/{property_id}",
                 dimensions=[Dimension(name="country")],
                 metrics=[Metric(name="activeUsers")],
-                dimension_filter=hostname_filter,
             )
         )
     except Exception as exc:
