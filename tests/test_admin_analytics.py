@@ -89,7 +89,16 @@ class AdminAnalyticsRouteTestCase(unittest.TestCase):
         self.assertIn("1.5 MB", html)
         self.assertIn("admin-analytics.js", html)
         self.assertIn("data-analytics-main-source", html)
-        self.assertIn("data-analytics-engagement-source", html)
+        self.assertIn('data-analytics-metric="pageViews"', html)
+        self.assertIn('data-analytics-delta="activeUsers"', html)
+        self.assertIn('data-analytics-delta="pageViews"', html)
+        self.assertIn('data-analytics-country-map', html)
+        self.assertIn('data-analytics-detail-list="countries"', html)
+        self.assertIn('data-analytics-detail-list="pages"', html)
+        self.assertNotIn("data-analytics-engagement-source", html)
+        self.assertNotIn("data-analytics-main-title", html)
+        self.assertNotIn("data-analytics-main-description", html)
+        self.assertNotIn(">Engagement<", html)
         self.assertNotIn("Live GA4 Data API status", html)
         self.assertNotIn("data-analytics-ga4", html)
         self.assertLess(html.index(">Auth<"), html.index(">Analytics<"))
@@ -187,6 +196,9 @@ class AdminAnalyticsServiceTestCase(unittest.TestCase):
         self.assertTrue(all(point["value"] == 0 for point in payload["series"]["activeUsers"]))
         self.assertTrue(all(point["value"] == 0 for point in payload["series"]["pageViews"]))
         self.assertEqual(payload["engagement"]["topPages"], [])
+        self.assertFalse(payload["comparison"]["enabled"])
+        self.assertEqual(payload["gaDetails"]["countries"], [])
+        self.assertEqual(payload["gaDetails"]["pages"], [])
         oauth = {row["key"]: row["value"] for row in payload["breakdowns"]["oauth"]}
         self.assertEqual(oauth["google"], 1)
         self.assertEqual(oauth["discord"], 1)
@@ -222,6 +234,9 @@ class AdminAnalyticsServiceTestCase(unittest.TestCase):
         self.assertEqual(payload["ga4"]["status"], "not_configured")
         self.assertEqual(payload["cards"]["activeUsers"], 0)
         self.assertEqual(payload["cards"]["pageViews"], 0)
+        self.assertFalse(payload["comparison"]["enabled"])
+        self.assertEqual(payload["gaDetails"]["countries"], [])
+        self.assertEqual(payload["gaDetails"]["pages"], [])
 
     def test_ga4_defaults_to_nest_property_and_filters_hostname(self):
         def fake_row(dimensions, metrics):
@@ -236,17 +251,34 @@ class AdminAnalyticsServiceTestCase(unittest.TestCase):
             def run_report(self, request):
                 FakeAnalyticsClient.report_requests.append(request)
                 dimension_names = [dimension.name for dimension in getattr(request, "dimensions", []) or []]
+                date_range = (getattr(request, "date_ranges", []) or [SimpleNamespace(start_date="")])[0]
+                previous = getattr(date_range, "start_date", "") == "2026-04-20"
                 if not dimension_names:
-                    return SimpleNamespace(rows=[fake_row([], [7, 42, 99])])
+                    return SimpleNamespace(rows=[fake_row([], [10, 60, 0] if previous else [7, 42, 99])])
                 if dimension_names == ["date"]:
                     return SimpleNamespace(rows=[
                         fake_row(["20260501"], [2, 10]),
                         fake_row(["20260503"], [5, 32]),
                     ])
-                if dimension_names == ["pagePath"]:
+                if dimension_names == ["pageTitle", "pagePath"]:
+                    if previous:
+                        return SimpleNamespace(rows=[
+                            fake_row(["Resources | APStudy", "/resources"], [10]),
+                            fake_row(["Dashboard | APStudy", "/dashboard"], [20]),
+                        ])
                     return SimpleNamespace(rows=[
-                        fake_row(["/notes"], [12]),
-                        fake_row(["/dashboard"], [30]),
+                        fake_row(["Notes | APStudy", "/notes"], [12]),
+                        fake_row(["Dashboard | APStudy", "/dashboard"], [30]),
+                    ])
+                if dimension_names == ["countryId", "country"]:
+                    if previous:
+                        return SimpleNamespace(rows=[
+                            fake_row(["US", "United States"], [2]),
+                            fake_row(["SG", "Singapore"], [6]),
+                        ])
+                    return SimpleNamespace(rows=[
+                        fake_row(["US", "United States"], [4]),
+                        fake_row(["SG", "Singapore"], [3]),
                     ])
                 return SimpleNamespace(rows=[])
 
@@ -296,8 +328,18 @@ class AdminAnalyticsServiceTestCase(unittest.TestCase):
         self.assertEqual(payload["series"]["activeUsers"][-1]["value"], 5)
         self.assertEqual(payload["series"]["pageViews"][-1]["value"], 32)
         self.assertEqual(payload["engagement"]["topPages"][0], {"label": "/dashboard", "value": 30})
+        self.assertTrue(payload["comparison"]["enabled"])
+        self.assertEqual(payload["comparison"]["metrics"]["activeUsers"]["previous"], 10)
+        self.assertEqual(payload["comparison"]["metrics"]["activeUsers"]["percentChange"], -30.0)
+        self.assertEqual(payload["comparison"]["metrics"]["pageViews"]["previous"], 60)
+        self.assertEqual(payload["comparison"]["metrics"]["pageViews"]["percentChange"], -30.0)
+        self.assertEqual(payload["gaDetails"]["countries"][0]["countryId"], "US")
+        self.assertEqual(payload["gaDetails"]["countries"][0]["comparison"]["percentChange"], 100.0)
+        self.assertEqual(payload["gaDetails"]["pages"][0]["title"], "Dashboard | APStudy")
+        self.assertEqual(payload["gaDetails"]["pages"][0]["path"], "/dashboard")
+        self.assertEqual(payload["gaDetails"]["pages"][0]["comparison"]["percentChange"], 50.0)
         self.assertEqual(payload["sources"]["traffic"]["label"], "Google Analytics")
-        self.assertEqual(len(FakeAnalyticsClient.report_requests), 3)
+        self.assertEqual(len(FakeAnalyticsClient.report_requests), 7)
         for request in FakeAnalyticsClient.report_requests:
             self.assertEqual(request.property, "properties/446578226")
             self.assertEqual(request.dimension_filter.filter.field_name, "hostName")

@@ -1,5 +1,8 @@
 (() => {
   const RANGE_KEYS = new Set(["24h", "7d", "14d", "30d", "60d", "all"]);
+  let googleChartsRequested = false;
+  let googleChartsReady = false;
+  const googleChartsCallbacks = [];
   const METRIC_CONFIG = {
     totalUsers: {
       label: "Total Users",
@@ -18,6 +21,15 @@
       tone: "success",
       seriesPath: ["series", "activeUsers"],
       value: (payload) => payload?.cards?.activeUsers,
+    },
+    pageViews: {
+      label: "Views",
+      title: "Views",
+      description: "Google Analytics page views across the selected range.",
+      type: "line",
+      tone: "secondary",
+      seriesPath: ["series", "pageViews"],
+      value: (payload) => payload?.cards?.pageViews,
     },
     oauth: {
       label: "OAuth",
@@ -100,6 +112,34 @@
   function formatNumber(value) {
     const number = Number(value || 0);
     return new Intl.NumberFormat(undefined, { maximumFractionDigits: 1 }).format(number);
+  }
+
+  function formatPercent(value) {
+    const number = Number(value);
+    if (!Number.isFinite(number)) return "";
+    return `${Math.abs(number).toFixed(1)}%`;
+  }
+
+  function comparisonForMetric(payload, key) {
+    return payload?.comparison?.metrics?.[key] || null;
+  }
+
+  function deltaLabel(comparison) {
+    if (!comparison?.available || comparison.percentChange == null) return "";
+    const direction = comparison.direction === "up" ? "up" : comparison.direction === "down" ? "down" : "neutral";
+    const symbol = direction === "up" ? "↑" : direction === "down" ? "↓" : "→";
+    return `${symbol} ${formatPercent(comparison.percentChange)}`;
+  }
+
+  function deltaClass(comparison) {
+    const direction = comparison?.direction === "up" ? "up" : comparison?.direction === "down" ? "down" : "neutral";
+    return `admin-analytics-delta admin-analytics-delta--${direction}`;
+  }
+
+  function deltaMarkup(comparison) {
+    const label = deltaLabel(comparison);
+    if (!label) return "";
+    return `<span class="${deltaClass(comparison)}">${escapeHtml(label)}</span>`;
   }
 
   function escapeHtml(value) {
@@ -404,6 +444,133 @@
     `;
   }
 
+  function normalizeDetailRows(items) {
+    return Array.isArray(items)
+      ? items.map((item) => ({
+          key: String(item?.key || item?.countryId || item?.path || item?.label || ""),
+          countryId: String(item?.countryId || ""),
+          label: String(item?.label || item?.title || item?.path || item?.countryId || ""),
+          title: String(item?.title || item?.label || item?.path || ""),
+          path: String(item?.path || ""),
+          value: Number(item?.value || 0),
+          comparison: item?.comparison || null,
+        })).filter((item) => item.label && item.value > 0)
+      : [];
+  }
+
+  function renderDetailRows(root, items, { type = "countries" } = {}) {
+    if (!root) return;
+    const rows = normalizeDetailRows(items);
+    const maxValue = Math.max(1, ...rows.map((row) => row.value));
+    const primaryHeader = type === "pages" ? "Page title and screen path" : "Country";
+    const valueHeader = type === "pages" ? "Views" : "Active users";
+    root.innerHTML = `
+      <div class="admin-analytics-rank-head">
+        <span>${escapeHtml(primaryHeader)}</span>
+        <span>${escapeHtml(valueHeader)}</span>
+      </div>
+      ${rows.length ? rows.map((row) => `
+        <div class="admin-analytics-rank-row">
+          <div class="admin-analytics-rank-label">
+            <strong>${escapeHtml(type === "pages" ? row.title : row.label)}</strong>
+            ${type === "pages" && row.path ? `<span>${escapeHtml(row.path)}</span>` : ""}
+          </div>
+          <div class="admin-analytics-rank-value">
+            <strong>${formatNumber(row.value)}</strong>
+            ${deltaMarkup(row.comparison)}
+          </div>
+          <div class="admin-analytics-bar-track" aria-hidden="true">
+            <span style="width:${Math.max(3, (row.value / maxValue) * 100).toFixed(1)}%"></span>
+          </div>
+        </div>
+      `).join("") : chartEmpty()}
+    `;
+  }
+
+  function setMetricDeltas(root, payload) {
+    Object.keys(METRIC_CONFIG).forEach((key) => {
+      const el = root.querySelector(`[data-analytics-delta="${key}"]`);
+      if (!el) return;
+      const comparison = comparisonForMetric(payload, key);
+      const label = deltaLabel(comparison);
+      el.hidden = !label;
+      el.textContent = label;
+      el.className = `admin-analytics-tab-delta ${label ? deltaClass(comparison) : ""}`.trim();
+    });
+  }
+
+  function runGoogleChartsCallback(callback) {
+    if (googleChartsReady) {
+      callback();
+      return true;
+    }
+    const charts = window.google?.charts;
+    if (!charts?.load || !charts?.setOnLoadCallback) {
+      return false;
+    }
+    googleChartsCallbacks.push(callback);
+    if (!googleChartsRequested) {
+      googleChartsRequested = true;
+      charts.load("current", { packages: ["geochart"] });
+      charts.setOnLoadCallback(() => {
+        googleChartsReady = true;
+        while (googleChartsCallbacks.length) {
+          googleChartsCallbacks.shift()?.();
+        }
+      });
+    }
+    return true;
+  }
+
+  function renderCountryMapFallback(root, countries) {
+    const rows = normalizeDetailRows(countries).slice(0, 6);
+    root.innerHTML = rows.length ? renderBarList(rows) : chartEmpty();
+  }
+
+  function renderCountryMap(root, countries) {
+    if (!root) return;
+    const rows = normalizeDetailRows(countries).filter((row) => row.countryId || row.label);
+    if (!rows.length) {
+      root.innerHTML = chartEmpty();
+      return;
+    }
+    const draw = () => {
+      try {
+        const table = [["Country", "Active users"], ...rows.map((row) => [row.countryId || row.label, row.value])];
+        const data = window.google.visualization.arrayToDataTable(table);
+        const chart = new window.google.visualization.GeoChart(root);
+        chart.draw(data, {
+          backgroundColor: "transparent",
+          colorAxis: { colors: ["#dbeafe", "#2563eb"] },
+          datalessRegionColor: "#eef2f7",
+          legend: "none",
+          tooltip: { textStyle: { fontName: "Inter" } },
+        });
+      } catch {
+        renderCountryMapFallback(root, rows);
+      }
+    };
+    if (!runGoogleChartsCallback(draw)) {
+      renderCountryMapFallback(root, rows);
+    }
+  }
+
+  function renderGaDetails(root, payload) {
+    const countries = payload?.gaDetails?.countries || [];
+    const pages = payload?.gaDetails?.pages || [];
+    const traffic = payload?.sources?.traffic?.status === "ok"
+      ? payload.sources.traffic.label
+      : "Google Analytics unavailable";
+    const sourceText = `Source: ${traffic}`;
+    const gaSource = root.querySelector("[data-analytics-ga-details-source]");
+    const pageSource = root.querySelector("[data-analytics-page-details-source]");
+    if (gaSource) gaSource.textContent = sourceText;
+    if (pageSource) pageSource.textContent = sourceText;
+    renderCountryMap(root.querySelector("[data-analytics-country-map]"), countries);
+    renderDetailRows(root.querySelector('[data-analytics-detail-list="countries"]'), countries, { type: "countries" });
+    renderDetailRows(root.querySelector('[data-analytics-detail-list="pages"]'), pages, { type: "pages" });
+  }
+
   function setCard(root, key, value, suffix = "") {
     const el = root.querySelector(`[data-analytics-card="${key}"]`);
     if (el) el.textContent = `${formatNumber(value)}${suffix}`;
@@ -442,35 +609,26 @@
   }
 
   function sourceTextForMetric(payload, metricKey) {
-    if (metricKey === "activeUsers") {
-      return `Traffic source: ${payload?.sources?.traffic?.label || "Google Analytics unavailable"}`;
-    }
-    return "Source: Nest database";
-  }
-
-  function engagementSourceText(payload) {
     const traffic = payload?.sources?.traffic?.status === "ok"
       ? payload.sources.traffic.label
       : "Google Analytics unavailable";
     const featureUsage = payload?.sources?.featureUsage?.label || "Nest database";
-    return `Page views and top pages: ${traffic}. Feature usage: ${featureUsage}.`;
+    if (metricKey === "activeUsers" || metricKey === "pageViews") {
+      return `Source: ${traffic}`;
+    }
+    return `Source: ${featureUsage}. Traffic: ${traffic}.`;
   }
 
   function renderDashboard(root, payload) {
     setMetricCards(root, payload);
-    setCard(root, "pageViews", payload?.cards?.pageViews);
     setCard(root, "onboardingRate", payload?.cards?.onboardingRate, "%");
-
-    const chart = (name) => root.querySelector(`[data-chart="${name}"]`);
-    const pageViews = chart("pageViews");
-    const engagementSource = root.querySelector("[data-analytics-engagement-source]");
+    setMetricDeltas(root, payload);
 
     renderMainMetric(root, payload, root.dataset.activeMetric || "totalUsers");
-    if (pageViews) pageViews.innerHTML = renderLineChart(payload?.series?.pageViews, { tone: "secondary" });
-    if (engagementSource) engagementSource.textContent = engagementSourceText(payload);
 
     renderList(root.querySelector('[data-analytics-list="topPages"]'), "Top Pages", payload?.engagement?.topPages);
     renderList(root.querySelector('[data-analytics-list="featureUsage"]'), "Feature Usage", payload?.engagement?.featureUsage);
+    renderGaDetails(root, payload);
   }
 
   function setNotice(root, message, isError = false) {
@@ -704,6 +862,8 @@
     normalizeSeries,
     renderDashboard,
     renderBarList,
+    renderDetailRows,
+    renderGaDetails,
     renderVerticalBarChart,
     renderLineChart,
     renderMultiLineChart,

@@ -120,6 +120,7 @@ test("admin analytics main card switches to selected metric graph", async () => 
   });
 
   const cards = new Map();
+  const deltas = new Map();
   const nodes = {
     main: {
       innerHTML: "",
@@ -128,12 +129,16 @@ test("admin analytics main card switches to selected metric graph", async () => 
         this.attrs[name] = value;
       },
     },
-    title: { textContent: "" },
-    description: { textContent: "" },
     source: { textContent: "" },
-    engagementSource: { textContent: "" },
+    topPages: { innerHTML: "" },
+    featureUsage: { innerHTML: "" },
+    countryMap: { innerHTML: "" },
+    countryList: { innerHTML: "" },
+    pageList: { innerHTML: "" },
+    gaSource: { textContent: "" },
+    pageSource: { textContent: "" },
   };
-  const tabs = ["totalUsers", "activeUsers", "oauth", "uniType"].map((metric) => ({
+  const tabs = ["totalUsers", "activeUsers", "pageViews", "oauth", "uniType"].map((metric) => ({
     dataset: { analyticsMetric: metric },
     active: false,
     attrs: {},
@@ -150,18 +155,27 @@ test("admin analytics main card switches to selected metric graph", async () => 
     tab.classList.owner = tab;
   });
   const root = {
-    dataset: { activeMetric: "oauth" },
+    dataset: { activeMetric: "pageViews" },
     querySelector(selector) {
       const card = selector.match(/\[data-analytics-card="([^"]+)"\]/)?.[1];
       if (card) {
         if (!cards.has(card)) cards.set(card, { textContent: "" });
         return cards.get(card);
       }
+      const delta = selector.match(/\[data-analytics-delta="([^"]+)"\]/)?.[1];
+      if (delta) {
+        if (!deltas.has(delta)) deltas.set(delta, { textContent: "", hidden: true, className: "" });
+        return deltas.get(delta);
+      }
       if (selector === '[data-chart="main"]') return nodes.main;
-      if (selector === '[data-analytics-main-title]') return nodes.title;
-      if (selector === '[data-analytics-main-description]') return nodes.description;
       if (selector === "[data-analytics-main-source]") return nodes.source;
-      if (selector === "[data-analytics-engagement-source]") return nodes.engagementSource;
+      if (selector === '[data-analytics-list="topPages"]') return nodes.topPages;
+      if (selector === '[data-analytics-list="featureUsage"]') return nodes.featureUsage;
+      if (selector === "[data-analytics-country-map]") return nodes.countryMap;
+      if (selector === '[data-analytics-detail-list="countries"]') return nodes.countryList;
+      if (selector === '[data-analytics-detail-list="pages"]') return nodes.pageList;
+      if (selector === "[data-analytics-ga-details-source]") return nodes.gaSource;
+      if (selector === "[data-analytics-page-details-source]") return nodes.pageSource;
       return null;
     },
     querySelectorAll(selector) {
@@ -170,11 +184,11 @@ test("admin analytics main card switches to selected metric graph", async () => 
   };
 
   window.AdminAnalytics.renderDashboard(root, {
-    cards: { totalUsers: 8, activeUsers: 3, pageViews: 0, onboardingRate: 0 },
+    cards: { totalUsers: 8, activeUsers: 3, pageViews: 12, onboardingRate: 0 },
     series: {
       totalUsers: [],
       activeUsers: [],
-      pageViews: [],
+      pageViews: [{ label: "May 1", value: 4 }, { label: "May 2", value: 12 }],
       oauth: [
         { key: "google", label: "Google", points: [{ label: "May 1", value: 1 }, { label: "May 2", value: 3 }] },
         { key: "discord", label: "Discord", points: [{ label: "May 1", value: 0 }, { label: "May 2", value: 2 }] },
@@ -185,7 +199,21 @@ test("admin analytics main card switches to selected metric graph", async () => 
       oauth: [{ label: "Google", value: 5 }, { label: "Discord", value: 3 }],
       uniType: [],
     },
-    engagement: {},
+    engagement: {
+      topPages: [{ label: "/dashboard", value: 12 }],
+      featureUsage: [{ label: "Tasks", value: 3 }],
+    },
+    comparison: {
+      enabled: true,
+      metrics: {
+        activeUsers: { available: true, percentChange: -20, direction: "down" },
+        pageViews: { available: true, percentChange: 50, direction: "up" },
+      },
+    },
+    gaDetails: {
+      countries: [{ countryId: "US", label: "United States", value: 7, comparison: { available: true, percentChange: 40, direction: "up" } }],
+      pages: [{ title: "Dashboard | APStudy", path: "/dashboard", label: "Dashboard | APStudy", value: 12, comparison: { available: true, percentChange: -25, direction: "down" } }],
+    },
     sources: {
       traffic: { label: "Google Analytics", status: "ok" },
       featureUsage: { label: "Nest database", status: "ok" },
@@ -193,14 +221,85 @@ test("admin analytics main card switches to selected metric graph", async () => 
     ga4: { configured: true, status: "ok" },
   });
 
-  assert.equal(nodes.title.textContent, "OAuth");
-  assert.equal(nodes.source.textContent, "Source: Nest database");
-  assert.equal(nodes.engagementSource.textContent, "Page views and top pages: Google Analytics. Feature usage: Nest database.");
-  assert.match(nodes.main.innerHTML, /admin-analytics-multiline/);
-  assert.match(nodes.main.innerHTML, /admin-analytics-legend/);
-  assert.match(nodes.main.innerHTML, /\+2/);
-  assert.equal(cards.get("oauth").textContent, "4");
-  assert.equal(tabs.find((tab) => tab.dataset.analyticsMetric === "oauth").attrs["aria-selected"], "true");
+  assert.equal(nodes.source.textContent, "Source: Google Analytics");
+  assert.match(nodes.main.innerHTML, /admin-analytics-svg--secondary/);
+  assert.equal(cards.get("pageViews").textContent, "12");
+  assert.equal(deltas.get("activeUsers").textContent, "↓ 20.0%");
+  assert.equal(deltas.get("pageViews").textContent, "↑ 50.0%");
+  assert.match(deltas.get("activeUsers").className, /admin-analytics-delta--down/);
+  assert.match(nodes.topPages.innerHTML, /Top Pages/);
+  assert.match(nodes.featureUsage.innerHTML, /Tasks/);
+  assert.match(nodes.countryMap.innerHTML, /admin-analytics-bars/);
+  assert.match(nodes.countryList.innerHTML, /United States/);
+  assert.match(nodes.pageList.innerHTML, /Dashboard \| APStudy/);
+  assert.match(nodes.pageList.innerHTML, /\/dashboard/);
+  assert.equal(tabs.find((tab) => tab.dataset.analyticsMetric === "pageViews").attrs["aria-selected"], "true");
+});
+
+test("admin analytics GA details draw a Google GeoChart when available", async () => {
+  const chartCalls = [];
+  const window = await runBrowserScript("static/js/admin-analytics.js", {
+    window: {
+      Intl,
+      google: {
+        charts: {
+          load(version, options) {
+            chartCalls.push({ type: "load", version, options });
+          },
+          setOnLoadCallback(callback) {
+            callback();
+          },
+        },
+        visualization: {
+          arrayToDataTable(rows) {
+            chartCalls.push({ type: "data", rows });
+            return rows;
+          },
+          GeoChart: class {
+            constructor(root) {
+              this.root = root;
+            }
+            draw(data, options) {
+              this.root.drawn = { data, options };
+              chartCalls.push({ type: "draw", data, options });
+            }
+          },
+        },
+      },
+    },
+  });
+
+  const nodes = {
+    countryMap: { innerHTML: "", drawn: null },
+    countryList: { innerHTML: "" },
+    pageList: { innerHTML: "" },
+    gaSource: { textContent: "" },
+    pageSource: { textContent: "" },
+  };
+  const root = {
+    querySelector(selector) {
+      if (selector === "[data-analytics-country-map]") return nodes.countryMap;
+      if (selector === '[data-analytics-detail-list="countries"]') return nodes.countryList;
+      if (selector === '[data-analytics-detail-list="pages"]') return nodes.pageList;
+      if (selector === "[data-analytics-ga-details-source]") return nodes.gaSource;
+      if (selector === "[data-analytics-page-details-source]") return nodes.pageSource;
+      return null;
+    },
+  };
+
+  window.AdminAnalytics.renderGaDetails(root, {
+    gaDetails: {
+      countries: [{ countryId: "US", label: "United States", value: 7, comparison: { available: true, percentChange: 40, direction: "up" } }],
+      pages: [{ title: "Dashboard | APStudy", path: "/dashboard", label: "Dashboard | APStudy", value: 12, comparison: { available: true, percentChange: -25, direction: "down" } }],
+    },
+    sources: { traffic: { label: "Google Analytics", status: "ok" } },
+  });
+
+  assert.deepEqual(Array.from(chartCalls.find((call) => call.type === "load").options.packages), ["geochart"]);
+  assert.deepEqual(JSON.parse(JSON.stringify(nodes.countryMap.drawn.data)), [["Country", "Active users"], ["US", 7]]);
+  assert.equal(nodes.gaSource.textContent, "Source: Google Analytics");
+  assert.match(nodes.countryList.innerHTML, /↑ 40.0%/);
+  assert.match(nodes.pageList.innerHTML, /↓ 25.0%/);
 });
 
 test("admin analytics range dropdown opens, selects, and closes on outside click", async () => {

@@ -60,28 +60,37 @@
                     <button class="admin-analytics-tab is-active" type="button" role="tab" aria-selected="true" data-analytics-metric="totalUsers">
                         <span>Total Users</span>
                         <strong data-analytics-card="totalUsers">--</strong>
+                        <small class="admin-analytics-tab-delta" data-analytics-delta="totalUsers" hidden></small>
                     </button>
                     <button class="admin-analytics-tab" type="button" role="tab" aria-selected="false" data-analytics-metric="activeUsers">
                         <span>Users Active</span>
                         <strong data-analytics-card="activeUsers">--</strong>
+                        <small class="admin-analytics-tab-delta" data-analytics-delta="activeUsers" hidden></small>
+                    </button>
+                    <button class="admin-analytics-tab" type="button" role="tab" aria-selected="false" data-analytics-metric="pageViews">
+                        <span>Views</span>
+                        <strong data-analytics-card="pageViews">--</strong>
+                        <small class="admin-analytics-tab-delta" data-analytics-delta="pageViews" hidden></small>
                     </button>
                     <button class="admin-analytics-tab" type="button" role="tab" aria-selected="false" data-analytics-metric="oauth">
                         <span>OAuth</span>
                         <strong data-analytics-card="oauth">--</strong>
+                        <small class="admin-analytics-tab-delta" data-analytics-delta="oauth" hidden></small>
                     </button>
                     <button class="admin-analytics-tab" type="button" role="tab" aria-selected="false" data-analytics-metric="uniType">
                         <span>Uni Type</span>
                         <strong data-analytics-card="uniType">--</strong>
+                        <small class="admin-analytics-tab-delta" data-analytics-delta="uniType" hidden></small>
                     </button>
                 </div>
                 <div class="admin-section-heading">
-                    <div>
-                        <h2 class="admin-title admin-title--small" data-analytics-main-title>Total Users</h2>
-                        <p class="admin-subtitle admin-subtitle--compact" data-analytics-main-description>Cumulative user growth from the first joined account.</p>
-                        <p class="admin-analytics-source" data-analytics-main-source></p>
-                    </div>
+                    <p class="admin-analytics-source" data-analytics-main-source></p>
                 </div>
                 <div class="admin-analytics-chart admin-analytics-chart--main" data-chart="main" role="img" aria-label="Analytics chart"></div>
+                <div class="admin-analytics-engagement admin-analytics-engagement--merged">
+                    <div class="admin-analytics-list" data-analytics-list="topPages"></div>
+                    <div class="admin-analytics-list" data-analytics-list="featureUsage"></div>
+                </div>
                 <div class="admin-analytics-range-toolbar">
                     <div class="admin-analytics-range-dropdown" data-analytics-range-dropdown>
                         <button
@@ -118,18 +127,25 @@
                 </div>
             </article>
 
-            <article class="admin-card admin-analytics-chart-card admin-analytics-chart-card--wide">
-                <div class="admin-section-heading">
-                    <div>
-                        <h2 class="admin-title admin-title--small">Engagement</h2>
-                        <p class="admin-subtitle admin-subtitle--compact">Page views, top pages, onboarding completion, and feature creation volume.</p>
-                        <p class="admin-analytics-source" data-analytics-engagement-source></p>
+            <article class="admin-card admin-analytics-chart-card admin-analytics-chart-card--wide admin-analytics-ga-detail-card">
+                <div class="admin-analytics-ga-details">
+                    <div class="admin-analytics-ga-panel admin-analytics-ga-panel--country">
+                        <div class="admin-analytics-detail-header">
+                            <h2>Active users by Country</h2>
+                            <span data-analytics-ga-details-source></span>
+                        </div>
+                        <div class="admin-analytics-country-layout">
+                            <div class="admin-analytics-country-map" data-analytics-country-map aria-label="Active users by country map"></div>
+                            <div class="admin-analytics-rank-table" data-analytics-detail-list="countries"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="admin-analytics-engagement">
-                    <div class="admin-analytics-chart" data-chart="pageViews" role="img" aria-label="Page views chart"></div>
-                    <div class="admin-analytics-list" data-analytics-list="topPages"></div>
-                    <div class="admin-analytics-list" data-analytics-list="featureUsage"></div>
+                    <div class="admin-analytics-ga-panel">
+                        <div class="admin-analytics-detail-header">
+                            <h2>Views by Page</h2>
+                            <span data-analytics-page-details-source></span>
+                        </div>
+                        <div class="admin-analytics-rank-table" data-analytics-detail-list="pages"></div>
+                    </div>
                 </div>
             </article>
         </section>
@@ -139,6 +155,7 @@
 
     <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/admin-nav.js') }}" defer></script>
+    <script src="https://www.gstatic.com/charts/loader.js" defer></script>
     <script src="{{ url_for('static', filename='js/admin-analytics.js') }}" defer></script>
 </body>
 </html>

@@ -1634,14 +1634,14 @@ button.admin-tab {
 
 .admin-analytics-main-card {
     display: grid;
-    gap: 18px;
+    gap: 12px;
     padding-top: 0;
     overflow: visible;
 }
 
 .admin-analytics-tabs {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     margin: -1px -1px 0;
     border-bottom: 1px solid var(--admin-border);
 }
@@ -1649,11 +1649,11 @@ button.admin-tab {
 .admin-analytics-tab {
     position: relative;
     min-width: 0;
-    min-height: 128px;
+    min-height: 112px;
     display: grid;
     align-content: center;
-    gap: 8px;
-    padding: 20px 24px;
+    gap: 6px;
+    padding: 18px 20px;
     border: 0;
     border-right: 1px solid var(--admin-border);
     border-radius: 0;
@@ -1661,7 +1661,7 @@ button.admin-tab {
     color: var(--admin-muted);
     text-align: left;
     cursor: pointer;
-    transition: background 140ms ease, color 140ms ease;
+    transition: background 140ms ease, color 140ms ease, opacity 140ms ease;
 }
 
 .admin-analytics-tab:last-child {
@@ -1692,16 +1692,32 @@ button.admin-tab {
 }
 
 .admin-analytics-tab span {
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 800;
 }
 
 .admin-analytics-tab strong {
     color: var(--admin-ink);
     font-family: var(--font-display);
-    font-size: clamp(34px, 5vw, 52px);
+    font-size: clamp(28px, 4vw, 42px);
     font-weight: 500;
     line-height: 1;
+}
+
+.admin-analytics-tab:not(.is-active) span {
+    opacity: 0.62;
+}
+
+.admin-analytics-tab:not(.is-active) strong {
+    opacity: 0.76;
+}
+
+.admin-analytics-tab-delta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 18px;
+    font-size: 12px;
+    font-weight: 800;
 }
 
 .admin-analytics-chart {
@@ -1711,9 +1727,9 @@ button.admin-tab {
 }
 
 .admin-analytics-source {
-    margin: 6px 0 0;
+    margin: 0;
     color: var(--admin-muted);
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -1971,6 +1987,11 @@ button.admin-tab {
     align-items: start;
 }
 
+.admin-analytics-engagement--merged {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
 .admin-analytics-list {
     display: grid;
     gap: 10px;
@@ -1987,6 +2008,155 @@ button.admin-tab {
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--admin-muted);
+}
+
+.admin-analytics-delta {
+    white-space: nowrap;
+    font-family: var(--font-display);
+}
+
+.admin-analytics-delta--up {
+    color: var(--admin-success);
+}
+
+.admin-analytics-delta--down {
+    color: var(--admin-danger);
+}
+
+.admin-analytics-delta--neutral {
+    color: var(--admin-muted);
+}
+
+.admin-analytics-ga-detail-card {
+    overflow: hidden;
+}
+
+.admin-analytics-ga-details {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+    gap: 18px;
+}
+
+.admin-analytics-ga-panel {
+    min-width: 0;
+    display: grid;
+    gap: 18px;
+}
+
+.admin-analytics-detail-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.admin-analytics-detail-header h2 {
+    margin: 0;
+    color: var(--admin-ink);
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
+.admin-analytics-detail-header span {
+    color: var(--admin-muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.admin-analytics-country-layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(260px, 0.82fr);
+    gap: 18px;
+    align-items: start;
+}
+
+.admin-analytics-country-map {
+    min-height: 320px;
+    display: grid;
+    align-items: center;
+    overflow: hidden;
+}
+
+.admin-analytics-country-map > div {
+    width: 100%;
+}
+
+.admin-analytics-rank-table {
+    min-width: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.admin-analytics-rank-head,
+.admin-analytics-rank-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px 14px;
+    align-items: center;
+}
+
+.admin-analytics-rank-head {
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--admin-border);
+    color: var(--admin-muted);
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.admin-analytics-rank-row {
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-analytics-rank-label {
+    min-width: 0;
+    display: grid;
+    gap: 2px;
+}
+
+.admin-analytics-rank-label strong {
+    min-width: 0;
+    overflow: hidden;
+    color: var(--admin-ink);
+    font-size: 14px;
+    font-weight: 800;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-analytics-rank-label span {
+    min-width: 0;
+    overflow: hidden;
+    color: var(--admin-muted);
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-analytics-rank-value {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    color: var(--admin-muted);
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.admin-analytics-rank-value strong {
+    color: var(--admin-ink);
+    font-size: 15px;
+}
+
+.admin-analytics-rank-row .admin-analytics-bar-track {
+    grid-column: 1 / -1;
+    height: 4px;
 }
 
 .admin-analytics-empty {
@@ -2051,6 +2221,10 @@ button.admin-tab {
     justify-content: space-between;
     gap: 16px;
     margin-bottom: 14px;
+}
+
+.admin-analytics-main-card > .admin-section-heading {
+    margin-bottom: 0;
 }
 
 .admin-inline-notice {
@@ -2490,7 +2664,9 @@ button.admin-tab {
 
     .admin-analytics-summary,
     .admin-analytics-grid,
-    .admin-analytics-engagement {
+    .admin-analytics-engagement,
+    .admin-analytics-ga-details,
+    .admin-analytics-country-layout {
         grid-template-columns: 1fr;
     }
 
@@ -2501,14 +2677,28 @@ button.admin-tab {
     .admin-analytics-tab {
         min-height: 104px;
         padding: 16px;
+        border-right: 1px solid var(--admin-border);
+        border-bottom: 1px solid var(--admin-border);
     }
 
-    .admin-analytics-tab:nth-child(2) {
+    .admin-analytics-tab:nth-child(2n) {
         border-right: 0;
     }
 
-    .admin-analytics-tab:nth-child(-n + 2) {
-        border-bottom: 1px solid var(--admin-border);
+    .admin-analytics-tab:last-child {
+        grid-column: 1 / -1;
+        border-right: 0;
+        border-bottom: 0;
+    }
+
+    .admin-analytics-detail-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+    }
+
+    .admin-analytics-country-map {
+        min-height: 260px;
     }
 
     .admin-analytics-kpi {
