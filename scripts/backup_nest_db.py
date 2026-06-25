@@ -30,6 +30,7 @@ MAX_BACKUPS = int(os.environ.get("NEST_BACKUP_RETENTION", "7"))
 DATABASES = (
     ("nest.sqlite3", "nest.sqlite3"),
     ("calendar.sqlite3", "calendar.sqlite3"),
+    ("apswiftly/aoi.db", "apswiftly/aoi.db"),
 )
 
 

@@ -42,6 +42,35 @@ class BackupNestDbTestCase(unittest.TestCase):
             self.assertEqual(event.channel, "server_logs")
             self.assertEqual(event.title, "Database Backup Created")
 
+    def test_run_backup_includes_apswiftly_database(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            instance_dir = Path(temp_dir) / "instance"
+            backup_dir = Path(temp_dir) / "backups"
+            apswiftly_dir = instance_dir / "apswiftly"
+            apswiftly_dir.mkdir(parents=True)
+
+            for relative_path in ("nest.sqlite3", "calendar.sqlite3", "apswiftly/aoi.db"):
+                db_path = instance_dir / relative_path
+                db_path.parent.mkdir(parents=True, exist_ok=True)
+                with sqlite3.connect(db_path) as connection:
+                    connection.execute("CREATE TABLE sample (id INTEGER PRIMARY KEY)")
+                    connection.commit()
+
+            with patch.object(backup_nest_db, "send_audit_event_sync", return_value=True) as notify:
+                exit_code = backup_nest_db.run_backup(
+                    instance_dir=instance_dir,
+                    backup_dir=backup_dir,
+                    max_backups=3,
+                    notify_discord=True,
+                )
+
+            self.assertEqual(exit_code, 0)
+            backup_set = next(backup_dir.glob("backup_*"))
+            for relative_path in ("nest.sqlite3", "calendar.sqlite3", "apswiftly/aoi.db"):
+                self.assertTrue((backup_set / relative_path).is_file())
+            event = notify.call_args.args[0]
+            self.assertIn("apswiftly/aoi.db", event.metadata["databases"])
+
     def test_run_backup_reports_missing_database(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             instance_dir = Path(temp_dir) / "instance"
