@@ -234,7 +234,18 @@ function clipboardTextLooksStructured(text) {
     ));
 }
 
+function normalizeClipboardText(text) {
+    if (typeof text !== 'string') return '';
+    return text
+        .replace(/\r\n?/g, '\n')
+        .split('\n')
+        .map((line) => line.trim() ? line.replace(/[ \t]+$/g, '') : '')
+        .join('\n')
+        .replace(/\n{3,}/g, '\n\n');
+}
+
 export {
     clipboardTextLooksStructured,
+    normalizeClipboardText,
     normalizeImportedMarkdownBlocks,
 };

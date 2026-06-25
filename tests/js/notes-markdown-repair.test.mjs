@@ -88,3 +88,16 @@ test("notes markdown repair converts dividers and quote markers", async () => {
     assert.equal(result.blocks[1].content[0].text, "Also called GDRs.");
     assert.equal(clipboardTextLooksStructured("# Title\n\n- Item"), true);
 });
+
+test("notes markdown clipboard normalization preserves paragraphs and collapses excessive blanks", async () => {
+    const { normalizeClipboardText } = await importBrowserModule("static/js/notes/editor/markdown-repair.js");
+
+    assert.equal(
+        normalizeClipboardText("First paragraph\r\n\r\nSecond paragraph"),
+        "First paragraph\n\nSecond paragraph"
+    );
+    assert.equal(
+        normalizeClipboardText("Line one   \n   \n\n\nLine two\t"),
+        "Line one\n\nLine two"
+    );
+});

@@ -9,6 +9,7 @@ import {
 } from '@blocknote/react';
 import { checkBlockHasDefaultProp, checkBlockTypeHasDefaultProp, mapTableCell } from '@blocknote/core';
 import { BlockNoteView } from '@blocknote/mantine';
+import { History } from '@tiptap/extension-history';
 import { notesEditorSchema } from './toolbar.js';
 import {
     BLOCK_CATALOG,
@@ -21,13 +22,15 @@ import {
     filterBlockCatalog,
 } from './editor/block-catalog.js';
 import { hiddenBlocksForCollapsedHeadings } from './editor/heading-collapse.js';
-import { clipboardTextLooksStructured, normalizeImportedMarkdownBlocks } from './editor/markdown-repair.js';
+import { clipboardTextLooksStructured, normalizeClipboardText, normalizeImportedMarkdownBlocks } from './editor/markdown-repair.js';
 import { blockOwnContentIsEmpty, buildLoadingIndicatorHtml, documentHasText, formatRelativeSavedTime, isBlankTitle, noteIdFromPath, parseSavedDate } from './editor/utils.js';
 
 const noteId = noteIdFromPath();
 const SAVE_DEBOUNCE_MS = 800;
 const SAVE_DEBOUNCE_LARGE_DOC_MS = 1500;
 const LARGE_DOCUMENT_BLOCK_COUNT = 120;
+const NORMAL_HISTORY_DEPTH = 100;
+const LONG_DOCUMENT_HISTORY_DEPTH = 35;
 const EDITOR_CHROME_THROTTLE_MS = 120;
 const SAVED_TIME_REFRESH_MS = 60000;
 const ZOOM_STORAGE_KEY = 'apstudy.notes.editor.zoom';
@@ -92,6 +95,7 @@ let toolbarOverflowController = null;
 let notePageSetup = {};
 let globalPageSetup = {};
 let pageSetupScope = 'note';
+let activePageSetupTrigger = null;
 let pageSetupSaveTimer = null;
 let addBlockActiveIndex = 0;
 let defaultSideMarginPercent = null;
@@ -101,9 +105,13 @@ let urlBlockPopover = null;
 let urlBlockResolve = null;
 let editorChromeThrottleTimer = null;
 let editorChromeRafId = null;
+let editorChromeSyncNeedsStructure = false;
+let editorChromeSyncSnapshot = null;
+let pastedContentNormalizationTimer = null;
 let lastSelectedBlockIds = new Set();
 let lastHeadingCollapseSignature = '';
-let lastSavedPayloadHash = '';
+let latestDocumentSnapshot = null;
+let lastSavedPayloadFingerprint = '';
 
 const titleInput = document.getElementById('note-title-input');
 const saveStatus = document.getElementById('save-status');
@@ -286,6 +294,56 @@ function textFromInlineContent(content) {
     }).join('');
 }
 
+function blockCountForDocument(documentValue) {
+    return Array.isArray(documentValue) ? documentValue.length : 0;
+}
+
+function historyDepthForDocument(documentValue) {
+    return blockCountForDocument(documentValue) >= LARGE_DOCUMENT_BLOCK_COUNT
+        ? LONG_DOCUMENT_HISTORY_DEPTH
+        : NORMAL_HISTORY_DEPTH;
+}
+
+function editorTopLevelBlockCount() {
+    const prosemirrorBlockGroup = editorInstance?._tiptapEditor?.state?.doc?.firstChild;
+    if (typeof prosemirrorBlockGroup?.childCount === 'number') {
+        return prosemirrorBlockGroup.childCount;
+    }
+    return blockCountForDocument(latestDocumentSnapshot);
+}
+
+function invalidateDocumentSnapshot() {
+    latestDocumentSnapshot = null;
+}
+
+function currentDocumentSnapshot() {
+    if (!editorInstance) return [];
+    if (!latestDocumentSnapshot) {
+        latestDocumentSnapshot = editorInstance.document || [];
+    }
+    return latestDocumentSnapshot;
+}
+
+function fingerprintTextParts(parts) {
+    let hash = 2166136261;
+    let length = 0;
+    parts.forEach((part) => {
+        const text = String(part ?? '');
+        length += text.length;
+        for (let index = 0; index < text.length; index += 1) {
+            hash ^= text.charCodeAt(index);
+            hash = Math.imul(hash, 16777619);
+        }
+        hash ^= 0;
+        hash = Math.imul(hash, 16777619);
+    });
+    return `${length}:${(hash >>> 0).toString(36)}`;
+}
+
+function notePayloadFingerprint(title, content) {
+    return fingerprintTextParts([title, content]);
+}
+
 function noteUrl(value) {
     const raw = String(value || '').trim();
     if (!raw) return '';
@@ -388,7 +446,8 @@ function closePageSetupPopover() {
     if (!pageSetupPopover) return;
     pageSetupPopover.hidden = true;
     closePageSetupDropdowns();
-    writingToolbar?.querySelector('[data-editor-action="page-setup"]')?.setAttribute('aria-expanded', 'false');
+    activePageSetupTrigger?.setAttribute('aria-expanded', 'false');
+    activePageSetupTrigger = null;
 }
 
 function positionPageSetupPopover(trigger) {
@@ -405,10 +464,11 @@ function openPageSetupPopover(trigger) {
         closePageSetupPopover();
         return;
     }
+    activePageSetupTrigger = trigger || null;
     pageSetupPopover.hidden = false;
-    trigger?.setAttribute('aria-expanded', 'true');
+    activePageSetupTrigger?.setAttribute('aria-expanded', 'true');
     updatePageSetupControls();
-    positionPageSetupPopover(trigger);
+    positionPageSetupPopover(activePageSetupTrigger);
 }
 
 async function saveNotePageSetup() {
@@ -730,12 +790,14 @@ function setSaveStatus(status, options = {}) {
 async function saveNote() {
     if (!noteId || !titleInput || !editorInstance) return;
 
+    const documentSnapshot = currentDocumentSnapshot();
+    const content = JSON.stringify(documentSnapshot);
     const payload = {
         title: titleInput.value,
-        content: JSON.stringify(editorInstance.document),
+        content,
     };
-    const payloadHash = `${payload.title}\u0000${payload.content}`;
-    if (payloadHash === lastSavedPayloadHash) {
+    const payloadFingerprint = notePayloadFingerprint(payload.title, payload.content);
+    if (payloadFingerprint === lastSavedPayloadFingerprint) {
         noteHasPendingChanges = false;
         return;
     }
@@ -757,10 +819,9 @@ async function saveNote() {
             throw new Error('Save request failed');
         }
 
-        const updatedNote = await response.json();
-        lastSavedPayloadHash = payloadHash;
+        lastSavedPayloadFingerprint = payloadFingerprint;
         noteHasPendingChanges = false;
-        setSaveStatus('saved', { savedAt: updatedNote?.updated_at });
+        setSaveStatus('saved', { savedAt: new Date().toISOString() });
     } catch (error) {
         console.error(error);
         setSaveStatus('error');
@@ -768,7 +829,7 @@ async function saveNote() {
 }
 
 function currentSaveDebounceMs() {
-    const blockCount = Array.isArray(editorInstance?.document) ? editorInstance.document.length : 0;
+    const blockCount = editorTopLevelBlockCount();
     return blockCount >= LARGE_DOCUMENT_BLOCK_COUNT ? SAVE_DEBOUNCE_LARGE_DOC_MS : SAVE_DEBOUNCE_MS;
 }
 
@@ -946,6 +1007,19 @@ function selectedBlocks() {
     return editorInstance.getSelection?.()?.blocks || [editorInstance.getTextCursorPosition?.()?.block].filter(Boolean);
 }
 
+function safeSetBlockSelection(anchor, head = anchor) {
+    if (!editorInstance || !anchor) return false;
+    const nextHead = head || anchor;
+    if (anchor.id && nextHead.id && anchor.id !== nextHead.id) {
+        editorInstance.setSelection?.(anchor, nextHead);
+    } else {
+        editorInstance.setTextCursorPosition?.(anchor);
+    }
+    selectedBlockAnchorId = anchor.id || null;
+    editorInstance.setForceSelectionVisible?.(true);
+    return true;
+}
+
 function blockSupportsVisualIndent(block) {
     return VISUAL_INDENT_BLOCKS.has(block?.type);
 }
@@ -1028,7 +1102,7 @@ function deleteSelectedBlocks() {
     const blocks = selectedBlocks();
     if (!blocks.length) return;
     const reference = blocks[0];
-    const nextBlock = editorInstance.getNextBlock?.(reference) || editorInstance.getPrevBlock?.(reference) || editorInstance.document?.[0];
+    const nextBlock = editorInstance.getNextBlock?.(reference) || editorInstance.getPrevBlock?.(reference) || currentDocumentSnapshot()[0];
     editorInstance.removeBlocks?.(blocks);
     if (nextBlock) editorInstance.setTextCursorPosition?.(nextBlock);
     selectedBlockAnchorId = null;
@@ -1047,8 +1121,7 @@ function duplicateSelectedBlocks() {
     });
     const inserted = editorInstance.insertBlocks?.(copied, blocks[blocks.length - 1], 'after') || [];
     if (inserted[0]) {
-        editorInstance.setSelection?.(inserted[0], inserted[inserted.length - 1] || inserted[0]);
-        selectedBlockAnchorId = inserted[0].id;
+        safeSetBlockSelection(inserted[0], inserted[inserted.length - 1] || inserted[0]);
     }
     focusEditorBody();
     updateEditorChrome();
@@ -1116,12 +1189,10 @@ function selectBlockRange(block, extend = false) {
     if (!editorInstance || !block) return;
     const anchor = extend && selectedBlockAnchorId ? editorInstance.getBlock?.(selectedBlockAnchorId) : null;
     if (anchor) {
-        editorInstance.setSelection?.(anchor, block);
+        safeSetBlockSelection(anchor, block);
     } else {
-        selectedBlockAnchorId = block.id;
-        editorInstance.setSelection?.(block, block);
+        safeSetBlockSelection(block, block);
     }
-    editorInstance.setForceSelectionVisible?.(true);
     updateEditorChrome();
 }
 
@@ -1328,9 +1399,14 @@ function updateToolbarState() {
     });
 }
 
-function updateEditorHint() {
+function updateEditorHint(documentSnapshot = latestDocumentSnapshot) {
     if (!editorHint || !editorInstance) return;
-    editorHint.hidden = documentHasText(editorInstance.document);
+    if (Array.isArray(documentSnapshot)) {
+        editorHint.hidden = documentHasText(documentSnapshot);
+        return;
+    }
+    const textContent = editorInstance._tiptapEditor?.state?.doc?.textContent || '';
+    editorHint.hidden = textContent.trim().length > 0;
 }
 
 function blockOuterById(id) {
@@ -1365,9 +1441,9 @@ function headingCollapseSignature(documentBlocks) {
     return `${collapsed}::${hiddenPart}`;
 }
 
-function syncHeadingCollapseChrome(force = false) {
+function syncHeadingCollapseChrome(force = false, documentSnapshot = null) {
     if (!editorInstance || !blocknoteRoot) return;
-    const documentBlocks = editorInstance.document || [];
+    const documentBlocks = documentSnapshot || currentDocumentSnapshot();
     const signature = headingCollapseSignature(documentBlocks);
     if (!force && signature === lastHeadingCollapseSignature) return;
     lastHeadingCollapseSignature = signature;
@@ -1403,11 +1479,20 @@ function syncHeadingCollapseChrome(force = false) {
 
 function flushEditorChromeSync() {
     editorChromeRafId = null;
+    const needsStructure = editorChromeSyncNeedsStructure;
+    const documentSnapshot = editorChromeSyncSnapshot;
+    editorChromeSyncNeedsStructure = false;
+    editorChromeSyncSnapshot = null;
     syncSelectedBlockClasses();
-    syncHeadingCollapseChrome();
+    if (needsStructure) {
+        syncHeadingCollapseChrome(false, documentSnapshot);
+    }
 }
 
-function scheduleEditorChromeSync({ immediate = false } = {}) {
+function scheduleEditorChromeSync({ immediate = false, structureChanged = false, documentSnapshot = null } = {}) {
+    editorChromeSyncNeedsStructure = editorChromeSyncNeedsStructure || structureChanged;
+    if (documentSnapshot) editorChromeSyncSnapshot = documentSnapshot;
+
     if (immediate) {
         if (editorChromeThrottleTimer) {
             clearTimeout(editorChromeThrottleTimer);
@@ -1427,11 +1512,17 @@ function scheduleEditorChromeSync({ immediate = false } = {}) {
     }, EDITOR_CHROME_THROTTLE_MS);
 }
 
-function updateEditorChrome({ immediate = false, structureChanged = false } = {}) {
+function updateEditorChrome({ immediate = false, structureChanged = false, contentChanged = false, documentSnapshot = null } = {}) {
     updateToolbarState();
-    updateEditorHint();
-    if (immediate || structureChanged) {
-        scheduleEditorChromeSync({ immediate: true });
+    if (contentChanged) {
+        updateEditorHint(documentSnapshot);
+    }
+    if (immediate || structureChanged || contentChanged) {
+        scheduleEditorChromeSync({
+            immediate: immediate || structureChanged,
+            structureChanged: structureChanged || contentChanged,
+            documentSnapshot,
+        });
         return;
     }
     scheduleEditorChromeSync();
@@ -1562,8 +1653,7 @@ function bindWritingToolbar() {
             removeUrlBlockPopover();
         }
         if (!pageSetupPopover || pageSetupPopover.hidden) return;
-        const trigger = writingToolbar.querySelector('[data-editor-action="page-setup"]');
-        if (pageSetupPopover.contains(event.target) || trigger?.contains(event.target)) return;
+        if (pageSetupPopover.contains(event.target) || activePageSetupTrigger?.contains(event.target)) return;
         closePageSetupDropdowns();
         closePageSetupPopover();
     });
@@ -1713,29 +1803,35 @@ function clipboardTextHasMarkdownSyntax(text) {
 function normalizeEditorDocument({ save = true } = {}) {
     if (!editorInstance || normalizingEditorDocument) return false;
 
-    const result = normalizeImportedMarkdownBlocks(editorInstance.document);
+    const documentSnapshot = currentDocumentSnapshot();
+    const result = normalizeImportedMarkdownBlocks(documentSnapshot);
     if (!result.changed) return false;
 
     normalizingEditorDocument = true;
     try {
-        editorInstance.replaceBlocks(editorInstance.document, result.blocks);
+        editorInstance.replaceBlocks(documentSnapshot, result.blocks);
     } finally {
         normalizingEditorDocument = false;
+        invalidateDocumentSnapshot();
     }
 
-    updateEditorChrome({ structureChanged: true });
+    updateEditorChrome({ structureChanged: true, contentChanged: true, documentSnapshot: result.blocks });
     if (save) triggerDebouncedSave();
     return true;
 }
 
 function schedulePastedContentNormalization() {
-    window.setTimeout(() => {
+    if (pastedContentNormalizationTimer) {
+        clearTimeout(pastedContentNormalizationTimer);
+    }
+    pastedContentNormalizationTimer = window.setTimeout(() => {
+        pastedContentNormalizationTimer = null;
         normalizeEditorDocument();
     }, 0);
 }
 
 function handleNotesPaste({ event, editor, defaultPasteHandler }) {
-    const plainText = event.clipboardData?.getData('text/plain') || '';
+    const plainText = normalizeClipboardText(event.clipboardData?.getData('text/plain') || '');
     const blockJson = event.clipboardData?.getData('application/x-nest-blocknote+json') || '';
     if (blockJson) {
         try {
@@ -1756,18 +1852,20 @@ function handleNotesPaste({ event, editor, defaultPasteHandler }) {
             // Fall back to markdown/plain text paste.
         }
     }
-    if (clipboardTextHasMarkdownSyntax(plainText)) {
+    const hasMarkdownSyntax = clipboardTextHasMarkdownSyntax(plainText);
+    const looksStructured = clipboardTextLooksStructured(plainText);
+    if (hasMarkdownSyntax) {
         editor.pasteMarkdown?.(plainText);
         schedulePastedContentNormalization();
         return true;
     }
 
     const handled = defaultPasteHandler({
-        prioritizeMarkdownOverHTML: true,
-        plainTextAsMarkdown: true,
+        prioritizeMarkdownOverHTML: looksStructured,
+        plainTextAsMarkdown: looksStructured,
     });
 
-    if (clipboardTextLooksStructured(plainText)) {
+    if (looksStructured) {
         schedulePastedContentNormalization();
     }
 
@@ -1813,9 +1911,7 @@ function NotesSideMenu(props) {
     }, []);
     const selectActionBlock = React.useCallback(() => {
         if (!editorInstance || !block) return;
-        selectedBlockAnchorId = block.id;
-        editorInstance.setSelection?.(block, block);
-        editorInstance.setForceSelectionVisible?.(true);
+        safeSetBlockSelection(block, block);
     }, [block]);
 
     React.useEffect(() => {
@@ -1943,10 +2039,15 @@ function NotesSideMenu(props) {
 }
 
 function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
+    const historyDepth = historyDepthForDocument(initialContent);
     const editor = useCreateBlockNote({
         initialContent,
         schema: notesEditorSchema,
         pasteHandler: handleNotesPaste,
+        disableExtensions: ['history'],
+        _tiptapOptions: {
+            extensions: [History.configure({ depth: historyDepth, newGroupDelay: 500 })],
+        },
         placeholders: {
             default: undefined,
             emptyDocument: "Enter text or type '/' for commands",
@@ -1967,7 +2068,9 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
         window.setTimeout(() => {
             if (editorInstance !== editor) return;
             captureHistoryBaseline();
-            updateEditorChrome();
+            invalidateDocumentSnapshot();
+            const documentSnapshot = currentDocumentSnapshot();
+            updateEditorChrome({ structureChanged: true, contentChanged: true, documentSnapshot });
             if (initialContentWasNormalized) {
                 triggerDebouncedSave();
             }
@@ -1995,12 +2098,13 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
             filePanel: false,
             theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
             onChange: () => {
+                invalidateDocumentSnapshot();
                 if (normalizingEditorDocument) {
-                    updateEditorChrome({ structureChanged: true });
+                    const documentSnapshot = currentDocumentSnapshot();
+                    updateEditorChrome({ structureChanged: true, contentChanged: true, documentSnapshot });
                     return;
                 }
-                if (normalizeEditorDocument()) return;
-                updateEditorChrome();
+                updateEditorChrome({ contentChanged: true });
                 triggerDebouncedSave();
             },
         },
@@ -2054,7 +2158,7 @@ async function initEditorPage() {
         setSaveStatus('saved', { savedAt: note.updated_at });
     }
     if (typeof note?.content === 'string') {
-        lastSavedPayloadHash = `${noteTitle}\u0000${note.content}`;
+        lastSavedPayloadFingerprint = notePayloadFingerprint(noteTitle, note.content);
     }
 
     let parsedContent = undefined;
@@ -2108,7 +2212,8 @@ async function initEditorPage() {
     });
     window.setTimeout(() => {
         const isNewBlankNote = isBlankTitle(noteTitle) && !documentHasText(parsedContent);
-        updateEditorChrome();
+        const documentSnapshot = currentDocumentSnapshot();
+        updateEditorChrome({ structureChanged: true, contentChanged: true, documentSnapshot });
         if (!isNewBlankNote) return;
         titleInput.focus({ preventScroll: true });
         titleInput.select();

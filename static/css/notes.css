@@ -362,6 +362,9 @@ body.notes-editor-body main {
 }
 
 .notes-writing-toolbar {
+  position: sticky;
+  top: calc(var(--notes-topbar-height) + 10px);
+  z-index: 45;
   display: flex;
   width: 100%;
   max-width: none;
@@ -372,7 +375,7 @@ body.notes-editor-body main {
   border: 1px solid var(--notes-border-subtle);
   border-radius: 10px;
   background: var(--notes-bg-toolbar);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
   overflow: visible;
 }
 
@@ -1493,6 +1496,41 @@ body.notes-editor-body main {
 
 .notes-bookmark-image .material-symbols-outlined {
   font-size: 28px;
+}
+
+.notes-lazy-image-frame {
+  width: 100%;
+  min-height: 180px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.notes-lazy-image-placeholder {
+  display: flex;
+  min-height: 180px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px dashed var(--notes-border-subtle);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--notes-bg-base) 72%, transparent);
+  color: var(--notes-text-muted);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.notes-lazy-image-placeholder .material-symbols-outlined {
+  font-size: 22px;
+}
+
+.notes-lazy-image {
+  display: block;
+}
+
+.notes-image-link-block {
+  color: inherit;
+  text-decoration: none;
 }
 
 .notes-bookmark-body {

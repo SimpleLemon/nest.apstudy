@@ -338,6 +338,11 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
 
     assert.match(source, /const SAVE_DEBOUNCE_MS = 800/);
     assert.match(source, /const SAVED_TIME_REFRESH_MS = 60000/);
+    assert.match(source, /const NORMAL_HISTORY_DEPTH = 100/);
+    assert.match(source, /const LONG_DOCUMENT_HISTORY_DEPTH = 35/);
+    assert.match(source, /function historyDepthForDocument\(documentValue\)/);
+    assert.match(source, /disableExtensions: \['history'\]/);
+    assert.match(source, /History\.configure\(\{ depth: historyDepth, newGroupDelay: 500 \}\)/);
     assert.match(source, /from '\.\/toolbar\.js'/);
     assert.match(source, /from '\.\/editor\/block-catalog\.js'/);
     assert.match(toolbarSource, /const notesEditorSchema = BlockNoteSchema\.create/);
@@ -345,6 +350,13 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(toolbarSource, /type: 'callout'/);
     assert.match(toolbarSource, /type: 'bookmark'/);
     assert.match(toolbarSource, /type: 'divider'/);
+    assert.match(toolbarSource, /const lazyImageBlock = createReactBlockSpec\(imageBlockConfig/);
+    assert.match(toolbarSource, /function LazyImagePreview\(\{ url, alt, width \}\)/);
+    assert.match(toolbarSource, /IntersectionObserver/);
+    assert.match(toolbarSource, /loading: 'lazy'/);
+    assert.match(toolbarSource, /decoding: 'async'/);
+    assert.match(toolbarSource, /fetchPriority: 'low'/);
+    assert.match(toolbarSource, /parse: imageParse/);
     assert.match(toolbarSource, /isCollapsed: collapsedProp/);
     assert.match(toolbarSource, /createReactStyleSpec/);
     assert.match(toolbarSource, /fontSizeStyle/);
@@ -367,8 +379,26 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(source, /filePanel: false/);
     assert.match(source, /function handleNotesPaste\(\{ event, editor, defaultPasteHandler \}\)/);
     assert.match(source, /pasteHandler: handleNotesPaste/);
-    assert.match(source, /prioritizeMarkdownOverHTML: true/);
-    assert.match(source, /plainTextAsMarkdown: true/);
+    assert.match(source, /from '\.\/editor\/markdown-repair\.js'/);
+    assert.match(source, /normalizeClipboardText/);
+    assert.match(source, /const looksStructured = clipboardTextLooksStructured\(plainText\)/);
+    assert.match(source, /prioritizeMarkdownOverHTML: looksStructured/);
+    assert.match(source, /plainTextAsMarkdown: looksStructured/);
+    assert.match(source, /function safeSetBlockSelection\(anchor, head = anchor\)/);
+    assert.match(source, /editorInstance\.setTextCursorPosition\?\.\(anchor\)/);
+    assert.doesNotMatch(source, /setSelection\?\.\(block, block\)/);
+    assert.match(source, /let latestDocumentSnapshot = null/);
+    assert.match(source, /function currentDocumentSnapshot\(\)/);
+    assert.match(source, /function notePayloadFingerprint\(title, content\)/);
+    assert.match(source, /let lastSavedPayloadFingerprint = ''/);
+    assert.doesNotMatch(source, /lastSavedPayloadHash/);
+    assert.match(source, /const content = JSON\.stringify\(documentSnapshot\)/);
+    assert.doesNotMatch(source, /const updatedNote = await response\.json\(\)/);
+    assert.doesNotMatch(source, /if \(normalizeEditorDocument\(\)\) return;/);
+    assert.match(source, /schedulePastedContentNormalization\(\)/);
+    assert.match(source, /let activePageSetupTrigger = null/);
+    assert.match(source, /activePageSetupTrigger = trigger \|\| null/);
+    assert.match(source, /activePageSetupTrigger\?\.contains\(event\.target\)/);
     assert.match(source, /application\/x-nest-blocknote\+json/);
     assert.match(source, /notes\/tools\/link-preview/);
     assert.match(source, /function toggleHeadingCollapse/);
@@ -393,6 +423,7 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(styles, /--notes-bg-toolbar: var\(--color-surface-container-low\)/);
     assert.match(styles, /--notes-editor-content-width: 720px/);
     assert.match(styles, /max-width: var\(--notes-editor-content-width\)/);
+    assert.match(styles, /\.notes-writing-toolbar\s*\{[^}]*position:\s*sticky;[^}]*top:\s*calc\(var\(--notes-topbar-height\) \+ 10px\);[^}]*z-index:\s*45;/s);
     assert.ok(styles.includes('content: "\\2022" !important;'));
     assert.ok(styles.includes('content: attr(data-index) "." !important;'));
     assert.match(styles, /\.blocknote-container \.bn-block-content\[data-content-type="checkListItem"\] input\[type="checkbox"\]/);
@@ -401,6 +432,8 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(styles, /\.blocknote-container \.bn-block-content\[data-content-type="codeBlock"\]/);
     assert.match(styles, /\.notes-callout-block/);
     assert.match(styles, /\.notes-bookmark-block/);
+    assert.match(styles, /\.notes-lazy-image-placeholder/);
+    assert.match(styles, /\.notes-lazy-image-frame/);
     assert.match(styles, /\.notes-slash-menu/);
     assert.match(styles, /\.notes-side-tools/);
     assert.match(styles, /\.notes-side-button \.material-symbols-outlined\s*\{[^}]*font-size:\s*20px;[^}]*line-height:\s*1;/s);
@@ -416,6 +449,7 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(editorTemplate, /data-toolbar-menu-trigger="text-color"/);
     assert.match(editorTemplate, /data-toolbar-menu-trigger="highlight-color"/);
     assert.match(editorTemplate, /data-toolbar-menu-trigger="block-actions"/);
+    assert.match(editorTemplate, /data-editor-action="page-setup"[^>]*aria-expanded="false"/);
     for (const action of ['copy-blocks', 'cut-blocks', 'duplicate-blocks', 'delete-blocks', 'move-blocks-up', 'move-blocks-down', 'toggle-heading-collapse']) {
         assert.match(editorTemplate, new RegExp(`data-editor-action="${action}"`));
     }

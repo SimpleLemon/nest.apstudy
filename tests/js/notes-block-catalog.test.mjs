@@ -49,6 +49,18 @@ test("block catalog builds URL block payloads", async () => {
     assert.equal(bookmark.props.imageUrl, "https://example.com/og.png");
 });
 
+test("notes image block renderer keeps image props and lazy-loads previews", async () => {
+    const source = await readFile(path.join(repoRoot, "static/js/notes/toolbar.js"), "utf8");
+
+    assert.match(source, /imageBlockConfig/);
+    assert.match(source, /const \{ url, caption, name, showPreview, previewWidth \} = props\.block\.props/);
+    assert.match(source, /loading: 'lazy'/);
+    assert.match(source, /decoding: 'async'/);
+    assert.match(source, /fetchPriority: 'low'/);
+    assert.match(source, /rootMargin: '900px 0px'/);
+    assert.match(source, /parse: imageParse/);
+});
+
 test("heading collapse hides blocks until same-or-higher heading", async () => {
     const { hiddenBlocksForCollapsedHeadings } = await importBrowserModule("static/js/notes/editor/heading-collapse.js");
 
