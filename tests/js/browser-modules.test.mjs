@@ -464,7 +464,10 @@ test("courses page keeps Atlas APIs, filtering state, and schedule constants con
     assert.match(source, /fetchJson\("\/api\/atlas\/terms"\)/);
     assert.match(source, /new URLSearchParams\(\{\s*term,\s*include_cancelled: "0",\s*\}\)/);
     assert.match(source, /params\.set\("q", query\)/);
-    assert.match(source, /window\.APStudyAtlasLive\.fetchSectionStatus\(section\)/);
+    assert.match(source, /COURSE_LIVE_HYDRATION_OVERSCAN = 5/);
+    assert.match(source, /fetchJson\("\/api\/courses\/section-status\/batch"/);
+    assert.match(source, /body: JSON\.stringify\(\{ section_ids: sectionIds, force: false \}\)/);
+    assert.doesNotMatch(source, /APStudyAtlasLive\.fetchSectionStatus/);
     assert.match(source, /fetchJson\("\/api\/courses\/saved"\)/);
     assert.match(source, /fetchJson\("\/api\/courses\/tracks"\)/);
     assert.match(source, /buildSectionSearchBlob\(normalized\)/);

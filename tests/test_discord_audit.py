@@ -726,7 +726,7 @@ class DiscordAuditRouteInstrumentationTestCase(unittest.TestCase):
             with patch.object(courses, "current_user", user), \
                     patch.object(courses, "_require_emory_student", return_value=None), \
                     patch.object(courses, "_get_section_by_id", return_value=section), \
-                    patch.object(courses, "_merge_live_section", return_value=(section, None, "2026-05-25T00:00:00Z")), \
+                    patch.object(courses, "_merge_live_section", return_value=(section, None, "2026-05-25T00:00:00Z", False)), \
                     patch.object(courses, "is_section_trackable", return_value=True), \
                     patch.object(courses, "_track_for_section", return_value=None), \
                     patch.object(courses, "create_row_safe", return_value=track), \
@@ -786,7 +786,7 @@ class DiscordAuditRouteInstrumentationTestCase(unittest.TestCase):
                     patch.object(courses, "_require_emory_student", return_value=None), \
                     patch.object(courses, "_get_section_by_id", return_value=section), \
                     patch.object(courses, "spring_course_tracking_open", return_value=True), \
-                    patch.object(courses, "_merge_live_section", return_value=(section, None, "2026-05-25T00:00:00Z")), \
+                    patch.object(courses, "_merge_live_section", return_value=(section, None, "2026-05-25T00:00:00Z", False)), \
                     patch.object(courses, "is_section_trackable", return_value=True), \
                     patch.object(courses, "_track_for_section", return_value=None), \
                     patch.object(courses, "create_row_safe", return_value=track), \

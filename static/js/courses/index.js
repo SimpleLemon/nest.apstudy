@@ -11,6 +11,8 @@ const COURSE_START_MINUTES = COURSE_START_HOUR * 60;
 const COURSE_END_MINUTES = COURSE_END_HOUR * 60;
 const COURSE_HOUR_HEIGHT = 64;
 const COURSE_RESULT_LIMIT = 100;
+const COURSE_LIVE_HYDRATION_OVERSCAN = 5;
+const COURSE_LIVE_HYDRATION_FAILURE_TTL_MS = 2 * 60 * 1000;
 const COMPACT_COURSES_QUERY = window.matchMedia("(max-width: 640px)");
 const COURSE_COLOR_PALETTE = Array.from({ length: 16 }, (_, index) => ({
   key: `course-color-${String(index + 1).padStart(2, "0")}`,
@@ -50,6 +52,9 @@ const state = {
   editingSaving: false,
   detailLoading: false,
   detailLiveError: "",
+  liveHydrationTimer: null,
+  liveHydrationInFlight: new Set(),
+  liveHydrationFailures: new Map(),
   error: "",
   weekScrollTop: null,
   weekScrollLeft: null,
@@ -121,6 +126,7 @@ const { wireControls } = window.APStudyCoursesControls.create({
 
 document.addEventListener("DOMContentLoaded", () => {
   wireControls();
+  wireLiveHydrationControls();
   void bootstrap();
 });
 
@@ -285,6 +291,9 @@ function rememberSection(section) {
   if (state.savedCoursesBySection.has(id)) {
     Object.assign(normalized, getDisplayCourse(id));
   }
+  if (normalized.live_snapshot_available === true) {
+    state.liveHydrationFailures.delete(id);
+  }
   normalized.searchBlob = buildSectionSearchBlob(normalized);
   state.sectionsById[id] = normalized;
   return normalized;
@@ -318,17 +327,10 @@ function getDisplayCourse(sectionId) {
     "campus_description",
     "course_description",
     "description",
-    "enrollment_status",
-    "enrollment_count",
-    "seats_available",
-    "enrollment_capacity",
-    "waitlist_total",
-    "waitlist_capacity",
     "grading_mode",
     "grading_mode_options",
     "instruction_method",
     "atlas_key",
-    "is_cancelled",
     "color_key",
     "overrides",
     "updated_at",
@@ -345,6 +347,7 @@ function render() {
   renderTermSelect();
   renderPanel();
   renderCalendar();
+  scheduleVisibleLiveHydration();
 }
 
 function changeTermBy(delta) {
@@ -446,31 +449,18 @@ function openDetail(sectionId) {
   state.filtersOpen = false;
   renderPanel();
   scrollPanelContentToTop();
+  void refreshSectionStatus(sectionId, { force: false });
 }
 
-async function refreshSectionStatus(sectionId) {
+async function refreshSectionStatus(sectionId, options = {}) {
   state.detailLoading = true;
   renderPanel();
-  const section = getSection(sectionId);
-  let liveSection = null;
-  let liveError = "";
-  if (section && window.APStudyAtlasLive?.fetchSectionStatus) {
-    try {
-      liveSection = await window.APStudyAtlasLive.fetchSectionStatus(section);
-    } catch (error) {
-      console.info("Browser Atlas live refresh unavailable:", error);
-      liveError = error.message || "Live Atlas status unavailable from this browser.";
-    }
-  } else {
-    liveError = "Live Atlas status unavailable from this browser.";
-  }
   try {
     const payload = await fetchJson("/api/courses/section-status", {
       method: "POST",
       body: JSON.stringify({
         section_id: sectionId,
-        live_section: liveSection,
-        live_error: liveError,
+        force: options.force !== false,
       }),
     });
     if (payload.section) {
@@ -478,9 +468,13 @@ async function refreshSectionStatus(sectionId) {
       rememberSection(payload.section);
     }
     state.detailLiveError = payload.live_error || "";
+    if (payload.live_error) {
+      showToast(payload.live_error || "Live Atlas status unavailable.", true);
+    }
   } catch (error) {
     console.error(error);
     state.detailLiveError = error.message || "Live status unavailable.";
+    showToast(state.detailLiveError, true);
   } finally {
     state.detailLoading = false;
     renderPanel();
@@ -551,26 +545,12 @@ async function setTrack(sectionId, enabled) {
   if (!sectionId) return;
   state.trackingIds.add(sectionId);
   renderPanel();
-  const section = getSection(sectionId);
-  let liveSection = null;
-  let liveError = "";
-  if (enabled && section && window.APStudyAtlasLive?.fetchSectionStatus) {
-    try {
-      liveSection = await window.APStudyAtlasLive.fetchSectionStatus(section);
-      rememberSection(liveSection);
-    } catch (error) {
-      console.info("Browser Atlas live refresh unavailable:", error);
-      liveError = error.message || "Live Atlas status unavailable from this browser.";
-    }
-  }
   try {
     const payload = await fetchJson("/api/courses/tracks", {
       method: "POST",
       body: JSON.stringify({
         section_id: sectionId,
         enabled,
-        live_section: liveSection,
-        live_error: liveError,
       }),
     });
     if (payload.section) rememberSection(payload.section);
@@ -606,6 +586,97 @@ function scrollPanelContentToTop() {
   window.requestAnimationFrame?.(() => {
     content.scrollTop = 0;
   });
+}
+
+function wireLiveHydrationControls() {
+  const content = document.getElementById("courses-panel-content");
+  content?.addEventListener("scroll", scheduleVisibleLiveHydration, { passive: true });
+  window.addEventListener("resize", scheduleVisibleLiveHydration);
+}
+
+function scheduleVisibleLiveHydration() {
+  window.clearTimeout(state.liveHydrationTimer);
+  state.liveHydrationTimer = window.setTimeout(hydrateVisibleLiveSections, 140);
+}
+
+function shouldHydrateLiveSection(section) {
+  const id = String(section?.id || section?.section_id || "");
+  if (!id || state.liveHydrationInFlight.has(id)) return false;
+  if (section?.live_snapshot_available === true && section?.live_stale !== true) return false;
+  const failedAt = state.liveHydrationFailures.get(id);
+  if (failedAt && Date.now() - failedAt < COURSE_LIVE_HYDRATION_FAILURE_TTL_MS) return false;
+  return true;
+}
+
+function visibleHydrationSectionIds() {
+  if (state.loading || state.sectionsLoading || state.detailSectionId || state.editingSectionId) return [];
+  const content = document.getElementById("courses-panel-content");
+  if (!content) return [];
+  const cards = Array.from(content.querySelectorAll(".course-card[data-section-id]"));
+  if (!cards.length) return [];
+
+  const contentRect = content.getBoundingClientRect();
+  const selected = [];
+  let lastVisibleIndex = -1;
+  cards.forEach((card, index) => {
+    const rect = card.getBoundingClientRect();
+    const visible = rect.bottom >= contentRect.top && rect.top <= contentRect.bottom;
+    if (!visible) return;
+    selected.push(card.dataset.sectionId);
+    lastVisibleIndex = Math.max(lastVisibleIndex, index);
+  });
+
+  if (lastVisibleIndex < 0) {
+    lastVisibleIndex = Math.min(cards.length - 1, COURSE_LIVE_HYDRATION_OVERSCAN - 1);
+    for (let index = 0; index <= lastVisibleIndex; index += 1) {
+      selected.push(cards[index].dataset.sectionId);
+    }
+  }
+
+  for (
+    let index = lastVisibleIndex + 1;
+    index < cards.length && index <= lastVisibleIndex + COURSE_LIVE_HYDRATION_OVERSCAN;
+    index += 1
+  ) {
+    selected.push(cards[index].dataset.sectionId);
+  }
+
+  return Array.from(new Set(selected))
+    .filter((sectionId) => shouldHydrateLiveSection(getSection(sectionId)));
+}
+
+async function hydrateVisibleLiveSections() {
+  const sectionIds = visibleHydrationSectionIds();
+  if (!sectionIds.length) return;
+  sectionIds.forEach((sectionId) => state.liveHydrationInFlight.add(sectionId));
+  try {
+    const payload = await fetchJson("/api/courses/section-status/batch", {
+      method: "POST",
+      body: JSON.stringify({ section_ids: sectionIds, force: false }),
+    });
+    Object.values(payload.sections_by_id || {}).forEach((section) => {
+      if (section?.id || section?.section_id) rememberSection(section);
+    });
+    Object.keys(payload.errors_by_id || {}).forEach((sectionId) => {
+      state.liveHydrationFailures.set(String(sectionId), Date.now());
+    });
+    rerenderAfterLiveHydration();
+  } catch (error) {
+    console.error(error);
+    sectionIds.forEach((sectionId) => state.liveHydrationFailures.set(sectionId, Date.now()));
+  } finally {
+    sectionIds.forEach((sectionId) => state.liveHydrationInFlight.delete(sectionId));
+  }
+}
+
+function rerenderAfterLiveHydration() {
+  const before = document.getElementById("courses-panel-content")?.scrollTop || 0;
+  renderTermSelect();
+  renderPanel();
+  renderCalendar();
+  const content = document.getElementById("courses-panel-content");
+  if (content) content.scrollTop = before;
+  scheduleVisibleLiveHydration();
 }
 
 function showToast(message, isError = false, options = {}) {

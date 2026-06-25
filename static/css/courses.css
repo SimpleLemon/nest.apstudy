@@ -562,6 +562,12 @@ body.courses-body {
   border-color: rgba(239, 68, 68, 0.36);
 }
 
+.course-chip.is-loading {
+  color: var(--color-on-surface-variant);
+  background: color-mix(in srgb, var(--color-surface-container) 78%, transparent);
+  border-color: color-mix(in srgb, var(--color-outline-variant) 62%, transparent);
+}
+
 .course-card-schedule {
   color: var(--color-on-surface-variant);
   font-size: 12px;

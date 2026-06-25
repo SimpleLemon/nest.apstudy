@@ -28,6 +28,7 @@ from services.atlas_client import (
     parse_section_id,
 )
 from services.app_config import spring_course_tracking_open
+from services.course_live_snapshots import merge_snapshots_into_sections, refresh_section_snapshot
 from services.course_catalog import get_course_catalog_metadata
 from services.discord_audit import (
     emit_course_track_event,
@@ -59,27 +60,7 @@ COURSE_OVERRIDE_STRING_FIELDS = {
 }
 COURSE_OVERRIDE_FIELDS = set(COURSE_OVERRIDE_STRING_FIELDS) | {"meetings"}
 COURSE_DAY_KEYS = {"Mon", "Tue", "Wed", "Thu", "Fri"}
-CLIENT_LIVE_SECTION_FIELDS = {
-    "enrollment_status",
-    "enrollment_count",
-    "seats_available",
-    "enrollment_capacity",
-    "is_cancelled",
-    "schedule_display",
-    "meetings",
-    "date_range",
-    "location",
-    "instructor",
-    "instructors",
-    "schedule_type",
-    "credit_hours",
-    "requirement_designation",
-    "requirements",
-    "course_description",
-    "course_notes",
-    "campus",
-    "campus_description",
-}
+MAX_LIVE_BATCH_SECTIONS = 20
 
 
 def _current_user_id():
@@ -111,6 +92,12 @@ def _require_emory_student():
     return None
 
 
+def _payload_bool(payload, key, default=False):
+    if key not in (payload or {}):
+        return default
+    return str(payload.get(key)).strip().lower() not in {"0", "false", "no", "off", ""}
+
+
 def _get_section_by_id(section_id):
     parsed = parse_section_id(section_id)
     if not parsed:
@@ -119,12 +106,12 @@ def _get_section_by_id(section_id):
     result = get_sections_by_ids([section_id], include_cancelled=True)
     sections = result.get("sections") or []
     if sections:
-        return sections[0]
+        return merge_snapshots_into_sections(sections)[0]
 
     fallback = get_sections_index(term=parsed["term"], include_cancelled=True)
     for section in fallback.get("sections", []):
         if section.get("id") == section_id:
-            return section
+            return merge_snapshots_into_sections([section])[0]
     return None
 
 
@@ -333,6 +320,12 @@ def _serialize_course(course, section=None):
         "enrollment_status": section.get("enrollment_status"),
         "enrollment_count": section.get("enrollment_count"),
         "seats_available": section.get("seats_available"),
+        "enrollment_capacity": section.get("enrollment_capacity"),
+        "waitlist_total": section.get("waitlist_total"),
+        "waitlist_capacity": section.get("waitlist_capacity"),
+        "live_updated_at": section.get("live_updated_at"),
+        "live_snapshot_available": section.get("live_snapshot_available", False),
+        "live_stale": section.get("live_stale", True),
         "is_cancelled": section.get("is_cancelled", False),
         "color_key": course.get("color_key"),
         "overrides": overrides,
@@ -387,45 +380,17 @@ def _merge_catalog_section(section):
     return enriched_section, timestamp
 
 
-def _client_live_matches(section, live_section):
-    if not isinstance(live_section, dict):
-        return False
-    live_id = live_section.get("id") or live_section.get("section_id")
-    if live_id and live_id != section.get("id"):
-        return False
-
-    return (
-        str(live_section.get("term") or "") == str(section.get("term") or "")
-        and str(live_section.get("subject") or "").upper() == str(section.get("subject") or "").upper()
-        and str(live_section.get("catalog_number") or live_section.get("catalog") or "") == str(section.get("catalog_number") or "")
-        and str(live_section.get("crn") or "") == str(section.get("crn") or "")
-        and str(live_section.get("section_number") or "") == str(section.get("section_number") or "")
-    )
-
-
-def _merge_client_live_section(section, live_section):
-    enriched_section, timestamp = _merge_catalog_section(section)
-    if not _client_live_matches(enriched_section, live_section):
-        enriched_section["live_updated_at"] = timestamp
-        return enriched_section, "Atlas live response did not match this section.", timestamp
-
-    merged = dict(enriched_section)
-    for key in CLIENT_LIVE_SECTION_FIELDS:
-        value = live_section.get(key)
-        if value not in (None, "", []):
-            merged[key] = value
-    merged["live_updated_at"] = timestamp
-    return merged, None, timestamp
-
-
 def _merge_live_section(section, payload=None):
     payload = payload or {}
-    live_section = payload.get("live_section")
-    if live_section:
-        return _merge_client_live_section(section, live_section)
-    enriched_section, timestamp = _merge_catalog_section(section)
-    enriched_section["live_updated_at"] = timestamp
-    return enriched_section, payload.get("live_error") or "Live Atlas status was not refreshed from this browser.", timestamp
+    force = _payload_bool(payload, "force", default=False)
+    enriched_section, _ = _merge_catalog_section(section)
+    try:
+        return refresh_section_snapshot(enriched_section, force=force)
+    except Exception:
+        logger.exception("Failed to refresh live Atlas snapshot")
+        enriched_section["live_snapshot_available"] = False
+        enriched_section["live_stale"] = True
+        return enriched_section, "Live Atlas status unavailable.", None, True
 
 
 @courses_bp.route("/saved", methods=["GET"])
@@ -667,14 +632,16 @@ def upsert_track():
 
     live_error = None
     last_updated_at = None
+    live_stale = False
     if enabled:
-        section, live_error, last_updated_at = _merge_live_section(section, payload)
+        section, live_error, last_updated_at, live_stale = _merge_live_section(section, payload)
         if not is_section_trackable(section):
             return jsonify({
                 "error": "This section is not closed/full right now.",
                 "section": section,
                 "live_error": live_error,
                 "last_updated_at": last_updated_at,
+                "live_stale": live_stale,
             }), 400
 
     user_id = _current_user_id()
@@ -736,6 +703,7 @@ def upsert_track():
         "section": section,
         "live_error": live_error,
         "last_updated_at": last_updated_at,
+        "live_stale": live_stale,
     })
 
 
@@ -752,10 +720,62 @@ def section_status():
     if not section:
         return jsonify({"error": "Course section not found."}), 404
 
-    section, live_error, last_updated_at = _merge_live_section(section, payload)
+    section, live_error, last_updated_at, live_stale = _merge_live_section(section, payload)
     return jsonify({
         "section": section,
         "trackable": is_section_trackable(section),
         "live_error": live_error,
         "last_updated_at": last_updated_at,
+        "live_stale": live_stale,
+    })
+
+
+@courses_bp.route("/section-status/batch", methods=["POST"])
+@login_required
+def section_status_batch():
+    forbidden = _require_emory_student()
+    if forbidden:
+        return forbidden
+
+    payload = request.get_json(silent=True) or {}
+    raw_section_ids = payload.get("section_ids") or []
+    if not isinstance(raw_section_ids, list):
+        return jsonify({"error": "section_ids must be a list"}), 400
+
+    force = _payload_bool(payload, "force", default=False)
+    section_ids = []
+    seen = set()
+    for raw_id in raw_section_ids:
+        section_id = str(raw_id or "").strip()
+        if not section_id or section_id in seen:
+            continue
+        seen.add(section_id)
+        section_ids.append(section_id)
+        if len(section_ids) >= MAX_LIVE_BATCH_SECTIONS:
+            break
+
+    sections_by_id = {}
+    errors_by_id = {}
+    stale_by_id = {}
+    updated_by_id = {}
+    for section_id in section_ids:
+        section = _get_section_by_id(section_id)
+        if not section:
+            errors_by_id[section_id] = "Course section not found."
+            continue
+        section, live_error, last_updated_at, live_stale = _merge_live_section(section, {"force": force})
+        sections_by_id[section_id] = section
+        stale_by_id[section_id] = live_stale
+        if last_updated_at:
+            updated_by_id[section_id] = last_updated_at
+        if live_error:
+            errors_by_id[section_id] = live_error
+
+    return jsonify({
+        "status": "ok",
+        "count": len(sections_by_id),
+        "sections_by_id": sections_by_id,
+        "errors_by_id": errors_by_id,
+        "stale_by_id": stale_by_id,
+        "updated_by_id": updated_by_id,
     })

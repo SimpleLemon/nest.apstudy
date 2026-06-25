@@ -27,6 +27,7 @@ BOOLEAN_COLUMNS = {
         "chat_sound_enabled",
     },
     "course_seat_tracks": {"enabled"},
+    "course_section_live_snapshots": {"is_cancelled"},
     "calendar_cache": {"is_all_day"},
     "user_calendar_preferences": {"visible"},
     "user_events": {"is_all_day"},

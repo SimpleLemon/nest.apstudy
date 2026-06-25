@@ -155,7 +155,9 @@
       const colorClass = isAdded ? getCourseColor(addedCourse).key : "";
       const status = section.enrollment_status || "Unknown";
       const statusClass = status.toLowerCase() === "open" ? "is-open" : status.toLowerCase() === "closed" ? "is-closed" : "";
-      const seats = formatSeats(section);
+      const hasLiveSnapshot = section.live_snapshot_available === true;
+      const seats = hasLiveSnapshot ? formatSeats(section) : "Loading seats";
+      const seatsClass = hasLiveSnapshot ? "" : "is-loading";
       const saving = state.savingIds.has(id);
       const sectionLabel = section.section_number ? ` <span class="course-section-inline">&middot; Sec ${escapeHtml(section.section_number)}</span>` : "";
       const scheduleDetail = formatCourseCardSchedule(section);
@@ -172,7 +174,7 @@
           <div class="course-card-meta-row">
             <div class="course-card-meta">
               <span class="course-chip ${statusClass}">${escapeHtml(status)}</span>
-              <span class="course-chip">${escapeHtml(seats)}</span>
+              <span class="course-chip ${seatsClass}">${escapeHtml(seats)}</span>
               <span class="course-chip">${escapeHtml(section.schedule_type || "Type")}</span>
               <span class="course-chip">${escapeHtml(formatCampus(section))}</span>
             </div>

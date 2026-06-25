@@ -14,6 +14,7 @@ from services.atlas_client import (
     get_sections_by_ids,
     get_starred_general_ed_requirements,
 )
+from services.course_live_snapshots import merge_snapshots_into_sections
 
 
 atlas_bp = Blueprint("atlas", __name__)
@@ -95,6 +96,10 @@ def list_sections():
     )
     if "error" in result:
         return jsonify(result), 400 if "Invalid" in result["error"] else 404
+    result = {
+        **result,
+        "sections": merge_snapshots_into_sections(result.get("sections") or []),
+    }
     return jsonify(result)
 
 
@@ -110,4 +115,8 @@ def list_sections_by_id():
     result = get_sections_by_ids(section_ids=section_ids, include_cancelled=include_cancelled)
     if "error" in result:
         return jsonify(result), 400
+    result = {
+        **result,
+        "sections": merge_snapshots_into_sections(result.get("sections") or []),
+    }
     return jsonify(result)
