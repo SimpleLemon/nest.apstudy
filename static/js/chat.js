@@ -19,6 +19,7 @@
   const REALTIME_HEARTBEAT_MS = 8000;
   const REALTIME_RECONNECT_MS = 1500;
   const ANNOUNCEMENTS_CHANNEL_ID = "nest_announcements";
+  const GRAMMARLY_DISABLED_ATTRS = 'data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"';
 
   const state = {
     user: root.dataset.currentUserId ? { id: root.dataset.currentUserId } : null,
@@ -744,7 +745,7 @@
     const loader = window.APStudyLoader?.html
       ? window.APStudyLoader.html(label, { sizePx: 46, textToneClass: "text-on-surface" })
       : `<div class="chat-empty">${escapeHtml(label)}</div>`;
-    els.messages.innerHTML = `<div class="chat-message-loader">${loader}</div>`;
+    els.messages.innerHTML = `<div class="chat-message-loader" ${GRAMMARLY_DISABLED_ATTRS}>${loader}</div>`;
   }
 
   function focusComposerSoon() {
@@ -880,8 +881,12 @@
     menu.className = "chat-room-context-menu";
     menu.hidden = true;
     menu.setAttribute("role", "menu");
+    menu.setAttribute("data-gramm", "false");
+    menu.setAttribute("data-gramm_editor", "false");
+    menu.setAttribute("data-enable-grammarly", "false");
+    menu.setAttribute("spellcheck", "false");
     menu.innerHTML = `
-      <button type="button" class="chat-room-context-action" role="menuitem" data-chat-room-action="read">Mark as read</button>
+      <button type="button" class="chat-room-context-action" role="menuitem" data-chat-room-action="read" ${GRAMMARLY_DISABLED_ATTRS}>Mark as read</button>
     `;
     document.body.appendChild(menu);
     menu.addEventListener("click", (event) => {
@@ -967,6 +972,10 @@
     if (!state.threads.length) {
       const empty = document.createElement("div");
       empty.className = "chat-empty chat-empty-compact";
+      empty.setAttribute("data-gramm", "false");
+      empty.setAttribute("data-gramm_editor", "false");
+      empty.setAttribute("data-enable-grammarly", "false");
+      empty.setAttribute("spellcheck", "false");
       empty.textContent = "No direct messages yet.";
       els.dmList.appendChild(empty);
       return;
@@ -1189,11 +1198,11 @@
   function messageStackElement() {
     if (!els.messages) return null;
     if (els.messages.querySelector(".chat-message-loader")) {
-      els.messages.innerHTML = `<div class="chat-message-stack"></div>`;
+      els.messages.innerHTML = `<div class="chat-message-stack" ${GRAMMARLY_DISABLED_ATTRS}></div>`;
     }
     let stack = els.messages.querySelector(".chat-message-stack");
     if (!stack) {
-      els.messages.innerHTML = `<div class="chat-message-stack"></div>`;
+      els.messages.innerHTML = `<div class="chat-message-stack" ${GRAMMARLY_DISABLED_ATTRS}></div>`;
       stack = els.messages.querySelector(".chat-message-stack");
     }
     return stack;
@@ -1251,7 +1260,7 @@
     const el = messageElementById(message.id);
     if (!el) return false;
     const contentHtml = `
-      <div class="chat-message-body">${message.rendered_html || escapeHtml(message.content || "")}</div>
+      <div class="chat-message-body" ${GRAMMARLY_DISABLED_ATTRS}>${message.rendered_html || escapeHtml(message.content || "")}</div>
       ${renderImages(message.images || [])}
       ${renderPreviews(message.previews || [])}
     `;
@@ -1285,7 +1294,7 @@
     }
     const stack = messageStackElement();
     if (stack && !stack.querySelector("[data-message-id]") && !stack.querySelector(".chat-empty")) {
-      stack.innerHTML = `<div class="chat-empty">No messages yet.</div>`;
+      stack.innerHTML = `<div class="chat-empty" ${GRAMMARLY_DISABLED_ATTRS}>No messages yet.</div>`;
     }
     return true;
   }
@@ -1528,7 +1537,7 @@
     if (els.messages) {
       const denied = channel?.university_status === "denied";
       els.messages.innerHTML = `
-        <div class="chat-empty chat-approval-state">
+        <div class="chat-empty chat-approval-state" ${GRAMMARLY_DISABLED_ATTRS}>
           <strong>${denied ? "University Channel Denied." : "Waiting Admin Approval."}</strong>
           <span>Email derek.chen@emory.edu for faster approval.</span>
         </div>
@@ -1540,13 +1549,13 @@
   function renderMessages(messages) {
     if (!els.messages) return;
     if (!messages || !messages.length) {
-      els.messages.innerHTML = `<div class="chat-message-stack"><div class="chat-empty">No messages yet.</div></div>`;
+      els.messages.innerHTML = `<div class="chat-message-stack" ${GRAMMARLY_DISABLED_ATTRS}><div class="chat-empty" ${GRAMMARLY_DISABLED_ATTRS}>No messages yet.</div></div>`;
       updateAnnouncementsUnreadBanner([]);
       updateHistoryBannerVisibility();
       return;
     }
     els.messages.innerHTML = `
-      <div class="chat-message-stack">
+      <div class="chat-message-stack" ${GRAMMARLY_DISABLED_ATTRS}>
         ${groupMessages(messages).map(renderMessageGroup).join("")}
       </div>
     `;
@@ -1557,7 +1566,7 @@
   function renderMessageGroup(group) {
     const [lead, ...continuations] = group.messages;
     return `
-      <div class="chat-message-group" data-message-group="${escapeHtml(group.id)}">
+      <div class="chat-message-group" data-message-group="${escapeHtml(group.id)}" ${GRAMMARLY_DISABLED_ATTRS}>
         ${renderLeadMessage(lead)}
         ${continuations.map(renderContinuationMessage).join("")}
       </div>
@@ -1567,7 +1576,7 @@
   function renderDeleteButton(message) {
     if (!message.can_delete) return "";
     return `
-      <button class="chat-delete" type="button" data-delete-message="${escapeHtml(message.id)}" aria-label="Delete message">
+      <button class="chat-delete" type="button" data-delete-message="${escapeHtml(message.id)}" aria-label="Delete message" ${GRAMMARLY_DISABLED_ATTRS}>
         <span class="material-symbols-outlined">delete</span>
       </button>
     `;
@@ -1578,16 +1587,16 @@
       ? renderDeleteButton(message)
       : "";
     return `
-      <article class="chat-message" data-message-id="${escapeHtml(message.id)}">
-        <button type="button" class="chat-message-avatar-button chat-author-button" data-author-message-id="${escapeHtml(message.id)}" aria-label="View ${escapeHtml(message.author_name || "author")} profile">
+      <article class="chat-message" data-message-id="${escapeHtml(message.id)}" ${GRAMMARLY_DISABLED_ATTRS}>
+        <button type="button" class="chat-message-avatar-button chat-author-button" data-author-message-id="${escapeHtml(message.id)}" aria-label="View ${escapeHtml(message.author_name || "author")} profile" ${GRAMMARLY_DISABLED_ATTRS}>
           <img class="chat-message-avatar" ${avatarAttrs(message.author_avatar_url, 84, "42px")} alt="">
         </button>
-        <div class="chat-message-content">
-          <div class="chat-message-head">
-            <button type="button" class="chat-author-button" data-author-message-id="${escapeHtml(message.id)}">${escapeHtml(message.author_name || "Nest User")}</button>
+        <div class="chat-message-content" ${GRAMMARLY_DISABLED_ATTRS}>
+          <div class="chat-message-head" ${GRAMMARLY_DISABLED_ATTRS}>
+            <button type="button" class="chat-author-button" data-author-message-id="${escapeHtml(message.id)}" ${GRAMMARLY_DISABLED_ATTRS}>${escapeHtml(message.author_name || "Nest User")}</button>
             <span class="chat-message-time">${escapeHtml(formatMessageTimestamp(message.created_at))}</span>
           </div>
-          <div class="chat-message-body">${message.rendered_html || escapeHtml(message.content || "")}</div>
+          <div class="chat-message-body" ${GRAMMARLY_DISABLED_ATTRS}>${message.rendered_html || escapeHtml(message.content || "")}</div>
           ${renderImages(message.images || [])}
           ${renderPreviews(message.previews || [])}
         </div>
@@ -1598,10 +1607,10 @@
 
   function renderContinuationMessage(message) {
     return `
-      <article class="chat-message chat-message-continuation" data-message-id="${escapeHtml(message.id)}">
+      <article class="chat-message chat-message-continuation" data-message-id="${escapeHtml(message.id)}" ${GRAMMARLY_DISABLED_ATTRS}>
         <span class="chat-message-continuation-time">${escapeHtml(formatClockTime(parseMessageDate(message.created_at)))}</span>
-        <div class="chat-message-content">
-          <div class="chat-message-body">${message.rendered_html || escapeHtml(message.content || "")}</div>
+        <div class="chat-message-content" ${GRAMMARLY_DISABLED_ATTRS}>
+          <div class="chat-message-body" ${GRAMMARLY_DISABLED_ATTRS}>${message.rendered_html || escapeHtml(message.content || "")}</div>
           ${renderImages(message.images || [])}
           ${renderPreviews(message.previews || [])}
         </div>
@@ -1613,7 +1622,7 @@
   function renderImages(images) {
     if (!images.length) return "";
     return `
-      <div class="chat-message-images">
+      <div class="chat-message-images" ${GRAMMARLY_DISABLED_ATTRS}>
         ${images.map((image) => `
           <img
             class="chat-message-image"
@@ -1635,9 +1644,9 @@
         ? `<img src="${escapeHtml(preview.image_url)}" alt="" loading="lazy" decoding="async" sizes="(max-width: 640px) 92vw, 128px">`
         : "";
       return `
-        <div class="chat-preview">
+        <div class="chat-preview" ${GRAMMARLY_DISABLED_ATTRS}>
           <a href="${escapeHtml(preview.url || "#")}" target="_blank" rel="noopener noreferrer nofollow">
-            <span class="chat-preview-copy">
+            <span class="chat-preview-copy" ${GRAMMARLY_DISABLED_ATTRS}>
               <strong>${escapeHtml(preview.title || preview.site_name || preview.url || "Link")}</strong>
               ${preview.site_name ? `<span>${escapeHtml(preview.site_name)}</span>` : ""}
               ${preview.description ? `<p>${escapeHtml(preview.description)}</p>` : ""}
@@ -1658,11 +1667,11 @@
     els.profilePanel.hidden = true;
     els.profilePanel.innerHTML = "";
     if (!onlineUsers.length) {
-      els.memberList.innerHTML = `<div class="chat-empty chat-empty-compact">No online users.</div>`;
+      els.memberList.innerHTML = `<div class="chat-empty chat-empty-compact" ${GRAMMARLY_DISABLED_ATTRS}>No online users.</div>`;
       return;
     }
     els.memberList.innerHTML = onlineUsers.map((user) => `
-      <button class="chat-member" type="button" data-profile-id="${escapeHtml(user.id)}">
+      <button class="chat-member" type="button" data-profile-id="${escapeHtml(user.id)}" ${GRAMMARLY_DISABLED_ATTRS}>
         <img ${avatarAttrs(user.picture_url, 72, "36px")} alt="">
         <span>
           <strong>${escapeHtml(user.name || user.username || "Nest User")}</strong>
@@ -1696,7 +1705,7 @@
 
   function profileDetail(label, value, className = "") {
     return `
-      <div class="${className}">
+      <div class="${className}" ${GRAMMARLY_DISABLED_ATTRS}>
         <span>${escapeHtml(label)}</span>
         <strong>${escapeHtml(value || "Not set")}</strong>
       </div>
@@ -1714,7 +1723,7 @@
       ? `<button type="button" data-block-user="${escapeHtml(user.id)}" data-blocked="${options.blocked ? "true" : "false"}">${blockLabel}</button>`
       : "";
     return `
-      <div class="chat-profile-card">
+      <div class="chat-profile-card" ${GRAMMARLY_DISABLED_ATTRS}>
         <div class="profile-tile" style="--profile-banner-color: ${escapeHtml(bannerColor)};">
           <div class="profile-tile-banner" aria-hidden="true"></div>
           <div class="profile-tile-body">
@@ -1739,7 +1748,7 @@
           </div>
         </div>
       </div>
-      <div class="chat-profile-actions">
+      <div class="chat-profile-actions" ${GRAMMARLY_DISABLED_ATTRS}>
         ${user?.profile_url ? `<a href="${escapeHtml(user.profile_url)}">View profile</a>` : ""}
         ${blockAction}
       </div>
@@ -2588,7 +2597,7 @@
       const results = payload.results || [];
       els.dmResults.innerHTML = results.length
         ? results.map((user) => `
-          <button type="button" class="chat-member chat-dm-result" data-start-dm="${escapeHtml(user.id)}">
+          <button type="button" class="chat-member chat-dm-result" data-start-dm="${escapeHtml(user.id)}" ${GRAMMARLY_DISABLED_ATTRS}>
             <img ${avatarAttrs(user.picture_url, 72, "36px")} alt="">
             <span>
               <strong>${escapeHtml(user.name || user.username || "Nest User")}</strong>
@@ -2596,9 +2605,9 @@
             </span>
           </button>
         `).join("")
-        : `<div class="chat-empty chat-empty-compact">No users found.</div>`;
+        : `<div class="chat-empty chat-empty-compact" ${GRAMMARLY_DISABLED_ATTRS}>No users found.</div>`;
     } catch (error) {
-      els.dmResults.innerHTML = `<div class="chat-empty chat-empty-compact">${escapeHtml(error.message)}</div>`;
+      els.dmResults.innerHTML = `<div class="chat-empty chat-empty-compact" ${GRAMMARLY_DISABLED_ATTRS}>${escapeHtml(error.message)}</div>`;
     }
   }
 

@@ -9,7 +9,9 @@ import {
 } from '@blocknote/react';
 import { checkBlockHasDefaultProp, checkBlockTypeHasDefaultProp, mapTableCell } from '@blocknote/core';
 import { BlockNoteView } from '@blocknote/mantine';
+import { Extension } from '@tiptap/core';
 import { History } from '@tiptap/extension-history';
+import { Plugin } from '@tiptap/pm/state';
 import { notesEditorSchema } from './toolbar.js';
 import {
     BLOCK_CATALOG,
@@ -31,6 +33,30 @@ const SAVE_DEBOUNCE_LARGE_DOC_MS = 1500;
 const LARGE_DOCUMENT_BLOCK_COUNT = 120;
 const NORMAL_HISTORY_DEPTH = 100;
 const LONG_DOCUMENT_HISTORY_DEPTH = 35;
+const GRAMMARLY_DISABLED_ATTRS = 'data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"';
+
+const preserveRangeSelectionShortcuts = Extension.create({
+    name: 'preserveRangeSelectionShortcuts',
+    priority: 1000,
+    addProseMirrorPlugins() {
+        return [
+            new Plugin({
+                props: {
+                    handleDOMEvents: {
+                        keydown(view, event) {
+                            const isRangeVerticalArrow = event.shiftKey
+                                && (event.metaKey || event.ctrlKey)
+                                && !event.altKey
+                                && (event.key === 'ArrowUp' || event.key === 'ArrowDown');
+                            if (!isRangeVerticalArrow) return false;
+                            return true;
+                        },
+                    },
+                },
+            }),
+        ];
+    },
+});
 const EDITOR_CHROME_THROTTLE_MS = 120;
 const SAVED_TIME_REFRESH_MS = 60000;
 const ZOOM_STORAGE_KEY = 'apstudy.notes.editor.zoom';
@@ -875,10 +901,14 @@ function requestUrlForBlock(item, anchorRect = null) {
         const label = item?.label || 'URL block';
         urlBlockPopover = document.createElement('form');
         urlBlockPopover.className = 'notes-url-block-popover';
+        urlBlockPopover.setAttribute('data-gramm', 'false');
+        urlBlockPopover.setAttribute('data-gramm_editor', 'false');
+        urlBlockPopover.setAttribute('data-enable-grammarly', 'false');
+        urlBlockPopover.setAttribute('spellcheck', 'false');
         urlBlockPopover.innerHTML = `
             <label class="notes-url-block-field">
                 <span>${label} URL</span>
-                <input type="url" name="url" placeholder="https://example.com" autocomplete="off" required />
+                <input type="url" name="url" placeholder="https://example.com" autocomplete="off" ${GRAMMARLY_DISABLED_ATTRS} required />
             </label>
             <div class="notes-url-block-error" hidden></div>
             <div class="notes-url-block-actions">
@@ -1685,10 +1715,10 @@ function bindWritingToolbar() {
         } else if (mod && event.altKey && event.key.toLowerCase() === 'h') {
             event.preventDefault();
             toggleHeadingCollapse();
-        } else if (event.altKey && event.key === 'ArrowUp') {
+        } else if (event.altKey && !event.shiftKey && !event.metaKey && !event.ctrlKey && event.key === 'ArrowUp') {
             event.preventDefault();
             moveSelectedBlocks('up');
-        } else if (event.altKey && event.key === 'ArrowDown') {
+        } else if (event.altKey && !event.shiftKey && !event.metaKey && !event.ctrlKey && event.key === 'ArrowDown') {
             event.preventDefault();
             moveSelectedBlocks('down');
         } else if ((event.key === 'Delete' || event.key === 'Backspace') && selectedBlocks().length > 1) {
@@ -2046,7 +2076,10 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
         pasteHandler: handleNotesPaste,
         disableExtensions: ['history'],
         _tiptapOptions: {
-            extensions: [History.configure({ depth: historyDepth, newGroupDelay: 500 })],
+            extensions: [
+                History.configure({ depth: historyDepth, newGroupDelay: 500 }),
+                preserveRangeSelectionShortcuts,
+            ],
         },
         placeholders: {
             default: undefined,

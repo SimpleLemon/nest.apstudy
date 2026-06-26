@@ -64,7 +64,7 @@
                     spellcheck="true"
                 />
 
-                <div id="notes-writing-toolbar" class="notes-writing-toolbar" aria-label="Writing tools" hidden>
+                <div id="notes-writing-toolbar" class="notes-writing-toolbar" aria-label="Writing tools" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden>
                     <div class="notes-toolbar-main" data-toolbar-main>
                     <div class="notes-toolbar-segment notes-toolbar-page-setup" data-toolbar-item data-overflow-priority="5" aria-label="Page setup">
                         <button type="button" data-editor-action="page-setup" title="Page setup" aria-label="Page setup" aria-expanded="false">
@@ -265,7 +265,7 @@
                     <div class="notes-toolbar-menu notes-add-block-menu" data-toolbar-menu="add-block" hidden>
                         <label class="notes-add-block-search">
                             <span class="material-symbols-outlined" aria-hidden="true">search</span>
-                            <input type="search" data-add-block-search placeholder="Search blocks" autocomplete="off" />
+                            <input type="search" data-add-block-search placeholder="Search blocks" autocomplete="off" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" />
                         </label>
                         <div class="notes-add-block-group" data-add-block-list>
                             <button type="button" class="notes-add-block-item" data-editor-action="insert-block" data-block-type="paragraph">
@@ -309,7 +309,7 @@
                     <form class="notes-toolbar-menu notes-link-menu" data-toolbar-menu="link" hidden>
                         <label class="notes-link-field">
                             <span>Link URL</span>
-                            <input type="url" data-link-url placeholder="https://example.com" autocomplete="off" />
+                            <input type="url" data-link-url placeholder="https://example.com" autocomplete="off" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" />
                         </label>
                         <div class="notes-link-actions">
                             <button type="button" class="notes-link-remove" data-editor-action="remove-link">Remove</button>
@@ -318,7 +318,7 @@
                         </div>
                     </form>
                 </div>
-                <section id="notes-page-setup-popover" class="notes-page-setup-popover" aria-labelledby="notes-page-setup-title" hidden>
+                <section id="notes-page-setup-popover" class="notes-page-setup-popover" aria-labelledby="notes-page-setup-title" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden>
                     <header class="notes-page-setup-header">
                         <h2 id="notes-page-setup-title">Page setup</h2>
                         <button type="button" class="notes-page-setup-close" data-page-setup-close aria-label="Close page setup">

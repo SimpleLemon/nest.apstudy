@@ -49,7 +49,7 @@
 
             <div class="chat-section">
                 <div class="chat-section-title">Nest</div>
-                <div id="chat-channel-list" class="chat-list"></div>
+                <div id="chat-channel-list" class="chat-list" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"></div>
             </div>
 
             <div class="chat-section chat-section-grow">
@@ -61,9 +61,9 @@
                 </div>
                 <div id="chat-dm-search" class="chat-dm-search" hidden>
                     <input id="chat-dm-search-input" type="search" placeholder="Find users" autocomplete="off">
-                    <div id="chat-dm-results" class="chat-dm-results"></div>
+                    <div id="chat-dm-results" class="chat-dm-results" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"></div>
                 </div>
-                <div id="chat-dm-list" class="chat-list"></div>
+                <div id="chat-dm-list" class="chat-list" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"></div>
             </div>
         </section>
 
@@ -89,19 +89,19 @@
                 </div>
             </header>
 
-            <div id="chat-status" class="chat-status" hidden></div>
-            <div id="chat-announcements-unread" class="chat-history-limited chat-announcements-unread" hidden>
+            <div id="chat-status" class="chat-status" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden></div>
+            <div id="chat-announcements-unread" class="chat-history-limited chat-announcements-unread" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden>
                 <span>Unread announcements</span>
                 <button id="chat-announcements-read" class="chat-announcements-read" type="button" aria-label="Mark announcements read">
                     <span class="material-symbols-outlined">close</span>
                 </button>
             </div>
-            <div id="chat-history-limited" class="chat-history-limited" hidden>
+            <div id="chat-history-limited" class="chat-history-limited" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden>
                 <span>Older Discord history lives in the server.</span>
                 <a id="chat-join-discord" href="#" target="_blank" rel="noopener noreferrer">Join Discord</a>
             </div>
-            <div id="chat-messages" class="chat-messages" aria-live="polite"></div>
-            <div id="chat-typing-indicator" class="chat-typing-indicator" hidden></div>
+            <div id="chat-messages" class="chat-messages" aria-live="polite" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"></div>
+            <div id="chat-typing-indicator" class="chat-typing-indicator" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden></div>
 
             <form id="chat-composer" class="chat-composer" autocomplete="off">
                 <textarea id="chat-message-input" rows="1" maxlength="2000" placeholder="Message #chat"></textarea>
@@ -125,8 +125,8 @@
                 <span class="material-symbols-outlined">group</span>
                 <span id="chat-members-restore-count">0</span>
             </button>
-            <div id="chat-member-list" class="chat-member-list"></div>
-            <div id="chat-profile-panel" class="chat-profile-panel" hidden></div>
+            <div id="chat-member-list" class="chat-member-list" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"></div>
+            <div id="chat-profile-panel" class="chat-profile-panel" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden></div>
         </aside>
     </main>
     <audio id="chat-audio" preload="auto" src="{{ url_for('static', filename='audio/task-pop.mp3') }}"></audio>

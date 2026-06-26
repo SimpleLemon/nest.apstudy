@@ -1314,6 +1314,13 @@ body.notes-editor-body main {
 
 .blocknote-container .bn-block-group .bn-block-group {
   margin-top: 0.12em !important;
+  min-height: 0 !important;
+}
+
+.blocknote-container .bn-block-group .bn-block-group > .bn-block-outer::before {
+  content: none !important;
+  border-left: 0 !important;
+  display: none !important;
 }
 
 .blocknote-container .bn-block-content[data-content-type="quote"] {
@@ -1393,14 +1400,19 @@ body.notes-editor-body main {
 .blocknote-container [data-content-type="pageBreak"],
 .blocknote-container [data-content-type="divider"],
 .blocknote-container [data-content-type="horizontalRule"] {
-  margin: 1em 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  min-height: 1.75em !important;
+  margin: 0.35em 0 !important;
 }
 
 .blocknote-container [data-content-type="pageBreak"] hr,
 .blocknote-container [data-content-type="divider"] hr,
 .blocknote-container [data-content-type="horizontalRule"] hr {
+  width: 100% !important;
   border: 0 !important;
   border-top: 1px solid var(--notes-border-subtle) !important;
+  margin: 0 !important;
 }
 
 .blocknote-container [data-content-type="pageBreak"] .bn-page-break {
@@ -1414,7 +1426,7 @@ body.notes-editor-body main {
   width: 100%;
   border: 0 !important;
   border-top: 1px solid var(--notes-border-subtle) !important;
-  margin: 0.6em 0 !important;
+  margin: 0 !important;
 }
 
 .notes-callout-block {
@@ -1853,11 +1865,13 @@ body.notes-editor-body main {
 }
 
 /* Ensure the editor area is clickable and takes full height */
-.blocknote-container [class*="bn-block-group"] {
+.blocknote-container .bn-editor > .bn-block-group,
+.blocknote-container .ProseMirror > .bn-block-group {
   min-height: 200px;
 }
 
-.blocknote-container [class*="bn-block-group"]:empty::before {
+.blocknote-container .bn-editor > .bn-block-group:empty::before,
+.blocknote-container .ProseMirror > .bn-block-group:empty::before {
   content: "Click here and start typing.";
   display: block;
   color: var(--notes-placeholder);
