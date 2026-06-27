@@ -28,6 +28,10 @@ _USER_OWNED_TABLES = (
 )
 
 _RELATION_TABLES = (
+    (
+        COLLECTIONS.get("note_access_grants", "note_access_grants"),
+        ("owner_user_id", "principal_id", "granted_by_user_id"),
+    ),
     (COLLECTIONS.get("chat_dm_threads", "chat_dm_threads"), ("participant_a", "participant_b")),
     (COLLECTIONS.get("chat_blocks", "chat_blocks"), ("blocker_id", "blocked_id")),
 )

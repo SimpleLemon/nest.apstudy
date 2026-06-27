@@ -242,6 +242,7 @@ COLLECTIONS = {
 	"file_folders": "file_folders",
 	"note_folders": "note_folders",
 	"notes": "notes",
+	"note_access_grants": "note_access_grants",
 	"chat_channels": "chat_channels",
 	"chat_messages": "chat_messages",
 	"chat_dm_threads": "chat_dm_threads",

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <script>window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or 'system-match' }}";</script>
+    <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
+    {% if viewer_authenticated %}{% include '_sidebar_init.html' %}{% endif %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/themes.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-sharing-1">
+    <title>{{ (folder.name if folder else 'Shared Folder') }} - APStudy Nest</title>
+    <script src="{{ url_for('static', filename='js/core/global-chrome.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/core/navbar.js') }}" defer></script>
+    {% if viewer_authenticated %}<script src="{{ url_for('static', filename='js/core/sidebar.js') }}" defer></script>{% endif %}
+    <script src="{{ url_for('static', filename='js/notes/sharing.js') }}" defer></script>
+</head>
+<body class="{% if not viewer_authenticated %}notes-no-sidebar {% endif %}bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased">
+    <global class="thenav"
+        data-authenticated="{{ 'true' if viewer_authenticated else 'false' }}"
+        data-has-sidebar="{{ 'true' if viewer_authenticated else 'false' }}"
+        data-login-url="{{ login_url }}"
+        {% if viewer_authenticated %}data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"{% endif %}></global>
+    {% if viewer_authenticated %}
+    {% set sidebar_user_emory_student = user.emory_student %}
+    {% include '_sidebar.html' %}
+    {% endif %}
+
+    <main class="flex-1 w-full max-w-[1400px] mx-auto px-6 md:px-8 pt-6 pb-10 relative z-10">
+        {% if page_state != 'ready' %}
+        <section class="notes-share-gate" aria-labelledby="notes-folder-gate-title">
+            <span class="material-symbols-outlined" aria-hidden="true">{{ 'lock' if page_state == 'login_required' else 'folder_off' }}</span>
+            <h1 id="notes-folder-gate-title">{{ 'Log in to view this folder' if page_state == 'login_required' else 'Folder unavailable' }}</h1>
+            <p>{{ 'This folder is shared with specific Nest users. Log in to check your access.' if page_state == 'login_required' else 'The folder may have been removed, unshared, or the link may be incorrect.' }}</p>
+            <div class="notes-share-gate-actions">
+                {% if page_state == 'login_required' %}<a class="btn-primary" href="{{ login_url }}">Login</a>{% endif %}
+                <a class="btn-secondary" href="{{ back_url }}">{{ back_label }}</a>
+            </div>
+        </section>
+        {% else %}
+        <section class="notes-shared-folder-page">
+            <header class="notes-shared-folder-header">
+                <div>
+                    <a class="editor-back-link" href="{{ back_url }}">
+                        <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+                        <span>{{ back_label }}</span>
+                    </a>
+                    <div class="notes-shared-folder-title">
+                        <span class="material-symbols-outlined" aria-hidden="true">folder_shared</span>
+                        <div>
+                            <h1>{{ folder.name or 'Untitled Folder' }}</h1>
+                            <p>View only{% if owner %} · Shared by {{ owner.name }}{% endif %}</p>
+                        </div>
+                    </div>
+                </div>
+                {% if access.can_share %}
+                <button class="notes-share-button" type="button" data-notes-share-resource="folder" data-resource-id="{{ folder.id or folder['$id'] }}" data-resource-title="{{ folder.name or 'Untitled Folder' }}">
+                    <span class="material-symbols-outlined" aria-hidden="true">ios_share</span>
+                    <span>Share</span>
+                </button>
+                {% endif %}
+            </header>
+            <div class="notes-shared-folder-grid" aria-label="Shared notes">
+                {% for note in notes %}
+                <a class="note-card notes-shared-note-card" href="{{ url_for('dashboard.note_document', note_id=note.id or note['$id']) }}">
+                    <div class="note-card-header"><span class="note-card-title">{{ note.title or 'Untitled' }}</span></div>
+                    <p class="note-card-preview">{{ note.preview_text or 'Open this note to read it.' }}</p>
+                    <div class="note-card-date">Shared note</div>
+                </a>
+                {% else %}
+                <div class="empty-state notes-shared-empty">
+                    <span class="material-symbols-outlined empty-state-icon" aria-hidden="true">description</span>
+                    <p class="empty-state-text">This folder is empty</p>
+                    <p class="empty-state-subtext">Notes added later will appear here automatically.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+    </main>
+</body>
+</html>

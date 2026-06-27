@@ -3,15 +3,28 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
     <script>
         window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";
         window.APPWRITE_DATABASE_ID = "{{ config.APPWRITE_DATABASE_ID or '' }}";
+        window.APSTUDY_NOTE_CONTEXT = {{ {
+            "noteId": note_id,
+            "pageState": page_state,
+            "authenticated": viewer_authenticated,
+            "access": access,
+            "owner": owner,
+            "loginUrl": login_url
+        }|tojson }};
     </script>
+    {% if viewer_authenticated %}
     <script src="https://cdn.jsdelivr.net/npm/appwrite@25.0.0/dist/iife/sdk.js"></script>
     {% include '_appwrite_meta.html' %}
     <script src="{{ url_for('static', filename='js/core/appwrite.js') }}"></script>
+    {% endif %}
     <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
+    {% if viewer_authenticated %}
     {% include '_sidebar_init.html' %}
+    {% endif %}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/themes.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/layout.css') }}">
@@ -22,34 +35,71 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-editor-setup-6">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-sharing-1">
     <link rel="stylesheet" href="{{ url_for('static', filename='js/notes/dist/notes-editor.css') }}?v=notes-editor-bundle-5">
-    <title>Note Editor - APStudy Nest</title>
+    <title>{{ 'Shared Note' if access.role == 'viewer' else 'Note Editor' }} - APStudy Nest</title>
 
     <script src="{{ url_for('static', filename='js/core/global-chrome.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/navbar.js') }}" defer></script>
+    {% if viewer_authenticated %}
     <script src="{{ url_for('static', filename='js/core/sidebar.js') }}" defer></script>
+    {% endif %}
+    <script src="{{ url_for('static', filename='js/notes/sharing.js') }}" defer></script>
+    {% if page_state == 'ready' %}
     <script type="module" src="{{ url_for('static', filename='js/notes/dist/notes-editor.js') }}?v=notes-editor-bundle-5"></script>
+    {% endif %}
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     </style>
 </head>
-<body class="notes-editor-body bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-primary/30 selection:text-primary-fixed">
-    <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
+<body class="notes-editor-body{% if not viewer_authenticated %} notes-no-sidebar{% endif %} bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-primary/30 selection:text-primary-fixed" data-note-read-only="{{ 'false' if access.can_edit else 'true' }}">
+    <global class="thenav"
+        data-authenticated="{{ 'true' if viewer_authenticated else 'false' }}"
+        data-has-sidebar="{{ 'true' if viewer_authenticated else 'false' }}"
+        data-login-url="{{ login_url }}"
+        {% if viewer_authenticated %}data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"{% endif %}></global>
+    {% if viewer_authenticated %}
     {% set sidebar_user_emory_student = user.emory_student %}
     {% include "_sidebar.html" %}
+    {% endif %}
     <main class="flex-1 w-full max-w-[1600px] mx-auto px-6 md:px-8 pt-6 pb-10 flex flex-col gap-12 relative z-10">
+        {% if page_state != 'ready' %}
+        <section class="notes-share-gate" aria-labelledby="notes-share-gate-title">
+            <span class="material-symbols-outlined" aria-hidden="true">{{ 'lock' if page_state == 'login_required' else 'description' }}</span>
+            <h1 id="notes-share-gate-title">{{ 'Log in to view this note' if page_state == 'login_required' else 'Note unavailable' }}</h1>
+            <p>{{ 'This note is shared with specific Nest users. Log in to check your access.' if page_state == 'login_required' else 'The note may have been removed, unshared, or the link may be incorrect.' }}</p>
+            <div class="notes-share-gate-actions">
+                {% if page_state == 'login_required' %}
+                <a class="btn-primary" href="{{ login_url }}">Login</a>
+                {% endif %}
+                <a class="btn-secondary" href="{{ back_url }}">{{ back_label }}</a>
+            </div>
+        </section>
+        {% else %}
         <div id="editor-page" class="notes-editor-page">
             <!-- Top bar -->
             <div id="editor-topbar" class="editor-topbar">
-                <a href="/notes" class="editor-back-link">
+                <a href="{{ back_url }}" class="editor-back-link">
                     <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
-                    <span>Notes</span>
+                    <span>{{ back_label }}</span>
                 </a>
                 <div class="editor-save-wrap">
+                    {% if access.can_edit %}
                     <div id="save-status" class="save-status save-status-hidden">Loading...</div>
                     <button id="save-retry" class="editor-retry-button" type="button" hidden>Retry</button>
+                    {% if access.can_share %}
+                    <button id="notes-share-button" class="notes-share-button" type="button" aria-label="Share note" data-notes-share-resource="note" data-resource-id="{{ note_id }}" data-resource-title="Note">
+                        <span class="material-symbols-outlined" aria-hidden="true">ios_share</span>
+                        <span>Share</span>
+                    </button>
+                    {% endif %}
+                    {% else %}
+                    <div class="notes-viewer-status">
+                        <span class="material-symbols-outlined" aria-hidden="true">visibility</span>
+                        <span>View only{% if owner %} · Shared by {{ owner.name }}{% endif %}</span>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
 
@@ -62,8 +112,10 @@
                     placeholder="Untitled"
                     autocomplete="off"
                     spellcheck="true"
+                    {% if not access.can_edit %}readonly aria-readonly="true"{% endif %}
                 />
 
+                {% if access.can_edit %}
                 <div id="notes-writing-toolbar" class="notes-writing-toolbar" aria-label="Writing tools" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden>
                     <div class="notes-toolbar-main" data-toolbar-main>
                     <div class="notes-toolbar-segment notes-toolbar-page-setup" data-toolbar-item data-overflow-priority="5" aria-label="Page setup">
@@ -388,12 +440,14 @@
                         </label>
                     </div>
                 </section>
+                {% endif %}
                 <p id="notes-editor-hint" class="notes-editor-hint" hidden>Type normally, use <kbd>/</kbd> for blocks, and press Space after Markdown shortcuts.</p>
 
                 <!-- BlockNote editor mounts here via createRoot -->
                 <div id="blocknote-root" class="blocknote-container"></div>
             </div>
         </div>
+        {% endif %}
     </main>
 </body>
 </html>

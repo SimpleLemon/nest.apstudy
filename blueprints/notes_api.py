@@ -4,7 +4,7 @@ import uuid
 from datetime import datetime, timezone
 from urllib.parse import urlparse
 
-from flask import Blueprint, abort, jsonify, request
+from flask import Blueprint, abort, jsonify, request, url_for
 from flask_login import current_user, login_required
 
 from appwrite.exception import AppwriteException
@@ -91,9 +91,9 @@ def _load_global_notes_page_setup(user_id):
     return _parse_page_setup(settings.get("notes_page_setup_json") if settings else "")
 
 
-def _note_to_payload(note, global_page_setup=None):
+def _note_to_payload(note, global_page_setup=None, *, access=None, owner=None):
     note_id = note.get("$id") or note.get("id")
-    return {
+    payload = {
         "$id": note_id,
         "id": note_id,
         "folder_id": note.get("folder_id"),
@@ -105,6 +105,39 @@ def _note_to_payload(note, global_page_setup=None):
         "global_page_setup": global_page_setup if global_page_setup is not None else {},
         "created_at": note.get("created_at"),
         "updated_at": note.get("updated_at"),
+    }
+    if access is not None:
+        payload["access"] = access
+    if owner is not None:
+        payload["owner"] = owner
+    return payload
+
+
+def _viewer_id():
+    if not current_user.is_authenticated:
+        return None
+    return str(current_user.id)
+
+
+def _access_denied_response():
+    if not current_user.is_authenticated:
+        return jsonify({"error": "Log in to view this shared note.", "login_required": True}), 401
+    return jsonify({"error": "Not found."}), 404
+
+
+def _sharing_url(resource_type, resource_id):
+    endpoint = "dashboard.note_document" if resource_type == "note" else "dashboard.shared_note_folder"
+    key = "note_id" if resource_type == "note" else "folder_id"
+    return url_for(endpoint, **{key: resource_id}, _external=True)
+
+
+def _sharing_payload(resource_type, resource_id):
+    state = note_store.sharing_state(resource_type, resource_id)
+    return {
+        "resource_type": resource_type,
+        "resource_id": resource_id,
+        "share_url": _sharing_url(resource_type, resource_id),
+        **state,
     }
 
 
@@ -217,16 +250,43 @@ def list_notes():
     try:
         notes = note_store.list_notes_for_user(user_id)
         folders = note_store.list_folders_for_user(user_id)
+        shared_note_ids = note_store.shared_resource_ids(user_id, "note")
+        shared_folder_ids = note_store.shared_resource_ids(user_id, "folder")
     except AppwriteException:
         logger.exception("Failed to fetch notes/folders")
         return jsonify({"notes": [], "folders": [], "error": "Unable to fetch notes right now."}), 500
 
     return jsonify(
         {
-            "notes": [note_store.note_list_payload(note) for note in notes],
-            "folders": [note_store.folder_payload(folder) for folder in folders],
+            "notes": [
+                note_store.note_list_payload(note, is_shared=(note.get("$id") or note.get("id")) in shared_note_ids)
+                for note in notes
+            ],
+            "folders": [
+                note_store.folder_payload(folder, is_shared=(folder.get("$id") or folder.get("id")) in shared_folder_ids)
+                for folder in folders
+            ],
         }
     )
+
+
+@notes_api_bp.route("/api/notes/shared", methods=["GET"])
+@login_required
+def list_shared_notes():
+    try:
+        return jsonify(note_store.list_shared_for_user(current_user.id))
+    except AppwriteException:
+        logger.exception("Failed to load notes shared with user")
+        return jsonify({"folders": [], "notes": [], "error": "Unable to load shared notes."}), 500
+
+
+@notes_api_bp.route("/api/notes/share-users", methods=["GET"])
+@login_required
+def search_note_share_users():
+    try:
+        return jsonify({"results": note_store.search_share_users(request.args.get("q"), current_user.id)})
+    except AppwriteException:
+        return jsonify({"results": [], "error": "Unable to search users."}), 500
 
 
 @notes_api_bp.route("/api/notes", methods=["POST"])
@@ -274,21 +334,29 @@ def notes_link_preview():
 
 
 @notes_api_bp.route("/api/notes/<note_id>", methods=["GET"])
-@login_required
 def get_note(note_id):
-    note = _note_owner_or_404(note_id)
+    note = note_store.get_note(note_id)
+    if not note:
+        abort(404)
+    access = note_store.resolve_note_access(note, _viewer_id())
+    if not access["can_view"]:
+        return _access_denied_response()
     try:
-        global_page_setup = _load_global_notes_page_setup(current_user.id)
+        global_page_setup = _load_global_notes_page_setup(note.get("user_id"))
     except AppwriteException:
         logger.exception("Failed to load note page setup defaults")
         global_page_setup = {}
-    return jsonify(_note_to_payload(note, global_page_setup=global_page_setup))
+    owner = note_store.get_safe_user(note.get("user_id"))
+    return jsonify(_note_to_payload(note, global_page_setup=global_page_setup, access=access, owner=owner))
 
 
 @notes_api_bp.route("/api/notes/<note_id>", methods=["PATCH"])
 @login_required
 def update_note(note_id):
-    _note_owner_or_404(note_id)
+    note = _note_owner_or_404(note_id)
+    access = note_store.resolve_note_access(note, current_user.id)
+    if not access["can_edit"]:
+        abort(404)
     payload = request.get_json(silent=True) or {}
 
     allowed = {"title", "content", "folder_id", "order", "page_setup_json"}
@@ -318,11 +386,24 @@ def update_note(note_id):
         return jsonify({"error": "Unable to update note."}), 500
 
     try:
-        global_page_setup = _load_global_notes_page_setup(current_user.id)
+        global_page_setup = _load_global_notes_page_setup(note.get("user_id"))
     except AppwriteException:
         logger.exception("Failed to load note page setup defaults")
         global_page_setup = {}
-    return jsonify(_note_to_payload(updated, global_page_setup=global_page_setup))
+    owner = note_store.get_safe_user(note.get("user_id"))
+    return jsonify(_note_to_payload(updated, global_page_setup=global_page_setup, access=access, owner=owner))
+
+
+@notes_api_bp.route("/api/notes/<note_id>/sharing", methods=["GET", "PATCH"])
+@login_required
+def note_sharing(note_id):
+    note = _note_owner_or_404(note_id)
+    access = note_store.resolve_note_access(note, current_user.id)
+    if not access["can_share"]:
+        abort(404)
+    if request.method == "GET":
+        return jsonify(_sharing_payload("note", note_id))
+    return _replace_sharing("note", note_id, note.get("user_id"))
 
 
 @notes_api_bp.route("/api/notes/<note_id>", methods=["DELETE"])
@@ -368,6 +449,24 @@ def create_folder():
     return jsonify(note_store.folder_payload(created)), 201
 
 
+@notes_api_bp.route("/api/notes/folders/<folder_id>", methods=["GET"])
+def get_shared_folder(folder_id):
+    folder = note_store.get_folder(folder_id)
+    if not folder:
+        abort(404)
+    access = note_store.resolve_folder_access(folder, _viewer_id())
+    if not access["can_view"]:
+        return _access_denied_response()
+    owner = note_store.get_safe_user(folder.get("user_id"))
+    notes = [note_store.note_list_payload(note, owner=owner) for note in note_store.list_notes_in_folder(folder_id)]
+    return jsonify({
+        "folder": note_store.folder_payload(folder, is_shared=True, owner=owner),
+        "notes": notes,
+        "owner": owner,
+        "access": access,
+    })
+
+
 @notes_api_bp.route("/api/notes/folders/<folder_id>", methods=["PATCH"])
 @login_required
 def update_folder(folder_id):
@@ -395,6 +494,18 @@ def update_folder(folder_id):
     return jsonify(note_store.folder_payload(updated))
 
 
+@notes_api_bp.route("/api/notes/folders/<folder_id>/sharing", methods=["GET", "PATCH"])
+@login_required
+def folder_sharing(folder_id):
+    folder = _folder_owner_or_404(folder_id)
+    access = note_store.resolve_folder_access(folder, current_user.id)
+    if not access["can_share"]:
+        abort(404)
+    if request.method == "GET":
+        return jsonify(_sharing_payload("folder", folder_id))
+    return _replace_sharing("folder", folder_id, folder.get("user_id"))
+
+
 @notes_api_bp.route("/api/notes/folders/<folder_id>", methods=["DELETE"])
 @login_required
 def delete_folder(folder_id):
@@ -407,3 +518,41 @@ def delete_folder(folder_id):
         return jsonify({"error": "Unable to delete folder."}), 500
 
     return jsonify({"ok": True})
+
+
+def _replace_sharing(resource_type, resource_id, owner_user_id):
+    payload = request.get_json(silent=True) or {}
+    public = payload.get("public")
+    if not isinstance(public, bool):
+        return jsonify({"error": "public must be a boolean."}), 400
+    raw_user_ids = payload.get("user_ids", [])
+    if not isinstance(raw_user_ids, list):
+        return jsonify({"error": "user_ids must be a list."}), 400
+    if len(raw_user_ids) > 100:
+        return jsonify({"error": "A resource can be shared with at most 100 users."}), 400
+
+    user_ids = []
+    for value in raw_user_ids:
+        if not isinstance(value, str):
+            return jsonify({"error": "Every user_id must be a valid Nest user ID."}), 400
+        user_id = value.strip()
+        if not user_id or user_id == str(owner_user_id):
+            return jsonify({"error": "Every user_id must be a valid recipient."}), 400
+        if user_id in user_ids:
+            continue
+        if not note_store.get_safe_user(user_id):
+            return jsonify({"error": "One or more selected users no longer exist."}), 400
+        user_ids.append(user_id)
+
+    try:
+        note_store.replace_resource_grants(
+            resource_type,
+            resource_id,
+            owner_user_id,
+            public=public,
+            user_ids=user_ids,
+            granted_by_user_id=current_user.id,
+        )
+    except AppwriteException:
+        return jsonify({"error": "Unable to update sharing."}), 500
+    return jsonify(_sharing_payload(resource_type, resource_id))

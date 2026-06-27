@@ -119,6 +119,28 @@ body {
   background: var(--color-shell-dropdown-hover-bg);
   color: var(--text-primary);
 }
+.navbar-login-button {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 70%, var(--border-color));
+  border-radius: 8px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+.navbar-login-button:hover,
+.navbar-login-button:focus-visible {
+  color: var(--color-on-primary);
+  filter: brightness(1.06);
+  outline: none;
+  transform: translateY(-1px);
+}
 /* Avatar wrapper (contains button + dropdown) */
 .navbar-avatar-wrapper {
   position: relative;

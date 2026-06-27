@@ -7,8 +7,18 @@
         notesSection: document.getElementById('notes-section'),
         notesEmptyState: document.getElementById('notes-empty-state'),
         notesEmptyNewNote: document.getElementById('notes-empty-new-note'),
+        notesEmptyTitle: document.getElementById('notes-empty-title'),
+        notesEmptySubtitle: document.getElementById('notes-empty-subtitle'),
+        notesSectionTitle: document.getElementById('notes-section-title'),
+        rootBreadcrumb: document.getElementById('notes-root-breadcrumb'),
+        breadcrumbSeparator: document.getElementById('notes-breadcrumb-separator'),
+        folderBreadcrumb: document.getElementById('notes-folder-breadcrumb'),
         btnNewNote: document.getElementById('btn-new-note'),
         btnNewFolder: document.getElementById('btn-new-folder'),
+        btnShareFolder: document.getElementById('btn-share-folder'),
+        pageActions: document.querySelector('.notes-page-actions'),
+        tabMine: document.getElementById('notes-tab-mine'),
+        tabShared: document.getElementById('notes-tab-shared'),
         alert: document.getElementById('notes-alert'),
         foldersCount: document.getElementById('folders-count'),
         notesCount: document.getElementById('notes-count'),
@@ -29,6 +39,8 @@
     const state = {
         folders: [],
         notes: [],
+        currentFolderId: null,
+        viewMode: 'mine',
         folderModalMode: 'create',
         activeFolder: null,
         moveNote: null,
@@ -38,6 +50,7 @@
     };
     const sortableInstances = [];
     let folderDropListenersBound = false;
+    let pendingDropFolderId;
 
     const {
         apiJson,
@@ -56,18 +69,16 @@
             formatCount,
             formatDate,
             notePreview,
-            onFolderExpandChange: initDragDrop,
+            openFolder,
+            openFolderSharing,
+            openSharedFolder,
             openFolderModal,
             openMoveModal,
             preloadEditorBundle,
             toggleCardMenu,
         },
     });
-    const {
-        createFolderCard,
-        createNoteCard,
-        expandFolderById,
-    } = noteCardFactory;
+    const { createFolderCard, createNoteCard } = noteCardFactory;
 
     function noteIdOf(note) {
         return note?.$id || note?.id || '';
@@ -84,8 +95,11 @@
     }
 
     function updateCounts(notesByFolder) {
+        const visibleFolderId = state.currentFolderId || 'root';
         if (els.foldersCount) els.foldersCount.textContent = formatCount(state.folders.length, 'folder');
-        if (els.notesCount) els.notesCount.textContent = formatCount((notesByFolder.root || []).length, 'note');
+        if (els.notesCount) {
+            els.notesCount.textContent = formatCount((notesByFolder[visibleFolderId] || []).length, 'note');
+        }
     }
 
     function setButtonBusy(button, busy) {
@@ -180,6 +194,110 @@
         return state.folders.find((folder) => noteIdOf(folder) === folderId) || null;
     }
 
+    function folderIdFromLocation() {
+        return new URLSearchParams(window.location.search).get('folder') || null;
+    }
+
+    function viewModeFromLocation() {
+        return new URLSearchParams(window.location.search).get('view') === 'shared' ? 'shared' : 'mine';
+    }
+
+    function updateFolderLocation(folderId, { replace = false } = {}) {
+        const url = new URL(window.location.href);
+        if (folderId) {
+            url.searchParams.set('folder', folderId);
+        } else {
+            url.searchParams.delete('folder');
+        }
+        url.searchParams.delete('view');
+        const method = replace ? 'replaceState' : 'pushState';
+        window.history[method]({ notesFolderId: folderId }, '', `${url.pathname}${url.search}${url.hash}`);
+    }
+
+    function updateViewLocation(viewMode, { replace = false } = {}) {
+        const url = new URL(window.location.href);
+        url.searchParams.delete('folder');
+        if (viewMode === 'shared') url.searchParams.set('view', 'shared');
+        else url.searchParams.delete('view');
+        const method = replace ? 'replaceState' : 'pushState';
+        window.history[method]({ notesView: viewMode }, '', `${url.pathname}${url.search}${url.hash}`);
+    }
+
+    function openSharedFolder(folderId) {
+        if (!folderId) return;
+        window.location.href = `/notes/folders/${encodeURIComponent(folderId)}`;
+    }
+
+    function markFolderSharing(folderId, sharing) {
+        const isShared = Boolean(sharing?.public || sharing?.users?.length);
+        state.folders = state.folders.map((folder) => (
+            noteIdOf(folder) === folderId ? { ...folder, is_shared: isShared } : folder
+        ));
+        renderCurrentView();
+    }
+
+    function openFolderSharing(folder = folderById(state.currentFolderId)) {
+        const folderId = noteIdOf(folder);
+        if (!folderId) return;
+        window.APStudyNotesSharing?.open({
+            resourceType: 'folder',
+            resourceId: folderId,
+            resourceTitle: folder.name || 'Untitled Folder',
+            onSaved: (sharing) => markFolderSharing(folderId, sharing),
+        });
+    }
+
+    async function setViewMode(viewMode, { updateHistory = true } = {}) {
+        const nextMode = viewMode === 'shared' ? 'shared' : 'mine';
+        if (state.viewMode === nextMode && state.notes.length) return;
+        state.viewMode = nextMode;
+        state.currentFolderId = null;
+        if (updateHistory) updateViewLocation(nextMode);
+        await loadAndRender();
+    }
+
+    function updateBreadcrumb() {
+        if (state.viewMode === 'shared') {
+            if (els.rootBreadcrumb) {
+                els.rootBreadcrumb.textContent = 'Shared with me';
+                els.rootBreadcrumb.disabled = true;
+                els.rootBreadcrumb.setAttribute('aria-current', 'page');
+            }
+            if (els.breadcrumbSeparator) els.breadcrumbSeparator.hidden = true;
+            if (els.folderBreadcrumb) els.folderBreadcrumb.hidden = true;
+            return;
+        }
+        const folder = folderById(state.currentFolderId);
+        const inFolder = Boolean(folder);
+        if (els.rootBreadcrumb) {
+            els.rootBreadcrumb.textContent = 'My Notes';
+            els.rootBreadcrumb.disabled = !inFolder;
+            if (inFolder) {
+                els.rootBreadcrumb.removeAttribute('aria-current');
+            } else {
+                els.rootBreadcrumb.setAttribute('aria-current', 'page');
+            }
+        }
+        if (els.breadcrumbSeparator) els.breadcrumbSeparator.hidden = !inFolder;
+        if (els.folderBreadcrumb) {
+            els.folderBreadcrumb.hidden = !inFolder;
+            els.folderBreadcrumb.textContent = folder?.name || '';
+            if (inFolder) {
+                els.folderBreadcrumb.setAttribute('aria-current', 'page');
+            } else {
+                els.folderBreadcrumb.removeAttribute('aria-current');
+            }
+        }
+    }
+
+    function openFolder(folderId, { updateHistory = true } = {}) {
+        const nextFolderId = folderById(folderId) ? folderId : null;
+        if (state.currentFolderId === nextFolderId) return;
+        state.currentFolderId = nextFolderId;
+        if (updateHistory) updateFolderLocation(nextFolderId);
+        renderCurrentView();
+    }
+
     function openFolderModal(mode, folder = null) {
         state.folderModalMode = mode;
         state.activeFolder = folder;
@@ -220,42 +338,74 @@
         }
     }
 
-    function render(data) {
+    function renderCurrentView() {
         destroyDragDrop();
-        state.notes = data.notes || [];
-        state.folders = data.folders || [];
         const notesByFolder = notesByFolderMap();
+        const currentFolder = folderById(state.currentFolderId);
+        if (state.currentFolderId && !currentFolder) {
+            state.currentFolderId = null;
+            updateFolderLocation(null, { replace: true });
+        }
 
+        updateBreadcrumb();
         updateCounts(notesByFolder);
 
         if (els.foldersGrid) els.foldersGrid.innerHTML = '';
-        if (!state.folders.length) {
-            if (els.foldersSection) els.foldersSection.hidden = true;
-        } else {
-            if (els.foldersSection) els.foldersSection.hidden = false;
+        const readOnly = state.viewMode === 'shared';
+        const showFolders = (readOnly || !state.currentFolderId) && Boolean(state.folders.length);
+        if (els.foldersSection) els.foldersSection.hidden = !showFolders;
+        if (showFolders) {
             state.folders.forEach((folder) => {
                 const folderId = noteIdOf(folder);
-                els.foldersGrid.appendChild(createFolderCard(folder, notesByFolder[folderId] || []));
+                const folderNotes = readOnly ? (folder.notes || []) : (notesByFolder[folderId] || []);
+                els.foldersGrid.appendChild(createFolderCard(folder, folderNotes, { readOnly }));
             });
         }
 
         if (els.notesGrid) els.notesGrid.innerHTML = '';
-        const unfiled = notesByFolder.root || [];
-        if (!unfiled.length) {
+        const visibleFolderId = state.currentFolderId || 'root';
+        const visibleNotes = notesByFolder[visibleFolderId] || [];
+        if (els.notesSectionTitle) {
+            els.notesSectionTitle.textContent = readOnly ? 'Shared notes' : state.currentFolderId ? 'Notes' : 'Unfiled notes';
+        }
+        if (els.notesEmptyTitle) {
+            els.notesEmptyTitle.textContent = readOnly ? 'Nothing shared with you yet' : state.currentFolderId ? 'This folder is empty' : 'No notes yet';
+        }
+        if (els.notesEmptySubtitle) {
+            els.notesEmptySubtitle.textContent = readOnly
+                ? 'Notes and folders shared directly with your Nest account will appear here.'
+                : state.currentFolderId
+                ? 'Create a note here or move an existing note into this folder.'
+                : 'Start a note, then organize it into folders when you are ready.';
+        }
+        if (!visibleNotes.length) {
             if (els.notesEmptyState) els.notesEmptyState.style.display = '';
         } else {
             if (els.notesEmptyState) els.notesEmptyState.style.display = 'none';
-            unfiled.forEach((note) => els.notesGrid.appendChild(createNoteCard(note)));
+            visibleNotes.forEach((note) => els.notesGrid.appendChild(createNoteCard(note, { readOnly })));
         }
 
-        initDragDrop();
+        if (els.pageActions) els.pageActions.hidden = readOnly;
+        if (els.btnShareFolder) els.btnShareFolder.hidden = readOnly || !state.currentFolderId;
+        if (els.notesEmptyNewNote) els.notesEmptyNewNote.hidden = readOnly;
+        els.tabMine?.classList.toggle('is-active', !readOnly);
+        els.tabMine?.setAttribute('aria-selected', String(!readOnly));
+        els.tabShared?.classList.toggle('is-active', readOnly);
+        els.tabShared?.setAttribute('aria-selected', String(readOnly));
+        if (!readOnly) initDragDrop();
+    }
+
+    function render(data) {
+        state.notes = data.notes || [];
+        state.folders = data.folders || [];
+        renderCurrentView();
     }
 
     async function loadAndRender(options = {}) {
         if (options.clearAlert !== false) clearAlert();
         setLoadingState(true, 'Loading notes...');
         try {
-            const data = await apiJson('/api/notes');
+            const data = await apiJson(state.viewMode === 'shared' ? '/api/notes/shared' : '/api/notes');
             render(data);
         } catch (error) {
             render({ notes: [], folders: [] });
@@ -272,11 +422,11 @@
         try {
             const note = await apiJson('/api/notes', {
                 method: 'POST',
-                body: JSON.stringify({ title: '', content: '' }),
+                body: JSON.stringify({ title: '', content: '', folder_id: state.currentFolderId }),
             });
             const noteId = noteIdOf(note);
             if (noteId) {
-                window.location.href = `/notes/editor/${encodeURIComponent(noteId)}`;
+                window.location.href = `/notes/${encodeURIComponent(noteId)}`;
                 return;
             }
             await loadAndRender({ clearAlert: false });
@@ -306,12 +456,7 @@
                 state.folders = state.folders.map((folder) => (
                     noteIdOf(folder) === folderId ? { ...folder, ...updated } : folder
                 ));
-                const folderCard = document.querySelector(`.folder-card[data-folder-id="${CSS.escape(folderId)}"]`);
-                folderCard?.querySelector('.folder-card-name')?.replaceChildren(document.createTextNode(name));
-                folderCard?.querySelector('.folder-card-menu-btn')?.setAttribute(
-                    'aria-label',
-                    `Folder options for ${name}`,
-                );
+                renderCurrentView();
                 showAlert('Folder renamed.');
             } else {
                 const created = await apiJson('/api/notes/folders', {
@@ -319,11 +464,7 @@
                     body: JSON.stringify({ name }),
                 });
                 state.folders.push(created);
-                const notesByFolder = notesByFolderMap();
-                updateCounts(notesByFolder);
-                if (els.foldersSection) els.foldersSection.hidden = false;
-                els.foldersGrid?.appendChild(createFolderCard(created, []));
-                initDragDrop();
+                renderCurrentView();
                 showAlert('Folder created.');
             }
             closeModal(els.folderModal);
@@ -350,7 +491,7 @@
             state.notes = state.notes.map((note) => (
                 noteIdOf(note) === noteId ? { ...note, ...listFields } : note
             ));
-            render({ notes: state.notes, folders: state.folders });
+            renderCurrentView();
             showAlert(folderId ? `Moved to ${folderById(folderId)?.name || 'folder'}.` : 'Moved to unfiled notes.');
         } catch (error) {
             showFormError(els.moveError, error.message || 'Unable to move note.');
@@ -375,11 +516,7 @@
         try {
             await apiJson(`/api/notes/${encodeURIComponent(noteId)}`, { method: 'DELETE' });
             state.notes = state.notes.filter((item) => noteIdOf(item) !== noteId);
-            noteCard.remove();
-            updateCounts(notesByFolderMap());
-            if (!state.notes.filter((item) => !item.folder_id).length && els.notesEmptyState) {
-                els.notesEmptyState.style.display = '';
-            }
+            renderCurrentView();
             showAlert('Note deleted.');
         } catch (error) {
             showAlert(error.message || 'Unable to delete note.', 'error');
@@ -405,9 +542,7 @@
             await apiJson(`/api/notes/folders/${encodeURIComponent(folderId)}`, { method: 'DELETE' });
             state.notes = state.notes.filter((note) => note.folder_id !== folderId);
             state.folders = state.folders.filter((item) => noteIdOf(item) !== folderId);
-            folderCard.remove();
-            updateCounts(notesByFolderMap());
-            if (!state.folders.length && els.foldersSection) els.foldersSection.hidden = true;
+            renderCurrentView();
             showAlert('Folder deleted.');
         } catch (error) {
             showAlert(error.message || 'Unable to delete folder.', 'error');
@@ -428,22 +563,10 @@
                 ghostClass: 'note-card-ghost',
                 chosenClass: 'note-card-chosen',
                 dragClass: 'note-card-drag',
+                onStart: handleDragStart,
                 onEnd: handleDragEnd,
             }));
         }
-
-        document.querySelectorAll('.folder-card-notes-inner').forEach((container) => {
-            if (!container.querySelector('.note-card')) return;
-            sortableInstances.push(Sortable.create(container, {
-                group: { name: 'notes', pull: true, put: true },
-                animation: 150,
-                draggable: '.note-card',
-                ghostClass: 'note-card-ghost',
-                chosenClass: 'note-card-chosen',
-                dragClass: 'note-card-drag',
-                onEnd: handleDragEnd,
-            }));
-        });
 
         if (folderDropListenersBound) return;
         folderDropListenersBound = true;
@@ -463,29 +586,39 @@
             if (!folderCard) return;
             event.preventDefault();
             folderCard.classList.remove('folder-drop-target');
-            const folderId = folderCard.dataset.folderId;
-            if (folderId) {
-                expandFolderById(folderId, notesByFolderMap());
-                initDragDrop();
-            }
+            pendingDropFolderId = folderCard.dataset.folderId || undefined;
         });
+    }
+
+    function handleDragStart() {
+        pendingDropFolderId = undefined;
+        els.page?.classList.add('is-dragging-note');
     }
 
     async function handleDragEnd(evt) {
         const item = evt.item;
+        els.page?.classList.remove('is-dragging-note');
+        document.querySelectorAll('.folder-drop-target').forEach((folderCard) => {
+            folderCard.classList.remove('folder-drop-target');
+        });
         if (!item) return;
         const noteId = item.dataset.noteId;
-        const folderCard = evt.to.closest('.folder-card');
-        const newFolderId = folderCard?.dataset.folderId || null;
+        const droppedOnFolder = pendingDropFolderId !== undefined;
+        const newFolderId = droppedOnFolder ? pendingDropFolderId : state.currentFolderId;
+        pendingDropFolderId = undefined;
+        const note = state.notes.find((entry) => noteIdOf(entry) === noteId);
+        if (note) note.folder_id = newFolderId;
+        item.dataset.folderId = newFolderId || '';
+        updateCounts(notesByFolderMap());
         try {
             await apiJson(`/api/notes/${encodeURIComponent(noteId)}`, {
                 method: 'PATCH',
-                body: JSON.stringify({ folder_id: newFolderId, order: evt.newIndex }),
+                body: JSON.stringify({
+                    folder_id: newFolderId,
+                    order: evt.newDraggableIndex ?? evt.newIndex,
+                }),
             });
-            const note = state.notes.find((entry) => noteIdOf(entry) === noteId);
-            if (note) note.folder_id = newFolderId;
-            item.dataset.folderId = newFolderId || '';
-            updateCounts(notesByFolderMap());
+            if (droppedOnFolder) renderCurrentView();
         } catch (error) {
             showAlert(error.message || 'Unable to update note position.', 'error');
             await loadAndRender();
@@ -496,6 +629,10 @@
         els.btnNewNote?.addEventListener('click', createNote);
         els.notesEmptyNewNote?.addEventListener('click', createNote);
         els.btnNewFolder?.addEventListener('click', () => openFolderModal('create'));
+        els.btnShareFolder?.addEventListener('click', () => openFolderSharing());
+        els.tabMine?.addEventListener('click', () => void setViewMode('mine'));
+        els.tabShared?.addEventListener('click', () => void setViewMode('shared'));
+        els.rootBreadcrumb?.addEventListener('click', () => openFolder(null));
         els.folderForm?.addEventListener('submit', (event) => {
             event.preventDefault();
             void saveFolderModal();
@@ -540,9 +677,16 @@
         });
         window.addEventListener('resize', closeAllMenus);
         window.addEventListener('scroll', closeAllMenus, true);
+        window.addEventListener('popstate', () => {
+            state.viewMode = viewModeFromLocation();
+            state.currentFolderId = folderIdFromLocation();
+            void loadAndRender();
+        });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+        state.viewMode = viewModeFromLocation();
+        state.currentFolderId = folderIdFromLocation();
         bindEvents();
         void loadAndRender();
     });

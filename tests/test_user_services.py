@@ -2,7 +2,7 @@ from unittest.mock import patch
 
 from appwrite.exception import AppwriteException
 
-from services.user_cleanup import delete_user_data
+from services.user_cleanup import _RELATION_TABLES, delete_user_data
 from services.user_profile import (
     is_early_member,
     is_emory_school,
@@ -31,6 +31,10 @@ class TestUserProfile:
 
 
 class TestUserCleanup:
+    def test_account_deletion_cleans_owned_received_and_granted_note_access(self):
+        grants = next(fields for table, fields in _RELATION_TABLES if table == "note_access_grants")
+        assert grants == ("owner_user_id", "principal_id", "granted_by_user_id")
+
     @patch("services.user_cleanup.delete_row_safe")
     @patch("services.user_cleanup.list_rows_all", return_value=[])
     @patch("services.user_cleanup.delete_calendar_rows_by_user")

@@ -25,9 +25,11 @@ import {
 } from './editor/block-catalog.js';
 import { hiddenBlocksForCollapsedHeadings } from './editor/heading-collapse.js';
 import { clipboardTextLooksStructured, normalizeClipboardText, normalizeImportedMarkdownBlocks } from './editor/markdown-repair.js';
-import { blockOwnContentIsEmpty, buildLoadingIndicatorHtml, documentHasText, formatRelativeSavedTime, isBlankTitle, noteIdFromPath, parseSavedDate } from './editor/utils.js';
+import { blockOwnContentIsEmpty, buildLoadingIndicatorHtml, documentHasText, formatRelativeSavedTime, handlePageSetupToolbarClick, isBlankTitle, noteIdFromPath, parseSavedDate } from './editor/utils.js';
 
-const noteId = noteIdFromPath();
+const noteContext = window.APSTUDY_NOTE_CONTEXT || {};
+const noteId = noteContext.noteId || noteIdFromPath();
+const canEdit = noteContext.access?.can_edit === true;
 const SAVE_DEBOUNCE_MS = 800;
 const SAVE_DEBOUNCE_LARGE_DOC_MS = 1500;
 const LARGE_DOCUMENT_BLOCK_COUNT = 120;
@@ -148,6 +150,7 @@ const editorHint = document.getElementById('notes-editor-hint');
 const editorPage = document.getElementById('editor-page');
 const zoomValue = document.getElementById('notes-zoom-value');
 const pageSetupPopover = document.getElementById('notes-page-setup-popover');
+const shareButton = document.getElementById('notes-share-button');
 const pageSetupScopeInput = document.querySelector('[data-page-setup-scope]');
 const sideMarginsValue = document.getElementById('notes-side-margins-value');
 
@@ -498,7 +501,7 @@ function openPageSetupPopover(trigger) {
 }
 
 async function saveNotePageSetup() {
-    if (!noteId) return;
+    if (!canEdit || !noteId) return;
     try {
         const response = await (window.APStudyPendingMutations?.track(fetch(`/api/notes/${noteId}`, {
             method: 'PATCH',
@@ -522,6 +525,7 @@ async function saveNotePageSetup() {
 }
 
 async function saveGlobalPageSetup() {
+    if (!canEdit) return;
     try {
         const response = await (window.APStudyPendingMutations?.track(fetch('/settings/api/notes-page-setup', {
             method: 'POST',
@@ -544,6 +548,7 @@ async function saveGlobalPageSetup() {
 }
 
 function schedulePageSetupSave() {
+    if (!canEdit) return;
     if (pageSetupSaveTimer) clearTimeout(pageSetupSaveTimer);
     pageSetupSaveTimer = window.setTimeout(() => {
         if (pageSetupScope === 'global') {
@@ -814,7 +819,7 @@ function setSaveStatus(status, options = {}) {
 }
 
 async function saveNote() {
-    if (!noteId || !titleInput || !editorInstance) return;
+    if (!canEdit || !noteId || !titleInput || !editorInstance) return;
 
     const documentSnapshot = currentDocumentSnapshot();
     const content = JSON.stringify(documentSnapshot);
@@ -1494,6 +1499,10 @@ function syncHeadingCollapseChrome(force = false, documentSnapshot = null) {
         if (!content) return;
         content.classList.toggle('notes-heading-collapsed', Boolean(block.props?.isCollapsed));
         let button = content.querySelector(':scope > .notes-heading-collapse-toggle');
+        if (!canEdit) {
+            button?.remove();
+            return;
+        }
         if (!button) {
             button = document.createElement('button');
             button.type = 'button';
@@ -1559,7 +1568,7 @@ function updateEditorChrome({ immediate = false, structureChanged = false, conte
 }
 
 function bindWritingToolbar() {
-    if (!writingToolbar) return;
+    if (!canEdit || !writingToolbar) return;
     writingToolbar.hidden = false;
     toolbarOverflowController?.disconnect();
     toolbarOverflowController = createToolbarOverflowController(writingToolbar);
@@ -1571,6 +1580,8 @@ function bindWritingToolbar() {
             closeToolbarMenus();
             return;
         }
+
+        if (handlePageSetupToolbarClick(event, writingToolbar, openPageSetupPopover)) return;
 
         const menuTrigger = event.target.closest('[data-toolbar-menu-trigger]');
         if (menuTrigger && writingToolbar.contains(menuTrigger)) {
@@ -1584,9 +1595,7 @@ function bindWritingToolbar() {
         event.preventDefault();
 
         const action = actionButton.dataset.editorAction;
-        if (action === 'page-setup') {
-            openPageSetupPopover(actionButton);
-        } else if (action === 'focus-body') {
+        if (action === 'focus-body') {
             focusEditorBody();
         } else if (action === 'insert-block') {
             insertBlockFromMenu(actionButton);
@@ -1803,6 +1812,7 @@ function renderMissingNoteState(message = 'This note could not be opened.') {
 }
 
 function triggerDebouncedSave() {
+    if (!canEdit) return;
     noteHasPendingChanges = true;
     if (saveDebounceTimer) {
         clearTimeout(saveDebounceTimer);
@@ -2104,7 +2114,7 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
             invalidateDocumentSnapshot();
             const documentSnapshot = currentDocumentSnapshot();
             updateEditorChrome({ structureChanged: true, contentChanged: true, documentSnapshot });
-            if (initialContentWasNormalized) {
+            if (canEdit && initialContentWasNormalized) {
                 triggerDebouncedSave();
             }
         }, 0);
@@ -2124,6 +2134,7 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
         BlockNoteView,
         {
             editor,
+            editable: canEdit,
             formattingToolbar: false,
             linkToolbar: false,
             sideMenu: false,
@@ -2132,6 +2143,7 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
             theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
             onChange: () => {
                 invalidateDocumentSnapshot();
+                if (!canEdit) return;
                 if (normalizingEditorDocument) {
                     const documentSnapshot = currentDocumentSnapshot();
                     updateEditorChrome({ structureChanged: true, contentChanged: true, documentSnapshot });
@@ -2141,14 +2153,14 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
                 triggerDebouncedSave();
             },
         },
-        React.createElement(SuggestionMenuController, {
+        canEdit ? React.createElement(SuggestionMenuController, {
             triggerCharacter: '/',
             getItems: getSlashItems,
             suggestionMenuComponent: NotesSlashMenu,
-        }),
-        React.createElement(SideMenuController, {
+        }) : null,
+        canEdit ? React.createElement(SideMenuController, {
             sideMenu: NotesSideMenu,
-        })
+        }) : null
     );
 }
 
@@ -2183,6 +2195,7 @@ async function initEditorPage() {
 
     const noteTitle = typeof note?.title === 'string' ? note.title : '';
     titleInput.value = noteTitle;
+    if (shareButton) shareButton.dataset.resourceTitle = noteTitle || 'Untitled';
     notePageSetup = normalizePageSetup(note?.page_setup);
     globalPageSetup = normalizePageSetup(note?.global_page_setup);
     applyPageSetupVariables();
@@ -2217,21 +2230,24 @@ async function initEditorPage() {
             initialContent: parsedContent,
             initialContentWasNormalized: parsedContentWasNormalized,
         }));
-        bindWritingToolbar();
+        if (canEdit) bindWritingToolbar();
     } catch (error) {
         console.error('Failed to mount note editor', error);
         setSaveStatus('error');
     }
 
-    titleInput.addEventListener('input', () => {
-        triggerDebouncedSave();
-    });
-    titleInput.addEventListener('keydown', (event) => {
-        if (event.key !== 'Enter') return;
-        event.preventDefault();
-        focusEditorBody();
-    });
+    if (canEdit) {
+        titleInput.addEventListener('input', () => {
+            triggerDebouncedSave();
+        });
+        titleInput.addEventListener('keydown', (event) => {
+            if (event.key !== 'Enter') return;
+            event.preventDefault();
+            focusEditorBody();
+        });
+    }
     rootElement.addEventListener('click', (event) => {
+        if (!canEdit) return;
         const collapseButton = event.target.closest('.notes-heading-collapse-toggle');
         if (collapseButton) {
             event.preventDefault();
@@ -2247,7 +2263,7 @@ async function initEditorPage() {
         const isNewBlankNote = isBlankTitle(noteTitle) && !documentHasText(parsedContent);
         const documentSnapshot = currentDocumentSnapshot();
         updateEditorChrome({ structureChanged: true, contentChanged: true, documentSnapshot });
-        if (!isNewBlankNote) return;
+        if (!canEdit || !isNewBlankNote) return;
         titleInput.focus({ preventScroll: true });
         titleInput.select();
     }, 0);

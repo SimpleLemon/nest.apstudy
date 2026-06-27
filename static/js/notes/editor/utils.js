@@ -1,8 +1,17 @@
 export function noteIdFromPath(pathname = window.location.pathname) {
     const parts = pathname.split('/').filter(Boolean);
     const editorIndex = parts.indexOf('editor');
-    if (editorIndex === -1) return '';
-    return parts[editorIndex + 1] || '';
+    if (editorIndex !== -1) return parts[editorIndex + 1] || '';
+    if (parts[0] === 'notes' && parts[1] && parts[1] !== 'folders') return parts[1];
+    return '';
+}
+
+export function handlePageSetupToolbarClick(event, toolbar, openPageSetupPopover) {
+    const actionButton = event?.target?.closest?.('button[data-editor-action="page-setup"]');
+    if (!actionButton || !toolbar?.contains?.(actionButton)) return false;
+    event.preventDefault?.();
+    openPageSetupPopover(actionButton);
+    return true;
 }
 
 export function buildLoadingIndicatorHtml(label = 'Loading...', options = {}) {

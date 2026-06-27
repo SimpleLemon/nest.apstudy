@@ -313,10 +313,13 @@ test("console discord batches browser console output for server logs", async () 
 });
 
 test("notes list guards destructive actions and supports folder/export workflows", async () => {
+    const listSource = await sourceFor("static/js/notes/list.js");
+    const cardsSource = await sourceFor("static/js/notes/list/cards.js");
+    const template = await sourceFor("templates/notes.html");
     const source = [
-        await sourceFor("static/js/notes/list.js"),
+        listSource,
         await sourceFor("static/js/notes/list/utils.js"),
-        await sourceFor("static/js/notes/list/cards.js"),
+        cardsSource,
     ].join("\n");
 
     assert.match(source, /function apiJson\(url, options = \{\}\)/);
@@ -326,6 +329,14 @@ test("notes list guards destructive actions and supports folder/export workflows
     assert.match(source, /NotesExport\?\.exportNoteJsonToTxt/);
     assert.match(source, /NotesExport\?\.exportNoteJsonToPdf/);
     assert.match(source, /data-action="move"/);
+    assert.equal((listSource.match(/onStart: handleDragStart/g) || []).length, 1);
+    assert.doesNotMatch(listSource, /addEventListener\('drop',[\s\S]{0,500}initDragDrop\(\)/);
+    assert.doesNotMatch(cardsSource, /more_horiz/);
+    assert.equal((cardsSource.match(/more_vert/g) || []).length, 2);
+    assert.match(cardsSource, /openFolder\(folderId\)/);
+    assert.match(listSource, /state\.currentFolderId = folderIdFromLocation\(\)/);
+    assert.match(template, /id="notes-root-breadcrumb"[^>]*>My Notes</);
+    assert.match(template, /id="notes-folder-breadcrumb"/);
 });
 
 test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wired", async () => {
@@ -490,6 +501,49 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.doesNotMatch(styles, /STATIC TOOLBAR/);
     assert.doesNotMatch(styles, /padding-top:\s*58px/);
     assert.doesNotMatch(styles, /#4ade80/i);
+});
+
+test("notes sharing keeps canonical links, view-only capabilities, and folder inheritance UI wired", async () => {
+    const listSource = await sourceFor("static/js/notes/list.js");
+    const cardsSource = await sourceFor("static/js/notes/list/cards.js");
+    const sharingSource = await sourceFor("static/js/notes/sharing.js");
+    const editorSource = await sourceFor("static/js/notes/editor.js");
+    const editorTemplate = await sourceFor("templates/notes_editor.html");
+    const notesTemplate = await sourceFor("templates/notes.html");
+    const folderTemplate = await sourceFor("templates/notes_shared_folder.html");
+    const navbarSource = await sourceFor("static/js/core/navbar.js");
+
+    assert.doesNotMatch(`${listSource}\n${cardsSource}`, /\/notes\/editor\/\$\{/);
+    assert.match(cardsSource, /global\.location\.href = `\/notes\/\$\{encodeURIComponent\(noteId\)\}`/);
+    assert.match(listSource, /state\.viewMode === 'shared' \? '\/api\/notes\/shared' : '\/api\/notes'/);
+    assert.match(listSource, /if \(!readOnly\) initDragDrop\(\)/);
+    assert.match(cardsSource, /folder\.is_shared \|\| readOnly \? 'folder_shared' : 'folder'/);
+    assert.match(notesTemplate, /data-notes-view="shared"[^>]*>Shared with me</);
+    assert.match(notesTemplate, /id="btn-share-folder"/);
+
+    assert.match(sharingSource, /\/api\/notes\/share-users\?q=/);
+    assert.match(sharingSource, /public: modal\.querySelector\('\[data-share-public\]'\)\.value === 'public'/);
+    assert.match(sharingSource, /user_ids: users\.map\(\(user\) => user\.id\)/);
+    assert.match(sharingSource, /Anyone with the link/);
+    assert.match(sharingSource, /Viewer/);
+    assert.match(sharingSource, /data-share-copy/);
+
+    assert.match(editorSource, /const canEdit = noteContext\.access\?\.can_edit === true/);
+    assert.match(editorSource, /editable: canEdit/);
+    assert.match(editorSource, /if \(!canEdit \|\| !noteId \|\| !titleInput \|\| !editorInstance\) return/);
+    assert.match(editorSource, /canEdit \? React\.createElement\(SuggestionMenuController/);
+    assert.match(editorSource, /canEdit \? React\.createElement\(SideMenuController/);
+    assert.match(editorSource, /if \(!canEdit\) \{\s*button\?\.remove\(\);/);
+    assert.match(editorTemplate, /id="notes-share-button"[\s\S]*?data-notes-share-resource="note"/);
+    assert.match(editorTemplate, /View only\{% if owner %\} · Shared by/);
+    assert.match(editorTemplate, /{% if access\.can_edit %}[\s\S]*?notes-toolbar-page-setup/);
+    assert.match(editorSource, /handlePageSetupToolbarClick\(event, writingToolbar, openPageSetupPopover\)/);
+
+    assert.match(folderTemplate, /folder_shared/);
+    assert.match(folderTemplate, /url_for\('dashboard\.note_document'/);
+    assert.match(folderTemplate, /meta name="robots" content="noindex,nofollow"/);
+    assert.match(navbarSource, /navPlaceholder\.dataset\.authenticated !== 'false'/);
+    assert.match(navbarSource, /navbar-login-button/);
 });
 
 test("courses page keeps Atlas APIs, filtering state, and schedule constants connected", async () => {

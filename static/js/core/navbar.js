@@ -147,6 +147,9 @@ function renderNavbar() {
   const navPlaceholder = document.querySelector('global.thenav');
   if (!navPlaceholder) return;
 
+  const authenticated = navPlaceholder.dataset.authenticated !== 'false';
+  const hasSidebar = navPlaceholder.dataset.hasSidebar !== 'false';
+  const loginUrl = navPlaceholder.dataset.loginUrl || '/login';
   const rawProfileImage = navPlaceholder.dataset.profilePicture ||
     document.body?.dataset?.profilePicture ||
     'data:image/svg+xml,%3Csvg%20xmlns="http://www.w3.org/2000/svg"%20viewBox="0%200%2032%2032"%3E%3Crect%20width="32"%20height="32"%20fill="%23ccc"/%3E%3C/svg%3E';
@@ -157,27 +160,19 @@ function renderNavbar() {
   const userEmail = navPlaceholder.dataset.userEmail || 'user@example.com';
   const commandShortcut = getCommandPaletteShortcutLabel();
 
-  const navbarHTML = `
-<div class="navbar-container" id="navbar-root">
-  <div class="navbar-left">
+  const menuButton = hasSidebar ? `
     <button type="button" class="navbar-button navbar-menu-button" id="navbar-menu-btn" aria-label="Open navigation menu" aria-controls="sidebar-root" aria-expanded="false">
       ${NAVBAR_ICONS.menu}
-    </button>
-    <img src="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy" class="navbar-logo" width="32" height="32" decoding="async" />
-    <a href="/dashboard" class="navbar-title">Nest.APStudy</a>
-  </div>
-  
-  <div class="navbar-right">
+    </button>` : '';
+  const accountControls = authenticated ? `
     <button type="button" class="navbar-button navbar-search-button" id="navbar-search-btn" aria-label="Open command palette (${commandShortcut})" title="${commandShortcut}">
       ${NAVBAR_ICONS.search}
       <span class="navbar-search-tooltip" role="tooltip">${commandShortcut}</span>
     </button>
-    
     <div class="navbar-avatar-wrapper">
       <button type="button" class="navbar-avatar" id="navbar-avatar-btn" aria-label="Profile menu">
         <img ${profileImageAttrs} sizes="48px" alt="Profile" width="48" height="48" decoding="async" />
       </button>
-      
       <div id="profile-dropdown" class="profile-dropdown">
         <div class="profile-dropdown-item email">${userEmail}</div>
         <button type="button" class="profile-dropdown-button" id="navbar-account-btn">
@@ -189,7 +184,19 @@ function renderNavbar() {
           <span class="profile-dropdown-icon" aria-hidden="true">${NAVBAR_ICONS.signOut}</span>
         </button>
       </div>
-    </div>
+    </div>` : `
+    <a class="navbar-login-button" href="${escapeHtmlAttr(loginUrl)}">Login</a>`;
+
+  const navbarHTML = `
+<div class="navbar-container" id="navbar-root">
+  <div class="navbar-left">
+    ${menuButton}
+    <img src="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy" class="navbar-logo" width="32" height="32" decoding="async" />
+    <a href="${authenticated ? '/dashboard' : '/'}" class="navbar-title">Nest.APStudy</a>
+  </div>
+
+  <div class="navbar-right">
+    ${accountControls}
   </div>
 </div>
   `;
@@ -197,10 +204,10 @@ function renderNavbar() {
   navPlaceholder.innerHTML = navbarHTML;
 
   // Setup navbar interactions
-  setupNavbarInteractions(userEmail);
+  setupNavbarInteractions(userEmail, authenticated);
 }
 
-function setupNavbarInteractions(userEmail) {
+function setupNavbarInteractions(userEmail, authenticated = true) {
   const avatarBtn = document.getElementById('navbar-avatar-btn');
   const dropdown = document.getElementById('profile-dropdown');
   const accountBtn = document.getElementById('navbar-account-btn');
@@ -265,7 +272,7 @@ function setupNavbarInteractions(userEmail) {
     });
   }
 
-  if (!window.APSTUDY_COMMAND_PALETTE_SHORTCUT_BOUND) {
+  if (authenticated && !window.APSTUDY_COMMAND_PALETTE_SHORTCUT_BOUND) {
     window.APSTUDY_COMMAND_PALETTE_SHORTCUT_BOUND = true;
     document.addEventListener('keydown', (event) => {
       const key = String(event.key || '').toLowerCase();
@@ -278,7 +285,7 @@ function setupNavbarInteractions(userEmail) {
     });
   }
 
-  if (document.body?.dataset?.commandPalettePreload !== 'false') {
+  if (authenticated && document.body?.dataset?.commandPalettePreload !== 'false') {
     ensureCommandPaletteModule().catch((error) => {
       console.warn('Unable to preload command palette.', error);
     });

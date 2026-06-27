@@ -28,6 +28,7 @@
     <script src="{{ url_for('static', filename='js/core/sidebar.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script src="{{ url_for('static', filename='js/notes/export.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/notes/sharing.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/notes/list/utils.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/notes/list/cards.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/notes/list.js') }}" defer></script>
@@ -39,11 +40,16 @@
     <main class="flex-1 w-full max-w-[1600px] mx-auto px-6 md:px-8 pt-6 pb-10 flex flex-col gap-12 relative z-10">
         <div id="notes-page" class="notes-page">
             <div class="notes-page-header">
-                <div>
-                    <h1 class="notes-page-title">Notes</h1>
-                    <p class="notes-page-subtitle">Take and organize your notes</p>
-                </div>
+                <h1 class="notes-page-title">
+                    <button id="notes-root-breadcrumb" class="notes-breadcrumb-root" type="button" aria-current="page">My Notes</button>
+                    <span id="notes-breadcrumb-separator" class="material-symbols-outlined notes-breadcrumb-separator" aria-hidden="true" hidden>chevron_right</span>
+                    <span id="notes-folder-breadcrumb" class="notes-breadcrumb-current" hidden></span>
+                </h1>
                 <div class="notes-page-actions">
+                    <button id="btn-share-folder" class="btn-secondary cursor-pointer" type="button" hidden>
+                        <span class="material-symbols-outlined" aria-hidden="true">ios_share</span>
+                        Share
+                    </button>
                     <button id="btn-new-folder" class="btn-secondary cursor-pointer">
                         <span class="material-symbols-outlined" aria-hidden="true">create_new_folder</span>
                         New Folder
@@ -54,6 +60,11 @@
                     </button>
                 </div>
             </div>
+
+            <nav class="notes-view-tabs" aria-label="Notes views">
+                <button id="notes-tab-mine" class="notes-view-tab is-active" type="button" data-notes-view="mine" aria-selected="true">My Notes</button>
+                <button id="notes-tab-shared" class="notes-view-tab" type="button" data-notes-view="shared" aria-selected="false">Shared with me</button>
+            </nav>
 
             <div id="notes-alert" class="notes-alert" role="status" hidden></div>
 
@@ -67,14 +78,14 @@
 
             <section id="notes-section" class="notes-section">
                 <div class="notes-section-heading">
-                    <h2 class="notes-section-header">Unfiled notes</h2>
+                    <h2 id="notes-section-title" class="notes-section-header">Unfiled notes</h2>
                     <span id="notes-count" class="notes-section-count">0 notes</span>
                 </div>
                 <div id="notes-grid" class="notes-grid" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"></div>
                 <div id="notes-empty-state" class="empty-state" style="display:none;">
                     <span class="material-symbols-outlined empty-state-icon" aria-hidden="true">article</span>
-                    <p class="empty-state-text">No notes yet</p>
-                    <p class="empty-state-subtext">Start a note, then organize it into folders when you are ready.</p>
+                    <p id="notes-empty-title" class="empty-state-text">No notes yet</p>
+                    <p id="notes-empty-subtitle" class="empty-state-subtext">Start a note, then organize it into folders when you are ready.</p>
                     <button id="notes-empty-new-note" class="btn-primary" type="button">
                         <span class="material-symbols-outlined" aria-hidden="true">note_add</span>
                         New Note

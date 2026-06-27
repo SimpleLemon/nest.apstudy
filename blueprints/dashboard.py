@@ -26,6 +26,7 @@ from services.atlas_client import DEFAULT_TERM, get_atlas_term_srcdb, get_genera
 from services.daily_quote import get_daily_quote_payload
 from services.calendar_store import list_calendar_rows_all
 from services.toasts import pop_toasts
+from services import note_store
 
 dashboard_bp = Blueprint("dashboard", __name__)
 logger = logging.getLogger(__name__)
@@ -692,7 +693,7 @@ def _load_recent_notes(user_id):
                 "id": _row_id(row),
                 "title": row.get("title") or "Untitled note",
                 "updated_at": row.get("updated_at") or row.get("created_at"),
-                "href": url_for("dashboard.notes_editor", note_id=_row_id(row)),
+                "href": url_for("dashboard.note_document", note_id=_row_id(row)),
             }
             for row in rows[:DASHBOARD_LIST_LIMIT]
         ],
@@ -1197,21 +1198,100 @@ def tasks():
     )
 
 
-@dashboard_bp.route("/notes/editor", defaults={"note_id": None})
-@dashboard_bp.route("/notes/editor/<note_id>")
-@login_required
-def notes_editor(note_id):
-    """Render the note editor page."""
-    if not current_user.onboarding_complete:
-        return redirect(url_for("settings.onboarding"))
+def _shared_notes_page_context(resource, access, *, page_state="ready"):
+    viewer_authenticated = current_user.is_authenticated
+    user = _user_payload() if viewer_authenticated else None
+    theme_preference = "system-match"
+    if viewer_authenticated:
+        theme_preference = _theme_from_settings(_load_user_settings()) or "system-match"
+    owner = note_store.get_safe_user(resource.get("user_id")) if resource else None
+    if access.get("source") in {"folder_user", "folder_public"} and access.get("source_id"):
+        back_url = url_for("dashboard.shared_note_folder", folder_id=access["source_id"])
+        back_label = "Shared folder"
+    elif viewer_authenticated and access.get("role") == "viewer":
+        back_url = url_for("dashboard.notes", view="shared")
+        back_label = "Shared with me"
+    elif viewer_authenticated:
+        back_url = url_for("dashboard.notes")
+        back_label = "Notes"
+    else:
+        back_url = url_for("auth.index")
+        back_label = "Nest.APStudy"
+    return {
+        "user": user,
+        "viewer_authenticated": viewer_authenticated,
+        "access": access,
+        "owner": owner,
+        "page_state": page_state,
+        "theme_preference": theme_preference,
+        "login_url": url_for("auth.login", next=request.path),
+        "back_url": back_url,
+        "back_label": back_label,
+    }
 
-    user_settings = _load_user_settings()
-    return render_template(
-        "notes_editor.html",
-        user=_user_payload(),
-        note_id=note_id,
-        theme_preference=_theme_from_settings(user_settings),
-    )
+
+@dashboard_bp.route("/notes/editor")
+def legacy_notes_editor_root():
+    return redirect(url_for("dashboard.notes"), code=308)
+
+
+@dashboard_bp.route("/notes/editor/<note_id>")
+def legacy_notes_editor(note_id):
+    return redirect(url_for("dashboard.note_document", note_id=note_id, **request.args), code=308)
+
+
+@dashboard_bp.route("/notes/<note_id>")
+def note_document(note_id):
+    """Render an owned or shared note at its canonical URL."""
+    note = note_store.get_note(note_id)
+    if not note:
+        context = _shared_notes_page_context(None, note_store.resolve_note_access(None), page_state="unavailable")
+        return render_template("notes_editor.html", note_id=note_id, **context), 404
+
+    viewer_id = str(current_user.id) if current_user.is_authenticated else None
+    access = note_store.resolve_note_access(note, viewer_id)
+    if not access["can_view"]:
+        page_state = "login_required" if not current_user.is_authenticated else "unavailable"
+        context = _shared_notes_page_context(None, access, page_state=page_state)
+        status = 401 if page_state == "login_required" else 404
+        return render_template("notes_editor.html", note_id=note_id, **context), status
+
+    if current_user.is_authenticated and not current_user.onboarding_complete:
+        return redirect(url_for("settings.onboarding"))
+    context = _shared_notes_page_context(note, access)
+    return render_template("notes_editor.html", note_id=note_id, **context)
+
+
+@dashboard_bp.route("/notes/folders/<folder_id>")
+def shared_note_folder(folder_id):
+    """Render an owned or shared note folder at its stable URL."""
+    folder = note_store.get_folder(folder_id)
+    if not folder:
+        context = _shared_notes_page_context(None, note_store.resolve_folder_access(None), page_state="unavailable")
+        return render_template("notes_shared_folder.html", folder=None, notes=[], **context), 404
+
+    viewer_id = str(current_user.id) if current_user.is_authenticated else None
+    access = note_store.resolve_folder_access(folder, viewer_id)
+    if not access["can_view"]:
+        page_state = "login_required" if not current_user.is_authenticated else "unavailable"
+        context = _shared_notes_page_context(None, access, page_state=page_state)
+        status = 401 if page_state == "login_required" else 404
+        return render_template("notes_shared_folder.html", folder=None, notes=[], **context), status
+
+    if current_user.is_authenticated and not current_user.onboarding_complete:
+        return redirect(url_for("settings.onboarding"))
+    context = _shared_notes_page_context(folder, access)
+    if access.get("role") == "owner":
+        context["back_url"] = url_for("dashboard.notes", folder=folder_id)
+        context["back_label"] = "My Notes"
+    elif current_user.is_authenticated:
+        context["back_url"] = url_for("dashboard.notes", view="shared")
+        context["back_label"] = "Shared with me"
+    else:
+        context["back_url"] = url_for("auth.index")
+        context["back_label"] = "Nest.APStudy"
+    notes = note_store.list_notes_in_folder(folder_id)
+    return render_template("notes_shared_folder.html", folder=folder, notes=notes, **context)
 
 
 @dashboard_bp.route("/chat")
