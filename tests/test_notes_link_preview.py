@@ -2,9 +2,13 @@ import unittest
 from unittest.mock import patch
 
 import blueprints.notes_api as notes_api
+from tests.support.harness import reset_flask_login_manager
 
 
 class NotesLinkPreviewTests(unittest.TestCase):
+    def tearDown(self):
+        reset_flask_login_manager()
+
     def test_rejects_invalid_url(self):
         payload, status = notes_api._link_preview_payload("javascript:alert(1)")
 

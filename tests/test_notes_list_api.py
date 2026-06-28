@@ -3,12 +3,16 @@ from unittest.mock import MagicMock, patch
 
 import blueprints.notes_api as notes_api
 from services import note_store
+from tests.support.harness import reset_flask_login_manager
 
 
 class NotesListApiTests(unittest.TestCase):
     def setUp(self):
         self.user = MagicMock()
         self.user.id = "user-1"
+
+    def tearDown(self):
+        reset_flask_login_manager()
 
     @patch.object(notes_api.note_store, "list_folders_for_user", return_value=[])
     @patch.object(notes_api.note_store, "list_notes_for_user")

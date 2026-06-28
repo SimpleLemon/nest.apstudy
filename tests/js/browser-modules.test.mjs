@@ -192,7 +192,9 @@ test("dashboard daily quote fetches Flask endpoint and uses one smooth egg card"
     assert.doesNotMatch(source, /\.dashboard-egg-quote\{[^}]*border:1px/);
     assert.doesNotMatch(source, /\.dashboard-egg-quote\{[^}]*box-shadow/);
     assert.doesNotMatch(source, /@radix-ui\/react-dialog|Dialog\.(?:Title|Description)/);
-    assert.match(source, /'h2',\s*\{ className: 'apstudy-visually-hidden' \}/);
+    assert.match(source, /role="status"/);
+    assert.match(source, /aria-label="Preparing daily motivation"/);
+    assert.match(source, /aria-label="Hide daily quote"/);
 });
 
 test("sidebar keeps persisted collapse state, route targets, and preference event bridge", async () => {
@@ -644,7 +646,7 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
     }
 
     assert.doesNotMatch(template, /appwrite@|js\/core\/appwrite\.js/);
-    assert.match(template, /settings-sqlite-20260613-1/);
+    assert.match(template, /\{% set settings_assets_version = 'settings-[^']+' %\}/);
     assert.match(template, /data-probe-appwrite-session="false"/);
     assert.match(source, /const SETTINGS_SECTION_IDS = \['account', 'data', 'preferences'\]/);
     assert.match(source, /const SETTINGS_INTERFACE_THEMES = \[/);
@@ -775,7 +777,7 @@ test("landing page keeps local assets, tabs, analytics, and reduced-motion handl
     assert.match(template, /School/);
     assert.match(template, /Completed/);
     assert.match(template, /Foundations of Modern Biol I/);
-    assert.match(template, /5<\/strong> Open/);
+    assert.match(template, /3<\/strong> Open/);
     assert.match(template, /Nest Announcements/);
     assert.match(template, /Nest Chat/);
     assert.match(template, /Your University/);

@@ -9,6 +9,7 @@ from flask import Flask
 
 from extensions import login_manager
 import blueprints.chat_api as chat_api
+from tests.support.harness import reset_flask_login_manager
 from avatar_images import APSTUDY_LOGO_URL
 import services.chat_presence as chat_presence
 from services.chat_formatting import render_markdown
@@ -278,6 +279,7 @@ class TestChatFeature(unittest.TestCase):
             thread_access.assert_called_once_with("thread-1", "user-1")
 
     def test_chat_events_stream_requires_login(self):
+        reset_flask_login_manager()
         login_manager.init_app(self.app)
         self.app.register_blueprint(chat_api.chat_api_bp)
         with self.app.test_client() as client:
@@ -346,6 +348,7 @@ class TestChatFeature(unittest.TestCase):
         self.assertEqual(statuses, {"user-2": "offline"})
 
     def test_presence_online_requires_login(self):
+        reset_flask_login_manager()
         login_manager.init_app(self.app)
         self.app.register_blueprint(chat_api.chat_api_bp)
         with self.app.test_client() as client:
@@ -353,6 +356,7 @@ class TestChatFeature(unittest.TestCase):
         self.assertIn(response.status_code, (302, 401))
 
     def test_presence_statuses_requires_login(self):
+        reset_flask_login_manager()
         login_manager.init_app(self.app)
         self.app.register_blueprint(chat_api.chat_api_bp)
         with self.app.test_client() as client:
@@ -360,6 +364,7 @@ class TestChatFeature(unittest.TestCase):
         self.assertIn(response.status_code, (302, 401))
 
     def test_presence_room_requires_login(self):
+        reset_flask_login_manager()
         login_manager.init_app(self.app)
         self.app.register_blueprint(chat_api.chat_api_bp)
         with self.app.test_client() as client:

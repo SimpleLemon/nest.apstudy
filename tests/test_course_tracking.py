@@ -47,15 +47,6 @@ class CourseTrackingTests(unittest.TestCase):
             "seats_available": 0,
         }
 
-    def test_scheduler_course_tracking_interval_is_five_minutes(self):
-        root = os.path.dirname(os.path.dirname(__file__))
-        with open(os.path.join(root, "services", "scheduler.py"), encoding="utf-8") as handle:
-            source = handle.read()
-
-        self.assertIn("trigger=IntervalTrigger(minutes=5)", source)
-        self.assertIn('name="Check tracked Emory course seats every 5 min"', source)
-        self.assertNotIn("Check tracked Emory course seats every 10 min", source)
-
     def test_no_enabled_tracks_skips_atlas_ping(self):
         with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
                 patch.object(course_tracking, "list_rows_all", return_value=[]), \

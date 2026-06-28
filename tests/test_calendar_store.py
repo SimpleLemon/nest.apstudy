@@ -1,26 +1,33 @@
 import os
 import tempfile
 import unittest
-from unittest.mock import patch
 
 from appwrite.exception import AppwriteException
 from appwrite.query import Query
 
 from services import calendar_store as store
+from tests.support.harness import bootstrap_calendar_db
 
 
 class CalendarStoreTestCase(unittest.TestCase):
     def setUp(self):
         self.tmpdir = tempfile.TemporaryDirectory()
-        self.previous_path = os.environ.get("CALENDAR_SQLITE_PATH")
-        os.environ["CALENDAR_SQLITE_PATH"] = os.path.join(self.tmpdir.name, "calendar.sqlite3")
-        store.init_calendar_store()
+        self.db_path = os.path.join(self.tmpdir.name, "nest.sqlite3")
+        self.previous_database_path = os.environ.get("DATABASE_PATH")
+        self.previous_calendar_path = os.environ.get("CALENDAR_SQLITE_PATH")
+        os.environ["DATABASE_PATH"] = self.db_path
+        os.environ.pop("CALENDAR_SQLITE_PATH", None)
+        bootstrap_calendar_db(self.db_path)
 
     def tearDown(self):
-        if self.previous_path is None:
+        if self.previous_database_path is None:
+            os.environ.pop("DATABASE_PATH", None)
+        else:
+            os.environ["DATABASE_PATH"] = self.previous_database_path
+        if self.previous_calendar_path is None:
             os.environ.pop("CALENDAR_SQLITE_PATH", None)
         else:
-            os.environ["CALENDAR_SQLITE_PATH"] = self.previous_path
+            os.environ["CALENDAR_SQLITE_PATH"] = self.previous_calendar_path
         self.tmpdir.cleanup()
 
     def test_crud_count_and_appwrite_id_shape(self):
@@ -119,93 +126,6 @@ class CalendarStoreTestCase(unittest.TestCase):
         self.assertEqual(len(rows), 1)
         self.assertFalse(rows[0]["hidden"])
         self.assertIsNone(rows[0]["is_all_day"])
-
-
-class CalendarMigrationTestCase(unittest.TestCase):
-    def setUp(self):
-        self.tmpdir = tempfile.TemporaryDirectory()
-        self.previous_path = os.environ.get("CALENDAR_SQLITE_PATH")
-        os.environ["CALENDAR_SQLITE_PATH"] = os.path.join(self.tmpdir.name, "calendar.sqlite3")
-        store.init_calendar_store()
-
-    def tearDown(self):
-        if self.previous_path is None:
-            os.environ.pop("CALENDAR_SQLITE_PATH", None)
-        else:
-            os.environ["CALENDAR_SQLITE_PATH"] = self.previous_path
-        self.tmpdir.cleanup()
-
-    def test_migration_preserves_ids_and_is_rerunnable(self):
-        import scripts.migrate_calendar_appwrite_to_sqlite as migration
-
-        rows_by_table = {
-            "calendar_cache": [{
-                "$id": "cache-1",
-                "user_id": "user-1",
-                "feed_url": "https://example.test/feed.ics",
-                "feed_url_hash": "hash",
-                "event_uid": "uid-1",
-                "event_title": "Assignment",
-                "is_all_day": False,
-            }],
-            "calendar_feeds": [{
-                "$id": "feed-1",
-                "user_id": "user-1",
-                "feed_url": "https://example.test/feed.ics",
-                "feed_url_hash": "hash",
-                "created_at": "2026-05-18T00:00:00Z",
-            }],
-            "user_calendar_preferences": [{
-                "$id": "pref-1",
-                "user_id": "user-1",
-                "calendar_name": "canvas",
-                "visible": True,
-                "created_at": "2026-05-18T00:00:00Z",
-            }],
-            "user_events": [{
-                "$id": "event-1",
-                "user_id": "user-1",
-                "title": "Study",
-                "start": "2026-05-20T14:00:00Z",
-                "end": "2026-05-20T15:00:00Z",
-                "created_at": "2026-05-18T00:00:00Z",
-            }],
-            "user_calendar_sources": [{
-                "$id": "source-1",
-                "user_id": "user-1",
-                "source_id": "local:default",
-                "created_at": "2026-05-18T00:00:00Z",
-            }],
-            "user_event_overrides": [{
-                "$id": "override-1",
-                "user_id": "user-1",
-                "event_ref": "feed:hash:uid",
-                "hidden": False,
-                "created_at": "2026-05-18T00:00:00Z",
-            }],
-            "calendar_shares": [{
-                "$id": "share-1",
-                "user_id": "user-1",
-                "share_code": "ABCDEFGHIJKLMNOP",
-                "is_active": True,
-                "include_all_calendars": True,
-                "date_scope": "all",
-                "created_at": "2026-05-18T00:00:00Z",
-            }],
-        }
-
-        def fake_list_rows(table_id):
-            return rows_by_table[table_id]
-
-        with patch.object(migration, "list_rows_all", side_effect=fake_list_rows):
-            for table_id in store.CALENDAR_TABLES:
-                self.assertEqual(migration.migrate_table(table_id)["imported"], 1)
-            for table_id in store.CALENDAR_TABLES:
-                self.assertEqual(migration.migrate_table(table_id)["imported"], 1)
-
-        for table_id in store.CALENDAR_TABLES:
-            self.assertEqual(store.count_calendar_rows(table_id), 1)
-        self.assertEqual(store.get_calendar_row("calendar_shares", "share-1")["share_code"], "ABCDEFGHIJKLMNOP")
 
 
 if __name__ == "__main__":

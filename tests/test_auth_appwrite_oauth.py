@@ -13,6 +13,7 @@ from app import create_app
 from avatar_images import avatar_url_for_size
 from extensions import login_manager
 from models import User
+from tests.support.harness import reset_flask_login_manager
 
 
 class AppwriteOauthRouteTestCase(unittest.TestCase):
@@ -26,6 +27,9 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         self.app.secret_key = "test"
         login_manager.init_app(self.app)
         self.app.register_blueprint(auth.auth_bp)
+
+    def tearDown(self):
+        reset_flask_login_manager()
 
     def assert_login_error_is_rendered_and_consumed(self, error_code):
         with self.app.test_client() as client:

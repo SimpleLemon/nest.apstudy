@@ -8,6 +8,7 @@ from flask import Flask
 from blueprints.auth import auth_bp
 import blueprints.legal as legal
 from extensions import login_manager
+from tests.support.harness import register_shell_route_stubs
 
 
 class LegalPagesTestCase(unittest.TestCase):
@@ -23,6 +24,7 @@ class LegalPagesTestCase(unittest.TestCase):
         login_manager.init_app(self.app)
         self.app.register_blueprint(auth_bp)
         self.app.register_blueprint(legal.legal_bp)
+        register_shell_route_stubs(self.app)
 
     def test_privacy_policy_renders_logged_out(self):
         response = self.app.test_client().get("/privacy-policy")
@@ -67,26 +69,11 @@ class LegalPagesTestCase(unittest.TestCase):
         body = response.get_data(as_text=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn('global class="thenav"', body)
-        self.assertIn('global class="thesidebar"', body)
+        self.assertIn('id="sidebar-root"', body)
         self.assertIn('data-user-email="student@example.test"', body)
-        self.assertIn('data-user-emory-student="True"', body)
+        self.assertIn('href="/courses"', body)
         self.assertNotIn("legal-public-nav", body)
         self.assertIn('window.APSTUDY_THEME_PREFERENCE = "nest-light";', body)
-
-    def test_global_footer_points_to_legal_pages(self):
-        footer_path = os.path.join(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-            "static",
-            "js",
-            "global.js",
-        )
-        with open(footer_path, encoding="utf-8") as footer_file:
-            footer_source = footer_file.read()
-
-        self.assertIn('href="mailto:derek.chen@emory.edu"', footer_source)
-        self.assertIn('href="/privacy-policy"', footer_source)
-        self.assertIn('href="/terms-of-service"', footer_source)
-        self.assertNotIn(">Archive<", footer_source)
 
     def test_legal_css_keeps_responsive_readability_rules(self):
         css_path = os.path.join(

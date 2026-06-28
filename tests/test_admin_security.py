@@ -12,6 +12,7 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 from app import create_app
 from extensions import csrf, login_manager
 import blueprints.admin as admin
+from tests.support.harness import reset_flask_login_manager
 
 
 class TestUser(UserMixin):
@@ -68,6 +69,7 @@ class AdminSecurityTestCase(unittest.TestCase):
 
     def tearDown(self):
         os.environ.pop("ADMIN_USER_IDS", None)
+        reset_flask_login_manager()
 
     def _login(self, client):
         with client.session_transaction() as session:

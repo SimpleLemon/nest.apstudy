@@ -197,7 +197,7 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
 
         with patch.object(discord_audit, "get_audit_service", return_value=service), \
                 patch.object(service, "_request", return_value=response) as request, \
-                patch.dict(os.environ, {}, clear=True):
+                patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "test-token"}, clear=False):
             sent = discord_audit.update_course_tracks_channel_topic(3)
 
         self.assertTrue(sent)
@@ -685,6 +685,7 @@ class DiscordAuditRouteInstrumentationTestCase(unittest.TestCase):
                     patch.object(admin, "get_row_safe", return_value=user_doc), \
                     patch.object(admin, "_fetch_account", return_value={}), \
                     patch.object(admin, "_safe_count_rows", return_value=0), \
+                    patch.object(admin, "count_calendar_rows", return_value=0), \
                     patch.object(admin, "_chat_count_summary", return_value={}), \
                     patch.object(admin, "_load_section", return_value={}), \
                     patch.object(admin, "_pending_admin_request_count", return_value=0), \
