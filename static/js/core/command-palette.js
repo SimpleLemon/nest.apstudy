@@ -201,7 +201,9 @@ function isCurrentRoute(route) {
 }
 
 function navigateTo(route) {
-  window.location.assign(route);
+  if (!window.APStudyNavigation?.go?.(route)) {
+    window.location.assign(route);
+  }
 }
 
 async function persistTheme(interfaceTheme) {

@@ -8,6 +8,7 @@ import os
 import shutil
 import sqlite3
 import sys
+from contextlib import closing
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -78,11 +79,26 @@ def _backup_database(source: Path, destination: Path) -> tuple[bool, str]:
 
     destination.parent.mkdir(parents=True, exist_ok=True)
     try:
-        with sqlite3.connect(f"file:{source}?mode=ro", uri=True) as source_conn:
+        with closing(sqlite3.connect(f"file:{source}?mode=ro", uri=True)) as source_conn:
             source_conn.execute("PRAGMA busy_timeout = 5000")
-            with sqlite3.connect(destination) as dest_conn:
+            with closing(sqlite3.connect(destination)) as dest_conn:
                 source_conn.backup(dest_conn)
+                dest_conn.commit()
+
+        with closing(sqlite3.connect(f"file:{destination}?mode=ro", uri=True)) as check_conn:
+            integrity_rows = check_conn.execute("PRAGMA integrity_check").fetchall()
+            if integrity_rows != [("ok",)]:
+                raise sqlite3.DatabaseError(f"integrity_check failed: {integrity_rows!r}")
+            foreign_key_rows = check_conn.execute("PRAGMA foreign_key_check").fetchall()
+            if foreign_key_rows:
+                raise sqlite3.IntegrityError(
+                    f"foreign_key_check failed: {foreign_key_rows!r}"
+                )
     except sqlite3.Error as exc:
+        try:
+            destination.unlink(missing_ok=True)
+        except OSError:
+            pass
         return False, f"[ERROR] Failed to backup {source.name}: {exc}"
 
     size_label = _format_bytes(_file_size(destination))

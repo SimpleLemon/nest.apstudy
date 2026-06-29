@@ -613,6 +613,22 @@ function initializePresenceHeartbeat() {
         intervalId = window.setInterval(sendHeartbeat, heartbeatIntervalMs());
     }
 
+    function stopTimer() {
+        if (!intervalId) return;
+        window.clearInterval(intervalId);
+        intervalId = null;
+    }
+
+    function pauseHeartbeat() {
+        void sendHeartbeat({ keepalive: true });
+        stopTimer();
+    }
+
+    function resumeHeartbeat() {
+        void sendHeartbeat();
+        startTimer();
+    }
+
     function setChatRoom(roomId) {
         const scopeId = String(roomId || "").trim();
         const previous = extraScopes.get(chatRoomScopeKey)?.scope_id || "";
@@ -627,11 +643,21 @@ function initializePresenceHeartbeat() {
     sendHeartbeat();
     startTimer();
     document.addEventListener("visibilitychange", () => sendHeartbeat({ keepalive: true }));
-    window.addEventListener("pagehide", () => sendHeartbeat({ keepalive: true }));
+    if (window.APStudyPageLifecycle?.register) {
+        window.APStudyPageLifecycle.register({
+            pause: pauseHeartbeat,
+            resume: resumeHeartbeat,
+            dispose: pauseHeartbeat,
+        });
+    } else {
+        window.addEventListener("pagehide", pauseHeartbeat, { once: true });
+    }
     window.APStudyPresenceHeartbeat = {
         send: sendHeartbeat,
         setChatRoom,
         clearChatRoom: () => setChatRoom(null),
+        pause: pauseHeartbeat,
+        resume: resumeHeartbeat,
         tabId,
         siteHeartbeatMs,
         chatHeartbeatMs,

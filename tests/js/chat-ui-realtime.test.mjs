@@ -411,6 +411,22 @@ test("chat starts realtime fallback refresh after websocket failure", async () =
   assert.match(script, /stopRealtimeFallback\(\)/);
 });
 
+test("chat lifecycle stops realtime resources and resumes one runtime", async () => {
+  const script = await sourceFor("static/js/chat.js");
+
+  assert.match(script, /function stopChatRuntime\(\{ dispose = false \} = \{\}\)/);
+  assert.match(script, /chatRequestController\.abort\(\)/);
+  assert.match(script, /resetRealtimeConnection\(\)/);
+  assert.match(script, /stopPresenceRefreshTimer\(\)/);
+  assert.match(script, /window\.clearTimeout\(realtimeReconnectTimer\)/);
+  assert.match(script, /cancelUnreadSummaryRefresh\(\)/);
+  assert.match(script, /clearTransientWork\(\)/);
+  assert.match(script, /function resumeChatRuntime\(\)/);
+  assert.match(script, /chatRequestController = new AbortController\(\)/);
+  assert.match(script, /window\.APStudyPageLifecycle\.register\(\{/);
+  assert.doesNotMatch(script, /window\.addEventListener\("beforeunload"/);
+});
+
 test("chat author names and avatars open inline profile popovers", async () => {
   const script = await sourceFor("static/js/chat.js");
   const styles = await sourceFor("static/css/chat.css");

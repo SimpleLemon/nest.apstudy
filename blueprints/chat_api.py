@@ -1607,11 +1607,6 @@ def ingest_discord_gateway_message(message, *, event_type="create"):
 def delete_discord_gateway_message(discord_channel_id, discord_message_id):
     channel = _discord_channel_for_discord_id(discord_channel_id)
     if not _can_sync_discord_channel(channel):
-        logger.warning(
-            "Discord delete ignored for channel %s message %s: channel not configured for sync.",
-            discord_channel_id,
-            discord_message_id,
-        )
         return None
     row = _soft_delete_discord_message(channel, discord_message_id, emit_event=True)
     if row is None:

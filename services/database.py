@@ -14,6 +14,7 @@ from flask import current_app, g, has_app_context
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PRODUCTION_DATABASE_PATH = "/var/www/nest.apstudy.org/instance/nest.sqlite3"
 LOCAL_INSTANCE_ONLY = "APSTUDY_FORCE_LOCAL_INSTANCE_DB"
+BASELINE_MIGRATION = "001_initial_schema.sql"
 DEFAULT_LIMIT = 100
 UNIQUE_SENTINELS = {"unique()"}
 IDENTIFIER_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
@@ -89,6 +90,44 @@ def migrations_path():
     return os.path.join(BASE_DIR, "migrations")
 
 
+def _migration_filenames():
+    """Return migrations in upgrade order, with the historical baseline first."""
+    filenames = sorted(
+        filename
+        for filename in os.listdir(migrations_path())
+        if filename.endswith(".sql")
+    )
+    if BASELINE_MIGRATION in filenames:
+        filenames.remove(BASELINE_MIGRATION)
+        filenames.insert(0, BASELINE_MIGRATION)
+    return filenames
+
+
+def _apply_migration(conn, filename):
+    """Apply and record one migration in the same SQLite transaction."""
+    version = filename[:-4]
+    with open(os.path.join(migrations_path(), filename), "r", encoding="utf-8") as handle:
+        sql = handle.read()
+
+    try:
+        # executescript otherwise commits any pending transaction before running.
+        # Starting the transaction inside the script keeps its DDL and marker atomic.
+        conn.executescript(f"BEGIN IMMEDIATE;\n{sql}")
+        if not conn.in_transaction:
+            raise sqlite3.OperationalError(
+                f"Migration {filename} ended its managed transaction"
+            )
+        conn.execute(
+            "INSERT OR IGNORE INTO schema_migrations (version, applied_at) VALUES (?, ?)",
+            [version, utcnow_iso()],
+        )
+        conn.commit()
+    except Exception:
+        if conn.in_transaction:
+            conn.rollback()
+        raise
+
+
 def _quote_identifier(identifier):
     if not isinstance(identifier, str) or not IDENTIFIER_RE.match(identifier):
         raise ValueError(f"Invalid SQL identifier: {identifier!r}")
@@ -157,9 +196,7 @@ def init_db(app=None, path=None):
         if not os.path.isdir(migrations_path()):
             return
 
-        for filename in sorted(os.listdir(migrations_path())):
-            if not filename.endswith(".sql"):
-                continue
+        for filename in _migration_filenames():
             version = filename[:-4]
             applied = conn.execute(
                 "SELECT 1 FROM schema_migrations WHERE version = ?",
@@ -168,12 +205,7 @@ def init_db(app=None, path=None):
             if applied:
                 continue
 
-            with open(os.path.join(migrations_path(), filename), "r", encoding="utf-8") as handle:
-                conn.executescript(handle.read())
-            conn.execute(
-                "INSERT OR IGNORE INTO schema_migrations (version, applied_at) VALUES (?, ?)",
-                [version, utcnow_iso()],
-            )
+            _apply_migration(conn, filename)
             if version == "001_notes_preview_text":
                 should_backfill_preview_text = True
 
