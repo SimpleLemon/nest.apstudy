@@ -213,10 +213,7 @@ export function tableBlockPayload() {
         content: {
             type: 'tableContent',
             rows: Array.from({ length: 3 }, () => ({
-                cells: Array.from({ length: 3 }, () => [{
-                    type: 'paragraph',
-                    content: [],
-                }]),
+                cells: Array.from({ length: 3 }, () => ''),
             })),
         },
     };

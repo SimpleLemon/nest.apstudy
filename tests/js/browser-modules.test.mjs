@@ -65,6 +65,7 @@ if (false) {
     await import("../../static/js/landing.js");
     await import("../../static/js/notes/editor.js");
     await import("../../static/js/notes/editor/block-catalog.js");
+    await import("../../static/js/notes/editor/print.js");
     await import("../../static/js/notes/editor/utils.js");
     await import("../../static/js/notes/export.js");
     await import("../../static/js/notes/list.js");
@@ -304,6 +305,18 @@ test("dashboard uses the shared theme preference without page-specific remapping
     assert.doesNotMatch(template, /js\/dashboard\/theme\.js/);
 });
 
+test("notes, files, and tasks share the compact workspace title style", async () => {
+    const layoutStyles = await sourceFor("static/css/layout.css");
+    const notesTemplate = await sourceFor("templates/notes.html");
+    const filesTemplate = await sourceFor("templates/files.html");
+    const taskSource = await sourceFor("static/js/tasks/task.js");
+
+    assert.match(layoutStyles, /\.workspace-page-title\s*\{[^}]*font-size:\s*20px;[^}]*font-weight:\s*740;/s);
+    assert.match(notesTemplate, /notes-page-title workspace-page-title/);
+    assert.match(filesTemplate, /files-breadcrumbs workspace-page-title/);
+    assert.match(taskSource, /task-title workspace-page-title/);
+});
+
 test("console discord batches browser console output for server logs", async () => {
     const source = await sourceFor("static/js/core/console-discord.js");
 
@@ -318,6 +331,7 @@ test("notes list guards destructive actions and supports folder/export workflows
     const listSource = await sourceFor("static/js/notes/list.js");
     const cardsSource = await sourceFor("static/js/notes/list/cards.js");
     const template = await sourceFor("templates/notes.html");
+    const styles = await sourceFor("static/css/notes.css");
     const source = [
         listSource,
         await sourceFor("static/js/notes/list/utils.js"),
@@ -337,14 +351,30 @@ test("notes list guards destructive actions and supports folder/export workflows
     assert.equal((cardsSource.match(/more_vert/g) || []).length, 2);
     assert.match(cardsSource, /openFolder\(folderId\)/);
     assert.match(listSource, /state\.currentFolderId = folderIdFromLocation\(\)/);
-    assert.match(template, /id="notes-root-breadcrumb"[^>]*>My Notes</);
+    assert.match(listSource, /function syncViewControls\(\)/);
+    assert.match(listSource, /if \(els\.pageActions\) els\.pageActions\.hidden = readOnly/);
+    assert.match(listSource, /if \(els\.notesEmptyNewNote\) els\.notesEmptyNewNote\.hidden = readOnly/);
+    assert.match(template, /id="notes-root-breadcrumb"[^>]*aria-haspopup="menu"/);
+    assert.match(template, /id="notes-view-label">My Notes</);
+    assert.match(template, /id="notes-new-button"[\s\S]*?add_2[\s\S]*?<span>New<\/span>/);
+    assert.match(template, /id="notes-view-menu"[^>]*role="menu"/);
+    assert.doesNotMatch(template, /class="notes-view-tabs"/);
     assert.match(template, /id="notes-folder-breadcrumb"/);
+    assert.doesNotMatch(template, /id="btn-share-folder"/);
+    assert.doesNotMatch(cardsSource, /data-action="share-folder"/);
+    assert.doesNotMatch(template, /js\/notes\/sharing\.js/);
+    assert.match(styles, /\.notes-page-actions\[hidden\],[\s\S]*?#notes-empty-new-note\[hidden\]\s*\{\s*display:\s*none !important;/);
+    assert.match(styles, /@keyframes notes-popover-in/);
+    assert.match(styles, /\.note-card\s*\{[^}]*min-height:\s*104px;[^}]*padding:\s*12px 10px 12px 14px;/s);
+    assert.match(styles, /\.folder-card-menu-btn\s*\{[^}]*right:\s*6px;/s);
 });
 
 test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wired", async () => {
     const source = await sourceFor("static/js/notes/editor.js");
     const toolbarSource = await sourceFor("static/js/notes/toolbar.js");
     const catalogSource = await sourceFor("static/js/notes/editor/block-catalog.js");
+    const keyboardSource = await sourceFor("static/js/notes/editor/keyboard-shortcuts.js");
+    const printSource = await sourceFor("static/js/notes/editor/print.js");
     const styles = await sourceFor("static/css/notes.css");
     const editorTemplate = await sourceFor("templates/notes_editor.html");
     const notesTemplate = await sourceFor("templates/notes.html");
@@ -353,18 +383,21 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(source, /const SAVED_TIME_REFRESH_MS = 60000/);
     assert.match(source, /const NORMAL_HISTORY_DEPTH = 100/);
     assert.match(source, /const LONG_DOCUMENT_HISTORY_DEPTH = 35/);
-    assert.match(source, /const preserveRangeSelectionShortcuts = Extension\.create\(/);
-    assert.match(source, /addProseMirrorPlugins\(\)/);
-    assert.match(source, /new Plugin\(\{/);
-    assert.match(source, /handleDOMEvents:\s*\{\s*keydown\(view, event\)/);
-    assert.match(source, /event\.shiftKey[\s\S]*?\(event\.metaKey \|\| event\.ctrlKey\)[\s\S]*?!event\.altKey[\s\S]*?event\.key === 'ArrowUp' \|\| event\.key === 'ArrowDown'/);
-    assert.match(source, /if \(!isRangeVerticalArrow\) return false;[\s\S]*?return true;/);
+    assert.match(keyboardSource, /const preserveRangeSelectionShortcuts = Extension\.create\(/);
+    assert.match(keyboardSource, /addProseMirrorPlugins\(\)/);
+    assert.match(keyboardSource, /new Plugin\(\{/);
+    assert.match(keyboardSource, /handleDOMEvents:\s*\{\s*keydown\(view, event\)/);
+    assert.match(keyboardSource, /event\.shiftKey[\s\S]*?\(event\.metaKey \|\| event\.ctrlKey\)[\s\S]*?!event\.altKey[\s\S]*?event\.key === 'ArrowUp' \|\| event\.key === 'ArrowDown'/);
+    assert.match(keyboardSource, /if \(!isRangeVerticalArrow\) return false;[\s\S]*?return true;/);
+    assert.match(keyboardSource, /'Shift-Enter'/);
     assert.match(source, /function historyDepthForDocument\(documentValue\)/);
     assert.match(source, /disableExtensions: \['history'\]/);
     assert.match(source, /History\.configure\(\{ depth: historyDepth, newGroupDelay: 500 \}\)/);
     assert.match(source, /preserveRangeSelectionShortcuts/);
+    assert.match(source, /listItemHardBreakShortcuts/);
     assert.match(source, /from '\.\/toolbar\.js'/);
     assert.match(source, /from '\.\/editor\/block-catalog\.js'/);
+    assert.match(source, /from '\.\/editor\/print\.js'/);
     assert.match(toolbarSource, /const notesEditorSchema = BlockNoteSchema\.create/);
     assert.match(toolbarSource, /createReactBlockSpec/);
     assert.match(toolbarSource, /type: 'callout'/);
@@ -401,9 +434,14 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(source, /pasteHandler: handleNotesPaste/);
     assert.match(source, /from '\.\/editor\/markdown-repair\.js'/);
     assert.match(source, /normalizeClipboardText/);
+    assert.match(source, /normalizeCopiedPlainText/);
     assert.match(source, /const looksStructured = clipboardTextLooksStructured\(plainText\)/);
-    assert.match(source, /prioritizeMarkdownOverHTML: looksStructured/);
-    assert.match(source, /plainTextAsMarkdown: looksStructured/);
+    assert.match(source, /if \(looksStructured\) \{\s*editor\.pasteText\?\.\(plainText\);/);
+    assert.match(source, /prioritizeMarkdownOverHTML: false/);
+    assert.match(source, /plainTextAsMarkdown: false/);
+    assert.doesNotMatch(source, /clipboardTextHasMarkdownSyntax/);
+    assert.match(source, /clipboardData\.setData\('text\/plain', normalizeCopiedPlainText\(plainText\)\)/);
+    assert.match(source, /clipboardData\?\.getData\('blocknote\/html'\)/);
     assert.match(source, /function safeSetBlockSelection\(anchor, head = anchor\)/);
     assert.match(source, /editorInstance\.setTextCursorPosition\?\.\(anchor\)/);
     assert.doesNotMatch(source, /setSelection\?\.\(block, block\)/);
@@ -435,6 +473,7 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(source, /React\.createElement\(NoteEditor, \{/);
     assert.match(source, /function insertBlockPayload\(block/);
     assert.match(source, /editorInstance\.insertBlocks\?\.\(/);
+    assert.match(source, /ATOM_BLOCK_TYPES\.has\(insertedOrUpdated\.type\) \|\| insertedOrUpdated\.type === 'table'/);
     assert.match(source, /editorInstance\.openSuggestionMenu\?\.\('\/'\)/);
     assert.match(source, /function canRunHistoryAction\(action\)/);
     assert.match(source, /editorInstance\._tiptapEditor\?\.can\?\.\(\)/);
@@ -443,11 +482,15 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(styles, /--notes-bg-toolbar: var\(--color-surface-container-low\)/);
     assert.match(styles, /--notes-editor-content-width: 720px/);
     assert.match(styles, /max-width: var\(--notes-editor-content-width\)/);
-    assert.match(styles, /\.notes-writing-toolbar\s*\{[^}]*position:\s*sticky;[^}]*top:\s*calc\(var\(--notes-topbar-height\) \+ 10px\);[^}]*z-index:\s*45;/s);
+    assert.match(styles, /\.notes-writing-toolbar\s*\{[^}]*position:\s*sticky;[^}]*top:\s*var\(--notes-topbar-height\);[^}]*z-index:\s*45;/s);
+    assert.match(styles, /\.notes-toolbar-segment \+ \.notes-toolbar-segment::before,[^{]*\{[^}]*width:\s*1px;[^}]*height:\s*22px;/s);
+    assert.match(styles, /@media \(min-width:\s*701px\)[\s\S]*?\.editor-title-input\s*\{[^}]*max-width:\s*none;[^}]*text-align:\s*center;/s);
+    assert.match(styles, /@media \(min-width:\s*701px\)[\s\S]*?\.notes-writing-toolbar\s*\{[^}]*width:\s*auto;[^}]*margin-inline:\s*calc\(-1 \* var\(--notes-editor-surface-padding-inline\)\);/s);
     assert.ok(styles.includes('content: "\\2022" !important;'));
     assert.ok(styles.includes('content: attr(data-index) "." !important;'));
     assert.match(styles, /\.blocknote-container \.bn-block-content\[data-content-type="checkListItem"\] input\[type="checkbox"\]/);
     assert.match(styles, /\.blocknote-container \[data-content-type="table"\] table/);
+    assert.match(styles, /\.bn-inline-content:has\(> \.ProseMirror-trailingBreak:only-child\):before\s*\{[^}]*font-size:\s*inherit !important;[^}]*font-weight:\s*inherit !important;[^}]*line-height:\s*inherit !important;/s);
     assert.match(styles, /\.blocknote-container \.bn-block-content\[data-content-type="quote"\]/);
     assert.match(styles, /\.blocknote-container \.bn-block-content\[data-content-type="codeBlock"\]/);
     assert.match(styles, /\.notes-callout-block/);
@@ -474,11 +517,25 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(editorTemplate, /data-toolbar-menu-trigger="font-size"/);
     assert.match(editorTemplate, /data-toolbar-menu-trigger="text-color"/);
     assert.match(editorTemplate, /data-toolbar-menu-trigger="highlight-color"/);
-    assert.match(editorTemplate, /data-toolbar-menu-trigger="block-actions"/);
+    assert.doesNotMatch(editorTemplate, /more_horiz|data-toolbar-menu-trigger="block-actions"|data-toolbar-menu="block-actions"/);
     assert.match(editorTemplate, /data-editor-action="page-setup"[^>]*aria-expanded="false"/);
-    for (const action of ['copy-blocks', 'cut-blocks', 'duplicate-blocks', 'delete-blocks', 'move-blocks-up', 'move-blocks-down', 'toggle-heading-collapse']) {
-        assert.match(editorTemplate, new RegExp(`data-editor-action="${action}"`));
-    }
+    assert.match(editorTemplate, /data-editor-action="page-setup"[^>]*aria-controls="notes-page-setup-popover"/);
+    assert.match(editorTemplate, /data-editor-action="page-setup"[\s\S]*?data-note-print[\s\S]*?notes-toolbar-history/);
+    assert.match(editorTemplate, /class="notes-viewer-print-button"[^>]*data-note-print[^>]*disabled/);
+    assert.match(printSource, /editor\.blocksToHTMLLossy\(printableBlocks\)/);
+    assert.match(printSource, /hiddenBlockIds/);
+    assert.match(printSource, /windowRef\.addEventListener\?\.\('afterprint'/);
+    assert.match(printSource, /PRINT_IMAGE_TIMEOUT_MS = 2000/);
+    assert.match(source, /isNotePrintShortcut\(event\)/);
+    assert.match(source, /hiddenBlockIds: hidden\.keys\(\)/);
+    assert.match(source, /APStudyToast\?\.error\?\.\('Could not prepare this note for printing\.'/);
+    assert.match(styles, /@media print\s*\{/);
+    assert.match(styles, /body\.notes-editor-body\.notes-print-prepared > \.notes-print-surface/);
+    assert.match(styles, /background:\s*#ffffff !important/);
+    assert.match(styles, /--notes-print-font-family/);
+    assert.match(styles, /--notes-print-side-margin/);
+    assert.match(editorTemplate, /css\/notes\.css'\) }}\?v=notes-print-1/);
+    assert.match(editorTemplate, /notes-editor-bundle-10/);
     assert.match(editorTemplate, /data-block-type="codeBlock"/);
     assert.match(editorTemplate, /data-block-type="callout"/);
     assert.match(source, /action === 'copy-blocks'/);
@@ -496,8 +553,17 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(styles, /\.notes-toolbar-overflow-menu \.notes-toolbar-label,[^{]*\{[^}]*display:\s*none;/s);
     assert.doesNotMatch(styles, /\.notes-toolbar-overflow-menu \.notes-toolbar-segment\s*\{[^}]*width:\s*100%;/s);
     assert.match(source, /const isOverflowToolbar = menu\.classList\.contains\('notes-toolbar-overflow-menu'\)/);
+    assert.match(source, /floatingPopoverPosition\(\{/);
+    assert.match(source, /position\.left - originRect\.left/);
+    assert.match(source, /position\.top - originRect\.top/);
+    assert.doesNotMatch(styles, /\.notes-page-setup-popover\s*\{[^}]*transform:\s*translate\(-50%, -50%\)/s);
     assert.match(source, /menu\.style\.maxWidth = isOverflowToolbar/);
     assert.match(source, /b\.priority - a\.priority \|\| b\.index - a\.index/);
+    assert.match(source, /const pageSetupTrigger = writingToolbar\?\.querySelector/);
+    assert.match(source, /pageSetupTrigger\?\.addEventListener\('click'/);
+    assert.match(source, /activePageSetupTriggerRect = triggerRect \|\| usableTriggerRect\(trigger\)/);
+    assert.match(source, /editorPage\?\.addEventListener\('scroll', schedulePageSetupPopoverPosition/);
+    assert.match(source, /window\.addEventListener\('resize', schedulePageSetupPopoverPosition\)/);
     assert.doesNotMatch(editorTemplate, /<global class="thefooter"><\/global>/);
     assert.match(notesTemplate, /<global class="thefooter"><\/global>/);
     assert.doesNotMatch(styles, /STATIC TOOLBAR/);
@@ -511,6 +577,7 @@ test("notes sharing keeps canonical links, view-only capabilities, and folder in
     const sharingSource = await sourceFor("static/js/notes/sharing.js");
     const editorSource = await sourceFor("static/js/notes/editor.js");
     const editorTemplate = await sourceFor("templates/notes_editor.html");
+    const styles = await sourceFor("static/css/notes.css");
     const notesTemplate = await sourceFor("templates/notes.html");
     const folderTemplate = await sourceFor("templates/notes_shared_folder.html");
     const navbarSource = await sourceFor("static/js/core/navbar.js");
@@ -520,8 +587,9 @@ test("notes sharing keeps canonical links, view-only capabilities, and folder in
     assert.match(listSource, /state\.viewMode === 'shared' \? '\/api\/notes\/shared' : '\/api\/notes'/);
     assert.match(listSource, /if \(!readOnly\) initDragDrop\(\)/);
     assert.match(cardsSource, /folder\.is_shared \|\| readOnly \? 'folder_shared' : 'folder'/);
-    assert.match(notesTemplate, /data-notes-view="shared"[^>]*>Shared with me</);
-    assert.match(notesTemplate, /id="btn-share-folder"/);
+    assert.match(notesTemplate, /data-notes-view="shared"[\s\S]*?>Shared with Me</);
+    assert.doesNotMatch(notesTemplate, /id="btn-share-folder"/);
+    assert.doesNotMatch(cardsSource, /data-action="share-folder"/);
 
     assert.match(sharingSource, /\/api\/notes\/share-users\?q=/);
     assert.match(sharingSource, /public: modal\.querySelector\('\[data-share-public\]'\)\.value === 'public'/);
@@ -537,9 +605,13 @@ test("notes sharing keeps canonical links, view-only capabilities, and folder in
     assert.match(editorSource, /canEdit \? React\.createElement\(SideMenuController/);
     assert.match(editorSource, /if \(!canEdit\) \{\s*button\?\.remove\(\);/);
     assert.match(editorTemplate, /id="notes-share-button"[\s\S]*?data-notes-share-resource="note"/);
-    assert.match(editorTemplate, /View only\{% if owner %\} · Shared by/);
+    assert.match(editorTemplate, /js\/notes\/sharing\.js/);
+    assert.match(editorTemplate, /Shared by <a class="notes-viewer-owner" href="\{\{ owner\.profile_url \}\}">\{\{ owner\.name \}\}<\/a>/);
+    assert.match(styles, /body\.notes-editor-body\s*\{[^}]*display:\s*grid !important;[^}]*grid-template-rows:\s*var\(--navbar-height, 50px\) minmax\(0, 1fr\);/s);
+    assert.match(styles, /body\[data-note-read-only="true"\] \.blocknote-container \.notes-block-selected > \.bn-block\s*\{[^}]*background:\s*transparent;[^}]*box-shadow:\s*none;/s);
+    assert.match(editorSource, /if \(!canEdit\) \{[\s\S]*?querySelectorAll\('\.notes-block-selected'\)[\s\S]*?lastSelectedBlockIds = new Set\(\);/);
     assert.match(editorTemplate, /{% if access\.can_edit %}[\s\S]*?notes-toolbar-page-setup/);
-    assert.match(editorSource, /handlePageSetupToolbarClick\(event, writingToolbar, openPageSetupPopover\)/);
+    assert.match(editorSource, /handlePageSetupTriggerClick\([\s\S]*?pageSetupTrigger,[\s\S]*?pageSetupPopover,[\s\S]*?openPageSetupPopover,[\s\S]*?closePageSetupPopover/);
 
     assert.match(folderTemplate, /folder_shared/);
     assert.match(folderTemplate, /url_for\('dashboard\.note_document'/);

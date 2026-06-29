@@ -35,8 +35,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-sharing-1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='js/notes/dist/notes-editor.css') }}?v=notes-editor-bundle-5">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-print-1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/notes/dist/notes-editor.css') }}?v=notes-editor-bundle-10">
     <title>{{ 'Shared Note' if access.role == 'viewer' else 'Note Editor' }} - APStudy Nest</title>
 
     <script src="{{ url_for('static', filename='js/core/global-chrome.js') }}" defer></script>
@@ -47,7 +47,7 @@
     {% endif %}
     <script src="{{ url_for('static', filename='js/notes/sharing.js') }}" defer></script>
     {% if page_state == 'ready' %}
-    <script type="module" src="{{ url_for('static', filename='js/notes/dist/notes-editor.js') }}?v=notes-editor-bundle-5"></script>
+    <script type="module" src="{{ url_for('static', filename='js/notes/dist/notes-editor.js') }}?v=notes-editor-bundle-10"></script>
     {% endif %}
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
@@ -97,8 +97,12 @@
                     {% else %}
                     <div class="notes-viewer-status">
                         <span class="material-symbols-outlined" aria-hidden="true">visibility</span>
-                        <span>View only{% if owner %} · Shared by {{ owner.name }}{% endif %}</span>
+                        <span>View only{% if owner %} · Shared by <a class="notes-viewer-owner" href="{{ owner.profile_url }}">{{ owner.name }}</a>{% endif %}</span>
                     </div>
+                    <button type="button" class="notes-viewer-print-button" data-note-print title="Print note" aria-label="Print note" aria-disabled="true" disabled>
+                        <span class="material-symbols-outlined" aria-hidden="true">print</span>
+                        <span class="notes-viewer-print-label">Print</span>
+                    </button>
                     {% endif %}
                 </div>
             </div>
@@ -118,9 +122,12 @@
                 {% if access.can_edit %}
                 <div id="notes-writing-toolbar" class="notes-writing-toolbar" aria-label="Writing tools" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden>
                     <div class="notes-toolbar-main" data-toolbar-main>
-                    <div class="notes-toolbar-segment notes-toolbar-page-setup" data-toolbar-item data-overflow-priority="5" aria-label="Page setup">
-                        <button type="button" data-editor-action="page-setup" title="Page setup" aria-label="Page setup" aria-expanded="false">
+                    <div class="notes-toolbar-segment notes-toolbar-page-setup" data-toolbar-item data-overflow-priority="5" aria-label="Page setup and printing">
+                        <button type="button" data-editor-action="page-setup" title="Page setup" aria-label="Page setup" aria-controls="notes-page-setup-popover" aria-expanded="false">
                             <span class="material-symbols-outlined" aria-hidden="true">tune</span>
+                        </button>
+                        <button type="button" data-note-print title="Print note" aria-label="Print note" aria-disabled="true" disabled>
+                            <span class="material-symbols-outlined" aria-hidden="true">print</span>
                         </button>
                     </div>
                     <div class="notes-toolbar-segment notes-toolbar-history" data-toolbar-item data-overflow-priority="10" aria-label="History">
@@ -157,7 +164,7 @@
                             <span class="material-symbols-outlined" aria-hidden="true">code</span>
                         </button>
                     </div>
-                    <div class="notes-toolbar-segment notes-toolbar-format" data-toolbar-item data-overflow-priority="35" aria-label="Format">
+                    <div class="notes-toolbar-segment notes-toolbar-format" data-toolbar-item data-overflow-priority="35" aria-label="Text appearance">
                         <button type="button" class="notes-toolbar-menu-trigger" data-toolbar-menu-trigger="font-size" title="Font size" aria-label="Font size" aria-expanded="false">
                             <span class="material-symbols-outlined notes-toolbar-icon" aria-hidden="true">format_size</span>
                             <span class="material-symbols-outlined notes-toolbar-chevron" aria-hidden="true">expand_more</span>
@@ -199,11 +206,6 @@
                     <div class="notes-toolbar-segment notes-toolbar-link" data-toolbar-item data-overflow-priority="70" aria-label="Link">
                         <button type="button" class="notes-toolbar-menu-trigger" data-toolbar-menu-trigger="link" title="Create link" aria-label="Create link" aria-expanded="false">
                             <span class="material-symbols-outlined" aria-hidden="true">link</span>
-                        </button>
-                    </div>
-                    <div class="notes-toolbar-segment notes-toolbar-block-actions" data-toolbar-item data-overflow-priority="75" aria-label="Block actions">
-                        <button type="button" class="notes-toolbar-menu-trigger" data-toolbar-menu-trigger="block-actions" title="Block actions" aria-label="Block actions" aria-expanded="false">
-                            <span class="material-symbols-outlined" aria-hidden="true">more_horiz</span>
                         </button>
                     </div>
                     <div class="notes-toolbar-segment notes-toolbar-insert-desktop" data-toolbar-item data-overflow-priority="80" aria-label="Insert">
@@ -284,36 +286,6 @@
                     <div class="notes-toolbar-menu notes-font-size-menu" data-toolbar-menu="font-size" hidden></div>
                     <div class="notes-toolbar-menu notes-color-menu" data-toolbar-menu="text-color" hidden></div>
                     <div class="notes-toolbar-menu notes-color-menu" data-toolbar-menu="highlight-color" hidden></div>
-                    <div class="notes-toolbar-menu notes-block-actions-menu" data-toolbar-menu="block-actions" hidden>
-                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="copy-blocks">
-                            <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
-                            <span>Copy block</span>
-                        </button>
-                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="cut-blocks">
-                            <span class="material-symbols-outlined" aria-hidden="true">content_cut</span>
-                            <span>Cut block</span>
-                        </button>
-                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="duplicate-blocks">
-                            <span class="material-symbols-outlined" aria-hidden="true">control_point_duplicate</span>
-                            <span>Duplicate block</span>
-                        </button>
-                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="move-blocks-up">
-                            <span class="material-symbols-outlined" aria-hidden="true">arrow_upward</span>
-                            <span>Move up</span>
-                        </button>
-                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="move-blocks-down">
-                            <span class="material-symbols-outlined" aria-hidden="true">arrow_downward</span>
-                            <span>Move down</span>
-                        </button>
-                        <button type="button" class="notes-toolbar-menu-item" data-editor-action="toggle-heading-collapse">
-                            <span class="material-symbols-outlined" data-heading-collapse-icon aria-hidden="true">unfold_less</span>
-                            <span data-heading-collapse-label>Collapse heading</span>
-                        </button>
-                        <button type="button" class="notes-toolbar-menu-item is-danger" data-editor-action="delete-blocks">
-                            <span class="material-symbols-outlined" aria-hidden="true">delete</span>
-                            <span>Delete block</span>
-                        </button>
-                    </div>
                     <div class="notes-toolbar-menu notes-add-block-menu" data-toolbar-menu="add-block" hidden>
                         <label class="notes-add-block-search">
                             <span class="material-symbols-outlined" aria-hidden="true">search</span>

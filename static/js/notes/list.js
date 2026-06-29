@@ -13,9 +13,12 @@
         rootBreadcrumb: document.getElementById('notes-root-breadcrumb'),
         breadcrumbSeparator: document.getElementById('notes-breadcrumb-separator'),
         folderBreadcrumb: document.getElementById('notes-folder-breadcrumb'),
+        viewLabel: document.getElementById('notes-view-label'),
+        viewMenu: document.getElementById('notes-view-menu'),
         btnNewNote: document.getElementById('btn-new-note'),
         btnNewFolder: document.getElementById('btn-new-folder'),
-        btnShareFolder: document.getElementById('btn-share-folder'),
+        newButton: document.getElementById('notes-new-button'),
+        newMenu: document.getElementById('notes-new-menu'),
         pageActions: document.querySelector('.notes-page-actions'),
         tabMine: document.getElementById('notes-tab-mine'),
         tabShared: document.getElementById('notes-tab-shared'),
@@ -70,7 +73,6 @@
             formatDate,
             notePreview,
             openFolder,
-            openFolderSharing,
             openSharedFolder,
             openFolderModal,
             openMoveModal,
@@ -228,23 +230,37 @@
         window.location.href = `/notes/folders/${encodeURIComponent(folderId)}`;
     }
 
-    function markFolderSharing(folderId, sharing) {
-        const isShared = Boolean(sharing?.public || sharing?.users?.length);
-        state.folders = state.folders.map((folder) => (
-            noteIdOf(folder) === folderId ? { ...folder, is_shared: isShared } : folder
-        ));
-        renderCurrentView();
+    function setPopoverOpen(menu, button, open) {
+        if (!menu || !button) return;
+        menu.hidden = !open;
+        button.setAttribute('aria-expanded', String(open));
     }
 
-    function openFolderSharing(folder = folderById(state.currentFolderId)) {
-        const folderId = noteIdOf(folder);
-        if (!folderId) return;
-        window.APStudyNotesSharing?.open({
-            resourceType: 'folder',
-            resourceId: folderId,
-            resourceTitle: folder.name || 'Untitled Folder',
-            onSaved: (sharing) => markFolderSharing(folderId, sharing),
-        });
+    function closeHeaderPopovers({ restoreFocus = false } = {}) {
+        const openButton = !els.newMenu?.hidden
+            ? els.newButton
+            : (!els.viewMenu?.hidden ? els.rootBreadcrumb : null);
+        setPopoverOpen(els.newMenu, els.newButton, false);
+        setPopoverOpen(els.viewMenu, els.rootBreadcrumb, false);
+        if (restoreFocus) openButton?.focus();
+    }
+
+    function toggleHeaderPopover(menu, button) {
+        const shouldOpen = Boolean(menu?.hidden);
+        closeHeaderPopovers();
+        setPopoverOpen(menu, button, shouldOpen);
+    }
+
+    function syncViewControls() {
+        const readOnly = state.viewMode === 'shared';
+        if (els.pageActions) els.pageActions.hidden = readOnly;
+        if (els.notesEmptyNewNote) els.notesEmptyNewNote.hidden = readOnly;
+        if (els.viewLabel) els.viewLabel.textContent = readOnly ? 'Shared with Me' : 'My Notes';
+        els.tabMine?.classList.toggle('is-active', !readOnly);
+        els.tabMine?.setAttribute('aria-checked', String(!readOnly));
+        els.tabShared?.classList.toggle('is-active', readOnly);
+        els.tabShared?.setAttribute('aria-checked', String(readOnly));
+        if (readOnly) setPopoverOpen(els.newMenu, els.newButton, false);
     }
 
     async function setViewMode(viewMode, { updateHistory = true } = {}) {
@@ -252,32 +268,19 @@
         if (state.viewMode === nextMode && state.notes.length) return;
         state.viewMode = nextMode;
         state.currentFolderId = null;
+        syncViewControls();
         if (updateHistory) updateViewLocation(nextMode);
         await loadAndRender();
     }
 
     function updateBreadcrumb() {
         if (state.viewMode === 'shared') {
-            if (els.rootBreadcrumb) {
-                els.rootBreadcrumb.textContent = 'Shared with me';
-                els.rootBreadcrumb.disabled = true;
-                els.rootBreadcrumb.setAttribute('aria-current', 'page');
-            }
             if (els.breadcrumbSeparator) els.breadcrumbSeparator.hidden = true;
             if (els.folderBreadcrumb) els.folderBreadcrumb.hidden = true;
             return;
         }
         const folder = folderById(state.currentFolderId);
         const inFolder = Boolean(folder);
-        if (els.rootBreadcrumb) {
-            els.rootBreadcrumb.textContent = 'My Notes';
-            els.rootBreadcrumb.disabled = !inFolder;
-            if (inFolder) {
-                els.rootBreadcrumb.removeAttribute('aria-current');
-            } else {
-                els.rootBreadcrumb.setAttribute('aria-current', 'page');
-            }
-        }
         if (els.breadcrumbSeparator) els.breadcrumbSeparator.hidden = !inFolder;
         if (els.folderBreadcrumb) {
             els.folderBreadcrumb.hidden = !inFolder;
@@ -348,6 +351,7 @@
         }
 
         updateBreadcrumb();
+        syncViewControls();
         updateCounts(notesByFolder);
 
         if (els.foldersGrid) els.foldersGrid.innerHTML = '';
@@ -385,13 +389,6 @@
             visibleNotes.forEach((note) => els.notesGrid.appendChild(createNoteCard(note, { readOnly })));
         }
 
-        if (els.pageActions) els.pageActions.hidden = readOnly;
-        if (els.btnShareFolder) els.btnShareFolder.hidden = readOnly || !state.currentFolderId;
-        if (els.notesEmptyNewNote) els.notesEmptyNewNote.hidden = readOnly;
-        els.tabMine?.classList.toggle('is-active', !readOnly);
-        els.tabMine?.setAttribute('aria-selected', String(!readOnly));
-        els.tabShared?.classList.toggle('is-active', readOnly);
-        els.tabShared?.setAttribute('aria-selected', String(readOnly));
         if (!readOnly) initDragDrop();
     }
 
@@ -626,13 +623,32 @@
     }
 
     function bindEvents() {
-        els.btnNewNote?.addEventListener('click', createNote);
+        els.newButton?.addEventListener('click', (event) => {
+            event.stopPropagation();
+            toggleHeaderPopover(els.newMenu, els.newButton);
+        });
+        els.rootBreadcrumb?.addEventListener('click', (event) => {
+            event.stopPropagation();
+            toggleHeaderPopover(els.viewMenu, els.rootBreadcrumb);
+        });
+        els.btnNewNote?.addEventListener('click', () => {
+            closeHeaderPopovers();
+            void createNote();
+        });
         els.notesEmptyNewNote?.addEventListener('click', createNote);
-        els.btnNewFolder?.addEventListener('click', () => openFolderModal('create'));
-        els.btnShareFolder?.addEventListener('click', () => openFolderSharing());
-        els.tabMine?.addEventListener('click', () => void setViewMode('mine'));
-        els.tabShared?.addEventListener('click', () => void setViewMode('shared'));
-        els.rootBreadcrumb?.addEventListener('click', () => openFolder(null));
+        els.btnNewFolder?.addEventListener('click', () => {
+            closeHeaderPopovers();
+            openFolderModal('create');
+        });
+        els.tabMine?.addEventListener('click', () => {
+            closeHeaderPopovers();
+            if (state.viewMode === 'mine') openFolder(null);
+            else void setViewMode('mine');
+        });
+        els.tabShared?.addEventListener('click', () => {
+            closeHeaderPopovers();
+            void setViewMode('shared');
+        });
         els.folderForm?.addEventListener('submit', (event) => {
             event.preventDefault();
             void saveFolderModal();
@@ -650,6 +666,9 @@
             });
         });
         document.addEventListener('click', (event) => {
+            if (!event.target.closest('.notes-new-menu-wrap, .notes-view-switcher')) {
+                closeHeaderPopovers();
+            }
             if (!event.target.closest('.note-card-menu, .folder-card-menu, .note-card-menu-btn, .folder-card-menu-btn')) {
                 closeAllMenus();
             }
@@ -673,6 +692,10 @@
                 closeModal();
                 return;
             }
+            if (!els.newMenu?.hidden || !els.viewMenu?.hidden) {
+                closeHeaderPopovers({ restoreFocus: true });
+                return;
+            }
             closeAllMenus();
         });
         window.addEventListener('resize', closeAllMenus);
@@ -680,6 +703,7 @@
         window.addEventListener('popstate', () => {
             state.viewMode = viewModeFromLocation();
             state.currentFolderId = folderIdFromLocation();
+            syncViewControls();
             void loadAndRender();
         });
     }
@@ -687,6 +711,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         state.viewMode = viewModeFromLocation();
         state.currentFolderId = folderIdFromLocation();
+        syncViewControls();
         bindEvents();
         void loadAndRender();
     });

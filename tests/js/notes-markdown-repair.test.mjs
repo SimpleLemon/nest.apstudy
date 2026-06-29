@@ -89,8 +89,23 @@ test("notes markdown repair converts dividers and quote markers", async () => {
     assert.equal(clipboardTextLooksStructured("# Title\n\n- Item"), true);
 });
 
+test("notes markdown repair converts pasted heading markers without joining surrounding lines", async () => {
+    const { normalizeImportedMarkdownBlocks } = await importBrowserModule("static/js/notes/editor/markdown-repair.js");
+    const result = normalizeImportedMarkdownBlocks([
+        paragraph("intro", "Intro paragraph"),
+        paragraph("heading", "## Details"),
+        paragraph("body", "Body paragraph"),
+    ]);
+
+    assert.equal(result.changed, true);
+    assert.equal(result.blocks.length, 3);
+    assert.equal(result.blocks[1].type, "heading");
+    assert.equal(result.blocks[1].props.level, 2);
+    assert.equal(result.blocks[1].content[0].text, "Details");
+});
+
 test("notes markdown clipboard normalization preserves paragraphs and collapses excessive blanks", async () => {
-    const { normalizeClipboardText } = await importBrowserModule("static/js/notes/editor/markdown-repair.js");
+    const { clipboardTextLooksStructured, normalizeClipboardText } = await importBrowserModule("static/js/notes/editor/markdown-repair.js");
 
     assert.equal(
         normalizeClipboardText("First paragraph\r\n\r\nSecond paragraph"),
@@ -99,5 +114,21 @@ test("notes markdown clipboard normalization preserves paragraphs and collapses 
     assert.equal(
         normalizeClipboardText("Line one   \n   \n\n\nLine two\t"),
         "Line one\n\nLine two"
+    );
+    assert.equal(normalizeClipboardText("Line one\nLine two\nLine three"), "Line one\nLine two\nLine three");
+    assert.equal(clipboardTextLooksStructured("Line one\nLine two\nLine three"), false);
+});
+
+test("notes copied plain text does not add blank lines between editor blocks", async () => {
+    const { normalizeCopiedPlainText } = await importBrowserModule("static/js/notes/editor/markdown-repair.js");
+
+    assert.equal(
+        normalizeCopiedPlainText("First line\n\nSecond line\n\n\nThird line\n"),
+        "First line\nSecond line\nThird line"
+    );
+    assert.equal(normalizeCopiedPlainText("Line one\nLine two"), "Line one\nLine two");
+    assert.equal(
+        normalizeCopiedPlainText("Before\n\n```\nconst a = 1;\n\nconst b = 2;\n```\n\nAfter\n"),
+        "Before\n```\nconst a = 1;\n\nconst b = 2;\n```\nAfter"
     );
 });

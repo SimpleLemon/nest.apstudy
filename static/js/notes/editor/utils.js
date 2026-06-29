@@ -6,12 +6,44 @@ export function noteIdFromPath(pathname = window.location.pathname) {
     return '';
 }
 
-export function handlePageSetupToolbarClick(event, toolbar, openPageSetupPopover) {
-    const actionButton = event?.target?.closest?.('button[data-editor-action="page-setup"]');
-    if (!actionButton || !toolbar?.contains?.(actionButton)) return false;
-    event.preventDefault?.();
-    openPageSetupPopover(actionButton);
+export function handlePageSetupTriggerClick(event, trigger, popover, openPageSetupPopover, closePageSetupPopover) {
+    if (!trigger || !popover) return false;
+    const triggerRect = trigger.getBoundingClientRect?.() || null;
+    event?.preventDefault?.();
+    event?.stopPropagation?.();
+    if (popover.hidden) {
+        openPageSetupPopover(trigger, triggerRect);
+    } else {
+        closePageSetupPopover();
+    }
     return true;
+}
+
+export function floatingPopoverPosition({
+    triggerRect,
+    popoverRect,
+    boundaryRect = null,
+    viewportWidth = window.innerWidth,
+    viewportHeight = window.innerHeight,
+    gap = 6,
+    margin = 8,
+} = {}) {
+    if (!triggerRect || !popoverRect) return { left: margin, top: margin };
+
+    const boundaryLeft = Math.max(margin, (boundaryRect?.left ?? 0) + margin);
+    const boundaryRight = Math.min(viewportWidth - margin, (boundaryRect?.right ?? viewportWidth) - margin);
+    const maxLeft = Math.max(boundaryLeft, boundaryRight - popoverRect.width);
+    const left = Math.min(maxLeft, Math.max(boundaryLeft, triggerRect.left));
+
+    const below = triggerRect.bottom + gap;
+    const above = triggerRect.top - popoverRect.height - gap;
+    const preferredTop = below + popoverRect.height <= viewportHeight - margin || above < margin
+        ? below
+        : above;
+    const maxTop = Math.max(margin, viewportHeight - margin - popoverRect.height);
+    const top = Math.min(maxTop, Math.max(margin, preferredTop));
+
+    return { left, top };
 }
 
 export function buildLoadingIndicatorHtml(label = 'Loading...', options = {}) {

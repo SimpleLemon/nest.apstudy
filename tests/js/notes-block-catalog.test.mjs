@@ -47,6 +47,15 @@ test("block catalog builds URL block payloads", async () => {
     assert.equal(bookmark.type, "bookmark");
     assert.equal(bookmark.props.title, "Example");
     assert.equal(bookmark.props.imageUrl, "https://example.com/og.png");
+
+    const table = blockPayloadForCatalogItem(catalogItemByKey("table"));
+    assert.equal(table.type, "table");
+    assert.equal(table.content.type, "tableContent");
+    assert.deepEqual(table.content.rows.map((row) => row.cells), [
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""],
+    ]);
 });
 
 test("notes image block renderer keeps image props and lazy-loads previews", async () => {

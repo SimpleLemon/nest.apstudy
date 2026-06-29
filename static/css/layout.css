@@ -29,6 +29,17 @@ html, body {
 html {
   scroll-padding-top: var(--navbar-height);
 }
+
+.workspace-page-title {
+  margin: 0;
+  color: var(--color-on-surface);
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 740;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
 body {
   background: var(--bg-main);
   color: var(--text-primary);

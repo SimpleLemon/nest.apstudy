@@ -28,7 +28,6 @@
     <script src="{{ url_for('static', filename='js/core/sidebar.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script src="{{ url_for('static', filename='js/notes/export.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/notes/sharing.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/notes/list/utils.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/notes/list/cards.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/notes/list.js') }}" defer></script>
@@ -40,31 +39,53 @@
     <main class="flex-1 w-full max-w-[1600px] mx-auto px-6 md:px-8 pt-6 pb-10 flex flex-col gap-12 relative z-10">
         <div id="notes-page" class="notes-page">
             <div class="notes-page-header">
-                <h1 class="notes-page-title">
-                    <button id="notes-root-breadcrumb" class="notes-breadcrumb-root" type="button" aria-current="page">My Notes</button>
+                <h1 class="notes-page-title workspace-page-title">
+                    <span class="notes-view-switcher">
+                        <button id="notes-root-breadcrumb" class="notes-breadcrumb-root" type="button" aria-haspopup="menu" aria-expanded="false">
+                            <span id="notes-view-label">My Notes</span>
+                            <span class="material-symbols-outlined notes-view-caret" aria-hidden="true">expand_more</span>
+                        </button>
+                        <span id="notes-view-menu" class="notes-view-menu" role="menu" hidden>
+                            <button id="notes-tab-mine" class="notes-view-option is-active" type="button" role="menuitemradio" data-notes-view="mine" aria-checked="true">
+                                <span class="material-symbols-outlined" aria-hidden="true">description</span>
+                                <span>My Notes</span>
+                                <span class="material-symbols-outlined notes-view-check" aria-hidden="true">check</span>
+                            </button>
+                            <button id="notes-tab-shared" class="notes-view-option" type="button" role="menuitemradio" data-notes-view="shared" aria-checked="false">
+                                <span class="material-symbols-outlined" aria-hidden="true">group</span>
+                                <span>Shared with Me</span>
+                                <span class="material-symbols-outlined notes-view-check" aria-hidden="true">check</span>
+                            </button>
+                        </span>
+                    </span>
                     <span id="notes-breadcrumb-separator" class="material-symbols-outlined notes-breadcrumb-separator" aria-hidden="true" hidden>chevron_right</span>
                     <span id="notes-folder-breadcrumb" class="notes-breadcrumb-current" hidden></span>
                 </h1>
                 <div class="notes-page-actions">
-                    <button id="btn-share-folder" class="btn-secondary cursor-pointer" type="button" hidden>
-                        <span class="material-symbols-outlined" aria-hidden="true">ios_share</span>
-                        Share
-                    </button>
-                    <button id="btn-new-folder" class="btn-secondary cursor-pointer">
-                        <span class="material-symbols-outlined" aria-hidden="true">create_new_folder</span>
-                        New Folder
-                    </button>
-                    <button id="btn-new-note" class="btn-primary cursor-pointer">
-                        <span class="material-symbols-outlined" aria-hidden="true">note_add</span>
-                        New Note
-                    </button>
+                    <div class="notes-new-menu-wrap">
+                        <button id="notes-new-button" class="btn-primary cursor-pointer" type="button" aria-haspopup="menu" aria-expanded="false">
+                            <span class="material-symbols-outlined" aria-hidden="true">add_2</span>
+                            <span>New</span>
+                        </button>
+                        <div id="notes-new-menu" class="notes-new-menu" role="menu" hidden>
+                            <button id="btn-new-folder" type="button" role="menuitem">
+                                <span class="material-symbols-outlined" aria-hidden="true">create_new_folder</span>
+                                <span>
+                                    <strong>New Folder</strong>
+                                    <small>Organize related notes</small>
+                                </span>
+                            </button>
+                            <button id="btn-new-note" type="button" role="menuitem">
+                                <span class="material-symbols-outlined" aria-hidden="true">note_add</span>
+                                <span>
+                                    <strong>New Note</strong>
+                                    <small>Start a blank note</small>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <nav class="notes-view-tabs" aria-label="Notes views">
-                <button id="notes-tab-mine" class="notes-view-tab is-active" type="button" data-notes-view="mine" aria-selected="true">My Notes</button>
-                <button id="notes-tab-shared" class="notes-view-tab" type="button" data-notes-view="shared" aria-selected="false">Shared with me</button>
-            </nav>
 
             <div id="notes-alert" class="notes-alert" role="status" hidden></div>
 

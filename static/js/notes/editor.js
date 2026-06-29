@@ -9,9 +9,7 @@ import {
 } from '@blocknote/react';
 import { checkBlockHasDefaultProp, checkBlockTypeHasDefaultProp, mapTableCell } from '@blocknote/core';
 import { BlockNoteView } from '@blocknote/mantine';
-import { Extension } from '@tiptap/core';
 import { History } from '@tiptap/extension-history';
-import { Plugin } from '@tiptap/pm/state';
 import { notesEditorSchema } from './toolbar.js';
 import {
     BLOCK_CATALOG,
@@ -24,8 +22,10 @@ import {
     filterBlockCatalog,
 } from './editor/block-catalog.js';
 import { hiddenBlocksForCollapsedHeadings } from './editor/heading-collapse.js';
-import { clipboardTextLooksStructured, normalizeClipboardText, normalizeImportedMarkdownBlocks } from './editor/markdown-repair.js';
-import { blockOwnContentIsEmpty, buildLoadingIndicatorHtml, documentHasText, formatRelativeSavedTime, handlePageSetupToolbarClick, isBlankTitle, noteIdFromPath, parseSavedDate } from './editor/utils.js';
+import { listItemHardBreakShortcuts, preserveRangeSelectionShortcuts } from './editor/keyboard-shortcuts.js';
+import { clipboardTextLooksStructured, normalizeClipboardText, normalizeCopiedPlainText, normalizeImportedMarkdownBlocks } from './editor/markdown-repair.js';
+import { isNotePrintShortcut, printNote } from './editor/print.js';
+import { blockOwnContentIsEmpty, buildLoadingIndicatorHtml, documentHasText, floatingPopoverPosition, formatRelativeSavedTime, handlePageSetupTriggerClick, isBlankTitle, noteIdFromPath, parseSavedDate } from './editor/utils.js';
 
 const noteContext = window.APSTUDY_NOTE_CONTEXT || {};
 const noteId = noteContext.noteId || noteIdFromPath();
@@ -37,28 +37,6 @@ const NORMAL_HISTORY_DEPTH = 100;
 const LONG_DOCUMENT_HISTORY_DEPTH = 35;
 const GRAMMARLY_DISABLED_ATTRS = 'data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"';
 
-const preserveRangeSelectionShortcuts = Extension.create({
-    name: 'preserveRangeSelectionShortcuts',
-    priority: 1000,
-    addProseMirrorPlugins() {
-        return [
-            new Plugin({
-                props: {
-                    handleDOMEvents: {
-                        keydown(view, event) {
-                            const isRangeVerticalArrow = event.shiftKey
-                                && (event.metaKey || event.ctrlKey)
-                                && !event.altKey
-                                && (event.key === 'ArrowUp' || event.key === 'ArrowDown');
-                            if (!isRangeVerticalArrow) return false;
-                            return true;
-                        },
-                    },
-                },
-            }),
-        ];
-    },
-});
 const EDITOR_CHROME_THROTTLE_MS = 120;
 const SAVED_TIME_REFRESH_MS = 60000;
 const ZOOM_STORAGE_KEY = 'apstudy.notes.editor.zoom';
@@ -124,7 +102,9 @@ let notePageSetup = {};
 let globalPageSetup = {};
 let pageSetupScope = 'note';
 let activePageSetupTrigger = null;
+let activePageSetupTriggerRect = null;
 let pageSetupSaveTimer = null;
+let pageSetupPositionRafId = null;
 let addBlockActiveIndex = 0;
 let defaultSideMarginPercent = null;
 let normalizingEditorDocument = false;
@@ -140,6 +120,8 @@ let lastSelectedBlockIds = new Set();
 let lastHeadingCollapseSignature = '';
 let latestDocumentSnapshot = null;
 let lastSavedPayloadFingerprint = '';
+let notePrintReady = false;
+let notePrintInProgress = false;
 
 const titleInput = document.getElementById('note-title-input');
 const saveStatus = document.getElementById('save-status');
@@ -150,9 +132,11 @@ const editorHint = document.getElementById('notes-editor-hint');
 const editorPage = document.getElementById('editor-page');
 const zoomValue = document.getElementById('notes-zoom-value');
 const pageSetupPopover = document.getElementById('notes-page-setup-popover');
+const pageSetupTrigger = writingToolbar?.querySelector('button[data-editor-action="page-setup"]') || null;
 const shareButton = document.getElementById('notes-share-button');
 const pageSetupScopeInput = document.querySelector('[data-page-setup-scope]');
 const sideMarginsValue = document.getElementById('notes-side-margins-value');
+const notePrintButtons = Array.from(document.querySelectorAll('[data-note-print]'));
 
 function clampZoomIndex(index) {
     return Math.min(ZOOM_LEVELS.length - 1, Math.max(0, index));
@@ -473,31 +457,51 @@ function applyTextAlignment(textAlignment) {
 
 function closePageSetupPopover() {
     if (!pageSetupPopover) return;
+    if (pageSetupPositionRafId) {
+        window.cancelAnimationFrame(pageSetupPositionRafId);
+        pageSetupPositionRafId = null;
+    }
     pageSetupPopover.hidden = true;
     closePageSetupDropdowns();
     activePageSetupTrigger?.setAttribute('aria-expanded', 'false');
     activePageSetupTrigger = null;
+    activePageSetupTriggerRect = null;
 }
 
-function positionPageSetupPopover(trigger) {
+function usableTriggerRect(trigger) {
+    const rect = trigger?.getBoundingClientRect?.();
+    if (!rect || (!rect.width && !rect.height)) return null;
+    return rect;
+}
+
+function positionPageSetupPopover(trigger, triggerRectOverride = null) {
     if (!pageSetupPopover || !trigger) return;
-    pageSetupPopover.style.removeProperty('left');
-    pageSetupPopover.style.removeProperty('top');
+    const currentRect = usableTriggerRect(trigger);
+    activePageSetupTriggerRect = currentRect || triggerRectOverride || activePageSetupTriggerRect;
+    if (!activePageSetupTriggerRect) return;
+    positionFloatingElement(trigger, pageSetupPopover, {
+        triggerRectOverride: activePageSetupTriggerRect,
+        boundaryRect: editorPage?.getBoundingClientRect(),
+    });
 }
 
-function openPageSetupPopover(trigger) {
+function schedulePageSetupPopoverPosition() {
+    if (!pageSetupPopover || pageSetupPopover.hidden || pageSetupPositionRafId) return;
+    pageSetupPositionRafId = window.requestAnimationFrame(() => {
+        pageSetupPositionRafId = null;
+        positionPageSetupPopover(activePageSetupTrigger, activePageSetupTriggerRect);
+    });
+}
+
+function openPageSetupPopover(trigger, triggerRect = null) {
     if (!pageSetupPopover) return;
-    const opening = pageSetupPopover.hidden;
     closeToolbarMenus();
-    if (!opening) {
-        closePageSetupPopover();
-        return;
-    }
     activePageSetupTrigger = trigger || null;
+    activePageSetupTriggerRect = triggerRect || usableTriggerRect(trigger);
     pageSetupPopover.hidden = false;
     activePageSetupTrigger?.setAttribute('aria-expanded', 'true');
     updatePageSetupControls();
-    positionPageSetupPopover(activePageSetupTrigger);
+    positionPageSetupPopover(activePageSetupTrigger, activePageSetupTriggerRect);
 }
 
 async function saveNotePageSetup() {
@@ -571,6 +575,63 @@ function updateCurrentPageSetup(key, value) {
     schedulePageSetupSave();
 }
 
+function syncNotePrintControls() {
+    notePrintButtons.forEach((button) => {
+        const disabled = !notePrintReady || notePrintInProgress;
+        button.disabled = disabled;
+        button.setAttribute('aria-disabled', String(disabled));
+        button.toggleAttribute('aria-busy', notePrintInProgress);
+    });
+}
+
+function setNotePrintReady(ready) {
+    notePrintReady = Boolean(ready);
+    syncNotePrintControls();
+}
+
+async function requestCurrentNotePrint() {
+    if (!notePrintReady || notePrintInProgress || !editorInstance || !titleInput) return;
+    notePrintInProgress = true;
+    syncNotePrintControls();
+    closeToolbarMenus();
+    closePageSetupPopover();
+
+    try {
+        const documentSnapshot = currentDocumentSnapshot();
+        const { hidden } = hiddenBlocksForCollapsedHeadings(documentSnapshot);
+        const setup = effectivePageSetup();
+        await printNote({
+            editor: editorInstance,
+            blocks: documentSnapshot,
+            hiddenBlockIds: hidden.keys(),
+            title: titleInput.value,
+            fontFamily: PAGE_SETUP_FONT_TYPES[setup.fontType] || PAGE_SETUP_FONT_TYPES.default,
+            sideMargins: setup.sideMargins,
+        });
+    } catch (error) {
+        console.error('Failed to prepare note for printing', error);
+        window.APStudyToast?.error?.('Could not prepare this note for printing.');
+    } finally {
+        notePrintInProgress = false;
+        syncNotePrintControls();
+    }
+}
+
+function bindNotePrintControls() {
+    syncNotePrintControls();
+    notePrintButtons.forEach((button) => {
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            void requestCurrentNotePrint();
+        });
+    });
+    document.addEventListener('keydown', (event) => {
+        if (!notePrintReady || !isNotePrintShortcut(event)) return;
+        event.preventDefault();
+        void requestCurrentNotePrint();
+    }, true);
+}
+
 function closeToolbarMenus() {
     if (!writingToolbar) return;
     activeToolbarMenu = null;
@@ -582,28 +643,38 @@ function closeToolbarMenus() {
     });
 }
 
+function positionFloatingElement(trigger, element, { triggerRectOverride = null, boundaryRect = null } = {}) {
+    if (!trigger || !element) return;
+    const triggerRect = triggerRectOverride || trigger.getBoundingClientRect();
+    element.style.left = '0px';
+    element.style.top = '0px';
+    element.style.transform = 'none';
+
+    const originRect = element.getBoundingClientRect();
+    const position = floatingPopoverPosition({
+        triggerRect,
+        popoverRect: originRect,
+        boundaryRect,
+    });
+
+    element.style.left = `${Math.round(position.left - originRect.left)}px`;
+    element.style.top = `${Math.round(position.top - originRect.top)}px`;
+}
+
 function positionToolbarMenu(trigger, menu, triggerRectOverride = null) {
     if (!trigger || !menu) return;
     const triggerRect = triggerRectOverride || trigger.getBoundingClientRect();
     const isOverflowToolbar = menu.classList.contains('notes-toolbar-overflow-menu');
-    menu.style.left = '0px';
-    menu.style.top = '0px';
     menu.style.minWidth = isOverflowToolbar ? '0px' : `${Math.max(triggerRect.width, 150)}px`;
 
     const editorRect = editorPage?.getBoundingClientRect();
-    const viewportRight = window.innerWidth - 8;
-    const boundaryRight = Math.min(viewportRight, editorRect ? editorRect.right - 8 : viewportRight);
-    menu.style.maxWidth = isOverflowToolbar ? `${Math.max(0, boundaryRight - 8)}px` : '';
-    const menuRect = menu.getBoundingClientRect();
-    let left = triggerRect.left;
-
-    if (left + menuRect.width > boundaryRight) {
-        left = triggerRect.right - menuRect.width;
-    }
-
-    left = Math.max(8, left);
-    menu.style.left = `${Math.round(left)}px`;
-    menu.style.top = `${Math.round(triggerRect.bottom + 6)}px`;
+    menu.style.maxWidth = isOverflowToolbar
+        ? `${Math.max(0, Math.min(window.innerWidth, editorRect?.width || window.innerWidth) - 16)}px`
+        : '';
+    positionFloatingElement(trigger, menu, {
+        triggerRectOverride: triggerRect,
+        boundaryRect: editorRect,
+    });
 }
 
 function openToolbarMenu(name, trigger) {
@@ -1006,7 +1077,7 @@ function insertBlockPayload(block, editor = editorInstance) {
 
     if (!insertedOrUpdated) return null;
 
-    if (ATOM_BLOCK_TYPES.has(insertedOrUpdated.type)) {
+    if (ATOM_BLOCK_TYPES.has(insertedOrUpdated.type) || insertedOrUpdated.type === 'table') {
         const after = editor.insertBlocks?.([{ type: 'paragraph' }], insertedOrUpdated, 'after')?.[0];
         if (after) editor.setTextCursorPosition?.(after);
     } else {
@@ -1168,27 +1239,36 @@ async function copySelectedBlocks({ cut = false } = {}) {
     const blocks = selectedBlocks();
     if (!blocks.length) return;
     const markdown = await editorInstance.blocksToMarkdownLossy?.(blocks) || blocks.map((block) => textFromInlineContent(block.content)).join('\n\n');
+    const plainText = normalizeCopiedPlainText(markdown);
     const json = JSON.stringify(blocks);
     try {
         if (window.ClipboardItem && navigator.clipboard?.write) {
             await navigator.clipboard.write([
                 new ClipboardItem({
-                    'text/plain': new Blob([markdown], { type: 'text/plain' }),
+                    'text/plain': new Blob([plainText], { type: 'text/plain' }),
                     'text/markdown': new Blob([markdown], { type: 'text/markdown' }),
                     'application/x-nest-blocknote+json': new Blob([json], { type: 'application/x-nest-blocknote+json' }),
                 }),
             ]);
         } else {
-            await navigator.clipboard?.writeText(markdown);
+            await navigator.clipboard?.writeText(plainText);
         }
     } catch (error) {
         try {
-            await navigator.clipboard?.writeText(markdown);
+            await navigator.clipboard?.writeText(plainText);
         } catch (clipboardError) {
             console.warn('Unable to write selected note blocks to clipboard', clipboardError);
         }
     }
     if (cut) deleteSelectedBlocks();
+}
+
+function normalizeNativeEditorCopy(event) {
+    const clipboardData = event.clipboardData;
+    if (!clipboardData) return;
+    const plainText = clipboardData.getData('text/plain');
+    if (!plainText) return;
+    clipboardData.setData('text/plain', normalizeCopiedPlainText(plainText));
 }
 
 function moveSelectedBlocks(direction) {
@@ -1451,6 +1531,13 @@ function blockOuterById(id) {
 
 function syncSelectedBlockClasses() {
     if (!blocknoteRoot) return;
+    if (!canEdit) {
+        blocknoteRoot.querySelectorAll('.notes-block-selected').forEach((element) => {
+            element.classList.remove('notes-block-selected');
+        });
+        lastSelectedBlockIds = new Set();
+        return;
+    }
     const ids = selectedBlockIds();
     const toClear = [...lastSelectedBlockIds].filter((id) => !ids.has(id));
     const toSet = [...ids].filter((id) => !lastSelectedBlockIds.has(id));
@@ -1581,8 +1668,6 @@ function bindWritingToolbar() {
             return;
         }
 
-        if (handlePageSetupToolbarClick(event, writingToolbar, openPageSetupPopover)) return;
-
         const menuTrigger = event.target.closest('[data-toolbar-menu-trigger]');
         if (menuTrigger && writingToolbar.contains(menuTrigger)) {
             event.preventDefault();
@@ -1650,6 +1735,16 @@ function bindWritingToolbar() {
             toggleHeadingCollapse();
             closeToolbarMenus();
         }
+    });
+
+    pageSetupTrigger?.addEventListener('click', (event) => {
+        handlePageSetupTriggerClick(
+            event,
+            pageSetupTrigger,
+            pageSetupPopover,
+            openPageSetupPopover,
+            closePageSetupPopover
+        );
     });
 
     writingToolbar.addEventListener('input', (event) => {
@@ -1789,6 +1884,9 @@ function bindWritingToolbar() {
         updateCurrentPageSetup('sideMargins', input.value);
     });
 
+    editorPage?.addEventListener('scroll', schedulePageSetupPopoverPosition, { passive: true });
+    window.addEventListener('resize', schedulePageSetupPopoverPosition);
+
     toolbarOverflowController?.refresh();
 }
 
@@ -1829,17 +1927,6 @@ window.addEventListener('beforeunload', (event) => {
     event.returnValue = '';
 });
 
-function clipboardTextHasMarkdownSyntax(text) {
-    if (typeof text !== 'string') return false;
-    return text.split(/\r?\n/).some((line) => (
-        /^#{1,6}\s+\S/.test(line)
-        || /^>\s+\S/.test(line)
-        || /^[-*+]\s+\S/.test(line)
-        || /^\d+[.)]\s+\S/.test(line)
-        || /^-{3,}\s*$/.test(line)
-    ));
-}
-
 function normalizeEditorDocument({ save = true } = {}) {
     if (!editorInstance || normalizingEditorDocument) return false;
 
@@ -1871,8 +1958,9 @@ function schedulePastedContentNormalization() {
 }
 
 function handleNotesPaste({ event, editor, defaultPasteHandler }) {
-    const plainText = normalizeClipboardText(event.clipboardData?.getData('text/plain') || '');
-    const blockJson = event.clipboardData?.getData('application/x-nest-blocknote+json') || '';
+    const clipboardData = event.clipboardData;
+    const rawPlainText = clipboardData?.getData('text/plain') || '';
+    const blockJson = clipboardData?.getData('application/x-nest-blocknote+json') || '';
     if (blockJson) {
         try {
             const blocks = JSON.parse(blockJson);
@@ -1892,24 +1980,33 @@ function handleNotesPaste({ event, editor, defaultPasteHandler }) {
             // Fall back to markdown/plain text paste.
         }
     }
-    const hasMarkdownSyntax = clipboardTextHasMarkdownSyntax(plainText);
-    const looksStructured = clipboardTextLooksStructured(plainText);
-    if (hasMarkdownSyntax) {
-        editor.pasteMarkdown?.(plainText);
+
+    if (clipboardData?.getData('blocknote/html')) {
+        return defaultPasteHandler({
+            prioritizeMarkdownOverHTML: false,
+            plainTextAsMarkdown: false,
+        });
+    }
+
+    const explicitMarkdown = clipboardData?.getData('text/markdown') || '';
+    if (explicitMarkdown) {
+        editor.pasteMarkdown?.(normalizeClipboardText(explicitMarkdown));
         schedulePastedContentNormalization();
         return true;
     }
 
-    const handled = defaultPasteHandler({
-        prioritizeMarkdownOverHTML: looksStructured,
-        plainTextAsMarkdown: looksStructured,
-    });
-
+    const plainText = normalizeClipboardText(rawPlainText);
+    const looksStructured = clipboardTextLooksStructured(plainText);
     if (looksStructured) {
+        editor.pasteText?.(plainText);
         schedulePastedContentNormalization();
+        return true;
     }
 
-    return handled;
+    return defaultPasteHandler({
+        prioritizeMarkdownOverHTML: false,
+        plainTextAsMarkdown: false,
+    });
 }
 
 function NotesSlashMenu(props) {
@@ -2089,6 +2186,7 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
             extensions: [
                 History.configure({ depth: historyDepth, newGroupDelay: 500 }),
                 preserveRangeSelectionShortcuts,
+                listItemHardBreakShortcuts,
             ],
         },
         placeholders: {
@@ -2108,6 +2206,7 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
 
     React.useEffect(() => {
         editorInstance = editor;
+        setNotePrintReady(true);
         window.setTimeout(() => {
             if (editorInstance !== editor) return;
             captureHistoryBaseline();
@@ -2122,6 +2221,7 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
         return () => {
             if (editorInstance === editor) {
                 editorInstance = null;
+                setNotePrintReady(false);
             }
         };
     }, [editor]);
@@ -2259,6 +2359,8 @@ async function initEditorPage() {
         }
         focusEditorBody();
     });
+    rootElement.addEventListener('copy', normalizeNativeEditorCopy);
+    rootElement.addEventListener('cut', normalizeNativeEditorCopy);
     window.setTimeout(() => {
         const isNewBlankNote = isBlankTitle(noteTitle) && !documentHasText(parsedContent);
         const documentSnapshot = currentDocumentSnapshot();
@@ -2273,6 +2375,7 @@ saveRetry?.addEventListener('click', () => {
     void saveNote();
 });
 
+bindNotePrintControls();
 zoomIndex = loadStoredZoomIndex();
 applyEditorZoom();
 initEditorPage();

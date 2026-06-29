@@ -223,7 +223,6 @@
     align-items: center;
     gap: 4px;
     overflow-x: auto;
-    color: var(--color-on-surface-variant);
 }
 
 .files-breadcrumbs button {
@@ -232,8 +231,7 @@
     border-radius: 8px;
     background: transparent;
     color: inherit;
-    font-size: 20px;
-    font-weight: 740;
+    font: inherit;
     cursor: pointer;
 }
 

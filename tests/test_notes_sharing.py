@@ -168,6 +168,7 @@ class NotesSharingStoreTests(unittest.TestCase):
         self.assertEqual(payload["access"]["role"], "viewer")
         self.assertFalse(payload["access"]["can_edit"])
         self.assertEqual(payload["owner"]["id"], "owner")
+        self.assertEqual(payload["owner"]["profile_url"], "/u/owner")
         self.assertNotIn("email", payload["owner"])
 
     def test_private_note_api_requires_login_then_hides_from_other_users(self):

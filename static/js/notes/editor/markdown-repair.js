@@ -85,6 +85,16 @@ function markerForText(text) {
 }
 
 function directMarkdownMarker(text) {
+    const heading = text.match(/^(#{1,3})\s+(.+)$/);
+    if (heading) {
+        return {
+            type: 'heading',
+            level: 0,
+            text: heading[2],
+            props: { level: heading[1].length },
+        };
+    }
+
     const quote = text.match(/^>\s+(.+)$/);
     if (quote) {
         return { type: 'quote', level: 0, text: quote[1] };
@@ -189,9 +199,10 @@ function normalizeImportedMarkdownBlocks(blocks) {
         if (directMarker) {
             const converted = textLikeBlock(block, {
                 type: directMarker.type,
+                props: directMarker.props,
                 content: contentFromText(directMarker.text),
             });
-            if (directMarker.type === 'quote') {
+            if (directMarker.type === 'quote' || directMarker.type === 'heading') {
                 output.push(converted);
                 listStack.length = 0;
             } else {
@@ -244,8 +255,34 @@ function normalizeClipboardText(text) {
         .replace(/\n{3,}/g, '\n\n');
 }
 
+function normalizeCopiedPlainText(text) {
+    if (typeof text !== 'string') return '';
+    const output = [];
+    let inFencedCode = false;
+
+    text.replace(/\r\n?/g, '\n').split('\n').forEach((rawLine) => {
+        const fence = /^\s*(```|~~~)/.test(rawLine);
+        if (fence) {
+            output.push(rawLine.replace(/[ \t]+$/g, ''));
+            inFencedCode = !inFencedCode;
+            return;
+        }
+        if (inFencedCode) {
+            output.push(rawLine);
+            return;
+        }
+
+        const line = rawLine.replace(/[ \t]+$/g, '');
+        if (line === '') return;
+        output.push(line);
+    });
+
+    return output.join('\n').replace(/\n+$/g, '');
+}
+
 export {
     clipboardTextLooksStructured,
     normalizeClipboardText,
+    normalizeCopiedPlainText,
     normalizeImportedMarkdownBlocks,
 };

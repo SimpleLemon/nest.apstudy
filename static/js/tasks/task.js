@@ -375,7 +375,7 @@ function TaskApp({ completeSound, uncompleteSound }) {
         h("div", { className: "task-app" },
             h("header", { className: "task-header" },
                 h("div", null,
-                    h("h1", { className: "task-title" }, "Tasks"),
+                    h("h1", { className: "task-title workspace-page-title" }, "Tasks"),
                     h("p", { className: "task-subtitle" }, "Lists, deadlines, repeat schedules, and calendar-synced work.")
                 )
             ),

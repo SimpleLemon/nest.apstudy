@@ -25,13 +25,7 @@
 }
 
 .task-title {
-    margin: 0;
     color: var(--color-on-surface, #202124);
-    font-family: var(--font-display);
-    font-size: 32px;
-    font-weight: 700;
-    letter-spacing: -0.025em;
-    line-height: 1.1;
 }
 
 .task-subtitle {
@@ -1388,11 +1382,6 @@
     .task-header-actions {
         align-items: stretch;
         flex-direction: column;
-    }
-
-    .task-title {
-        font-size: 28px;
-        line-height: 1.14;
     }
 
     .task-subtitle {

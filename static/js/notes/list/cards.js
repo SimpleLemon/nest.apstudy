@@ -8,7 +8,6 @@
             formatDate,
             notePreview,
             openFolder,
-            openFolderSharing,
             openSharedFolder,
             openFolderModal,
             openMoveModal,
@@ -138,7 +137,6 @@
                     <span class="material-symbols-outlined" aria-hidden="true">more_vert</span>
                 </button>
                 <div class="folder-card-menu note-menu-hidden" role="menu">
-                    <button type="button" class="note-menu-item" role="menuitem" data-action="share-folder">Share</button>
                     <button type="button" class="note-menu-item" role="menuitem" data-action="rename">Rename</button>
                     <button type="button" class="note-menu-item note-menu-item-danger" role="menuitem" data-action="delete-folder">Delete</button>
                 </div>`;
@@ -168,11 +166,6 @@
                 menuBtn.addEventListener('click', (event) => {
                     event.stopPropagation();
                     toggleCardMenu(menuBtn, menu);
-                });
-                menu.querySelector('[data-action="share-folder"]').addEventListener('click', (event) => {
-                    event.stopPropagation();
-                    closeAllMenus();
-                    openFolderSharing(folder);
                 });
                 menu.querySelector('[data-action="rename"]').addEventListener('click', (event) => {
                     event.stopPropagation();

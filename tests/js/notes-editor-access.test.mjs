@@ -12,33 +12,70 @@ async function importBrowserModule(relativePath) {
     return import(url);
 }
 
-test("page setup toolbar click reaches the popover handler for edit-capable views", async () => {
-    const { handlePageSetupToolbarClick } = await importBrowserModule("static/js/notes/editor/utils.js");
-    const button = { dataset: { editorAction: "page-setup" } };
-    const toolbar = { contains: (candidate) => candidate === button };
+test("page setup trigger captures its visible anchor before opening", async () => {
+    const { handlePageSetupTriggerClick } = await importBrowserModule("static/js/notes/editor/utils.js");
+    const triggerRect = { left: 24, top: 60, right: 58, bottom: 94, width: 34, height: 34 };
+    const button = { getBoundingClientRect: () => triggerRect };
+    const popover = { hidden: true };
     let prevented = false;
+    let stopped = false;
     let openedWith = null;
+    let openedAt = null;
     const event = {
-        target: { closest: () => button },
         preventDefault: () => { prevented = true; },
+        stopPropagation: () => { stopped = true; },
     };
 
-    const handled = handlePageSetupToolbarClick(event, toolbar, (trigger) => {
+    const handled = handlePageSetupTriggerClick(event, button, popover, (trigger, rect) => {
         openedWith = trigger;
-    });
+        openedAt = rect;
+    }, () => assert.fail("should not close"));
 
     assert.equal(handled, true);
     assert.equal(prevented, true);
+    assert.equal(stopped, true);
     assert.equal(openedWith, button);
+    assert.equal(openedAt, triggerRect);
 });
 
-test("page setup toolbar click ignores controls outside the writing toolbar", async () => {
-    const { handlePageSetupToolbarClick } = await importBrowserModule("static/js/notes/editor/utils.js");
-    const button = {};
-    const handled = handlePageSetupToolbarClick(
-        { target: { closest: () => button }, preventDefault: () => assert.fail("should not prevent") },
-        { contains: () => false },
+test("page setup trigger toggles an open popover closed", async () => {
+    const { handlePageSetupTriggerClick } = await importBrowserModule("static/js/notes/editor/utils.js");
+    const button = { getBoundingClientRect: () => ({ width: 34, height: 34 }) };
+    let closed = false;
+    const handled = handlePageSetupTriggerClick(
+        { preventDefault() {}, stopPropagation() {} },
+        button,
+        { hidden: false },
         () => assert.fail("should not open"),
+        () => { closed = true; },
     );
-    assert.equal(handled, false);
+    assert.equal(handled, true);
+    assert.equal(closed, true);
+});
+
+test("page setup trigger ignores a missing control or popover", async () => {
+    const { handlePageSetupTriggerClick } = await importBrowserModule("static/js/notes/editor/utils.js");
+    assert.equal(handlePageSetupTriggerClick({}, null, {}, () => {}, () => {}), false);
+    assert.equal(handlePageSetupTriggerClick({}, {}, null, () => {}, () => {}), false);
+});
+
+test("toolbar popovers stay beside their trigger and inside the editor boundary", async () => {
+    const { floatingPopoverPosition } = await importBrowserModule("static/js/notes/editor/utils.js");
+    const boundaryRect = { left: 100, right: 900 };
+
+    assert.deepEqual(floatingPopoverPosition({
+        triggerRect: { left: 820, top: 120, right: 860, bottom: 160 },
+        popoverRect: { width: 240, height: 180 },
+        boundaryRect,
+        viewportWidth: 1000,
+        viewportHeight: 700,
+    }), { left: 652, top: 166 });
+
+    assert.deepEqual(floatingPopoverPosition({
+        triggerRect: { left: 300, top: 620, right: 340, bottom: 660 },
+        popoverRect: { width: 220, height: 180 },
+        boundaryRect,
+        viewportWidth: 1000,
+        viewportHeight: 700,
+    }), { left: 300, top: 434 });
 });
