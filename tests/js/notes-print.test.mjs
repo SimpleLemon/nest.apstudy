@@ -111,7 +111,7 @@ function fakeElement(tagName, documentRef) {
     };
 }
 
-test('print lifecycle restores the document title and cleans up after printing', async () => {
+test('print lifecycle is single-flight until afterprint and permits a later print', async () => {
     const { printNote } = await importPrintModule();
     const classes = new Set();
     const documentRef = {
@@ -127,7 +127,7 @@ test('print lifecycle restores the document title and cleans up after printing',
         },
     };
     const listeners = new Map();
-    let printedTitle = '';
+    const printedTitles = [];
     const windowRef = {
         addEventListener(type, handler) { listeners.set(type, handler); },
         removeEventListener(type, handler) {
@@ -136,13 +136,13 @@ test('print lifecycle restores the document title and cleans up after printing',
         requestAnimationFrame(callback) { callback(); },
         setTimeout,
         clearTimeout,
-        print() { printedTitle = documentRef.title; },
+        print() { printedTitles.push(documentRef.title); },
     };
     const editor = {
         async blocksToHTMLLossy() { return '<p>Current unsaved text</p>'; },
     };
 
-    await printNote({
+    const options = {
         editor,
         blocks: [{ id: 'one', type: 'paragraph' }],
         title: '  Current title  ',
@@ -150,14 +150,80 @@ test('print lifecycle restores the document title and cleans up after printing',
         sideMargins: 12,
         documentRef,
         windowRef,
-    });
+    };
+    const firstPrint = printNote(options);
+    const duplicatePrint = printNote(options);
+    let firstPrintSettled = false;
+    void firstPrint.then(() => { firstPrintSettled = true; });
+    await new Promise((resolve) => setImmediate(resolve));
 
-    assert.equal(printedTitle, 'Current title');
-    assert.equal(documentRef.title, 'Note Editor - APStudy Nest');
+    assert.equal(duplicatePrint, firstPrint);
+    assert.deepEqual(printedTitles, ['Current title']);
+    assert.equal(firstPrintSettled, false);
+    assert.equal(documentRef.title, 'Current title');
     assert.equal(documentRef.body.children.length, 1);
     assert.equal(classes.has('notes-print-prepared'), true);
 
     listeners.get('afterprint')();
+    await firstPrint;
+    assert.equal(documentRef.title, 'Note Editor - APStudy Nest');
     assert.equal(documentRef.body.children.length, 0);
     assert.equal(classes.has('notes-print-prepared'), false);
+
+    const laterPrint = printNote(options);
+    await new Promise((resolve) => setImmediate(resolve));
+    assert.deepEqual(printedTitles, ['Current title', 'Current title']);
+    listeners.get('afterprint')();
+    await laterPrint;
+});
+
+test('print errors clean up and permit retry', async () => {
+    const { printNote } = await importPrintModule();
+    const classes = new Set();
+    const documentRef = {
+        title: 'Note Editor - APStudy Nest',
+        createElement(tagName) { return fakeElement(tagName, documentRef); },
+        body: {
+            children: [],
+            append(element) { this.children.push(element); },
+            classList: {
+                add(value) { classes.add(value); },
+                remove(value) { classes.delete(value); },
+            },
+        },
+    };
+    const listeners = new Map();
+    let printCalls = 0;
+    const windowRef = {
+        addEventListener(type, handler) { listeners.set(type, handler); },
+        removeEventListener(type, handler) {
+            if (listeners.get(type) === handler) listeners.delete(type);
+        },
+        requestAnimationFrame(callback) { callback(); },
+        setTimeout,
+        clearTimeout,
+        print() {
+            printCalls += 1;
+            throw new Error('Print unavailable');
+        },
+    };
+    const options = {
+        editor: { async blocksToHTMLLossy() { return '<p>Text</p>'; } },
+        blocks: [{ id: 'one', type: 'paragraph' }],
+        title: 'Current title',
+        documentRef,
+        windowRef,
+    };
+
+    await assert.rejects(printNote(options), /Print unavailable/);
+    assert.equal(documentRef.title, 'Note Editor - APStudy Nest');
+    assert.equal(documentRef.body.children.length, 0);
+    assert.equal(classes.has('notes-print-prepared'), false);
+
+    windowRef.print = () => { printCalls += 1; };
+    const retry = printNote(options);
+    await new Promise((resolve) => setImmediate(resolve));
+    listeners.get('afterprint')();
+    await retry;
+    assert.equal(printCalls, 2);
 });

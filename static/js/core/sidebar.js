@@ -189,7 +189,9 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
       setMobileSidebarOpen(false);
       if (route) {
         e.preventDefault();
-        window.location.href = route;
+        if (!window.APStudyNavigation?.go?.(route)) {
+          window.location.assign(route);
+        }
       }
     });
 
@@ -233,6 +235,9 @@ function setupChatSummaryBadge() {
   const idleMs = 300000;
   let timer = null;
   let inFlight = false;
+  let paused = false;
+  let disposed = false;
+  let requestController = null;
   let lastActivityAt = Date.now();
 
   function isIdle() {
@@ -262,18 +267,20 @@ function setupChatSummaryBadge() {
   function schedule(delay = pollMs) {
     window.clearTimeout(timer);
     timer = null;
-    if (document.visibilityState === 'hidden' || isIdle()) return;
+    if (paused || disposed || document.visibilityState === 'hidden' || isIdle()) return;
     const activeForMs = Date.now() - lastActivityAt;
     const untilIdleMs = Math.max(0, idleMs - activeForMs);
     timer = window.setTimeout(refresh, Math.min(delay, untilIdleMs));
   }
 
   async function refresh() {
-    if (inFlight || document.visibilityState === 'hidden' || isIdle()) return;
+    if (paused || disposed || inFlight || document.visibilityState === 'hidden' || isIdle()) return;
     inFlight = true;
+    requestController = new AbortController();
     try {
       const response = await fetch('/api/chat/summary', {
         headers: { Accept: 'application/json' },
+        signal: requestController.signal,
       });
       if (response.ok) {
         renderBadge(await response.json());
@@ -282,9 +289,30 @@ function setupChatSummaryBadge() {
       void error;
       // The next visible-tab interval will try again.
     } finally {
+      requestController = null;
       inFlight = false;
       schedule();
     }
+  }
+
+  function pausePolling() {
+    if (disposed) return;
+    paused = true;
+    window.clearTimeout(timer);
+    timer = null;
+    requestController?.abort();
+  }
+
+  function resumePolling() {
+    if (disposed || !paused) return;
+    paused = false;
+    lastActivityAt = Date.now();
+    schedule(1000);
+  }
+
+  function disposePolling() {
+    pausePolling();
+    disposed = true;
   }
 
   function markActive() {
@@ -311,6 +339,11 @@ function setupChatSummaryBadge() {
   window.addEventListener('apstudy-chat-summary', (event) => {
     renderBadge(event.detail || {});
     schedule();
+  });
+  window.APStudyPageLifecycle?.register?.({
+    pause: pausePolling,
+    resume: resumePolling,
+    dispose: disposePolling,
   });
   schedule(2500);
 }

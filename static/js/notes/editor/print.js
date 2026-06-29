@@ -25,7 +25,7 @@ export const PRINT_HIGHLIGHT_COLORS = Object.freeze({
     pink: '#fce7f3',
 });
 
-let activePrintCleanup = null;
+let activePrintPromise = null;
 
 export function normalizePrintTitle(value) {
     return String(value || '').trim() || 'Untitled';
@@ -259,7 +259,7 @@ function nextPaint(windowRef) {
     });
 }
 
-export async function printNote({
+async function runPrintNote({
     editor,
     blocks,
     hiddenBlockIds = [],
@@ -274,24 +274,27 @@ export async function printNote({
         throw new Error('Note printing is unavailable.');
     }
 
-    activePrintCleanup?.();
     const printableBlocks = printableBlocksForCurrentView(blocks, hiddenBlockIds);
     const html = await editor.blocksToHTMLLossy(printableBlocks);
     const surface = createPrintSurface({ documentRef, title, html, fontFamily, sideMargins });
     const originalTitle = documentRef.title;
     let cleaned = false;
+    let finishPrintLifecycle;
+    const printLifecycle = new Promise((resolve) => {
+        finishPrintLifecycle = resolve;
+    });
 
     const cleanup = () => {
         if (cleaned) return;
         cleaned = true;
+        documentRef.title = originalTitle;
         surface.remove();
         documentRef.body.classList.remove('notes-print-prepared');
         windowRef.removeEventListener?.('afterprint', cleanup);
         windowRef.removeEventListener?.('pagehide', cleanup);
-        if (activePrintCleanup === cleanup) activePrintCleanup = null;
+        finishPrintLifecycle();
     };
 
-    activePrintCleanup = cleanup;
     documentRef.body.classList.add('notes-print-prepared');
     windowRef.addEventListener?.('afterprint', cleanup, { once: true });
     windowRef.addEventListener?.('pagehide', cleanup, { once: true });
@@ -302,10 +305,25 @@ export async function printNote({
         await nextPaint(windowRef);
         documentRef.title = normalizePrintTitle(title);
         windowRef.print();
+        await printLifecycle;
     } catch (error) {
         cleanup();
         throw error;
-    } finally {
-        documentRef.title = originalTitle;
     }
+}
+
+export function printNote(options) {
+    if (activePrintPromise) return activePrintPromise;
+
+    const printPromise = runPrintNote(options);
+    activePrintPromise = printPromise;
+    void printPromise.then(
+        () => {
+            if (activePrintPromise === printPromise) activePrintPromise = null;
+        },
+        () => {
+            if (activePrintPromise === printPromise) activePrintPromise = null;
+        },
+    );
+    return printPromise;
 }

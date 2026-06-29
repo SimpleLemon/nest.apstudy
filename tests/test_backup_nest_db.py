@@ -1,7 +1,9 @@
 import os
+import shutil
 import sqlite3
 import tempfile
 import unittest
+from contextlib import closing
 from pathlib import Path
 from unittest.mock import patch
 
@@ -9,6 +11,25 @@ from scripts import backup_nest_db
 
 
 class BackupNestDbTestCase(unittest.TestCase):
+    def test_backup_database_rejects_foreign_key_violations(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            source = Path(temp_dir) / "source.sqlite3"
+            destination = Path(temp_dir) / "backup" / "source.sqlite3"
+            with closing(sqlite3.connect(source)) as connection:
+                connection.execute("CREATE TABLE parents (id INTEGER PRIMARY KEY)")
+                connection.execute(
+                    "CREATE TABLE children ("
+                    "id INTEGER PRIMARY KEY, parent_id INTEGER REFERENCES parents(id))"
+                )
+                connection.execute("INSERT INTO children (parent_id) VALUES (999)")
+                connection.commit()
+
+            ok, message = backup_nest_db._backup_database(source, destination)
+
+            self.assertFalse(ok)
+            self.assertIn("foreign_key_check failed", message)
+            self.assertFalse(destination.exists())
+
     def test_run_backup_creates_snapshot_and_notifies_discord(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             instance_dir = Path(temp_dir) / "instance"
@@ -16,27 +37,44 @@ class BackupNestDbTestCase(unittest.TestCase):
             instance_dir.mkdir()
 
             db_path = instance_dir / "nest.sqlite3"
-            with sqlite3.connect(db_path) as connection:
+            connection = sqlite3.connect(db_path)
+            try:
+                connection.execute("PRAGMA journal_mode = WAL")
+                connection.execute("PRAGMA wal_autocheckpoint = 0")
                 connection.execute("CREATE TABLE notes (id INTEGER PRIMARY KEY, title TEXT)")
                 connection.execute("INSERT INTO notes (title) VALUES ('hello')")
                 connection.commit()
 
-            with patch.object(backup_nest_db, "send_audit_event_sync", return_value=True) as notify:
-                exit_code = backup_nest_db.run_backup(
-                    instance_dir=instance_dir,
-                    backup_dir=backup_dir,
-                    max_backups=3,
-                    notify_discord=True,
-                )
+                with patch.object(backup_nest_db, "send_audit_event_sync", return_value=True) as notify:
+                    exit_code = backup_nest_db.run_backup(
+                        instance_dir=instance_dir,
+                        backup_dir=backup_dir,
+                        max_backups=3,
+                        notify_discord=True,
+                    )
+            finally:
+                connection.close()
 
             self.assertEqual(exit_code, 0)
             backup_sets = list(backup_dir.glob("backup_*"))
             self.assertEqual(len(backup_sets), 1)
             copied = backup_sets[0] / "nest.sqlite3"
             self.assertTrue(copied.is_file())
-            with sqlite3.connect(copied) as connection:
+            with closing(sqlite3.connect(f"file:{copied}?mode=ro", uri=True)) as connection:
+                self.assertEqual(connection.execute("PRAGMA integrity_check").fetchone()[0], "ok")
+                self.assertEqual(connection.execute("PRAGMA foreign_key_check").fetchall(), [])
                 row = connection.execute("SELECT title FROM notes").fetchone()
             self.assertEqual(row[0], "hello")
+
+            restored = Path(temp_dir) / "restore" / "nest.sqlite3"
+            restored.parent.mkdir()
+            shutil.copy2(copied, restored)
+            with closing(sqlite3.connect(f"file:{restored}?mode=ro", uri=True)) as restored_connection:
+                self.assertEqual(restored_connection.execute("PRAGMA integrity_check").fetchone()[0], "ok")
+                self.assertEqual(
+                    restored_connection.execute("SELECT title FROM notes").fetchone()[0],
+                    "hello",
+                )
             notify.assert_called_once()
             event = notify.call_args.args[0]
             self.assertEqual(event.channel, "server_logs")
@@ -53,7 +91,7 @@ class BackupNestDbTestCase(unittest.TestCase):
             for relative_path in ("nest.sqlite3", "calendar.sqlite3"):
                 db_path = instance_dir / relative_path
                 db_path.parent.mkdir(parents=True, exist_ok=True)
-                with sqlite3.connect(db_path) as connection:
+                with closing(sqlite3.connect(db_path)) as connection:
                     connection.execute("CREATE TABLE sample (id INTEGER PRIMARY KEY)")
                     connection.commit()
 
@@ -83,7 +121,7 @@ class BackupNestDbTestCase(unittest.TestCase):
             for relative_path in ("nest.sqlite3", "calendar.sqlite3"):
                 db_path = instance_dir / relative_path
                 db_path.parent.mkdir(parents=True, exist_ok=True)
-                with sqlite3.connect(db_path) as connection:
+                with closing(sqlite3.connect(db_path)) as connection:
                     connection.execute("CREATE TABLE sample (id INTEGER PRIMARY KEY)")
                     connection.commit()
 

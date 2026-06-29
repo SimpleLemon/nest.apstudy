@@ -1241,6 +1241,17 @@ class TestChatFeature(unittest.TestCase):
         emit_event.assert_called_once()
         self.assertEqual(emit_event.call_args.args[:3], ("channel", "nest_chat", "message_deleted"))
 
+    def test_discord_delete_for_unconfigured_channel_is_silent(self):
+        with patch.object(chat_api, "_discord_channel_for_discord_id", return_value=None), \
+                patch.object(chat_api.logger, "warning") as warning:
+            result = chat_api.delete_discord_gateway_message(
+                "unconfigured-channel",
+                "discord-message-1",
+            )
+
+        self.assertIsNone(result)
+        warning.assert_not_called()
+
     def test_discord_message_payload_normalizes_schema_bounded_values(self):
         channel = {
             "$id": "nest_chat",

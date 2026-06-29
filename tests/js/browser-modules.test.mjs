@@ -393,6 +393,11 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(source, /function historyDepthForDocument\(documentValue\)/);
     assert.match(source, /disableExtensions: \['history'\]/);
     assert.match(source, /History\.configure\(\{ depth: historyDepth, newGroupDelay: 500 \}\)/);
+    assert.match(source, /let noteEditorReactRoot = null/);
+    assert.match(source, /noteEditorReactRoot\?\.unmount\(\)/);
+    assert.match(source, /window\.APStudyPageLifecycle\?\.register\?\.\(\{/);
+    assert.match(source, /pause: releaseNoteEditorRuntime/);
+    assert.match(editorTemplate, /data-navigation-retention="discard"/);
     assert.match(source, /preserveRangeSelectionShortcuts/);
     assert.match(source, /listItemHardBreakShortcuts/);
     assert.match(source, /from '\.\/toolbar\.js'/);
@@ -468,7 +473,7 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(catalogSource, /export const FORMAT_COLORS = \[/);
     assert.match(catalogSource, /export const FONT_SIZE_PRESETS = \[/);
     assert.match(source, /window\.APStudyPendingMutations\?\.track\(fetch\(`\/api\/notes\/\$\{noteId\}`/);
-    assert.match(source, /fetch\(`\/api\/notes\/\$\{noteId\}`\)/);
+    assert.match(source, /fetch\(`\/api\/notes\/\$\{noteId\}`, \{ signal: editorLoadController\.signal \}\)/);
     assert.match(source, /triggerDebouncedSave\(\)/);
     assert.match(source, /React\.createElement\(NoteEditor, \{/);
     assert.match(source, /function insertBlockPayload\(block/);
@@ -535,7 +540,7 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(styles, /--notes-print-font-family/);
     assert.match(styles, /--notes-print-side-margin/);
     assert.match(editorTemplate, /css\/notes\.css'\) }}\?v=notes-print-1/);
-    assert.match(editorTemplate, /notes-editor-bundle-10/);
+    assert.match(editorTemplate, /notes-editor-bundle-12/);
     assert.match(editorTemplate, /data-block-type="codeBlock"/);
     assert.match(editorTemplate, /data-block-type="callout"/);
     assert.match(source, /action === 'copy-blocks'/);
@@ -749,7 +754,10 @@ test("task app shell keeps data-layer wiring, destructive confirms, and mount co
     assert.match(source, /completeTaskRecord\(task\.id, completed, optimistic\.occurrenceKey\)/);
     assert.match(source, /buildListOrderUpdates\(orderedIds\)/);
     assert.match(source, /taskOrderUpdatesFromDocument\(\)/);
-    assert.match(source, /createRoot\(mount\)\.render\(h\(TaskApp/);
+    assert.match(source, /taskReactRoot = createRoot\(mount\)/);
+    assert.match(source, /taskReactRoot\.render\(h\(TaskApp/);
+    assert.match(source, /taskReactRoot\?\.unmount\(\)/);
+    assert.match(source, /window\.APStudyPageLifecycle\?\.register\?\.\(\{/);
     assert.match(source, /createTaskSounds\(\{ completeSound, uncompleteSound \}\)/);
     assert.doesNotMatch(source, /use-sound|useSound/);
     assert.doesNotMatch(template, /appwrite@|js\/core\/appwrite\.js|use-sound/);
@@ -790,12 +798,16 @@ test("calendar context menu keeps task, event, override, and keyboard flows wire
     assert.match(source, /e\.key === 'ArrowDown'/);
 });
 
-test("global chrome keeps pending mutation, confirmation, loader, date, and auth helpers", async () => {
+test("global chrome keeps lifecycle, navigation, mutation, confirmation, loader, date, and auth helpers", async () => {
     const chromeSource = await sourceFor("static/js/core/global-chrome.js");
     const source = await sourceFor("static/js/core/global.js");
 
-    assert.match(chromeSource, /Compatibility shim/);
-    assert.match(chromeSource, /global\.js/);
+    assert.match(chromeSource, /window\.APStudyPageLifecycle = \{/);
+    assert.match(chromeSource, /window\.APStudyNavigation = \{/);
+    assert.match(chromeSource, /window\.addEventListener\('pagehide', handlePageHide\)/);
+    assert.match(chromeSource, /window\.addEventListener\('pageshow', handlePageShow\)/);
+    assert.match(chromeSource, /navigationRetention === 'discard'/);
+    assert.match(chromeSource, /window\.location\.replace\(url\.href\)/);
     assert.doesNotMatch(chromeSource, /window\.APStudyPendingMutations = \{/);
     assert.match(source, /window\.APStudyPendingMutations = \{/);
     assert.match(source, /new CustomEvent\("apstudy-pending-save-change"/);
@@ -889,7 +901,7 @@ test("navbar keeps avatar sizing, command palette shortcut, and logout/account f
     assert.match(source, /commandPalettePreload !== 'false'/);
     assert.match(source, /window\.APSTUDY_COMMAND_PALETTE_SHORTCUT_BOUND/);
     assert.match(source, /event\.metaKey && !event\.ctrlKey/);
-    assert.match(source, /window\.location\.href = '\/settings#account'/);
+    assert.match(source, /window\.APStudyNavigation\?\.go\?\.\('\/settings#account'\)/);
     assert.match(source, /runLogoutFlow\(\)/);
 });
 

@@ -43,7 +43,7 @@ MAX_FILE_SIZE = 50 * 1024 * 1024
 MAX_UPLOAD_FILES = 5
 DEFAULT_EXPIRY_DAYS = 1
 ALLOWED_EXPIRY_OPTIONS = [1, 3, 7, 14, 30]
-SHARE_CODE_LENGTH = 7
+SHARE_CODE_LENGTH = 24
 SHARE_CODE_CHARS = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ"
 APPWRITE_STORAGE_BACKEND = "appwrite"
 ROOT_FOLDER_ID = "root"
@@ -170,8 +170,7 @@ def _is_expired(shared_file):
 
 def _generate_share_code():
     while True:
-        raw_bytes = secrets.token_bytes(SHARE_CODE_LENGTH)
-        code = "".join(SHARE_CODE_CHARS[byte % len(SHARE_CODE_CHARS)] for byte in raw_bytes)
+        code = "".join(secrets.choice(SHARE_CODE_CHARS) for _ in range(SHARE_CODE_LENGTH))
         try:
             existing_file = first_row(
                 COLLECTIONS["shared_files"],

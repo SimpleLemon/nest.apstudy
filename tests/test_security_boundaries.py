@@ -1,0 +1,160 @@
+import os
+import sqlite3
+import tempfile
+import unittest
+from types import SimpleNamespace
+from unittest.mock import Mock, patch
+
+import app as app_module
+import blueprints.file_share as file_share
+import requests
+from extensions import login_manager
+from services import feed_fetcher
+from services import avatar_storage
+from services.outbound_http import is_public_http_url, redacted_url
+
+
+class OutboundHttpSecurityTests(unittest.TestCase):
+    def test_private_and_mixed_resolution_hosts_are_rejected(self):
+        private = [(None, None, None, None, ("127.0.0.1", 443))]
+        mixed = [
+            (None, None, None, None, ("93.184.216.34", 443)),
+            (None, None, None, None, ("10.0.0.1", 443)),
+        ]
+        self.assertFalse(is_public_http_url("https://example.test/feed", resolver=lambda *_args, **_kwargs: private))
+        self.assertFalse(is_public_http_url("https://example.test/feed", resolver=lambda *_args, **_kwargs: mixed))
+
+    def test_calendar_fetch_rejects_private_host_before_request(self):
+        with patch.object(feed_fetcher.http_requests, "get") as get:
+            with self.assertRaisesRegex(ValueError, "public"):
+                feed_fetcher.fetch_and_parse_ical("https://127.0.0.1/private.ics")
+        get.assert_not_called()
+
+    def test_calendar_fetch_rejects_redirect_to_private_host(self):
+        redirect = Mock(status_code=302, headers={"Location": "https://127.0.0.1/private.ics"})
+        redirect.close = Mock()
+        public_resolution = [(None, None, None, None, ("93.184.216.34", 443))]
+        private_resolution = [(None, None, None, None, ("127.0.0.1", 443))]
+        def resolve(host, *_args, **_kwargs):
+            return private_resolution if host == "127.0.0.1" else public_resolution
+
+        with patch("services.outbound_http.socket.getaddrinfo", side_effect=resolve), \
+                patch.object(feed_fetcher.http_requests, "get", return_value=redirect) as get:
+            with self.assertRaisesRegex(ValueError, "public"):
+                feed_fetcher.fetch_and_parse_ical("https://example.test/feed.ics")
+        self.assertEqual(get.call_count, 1)
+        redirect.close.assert_called_once()
+
+    def test_log_url_redaction_removes_credentials_query_and_fragment(self):
+        rendered = redacted_url("https://user:password@example.test/feed.ics?token=sensitive#fragment")
+        self.assertEqual(rendered, "https://example.test/feed.ics?[redacted]")
+
+    def test_avatar_copy_rejects_private_host_before_request(self):
+        with patch.object(avatar_storage.http_requests, "get") as get:
+            self.assertIsNone(avatar_storage.store_avatar_from_url("user-1", "https://127.0.0.1/avatar.png"))
+        get.assert_not_called()
+
+    def test_calendar_response_size_is_bounded(self):
+        response = Mock(headers={}, content=b"x" * (feed_fetcher.MAX_ICAL_BYTES + 1))
+        with self.assertRaisesRegex(ValueError, "10 MB"):
+            feed_fetcher._read_response_bytes(response)
+
+    def test_calendar_request_errors_do_not_log_or_raise_feed_secrets(self):
+        secret_url = "https://example.test/feed.ics?token=do-not-log"
+        with patch.object(feed_fetcher, "require_public_http_url", side_effect=lambda url: url), \
+                patch.object(feed_fetcher.http_requests, "get", side_effect=requests.ConnectionError(secret_url)), \
+                self.assertLogs("services.feed_fetcher", level="ERROR") as logs:
+            with self.assertRaisesRegex(ValueError, "request failed") as raised:
+                feed_fetcher.fetch_and_parse_ical(secret_url)
+        combined = "\n".join(logs.output) + str(raised.exception)
+        self.assertNotIn("do-not-log", combined)
+        self.assertIn("?[redacted]", combined)
+
+
+class ApplicationSecurityIntegrationTests(unittest.TestCase):
+    def setUp(self):
+        self.temp_dir = tempfile.TemporaryDirectory()
+        self.env = patch.dict(os.environ, {
+            "DATABASE_PATH": os.path.join(self.temp_dir.name, "security.sqlite3"),
+            "FLASK_SECRET_KEY": "test-security-key",
+            "FLASK_ENV": "testing",
+            "APSTUDY_ALLOW_INSECURE_HTTP": "1",
+            "SCHEDULER_ENABLED": "0",
+        }, clear=False)
+        self.env.start()
+        schema_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "migrations", "001_initial_schema.sql")
+        with sqlite3.connect(os.environ["DATABASE_PATH"]) as connection, open(schema_path, encoding="utf-8") as schema:
+            connection.executescript(schema.read())
+        with patch("services.scheduler.init_scheduler"), patch("services.discord_audit.init_discord_audit"):
+            self.app = app_module.create_app()
+        self.app.config.update(TESTING=True)
+        self.user = SimpleNamespace(
+            id="security-user",
+            is_authenticated=True,
+            discord_id=None,
+            discord_username=None,
+            discord_linked_at=None,
+        )
+        self.previous_loader = login_manager._user_callback
+        login_manager._user_callback = lambda _user_id: self.user
+
+    def tearDown(self):
+        login_manager._user_callback = self.previous_loader
+        self.env.stop()
+        self.temp_dir.cleanup()
+
+    def _authenticated_client(self):
+        client = self.app.test_client()
+        with client.session_transaction() as session:
+            session["_user_id"] = self.user.id
+            session["_fresh"] = True
+        return client
+
+    def _csrf_token(self, client):
+        client.get("/login")
+        cookie = client.get_cookie("csrf_token")
+        self.assertIsNotNone(cookie)
+        return cookie.value
+
+    def test_authenticated_mutation_requires_and_accepts_csrf_token(self):
+        client = self._authenticated_client()
+        with patch("blueprints.settings.update_row_safe", return_value={}):
+            rejected = client.post("/settings/api/discord/unlink")
+            token = self._csrf_token(client)
+            accepted = client.post(
+                "/settings/api/discord/unlink",
+                headers={"X-CSRFToken": token},
+            )
+        self.assertEqual(rejected.status_code, 400)
+        self.assertEqual(accepted.status_code, 200)
+
+    def test_logout_is_post_only_and_csrf_protected(self):
+        client = self._authenticated_client()
+        self.assertEqual(client.get("/logout").status_code, 405)
+        self.assertEqual(client.post("/logout").status_code, 400)
+
+
+class SecretAndShareTokenTests(unittest.TestCase):
+    def test_production_requires_explicit_flask_secret(self):
+        with patch.dict(os.environ, {"FLASK_ENV": "production"}, clear=False):
+            os.environ.pop("FLASK_SECRET_KEY", None)
+            with self.assertRaisesRegex(RuntimeError, "FLASK_SECRET_KEY"):
+                app_module._session_secret_key()
+
+    def test_nonproduction_missing_secret_is_unpredictable(self):
+        with patch.dict(os.environ, {"FLASK_ENV": "development"}, clear=False):
+            os.environ.pop("FLASK_SECRET_KEY", None)
+            first = app_module._session_secret_key()
+            second = app_module._session_secret_key()
+        self.assertNotEqual(first, "dev-fallback-key")
+        self.assertNotEqual(first, second)
+
+    def test_new_file_share_codes_have_at_least_100_bits_of_entropy(self):
+        with patch.object(file_share, "first_row", return_value=None):
+            code = file_share._generate_share_code()
+        self.assertGreaterEqual(len(code), 20)
+        self.assertTrue(set(code) <= set(file_share.SHARE_CODE_CHARS))
+
+
+if __name__ == "__main__":
+    unittest.main()

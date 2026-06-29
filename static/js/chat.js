@@ -69,6 +69,41 @@
   let chatSoundCooldownTimer = null;
   let unreadSummaryRefreshTimer = null;
   let inlineProfilePopover = null;
+  let chatRuntimePaused = false;
+  let chatRuntimeDisposed = false;
+  let chatRequestController = new AbortController();
+  let roomPrefetchIdleId = null;
+  const transientChatTimers = new Set();
+  const transientChatFrames = new Set();
+
+  function scheduleTransientTimeout(callback, delay = 0) {
+    const timer = window.setTimeout(() => {
+      transientChatTimers.delete(timer);
+      if (!chatRuntimePaused && !chatRuntimeDisposed) callback();
+    }, delay);
+    transientChatTimers.add(timer);
+    return timer;
+  }
+
+  function scheduleTransientFrame(callback) {
+    const frame = window.requestAnimationFrame(() => {
+      transientChatFrames.delete(frame);
+      if (!chatRuntimePaused && !chatRuntimeDisposed) callback();
+    });
+    transientChatFrames.add(frame);
+    return frame;
+  }
+
+  function clearTransientWork() {
+    transientChatTimers.forEach((timer) => window.clearTimeout(timer));
+    transientChatTimers.clear();
+    transientChatFrames.forEach((frame) => window.cancelAnimationFrame(frame));
+    transientChatFrames.clear();
+    if (roomPrefetchIdleId !== null && "cancelIdleCallback" in window) {
+      window.cancelIdleCallback(roomPrefetchIdleId);
+    }
+    roomPrefetchIdleId = null;
+  }
 
   const els = {
     channelList: document.getElementById("chat-channel-list"),
@@ -443,13 +478,13 @@
   }
 
   function schedulePersistentBootstrapSave() {
-    window.setTimeout(() => {
+    scheduleTransientTimeout(() => {
       void persistBootstrapCache();
     }, 0);
   }
 
   function schedulePersistentRoomSave(room) {
-    window.setTimeout(() => {
+    scheduleTransientTimeout(() => {
       void persistRoomCache(room);
     }, 0);
   }
@@ -513,7 +548,7 @@
   }
 
   function restoreScroll(cache, shouldBottom = false) {
-    window.setTimeout(() => {
+    scheduleTransientTimeout(() => {
       if (!els.messages) return;
       if (shouldBottom) {
         els.messages.scrollTop = els.messages.scrollHeight;
@@ -532,12 +567,16 @@
   }
 
   async function fetchJson(url, options = {}) {
+    const requestOptions = {
+      ...options,
+      signal: options.signal || chatRequestController.signal,
+    };
     if (window.APStudyHttp?.fetchJson) {
-      return window.APStudyHttp.fetchJson(url, options);
+      return window.APStudyHttp.fetchJson(url, requestOptions);
     }
     const response = await fetch(url, {
-      headers: { "Content-Type": "application/json", ...(options.headers || {}) },
-      ...options,
+      headers: { "Content-Type": "application/json", ...(requestOptions.headers || {}) },
+      ...requestOptions,
     });
     const payload = await response.json().catch(() => ({}));
     if (!response.ok) {
@@ -750,7 +789,7 @@
 
   function focusComposerSoon() {
     if (!els.input || els.input.disabled || els.composer?.hidden) return;
-    window.setTimeout(() => els.input?.focus({ preventScroll: true }), 0);
+    scheduleTransientTimeout(() => els.input?.focus({ preventScroll: true }), 0);
   }
 
   function playChatSound(actorId) {
@@ -1110,7 +1149,7 @@
       state.announcementsBannerVisible = false;
       return;
     }
-    window.requestAnimationFrame(() => {
+    scheduleTransientFrame(() => {
       const unreadNodes = unread
         .map((message) => els.messages?.querySelector(`[data-message-id="${CSS.escape(message.id)}"]`))
         .filter(Boolean);
@@ -1403,7 +1442,7 @@
   }
 
   function startRealtimeFallback() {
-    if (realtimeFallbackTimer || state.realtimeReady) return;
+    if (chatRuntimePaused || chatRuntimeDisposed || realtimeFallbackTimer || state.realtimeReady) return;
     realtimeFallbackTimer = window.setInterval(() => {
       if (document.visibilityState !== "visible") return;
       if (state.realtimeReady) {
@@ -1422,7 +1461,7 @@
   }
 
   function startRealtimeHeartbeat() {
-    if (realtimeHeartbeatTimer) return;
+    if (chatRuntimePaused || chatRuntimeDisposed || realtimeHeartbeatTimer) return;
     realtimeHeartbeatTimer = window.setInterval(() => {
       if (document.visibilityState !== "visible" || !state.realtimeReady) return;
       pollActiveRoomMessages();
@@ -1458,7 +1497,7 @@
   }
 
   function scheduleRealtimeReconnect() {
-    if (realtimeReconnectTimer) return;
+    if (chatRuntimePaused || chatRuntimeDisposed || realtimeReconnectTimer) return;
     resetRealtimeConnection();
     startRealtimeFallback();
     realtimeReconnectTimer = window.setTimeout(() => {
@@ -1472,6 +1511,7 @@
   }
 
   async function startRealtimeServices() {
+    if (chatRuntimePaused || chatRuntimeDisposed) return;
     initializeChatEventStream();
     void loadInitialPresences();
   }
@@ -2061,9 +2101,12 @@
       }
     };
     if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(run, { timeout: 2500 });
+      roomPrefetchIdleId = window.requestIdleCallback(() => {
+        roomPrefetchIdleId = null;
+        if (!chatRuntimePaused && !chatRuntimeDisposed) run();
+      }, { timeout: 2500 });
     } else {
-      window.setTimeout(run, 700);
+      scheduleTransientTimeout(run, 700);
     }
   }
 
@@ -2205,6 +2248,7 @@
   }
 
   function initializeChatEventStream() {
+    if (chatRuntimePaused || chatRuntimeDisposed) return;
     if (state.realtimeReady || chatEventSource || state.realtimeConnecting) return;
     if (typeof window.EventSource !== "function") {
       startRealtimeFallback();
@@ -2215,6 +2259,10 @@
       const source = new EventSource(buildChatEventsStreamUrl());
       chatEventSource = source;
       source.onopen = () => {
+        if (chatRuntimePaused || chatRuntimeDisposed) {
+          source.close();
+          return;
+        }
         state.realtimeReady = true;
         state.realtimeConnecting = false;
         state.realtimeUnsubscribe = () => {
@@ -2228,6 +2276,7 @@
         pollActiveRoomMessages();
       };
       source.onmessage = (messageEvent) => {
+        if (chatRuntimePaused || chatRuntimeDisposed) return;
         let payload;
         try {
           payload = JSON.parse(messageEvent.data);
@@ -2243,6 +2292,7 @@
         void handleRealtimePayload({ payload });
       };
       source.onerror = () => {
+        if (chatRuntimePaused || chatRuntimeDisposed) return;
         handleRealtimeDisconnect();
       };
     } catch (error) {
@@ -2469,6 +2519,8 @@
   function clearTypingPresence() {
     window.clearTimeout(state.typingInputTimer);
     window.clearTimeout(state.typingClearTimer);
+    state.typingInputTimer = null;
+    state.typingClearTimer = null;
   }
 
   function refreshViewingPresence() {
@@ -2499,9 +2551,15 @@
   }
 
   function startPresenceRefreshTimer() {
+    if (chatRuntimePaused || chatRuntimeDisposed) return;
     window.clearInterval(state.presenceRefreshTimer);
     refreshViewingPresence();
     state.presenceRefreshTimer = window.setInterval(refreshViewingPresence, PRESENCE_REFRESH_MS);
+  }
+
+  function stopPresenceRefreshTimer() {
+    window.clearInterval(state.presenceRefreshTimer);
+    state.presenceRefreshTimer = null;
   }
 
   async function sendActiveMessage(event) {
@@ -2545,7 +2603,7 @@
   function handleComposerKeydown(event) {
     if (event.key !== "Enter" || event.isComposing) return;
     if (event.shiftKey) {
-      window.setTimeout(() => {
+      scheduleTransientTimeout(() => {
         autosizeComposer();
         scheduleTypingPresence();
       }, 0);
@@ -2661,6 +2719,53 @@
     if (state.persistentCacheReady || state.serverBootstrapped) {
       schedulePersistentBootstrapSave();
     }
+  }
+
+  function stopChatRuntime({ dispose = false } = {}) {
+    if (chatRuntimeDisposed || (chatRuntimePaused && !dispose)) return;
+    chatRuntimePaused = true;
+    if (dispose) chatRuntimeDisposed = true;
+
+    const activeCache = cacheFor(state.activeRoom);
+    if (activeCache && els.messages) {
+      activeCache.scrollTop = els.messages.scrollTop;
+      void persistRoomCache(state.activeRoom);
+    }
+
+    clearTypingPresence();
+    resetRealtimeConnection();
+    stopRealtimeFallback();
+    stopRealtimeHeartbeat();
+    stopPresenceRefreshTimer();
+    window.clearTimeout(realtimeReconnectTimer);
+    realtimeReconnectTimer = null;
+    cancelUnreadSummaryRefresh();
+    window.clearTimeout(chatSoundCooldownTimer);
+    chatSoundCooldownTimer = null;
+    window.clearTimeout(state.searchTimer);
+    state.searchTimer = null;
+    window.clearTimeout(state.scrollSaveTimer);
+    state.scrollSaveTimer = null;
+    clearTransientWork();
+    chatRequestController.abort();
+    window.APStudyPresenceHeartbeat?.clearChatRoom?.();
+    els.audio?.pause?.();
+    closeRoomContextMenu();
+    closeInlineProfilePopover();
+  }
+
+  function resumeChatRuntime() {
+    if (chatRuntimeDisposed || !chatRuntimePaused) return;
+    chatRuntimePaused = false;
+    chatRequestController = new AbortController();
+    startPresenceRefreshTimer();
+    if (state.serverBootstrapped) {
+      void startRealtimeServices();
+    } else {
+      void startChat();
+    }
+    void refreshChatSummary();
+    refreshViewingPresence();
   }
 
   function bindEvents() {
@@ -2803,24 +2908,19 @@
         clearTypingPresence();
       }
     });
-    window.addEventListener("beforeunload", () => {
-      saveActiveScroll();
-      clearTypingPresence();
-      if (state.realtimeUnsubscribe) state.realtimeUnsubscribe();
-      stopRealtimeFallback();
-      stopRealtimeHeartbeat();
-    });
   }
 
   async function startChat() {
     setMembersCollapsed(state.membersCollapsed);
     renderMessageLoader();
     const cachePromise = hydrateFromPersistentCache().catch((error) => {
+      if (error?.name === "AbortError") return false;
       console.warn("Unable to hydrate chat cache", error);
       state.persistentCacheReady = true;
       return false;
     });
     const bootstrapPromise = bootstrap().catch((error) => {
+      if (error?.name === "AbortError") return false;
       setStatus(error.message || "Unable to load chat.", "error");
       throw error;
     });
@@ -2828,6 +2928,15 @@
   }
 
   bindEvents();
+  if (window.APStudyPageLifecycle?.register) {
+    window.APStudyPageLifecycle.register({
+      pause: () => stopChatRuntime(),
+      resume: resumeChatRuntime,
+      dispose: () => stopChatRuntime({ dispose: true }),
+    });
+  } else {
+    window.addEventListener("pagehide", () => stopChatRuntime({ dispose: true }), { once: true });
+  }
   startPresenceRefreshTimer();
   void startChat();
 })();

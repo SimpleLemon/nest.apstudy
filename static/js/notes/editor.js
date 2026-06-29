@@ -122,6 +122,11 @@ let latestDocumentSnapshot = null;
 let lastSavedPayloadFingerprint = '';
 let notePrintReady = false;
 let notePrintInProgress = false;
+let noteEditorReactRoot = null;
+let editorLoadController = null;
+let editorReadyTimer = null;
+let editorInitialFocusTimer = null;
+let editorPageDisposed = false;
 
 const titleInput = document.getElementById('note-title-input');
 const saveStatus = document.getElementById('save-status');
@@ -954,9 +959,11 @@ function openBlockSuggestionMenu(block) {
 
 function removeUrlBlockPopover() {
     if (!urlBlockPopover) return;
+    const resolve = urlBlockResolve;
     urlBlockPopover.remove();
     urlBlockPopover = null;
     urlBlockResolve = null;
+    resolve?.(null);
 }
 
 function positionUrlBlockPopover(anchorRect) {
@@ -2207,7 +2214,8 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
     React.useEffect(() => {
         editorInstance = editor;
         setNotePrintReady(true);
-        window.setTimeout(() => {
+        editorReadyTimer = window.setTimeout(() => {
+            editorReadyTimer = null;
             if (editorInstance !== editor) return;
             captureHistoryBaseline();
             invalidateDocumentSnapshot();
@@ -2219,6 +2227,10 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
         }, 0);
 
         return () => {
+            if (editorReadyTimer) {
+                window.clearTimeout(editorReadyTimer);
+                editorReadyTimer = null;
+            }
             if (editorInstance === editor) {
                 editorInstance = null;
                 setNotePrintReady(false);
@@ -2265,6 +2277,7 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
 }
 
 async function initEditorPage() {
+    if (editorPageDisposed) return;
     if (!noteId || !titleInput) {
         renderMissingNoteState('Open or create a note from the Notes page first.');
         return;
@@ -2282,16 +2295,23 @@ async function initEditorPage() {
     let note = null;
 
     try {
-        const response = await fetch(`/api/notes/${noteId}`);
+        editorLoadController?.abort();
+        editorLoadController = new AbortController();
+        const response = await fetch(`/api/notes/${noteId}`, { signal: editorLoadController.signal });
         if (!response.ok) {
             throw new Error('Failed to fetch note');
         }
         note = await response.json();
     } catch (error) {
+        if (error?.name === 'AbortError' || editorPageDisposed) return;
         console.error(error);
         renderMissingNoteState('The note may have been deleted or is unavailable.');
         return;
+    } finally {
+        editorLoadController = null;
     }
+
+    if (editorPageDisposed) return;
 
     const noteTitle = typeof note?.title === 'string' ? note.title : '';
     titleInput.value = noteTitle;
@@ -2323,10 +2343,10 @@ async function initEditorPage() {
         parsedContentWasNormalized = normalized.changed;
     }
 
-    const root = createRoot(rootElement);
+    noteEditorReactRoot = createRoot(rootElement);
 
     try {
-        root.render(React.createElement(NoteEditor, {
+        noteEditorReactRoot.render(React.createElement(NoteEditor, {
             initialContent: parsedContent,
             initialContentWasNormalized: parsedContentWasNormalized,
         }));
@@ -2361,7 +2381,9 @@ async function initEditorPage() {
     });
     rootElement.addEventListener('copy', normalizeNativeEditorCopy);
     rootElement.addEventListener('cut', normalizeNativeEditorCopy);
-    window.setTimeout(() => {
+    editorInitialFocusTimer = window.setTimeout(() => {
+        editorInitialFocusTimer = null;
+        if (editorPageDisposed) return;
         const isNewBlankNote = isBlankTitle(noteTitle) && !documentHasText(parsedContent);
         const documentSnapshot = currentDocumentSnapshot();
         updateEditorChrome({ structureChanged: true, contentChanged: true, documentSnapshot });
@@ -2370,6 +2392,57 @@ async function initEditorPage() {
         titleInput.select();
     }, 0);
 }
+
+function clearEditorTimersAndFrames() {
+    if (saveDebounceTimer) window.clearTimeout(saveDebounceTimer);
+    if (pageSetupSaveTimer) window.clearTimeout(pageSetupSaveTimer);
+    if (pastedContentNormalizationTimer) window.clearTimeout(pastedContentNormalizationTimer);
+    if (editorChromeThrottleTimer) window.clearTimeout(editorChromeThrottleTimer);
+    if (editorReadyTimer) window.clearTimeout(editorReadyTimer);
+    if (editorInitialFocusTimer) window.clearTimeout(editorInitialFocusTimer);
+    if (pageSetupPositionRafId) window.cancelAnimationFrame(pageSetupPositionRafId);
+    if (editorChromeRafId) window.cancelAnimationFrame(editorChromeRafId);
+    saveDebounceTimer = null;
+    pageSetupSaveTimer = null;
+    pastedContentNormalizationTimer = null;
+    editorChromeThrottleTimer = null;
+    editorReadyTimer = null;
+    editorInitialFocusTimer = null;
+    pageSetupPositionRafId = null;
+    editorChromeRafId = null;
+    clearSavedTimeRefresh();
+}
+
+function releaseNoteEditorRuntime() {
+    if (editorPageDisposed) return;
+    editorPageDisposed = true;
+    editorLoadController?.abort();
+    editorLoadController = null;
+    clearEditorTimersAndFrames();
+    toolbarOverflowController?.disconnect();
+    toolbarOverflowController = null;
+    closeToolbarMenus();
+    closePageSetupPopover();
+    closePageSetupDropdowns();
+    removeUrlBlockPopover();
+    noteEditorReactRoot?.unmount();
+    noteEditorReactRoot = null;
+    editorInstance = null;
+    latestDocumentSnapshot = null;
+    editorChromeSyncSnapshot = null;
+    lastSelectedBlockIds.clear();
+    setNotePrintReady(false);
+}
+
+window.APStudyPageLifecycle?.register?.({
+    pause: releaseNoteEditorRuntime,
+    resume() {
+        // Browser Back can still place the editor in bfcache. Restore it from a
+        // fresh document after releasing the retained BlockNote heap.
+        window.location.reload();
+    },
+    dispose: releaseNoteEditorRuntime,
+});
 
 saveRetry?.addEventListener('click', () => {
     void saveNote();

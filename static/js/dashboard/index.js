@@ -353,8 +353,7 @@
     }
     function setupSortable() {
         if (!els.tiles || typeof Sortable === "undefined") return;
-        if (state.sortable) state.sortable.destroy();
-        state.sortable = null;
+        destroySortable();
         if (!state.editMode) return;
         state.sortable = Sortable.create(els.tiles, {
             animation: 150,
@@ -370,6 +369,10 @@
                 void persistLayout();
             },
         });
+    }
+    function destroySortable() {
+        state.sortable?.destroy();
+        state.sortable = null;
     }
     async function persistLayout() {
         const tile_layout = tileLayoutFromDom();
@@ -515,6 +518,11 @@
         setAddMenuOpen(false);
     });
     window.addEventListener?.("apstudy:dashboard-quote-visibility", updateAddTileMenu);
+    window.APStudyPageLifecycle?.register?.({
+        pause: destroySortable,
+        resume: setupSortable,
+        dispose: destroySortable,
+    });
     document.addEventListener("DOMContentLoaded", loadDashboard);
     Object.assign(window.APStudyDashboardUtils, {
         tileOrderFromDom,

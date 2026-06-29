@@ -10,6 +10,7 @@ blueprints/auth -> blueprints/settings import cycle.
 
 import logging
 import os
+from urllib.parse import urljoin
 
 import requests as http_requests
 from appwrite.exception import AppwriteException
@@ -25,11 +26,13 @@ from appwrite_client import (
     PROJECT_ID,
     client as appwrite_client,
 )
+from services.outbound_http import redacted_url, require_public_http_url
 
 logger = logging.getLogger(__name__)
 
 MAX_AVATAR_BYTES = 10 * 1024 * 1024
 ALLOWED_AVATAR_MIME_TYPES = {"image/jpeg", "image/png", "image/gif", "image/webp"}
+MAX_AVATAR_REDIRECTS = 4
 MIME_TYPE_EXTENSIONS = {
     "image/jpeg": "jpg",
     "image/png": "png",
@@ -74,12 +77,32 @@ def store_avatar_from_url(user_id, source_url, *, timeout=8, max_bytes=MAX_AVATA
     if not clean_url:
         return None
 
+    response = None
+    current_url = clean_url
     try:
-        response = http_requests.get(clean_url, timeout=timeout, stream=True)
-    except Exception:
-        logger.exception(
-            "Failed to download provider avatar: source=%s",
-            clean_url[:120],
+        for _ in range(MAX_AVATAR_REDIRECTS + 1):
+            require_public_http_url(current_url)
+            response = http_requests.get(
+                current_url,
+                timeout=timeout,
+                stream=True,
+                allow_redirects=False,
+            )
+            if 300 <= response.status_code < 400 and response.headers.get("Location"):
+                next_url = urljoin(current_url, response.headers["Location"])
+                response.close()
+                response = None
+                current_url = next_url
+                continue
+            break
+        else:
+            logger.warning("Provider avatar redirected too many times")
+            return None
+    except Exception as exc:
+        logger.warning(
+            "Failed to download provider avatar: source=%s error_type=%s",
+            redacted_url(current_url)[:120],
+            type(exc).__name__,
         )
         return None
 
@@ -88,7 +111,7 @@ def store_avatar_from_url(user_id, source_url, *, timeout=8, max_bytes=MAX_AVATA
             logger.warning(
                 "Provider avatar download failed: status=%s source=%s",
                 response.status_code,
-                clean_url[:120],
+                redacted_url(current_url)[:120],
             )
             return None
 
@@ -97,7 +120,7 @@ def store_avatar_from_url(user_id, source_url, *, timeout=8, max_bytes=MAX_AVATA
             logger.warning(
                 "Provider avatar has unsupported content type: %s source=%s",
                 mime_type,
-                clean_url[:120],
+                redacted_url(current_url)[:120],
             )
             return None
 

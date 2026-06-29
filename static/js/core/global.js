@@ -1,4 +1,34 @@
 (() => {
+    if (window.__apstudyCsrfFetchInstalled || typeof window.fetch !== "function") return;
+    window.__apstudyCsrfFetchInstalled = true;
+    const nativeFetch = window.fetch.bind(window);
+    const unsafeMethods = new Set(["POST", "PUT", "PATCH", "DELETE"]);
+
+    function csrfToken() {
+        const entry = document.cookie
+            .split(";")
+            .map((item) => item.trim())
+            .find((item) => item.startsWith("csrf_token="));
+        return entry ? decodeURIComponent(entry.slice("csrf_token=".length)) : "";
+    }
+
+    window.fetch = (input, init = {}) => {
+        const request = input instanceof Request ? input : null;
+        const method = String(init.method || request?.method || "GET").toUpperCase();
+        const url = new URL(request?.url || String(input), window.location.href);
+        if (!unsafeMethods.has(method) || url.origin !== window.location.origin) {
+            return nativeFetch(input, init);
+        }
+
+        const headers = new Headers(request?.headers || undefined);
+        new Headers(init.headers || undefined).forEach((value, key) => headers.set(key, value));
+        const token = csrfToken();
+        if (token && !headers.has("X-CSRFToken")) headers.set("X-CSRFToken", token);
+        return nativeFetch(input, { ...init, headers });
+    };
+})();
+
+(() => {
     if (window.APStudyPendingMutations) return;
 
     const activeTokens = new Set();
@@ -446,7 +476,21 @@ async function runLogoutFlow() {
 
     clearClientState({ includeCookies: false });
     markClientLoggedOut();
-    window.location.assign(`${window.location.origin}/logout`);
+    try {
+        const response = await fetch("/logout", {
+            method: "POST",
+            credentials: "same-origin",
+        });
+        if (!response.ok) throw new Error("Logout failed");
+        window.location.assign(`${window.location.origin}/login`);
+    } catch (error) {
+        console.error(error);
+        window.APStudyToast?.show?.({
+            title: "Could not log out",
+            message: "Refresh the page and try again.",
+            type: "error",
+        });
+    }
 }
 
 function drainServerToasts() {
@@ -569,6 +613,22 @@ function initializePresenceHeartbeat() {
         intervalId = window.setInterval(sendHeartbeat, heartbeatIntervalMs());
     }
 
+    function stopTimer() {
+        if (!intervalId) return;
+        window.clearInterval(intervalId);
+        intervalId = null;
+    }
+
+    function pauseHeartbeat() {
+        void sendHeartbeat({ keepalive: true });
+        stopTimer();
+    }
+
+    function resumeHeartbeat() {
+        void sendHeartbeat();
+        startTimer();
+    }
+
     function setChatRoom(roomId) {
         const scopeId = String(roomId || "").trim();
         const previous = extraScopes.get(chatRoomScopeKey)?.scope_id || "";
@@ -583,11 +643,21 @@ function initializePresenceHeartbeat() {
     sendHeartbeat();
     startTimer();
     document.addEventListener("visibilitychange", () => sendHeartbeat({ keepalive: true }));
-    window.addEventListener("pagehide", () => sendHeartbeat({ keepalive: true }));
+    if (window.APStudyPageLifecycle?.register) {
+        window.APStudyPageLifecycle.register({
+            pause: pauseHeartbeat,
+            resume: resumeHeartbeat,
+            dispose: pauseHeartbeat,
+        });
+    } else {
+        window.addEventListener("pagehide", pauseHeartbeat, { once: true });
+    }
     window.APStudyPresenceHeartbeat = {
         send: sendHeartbeat,
         setChatRoom,
         clearChatRoom: () => setChatRoom(null),
+        pause: pauseHeartbeat,
+        resume: resumeHeartbeat,
         tabId,
         siteHeartbeatMs,
         chatHeartbeatMs,

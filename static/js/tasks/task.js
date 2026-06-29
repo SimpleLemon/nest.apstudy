@@ -436,9 +436,17 @@ function TaskApp({ completeSound, uncompleteSound }) {
 }
 
 const mount = document.getElementById("task-root");
+let taskReactRoot = null;
 if (mount) {
-    createRoot(mount).render(h(TaskApp, {
+    taskReactRoot = createRoot(mount);
+    taskReactRoot.render(h(TaskApp, {
         completeSound: mount.dataset.completeSound || "/static/audio/task-pop.mp3",
         uncompleteSound: mount.dataset.uncompleteSound || "/static/audio/task-pop-down.mp3",
     }));
+    window.APStudyPageLifecycle?.register?.({
+        dispose() {
+            taskReactRoot?.unmount();
+            taskReactRoot = null;
+        },
+    });
 }

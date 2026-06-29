@@ -1483,7 +1483,7 @@ def appwrite_session():
     return jsonify({"status": "ok", "user_id": result["user_id"], "redirect": result["redirect"]})
 
 
-@auth_bp.route("/logout")
+@auth_bp.route("/logout", methods=["POST"])
 def logout():
     """Clear session and revoke Google token if possible."""
     credentials_data = session.get("credentials")

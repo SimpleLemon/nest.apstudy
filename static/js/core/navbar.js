@@ -214,6 +214,7 @@ function setupNavbarInteractions(userEmail, authenticated = true) {
   const logoutBtn = document.getElementById('navbar-logout-btn');
   const searchBtn = document.getElementById('navbar-search-btn');
   const menuBtn = document.getElementById('navbar-menu-btn');
+  const titleLink = document.querySelector('.navbar-title');
 
   function syncMobileMenuButton(isOpen) {
     if (!menuBtn) return;
@@ -222,6 +223,14 @@ function setupNavbarInteractions(userEmail, authenticated = true) {
   }
 
   window.APSTUDY_SYNC_MOBILE_NAV_BUTTON = syncMobileMenuButton;
+
+  titleLink?.addEventListener('click', (event) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    if (!window.APStudyNavigation?.go?.(titleLink.href)) {
+      window.location.assign(titleLink.href);
+    }
+  });
 
   if (menuBtn) {
     menuBtn.addEventListener('click', (e) => {
@@ -261,7 +270,9 @@ function setupNavbarInteractions(userEmail, authenticated = true) {
   if (accountBtn) {
     accountBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      window.location.href = '/settings#account';
+      if (!window.APStudyNavigation?.go?.('/settings#account')) {
+        window.location.assign('/settings#account');
+      }
     });
   }
 
