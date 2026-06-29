@@ -155,7 +155,8 @@ class TestCalendarSources(unittest.TestCase):
         response.text = ics_payload.decode("utf-8")
         response.headers = {}
 
-        with patch("services.feed_fetcher.http_requests.get", return_value=response):
+        with patch("services.feed_fetcher.require_public_http_url", side_effect=lambda url: url), \
+                patch("services.feed_fetcher.http_requests.get", return_value=response):
             parsed = fetch_and_parse_ical("https://example.com/holidays.ics")
 
         self.assertEqual(parsed["calendar_name"], "US Holidays")
@@ -181,7 +182,8 @@ class TestCalendarSources(unittest.TestCase):
         response.text = ics_payload.decode("utf-8")
         response.headers = {}
 
-        with patch("services.feed_fetcher.http_requests.get", return_value=response) as get_mock:
+        with patch("services.feed_fetcher.require_public_http_url", side_effect=lambda url: url), \
+                patch("services.feed_fetcher.http_requests.get", return_value=response) as get_mock:
             parsed = fetch_and_parse_ical(ICLOUD_NOTCHNOOK_URL)
 
         normalized_url = _normalize_feed_url(ICLOUD_NOTCHNOOK_URL)

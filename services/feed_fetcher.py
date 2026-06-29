@@ -10,7 +10,7 @@ import hashlib
 import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, date as date_type, timezone
-from urllib.parse import urlparse, urlunparse
+from urllib.parse import urljoin, urlparse, urlunparse
 
 import icalendar
 import requests as http_requests
@@ -29,8 +29,11 @@ from services.calendar_store import (
     update_calendar_row,
 )
 from services.feed_diff import diff_events
+from services.outbound_http import redacted_url, require_public_http_url
 
 logger = logging.getLogger(__name__)
+MAX_ICAL_BYTES = 10 * 1024 * 1024
+MAX_ICAL_REDIRECTS = 5
 
 
 # ── Event type classification ────────────────────────────────────────────────
@@ -194,6 +197,54 @@ def _feed_url_hash(feed_url):
     return hashlib.sha256(_normalize_feed_url(feed_url).encode("utf-8")).hexdigest()
 
 
+def _request_public_feed(url, *, headers, timeout):
+    current_url = url
+    for _ in range(MAX_ICAL_REDIRECTS + 1):
+        require_public_http_url(current_url)
+        response = http_requests.get(
+            current_url,
+            headers=headers,
+            timeout=timeout,
+            allow_redirects=False,
+            stream=True,
+        )
+        if 300 <= response.status_code < 400 and response.headers.get("Location"):
+            next_url = urljoin(current_url, response.headers["Location"])
+            response.close()
+            current_url = next_url
+            continue
+        return response, current_url
+    raise ValueError("Calendar feed redirected too many times.")
+
+
+def _read_response_bytes(response):
+    content_length = response.headers.get("Content-Length")
+    if content_length:
+        try:
+            declared_size = int(content_length)
+        except (TypeError, ValueError):
+            declared_size = None
+        if declared_size is not None and declared_size > MAX_ICAL_BYTES:
+            raise ValueError("Calendar feed exceeds the 10 MB response limit.")
+
+    if not isinstance(response, http_requests.Response):
+        data = response.content
+        if len(data) > MAX_ICAL_BYTES:
+            raise ValueError("Calendar feed exceeds the 10 MB response limit.")
+        return data
+
+    chunks = []
+    total = 0
+    for chunk in response.iter_content(chunk_size=64 * 1024):
+        if not chunk:
+            continue
+        total += len(chunk)
+        if total > MAX_ICAL_BYTES:
+            raise ValueError("Calendar feed exceeds the 10 MB response limit.")
+        chunks.append(chunk)
+    return b"".join(chunks)
+
+
 def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
     """
     Fetch an iCal feed from a URL and parse it into a list of event dicts.
@@ -220,30 +271,32 @@ def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
     if last_modified:
         headers["If-Modified-Since"] = last_modified
 
-    logger.info("Fetching calendar feed: url=%s", normalized_url)
+    safe_log_url = redacted_url(normalized_url)
+    logger.info("Fetching calendar feed: url=%s", safe_log_url)
 
     try:
-        response = http_requests.get(
-            normalized_url,
-            headers=headers,
-            timeout=timeout,
-            allow_redirects=True,
-        )
+        response, final_url = _request_public_feed(normalized_url, headers=headers, timeout=timeout)
     except http_requests.RequestException as exc:
         logger.error(
             "Calendar feed fetch failed: url=%s error=%s",
-            normalized_url,
+            safe_log_url,
+            type(exc).__name__,
+        )
+        raise ValueError("Calendar feed request failed.") from None
+    except ValueError as exc:
+        logger.warning(
+            "Calendar feed rejected: url=%s reason=%s",
+            safe_log_url,
             str(exc),
-            exc_info=True,
         )
         raise
 
     if response.status_code == 304:
         logger.info(
             "Calendar feed not modified: url=%s",
-            normalized_url,
+            redacted_url(final_url),
         )
-        return {
+        result = {
             "status_code": 304,
             "events": [],
             "etag": response.headers.get("ETag") or etag,
@@ -251,48 +304,51 @@ def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
             "feed_url": normalized_url,
             "calendar_name": None,
         }
-
-    raw_bytes = response.content
-    raw_text = response.text
+        response.close()
+        return result
 
     if response.status_code != 200:
         logger.error(
             "Calendar feed returned non-200 status: url=%s status_code=%s",
-            normalized_url,
+            redacted_url(final_url),
             response.status_code,
         )
+        response.close()
         raise ValueError(
-            f"Feed fetch failed for {normalized_url}: HTTP {response.status_code}"
+            f"Feed fetch failed: HTTP {response.status_code}"
         )
 
+    try:
+        raw_bytes = _read_response_bytes(response)
+    finally:
+        response.close()
+    encoding = response.encoding if isinstance(getattr(response, "encoding", None), str) else "utf-8"
+    raw_text = raw_bytes.decode(encoding or "utf-8", errors="replace")
+
     if not raw_bytes:
-        logger.error("Calendar feed response body is empty: url=%s", normalized_url)
-        raise ValueError(f"Feed fetch failed for {normalized_url}: empty response body")
+        logger.error("Calendar feed response body is empty: url=%s", redacted_url(final_url))
+        raise ValueError("Feed fetch failed: empty response body")
 
     if "BEGIN:VCALENDAR" not in raw_text.upper():
         content_type = response.headers.get("Content-Type", "")
         logger.error(
-            "Calendar feed response is not iCalendar data: url=%s status_code=%s content_type=%s preview=%s",
-            normalized_url,
+            "Calendar feed response is not iCalendar data: url=%s status_code=%s content_type=%s",
+            redacted_url(final_url),
             response.status_code,
             content_type,
-            raw_text[:200],
         )
-        raise ValueError(
-            f"Feed fetch failed for {normalized_url}: response is not iCalendar data"
-        )
+        raise ValueError("Feed fetch failed: response is not iCalendar data")
 
     try:
         cal = icalendar.Calendar.from_ical(raw_bytes)
     except Exception as exc:
         logger.error(
-            "Calendar feed parse failed: url=%s status_code=%s error=%s",
-            normalized_url,
+            "Calendar feed parse failed: url=%s status_code=%s error_type=%s",
+            redacted_url(final_url),
             response.status_code,
-            str(exc),
-            exc_info=True,
+            type(exc).__name__,
         )
-        raise ValueError(f"Feed parse failed for {normalized_url}: {exc}") from exc
+        raise ValueError("Feed parse failed: invalid iCalendar data") from None
 
     calendar_name = _stringify_ical(cal.get("X-WR-CALNAME")) or _stringify_ical(cal.get("NAME"))
     prodid = _stringify_ical(cal.get("PRODID")) or ""
@@ -336,7 +392,7 @@ def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
 
     logger.info(
         "Calendar feed parsed successfully: url=%s events_parsed=%s",
-        normalized_url,
+        redacted_url(final_url),
         len(events),
     )
     return {

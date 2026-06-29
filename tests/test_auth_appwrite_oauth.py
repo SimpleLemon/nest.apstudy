@@ -677,7 +677,8 @@ class AvatarStorageServiceTestCase(unittest.TestCase):
                 created["permissions"] = permissions
                 return {"$id": file_id}
 
-        with patch.object(avatar_storage.http_requests, "get", return_value=self._fake_response()), \
+        with patch.object(avatar_storage, "require_public_http_url", side_effect=lambda url: url), \
+                patch.object(avatar_storage.http_requests, "get", return_value=self._fake_response()), \
                 patch.object(avatar_storage, "Storage", _Storage), \
                 patch.object(avatar_storage, "build_avatar_view_url", side_effect=lambda fid: f"https://appwrite.test/view/{fid}"):
             result = avatar_storage.store_avatar_from_url("user-1", "https://provider.test/avatar.png")
@@ -689,7 +690,8 @@ class AvatarStorageServiceTestCase(unittest.TestCase):
     def test_store_avatar_from_url_rejects_unsupported_content_type(self):
         from services import avatar_storage
 
-        with patch.object(avatar_storage.http_requests, "get", return_value=self._fake_response(content_type="text/html")), \
+        with patch.object(avatar_storage, "require_public_http_url", side_effect=lambda url: url), \
+                patch.object(avatar_storage.http_requests, "get", return_value=self._fake_response(content_type="text/html")), \
                 patch.object(avatar_storage, "Storage") as storage_class:
             result = avatar_storage.store_avatar_from_url("user-1", "https://provider.test/avatar.png")
 
@@ -699,7 +701,8 @@ class AvatarStorageServiceTestCase(unittest.TestCase):
     def test_store_avatar_from_url_returns_none_on_download_error(self):
         from services import avatar_storage
 
-        with patch.object(avatar_storage.http_requests, "get", side_effect=RuntimeError("network down")), \
+        with patch.object(avatar_storage, "require_public_http_url", side_effect=lambda url: url), \
+                patch.object(avatar_storage.http_requests, "get", side_effect=RuntimeError("network down")), \
                 patch.object(avatar_storage, "Storage") as storage_class:
             result = avatar_storage.store_avatar_from_url("user-1", "https://provider.test/avatar.png")
 
@@ -709,7 +712,7 @@ class AvatarStorageServiceTestCase(unittest.TestCase):
     def test_store_avatar_from_url_enforces_size_limit(self):
         from services import avatar_storage
 
-        with patch.object(
+        with patch.object(avatar_storage, "require_public_http_url", side_effect=lambda url: url), patch.object(
             avatar_storage.http_requests,
             "get",
             return_value=self._fake_response(content_length=avatar_storage.MAX_AVATAR_BYTES + 1),
