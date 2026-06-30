@@ -244,7 +244,7 @@ body.user-profile-page > global.thenav + .user-profile-shell {
 }
 
 .user-profile-card .profile-tile {
-    border-color: #30363d;
+    border-color: var(--color-outline-variant, #30363d);
     box-shadow: 0 0 0 1px rgba(48, 54, 61, 0.35), 0 16px 32px rgba(1, 4, 9, 0.3);
 }
 
@@ -260,14 +260,14 @@ body.user-profile-page > global.thenav + .user-profile-shell {
 }
 
 .user-profile-footer {
-    color: #8b949e;
+    color: var(--color-on-surface-variant, #8b949e);
     font-size: 12px;
     margin-top: 16px;
     text-align: center;
 }
 
 .user-profile-footer a {
-    color: #58a6ff;
+    color: var(--color-primary, #58a6ff);
     text-decoration: none;
 }
 
@@ -277,8 +277,8 @@ body.user-profile-page > global.thenav + .user-profile-shell {
 
 .user-profile-footer-chrome footer {
     background: transparent;
-    border-top: 1px solid #30363d;
-    color: #8b949e;
+    border-top: 1px solid var(--color-outline-variant, #30363d);
+    color: var(--color-on-surface-variant, #8b949e);
     padding: 20px 16px;
 }
 
@@ -288,11 +288,11 @@ body.user-profile-page > global.thenav + .user-profile-shell {
 
 .user-profile-footer-chrome footer span,
 .user-profile-footer-chrome footer a {
-    color: #8b949e;
+    color: var(--color-on-surface-variant, #8b949e);
 }
 
 .user-profile-footer-chrome footer a:hover {
-    color: #58a6ff;
+    color: var(--color-primary, #58a6ff);
 }
 
 .user-profile-footer-chrome footer div > div {

@@ -128,6 +128,7 @@
         const nextHidden = !menu.hidden ? true : false;
         menu.hidden = nextHidden;
         button?.setAttribute("aria-expanded", String(!nextHidden));
+        if (!nextHidden) requestAnimationFrame(() => menu.querySelector('[role="menuitem"]')?.focus({ preventScroll: true }));
     }
 
     function closeNewMenu(menu, button) {
@@ -179,9 +180,13 @@
     }
 
     function closeActionMenu(state) {
-        state.actionMenu?.remove();
+        const menu = state.actionMenu;
+        const anchor = state.actionMenuAnchor;
+        const shouldRestoreFocus = Boolean(menu?.contains(document.activeElement));
+        menu?.remove();
         state.actionMenu = null;
         state.actionMenuAnchor = null;
+        if (shouldRestoreFocus) anchor?.focus?.({ preventScroll: true });
     }
 
     window.APStudyFilesRenderers = {

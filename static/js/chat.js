@@ -47,6 +47,7 @@
     clearedReadRooms: new Set(),
     messageSendInFlight: false,
     contextMenuRoom: null,
+    contextMenuAnchor: null,
     loadingMessages: false,
     roomReadState: null,
     announcementsBannerVisible: false,
@@ -942,14 +943,18 @@
 
   function closeRoomContextMenu() {
     const menu = document.getElementById("chat-room-context-menu");
+    const shouldRestoreFocus = Boolean(menu?.contains(document.activeElement));
     if (menu) menu.hidden = true;
     state.contextMenuRoom = null;
+    if (shouldRestoreFocus) state.contextMenuAnchor?.focus?.({ preventScroll: true });
+    state.contextMenuAnchor = null;
   }
 
   function openRoomContextMenu(room, event) {
     if (!room?.type || !room?.id) return;
     event.preventDefault();
     state.contextMenuRoom = room;
+    state.contextMenuAnchor = event.currentTarget || null;
     const menu = ensureRoomContextMenu();
     const rect = event.currentTarget?.getBoundingClientRect?.() || { left: 0, bottom: 0 };
     const x = typeof event.clientX === "number" && event.clientX > 0 ? event.clientX : rect.left + 16;
@@ -2845,23 +2850,37 @@
     document.querySelector("[data-restore-members]")?.addEventListener("click", () => setMembersCollapsed(false));
     const rail = document.getElementById("chat-rail");
     const backdrop = document.getElementById("chat-drawer-backdrop");
+    let drawerReturnFocus = null;
     const closeChatDrawers = () => {
       rail?.classList.remove("is-open");
       els.members?.classList.remove("is-open");
+      [rail, els.members].forEach((drawer) => {
+        drawer?.removeAttribute("role");
+        drawer?.removeAttribute("aria-modal");
+      });
+      window.APStudyAccessibility?.syncDialogs?.();
+      document.querySelectorAll("[data-open-rail], [data-open-members]").forEach((button) => button.setAttribute("aria-expanded", "false"));
       if (backdrop) backdrop.hidden = true;
       document.body.classList.remove("chat-drawer-open");
+      drawerReturnFocus?.focus?.({ preventScroll: true });
+      drawerReturnFocus = null;
     };
-    const openChatDrawer = (drawer) => {
+    const openChatDrawer = (drawer, trigger) => {
       if (!drawer) return;
+      drawerReturnFocus = trigger || document.activeElement;
       if (drawer === rail) els.members?.classList.remove("is-open");
       else rail?.classList.remove("is-open");
       drawer.classList.add("is-open");
+      drawer.setAttribute("role", "dialog");
+      drawer.setAttribute("aria-modal", "true");
+      trigger?.setAttribute("aria-expanded", "true");
       if (backdrop) backdrop.hidden = false;
       document.body.classList.add("chat-drawer-open");
+      drawer.querySelector("[data-close-rail], [data-close-members], button, a[href]")?.focus({ preventScroll: true });
     };
-    document.querySelector("[data-open-rail]")?.addEventListener("click", () => openChatDrawer(rail));
+    document.querySelector("[data-open-rail]")?.addEventListener("click", (event) => openChatDrawer(rail, event.currentTarget));
     document.querySelector("[data-close-rail]")?.addEventListener("click", closeChatDrawers);
-    document.querySelector("[data-open-members]")?.addEventListener("click", () => openChatDrawer(els.members));
+    document.querySelector("[data-open-members]")?.addEventListener("click", (event) => openChatDrawer(els.members, event.currentTarget));
     document.querySelector("[data-close-members]")?.addEventListener("click", closeChatDrawers);
     backdrop?.addEventListener("click", closeChatDrawers);
     document.addEventListener("keydown", (event) => {

@@ -72,11 +72,13 @@
             const inactive = "inline-flex h-8 min-w-[84px] items-center justify-center rounded-md bg-transparent px-3 text-sm font-medium text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface";
             weekBtn.className = state.view === "week" ? active : inactive;
             monthBtn.className = state.view === "month" ? active : inactive;
+            weekBtn.setAttribute("aria-pressed", String(state.view === "week"));
+            monthBtn.setAttribute("aria-pressed", String(state.view === "month"));
             if (state.view === "week") {
-                weekBtn.style.background = "linear-gradient(135deg, var(--color-primary), var(--color-primary-container))";
+                weekBtn.style.background = "var(--color-primary)";
                 monthBtn.style.background = "";
             } else {
-                monthBtn.style.background = "linear-gradient(135deg, var(--color-primary), var(--color-primary-container))";
+                monthBtn.style.background = "var(--color-primary)";
                 weekBtn.style.background = "";
             }
             if (state.view !== "week") {

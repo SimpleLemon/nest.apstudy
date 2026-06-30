@@ -39,7 +39,7 @@
                 <!-- Branding Header -->
                 <div class="login-brand">
                     <div class="login-logo">
-                        <span class="material-symbols-outlined login-logo-icon">auto_awesome</span>
+                        <span class="material-symbols-outlined login-logo-icon" aria-hidden="true">auto_awesome</span>
                     </div>
                     <h1 id="login-title" class="login-title">Sign in to Nest</h1>
                     <p class="login-subtitle">Open your academic command center.</p>
@@ -47,8 +47,8 @@
 
             <!-- Error Message (shown via Jinja if present) -->
             {% if error %}
-            <div class="login-error">
-                <span class="material-symbols-outlined text-lg shrink-0">error</span>
+            <div class="login-error" role="alert">
+                <span class="material-symbols-outlined text-lg shrink-0" aria-hidden="true">error</span>
                 <p>{{ error }}</p>
             </div>
             {% endif %}

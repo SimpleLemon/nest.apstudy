@@ -255,6 +255,7 @@
   background: var(--color-surface-container-high);
 }
 
+.profile-tile-heading h1,
 .profile-tile-heading h3 {
   margin: 0;
   font-size: clamp(1.15rem, 7cqw, 2rem);
@@ -622,7 +623,7 @@
 }
 
 .settings-button-danger {
-  color: var(--color-on-error);
+  color: var(--color-error);
   background: color-mix(in srgb, var(--color-error) 20%, transparent);
   border: 1px solid color-mix(in srgb, var(--color-error) 34%, transparent);
 }
@@ -1028,6 +1029,7 @@
     grid-template-columns: 1fr;
   }
 
+  .profile-tile-heading h1,
   .profile-tile-heading h3 {
     font-size: 1.75rem;
   }

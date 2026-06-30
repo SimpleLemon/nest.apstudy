@@ -305,6 +305,51 @@ function TaskApp({ completeSound, uncompleteSound }) {
         }
     }, [load, setTasksAndRef]);
 
+    const persistTaskUpdates = React.useCallback(async (updates) => {
+        setTasksAndRef((current) => applyTaskOrderUpdates(current, updates));
+        try {
+            await persistTaskOrder(updates);
+        } catch (err) {
+            setError(err.message || "Unable to reorder tasks.");
+            load();
+        }
+    }, [load, setTasksAndRef]);
+
+    const moveList = React.useCallback((listId, direction) => {
+        const ids = sortedLists(listsRef.current).map((list) => list.id);
+        const index = ids.indexOf(listId);
+        const target = index + direction;
+        if (index < 0 || target < 0 || target >= ids.length) return;
+        [ids[index], ids[target]] = [ids[target], ids[index]];
+        void reorderLists(ids);
+    }, [reorderLists]);
+
+    const moveTask = React.useCallback((taskId, direction) => {
+        const task = tasksRef.current.find((item) => item.id === taskId);
+        if (!task) return;
+        const ordered = [...(tasksByListRef.current.get(task.list_id) || [])];
+        const index = ordered.findIndex((item) => item.id === taskId);
+        const target = index + direction;
+        if (index < 0 || target < 0 || target >= ordered.length) return;
+        [ordered[index], ordered[target]] = [ordered[target], ordered[index]];
+        if ((listByIdRef.current.get(task.list_id)?.sort_mode || "default") !== "default") {
+            void updateList(task.list_id, { sort_mode: "default" });
+        }
+        void persistTaskUpdates(ordered.map((item, orderIndex) => ({ id: item.id, list_id: task.list_id, order: (orderIndex + 1) * 1000 })));
+    }, [persistTaskUpdates, updateList]);
+
+    const moveTaskToList = React.useCallback((taskId, targetListId) => {
+        const task = tasksRef.current.find((item) => item.id === taskId);
+        if (!task || !listByIdRef.current.has(targetListId) || task.list_id === targetListId) return;
+        const source = (tasksByListRef.current.get(task.list_id) || []).filter((item) => item.id !== taskId);
+        const target = [...(tasksByListRef.current.get(targetListId) || []), task];
+        const updates = [
+            ...source.map((item, index) => ({ id: item.id, list_id: task.list_id, order: (index + 1) * 1000 })),
+            ...target.map((item, index) => ({ id: item.id, list_id: targetListId, order: (index + 1) * 1000 })),
+        ];
+        void persistTaskUpdates(updates);
+    }, [persistTaskUpdates]);
+
     const openListDialog = React.useCallback((request) => {
         if (request?.mode === "quick") {
             createList({ name: request.name, description: "" });
@@ -336,16 +381,37 @@ function TaskApp({ completeSound, uncompleteSound }) {
         toggleActionMenu(setActionMenu, "list", listId, () => ({
             anchor: position.anchor,
             title: "Sort by",
-            items: listMenuItems({ list, listTasks, updateList, openListDialog, printListById, deleteCompletedTasks, deleteList }),
+            items: listMenuItems({
+                list,
+                listTasks,
+                updateList,
+                openListDialog,
+                printListById,
+                deleteCompletedTasks,
+                deleteList,
+                moveList,
+                canMoveEarlier: sortedLists(listsRef.current).findIndex((item) => item.id === listId) > 0,
+                canMoveLater: sortedLists(listsRef.current).findIndex((item) => item.id === listId) < listsRef.current.length - 1,
+            }),
         }));
-    }, [deleteCompletedTasks, deleteList, openListDialog, printListById, updateList]);
+    }, [deleteCompletedTasks, deleteList, moveList, openListDialog, printListById, updateList]);
 
     const openTaskMenu = React.useCallback((taskId, position) => {
+        const task = tasksRef.current.find((item) => item.id === taskId);
+        const ordered = task ? (tasksByListRef.current.get(task.list_id) || []) : [];
+        const taskIndex = ordered.findIndex((item) => item.id === taskId);
         toggleActionMenu(setActionMenu, "task", taskId, () => ({
             anchor: position.anchor,
-            items: taskMenuItems(taskId, position, deleteTask),
+            items: taskMenuItems(taskId, position, deleteTask, {
+                moveTask,
+                moveTaskToList,
+                lists: sortedLists(listsRef.current),
+                currentListId: task?.list_id || "",
+                canMoveEarlier: taskIndex > 0,
+                canMoveLater: taskIndex >= 0 && taskIndex < ordered.length - 1,
+            }),
         }));
-    }, [deleteTask]);
+    }, [deleteTask, moveTask, moveTaskToList]);
 
     const workspaceLists = React.useMemo(() => {
         if (selectedListId === "all") return visibleOrderedLists;

@@ -76,6 +76,7 @@
             openSharedFolder,
             openFolderModal,
             openMoveModal,
+            moveNoteBy,
             preloadEditorBundle,
             toggleCardMenu,
         },
@@ -151,13 +152,16 @@
         }
     }
 
-    function closeAllMenus() {
+    function closeAllMenus({ restoreFocus = false } = {}) {
+        const openMenu = document.querySelector('.note-card-menu:not(.note-menu-hidden), .folder-card-menu:not(.note-menu-hidden)');
+        const trigger = openMenu?.closest('.note-card, .folder-card')?.querySelector('.note-card-menu-btn, .folder-card-menu-btn');
         document.querySelectorAll('.note-card-menu, .folder-card-menu').forEach((menu) => {
             menu.classList.add('note-menu-hidden');
         });
         document.querySelectorAll('.note-card-menu-btn, .folder-card-menu-btn').forEach((button) => {
             button.setAttribute('aria-expanded', 'false');
         });
+        if (restoreFocus) trigger?.focus({ preventScroll: true });
     }
 
     function toggleCardMenu(button, menu) {
@@ -249,6 +253,7 @@
         const shouldOpen = Boolean(menu?.hidden);
         closeHeaderPopovers();
         setPopoverOpen(menu, button, shouldOpen);
+        if (shouldOpen) requestAnimationFrame(() => menu?.querySelector('[role^="menuitem"]')?.focus({ preventScroll: true }));
     }
 
     function syncViewControls() {
@@ -497,6 +502,30 @@
         }
     }
 
+    async function moveNoteBy(note, direction) {
+        const noteId = noteIdOf(note);
+        if (!noteId || ![-1, 1].includes(direction)) return;
+        const folderId = note.folder_id || null;
+        const visible = state.notes.filter((item) => (item.folder_id || null) === folderId);
+        const currentIndex = visible.findIndex((item) => noteIdOf(item) === noteId);
+        const targetIndex = currentIndex + direction;
+        if (currentIndex < 0 || targetIndex < 0 || targetIndex >= visible.length) return;
+        const currentStateIndex = state.notes.indexOf(visible[currentIndex]);
+        const targetStateIndex = state.notes.indexOf(visible[targetIndex]);
+        [state.notes[currentStateIndex], state.notes[targetStateIndex]] = [state.notes[targetStateIndex], state.notes[currentStateIndex]];
+        renderCurrentView();
+        try {
+            await apiJson(`/api/notes/${encodeURIComponent(noteId)}`, {
+                method: 'PATCH',
+                body: JSON.stringify({ folder_id: folderId, order: targetIndex }),
+            });
+            showAlert(direction < 0 ? 'Note moved earlier.' : 'Note moved later.', 'success');
+        } catch (error) {
+            showAlert(error.message || 'Unable to reorder note.', 'error');
+            await loadAndRender({ clearAlert: false });
+        }
+    }
+
     async function deleteNote(noteCard, button) {
         const noteId = noteCard?.dataset.noteId;
         if (!noteId) return;
@@ -555,7 +584,7 @@
         if (els.notesGrid) {
             sortableInstances.push(Sortable.create(els.notesGrid, {
                 group: { name: 'notes', pull: true, put: true },
-                animation: 150,
+                animation: window.APStudyAccessibility?.prefersReducedMotion?.() ? 0 : 150,
                 draggable: '.note-card',
                 ghostClass: 'note-card-ghost',
                 chosenClass: 'note-card-chosen',
@@ -696,7 +725,7 @@
                 closeHeaderPopovers({ restoreFocus: true });
                 return;
             }
-            closeAllMenus();
+            closeAllMenus({ restoreFocus: true });
         });
         window.addEventListener('resize', closeAllMenus);
         window.addEventListener('scroll', closeAllMenus, true);

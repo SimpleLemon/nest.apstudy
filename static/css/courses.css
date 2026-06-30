@@ -551,15 +551,15 @@ body.courses-body {
 }
 
 .course-chip.is-open {
-  color: #047857;
-  background: rgba(16, 185, 129, 0.12);
-  border-color: rgba(16, 185, 129, 0.36);
+  color: var(--color-success, #12683f);
+  background: color-mix(in srgb, var(--color-success, #12683f) 12%, transparent);
+  border-color: color-mix(in srgb, var(--color-success, #12683f) 42%, transparent);
 }
 
 .course-chip.is-closed {
-  color: #dc2626;
-  background: rgba(239, 68, 68, 0.12);
-  border-color: rgba(239, 68, 68, 0.36);
+  color: var(--color-error, #ba1a1a);
+  background: color-mix(in srgb, var(--color-error, #ba1a1a) 12%, transparent);
+  border-color: color-mix(in srgb, var(--color-error, #ba1a1a) 42%, transparent);
 }
 
 .course-chip.is-loading {

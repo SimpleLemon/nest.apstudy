@@ -415,6 +415,58 @@ body.apstudy-confirm-open {
 	}
 }
 
+/* WCAG baseline: a consistent keyboard indicator must survive page-level resets. */
+.apstudy-skip-link {
+	position: fixed;
+	top: 8px;
+	left: 8px;
+	z-index: 10100;
+	transform: translateY(calc(-100% - 16px));
+	border-radius: 8px;
+	background: var(--color-surface, #fff);
+	color: var(--color-on-surface, #111);
+	font-weight: 700;
+	padding: 10px 14px;
+	text-decoration: none;
+}
+
+.apstudy-skip-link:focus {
+	transform: translateY(0);
+}
+
+html body :is(a, button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]):focus-visible {
+	outline: 3px solid var(--color-primary, #0060aa) !important;
+	outline-offset: 3px !important;
+	box-shadow: 0 0 0 6px var(--color-surface, #fff) !important;
+	scroll-margin-block: calc(var(--navbar-height, 64px) + 16px) 24px;
+}
+
+/* Form boundaries use the full outline token so they remain visible in every theme. */
+html body :is(
+	input[type="text"], input[type="email"], input[type="password"], input[type="search"],
+	input[type="url"], input[type="tel"], input[type="number"], input[type="date"],
+	input[type="time"], input[type="datetime-local"], select, textarea
+) {
+	border-color: var(--color-outline, #79786e) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html:focus-within {
+		scroll-behavior: auto !important;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-delay: 0ms !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+		transition-delay: 0ms !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
 .loader {
 	width: 42px;
 	height: 42px;
@@ -996,6 +1048,11 @@ body.apstudy-confirm-open {
 
 .calendar-event-shell:focus-visible {
 	box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary, #3b82f6) 70%, transparent);
+}
+
+.calendar-event-shell.is-completed {
+	text-decoration: line-through;
+	text-decoration-thickness: 1px;
 }
 
 .calendar-event-hover-card {

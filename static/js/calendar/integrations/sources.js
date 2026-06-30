@@ -81,7 +81,7 @@
                             <input class="js-source-info-url calendar-info-input" type="url" inputmode="url" value="${escapeHtml(calendar.url || "")}" placeholder="https://calendar.example.com/feed.ics" ${editable ? "" : "disabled"}>
                         </label>`}
                         ${editable ? "" : '<p class="calendar-info-note">This calendar is generated inside Nest and does not have an editable feed URL.</p>'}
-                        <p class="js-source-info-error calendar-info-error hidden"></p>
+                        <p class="js-source-info-error calendar-info-error hidden" role="alert"></p>
                     </div>
                     <div class="calendar-info-footer">
                         <button type="button" class="js-source-info-cancel calendar-info-button calendar-info-button-secondary">Close</button>
@@ -205,7 +205,7 @@
                                     `).join("")}
                                 </div>
                             </div>
-                            <p class="js-source-create-error calendar-info-error hidden"></p>
+                            <p class="js-source-create-error calendar-info-error hidden" role="alert"></p>
                         </div>
                         <div class="calendar-info-footer">
                             <button type="button" class="js-source-create-cancel calendar-info-button calendar-info-button-secondary">Cancel</button>
@@ -314,9 +314,9 @@
                                 <div>
                                     <div class="flex items-center justify-between text-xs text-on-surface-variant mb-1.5">
                                         <span>${channel.toUpperCase()}</span>
-                                        <input type="number" min="0" max="255" value="${initial[channel]}" class="js-rgb-number w-16 rounded border border-outline-variant/50 bg-surface-container-low px-2 py-1 text-right text-sm text-on-surface" data-channel="${channel}">
+                                        <input type="number" min="0" max="255" value="${initial[channel]}" aria-label="${channel.toUpperCase()} color value" class="js-rgb-number w-16 rounded border border-outline-variant/50 bg-surface-container-low px-2 py-1 text-right text-sm text-on-surface" data-channel="${channel}">
                                     </div>
-                                    <input type="range" min="0" max="255" value="${initial[channel]}" class="js-rgb-range w-full" data-channel="${channel}">
+                                    <input type="range" min="0" max="255" value="${initial[channel]}" aria-label="${channel.toUpperCase()} color slider" class="js-rgb-range w-full" data-channel="${channel}">
                                 </div>
                             `).join("")}
                         </div>

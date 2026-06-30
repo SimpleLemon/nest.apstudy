@@ -66,7 +66,7 @@ export function toggleActionMenu(setActionMenu, type, id, buildMenu) {
         : { type, id, nonce: Date.now(), ...buildMenu() });
 }
 
-export function listMenuItems({ list, listTasks, updateList, openListDialog, printListById, deleteCompletedTasks, deleteList }) {
+export function listMenuItems({ list, listTasks, updateList, openListDialog, printListById, deleteCompletedTasks, deleteList, moveList, canMoveEarlier, canMoveLater }) {
     return [
         ...LIST_SORT_OPTIONS.map((option) => ({
             label: option.label,
@@ -74,6 +74,9 @@ export function listMenuItems({ list, listTasks, updateList, openListDialog, pri
             checked: (list.sort_mode || "default") === option.value,
             onClick: () => updateList(list.id, { sort_mode: option.value }),
         })),
+        { separator: true },
+        { label: "Move list earlier", icon: "arrow_upward", disabled: !canMoveEarlier, onClick: () => moveList(list.id, -1) },
+        { label: "Move list later", icon: "arrow_downward", disabled: !canMoveLater, onClick: () => moveList(list.id, 1) },
         { separator: true },
         { label: "Rename list", icon: "edit", onClick: () => openListDialog({ mode: "edit", list }) },
         { label: "Print list", icon: "print", onClick: () => printListById(list.id) },
@@ -87,9 +90,16 @@ export function listMenuItems({ list, listTasks, updateList, openListDialog, pri
     ];
 }
 
-export function taskMenuItems(taskId, position, deleteTask) {
+export function taskMenuItems(taskId, position, deleteTask, { moveTask, moveTaskToList, lists = [], currentListId = "", canMoveEarlier = false, canMoveLater = false } = {}) {
     return [
         { label: "Configure task", icon: "tune", onClick: () => position.configure?.() },
+        { label: "Move task earlier", icon: "arrow_upward", disabled: !canMoveEarlier, onClick: () => moveTask(taskId, -1) },
+        { label: "Move task later", icon: "arrow_downward", disabled: !canMoveLater, onClick: () => moveTask(taskId, 1) },
+        ...lists.filter((list) => list.id !== currentListId).map((list) => ({
+            label: `Move to ${list.name}`,
+            icon: "drive_file_move",
+            onClick: () => moveTaskToList(taskId, list.id),
+        })),
         { label: "Delete task", icon: "delete", danger: true, onClick: () => deleteTask(taskId) },
     ];
 }

@@ -43,7 +43,7 @@
                     <h1>Chat</h1>
                 </div>
                 <button class="chat-icon-button chat-mobile-close" type="button" data-close-rail aria-label="Close channels">
-                    <span class="material-symbols-outlined">close</span>
+                    <span class="material-symbols-outlined" aria-hidden="true">close</span>
                 </button>
             </div>
 
@@ -56,11 +56,11 @@
                 <div class="chat-section-title-row">
                     <span class="chat-section-title">Direct Messages</span>
                     <button id="chat-dm-new" class="chat-icon-button" type="button" aria-label="Find people">
-                        <span class="material-symbols-outlined">person_add</span>
+                        <span class="material-symbols-outlined" aria-hidden="true">person_add</span>
                     </button>
                 </div>
                 <div id="chat-dm-search" class="chat-dm-search" hidden>
-                    <input id="chat-dm-search-input" type="search" placeholder="Find users" autocomplete="off">
+                    <input id="chat-dm-search-input" type="search" placeholder="Find users" autocomplete="off" aria-label="Find people">
                     <div id="chat-dm-results" class="chat-dm-results" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"></div>
                 </div>
                 <div id="chat-dm-list" class="chat-list" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"></div>
@@ -69,8 +69,8 @@
 
         <section class="chat-main-panel">
             <header class="chat-topbar">
-                <button class="chat-icon-button chat-mobile-only" type="button" data-open-rail aria-label="Open channels">
-                    <span class="material-symbols-outlined">menu</span>
+                <button class="chat-icon-button chat-mobile-only" type="button" data-open-rail aria-label="Open channels" aria-controls="chat-rail" aria-expanded="false">
+                    <span class="material-symbols-outlined" aria-hidden="true">menu</span>
                 </button>
                 <div class="chat-room-title">
                     <span id="chat-room-symbol">#</span>
@@ -81,32 +81,32 @@
                 </div>
                 <div class="chat-topbar-actions">
                     <button class="chat-profile-toggle" type="button" data-toggle-members aria-label="Show user profile" title="Show user profile">
-                        <span class="material-symbols-outlined">account_circle</span>
+                        <span class="material-symbols-outlined" aria-hidden="true">account_circle</span>
                     </button>
-                    <button class="chat-icon-button chat-mobile-only" type="button" data-open-members aria-label="Open members">
-                        <span class="material-symbols-outlined">group</span>
+                    <button class="chat-icon-button chat-mobile-only" type="button" data-open-members aria-label="Open members" aria-controls="chat-members" aria-expanded="false">
+                        <span class="material-symbols-outlined" aria-hidden="true">group</span>
                     </button>
                 </div>
             </header>
 
-            <div id="chat-status" class="chat-status" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden></div>
+            <div id="chat-status" class="chat-status" role="status" aria-live="polite" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden></div>
             <div id="chat-announcements-unread" class="chat-history-limited chat-announcements-unread" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden>
                 <span>Unread announcements</span>
                 <button id="chat-announcements-read" class="chat-announcements-read" type="button" aria-label="Mark announcements read">
-                    <span class="material-symbols-outlined">close</span>
+                    <span class="material-symbols-outlined" aria-hidden="true">close</span>
                 </button>
             </div>
             <div id="chat-history-limited" class="chat-history-limited" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden>
                 <span>Older Discord history lives in the server.</span>
                 <a id="chat-join-discord" href="#" target="_blank" rel="noopener noreferrer">Join Discord</a>
             </div>
-            <div id="chat-messages" class="chat-messages" aria-live="polite" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"></div>
-            <div id="chat-typing-indicator" class="chat-typing-indicator" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden></div>
+            <div id="chat-messages" class="chat-messages" role="log" aria-live="polite" aria-relevant="additions text" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"></div>
+            <div id="chat-typing-indicator" class="chat-typing-indicator" role="status" aria-live="polite" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden></div>
 
             <form id="chat-composer" class="chat-composer" autocomplete="off">
-                <textarea id="chat-message-input" rows="1" maxlength="2000" placeholder="Message #chat"></textarea>
+                <textarea id="chat-message-input" rows="1" maxlength="2000" placeholder="Message #chat" aria-label="Message"></textarea>
                 <button class="chat-send-button" type="submit" aria-label="Send message">
-                    <span class="material-symbols-outlined">send</span>
+                    <span class="material-symbols-outlined" aria-hidden="true">send</span>
                 </button>
             </form>
         </section>
@@ -118,11 +118,11 @@
                     <h2 id="chat-members-count">0 users</h2>
                 </div>
                 <button class="chat-icon-button chat-mobile-close" type="button" data-close-members aria-label="Close members">
-                    <span class="material-symbols-outlined">close</span>
+                    <span class="material-symbols-outlined" aria-hidden="true">close</span>
                 </button>
             </div>
             <button class="chat-members-restore" type="button" data-restore-members aria-label="Show online users">
-                <span class="material-symbols-outlined">group</span>
+                <span class="material-symbols-outlined" aria-hidden="true">group</span>
                 <span id="chat-members-restore-count">0</span>
             </button>
             <div id="chat-member-list" class="chat-member-list" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"></div>

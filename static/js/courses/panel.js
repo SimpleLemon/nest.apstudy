@@ -339,10 +339,10 @@
                 const meeting = meetings.find((item) => item.day === day.key);
                 return `
                   <label class="courses-meeting-row">
-                    <input type="checkbox" data-meeting-day="${escapeHtml(day.key)}" ${meeting ? "checked" : ""} />
+                    <input type="checkbox" data-meeting-day="${escapeHtml(day.key)}" aria-label="Include ${escapeHtml(day.key)} meeting" ${meeting ? "checked" : ""} />
                     <span>${escapeHtml(day.key)}</span>
-                    <input type="time" data-meeting-start="${escapeHtml(day.key)}" value="${escapeHtml(meeting?.startInput || "09:00")}" min="06:00" max="23:59" />
-                    <input type="time" data-meeting-end="${escapeHtml(day.key)}" value="${escapeHtml(meeting?.endInput || "09:50")}" min="06:00" max="23:59" />
+                    <input type="time" data-meeting-start="${escapeHtml(day.key)}" aria-label="${escapeHtml(day.key)} start time" value="${escapeHtml(meeting?.startInput || "09:00")}" min="06:00" max="23:59" />
+                    <input type="time" data-meeting-end="${escapeHtml(day.key)}" aria-label="${escapeHtml(day.key)} end time" value="${escapeHtml(meeting?.endInput || "09:50")}" min="06:00" max="23:59" />
                   </label>
                 `;
               }).join("")}

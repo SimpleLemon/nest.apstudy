@@ -121,7 +121,7 @@
                                 </label>
                                 <div id="emory-email-field" class="space-y-2 hidden">
                                     <span class="text-xs uppercase tracking-[0.16em] text-on-surface-variant">Emory email</span>
-                                    <input id="emory-email" class="w-full rounded-xl bg-surface-container-lowest border border-outline-variant/25 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 px-4 py-3 text-sm" type="email" inputmode="email" pattern=".+@emory\\.edu$" placeholder="yournetid@emory.edu" />
+                                    <input id="emory-email" class="w-full rounded-xl bg-surface-container-lowest border border-outline-variant/25 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 px-4 py-3 text-sm" type="email" inputmode="email" pattern=".+@emory\\.edu$" placeholder="yournetid@emory.edu" aria-label="Emory email" />
                                 </div>
                             </div>
                             <div class="flex justify-between gap-3">
@@ -273,7 +273,7 @@
                                             <label class="block text-[11px] uppercase tracking-[0.05em] text-on-surface-variant mb-2 font-medium">Canvas Calendar</label>
                                             <p class="text-sm text-on-surface-variant mb-3">Paste your ICS calendar link here to sync your schedule and assignments:</p>
                                             <div class="relative">
-                                                <input id="canvas-feed-url" class="w-full bg-surface-container-lowest border border-outline-variant/30 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 rounded-lg pl-10 pr-4 py-3 transition-all font-body text-sm" placeholder="https://canvas.yourschool.edu/feeds/calendar..." type="text" value="{{ settings.canvas_ical_url if settings and settings.canvas_ical_url else '' }}" />
+                                                <input id="canvas-feed-url" class="w-full bg-surface-container-lowest border border-outline-variant/30 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 rounded-lg pl-10 pr-4 py-3 transition-all font-body text-sm" placeholder="https://canvas.yourschool.edu/feeds/calendar..." type="text" value="{{ settings.canvas_ical_url if settings and settings.canvas_ical_url else '' }}" aria-label="Canvas calendar URL" />
                                                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="link">link</span>
                                             </div>
                                         </div>
@@ -290,7 +290,7 @@
                                                 {% for url in (other_calendar_urls or []) %}
                                                 <div class="other-calendar-row flex gap-2 items-center">
                                                     <div class="relative flex-1">
-                                                        <input data-other-calendar-url class="w-full bg-surface-container-lowest border border-outline-variant/30 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 rounded-lg pl-10 pr-4 py-2.5 transition-all font-body text-sm" placeholder="https://calendar.google.com/..." type="text" value="{{ url }}" />
+                                                        <input data-other-calendar-url aria-label="Other calendar URL" class="w-full bg-surface-container-lowest border border-outline-variant/30 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 rounded-lg pl-10 pr-4 py-2.5 transition-all font-body text-sm" placeholder="https://calendar.google.com/..." type="text" value="{{ url }}" />
                                                         <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="event">event</span>
                                                     </div>
                                                     <button type="button" class="btn-remove-calendar inline-flex items-center justify-center rounded-lg h-10 w-10 bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" aria-label="Remove calendar link">
@@ -654,7 +654,7 @@
             row.className = 'other-calendar-row flex gap-2 items-center';
             row.innerHTML = `
                 <div class="relative flex-1">
-                    <input data-other-calendar-url class="w-full bg-surface-container-lowest border border-outline-variant/30 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 rounded-lg pl-10 pr-4 py-2.5 transition-all font-body text-sm" placeholder="https://calendar.google.com/..." type="text" value="${value}" />
+                    <input data-other-calendar-url aria-label="Other calendar URL" class="w-full bg-surface-container-lowest border border-outline-variant/30 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 rounded-lg pl-10 pr-4 py-2.5 transition-all font-body text-sm" placeholder="https://calendar.google.com/..." type="text" value="${value}" />
                     <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="event">event</span>
                 </div>
                 <button type="button" class="${REMOVE_CALENDAR_BUTTON_CLASSES}" aria-label="Remove calendar link">

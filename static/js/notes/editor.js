@@ -993,7 +993,7 @@ function requestUrlForBlock(item, anchorRect = null) {
                 <span>${label} URL</span>
                 <input type="url" name="url" placeholder="https://example.com" autocomplete="off" ${GRAMMARLY_DISABLED_ATTRS} required />
             </label>
-            <div class="notes-url-block-error" hidden></div>
+            <div class="notes-url-block-error" role="alert" hidden></div>
             <div class="notes-url-block-actions">
                 <button type="button" data-url-block-cancel>Cancel</button>
                 <button type="submit">Insert</button>
