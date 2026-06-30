@@ -80,6 +80,10 @@ class DatabaseMigrationSafetyTestCase(unittest.TestCase):
                 ("note-1", "user-1", "Kept note", legacy_content, "2026-01-02Z"),
             )
             connection.execute(
+                "INSERT INTO notes (id, user_id, title, content, created_at) VALUES (?, ?, ?, ?, ?)",
+                ("note-empty", "user-1", "Empty note", "", "2026-01-02Z"),
+            )
+            connection.execute(
                 "INSERT INTO chat_messages (id, external_id, content, created_at) VALUES (?, ?, ?, ?)",
                 ("message-1", "external-1", "Kept message", "2026-01-03Z"),
             )
@@ -92,7 +96,10 @@ class DatabaseMigrationSafetyTestCase(unittest.TestCase):
                 "SELECT id, google_id, email, name, username, discord_id FROM users"
             ).fetchone()
             note = connection.execute(
-                "SELECT id, user_id, title, content, preview_text FROM notes"
+                "SELECT id, user_id, title, content, preview_text FROM notes WHERE id = 'note-1'"
+            ).fetchone()
+            empty_note = connection.execute(
+                "SELECT id, content, preview_text FROM notes WHERE id = 'note-empty'"
             ).fetchone()
             message = connection.execute(
                 "SELECT id, external_id, content FROM chat_messages"
@@ -104,6 +111,7 @@ class DatabaseMigrationSafetyTestCase(unittest.TestCase):
         self.assertEqual(tuple(user), ("user-1", "google-1", "legacy@example.com", "Legacy User", "legacy", None))
         self.assertEqual(tuple(note[:4]), ("note-1", "user-1", "Kept note", legacy_content))
         self.assertEqual(note[4], "Legacy note body")
+        self.assertEqual(tuple(empty_note), ("note-empty", "", "Blank note"))
         self.assertEqual(tuple(message), ("message-1", "external-1", "Kept message"))
         self.assertEqual(versions, self._expected_versions())
         self._assert_database_healthy()
@@ -167,6 +175,30 @@ class DatabaseMigrationSafetyTestCase(unittest.TestCase):
             ).fetchone()
             marker = connection.execute(
                 "SELECT 1 FROM schema_migrations WHERE version = '999_broken'"
+            ).fetchone()
+            self.assertIsNone(partial_table)
+            self.assertIsNone(marker)
+            self.assertEqual(connection.execute("PRAGMA integrity_check").fetchone()[0], "ok")
+
+    def test_migration_transaction_control_is_rejected_before_any_ddl_runs(self):
+        migrations_dir = Path(self.temp_dir.name) / "transaction-migrations"
+        migrations_dir.mkdir()
+        (migrations_dir / "999_forbidden_commit.sql").write_text(
+            "CREATE TABLE must_not_commit (id TEXT PRIMARY KEY);\n"
+            "COMMIT;\n",
+            encoding="utf-8",
+        )
+
+        with patch.object(database, "migrations_path", return_value=str(migrations_dir)):
+            with self.assertRaisesRegex(sqlite3.OperationalError, "forbidden transaction statement COMMIT"):
+                database.init_db(path=self.db_path)
+
+        with database.db_connection(self.db_path) as connection:
+            partial_table = connection.execute(
+                "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'must_not_commit'"
+            ).fetchone()
+            marker = connection.execute(
+                "SELECT 1 FROM schema_migrations WHERE version = '999_forbidden_commit'"
             ).fetchone()
             self.assertIsNone(partial_table)
             self.assertIsNone(marker)

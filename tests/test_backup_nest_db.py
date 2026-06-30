@@ -8,6 +8,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from scripts import backup_nest_db
+from services import database
 
 
 class BackupNestDbTestCase(unittest.TestCase):
@@ -79,6 +80,63 @@ class BackupNestDbTestCase(unittest.TestCase):
             event = notify.call_args.args[0]
             self.assertEqual(event.channel, "server_logs")
             self.assertEqual(event.title, "Database Backup Created")
+
+    def test_initialized_database_backup_restores_and_reinitializes_without_data_loss(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            instance_dir = Path(temp_dir) / "instance"
+            backup_dir = Path(temp_dir) / "backups"
+            source = instance_dir / "nest.sqlite3"
+            database.init_db(path=source)
+
+            with database.db_connection(source) as connection:
+                connection.execute(
+                    "INSERT INTO users (id, google_id, email, username, created_at) "
+                    "VALUES (?, ?, ?, ?, ?)",
+                    ("user-1", "google-1", "restore@example.com", "restore", "2026-01-01Z"),
+                )
+                connection.execute(
+                    "INSERT INTO notes (id, user_id, title, content, preview_text, created_at) "
+                    "VALUES (?, ?, ?, ?, ?, ?)",
+                    ("note-1", "user-1", "Restore me", "body", "body", "2026-01-02Z"),
+                )
+
+            exit_code = backup_nest_db.run_backup(
+                instance_dir=instance_dir,
+                backup_dir=backup_dir,
+                max_backups=3,
+                notify_discord=False,
+            )
+            self.assertEqual(exit_code, 0)
+
+            backup = next(backup_dir.glob("backup_*")) / "nest.sqlite3"
+            restored = Path(temp_dir) / "restore" / "nest.sqlite3"
+            restored.parent.mkdir()
+            shutil.copy2(backup, restored)
+
+            database.init_db(path=restored)
+            database.init_db(path=restored)
+            with database.db_connection(restored) as connection:
+                self.assertEqual(connection.execute("PRAGMA integrity_check").fetchone()[0], "ok")
+                self.assertEqual(connection.execute("PRAGMA foreign_key_check").fetchall(), [])
+                self.assertEqual(
+                    tuple(connection.execute(
+                        "SELECT id, user_id, title, content, preview_text FROM notes"
+                    ).fetchone()),
+                    ("note-1", "user-1", "Restore me", "body", "body"),
+                )
+                versions = {
+                    row[0] for row in connection.execute("SELECT version FROM schema_migrations")
+                }
+                self.assertEqual(
+                    versions,
+                    {filename[:-4] for filename in database._migration_filenames()},
+                )
+                with self.assertRaises(sqlite3.IntegrityError):
+                    connection.execute(
+                        "INSERT INTO users (id, google_id, email, username, created_at) "
+                        "VALUES (?, ?, ?, ?, ?)",
+                        ("user-2", "google-1", "other@example.com", "other", "2026-01-03Z"),
+                    )
 
     def test_run_backup_includes_apswiftly_database(self):
         with tempfile.TemporaryDirectory() as temp_dir:

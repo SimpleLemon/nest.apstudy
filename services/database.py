@@ -103,11 +103,61 @@ def _migration_filenames():
     return filenames
 
 
+def _migration_statements(sql):
+    """Yield complete SQL statements without splitting quoted or trigger bodies."""
+    start = 0
+    for index, character in enumerate(sql):
+        if character != ";":
+            continue
+        candidate = sql[start : index + 1]
+        if sqlite3.complete_statement(candidate):
+            yield candidate
+            start = index + 1
+
+    remainder = sql[start:]
+    if remainder.strip():
+        yield remainder
+
+
+def _leading_sql_keyword(statement):
+    """Return the first SQL keyword after leading whitespace and comments."""
+    remaining = statement
+    while True:
+        remaining = remaining.lstrip()
+        if remaining.startswith("--"):
+            newline = remaining.find("\n")
+            if newline == -1:
+                return None
+            remaining = remaining[newline + 1 :]
+            continue
+        if remaining.startswith("/*"):
+            comment_end = remaining.find("*/", 2)
+            if comment_end == -1:
+                return None
+            remaining = remaining[comment_end + 2 :]
+            continue
+        match = re.match(r"[A-Za-z]+", remaining)
+        return match.group(0).upper() if match else None
+
+
+def _validate_migration_sql(sql, filename):
+    """Reject transaction control that could escape the runner-managed transaction."""
+    transaction_keywords = {"BEGIN", "COMMIT", "END", "ROLLBACK", "SAVEPOINT", "RELEASE"}
+    for statement in _migration_statements(sql):
+        keyword = _leading_sql_keyword(statement)
+        if keyword in transaction_keywords:
+            raise sqlite3.OperationalError(
+                f"Migration {filename} contains forbidden transaction statement {keyword}"
+            )
+
+
 def _apply_migration(conn, filename):
     """Apply and record one migration in the same SQLite transaction."""
     version = filename[:-4]
     with open(os.path.join(migrations_path(), filename), "r", encoding="utf-8") as handle:
         sql = handle.read()
+
+    _validate_migration_sql(sql, filename)
 
     try:
         # executescript otherwise commits any pending transaction before running.
