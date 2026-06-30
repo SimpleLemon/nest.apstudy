@@ -58,6 +58,9 @@
         event.stopPropagation();
         state.filtersOpen = !state.filtersOpen;
         syncFilterControls();
+        if (state.filtersOpen) {
+          requestAnimationFrame(() => document.getElementById("courses-filter-popover")?.querySelector("select, input, button")?.focus({ preventScroll: true }));
+        }
       });
 
       document.getElementById("courses-search-input")?.addEventListener("input", (event) => {
@@ -263,6 +266,7 @@
         if (event.key === "Escape" && state.filtersOpen) {
           state.filtersOpen = false;
           syncFilterControls();
+          filterButton?.focus({ preventScroll: true });
           return;
         }
         if (event.key === "Escape" && state.editingSectionId) {

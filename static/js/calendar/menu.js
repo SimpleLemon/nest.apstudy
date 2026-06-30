@@ -25,10 +25,12 @@
             if (!state.ui.calendarMenuOpen) {
                 container.style.display = "none";
                 container.innerHTML = "";
+                document.getElementById("calendar-toggle-menu")?.setAttribute("aria-expanded", "false");
                 return;
             }
             container.innerHTML = buildCalendarMenuHtml();
             container.style.display = "block";
+            document.getElementById("calendar-toggle-menu")?.setAttribute("aria-expanded", "true");
         }
 
         function buildCalendarMenuHtml() {

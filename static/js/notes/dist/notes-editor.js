@@ -196,7 +196,7 @@ ${n.toString()}`)};class yz{constructor(e){this.patterns=[],this.$state=e}if(e,n
                 <span>${r} URL</span>
                 <input type="url" name="url" placeholder="https://example.com" autocomplete="off" ${vre} required />
             </label>
-            <div class="notes-url-block-error" hidden></div>
+            <div class="notes-url-block-error" role="alert" hidden></div>
             <div class="notes-url-block-actions">
                 <button type="button" data-url-block-cancel>Cancel</button>
                 <button type="submit">Insert</button>

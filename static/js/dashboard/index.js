@@ -101,6 +101,12 @@
                 removeTile(tile);
             });
         });
+        els.tiles?.querySelectorAll(".dashboard-tile-move-up, .dashboard-tile-move-down").forEach((button) => {
+            button.addEventListener("click", () => {
+                const tile = button.closest(".dashboard-tile");
+                moveTile(tile, button.classList.contains("dashboard-tile-move-up") ? -1 : 1);
+            });
+        });
         els.tiles?.querySelectorAll(".dashboard-tile-config-toggle").forEach((button) => {
             button.addEventListener("click", (event) => {
                 event.stopPropagation();
@@ -128,7 +134,7 @@
         els.addTile?.addEventListener("click", (event) => {
             event.stopPropagation();
             const isOpen = els.addTile.getAttribute("aria-expanded") === "true";
-            setAddMenuOpen(!isOpen);
+            setAddMenuOpen(!isOpen, { focusFirst: !isOpen });
         });
         els.addMenu?.addEventListener("click", (event) => {
             const quoteButton = event.target.closest("[data-add-quote-tile]");
@@ -162,6 +168,7 @@
             closeTileConfigMenus();
             setAddMenuOpen(false);
         }
+        syncTileMoveButtons();
     }
     function setTileSize(tile, size) {
         if (!tile) return;
@@ -278,14 +285,18 @@
         closeTileConfigMenus();
         menu.hidden = !shouldOpen;
         button?.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
+        if (shouldOpen) requestAnimationFrame(() => menu.querySelector('[role="menuitem"]')?.focus({ preventScroll: true }));
     }
-    function closeTileConfigMenus() {
+    function closeTileConfigMenus({ restoreFocus = false } = {}) {
+        const openMenu = els.tiles?.querySelector(".dashboard-config-menu:not([hidden])");
+        const trigger = openMenu?.closest(".dashboard-tile")?.querySelector(".dashboard-tile-config-toggle");
         els.tiles?.querySelectorAll(".dashboard-config-menu").forEach((menu) => {
             menu.hidden = true;
         });
         els.tiles?.querySelectorAll(".dashboard-tile-config-toggle").forEach((button) => {
             button.setAttribute("aria-expanded", "false");
         });
+        if (restoreFocus) trigger?.focus({ preventScroll: true });
     }
     function syncSummaryLayoutFromDom() {
         if (!state.summary) return;
@@ -299,6 +310,26 @@
         syncSummaryLayoutFromDom();
         updateAddTileMenu();
         void persistLayout();
+    }
+    function moveTile(tile, direction) {
+        if (!tile || !els.tiles || ![-1, 1].includes(direction)) return;
+        const sibling = direction < 0 ? tile.previousElementSibling : tile.nextElementSibling;
+        if (!sibling?.classList.contains("dashboard-tile")) return;
+        if (direction < 0) els.tiles.insertBefore(tile, sibling);
+        else els.tiles.insertBefore(sibling, tile);
+        syncSummaryLayoutFromDom();
+        syncTileMoveButtons();
+        tile.querySelector(direction < 0 ? ".dashboard-tile-move-up" : ".dashboard-tile-move-down")?.focus({ preventScroll: true });
+        void persistLayout();
+    }
+    function syncTileMoveButtons() {
+        const tiles = Array.from(els.tiles?.querySelectorAll(".dashboard-tile") || []);
+        tiles.forEach((tile, index) => {
+            const up = tile.querySelector(".dashboard-tile-move-up");
+            const down = tile.querySelector(".dashboard-tile-move-down");
+            if (up) up.disabled = index === 0;
+            if (down) down.disabled = index === tiles.length - 1;
+        });
     }
     function addTile(tileId) {
         if (!state.summary || !TILE_META[tileId]) return;
@@ -346,17 +377,19 @@
         ` : "";
         els.addMenu.innerHTML = `${quoteItem}${dashboardTileItems}`;
     }
-    function setAddMenuOpen(isOpen) {
+    function setAddMenuOpen(isOpen, { focusFirst = false, restoreFocus = false } = {}) {
         if (!els.addTile || !els.addMenu) return;
         els.addMenu.hidden = !isOpen;
         els.addTile.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        if (isOpen && focusFirst) requestAnimationFrame(() => els.addMenu.querySelector('[role="menuitem"]')?.focus({ preventScroll: true }));
+        if (!isOpen && restoreFocus) els.addTile.focus({ preventScroll: true });
     }
     function setupSortable() {
         if (!els.tiles || typeof Sortable === "undefined") return;
         destroySortable();
         if (!state.editMode) return;
         state.sortable = Sortable.create(els.tiles, {
-            animation: 150,
+            animation: window.APStudyAccessibility?.prefersReducedMotion?.() ? 0 : 150,
             draggable: ".dashboard-tile",
             filter: ".dashboard-tile-edit-controls,.dashboard-tile-edit-controls *, .dashboard-config-menu, .dashboard-config-menu *, .dashboard-resize-grip",
             ghostClass: "dashboard-tile-ghost",
@@ -514,8 +547,8 @@
         }
         state.activePopoverLocked = false;
         hidePopover();
-        closeTileConfigMenus();
-        setAddMenuOpen(false);
+        closeTileConfigMenus({ restoreFocus: true });
+        setAddMenuOpen(false, { restoreFocus: els.addTile?.getAttribute("aria-expanded") === "true" });
     });
     window.addEventListener?.("apstudy:dashboard-quote-visibility", updateAddTileMenu);
     window.APStudyPageLifecycle?.register?.({

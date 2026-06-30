@@ -120,7 +120,7 @@
             const isMonthTimedChip = Boolean(options.monthView) && !event.isAllDay;
             if (isMonthTimedChip) {
                 const taskLabel = isTaskEvent(event) && event.priority && event.priority !== "none" ? event.priority.slice(0, 1).toUpperCase() : "";
-                const completedClass = isTaskEvent(event) && event.completed ? " opacity-65" : "";
+                const completedClass = isTaskEvent(event) && event.completed ? " is-completed" : "";
                 return `
                     <div ${getEventElementAttributes(event)} class="calendar-event-shell relative${completedClass}">
                         <div class="${sizeClass} rounded-md border bg-surface-container-high/50 truncate flex items-center gap-2" style="border-color: ${badgeColors.border};">

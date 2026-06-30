@@ -471,6 +471,8 @@
 }
 
 .dashboard-tile-remove,
+.dashboard-tile-move-up,
+.dashboard-tile-move-down,
 .dashboard-tile-config-toggle {
     display: inline-flex;
     width: 30px;
@@ -489,14 +491,26 @@
     color: var(--color-error);
 }
 
+.dashboard-tile-move-up:disabled,
+.dashboard-tile-move-down:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
 .dashboard-tile-remove .material-symbols-outlined,
+.dashboard-tile-move-up .material-symbols-outlined,
+.dashboard-tile-move-down .material-symbols-outlined,
 .dashboard-tile-config-toggle .material-symbols-outlined {
     font-size: 18px;
 }
 
 .dashboard-tile-remove:hover,
+.dashboard-tile-move-up:hover,
+.dashboard-tile-move-down:hover,
 .dashboard-tile-config-toggle:hover,
 .dashboard-tile-remove:focus-visible,
+.dashboard-tile-move-up:focus-visible,
+.dashboard-tile-move-down:focus-visible,
 .dashboard-tile-config-toggle:focus-visible {
     background: color-mix(in srgb, var(--color-on-surface-variant) 42%, var(--color-surface-container-high));
     outline: none;

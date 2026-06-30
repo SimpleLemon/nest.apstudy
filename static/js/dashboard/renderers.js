@@ -65,10 +65,16 @@
         return `
             <article class="dashboard-tile" data-tile-id="${escapeHtml(tileId)}" data-tile-size="${escapeHtml(safeSize)}" ${tileId === "calendar" ? `data-calendar-view="${escapeHtml(safeView)}"` : ""} ${taskListFilterAttr} tabindex="0">
                 <div class="dashboard-tile-edit-controls" aria-label="${escapeHtml(title)} edit controls">
+                    <button class="dashboard-tile-move-up" type="button" aria-label="Move ${escapeHtml(title)} tile earlier">
+                        <span class="material-symbols-outlined" aria-hidden="true">arrow_upward</span>
+                    </button>
+                    <button class="dashboard-tile-move-down" type="button" aria-label="Move ${escapeHtml(title)} tile later">
+                        <span class="material-symbols-outlined" aria-hidden="true">arrow_downward</span>
+                    </button>
                     <button class="dashboard-tile-remove" type="button" aria-label="Remove ${escapeHtml(title)} tile">
                         <span class="material-symbols-outlined" aria-hidden="true">remove</span>
                     </button>
-                    <button class="dashboard-tile-config-toggle" type="button" aria-label="Configure ${escapeHtml(title)} tile" aria-expanded="false">
+                    <button class="dashboard-tile-config-toggle" type="button" aria-label="Configure ${escapeHtml(title)} tile" aria-haspopup="menu" aria-expanded="false">
                         <span class="material-symbols-outlined" aria-hidden="true">tune</span>
                     </button>
                 </div>

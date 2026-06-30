@@ -170,16 +170,16 @@ function renderNavbar() {
       <span class="navbar-search-tooltip" role="tooltip">${commandShortcut}</span>
     </button>
     <div class="navbar-avatar-wrapper">
-      <button type="button" class="navbar-avatar" id="navbar-avatar-btn" aria-label="Profile menu">
+      <button type="button" class="navbar-avatar" id="navbar-avatar-btn" aria-label="Profile menu" aria-haspopup="menu" aria-controls="profile-dropdown" aria-expanded="false">
         <img ${profileImageAttrs} sizes="48px" alt="Profile" width="48" height="48" decoding="async" />
       </button>
-      <div id="profile-dropdown" class="profile-dropdown">
+      <div id="profile-dropdown" class="profile-dropdown" role="menu">
         <div class="profile-dropdown-item email">${userEmail}</div>
-        <button type="button" class="profile-dropdown-button" id="navbar-account-btn">
+        <button type="button" class="profile-dropdown-button" id="navbar-account-btn" role="menuitem">
           <span>Account</span>
           <span class="profile-dropdown-icon" aria-hidden="true">${NAVBAR_ICONS.account}</span>
         </button>
-        <button type="button" class="profile-dropdown-button profile-dropdown-button--danger" id="navbar-logout-btn">
+        <button type="button" class="profile-dropdown-button profile-dropdown-button--danger" id="navbar-logout-btn" role="menuitem">
           <span>Sign Out</span>
           <span class="profile-dropdown-icon" aria-hidden="true">${NAVBAR_ICONS.signOut}</span>
         </button>
@@ -236,6 +236,7 @@ function setupNavbarInteractions(userEmail, authenticated = true) {
     menuBtn.addEventListener('click', (e) => {
       e.preventDefault();
       dropdown?.classList.remove('visible');
+      avatarBtn?.setAttribute('aria-expanded', 'false');
       if (typeof window.APSTUDY_TOGGLE_MOBILE_SIDEBAR === 'function') {
         window.APSTUDY_TOGGLE_MOBILE_SIDEBAR();
         return;
@@ -249,6 +250,8 @@ function setupNavbarInteractions(userEmail, authenticated = true) {
       e.stopPropagation();
       const isOpen = dropdown.classList.contains('visible');
       dropdown.classList.toggle('visible', !isOpen);
+      avatarBtn.setAttribute('aria-expanded', String(!isOpen));
+      if (!isOpen) requestAnimationFrame(() => dropdown.querySelector('[role="menuitem"]')?.focus({ preventScroll: true }));
     });
   }
 
@@ -256,7 +259,16 @@ function setupNavbarInteractions(userEmail, authenticated = true) {
   document.addEventListener('click', (e) => {
     if (dropdown && !dropdown.contains(e.target) && !avatarBtn?.contains(e.target)) {
       dropdown.classList.remove('visible');
+      avatarBtn?.setAttribute('aria-expanded', 'false');
     }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || !dropdown?.classList.contains('visible')) return;
+    event.preventDefault();
+    dropdown.classList.remove('visible');
+    avatarBtn?.setAttribute('aria-expanded', 'false');
+    avatarBtn?.focus({ preventScroll: true });
   });
 
   // Logout button

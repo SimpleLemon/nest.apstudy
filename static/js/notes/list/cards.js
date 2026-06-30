@@ -11,6 +11,7 @@
             openSharedFolder,
             openFolderModal,
             openMoveModal,
+            moveNoteBy,
             preloadEditorBundle,
             toggleCardMenu,
         } = callbacks;
@@ -41,6 +42,8 @@
                 <div class="note-card-menu note-menu-hidden" role="menu">
                     <button type="button" class="note-menu-item" role="menuitem" data-action="open">Open</button>
                     <button type="button" class="note-menu-item" role="menuitem" data-action="move">Move to folder</button>
+                    <button type="button" class="note-menu-item" role="menuitem" data-action="move-earlier">Move earlier</button>
+                    <button type="button" class="note-menu-item" role="menuitem" data-action="move-later">Move later</button>
                     <button type="button" class="note-menu-item" role="menuitem" data-action="export-txt">Export TXT</button>
                     <button type="button" class="note-menu-item" role="menuitem" data-action="export-pdf">Export PDF</button>
                     <hr class="note-menu-divider"/>
@@ -77,6 +80,16 @@
                     event.stopPropagation();
                     closeAllMenus();
                     openMoveModal(note);
+                });
+                menu.querySelector('[data-action="move-earlier"]').addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    closeAllMenus();
+                    void moveNoteBy(note, -1);
+                });
+                menu.querySelector('[data-action="move-later"]').addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    closeAllMenus();
+                    void moveNoteBy(note, 1);
                 });
                 menu.querySelector('[data-action="export-txt"]').addEventListener('click', async (event) => {
                 event.stopPropagation();

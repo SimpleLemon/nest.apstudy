@@ -189,7 +189,7 @@
             const widthPct = 100 / event.layoutLaneCount;
             const badgeStyle = getEventBadgeStyle(event);
             const isTask = isTaskEvent(event);
-            const taskClasses = isTask ? ` ${event.completed ? "opacity-65" : ""}` : "";
+            const taskClasses = isTask && event.completed ? " is-completed" : "";
             const priorityLabel = isTask && event.priority && event.priority !== "none" ? event.priority : "";
             return `
                 <div ${getEventElementAttributes(event)} class="calendar-event-shell absolute px-0.5${taskClasses}" style="top:${topPx}px; left:${leftPct}%; width:calc(${widthPct}% - 0.25rem); height:${heightPx}px; z-index: 10;">

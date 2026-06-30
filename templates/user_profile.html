@@ -47,7 +47,7 @@
                             <img class="profile-tile-avatar" src="{{ (profile.picture_url or '')|avatar_url(150) }}" srcset="{{ (profile.picture_url or '')|avatar_url(150) }} 1x, {{ (profile.picture_url or '')|avatar_url(300) }} 2x" sizes="(max-width: 640px) 96px, 150px" alt="{{ profile.name }} avatar" width="150" height="150" loading="lazy" decoding="async" />
                         </div>
                         <div class="profile-tile-heading">
-                            <h3>{{ profile.name }}</h3>
+                            <h1>{{ profile.name }}</h1>
                             <p>{{ profile.handle or profile.id }}</p>
                         </div>
                         <div class="profile-tile-details">

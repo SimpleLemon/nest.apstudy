@@ -159,7 +159,7 @@
                             `).join("")}
                         </div>
                     </div>
-                    <p id="apstudy-event-error" class="calendar-event-error hidden"></p>
+                    <p id="apstudy-event-error" class="calendar-event-error hidden" role="alert"></p>
                     <div class="calendar-event-footer">
                         <button type="button" class="calendar-event-button calendar-event-button-secondary" data-event-close>Cancel</button>
                         <button type="submit" class="calendar-event-button calendar-event-button-primary">Save</button>

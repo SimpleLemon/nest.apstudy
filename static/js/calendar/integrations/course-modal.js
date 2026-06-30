@@ -75,24 +75,24 @@
             const content = state.courses.loading
                 ? `<div class="py-12">${window.APStudyLoader.html("Loading full course index...", { sizePx: 54, textToneClass: "text-on-surface" })}</div>`
                 : state.courses.error
-                    ? `<div class="py-12 text-center text-sm text-error">${escapeHtml(state.courses.error)}</div>`
+                    ? `<div class="py-12 text-center text-sm text-error" role="alert">${escapeHtml(state.courses.error)}</div>`
                     : !state.courses.indexLoaded
                         ? `<div class="py-12">${window.APStudyLoader.html("Loading full course index...", { sizePx: 54, textToneClass: "text-on-surface" })}</div>`
                         : buildCourseCardsHtml();
             overlay.innerHTML = `
-                <section id="courses-modal-panel" class="w-full max-w-[1200px] h-[88vh] rounded-3xl border border-outline-variant/30 bg-surface shadow-2xl shadow-black/30 flex flex-col overflow-hidden transition-all duration-200 ${state.courses.animateOnOpen ? "-translate-y-3 opacity-0" : "translate-y-0 opacity-100"}">
+                <section id="courses-modal-panel" role="dialog" aria-modal="true" aria-labelledby="courses-modal-title" class="w-full max-w-[1200px] h-[88vh] rounded-3xl border border-outline-variant/30 bg-surface shadow-2xl shadow-black/30 flex flex-col overflow-hidden transition-all duration-200 ${state.courses.animateOnOpen ? "-translate-y-3 opacity-0" : "translate-y-0 opacity-100"}">
                     <header class="px-5 sm:px-7 pt-5 sm:pt-6 pb-4 border-b border-outline-variant/20 bg-surface-container-low">
                         <div class="flex items-center justify-between gap-3 mb-4">
-                            <h2 class="text-2xl font-headline font-bold text-on-surface">Courses</h2>
+                            <h2 id="courses-modal-title" class="text-2xl font-headline font-bold text-on-surface">Courses</h2>
                             <button id="courses-modal-close" type="button" class="h-9 w-9 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" aria-label="Close courses search">✕</button>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-[1fr_220px] gap-3">
                             <label class="relative block">
-                                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
-                                <input id="courses-search-input" type="text" value="${escapeHtml(state.courses.searchInput)}" placeholder="${escapeHtml(searchPlaceholder)}" class="w-full h-11 rounded-xl border border-outline-variant/35 bg-surface px-10 pr-[7.25rem] text-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]" aria-hidden="true">search</span>
+                                <input id="courses-search-input" type="text" value="${escapeHtml(state.courses.searchInput)}" placeholder="${escapeHtml(searchPlaceholder)}" aria-label="Search courses" class="w-full h-11 rounded-xl border border-outline-variant/35 bg-surface px-10 pr-[7.25rem] text-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary/30" />
                                 <button id="courses-search-submit" type="button" class="absolute right-1.5 top-1/2 -translate-y-1/2 h-8 px-3 rounded-lg bg-primary text-on-primary text-xs font-semibold hover:bg-primary-container hover:text-on-primary-container disabled:opacity-60 disabled:cursor-not-allowed" ${state.courses.loading ? "disabled" : ""}>Search</button>
                             </label>
-                            <select id="courses-term-select" ${termDisabled ? "disabled" : ""} class="h-11 rounded-xl border border-outline-variant/35 bg-surface px-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-60 disabled:cursor-not-allowed">
+                            <select id="courses-term-select" aria-label="Filter by term" ${termDisabled ? "disabled" : ""} class="h-11 rounded-xl border border-outline-variant/35 bg-surface px-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-60 disabled:cursor-not-allowed">
                                 <option value="" ${state.courses.termFilter ? "" : "selected"}>All Terms</option>
                                 ${terms.map((term) => `<option value="${escapeHtml(term)}" ${state.courses.termFilter === term ? "selected" : ""}>${escapeHtml(formatTermLabel(term))}</option>`).join("")}
                             </select>

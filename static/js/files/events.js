@@ -158,6 +158,7 @@
             }
             if (els.newMenu && !els.newMenu.hidden) {
                 closeNewMenu(els.newMenu, els.newButton);
+                els.newButton?.focus({ preventScroll: true });
                 return;
             }
             if (state.activeModal) {

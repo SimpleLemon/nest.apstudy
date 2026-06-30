@@ -382,13 +382,13 @@
 }
 
 .task-priority-low {
-    background: color-mix(in srgb, #22c55e 16%, transparent);
-    color: #15803d;
+    background: color-mix(in srgb, var(--color-success, #12683f) 16%, transparent);
+    color: var(--color-success, #12683f);
 }
 
 .task-priority-medium {
-    background: color-mix(in srgb, #f59e0b 18%, transparent);
-    color: #b45309;
+    background: color-mix(in srgb, var(--color-warning, #8f5200) 18%, transparent);
+    color: var(--color-warning, #8f5200);
 }
 
 .task-priority-high {
@@ -1190,16 +1190,16 @@
 .task-star-button:focus-visible,
 .task-star-button.is-starred {
     outline: none;
-    background: color-mix(in srgb, #f59e0b 13%, transparent);
+    background: color-mix(in srgb, var(--color-warning, #8f5200) 13%, transparent);
 }
 
 .task-star-button.is-starred {
-    color: #f59e0b;
+    color: var(--color-warning, #8f5200);
 }
 
 .task-star-button:hover:not(.is-starred),
 .task-star-button:focus-visible:not(.is-starred) {
-    color: #b45309;
+    color: var(--color-warning, #8f5200);
 }
 
 .task-star-button:hover {

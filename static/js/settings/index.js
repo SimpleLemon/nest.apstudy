@@ -515,6 +515,7 @@ function openDiscordModal() {
   elements.discordModal.hidden = false;
   elements.discordModal.classList.add('is-open');
   document.body.classList.add('settings-discord-modal-open');
+  requestAnimationFrame(() => elements.discordUnlink?.focus({ preventScroll: true }));
 }
 
 function closeDiscordModal() {

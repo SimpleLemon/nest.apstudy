@@ -74,13 +74,14 @@ function actionMenuItem(item, index, onClose) {
     if (item.separator) {
         return h("div", { key: `sep-${index}`, className: "task-action-menu-separator", role: "separator" });
     }
+    const checkable = typeof item.checked === "boolean";
     return h("button", {
         key: `${item.label}-${index}`,
         type: "button",
-        role: "menuitem",
+        role: checkable ? "menuitemradio" : "menuitem",
         className: cx(item.danger && "is-danger", item.checked && "is-checked"),
         disabled: item.disabled,
-        "aria-checked": item.checked ? "true" : undefined,
+        "aria-checked": checkable ? String(item.checked) : undefined,
         onClick: () => {
             onClose();
             item.onClick?.();
@@ -105,11 +106,13 @@ export function EmptyStarter({ onCreate }) {
 
 export function ActionMenu({ menu, onClose }) {
     const menuRef = React.useRef(null);
+    const previousFocusRef = React.useRef(null);
     const menuKey = menu ? `${menu.type || "menu"}:${menu.id || "none"}:${menu.nonce || 0}` : "";
     const [position, setPosition] = React.useState({ key: "", top: 0, left: 0, ready: false });
 
     React.useEffect(() => {
         if (!menu) return undefined;
+        previousFocusRef.current = document.activeElement;
         const onPointerDown = (event) => {
             if (menuRef.current?.contains(event.target)) return;
             if (event.target?.closest?.("[data-task-menu-trigger]")) return;
@@ -129,6 +132,9 @@ export function ActionMenu({ menu, onClose }) {
             document.removeEventListener("keydown", onKeyDown);
             window.removeEventListener("scroll", onScroll, true);
             window.removeEventListener("resize", onResize);
+            if (menuRef.current?.contains(document.activeElement)) {
+                previousFocusRef.current?.focus?.({ preventScroll: true });
+            }
         };
     }, [menu, onClose]);
 
@@ -161,12 +167,30 @@ export function ActionMenu({ menu, onClose }) {
         setPosition({ key: menuKey, top, left, ready: true });
     }, [menu, menuKey]);
 
+    const ready = Boolean(menu && position.key === menuKey && position.ready);
+    React.useEffect(() => {
+        if (ready) menuRef.current?.querySelector("button:not([disabled])")?.focus({ preventScroll: true });
+    }, [menuKey, ready]);
+
     if (!menu) return null;
-    const ready = position.key === menuKey && position.ready;
+
+    const handleMenuKeyDown = (event) => {
+        if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
+        const items = Array.from(menuRef.current?.querySelectorAll("button:not([disabled])") || []);
+        if (!items.length) return;
+        event.preventDefault();
+        const index = items.indexOf(document.activeElement);
+        if (event.key === 'Home') items[0].focus();
+        else if (event.key === 'End') items.at(-1).focus();
+        else if (event.key === 'ArrowDown') items[(index + 1 + items.length) % items.length].focus();
+        else items[(index - 1 + items.length) % items.length].focus();
+    };
     return h("div", {
         ref: menuRef,
         className: "task-action-menu",
         role: "menu",
+        "aria-label": menu.title || "Task actions",
+        onKeyDown: handleMenuKeyDown,
         style: {
             top: `${ready ? position.top : 0}px`,
             left: `${ready ? position.left : 0}px`,
@@ -186,6 +210,15 @@ export function ListEditorDialog({ dialog, onClose, onSubmit }) {
         setName(dialog?.list?.name || "");
         setDescription(dialog?.list?.description || "");
     }, [dialog?.id, dialog?.list?.name, dialog?.list?.description]);
+
+    React.useEffect(() => {
+        if (!dialog) return undefined;
+        const onKeyDown = (event) => {
+            if (event.key === "Escape") onClose();
+        };
+        document.addEventListener("keydown", onKeyDown);
+        return () => document.removeEventListener("keydown", onKeyDown);
+    }, [dialog, onClose]);
 
     if (!dialog) return null;
     const creating = dialog.mode === "create";
@@ -276,7 +309,7 @@ export function ListRail(props) {
     const starredCount = visibleTasks.filter((task) => task.starred).length;
 
     useSortable(railRef, () => ({
-            animation: 150,
+            animation: window.APStudyAccessibility?.prefersReducedMotion?.() ? 0 : 150,
             draggable: ".task-list-nav-item",
             handle: ".task-list-nav-content",
             filter: ".task-list-visibility, .task-list-row-menu",
@@ -403,7 +436,7 @@ export const TaskSection = React.memo(function TaskSection(props) {
 
     useSortable(bodyRef, () => ({
             group: { name: "tasks", pull: true, put: true },
-            animation: 150,
+            animation: window.APStudyAccessibility?.prefersReducedMotion?.() ? 0 : 150,
             draggable: ".task-row",
             handle: ".task-row-drag",
             ghostClass: "task-sortable-ghost",

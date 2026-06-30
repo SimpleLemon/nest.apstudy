@@ -187,7 +187,7 @@
                             <span class="calendar-share-code">${escapeHtml(share.shareCode || "")}</span>
                         </div>
                         <div class="calendar-share-row-meta">${escapeHtml(share.scopeLabel || "All shared dates")}</div>
-                        <input class="calendar-info-input calendar-share-url" readonly value="${escapeHtml(share.shareUrl || "")}">
+                        <input class="calendar-info-input calendar-share-url" readonly aria-label="Share link" value="${escapeHtml(share.shareUrl || "")}">
                     </div>
                     <div class="calendar-share-actions">
                         <button type="button" class="js-share-copy calendar-info-button calendar-info-button-secondary" data-share-id="${escapeHtml(share.id)}" ${inactive ? "disabled" : ""}>Copy</button>
