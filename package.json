@@ -5,11 +5,12 @@
   "main": "atlasMainScraper.js",
   "scripts": {
     "scrape:atlas": "node atlasMainScraper.js",
+    "build": "npm run build:css",
     "build:css": "tailwindcss -c ./tailwind.config.cjs -i ./static/css/tailwind-input.css -o ./static/css/tailwind.css --minify",
     "watch:css": "tailwindcss -c ./tailwind.config.cjs -i ./static/css/tailwind-input.css -o ./static/css/tailwind.css --watch",
     "test": "npm run test:js && npm run test:py",
     "test:js": "node --test tests/js/*.test.cjs tests/js/*.test.mjs",
-    "test:py": "python -m unittest"
+    "test:py": ".venv/bin/python -m unittest"
   },
   "repository": {
     "type": "git",

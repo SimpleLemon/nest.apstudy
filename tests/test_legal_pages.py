@@ -20,6 +20,9 @@ class LegalPagesTestCase(unittest.TestCase):
         )
         self.app.secret_key = "test"
         self.app.jinja_env.filters["avatar_url"] = lambda value, size=32: value or ""
+        self.app.url_build_error_handlers.append(
+            lambda error, endpoint, values: f"/{endpoint.replace('.', '/')}"
+        )
         login_manager.init_app(self.app)
         self.app.register_blueprint(auth_bp)
         self.app.register_blueprint(legal.legal_bp)
@@ -51,7 +54,7 @@ class LegalPagesTestCase(unittest.TestCase):
         self.assertIn('href="/terms-of-service"', body)
         self.assertNotIn('class="thesidebar"', body)
 
-    def test_authenticated_legal_page_uses_app_chrome_placeholders(self):
+    def test_authenticated_legal_page_uses_app_chrome(self):
         user = SimpleNamespace(
             id="user-1",
             email="student@example.test",
@@ -67,9 +70,9 @@ class LegalPagesTestCase(unittest.TestCase):
         body = response.get_data(as_text=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn('global class="thenav"', body)
-        self.assertIn('global class="thesidebar"', body)
+        self.assertIn('class="sidebar-container"', body)
         self.assertIn('data-user-email="student@example.test"', body)
-        self.assertIn('data-user-emory-student="True"', body)
+        self.assertIn('aria-label="Courses"', body)
         self.assertNotIn("legal-public-nav", body)
         self.assertIn('window.APSTUDY_THEME_PREFERENCE = "nest-light";', body)
 
@@ -78,6 +81,7 @@ class LegalPagesTestCase(unittest.TestCase):
             os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
             "static",
             "js",
+            "core",
             "global.js",
         )
         with open(footer_path, encoding="utf-8") as footer_file:

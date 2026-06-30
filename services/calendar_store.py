@@ -511,7 +511,13 @@ def calendar_connection(path=None):
 
 
 def init_calendar_store(path=None):
-    _nest_database.init_db(path=calendar_db_path(path))
+    db_path = calendar_db_path(path)
+    _nest_database.init_db(path=db_path)
+    with _nest_database.db_connection(db_path) as conn:
+        for statement in SCHEMA_STATEMENTS:
+            conn.execute(statement)
+        for statement in INDEX_STATEMENTS:
+            conn.execute(statement)
 
 
 def list_calendar_rows_safe(table_id, queries=None):

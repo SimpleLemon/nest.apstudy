@@ -5,8 +5,25 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
+const chatModulePaths = [
+  "static/js/chat/index.js",
+  "static/js/chat/context.js",
+  "static/js/chat/utils.js",
+  "static/js/chat/cache.js",
+  "static/js/chat/render-ui.js",
+  "static/js/chat/render-messages.js",
+  "static/js/chat/presence.js",
+  "static/js/chat/load.js",
+  "static/js/chat/realtime.js",
+  "static/js/chat/actions.js",
+];
 
 async function sourceFor(relativePath) {
+  if (relativePath === "static/js/chat.js") {
+    return (await Promise.all(chatModulePaths.map((modulePath) => (
+      readFile(path.join(repoRoot, modulePath), "utf8")
+    )))).join("\n");
+  }
   return readFile(path.join(repoRoot, relativePath), "utf8");
 }
 

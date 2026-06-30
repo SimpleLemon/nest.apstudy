@@ -119,10 +119,10 @@
         const folders = Number(folder.folderCount) || 0;
         const files = Number(folder.fileCount) || 0;
         if (!folders && !files) return "Empty folder";
-        return `${formatCount(folders, "folder")} / ${formatCount(files, "file")}`;
+        return `${formatFileCount(folders, "folder")} / ${formatFileCount(files, "file")}`;
     }
 
-    function formatCount(count, label) {
+    function formatFileCount(count, label) {
         const number = Number(count) || 0;
         return `${number.toLocaleString()} ${label}${number === 1 ? "" : "s"}`;
     }
@@ -335,7 +335,7 @@
         formatFolderStatus,
         formatFileStatus,
         formatFolderCounts,
-        formatCount,
+        formatCount: formatFileCount,
         formatBytes,
         formatDateTime,
         formatExpiry,

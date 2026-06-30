@@ -56,7 +56,7 @@
         return modal;
     }
 
-    function closeModal() {
+    function closeEventFormModal() {
         const m = ensureModal();
         m.style.display = "none";
         currentMode = "create";
@@ -182,7 +182,7 @@
 
     function onModalClick(event) {
         if (event.target.closest("[data-event-close]")) {
-            closeModal();
+            closeEventFormModal();
             return;
         }
         const colorButton = event.target.closest("[data-event-color]");
@@ -275,7 +275,7 @@
                 return;
             }
             localStorage.removeItem("calendarEventsCache");
-            closeModal();
+            closeEventFormModal();
             window.loadCalendarData && window.loadCalendarData();
         } catch (_) {
             showError("Save failed.");
@@ -300,7 +300,7 @@
 
     document.addEventListener("keydown", (event) => {
         if (event.key === "Escape" && modal?.style.display !== "none") {
-            closeModal();
+            closeEventFormModal();
         }
     });
 })();

@@ -122,8 +122,8 @@
                 downloadSelectedFiles,
                 loadFolder,
                 openBulkDeleteConfirm,
-                openFolderModal,
-                openMoveModal,
+                openFolderModal: openFilesFolderModal,
+                openMoveModal: openFilesMoveModal,
                 openUploadModal,
                 runConfirmAction,
                 saveFolderModal,
@@ -291,8 +291,8 @@
         openActionMenuFromUtils(anchor, fileMenuItems(file, {
             downloadFile,
             openShareModal,
-            openFolderModal,
-            openMoveModal,
+            openFolderModal: openFilesFolderModal,
+            openMoveModal: openFilesMoveModal,
             openFileDeleteConfirm,
         }), state);
     }
@@ -300,13 +300,13 @@
     function openFolderMenu(anchor, folder) {
         openActionMenuFromUtils(anchor, folderMenuItems(folder, {
             openShareModal,
-            openFolderModal,
-            openMoveModal,
+            openFolderModal: openFilesFolderModal,
+            openMoveModal: openFilesMoveModal,
             openFolderDeleteConfirm,
         }), state);
     }
 
-    function openFolderModal(mode, item = null) {
+    function openFilesFolderModal(mode, item = null) {
         return modals.openFolderModal(mode, item);
     }
 
@@ -314,7 +314,7 @@
         return modals.saveFolderModal();
     }
 
-    function openMoveModal(context) {
+    function openFilesMoveModal(context) {
         return modals.openMoveModal(context);
     }
 

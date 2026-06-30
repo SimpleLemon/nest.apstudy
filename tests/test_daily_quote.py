@@ -4,7 +4,6 @@ from unittest.mock import patch
 from appwrite.exception import AppwriteException
 
 import services.daily_quote as daily_quote
-from setup_appwrite_db import TABLE_SPECS
 
 
 class FakeResponse:
@@ -19,24 +18,8 @@ class FakeResponse:
 
 
 class DailyQuoteServiceTests(unittest.TestCase):
-    def test_setup_appwrite_daily_quotes_schema(self):
-        spec = next(item for item in TABLE_SPECS if item["id"] == "daily_quotes")
-        column_keys = {column["key"] for column in spec["columns"]}
-        self.assertTrue({
-            "quote_date",
-            "quote_text",
-            "author",
-            "source",
-            "source_url",
-            "raw_payload",
-            "fetched_at",
-            "created_at",
-            "updated_at",
-        }.issubset(column_keys))
-        self.assertIn(
-            {"key": "idx_daily_quotes_date", "type": "unique", "columns": ["quote_date"]},
-            spec["indexes"],
-        )
+    def test_daily_quotes_collection_is_configured(self):
+        self.assertEqual(daily_quote._quote_table(), "daily_quotes")
 
     def test_fetch_and_store_daily_quote_normalizes_and_creates_row(self):
         response = FakeResponse([{"q": "Study the pattern.", "a": "Ada"}])

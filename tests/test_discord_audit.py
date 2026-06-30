@@ -189,7 +189,7 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
 
         with patch.object(discord_audit, "get_audit_service", return_value=service), \
                 patch.object(service, "_request", return_value=response) as request, \
-                patch.dict(os.environ, {}, clear=True):
+                patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "bot-token"}, clear=True):
             sent = discord_audit.update_course_tracks_channel_topic(3)
 
         self.assertTrue(sent)

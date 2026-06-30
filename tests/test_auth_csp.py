@@ -57,7 +57,7 @@ class LoginCspTestCase(unittest.TestCase):
         self.assertIn(b"Nest.APStudy", response.data)
         self.assertIn(b"Log In", response.data)
         self.assertNotIn(b"Open Nest", response.data)
-        self.assertIn(b"/static/apple-touch-icon.png", response.data)
+        self.assertIn(b"/apple-touch-icon.png", response.data)
         self.assertIn(b"landing-app-demo-dashboard", response.data)
         self.assertIn(b"static/images/landing/nest-interface-hero.png", response.data)
 

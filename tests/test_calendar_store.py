@@ -13,7 +13,10 @@ class CalendarStoreTestCase(unittest.TestCase):
     def setUp(self):
         self.tmpdir = tempfile.TemporaryDirectory()
         self.previous_path = os.environ.get("CALENDAR_SQLITE_PATH")
-        os.environ["CALENDAR_SQLITE_PATH"] = os.path.join(self.tmpdir.name, "calendar.sqlite3")
+        self.previous_database_path = os.environ.get("DATABASE_PATH")
+        test_path = os.path.join(self.tmpdir.name, "calendar.sqlite3")
+        os.environ["CALENDAR_SQLITE_PATH"] = test_path
+        os.environ["DATABASE_PATH"] = test_path
         store.init_calendar_store()
 
     def tearDown(self):
@@ -21,6 +24,10 @@ class CalendarStoreTestCase(unittest.TestCase):
             os.environ.pop("CALENDAR_SQLITE_PATH", None)
         else:
             os.environ["CALENDAR_SQLITE_PATH"] = self.previous_path
+        if self.previous_database_path is None:
+            os.environ.pop("DATABASE_PATH", None)
+        else:
+            os.environ["DATABASE_PATH"] = self.previous_database_path
         self.tmpdir.cleanup()
 
     def test_crud_count_and_appwrite_id_shape(self):
@@ -125,7 +132,10 @@ class CalendarMigrationTestCase(unittest.TestCase):
     def setUp(self):
         self.tmpdir = tempfile.TemporaryDirectory()
         self.previous_path = os.environ.get("CALENDAR_SQLITE_PATH")
-        os.environ["CALENDAR_SQLITE_PATH"] = os.path.join(self.tmpdir.name, "calendar.sqlite3")
+        self.previous_database_path = os.environ.get("DATABASE_PATH")
+        test_path = os.path.join(self.tmpdir.name, "calendar.sqlite3")
+        os.environ["CALENDAR_SQLITE_PATH"] = test_path
+        os.environ["DATABASE_PATH"] = test_path
         store.init_calendar_store()
 
     def tearDown(self):
@@ -133,6 +143,10 @@ class CalendarMigrationTestCase(unittest.TestCase):
             os.environ.pop("CALENDAR_SQLITE_PATH", None)
         else:
             os.environ["CALENDAR_SQLITE_PATH"] = self.previous_path
+        if self.previous_database_path is None:
+            os.environ.pop("DATABASE_PATH", None)
+        else:
+            os.environ["DATABASE_PATH"] = self.previous_database_path
         self.tmpdir.cleanup()
 
     def test_migration_preserves_ids_and_is_rerunnable(self):
