@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+import re
 import time
 from datetime import datetime, timezone
 
@@ -14,6 +15,7 @@ from appwrite_helpers import create_row_safe, first_row, format_datetime, update
 
 
 logger = logging.getLogger(__name__)
+SECRET_TEXT_RE = re.compile(r"((?:[?&]|\b)(?:secret|key|token|password)=)[^&\s]+", re.IGNORECASE)
 DISCORD_API_BASE = "https://discord.com/api/v10"
 WEBHOOK_CONFIG_KEY = "nest_chat_webhook"
 DEFAULT_GUILD_ID = "867928393558151228"
@@ -27,6 +29,11 @@ _user_cache = {}
 
 class DiscordBridgeError(RuntimeError):
     pass
+
+
+def _safe_response_text(response, limit=200):
+    text = SECRET_TEXT_RE.sub(r"\1[redacted]", str(getattr(response, "text", "") or ""))
+    return " ".join(text.split())[:limit]
 
 
 def _bot_token():
@@ -53,7 +60,9 @@ def _request(method, path, **kwargs):
         **kwargs,
     )
     if response.status_code >= 400:
-        raise DiscordBridgeError(f"Discord API returned {response.status_code}: {response.text[:200]}")
+        raise DiscordBridgeError(
+            f"Discord API returned {response.status_code}: {_safe_response_text(response)}"
+        )
     if response.status_code == 204 or not response.content:
         return None
     return response.json()
@@ -139,7 +148,7 @@ def add_guild_member_role(discord_user_id, guild_id=None, role_id=None):
         "Discord role grant returned %s for user %s: %s",
         response.status_code,
         discord_user_id,
-        response.text[:200],
+        _safe_response_text(response),
     )
     return False
 
@@ -172,7 +181,7 @@ def remove_guild_member_role(discord_user_id, guild_id=None, role_id=None):
         "Discord role removal returned %s for user %s: %s",
         response.status_code,
         discord_user_id,
-        response.text[:200],
+        _safe_response_text(response),
     )
     return False
 
@@ -204,14 +213,19 @@ def member_has_role(discord_user_id, guild_id=None, role_id=None):
             "Discord member lookup returned %s for user %s: %s",
             response.status_code,
             discord_user_id,
-            response.text[:200],
+            _safe_response_text(response),
         )
         return None
     try:
         member = response.json()
     except ValueError:
         return None
-    return role_id in (member.get("roles") or [])
+    if not isinstance(member, dict):
+        return None
+    roles = member.get("roles")
+    if not isinstance(roles, list):
+        return None
+    return role_id in roles
 
 
 def _get_bridge_config():

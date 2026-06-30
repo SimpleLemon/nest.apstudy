@@ -1,10 +1,10 @@
+import hashlib
 import logging
 import os
 import re
 from datetime import datetime, timezone
 
 from appwrite.exception import AppwriteException
-from appwrite.id import ID
 from appwrite.query import Query
 from appwrite.services.messaging import Messaging
 
@@ -80,13 +80,34 @@ def _send_open_email(track, section):
         base_url=base_url,
         nest_details_url=build_nest_courses_detail_url(base_url, section_id),
     )
-    messaging.create_email(
-        message_id=ID.unique(),
-        subject=subject,
-        content=content,
-        users=[track.get("user_id")],
-        html=True,
-    )
+    message_id = _open_notification_id(track)
+    try:
+        messaging.create_email(
+            message_id=message_id,
+            subject=subject,
+            content=content,
+            users=[track.get("user_id")],
+            html=True,
+        )
+    except AppwriteException as exc:
+        if exc.code != 409:
+            raise
+        # A retry after an ambiguous timeout may find that Appwrite accepted the
+        # first request. Verify that the deterministic message exists before
+        # treating the conflict as a successful, already-enqueued delivery.
+        messaging.get_message(message_id)
+
+
+def _open_notification_id(track):
+    transition_key = "|".join([
+        str(track.get("$id") or track.get("id") or ""),
+        str(track.get("user_id") or ""),
+        str(track.get("section_id") or ""),
+        str(track.get("last_status") or ""),
+        str(track.get("last_seats_available") or ""),
+        str(track.get("updated_at") or track.get("last_checked_at") or ""),
+    ])
+    return f"seat-{hashlib.sha256(transition_key.encode('utf-8')).hexdigest()[:31]}"
 
 
 def _track_group_key(track):
@@ -273,6 +294,10 @@ def check_course_seat_tracks(*, term=None, subject=None, catalog=None, poll_sour
                 error,
             )
             result = {"error": error}
+        if not isinstance(result, dict):
+            result = {"error": "Live Atlas returned invalid data"}
+        elif "error" not in result and not isinstance(result.get("section"), dict):
+            result = {"error": "Live Atlas returned an invalid section"}
         updates = {
             "last_checked_at": format_datetime(now),
             "updated_at": format_datetime(now),

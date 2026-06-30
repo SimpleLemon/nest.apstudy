@@ -584,10 +584,9 @@ def fetch_and_cache_feeds(user_id, feed_urls):
             except Exception as exc:
                 normalized_url = futures.get(future)
                 logger.error(
-                    "Failed to fetch or parse calendar feed: url=%s error=%s",
-                    normalized_url,
-                    str(exc),
-                    exc_info=True,
+                    "Failed to fetch or parse calendar feed: url=%s error_type=%s",
+                    redacted_url(normalized_url),
+                    type(exc).__name__,
                 )
                 errors.append(exc)
 
