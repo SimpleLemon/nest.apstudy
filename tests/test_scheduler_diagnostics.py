@@ -265,6 +265,18 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
         self.assertIsNone(result)
         fetch_quote.assert_not_called()
 
+    def test_daily_quote_failure_diagnostic_does_not_expose_exception_secret(self):
+        app = Flask(__name__)
+        with patch.object(scheduler, "_current_daily_quote_date", return_value="2026-06-03"), \
+                patch("services.daily_quote.fetch_and_store_daily_quote", side_effect=RuntimeError("token=quote-secret")), \
+                patch.object(scheduler, "_schedule_daily_quote_retry", return_value=False), \
+                patch.object(scheduler, "_emit_scheduler_event", return_value=True) as emit_event, \
+                self.assertLogs(scheduler.logger, level="ERROR") as captured:
+            scheduler._fetch_daily_quote(app, quote_date="2026-06-03")
+
+        self.assertNotIn("quote-secret", "\n".join(captured.output))
+        self.assertEqual(emit_event.call_args.kwargs["metadata"]["error"], "RuntimeError")
+
     def test_update_course_tracking_refresh_interval_reschedules_job(self):
         fake_scheduler = FakeScheduler()
         fake_scheduler.running = True
@@ -299,6 +311,61 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
 
         fetch_feeds.assert_called_once_with("user-1", ["https://example.com/feed.ics"])
         update_row.assert_not_called()
+
+    def test_feed_refresh_isolates_metadata_failure_to_one_user(self):
+        app = Flask(__name__)
+        settings = [
+            {"user_id": "user-1", "canvas_ical_url": "https://one.example/feed.ics"},
+            {"user_id": "user-2", "canvas_ical_url": "https://two.example/feed.ics"},
+        ]
+
+        with patch.object(scheduler, "list_rows_all", return_value=settings), \
+                patch.object(
+                    scheduler,
+                    "first_calendar_row",
+                    side_effect=[RuntimeError("metadata unavailable"), None, None],
+                ), \
+                patch.object(scheduler, "is_stale", return_value=True), \
+                patch("services.feed_fetcher.fetch_and_cache_feeds", return_value=0) as fetch_feeds:
+            scheduler._refresh_all_feeds(app)
+
+        fetch_feeds.assert_called_once_with("user-2", ["https://two.example/feed.ics"])
+
+    def test_role_sync_does_not_repeat_grant_after_ambiguous_failure(self):
+        app = Flask(__name__)
+        linked_user = {"discord_id": "discord-1"}
+
+        with patch.object(scheduler, "list_rows_all", return_value=[linked_user]), \
+                patch("services.discord_bridge._bot_token", return_value="token"), \
+                patch(
+                    "services.discord_bridge.member_has_role",
+                    side_effect=[False, True],
+                ) as has_role, \
+                patch(
+                    "services.discord_bridge.add_guild_member_role",
+                    return_value=False,
+                ) as add_role:
+            scheduler._sync_discord_roles(app)
+            scheduler._sync_discord_roles(app)
+
+        self.assertEqual(has_role.call_count, 2)
+        add_role.assert_called_once_with("discord-1")
+
+    def test_scheduler_init_failure_releases_lock_without_crashing_app(self):
+        app = Flask(__name__)
+        with tempfile.TemporaryDirectory() as temp_dir, \
+                patch.dict(os.environ, {
+                    "SCHEDULER_ENABLED": "1",
+                    "FEED_REFRESH_INTERVAL_MINUTES": "not-an-integer",
+                    "SCHEDULER_LOCK_PATH": os.path.join(temp_dir, "scheduler.lock"),
+                }, clear=False), \
+                patch.object(scheduler, "BackgroundScheduler", FakeScheduler), \
+                patch.object(scheduler, "_emit_scheduler_event", return_value=True) as emit_event:
+            scheduler.init_scheduler(app)
+
+        self.assertIsNone(scheduler._scheduler)
+        self.assertFalse(scheduler.scheduler_status()["scheduler_lock_acquired"])
+        self.assertEqual(emit_event.call_args.args[0], "Scheduler Startup Failed")
 
 
 if __name__ == "__main__":

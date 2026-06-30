@@ -240,43 +240,43 @@ def _refresh_all_feeds(app):
 
         now = datetime.now(timezone.utc)
         for settings in settings_with_feeds:
-            refresh_minutes = settings.get("feed_refresh_minutes")
             try:
-                refresh_minutes = int(refresh_minutes) if refresh_minutes is not None else None
-            except (TypeError, ValueError):
-                refresh_minutes = None
+                refresh_minutes = settings.get("feed_refresh_minutes")
+                try:
+                    refresh_minutes = int(refresh_minutes) if refresh_minutes is not None else None
+                except (TypeError, ValueError):
+                    refresh_minutes = None
 
-            if refresh_minutes is None:
-                refresh_minutes = int(os.environ.get("FEED_REFRESH_INTERVAL_MINUTES", "15"))
+                if refresh_minutes is None:
+                    refresh_minutes = int(os.environ.get("FEED_REFRESH_INTERVAL_MINUTES", "15"))
 
-            last_fetched = None
-            feed_table = COLLECTIONS.get("calendar_feeds")
-            if feed_table:
-                latest_feed = first_calendar_row(
-                    feed_table,
-                    [
-                        Query.equal("user_id", [settings.get("user_id")]),
-                        Query.order_desc("last_fetched"),
-                    ],
-                )
-                if latest_feed and latest_feed.get("last_fetched"):
-                    last_fetched = parse_datetime(latest_feed.get("last_fetched"))
+                last_fetched = None
+                feed_table = COLLECTIONS.get("calendar_feeds")
+                if feed_table:
+                    latest_feed = first_calendar_row(
+                        feed_table,
+                        [
+                            Query.equal("user_id", [settings.get("user_id")]),
+                            Query.order_desc("last_fetched"),
+                        ],
+                    )
+                    if latest_feed and latest_feed.get("last_fetched"):
+                        last_fetched = parse_datetime(latest_feed.get("last_fetched"))
 
-            if not last_fetched:
-                latest_event = first_calendar_row(
-                    COLLECTIONS["calendar_cache"],
-                    [
-                        Query.equal("user_id", [settings.get("user_id")]),
-                        Query.order_desc("fetched_at"),
-                    ],
-                )
-                if latest_event and latest_event.get("fetched_at"):
-                    last_fetched = parse_datetime(latest_event.get("fetched_at"))
+                if not last_fetched:
+                    latest_event = first_calendar_row(
+                        COLLECTIONS["calendar_cache"],
+                        [
+                            Query.equal("user_id", [settings.get("user_id")]),
+                            Query.order_desc("fetched_at"),
+                        ],
+                    )
+                    if latest_event and latest_event.get("fetched_at"):
+                        last_fetched = parse_datetime(latest_event.get("fetched_at"))
 
-            # Refresh only when the user's interval has elapsed.
-            if not is_stale(last_fetched, refresh_minutes, now=now):
-                continue
-            try:
+                # Refresh only when the user's interval has elapsed.
+                if not is_stale(last_fetched, refresh_minutes, now=now):
+                    continue
                 count = fetch_and_cache_feeds(
                     settings.get("user_id"),
                     _configured_feed_urls(settings),
@@ -286,17 +286,11 @@ def _refresh_all_feeds(app):
                     settings.get("user_id"),
                     count,
                 )
-            except AppwriteException as exc:
+            except Exception as exc:
                 logger.error(
-                    "  User %s: feed refresh failed: %s",
+                    "  User %s: feed refresh failed (%s)",
                     settings.get("user_id"),
-                    exc,
-                )
-            except Exception as e:
-                logger.error(
-                    "  User %s: feed refresh failed: %s",
-                    settings.get("user_id"),
-                    e,
+                    type(exc).__name__,
                 )
 
 
@@ -309,7 +303,7 @@ def _check_course_seat_tracks(app):
             notified_count = check_course_seat_tracks()
             logger.info("Course seat tracking: %s notification(s) sent.", notified_count)
         except Exception:
-            logger.exception("Course seat tracking failed")
+            logger.error("Course seat tracking failed")
             _emit_scheduler_event(
                 "Course Seat Tracking Scheduler Failed",
                 metadata={"job_id": "check_course_seat_tracks"},
@@ -403,7 +397,12 @@ def _fetch_daily_quote(app, quote_date=None, attempt=0):
             logger.info("Daily quote fetched and stored for %s.", target_date)
             return row
         except Exception as exc:
-            logger.exception("Daily quote fetch failed for %s on attempt %s", target_date, attempt)
+            logger.error(
+                "Daily quote fetch failed for %s on attempt %s (%s)",
+                target_date,
+                attempt,
+                type(exc).__name__,
+            )
             next_attempt = attempt + 1
             retry_scheduled = False
             if next_attempt <= DAILY_QUOTE_RETRY_LIMIT:
@@ -417,7 +416,7 @@ def _fetch_daily_quote(app, quote_date=None, attempt=0):
                     "next_attempt": next_attempt if retry_scheduled else None,
                     "retry_scheduled": retry_scheduled,
                     "gave_up": not retry_scheduled,
-                    "error": str(exc)[:300],
+                    "error": type(exc).__name__,
                 },
                 color="red",
             )
@@ -529,12 +528,11 @@ def init_scheduler(app):
 
     atexit.register(shutdown_scheduler)
 
-    default_interval = int(
-        os.environ.get("FEED_REFRESH_INTERVAL_MINUTES", "15")
-    )
-    course_tracking_interval = get_course_tracking_refresh_minutes()
-
     try:
+        default_interval = int(
+            os.environ.get("FEED_REFRESH_INTERVAL_MINUTES", "15")
+        )
+        course_tracking_interval = get_course_tracking_refresh_minutes()
         _scheduler = BackgroundScheduler(daemon=True)
 
         _scheduler.add_job(
@@ -610,10 +608,25 @@ def init_scheduler(app):
                 logger.exception("Failed to start Discord Gateway listener")
 
         _scheduler.start()
-    except Exception:
+    except Exception as exc:
+        failed_scheduler = _scheduler
+        if failed_scheduler is not None and failed_scheduler.running:
+            try:
+                failed_scheduler.shutdown(wait=False)
+            except Exception:
+                logger.exception("Failed to stop partially initialized scheduler")
         _scheduler = None
         _release_scheduler_lock()
-        raise
+        logger.error("Scheduler startup failed (%s)", type(exc).__name__)
+        _emit_scheduler_event(
+            "Scheduler Startup Failed",
+            metadata={
+                "scheduler_enabled": True,
+                "error_type": type(exc).__name__,
+            },
+            color="red",
+        )
+        return None
     logger.info(
         f"Scheduler started. Feed refresh interval: {default_interval} min."
     )

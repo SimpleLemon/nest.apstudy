@@ -432,6 +432,57 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
         self.assertEqual(service.queue[0].attempt, 1)
         self.assertGreaterEqual(service.queue[0].next_attempt - before, 5.9)
 
+    def test_audit_post_uses_enforced_nonce_for_retry_deduplication(self):
+        calls = []
+
+        def request_func(method, url, **kwargs):
+            calls.append((method, url, kwargs))
+            return ResponseStub(200)
+
+        event = DiscordAuditEvent(
+            channel="admin",
+            title="A",
+            actor="B",
+            target="C",
+            event_id="stable-event-id",
+        )
+        service = DiscordAuditService(token_getter=lambda: "token", request_func=request_func)
+        service._send_queued(_QueuedAuditEvent(event=event))
+
+        payload = calls[0][2]["json"]
+        self.assertTrue(payload["enforce_nonce"])
+        self.assertLessEqual(len(payload["nonce"]), 25)
+
+    def test_malformed_post_response_retries_without_escaping_sender(self):
+        service = DiscordAuditService(
+            token_getter=lambda: "token",
+            request_func=lambda *_args, **_kwargs: object(),
+        )
+
+        service._send_queued(
+            _QueuedAuditEvent(
+                event=DiscordAuditEvent(channel="admin", title="A", actor="B", target="C")
+            )
+        )
+
+        self.assertEqual(len(service.queue), 1)
+        self.assertEqual(service.queue[0].attempt, 1)
+
+    def test_malformed_history_payload_does_not_crash_retry(self):
+        def request_func(method, url, **kwargs):
+            if method == "POST":
+                return ResponseStub(500)
+            return ResponseStub(200, payload={"unexpected": True})
+
+        service = DiscordAuditService(token_getter=lambda: "token", request_func=request_func)
+        service._send_queued(
+            _QueuedAuditEvent(
+                event=DiscordAuditEvent(channel="admin", title="A", actor="B", target="C")
+            )
+        )
+
+        self.assertEqual(len(service.queue), 1)
+
     def test_retry_discards_duplicate_event_found_in_history(self):
         event = DiscordAuditEvent(channel="admin", title="A", actor="B", target="C", event_id="duplicate-id")
 
@@ -439,6 +490,19 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
             if method == "POST":
                 return ResponseStub(500)
             return ResponseStub(200, payload=[{"embeds": [{"fields": [{"name": "Event ID", "value": "duplicate-id"}]}]}])
+
+        service = DiscordAuditService(token_getter=lambda: "token", request_func=request_func)
+        service._send_queued(_QueuedAuditEvent(event=event))
+
+        self.assertEqual(len(service.queue), 0)
+
+    def test_retry_discards_duplicate_event_found_by_discord_nonce(self):
+        event = DiscordAuditEvent(channel="admin", title="A", actor="B", target="C", event_id="duplicate-id")
+
+        def request_func(method, url, **kwargs):
+            if method == "POST":
+                return ResponseStub(500)
+            return ResponseStub(200, payload=[{"nonce": discord_audit._event_nonce(event)}])
 
         service = DiscordAuditService(token_getter=lambda: "token", request_func=request_func)
         service._send_queued(_QueuedAuditEvent(event=event))

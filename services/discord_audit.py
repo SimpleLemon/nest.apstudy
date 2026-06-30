@@ -1,3 +1,4 @@
+import hashlib
 import json
 import logging
 import os
@@ -47,6 +48,10 @@ INVALID_WINDOW_SECONDS = 10 * 60
 INVALID_PAUSE_SECONDS = 10 * 60
 INVALID_PAUSE_THRESHOLD = 50
 SECRET_TEXT_RE = re.compile(r"((?:[?&]|\b)(?:secret|key|token|password)=)[^&\s]+", re.IGNORECASE)
+
+
+def _event_nonce(event):
+    return hashlib.sha256(event.event_id.encode("utf-8")).hexdigest()[:25]
 
 
 def _utcnow_iso():
@@ -707,28 +712,34 @@ class DiscordAuditService:
             response = self._request(
                 "POST",
                 f"/channels/{channel_id}/messages",
-                json={"embeds": [queued.event.embed()], "allowed_mentions": {"parse": []}},
+                json={
+                    "embeds": [queued.event.embed()],
+                    "allowed_mentions": {"parse": []},
+                    "nonce": _event_nonce(queued.event),
+                    "enforce_nonce": True,
+                },
             )
+            status_code = int(response.status_code)
         except Exception:
             logger.exception(
-                "Discord audit send failed for channel %s; scheduling retry",
+                "Discord audit send failed or returned an invalid response for channel %s; scheduling retry",
                 queued.event.channel,
             )
             self._retry_or_persist(queued, self._backoff_seconds(queued.attempt + 1))
             return
 
-        if 200 <= response.status_code < 300:
+        if 200 <= status_code < 300:
             return
 
         logger.warning(
             "Discord audit send returned HTTP %s for channel %s; scheduling retry",
-            response.status_code,
+            status_code,
             queued.event.channel,
         )
-        if response.status_code in {401, 403, 429}:
+        if status_code in {401, 403, 429}:
             self._record_invalid_response()
 
-        if response.status_code == 429:
+        if status_code == 429:
             self._retry_or_persist(queued, self._retry_after_seconds(response))
             return
 
@@ -736,7 +747,10 @@ class DiscordAuditService:
         self._retry_or_persist(queued, delay)
 
     def _retry_after_seconds(self, response):
-        retry_after = response.headers.get("Retry-After") or response.headers.get("retry-after")
+        headers = getattr(response, "headers", None)
+        retry_after = None
+        if hasattr(headers, "get"):
+            retry_after = headers.get("Retry-After") or headers.get("retry-after")
         if retry_after is None:
             try:
                 retry_after = response.json().get("retry_after")
@@ -770,17 +784,29 @@ class DiscordAuditService:
             if response.status_code >= 400:
                 return False
             messages = response.json() or []
+            if not isinstance(messages, list):
+                logger.warning("Discord audit history returned invalid data")
+                return False
         except Exception:
             logger.exception("Failed to check Discord audit message history")
             return False
         event_id = event.event_id
+        event_nonce = _event_nonce(event)
         for message in messages:
+            if not isinstance(message, dict):
+                continue
+            if str(message.get("nonce") or "") == event_nonce:
+                return True
             if event_id in (message.get("content") or ""):
                 return True
             for embed in message.get("embeds") or []:
+                if not isinstance(embed, dict):
+                    continue
                 if event_id in (embed.get("footer") or {}).get("text", ""):
                     return True
                 for field in embed.get("fields") or []:
+                    if not isinstance(field, dict):
+                        continue
                     if field.get("name") == "Event ID" and field.get("value") == event_id:
                         return True
                     if event_id in str(field.get("value") or ""):

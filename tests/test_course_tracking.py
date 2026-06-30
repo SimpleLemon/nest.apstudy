@@ -1,7 +1,7 @@
 import os
 import unittest
 from datetime import datetime, timezone
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from appwrite.exception import AppwriteException
 
@@ -359,6 +359,58 @@ class CourseTrackingTests(unittest.TestCase):
         self.assertEqual(len(completed_events), 0)
         summary = course_tracking.get_last_course_tracking_poll()
         self.assertEqual(summary["atlas_checks_failed"], 1)
+
+    def test_malformed_atlas_result_skips_group_and_continues_poll(self):
+        tracks = [
+            self._track("track-1", "user-1"),
+            self._track("track-2", "user-2", section_id="Fall_2026-CS-170-5678-2"),
+        ]
+        tracks[1]["crn"] = "5678"
+
+        with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
+                patch.object(course_tracking, "list_rows_all", return_value=tracks), \
+                patch.object(
+                    course_tracking,
+                    "fetch_live_section_status",
+                    side_effect=[None, {"section": self._open_section()}],
+                ), \
+                patch.object(course_tracking, "_send_open_email"), \
+                patch.object(course_tracking, "update_row_safe") as update_row, \
+                patch.object(course_tracking, "emit_course_track_event"), \
+                patch.object(course_tracking, "update_course_tracks_channel_topic"), \
+                patch.object(course_tracking, "_now_utc", return_value=datetime(2026, 5, 29, tzinfo=timezone.utc)):
+            notified = course_tracking.check_course_seat_tracks()
+
+        self.assertEqual(notified, 1)
+        update_row.assert_called_once()
+        self.assertEqual(update_row.call_args.args[1], "track-2")
+        summary = course_tracking.get_last_course_tracking_poll()
+        self.assertEqual(summary["atlas_checks_failed"], 1)
+        self.assertEqual(summary["atlas_checks_succeeded"], 1)
+
+    def test_open_email_retry_reuses_message_id_after_ambiguous_timeout(self):
+        track = self._track("track-1", "user-1")
+        track["updated_at"] = "2026-05-29T00:00:00Z"
+        sent_ids = []
+        messaging = Mock()
+
+        def create_email(**kwargs):
+            sent_ids.append(kwargs["message_id"])
+            if len(sent_ids) == 1:
+                raise AppwriteException("gateway timeout", code=500)
+            raise AppwriteException("message already exists", code=409)
+
+        messaging.create_email.side_effect = create_email
+        messaging.get_message.return_value = {"$id": "existing"}
+
+        with patch.object(course_tracking, "Messaging", return_value=messaging):
+            with self.assertRaises(AppwriteException):
+                course_tracking._send_open_email(track, self._open_section())
+            course_tracking._send_open_email(track, self._open_section())
+
+        self.assertEqual(len(sent_ids), 2)
+        self.assertEqual(sent_ids[0], sent_ids[1])
+        messaging.get_message.assert_called_once_with(sent_ids[0])
 
 
 class CourseTrackingEmailTests(unittest.TestCase):
