@@ -45,7 +45,7 @@
     <script src="{{ url_for('static', filename='js/courses/controls.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/courses/index.js') }}" defer></script>
 </head>
-<body class="courses-body bg-surface text-on-surface font-body min-h-screen antialiased selection:bg-primary/30 selection:text-primary-fixed">
+<body class="courses-body bg-surface text-on-surface font-body min-h-screen antialiased">
     <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
     {% set sidebar_user_emory_student = user.emory_student %}
     {% include "_sidebar.html" %}

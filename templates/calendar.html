@@ -55,7 +55,7 @@
         }
     </style>
 </head>
-<body data-default-dashboard-view="{{ preferred_calendar_view|default('week') }}" data-calendar-buffer-days="{{ calendar_buffer_days|default(7) }}" class="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-primary/30 selection:text-primary-fixed">
+<body data-default-dashboard-view="{{ preferred_calendar_view|default('week') }}" data-calendar-buffer-days="{{ calendar_buffer_days|default(7) }}" class="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased">
 <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
 {% set sidebar_user_emory_student = user.emory_student %}
 {% include "_sidebar.html" %}

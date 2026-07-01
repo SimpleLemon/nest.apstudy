@@ -144,6 +144,9 @@ class AccessibilityBaselineTests(unittest.TestCase):
         css = (ROOT / "static/css/global.css").read_text()
         javascript = (ROOT / "static/js/core/global.js").read_text()
         self.assertIn(".apstudy-skip-link", css)
+        self.assertRegex(css, r"::selection\s*\{[^}]*--color-on-surface")
+        for template in TEMPLATES.glob("*.html"):
+            self.assertNotIn("selection:bg-primary", template.read_text(), template.name)
         self.assertRegex(css, r":focus-visible\s*\{[^}]*outline:\s*3px[^}]*!important")
         self.assertIn("border-color: var(--color-outline", css)
         self.assertRegex(css, r"prefers-reduced-motion:\s*reduce[\s\S]*animation-duration:\s*0\.01ms\s*!important")

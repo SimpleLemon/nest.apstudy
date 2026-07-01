@@ -25,6 +25,11 @@ body {
 	font-family: var(--font-body);
 }
 
+::selection {
+	background: color-mix(in srgb, var(--color-on-surface, #202124) 18%, transparent);
+	color: inherit;
+}
+
 button,
 input,
 textarea,
