@@ -156,6 +156,54 @@ class DatabaseMigrationSafetyTestCase(unittest.TestCase):
 
         self._assert_database_healthy()
 
+    def test_external_id_migration_reconciles_legacy_duplicate_messages(self):
+        baseline_path = Path(database.migrations_path()) / database.BASELINE_MIGRATION
+        with database.db_connection(self.db_path) as connection:
+            connection.executescript(baseline_path.read_text(encoding="utf-8"))
+            connection.execute(
+                "INSERT INTO chat_messages "
+                "(id, source, external_id, content, created_at, updated_at) "
+                "VALUES (?, ?, ?, ?, ?, ?)",
+                ("message-old", "discord", "discord:channel:message", "old", "2026-01-01Z", "2026-01-02Z"),
+            )
+            connection.execute(
+                "INSERT INTO chat_messages "
+                "(id, source, external_id, content, created_at, updated_at) "
+                "VALUES (?, ?, ?, ?, ?, ?)",
+                ("message-new", "discord", "discord:channel:message", "new", "2026-01-01Z", "2026-02-01Z"),
+            )
+            connection.execute(
+                "INSERT INTO chat_events (id, scope_type, scope_id, event_type, message_id, created_at) "
+                "VALUES (?, ?, ?, ?, ?, ?)",
+                ("event-1", "channel", "channel", "message", "message-old", "2026-01-03Z"),
+            )
+            connection.execute(
+                "INSERT INTO chat_read_states "
+                "(id, user_id, scope_type, scope_id, read_key, last_read_message_id) "
+                "VALUES (?, ?, ?, ?, ?, ?)",
+                ("read-1", "user-1", "channel", "channel", "user-1:channel", "message-old"),
+            )
+            connection.commit()
+
+        database.init_db(path=self.db_path)
+
+        with database.db_connection(self.db_path) as connection:
+            messages = connection.execute(
+                "SELECT id, content FROM chat_messages WHERE external_id = ?",
+                ["discord:channel:message"],
+            ).fetchall()
+            event_message_id = connection.execute(
+                "SELECT message_id FROM chat_events WHERE id = 'event-1'"
+            ).fetchone()[0]
+            read_message_id = connection.execute(
+                "SELECT last_read_message_id FROM chat_read_states WHERE id = 'read-1'"
+            ).fetchone()[0]
+
+        self.assertEqual([tuple(row) for row in messages], [("message-new", "new")])
+        self.assertEqual(event_message_id, "message-new")
+        self.assertEqual(read_message_id, "message-new")
+        self._assert_database_healthy()
+
     def test_failed_migration_rolls_back_ddl_and_is_not_recorded(self):
         migrations_dir = Path(self.temp_dir.name) / "broken-migrations"
         migrations_dir.mkdir()

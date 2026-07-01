@@ -38,6 +38,9 @@ class BackupNestDbTestCase(unittest.TestCase):
             instance_dir.mkdir()
 
             db_path = instance_dir / "nest.sqlite3"
+            with closing(sqlite3.connect(instance_dir / "calendar.sqlite3")) as calendar:
+                calendar.execute("CREATE TABLE events (id INTEGER PRIMARY KEY)")
+                calendar.commit()
             connection = sqlite3.connect(db_path)
             try:
                 connection.execute("PRAGMA journal_mode = WAL")
@@ -61,6 +64,8 @@ class BackupNestDbTestCase(unittest.TestCase):
             self.assertEqual(len(backup_sets), 1)
             copied = backup_sets[0] / "nest.sqlite3"
             self.assertTrue(copied.is_file())
+            self.assertFalse((backup_sets[0] / "nest.sqlite3-wal").exists())
+            self.assertFalse((backup_sets[0] / "nest.sqlite3-shm").exists())
             with closing(sqlite3.connect(f"file:{copied}?mode=ro", uri=True)) as connection:
                 self.assertEqual(connection.execute("PRAGMA integrity_check").fetchone()[0], "ok")
                 self.assertEqual(connection.execute("PRAGMA foreign_key_check").fetchall(), [])
@@ -79,7 +84,7 @@ class BackupNestDbTestCase(unittest.TestCase):
             notify.assert_called_once()
             event = notify.call_args.args[0]
             self.assertEqual(event.channel, "server_logs")
-            self.assertEqual(event.title, "Database Backup Created")
+            self.assertEqual(event.title, "Database Backup Created With Optional Data Skipped")
 
     def test_initialized_database_backup_restores_and_reinitializes_without_data_loss(self):
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -87,6 +92,9 @@ class BackupNestDbTestCase(unittest.TestCase):
             backup_dir = Path(temp_dir) / "backups"
             source = instance_dir / "nest.sqlite3"
             database.init_db(path=source)
+            with closing(sqlite3.connect(instance_dir / "calendar.sqlite3")) as calendar:
+                calendar.execute("CREATE TABLE events (id INTEGER PRIMARY KEY)")
+                calendar.commit()
 
             with database.db_connection(source) as connection:
                 connection.execute(
@@ -213,6 +221,33 @@ class BackupNestDbTestCase(unittest.TestCase):
             self.assertEqual(exit_code, 1)
             notify.assert_called_once()
             self.assertEqual(notify.call_args.args[0].title, "Database Backup Failed")
+            self.assertEqual(list(backup_dir.glob("backup_*")), [])
+            self.assertEqual(list(backup_dir.glob("*.incomplete")), [])
+
+    def test_partial_backup_does_not_rotate_known_good_backups(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            instance_dir = Path(temp_dir) / "instance"
+            backup_dir = Path(temp_dir) / "backups"
+            instance_dir.mkdir()
+            backup_dir.mkdir()
+            existing = [backup_dir / f"backup_2026-01-0{day}_00-00-00" for day in range(1, 4)]
+            for backup_set in existing:
+                backup_set.mkdir()
+
+            with closing(sqlite3.connect(instance_dir / "nest.sqlite3")) as connection:
+                connection.execute("CREATE TABLE sample (id INTEGER PRIMARY KEY)")
+                connection.commit()
+
+            exit_code = backup_nest_db.run_backup(
+                instance_dir=instance_dir,
+                backup_dir=backup_dir,
+                max_backups=3,
+                notify_discord=False,
+            )
+
+            self.assertEqual(exit_code, 1)
+            self.assertEqual(sorted(backup_dir.glob("backup_*")), existing)
+            self.assertEqual(list(backup_dir.glob("*.incomplete")), [])
 
 
 if __name__ == "__main__":

@@ -75,7 +75,7 @@ def _format_bytes(num_bytes: int | None) -> str:
 
 def _backup_database(source: Path, destination: Path) -> tuple[bool, str]:
     if not source.is_file():
-        return False, f"[WARN] {source.name} not found, skipping"
+        return False, f"[ERROR] Required database {source.name} not found"
 
     destination.parent.mkdir(parents=True, exist_ok=True)
     try:
@@ -85,7 +85,12 @@ def _backup_database(source: Path, destination: Path) -> tuple[bool, str]:
                 source_conn.backup(dest_conn)
                 dest_conn.commit()
 
-        with closing(sqlite3.connect(f"file:{destination}?mode=ro", uri=True)) as check_conn:
+        # The completed snapshot is immutable during validation. This avoids
+        # creating WAL/SHM sidecars in the backup set when the source database
+        # uses WAL mode.
+        with closing(
+            sqlite3.connect(f"file:{destination}?mode=ro&immutable=1", uri=True)
+        ) as check_conn:
             integrity_rows = check_conn.execute("PRAGMA integrity_check").fetchall()
             if integrity_rows != [("ok",)]:
                 raise sqlite3.DatabaseError(f"integrity_check failed: {integrity_rows!r}")
@@ -138,21 +143,29 @@ def _rotate_backups(backup_dir: Path, max_backups: int) -> list[str]:
 
 
 def run_backup(*, instance_dir: Path, backup_dir: Path, max_backups: int, notify_discord: bool) -> int:
+    if max_backups < 1:
+        raise ValueError("max_backups must be at least 1")
+
     timestamp = _utc_timestamp()
     backup_subdir = backup_dir / f"backup_{timestamp}"
+    staging_subdir = backup_dir / f".backup_{timestamp}.incomplete"
     log_lines: list[str] = []
     errors = 0
     backed_up: list[str] = []
     skipped: list[str] = []
+    backup_sizes: dict[str, int | None] = {}
 
-    backup_subdir.mkdir(parents=True, exist_ok=True)
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    staging_subdir.mkdir(exist_ok=False)
 
     for source_name, dest_name in SQLITE_DATABASES:
-        ok, message = _backup_database(instance_dir / source_name, backup_subdir / dest_name)
+        destination = staging_subdir / dest_name
+        ok, message = _backup_database(instance_dir / source_name, destination)
         log_lines.append(message)
         print(message)
         if ok:
             backed_up.append(source_name)
+            backup_sizes[source_name] = _file_size(destination)
         elif "[ERROR]" in message:
             errors += 1
         elif "[WARN]" in message:
@@ -161,32 +174,40 @@ def run_backup(*, instance_dir: Path, backup_dir: Path, max_backups: int, notify
     apswiftly_source, apswiftly_dest = APSWIFTLY_DATA_DIR
     ok, message = _backup_directory(
         instance_dir / apswiftly_source,
-        backup_subdir / apswiftly_dest,
+        staging_subdir / apswiftly_dest,
         label="APSwiftly database (aoi.db)",
     )
     log_lines.append(message)
     print(message)
     if ok:
         backed_up.append(apswiftly_source)
+        backup_sizes[apswiftly_source] = _directory_size(staging_subdir / apswiftly_dest)
     elif "[ERROR]" in message:
         errors += 1
     elif "[WARN]" in message:
         skipped.append(apswiftly_source)
 
-    if errors == 0 and backed_up:
-        summary = f"[SUCCESS] Full backup created: {backup_subdir}"
-        color = "green"
-    elif backed_up:
-        summary = f"[WARNING] Backup completed with {errors} error(s): {backup_subdir}"
-        color = "yellow"
+    required_databases = {source_name for source_name, _ in SQLITE_DATABASES}
+    required_complete = required_databases.issubset(backed_up)
+    published = errors == 0 and required_complete
+
+    if published:
+        staging_subdir.rename(backup_subdir)
+        if skipped:
+            summary = f"[WARNING] Backup created with optional data skipped: {backup_subdir}"
+            color = "yellow"
+        else:
+            summary = f"[SUCCESS] Full backup created: {backup_subdir}"
+            color = "green"
     else:
-        summary = f"[ERROR] Backup failed with no databases copied: {backup_subdir}"
+        shutil.rmtree(staging_subdir, ignore_errors=True)
+        summary = f"[ERROR] Backup failed; incomplete snapshot discarded: {backup_subdir}"
         color = "red"
 
     log_lines.append(summary)
     print(summary)
 
-    rotate_lines = _rotate_backups(backup_dir, max_backups)
+    rotate_lines = _rotate_backups(backup_dir, max_backups) if published else []
     for line in rotate_lines:
         log_lines.append(line)
         print(line)
@@ -211,16 +232,13 @@ def run_backup(*, instance_dir: Path, backup_dir: Path, max_backups: int, notify
             "retention": max_backups,
             "total_sets": len(remaining),
         }
-        for source_name in backed_up:
-            destination = backup_subdir / source_name
-            if destination.is_dir():
-                size = _directory_size(destination)
-            else:
-                size = _file_size(destination)
+        for source_name, size in backup_sizes.items():
             metadata[f"{source_name}_size"] = _format_bytes(size)
 
-        title = "Database Backup Created" if errors == 0 else "Database Backup Completed With Errors"
-        if not backed_up:
+        title = "Database Backup Created"
+        if skipped:
+            title = "Database Backup Created With Optional Data Skipped"
+        if not published:
             title = "Database Backup Failed"
 
         event = DiscordAuditEvent(
@@ -240,7 +258,7 @@ def run_backup(*, instance_dir: Path, backup_dir: Path, max_backups: int, notify
                 color=color,
             )
 
-    return 1 if errors or not backed_up else 0
+    return 0 if published else 1
 
 
 def main(argv: list[str] | None = None) -> int:
