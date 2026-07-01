@@ -250,6 +250,8 @@ test("chat direct messages render presence dots and profile-only side pane", asy
   assert.match(styles, /chat-presence-dot\.is-busy/);
   assert.match(styles, /chat-presence-dot\.is-offline/);
   assert.match(script, /is-dm-profile/);
+  assert.match(script, /className: "chat-dm-button"/);
+  assert.match(styles, /\.chat-dm-button \.chat-list-copy\s*\{[^}]*justify-content: center;/s);
 });
 
 test("chat groups close same-author messages and formats timestamps compactly", async () => {

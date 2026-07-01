@@ -1041,6 +1041,7 @@
         leading,
         title: other.name || other.username || "Nest User",
         meta: dmPresenceMarkup(status),
+        className: "chat-dm-button",
       });
       els.dmList.appendChild(button);
     }

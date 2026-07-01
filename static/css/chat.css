@@ -148,6 +148,11 @@
   gap: 2px;
 }
 
+.chat-dm-button .chat-list-copy {
+  min-height: 30px;
+  justify-content: center;
+}
+
 .chat-list-title {
   min-width: 0;
   color: inherit;
