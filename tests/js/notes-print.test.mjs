@@ -6,9 +6,9 @@ import { fileURLToPath } from 'node:url';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
-async function importPrintModule() {
+async function importPrintModule(cacheKey = '') {
     const source = await readFile(path.join(repoRoot, 'static/js/notes/editor/print.js'), 'utf8');
-    const url = `data:text/javascript;base64,${Buffer.from(source).toString('base64')}`;
+    const url = `data:text/javascript;base64,${Buffer.from(source).toString('base64')}#${cacheKey}`;
     return import(url);
 }
 
@@ -21,6 +21,54 @@ test('print title and keyboard shortcut helpers are conservative', async () => {
     assert.equal(isNotePrintShortcut({ key: 'P', ctrlKey: true }), true);
     assert.equal(isNotePrintShortcut({ key: 'p', ctrlKey: true, shiftKey: true }), false);
     assert.equal(isNotePrintShortcut({ key: 'p', ctrlKey: true, defaultPrevented: true }), false);
+});
+
+test('delegated print controller handles toolbar clicks and suppresses native shortcuts', async () => {
+    const { bindNotePrintController } = await importPrintModule('controller');
+    const listeners = new Map();
+    const button = {};
+    const documentRef = {
+        contains: (candidate) => candidate === button,
+        addEventListener(type, handler) { listeners.set(type, handler); },
+    };
+    const windowRef = {};
+    let ready = false;
+    let printRequests = 0;
+    const controller = bindNotePrintController({
+        documentRef,
+        windowRef,
+        isReady: () => ready,
+        requestPrint: () => { printRequests += 1; },
+    });
+    const duplicateController = bindNotePrintController({
+        documentRef,
+        windowRef,
+        isReady: () => true,
+        requestPrint: () => { printRequests += 100; },
+    });
+
+    let clickPrevented = false;
+    listeners.get('click')({
+        target: { closest: () => button },
+        preventDefault: () => { clickPrevented = true; },
+    });
+    assert.equal(clickPrevented, true);
+    assert.equal(printRequests, 1);
+    assert.equal(duplicateController, controller);
+
+    let shortcutPrevented = false;
+    const shortcut = {
+        key: 'p',
+        metaKey: true,
+        preventDefault: () => { shortcutPrevented = true; },
+    };
+    listeners.get('keydown')(shortcut);
+    assert.equal(shortcutPrevented, true);
+    assert.equal(printRequests, 1);
+
+    ready = true;
+    listeners.get('keydown')({ ...shortcut, defaultPrevented: false });
+    assert.equal(printRequests, 2);
 });
 
 test('printable blocks match collapsed visibility and simplify media', async () => {
@@ -117,6 +165,11 @@ test('print lifecycle is single-flight until afterprint and permits a later prin
     const documentRef = {
         title: 'Note Editor - APStudy Nest',
         createElement(tagName) { return fakeElement(tagName, documentRef); },
+        querySelectorAll(selector) {
+            return selector === '.notes-print-surface'
+                ? this.body.children.filter((element) => element.className === 'notes-print-surface')
+                : [];
+        },
         body: {
             children: [],
             append(element) { this.children.push(element); },
@@ -126,6 +179,9 @@ test('print lifecycle is single-flight until afterprint and permits a later prin
             },
         },
     };
+    const staleSurface = fakeElement('article', documentRef);
+    staleSurface.className = 'notes-print-surface';
+    documentRef.body.children.push(staleSurface);
     const listeners = new Map();
     const printedTitles = [];
     const windowRef = {
@@ -162,6 +218,7 @@ test('print lifecycle is single-flight until afterprint and permits a later prin
     assert.equal(firstPrintSettled, false);
     assert.equal(documentRef.title, 'Current title');
     assert.equal(documentRef.body.children.length, 1);
+    assert.notEqual(documentRef.body.children[0], staleSurface);
     assert.equal(classes.has('notes-print-prepared'), true);
 
     listeners.get('afterprint')();
@@ -177,12 +234,69 @@ test('print lifecycle is single-flight until afterprint and permits a later prin
     await laterPrint;
 });
 
+test('print lock is shared across duplicate module instances', async () => {
+    const firstModule = await importPrintModule('first-instance');
+    const secondModule = await importPrintModule('second-instance');
+    const classes = new Set();
+    const documentRef = {
+        title: 'Note Editor - APStudy Nest',
+        createElement(tagName) { return fakeElement(tagName, documentRef); },
+        querySelectorAll(selector) {
+            return selector === '.notes-print-surface'
+                ? this.body.children.filter((element) => element.className === 'notes-print-surface')
+                : [];
+        },
+        body: {
+            children: [],
+            append(element) { this.children.push(element); },
+            classList: {
+                add(value) { classes.add(value); },
+                remove(value) { classes.delete(value); },
+            },
+        },
+    };
+    const listeners = new Map();
+    let printCalls = 0;
+    const windowRef = {
+        addEventListener(type, handler) { listeners.set(type, handler); },
+        removeEventListener(type, handler) {
+            if (listeners.get(type) === handler) listeners.delete(type);
+        },
+        requestAnimationFrame(callback) { callback(); },
+        setTimeout,
+        clearTimeout,
+        print() { printCalls += 1; },
+    };
+    const options = {
+        editor: { async blocksToHTMLLossy() { return '<p>One copy</p>'; } },
+        blocks: [{ id: 'one', type: 'paragraph' }],
+        title: 'Current title',
+        documentRef,
+        windowRef,
+    };
+
+    const firstPrint = firstModule.printNote(options);
+    const duplicatePrint = secondModule.printNote(options);
+    await new Promise((resolve) => setImmediate(resolve));
+
+    assert.equal(duplicatePrint, firstPrint);
+    assert.equal(printCalls, 1);
+    assert.equal(documentRef.body.children.length, 1);
+    listeners.get('afterprint')();
+    await firstPrint;
+});
+
 test('print errors clean up and permit retry', async () => {
     const { printNote } = await importPrintModule();
     const classes = new Set();
     const documentRef = {
         title: 'Note Editor - APStudy Nest',
         createElement(tagName) { return fakeElement(tagName, documentRef); },
+        querySelectorAll(selector) {
+            return selector === '.notes-print-surface'
+                ? this.body.children.filter((element) => element.className === 'notes-print-surface')
+                : [];
+        },
         body: {
             children: [],
             append(element) { this.children.push(element); },

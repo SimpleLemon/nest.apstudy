@@ -1,10 +1,13 @@
+import sqlite3
+import tempfile
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
 from appwrite.exception import AppwriteException
 
 import services.daily_quote as daily_quote
-from setup_appwrite_db import TABLE_SPECS
+from services import database
 
 
 class FakeResponse:
@@ -19,9 +22,19 @@ class FakeResponse:
 
 
 class DailyQuoteServiceTests(unittest.TestCase):
-    def test_setup_appwrite_daily_quotes_schema(self):
-        spec = next(item for item in TABLE_SPECS if item["id"] == "daily_quotes")
-        column_keys = {column["key"] for column in spec["columns"]}
+    def test_sqlite_daily_quotes_schema(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            db_path = Path(temp_dir) / "daily-quotes.sqlite3"
+            database.init_db(path=db_path)
+            with sqlite3.connect(db_path) as connection:
+                column_keys = {
+                    row[1] for row in connection.execute("PRAGMA table_info(daily_quotes)")
+                }
+                indexes = {
+                    row[1]: bool(row[2])
+                    for row in connection.execute("PRAGMA index_list(daily_quotes)")
+                }
+
         self.assertTrue({
             "quote_date",
             "quote_text",
@@ -33,10 +46,7 @@ class DailyQuoteServiceTests(unittest.TestCase):
             "created_at",
             "updated_at",
         }.issubset(column_keys))
-        self.assertIn(
-            {"key": "idx_daily_quotes_date", "type": "unique", "columns": ["quote_date"]},
-            spec["indexes"],
-        )
+        self.assertTrue(indexes.get("idx_daily_quotes_date"))
 
     def test_fetch_and_store_daily_quote_normalizes_and_creates_row(self):
         response = FakeResponse([{"q": "Study the pattern.", "a": "Ada"}])

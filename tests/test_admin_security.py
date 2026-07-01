@@ -24,6 +24,8 @@ class TestUser(UserMixin):
 
 class AdminSecurityTestCase(unittest.TestCase):
     def setUp(self):
+        previous_loader = login_manager._user_callback
+        self.addCleanup(setattr, login_manager, "_user_callback", previous_loader)
         root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.app = Flask(
             __name__,

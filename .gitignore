@@ -145,11 +145,6 @@ logs/
 .github/
 codex-attention-notifier
 docs/
-migrations/
-!migrations/
-migrations/*
-!migrations/002_course_live_snapshots.sql
-!migrations/003_notes_sharing.sql
 .scorecard.png
 setup_appwrite_db.py
 REMNUS_BLOCK_EDITOR_REFERENCE.md

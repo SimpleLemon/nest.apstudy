@@ -25,7 +25,8 @@ export const PRINT_HIGHLIGHT_COLORS = Object.freeze({
     pink: '#fce7f3',
 });
 
-let activePrintPromise = null;
+const ACTIVE_PRINT_KEY = Symbol.for('apstudy.notes.active-print-promise');
+const PRINT_CONTROLLER_KEY = Symbol.for('apstudy.notes.print-controller');
 
 export function normalizePrintTitle(value) {
     return String(value || '').trim() || 'Untitled';
@@ -40,6 +41,33 @@ export function isNotePrintShortcut(event) {
         && !event.shiftKey
         && String(event.key || '').toLowerCase() === 'p'
     );
+}
+
+export function bindNotePrintController({
+    documentRef = globalThis.document,
+    windowRef = globalThis.window,
+    isReady = () => false,
+    requestPrint,
+} = {}) {
+    if (!documentRef || !windowRef || typeof requestPrint !== 'function') return null;
+    if (windowRef[PRINT_CONTROLLER_KEY]) return windowRef[PRINT_CONTROLLER_KEY];
+
+    const handleClick = (event) => {
+        const button = event?.target?.closest?.('[data-note-print]');
+        if (!button || !documentRef.contains?.(button)) return;
+        event.preventDefault?.();
+        requestPrint();
+    };
+    const handleKeydown = (event) => {
+        if (!isNotePrintShortcut(event)) return;
+        event.preventDefault?.();
+        if (isReady()) requestPrint();
+    };
+    const controller = { handleClick, handleKeydown };
+    windowRef[PRINT_CONTROLLER_KEY] = controller;
+    documentRef.addEventListener?.('click', handleClick, true);
+    documentRef.addEventListener?.('keydown', handleKeydown, true);
+    return controller;
 }
 
 export function printColorFor(value, { highlight = false } = {}) {
@@ -229,6 +257,7 @@ function clampSideMargins(value) {
 }
 
 function createPrintSurface({ documentRef, title, html, fontFamily, sideMargins }) {
+    documentRef.querySelectorAll?.('.notes-print-surface').forEach((surface) => surface.remove());
     const surface = documentRef.createElement('article');
     surface.className = 'notes-print-surface';
     surface.setAttribute('aria-hidden', 'true');
@@ -313,16 +342,17 @@ async function runPrintNote({
 }
 
 export function printNote(options) {
-    if (activePrintPromise) return activePrintPromise;
+    const windowRef = options?.windowRef || globalThis.window;
+    if (windowRef?.[ACTIVE_PRINT_KEY]) return windowRef[ACTIVE_PRINT_KEY];
 
     const printPromise = runPrintNote(options);
-    activePrintPromise = printPromise;
+    if (windowRef) windowRef[ACTIVE_PRINT_KEY] = printPromise;
     void printPromise.then(
         () => {
-            if (activePrintPromise === printPromise) activePrintPromise = null;
+            if (windowRef?.[ACTIVE_PRINT_KEY] === printPromise) delete windowRef[ACTIVE_PRINT_KEY];
         },
         () => {
-            if (activePrintPromise === printPromise) activePrintPromise = null;
+            if (windowRef?.[ACTIVE_PRINT_KEY] === printPromise) delete windowRef[ACTIVE_PRINT_KEY];
         },
     );
     return printPromise;

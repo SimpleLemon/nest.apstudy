@@ -74,6 +74,7 @@ class OutboundHttpSecurityTests(unittest.TestCase):
 class ApplicationSecurityIntegrationTests(unittest.TestCase):
     def setUp(self):
         self.temp_dir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp_dir.cleanup)
         self.env = patch.dict(os.environ, {
             "DATABASE_PATH": os.path.join(self.temp_dir.name, "security.sqlite3"),
             "FLASK_SECRET_KEY": "test-security-key",
@@ -82,6 +83,7 @@ class ApplicationSecurityIntegrationTests(unittest.TestCase):
             "SCHEDULER_ENABLED": "0",
         }, clear=False)
         self.env.start()
+        self.addCleanup(self.env.stop)
         schema_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "migrations", "001_initial_schema.sql")
         with sqlite3.connect(os.environ["DATABASE_PATH"]) as connection, open(schema_path, encoding="utf-8") as schema:
             connection.executescript(schema.read())
@@ -100,8 +102,6 @@ class ApplicationSecurityIntegrationTests(unittest.TestCase):
 
     def tearDown(self):
         login_manager._user_callback = self.previous_loader
-        self.env.stop()
-        self.temp_dir.cleanup()
 
     def _authenticated_client(self):
         client = self.app.test_client()

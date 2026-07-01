@@ -59,6 +59,32 @@ test("page setup trigger ignores a missing control or popover", async () => {
     assert.equal(handlePageSetupTriggerClick({}, {}, null, () => {}, () => {}), false);
 });
 
+test("delegated page setup click opens from a toolbar overflow item", async () => {
+    const { handlePageSetupToolbarClick } = await importBrowserModule("static/js/notes/editor/utils.js");
+    const triggerRect = { left: 700, top: 100, right: 734, bottom: 134, width: 34, height: 34 };
+    const button = { getBoundingClientRect: () => triggerRect };
+    const overflowMenu = { contains: (candidate) => candidate === button };
+    const toolbar = { contains: (candidate) => overflowMenu.contains(candidate) };
+    const popover = { hidden: true };
+    let openedAt = null;
+    const event = {
+        target: { closest: () => button },
+        preventDefault() {},
+        stopPropagation() {},
+    };
+
+    const handled = handlePageSetupToolbarClick(
+        event,
+        toolbar,
+        popover,
+        (_trigger, rect) => { openedAt = rect; },
+        () => assert.fail("should not close"),
+    );
+
+    assert.equal(handled, true);
+    assert.equal(openedAt, triggerRect);
+});
+
 test("toolbar popovers stay beside their trigger and inside the editor boundary", async () => {
     const { floatingPopoverPosition } = await importBrowserModule("static/js/notes/editor/utils.js");
     const boundaryRect = { left: 100, right: 900 };

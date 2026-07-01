@@ -12,6 +12,7 @@ from services import course_live_snapshots as snapshots
 class CourseLiveSnapshotTests(unittest.TestCase):
     def setUp(self):
         self.tmpdir = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, self.tmpdir)
         self.db_path = os.path.join(self.tmpdir, "nest.sqlite3")
         conn = sqlite3.connect(self.db_path)
         try:
@@ -22,10 +23,7 @@ class CourseLiveSnapshotTests(unittest.TestCase):
             conn.close()
         self.env_patch = patch.dict(os.environ, {"DATABASE_PATH": self.db_path})
         self.env_patch.start()
-
-    def tearDown(self):
-        self.env_patch.stop()
-        shutil.rmtree(self.tmpdir)
+        self.addCleanup(self.env_patch.stop)
 
     def _section(self, seats=2):
         return {

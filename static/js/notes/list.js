@@ -66,7 +66,6 @@
     } = window.APStudyNotesListUtils;
     const noteCardFactory = window.APStudyNotesListCards.createNotesListCards({
         callbacks: {
-            apiJson,
             closeAllMenus,
             escapeHtml,
             formatCount,
@@ -76,7 +75,6 @@
             openSharedFolder,
             openFolderModal,
             openMoveModal,
-            moveNoteBy,
             preloadEditorBundle,
             toggleCardMenu,
         },
@@ -157,6 +155,11 @@
         const trigger = openMenu?.closest('.note-card, .folder-card')?.querySelector('.note-card-menu-btn, .folder-card-menu-btn');
         document.querySelectorAll('.note-card-menu, .folder-card-menu').forEach((menu) => {
             menu.classList.add('note-menu-hidden');
+            menu.style.removeProperty('top');
+            menu.style.removeProperty('left');
+            menu.style.removeProperty('max-height');
+            menu.style.removeProperty('visibility');
+            delete menu.dataset.placement;
         });
         document.querySelectorAll('.note-card-menu-btn, .folder-card-menu-btn').forEach((button) => {
             button.setAttribute('aria-expanded', 'false');
@@ -164,14 +167,48 @@
         if (restoreFocus) trigger?.focus({ preventScroll: true });
     }
 
+    function positionCardMenu(button, menu) {
+        const viewportMargin = 8;
+        const menuGap = 6;
+        const triggerRect = button.getBoundingClientRect();
+        const viewportWidth = document.documentElement.clientWidth;
+        const viewportHeight = document.documentElement.clientHeight;
+
+        menu.style.visibility = 'hidden';
+        menu.classList.remove('note-menu-hidden');
+        const naturalHeight = menu.scrollHeight;
+        const menuWidth = menu.offsetWidth;
+        const spaceAbove = Math.max(0, triggerRect.top - menuGap - viewportMargin);
+        const spaceBelow = Math.max(0, viewportHeight - triggerRect.bottom - menuGap - viewportMargin);
+        const placeBelow = spaceBelow >= spaceAbove;
+        const availableHeight = placeBelow ? spaceBelow : spaceAbove;
+        const renderedHeight = Math.min(naturalHeight, availableHeight);
+        const maxLeft = Math.max(viewportMargin, viewportWidth - menuWidth - viewportMargin);
+        const left = Math.min(Math.max(viewportMargin, triggerRect.right - menuWidth), maxLeft);
+        const top = placeBelow
+            ? triggerRect.bottom + menuGap
+            : triggerRect.top - menuGap - renderedHeight;
+
+        menu.style.left = `${Math.round(left)}px`;
+        menu.style.top = `${Math.round(Math.max(viewportMargin, top))}px`;
+        menu.style.maxHeight = `${Math.max(0, Math.floor(availableHeight))}px`;
+        menu.dataset.placement = placeBelow ? 'below' : 'above';
+        menu.style.removeProperty('visibility');
+    }
+
     function toggleCardMenu(button, menu) {
         const isHidden = menu.classList.contains('note-menu-hidden');
         closeAllMenus();
         if (isHidden) {
-            menu.classList.remove('note-menu-hidden');
+            positionCardMenu(button, menu);
             button.setAttribute('aria-expanded', 'true');
             menu.querySelector('button')?.focus({ preventScroll: true });
         }
+    }
+
+    function handleCardMenuViewportScroll(event) {
+        if (event.target?.closest?.('.note-card-menu, .folder-card-menu')) return;
+        closeAllMenus();
     }
 
     function openModal(modal, focusTarget = null) {
@@ -502,30 +539,6 @@
         }
     }
 
-    async function moveNoteBy(note, direction) {
-        const noteId = noteIdOf(note);
-        if (!noteId || ![-1, 1].includes(direction)) return;
-        const folderId = note.folder_id || null;
-        const visible = state.notes.filter((item) => (item.folder_id || null) === folderId);
-        const currentIndex = visible.findIndex((item) => noteIdOf(item) === noteId);
-        const targetIndex = currentIndex + direction;
-        if (currentIndex < 0 || targetIndex < 0 || targetIndex >= visible.length) return;
-        const currentStateIndex = state.notes.indexOf(visible[currentIndex]);
-        const targetStateIndex = state.notes.indexOf(visible[targetIndex]);
-        [state.notes[currentStateIndex], state.notes[targetStateIndex]] = [state.notes[targetStateIndex], state.notes[currentStateIndex]];
-        renderCurrentView();
-        try {
-            await apiJson(`/api/notes/${encodeURIComponent(noteId)}`, {
-                method: 'PATCH',
-                body: JSON.stringify({ folder_id: folderId, order: targetIndex }),
-            });
-            showAlert(direction < 0 ? 'Note moved earlier.' : 'Note moved later.', 'success');
-        } catch (error) {
-            showAlert(error.message || 'Unable to reorder note.', 'error');
-            await loadAndRender({ clearAlert: false });
-        }
-    }
-
     async function deleteNote(noteCard, button) {
         const noteId = noteCard?.dataset.noteId;
         if (!noteId) return;
@@ -716,6 +729,19 @@
             }
         });
         document.addEventListener('keydown', (event) => {
+            const openMenu = event.target.closest?.('.note-card-menu:not(.note-menu-hidden), .folder-card-menu:not(.note-menu-hidden)');
+            if (openMenu && ['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+                const items = [...openMenu.querySelectorAll('[role="menuitem"]:not(:disabled)')];
+                const currentIndex = items.indexOf(document.activeElement);
+                let nextIndex = currentIndex;
+                if (event.key === 'ArrowDown') nextIndex = (currentIndex + 1) % items.length;
+                if (event.key === 'ArrowUp') nextIndex = (currentIndex - 1 + items.length) % items.length;
+                if (event.key === 'Home') nextIndex = 0;
+                if (event.key === 'End') nextIndex = items.length - 1;
+                event.preventDefault();
+                items[nextIndex]?.focus({ preventScroll: true });
+                return;
+            }
             if (event.key !== 'Escape') return;
             if (state.activeModal) {
                 closeModal();
@@ -728,7 +754,7 @@
             closeAllMenus({ restoreFocus: true });
         });
         window.addEventListener('resize', closeAllMenus);
-        window.addEventListener('scroll', closeAllMenus, true);
+        window.addEventListener('scroll', handleCardMenuViewportScroll, true);
         window.addEventListener('popstate', () => {
             state.viewMode = viewModeFromLocation();
             state.currentFolderId = folderIdFromLocation();

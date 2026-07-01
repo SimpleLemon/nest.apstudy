@@ -180,7 +180,8 @@ class AccessibilityBaselineTests(unittest.TestCase):
         self.assertIn("sidebar.toggleAttribute('inert'", sidebar)
         self.assertIn("sidebar.setAttribute('aria-modal', 'true')", sidebar)
         self.assertIn("dashboard-tile-move-up", dashboard)
-        self.assertIn('data-action="move-earlier"', notes)
+        self.assertIn('data-action="share"', notes)
+        self.assertNotIn('data-action="move-earlier"', notes)
         self.assertIn('label: "Move list earlier"', tasks)
         self.assertIn('label: "Move task earlier"', tasks)
         self.assertIn("Move to ${list.name}", tasks)
@@ -191,6 +192,7 @@ class AccessibilityBaselineTests(unittest.TestCase):
 class RenderedJourneyAccessibilityTests(unittest.TestCase):
     def setUp(self):
         self.temp_dir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp_dir.cleanup)
         self.database_path = os.path.join(self.temp_dir.name, "accessibility.sqlite3")
         self.environment = patch.dict(os.environ, {
             "DATABASE_PATH": self.database_path,
@@ -200,6 +202,7 @@ class RenderedJourneyAccessibilityTests(unittest.TestCase):
             "SCHEDULER_ENABLED": "0",
         }, clear=False)
         self.environment.start()
+        self.addCleanup(self.environment.stop)
         with sqlite3.connect(self.database_path) as connection:
             connection.executescript((ROOT / "migrations/001_initial_schema.sql").read_text())
             connection.execute(
@@ -219,13 +222,14 @@ class RenderedJourneyAccessibilityTests(unittest.TestCase):
             )
             connection.commit()
         from app import create_app
+        from extensions import login_manager
+        from models import load_user
         with patch("services.scheduler.init_scheduler"), patch("services.discord_audit.init_discord_audit"):
             self.app = create_app()
+        previous_loader = login_manager._user_callback
+        login_manager._user_callback = load_user
+        self.addCleanup(setattr, login_manager, "_user_callback", previous_loader)
         self.app.config.update(TESTING=True)
-
-    def tearDown(self):
-        self.environment.stop()
-        self.temp_dir.cleanup()
 
     @staticmethod
     def _assert_rendered_document(test_case, response, route):

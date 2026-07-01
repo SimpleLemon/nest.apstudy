@@ -372,11 +372,13 @@
 /* Note menu */
 .note-menu-hidden { display: none !important; }
 .note-card-menu,
-.folder-card-menu { position: absolute; top: calc(100% + 8px); right: 8px; background: var(--notes-elevated-bg); border: 1px solid var(--notes-border) !important; border-radius: var(--notes-radius-md); padding: 6px; min-width: 170px; z-index: 120; box-shadow: var(--notes-shadow); }
-.note-menu-item { display: flex; width: 100%; min-height: 34px; align-items: center; border-radius: 8px; padding: 8px 10px; text-align: left; font-size: 13px; font-weight: 620; color: var(--color-on-surface); background: transparent; border: none; cursor: pointer; transition: background 0.12s ease, color 0.12s ease; }
+.folder-card-menu { position: fixed; top: 0; left: 0; width: max-content; max-width: calc(100vw - 16px); overflow-y: auto; overscroll-behavior: contain; background: var(--notes-elevated-bg); border: 1px solid var(--notes-border) !important; border-radius: var(--notes-radius-md); padding: 6px; min-width: 180px; z-index: 10060; box-shadow: var(--notes-shadow); }
+.note-menu-item { display: flex; width: 100%; min-height: 38px; align-items: center; gap: 10px; border-radius: 8px; padding: 8px 10px; text-align: left; font-size: 13px; font-weight: 620; color: var(--color-on-surface); background: transparent; border: none; cursor: pointer; transition: background 0.12s ease, color 0.12s ease; }
+.note-menu-item .material-symbols-outlined { flex: 0 0 20px; color: var(--notes-muted); font-size: 19px; line-height: 1; }
 .note-menu-item:hover,
 .note-menu-item:focus-visible { outline: none; background: var(--notes-card-hover); }
 .note-menu-item-danger { color: var(--color-error); }
+.note-menu-item-danger .material-symbols-outlined { color: currentColor; }
 .note-menu-item-danger:hover,
 .note-menu-item-danger:focus-visible { background: color-mix(in srgb, var(--color-error) 13%, transparent); }
 .note-menu-divider { border: none; border-top: 1px solid var(--notes-border); margin: 6px 2px; }
@@ -2510,8 +2512,6 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
 
   .note-card-menu,
   .folder-card-menu {
-    left: auto;
-    right: 8px;
     max-width: calc(100vw - 40px);
   }
 
@@ -2651,6 +2651,7 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
 
   body.notes-editor-body > global,
   body.notes-editor-body > .thesidebar,
+  body.notes-editor-body > .apstudy-skip-link,
   body.notes-editor-body .editor-topbar,
   body.notes-editor-body .notes-writing-toolbar,
   body.notes-editor-body .notes-page-setup-popover,
@@ -2665,80 +2666,7 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
     display: none !important;
   }
 
-  body.notes-editor-body main {
-    display: block !important;
-    width: 100% !important;
-    max-width: none !important;
-    height: auto !important;
-    min-height: 0 !important;
-    overflow: visible !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  body.notes-editor-body:not(.notes-print-prepared) .notes-editor-page,
-  body.notes-editor-body:not(.notes-print-prepared) .notes-editor-surface,
-  body.notes-editor-body:not(.notes-print-prepared) .blocknote-container,
-  body.notes-editor-body:not(.notes-print-prepared) [class*="bn-container"],
-  body.notes-editor-body:not(.notes-print-prepared) [class*="bn-editor"] {
-    width: 100% !important;
-    max-width: none !important;
-    height: auto !important;
-    min-height: 0 !important;
-    overflow: visible !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: #ffffff !important;
-    color: #111827 !important;
-    box-shadow: none !important;
-  }
-
-  body.notes-editor-body:not(.notes-print-prepared) .notes-editor-surface {
-    display: block !important;
-    padding: 0.55in max(0.55in, var(--notes-page-side-margin, 10%)) 0.7in !important;
-  }
-
-  body.notes-editor-body:not(.notes-print-prepared) .editor-title-input {
-    display: block !important;
-    width: 100% !important;
-    max-width: none !important;
-    height: auto !important;
-    margin: 0 0 0.28in !important;
-    padding: 0 0 0.14in !important;
-    overflow: visible !important;
-    border: 0 !important;
-    border-bottom: 1px solid #d1d5db !important;
-    border-radius: 0 !important;
-    background: #ffffff !important;
-    box-shadow: none !important;
-    color: #111827 !important;
-    font-family: var(--notes-page-font-family, Arial, sans-serif) !important;
-    font-size: 24pt !important;
-    font-weight: 700 !important;
-    line-height: 1.15 !important;
-    text-align: left !important;
-    text-overflow: clip !important;
-    white-space: normal !important;
-  }
-
-  body.notes-editor-body:not(.notes-print-prepared) .blocknote-container {
-    margin: 0 !important;
-    padding: 0 !important;
-    font-family: var(--notes-page-font-family, Arial, sans-serif) !important;
-    font-size: 11pt !important;
-    line-height: 1.55 !important;
-  }
-
-  body.notes-editor-body:not(.notes-print-prepared) .notes-block-selected > .bn-block,
-  body.notes-editor-body:not(.notes-print-prepared) .ProseMirror-selectednode,
-  body.notes-editor-body:not(.notes-print-prepared) .bn-block-content.ProseMirror-selectednode > *,
-  body.notes-editor-body:not(.notes-print-prepared) .ProseMirror-selectednode > .bn-block-content > * {
-    background: transparent !important;
-    box-shadow: none !important;
-    outline: none !important;
-  }
-
-  body.notes-editor-body.notes-print-prepared > :not(.notes-print-surface) {
+  body.notes-editor-body > :not(.notes-print-surface) {
     display: none !important;
   }
 
@@ -2821,16 +2749,14 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
     widows: 3;
   }
 
-  .notes-print-content a,
-  body.notes-editor-body:not(.notes-print-prepared) .blocknote-container a {
+  .notes-print-content a {
     color: #1d4ed8 !important;
     text-decoration: underline !important;
     text-decoration-color: #93b4ee !important;
     text-underline-offset: 2px;
   }
 
-  .notes-print-content pre,
-  body.notes-editor-body:not(.notes-print-prepared) .blocknote-container pre {
+  .notes-print-content pre {
     max-width: 100% !important;
     overflow: visible !important;
     border: 1px solid #d1d5db !important;
@@ -2843,22 +2769,19 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
     word-break: break-word !important;
   }
 
-  .notes-print-content code,
-  body.notes-editor-body:not(.notes-print-prepared) .blocknote-container code {
+  .notes-print-content code {
     background: #f3f4f6 !important;
     color: #111827 !important;
     font-family: "IBM Plex Mono", ui-monospace, monospace !important;
   }
 
-  .notes-print-content blockquote,
-  body.notes-editor-body:not(.notes-print-prepared) .blocknote-container blockquote {
+  .notes-print-content blockquote {
     border-left: 3px solid #9ca3af !important;
     color: #374151 !important;
     padding-left: 0.9em !important;
   }
 
-  .notes-print-content table,
-  body.notes-editor-body:not(.notes-print-prepared) .blocknote-container table {
+  .notes-print-content table {
     width: 100% !important;
     max-width: 100% !important;
     table-layout: fixed !important;
@@ -2870,9 +2793,7 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
   .notes-print-content thead { display: table-header-group; }
 
   .notes-print-content th,
-  .notes-print-content td,
-  body.notes-editor-body:not(.notes-print-prepared) .blocknote-container th,
-  body.notes-editor-body:not(.notes-print-prepared) .blocknote-container td {
+  .notes-print-content td {
     min-width: 0 !important;
     border: 1px solid #9ca3af !important;
     background: #ffffff !important;
@@ -2882,8 +2803,7 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
     word-break: break-word !important;
   }
 
-  .notes-print-content th,
-  body.notes-editor-body:not(.notes-print-prepared) .blocknote-container th {
+  .notes-print-content th {
     background: #f3f4f6 !important;
     font-weight: 700;
   }
@@ -2898,8 +2818,7 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
     page-break-inside: avoid;
   }
 
-  .notes-print-content img,
-  body.notes-editor-body:not(.notes-print-prepared) .blocknote-container img {
+  .notes-print-content img {
     display: block;
     width: auto !important;
     max-width: 100% !important;
@@ -2918,8 +2837,7 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
   }
 
   .notes-print-content aside,
-  .notes-print-content .notes-callout-block,
-  body.notes-editor-body:not(.notes-print-prepared) .notes-callout-block {
+  .notes-print-content .notes-callout-block {
     border: 1px solid #cbd5e1 !important;
     border-left: 4px solid #64748b !important;
     border-radius: 5px !important;
@@ -2928,15 +2846,13 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
     padding: 0.65em 0.8em !important;
   }
 
-  .notes-print-content hr,
-  body.notes-editor-body:not(.notes-print-prepared) .blocknote-container hr {
+  .notes-print-content hr {
     border: 0 !important;
     border-top: 1px solid #9ca3af !important;
     margin: 1em 0 !important;
   }
 
-  .notes-print-content [data-page-break],
-  body.notes-editor-body:not(.notes-print-prepared) [data-page-break] {
+  .notes-print-content [data-page-break] {
     display: block !important;
     height: 0 !important;
     margin: 0 !important;
@@ -2968,41 +2884,23 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
   .notes-print-content [data-indent-level="3"] { margin-left: 4.5em; }
   .notes-print-content [data-indent-level="4"] { margin-left: 6em; }
 
-  .notes-print-content [data-text-color="gray"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-text-color="gray"] { color: #4b5563 !important; }
-  .notes-print-content [data-text-color="brown"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-text-color="brown"] { color: #7c4a2d !important; }
-  .notes-print-content [data-text-color="red"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-text-color="red"] { color: #b42318 !important; }
-  .notes-print-content [data-text-color="orange"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-text-color="orange"] { color: #b54708 !important; }
-  .notes-print-content [data-text-color="yellow"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-text-color="yellow"] { color: #854d0e !important; }
-  .notes-print-content [data-text-color="green"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-text-color="green"] { color: #166534 !important; }
-  .notes-print-content [data-text-color="blue"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-text-color="blue"] { color: #1d4ed8 !important; }
-  .notes-print-content [data-text-color="purple"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-text-color="purple"] { color: #6b21a8 !important; }
-  .notes-print-content [data-text-color="pink"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-text-color="pink"] { color: #9d174d !important; }
+  .notes-print-content [data-text-color="gray"] { color: #4b5563 !important; }
+  .notes-print-content [data-text-color="brown"] { color: #7c4a2d !important; }
+  .notes-print-content [data-text-color="red"] { color: #b42318 !important; }
+  .notes-print-content [data-text-color="orange"] { color: #b54708 !important; }
+  .notes-print-content [data-text-color="yellow"] { color: #854d0e !important; }
+  .notes-print-content [data-text-color="green"] { color: #166534 !important; }
+  .notes-print-content [data-text-color="blue"] { color: #1d4ed8 !important; }
+  .notes-print-content [data-text-color="purple"] { color: #6b21a8 !important; }
+  .notes-print-content [data-text-color="pink"] { color: #9d174d !important; }
 
-  .notes-print-content [data-background-color="gray"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-background-color="gray"] { background-color: #f3f4f6 !important; }
-  .notes-print-content [data-background-color="brown"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-background-color="brown"] { background-color: #f5ebe3 !important; }
-  .notes-print-content [data-background-color="red"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-background-color="red"] { background-color: #fee2e2 !important; }
-  .notes-print-content [data-background-color="orange"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-background-color="orange"] { background-color: #ffedd5 !important; }
-  .notes-print-content [data-background-color="yellow"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-background-color="yellow"] { background-color: #fef3c7 !important; }
-  .notes-print-content [data-background-color="green"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-background-color="green"] { background-color: #dcfce7 !important; }
-  .notes-print-content [data-background-color="blue"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-background-color="blue"] { background-color: #dbeafe !important; }
-  .notes-print-content [data-background-color="purple"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-background-color="purple"] { background-color: #f3e8ff !important; }
-  .notes-print-content [data-background-color="pink"],
-  body.notes-editor-body:not(.notes-print-prepared) [data-background-color="pink"] { background-color: #fce7f3 !important; }
+  .notes-print-content [data-background-color="gray"] { background-color: #f3f4f6 !important; }
+  .notes-print-content [data-background-color="brown"] { background-color: #f5ebe3 !important; }
+  .notes-print-content [data-background-color="red"] { background-color: #fee2e2 !important; }
+  .notes-print-content [data-background-color="orange"] { background-color: #ffedd5 !important; }
+  .notes-print-content [data-background-color="yellow"] { background-color: #fef3c7 !important; }
+  .notes-print-content [data-background-color="green"] { background-color: #dcfce7 !important; }
+  .notes-print-content [data-background-color="blue"] { background-color: #dbeafe !important; }
+  .notes-print-content [data-background-color="purple"] { background-color: #f3e8ff !important; }
+  .notes-print-content [data-background-color="pink"] { background-color: #fce7f3 !important; }
 }

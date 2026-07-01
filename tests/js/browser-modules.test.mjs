@@ -327,7 +327,7 @@ test("console discord batches browser console output for server logs", async () 
     assert.match(source, /forwarding/);
 });
 
-test("notes list guards destructive actions and supports folder/export workflows", async () => {
+test("notes list guards destructive actions and supports safe card menus", async () => {
     const listSource = await sourceFor("static/js/notes/list.js");
     const cardsSource = await sourceFor("static/js/notes/list/cards.js");
     const template = await sourceFor("templates/notes.html");
@@ -342,9 +342,15 @@ test("notes list guards destructive actions and supports folder/export workflows
     assert.match(source, /APStudyPendingMutations\?\.track\(request, 'notes-save'\)/);
     assert.match(source, /apiJson\(`\/api\/notes\/\$\{encodeURIComponent\(noteId\)\}`/);
     assert.match(source, /apiJson\(`\/api\/notes\/folders\/\$\{encodeURIComponent\(folderId\)\}`/);
-    assert.match(source, /NotesExport\?\.exportNoteJsonToTxt/);
-    assert.match(source, /NotesExport\?\.exportNoteJsonToPdf/);
+    assert.doesNotMatch(cardsSource, /NotesExport/);
+    assert.doesNotMatch(cardsSource, /data-action="(?:move-earlier|move-later|export-txt|export-pdf)"/);
+    assert.match(cardsSource, /data-action="share"/);
+    assert.match(cardsSource, /APStudyNotesSharing\?\.open/);
     assert.match(source, /data-action="move"/);
+    assert.match(listSource, /function positionCardMenu\(button, menu\)/);
+    assert.match(listSource, /const placeBelow = spaceBelow >= spaceAbove/);
+    assert.match(listSource, /handleCardMenuViewportScroll/);
+    assert.match(listSource, /\['ArrowDown', 'ArrowUp', 'Home', 'End'\]/);
     assert.equal((listSource.match(/onStart: handleDragStart/g) || []).length, 1);
     assert.doesNotMatch(listSource, /addEventListener\('drop',[\s\S]{0,500}initDragDrop\(\)/);
     assert.doesNotMatch(cardsSource, /more_horiz/);
@@ -362,11 +368,13 @@ test("notes list guards destructive actions and supports folder/export workflows
     assert.match(template, /id="notes-folder-breadcrumb"/);
     assert.doesNotMatch(template, /id="btn-share-folder"/);
     assert.doesNotMatch(cardsSource, /data-action="share-folder"/);
-    assert.doesNotMatch(template, /js\/notes\/sharing\.js/);
+    assert.match(template, /js\/notes\/sharing\.js/);
+    assert.doesNotMatch(template, /js\/notes\/export\.js/);
     assert.match(styles, /\.notes-page-actions\[hidden\],[\s\S]*?#notes-empty-new-note\[hidden\]\s*\{\s*display:\s*none !important;/);
     assert.match(styles, /@keyframes notes-popover-in/);
     assert.match(styles, /\.note-card\s*\{[^}]*min-height:\s*104px;[^}]*padding:\s*12px 10px 12px 14px;/s);
     assert.match(styles, /\.folder-card-menu-btn\s*\{[^}]*right:\s*6px;/s);
+    assert.match(styles, /\.folder-card-menu\s*\{[^}]*position:\s*fixed;[^}]*overflow-y:\s*auto;/s);
 });
 
 test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wired", async () => {
@@ -530,17 +538,23 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(printSource, /editor\.blocksToHTMLLossy\(printableBlocks\)/);
     assert.match(printSource, /hiddenBlockIds/);
     assert.match(printSource, /windowRef\.addEventListener\?\.\('afterprint'/);
+    assert.match(printSource, /Symbol\.for\('apstudy\.notes\.active-print-promise'\)/);
+    assert.match(printSource, /querySelectorAll\?\.\('\.notes-print-surface'\)/);
     assert.match(printSource, /PRINT_IMAGE_TIMEOUT_MS = 2000/);
-    assert.match(source, /isNotePrintShortcut\(event\)/);
+    assert.match(source, /bindNotePrintController\(\{/);
+    assert.match(printSource, /isNotePrintShortcut\(event\)/);
     assert.match(source, /hiddenBlockIds: hidden\.keys\(\)/);
     assert.match(source, /APStudyToast\?\.error\?\.\('Could not prepare this note for printing\.'/);
     assert.match(styles, /@media print\s*\{/);
     assert.match(styles, /body\.notes-editor-body\.notes-print-prepared > \.notes-print-surface/);
+    assert.match(styles, /body\.notes-editor-body > :not\(\.notes-print-surface\)/);
+    assert.match(styles, /body\.notes-editor-body > \.apstudy-skip-link/);
+    assert.doesNotMatch(styles, /body\.notes-editor-body:not\(\.notes-print-prepared\)/);
     assert.match(styles, /background:\s*#ffffff !important/);
     assert.match(styles, /--notes-print-font-family/);
     assert.match(styles, /--notes-print-side-margin/);
-    assert.match(editorTemplate, /css\/notes\.css'\) }}\?v=notes-print-1/);
-    assert.match(editorTemplate, /notes-editor-bundle-12/);
+    assert.match(editorTemplate, /css\/notes\.css'\) }}\?v=notes-print-2/);
+    assert.match(editorTemplate, /notes-editor-bundle-13/);
     assert.match(editorTemplate, /data-block-type="codeBlock"/);
     assert.match(editorTemplate, /data-block-type="callout"/);
     assert.match(source, /action === 'copy-blocks'/);
@@ -564,8 +578,8 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.doesNotMatch(styles, /\.notes-page-setup-popover\s*\{[^}]*transform:\s*translate\(-50%, -50%\)/s);
     assert.match(source, /menu\.style\.maxWidth = isOverflowToolbar/);
     assert.match(source, /b\.priority - a\.priority \|\| b\.index - a\.index/);
-    assert.match(source, /const pageSetupTrigger = writingToolbar\?\.querySelector/);
-    assert.match(source, /pageSetupTrigger\?\.addEventListener\('click'/);
+    assert.match(source, /handlePageSetupToolbarClick\([\s\S]*?writingToolbar,[\s\S]*?pageSetupPopover/);
+    assert.doesNotMatch(source, /pageSetupTrigger\?\.addEventListener\('click'/);
     assert.match(source, /activePageSetupTriggerRect = triggerRect \|\| usableTriggerRect\(trigger\)/);
     assert.match(source, /editorPage\?\.addEventListener\('scroll', schedulePageSetupPopoverPosition/);
     assert.match(source, /window\.addEventListener\('resize', schedulePageSetupPopoverPosition\)/);
@@ -616,7 +630,7 @@ test("notes sharing keeps canonical links, view-only capabilities, and folder in
     assert.match(styles, /body\[data-note-read-only="true"\] \.blocknote-container \.notes-block-selected > \.bn-block\s*\{[^}]*background:\s*transparent;[^}]*box-shadow:\s*none;/s);
     assert.match(editorSource, /if \(!canEdit\) \{[\s\S]*?querySelectorAll\('\.notes-block-selected'\)[\s\S]*?lastSelectedBlockIds = new Set\(\);/);
     assert.match(editorTemplate, /{% if access\.can_edit %}[\s\S]*?notes-toolbar-page-setup/);
-    assert.match(editorSource, /handlePageSetupTriggerClick\([\s\S]*?pageSetupTrigger,[\s\S]*?pageSetupPopover,[\s\S]*?openPageSetupPopover,[\s\S]*?closePageSetupPopover/);
+    assert.match(editorSource, /handlePageSetupToolbarClick\([\s\S]*?writingToolbar,[\s\S]*?pageSetupPopover,[\s\S]*?openPageSetupPopover,[\s\S]*?closePageSetupPopover/);
 
     assert.match(folderTemplate, /folder_shared/);
     assert.match(folderTemplate, /url_for\('dashboard\.note_document'/);

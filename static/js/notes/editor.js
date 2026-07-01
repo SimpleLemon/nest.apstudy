@@ -24,8 +24,8 @@ import {
 import { hiddenBlocksForCollapsedHeadings } from './editor/heading-collapse.js';
 import { listItemHardBreakShortcuts, preserveRangeSelectionShortcuts } from './editor/keyboard-shortcuts.js';
 import { clipboardTextLooksStructured, normalizeClipboardText, normalizeCopiedPlainText, normalizeImportedMarkdownBlocks } from './editor/markdown-repair.js';
-import { isNotePrintShortcut, printNote } from './editor/print.js';
-import { blockOwnContentIsEmpty, buildLoadingIndicatorHtml, documentHasText, floatingPopoverPosition, formatRelativeSavedTime, handlePageSetupTriggerClick, isBlankTitle, noteIdFromPath, parseSavedDate } from './editor/utils.js';
+import { bindNotePrintController, printNote } from './editor/print.js';
+import { blockOwnContentIsEmpty, buildLoadingIndicatorHtml, documentHasText, floatingPopoverPosition, formatRelativeSavedTime, handlePageSetupToolbarClick, isBlankTitle, noteIdFromPath, parseSavedDate } from './editor/utils.js';
 
 const noteContext = window.APSTUDY_NOTE_CONTEXT || {};
 const noteId = noteContext.noteId || noteIdFromPath();
@@ -137,7 +137,6 @@ const editorHint = document.getElementById('notes-editor-hint');
 const editorPage = document.getElementById('editor-page');
 const zoomValue = document.getElementById('notes-zoom-value');
 const pageSetupPopover = document.getElementById('notes-page-setup-popover');
-const pageSetupTrigger = writingToolbar?.querySelector('button[data-editor-action="page-setup"]') || null;
 const shareButton = document.getElementById('notes-share-button');
 const pageSetupScopeInput = document.querySelector('[data-page-setup-scope]');
 const sideMarginsValue = document.getElementById('notes-side-margins-value');
@@ -624,17 +623,12 @@ async function requestCurrentNotePrint() {
 
 function bindNotePrintControls() {
     syncNotePrintControls();
-    notePrintButtons.forEach((button) => {
-        button.addEventListener('click', (event) => {
-            event.preventDefault();
-            void requestCurrentNotePrint();
-        });
+    bindNotePrintController({
+        documentRef: document,
+        windowRef: window,
+        isReady: () => notePrintReady,
+        requestPrint: () => { void requestCurrentNotePrint(); },
     });
-    document.addEventListener('keydown', (event) => {
-        if (!notePrintReady || !isNotePrintShortcut(event)) return;
-        event.preventDefault();
-        void requestCurrentNotePrint();
-    }, true);
 }
 
 function closeToolbarMenus() {
@@ -1682,6 +1676,14 @@ function bindWritingToolbar() {
             return;
         }
 
+        if (handlePageSetupToolbarClick(
+            event,
+            writingToolbar,
+            pageSetupPopover,
+            openPageSetupPopover,
+            closePageSetupPopover
+        )) return;
+
         const actionButton = event.target.closest('button[data-editor-action]');
         if (!actionButton || !writingToolbar.contains(actionButton)) return;
         event.preventDefault();
@@ -1742,16 +1744,6 @@ function bindWritingToolbar() {
             toggleHeadingCollapse();
             closeToolbarMenus();
         }
-    });
-
-    pageSetupTrigger?.addEventListener('click', (event) => {
-        handlePageSetupTriggerClick(
-            event,
-            pageSetupTrigger,
-            pageSetupPopover,
-            openPageSetupPopover,
-            closePageSetupPopover
-        );
     });
 
     writingToolbar.addEventListener('input', (event) => {

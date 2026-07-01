@@ -19,6 +19,18 @@ export function handlePageSetupTriggerClick(event, trigger, popover, openPageSet
     return true;
 }
 
+export function handlePageSetupToolbarClick(event, toolbar, popover, openPageSetupPopover, closePageSetupPopover) {
+    const trigger = event?.target?.closest?.('button[data-editor-action="page-setup"]');
+    if (!trigger || !toolbar?.contains?.(trigger)) return false;
+    return handlePageSetupTriggerClick(
+        event,
+        trigger,
+        popover,
+        openPageSetupPopover,
+        closePageSetupPopover
+    );
+}
+
 export function floatingPopoverPosition({
     triggerRect,
     popoverRect,

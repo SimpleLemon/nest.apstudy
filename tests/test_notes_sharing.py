@@ -16,8 +16,10 @@ class NotesSharingStoreTests(unittest.TestCase):
     def setUp(self):
         handle, self.path = tempfile.mkstemp(suffix=".sqlite3")
         os.close(handle)
+        self.addCleanup(lambda: os.path.exists(self.path) and os.remove(self.path))
         self.env = patch.dict(os.environ, {"DATABASE_PATH": self.path})
         self.env.start()
+        self.addCleanup(self.env.stop)
         with sqlite3.connect(self.path) as conn:
             conn.executescript(
                 """
@@ -60,10 +62,6 @@ class NotesSharingStoreTests(unittest.TestCase):
                     ("standalone-note", None, "Standalone Note", "Outside folder"),
                 ],
             )
-
-    def tearDown(self):
-        self.env.stop()
-        os.remove(self.path)
 
     def test_public_named_and_folder_access_is_dynamic(self):
         folder_note = note_store.get_note("folder-note")

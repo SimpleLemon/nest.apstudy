@@ -1,7 +1,6 @@
 (function registerNotesListCards(global) {
     function createNotesListCards({ callbacks }) {
         const {
-            apiJson,
             closeAllMenus,
             escapeHtml,
             formatCount,
@@ -11,15 +10,9 @@
             openSharedFolder,
             openFolderModal,
             openMoveModal,
-            moveNoteBy,
             preloadEditorBundle,
             toggleCardMenu,
         } = callbacks;
-
-        async function fetchNoteContent(noteId) {
-            const note = await apiJson(`/api/notes/${encodeURIComponent(noteId)}`);
-            return typeof note?.content === 'string' ? note.content : '';
-        }
 
         function createNoteCard(note, { readOnly = false } = {}) {
             const noteId = note.$id || note.id || '';
@@ -40,14 +33,23 @@
                 </button>`;
             const menuPanelMarkup = readOnly ? '' : `
                 <div class="note-card-menu note-menu-hidden" role="menu">
-                    <button type="button" class="note-menu-item" role="menuitem" data-action="open">Open</button>
-                    <button type="button" class="note-menu-item" role="menuitem" data-action="move">Move to folder</button>
-                    <button type="button" class="note-menu-item" role="menuitem" data-action="move-earlier">Move earlier</button>
-                    <button type="button" class="note-menu-item" role="menuitem" data-action="move-later">Move later</button>
-                    <button type="button" class="note-menu-item" role="menuitem" data-action="export-txt">Export TXT</button>
-                    <button type="button" class="note-menu-item" role="menuitem" data-action="export-pdf">Export PDF</button>
+                    <button type="button" class="note-menu-item" role="menuitem" data-action="open">
+                        <span class="material-symbols-outlined" aria-hidden="true">open_in_new</span>
+                        <span>Open</span>
+                    </button>
+                    <button type="button" class="note-menu-item" role="menuitem" data-action="share">
+                        <span class="material-symbols-outlined" aria-hidden="true">person_add</span>
+                        <span>Share</span>
+                    </button>
+                    <button type="button" class="note-menu-item" role="menuitem" data-action="move">
+                        <span class="material-symbols-outlined" aria-hidden="true">drive_file_move</span>
+                        <span>Move to folder</span>
+                    </button>
                     <hr class="note-menu-divider"/>
-                    <button type="button" class="note-menu-item note-menu-item-danger" role="menuitem" data-action="delete">Delete</button>
+                    <button type="button" class="note-menu-item note-menu-item-danger" role="menuitem" data-action="delete">
+                        <span class="material-symbols-outlined" aria-hidden="true">delete</span>
+                        <span>Delete</span>
+                    </button>
                 </div>`;
 
             card.classList.toggle('notes-shared-note-card', readOnly);
@@ -81,41 +83,15 @@
                     closeAllMenus();
                     openMoveModal(note);
                 });
-                menu.querySelector('[data-action="move-earlier"]').addEventListener('click', (event) => {
+                menu.querySelector('[data-action="share"]').addEventListener('click', (event) => {
                     event.stopPropagation();
                     closeAllMenus();
-                    void moveNoteBy(note, -1);
-                });
-                menu.querySelector('[data-action="move-later"]').addEventListener('click', (event) => {
-                    event.stopPropagation();
-                    closeAllMenus();
-                    void moveNoteBy(note, 1);
-                });
-                menu.querySelector('[data-action="export-txt"]').addEventListener('click', async (event) => {
-                event.stopPropagation();
-                closeAllMenus();
-                try {
-                    const content = await fetchNoteContent(noteId);
-                    global.NotesExport?.exportNoteJsonToTxt(content, title);
-                } catch (error) {
-                    global.APStudyToast?.show?.({
-                        message: error.message || 'Unable to export note.',
-                        type: 'error',
+                    menuBtn.focus({ preventScroll: true });
+                    void global.APStudyNotesSharing?.open({
+                        resourceType: 'note',
+                        resourceId: noteId,
+                        resourceTitle: title,
                     });
-                }
-                });
-                menu.querySelector('[data-action="export-pdf"]').addEventListener('click', async (event) => {
-                event.stopPropagation();
-                closeAllMenus();
-                try {
-                    const content = await fetchNoteContent(noteId);
-                    await global.NotesExport?.exportNoteJsonToPdf(content, title);
-                } catch (error) {
-                    global.APStudyToast?.show?.({
-                        message: error.message || 'Unable to export note.',
-                        type: 'error',
-                    });
-                }
                 });
             }
 
@@ -150,8 +126,14 @@
                     <span class="material-symbols-outlined" aria-hidden="true">more_vert</span>
                 </button>
                 <div class="folder-card-menu note-menu-hidden" role="menu">
-                    <button type="button" class="note-menu-item" role="menuitem" data-action="rename">Rename</button>
-                    <button type="button" class="note-menu-item note-menu-item-danger" role="menuitem" data-action="delete-folder">Delete</button>
+                    <button type="button" class="note-menu-item" role="menuitem" data-action="rename">
+                        <span class="material-symbols-outlined" aria-hidden="true">edit</span>
+                        <span>Rename</span>
+                    </button>
+                    <button type="button" class="note-menu-item note-menu-item-danger" role="menuitem" data-action="delete-folder">
+                        <span class="material-symbols-outlined" aria-hidden="true">delete</span>
+                        <span>Delete</span>
+                    </button>
                 </div>`;
             el.classList.toggle('notes-shared-folder-card', readOnly);
             el.innerHTML = `

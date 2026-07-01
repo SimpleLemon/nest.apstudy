@@ -25,6 +25,8 @@ class TestUser(UserMixin):
 
 class AdminAnalyticsRouteTestCase(unittest.TestCase):
     def setUp(self):
+        previous_loader = login_manager._user_callback
+        self.addCleanup(setattr, login_manager, "_user_callback", previous_loader)
         root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.app = Flask(
             __name__,
@@ -139,15 +141,9 @@ class AdminAnalyticsRouteTestCase(unittest.TestCase):
 class AdminAnalyticsServiceTestCase(unittest.TestCase):
     def setUp(self):
         self.temp_dir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp_dir.cleanup)
         self.db_path = os.path.join(self.temp_dir.name, "nest.sqlite3")
-        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        with database.db_connection(self.db_path) as conn:
-            for filename in ("001_initial_schema.sql", "0003_daily_active_users.sql", "0004_admin_analytics.sql"):
-                with open(os.path.join(root, "migrations", filename), "r", encoding="utf-8") as handle:
-                    conn.executescript(handle.read())
-
-    def tearDown(self):
-        self.temp_dir.cleanup()
+        database.init_db(path=self.db_path)
 
     def _insert_fixture_data(self):
         with database.db_connection(self.db_path) as conn:
