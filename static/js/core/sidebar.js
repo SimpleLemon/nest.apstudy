@@ -73,6 +73,7 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
   if (!sidebar) return;
 
   const toggleHandle = document.getElementById('sidebar-toggle-handle');
+  const mobileToggle = document.querySelector('[data-sidebar-mobile-toggle]');
   const tooltip = document.getElementById('sidebar-tooltip');
   const backdrop = document.getElementById('sidebar-mobile-backdrop');
   const toggleTooltip = toggleHandle?.querySelector('.sidebar-toggle-tooltip');
@@ -89,7 +90,7 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
       return;
     }
 
-    const menuButton = document.getElementById('navbar-menu-btn');
+    const menuButton = document.getElementById('navbar-menu-btn') || mobileToggle;
     if (!menuButton) return;
     menuButton.setAttribute('aria-expanded', String(isOpen));
     menuButton.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
@@ -98,7 +99,7 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
   function setMobileSidebarOpen(isOpen) {
     const shouldOpen = Boolean(isOpen) && isMobileShell();
     const wasOpen = sidebar.classList.contains('mobile-open');
-    const menuButton = document.getElementById('navbar-menu-btn');
+    const menuButton = document.getElementById('navbar-menu-btn') || mobileToggle;
     sidebar.classList.toggle('mobile-open', shouldOpen);
     document.body.classList.toggle('mobile-sidebar-open', shouldOpen);
     if (backdrop) {
@@ -128,6 +129,13 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
   window.APSTUDY_TOGGLE_MOBILE_SIDEBAR = toggleMobileSidebar;
 
   document.addEventListener('apstudy-mobile-sidebar-toggle', toggleMobileSidebar);
+
+  if (mobileToggle) {
+    mobileToggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      toggleMobileSidebar();
+    });
+  }
 
   if (backdrop) {
     backdrop.addEventListener('click', () => setMobileSidebarOpen(false));

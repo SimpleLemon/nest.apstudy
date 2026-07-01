@@ -41,7 +41,6 @@
 
     <script src="{{ url_for('static', filename='js/core/global-chrome.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/core/navbar.js') }}" defer></script>
     {% if viewer_authenticated %}
     <script src="{{ url_for('static', filename='js/core/sidebar.js') }}" defer></script>
     {% endif %}
@@ -54,11 +53,6 @@
     </style>
 </head>
 <body class="notes-editor-body{% if not viewer_authenticated %} notes-no-sidebar{% endif %} bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased" data-note-read-only="{{ 'false' if access.can_edit else 'true' }}" data-navigation-retention="discard">
-    <global class="thenav"
-        data-authenticated="{{ 'true' if viewer_authenticated else 'false' }}"
-        data-has-sidebar="{{ 'true' if viewer_authenticated else 'false' }}"
-        data-login-url="{{ login_url }}"
-        {% if viewer_authenticated %}data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"{% endif %}></global>
     {% if viewer_authenticated %}
     {% set sidebar_user_emory_student = user.emory_student %}
     {% include "_sidebar.html" %}
@@ -80,10 +74,17 @@
         <div id="editor-page" class="notes-editor-page">
             <!-- Top bar -->
             <div id="editor-topbar" class="editor-topbar">
-                <a href="{{ back_url }}" class="editor-back-link">
-                    <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
-                    <span>{{ back_label }}</span>
-                </a>
+                <div class="editor-topbar-navigation">
+                    {% if viewer_authenticated %}
+                    <button type="button" class="navbar-button navbar-menu-button editor-sidebar-menu-button" data-sidebar-mobile-toggle aria-label="Open navigation menu" aria-controls="sidebar-root" aria-expanded="false">
+                        <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+                    </button>
+                    {% endif %}
+                    <a href="{{ back_url }}" class="editor-back-link">
+                        <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+                        <span>{{ back_label }}</span>
+                    </a>
+                </div>
                 <div class="editor-save-wrap">
                     {% if access.can_edit %}
                     <div id="save-status" class="save-status save-status-hidden">Loading...</div>

@@ -406,6 +406,11 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(source, /window\.APStudyPageLifecycle\?\.register\?\.\(\{/);
     assert.match(source, /pause: releaseNoteEditorRuntime/);
     assert.match(editorTemplate, /data-navigation-retention="discard"/);
+    assert.doesNotMatch(editorTemplate, /js\/core\/navbar\.js/);
+    assert.doesNotMatch(editorTemplate, /<global class="thenav"/);
+    assert.match(editorTemplate, /data-sidebar-mobile-toggle/);
+    assert.match(styles, /body\.notes-editor-body\s*\{[^}]*--navbar-height:\s*0px;[^}]*grid-template-rows:\s*minmax\(0, 1fr\);/s);
+    assert.match(styles, /body\.notes-editor-body main\s*\{[^}]*grid-row:\s*1;[^}]*max-width:\s*none;[^}]*padding:\s*0;/s);
     assert.match(source, /preserveRangeSelectionShortcuts/);
     assert.match(source, /listItemHardBreakShortcuts/);
     assert.match(source, /from '\.\/toolbar\.js'/);
@@ -626,7 +631,7 @@ test("notes sharing keeps canonical links, view-only capabilities, and folder in
     assert.match(editorTemplate, /id="notes-share-button"[\s\S]*?data-notes-share-resource="note"/);
     assert.match(editorTemplate, /js\/notes\/sharing\.js/);
     assert.match(editorTemplate, /Shared by <a class="notes-viewer-owner" href="\{\{ owner\.profile_url \}\}">\{\{ owner\.name \}\}<\/a>/);
-    assert.match(styles, /body\.notes-editor-body\s*\{[^}]*display:\s*grid !important;[^}]*grid-template-rows:\s*var\(--navbar-height, 50px\) minmax\(0, 1fr\);/s);
+    assert.match(styles, /body\.notes-editor-body\s*\{[^}]*--navbar-height:\s*0px;[^}]*display:\s*grid !important;[^}]*grid-template-rows:\s*minmax\(0, 1fr\);/s);
     assert.match(styles, /body\[data-note-read-only="true"\] \.blocknote-container \.notes-block-selected > \.bn-block\s*\{[^}]*background:\s*transparent;[^}]*box-shadow:\s*none;/s);
     assert.match(editorSource, /if \(!canEdit\) \{[\s\S]*?querySelectorAll\('\.notes-block-selected'\)[\s\S]*?lastSelectedBlockIds = new Set\(\);/);
     assert.match(editorTemplate, /{% if access\.can_edit %}[\s\S]*?notes-toolbar-page-setup/);
